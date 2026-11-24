@@ -35,7 +35,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=mining_roof_support;i=3002", browseName="RSSStateEnum")
+@o6.enumtype(nodeId="ns=mining_roof_support;i=3002", browseName="ns=mining_roof_support;RSSStateEnum")
 class RSSStateEnum(ns0.datatypes.Enumeration):
     UNDEFINED = o6.enumfield(0, name="UNDEFINED")
     ONGOING = o6.enumfield(1, name="ONGOING")

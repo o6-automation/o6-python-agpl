@@ -57,6 +57,7 @@ o6.call(
     nodeId="ns=scheduler;i=40",
     browseName="ns=scheduler;AddDateListElements",
     description="Adds elements to the DateList",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=scheduler;i=41"]),
     outputArgs=o6.hasProperty(o6.ns["ns=scheduler;i=42"]),
 )
@@ -87,6 +88,7 @@ o6.call(
     nodeId="ns=scheduler;i=43",
     browseName="ns=scheduler;RemoveDateListElements",
     description="Removes elements of the DateList",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=scheduler;i=44"]),
     outputArgs=o6.hasProperty(o6.ns["ns=scheduler;i=45"]),
 )
@@ -105,6 +107,7 @@ class CalendarType(ns0.objtypes.BaseObjectType):
             nodeId="ns=scheduler;i=39",
             browseName="ns=scheduler;DateList",
             description="Array of elements each defining either a specific date or date pattern, or range of dates",
+            modellingRule="Mandatory",
             dataType=scheduler_datypes.CalendarEntryType,
             valueRank=1,
             arrayDimensions=[0],
@@ -115,6 +118,7 @@ class CalendarType(ns0.objtypes.BaseObjectType):
             nodeId="ns=scheduler;i=38",
             browseName="ns=scheduler;PresentValue",
             description="Indicates if the current date is in the DateList (true) or not (false)",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -147,6 +151,7 @@ o6.call(
     nodeId="ns=scheduler;i=54",
     browseName="ns=scheduler;AddExceptionScheduleElements",
     description="Adds elements to the ExceptionSchedule",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=scheduler;i=55"]),
     outputArgs=o6.hasProperty(o6.ns["ns=scheduler;i=56"]),
 )
@@ -177,6 +182,7 @@ o6.call(
     nodeId="ns=scheduler;i=57",
     browseName="ns=scheduler;RemoveExceptionScheduleElements",
     description="Removes elements from the ExceptionSchedule",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=scheduler;i=58"]),
     outputArgs=o6.hasProperty(o6.ns["ns=scheduler;i=59"]),
 )
@@ -195,6 +201,7 @@ class ScheduleType(ns0.objtypes.BaseObjectType):
             nodeId="ns=scheduler;i=63",
             browseName="ns=scheduler;ApplyLastAfterStart",
             description="The ApplyLastAfterStart Property defines if the last set of actions shall be applied when starting the schedule Object",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -203,6 +210,7 @@ class ScheduleType(ns0.objtypes.BaseObjectType):
             nodeId="ns=scheduler;i=62",
             browseName="ns=scheduler;EffectivePeriod",
             description="Specifies the range of dates within which the schedule Object is active. Upon entering its effective period, the object shall execute the defined actions at the defined times, otherwise it shall not execute any actions.",
+            modellingRule="Optional",
             dataType=scheduler_datypes.DateRangeType,
         )
     )
@@ -211,6 +219,7 @@ class ScheduleType(ns0.objtypes.BaseObjectType):
             nodeId="ns=scheduler;i=53",
             browseName="ns=scheduler;ExceptionSchedule",
             description="An array of special events. If present, each of those special events describes a sequence of schedule actions that take precedence over a normal day's behaviour on a special day or days.",
+            modellingRule="Optional",
             dataType=scheduler_datypes.SpecialEventType,
             valueRank=1,
             arrayDimensions=[0],
@@ -221,6 +230,7 @@ class ScheduleType(ns0.objtypes.BaseObjectType):
             nodeId="ns=scheduler;i=61",
             browseName="LocalTime",
             description="Provides information about the local time of the schedule Object. All scheduled times are UTC time. Clients need to consider this Property to calculate the local time of the schedule. If this Property is changed, it is server-specific whether the times of the schedule are adjusted or not.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.TimeZoneDataType,
         )
     )
@@ -230,6 +240,7 @@ class ScheduleType(ns0.objtypes.BaseObjectType):
             nodeId="ns=scheduler;i=60",
             browseName="ns=scheduler;WeeklySchedule",
             description="Each entry represents one day of the week. The first entry in the array represents Monday, the last Sunday. Each element describes a sequence of times and a list of actions that provides a sequence of schedule actions on one day of the week when no ExceptionSchedule is in effect.",
+            modellingRule="Optional",
             dataType=scheduler_datypes.DailyScheduleType,
             valueRank=1,
             arrayDimensions=[7],

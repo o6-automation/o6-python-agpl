@@ -149,12 +149,20 @@ safety_objtypes.SafetyProviderParametersType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=safety;i=6019", browseName="ns=safety;SafetyBaseIDActive", description="Currently active Base-ID of the SafetyProvider", dataType=o6.Guid
+                nodeId="ns=safety;i=6019",
+                browseName="ns=safety;SafetyBaseIDActive",
+                description="Currently active Base-ID of the SafetyProvider",
+                modellingRule="Mandatory",
+                dataType=o6.Guid,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=safety;i=6020", browseName="ns=safety;SafetyBaseIDConfigured", description="Base-ID of the SafetyProvider as configured via the SPI", dataType=o6.Guid
+                nodeId="ns=safety;i=6020",
+                browseName="ns=safety;SafetyBaseIDConfigured",
+                description="Base-ID of the SafetyProvider as configured via the SPI",
+                modellingRule="Mandatory",
+                dataType=o6.Guid,
             )
         ),
         o6.hasProperty(
@@ -162,12 +170,17 @@ safety_objtypes.SafetyProviderParametersType(
                 nodeId="ns=safety;i=6021",
                 browseName="ns=safety;SafetyProviderDelay",
                 description="SafetyProviderDelay is the maximum time at the SafetyProvider from receiving the RequestSPDU to start the transmission of ResponseSPDU",
+                modellingRule="Mandatory",
                 dataType=o6.UInt32,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=safety;i=6031", browseName="ns=safety;SafetyProviderIDActive", description="Currently active Provider-ID of the SafetyProvider", dataType=o6.UInt32
+                nodeId="ns=safety;i=6031",
+                browseName="ns=safety;SafetyProviderIDActive",
+                description="Currently active Provider-ID of the SafetyProvider",
+                modellingRule="Mandatory",
+                dataType=o6.UInt32,
             )
         ),
         o6.hasProperty(
@@ -175,6 +188,7 @@ safety_objtypes.SafetyProviderParametersType(
                 nodeId="ns=safety;i=6032",
                 browseName="ns=safety;SafetyProviderIDConfigured",
                 description="Provider-ID of the SafetyProvider as configured via the SPI",
+                modellingRule="Mandatory",
                 dataType=o6.UInt32,
             )
         ),
@@ -183,6 +197,7 @@ safety_objtypes.SafetyProviderParametersType(
                 nodeId="ns=safety;i=6033",
                 browseName="ns=safety;SafetyProviderLevel",
                 description="The maximal SIL the SafetyProvider implementation (hardware & software) is capable of",
+                modellingRule="Mandatory",
                 dataType=o6.Byte,
             )
         ),
@@ -191,6 +206,7 @@ safety_objtypes.SafetyProviderParametersType(
                 nodeId="ns=safety;i=6034",
                 browseName="ns=safety;SafetyPubSubImplemented",
                 description="Indicates whether the SafetyProvider supports OPC UA PubSub communication",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
             )
         ),
@@ -199,20 +215,26 @@ safety_objtypes.SafetyProviderParametersType(
                 nodeId="ns=safety;i=6040",
                 browseName="ns=safety;SafetyServerImplemented",
                 description="Indicates whether the SafetyProvider supports OPC UA Client/Server communication",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=safety;i=6061", browseName="ns=safety;SafetyStructureIdentifier", description="Identifier of the structure type", dataType=o6.String
+                nodeId="ns=safety;i=6061",
+                browseName="ns=safety;SafetyStructureIdentifier",
+                description="Identifier of the structure type",
+                modellingRule="Mandatory",
+                dataType=o6.String,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6070", browseName="ns=safety;SafetyStructureSignature", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6070", browseName="ns=safety;SafetyStructureSignature", modellingRule="Mandatory", dataType=o6.UInt32)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=safety;i=6071",
                 browseName="ns=safety;SafetyStructureSignatureVersion",
                 description="Version of the algorithm for calculating the StructureSignature",
+                modellingRule="Mandatory",
                 dataType=o6.UInt16,
             )
         ),
@@ -224,35 +246,37 @@ safety_objtypes.SafetyConsumerParametersType(
     browseName="ns=safety;Parameters",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6072", browseName="ns=safety;SafetyBaseIDActive", dataType=o6.Guid)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6073", browseName="ns=safety;SafetyBaseIDConfigured", dataType=o6.Guid)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6072", browseName="ns=safety;SafetyBaseIDActive", modellingRule="Mandatory", dataType=o6.Guid)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6073", browseName="ns=safety;SafetyBaseIDConfigured", modellingRule="Mandatory", dataType=o6.Guid)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=safety;i=6074",
                 browseName="ns=safety;SafetyClientImplemented",
                 description="Indicates whether the SafetyClient supports OPC UA Client/Server communication",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6075", browseName="ns=safety;SafetyConsumerIDActive", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6076", browseName="ns=safety;SafetyConsumerIDConfigured", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6077", browseName="ns=safety;SafetyConsumerTimeout", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6078", browseName="ns=safety;SafetyErrorIntervalLimit", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6079", browseName="ns=safety;SafetyOperatorAckNecessary", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6080", browseName="ns=safety;SafetyProviderIDActive", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6081", browseName="ns=safety;SafetyProviderIDConfigured", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6082", browseName="ns=safety;SafetyProviderLevel", dataType=o6.Byte)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6075", browseName="ns=safety;SafetyConsumerIDActive", modellingRule="Mandatory", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6076", browseName="ns=safety;SafetyConsumerIDConfigured", modellingRule="Mandatory", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6077", browseName="ns=safety;SafetyConsumerTimeout", modellingRule="Mandatory", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6078", browseName="ns=safety;SafetyErrorIntervalLimit", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6079", browseName="ns=safety;SafetyOperatorAckNecessary", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6080", browseName="ns=safety;SafetyProviderIDActive", modellingRule="Mandatory", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6081", browseName="ns=safety;SafetyProviderIDConfigured", modellingRule="Mandatory", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6082", browseName="ns=safety;SafetyProviderLevel", modellingRule="Mandatory", dataType=o6.Byte)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=safety;i=6083",
                 browseName="ns=safety;SafetyPubSubImplemented",
                 description="Indicates whether the SafetyConsumer supports OPC UA PubSub communication",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6084", browseName="ns=safety;SafetyStructureIdentifier", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6085", browseName="ns=safety;SafetyStructureSignature", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6086", browseName="ns=safety;SafetyStructureSignatureVersion", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6084", browseName="ns=safety;SafetyStructureIdentifier", modellingRule="Optional", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6085", browseName="ns=safety;SafetyStructureSignature", modellingRule="Mandatory", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=safety;i=6086", browseName="ns=safety;SafetyStructureSignatureVersion", modellingRule="Optional", dataType=o6.UInt16)),
     ],
 )
 o6.reference(safety_objtypes.SafetyConsumerType, ns0.reftypes.HasComponent, o6.ns["ns=safety;i=5009"])

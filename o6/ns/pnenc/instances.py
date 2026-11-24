@@ -304,8 +304,8 @@ ns0.vartypes.AnalogUnitRangeType(
     browseName="ns=pnenc;Acceleration",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6107", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6108", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6107", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6108", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
 )
@@ -315,8 +315,8 @@ ns0.vartypes.AnalogUnitRangeType(
     browseName="ns=pnenc;Temperature",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6111", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6112", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6111", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6112", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
 )
@@ -326,14 +326,15 @@ pnenc_objtypes.LogbookType(
     browseName="ns=pnenc;Logbook",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6113", browseName="ns=pnenc;LogbookSize", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6113", browseName="ns=pnenc;LogbookSize", modellingRule="Mandatory", dataType=o6.UInt16)),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=pnenc;i=6114",
                 browseName="ns=pnenc;LogEntries",
+                modellingRule="Mandatory",
                 dataType=pnenc_datypes.LogEntryDataType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[
                     pnenc_datypes.LogEntryDataType(
                         faultSituationNumber=0,
@@ -361,7 +362,7 @@ http_opcfoundation_org_UA_PNENC_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6118", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=pnenc;i=6119", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=pnenc;i=6119", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
@@ -377,10 +378,10 @@ ns0.vartypes.AnalogUnitRangeType(
     browseName="ns=pnenc;Position",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6101", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6102", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6123", browseName="ns=pnenc;AbsolutePositionRange", dataType=ns0.datatypes.Range)),
-        o6.hasComponent(ns0.vartypes.BaseAnalogType(nodeId="ns=pnenc;i=6122", browseName="ns=pnenc;Resolution", dataType=o6.Double)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6101", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6102", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6123", browseName="ns=pnenc;AbsolutePositionRange", modellingRule="Optional", dataType=ns0.datatypes.Range)),
+        o6.hasComponent(ns0.vartypes.BaseAnalogType(nodeId="ns=pnenc;i=6122", browseName="ns=pnenc;Resolution", modellingRule="Optional", dataType=o6.Double)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -391,8 +392,12 @@ ns0.vartypes.BaseDataVariableType(
     browseName="ns=pnenc;G1_XIST1",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6124", browseName="ns=pnenc;ShiftFactorXIST1", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6125", browseName="ns=pnenc;XIST1PresetControl", dataType=pnenc_datypes.EncoderPresetControlEnumeration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6124", browseName="ns=pnenc;ShiftFactorXIST1", modellingRule="Optional", dataType=o6.UInt16)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=pnenc;i=6125", browseName="ns=pnenc;XIST1PresetControl", modellingRule="Optional", dataType=pnenc_datypes.EncoderPresetControlEnumeration
+            )
+        ),
     ],
     dataType=o6.UInt32,
     value=0,
@@ -402,7 +407,7 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=pnenc;i=6093",
     browseName="ns=pnenc;G1_XIST2",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6126", browseName="ns=pnenc;ShiftFactorXIST2", dataType=o6.UInt16))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6126", browseName="ns=pnenc;ShiftFactorXIST2", modellingRule="Optional", dataType=o6.UInt16))],
     dataType=o6.UInt32,
     value=0,
 )
@@ -412,9 +417,9 @@ ns0.vartypes.AnalogUnitRangeType(
     browseName="ns=pnenc;Velocity",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6104", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6105", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasComponent(ns0.vartypes.BaseAnalogType(nodeId="ns=pnenc;i=6127", browseName="ns=pnenc;Damping", dataType=o6.Float)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6104", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6105", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasComponent(ns0.vartypes.BaseAnalogType(nodeId="ns=pnenc;i=6127", browseName="ns=pnenc;Damping", modellingRule="Optional", dataType=o6.Float)),
     ],
     dataType=o6.Float,
     value=0.0,
@@ -424,7 +429,11 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=pnenc;i=6109",
     browseName="ns=pnenc;PositionSensorSignalValue",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6128", browseName="ns=pnenc;SignalType", dataType=pnenc_datypes.EncoderSignalTypeEnumeration))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6128", browseName="ns=pnenc;SignalType", modellingRule="Optional", dataType=pnenc_datypes.EncoderSignalTypeEnumeration)
+        )
+    ],
     dataType=ns0.datatypes.Number,
 )
 o6.reference(pnenc_objtypes.EncoderChannelType, ns0.reftypes.HasComponent, o6.ns["ns=pnenc;i=6109"])
@@ -432,14 +441,18 @@ pnenc_objtypes.EncoderSensorType(
     nodeId="ns=pnenc;i=5011",
     browseName="ns=pnenc;Sensor",
     modellingRule="Mandatory",
-    references=[o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6129", browseName="ns=pnenc;PositionOffset", dataType=ns0.datatypes.Number))],
+    references=[
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6129", browseName="ns=pnenc;PositionOffset", modellingRule="Mandatory", dataType=ns0.datatypes.Number))
+    ],
 )
 o6.reference(pnenc_objtypes.EncoderChannelType, ns0.reftypes.HasComponent, o6.ns["ns=pnenc;i=5011"])
 pnenc_objtypes.EncoderProbeType(
     nodeId="ns=pnenc;i=5006",
     browseName="ns=pnenc;<Probex>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6130", browseName="ns=pnenc;LastLatchedPos", dataType=ns0.datatypes.Number))],
+    references=[
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6130", browseName="ns=pnenc;LastLatchedPos", modellingRule="Mandatory", dataType=ns0.datatypes.Number))
+    ],
 )
 o6.reference(pnenc_objtypes.EncoderProbesType, ns0.reftypes.HasComponent, o6.ns["ns=pnenc;i=5006"])
 
@@ -452,10 +465,10 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnenc;i=7002", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6010"]))
+o6.call(nodeId="ns=pnenc;i=7002", browseName="ns=di;BreakLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6010"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnenc;i=6011",
@@ -465,10 +478,10 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnenc;i=7003", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6011"]))
+o6.call(nodeId="ns=pnenc;i=7003", browseName="ns=di;ExitLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6011"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnenc;i=6012",
@@ -478,7 +491,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="Context", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
@@ -489,10 +502,16 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnenc;i=7004", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6012"]), outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6013"]))
+o6.call(
+    nodeId="ns=pnenc;i=7004",
+    browseName="ns=di;InitLock",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6012"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6013"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnenc;i=6018",
@@ -502,20 +521,20 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnenc;i=7005", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6018"]))
+o6.call(nodeId="ns=pnenc;i=7005", browseName="ns=di;RenewLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6018"]))
 
 di.objtypes.LockingServicesType(
     nodeId="ns=pnenc;i=5001",
     browseName="ns=pnenc;Lock",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6014", browseName="ns=di;Locked", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6015", browseName="ns=di;LockingClient", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6016", browseName="ns=di;LockingUser", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6017", browseName="ns=di;RemainingLockTime", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6014", browseName="ns=di;Locked", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6015", browseName="ns=di;LockingClient", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6016", browseName="ns=di;LockingUser", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6017", browseName="ns=di;RemainingLockTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
         o6.hasComponent(o6.ns["ns=pnenc;i=7002"]),
         o6.hasComponent(o6.ns["ns=pnenc;i=7003"]),
         o6.hasComponent(o6.ns["ns=pnenc;i=7004"]),
@@ -533,10 +552,10 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnenc;i=7014", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6075"]))
+o6.call(nodeId="ns=pnenc;i=7014", browseName="ns=di;BreakLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6075"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnenc;i=6076",
@@ -546,10 +565,10 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnenc;i=7015", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6076"]))
+o6.call(nodeId="ns=pnenc;i=7015", browseName="ns=di;ExitLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6076"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnenc;i=6077",
@@ -559,7 +578,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="Context", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
@@ -570,10 +589,16 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnenc;i=7016", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6077"]), outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6078"]))
+o6.call(
+    nodeId="ns=pnenc;i=7016",
+    browseName="ns=di;InitLock",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6077"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6078"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnenc;i=6083",
@@ -583,20 +608,20 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnenc;i=7017", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6083"]))
+o6.call(nodeId="ns=pnenc;i=7017", browseName="ns=di;RenewLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6083"]))
 
 di.objtypes.LockingServicesType(
     nodeId="ns=pnenc;i=5005",
     browseName="ns=pnenc;Lock",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6079", browseName="ns=di;Locked", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6080", browseName="ns=di;LockingClient", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6081", browseName="ns=di;LockingUser", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6082", browseName="ns=di;RemainingLockTime", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6079", browseName="ns=di;Locked", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6080", browseName="ns=di;LockingClient", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6081", browseName="ns=di;LockingUser", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6082", browseName="ns=di;RemainingLockTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
         o6.hasComponent(o6.ns["ns=pnenc;i=7014"]),
         o6.hasComponent(o6.ns["ns=pnenc;i=7015"]),
         o6.hasComponent(o6.ns["ns=pnenc;i=7016"]),

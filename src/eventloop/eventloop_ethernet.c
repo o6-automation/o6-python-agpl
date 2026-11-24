@@ -216,8 +216,9 @@ ethernetOpen(UA_ConnectionManager *cm, const UA_KeyValueMap *params,
     if(!loop || cm->eventSource.state != UA_EVENTSOURCESTATE_STARTED)
         return UA_STATUSCODE_BADINVALIDSTATE;
     initEthParams();
-    UA_StatusCode status = UA_KeyValueRestriction_validate(
-        loop->cLoop.logger, "ETH", ethParams, ETH_PARAMETERSSIZE, params);
+    UA_StatusCode status = UA_KeyValueMap_validate(
+        params, ethParams, ETH_PARAMETERSSIZE, false,
+        loop->cLoop.logger, UA_LOGCATEGORY_EVENTLOOP, "ETH");
     if(status != UA_STATUSCODE_GOOD)
         return status;
 

@@ -36,16 +36,16 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-ns0.objtypes.BaseObjectType(nodeId="ns=cranes_hoists;i=2114", browseName="ns=di;ParameterSet")
-machinery.objtypes.MachineIdentificationType(nodeId="ns=cranes_hoists;i=5000", browseName="ns=di;Identification")
-machinery.objtypes.MachineIdentificationType(nodeId="ns=cranes_hoists;i=5005", browseName="ns=di;Identification")
-di.objtypes.FunctionalGroupType(nodeId="ns=cranes_hoists;i=5009", browseName="ns=di;Operational")
+ns0.objtypes.BaseObjectType(nodeId="ns=cranes_hoists;i=2114", browseName="ns=di;ParameterSet", modellingRule="Mandatory")
+machinery.objtypes.MachineIdentificationType(nodeId="ns=cranes_hoists;i=5000", browseName="ns=di;Identification", modellingRule="Mandatory")
+machinery.objtypes.MachineIdentificationType(nodeId="ns=cranes_hoists;i=5005", browseName="ns=di;Identification", modellingRule="Mandatory")
+di.objtypes.FunctionalGroupType(nodeId="ns=cranes_hoists;i=5009", browseName="ns=di;Operational", modellingRule="Optional")
 
 
 @o6.objecttype(nodeId="ns=cranes_hoists;i=1556", browseName="ns=cranes_hoists;BrakeType", displayName="BrakeType")
 class BrakeType(di.objtypes.ComponentType):
     identification: machinery.objtypes.MachineryComponentIdentificationType | None = o6.hasAddIn(
-        machinery.objtypes.MachineryComponentIdentificationType(nodeId="ns=cranes_hoists;i=5002", browseName="ns=machinery;Identification")
+        machinery.objtypes.MachineryComponentIdentificationType(nodeId="ns=cranes_hoists;i=5002", browseName="ns=machinery;Identification", modellingRule="Optional")
     )
     operational: di.objtypes.FunctionalGroupType | None = o6.hasComponent(o6.ns["ns=cranes_hoists;i=5009"])
     parameterSet: ns0.objtypes.BaseObjectType
@@ -53,7 +53,9 @@ class BrakeType(di.objtypes.ComponentType):
 
 @o6.objecttype(nodeId="ns=cranes_hoists;i=1369", browseName="ns=cranes_hoists;CraneAxisType", displayName="CraneAxisType")
 class CraneAxisType(robotics.objtypes.AxisType):
-    actualLoad: robotics.objtypes.LoadType | None = o6.hasComponent(robotics.objtypes.LoadType(nodeId="ns=cranes_hoists;i=1378", browseName="ns=cranes_hoists;ActualLoad"))
+    actualLoad: robotics.objtypes.LoadType | None = o6.hasComponent(
+        robotics.objtypes.LoadType(nodeId="ns=cranes_hoists;i=1378", browseName="ns=cranes_hoists;ActualLoad", modellingRule="Optional")
+    )
     backupBrakeIdentifier_: BrakeType | None = o6.hasComponent(
         BrakeType(nodeId="ns=cranes_hoists;i=1373", browseName="ns=cranes_hoists;<BackupBrakeIdentifier>", modellingRule="OptionalPlaceholder")
     )
@@ -62,10 +64,10 @@ class CraneAxisType(robotics.objtypes.AxisType):
     parameterSet: ns0.objtypes.BaseObjectType
 
 
-di.objtypes.FunctionalGroupType(nodeId="ns=cranes_hoists;i=5013", browseName="ns=di;Operational")
-di.objtypes.FunctionalGroupType(nodeId="ns=cranes_hoists;i=5014", browseName="ns=di;Operational")
-machinery.objtypes.MachineryComponentIdentificationType(nodeId="ns=cranes_hoists;i=5015", browseName="ns=machinery;Identification")
-di.objtypes.FunctionalGroupType(nodeId="ns=cranes_hoists;i=5019", browseName="ns=di;Operational")
+di.objtypes.FunctionalGroupType(nodeId="ns=cranes_hoists;i=5013", browseName="ns=di;Operational", modellingRule="Optional")
+di.objtypes.FunctionalGroupType(nodeId="ns=cranes_hoists;i=5014", browseName="ns=di;Operational", modellingRule="Optional")
+machinery.objtypes.MachineryComponentIdentificationType(nodeId="ns=cranes_hoists;i=5015", browseName="ns=machinery;Identification", modellingRule="Optional")
+di.objtypes.FunctionalGroupType(nodeId="ns=cranes_hoists;i=5019", browseName="ns=di;Operational", modellingRule="Optional")
 
 
 @o6.objecttype(nodeId="ns=cranes_hoists;i=1262", browseName="ns=cranes_hoists;CraneMotorType", displayName="CraneMotorType")
@@ -81,13 +83,14 @@ o6.reference(CraneMotorType, "ns=robotics;i=18181", "ns=robotics;i=16041")
 @o6.objecttype(nodeId="ns=cranes_hoists;i=1462", browseName="ns=cranes_hoists;ProtectiveFunctionType", displayName="ProtectiveFunctionType")
 class ProtectiveFunctionType(ns0.objtypes.BaseObjectType):
     identification: machinery.objtypes.MachineryComponentIdentificationType | None = o6.hasAddIn(
-        machinery.objtypes.MachineryComponentIdentificationType(nodeId="ns=cranes_hoists;i=5024", browseName="ns=machinery;Identification")
+        machinery.objtypes.MachineryComponentIdentificationType(nodeId="ns=cranes_hoists;i=5024", browseName="ns=machinery;Identification", modellingRule="Optional")
     )
     name: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=cranes_hoists;i=1479",
             browseName="ns=cranes_hoists;Name",
             description="The Name of the ProtectiveStopFunctionType provides a manufacturer-specific protective function identifier within the safety system.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -98,6 +101,7 @@ class ProtectiveFunctionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=cranes_hoists;i=1864",
             browseName="ns=cranes_hoists;ProtectiveFunctionMode",
             description="This property describes which is the mode of operation for this protective function, for example force limiter for overload protection devices or motion limiter for limit switches etc.",
+            modellingRule="Optional",
             dataType=cranes_hoists_datypes.ProtectiveFunctionEnum,
         )
     )
@@ -106,22 +110,23 @@ class ProtectiveFunctionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=cranes_hoists;i=1472",
             browseName="ns=cranes_hoists;RampDown",
             description="Indicates if the motion is slowed down or stopped gracefully with ramping down instead of with brakes.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
 
 
-ns0.vartypes.PropertyType(nodeId="ns=cranes_hoists;i=6007", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText)
+ns0.vartypes.PropertyType(nodeId="ns=cranes_hoists;i=6007", browseName="ns=di;Manufacturer", modellingRule="Optional", dataType=o6.LocalizedText)
 o6.reference(o6.ns["ns=cranes_hoists;i=5000"], "i=46", o6.ns["ns=cranes_hoists;i=6007"])
-ns0.vartypes.PropertyType(nodeId="ns=cranes_hoists;i=6008", browseName="ns=di;SerialNumber", dataType=o6.String)
+ns0.vartypes.PropertyType(nodeId="ns=cranes_hoists;i=6008", browseName="ns=di;SerialNumber", modellingRule="Optional", dataType=o6.String)
 o6.reference(o6.ns["ns=cranes_hoists;i=5000"], "i=46", o6.ns["ns=cranes_hoists;i=6008"])
-ns0.vartypes.PropertyType(nodeId="ns=cranes_hoists;i=6009", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText)
+ns0.vartypes.PropertyType(nodeId="ns=cranes_hoists;i=6009", browseName="ns=di;Manufacturer", modellingRule="Mandatory", dataType=o6.LocalizedText)
 o6.reference(o6.ns["ns=cranes_hoists;i=5005"], "i=46", o6.ns["ns=cranes_hoists;i=6009"])
 o6.reference(o6.ns["ns=cranes_hoists;i=5015"], "i=46", o6.ns["ns=cranes_hoists;i=6009"])
-ns0.vartypes.PropertyType(nodeId="ns=cranes_hoists;i=6010", browseName="ns=di;SerialNumber", dataType=o6.String)
+ns0.vartypes.PropertyType(nodeId="ns=cranes_hoists;i=6010", browseName="ns=di;SerialNumber", modellingRule="Mandatory", dataType=o6.String)
 o6.reference(o6.ns["ns=cranes_hoists;i=5005"], "i=46", o6.ns["ns=cranes_hoists;i=6010"])
 o6.reference(o6.ns["ns=cranes_hoists;i=5015"], "i=46", o6.ns["ns=cranes_hoists;i=6010"])
-ns0.vartypes.PropertyType(nodeId="ns=cranes_hoists;i=6011", browseName="ns=di;ProductInstanceUri", dataType=o6.String)
+ns0.vartypes.PropertyType(nodeId="ns=cranes_hoists;i=6011", browseName="ns=di;ProductInstanceUri", modellingRule="Optional", dataType=o6.String)
 o6.reference(o6.ns["ns=cranes_hoists;i=5000"], "i=46", o6.ns["ns=cranes_hoists;i=6011"])
 
 
@@ -138,7 +143,7 @@ class CraneMotionDeviceSystemType(robotics.objtypes.MotionDeviceSystemType):
     serialNumber: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=cranes_hoists;i=6008"])
 
 
-ns0.vartypes.PropertyType(nodeId="ns=cranes_hoists;i=6012", browseName="ns=di;ProductInstanceUri", dataType=o6.String)
+ns0.vartypes.PropertyType(nodeId="ns=cranes_hoists;i=6012", browseName="ns=di;ProductInstanceUri", modellingRule="Optional", dataType=o6.String)
 o6.reference(o6.ns["ns=cranes_hoists;i=5005"], "i=46", o6.ns["ns=cranes_hoists;i=6012"])
 o6.reference(o6.ns["ns=cranes_hoists;i=5015"], "i=46", o6.ns["ns=cranes_hoists;i=6012"])
 
@@ -152,6 +157,7 @@ class CraneMotionDeviceType(robotics.objtypes.MotionDeviceType):
             nodeId="ns=cranes_hoists;i=6004",
             browseName="ns=cranes_hoists;CraneMotionDeviceCategory",
             description="This property describes which category this motion device belongs to. Different categories include hoists, trolley traversing machineries, bridge or gantry travelling machineries, load lifting attachments etc.",
+            modellingRule="Mandatory",
             dataType=cranes_hoists_datypes.CraneMotionDeviceCategoryEnum,
         )
     )

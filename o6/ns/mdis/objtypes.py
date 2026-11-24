@@ -41,14 +41,14 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="Enable", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Disable the device (false), or enable the device (true)")
         )
     ],
 )
-o6.call(nodeId="ns=mdis;i=195", browseName="ns=mdis;EnableDisable", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=196"]))
+o6.call(nodeId="ns=mdis;i=195", browseName="ns=mdis;EnableDisable", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=196"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=mdis;i=884",
@@ -58,7 +58,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[5],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="Direction",
@@ -93,7 +93,7 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=mdis;i=883", browseName="ns=mdis;Move", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=884"]))
+o6.call(nodeId="ns=mdis;i=883", browseName="ns=mdis;Move", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=884"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=mdis;i=1156",
@@ -103,7 +103,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="Position", dataType=o6.NodeId("i=10"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("A number (in percent) indicating the percent open")
@@ -120,7 +120,7 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=mdis;i=1155", browseName="ns=mdis;Move", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1156"]))
+o6.call(nodeId="ns=mdis;i=1155", browseName="ns=mdis;Move", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1156"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=mdis;i=1158",
@@ -130,7 +130,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[4],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="Direction",
@@ -154,7 +154,7 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=mdis;i=1157", browseName="ns=mdis;Step", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1158"]))
+o6.call(nodeId="ns=mdis;i=1157", browseName="ns=mdis;Step", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1158"]))
 
 
 @o6.objecttype(
@@ -167,22 +167,29 @@ o6.call(nodeId="ns=mdis;i=1157", browseName="ns=mdis;Step", inputArgs=o6.hasProp
 class MDISBaseObjectType(ns0.objtypes.BaseObjectType):
     enableDisable: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=mdis;i=195"])
     enabled: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=476", browseName="ns=mdis;Enabled", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=476", browseName="ns=mdis;Enabled", modellingRule="Optional", dataType=o6.Boolean)
     )
-    fault: ns0.vartypes.BaseDataVariableType = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=489", browseName="ns=mdis;Fault", dataType=o6.Boolean))
+    fault: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=489", browseName="ns=mdis;Fault", modellingRule="Mandatory", dataType=o6.Boolean)
+    )
     faultCode: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1165", browseName="ns=mdis;FaultCode", dataType=o6.UInt32)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1165", browseName="ns=mdis;FaultCode", modellingRule="Optional", dataType=o6.UInt32)
     )
     tagId: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=mdis;i=197", browseName="ns=mdis;TagId", description="The id used in other parts of the system", displayName="Tag ID", dataType=o6.String
+            nodeId="ns=mdis;i=197",
+            browseName="ns=mdis;TagId",
+            description="The id used in other parts of the system",
+            displayName="Tag ID",
+            modellingRule="Optional",
+            dataType=o6.String,
         )
     )
     warning: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=497", browseName="ns=mdis;Warning", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=497", browseName="ns=mdis;Warning", modellingRule="Optional", dataType=o6.Boolean)
     )
     warningCode: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1166", browseName="ns=mdis;WarningCode", dataType=o6.UInt32)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1166", browseName="ns=mdis;WarningCode", modellingRule="Optional", dataType=o6.UInt32)
     )
 
 
@@ -193,7 +200,9 @@ class MDISBaseObjectType(ns0.objtypes.BaseObjectType):
     description="The definition of a MDIS standard Digital Instrument",
 )
 class MDISDigitalInstrumentObjectType(MDISBaseObjectType):
-    state: ns0.vartypes.BaseDataVariableType = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=970", browseName="ns=mdis;State", dataType=o6.Boolean))
+    state: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=970", browseName="ns=mdis;State", modellingRule="Mandatory", dataType=o6.Boolean)
+    )
 
 
 @o6.objecttype(
@@ -201,25 +210,29 @@ class MDISDigitalInstrumentObjectType(MDISBaseObjectType):
 )
 class MDISInstrumentObjectType(MDISBaseObjectType):
     hHSetPoint: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=1062", browseName="ns=mdis;HHSetPoint", dataType=o6.Float, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=1062", browseName="ns=mdis;HHSetPoint", modellingRule="Optional", dataType=o6.Float, accessLevel=3, userAccessLevel=1)
     )
     hHlimit: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1058", browseName="ns=mdis;HHlimit", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1058", browseName="ns=mdis;HHlimit", modellingRule="Optional", dataType=o6.Boolean)
     )
     hSetPoint: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=1063", browseName="ns=mdis;HSetPoint", dataType=o6.Float, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=1063", browseName="ns=mdis;HSetPoint", modellingRule="Optional", dataType=o6.Float, accessLevel=3, userAccessLevel=1)
     )
-    hlimit: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1059", browseName="ns=mdis;Hlimit", dataType=o6.Boolean))
+    hlimit: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1059", browseName="ns=mdis;Hlimit", modellingRule="Optional", dataType=o6.Boolean)
+    )
     lLSetPoint: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=1065", browseName="ns=mdis;LLSetPoint", dataType=o6.Float, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=1065", browseName="ns=mdis;LLSetPoint", modellingRule="Optional", dataType=o6.Float, accessLevel=3, userAccessLevel=1)
     )
     lLlimit: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1061", browseName="ns=mdis;LLlimit", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1061", browseName="ns=mdis;LLlimit", modellingRule="Optional", dataType=o6.Boolean)
     )
     lSetPoint: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=1064", browseName="ns=mdis;LSetPoint", dataType=o6.Float, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=1064", browseName="ns=mdis;LSetPoint", modellingRule="Optional", dataType=o6.Float, accessLevel=3, userAccessLevel=1)
     )
-    llimit: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1060", browseName="ns=mdis;Llimit", dataType=o6.Boolean))
+    llimit: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1060", browseName="ns=mdis;Llimit", modellingRule="Optional", dataType=o6.Boolean)
+    )
     processVariable: ns0.vartypes.AnalogItemType
 
 
@@ -230,7 +243,9 @@ class MDISInstrumentObjectType(MDISBaseObjectType):
     description="The definition of a MDIS standard Discrete Instrument",
 )
 class MDISDiscreteInstrumentObjectType(MDISBaseObjectType):
-    state: ns0.vartypes.BaseDataVariableType = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1223", browseName="ns=mdis;State", dataType=o6.UInt32))
+    state: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1223", browseName="ns=mdis;State", modellingRule="Mandatory", dataType=o6.UInt32)
+    )
 
 
 ns0.vartypes.PropertyType(
@@ -241,14 +256,14 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="State", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Boolean state that is being written to the object")
         )
     ],
 )
-o6.call(nodeId="ns=mdis;i=1240", browseName="ns=mdis;WriteState", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1241"]))
+o6.call(nodeId="ns=mdis;i=1240", browseName="ns=mdis;WriteState", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1241"]))
 
 
 @o6.objecttype(
@@ -266,14 +281,14 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="State", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Unit32 state that is being written to the object")
         )
     ],
 )
-o6.call(nodeId="ns=mdis;i=1252", browseName="ns=mdis;WriteValue", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1253"]))
+o6.call(nodeId="ns=mdis;i=1252", browseName="ns=mdis;WriteValue", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1253"]))
 
 
 @o6.objecttype(
@@ -294,14 +309,14 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="Value", dataType=o6.NodeId("i=10"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Float value that is being written to the object")
         )
     ],
 )
-o6.call(nodeId="ns=mdis;i=1277", browseName="ns=mdis;WriteValue", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1278"]))
+o6.call(nodeId="ns=mdis;i=1277", browseName="ns=mdis;WriteValue", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1278"]))
 
 
 @o6.objecttype(
@@ -317,39 +332,39 @@ class MDISInstrumentOutObjectType(MDISInstrumentObjectType):
 @o6.objecttype(nodeId="ns=mdis;i=794", browseName="ns=mdis;MDISValveObjectType", displayName="MDISValveObjectType", description="The definition of a MDIS standard Valve Object")
 class MDISValveObjectType(MDISBaseObjectType):
     closeTimeDuration: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=888", browseName="ns=mdis;CloseTimeDuration", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=888", browseName="ns=mdis;CloseTimeDuration", modellingRule="Optional", dataType=ns0.datatypes.Duration)
     )
     commandRejected: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=876", browseName="ns=mdis;CommandRejected", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=876", browseName="ns=mdis;CommandRejected", modellingRule="Optional", dataType=o6.Boolean)
     )
     defeatableCloseInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=882", browseName="ns=mdis;DefeatableCloseInterlock", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=882", browseName="ns=mdis;DefeatableCloseInterlock", modellingRule="Optional", dataType=o6.Boolean)
     )
     defeatableOpenInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=880", browseName="ns=mdis;DefeatableOpenInterlock", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=880", browseName="ns=mdis;DefeatableOpenInterlock", modellingRule="Optional", dataType=o6.Boolean)
     )
     interlockPlaceholder_: mdis_vartypes.InterlockVariableType | None = o6.reference(
         mdis_vartypes.InterlockVariableType(nodeId="ns=mdis;i=1280", browseName="ns=mdis;<InterlockPlaceholder>", modellingRule="OptionalPlaceholder", dataType=o6.Boolean),
         "ns=mdis;i=1183",
     )
     lastCommand: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=878", browseName="ns=mdis;LastCommand", dataType=mdis_datypes.CommandEnum)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=878", browseName="ns=mdis;LastCommand", modellingRule="Optional", dataType=mdis_datypes.CommandEnum)
     )
     move: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=mdis;i=883"])
     nonDefeatableCloseInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=881", browseName="ns=mdis;NonDefeatableCloseInterlock", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=881", browseName="ns=mdis;NonDefeatableCloseInterlock", modellingRule="Optional", dataType=o6.Boolean)
     )
     nonDefeatableOpenInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=879", browseName="ns=mdis;NonDefeatableOpenInterlock", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=879", browseName="ns=mdis;NonDefeatableOpenInterlock", modellingRule="Optional", dataType=o6.Boolean)
     )
     openTimeDuration: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=887", browseName="ns=mdis;OpenTimeDuration", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=887", browseName="ns=mdis;OpenTimeDuration", modellingRule="Optional", dataType=ns0.datatypes.Duration)
     )
     position: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=875", browseName="ns=mdis;Position", dataType=mdis_datypes.ValvePositionEnum)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=875", browseName="ns=mdis;Position", modellingRule="Mandatory", dataType=mdis_datypes.ValvePositionEnum)
     )
     signatureRequestStatus: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=877", browseName="ns=mdis;SignatureRequestStatus", dataType=mdis_datypes.SignatureStatusEnum)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=877", browseName="ns=mdis;SignatureRequestStatus", modellingRule="Optional", dataType=mdis_datypes.SignatureStatusEnum)
     )
     valveSignature_: ns0.objtypes.FileType | None
 
@@ -362,30 +377,30 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="Position", dataType=o6.NodeId("i=10"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("A number (in percent) indicating the percent open")
         )
     ],
 )
-o6.call(nodeId="ns=mdis;i=1284", browseName="ns=mdis;SetCalculatedPosition", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1285"]))
+o6.call(nodeId="ns=mdis;i=1284", browseName="ns=mdis;SetCalculatedPosition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1285"]))
 
 
 @o6.objecttype(nodeId="ns=mdis;i=1066", browseName="ns=mdis;MDISChokeObjectType", displayName="MDISChokeObjectType", description="The definition of a MDIS standard Choke Object")
 class MDISChokeObjectType(MDISBaseObjectType):
-    abort: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="ns=mdis;i=1159", browseName="ns=mdis;Abort"))
+    abort: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="ns=mdis;i=1159", browseName="ns=mdis;Abort", modellingRule="Mandatory"))
     calculatedPosition: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1147", browseName="ns=mdis;CalculatedPosition", dataType=o6.Float)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1147", browseName="ns=mdis;CalculatedPosition", modellingRule="Mandatory", dataType=o6.Float)
     )
     commandRejected: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1150", browseName="ns=mdis;CommandRejected", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1150", browseName="ns=mdis;CommandRejected", modellingRule="Optional", dataType=o6.Boolean)
     )
     defeatableCloseInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1154", browseName="ns=mdis;DefeatableCloseInterlock", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1154", browseName="ns=mdis;DefeatableCloseInterlock", modellingRule="Optional", dataType=o6.Boolean)
     )
     defeatableOpenInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1152", browseName="ns=mdis;DefeatableOpenInterlock", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1152", browseName="ns=mdis;DefeatableOpenInterlock", modellingRule="Optional", dataType=o6.Boolean)
     )
     interlockPlaceholder_: mdis_vartypes.InterlockVariableType | None = o6.reference(
         mdis_vartypes.InterlockVariableType(nodeId="ns=mdis;i=1281", browseName="ns=mdis;<InterlockPlaceholder>", modellingRule="OptionalPlaceholder", dataType=o6.Boolean),
@@ -393,29 +408,33 @@ class MDISChokeObjectType(MDISBaseObjectType):
     )
     move: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=mdis;i=1155"])
     moving: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1149", browseName="ns=mdis;Moving", dataType=mdis_datypes.ChokeMoveEnum)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1149", browseName="ns=mdis;Moving", modellingRule="Mandatory", dataType=mdis_datypes.ChokeMoveEnum)
     )
     nonDefeatableCloseInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1153", browseName="ns=mdis;NonDefeatableCloseInterlock", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1153", browseName="ns=mdis;NonDefeatableCloseInterlock", modellingRule="Optional", dataType=o6.Boolean)
     )
     nonDefeatableOpenInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1151", browseName="ns=mdis;NonDefeatableOpenInterlock", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1151", browseName="ns=mdis;NonDefeatableOpenInterlock", modellingRule="Optional", dataType=o6.Boolean)
     )
     positionInSteps: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1148", browseName="ns=mdis;PositionInSteps", dataType=o6.Int16)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1148", browseName="ns=mdis;PositionInSteps", modellingRule="Optional", dataType=o6.Int16)
     )
     setCalculatedPosition: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=mdis;i=1284"])
     setCalculatedPositionStatus: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=1314", browseName="ns=mdis;SetCalculatedPositionStatus", dataType=mdis_datypes.SetCalculatedPositionEnum)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=mdis;i=1314", browseName="ns=mdis;SetCalculatedPositionStatus", modellingRule="Optional", dataType=mdis_datypes.SetCalculatedPositionEnum
+        )
     )
     step: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=mdis;i=1157"])
     stepDurationClose: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=1163", browseName="ns=mdis;StepDurationClose", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=1163", browseName="ns=mdis;StepDurationClose", modellingRule="Optional", dataType=ns0.datatypes.Duration)
     )
     stepDurationOpen: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=1162", browseName="ns=mdis;StepDurationOpen", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=1162", browseName="ns=mdis;StepDurationOpen", modellingRule="Optional", dataType=ns0.datatypes.Duration)
     )
-    totalSteps: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mdis;i=1164", browseName="ns=mdis;TotalSteps", dataType=o6.UInt16))
+    totalSteps: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=1164", browseName="ns=mdis;TotalSteps", modellingRule="Optional", dataType=o6.UInt16)
+    )
 
 
 @o6.objecttype(
@@ -455,7 +474,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="TargetTime",
@@ -466,7 +485,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=mdis;i=1469", browseName="ns=mdis;SetTime", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1470"]))
+o6.call(nodeId="ns=mdis;i=1469", browseName="ns=mdis;SetTime", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=1470"]))
 
 
 @o6.objecttype(
@@ -484,7 +503,7 @@ class MDISTimeSyncObjectType(ns0.objtypes.BaseObjectType):
 )
 class MDISInformationObjectType(ns0.objtypes.BaseObjectType):
     mDISVersion: mdis_vartypes.MDISVersionVariableType
-    signatures: ns0.objtypes.FolderType | None = o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=mdis;i=1475", browseName="ns=mdis;Signatures"))
+    signatures: ns0.objtypes.FolderType | None = o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=mdis;i=1475", browseName="ns=mdis;Signatures", modellingRule="Optional"))
     timeSynchronization: MDISTimeSyncObjectType | None
 
 
@@ -496,7 +515,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="ArbitrationMode",
@@ -507,7 +526,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=mdis;i=15028", browseName="ns=mdis;SetArbitrationMode", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15029"]))
+o6.call(nodeId="ns=mdis;i=15028", browseName="ns=mdis;SetArbitrationMode", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15029"]))
 
 
 @o6.objecttype(
@@ -518,11 +537,15 @@ o6.call(nodeId="ns=mdis;i=15028", browseName="ns=mdis;SetArbitrationMode", input
 )
 class MDISDigitalArbitrationObjectType(MDISDigitalInstrumentObjectType):
     arbitrationMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15027", browseName="ns=mdis;ArbitrationMode", dataType=mdis_datypes.ArbitrationModeEnum)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15027", browseName="ns=mdis;ArbitrationMode", modellingRule="Mandatory", dataType=mdis_datypes.ArbitrationModeEnum)
     )
     setArbitrationMode: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=mdis;i=15028"])
-    sourceA: ns0.vartypes.BaseDataVariableType = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15025", browseName="ns=mdis;SourceA", dataType=o6.Boolean))
-    sourceB: ns0.vartypes.BaseDataVariableType = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15026", browseName="ns=mdis;SourceB", dataType=o6.Boolean))
+    sourceA: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15025", browseName="ns=mdis;SourceA", modellingRule="Mandatory", dataType=o6.Boolean)
+    )
+    sourceB: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15026", browseName="ns=mdis;SourceB", modellingRule="Mandatory", dataType=o6.Boolean)
+    )
 
 
 ns0.vartypes.PropertyType(
@@ -533,7 +556,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="ArbitrationMode",
@@ -544,7 +567,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=mdis;i=15074", browseName="ns=mdis;SetArbitrationMode", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15075"]))
+o6.call(nodeId="ns=mdis;i=15074", browseName="ns=mdis;SetArbitrationMode", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15075"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=mdis;i=15093",
@@ -554,7 +577,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="Position", dataType=o6.NodeId("i=10"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("A number (in percent) indicating the percent open")
@@ -571,7 +594,7 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=mdis;i=15092", browseName="ns=mdis;Move", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15093"]))
+o6.call(nodeId="ns=mdis;i=15092", browseName="ns=mdis;Move", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15093"]))
 
 
 @o6.objecttype(
@@ -581,18 +604,18 @@ o6.call(nodeId="ns=mdis;i=15092", browseName="ns=mdis;Move", inputArgs=o6.hasPro
     description="The definition of a MDIS standard Electric Choke Object",
 )
 class MDISElectricChokeObjectType(MDISBaseObjectType):
-    abort: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="ns=mdis;i=15094", browseName="ns=mdis;Abort"))
+    abort: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="ns=mdis;i=15094", browseName="ns=mdis;Abort", modellingRule="Mandatory"))
     actualPosition: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15085", browseName="ns=mdis;ActualPosition", dataType=o6.Float)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15085", browseName="ns=mdis;ActualPosition", modellingRule="Mandatory", dataType=o6.Float)
     )
     commandRejected: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15087", browseName="ns=mdis;CommandRejected", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15087", browseName="ns=mdis;CommandRejected", modellingRule="Optional", dataType=o6.Boolean)
     )
     defeatableCloseInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15091", browseName="ns=mdis;DefeatableCloseInterlock", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15091", browseName="ns=mdis;DefeatableCloseInterlock", modellingRule="Optional", dataType=o6.Boolean)
     )
     defeatableOpenInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15089", browseName="ns=mdis;DefeatableOpenInterlock", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15089", browseName="ns=mdis;DefeatableOpenInterlock", modellingRule="Optional", dataType=o6.Boolean)
     )
     interlockPlaceholder_: mdis_vartypes.InterlockVariableType | None = o6.reference(
         mdis_vartypes.InterlockVariableType(nodeId="ns=mdis;i=15095", browseName="ns=mdis;<InterlockPlaceholder>", modellingRule="OptionalPlaceholder", dataType=o6.Boolean),
@@ -600,13 +623,13 @@ class MDISElectricChokeObjectType(MDISBaseObjectType):
     )
     move: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=mdis;i=15092"])
     moving: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15086", browseName="ns=mdis;Moving", dataType=mdis_datypes.ChokeMoveEnum)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15086", browseName="ns=mdis;Moving", modellingRule="Mandatory", dataType=mdis_datypes.ChokeMoveEnum)
     )
     nonDefeatableCloseInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15090", browseName="ns=mdis;NonDefeatableCloseInterlock", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15090", browseName="ns=mdis;NonDefeatableCloseInterlock", modellingRule="Optional", dataType=o6.Boolean)
     )
     nonDefeatableOpenInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15088", browseName="ns=mdis;NonDefeatableOpenInterlock", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15088", browseName="ns=mdis;NonDefeatableOpenInterlock", modellingRule="Optional", dataType=o6.Boolean)
     )
 
 
@@ -618,14 +641,14 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="Initial", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The value to initialize the Object Count to, default is 0")
         )
     ],
 )
-o6.call(nodeId="ns=mdis;i=15100", browseName="ns=mdis;SetCount", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15101"]))
+o6.call(nodeId="ns=mdis;i=15100", browseName="ns=mdis;SetCount", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15101"]))
 
 
 @o6.objecttype(
@@ -636,7 +659,7 @@ o6.call(nodeId="ns=mdis;i=15100", browseName="ns=mdis;SetCount", inputArgs=o6.ha
 )
 class MDISCounterObjectType(ns0.objtypes.BaseObjectType):
     count: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15099", browseName="ns=mdis;Count", dataType=ns0.datatypes.Number)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15099", browseName="ns=mdis;Count", modellingRule="Mandatory", dataType=ns0.datatypes.Number)
     )
     setCount: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=mdis;i=15100"])
 
@@ -649,14 +672,14 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="Initial", dataType=o6.NodeId("i=10"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The value to initialize the TotalFlow to")
         )
     ],
 )
-o6.call(nodeId="ns=mdis;i=15166", browseName="ns=mdis;ResetTotalFlow", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15167"]))
+o6.call(nodeId="ns=mdis;i=15166", browseName="ns=mdis;ResetTotalFlow", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15167"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=mdis;i=15169",
@@ -666,7 +689,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="Mode",
@@ -687,7 +710,7 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=mdis;i=15168", browseName="ns=mdis;SetOperationMode", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15169"]))
+o6.call(nodeId="ns=mdis;i=15168", browseName="ns=mdis;SetOperationMode", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15169"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=mdis;i=15171",
@@ -697,7 +720,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="FlowRate",
@@ -718,7 +741,7 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=mdis;i=15170", browseName="ns=mdis;SetFlowRate", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15171"]))
+o6.call(nodeId="ns=mdis;i=15170", browseName="ns=mdis;SetFlowRate", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15171"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=mdis;i=15173",
@@ -728,7 +751,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="Position",
@@ -749,7 +772,7 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=mdis;i=15172", browseName="ns=mdis;SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15173"]))
+o6.call(nodeId="ns=mdis;i=15172", browseName="ns=mdis;SetPosition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15173"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=mdis;i=15175",
@@ -759,7 +782,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[4],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="Direction", dataType=o6.NodeId("ns=mdis;i=15007"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Direction to move – Open or Close")
@@ -783,7 +806,7 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=mdis;i=15174", browseName="ns=mdis;SetManual", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15175"]))
+o6.call(nodeId="ns=mdis;i=15174", browseName="ns=mdis;SetManual", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15175"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=mdis;i=15206",
@@ -793,7 +816,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="OverrideInterlocks",
@@ -804,7 +827,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=mdis;i=15205", browseName="ns=mdis;Start", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15206"]))
+o6.call(nodeId="ns=mdis;i=15205", browseName="ns=mdis;Start", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15206"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=mdis;i=15208",
@@ -814,7 +837,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="OverrideInterlocks",
@@ -825,7 +848,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=mdis;i=15207", browseName="ns=mdis;Stop", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15208"]))
+o6.call(nodeId="ns=mdis;i=15207", browseName="ns=mdis;Stop", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15208"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=mdis;i=15210",
@@ -835,21 +858,21 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="Mode", dataType=o6.NodeId("ns=mdis;i=15013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Mode to operate in (i.e. Auto or Manual)")
         )
     ],
 )
-o6.call(nodeId="ns=mdis;i=15209", browseName="ns=mdis;SetOperation", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15210"]))
+o6.call(nodeId="ns=mdis;i=15209", browseName="ns=mdis;SetOperation", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15210"]))
 
 
 @o6.objecttype(nodeId="ns=mdis;i=15114", browseName="ns=mdis;MDISCIMVObjectType", displayName="MDISCIMVObjectType", description="The definition of a MDIS standard CIMV Object")
 class MDISCIMVObjectType(MDISBaseObjectType):
-    abort: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="ns=mdis;i=15176", browseName="ns=mdis;Abort"))
+    abort: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="ns=mdis;i=15176", browseName="ns=mdis;Abort", modellingRule="Mandatory"))
     commandRejected: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15162", browseName="ns=mdis;CommandRejected", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15162", browseName="ns=mdis;CommandRejected", modellingRule="Optional", dataType=o6.Boolean)
     )
     deviceCurrent: ns0.vartypes.AnalogItemType | None
     flowRate: ns0.vartypes.AnalogItemType
@@ -861,22 +884,24 @@ class MDISCIMVObjectType(MDISBaseObjectType):
     internalPressure: ns0.vartypes.AnalogItemType | None
     motorOperationsCount: MDISCounterObjectType | None
     moving: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15137", browseName="ns=mdis;Moving", dataType=mdis_datypes.CIMVMoveEnum)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15137", browseName="ns=mdis;Moving", modellingRule="Mandatory", dataType=mdis_datypes.CIMVMoveEnum)
     )
     nonDefeatableCloseInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15165", browseName="ns=mdis;NonDefeatableCloseInterlock", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15165", browseName="ns=mdis;NonDefeatableCloseInterlock", modellingRule="Optional", dataType=o6.Boolean)
     )
     nonDefeatableCommandInProgressInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15164", browseName="ns=mdis;NonDefeatableCommandInProgressInterlock", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15164", browseName="ns=mdis;NonDefeatableCommandInProgressInterlock", modellingRule="Optional", dataType=o6.Boolean)
     )
     nonDefeatableOpenInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15163", browseName="ns=mdis;NonDefeatableOpenInterlock", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15163", browseName="ns=mdis;NonDefeatableOpenInterlock", modellingRule="Optional", dataType=o6.Boolean)
     )
     operationMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15123", browseName="ns=mdis;OperationMode", dataType=mdis_datypes.CIMVOperationModeEnum)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15123", browseName="ns=mdis;OperationMode", modellingRule="Mandatory", dataType=mdis_datypes.CIMVOperationModeEnum)
     )
     outletPressure: ns0.vartypes.AnalogItemType | None
-    position: ns0.vartypes.BaseDataVariableType = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15136", browseName="ns=mdis;Position", dataType=o6.Float))
+    position: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15136", browseName="ns=mdis;Position", modellingRule="Mandatory", dataType=o6.Float)
+    )
     resetTotalFlow: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=mdis;i=15166"])
     setFlowRate: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=mdis;i=15170"])
     setManual: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=mdis;i=15174"])
@@ -884,7 +909,7 @@ class MDISCIMVObjectType(MDISBaseObjectType):
     setPosition: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=mdis;i=15172"])
     targetFlowRate: ns0.vartypes.AnalogItemType
     targetPosition: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15304", browseName="ns=mdis;TargetPosition", dataType=o6.Float)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15304", browseName="ns=mdis;TargetPosition", modellingRule="Mandatory", dataType=o6.Float)
     )
     totalFlow: ns0.vartypes.AnalogItemType | None
     totalMotorRuntime: MDISCounterObjectType | None
@@ -893,25 +918,27 @@ class MDISCIMVObjectType(MDISBaseObjectType):
 @o6.objecttype(nodeId="ns=mdis;i=15190", browseName="ns=mdis;MDISMotorObjectType", displayName="MDISMotorObjectType", description="The definition of a MDIS standard Motor Object")
 class MDISMotorObjectType(MDISBaseObjectType):
     defeatableStartInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15396", browseName="ns=mdis;DefeatableStartInterlock", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15396", browseName="ns=mdis;DefeatableStartInterlock", modellingRule="Optional", dataType=o6.Boolean)
     )
     defeatableStopInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15398", browseName="ns=mdis;DefeatableStopInterlock", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15398", browseName="ns=mdis;DefeatableStopInterlock", modellingRule="Optional", dataType=o6.Boolean)
     )
     interlockPlaceholder_: mdis_vartypes.InterlockVariableType | None = o6.reference(
         mdis_vartypes.InterlockVariableType(nodeId="ns=mdis;i=15211", browseName="ns=mdis;<InterlockPlaceholder>", modellingRule="OptionalPlaceholder", dataType=o6.Boolean),
         "ns=mdis;i=1183",
     )
     nonDefeatableStartInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15395", browseName="ns=mdis;NonDefeatableStartInterlock", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15395", browseName="ns=mdis;NonDefeatableStartInterlock", modellingRule="Optional", dataType=o6.Boolean)
     )
     nonDefeatableStopInterlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15397", browseName="ns=mdis;NonDefeatableStopInterlock", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15397", browseName="ns=mdis;NonDefeatableStopInterlock", modellingRule="Optional", dataType=o6.Boolean)
     )
     operation: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15200", browseName="ns=mdis;Operation", dataType=mdis_datypes.MotorOperationEnum)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15200", browseName="ns=mdis;Operation", modellingRule="Mandatory", dataType=mdis_datypes.MotorOperationEnum)
     )
-    running: ns0.vartypes.BaseDataVariableType = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15199", browseName="ns=mdis;Running", dataType=o6.Boolean))
+    running: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15199", browseName="ns=mdis;Running", modellingRule="Mandatory", dataType=o6.Boolean)
+    )
     setOperation: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=mdis;i=15209"])
     start: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=mdis;i=15205"])
     stop: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=mdis;i=15207"])
@@ -925,7 +952,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="ArbitrationMode",
@@ -936,7 +963,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=mdis;i=15545", browseName="ns=mdis;SetArbitrationMode", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15546"]))
+o6.call(nodeId="ns=mdis;i=15545", browseName="ns=mdis;SetArbitrationMode", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=mdis;i=15546"]))
 
 
 @o6.objecttype(
@@ -947,11 +974,15 @@ o6.call(nodeId="ns=mdis;i=15545", browseName="ns=mdis;SetArbitrationMode", input
 )
 class MDISDiscreteArbitrationObjectType(MDISDiscreteInstrumentObjectType):
     arbitrationMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15544", browseName="ns=mdis;ArbitrationMode", dataType=mdis_datypes.ArbitrationModeEnum)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15544", browseName="ns=mdis;ArbitrationMode", modellingRule="Mandatory", dataType=mdis_datypes.ArbitrationModeEnum)
     )
     setArbitrationMode: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=mdis;i=15545"])
-    sourceA: ns0.vartypes.BaseDataVariableType = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15042", browseName="ns=mdis;SourceA", dataType=o6.UInt32))
-    sourceB: ns0.vartypes.BaseDataVariableType = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15043", browseName="ns=mdis;SourceB", dataType=o6.UInt32))
+    sourceA: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15042", browseName="ns=mdis;SourceA", modellingRule="Mandatory", dataType=o6.UInt32)
+    )
+    sourceB: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15043", browseName="ns=mdis;SourceB", modellingRule="Mandatory", dataType=o6.UInt32)
+    )
 
 
 @o6.objecttype(
@@ -962,14 +993,18 @@ class MDISDiscreteArbitrationObjectType(MDISDiscreteInstrumentObjectType):
 )
 class MDISInstrumentArbitrationObjectType(MDISInstrumentObjectType):
     arbitrationMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15072", browseName="ns=mdis;ArbitrationMode", dataType=mdis_datypes.ArbitrationModeEnum)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15072", browseName="ns=mdis;ArbitrationMode", modellingRule="Mandatory", dataType=mdis_datypes.ArbitrationModeEnum)
     )
     discrepancySetPoint: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=15073", browseName="ns=mdis;DiscrepancySetPoint", dataType=o6.Float, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=15073", browseName="ns=mdis;DiscrepancySetPoint", modellingRule="Optional", dataType=o6.Float, accessLevel=3, userAccessLevel=1)
     )
     setArbitrationMode: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=mdis;i=15074"])
-    sourceA: ns0.vartypes.BaseDataVariableType = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15070", browseName="ns=mdis;SourceA", dataType=o6.Float))
-    sourceB: ns0.vartypes.BaseDataVariableType = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15071", browseName="ns=mdis;SourceB", dataType=o6.Float))
+    sourceA: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15070", browseName="ns=mdis;SourceA", modellingRule="Mandatory", dataType=o6.Float)
+    )
+    sourceB: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=mdis;i=15071", browseName="ns=mdis;SourceB", modellingRule="Mandatory", dataType=o6.Float)
+    )
 
 
 del Any, TYPE_CHECKING, uuid, o6, ns0, mdis_reftypes, mdis_datypes, mdis_vartypes

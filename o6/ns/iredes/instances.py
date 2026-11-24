@@ -50,12 +50,18 @@ iredes_objtypes.SiteHeadType(
     references=[
         o6.hasAddIn(
             iredes_objtypes.DisplayToOperatorType(
-                nodeId="ns=iredes;i=5013", browseName="ns=iredes;DisplayToOperator", description="Object used to display messages to the operator of a machine."
+                nodeId="ns=iredes;i=5013",
+                browseName="ns=iredes;DisplayToOperator",
+                description="Object used to display messages to the operator of a machine.",
+                modellingRule="Mandatory",
             )
         ),
         o6.hasAddIn(
             iredes_objtypes.IROptionType(
-                nodeId="ns=iredes;i=5014", browseName="ns=iredes;SiteOption", description="Object that holds/references information that will not be processed."
+                nodeId="ns=iredes;i=5014",
+                browseName="ns=iredes;SiteOption",
+                description="Object that holds/references information that will not be processed.",
+                modellingRule="Mandatory",
             )
         ),
     ],
@@ -159,6 +165,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6040",
                 browseName="ns=iredes;DownCompat",
                 description="Downward compatibility of the profile version stated in “version” can be guaranteed down to the version number stated in this attribute. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -168,6 +175,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6041",
                 browseName="ns=iredes;FileCreateDate",
                 description="Date of file creation. This is the date/time stamp for initialization of the Data Set.",
+                modellingRule="Mandatory",
                 dataType=o6.DateTime,
                 accessLevel=3,
             )
@@ -177,6 +185,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6042",
                 browseName="ns=iredes;IRVersion",
                 description="Version of the IREDES main components of the standard. This version number changes any time IREDES top level schemas are modified. Please note to state downward compatibility in the separate Attribute. Type definition see below. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -188,12 +197,14 @@ iredes_objtypes.GenHeadType(
     nodeId="ns=iredes;i=5016",
     browseName="ns=iredes;GenHead",
     description="IREDES general header.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=iredes;i=6054",
                 browseName="ns=iredes;DownCompat",
                 description="Downward compatibility of the profile version stated in “version” can be guaranteed down to the version number stated in this attribute. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -203,6 +214,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6055",
                 browseName="ns=iredes;FileCreateDate",
                 description="Date of file creation. This is the date/time stamp for initialization of the Data Set.",
+                modellingRule="Mandatory",
                 dataType=o6.DateTime,
                 accessLevel=3,
             )
@@ -212,6 +224,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6056",
                 browseName="ns=iredes;IRVersion",
                 description="Version of the IREDES main components of the standard. This version number changes any time IREDES top level schemas are modified. Please note to state downward compatibility in the separate Attribute. Type definition see below. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -229,13 +242,19 @@ iredes_objtypes.IREDESType(
                 nodeId="ns=iredes;i=6053",
                 browseName="ns=iredes;IRDownwCompat",
                 description="Earliest version the IREDES Base system version stated in IRVersion is downward compatible to. Since this version, only extensions have been made but no changes affecting compatibility issues (data type changes etc).",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=iredes;i=6057", browseName="ns=iredes;IRVersion", description="IREDES Base version needed to process this scheme.", dataType=o6.String, accessLevel=3
+                nodeId="ns=iredes;i=6057",
+                browseName="ns=iredes;IRVersion",
+                description="IREDES Base version needed to process this scheme.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5016"]),
@@ -245,12 +264,14 @@ o6.reference(iredes_objtypes.IRpPerfGenType, ns0.reftypes.HasAddIn, o6.ns["ns=ir
 iredes_objtypes.GenHeadType(
     nodeId="ns=iredes;i=5018",
     browseName="ns=iredes;GenHead",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=iredes;i=6059",
                 browseName="ns=iredes;DownCompat",
                 description="Downward compatibility of the profile version stated in “version” can be guaranteed down to the version number stated in this attribute. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -260,6 +281,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6060",
                 browseName="ns=iredes;FileCreateDate",
                 description="Date of file creation. This is the date/time stamp for initialization of the Data Set.",
+                modellingRule="Mandatory",
                 dataType=o6.DateTime,
                 accessLevel=3,
             )
@@ -269,6 +291,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6061",
                 browseName="ns=iredes;IRVersion",
                 description="Version of the IREDES main components of the standard. This version number changes any time IREDES top level schemas are modified. Please note to state downward compatibility in the separate Attribute. Type definition see below. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -286,13 +309,19 @@ iredes_objtypes.OpPerfLogType(
                 nodeId="ns=iredes;i=6058",
                 browseName="ns=iredes;DownCompat",
                 description="Earliest version the IREDES Base system version stated in IRVersion is downward compatible to. Since this version, only extensions have been made but no changes affecting compatibility issues (data type changes etc).",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=iredes;i=6062", browseName="ns=iredes;IRVersion", description="IREDES Base version needed to process this scheme.", dataType=o6.String, accessLevel=3
+                nodeId="ns=iredes;i=6062",
+                browseName="ns=iredes;IRVersion",
+                description="IREDES Base version needed to process this scheme.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5018"]),
@@ -303,12 +332,14 @@ iredes_objtypes.GenHeadType(
     nodeId="ns=iredes;i=5020",
     browseName="ns=iredes;GenHead",
     description="IREDES general header.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=iredes;i=6069",
                 browseName="ns=iredes;DownCompat",
                 description="Downward compatibility of the profile version stated in “version” can be guaranteed down to the version number stated in this attribute. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -318,6 +349,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6070",
                 browseName="ns=iredes;FileCreateDate",
                 description="Date of file creation. This is the date/time stamp for initialization of the Data Set.",
+                modellingRule="Mandatory",
                 dataType=o6.DateTime,
                 accessLevel=3,
             )
@@ -327,6 +359,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6071",
                 browseName="ns=iredes;IRVersion",
                 description="Version of the IREDES main components of the standard. This version number changes any time IREDES top level schemas are modified. Please note to state downward compatibility in the separate Attribute. Type definition see below. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -344,13 +377,19 @@ iredes_objtypes.IREDESType(
                 nodeId="ns=iredes;i=6068",
                 browseName="ns=iredes;IRDownwCompat",
                 description="Earliest version the IREDES Base system version stated in IRVersion is downward compatible to. Since this version, only extensions have been made but no changes affecting compatibility issues (data type changes etc).",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=iredes;i=6072", browseName="ns=iredes;IRVersion", description="IREDES Base version needed to process this scheme.", dataType=o6.String, accessLevel=3
+                nodeId="ns=iredes;i=6072",
+                browseName="ns=iredes;IRVersion",
+                description="IREDES Base version needed to process this scheme.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5020"]),
@@ -364,7 +403,12 @@ iredes_objtypes.IRWorkOrderReplyGenType(
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=iredes;i=6091", browseName="ns=iredes;Answer", description="See Answer enumeration.", dataType=iredes_datypes.Answer, accessLevel=3
+                nodeId="ns=iredes;i=6091",
+                browseName="ns=iredes;Answer",
+                description="See Answer enumeration.",
+                modellingRule="Mandatory",
+                dataType=iredes_datypes.Answer,
+                accessLevel=3,
             )
         )
     ],
@@ -374,12 +418,14 @@ iredes_objtypes.GenHeadType(
     nodeId="ns=iredes;i=5023",
     browseName="ns=iredes;GenHead",
     description="IREDES general header.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=iredes;i=6095",
                 browseName="ns=iredes;DownCompat",
                 description="Downward compatibility of the profile version stated in “version” can be guaranteed down to the version number stated in this attribute. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -389,6 +435,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6096",
                 browseName="ns=iredes;FileCreateDate",
                 description="Date of file creation. This is the date/time stamp for initialization of the Data Set.",
+                modellingRule="Mandatory",
                 dataType=o6.DateTime,
                 accessLevel=3,
             )
@@ -398,6 +445,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6097",
                 browseName="ns=iredes;IRVersion",
                 description="Version of the IREDES main components of the standard. This version number changes any time IREDES top level schemas are modified. Please note to state downward compatibility in the separate Attribute. Type definition see below. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -414,13 +462,19 @@ iredes_objtypes.IREDESType(
                 nodeId="ns=iredes;i=6094",
                 browseName="ns=iredes;IRDownwCompat",
                 description="Earliest version the IREDES Base system version stated in IRVersion is downward compatible to. Since this version, only extensions have been made but no changes affecting compatibility issues (data type changes etc).",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=iredes;i=6098", browseName="ns=iredes;IRVersion", description="IREDES Base version needed to process this scheme.", dataType=o6.String, accessLevel=3
+                nodeId="ns=iredes;i=6098",
+                browseName="ns=iredes;IRVersion",
+                description="IREDES Base version needed to process this scheme.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5023"]),
@@ -430,10 +484,16 @@ o6.reference(iredes_objtypes.IRWorkOrderGenType, ns0.reftypes.HasAddIn, o6.ns["n
 iredes_objtypes.IRWorkOrderReplyGenType(
     nodeId="ns=iredes;i=5025",
     browseName="ns=iredes;Reply",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=iredes;i=6111", browseName="ns=iredes;Answer", description="See Answer enumeration.", dataType=iredes_datypes.Answer, accessLevel=3
+                nodeId="ns=iredes;i=6111",
+                browseName="ns=iredes;Answer",
+                description="See Answer enumeration.",
+                modellingRule="Mandatory",
+                dataType=iredes_datypes.Answer,
+                accessLevel=3,
             )
         )
     ],
@@ -444,7 +504,9 @@ iredes_objtypes.IRreplyType(
     description="Work order reply.",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6110", browseName="ns=iredes;Comment", dataType=o6.String, valueRank=0, accessLevel=3)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6110", browseName="ns=iredes;Comment", modellingRule="Mandatory", dataType=o6.String, valueRank=0, accessLevel=3)
+        ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5025"]),
     ],
 )
@@ -452,10 +514,16 @@ o6.reference(iredes_objtypes.IRWorkOrderGenType, ns0.reftypes.HasAddIn, o6.ns["n
 iredes_objtypes.IRWorkOrderReplyGenType(
     nodeId="ns=iredes;i=5027",
     browseName="ns=iredes;Reply",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=iredes;i=6113", browseName="ns=iredes;Answer", description="See Answer enumeration.", dataType=iredes_datypes.Answer, accessLevel=3
+                nodeId="ns=iredes;i=6113",
+                browseName="ns=iredes;Answer",
+                description="See Answer enumeration.",
+                modellingRule="Mandatory",
+                dataType=iredes_datypes.Answer,
+                accessLevel=3,
             )
         )
     ],
@@ -466,7 +534,9 @@ iredes_objtypes.IRreplyType(
     description="Work order reply.",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6112", browseName="ns=iredes;Comment", dataType=o6.String, valueRank=0, accessLevel=3)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6112", browseName="ns=iredes;Comment", modellingRule="Mandatory", dataType=o6.String, valueRank=0, accessLevel=3)
+        ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5027"]),
     ],
 )
@@ -474,10 +544,16 @@ o6.reference(iredes_objtypes.IRWorkOrderGenType, ns0.reftypes.HasAddIn, o6.ns["n
 iredes_objtypes.IRWorkOrderReplyGenType(
     nodeId="ns=iredes;i=5029",
     browseName="ns=iredes;Reply",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=iredes;i=6115", browseName="ns=iredes;Answer", description="See Answer enumeration.", dataType=iredes_datypes.Answer, accessLevel=3
+                nodeId="ns=iredes;i=6115",
+                browseName="ns=iredes;Answer",
+                description="See Answer enumeration.",
+                modellingRule="Mandatory",
+                dataType=iredes_datypes.Answer,
+                accessLevel=3,
             )
         )
     ],
@@ -488,7 +564,9 @@ iredes_objtypes.IRreplyType(
     description="Work order reply.",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6114", browseName="ns=iredes;Comment", dataType=o6.String, valueRank=0, accessLevel=3)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6114", browseName="ns=iredes;Comment", modellingRule="Mandatory", dataType=o6.String, valueRank=0, accessLevel=3)
+        ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5029"]),
     ],
 )
@@ -496,10 +574,16 @@ o6.reference(iredes_objtypes.IRWorkOrderGenType, ns0.reftypes.HasAddIn, o6.ns["n
 iredes_objtypes.IRWorkOrderReplyGenType(
     nodeId="ns=iredes;i=5031",
     browseName="ns=iredes;Reply",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=iredes;i=6117", browseName="ns=iredes;Answer", description="See Answer enumeration.", dataType=iredes_datypes.Answer, accessLevel=3
+                nodeId="ns=iredes;i=6117",
+                browseName="ns=iredes;Answer",
+                description="See Answer enumeration.",
+                modellingRule="Mandatory",
+                dataType=iredes_datypes.Answer,
+                accessLevel=3,
             )
         )
     ],
@@ -510,7 +594,9 @@ iredes_objtypes.IRreplyType(
     description="Work order reply.",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6116", browseName="ns=iredes;Comment", dataType=o6.String, valueRank=0, accessLevel=3)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6116", browseName="ns=iredes;Comment", modellingRule="Mandatory", dataType=o6.String, valueRank=0, accessLevel=3)
+        ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5031"]),
     ],
 )
@@ -518,10 +604,16 @@ o6.reference(iredes_objtypes.IRWorkOrderGenType, ns0.reftypes.HasAddIn, o6.ns["n
 iredes_objtypes.IRWorkOrderReplyGenType(
     nodeId="ns=iredes;i=5033",
     browseName="ns=iredes;Reply",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=iredes;i=6119", browseName="ns=iredes;Answer", description="See Answer enumeration.", dataType=iredes_datypes.Answer, accessLevel=3
+                nodeId="ns=iredes;i=6119",
+                browseName="ns=iredes;Answer",
+                description="See Answer enumeration.",
+                modellingRule="Mandatory",
+                dataType=iredes_datypes.Answer,
+                accessLevel=3,
             )
         )
     ],
@@ -532,7 +624,9 @@ iredes_objtypes.IRreplyType(
     description="Work order reply.",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6118", browseName="ns=iredes;Comment", dataType=o6.String, valueRank=0, accessLevel=3)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6118", browseName="ns=iredes;Comment", modellingRule="Mandatory", dataType=o6.String, valueRank=0, accessLevel=3)
+        ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5033"]),
     ],
 )
@@ -540,10 +634,16 @@ o6.reference(iredes_objtypes.IRWorkOrderGenType, ns0.reftypes.HasAddIn, o6.ns["n
 iredes_objtypes.IRWorkOrderReplyGenType(
     nodeId="ns=iredes;i=5035",
     browseName="ns=iredes;Reply",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=iredes;i=6121", browseName="ns=iredes;Answer", description="See Answer enumeration.", dataType=iredes_datypes.Answer, accessLevel=3
+                nodeId="ns=iredes;i=6121",
+                browseName="ns=iredes;Answer",
+                description="See Answer enumeration.",
+                modellingRule="Mandatory",
+                dataType=iredes_datypes.Answer,
+                accessLevel=3,
             )
         )
     ],
@@ -554,7 +654,9 @@ iredes_objtypes.IRreplyType(
     description="Work order reply.",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6120", browseName="ns=iredes;Comment", dataType=o6.String, valueRank=0, accessLevel=3)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6120", browseName="ns=iredes;Comment", modellingRule="Mandatory", dataType=o6.String, valueRank=0, accessLevel=3)
+        ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5035"]),
     ],
 )
@@ -562,10 +664,16 @@ o6.reference(iredes_objtypes.IRWorkOrderGenType, ns0.reftypes.HasAddIn, o6.ns["n
 iredes_objtypes.IRWorkOrderReplyGenType(
     nodeId="ns=iredes;i=5037",
     browseName="ns=iredes;Reply",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=iredes;i=6123", browseName="ns=iredes;Answer", description="See Answer enumeration.", dataType=iredes_datypes.Answer, accessLevel=3
+                nodeId="ns=iredes;i=6123",
+                browseName="ns=iredes;Answer",
+                description="See Answer enumeration.",
+                modellingRule="Mandatory",
+                dataType=iredes_datypes.Answer,
+                accessLevel=3,
             )
         )
     ],
@@ -576,7 +684,9 @@ iredes_objtypes.IRreplyType(
     description="Work order reply.",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6122", browseName="ns=iredes;Comment", dataType=o6.String, valueRank=0, accessLevel=3)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6122", browseName="ns=iredes;Comment", modellingRule="Mandatory", dataType=o6.String, valueRank=0, accessLevel=3)
+        ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5037"]),
     ],
 )
@@ -584,10 +694,16 @@ o6.reference(iredes_objtypes.IRWorkOrderGenType, ns0.reftypes.HasAddIn, o6.ns["n
 iredes_objtypes.IRWorkOrderReplyGenType(
     nodeId="ns=iredes;i=5039",
     browseName="ns=iredes;Reply",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=iredes;i=6125", browseName="ns=iredes;Answer", description="See Answer enumeration.", dataType=iredes_datypes.Answer, accessLevel=3
+                nodeId="ns=iredes;i=6125",
+                browseName="ns=iredes;Answer",
+                description="See Answer enumeration.",
+                modellingRule="Mandatory",
+                dataType=iredes_datypes.Answer,
+                accessLevel=3,
             )
         )
     ],
@@ -598,7 +714,9 @@ iredes_objtypes.IRreplyType(
     description="Work order reply.",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6124", browseName="ns=iredes;Comment", dataType=o6.String, valueRank=0, accessLevel=3)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6124", browseName="ns=iredes;Comment", modellingRule="Mandatory", dataType=o6.String, valueRank=0, accessLevel=3)
+        ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5039"]),
     ],
 )
@@ -606,10 +724,16 @@ o6.reference(iredes_objtypes.IRWorkOrderGenType, ns0.reftypes.HasAddIn, o6.ns["n
 iredes_objtypes.IRWorkOrderReplyGenType(
     nodeId="ns=iredes;i=5041",
     browseName="ns=iredes;Reply",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=iredes;i=6127", browseName="ns=iredes;Answer", description="See Answer enumeration.", dataType=iredes_datypes.Answer, accessLevel=3
+                nodeId="ns=iredes;i=6127",
+                browseName="ns=iredes;Answer",
+                description="See Answer enumeration.",
+                modellingRule="Mandatory",
+                dataType=iredes_datypes.Answer,
+                accessLevel=3,
             )
         )
     ],
@@ -620,7 +744,9 @@ iredes_objtypes.IRreplyType(
     description="Work order reply.",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6126", browseName="ns=iredes;Comment", dataType=o6.String, valueRank=0, accessLevel=3)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6126", browseName="ns=iredes;Comment", modellingRule="Mandatory", dataType=o6.String, valueRank=0, accessLevel=3)
+        ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5041"]),
     ],
 )
@@ -628,10 +754,16 @@ o6.reference(iredes_objtypes.IRWorkOrderGenType, ns0.reftypes.HasAddIn, o6.ns["n
 iredes_objtypes.IRWorkOrderReplyGenType(
     nodeId="ns=iredes;i=5043",
     browseName="ns=iredes;Reply",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=iredes;i=6129", browseName="ns=iredes;Answer", description="See Answer enumeration.", dataType=iredes_datypes.Answer, accessLevel=3
+                nodeId="ns=iredes;i=6129",
+                browseName="ns=iredes;Answer",
+                description="See Answer enumeration.",
+                modellingRule="Mandatory",
+                dataType=iredes_datypes.Answer,
+                accessLevel=3,
             )
         )
     ],
@@ -642,7 +774,9 @@ iredes_objtypes.IRreplyType(
     description="Work order reply.",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6128", browseName="ns=iredes;Comment", dataType=o6.String, valueRank=0, accessLevel=3)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6128", browseName="ns=iredes;Comment", modellingRule="Mandatory", dataType=o6.String, valueRank=0, accessLevel=3)
+        ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5043"]),
     ],
 )
@@ -651,12 +785,14 @@ iredes_objtypes.GenHeadType(
     nodeId="ns=iredes;i=5046",
     browseName="ns=iredes;GenHead",
     description="IREDES general header.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=iredes;i=6132",
                 browseName="ns=iredes;DownCompat",
                 description="Downward compatibility of the profile version stated in “version” can be guaranteed down to the version number stated in this attribute. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -666,6 +802,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6133",
                 browseName="ns=iredes;FileCreateDate",
                 description="Date of file creation. This is the date/time stamp for initialization of the Data Set.",
+                modellingRule="Mandatory",
                 dataType=o6.DateTime,
                 accessLevel=3,
             )
@@ -675,6 +812,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6134",
                 browseName="ns=iredes;IRVersion",
                 description="Version of the IREDES main components of the standard. This version number changes any time IREDES top level schemas are modified. Please note to state downward compatibility in the separate Attribute. Type definition see below. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -692,13 +830,19 @@ iredes_objtypes.IREDESType(
                 nodeId="ns=iredes;i=6131",
                 browseName="ns=iredes;IRDownwCompat",
                 description="Earliest version the IREDES Base system version stated in IRVersion is downward compatible to. Since this version, only extensions have been made but no changes affecting compatibility issues (data type changes etc).",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=iredes;i=6135", browseName="ns=iredes;IRVersion", description="IREDES Base version needed to process this scheme.", dataType=o6.String, accessLevel=3
+                nodeId="ns=iredes;i=6135",
+                browseName="ns=iredes;IRVersion",
+                description="IREDES Base version needed to process this scheme.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5046"]),
@@ -711,10 +855,19 @@ iredes_objtypes.GenTrailerType(
     description="Datatype that is used to guarantee the integrity of the data set.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6136", browseName="ns=iredes;ChkSum", description="CRC 32 checksum.", dataType=o6.ByteString, accessLevel=3)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=iredes;i=6137", browseName="ns=iredes;FileCloseDate", description="Date the file was created.", dataType=o6.DateTime, accessLevel=3
+                nodeId="ns=iredes;i=6136", browseName="ns=iredes;ChkSum", description="CRC 32 checksum.", modellingRule="Mandatory", dataType=o6.ByteString, accessLevel=3
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=iredes;i=6137",
+                browseName="ns=iredes;FileCloseDate",
+                description="Date the file was created.",
+                modellingRule="Mandatory",
+                dataType=o6.DateTime,
+                accessLevel=3,
             )
         ),
     ],
@@ -724,12 +877,14 @@ iredes_objtypes.GenHeadType(
     nodeId="ns=iredes;i=5050",
     browseName="ns=iredes;GenHead",
     description="IREDES general header.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=iredes;i=6142",
                 browseName="ns=iredes;DownCompat",
                 description="Downward compatibility of the profile version stated in “version” can be guaranteed down to the version number stated in this attribute. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -739,6 +894,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6143",
                 browseName="ns=iredes;FileCreateDate",
                 description="Date of file creation. This is the date/time stamp for initialization of the Data Set.",
+                modellingRule="Mandatory",
                 dataType=o6.DateTime,
                 accessLevel=3,
             )
@@ -748,6 +904,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6144",
                 browseName="ns=iredes;IRVersion",
                 description="Version of the IREDES main components of the standard. This version number changes any time IREDES top level schemas are modified. Please note to state downward compatibility in the separate Attribute. Type definition see below. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -758,19 +915,26 @@ iredes_objtypes.IREDESType(
     nodeId="ns=iredes;i=5049",
     browseName="ns=iredes;IREDES",
     description="Basic IREDES data type. Part of every complete IREDES data set.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=iredes;i=6141",
                 browseName="ns=iredes;IRDownwCompat",
                 description="Earliest version the IREDES Base system version stated in IRVersion is downward compatible to. Since this version, only extensions have been made but no changes affecting compatibility issues (data type changes etc).",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=iredes;i=6145", browseName="ns=iredes;IRVersion", description="IREDES Base version needed to process this scheme.", dataType=o6.String, accessLevel=3
+                nodeId="ns=iredes;i=6145",
+                browseName="ns=iredes;IRVersion",
+                description="IREDES Base version needed to process this scheme.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5050"]),
@@ -787,6 +951,7 @@ iredes_objtypes.IRplanGenType(
                 nodeId="ns=iredes;i=6146",
                 browseName="ns=iredes;PlanId",
                 description="IREDES internal production plan ID used for reference e.g. by Production Quality data sets basing on a particular production plan.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -796,6 +961,7 @@ iredes_objtypes.IRplanGenType(
                 nodeId="ns=iredes;i=6147",
                 browseName="ns=iredes;PlanName",
                 description="Plan logical name to identify this specific plan to the human user. Useful to help the operator of a machine to logical identify a specific plan.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -808,12 +974,14 @@ iredes_objtypes.GenHeadType(
     nodeId="ns=iredes;i=5053",
     browseName="ns=iredes;GenHead",
     description="IREDES general header.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=iredes;i=6149",
                 browseName="ns=iredes;DownCompat",
                 description="Downward compatibility of the profile version stated in “version” can be guaranteed down to the version number stated in this attribute. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -823,6 +991,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6150",
                 browseName="ns=iredes;FileCreateDate",
                 description="Date of file creation. This is the date/time stamp for initialization of the Data Set.",
+                modellingRule="Mandatory",
                 dataType=o6.DateTime,
                 accessLevel=3,
             )
@@ -832,6 +1001,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6151",
                 browseName="ns=iredes;IRVersion",
                 description="Version of the IREDES main components of the standard. This version number changes any time IREDES top level schemas are modified. Please note to state downward compatibility in the separate Attribute. Type definition see below. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -841,19 +1011,26 @@ iredes_objtypes.GenHeadType(
 iredes_objtypes.IREDESType(
     nodeId="ns=iredes;i=5052",
     browseName="ns=iredes;IREDESType",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=iredes;i=6148",
                 browseName="ns=iredes;IRDownwCompat",
                 description="Earliest version the IREDES Base system version stated in IRVersion is downward compatible to. Since this version, only extensions have been made but no changes affecting compatibility issues (data type changes etc).",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=iredes;i=6152", browseName="ns=iredes;IRVersion", description="IREDES Base version needed to process this scheme.", dataType=o6.String, accessLevel=3
+                nodeId="ns=iredes;i=6152",
+                browseName="ns=iredes;IRVersion",
+                description="IREDES Base version needed to process this scheme.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5053"]),
@@ -870,6 +1047,7 @@ iredes_objtypes.GenTrailerType(
                 nodeId="ns=iredes;i=6153",
                 browseName="ns=iredes;PlanId",
                 description="IREDES internal production plan ID used for reference e.g. by Production Quality data sets basing on a particular production plan.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -879,6 +1057,7 @@ iredes_objtypes.GenTrailerType(
                 nodeId="ns=iredes;i=6154",
                 browseName="ns=iredes;PlanName",
                 description="Plan logical name to identify this specific plan to the human user. Useful to help the operator of a machine to logical identify a specific plan.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -894,11 +1073,23 @@ iredes_objtypes.LTPPTimeRepType(
     modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6195", browseName="ns=iredes;LTPPEndTime", description="Mission end time.", dataType=ns0.datatypes.UtcTime, accessLevel=3)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=iredes;i=6195",
+                browseName="ns=iredes;LTPPEndTime",
+                description="Mission end time.",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.UtcTime,
+                accessLevel=3,
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=iredes;i=6196", browseName="ns=iredes;LTPPStartTime", description="Mission start time.", dataType=ns0.datatypes.UtcTime, accessLevel=3
+                nodeId="ns=iredes;i=6196",
+                browseName="ns=iredes;LTPPStartTime",
+                description="Mission start time.",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.UtcTime,
+                accessLevel=3,
             )
         ),
     ],
@@ -908,12 +1099,14 @@ iredes_objtypes.GenHeadType(
     nodeId="ns=iredes;i=5060",
     browseName="ns=iredes;GenHead",
     description="IREDES general header.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=iredes;i=6212",
                 browseName="ns=iredes;DownCompat",
                 description="Downward compatibility of the profile version stated in “version” can be guaranteed down to the version number stated in this attribute. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -923,6 +1116,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6213",
                 browseName="ns=iredes;FileCreateDate",
                 description="Date of file creation. This is the date/time stamp for initialization of the Data Set.",
+                modellingRule="Mandatory",
                 dataType=o6.DateTime,
                 accessLevel=3,
             )
@@ -932,6 +1126,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6214",
                 browseName="ns=iredes;IRVersion",
                 description="Version of the IREDES main components of the standard. This version number changes any time IREDES top level schemas are modified. Please note to state downward compatibility in the separate Attribute. Type definition see below. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -942,19 +1137,26 @@ iredes_objtypes.IREDESType(
     nodeId="ns=iredes;i=5059",
     browseName="ns=iredes;IREDES",
     description="Basic IREDES data type. Part of every complete IREDES data set.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=iredes;i=6211",
                 browseName="ns=iredes;IRDownwCompat",
                 description="Earliest version the IREDES Base system version stated in IRVersion is downward compatible to. Since this version, only extensions have been made but no changes affecting compatibility issues (data type changes etc).",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=iredes;i=6215", browseName="ns=iredes;IRVersion", description="IREDES Base version needed to process this scheme.", dataType=o6.String, accessLevel=3
+                nodeId="ns=iredes;i=6215",
+                browseName="ns=iredes;IRVersion",
+                description="IREDES Base version needed to process this scheme.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5060"]),
@@ -971,13 +1173,19 @@ iredes_objtypes.IRpPerfGenType(
                 nodeId="ns=iredes;i=6210",
                 browseName="ns=iredes;EndLogTine",
                 description="End of the reporting period. Date and time when the last entry to this xml-set was made.",
+                modellingRule="Mandatory",
                 dataType=o6.DateTime,
                 accessLevel=3,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=iredes;i=6216", browseName="ns=iredes;ReportId", description="Report ID code, to uniquely identify this log report.", dataType=o6.String, accessLevel=3
+                nodeId="ns=iredes;i=6216",
+                browseName="ns=iredes;ReportId",
+                description="Report ID code, to uniquely identify this log report.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
         o6.hasProperty(
@@ -985,6 +1193,7 @@ iredes_objtypes.IRpPerfGenType(
                 nodeId="ns=iredes;i=6217",
                 browseName="ns=iredes;StartLogTime",
                 description="Start of the reporting period. Date and time when the first entry to this xml-set was made.",
+                modellingRule="Mandatory",
                 dataType=o6.DateTime,
                 accessLevel=3,
             )
@@ -1004,6 +1213,7 @@ iredes_objtypes.LTPPLoadRepType(
                 nodeId="ns=iredes;i=6218",
                 browseName="ns=iredes;LTPPCyclTot",
                 description="Total number of working cycles (rounds) completed during the reporting period.",
+                modellingRule="Mandatory",
                 dataType=o6.UInt64,
                 accessLevel=3,
             )
@@ -1013,6 +1223,7 @@ iredes_objtypes.LTPPLoadRepType(
                 nodeId="ns=iredes;i=6219",
                 browseName="ns=iredes;LTPPloadTot",
                 description="Total load carried under all completed working cycles during reporting period. Minimum accuracy required by the standard: 0.01.",
+                modellingRule="Mandatory",
                 dataType=o6.Float,
                 accessLevel=3,
             )
@@ -1024,12 +1235,14 @@ iredes_objtypes.GenHeadType(
     nodeId="ns=iredes;i=5065",
     browseName="ns=iredes;GenHead",
     description="IREDES general header.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=iredes;i=6225",
                 browseName="ns=iredes;DownCompat",
                 description="Downward compatibility of the profile version stated in “version” can be guaranteed down to the version number stated in this attribute. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -1039,6 +1252,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6226",
                 browseName="ns=iredes;FileCreateDate",
                 description="Date of file creation. This is the date/time stamp for initialization of the Data Set.",
+                modellingRule="Mandatory",
                 dataType=o6.DateTime,
                 accessLevel=3,
             )
@@ -1048,6 +1262,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6227",
                 browseName="ns=iredes;IRVersion",
                 description="Version of the IREDES main components of the standard. This version number changes any time IREDES top level schemas are modified. Please note to state downward compatibility in the separate Attribute. Type definition see below. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -1058,19 +1273,26 @@ iredes_objtypes.IREDESType(
     nodeId="ns=iredes;i=5064",
     browseName="ns=iredes;IREDES",
     description="Basic IREDES data type. Part of every complete IREDES data set.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=iredes;i=6224",
                 browseName="ns=iredes;IRDownwCompat",
                 description="Earliest version the IREDES Base system version stated in IRVersion is downward compatible to. Since this version, only extensions have been made but no changes affecting compatibility issues (data type changes etc).",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=iredes;i=6228", browseName="ns=iredes;IRVersion", description="IREDES Base version needed to process this scheme.", dataType=o6.String, accessLevel=3
+                nodeId="ns=iredes;i=6228",
+                browseName="ns=iredes;IRVersion",
+                description="IREDES Base version needed to process this scheme.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5065"]),
@@ -1080,19 +1302,26 @@ iredes_objtypes.IRpPerfGenType(
     nodeId="ns=iredes;i=5063",
     browseName="ns=iredes;IRpPerfGen",
     description="Generic type used report production performance.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=iredes;i=6223",
                 browseName="ns=iredes;EndLogTine",
                 description="End of the reporting period. Date and time when the last entry to this xml-set was made.",
+                modellingRule="Mandatory",
                 dataType=o6.DateTime,
                 accessLevel=3,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=iredes;i=6229", browseName="ns=iredes;ReportId", description="Report ID code, to uniquely identify this log report.", dataType=o6.String, accessLevel=3
+                nodeId="ns=iredes;i=6229",
+                browseName="ns=iredes;ReportId",
+                description="Report ID code, to uniquely identify this log report.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
         o6.hasProperty(
@@ -1100,6 +1329,7 @@ iredes_objtypes.IRpPerfGenType(
                 nodeId="ns=iredes;i=6230",
                 browseName="ns=iredes;StartLogTime",
                 description="Start of the reporting period. Date and time when the first entry to this xml-set was made.",
+                modellingRule="Mandatory",
                 dataType=o6.DateTime,
                 accessLevel=3,
             )
@@ -1111,12 +1341,14 @@ iredes_objtypes.LTPPLoadRepType(
     nodeId="ns=iredes;i=5066",
     browseName="ns=iredes;LTPPLoadRep",
     description="Reports on how much material has been transported between load and dump points during the reporting period.",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=iredes;i=6233",
                 browseName="ns=iredes;LTPPCyclTot",
                 description="Total number of working cycles (rounds) completed during the reporting period.",
+                modellingRule="Mandatory",
                 dataType=o6.UInt64,
                 accessLevel=3,
             )
@@ -1126,6 +1358,7 @@ iredes_objtypes.LTPPLoadRepType(
                 nodeId="ns=iredes;i=6234",
                 browseName="ns=iredes;LTPPloadTot",
                 description="Total load carried under all completed working cycles during reporting period. Minimum accuracy required by the standard: 0.01.",
+                modellingRule="Mandatory",
                 dataType=o6.Float,
                 accessLevel=3,
             )
@@ -1138,8 +1371,16 @@ iredes_objtypes.IRLTPPerfType(
     description="IRLHD production performance reporting.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6231", browseName="ns=iredes;LTPPerfDownwCompat", description="2.0.", dataType=o6.String, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6232", browseName="ns=iredes;LTPPerfVersion", description="2.0.", dataType=o6.String, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=iredes;i=6231", browseName="ns=iredes;LTPPerfDownwCompat", description="2.0.", modellingRule="Mandatory", dataType=o6.String, accessLevel=3
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=iredes;i=6232", browseName="ns=iredes;LTPPerfVersion", description="2.0.", modellingRule="Mandatory", dataType=o6.String, accessLevel=3
+            )
+        ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5063"]),
         o6.hasAddIn(o6.ns["ns=iredes;i=5066"]),
     ],
@@ -1149,12 +1390,14 @@ iredes_objtypes.GenHeadType(
     nodeId="ns=iredes;i=5070",
     browseName="ns=iredes;GenHead",
     description="IREDES general header.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=iredes;i=6237",
                 browseName="ns=iredes;DownCompat",
                 description="Downward compatibility of the profile version stated in “version” can be guaranteed down to the version number stated in this attribute. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -1164,6 +1407,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6238",
                 browseName="ns=iredes;FileCreateDate",
                 description="Date of file creation. This is the date/time stamp for initialization of the Data Set.",
+                modellingRule="Mandatory",
                 dataType=o6.DateTime,
                 accessLevel=3,
             )
@@ -1173,6 +1417,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6239",
                 browseName="ns=iredes;IRVersion",
                 description="Version of the IREDES main components of the standard. This version number changes any time IREDES top level schemas are modified. Please note to state downward compatibility in the separate Attribute. Type definition see below. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -1183,19 +1428,26 @@ iredes_objtypes.IREDESType(
     nodeId="ns=iredes;i=5069",
     browseName="ns=iredes;IREDES",
     description="Basic IREDES data type. Part of every complete IREDES data set.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=iredes;i=6236",
                 browseName="ns=iredes;IRDownwCompat",
                 description="Earliest version the IREDES Base system version stated in IRVersion is downward compatible to. Since this version, only extensions have been made but no changes affecting compatibility issues (data type changes etc).",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=iredes;i=6240", browseName="ns=iredes;IRVersion", description="IREDES Base version needed to process this scheme.", dataType=o6.String, accessLevel=3
+                nodeId="ns=iredes;i=6240",
+                browseName="ns=iredes;IRVersion",
+                description="IREDES Base version needed to process this scheme.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5070"]),
@@ -1204,19 +1456,26 @@ iredes_objtypes.IREDESType(
 iredes_objtypes.IRpPerfGenType(
     nodeId="ns=iredes;i=5068",
     browseName="ns=iredes;IRpPerfGenType",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=iredes;i=6235",
                 browseName="ns=iredes;EndLogTine",
                 description="End of the reporting period. Date and time when the last entry to this xml-set was made.",
+                modellingRule="Mandatory",
                 dataType=o6.DateTime,
                 accessLevel=3,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=iredes;i=6241", browseName="ns=iredes;ReportId", description="Report ID code, to uniquely identify this log report.", dataType=o6.String, accessLevel=3
+                nodeId="ns=iredes;i=6241",
+                browseName="ns=iredes;ReportId",
+                description="Report ID code, to uniquely identify this log report.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
         o6.hasProperty(
@@ -1224,6 +1483,7 @@ iredes_objtypes.IRpPerfGenType(
                 nodeId="ns=iredes;i=6242",
                 browseName="ns=iredes;StartLogTime",
                 description="Start of the reporting period. Date and time when the first entry to this xml-set was made.",
+                modellingRule="Mandatory",
                 dataType=o6.DateTime,
                 accessLevel=3,
             )
@@ -1235,12 +1495,14 @@ iredes_objtypes.LTPPLoadRepType(
     nodeId="ns=iredes;i=5071",
     browseName="ns=iredes;LTPPLoadRepType",
     description="Reports on how much material has been transported between load and dump points during the reporting period.",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=iredes;i=6245",
                 browseName="ns=iredes;LTPPCyclTot",
                 description="Total number of working cycles (rounds) completed during the reporting period.",
+                modellingRule="Mandatory",
                 dataType=o6.UInt64,
                 accessLevel=3,
             )
@@ -1250,6 +1512,7 @@ iredes_objtypes.LTPPLoadRepType(
                 nodeId="ns=iredes;i=6246",
                 browseName="ns=iredes;LTPPloadTot",
                 description="Total load carried under all completed working cycles during reporting period. Minimum accuracy required by the standard: 0.01.",
+                modellingRule="Mandatory",
                 dataType=o6.Float,
                 accessLevel=3,
             )
@@ -1262,8 +1525,16 @@ iredes_objtypes.IRLTPlanType(
     description="IRLHD production planning.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6243", browseName="ns=iredes;LTPPerfDownwCompat", description="2.0.", dataType=o6.String, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6244", browseName="ns=iredes;LTPPerfVersion", description="2.0.", dataType=o6.String, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=iredes;i=6243", browseName="ns=iredes;LTPPerfDownwCompat", description="2.0.", modellingRule="Mandatory", dataType=o6.String, accessLevel=3
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=iredes;i=6244", browseName="ns=iredes;LTPPerfVersion", description="2.0.", modellingRule="Mandatory", dataType=o6.String, accessLevel=3
+            )
+        ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5068"]),
         o6.hasAddIn(o6.ns["ns=iredes;i=5071"]),
     ],
@@ -1273,11 +1544,21 @@ iredes_objtypes.GenTrailerType(
     nodeId="ns=iredes;i=5073",
     browseName="ns=iredes;GenTrailer",
     description="Datatype that is used to guarantee the integrity of the data set.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6247", browseName="ns=iredes;ChkSum", description="CRC 32 checksum.", dataType=o6.ByteString, accessLevel=3)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=iredes;i=6248", browseName="ns=iredes;FileCloseDate", description="Date the file was created.", dataType=o6.DateTime, accessLevel=3
+                nodeId="ns=iredes;i=6247", browseName="ns=iredes;ChkSum", description="CRC 32 checksum.", modellingRule="Mandatory", dataType=o6.ByteString, accessLevel=3
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=iredes;i=6248",
+                browseName="ns=iredes;FileCloseDate",
+                description="Date the file was created.",
+                modellingRule="Mandatory",
+                dataType=o6.DateTime,
+                accessLevel=3,
             )
         ),
     ],
@@ -1286,12 +1567,14 @@ iredes_objtypes.GenHeadType(
     nodeId="ns=iredes;i=5075",
     browseName="ns=iredes;GenHead",
     description="IREDES general header.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=iredes;i=6250",
                 browseName="ns=iredes;DownCompat",
                 description="Downward compatibility of the profile version stated in “version” can be guaranteed down to the version number stated in this attribute. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -1301,6 +1584,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6251",
                 browseName="ns=iredes;FileCreateDate",
                 description="Date of file creation. This is the date/time stamp for initialization of the Data Set.",
+                modellingRule="Mandatory",
                 dataType=o6.DateTime,
                 accessLevel=3,
             )
@@ -1310,6 +1594,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6252",
                 browseName="ns=iredes;IRVersion",
                 description="Version of the IREDES main components of the standard. This version number changes any time IREDES top level schemas are modified. Please note to state downward compatibility in the separate Attribute. Type definition see below. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -1320,19 +1605,26 @@ iredes_objtypes.IREDESType(
     nodeId="ns=iredes;i=5074",
     browseName="ns=iredes;IREDES",
     description="Basic IREDES data type. Part of every complete IREDES data set.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=iredes;i=6249",
                 browseName="ns=iredes;IRDownwCompat",
                 description="Earliest version the IREDES Base system version stated in IRVersion is downward compatible to. Since this version, only extensions have been made but no changes affecting compatibility issues (data type changes etc).",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=iredes;i=6253", browseName="ns=iredes;IRVersion", description="IREDES Base version needed to process this scheme.", dataType=o6.String, accessLevel=3
+                nodeId="ns=iredes;i=6253",
+                browseName="ns=iredes;IRVersion",
+                description="IREDES Base version needed to process this scheme.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5075"]),
@@ -1344,8 +1636,16 @@ iredes_objtypes.IRLTMMonType(
     description="IRLHD machine monitoring reporting.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6254", browseName="ns=iredes;LTMMonDownwCompat", description="2.0.", dataType=o6.String, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6255", browseName="ns=iredes;LTMMonVersion", description="2.0.", dataType=o6.String, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=iredes;i=6254", browseName="ns=iredes;LTMMonDownwCompat", description="2.0.", modellingRule="Mandatory", dataType=o6.String, accessLevel=3
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=iredes;i=6255", browseName="ns=iredes;LTMMonVersion", description="2.0.", modellingRule="Mandatory", dataType=o6.String, accessLevel=3
+            )
+        ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5073"]),
         o6.hasAddIn(o6.ns["ns=iredes;i=5074"]),
     ],
@@ -1382,9 +1682,19 @@ iredes_objtypes.EquipmentInfoType(
     description="Equipment specific information concerning the main aggregate the information comes from. ATTENTION: This information shall not be required to interpret a standard conformant data set.",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6263", browseName="ns=iredes;EqpManufact", description="Name of the manufacturer.", dataType=o6.String)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6264", browseName="ns=iredes;EqpType", description="Manufacturer internal type name of the machine.", dataType=o6.String)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=iredes;i=6263", browseName="ns=iredes;EqpManufact", description="Name of the manufacturer.", modellingRule="Mandatory", dataType=o6.String
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=iredes;i=6264",
+                browseName="ns=iredes;EqpType",
+                description="Manufacturer internal type name of the machine.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+            )
         ),
     ],
 )
@@ -1393,12 +1703,14 @@ iredes_objtypes.GenHeadType(
     nodeId="ns=iredes;i=5078",
     browseName="ns=iredes;GenHead",
     description="IREDES general header.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=iredes;i=6266",
                 browseName="ns=iredes;DownCompat",
                 description="Downward compatibility of the profile version stated in “version” can be guaranteed down to the version number stated in this attribute. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -1408,6 +1720,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6267",
                 browseName="ns=iredes;FileCreateDate",
                 description="Date of file creation. This is the date/time stamp for initialization of the Data Set.",
+                modellingRule="Mandatory",
                 dataType=o6.DateTime,
                 accessLevel=3,
             )
@@ -1417,6 +1730,7 @@ iredes_objtypes.GenHeadType(
                 nodeId="ns=iredes;i=6268",
                 browseName="ns=iredes;IRVersion",
                 description="Version of the IREDES main components of the standard. This version number changes any time IREDES top level schemas are modified. Please note to state downward compatibility in the separate Attribute. Type definition see below. Fixed 2.0.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -1434,13 +1748,19 @@ iredes_objtypes.IREDESType(
                 nodeId="ns=iredes;i=6265",
                 browseName="ns=iredes;IRDownwCompat",
                 description="Earliest version the IREDES Base system version stated in IRVersion is downward compatible to. Since this version, only extensions have been made but no changes affecting compatibility issues (data type changes etc).",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=iredes;i=6269", browseName="ns=iredes;IRVersion", description="IREDES Base version needed to process this scheme.", dataType=o6.String, accessLevel=3
+                nodeId="ns=iredes;i=6269",
+                browseName="ns=iredes;IRVersion",
+                description="IREDES Base version needed to process this scheme.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
         o6.hasAddIn(o6.ns["ns=iredes;i=5078"]),
@@ -1458,6 +1778,7 @@ iredes_objtypes.LTPPMissionType(
                 nodeId="ns=iredes;i=6206",
                 browseName="ns=iredes;LTPPMisSeq",
                 description="Sequence number of the mission. Starting at 1 with the first mission in the reporting period.",
+                modellingRule="Mandatory",
                 dataType=o6.UInt64,
                 accessLevel=3,
             )
@@ -1467,6 +1788,7 @@ iredes_objtypes.LTPPMissionType(
                 nodeId="ns=iredes;i=6207",
                 browseName="ns=iredes;LTPPMptFromN",
                 description="Name of the point where the mission originated (tramming started).",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -1476,6 +1798,7 @@ iredes_objtypes.LTPPMissionType(
                 nodeId="ns=iredes;i=6208",
                 browseName="ns=iredes;LTPPMptToN",
                 description="Name of the destination point, where the tramming finished and the mission ended.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -1485,6 +1808,7 @@ iredes_objtypes.LTPPMissionType(
                 nodeId="ns=iredes;i=6270",
                 browseName="ns=iredes;LTPPMaction",
                 description="Action to be carried out at destination point specified in LTPPMptTo.",
+                modellingRule="Mandatory",
                 dataType=iredes_datypes.LTPPMaction,
                 accessLevel=3,
             )
@@ -1494,6 +1818,7 @@ iredes_objtypes.LTPPMissionType(
                 nodeId="ns=iredes;i=6271",
                 browseName="ns=iredes;LTPPMpayld",
                 description="Tonnage of payload carried between start and destination points.",
+                modellingRule="Mandatory",
                 dataType=o6.Float,
                 accessLevel=3,
             )
@@ -1503,6 +1828,7 @@ iredes_objtypes.LTPPMissionType(
                 nodeId="ns=iredes;i=6272",
                 browseName="ns=iredes;LTPPMtramDist",
                 description="Tramming distance between start and destination point. Unit: km; Resolution: 0.0001 km (10 cm).",
+                modellingRule="Mandatory",
                 dataType=o6.Float,
                 accessLevel=3,
             )
@@ -1521,13 +1847,19 @@ iredes_objtypes.LTPPaccPtsType(
                 nodeId="ns=iredes;i=6203",
                 browseName="ns=iredes;LTPPLdrawPtN",
                 description="Name of the draw (load point) accessed in the reported job.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=iredes;i=6204", browseName="ns=iredes;LTPPLdumpPtN", description="Name of the dump point in this combination.", dataType=o6.String, accessLevel=3
+                nodeId="ns=iredes;i=6204",
+                browseName="ns=iredes;LTPPLdumpPtN",
+                description="Name of the dump point in this combination.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
         o6.hasComponent(
@@ -1535,6 +1867,7 @@ iredes_objtypes.LTPPaccPtsType(
                 nodeId="ns=iredes;i=6202",
                 browseName="ns=iredes;LTPPLcycl",
                 description="Number of cycles travelled between this point pair during reporting period.",
+                modellingRule="Mandatory",
                 dataType=o6.UInt16,
                 accessLevel=3,
             )
@@ -1544,6 +1877,7 @@ iredes_objtypes.LTPPaccPtsType(
                 nodeId="ns=iredes;i=6205",
                 browseName="ns=iredes;LTPPLmass",
                 description="Mass transported between this point pair during reporting period in t. Min accuracy: 0.01 t.",
+                modellingRule="Mandatory",
                 dataType=o6.Float,
                 accessLevel=3,
             )
@@ -1553,6 +1887,7 @@ iredes_objtypes.LTPPaccPtsType(
                 nodeId="ns=iredes;i=6273",
                 browseName="ns=iredes;LTPPLdist",
                 description="Distance travelled between those two points during reporting period. Accumulated distance of al rounds travelled. Both routes are counted! Accuracy: 0.01 km.",
+                modellingRule="Mandatory",
                 dataType=o6.Float,
                 accessLevel=3,
             )

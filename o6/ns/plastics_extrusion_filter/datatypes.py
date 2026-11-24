@@ -36,7 +36,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=plastics_extrusion_filter;i=3002", browseName="FilterPackageStatusEnumeration")
+@o6.enumtype(nodeId="ns=plastics_extrusion_filter;i=3002", browseName="ns=plastics_extrusion_filter;FilterPackageStatusEnumeration")
 class FilterPackageStatusEnumeration(ns0.datatypes.Enumeration):
     NOT_ACTIVE = o6.enumfield(0, name="NOT_ACTIVE")
     ACTIVE = o6.enumfield(1, name="ACTIVE")

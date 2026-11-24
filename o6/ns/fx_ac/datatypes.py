@@ -34,34 +34,34 @@ else:
     _VariableNode = object
 
 
-@o6.datatype(nodeId="ns=fx_ac;i=25", browseName="FxVersion", defaultEncodingId="ns=fx_ac;i=91")
+@o6.datatype(nodeId="ns=fx_ac;i=25", browseName="ns=fx_ac;FxVersion", defaultEncodingId="ns=fx_ac;i=91")
 class FxVersion(ns0.datatypes.Structure):
-    major: o6.UInt16
-    minor: o6.UInt16
-    build: o6.UInt16
-    subBuild: o6.UInt16
+    major: o6.UInt16 = o6.field(name="Major")
+    minor: o6.UInt16 = o6.field(name="Minor")
+    build: o6.UInt16 = o6.field(name="Build")
+    subBuild: o6.UInt16 = o6.field(name="SubBuild")
 
 
-@o6.enumtype(nodeId="ns=fx_ac;i=3001", browseName="ClampKindEnum")
+@o6.enumtype(nodeId="ns=fx_ac;i=3001", browseName="ns=fx_ac;ClampKindEnum")
 class ClampKindEnum(ns0.datatypes.Enumeration):
     SCREW = o6.enumfield(0, name="Screw")
     THUMB = o6.enumfield(1, name="Thumb")
 
 
-@o6.enumtype(nodeId="ns=fx_ac;i=3002", browseName="SocketKindEnum")
+@o6.enumtype(nodeId="ns=fx_ac;i=3002", browseName="ns=fx_ac;SocketKindEnum")
 class SocketKindEnum(ns0.datatypes.Enumeration):
     RJ45 = o6.enumfield(0, name="RJ45")
     M12 = o6.enumfield(1, name="M12")
 
 
-@o6.optionsettype(nodeId="ns=fx_ac;i=3004", browseName="CommHealthOptionSet", base=o6.UInt16)
+@o6.optionsettype(nodeId="ns=fx_ac;i=3004", browseName="ns=fx_ac;CommHealthOptionSet", base=o6.UInt16)
 class CommHealthOptionSet:
     COMM_INITIAL = o6.bitmask(0x01 << 0, name="CommInitial")
     COMM_PRE_OPERATIONAL = o6.bitmask(0x01 << 1, name="CommPreOperational")
     COMM_ERROR = o6.bitmask(0x01 << 2, name="CommError")
 
 
-@o6.optionsettype(nodeId="ns=fx_ac;i=3005", browseName="DeviceHealthOptionSet", base=o6.UInt16)
+@o6.optionsettype(nodeId="ns=fx_ac;i=3005", browseName="ns=fx_ac;DeviceHealthOptionSet", base=o6.UInt16)
 class DeviceHealthOptionSet:
     DEVICE_FAILURE = o6.bitmask(0x01 << 0, name="DeviceFailure")
     DEVICE_CHECK_FUNCTION = o6.bitmask(0x01 << 1, name="DeviceCheckFunction")
@@ -71,7 +71,7 @@ class DeviceHealthOptionSet:
 
 @o6.enumtype(
     nodeId="ns=fx_ac;i=3007",
-    browseName="ConnectionEndpointStatusEnum",
+    browseName="ns=fx_ac;ConnectionEndpointStatusEnum",
     description="This enumeration defines the values of the FlcConnectionStatus of an FlcConnectionEndpointType.",
 )
 class ConnectionEndpointStatusEnum(ns0.datatypes.Enumeration):
@@ -82,7 +82,7 @@ class ConnectionEndpointStatusEnum(ns0.datatypes.Enumeration):
     ERROR = o6.enumfield(4, name="Error")
 
 
-@o6.optionsettype(nodeId="ns=fx_ac;i=3010", browseName="OperationalHealthOptionSet", base=o6.UInt32)
+@o6.optionsettype(nodeId="ns=fx_ac;i=3010", browseName="ns=fx_ac;OperationalHealthOptionSet", base=o6.UInt32)
 class OperationalHealthOptionSet:
     OPERATIONAL_WARNING = o6.bitmask(0x01 << 16, name="OperationalWarning")
     OPERATIONAL_ERROR = o6.bitmask(0x01 << 17, name="OperationalError")
@@ -90,36 +90,36 @@ class OperationalHealthOptionSet:
     SUB_OPERATIONAL_ERROR = o6.bitmask(0x01 << 19, name="SubOperationalError")
 
 
-@o6.datatype(nodeId="ns=fx_ac;i=3003", browseName="AggregatedHealthDataType", defaultEncodingId="ns=fx_ac;i=5004")
+@o6.datatype(nodeId="ns=fx_ac;i=3003", browseName="ns=fx_ac;AggregatedHealthDataType", defaultEncodingId="ns=fx_ac;i=5004")
 class AggregatedHealthDataType(ns0.datatypes.Structure):
-    aggregatedDeviceHealth: DeviceHealthOptionSet
-    aggregatedOperationalHealth: OperationalHealthOptionSet
+    aggregatedDeviceHealth: DeviceHealthOptionSet = o6.field(name="AggregatedDeviceHealth")
+    aggregatedOperationalHealth: OperationalHealthOptionSet = o6.field(name="AggregatedOperationalHealth")
 
 
-@o6.datatype(nodeId="ns=fx_ac;i=3011", browseName="PublisherQosDataType", defaultEncodingId="ns=fx_ac;i=5024")
+@o6.datatype(nodeId="ns=fx_ac;i=3011", browseName="ns=fx_ac;PublisherQosDataType", defaultEncodingId="ns=fx_ac;i=5024")
 class PublisherQosDataType(ns0.datatypes.Structure):
-    qosCategory: o6.String
-    datagramQos: list[ns0.datatypes.TransmitQosDataType] = o6.field(arrayDimensions=[0])
+    qosCategory: o6.String = o6.field(name="QosCategory")
+    datagramQos: list[ns0.datatypes.TransmitQosDataType] = o6.field(name="DatagramQos", arrayDimensions=[0])
 
 
-@o6.datatype(nodeId="ns=fx_ac;i=3012", browseName="SubscriberQosDataType", defaultEncodingId="ns=fx_ac;i=5027")
+@o6.datatype(nodeId="ns=fx_ac;i=3012", browseName="ns=fx_ac;SubscriberQosDataType", defaultEncodingId="ns=fx_ac;i=5027")
 class SubscriberQosDataType(ns0.datatypes.Structure):
-    qosCategory: o6.String
-    datagramQos: list[ns0.datatypes.ReceiveQosDataType] = o6.field(arrayDimensions=[0])
+    qosCategory: o6.String = o6.field(name="QosCategory")
+    datagramQos: list[ns0.datatypes.ReceiveQosDataType] = o6.field(name="DatagramQos", arrayDimensions=[0])
 
 
-@o6.datatype(nodeId="ns=fx_ac;i=3013", browseName="ApplicationId", defaultEncodingId="ns=fx_ac;i=5003")
+@o6.datatype(nodeId="ns=fx_ac;i=3013", browseName="ns=fx_ac;ApplicationId", defaultEncodingId="ns=fx_ac;i=5003")
 class ApplicationId(ns0.datatypes.Union):
-    idNumeric: o6.UInt32
-    idString: o6.String
-    idGuid: o6.Guid
-    idByteString: o6.ByteString
+    idNumeric: o6.UInt32 = o6.field(name="IdNumeric")
+    idString: o6.String = o6.field(name="IdString")
+    idGuid: o6.Guid = o6.field(name="IdGuid")
+    idByteString: o6.ByteString = o6.field(name="IdByteString")
 
 
-@o6.datatype(nodeId="ns=fx_ac;i=28", browseName="ApplicationIdentifierDataType", defaultEncodingId="ns=fx_ac;i=60")
+@o6.datatype(nodeId="ns=fx_ac;i=28", browseName="ns=fx_ac;ApplicationIdentifierDataType", defaultEncodingId="ns=fx_ac;i=60")
 class ApplicationIdentifierDataType(ns0.datatypes.Structure):
-    name: o6.LocalizedText
-    uniqueIdentifier: ApplicationId
+    name: o6.LocalizedText = o6.field(name="Name")
+    uniqueIdentifier: ApplicationId = o6.field(name="UniqueIdentifier")
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, fx_data, ns0, fx_ac_reftypes

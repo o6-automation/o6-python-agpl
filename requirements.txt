@@ -10,7 +10,7 @@ mypy==1.19.1
 mypy_extensions==1.1.0
 numpy==2.4.6; python_version == "3.11"
 numpy==2.5.2; python_version >= "3.12"
-o6-ncc==1.0.1
+o6-ncc==2.0.0
 psutil==7.2.2
 python-dateutil==2.9.0.post0
 pytest==9.0.3

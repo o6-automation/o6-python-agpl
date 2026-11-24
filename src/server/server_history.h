@@ -196,7 +196,7 @@ pyHistoryGathering_stopPolls(UA_HistoryDataGathering *gathering,
  * owner-side path and runs after the server is gone. */
 typedef struct {
     UA_HistoryDataGathering gathering;  /* borrows backend.context (ring mode),
-                                          * or UA_HistoryDataGathering_Default
+                                          * or this facade's per-node gatherings
                                           * (customBackend mode) */
     UA_HistoryDataBackend backend;      /* owns the shared node table (ring
                                           * mode), or the one Python trampoline
@@ -206,11 +206,34 @@ typedef struct {
     size_t defaultCapacity;
     size_t defaultResponseSize;
     UA_Boolean enabled;
-    UA_Boolean customBackend;  
-    UA_NodeId *polledNodes;
-    size_t polledNodesSize;
-    size_t polledNodesCapacity;
+    UA_Boolean customBackend;
+    struct PyHistoryGatheringEntry *customNodes;
 } PyServerHistory;
+
+UA_Boolean
+pyHistoryBackend_paged(const UA_HistoryDataBackend *backend);
+
+UA_Boolean
+pyHistoryBackend_extended(const UA_HistoryDataBackend *backend);
+
+UA_Boolean
+pyHistoryBackend_rawRanges(const UA_HistoryDataBackend *backend);
+
+UA_StatusCode
+pyHistoryBackend_readPage(UA_Server *server, const UA_NodeId *sessionId,
+    void *sessionContext, const UA_HistoryDataBackend *backend,
+    const UA_ReadRawModifiedDetails *details, UA_TimestampsToReturn timestamps,
+    UA_NumericRange range, UA_Boolean release, const UA_HistoryReadValueId *item,
+    size_t cap, UA_ByteString *token, UA_HistoryData *result);
+
+UA_StatusCode
+pyHistoryBackend_unregister(UA_HistoryDataBackend *backend, const UA_NodeId *nodeId);
+
+UA_StatusCode
+pyHistoryBackend_validatePage(UA_Server *server, const UA_NodeId *sessionId,
+    void *sessionContext, const UA_HistoryDataBackend *backend,
+    const UA_ReadRawModifiedDetails *details, UA_TimestampsToReturn timestamps,
+    UA_NumericRange range, UA_Boolean release, const UA_HistoryReadValueId *item, size_t cap);
 
 void
 pyHistory_init(PyServerHistory *history);

@@ -492,13 +492,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1229",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1230", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1230", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -516,13 +521,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1237",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1238", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1238", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -540,13 +550,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1314",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1315", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1315", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -564,13 +579,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1318",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1319", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1319", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -588,13 +608,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1321",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1322", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1322", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -612,13 +637,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1324",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1325", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1325", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -636,13 +666,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1328",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1329", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1329", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -660,13 +695,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1331",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Area"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1332", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1332", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -684,13 +724,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1334",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("HeatTransferCoefficient"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1335", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1335", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -708,13 +753,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1344",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1345", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1345", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -732,13 +782,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1347",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1348", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1348", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -756,13 +811,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1352",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1353", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1353", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -780,13 +840,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1355",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1356", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1356", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -804,13 +869,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1358",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1359", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1359", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -828,13 +898,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1372",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1373", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1373", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -852,13 +927,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1381",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1382", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1382", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -876,13 +956,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1384",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1385", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1385", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -900,13 +985,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1389",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1390", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1390", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -924,13 +1014,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1392",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1393", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1393", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -948,13 +1043,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1395",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1396", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1396", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -972,13 +1072,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1402",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1403", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1403", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -996,13 +1101,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1405",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1406", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1406", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1020,13 +1130,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1410",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1411", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1411", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1044,13 +1159,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1413",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1414", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1414", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1068,13 +1188,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1417",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1418", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1418", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1092,13 +1217,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1420",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1421", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1421", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1116,13 +1246,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1423",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1424", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1424", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1140,13 +1275,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1427",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Volume"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1428", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1428", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1164,13 +1304,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1433",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1434", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1434", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1188,13 +1333,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1436",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1437", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1437", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1212,13 +1362,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1439",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1440", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1440", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1236,13 +1391,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1442",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1443", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1443", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1260,13 +1420,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1447",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1448", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1448", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1284,13 +1449,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1451",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1452", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1452", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1308,13 +1478,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1459",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Percentage"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1460", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1460", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1332,13 +1507,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1462",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Area"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1463", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1463", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1356,13 +1536,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1465",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Percentage"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1466", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1466", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1380,13 +1565,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1468",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1469", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1469", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1404,13 +1594,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1473",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Percentage"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1474", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1474", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1428,13 +1623,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1476",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1477", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1477", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1452,13 +1652,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1480",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1481", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1481", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1476,13 +1681,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1483",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1484", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1484", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1500,13 +1710,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1486",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1487", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1487", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1524,13 +1739,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1496",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1497", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1497", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1548,13 +1768,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1499",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1500", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1500", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1572,13 +1797,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1505",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1506", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1506", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1596,13 +1826,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1508",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1509", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1509", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1620,13 +1855,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1517",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1518", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1518", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1644,13 +1884,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1520",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1521", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1521", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1668,13 +1913,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1529",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1530", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1530", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1692,13 +1942,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1532",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1533", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1533", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1716,13 +1971,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1535",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1536", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1536", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1740,13 +2000,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1538",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1539", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1539", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1764,13 +2029,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1541",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1542", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1542", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1788,13 +2058,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1545",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1546", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1546", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1812,13 +2087,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1549",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1550", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1550", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1836,13 +2116,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1552",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1553", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1553", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1860,13 +2145,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1555",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1556", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1556", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1884,13 +2174,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1559",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1560", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1560", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1908,13 +2203,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1568",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1569", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1569", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1932,13 +2232,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1571",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1572", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1572", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1956,13 +2261,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1579",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1580", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1580", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1980,13 +2290,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1582",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1583", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1583", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2004,13 +2319,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1586",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1587", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1587", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2028,13 +2348,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1589",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1590", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1590", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2052,13 +2377,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1595",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1596", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1596", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2076,13 +2406,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1610",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1611", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1611", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2100,13 +2435,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1613",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1614", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1614", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2124,13 +2464,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1616",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1617", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1617", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2148,13 +2493,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1622",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1623", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1623", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2172,13 +2522,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1627",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1628", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1628", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2196,13 +2551,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1631",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1632", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1632", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2220,13 +2580,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1639",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1640", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1640", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2244,13 +2609,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1642",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1643", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1643", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2268,13 +2638,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1647",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1648", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1648", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2292,13 +2667,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1650",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1651", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1651", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2316,13 +2696,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1660",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Volume"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1661", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1661", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2340,13 +2725,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1665",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1666", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1666", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2364,13 +2754,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1669",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Volume"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1670", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1670", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2388,13 +2783,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1674",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1675", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1675", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2412,13 +2812,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1677",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1678", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1678", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2436,13 +2841,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1696",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1697", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1697", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2460,13 +2870,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1699",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1700", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1700", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2484,13 +2899,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1702",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1703", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1703", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2508,13 +2928,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1705",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1706", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1706", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2532,13 +2957,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1710",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("RotationalSpeed"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1711", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1711", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2556,13 +2986,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1713",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Power"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1714", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1714", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2580,13 +3015,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1718",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("VolumeFlowRate"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1719", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1719", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2604,13 +3044,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1721",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1722", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1722", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2628,13 +3073,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1724",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1725", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1725", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2652,13 +3102,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1730",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1731", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1731", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2676,13 +3131,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1734",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1735", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1735", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2700,13 +3160,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1760",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1761", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1761", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2724,13 +3189,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1765",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1766", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1766", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2748,13 +3218,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1778",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1779", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1779", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2772,13 +3247,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1782",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1783", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1783", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2796,13 +3276,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1796",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1797", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1797", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2820,13 +3305,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1801",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1802", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1802", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2844,13 +3334,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1815",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1816", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1816", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2868,13 +3363,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1820",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1821", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1821", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2892,13 +3392,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1835",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1836", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1836", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2916,13 +3421,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1840",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1841", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1841", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2940,13 +3450,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1850",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1851", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1851", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2964,13 +3479,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1854",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1855", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1855", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2988,13 +3508,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1880",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1881", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1881", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -3012,13 +3537,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1885",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1886", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1886", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -3036,13 +3566,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1907",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Percentage"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1908", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1908", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -3060,13 +3595,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1910",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1911", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1911", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -3084,13 +3624,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1915",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1916", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1916", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -3108,13 +3653,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1923",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1924", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1924", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -3132,13 +3682,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1950",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1951", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1951", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -3156,13 +3711,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1953",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Pressure"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1954", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1954", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -3180,13 +3740,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1961",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1962", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1962", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -3204,13 +3769,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1966",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1967", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1967", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -3228,13 +3798,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1979",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Temperature"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1980", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1980", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -3252,13 +3827,18 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=dexpi;i=1984",
                 browseName="ns=dexpi;EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText("Length"), description=o6.LocalizedText()),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=1985", browseName="ns=dexpi;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=1985", browseName="ns=dexpi;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -3271,10 +3851,20 @@ dEXPISupplementaryData = dexpi_objtypes.DEXPISupplementaryDataType(
     browseName="ns=dexpi;DEXPISupplementaryData",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=2123", browseName="ns=dexpi;DEXPISpecificationVersion", dataType=o6.String, value="1.2", accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=2123",
+                browseName="ns=dexpi;DEXPISpecificationVersion",
+                modellingRule="Optional",
+                dataType=o6.String,
+                value="1.2",
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=2124", browseName="ns=dexpi;ProteusSchemaVersion", dataType=o6.String, value="4.0.1", accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=dexpi;i=2124", browseName="ns=dexpi;ProteusSchemaVersion", modellingRule="Optional", dataType=o6.String, value="4.0.1", accessLevel=3, userAccessLevel=1
+            )
         ),
     ],
     parent="i=85",
@@ -3290,12 +3880,12 @@ http_opcfoundation_org_UA_DEXPI_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=6004", browseName="NamespaceVersion", dataType=o6.String, value="1.00")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=dexpi;i=6005", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=dexpi;i=6005", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=dexpi;i=6006", browseName="StaticNumericNodeIdRange", dataType=ns0.datatypes.NumericRange, valueRank=1, arrayDimensions=[1], value=["1:65535"]
+                nodeId="ns=dexpi;i=6006", browseName="StaticNumericNodeIdRange", dataType=ns0.datatypes.NumericRange, valueRank=1, arrayDimensions=[0], value=["1:65535"]
             )
         ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=dexpi;i=6007", browseName="StaticStringNodeIdPattern", dataType=o6.String, value="\n      ")),

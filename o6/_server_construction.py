@@ -20,6 +20,7 @@ from __future__ import annotations
 import re
 from collections.abc import Mapping
 from dataclasses import replace as dataclass_replace
+from functools import partial
 from typing import Any, Callable, Optional, cast
 
 import o6
@@ -439,7 +440,9 @@ def _delete_live_node(server: Any, node: Any) -> None:
     """Best-effort rollback for a partially constructed live node."""
     if node._is_native_attached():
         try:
-            server._on_event_loop(lambda: server._delete_node(o6.NodeId(node)).check())
+            server._run_on_loop(
+                lambda: server._delete_node(o6.NodeId(node)).check(), sync_result=True, wait=True
+            )
         except Exception:
             pass
 
@@ -547,8 +550,10 @@ def _queue_history(server: Any, node: Any, historizing: "bool | o6.History") -> 
 
 def _apply_role_permissions(server: Any, node_id: Any, permissions: Mapping[Any, int]) -> None:
     if permissions:
-        server._on_event_loop(
-            lambda: server._set_node_role_permissions(node_id, permissions, False)
+        server._run_on_loop(
+            lambda: server._set_node_role_permissions(node_id, permissions, False),
+            sync_result=True,
+            wait=True,
         )
 
 
@@ -556,7 +561,11 @@ def _apply_access_restrictions(server: Any, node_id: Any, restrictions: int) -> 
     # open62541 does not store the AccessRestrictions Attribute; the server's
     # access-control layer enforces the value o6 keeps beside the node.
     if restrictions:
-        server._on_event_loop(lambda: server._set_access_restrictions(node_id, int(restrictions)))
+        server._run_on_loop(
+            lambda: server._set_access_restrictions(node_id, int(restrictions)),
+            sync_result=True,
+            wait=True,
+        )
 
 
 def _construct_live_child(
@@ -787,7 +796,9 @@ def _modelling_rule_of(server: Any, node: o6.NodeId) -> Optional[o6.NodeId]:
         ns0.datatypes.BrowseResultMask.NONE,
     )
     try:
-        targets = server._on_event_loop(lambda: server._browse_references(node, query))
+        targets = server._run_on_loop(
+            lambda: server._browse_references(node, query), sync_result=True, wait=True
+        )
     except o6.StatusCodeError:
         return None
     return o6.NodeId(targets[0].nodeId) if targets else None
@@ -836,7 +847,7 @@ def _add_leaf_child(
     nc = int(decl.nodeclass)
     try:
         if nc == int(_NodeClass.VARIABLE):
-            nodeid = server._on_event_loop(
+            nodeid = server._run_on_loop(
                 lambda: server._add_variable_node(
                     req,
                     parent,
@@ -844,10 +855,12 @@ def _add_leaf_child(
                     qn,
                     _type_target_nodeid(decl.typeTarget),
                     attr,
-                )
+                ),
+                sync_result=True,
+                wait=True,
             )
         elif nc == int(_NodeClass.OBJECT):
-            nodeid = server._on_event_loop(
+            nodeid = server._run_on_loop(
                 lambda: server._add_object_node(
                     req,
                     parent,
@@ -855,7 +868,9 @@ def _add_leaf_child(
                     qn,
                     _type_target_nodeid(decl.typeTarget),
                     attr,
-                )
+                ),
+                sync_result=True,
+                wait=True,
             )
         else:
             raise NotImplementedError(
@@ -904,7 +919,7 @@ def _add_method_child(
     # open62541 skips empty argument lists and drops declared attributes.
     input_declaration = spec.input_args_declaration if declaration else None
     output_declaration = spec.output_args_declaration if declaration else None
-    method_id = server._on_event_loop(
+    method_id = server._run_on_loop(
         lambda: server._add_method_node(
             req,
             parent,
@@ -915,7 +930,9 @@ def _add_method_child(
             [] if output_declaration is not None else list(spec.output_args),
             (spec.input_args_nodeid or o6.NodeId()) if declaration else o6.NodeId(),
             (spec.output_args_nodeid or o6.NodeId()) if declaration else o6.NodeId(),
-        )
+        ),
+        sync_result=True,
+        wait=True,
     )
     for name, argument_declaration in (
         ("InputArguments", input_declaration),
@@ -977,12 +994,16 @@ def _finish_live_instance(
     """Advance one promoted raw node through prepare and finish."""
     node_id = o6.NodeId(node)
     if allow_abstract:
-        server._on_event_loop(lambda: server._set_type_abstract(type_definition, False))
+        server._run_on_loop(
+            lambda: server._set_type_abstract(type_definition, False), sync_result=True, wait=True
+        )
     try:
-        server._on_event_loop(
+        server._run_on_loop(
             lambda: server._add_node_prepare(
                 node_id, o6.NodeId(parent), o6.NodeId(reference_type), type_definition
-            )
+            ),
+            sync_result=True,
+            wait=True,
         )
         if values:
             _precreate_children(
@@ -999,16 +1020,24 @@ def _finish_live_instance(
             )
         for reference in references or ():
             _construct_declaration(server, node_id, _instance_declaration(reference))
-        server._on_event_loop(lambda: server._add_node_finish(node_id))
+        server._run_on_loop(lambda: server._add_node_finish(node_id), sync_result=True, wait=True)
         permissions = _normalize_role_permissions(role_permissions)
         _apply_role_permissions(server, node_id, permissions)
         _apply_access_restrictions(server, node_id, access_restrictions)
         if modelling_rule is not None:
             rule = _resolved_modelling_rule(modelling_rule)
-            server.addReferenceLegacy(node_id, rule, o6.NodeId("i=37"))
+            server._run_on_loop(
+                partial(server.addReferenceLegacy, node_id, rule, o6.NodeId("i=37")),
+                sync_result=True,
+                wait=True,
+            )
     finally:
         if allow_abstract:
-            server._on_event_loop(lambda: server._set_type_abstract(type_definition, True))
+            server._run_on_loop(
+                lambda: server._set_type_abstract(type_definition, True),
+                sync_result=True,
+                wait=True,
+            )
 
 
 def _construct_live_node(
@@ -1033,7 +1062,7 @@ def _construct_live_node(
 ) -> Any:
     """Run the single raw-to-initialized live-node transaction."""
     target = _live_class(marker, _instance_node_type(_type_declaration(marker).nodeclass))
-    node = server._on_event_loop(
+    node = server._run_on_loop(
         lambda: server._add_node_raw(
             int(nodeclass),
             requested,
@@ -1042,7 +1071,9 @@ def _construct_live_node(
             native_attrs,
             target,
             server._node_backend,
-        )
+        ),
+        sync_result=True,
+        wait=True,
     )
     node.__dict__[_INITIALIZER_KWARGS] = dict(initializer_kwargs)
     try:
@@ -1255,7 +1286,7 @@ def _construct_declaration(
                 _construct_declaration(server, live._nodeid, child, materialized)
             return live
 
-        return server._on_event_loop(create_view)
+        return server._run_on_loop(create_view, sync_result=True)
     if isinstance(declaration.attributes, MethodSpec):
         requested = o6.NodeId(declaration.nodeid) if declaration.nodeid is not None else o6.NodeId()
         inverse = declaration.inverse
@@ -1303,7 +1334,7 @@ def _construct_declaration(
             dataclass_replace(declaration, reference_type=o6.NodeId()) if inverse else declaration
         )
         if marker is not None and declaration.children:
-            live = server._on_event_loop(
+            live = server._run_on_loop(
                 lambda: server._add_node_begin(
                     int(declaration.nodeclass),
                     requested,
@@ -1312,7 +1343,9 @@ def _construct_declaration(
                     browse_name,
                     _type_target_nodeid(declaration.typeTarget),
                     attributes,
-                )
+                ),
+                sync_result=True,
+                wait=True,
             )
             _precreate_children(
                 server,
@@ -1321,7 +1354,7 @@ def _construct_declaration(
                 _declaration_values(declaration),
                 template=True,
             )
-            server._on_event_loop(lambda: server._add_node_finish(live))
+            server._run_on_loop(lambda: server._add_node_finish(live), sync_result=True, wait=True)
         else:
             live = _add_leaf_child(
                 server,

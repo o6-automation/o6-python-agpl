@@ -51,6 +51,8 @@ Symbols re-exported at the top level are listed under their canonical module and
 - [`Int64`](int64.md) — `o6.Int64` (class or type)
 - [`interfaceOf`](interfaceof.md) — `o6.interfaceOf` (function)
 - [`isConditionOf`](isconditionof.md) — `o6.isConditionOf` (function)
+- [`license`](license.md) — `o6.license` (object)
+- [`LicenseInfo`](licenseinfo.md) — `o6.LicenseInfo` (class or type)
 - [`LocalizedText`](localizedtext.md) — `o6.LocalizedText` (class or type)
 - [`LocalizedTextLike`](localizedtextlike.md) — `o6.LocalizedTextLike` (class or type)
 - [`logDebug`](logdebug.md) — `o6.logDebug` (function)

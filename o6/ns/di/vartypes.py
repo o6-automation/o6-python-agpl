@@ -40,12 +40,17 @@ class LifetimeVariableType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=di;i=471",
             browseName="ns=di;Indication",
             description="Indication gives an indication of what is actually measured / represented by the Value of the Variable and the StartValue and LimitValue.",
+            modellingRule="Optional",
             dataType=o6.NodeId,
         )
     )
     limitValue: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=di;i=470", browseName="ns=di;LimitValue", description="LimitValue indicates when the end of lifetime has been reached.", dataType=ns0.datatypes.Number
+            nodeId="ns=di;i=470",
+            browseName="ns=di;LimitValue",
+            description="LimitValue indicates when the end of lifetime has been reached.",
+            modellingRule="Mandatory",
+            dataType=ns0.datatypes.Number,
         )
     )
     startValue: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -53,6 +58,7 @@ class LifetimeVariableType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=di;i=469",
             browseName="ns=di;StartValue",
             description="StartValue indicates the initial value, when there is still the full lifetime left.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.Number,
         )
     )
@@ -61,6 +67,7 @@ class LifetimeVariableType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=di;i=472",
             browseName="ns=di;WarningValues",
             description="WarningValues indicates one or more levels when the end of lifetime is reached soon and can be used to inform the user when reached.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Number,
             valueRank=-3,
         )

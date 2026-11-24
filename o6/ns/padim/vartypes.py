@@ -33,31 +33,59 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1113", browseName="ns=padim;SimulationState", displayName="Simulation state", dataType=o6.Boolean, value=False, accessLevel=3)
+ns0.vartypes.BaseDataVariableType(
+    nodeId="ns=padim;i=1113", browseName="ns=padim;SimulationState", displayName="Simulation state", modellingRule="Optional", dataType=o6.Boolean, value=False, accessLevel=3
+)
 o6.reference(o6.ns["ns=padim;i=1113"], "i=17597", "ns=irdi;s=0112/2///61987#ABN611#002")
 ns0.vartypes.BaseDataVariableType(
-    nodeId="ns=padim;i=1115", browseName="ns=padim;ActualValue", displayName="Actual value", dataType=ns0.datatypes.Number, valueRank=-2, accessLevel=3
+    nodeId="ns=padim;i=1115", browseName="ns=padim;ActualValue", displayName="Actual value", modellingRule="Optional", dataType=ns0.datatypes.Number, valueRank=-2, accessLevel=3
 )
 o6.reference(o6.ns["ns=padim;i=1115"], "i=17597", "ns=irdi;s=0112/2///61987#ABN644#001")
 ns0.vartypes.BaseDataVariableType(
-    nodeId="ns=padim;i=1117", browseName="ns=padim;SimulationValue", displayName="Simulation value", dataType=ns0.datatypes.Number, valueRank=-2, accessLevel=3
+    nodeId="ns=padim;i=1117",
+    browseName="ns=padim;SimulationValue",
+    displayName="Simulation value",
+    modellingRule="Optional",
+    dataType=ns0.datatypes.Number,
+    valueRank=-2,
+    accessLevel=3,
 )
 o6.reference(o6.ns["ns=padim;i=1117"], "i=17597", "ns=irdi;s=0112/2///61987#ABN613#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1118", browseName="ns=padim;Damping", dataType=o6.Float, value=1.0, accessLevel=3)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1118", browseName="ns=padim;Damping", modellingRule="Optional", dataType=o6.Float, value=1.0, accessLevel=3)
 o6.reference(o6.ns["ns=padim;i=1118"], "i=17597", "ns=irdi;s=0112/2///61987#ABH526#002")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1131", browseName="ns=padim;LowFlowCutOff", displayName="Low flow cut off", dataType=o6.Float, valueRank=-2, accessLevel=3)
+ns0.vartypes.PropertyType(
+    nodeId="ns=padim;i=1131", browseName="ns=padim;LowFlowCutOff", displayName="Low flow cut off", modellingRule="Mandatory", dataType=o6.Float, valueRank=-2, accessLevel=3
+)
 o6.reference(o6.ns["ns=padim;i=1131"], "i=17597", "ns=irdi;s=0112/2///61987#ABJ724#003")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1140", browseName="ns=padim;PulseWidth", displayName="Pulse width", dataType=o6.Float, value=0.5, accessLevel=3)
+ns0.vartypes.PropertyType(
+    nodeId="ns=padim;i=1140", browseName="ns=padim;PulseWidth", displayName="Pulse width", modellingRule="Mandatory", dataType=o6.Float, value=0.5, accessLevel=3
+)
 o6.reference(o6.ns["ns=padim;i=1140"], "i=17597", "ns=irdi;s=0112/2///61987#ABA635#003")
 ns0.vartypes.BaseDataVariableType(
-    nodeId="ns=padim;i=1144", browseName="ns=padim;ActualValue", displayName="Two-state actual value", dataType=o6.Boolean, valueRank=-2, value=False, accessLevel=3
+    nodeId="ns=padim;i=1144",
+    browseName="ns=padim;ActualValue",
+    displayName="Two-state actual value",
+    modellingRule="Optional",
+    dataType=o6.Boolean,
+    valueRank=-2,
+    value=False,
+    accessLevel=3,
 )
 o6.reference(o6.ns["ns=padim;i=1144"], "i=17597", "ns=irdi;s=0112/2///61987#ABN645#002")
 ns0.vartypes.BaseDataVariableType(
-    nodeId="ns=padim;i=1145", browseName="ns=padim;SimulationValue", displayName="Two-state value of simulation", dataType=o6.Boolean, valueRank=-2, value=False, accessLevel=3
+    nodeId="ns=padim;i=1145",
+    browseName="ns=padim;SimulationValue",
+    displayName="Two-state value of simulation",
+    modellingRule="Optional",
+    dataType=o6.Boolean,
+    valueRank=-2,
+    value=False,
+    accessLevel=3,
 )
 o6.reference(o6.ns["ns=padim;i=1145"], "i=17597", "ns=irdi;s=0112/2///61987#ABN632#002")
-ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1147", browseName="ns=padim;SimulationState", displayName="Simulation state", dataType=o6.Boolean, value=False, accessLevel=3)
+ns0.vartypes.BaseDataVariableType(
+    nodeId="ns=padim;i=1147", browseName="ns=padim;SimulationState", displayName="Simulation state", modellingRule="Optional", dataType=o6.Boolean, value=False, accessLevel=3
+)
 o6.reference(o6.ns["ns=padim;i=1147"], "i=17597", "ns=irdi;s=0112/2///61987#ABN611#002")
 
 
@@ -73,13 +101,23 @@ class TwoStateDiscreteSignalVariableType(ns0.vartypes.TwoStateDiscreteType):
 o6.reference(TwoStateDiscreteSignalVariableType, "i=17597", "ns=irdi;s=0112/2///61987#ABN635#002")
 
 
-ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1148", browseName="ns=padim;ActualValue", displayName="Multistate actual value", dataType=o6.UInt32, value=0, accessLevel=3)
+ns0.vartypes.BaseDataVariableType(
+    nodeId="ns=padim;i=1148", browseName="ns=padim;ActualValue", displayName="Multistate actual value", modellingRule="Optional", dataType=o6.UInt32, value=0, accessLevel=3
+)
 o6.reference(o6.ns["ns=padim;i=1148"], "i=17597", "ns=irdi;s=0112/2///61987#ABN646#002")
 ns0.vartypes.BaseDataVariableType(
-    nodeId="ns=padim;i=1149", browseName="ns=padim;SimulationValue", displayName="Multistate value of simulation", dataType=o6.UInt32, value=0, accessLevel=3
+    nodeId="ns=padim;i=1149",
+    browseName="ns=padim;SimulationValue",
+    displayName="Multistate value of simulation",
+    modellingRule="Optional",
+    dataType=o6.UInt32,
+    value=0,
+    accessLevel=3,
 )
 o6.reference(o6.ns["ns=padim;i=1149"], "i=17597", "ns=irdi;s=0112/2///61987#ABN637#002")
-ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1151", browseName="ns=padim;SimulationState", displayName="Simulation state", dataType=o6.Boolean, value=False, accessLevel=3)
+ns0.vartypes.BaseDataVariableType(
+    nodeId="ns=padim;i=1151", browseName="ns=padim;SimulationState", displayName="Simulation state", modellingRule="Optional", dataType=o6.Boolean, value=False, accessLevel=3
+)
 o6.reference(o6.ns["ns=padim;i=1151"], "i=17597", "ns=irdi;s=0112/2///61987#ABN611#002")
 
 
@@ -93,11 +131,15 @@ class MultiStateDiscreteSignalVariableType(ns0.vartypes.MultiStateDictionaryEntr
 o6.reference(MultiStateDiscreteSignalVariableType, "i=17597", "ns=irdi;s=0112/2///61987#ABN636#002")
 
 
-ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1152", browseName="ns=padim;ActualValue", displayName="Actual value", valueRank=-2, accessLevel=3)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1152", browseName="ns=padim;ActualValue", displayName="Actual value", modellingRule="Optional", valueRank=-2, accessLevel=3)
 o6.reference(o6.ns["ns=padim;i=1152"], "i=17597", "ns=irdi;s=0112/2///61987#ABN644#001")
-ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1153", browseName="ns=padim;SimulationValue", displayName="Simulation value", valueRank=-2, accessLevel=3)
+ns0.vartypes.BaseDataVariableType(
+    nodeId="ns=padim;i=1153", browseName="ns=padim;SimulationValue", displayName="Simulation value", modellingRule="Optional", valueRank=-2, accessLevel=3
+)
 o6.reference(o6.ns["ns=padim;i=1153"], "i=17597", "ns=irdi;s=0112/2///61987#ABN613#001")
-ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1155", browseName="ns=padim;SimulationState", displayName="Simulation state", dataType=o6.Boolean, value=False, accessLevel=3)
+ns0.vartypes.BaseDataVariableType(
+    nodeId="ns=padim;i=1155", browseName="ns=padim;SimulationState", displayName="Simulation state", modellingRule="Optional", dataType=o6.Boolean, value=False, accessLevel=3
+)
 o6.reference(o6.ns["ns=padim;i=1155"], "i=17597", "ns=irdi;s=0112/2///61987#ABN611#002")
 
 
@@ -108,7 +150,7 @@ class DiscreteSignalVariableType(ns0.vartypes.DiscreteItemType):
     simulationValue: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(o6.ns["ns=padim;i=1153"])
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1206", browseName="EngineeringUnits", displayName="Unit", dataType=ns0.datatypes.EUInformation)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1206", browseName="EngineeringUnits", displayName="Unit", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
 o6.reference(o6.ns["ns=padim;i=1206"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 
 
@@ -182,7 +224,9 @@ o6.reference(ControlVariableType, "i=17597", "ns=irdi;s=0112/2///61987#ABP588#00
 )
 class TotalizerVariableType(AnalogSignalVariableType):
     pulseValue: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=padim;i=1139", browseName="ns=padim;PulseValue", displayName="Pulse value", dataType=ns0.datatypes.Number, accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=padim;i=1139", browseName="ns=padim;PulseValue", displayName="Pulse value", modellingRule="Mandatory", dataType=ns0.datatypes.Number, accessLevel=3
+        )
     )
     pulseWidth: ns0.vartypes.PropertyType = o6.hasProperty(o6.ns["ns=padim;i=1140"])
 
@@ -250,6 +294,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1562",
     browseName="ns=padim;PatMatrixDescription",
     displayName="Matrix of components/measurands",
+    modellingRule="Optional",
     dataType=padim_datypes.ChemicalSubstanceDataType,
     valueRank=1,
     arrayDimensions=[1],
@@ -260,6 +305,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1563",
     browseName="ns=padim;PatMeasurandDescription",
     displayName="Chemical component/measurand",
+    modellingRule="Optional",
     dataType=padim_datypes.ChemicalSubstanceDataType,
     accessLevel=3,
 )

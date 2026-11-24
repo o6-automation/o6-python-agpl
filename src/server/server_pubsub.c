@@ -420,6 +420,7 @@ pyPubSubComponentLifecycle(UA_Server *server, const UA_NodeId id,
 
 PyObject *
 pyNode_set_pubsub_state_machine(PyObject *self, PyObject *callback) {
+    O6_REQUIRE_LOOP_THREAD(pyNode_eventLoop(self), NULL);
     if(o6_require_pubsub() < 0)
         return NULL;
     if(callback != Py_None && !PyCallable_Check(callback)) {
@@ -489,6 +490,7 @@ pyNode_set_pubsub_state_machine(PyObject *self, PyObject *callback) {
 
 PyObject *
 pyNode_pubsub_configuration(PyObject *self, PyObject *Py_UNUSED(args)) {
+    O6_REQUIRE_LOOP_THREAD(pyNode_eventLoop(self), NULL);
     if(o6_require_pubsub() < 0)
         return NULL;
     PyServer *server = NULL;
@@ -602,6 +604,7 @@ error:
 
 PyObject *
 pyNode_pubsub_field_source(PyObject *self, PyObject *fieldIdObject) {
+    O6_REQUIRE_LOOP_THREAD(pyNode_eventLoop(self), NULL);
     if(o6_require_pubsub() < 0)
         return NULL;
     PyServer *server = NULL;
@@ -686,6 +689,7 @@ offset_table_to_python(PyServer *server, UA_PubSubOffsetTable *table) {
 
 PyObject *
 pyNode_pubsub_offset_table(PyObject *self, PyObject *Py_UNUSED(args)) {
+    O6_REQUIRE_LOOP_THREAD(pyNode_eventLoop(self), NULL);
     if(o6_require_pubsub() < 0)
         return NULL;
     PyServer *server = NULL;
@@ -724,6 +728,7 @@ pyNode_pubsub_offset_table(PyObject *self, PyObject *Py_UNUSED(args)) {
 
 PyObject *
 pyNode_pubsub_publish(PyObject *self, PyObject *Py_UNUSED(args)) {
+    O6_REQUIRE_LOOP_THREAD(pyNode_eventLoop(self), NULL);
     if(o6_require_pubsub() < 0)
         return NULL;
     PyServer *server = NULL;
@@ -758,6 +763,7 @@ pubsub_connection_id(PyServer *server, PyObject *object, UA_NodeId *nodeId) {
 
 PyObject *
 pyServer_set_pubsub_connection_enabled(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     if(o6_require_pubsub() < 0)
         return NULL;
     PyObject *pyNodeId;
@@ -780,6 +786,7 @@ pyServer_set_pubsub_connection_enabled(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_set_pubsub_component_enabled(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     if(o6_require_pubsub() < 0)
         return NULL;
     PyObject *pyNodeId;
@@ -834,6 +841,7 @@ pyServer_set_pubsub_component_enabled(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_remove_pubsub_connection(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     if(o6_require_pubsub() < 0)
         return NULL;
     PyObject *pyNodeId;
@@ -854,6 +862,7 @@ pyServer_remove_pubsub_connection(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_set_all_pubsub_components_enabled(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     if(o6_require_pubsub() < 0)
         return NULL;
     int enabled;
@@ -875,6 +884,7 @@ pyServer_set_all_pubsub_components_enabled(PyObject *self, PyObject *args) {
  * merely represented by Python-created address-space nodes. */
 PyObject *
 pyServer_add_subscribed_dataset(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     if(o6_require_pubsub() < 0)
         return NULL;
     PyObject *name, *metadata, *targets;
@@ -911,6 +921,7 @@ pyServer_add_subscribed_dataset(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_remove_subscribed_dataset(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     if(o6_require_pubsub() < 0)
         return NULL;
     PyObject *pyId;
@@ -930,6 +941,7 @@ pyServer_remove_subscribed_dataset(PyObject *self, PyObject *args) {
 /* Create a published-items template without dropping its metadata. */
 PyObject *
 pyServer_add_published_dataset(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     if(o6_require_pubsub() < 0)
         return NULL;
     PyObject *pyConfig;
@@ -967,6 +979,7 @@ pyServer_add_published_dataset(PyObject *self, PyObject *args) {
 /* Read-only typed snapshots of native PubSub components. */
 PyObject *
 pyServer_pubsub_configuration(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *pyId;
     if(!PyArg_ParseTuple(args, "O", &pyId))
         return NULL;

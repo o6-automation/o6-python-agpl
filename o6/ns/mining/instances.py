@@ -57,7 +57,7 @@ http_opcfoundation_org_UA_Mining_General_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining;i=6012", browseName="NamespaceVersion", dataType=o6.String, value="1.01.0")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=mining;i=6013", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=mining;i=6013", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
@@ -124,6 +124,7 @@ mining_objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining;i=6019",
                 browseName="ns=di;DeviceClass",
                 description="Indicates in which domain or for what purpose the MachineryItem is used.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
             )
@@ -133,6 +134,7 @@ mining_objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining;i=6020",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -141,6 +143,7 @@ mining_objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining;i=6021",
                 browseName="ns=di;ManufacturerUri",
                 description="A globally unique identifier of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
             )
@@ -150,6 +153,7 @@ mining_objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining;i=6030",
                 browseName="ns=di;Model",
                 description="A human-readable, localized name of the model of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText(),
             )
@@ -159,6 +163,7 @@ mining_objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining;i=6031",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -167,6 +172,7 @@ mining_objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining;i=6033",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -175,6 +181,7 @@ mining_objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining;i=6034",
                 browseName="ns=di;AssetId",
                 description="To be used by end users to store a unique identification in the context of their overall application. Servers shall support at least 40 Unicode characters for the clients writing this value, this means clients can expect to be able to write strings with a length of 40 Unicode characters into that field.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
             )

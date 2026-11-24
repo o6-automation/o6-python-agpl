@@ -124,6 +124,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=fx_cm;i=1481",
     browseName="ns=fx_cm;EditConnectionConfigurationSets",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=1265"]),
     outputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=1267"]),
 )
@@ -157,6 +158,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=fx_cm;i=1483",
     browseName="ns=fx_cm;ProcessConnectionConfigurationSets",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=1270"]),
     outputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=1271"]),
 )
@@ -168,11 +170,13 @@ class AutomationComponentConfigurationType(ns0.objtypes.BaseObjectType):
     assetVerification_: AssetVerificationType | None
     automationComponentNode: ns0.vartypes.SelectionListType
     commandBundleRequired: ns0.vartypes.BaseDataVariableType = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_cm;i=6009", browseName="ns=fx_cm;CommandBundleRequired", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1),
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=fx_cm;i=6009", browseName="ns=fx_cm;CommandBundleRequired", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+        ),
         "ns=fx_cm;i=4003",
     )
     communicationModelConfig: CommunicationModelConfigurationType | None = o6.hasComponent(
-        CommunicationModelConfigurationType(nodeId="ns=fx_cm;i=5013", browseName="ns=fx_cm;CommunicationModelConfig", _allow_abstract=True)
+        CommunicationModelConfigurationType(nodeId="ns=fx_cm;i=5013", browseName="ns=fx_cm;CommunicationModelConfig", modellingRule="Optional", _allow_abstract=True)
     )
 
 
@@ -182,6 +186,7 @@ class ConnectionEndpointConfigurationType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=fx_cm;i=6109",
             browseName="ns=fx_cm;ConfigurationData",
+            modellingRule="Optional",
             dataType=fx_cm_datypes.PortableNodeIdentifierValuePair,
             valueRank=1,
             arrayDimensions=[0],
@@ -194,6 +199,7 @@ class ConnectionEndpointConfigurationType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=fx_cm;i=6108",
             browseName="ns=fx_cm;ControlGroups",
+            modellingRule="Optional",
             dataType=fx_cm_datypes.PortableNodeIdentifier,
             valueRank=1,
             arrayDimensions=[0],
@@ -205,6 +211,7 @@ class ConnectionEndpointConfigurationType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=fx_cm;i=6107",
             browseName="ns=fx_cm;ExpectedVerificationVariables",
+            modellingRule="Optional",
             dataType=fx_cm_datypes.PortableNodeIdentifierValuePair,
             valueRank=1,
             arrayDimensions=[0],
@@ -222,15 +229,21 @@ class ConnectionManagerCapabilitiesType(ns0.objtypes.FolderType):
         "ns=fx_cm;i=4008",
     )
     maxConnectionConfigurationSets: ns0.vartypes.BaseDataVariableType | None = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_cm;i=6207", browseName="ns=fx_cm;MaxConnectionConfigurationSets", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1),
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=fx_cm;i=6207", browseName="ns=fx_cm;MaxConnectionConfigurationSets", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+        ),
         "ns=fx_cm;i=4008",
     )
     monitorsAllConnectionEndpoints: ns0.vartypes.BaseDataVariableType | None = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_cm;i=6238", browseName="ns=fx_cm;MonitorsAllConnectionEndpoints", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1),
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=fx_cm;i=6238", browseName="ns=fx_cm;MonitorsAllConnectionEndpoints", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+        ),
         "ns=fx_cm;i=4008",
     )
     monitorsLocalConnectionEndpoints: ns0.vartypes.BaseDataVariableType | None = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_cm;i=6235", browseName="ns=fx_cm;MonitorsLocalConnectionEndpoints", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1),
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=fx_cm;i=6235", browseName="ns=fx_cm;MonitorsLocalConnectionEndpoints", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+        ),
         "ns=fx_cm;i=4008",
     )
 
@@ -238,9 +251,13 @@ class ConnectionManagerCapabilitiesType(ns0.objtypes.FolderType):
 @o6.objecttype(nodeId="ns=fx_cm;i=1002", browseName="ns=fx_cm;ConnectionManagerType", displayName="ConnectionManagerType")
 class ConnectionManagerType(ns0.objtypes.BaseObjectType):
     aggregatedCurrentState: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_cm;i=6205", browseName="ns=fx_cm;AggregatedCurrentState", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=fx_cm;i=6205", browseName="ns=fx_cm;AggregatedCurrentState", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+        )
     )
-    capabilities: ConnectionManagerCapabilitiesType | None = o6.hasComponent(ConnectionManagerCapabilitiesType(nodeId="ns=fx_cm;i=5085", browseName="ns=fx_cm;Capabilities"))
+    capabilities: ConnectionManagerCapabilitiesType | None = o6.hasComponent(
+        ConnectionManagerCapabilitiesType(nodeId="ns=fx_cm;i=5085", browseName="ns=fx_cm;Capabilities", modellingRule="Optional")
+    )
     connectionConfigurationSets: ns0.objtypes.FolderType
     connectionManagerConfiguration: ConnectionManagerConfigurationType | None
     connectionManagerLog: ns0.objtypes.LogObjectType | None
@@ -248,7 +265,14 @@ class ConnectionManagerType(ns0.objtypes.BaseObjectType):
     editConnectionConfigurationSets: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=fx_cm;i=1481"])
     globalDiscoveryServers: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=fx_cm;i=6252", browseName="ns=fx_cm;GlobalDiscoveryServers", dataType=o6.String, valueRank=1, arrayDimensions=[0], accessLevel=3, userAccessLevel=1
+            nodeId="ns=fx_cm;i=6252",
+            browseName="ns=fx_cm;GlobalDiscoveryServers",
+            modellingRule="Optional",
+            dataType=o6.String,
+            valueRank=1,
+            arrayDimensions=[0],
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     processConnectionConfigurationSets: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=fx_cm;i=1483"])
@@ -263,23 +287,29 @@ o6.reference(ConnectionManagerType, "i=41", CloseConnectionErrorEventType)
 )
 class AuditUpdateConnectionConfigurationSetEventType(ns0.objtypes.AuditWriteUpdateEventType):
     connectionConfigurationSetNode: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fx_cm;i=6253", browseName="ns=fx_cm;ConnectionConfigurationSetNode", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fx_cm;i=6253", browseName="ns=fx_cm;ConnectionConfigurationSetNode", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1
+        )
     )
     name: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fx_cm;i=6254", browseName="ns=fx_cm;Name", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fx_cm;i=6254", browseName="ns=fx_cm;Name", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
 
 
 @o6.objecttype(nodeId="ns=fx_cm;i=1006", browseName="ns=fx_cm;ConnectionConfigurationSetEventType", displayName="ConnectionConfigurationSetEventType", isAbstract=True)
 class ConnectionConfigurationSetEventType(ns0.objtypes.BaseEventType):
     action: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fx_cm;i=6354", browseName="ns=fx_cm;Action", dataType=fx_cm_datypes.FxProcessEnum, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fx_cm;i=6354", browseName="ns=fx_cm;Action", modellingRule="Mandatory", dataType=fx_cm_datypes.FxProcessEnum, accessLevel=3, userAccessLevel=1
+        )
     )
     connectionConfigurationSetNode: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fx_cm;i=6352", browseName="ns=fx_cm;ConnectionConfigurationSetNode", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fx_cm;i=6352", browseName="ns=fx_cm;ConnectionConfigurationSetNode", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1
+        )
     )
     name: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fx_cm;i=6353", browseName="ns=fx_cm;Name", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fx_cm;i=6353", browseName="ns=fx_cm;Name", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
 
 
@@ -330,15 +360,23 @@ class ConnectionConfigurationSetType(ns0.objtypes.BaseObjectType):
     connection_: ConnectionConfigurationType
     connectionsDiagnostics: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=fx_cm;i=6239", browseName="ns=fx_cm;ConnectionsDiagnostics", dataType=fx_cm_datypes.ConnectionDiagnosticsDataType, valueRank=1, arrayDimensions=[0]
+            nodeId="ns=fx_cm;i=6239",
+            browseName="ns=fx_cm;ConnectionsDiagnostics",
+            modellingRule="Optional",
+            dataType=fx_cm_datypes.ConnectionDiagnosticsDataType,
+            valueRank=1,
+            arrayDimensions=[0],
         )
     )
-    edit: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_cm;i=6487", browseName="ns=fx_cm;Edit", dataType=o6.Boolean))
+    edit: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=fx_cm;i=6487", browseName="ns=fx_cm;Edit", modellingRule="Optional", dataType=o6.Boolean)
+    )
     lock: di.objtypes.LockingServicesType
     pubSubKeyPushTargets: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=fx_cm;i=6209",
             browseName="ns=fx_cm;PubSubKeyPushTargets",
+            modellingRule="Optional",
             dataType=ns0.datatypes.PubSubKeyPushTargetDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -347,12 +385,13 @@ class ConnectionConfigurationSetType(ns0.objtypes.BaseObjectType):
         )
     )
     rollbackOnError: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fx_cm;i=1272", browseName="ns=fx_cm;RollbackOnError", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fx_cm;i=1272", browseName="ns=fx_cm;RollbackOnError", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
     )
     securityGroups: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=fx_cm;i=6208",
             browseName="ns=fx_cm;SecurityGroups",
+            modellingRule="Optional",
             dataType=ns0.datatypes.SecurityGroupDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -363,7 +402,7 @@ class ConnectionConfigurationSetType(ns0.objtypes.BaseObjectType):
     securityKeyServer: fx_cm_vartypes.SecurityKeyServerAddressType | None
     serverAddress_: fx_cm_vartypes.ServerAddressType
     version: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_cm;i=6219", browseName="ns=fx_cm;Version", dataType=o6.UInt32)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_cm;i=6219", browseName="ns=fx_cm;Version", modellingRule="Optional", dataType=o6.UInt32)
     )
 
 
@@ -372,18 +411,29 @@ class ConnectionEndpointParameterType(ns0.objtypes.BaseObjectType):
     cleanupTimeout: ns0.vartypes.SelectionListType
     communicationLinks: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=fx_cm;i=6179", browseName="ns=fx_cm;CommunicationLinks", dataType=fx_data.datatypes.CommunicationLinkConfigurationDataType, accessLevel=3, userAccessLevel=1
+            nodeId="ns=fx_cm;i=6179",
+            browseName="ns=fx_cm;CommunicationLinks",
+            modellingRule="Optional",
+            dataType=fx_data.datatypes.CommunicationLinkConfigurationDataType,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     connectionEndpointTypeId: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=fx_cm;i=6172", browseName="ns=fx_cm;ConnectionEndpointTypeId", dataType=ns0.datatypes.PortableNodeId, accessLevel=3, userAccessLevel=1
+            nodeId="ns=fx_cm;i=6172",
+            browseName="ns=fx_cm;ConnectionEndpointTypeId",
+            modellingRule="Mandatory",
+            dataType=ns0.datatypes.PortableNodeId,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     inputVariableIds: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=fx_cm;i=6068",
             browseName="ns=fx_cm;InputVariableIds",
+            modellingRule="Optional",
             dataType=fx_cm_datypes.PortableNodeIdentifier,
             valueRank=1,
             arrayDimensions=[0],
@@ -393,13 +443,16 @@ class ConnectionEndpointParameterType(ns0.objtypes.BaseObjectType):
     )
     isPersistent: ns0.vartypes.SelectionListType
     isPreconfigured: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_cm;i=6498", browseName="ns=fx_cm;IsPreconfigured", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=fx_cm;i=6498", browseName="ns=fx_cm;IsPreconfigured", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+        )
     )
     name: ns0.vartypes.SelectionListType
     outputVariableIds: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=fx_cm;i=6082",
             browseName="ns=fx_cm;OutputVariableIds",
+            modellingRule="Optional",
             dataType=fx_cm_datypes.PortableNodeIdentifier,
             valueRank=1,
             arrayDimensions=[0],
@@ -408,10 +461,14 @@ class ConnectionEndpointParameterType(ns0.objtypes.BaseObjectType):
         )
     )
     preconfiguredPublishedDataSet: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_cm;i=6180", browseName="ns=fx_cm;PreconfiguredPublishedDataSet", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=fx_cm;i=6180", browseName="ns=fx_cm;PreconfiguredPublishedDataSet", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
     preconfiguredSubscribedDataSet: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_cm;i=6181", browseName="ns=fx_cm;PreconfiguredSubscribedDataSet", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=fx_cm;i=6181", browseName="ns=fx_cm;PreconfiguredSubscribedDataSet", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -422,6 +479,7 @@ class AssetVerificationType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=fx_cm;i=6526",
             browseName="ns=fx_cm;ExpectedAdditionalVerificationVariables",
+            modellingRule="Mandatory",
             dataType=fx_cm_datypes.PortableNodeIdentifierValuePair,
             valueRank=1,
             arrayDimensions=[0],
@@ -431,13 +489,19 @@ class AssetVerificationType(ns0.objtypes.BaseObjectType):
     )
     expectedVerificationResult: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=fx_cm;i=6158", browseName="ns=fx_cm;ExpectedVerificationResult", dataType=fx_data.datatypes.AssetVerificationResultEnum, accessLevel=3, userAccessLevel=1
+            nodeId="ns=fx_cm;i=6158",
+            browseName="ns=fx_cm;ExpectedVerificationResult",
+            modellingRule="Mandatory",
+            dataType=fx_data.datatypes.AssetVerificationResultEnum,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     expectedVerificationVariables: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=fx_cm;i=6159",
             browseName="ns=fx_cm;ExpectedVerificationVariables",
+            modellingRule="Mandatory",
             dataType=fx_cm_datypes.PortableNodeIdentifierValuePair,
             valueRank=1,
             arrayDimensions=[0],
@@ -447,7 +511,12 @@ class AssetVerificationType(ns0.objtypes.BaseObjectType):
     )
     verificationMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=fx_cm;i=6160", browseName="ns=fx_cm;VerificationMode", dataType=fx_data.datatypes.AssetVerificationModeEnum, accessLevel=3, userAccessLevel=1
+            nodeId="ns=fx_cm;i=6160",
+            browseName="ns=fx_cm;VerificationMode",
+            modellingRule="Mandatory",
+            dataType=fx_data.datatypes.AssetVerificationModeEnum,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
 
@@ -458,6 +527,7 @@ class PubSubCommunicationModelConfigurationType(CommunicationModelConfigurationT
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=fx_cm;i=6529",
             browseName="ns=fx_cm;ConfigurationReferences",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.PubSubConfigurationRefDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -469,6 +539,7 @@ class PubSubCommunicationModelConfigurationType(CommunicationModelConfigurationT
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=fx_cm;i=6530",
             browseName="ns=fx_cm;ConfigurationValues",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.PubSubConfigurationValueDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -478,18 +549,31 @@ class PubSubCommunicationModelConfigurationType(CommunicationModelConfigurationT
     )
     namespaces: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=fx_cm;i=6184", browseName="ns=fx_cm;Namespaces", dataType=o6.String, valueRank=1, arrayDimensions=[0], accessLevel=3, userAccessLevel=1
+            nodeId="ns=fx_cm;i=6184",
+            browseName="ns=fx_cm;Namespaces",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            valueRank=1,
+            arrayDimensions=[0],
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     pubSubConfiguration: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=fx_cm;i=6528", browseName="ns=fx_cm;PubSubConfiguration", dataType=ns0.datatypes.PubSubConfiguration2DataType, accessLevel=3, userAccessLevel=1
+            nodeId="ns=fx_cm;i=6528",
+            browseName="ns=fx_cm;PubSubConfiguration",
+            modellingRule="Mandatory",
+            dataType=ns0.datatypes.PubSubConfiguration2DataType,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     translationTable: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=fx_cm;i=6185",
             browseName="ns=fx_cm;TranslationTable",
+            modellingRule="Mandatory",
             dataType=fx_cm_datypes.NodeIdTranslationDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -529,7 +613,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="ConfigurationObjects", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=fx_cm;i=7003", browseName="ns=fx_cm;CloseAndUpdate", inputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=16032"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=16033"]))
+o6.call(
+    nodeId="ns=fx_cm;i=7003",
+    browseName="ns=fx_cm;CloseAndUpdate",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=16032"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=fx_cm;i=16033"]),
+)
 
 
 @o6.objecttype(nodeId="ns=fx_cm;i=1011", browseName="ns=fx_cm;ConnectionManagerConfigurationType", displayName="ConnectionManagerConfigurationType")

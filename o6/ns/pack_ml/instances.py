@@ -56,90 +56,90 @@ ns0.objtypes.StateType(
     nodeId="ns=pack_ml;i=27",
     browseName="ns=pack_ml;Resetting",
     description="will typically cause a machine to sound a horn and place the machine in a state where components are energized awaiting a START command",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=127", browseName="StateNumber", dataType=o6.UInt32, value=15))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=127", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=15))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=27"])
 ns0.objtypes.StateType(
     nodeId="ns=pack_ml;i=28",
     browseName="ns=pack_ml;Idle",
     description="This is a state which indicates that RESETTING is complete. This state maintains the machine conditions which were achieved during the RESETTING state, and performs operations required when the machine is in IDLE.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=128", browseName="StateNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=128", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=28"])
 ns0.objtypes.StateType(
     nodeId="ns=pack_ml;i=29",
     browseName="ns=pack_ml;Starting",
     description="This state provides the steps needed to start the machine and is a result of a starting type command (local or remote). Following this command, the machine will begin to Execute",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=129", browseName="StateNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=129", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=29"])
 ns0.objtypes.StateType(
     nodeId="ns=pack_ml;i=30",
     browseName="ns=pack_ml;Suspending",
     description="This state is a result of a change in monitored conditions due to process conditions or factors. The trigger event will cause a temporary suspension of the EXECUTE state. SUSPENDING is typically the result of starvation of upstream material in-feeds (i.e., container feed, beverage feed, crown feed, lubricant feed, etc.) that is outside the dynamic speed control range or a downstream out-feed blockage that prevents the machine from EXECUTING continued steady production",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=130", browseName="StateNumber", dataType=o6.UInt32, value=13))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=130", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=13))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=30"])
 ns0.objtypes.StateType(
     nodeId="ns=pack_ml;i=31",
     browseName="ns=pack_ml;Suspended",
     description="The machine may be running at a relevant set point speed, but there is no product being produced while the machine is waiting for external process conditions to return to normal.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=131", browseName="StateNumber", dataType=o6.UInt32, value=5))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=131", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=5))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=31"])
 ns0.objtypes.StateType(
     nodeId="ns=pack_ml;i=32",
     browseName="ns=pack_ml;Unsuspending",
     description="This state is a result of a machine generated request from SUSPENDED state to go back to the EXECUTE state. The actions of this state may include ramping up speeds, turning on vacuums, and the re-engagement of clutches.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=132", browseName="StateNumber", dataType=o6.UInt32, value=14))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=132", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=14))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=32"])
 ns0.objtypes.StateType(
     nodeId="ns=pack_ml;i=33",
     browseName="ns=pack_ml;Holding",
     description="Issuing the Unhold command will retrieve the saved set-points and return the status conditions to prepare the machine to re-enter the normal EXECUTE state",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=133", browseName="StateNumber", dataType=o6.UInt32, value=10))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=133", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=10))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=33"])
 ns0.objtypes.StateType(
     nodeId="ns=pack_ml;i=34",
     browseName="ns=pack_ml;Held",
     description="The HELD state holds the machine's operation while material blockages are cleared, or to stop throughput while a downstream problem is resolved, or enable the safe correction of an equipment fault before the production may be resumed.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=134", browseName="StateNumber", dataType=o6.UInt32, value=11))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=134", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=11))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=34"])
 ns0.objtypes.StateType(
     nodeId="ns=pack_ml;i=35",
     browseName="ns=pack_ml;Unholding",
     description="The UNHOLDING state is a response to an operator command to resume the EXECUTE state. Issuing the Unhold command will retrieve the saved set-points and return the status conditions to prepare the machine to re-enter the normal EXECUTE state",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=135", browseName="StateNumber", dataType=o6.UInt32, value=12))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=135", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=12))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=35"])
 ns0.objtypes.StateType(
     nodeId="ns=pack_ml;i=36",
     browseName="ns=pack_ml;Execute",
     description="Once the machine is processing materials it is deemed to be executing or in the EXECUTE state.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=136", browseName="StateNumber", dataType=o6.UInt32, value=6))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=136", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=6))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=36"])
 ns0.objtypes.StateType(
     nodeId="ns=pack_ml;i=37",
     browseName="ns=pack_ml;Completing",
     description="Normal operation has run to completion (i.e., processing of material at the infeed will stop).",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=137", browseName="StateNumber", dataType=o6.UInt32, value=16))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=137", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=16))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=37"])
 ns0.objtypes.StateType(
     nodeId="ns=pack_ml;i=38",
     browseName="ns=pack_ml;Complete",
     description="The machine has finished the COMPLETING state and is now waiting for a Reset command before transitioning to the RESETTING state",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=138", browseName="StateNumber", dataType=o6.UInt32, value=17))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=138", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=17))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=38"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=39",
     browseName="ns=pack_ml;ResettingToIdle",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=139", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=139", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=39"])
 o6.reference(o6.ns["ns=pack_ml;i=39"], "i=51", o6.ns["ns=pack_ml;i=27"])
@@ -147,7 +147,7 @@ o6.reference(o6.ns["ns=pack_ml;i=39"], "i=52", o6.ns["ns=pack_ml;i=28"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=40",
     browseName="ns=pack_ml;IdleToStarting",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=140", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=140", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=40"])
 o6.reference(o6.ns["ns=pack_ml;i=40"], "i=51", o6.ns["ns=pack_ml;i=28"])
@@ -156,7 +156,7 @@ o6.reference(o6.ns["ns=pack_ml;i=40"], "i=53", o6.ns["ns=pack_ml;i=369"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=41",
     browseName="ns=pack_ml;StartingToExecute",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=141", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=141", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=41"])
 o6.reference(o6.ns["ns=pack_ml;i=41"], "i=51", o6.ns["ns=pack_ml;i=29"])
@@ -164,7 +164,7 @@ o6.reference(o6.ns["ns=pack_ml;i=41"], "i=52", o6.ns["ns=pack_ml;i=36"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=42",
     browseName="ns=pack_ml;ExecuteToSuspending",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=142", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=142", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=42"])
 o6.reference(o6.ns["ns=pack_ml;i=42"], "i=51", o6.ns["ns=pack_ml;i=36"])
@@ -173,7 +173,7 @@ o6.reference(o6.ns["ns=pack_ml;i=42"], "i=53", o6.ns["ns=pack_ml;i=367"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=43",
     browseName="ns=pack_ml;SuspendingToSuspended",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=143", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=143", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=43"])
 o6.reference(o6.ns["ns=pack_ml;i=43"], "i=51", o6.ns["ns=pack_ml;i=30"])
@@ -181,7 +181,7 @@ o6.reference(o6.ns["ns=pack_ml;i=43"], "i=52", o6.ns["ns=pack_ml;i=31"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=44",
     browseName="ns=pack_ml;UnsuspendingToExecute",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=144", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=144", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=44"])
 o6.reference(o6.ns["ns=pack_ml;i=44"], "i=51", o6.ns["ns=pack_ml;i=32"])
@@ -189,7 +189,7 @@ o6.reference(o6.ns["ns=pack_ml;i=44"], "i=52", o6.ns["ns=pack_ml;i=36"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=45",
     browseName="ns=pack_ml;ExecuteToHolding",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=145", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=145", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=45"])
 o6.reference(o6.ns["ns=pack_ml;i=45"], "i=51", o6.ns["ns=pack_ml;i=36"])
@@ -198,7 +198,7 @@ o6.reference(o6.ns["ns=pack_ml;i=45"], "i=53", o6.ns["ns=pack_ml;i=366"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=46",
     browseName="ns=pack_ml;HoldingToHeld",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=146", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=146", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=46"])
 o6.reference(o6.ns["ns=pack_ml;i=46"], "i=51", o6.ns["ns=pack_ml;i=33"])
@@ -206,7 +206,7 @@ o6.reference(o6.ns["ns=pack_ml;i=46"], "i=52", o6.ns["ns=pack_ml;i=34"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=47",
     browseName="ns=pack_ml;HeldToUnholding",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=147", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=147", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=47"])
 o6.reference(o6.ns["ns=pack_ml;i=47"], "i=51", o6.ns["ns=pack_ml;i=34"])
@@ -215,7 +215,7 @@ o6.reference(o6.ns["ns=pack_ml;i=47"], "i=53", o6.ns["ns=pack_ml;i=368"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=48",
     browseName="ns=pack_ml;UnholdingToExecute",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=148", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=148", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=48"])
 o6.reference(o6.ns["ns=pack_ml;i=48"], "i=51", o6.ns["ns=pack_ml;i=35"])
@@ -223,7 +223,7 @@ o6.reference(o6.ns["ns=pack_ml;i=48"], "i=52", o6.ns["ns=pack_ml;i=36"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=49",
     browseName="ns=pack_ml;ExecuteToCompleting",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=149", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=149", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=49"])
 o6.reference(o6.ns["ns=pack_ml;i=49"], "i=51", o6.ns["ns=pack_ml;i=36"])
@@ -232,7 +232,7 @@ o6.reference(o6.ns["ns=pack_ml;i=49"], "i=53", o6.ns["ns=pack_ml;i=365"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=50",
     browseName="ns=pack_ml;CompletingToComplete",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=150", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=150", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=50"])
 o6.reference(o6.ns["ns=pack_ml;i=50"], "i=51", o6.ns["ns=pack_ml;i=37"])
@@ -240,7 +240,7 @@ o6.reference(o6.ns["ns=pack_ml;i=50"], "i=52", o6.ns["ns=pack_ml;i=38"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=51",
     browseName="ns=pack_ml;CompleteToResetting",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=151", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=151", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=51"])
 o6.reference(o6.ns["ns=pack_ml;i=51"], "i=51", o6.ns["ns=pack_ml;i=38"])
@@ -249,7 +249,7 @@ o6.reference(o6.ns["ns=pack_ml;i=51"], "i=53", o6.ns["ns=pack_ml;i=361"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=52",
     browseName="ns=pack_ml;SuspendedToUnsuspending",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=152", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=152", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=52"])
 o6.reference(o6.ns["ns=pack_ml;i=52"], "i=51", o6.ns["ns=pack_ml;i=31"])
@@ -259,33 +259,34 @@ ns0.objtypes.StateType(
     nodeId="ns=pack_ml;i=53",
     browseName="ns=pack_ml;Stopped",
     description="The machine is powered and stationary after completing the STOPPING state. All communications with other systems are functioning (if applicable).",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=155", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=155", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(pack_ml_objtypes.PackMLMachineStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=53"])
 ns0.objtypes.StateType(
     nodeId="ns=pack_ml;i=54",
     browseName="ns=pack_ml;Stopping",
     description="This state executes the logic which brings the machine to a controlled stop as reflected by the STOPPED state.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=156", browseName="StateNumber", dataType=o6.UInt32, value=7))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=156", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=7))],
 )
 o6.reference(pack_ml_objtypes.PackMLMachineStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=54"])
 ns0.objtypes.StateType(
     nodeId="ns=pack_ml;i=55",
     browseName="ns=pack_ml;Clearing",
     description="Initiated by a state command to clear faults that may have occurred when ABORTING, and are present in the ABORTED state.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=157", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=157", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(pack_ml_objtypes.PackMLMachineStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=55"])
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=pack_ml;i=161",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=162", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=162", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=57",
     browseName="ns=pack_ml;StoppingToStopped",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=163", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=163", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLMachineStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=57"])
 o6.reference(o6.ns["ns=pack_ml;i=57"], "i=51", o6.ns["ns=pack_ml;i=54"])
@@ -293,7 +294,7 @@ o6.reference(o6.ns["ns=pack_ml;i=57"], "i=52", o6.ns["ns=pack_ml;i=53"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=58",
     browseName="ns=pack_ml;ClearingToStopped",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=164", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=164", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLMachineStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=58"])
 o6.reference(o6.ns["ns=pack_ml;i=58"], "i=51", o6.ns["ns=pack_ml;i=55"])
@@ -301,7 +302,7 @@ o6.reference(o6.ns["ns=pack_ml;i=58"], "i=52", o6.ns["ns=pack_ml;i=53"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=59",
     browseName="ns=pack_ml;StoppedToRunning",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=165", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=165", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLMachineStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=59"])
 o6.reference(o6.ns["ns=pack_ml;i=59"], "i=51", o6.ns["ns=pack_ml;i=53"])
@@ -309,7 +310,7 @@ o6.reference(o6.ns["ns=pack_ml;i=59"], "i=53", o6.ns["ns=pack_ml;i=376"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=60",
     browseName="ns=pack_ml;RunningToStopping",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=166", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=166", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLMachineStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=60"])
 o6.reference(o6.ns["ns=pack_ml;i=60"], "i=52", o6.ns["ns=pack_ml;i=54"])
@@ -317,19 +318,19 @@ o6.reference(o6.ns["ns=pack_ml;i=60"], "i=53", o6.ns["ns=pack_ml;i=375"])
 ns0.objtypes.StateType(
     nodeId="ns=pack_ml;i=61",
     browseName="ns=pack_ml;Aborting",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=168", browseName="StateNumber", dataType=o6.UInt32, value=8))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=168", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=8))],
 )
 o6.reference(pack_ml_objtypes.PackMLBaseStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=61"])
 ns0.objtypes.StateType(
     nodeId="ns=pack_ml;i=62",
     browseName="ns=pack_ml;Aborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=169", browseName="StateNumber", dataType=o6.UInt32, value=9))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=169", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=9))],
 )
 o6.reference(pack_ml_objtypes.PackMLBaseStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=62"])
 ns0.objtypes.StateType(
     nodeId="ns=pack_ml;i=75",
     browseName="ns=pack_ml;Running",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=171", browseName="StateNumber", dataType=o6.UInt32, value=18))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=171", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=18))],
 )
 o6.reference(pack_ml_objtypes.PackMLMachineStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=75"])
 o6.reference(o6.ns["ns=pack_ml;i=59"], "i=52", o6.ns["ns=pack_ml;i=75"])
@@ -337,13 +338,14 @@ o6.reference(o6.ns["ns=pack_ml;i=60"], "i=51", o6.ns["ns=pack_ml;i=75"])
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=pack_ml;i=172",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=173", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=173", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=65",
     browseName="ns=pack_ml;AbortedToCleared",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=174", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=174", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLBaseStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=65"])
 o6.reference(o6.ns["ns=pack_ml;i=65"], "i=51", o6.ns["ns=pack_ml;i=62"])
@@ -351,7 +353,7 @@ o6.reference(o6.ns["ns=pack_ml;i=65"], "i=53", o6.ns["ns=pack_ml;i=363"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=66",
     browseName="ns=pack_ml;AbortingToAborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=175", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=175", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLBaseStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=66"])
 o6.reference(o6.ns["ns=pack_ml;i=66"], "i=51", o6.ns["ns=pack_ml;i=61"])
@@ -359,7 +361,7 @@ o6.reference(o6.ns["ns=pack_ml;i=66"], "i=52", o6.ns["ns=pack_ml;i=62"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=67",
     browseName="ns=pack_ml;ClearedToAborting",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=176", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=176", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLBaseStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=67"])
 o6.reference(o6.ns["ns=pack_ml;i=67"], "i=52", o6.ns["ns=pack_ml;i=61"])
@@ -370,9 +372,17 @@ pack_ml_objtypes.PackMLExecuteStateMachineType(
     description="StateMachine that provides additional sube",
     modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pack_ml;i=160", browseName="AvailableTransitions", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=pack_ml;i=160", browseName="AvailableTransitions", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]
+            )
+        ),
         o6.hasComponent(o6.ns["ns=pack_ml;i=161"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pack_ml;i=177", browseName="AvailableStates", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=pack_ml;i=177", browseName="AvailableStates", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]
+            )
+        ),
     ],
 )
 o6.reference(pack_ml_objtypes.PackMLMachineStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=56"])
@@ -381,7 +391,7 @@ ns0.objtypes.StateType(
     nodeId="ns=pack_ml;i=71",
     browseName="ns=pack_ml;Cleared",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=178", browseName="StateNumber", dataType=o6.UInt32, value=19))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=178", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=19))],
 )
 o6.reference(pack_ml_objtypes.PackMLBaseStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=71"])
 o6.reference(o6.ns["ns=pack_ml;i=65"], "i=52", o6.ns["ns=pack_ml;i=71"])
@@ -389,7 +399,7 @@ o6.reference(o6.ns["ns=pack_ml;i=67"], "i=51", o6.ns["ns=pack_ml;i=71"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=99",
     browseName="ns=pack_ml;StartingToHolding",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=179", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=179", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=99"])
 o6.reference(o6.ns["ns=pack_ml;i=99"], "i=51", o6.ns["ns=pack_ml;i=29"])
@@ -498,7 +508,7 @@ typeDictionary_2 = ns0.vartypes.DataTypeDictionaryType(
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=100",
     browseName="ns=pack_ml;UnsuspendingToHolding",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=208", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=208", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=100"])
 o6.reference(o6.ns["ns=pack_ml;i=100"], "i=51", o6.ns["ns=pack_ml;i=32"])
@@ -510,8 +520,16 @@ pack_ml_objtypes.PackMLMachineStateMachineType(
     modellingRule="Mandatory",
     references=[
         o6.hasComponent(o6.ns["ns=pack_ml;i=172"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pack_ml;i=204", browseName="AvailableTransitions", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pack_ml;i=212", browseName="AvailableStates", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=pack_ml;i=204", browseName="AvailableTransitions", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=pack_ml;i=212", browseName="AvailableStates", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]
+            )
+        ),
     ],
 )
 o6.reference(pack_ml_objtypes.PackMLBaseStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=64"])
@@ -519,7 +537,7 @@ o6.reference(o6.ns["ns=pack_ml;i=71"], "i=117", o6.ns["ns=pack_ml;i=64"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=101",
     browseName="ns=pack_ml;SuspendedToHolding",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=215", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=215", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=101"])
 o6.reference(o6.ns["ns=pack_ml;i=101"], "i=51", o6.ns["ns=pack_ml;i=31"])
@@ -528,7 +546,7 @@ o6.reference(o6.ns["ns=pack_ml;i=101"], "i=53", o6.ns["ns=pack_ml;i=366"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=102",
     browseName="ns=pack_ml;SuspendingToHolding",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=216", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=216", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=102"])
 o6.reference(o6.ns["ns=pack_ml;i=102"], "i=51", o6.ns["ns=pack_ml;i=30"])
@@ -537,7 +555,7 @@ o6.reference(o6.ns["ns=pack_ml;i=102"], "i=53", o6.ns["ns=pack_ml;i=366"])
 ns0.objtypes.TransitionType(
     nodeId="ns=pack_ml;i=103",
     browseName="ns=pack_ml;UnholdingToHolding",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=217", browseName="TransitionNumber", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=217", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(pack_ml_objtypes.PackMLExecuteStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=103"])
 o6.reference(o6.ns["ns=pack_ml;i=103"], "i=51", o6.ns["ns=pack_ml;i=35"])
@@ -547,7 +565,7 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=pack_ml;i=219",
     browseName="ns=pack_ml;MachSpeed",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=220", browseName="EURange", dataType=ns0.datatypes.Range))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=220", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range))],
     dataType=o6.Float,
 )
 o6.reference(pack_ml_objtypes.PackMLStatusObjectType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=219"])
@@ -555,58 +573,81 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=pack_ml;i=232",
     browseName="ns=pack_ml;CurMachSpeed",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=233", browseName="EURange", dataType=ns0.datatypes.Range))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=233", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range))],
     dataType=o6.Float,
 )
 o6.reference(pack_ml_objtypes.PackMLStatusObjectType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=232"])
 ns0.vartypes.AnalogItemType(
     nodeId="ns=pack_ml;i=255",
     browseName="ns=pack_ml;CurMachSpeed",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=256", browseName="EURange", dataType=ns0.datatypes.Range))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=256", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range))],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=pack_ml;i=257",
     browseName="ns=pack_ml;MachSpeed",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=258", browseName="EURange", dataType=ns0.datatypes.Range))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=258", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range))],
     dataType=o6.Float,
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=pack_ml;i=262",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=263", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=263", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=pack_ml;i=266",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=227", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=227", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 pack_ml_objtypes.PackMLExecuteStateMachineType(
     nodeId="ns=pack_ml;i=90",
     browseName="ns=pack_ml;ExecuteState",
     description="StateMachine that provides additional sube",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pack_ml;i=222", browseName="AvailableTransitions", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pack_ml;i=223", browseName="AvailableStates", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=pack_ml;i=222", browseName="AvailableTransitions", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=pack_ml;i=223", browseName="AvailableStates", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]
+            )
+        ),
         o6.hasComponent(o6.ns["ns=pack_ml;i=266"]),
     ],
 )
 pack_ml_objtypes.PackMLMachineStateMachineType(
     nodeId="ns=pack_ml;i=89",
     browseName="ns=pack_ml;MachineState",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(o6.ns["ns=pack_ml;i=90"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pack_ml;i=213", browseName="AvailableTransitions", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pack_ml;i=214", browseName="AvailableStates", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=pack_ml;i=213", browseName="AvailableTransitions", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=pack_ml;i=214", browseName="AvailableStates", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]
+            )
+        ),
         o6.hasComponent(o6.ns["ns=pack_ml;i=262"]),
     ],
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=pack_ml;i=272",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=273", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=273", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 pack_ml_objtypes.PackMLBaseStateMachineType(
@@ -615,8 +656,16 @@ pack_ml_objtypes.PackMLBaseStateMachineType(
     modellingRule="Mandatory",
     references=[
         o6.hasComponent(o6.ns["ns=pack_ml;i=89"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pack_ml;i=202", browseName="AvailableTransitions", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pack_ml;i=259", browseName="AvailableStates", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=pack_ml;i=202", browseName="AvailableTransitions", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=pack_ml;i=259", browseName="AvailableStates", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]
+            )
+        ),
         o6.hasComponent(o6.ns["ns=pack_ml;i=272"]),
     ],
 )
@@ -626,12 +675,14 @@ pack_ml_objtypes.PackMLStatusObjectType(
     browseName="ns=pack_ml;Status",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=290", browseName="ns=pack_ml;UnitSupportedModes", dataType=o6.NodeId)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pack_ml;i=225", browseName="ns=pack_ml;UnitModeCurrent", dataType=ns0.datatypes.Enumeration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pack_ml;i=290", browseName="ns=pack_ml;UnitSupportedModes", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=pack_ml;i=225", browseName="ns=pack_ml;UnitModeCurrent", modellingRule="Mandatory", dataType=ns0.datatypes.Enumeration)
+        ),
         o6.hasComponent(o6.ns["ns=pack_ml;i=255"]),
         o6.hasComponent(o6.ns["ns=pack_ml;i=257"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pack_ml;i=274", browseName="ns=pack_ml;EquipmentBlocked", dataType=o6.Boolean)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pack_ml;i=275", browseName="ns=pack_ml;EquipmentStarved", dataType=o6.Boolean)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pack_ml;i=274", browseName="ns=pack_ml;EquipmentBlocked", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pack_ml;i=275", browseName="ns=pack_ml;EquipmentStarved", modellingRule="Mandatory", dataType=o6.Boolean)),
     ],
 )
 o6.reference(pack_ml_objtypes.PackMLBaseObjectType, ns0.reftypes.HasComponent, o6.ns["ns=pack_ml;i=87"])

@@ -97,11 +97,12 @@ ns0.vartypes.AnalogItemType(
     description="Current temperature of the PowerUnit",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6035", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6035", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6036",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -117,8 +118,10 @@ ns0.vartypes.AnalogItemType(
     description="Current temperature of the zone",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6042", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6043", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6042", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6043", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -132,8 +135,10 @@ ns0.vartypes.AnalogItemType(
     description="Current temperature of the zone",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6072", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6073", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6072", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6073", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -145,8 +150,10 @@ ns0.vartypes.AnalogItemType(
     description="Maximum temperature that is in the normal tolerance. A higher actual value may create a warning. Used for quality control. Relative value.",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6075", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6076", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6075", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6076", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -158,8 +165,10 @@ ns0.vartypes.AnalogItemType(
     description="Maximum tolerable temperature. A higher actual value may create an alarm. Relative value.",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6078", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6079", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6078", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6079", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -171,8 +180,10 @@ ns0.vartypes.AnalogItemType(
     description="Minimum temperature that is in the normal tolerance. A lower actual value may create a warning. Used for quality control. Relative value.",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6082", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6083", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6082", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6083", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -184,8 +195,10 @@ ns0.vartypes.AnalogItemType(
     description="Minimum tolerable temperature. A lower actual value may create an alarm. Relative value.",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6085", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6086", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6085", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6086", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -197,8 +210,10 @@ ns0.vartypes.AnalogItemType(
     description="Nominal temperature (absolute value)",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6089", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6090", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6089", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6090", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -210,8 +225,10 @@ ns0.vartypes.AnalogItemType(
     description="Standby temperature of the zone",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6092", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6093", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6092", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6093", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -242,9 +259,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6111",
     browseName="ns=plastics_rubber;ActualTemperature",
     description="Current temperature of the zone",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6112", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6113", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6112", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6113", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -253,9 +273,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6117",
     browseName="ns=plastics_rubber;NominalTemperature",
     description="Nominal temperature (absolute value)",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6118", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6119", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6118", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6119", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -264,9 +287,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6120",
     browseName="ns=plastics_rubber;StandbyTemperature",
     description="Standby temperature of the zone",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6121", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6122", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6121", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6122", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -276,14 +302,15 @@ plastics_rubber_objtypes.TemperatureZonesType(
     browseName="ns=plastics_rubber;TemperatureZones",
     description="Container for the temperature zones of the mould",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6128", browseName="NodeVersion", dataType=o6.String, value=""))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6128", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value=""))],
 )
 o6.reference(plastics_rubber_objtypes.MouldType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_rubber;i=5019"])
 plastics_rubber_objtypes.TemperatureZonesType(
     nodeId="ns=plastics_rubber;i=5021",
     browseName="ns=plastics_rubber;TemperatureZones",
     description="Container for the temperature zones of the mould",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6133", browseName="NodeVersion", dataType=o6.String, value=""))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6133", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value=""))],
 )
 plastics_rubber_objtypes.MouldType(
     nodeId="ns=plastics_rubber;i=5020",
@@ -291,30 +318,46 @@ plastics_rubber_objtypes.MouldType(
     modellingRule="OptionalPlaceholder",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6129", browseName="ns=plastics_rubber;Index", description="Number of the mould", dataType=o6.UInt32, value=0)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6129", browseName="ns=plastics_rubber;Index", description="Number of the mould", modellingRule="Mandatory", dataType=o6.UInt32, value=0
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6130",
                 browseName="ns=plastics_rubber;MouldStatus",
                 description="Current (physical) status of the mould",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber_datypes.MouldStatusEnumeration,
                 value=plastics_rubber_datypes.MouldStatusEnumeration.OTHER,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_rubber;i=6131", browseName="ns=plastics_rubber;Description", description="Description of the installed mould", dataType=o6.String, value=""
+                nodeId="ns=plastics_rubber;i=6131",
+                browseName="ns=plastics_rubber;Description",
+                description="Description of the installed mould",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6132", browseName="ns=plastics_rubber;Id", description="Id of the installed mould", dataType=o6.String, value="")
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6132",
+                browseName="ns=plastics_rubber;Id",
+                description="Id of the installed mould",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6143",
                 browseName="ns=plastics_rubber;IsPresent",
                 description="Indication if the mould is physically present and connected",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
             )
@@ -329,11 +372,12 @@ ns0.vartypes.AnalogItemType(
     description="Current pressure of the hydraulic unit",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6149", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6149", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6150",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -374,36 +418,52 @@ plastics_rubber_objtypes.UserType(
                 nodeId="ns=plastics_rubber;i=6064",
                 browseName="ns=plastics_rubber;CardUid",
                 description="Uid of the identification card used by the operator for logging in to the machine",
+                modellingRule="Optional",
                 dataType=o6.String,
                 value="",
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6065", browseName="ns=plastics_rubber;Id", description="Id of the user", dataType=o6.String, value="")
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6065", browseName="ns=plastics_rubber;Id", description="Id of the user", modellingRule="Mandatory", dataType=o6.String, value=""
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6066",
                 browseName="ns=plastics_rubber;Language",
                 description="Currently selected language on the machine control unit",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.LocaleId,
                 value="",
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6067", browseName="ns=plastics_rubber;Name", description="Name of the user", dataType=o6.String, value="")
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6067", browseName="ns=plastics_rubber;Name", description="Name of the user", modellingRule="Mandatory", dataType=o6.String, value=""
+            )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6068", browseName="ns=plastics_rubber;UserLevel", description="Level of the user", dataType=o6.String, value="")
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6068",
+                browseName="ns=plastics_rubber;UserLevel",
+                description="Level of the user",
+                modellingRule="Optional",
+                dataType=o6.String,
+                value="",
+            )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6069", browseName="ns=plastics_rubber;UserRole", description="Role of the user", dataType=o6.String, value="")
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6069", browseName="ns=plastics_rubber;UserRole", description="Role of the user", modellingRule="Optional", dataType=o6.String, value=""
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6157",
                 browseName="ns=plastics_rubber;IsPresent",
                 description="The machine can have instances for the maximum number of users that can be simultaneously logged in. TRUE if the instance of UserType represents a user that is currently logged in.",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
             )
@@ -422,18 +482,22 @@ plastics_rubber_objtypes.UserType(
                 nodeId="ns=plastics_rubber;i=6158",
                 browseName="ns=plastics_rubber;CardUid",
                 description="Uid of the identification card used by the operator for logging in to the machine",
+                modellingRule="Optional",
                 dataType=o6.String,
                 value="",
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6159", browseName="ns=plastics_rubber;Id", description="Id of the user", dataType=o6.String, value="")
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6159", browseName="ns=plastics_rubber;Id", description="Id of the user", modellingRule="Mandatory", dataType=o6.String, value=""
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6160",
                 browseName="ns=plastics_rubber;IsPresent",
                 description="The machine can have instances for the maximum number of users that can be simultaneously logged in. TRUE if the instance of UserType represents a user that is currently logged in.",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
             )
@@ -443,18 +507,30 @@ plastics_rubber_objtypes.UserType(
                 nodeId="ns=plastics_rubber;i=6161",
                 browseName="ns=plastics_rubber;Language",
                 description="Currently selected language on the machine control unit",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.LocaleId,
                 value="",
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6162", browseName="ns=plastics_rubber;Name", description="Name of the user", dataType=o6.String, value="")
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6162", browseName="ns=plastics_rubber;Name", description="Name of the user", modellingRule="Mandatory", dataType=o6.String, value=""
+            )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6163", browseName="ns=plastics_rubber;UserLevel", description="Level of the user", dataType=o6.String, value="")
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6163",
+                browseName="ns=plastics_rubber;UserLevel",
+                description="Level of the user",
+                modellingRule="Optional",
+                dataType=o6.String,
+                value="",
+            )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6164", browseName="ns=plastics_rubber;UserRole", description="Role of the user", dataType=o6.String, value="")
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6164", browseName="ns=plastics_rubber;UserRole", description="Role of the user", modellingRule="Optional", dataType=o6.String, value=""
+            )
         ),
     ],
 )
@@ -541,7 +617,7 @@ plastics_rubber_objtypes.UsersType(
     browseName="ns=plastics_rubber;Users",
     description="Container for the user(s) of the machine",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6204", browseName="NodeVersion", dataType=o6.String, value=""))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6204", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value=""))],
 )
 o6.reference(plastics_rubber_objtypes.MachineStatusType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_rubber;i=5028"])
 ns0.vartypes.PropertyType(
@@ -635,12 +711,25 @@ plastics_rubber_objtypes.MESMessageType(
     modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6224", browseName="ns=plastics_rubber;Id", description="Id of the message", dataType=o6.String, value="")
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6224", browseName="ns=plastics_rubber;Id", description="Id of the message", modellingRule="Mandatory", dataType=o6.String, value=""
+            )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6225", browseName="ns=plastics_rubber;Message", description="Text of the message", dataType=o6.String, value="")
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6225",
+                browseName="ns=plastics_rubber;Message",
+                description="Text of the message",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6226", browseName="Severity", description="Severity of the message", dataType=o6.UInt16, value=0)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6226", browseName="Severity", description="Severity of the message", modellingRule="Mandatory", dataType=o6.UInt16, value=0
+            )
+        ),
     ],
 )
 o6.reference(plastics_rubber_objtypes.MachineMESStatusType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_rubber;i=5029"])
@@ -651,16 +740,31 @@ plastics_rubber_objtypes.StandstillMessageType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_rubber;i=6233", browseName="ns=plastics_rubber;Classification", description="Classification of the message", dataType=ns0.datatypes.Enumeration
+                nodeId="ns=plastics_rubber;i=6233",
+                browseName="ns=plastics_rubber;Classification",
+                description="Classification of the message",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.Enumeration,
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6234", browseName="ns=plastics_rubber;Id", description="Id of the message", dataType=o6.String, value="")
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6234", browseName="ns=plastics_rubber;Id", description="Id of the message", modellingRule="Mandatory", dataType=o6.String, value=""
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6235", browseName="Severity", description="Severity of the message", dataType=o6.UInt16, value=0)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_rubber;i=6236", browseName="Message", description="Text of the message", dataType=o6.LocalizedText, value=o6.LocalizedText()
+                nodeId="ns=plastics_rubber;i=6235", browseName="Severity", description="Severity of the message", modellingRule="Mandatory", dataType=o6.UInt16, value=0
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6236",
+                browseName="Message",
+                description="Text of the message",
+                modellingRule="Mandatory",
+                dataType=o6.LocalizedText,
+                value=o6.LocalizedText(),
             )
         ),
     ],
@@ -742,6 +846,7 @@ plastics_rubber_objtypes.JobInformationType(
                 nodeId="ns=plastics_rubber;i=6006",
                 browseName="ns=plastics_rubber;ContinueAtJobEnd",
                 description="Indication if the machine continues the production even if the nominal output has been reached",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -750,17 +855,25 @@ plastics_rubber_objtypes.JobInformationType(
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_rubber;i=6007", browseName="ns=plastics_rubber;JobDescription", description="Description of the job", dataType=o6.String, value=""
+                nodeId="ns=plastics_rubber;i=6007",
+                browseName="ns=plastics_rubber;JobDescription",
+                description="Description of the job",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6106", browseName="ns=plastics_rubber;JobName", description="Name of the job", dataType=o6.String, value="")
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6106", browseName="ns=plastics_rubber;JobName", description="Name of the job", modellingRule="Mandatory", dataType=o6.String, value=""
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6107",
                 browseName="ns=plastics_rubber;Material",
                 description="Array of material names used for the job",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[1],
@@ -772,9 +885,10 @@ plastics_rubber_objtypes.JobInformationType(
                 nodeId="ns=plastics_rubber;i=6108",
                 browseName="ns=plastics_rubber;ProductDescription",
                 description="Array of descriptions of the products produced by the job",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[""],
             )
         ),
@@ -783,6 +897,7 @@ plastics_rubber_objtypes.JobInformationType(
                 nodeId="ns=plastics_rubber;i=6109",
                 browseName="ns=plastics_rubber;ProductionDatasetDescription",
                 description="Additional description of the production dataset which is needed for the job",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
             )
@@ -792,6 +907,7 @@ plastics_rubber_objtypes.JobInformationType(
                 nodeId="ns=plastics_rubber;i=6114",
                 browseName="ns=plastics_rubber;ProductionDatasetName",
                 description="Name of the production dataset which is needed for the job",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
             )
@@ -801,9 +917,10 @@ plastics_rubber_objtypes.JobInformationType(
                 nodeId="ns=plastics_rubber;i=6115",
                 browseName="ns=plastics_rubber;ProductName",
                 description="Array of product names produced by the job",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[""],
             )
         ),
@@ -812,6 +929,7 @@ plastics_rubber_objtypes.JobInformationType(
                 nodeId="ns=plastics_rubber;i=6287",
                 browseName="ns=plastics_rubber;CustomerName",
                 description="Name of the customer for that the job is produced",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
             )
@@ -864,7 +982,12 @@ o6.reference(o6.ns["ns=plastics_rubber;i=5043"], "i=39", o6.ns["ns=plastics_rubb
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_rubber;i=6294",
     browseName="ns=plastics_rubber;Density",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6308", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6308", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     value=0.0,
 )
@@ -873,8 +996,12 @@ plastics_rubber_objtypes.MaterialType(
     browseName="ns=plastics_rubber;Material_<Nr>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6304", browseName="ns=plastics_rubber;Name", dataType=o6.LocalizedText, value=o6.LocalizedText())),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6305", browseName="ns=plastics_rubber;Id", dataType=o6.String, value="")),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6304", browseName="ns=plastics_rubber;Name", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText()
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6305", browseName="ns=plastics_rubber;Id", modellingRule="Mandatory", dataType=o6.String, value="")),
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=6294"]),
     ],
 )
@@ -883,7 +1010,11 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_rubber;i=6096",
     browseName="ns=plastics_rubber;Density",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6316", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6316", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     value=0.0,
 )
@@ -894,8 +1025,10 @@ ns0.vartypes.AnalogItemType(
     description="Regular interval between two maintenances",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6313", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6330", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6313", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6330", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -907,8 +1040,10 @@ ns0.vartypes.AnalogItemType(
     description="Interval before next maintenance is due",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6315", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6331", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6315", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6331", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -925,6 +1060,7 @@ plastics_rubber_objtypes.JobInformationType(
                 nodeId="ns=plastics_rubber;i=6288",
                 browseName="ns=plastics_rubber;CustomerName",
                 description="Name of the customer for that the job is produced",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
             )
@@ -934,6 +1070,7 @@ plastics_rubber_objtypes.JobInformationType(
                 nodeId="ns=plastics_rubber;i=6298",
                 browseName="ns=plastics_rubber;ContinueAtJobEnd",
                 description="Indication if the machine continues the production even if the nominal output has been reached",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -945,6 +1082,7 @@ plastics_rubber_objtypes.JobInformationType(
                 nodeId="ns=plastics_rubber;i=6299",
                 browseName="ns=plastics_rubber;ProductionDatasetDescription",
                 description="Additional description of the production dataset which is needed for the job",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
             )
@@ -954,23 +1092,32 @@ plastics_rubber_objtypes.JobInformationType(
                 nodeId="ns=plastics_rubber;i=6300",
                 browseName="ns=plastics_rubber;ProductionDatasetName",
                 description="Name of the production dataset which is needed for the job",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_rubber;i=6326", browseName="ns=plastics_rubber;JobDescription", description="Description of the job", dataType=o6.String, value=""
+                nodeId="ns=plastics_rubber;i=6326",
+                browseName="ns=plastics_rubber;JobDescription",
+                description="Description of the job",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6327", browseName="ns=plastics_rubber;JobName", description="Name of the job", dataType=o6.String, value="")
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6327", browseName="ns=plastics_rubber;JobName", description="Name of the job", modellingRule="Mandatory", dataType=o6.String, value=""
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6328",
                 browseName="ns=plastics_rubber;Material",
                 description="Array of material names used for the job",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[1],
@@ -982,9 +1129,10 @@ plastics_rubber_objtypes.JobInformationType(
                 nodeId="ns=plastics_rubber;i=6332",
                 browseName="ns=plastics_rubber;ProductDescription",
                 description="Array of descriptions of the products produced by the job",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[""],
             )
         ),
@@ -993,9 +1141,10 @@ plastics_rubber_objtypes.JobInformationType(
                 nodeId="ns=plastics_rubber;i=6333",
                 browseName="ns=plastics_rubber;ProductName",
                 description="Array of product names produced by the job",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[""],
             )
         ),
@@ -1009,8 +1158,10 @@ ns0.vartypes.AnalogItemType(
     description="Set/nominal/target value of the monitored parameter",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6324", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6334", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6324", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6334", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1024,8 +1175,10 @@ ns0.vartypes.AnalogItemType(
     description="Indication if SetValue that is lower than the actual value shall be reached as fast as possible (SetRampDown = 0) or within a given value change per time",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6336", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6337", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6336", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6337", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1037,8 +1190,10 @@ ns0.vartypes.AnalogItemType(
     description="Lower relative tolerance value of the process parameter",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6345", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6351", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6345", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6351", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1052,8 +1207,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
     description="The start-up alarm suppression deactivates alarms of a monitored parameter during start up or a setpoint jump",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6355", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6356", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6355", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6356", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -1067,8 +1224,10 @@ ns0.vartypes.AnalogItemType(
     description="Second lower relative tolerance value of the process parameter",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6349", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6357", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6349", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6357", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1082,8 +1241,10 @@ ns0.vartypes.AnalogItemType(
     description="Maximum absolute value of the process parameter",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6341", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6358", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6341", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6358", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1097,8 +1258,10 @@ ns0.vartypes.AnalogItemType(
     description="Minimum absolute value of the process parameter",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6339", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6359", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6339", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6359", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1112,8 +1275,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
     description="Defines how closely the tolerances are set during the automatic limit setting",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6353", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6360", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6353", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6360", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -1127,8 +1292,10 @@ ns0.vartypes.AnalogItemType(
     description="Indication if a SetValue that is higher than the actual value shall be reached as fast as possible (SetRampUp = 0) or within a given value change per time",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6329", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6361", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6329", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6361", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1140,8 +1307,10 @@ ns0.vartypes.AnalogItemType(
     description="Second upper relative tolerance value of the process parameter",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6347", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6362", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6347", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6362", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1155,8 +1324,10 @@ ns0.vartypes.AnalogItemType(
     description="Upper relative tolerance value of the process parameter",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6343", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6363", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6343", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6363", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1170,8 +1341,10 @@ ns0.vartypes.AnalogItemType(
     description="Actual value of the monitored parameter",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6323", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6364", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6323", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6364", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1183,8 +1356,10 @@ ns0.vartypes.AnalogItemType(
     description="Indication if SetValue that is lower than the actual value shall be reached as fast as possible (SetRampDown = 0) or within a given value change per time",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6366", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6369", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6366", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6369", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1198,8 +1373,10 @@ ns0.vartypes.AnalogItemType(
     description="Indication if a SetValue that is higher than the actual value shall be reached as fast as possible (SetRampUp = 0) or within a given value change per time",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6368", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6370", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6368", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6370", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1211,9 +1388,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6383",
     browseName="ns=plastics_rubber;ActualValue",
     description="Actual value of the monitored parameter",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6385", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6386", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6385", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6386", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1227,7 +1407,12 @@ o6.reference(o6.ns["ns=plastics_rubber;i=5027"], "i=39", o6.ns["ns=plastics_rubb
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_rubber;i=6381",
     browseName="ns=plastics_rubber;ActualPower",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6395", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6395", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     value=0.0,
 )
@@ -1235,7 +1420,7 @@ plastics_rubber_objtypes.MeasuringDevicesType(
     nodeId="ns=plastics_rubber;i=5052",
     browseName="ns=plastics_rubber;AdditionalMeasuringDevices",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6397", browseName="NodeVersion", dataType=o6.String, value=""))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6397", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value=""))],
 )
 o6.reference(plastics_rubber_objtypes.DriveType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_rubber;i=5052"])
 o6.reference(o6.ns["ns=plastics_rubber;i=5052"], "i=41", "i=2133")
@@ -1264,7 +1449,12 @@ ns0.vartypes.PropertyType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_rubber;i=6396",
     browseName="ns=plastics_rubber;ActualPower",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6400", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6400", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     value=0.0,
 )
@@ -1277,7 +1467,12 @@ o6.reference(o6.ns["ns=plastics_rubber;i=5038"], "i=39", o6.ns["ns=plastics_rubb
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_rubber;i=6403",
     browseName="ns=plastics_rubber;ActualSpecificEnergy",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6404", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6404", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     value=0.0,
 )
@@ -1331,7 +1526,12 @@ o6.reference(o6.ns["ns=plastics_rubber;i=5034"], "i=39", o6.ns["ns=plastics_rubb
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_rubber;i=6415",
     browseName="ns=plastics_rubber;PowerConsumption",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6416", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6416", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     value=0.0,
 )
@@ -1343,7 +1543,11 @@ plastics_rubber_objtypes.EnergyType(
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=6381"]),
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=6403"]),
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=6415"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_rubber;i=6429", browseName="ns=plastics_rubber;PowerFactor", dataType=o6.Double, value=0.0)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=plastics_rubber;i=6429", browseName="ns=plastics_rubber;PowerFactor", modellingRule="Optional", dataType=o6.Double, value=0.0
+            )
+        ),
     ],
 )
 o6.reference(plastics_rubber_objtypes.DriveType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_rubber;i=5051"])
@@ -1351,7 +1555,11 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_rubber;i=6417",
     browseName="ns=plastics_rubber;ActualPower",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6431", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6431", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     value=0.0,
 )
@@ -1360,7 +1568,11 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_rubber;i=6421",
     browseName="ns=plastics_rubber;ActualSpecificEnergy",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6432", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6432", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     value=0.0,
 )
@@ -1369,7 +1581,11 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_rubber;i=6419",
     browseName="ns=plastics_rubber;PowerConsumption",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6433", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6433", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     value=0.0,
 )
@@ -1378,9 +1594,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6434",
     browseName="ns=plastics_rubber;Interval",
     description="Regular interval between two maintenances",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6435", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6440", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6435", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6440", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1389,9 +1608,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6436",
     browseName="ns=plastics_rubber;RemainingInterval",
     description="Interval before next maintenance is due",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6437", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6443", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6437", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6443", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1400,9 +1622,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6438",
     browseName="ns=plastics_rubber;TotalOperation",
     description="How long is the component running in total",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6439", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6444", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6439", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6444", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
 )
@@ -1410,9 +1635,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6388",
     browseName="ns=plastics_rubber;ActualValue",
     description="Actual value of the monitored parameter",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6390", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6445", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6390", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6445", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1421,9 +1649,12 @@ ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_rubber;i=6446",
     browseName="ns=plastics_rubber;AlarmSuppression",
     description="The start-up alarm suppression deactivates alarms of a monitored parameter during start up or a setpoint jump",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6447", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6448", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6447", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6448", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -1434,9 +1665,12 @@ ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_rubber;i=6458",
     browseName="ns=plastics_rubber;MonitoringSensitivity",
     description="Defines how closely the tolerances are set during the automatic limit setting",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6459", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6466", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6459", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6466", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -1447,9 +1681,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6450",
     browseName="ns=plastics_rubber;LowerTolerance",
     description="Lower relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6451", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6477", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6451", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6477", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1460,9 +1697,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6452",
     browseName="ns=plastics_rubber;LowerTolerance2",
     description="Second lower relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6453", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6478", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6453", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6478", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1473,9 +1713,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6454",
     browseName="ns=plastics_rubber;MaxValue",
     description="Maximum absolute value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6455", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6479", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6455", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6479", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1486,9 +1729,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6456",
     browseName="ns=plastics_rubber;MinValue",
     description="Minimum absolute value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6457", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6480", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6457", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6480", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1499,9 +1745,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6467",
     browseName="ns=plastics_rubber;SetRampDown",
     description="Indication if SetValue that is lower than the actual value shall be reached as fast as possible (SetRampDown = 0) or within a given value change per time",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6468", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6481", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6468", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6481", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1510,9 +1759,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6469",
     browseName="ns=plastics_rubber;SetRampUp",
     description="Indication if a SetValue that is higher than the actual value shall be reached as fast as possible (SetRampUp = 0) or within a given value change per time",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6470", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6482", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6470", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6482", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1521,9 +1773,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6471",
     browseName="ns=plastics_rubber;SetValue",
     description="Set/nominal/target value of the monitored parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6472", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6483", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6472", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6483", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1534,9 +1789,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6473",
     browseName="ns=plastics_rubber;UpperTolerance",
     description="Upper relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6474", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6484", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6474", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6484", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1547,9 +1805,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6475",
     browseName="ns=plastics_rubber;UpperTolerance2",
     description="Second upper relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6476", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6485", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6476", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6485", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1560,9 +1821,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6393",
     browseName="ns=plastics_rubber;ActualValue",
     description="Actual value of the monitored parameter",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6394", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6486", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6394", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6486", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1571,9 +1835,12 @@ ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_rubber;i=6487",
     browseName="ns=plastics_rubber;AlarmSuppression",
     description="The start-up alarm suppression deactivates alarms of a monitored parameter during start up or a setpoint jump",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6488", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6489", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6488", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6489", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -1584,9 +1851,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6496",
     browseName="ns=plastics_rubber;TotalOperation",
     description="How long is the component running in total",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6497", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6498", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6497", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6498", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
 )
@@ -1594,9 +1864,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6506",
     browseName="ns=plastics_rubber;Interval",
     description="Regular interval between two maintenances",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6507", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6510", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6507", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6510", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1605,9 +1878,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6508",
     browseName="ns=plastics_rubber;RemainingInterval",
     description="Interval before next maintenance is due",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6509", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6511", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6509", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6511", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1618,8 +1894,10 @@ ns0.vartypes.AnalogItemType(
     description="How long is the component running in total",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6517", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6518", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6517", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6518", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
 )
@@ -1651,9 +1929,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6524",
     browseName="ns=plastics_rubber;HighDeviationTemperature1",
     description="Maximum temperature that is in the normal tolerance. A higher actual value may create a warning. Used for quality control. Relative value.",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6525", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6526", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6525", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6526", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1662,9 +1943,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6527",
     browseName="ns=plastics_rubber;HighDeviationTemperature2",
     description="Maximum tolerable temperature. A higher actual value may create an alarm. Relative value.",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6528", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6529", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6528", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6529", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1673,9 +1957,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6530",
     browseName="ns=plastics_rubber;LowDeviationTemperature1",
     description="Minimum temperature that is in the normal tolerance. A lower actual value may create a warning. Used for quality control. Relative value.",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6531", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6532", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6531", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6532", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1684,9 +1971,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6533",
     browseName="ns=plastics_rubber;LowDeviationTemperature2",
     description="Minimum tolerable temperature. A lower actual value may create an alarm. Relative value.",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6534", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6535", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6534", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6535", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1697,16 +1987,21 @@ plastics_rubber_objtypes.TemperatureZoneType(
     modellingRule="OptionalPlaceholder",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6116", browseName="ns=plastics_rubber;Name", description="Name of the zone", dataType=o6.String, value="")
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6116", browseName="ns=plastics_rubber;Name", description="Name of the zone", modellingRule="Mandatory", dataType=o6.String, value=""
+            )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6153", browseName="ns=plastics_rubber;Index", description="Number of the zone", dataType=o6.UInt32, value=0)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6153", browseName="ns=plastics_rubber;Index", description="Number of the zone", modellingRule="Mandatory", dataType=o6.UInt32, value=0
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6154",
                 browseName="ns=plastics_rubber;IsPresent",
                 description="Indication if the temperature zone is physically present and connected",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
             )
@@ -1716,6 +2011,7 @@ plastics_rubber_objtypes.TemperatureZoneType(
                 nodeId="ns=plastics_rubber;i=6155",
                 browseName="ns=plastics_rubber;ControlMode",
                 description="Indication how the temperature is currently controlled",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber_datypes.ControlModeEnumeration,
                 value=plastics_rubber_datypes.ControlModeEnumeration.OTHER,
             )
@@ -1725,6 +2021,7 @@ plastics_rubber_objtypes.TemperatureZoneType(
                 nodeId="ns=plastics_rubber;i=6523",
                 browseName="ns=plastics_rubber;Classification",
                 description="Type of the temperature zone",
+                modellingRule="Optional",
                 dataType=plastics_rubber_datypes.TemperatureZoneClassificationEnumeration,
             )
         ),
@@ -1742,9 +2039,12 @@ ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_rubber;i=6541",
     browseName="ns=plastics_rubber;MonitoringSensitivity",
     description="Defines how closely the tolerances are set during the automatic limit setting",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6542", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6543", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6542", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6543", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -1755,9 +2055,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6491",
     browseName="ns=plastics_rubber;LowerTolerance",
     description="Lower relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6492", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6554", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6492", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6554", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1768,9 +2071,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6493",
     browseName="ns=plastics_rubber;LowerTolerance2",
     description="Second lower relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6494", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6555", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6494", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6555", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1781,9 +2087,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6537",
     browseName="ns=plastics_rubber;MaxValue",
     description="Maximum absolute value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6538", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6556", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6538", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6556", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1794,9 +2103,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6539",
     browseName="ns=plastics_rubber;MinValue",
     description="Minimum absolute value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6540", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6557", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6540", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6557", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1807,9 +2119,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6544",
     browseName="ns=plastics_rubber;SetRampDown",
     description="Indication if SetValue that is lower than the actual value shall be reached as fast as possible (SetRampDown = 0) or within a given value change per time",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6545", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6558", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6545", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6558", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1818,9 +2133,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6546",
     browseName="ns=plastics_rubber;SetRampUp",
     description="Indication if a SetValue that is higher than the actual value shall be reached as fast as possible (SetRampUp = 0) or within a given value change per time",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6547", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6559", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6547", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6559", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1829,9 +2147,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6548",
     browseName="ns=plastics_rubber;SetValue",
     description="Set/nominal/target value of the monitored parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6549", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6560", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6549", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6560", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1842,9 +2163,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6550",
     browseName="ns=plastics_rubber;UpperTolerance",
     description="Upper relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6551", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6561", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6551", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6561", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1855,9 +2179,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6552",
     browseName="ns=plastics_rubber;UpperTolerance2",
     description="Second upper relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6553", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6562", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6553", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6562", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1867,7 +2194,8 @@ ns0.vartypes.AnalogItemType(
 plastics_rubber_objtypes.MeasuringDevicesType(
     nodeId="ns=plastics_rubber;i=5055",
     browseName="ns=plastics_rubber;AdditionalMeasuringDevices",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6564", browseName="NodeVersion", dataType=o6.String, value=""))],
+    modellingRule="Optional",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6564", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value=""))],
 )
 o6.reference(o6.ns["ns=plastics_rubber;i=5055"], "i=41", "i=2133")
 http_opcfoundation_org_UA_PlasticsRubber_GeneralTypes_ = ns0.objtypes.NamespaceMetadataType(
@@ -1890,7 +2218,7 @@ http_opcfoundation_org_UA_PlasticsRubber_GeneralTypes_ = ns0.objtypes.NamespaceM
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),
@@ -1908,9 +2236,12 @@ ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_rubber;i=6053",
     browseName="ns=plastics_rubber;AlarmSuppression",
     description="The start-up alarm suppression deactivates alarms of a monitored parameter during start up or a setpoint jump",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6573", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6574", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6573", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6574", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -1921,9 +2252,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6581",
     browseName="ns=plastics_rubber;Interval",
     description="Regular interval between two maintenances",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6582", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6583", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6582", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6583", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1932,9 +2266,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6584",
     browseName="ns=plastics_rubber;RemainingInterval",
     description="Interval before next maintenance is due",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6585", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6586", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6585", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6586", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1943,9 +2280,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6587",
     browseName="ns=plastics_rubber;TotalOperation",
     description="How long is the component running in total",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6588", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6589", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6588", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6589", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
 )
@@ -1953,9 +2293,12 @@ ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_rubber;i=6590",
     browseName="ns=plastics_rubber;AlarmSuppression",
     description="The start-up alarm suppression deactivates alarms of a monitored parameter during start up or a setpoint jump",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6591", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6592", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6591", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6592", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -1966,9 +2309,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6594",
     browseName="ns=plastics_rubber;LowerTolerance",
     description="Lower relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6595", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6596", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6595", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6596", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1979,9 +2325,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6597",
     browseName="ns=plastics_rubber;LowerTolerance2",
     description="Second lower relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6598", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6599", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6598", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6599", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1992,9 +2341,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6600",
     browseName="ns=plastics_rubber;MaxValue",
     description="Maximum absolute value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6601", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6602", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6601", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6602", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2005,9 +2357,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6603",
     browseName="ns=plastics_rubber;MinValue",
     description="Minimum absolute value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6604", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6605", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6604", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6605", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2018,9 +2373,12 @@ ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_rubber;i=6606",
     browseName="ns=plastics_rubber;MonitoringSensitivity",
     description="Defines how closely the tolerances are set during the automatic limit setting",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6607", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6608", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6607", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6608", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -2031,9 +2389,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6609",
     browseName="ns=plastics_rubber;SetRampDown",
     description="Indication if SetValue that is lower than the actual value shall be reached as fast as possible (SetRampDown = 0) or within a given value change per time",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6610", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6611", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6610", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6611", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2042,9 +2403,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6612",
     browseName="ns=plastics_rubber;SetRampUp",
     description="Indication if a SetValue that is higher than the actual value shall be reached as fast as possible (SetRampUp = 0) or within a given value change per time",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6613", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6614", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6613", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6614", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2053,9 +2417,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6615",
     browseName="ns=plastics_rubber;SetValue",
     description="Set/nominal/target value of the monitored parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6616", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6617", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6616", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6617", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2066,9 +2433,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6618",
     browseName="ns=plastics_rubber;UpperTolerance",
     description="Upper relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6619", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6620", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6619", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6620", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2079,9 +2449,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6621",
     browseName="ns=plastics_rubber;UpperTolerance2",
     description="Second upper relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6622", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6623", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6622", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6623", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2092,9 +2465,12 @@ ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_rubber;i=6624",
     browseName="ns=plastics_rubber;AlarmSuppression",
     description="The start-up alarm suppression deactivates alarms of a monitored parameter during start up or a setpoint jump",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6625", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6626", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6625", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6626", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -2105,9 +2481,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6628",
     browseName="ns=plastics_rubber;LowerTolerance",
     description="Lower relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6629", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6630", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6629", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6630", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2118,9 +2497,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6631",
     browseName="ns=plastics_rubber;LowerTolerance2",
     description="Second lower relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6632", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6633", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6632", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6633", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2131,9 +2513,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6634",
     browseName="ns=plastics_rubber;MaxValue",
     description="Maximum absolute value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6635", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6636", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6635", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6636", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2144,9 +2529,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6637",
     browseName="ns=plastics_rubber;MinValue",
     description="Minimum absolute value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6638", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6639", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6638", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6639", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2157,9 +2545,12 @@ ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_rubber;i=6640",
     browseName="ns=plastics_rubber;MonitoringSensitivity",
     description="Defines how closely the tolerances are set during the automatic limit setting",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6641", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6642", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6641", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6642", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -2170,9 +2561,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6643",
     browseName="ns=plastics_rubber;SetRampDown",
     description="Indication if SetValue that is lower than the actual value shall be reached as fast as possible (SetRampDown = 0) or within a given value change per time",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6644", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6645", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6644", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6645", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2181,9 +2575,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6646",
     browseName="ns=plastics_rubber;SetRampUp",
     description="Indication if a SetValue that is higher than the actual value shall be reached as fast as possible (SetRampUp = 0) or within a given value change per time",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6647", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6648", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6647", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6648", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2192,9 +2589,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6649",
     browseName="ns=plastics_rubber;SetValue",
     description="Set/nominal/target value of the monitored parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6650", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6651", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6650", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6651", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2205,9 +2605,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6652",
     browseName="ns=plastics_rubber;UpperTolerance",
     description="Upper relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6653", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6654", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6653", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6654", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2218,9 +2621,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6655",
     browseName="ns=plastics_rubber;UpperTolerance2",
     description="Second upper relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6656", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6657", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6656", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6657", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2231,9 +2637,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6568",
     browseName="ns=plastics_rubber;ActualValue",
     description="Actual value of the monitored parameter",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6569", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6659", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6569", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6659", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2242,9 +2651,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6571",
     browseName="ns=plastics_rubber;ActualValue",
     description="Actual value of the monitored parameter",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6572", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6660", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6572", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6660", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2253,9 +2665,12 @@ ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_rubber;i=6666",
     browseName="ns=plastics_rubber;MonitoringSensitivity",
     description="Defines how closely the tolerances are set during the automatic limit setting",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6667", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6668", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6667", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6668", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -2265,23 +2680,38 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_rubber;i=6680",
     browseName="ns=plastics_rubber;ActualSpecificEnergy",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6681", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6681", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     value=0.0,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_rubber;i=6682",
     browseName="ns=plastics_rubber;PowerConsumption",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6683", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6683", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     value=0.0,
 )
 plastics_rubber_objtypes.EnergyType(
     nodeId="ns=plastics_rubber;i=5056",
     browseName="ns=plastics_rubber;Energy",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=6396"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_rubber;i=6579", browseName="ns=plastics_rubber;PowerFactor", dataType=o6.Double, value=0.0)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=plastics_rubber;i=6579", browseName="ns=plastics_rubber;PowerFactor", modellingRule="Optional", dataType=o6.Double, value=0.0
+            )
+        ),
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=6680"]),
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=6682"]),
     ],
@@ -2290,9 +2720,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6576",
     browseName="ns=plastics_rubber;LowerTolerance",
     description="Lower relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6577", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6689", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6577", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6689", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2303,9 +2736,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6578",
     browseName="ns=plastics_rubber;LowerTolerance2",
     description="Second lower relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6658", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6690", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6658", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6690", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2316,9 +2752,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6692",
     browseName="ns=plastics_rubber;Interval",
     description="Regular interval between two maintenances",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6693", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6694", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6693", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6694", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2327,9 +2766,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6695",
     browseName="ns=plastics_rubber;RemainingInterval",
     description="Interval before next maintenance is due",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6696", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6697", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6696", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6697", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2338,9 +2780,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6698",
     browseName="ns=plastics_rubber;TotalOperation",
     description="How long is the component running in total",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6699", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6700", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6699", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6700", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
 )
@@ -2348,9 +2793,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6662",
     browseName="ns=plastics_rubber;MaxValue",
     description="Maximum absolute value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6663", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6701", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6663", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6701", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2361,9 +2809,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6664",
     browseName="ns=plastics_rubber;MinValue",
     description="Minimum absolute value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6665", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6702", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6665", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6702", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2374,9 +2825,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6669",
     browseName="ns=plastics_rubber;SetRampDown",
     description="Indication if SetValue that is lower than the actual value shall be reached as fast as possible (SetRampDown = 0) or within a given value change per time",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6670", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6703", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6670", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6703", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2387,9 +2841,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6671",
     browseName="ns=plastics_rubber;SetRampUp",
     description="Indication if a SetValue that is higher than the actual value shall be reached as fast as possible (SetRampUp = 0) or within a given value change per time",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6672", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6704", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6672", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6704", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2400,9 +2857,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6673",
     browseName="ns=plastics_rubber;SetValue",
     description="Set/nominal/target value of the monitored parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6674", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6705", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6674", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6705", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2413,9 +2873,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6676",
     browseName="ns=plastics_rubber;UpperTolerance",
     description="Upper relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6677", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6706", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6677", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6706", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2426,9 +2889,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6678",
     browseName="ns=plastics_rubber;UpperTolerance2",
     description="Second upper relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6679", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6707", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6679", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6707", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2439,16 +2905,18 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_rubber;i=6708",
     browseName="ns=plastics_rubber;ActualTemperature",
     description="Current temperature of the PowerUnit",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6709",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6710", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6710", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2460,7 +2928,12 @@ plastics_rubber_objtypes.PowerUnitType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_rubber;i=6144", browseName="ns=plastics_rubber;Index", description="Number of the power unit", dataType=o6.UInt32, value=0
+                nodeId="ns=plastics_rubber;i=6144",
+                browseName="ns=plastics_rubber;Index",
+                description="Number of the power unit",
+                modellingRule="Mandatory",
+                dataType=o6.UInt32,
+                value=0,
             )
         ),
         o6.hasProperty(
@@ -2468,6 +2941,7 @@ plastics_rubber_objtypes.PowerUnitType(
                 nodeId="ns=plastics_rubber;i=6145",
                 browseName="ns=plastics_rubber;IsPresent",
                 description="Indication if the power unit is physically present and connected",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
             )
@@ -2477,12 +2951,15 @@ plastics_rubber_objtypes.PowerUnitType(
                 nodeId="ns=plastics_rubber;i=6146",
                 browseName="ns=plastics_rubber;PowerOn",
                 description="Indication if the PowerUnit is switched on",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6147", browseName="ns=plastics_rubber;Id", description="Id of the PowerUnit", dataType=o6.String, value="")
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6147", browseName="ns=plastics_rubber;Id", description="Id of the PowerUnit", modellingRule="Mandatory", dataType=o6.String, value=""
+            )
         ),
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=6708"]),
     ],
@@ -2516,9 +2993,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
     modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6714", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6714", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6715", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6715", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
 )
@@ -2604,9 +3083,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
     modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6719", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6719", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6720", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6720", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
 )
@@ -2641,6 +3122,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=plastics_rubber;i=7005",
     browseName="ns=plastics_rubber;GetProductionDatasetList",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6026"]),
     outputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6027"]),
 )
@@ -2656,7 +3138,12 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ProductionDatasetList", dataType=o6.NodeId("ns=plastics_rubber;i=3006"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=plastics_rubber;i=7006", browseName="ns=plastics_rubber;SendProductionDatasetList", inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6028"]))
+o6.call(
+    nodeId="ns=plastics_rubber;i=7006",
+    browseName="ns=plastics_rubber;SendProductionDatasetList",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6028"]),
+)
 
 plastics_rubber_objtypes.ProductionDatasetListsType(
     nodeId="ns=plastics_rubber;i=5007",
@@ -2695,6 +3182,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=plastics_rubber;i=7007",
     browseName="CloseAndCommit",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6030"]),
     outputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6031"]),
 )
@@ -2728,6 +3216,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=plastics_rubber;i=7008",
     browseName="GenerateFileForRead",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6032"]),
     outputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6033"]),
 )
@@ -2760,6 +3249,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=plastics_rubber;i=7011",
     browseName="GenerateFileForWrite",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6037"]),
     outputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6038"]),
 )
@@ -2770,7 +3260,9 @@ ns0.objtypes.TemporaryFileTransferType(
     description="Transfer of production datasets between server and client",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6029", browseName="ClientProcessingTimeout", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6029", browseName="ClientProcessingTimeout", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
+        ),
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=7007"]),
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=7008"]),
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=7011"]),
@@ -2792,6 +3284,7 @@ plastics_rubber_objtypes.ActiveJobValuesType(
                 nodeId="ns=plastics_rubber;i=6223",
                 browseName="ns=plastics_rubber;BoxId",
                 description="Id of the box in which the current production is put in",
+                modellingRule="Optional",
                 dataType=o6.String,
                 value="",
                 accessLevel=3,
@@ -2803,6 +3296,7 @@ plastics_rubber_objtypes.ActiveJobValuesType(
                 nodeId="ns=plastics_rubber;i=6374",
                 browseName="ns=plastics_rubber;CurrentLotName",
                 description="Name of the current production lot",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
                 accessLevel=3,
@@ -2814,6 +3308,7 @@ plastics_rubber_objtypes.ActiveJobValuesType(
                 nodeId="ns=plastics_rubber;i=6378",
                 browseName="ns=plastics_rubber;JobStatus",
                 description="Current status of the job",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber_datypes.JobStatusEnumeration,
                 value=plastics_rubber_datypes.JobStatusEnumeration.OTHER,
             )
@@ -2823,6 +3318,7 @@ plastics_rubber_objtypes.ActiveJobValuesType(
                 nodeId="ns=plastics_rubber;i=7010",
                 browseName="ns=plastics_rubber;StartJob",
                 description="With this Method the client (e.g. MES) request the machine to change the JobStatus to JOB_IN_PRODUCTION_6",
+                modellingRule="Mandatory",
             )
         ),
         o6.hasComponent(
@@ -2830,6 +3326,7 @@ plastics_rubber_objtypes.ActiveJobValuesType(
                 nodeId="ns=plastics_rubber;i=7012",
                 browseName="ns=plastics_rubber;InterruptJob",
                 description="With this Method the client (e.g. MES) requests the machine to change the JobStatus to JOB_INTERRUPTED_7",
+                modellingRule="Mandatory",
             )
         ),
         o6.hasComponent(
@@ -2837,6 +3334,7 @@ plastics_rubber_objtypes.ActiveJobValuesType(
                 nodeId="ns=plastics_rubber;i=7013",
                 browseName="ns=plastics_rubber;FinishJob",
                 description="With this Method the client (e.g. MES) requests the machine to change the JobStatus to JOB_FINISHED_8",
+                modellingRule="Mandatory",
             )
         ),
     ],
@@ -2862,6 +3360,7 @@ o6.call(
     nodeId="ns=plastics_rubber;i=7015",
     browseName="ns=plastics_rubber;Load",
     description="Loads a production dataset from the file system of the machine to the control of the machine",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6189"]),
 )
 
@@ -2880,6 +3379,7 @@ o6.call(
     nodeId="ns=plastics_rubber;i=7023",
     browseName="ns=plastics_rubber;Save",
     description="Stores a production dataset from the control of the machine to the file system of the machine",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6274"]),
 )
 
@@ -2894,6 +3394,7 @@ plastics_rubber_objtypes.ProductionDatasetStatusType(
                 nodeId="ns=plastics_rubber;i=6136",
                 browseName="ns=plastics_rubber;Information",
                 description="Set of information on the production dataset",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber_datypes.ProductionDatasetInformationType,
                 value=plastics_rubber_datypes.ProductionDatasetInformationType(
                     name="",
@@ -2921,6 +3422,7 @@ plastics_rubber_objtypes.ProductionDatasetStatusType(
                 nodeId="ns=plastics_rubber;i=6188",
                 browseName="ns=plastics_rubber;Frozen",
                 description="Indication if changes on the machine in the production dataset are allowed",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -2932,6 +3434,7 @@ plastics_rubber_objtypes.ProductionDatasetStatusType(
                 nodeId="ns=plastics_rubber;i=6273",
                 browseName="ns=plastics_rubber;Modified",
                 description="Indication if the production dataset has been changed after the last storage",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
             )
@@ -2961,6 +3464,7 @@ o6.call(
     nodeId="ns=plastics_rubber;i=7027",
     browseName="ns=plastics_rubber;Load",
     description="Loads a production dataset from the file system of the machine to the control of the machine",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6278"]),
 )
 
@@ -2979,6 +3483,7 @@ o6.call(
     nodeId="ns=plastics_rubber;i=7038",
     browseName="ns=plastics_rubber;SetWatchDogTime",
     description="Release of production for a given time",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6231"]),
 )
 
@@ -2993,6 +3498,7 @@ plastics_rubber_objtypes.ProductionControlType(
                 nodeId="ns=plastics_rubber;i=6103",
                 browseName="ns=plastics_rubber;ProductionReleasedByMES",
                 description="Indication if ProductionStatus may have the value PRODUCTION_4",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -3004,6 +3510,7 @@ plastics_rubber_objtypes.ProductionControlType(
                 nodeId="ns=plastics_rubber;i=6227",
                 browseName="ns=plastics_rubber;AutomaticRunEnabled",
                 description="Indication if semi-automatic and automatic run of the machine is allowed by MES",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
             )
@@ -3013,6 +3520,7 @@ plastics_rubber_objtypes.ProductionControlType(
                 nodeId="ns=plastics_rubber;i=6229",
                 browseName="ns=plastics_rubber;ProductionOnlyWithMES",
                 description="Indication if production with the machine is only allowed when the MES is active",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -3024,6 +3532,7 @@ plastics_rubber_objtypes.ProductionControlType(
                 nodeId="ns=plastics_rubber;i=6230",
                 browseName="ns=plastics_rubber;ProductionStatus",
                 description="Production status when the machine is in automatic or semi-automatic mode",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber_datypes.ProductionStatusEnumeration,
                 value=plastics_rubber_datypes.ProductionStatusEnumeration.OTHER,
             )
@@ -3033,6 +3542,7 @@ plastics_rubber_objtypes.ProductionControlType(
                 nodeId="ns=plastics_rubber;i=7014",
                 browseName="ns=plastics_rubber;RequestTestSample",
                 description="The machine shall separate a test sample (e.g. for quality check). The size of the test sample depends on the product/machine configuration.",
+                modellingRule="Optional",
             )
         ),
         o6.hasComponent(
@@ -3040,6 +3550,7 @@ plastics_rubber_objtypes.ProductionControlType(
                 nodeId="ns=plastics_rubber;i=7033",
                 browseName="ns=plastics_rubber;DisableAutomaticRun",
                 description="Method for disabling the semi-automatic and automatic run of the machine",
+                modellingRule="Mandatory",
             )
         ),
         o6.hasComponent(
@@ -3047,6 +3558,7 @@ plastics_rubber_objtypes.ProductionControlType(
                 nodeId="ns=plastics_rubber;i=7035",
                 browseName="ns=plastics_rubber;EnableAutomaticRun",
                 description="Method for enabling the semi-automatic and automatic run of the machine",
+                modellingRule="Mandatory",
             )
         ),
         o6.hasComponent(
@@ -3054,6 +3566,7 @@ plastics_rubber_objtypes.ProductionControlType(
                 nodeId="ns=plastics_rubber;i=7037",
                 browseName="ns=plastics_rubber;ResetWatchDog",
                 description="Setting the watch dog timer to the value set by the last calling of SetWatchDogTime",
+                modellingRule="Optional",
             )
         ),
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=7038"]),
@@ -3077,6 +3590,7 @@ o6.call(
     nodeId="ns=plastics_rubber;i=7044",
     browseName="ns=plastics_rubber;Save",
     description="Stores a production dataset from the control of the machine to the file system of the machine",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6282"]),
 )
 
@@ -3091,6 +3605,7 @@ plastics_rubber_objtypes.ProductionDatasetStatusType(
                 nodeId="ns=plastics_rubber;i=6276",
                 browseName="ns=plastics_rubber;Information",
                 description="Set of information on the production dataset",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber_datypes.ProductionDatasetInformationType,
                 value=plastics_rubber_datypes.ProductionDatasetInformationType(
                     name="",
@@ -3118,6 +3633,7 @@ plastics_rubber_objtypes.ProductionDatasetStatusType(
                 nodeId="ns=plastics_rubber;i=6277",
                 browseName="ns=plastics_rubber;Frozen",
                 description="Indication if changes on the machine in the production dataset are allowed",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -3129,6 +3645,7 @@ plastics_rubber_objtypes.ProductionDatasetStatusType(
                 nodeId="ns=plastics_rubber;i=6280",
                 browseName="ns=plastics_rubber;Modified",
                 description="Indication if the production dataset has been changed after the last storage",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
             )
@@ -3149,6 +3666,7 @@ plastics_rubber_objtypes.ClosedLoopControlType(
                 nodeId="ns=plastics_rubber;i=6371",
                 browseName="ns=plastics_rubber;AutoTuningActive",
                 description="Informs if the automatic tuning is currently active",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
             )
@@ -3158,6 +3676,7 @@ plastics_rubber_objtypes.ClosedLoopControlType(
                 nodeId="ns=plastics_rubber;i=6372",
                 browseName="ns=plastics_rubber;AutomaticControllerMode",
                 description="Determination if PID Parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -3168,9 +3687,10 @@ plastics_rubber_objtypes.ClosedLoopControlType(
                 nodeId="ns=plastics_rubber;i=6373",
                 browseName="ns=plastics_rubber;PIDParameters",
                 description="PID Parameters as array if several input signals (sensors) are used for the control",
+                modellingRule="Optional",
                 dataType=plastics_rubber_datypes.PIDParametersDataType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[plastics_rubber_datypes.PIDParametersDataType(p=0.0, i=0.0, d=0.0)],
                 accessLevel=3,
                 userAccessLevel=1,
@@ -3181,9 +3701,17 @@ plastics_rubber_objtypes.ClosedLoopControlType(
                 nodeId="ns=plastics_rubber;i=7049",
                 browseName="ns=plastics_rubber;AutoTuningOff",
                 description="Stops an already active self-optimisation process (no control parameters are changed)",
+                modellingRule="Optional",
             )
         ),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7050", browseName="ns=plastics_rubber;AutoTuningOn", description="Starts the self-optimisation of the controller")),
+        o6.hasComponent(
+            o6.call(
+                nodeId="ns=plastics_rubber;i=7050",
+                browseName="ns=plastics_rubber;AutoTuningOn",
+                description="Starts the self-optimisation of the controller",
+                modellingRule="Optional",
+            )
+        ),
     ],
 )
 o6.reference(plastics_rubber_objtypes.ControlledParameterType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_rubber;i=5035"])
@@ -3197,6 +3725,7 @@ plastics_rubber_objtypes.MaintenanceType(
                 nodeId="ns=plastics_rubber;i=6399",
                 browseName="ns=plastics_rubber;Status",
                 description="Maintenance status of the machine/device/component (represented by the parent element)",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber_datypes.MaintenanceStatusEnumeration,
                 value=plastics_rubber_datypes.MaintenanceStatusEnumeration.NOT_DUE,
             )
@@ -3206,6 +3735,7 @@ plastics_rubber_objtypes.MaintenanceType(
                 nodeId="ns=plastics_rubber;i=6430",
                 browseName="ns=plastics_rubber;AdditionalInformation",
                 description="Additional information on the necessary maintenance. Can be also a link to another document.",
+                modellingRule="Optional",
                 dataType=o6.String,
             )
         ),
@@ -3214,7 +3744,10 @@ plastics_rubber_objtypes.MaintenanceType(
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=6438"]),
         o6.hasComponent(
             o6.call(
-                nodeId="ns=plastics_rubber;i=7052", browseName="ns=plastics_rubber;Reset", description="This Method sets the RemainingInterval to Interval and Status to NOT_DUE_0"
+                nodeId="ns=plastics_rubber;i=7052",
+                browseName="ns=plastics_rubber;Reset",
+                description="This Method sets the RemainingInterval to Interval and Status to NOT_DUE_0",
+                modellingRule="Mandatory",
             )
         ),
     ],
@@ -3230,6 +3763,7 @@ plastics_rubber_objtypes.MonitoredParameterType(
                 nodeId="ns=plastics_rubber;i=6449",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -3253,6 +3787,7 @@ plastics_rubber_objtypes.MonitoredParameterType(
                 nodeId="ns=plastics_rubber;i=7054",
                 browseName="ns=plastics_rubber;ResetMonitoring",
                 description="With this method the tolerance values are set according to the actual value and the set monitoring sensitivity",
+                modellingRule="Optional",
             )
         ),
     ],
@@ -3265,19 +3800,25 @@ plastics_rubber_objtypes.StartDeviceType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_rubber;i=6380", browseName="ns=plastics_rubber;StartBlockedByClient", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+                nodeId="ns=plastics_rubber;i=6380",
+                browseName="ns=plastics_rubber;StartBlockedByClient",
+                modellingRule="Optional",
+                dataType=o6.Boolean,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6387",
                 browseName="ns=plastics_rubber;Status",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber_datypes.StartEnumeration,
                 value=plastics_rubber_datypes.StartEnumeration.NOT_READY_TO_START,
             )
         ),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7061", browseName="ns=plastics_rubber;StartRequest")),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7062", browseName="ns=plastics_rubber;StopRequest")),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7061", browseName="ns=plastics_rubber;StartRequest", modellingRule="Optional")),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7062", browseName="ns=plastics_rubber;StopRequest", modellingRule="Optional")),
     ],
 )
 o6.reference(plastics_rubber_objtypes.MeasuringDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_rubber;i=5040"])
@@ -3291,6 +3832,7 @@ plastics_rubber_objtypes.MaintenanceType(
                 nodeId="ns=plastics_rubber;i=6505",
                 browseName="ns=plastics_rubber;Status",
                 description="Maintenance status of the machine/device/component (represented by the parent element)",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber_datypes.MaintenanceStatusEnumeration,
                 value=plastics_rubber_datypes.MaintenanceStatusEnumeration.NOT_DUE,
             )
@@ -3300,6 +3842,7 @@ plastics_rubber_objtypes.MaintenanceType(
                 nodeId="ns=plastics_rubber;i=6515",
                 browseName="ns=plastics_rubber;AdditionalInformation",
                 description="Additional information on the necessary maintenance. Can be also a link to another document.",
+                modellingRule="Optional",
                 dataType=o6.String,
             )
         ),
@@ -3307,7 +3850,12 @@ plastics_rubber_objtypes.MaintenanceType(
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=6506"]),
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=6508"]),
         o6.hasComponent(
-            o6.call(nodeId="ns=plastics_rubber;i=7063", browseName="ns=plastics_rubber;Reset", description="This Method sets the CurrentInterval to 0 and Status to NOT_DUE_0")
+            o6.call(
+                nodeId="ns=plastics_rubber;i=7063",
+                browseName="ns=plastics_rubber;Reset",
+                description="This Method sets the CurrentInterval to 0 and Status to NOT_DUE_0",
+                modellingRule="Mandatory",
+            )
         ),
     ],
 )
@@ -3321,17 +3869,23 @@ plastics_rubber_objtypes.StartDeviceType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6504",
                 browseName="ns=plastics_rubber;Status",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber_datypes.StartEnumeration,
                 value=plastics_rubber_datypes.StartEnumeration.NOT_READY_TO_START,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_rubber;i=6684", browseName="ns=plastics_rubber;StartBlockedByClient", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+                nodeId="ns=plastics_rubber;i=6684",
+                browseName="ns=plastics_rubber;StartBlockedByClient",
+                modellingRule="Optional",
+                dataType=o6.Boolean,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7055", browseName="ns=plastics_rubber;StartRequest")),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7064", browseName="ns=plastics_rubber;StopRequest")),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7055", browseName="ns=plastics_rubber;StartRequest", modellingRule="Optional")),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7064", browseName="ns=plastics_rubber;StopRequest", modellingRule="Optional")),
     ],
 )
 o6.reference(plastics_rubber_objtypes.DriveType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_rubber;i=5044"])
@@ -3345,6 +3899,7 @@ plastics_rubber_objtypes.MonitoredParameterType(
                 nodeId="ns=plastics_rubber;i=6490",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -3368,6 +3923,7 @@ plastics_rubber_objtypes.MonitoredParameterType(
                 nodeId="ns=plastics_rubber;i=7065",
                 browseName="ns=plastics_rubber;ResetMonitoring",
                 description="With this method the tolerance values are set according to the actual value and the set monitoring sensitivity",
+                modellingRule="Optional",
             )
         ),
     ],
@@ -3376,12 +3932,14 @@ o6.reference(plastics_rubber_objtypes.DriveType, ns0.reftypes.HasComponent, o6.n
 plastics_rubber_objtypes.MaintenanceType(
     nodeId="ns=plastics_rubber;i=5057",
     browseName="ns=plastics_rubber;Maintenance",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6567",
                 browseName="ns=plastics_rubber;Status",
                 description="Maintenance status of the machine/device/component (represented by the parent element)",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber_datypes.MaintenanceStatusEnumeration,
                 value=plastics_rubber_datypes.MaintenanceStatusEnumeration.NOT_DUE,
             )
@@ -3391,6 +3949,7 @@ plastics_rubber_objtypes.MaintenanceType(
                 nodeId="ns=plastics_rubber;i=6580",
                 browseName="ns=plastics_rubber;AdditionalInformation",
                 description="Additional information on the necessary maintenance. Can be also a link to another document.",
+                modellingRule="Optional",
                 dataType=o6.String,
             )
         ),
@@ -3399,7 +3958,10 @@ plastics_rubber_objtypes.MaintenanceType(
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=6587"]),
         o6.hasComponent(
             o6.call(
-                nodeId="ns=plastics_rubber;i=7066", browseName="ns=plastics_rubber;Reset", description="This Method sets the RemainingInterval to Interval and Status to NOT_DUE_0"
+                nodeId="ns=plastics_rubber;i=7066",
+                browseName="ns=plastics_rubber;Reset",
+                description="This Method sets the RemainingInterval to Interval and Status to NOT_DUE_0",
+                modellingRule="Mandatory",
             )
         ),
     ],
@@ -3407,12 +3969,14 @@ plastics_rubber_objtypes.MaintenanceType(
 plastics_rubber_objtypes.MonitoredParameterType(
     nodeId="ns=plastics_rubber;i=5058",
     browseName="ns=plastics_rubber;Speed",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6593",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -3436,6 +4000,7 @@ plastics_rubber_objtypes.MonitoredParameterType(
                 nodeId="ns=plastics_rubber;i=7067",
                 browseName="ns=plastics_rubber;ResetMonitoring",
                 description="With this method the tolerance values are set according to the actual value and the set monitoring sensitivity",
+                modellingRule="Optional",
             )
         ),
     ],
@@ -3443,33 +4008,42 @@ plastics_rubber_objtypes.MonitoredParameterType(
 plastics_rubber_objtypes.StartDeviceType(
     nodeId="ns=plastics_rubber;i=5059",
     browseName="ns=plastics_rubber;StartDrive",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6570",
                 browseName="ns=plastics_rubber;Status",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber_datypes.StartEnumeration,
                 value=plastics_rubber_datypes.StartEnumeration.NOT_READY_TO_START,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_rubber;i=6685", browseName="ns=plastics_rubber;StartBlockedByClient", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+                nodeId="ns=plastics_rubber;i=6685",
+                browseName="ns=plastics_rubber;StartBlockedByClient",
+                modellingRule="Optional",
+                dataType=o6.Boolean,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7068", browseName="ns=plastics_rubber;StartRequest")),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7069", browseName="ns=plastics_rubber;StopRequest")),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7068", browseName="ns=plastics_rubber;StartRequest", modellingRule="Optional")),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7069", browseName="ns=plastics_rubber;StopRequest", modellingRule="Optional")),
     ],
 )
 plastics_rubber_objtypes.MonitoredParameterType(
     nodeId="ns=plastics_rubber;i=5060",
     browseName="ns=plastics_rubber;Torque",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6627",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -3493,6 +4067,7 @@ plastics_rubber_objtypes.MonitoredParameterType(
                 nodeId="ns=plastics_rubber;i=7070",
                 browseName="ns=plastics_rubber;ResetMonitoring",
                 description="With this method the tolerance values are set according to the actual value and the set monitoring sensitivity",
+                modellingRule="Optional",
             )
         ),
     ],
@@ -3502,7 +4077,7 @@ plastics_rubber_objtypes.DriveType(
     browseName="ns=plastics_rubber;<Name>_<Nr>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6722", browseName="ns=plastics_rubber;Position", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6722", browseName="ns=plastics_rubber;Position", modellingRule="Optional", dataType=o6.String)),
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=5055"]),
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=5056"]),
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=5057"]),
@@ -3515,12 +4090,14 @@ o6.reference(plastics_rubber_objtypes.DrivesType, ns0.reftypes.HasComponent, o6.
 plastics_rubber_objtypes.MaintenanceType(
     nodeId="ns=plastics_rubber;i=5063",
     browseName="ns=plastics_rubber;Maintenance",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6661",
                 browseName="ns=plastics_rubber;Status",
                 description="Maintenance status of the machine/device/component (represented by the parent element)",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber_datypes.MaintenanceStatusEnumeration,
                 value=plastics_rubber_datypes.MaintenanceStatusEnumeration.NOT_DUE,
             )
@@ -3530,6 +4107,7 @@ plastics_rubber_objtypes.MaintenanceType(
                 nodeId="ns=plastics_rubber;i=6691",
                 browseName="ns=plastics_rubber;AdditionalInformation",
                 description="Additional information on the necessary maintenance. Can be also a link to another document.",
+                modellingRule="Optional",
                 dataType=o6.String,
             )
         ),
@@ -3537,7 +4115,12 @@ plastics_rubber_objtypes.MaintenanceType(
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=6695"]),
         o6.hasComponent(o6.ns["ns=plastics_rubber;i=6698"]),
         o6.hasComponent(
-            o6.call(nodeId="ns=plastics_rubber;i=7071", browseName="ns=plastics_rubber;Reset", description="This Method sets the CurrentInterval to 0 and Status to NOT_DUE_0")
+            o6.call(
+                nodeId="ns=plastics_rubber;i=7071",
+                browseName="ns=plastics_rubber;Reset",
+                description="This Method sets the CurrentInterval to 0 and Status to NOT_DUE_0",
+                modellingRule="Mandatory",
+            )
         ),
     ],
 )
@@ -3545,12 +4128,14 @@ plastics_rubber_objtypes.ClosedLoopControlType(
     nodeId="ns=plastics_rubber;i=5062",
     browseName="ns=plastics_rubber;ClosedLoopControl",
     description="With this type the client can do settings for the closed loop control on the device for a parameter",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6686",
                 browseName="ns=plastics_rubber;AutoTuningActive",
                 description="Informs if the automatic tuning is currently active",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
             )
@@ -3560,6 +4145,7 @@ plastics_rubber_objtypes.ClosedLoopControlType(
                 nodeId="ns=plastics_rubber;i=6687",
                 browseName="ns=plastics_rubber;AutomaticControllerMode",
                 description="Determination if PID Parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -3570,9 +4156,10 @@ plastics_rubber_objtypes.ClosedLoopControlType(
                 nodeId="ns=plastics_rubber;i=6688",
                 browseName="ns=plastics_rubber;PIDParameters",
                 description="PID Parameters as array if several input signals (sensors) are used for the control",
+                modellingRule="Optional",
                 dataType=plastics_rubber_datypes.PIDParametersDataType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[plastics_rubber_datypes.PIDParametersDataType(p=0.0, i=0.0, d=0.0)],
                 accessLevel=3,
                 userAccessLevel=1,
@@ -3583,30 +4170,45 @@ plastics_rubber_objtypes.ClosedLoopControlType(
                 nodeId="ns=plastics_rubber;i=7073",
                 browseName="ns=plastics_rubber;AutoTuningOff",
                 description="Stops an already active self-optimisation process (no control parameters are changed)",
+                modellingRule="Optional",
             )
         ),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7074", browseName="ns=plastics_rubber;AutoTuningOn", description="Starts the self-optimisation of the controller")),
+        o6.hasComponent(
+            o6.call(
+                nodeId="ns=plastics_rubber;i=7074",
+                browseName="ns=plastics_rubber;AutoTuningOn",
+                description="Starts the self-optimisation of the controller",
+                modellingRule="Optional",
+            )
+        ),
     ],
 )
 plastics_rubber_objtypes.StartDeviceType(
     nodeId="ns=plastics_rubber;i=5064",
     browseName="ns=plastics_rubber;StartDevice",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_rubber;i=6382", browseName="ns=plastics_rubber;StartBlockedByClient", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+                nodeId="ns=plastics_rubber;i=6382",
+                browseName="ns=plastics_rubber;StartBlockedByClient",
+                modellingRule="Optional",
+                dataType=o6.Boolean,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6675",
                 browseName="ns=plastics_rubber;Status",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber_datypes.StartEnumeration,
                 value=plastics_rubber_datypes.StartEnumeration.NOT_READY_TO_START,
             )
         ),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7075", browseName="ns=plastics_rubber;StartRequest")),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7076", browseName="ns=plastics_rubber;StopRequest")),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7075", browseName="ns=plastics_rubber;StartRequest", modellingRule="Optional")),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7076", browseName="ns=plastics_rubber;StopRequest", modellingRule="Optional")),
     ],
 )
 plastics_rubber_objtypes.MeasuringDeviceType(
@@ -3614,23 +4216,31 @@ plastics_rubber_objtypes.MeasuringDeviceType(
     browseName="ns=plastics_rubber;<Name>_<Nr>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6461", browseName="ns=plastics_rubber;Id", dataType=o6.String, value="")),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6461", browseName="ns=plastics_rubber;Id", modellingRule="Mandatory", dataType=o6.String, value="")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6462",
                 browseName="ns=plastics_rubber;ControlMode",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber_datypes.ControlModeEnumeration,
                 value=plastics_rubber_datypes.ControlModeEnumeration.OTHER,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6463", browseName="ns=plastics_rubber;IsPresent", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6464", browseName="ns=plastics_rubber;Name", dataType=o6.LocalizedText, value=o6.LocalizedText())),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6465", browseName="ns=plastics_rubber;Position", dataType=o6.String)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6463", browseName="ns=plastics_rubber;IsPresent", modellingRule="Mandatory", dataType=o6.Boolean, value=False)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_rubber;i=6464", browseName="ns=plastics_rubber;Name", modellingRule="Optional", dataType=o6.LocalizedText, value=o6.LocalizedText()
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6465", browseName="ns=plastics_rubber;Position", modellingRule="Optional", dataType=o6.String)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_rubber;i=6575",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -3657,6 +4267,7 @@ plastics_rubber_objtypes.MeasuringDeviceType(
                 nodeId="ns=plastics_rubber;i=7072",
                 browseName="ns=plastics_rubber;ResetMonitoring",
                 description="With this method the tolerance values are set according to the actual value and the set monitoring sensitivity",
+                modellingRule="Optional",
             )
         ),
     ],

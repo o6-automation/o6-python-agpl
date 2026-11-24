@@ -45,12 +45,12 @@ http_opcfoundation_org_UA_FX_Data_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_data;i=180", browseName="NamespaceVersion", dataType=o6.String, value="1.00.04")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=fx_data;i=181", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=fx_data;i=181", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=fx_data;i=182", browseName="StaticNumericNodeIdRange", dataType=ns0.datatypes.NumericRange, valueRank=1, arrayDimensions=[1], value=["0:15000"]
+                nodeId="ns=fx_data;i=182", browseName="StaticNumericNodeIdRange", dataType=ns0.datatypes.NumericRange, valueRank=1, arrayDimensions=[0], value=["0:15000"]
             )
         ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_data;i=183", browseName="StaticStringNodeIdPattern", dataType=o6.String, value="")),

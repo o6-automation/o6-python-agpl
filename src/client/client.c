@@ -26,6 +26,7 @@
 
 static PyObject *
 pyClient_get_state(PyClient *self, PyObject *Py_UNUSED(ignored)) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop(self), NULL);
     const UA_NamespaceMapping *nsMapping = &self->nsMapPy2UA;
     UA_StatusCode connectStatus = UA_STATUSCODE_GOOD;
     UA_SecureChannelState cState = 0;
@@ -53,17 +54,23 @@ pyClient_get_state(PyClient *self, PyObject *Py_UNUSED(ignored)) {
     return tuple;
 }
 
+/* Stop the timers of a connect that has ended */
 static void
-stopConnectPoll(PyClient *client) {
-    if (!client->connectPollId)
-        return;
-    UA_Client_removeCallback(client->client, client->connectPollId);
-    client->connectPollId = 0;
+stopConnectTimers(PyClient *client) {
+    if (client->connectPollId) {
+        UA_Client_removeCallback(client->client, client->connectPollId);
+        client->connectPollId = 0;
+    }
+    if (client->connectTimeoutId) {
+        UA_Client_removeCallback(client->client, client->connectTimeoutId);
+        client->connectTimeoutId = 0;
+    }
+    client->connectTimedOut = false;
 }
 
 static void
 failConnectFuture(PyClient *client, UA_StatusCode connectStatus) {
-    stopConnectPoll(client);
+    stopConnectTimers(client);
     /* Create exception object without polluting the exception state */
     PyObject *code = PyLong_FromUnsignedLong(connectStatus);
     PyObject *exc = code ? PyObject_CallOneArg(pyExc_StatusCode, code) : NULL;
@@ -81,7 +88,7 @@ failConnectFuture(PyClient *client, UA_StatusCode connectStatus) {
 
 static void
 resolveConnectFuture(PyClient *client, UA_StatusCode connectStatus) {
-    stopConnectPoll(client);
+    stopConnectTimers(client);
     PyObject *result = UA2PY(&connectStatus, &UA_TYPES[UA_TYPES_STATUSCODE],
                              &client->nsMapPy2UA);
     PyObject *res = result ? PyObject_CallMethod(client->connectFuture,
@@ -103,7 +110,7 @@ connectPollCallback(UA_Client *cClient, void *data) {
     if (!client)
         return;
     if (!client->connectFuture) {
-        stopConnectPoll(client);
+        stopConnectTimers(client);
         return;
     }
     lockClient(cClient);
@@ -116,6 +123,46 @@ connectPollCallback(UA_Client *cClient, void *data) {
         resolveConnectFuture(client, connectStatus);
 }
 
+/* open62541 bounds only a synchronous connect by config.timeout, and o6
+ * connects asynchronously. Without this deadline, a connect to a peer that
+ * never answers the Hello waits forever. Close the channel, and fail the
+ * connect once the channel is closed. */
+static void
+connectTimeoutCallback(UA_Client *cClient, void *data) {
+    PyClient *client = (PyClient*)UA_Client_getConfig(cClient)->clientContext;
+    if (!client)
+        return;
+    client->connectTimeoutId = 0;
+    if (!client->connectFuture)
+        return;
+
+    UA_LOG_ERROR(UA_Client_getConfig(cClient)->logging, UA_LOGCATEGORY_CLIENT,
+                 "The connection has timed out before it could be fully opened");
+    /* The pending connect keeps connectStatus GOOD. The disconnect changes
+     * it, so the state callback follows and fails the connect once the
+     * channel is closed. */
+    client->connectTimedOut = true;
+    UA_Client_disconnectSecureChannelAsync(cClient);
+}
+
+/* Fail a pending connect future and drop it. Leaves no error set, so the
+ * disconnect proceeds. */
+static void
+abortConnect(PyClient *client) {
+    if (!client->connectFuture)
+        return;
+    stopConnectTimers(client);
+    PyObject *exc = PyObject_CallFunction(PyExc_RuntimeError, "s",
+                                          "The client was disconnected before "
+                                          "completely connecting");
+    PyObject *res = exc ? PyObject_CallMethod(client->connectFuture,
+                                              "set_exception", "O", exc) : NULL;
+    Py_XDECREF(res);
+    Py_XDECREF(exc);
+    PyErr_Clear(); /* InvalidStateError if the future is done, e.g. cancelled */
+    Py_CLEAR(client->connectFuture);
+}
+
 static void
 clientStateCallback(UA_Client *cClient,
                     UA_SecureChannelState channelState,
@@ -126,8 +173,14 @@ clientStateCallback(UA_Client *cClient,
     PyClient *client = (PyClient*)config->clientContext;
     const UA_NamespaceMapping *nsMapping = &client->nsMapPy2UA;
     if (client->connectFuture) {
+        // The connect timed out. Fail it once the channel is closed.
+        if (client->connectTimedOut) {
+            if (channelState == UA_SECURECHANNELSTATE_CLOSED)
+                failConnectFuture(client, UA_STATUSCODE_BADTIMEOUT);
+        }
+
         // The connection was aborted
-        if (connectStatus != UA_STATUSCODE_GOOD) {
+        else if (connectStatus != UA_STATUSCODE_GOOD) {
             failConnectFuture(client, connectStatus);
         }
 
@@ -242,6 +295,7 @@ clientSubscriptionInactivityCallback(UA_Client *cClient, UA_UInt32 subId, void *
 
 static PyObject *
 pyClient_set_global_notification_callback(PyClient *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop(self), NULL);
     PyObject *callback;
     if (!PyArg_ParseTuple(args, "O", &callback))
         return NULL;
@@ -269,6 +323,7 @@ pyClient_set_global_notification_callback(PyClient *self, PyObject *args) {
 
 static PyObject *
 pyClient_set_lifecycle_notification_callback(PyClient *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop(self), NULL);
     PyObject *callback;
     if (!PyArg_ParseTuple(args, "O", &callback))
         return NULL;
@@ -296,6 +351,7 @@ pyClient_set_lifecycle_notification_callback(PyClient *self, PyObject *args) {
 
 static PyObject *
 pyClient_set_service_notification_callback(PyClient *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop(self), NULL);
     PyObject *callback;
     if (!PyArg_ParseTuple(args, "O", &callback))
         return NULL;
@@ -323,6 +379,7 @@ pyClient_set_service_notification_callback(PyClient *self, PyObject *args) {
 
 static PyObject *
 pyClient_set_inactivity_callback(PyClient *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop(self), NULL);
     PyObject *callback;
     if (!PyArg_ParseTuple(args, "O", &callback))
         return NULL;
@@ -350,6 +407,7 @@ pyClient_set_inactivity_callback(PyClient *self, PyObject *args) {
 
 static PyObject *
 pyClient_set_subscription_inactivity_callback(PyClient *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop(self), NULL);
     PyObject *callback;
     if (!PyArg_ParseTuple(args, "O", &callback))
         return NULL;
@@ -406,8 +464,29 @@ connectFailed(PyClient *self, PyObject *future, UA_StatusCode status) {
     return future;
 }
 
+/* A connect that started. Bound it by config.timeout unless the state
+ * callback already completed it. A timeout of 0 waits without limit.
+ * Steals the reference to future. */
+static PyObject *
+connectStarted(PyClient *self, PyObject *future) {
+    UA_ClientConfig *config = UA_Client_getConfig(self->client);
+    if (self->connectFuture != future || !config->timeout)
+        return future;
+    UA_EventLoop *el = config->eventLoop;
+    UA_DateTime deadline = el->dateTime_nowMonotonic(el) +
+        (UA_DateTime)config->timeout * UA_DATETIME_MSEC;
+    UA_StatusCode status =
+        UA_Client_addTimedCallback(self->client, connectTimeoutCallback, NULL,
+                                   deadline, &self->connectTimeoutId);
+    if (status == UA_STATUSCODE_GOOD)
+        return future;
+    UA_Client_disconnectSecureChannelAsync(self->client);
+    return connectFailed(self, future, status);
+}
+
 static PyObject *
 pyClient_connect(PyClient *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop(self), NULL);
     // connect() takes no arguments — uses endpointUrl from config
     if (PyTuple_Size(args) != 0) {
         PyErr_SetString(PyExc_ValueError,
@@ -450,25 +529,15 @@ pyClient_connect(PyClient *self, PyObject *args) {
     if (status != UA_STATUSCODE_GOOD)
         return connectFailed(self, future, status);
 
-    return future;
+    return connectStarted(self, future);
 }
 
 static PyObject *
 pyClient_disconnect(PyClient *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop(self), NULL);
     // If we are still connecting, abort
     UA_Client *client = self->client;
-    if (self->connectFuture) {
-        PyObject *exc =
-            PyObject_CallFunction(PyExc_RuntimeError, "s",
-                                  "The client was disconnected before "
-                                  "completely connecting");
-        PyObject *res =
-            PyObject_CallMethod(self->connectFuture, "set_exception", "O", exc);
-        Py_DECREF(self->connectFuture);
-        Py_XDECREF(res);
-        Py_XDECREF(exc);
-        self->connectFuture = NULL;
-    }
+    abortConnect(self);
 
     // Are we already disconnected?
     UA_SecureChannelState channelState = 0;
@@ -498,6 +567,7 @@ pyClient_disconnect(PyClient *self, PyObject *args) {
 
 static PyObject *
 pyClient_connect_secure_channel(PyClient *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop(self), NULL);
     // connect_secure_channel() takes no arguments — uses endpointUrl from config
     if (PyTuple_Size(args) != 0) {
         PyErr_SetString(PyExc_ValueError,
@@ -541,26 +611,16 @@ pyClient_connect_secure_channel(PyClient *self, PyObject *args) {
     if (status != UA_STATUSCODE_GOOD)
         return connectFailed(self, future, status);
 
-    return future;
+    return connectStarted(self, future);
 }
 
 static PyObject *
 pyClient_disconnect_secure_channel(PyClient *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop(self), NULL);
     UA_Client *client = self->client;
 
     // If we are still connecting, abort
-    if (self->connectFuture) {
-        PyObject *exc =
-            PyObject_CallFunction(PyExc_RuntimeError, "s",
-                                  "The client was disconnected before "
-                                  "completely connecting");
-        PyObject *res =
-            PyObject_CallMethod(self->connectFuture, "set_exception", "O", exc);
-        Py_DECREF(self->connectFuture);
-        Py_XDECREF(res);
-        Py_XDECREF(exc);
-        self->connectFuture = NULL;
-    }
+    abortConnect(self);
 
     // Are we already disconnected?
     UA_SecureChannelState channelState = 0;
@@ -597,6 +657,7 @@ pyClient_disconnect_secure_channel(PyClient *self, PyObject *args) {
 
 static PyObject *
 pyClient_start_reverse_connect(PyClient *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop(self), NULL);
     unsigned short port;
     PyObject *pyHostnames;
     if (!PyArg_ParseTuple(args, "HO", &port, &pyHostnames))
@@ -673,6 +734,7 @@ pyClient_start_reverse_connect(PyClient *self, PyObject *args) {
 
 static PyObject *
 pyClient_get_session_auth_token(PyClient *self, PyObject *Py_UNUSED(ignored)) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop(self), NULL);
     const UA_NamespaceMapping *nsMapping = &self->nsMapPy2UA;
     UA_NodeId token;
     UA_NodeId_init(&token);
@@ -706,6 +768,7 @@ pyClient_get_session_auth_token(PyClient *self, PyObject *Py_UNUSED(ignored)) {
 
 static PyObject *
 pyClient_activate_current_session(PyClient *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop(self), NULL);
     if (self->connectFuture) {
         PyErr_SetString(PyExc_RuntimeError,
                         "The client already has a pending connect/activate");
@@ -741,6 +804,7 @@ pyClient_activate_current_session(PyClient *self, PyObject *args) {
 
 static PyObject *
 pyClient_activate_session(PyClient *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop(self), NULL);
     const UA_NamespaceMapping *nsMapping = &self->nsMapPy2UA;
     UA_ClientConfig *config = UA_Client_getConfig(self->client);
     PyObject *pyToken;
@@ -816,6 +880,7 @@ pyClientCallbackBridge(UA_Client *client, void *data) {
 
 PyObject *
 pyClient_add_timed_callback(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     PyObject *callback;
     double delay_ms;
     if (!PyArg_ParseTuple(args, "Od", &callback, &delay_ms))
@@ -848,6 +913,7 @@ pyClient_add_timed_callback(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_add_repeated_callback(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     PyObject *callback;
     double interval_ms;
     if (!PyArg_ParseTuple(args, "Od", &callback, &interval_ms))
@@ -875,6 +941,7 @@ pyClient_add_repeated_callback(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_change_repeated_callback_interval(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     unsigned long long callbackId;
     double interval_ms;
     if (!PyArg_ParseTuple(args, "Kd", &callbackId, &interval_ms))
@@ -890,6 +957,7 @@ pyClient_change_repeated_callback_interval(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_remove_callback(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     unsigned long long callbackId;
     if (!PyArg_ParseTuple(args, "K", &callbackId))
         return NULL;
@@ -910,6 +978,7 @@ pyClient_remove_callback(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_get_namespace_uri(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     unsigned short index;
     if (!PyArg_ParseTuple(args, "H", &index))
         return NULL;
@@ -929,6 +998,7 @@ pyClient_get_namespace_uri(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_get_namespace_index(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     const char *uri_data;
     Py_ssize_t uri_len;
     if (!PyArg_ParseTuple(args, "s#", &uri_data, &uri_len))
@@ -944,6 +1014,7 @@ pyClient_get_namespace_index(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_apply_namespace_snapshot(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     PyObject *urisObj;
     PyObject *entriesObj;
     if(!PyArg_ParseTuple(args, "OO", &urisObj, &entriesObj))
@@ -1043,6 +1114,7 @@ fail:
 
 PyObject *
 pyClient_find_data_type(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     PyObject *nodeId_obj;
     if (!PyArg_ParseTuple(args, "O", &nodeId_obj))
         return NULL;
@@ -1210,6 +1282,7 @@ canHoldEncoded(const UA_DataType *type, int depth) {
  * encoded. Other values are returned unchanged, without typeIds. */
 static PyObject *
 pyClient_redecode(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     PyObject *obj;
     if(!PyArg_ParseTuple(args, "O", &obj))
         return NULL;
@@ -1410,7 +1483,7 @@ pyClient_do_cleanup(PyClient *self) {
     if(!self->client)
         return;
 
-    stopConnectPoll(self);
+    stopConnectTimers(self);
     UA_ClientConfig *config = UA_Client_getConfig(self->client);
     UA_EventLoop *el = NULL;
     if(config) {
@@ -1488,6 +1561,7 @@ pyClient_do_cleanup(PyClient *self) {
  * so tp_dealloc just calls tp_free. */
 static PyObject *
 pyClient_cleanup(PyClient *self, PyObject *Py_UNUSED(ignored)) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop(self), NULL);
     pyClient_do_cleanup(self);
     Py_RETURN_NONE;
 }
@@ -1511,6 +1585,20 @@ pyClient_traverse(PyClient *self, visitproc visit, void *arg) {
     Py_VISIT(self->subscriptionInactivityCallback);
     Py_VISIT(self->config_cache);
     return 0;
+}
+
+/* Whether the native client is open or opening: lock-free, so finalizers
+ * may call it on any thread. */
+static PyObject *
+pyClient_is_live(PyClient *self, PyObject *Py_UNUSED(ignored)) {
+    return PyBool_FromLong(pyClient_isLive(self));
+}
+
+bool
+pyClient_isLive(const PyClient *self) {
+    return self && self->client &&
+           (self->connectFuture != NULL ||
+            self->client->channel.state != UA_SECURECHANNELSTATE_CLOSED);
 }
 
 static int
@@ -1543,6 +1631,7 @@ static PyObject *pyClient_str(PyClient *self) {
 
 static PyObject *
 pyClient_set_owns_loop(PyClient *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop(self), NULL);
     int owns;
     if(!PyArg_ParseTuple(args, "p", &owns))
         return NULL;
@@ -1553,9 +1642,10 @@ pyClient_set_owns_loop(PyClient *self, PyObject *args) {
 static PyObject *pyClient_repr(PyClient *self) {
     if (!self->client)
         return PyUnicode_FromString("o6._o6.Client(uninitialized)");
+    /* Lock-free like _is_live: repr stays callable from any thread, and
+     * UA_Client_getState takes the client lock. */
     UA_ClientConfig *config = UA_Client_getConfig(self->client);
-    UA_SecureChannelState channelState = 0;
-    UA_Client_getState(self->client, &channelState, NULL, NULL);
+    UA_SecureChannelState channelState = self->client->channel.state;
     const char *state = (channelState == UA_SECURECHANNELSTATE_OPEN) ? "connected" : "disconnected";
     if (config->endpointUrl.length > 0 && config->endpointUrl.data)
         return PyUnicode_FromFormat("o6._o6.Client(%.*s, %s)",
@@ -1590,6 +1680,8 @@ static PyMethodDef pyClient_methods[] = {
     {"_set_owns_loop", (PyCFunction)pyClient_set_owns_loop, METH_VARARGS, "Set whether the client owns the asyncio loop"},
     {"_get_state", (PyCFunction)pyClient_get_state, METH_NOARGS, "Get the client connection state"},
     {"_cleanup", (PyCFunction)pyClient_cleanup, METH_NOARGS, NULL},
+    {"_is_live", (PyCFunction)pyClient_is_live, METH_NOARGS,
+     "Whether the client is connected or connecting; safe on any thread"},
     {"_connect", (PyCFunction)pyClient_connect, METH_VARARGS, "Connect to OPC UA server using configured endpointUrl"},
     {"_disconnect", (PyCFunction)pyClient_disconnect, METH_VARARGS, "Disconnect the client"},
     {"_connect_secure_channel", (PyCFunction)pyClient_connect_secure_channel, METH_VARARGS, "Connect SecureChannel only (no session)"},

@@ -41,6 +41,7 @@ class HomingModeType(ns0.vartypes.MultiStateDiscreteType):
 ns0.vartypes.PropertyType(
     nodeId="ns=pndrv;i=6152",
     browseName="EnumStrings",
+    modellingRule="Mandatory",
     dataType=o6.LocalizedText,
     valueRank=1,
     arrayDimensions=[3],
@@ -55,15 +56,18 @@ class AxisTypeVariableType(ns0.vartypes.MultiStateDiscreteType):
 
 @o6.variabletype(nodeId="ns=pndrv;i=2001", browseName="ns=pndrv;TemperatureVariableType", displayName="TemperatureVariableType", dataType=o6.Float)
 class TemperatureVariableType(ns0.vartypes.AnalogUnitType):
-    faultThreshold: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6206", browseName="ns=pndrv;FaultThreshold", dataType=o6.Float))
+    faultThreshold: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6206", browseName="ns=pndrv;FaultThreshold", modellingRule="Optional", dataType=o6.Float)
+    )
     warningThreshold: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6205", browseName="ns=pndrv;WarningThreshold", dataType=o6.Float)
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6205", browseName="ns=pndrv;WarningThreshold", modellingRule="Optional", dataType=o6.Float)
     )
 
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pndrv;i=6257",
     browseName="EnumStrings",
+    modellingRule="Mandatory",
     dataType=o6.LocalizedText,
     valueRank=1,
     arrayDimensions=[2],

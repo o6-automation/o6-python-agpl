@@ -62,7 +62,7 @@ http_opcfoundation_org_UA_PlasticsRubber_Extrusion_v2_Corrugator_ = ns0.objtypes
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),

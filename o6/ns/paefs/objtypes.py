@@ -120,16 +120,16 @@ class SafetySystemTriggeredAlarmType(ns0.objtypes.OffNormalAlarmType):
     pass
 
 
-ns0.objtypes.FolderType(nodeId="ns=paefs;i=5105", browseName="ns=machinery;MachineryBuildingBlocks")
-ns0.objtypes.FolderType(nodeId="ns=paefs;i=5107", browseName="ns=machinery;MachineryBuildingBlocks")
-ns0.objtypes.FolderType(nodeId="ns=paefs;i=5108", browseName="ns=machinery;MachineryBuildingBlocks")
-ns0.objtypes.FolderType(nodeId="ns=paefs;i=5109", browseName="ns=machinery;MachineryBuildingBlocks")
-ns0.objtypes.FolderType(nodeId="ns=paefs;i=5110", browseName="ns=machinery;MachineryBuildingBlocks")
-ns0.objtypes.FolderType(nodeId="ns=paefs;i=5111", browseName="ns=machinery;MachineryBuildingBlocks")
-ns0.objtypes.FolderType(nodeId="ns=paefs;i=5112", browseName="ns=machinery;MachineryBuildingBlocks")
-ns0.objtypes.FolderType(nodeId="ns=paefs;i=5113", browseName="ns=machinery;MachineryBuildingBlocks")
-ns0.objtypes.FolderType(nodeId="ns=paefs;i=5114", browseName="ns=machinery;MachineryBuildingBlocks")
-ns0.objtypes.FolderType(nodeId="ns=paefs;i=5115", browseName="ns=machinery;MachineryBuildingBlocks")
+ns0.objtypes.FolderType(nodeId="ns=paefs;i=5105", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Optional")
+ns0.objtypes.FolderType(nodeId="ns=paefs;i=5107", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Optional")
+ns0.objtypes.FolderType(nodeId="ns=paefs;i=5108", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Optional")
+ns0.objtypes.FolderType(nodeId="ns=paefs;i=5109", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Optional")
+ns0.objtypes.FolderType(nodeId="ns=paefs;i=5110", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Optional")
+ns0.objtypes.FolderType(nodeId="ns=paefs;i=5111", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Optional")
+ns0.objtypes.FolderType(nodeId="ns=paefs;i=5112", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Optional")
+ns0.objtypes.FolderType(nodeId="ns=paefs;i=5113", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Optional")
+ns0.objtypes.FolderType(nodeId="ns=paefs;i=5114", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Optional")
+ns0.objtypes.FolderType(nodeId="ns=paefs;i=5115", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Optional")
 
 
 @o6.objecttype(
@@ -147,6 +147,7 @@ class SensorMonitoringType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6007",
             browseName="ns=paefs;SignalForm",
             description="Specifies whether the sensor is an analog or a digital sensor.",
+            modellingRule="Optional",
             dataType=paefs_datypes.AnalogDigitalEnum,
         )
     )
@@ -164,6 +165,7 @@ class MaintenanceSwitchConditionType(ns0.objtypes.ConditionType):
             nodeId="ns=paefs;i=6046",
             browseName="ns=paefs;SwitchOn",
             description="Reflects the value of the MaintenanceRequested property of the object from which the event originates at the time the event was sent",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -181,6 +183,7 @@ class MaintenanceRequestedConditionType(ns0.objtypes.AcknowledgeableConditionTyp
             nodeId="ns=paefs;i=6047",
             browseName="ns=paefs;Requested",
             description="Reflects the value of the MaintenanceRequested property of the object from which the event originates at the time the event was sent",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -198,6 +201,7 @@ class CleaningRecommendedConditionType(ns0.objtypes.AcknowledgeableConditionType
             nodeId="ns=paefs;i=6048",
             browseName="ns=paefs;Recommended",
             description="Reflects the value of the property CleaningRequested of the CleaningUnitType",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -216,6 +220,7 @@ class HighVoltageUnitSupplyActiveEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=paefs;i=6049",
             browseName="ns=paefs;Active",
             description="Reflects the value of the SupplyActive property of the HighVoltageUnitType at the time the event was triggered",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -233,6 +238,7 @@ class ContainerOpenConditionType(ns0.objtypes.ConditionType):
             nodeId="ns=paefs;i=6050",
             browseName="ns=paefs;Open",
             description="Reflects the value of the ContainerOpen property of the FilterAidDeviceType at the time the condition was triggered",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -251,6 +257,7 @@ class SeparatorType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6081",
             browseName="ns=paefs;FilterMediumOperatingHours",
             description="The number of hours that the unit has been in operation since the last filter change.",
+            modellingRule="Optional",
             dataType=o6.UInt32,
         )
     )
@@ -279,12 +286,17 @@ class WetSeparatorType(SeparatorType):
             nodeId="ns=paefs;i=6062",
             browseName="ns=paefs;WashingAgentDrainMalfunction",
             description="Indicates whether there is an error with the washing agent drain. True in case of error. Examples: clogging, burst pipe, defective valve.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
     washingAgentDrainOpen: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=paefs;i=6061", browseName="ns=paefs;WashingAgentDrainOpen", description="Indicates that the washing agent drain valve is open.", dataType=o6.Boolean
+            nodeId="ns=paefs;i=6061",
+            browseName="ns=paefs;WashingAgentDrainOpen",
+            description="Indicates that the washing agent drain valve is open.",
+            modellingRule="Optional",
+            dataType=o6.Boolean,
         )
     )
     washingAgentInflowMalfunction: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -292,12 +304,17 @@ class WetSeparatorType(SeparatorType):
             nodeId="ns=paefs;i=6060",
             browseName="ns=paefs;WashingAgentInflowMalfunction",
             description="Indicates whether there is an error with the washing agent inflow. True in case of error. Examples: clogging, burst pipe, defective valve.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
     washingAgentInflowOpen: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=paefs;i=6059", browseName="ns=paefs;WashingAgentInflowOpen", description="Indicates that the washing agent inflow valve is open.", dataType=o6.Boolean
+            nodeId="ns=paefs;i=6059",
+            browseName="ns=paefs;WashingAgentInflowOpen",
+            description="Indicates that the washing agent inflow valve is open.",
+            modellingRule="Optional",
+            dataType=o6.Boolean,
         )
     )
 
@@ -322,6 +339,7 @@ class HighVoltageUnitType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6093",
             browseName="ns=paefs;MaintenanceRequested",
             description="Indicates that maintenance is requested for the high voltage generator.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -330,21 +348,26 @@ class HighVoltageUnitType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6091",
             browseName="ns=paefs;Malfunction",
             description="Indicates that the high voltage generator is malfunctioning (e.g., excess/insufficient voltage, overheating, etc). True in case of error.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
     operationCycleCounter: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6098", browseName="ns=paefs;OperationCycleCounter", dataType=ns0.datatypes.UInteger)
+        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6098", browseName="ns=paefs;OperationCycleCounter", modellingRule="Optional", dataType=ns0.datatypes.UInteger)
     )
     operationDuration: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6092", browseName="ns=paefs;OperationDuration", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6092", browseName="ns=paefs;OperationDuration", modellingRule="Optional", dataType=ns0.datatypes.Duration)
     )
     powerOnDuration: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6039", browseName="ns=paefs;PowerOnDuration", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6039", browseName="ns=paefs;PowerOnDuration", modellingRule="Optional", dataType=ns0.datatypes.Duration)
     )
     supplyActive: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=paefs;i=6087", browseName="ns=paefs;SupplyActive", description="Indicates that the high-voltage generator is emitting high voltage.", dataType=o6.Boolean
+            nodeId="ns=paefs;i=6087",
+            browseName="ns=paefs;SupplyActive",
+            description="Indicates that the high-voltage generator is emitting high voltage.",
+            modellingRule="Optional",
+            dataType=o6.Boolean,
         )
     )
 
@@ -377,7 +400,11 @@ class ElectrostaticPrecipitatorType(SeparatorType):
 class SensorSetpointReadType(SensorMonitoringType):
     isActiveSetpoint: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=paefs;i=6176", browseName="ns=paefs;IsActiveSetpoint", description="Indicates that the setpoint is currently active.", dataType=o6.Boolean
+            nodeId="ns=paefs;i=6176",
+            browseName="ns=paefs;IsActiveSetpoint",
+            description="Indicates that the setpoint is currently active.",
+            modellingRule="Optional",
+            dataType=o6.Boolean,
         )
     )
     signal: machinery_processvalues.objtypes.ProcessValueType
@@ -408,12 +435,16 @@ class TemperatureRegulatorType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6233",
             browseName="ns=paefs;Malfunction",
             description="Indicates whether there is an error with the temperature regulator. True in case of error.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
     powerConsumption: ConsumptionType | None = o6.hasComponent(
         ConsumptionType(
-            nodeId="ns=paefs;i=5054", browseName="ns=paefs;PowerConsumption", description="Contains information regarding the energy consumption of the temperature regulator."
+            nodeId="ns=paefs;i=5054",
+            browseName="ns=paefs;PowerConsumption",
+            description="Contains information regarding the energy consumption of the temperature regulator.",
+            modellingRule="Optional",
         )
     )
     temperature: SensorSetpointWriteType | None
@@ -431,7 +462,11 @@ o6.reference(TemperatureRegulatorType, "i=41", MalfunctionAlarmType)
 class AutomaticRollFilterType(SeparatorType):
     endOfFilterRoll: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=paefs;i=6389", browseName="ns=paefs;EndOfFilterRoll", description="EndOfFilterRoll is true if the end of the filter roll is reached.", dataType=o6.Boolean
+            nodeId="ns=paefs;i=6389",
+            browseName="ns=paefs;EndOfFilterRoll",
+            description="EndOfFilterRoll is true if the end of the filter roll is reached.",
+            modellingRule="Optional",
+            dataType=o6.Boolean,
         )
     )
 
@@ -449,16 +484,26 @@ class FanType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6208",
             browseName="ns=paefs;MaintenanceSwitchOn",
             description="Status of a physical maintenance switch on the fan. True when the switch is on.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
     malfunction: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=paefs;i=6395", browseName="ns=paefs;Malfunction", description="Indicates whether there is an error with the fan. True in case of error.", dataType=o6.Boolean
+            nodeId="ns=paefs;i=6395",
+            browseName="ns=paefs;Malfunction",
+            description="Indicates whether there is an error with the fan. True in case of error.",
+            modellingRule="Optional",
+            dataType=o6.Boolean,
         )
     )
     powerConsumption: ConsumptionType | None = o6.hasComponent(
-        ConsumptionType(nodeId="ns=paefs;i=5065", browseName="ns=paefs;PowerConsumption", description="Contains information regarding the energy consumption of the fan.")
+        ConsumptionType(
+            nodeId="ns=paefs;i=5065",
+            browseName="ns=paefs;PowerConsumption",
+            description="Contains information regarding the energy consumption of the fan.",
+            modellingRule="Optional",
+        )
     )
     rotationalSpeed: SensorSetpointWriteType | None
 
@@ -479,11 +524,14 @@ class CleaningUnitValveType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6359",
             browseName="ns=paefs;Malfunction",
             description="Indicates that the cleaning unit valve is malfunctioning. True in case of error. Malfunctions can be, for example, that the valve does not open or close.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
     open: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6418", browseName="ns=paefs;Open", description="Indicates that the valve is open.", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=paefs;i=6418", browseName="ns=paefs;Open", description="Indicates that the valve is open.", modellingRule="Optional", dataType=o6.Boolean
+        )
     )
 
 
@@ -498,11 +546,20 @@ o6.reference(CleaningUnitValveType, "i=41", MalfunctionAlarmType)
 )
 class DischargeSystemType(ns0.objtypes.BaseObjectType):
     airConsumption: ConsumptionType | None = o6.hasComponent(
-        ConsumptionType(nodeId="ns=paefs;i=5079", browseName="ns=paefs;AirConsumption", description="Contains information regarding the consumption of compressed air.")
+        ConsumptionType(
+            nodeId="ns=paefs;i=5079",
+            browseName="ns=paefs;AirConsumption",
+            description="Contains information regarding the consumption of compressed air.",
+            modellingRule="Optional",
+        )
     )
     dischargeContainerInstalled: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=paefs;i=6140", browseName="ns=paefs;DischargeContainerInstalled", description="Indicates that the discharge container is in place.", dataType=o6.Boolean
+            nodeId="ns=paefs;i=6140",
+            browseName="ns=paefs;DischargeContainerInstalled",
+            description="Indicates that the discharge container is in place.",
+            modellingRule="Optional",
+            dataType=o6.Boolean,
         )
     )
     dischargeSystemEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -510,6 +567,7 @@ class DischargeSystemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6230",
             browseName="ns=paefs;DischargeSystemEnabled",
             description="If enabled, discharge can be performed. If disabled, discharge cannot take place; for example, because a rotary valve is stopped or a discharge flap is closed.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -524,6 +582,7 @@ class DischargeSystemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6139",
             browseName="ns=paefs;MaintenanceSwitchOn",
             description="Status of a physical maintenance switch on the discharge system. True when the switch is on.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -532,6 +591,7 @@ class DischargeSystemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6420",
             browseName="ns=paefs;Malfunction",
             description="Indicates whether there is an error with the discharge system. True in case of error. Examples: discharge motor defective, discharge container full, discharge system blocked.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -556,6 +616,7 @@ class SafetySystemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6430",
             browseName="ns=paefs;Malfunction",
             description="Indicates that the safety system is malfunctioning. True in case of error.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -564,6 +625,7 @@ class SafetySystemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6219",
             browseName="ns=paefs;Triggered",
             description="Indicates that the safety system has been triggered. If true the safety system has been triggered.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -576,7 +638,7 @@ o6.reference(SafetySystemType, "i=41", SafetySystemTriggeredAlarmType)
 @o6.objecttype(nodeId="ns=paefs;i=1022", browseName="ns=paefs;FilterMachineIdentificationType", displayName="FilterMachineIdentificationType")
 class FilterMachineIdentificationType(machinery.objtypes.MachineIdentificationType):
     exIdentification: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6440", browseName="ns=paefs;ExIdentification", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6440", browseName="ns=paefs;ExIdentification", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     nominalAirflow: ns0.vartypes.AnalogUnitRangeType
     ratedPower: ns0.vartypes.AnalogUnitRangeType | None
@@ -597,6 +659,7 @@ o6.call(
     nodeId="ns=paefs;i=7003",
     browseName="ns=paefs;SetAndActivateAirflowSetpoint",
     description="The Method SetAirflowSetpoint sets a setpoint for the airflow. The value’s unit is the same as the one specified in object Airflow. Since setpoints are mutually exclusive, the method also sets the boolean IsActiveSetpoint of the setpoints for pressure and rotational speed to false.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=paefs;i=6277"]),
 )
 
@@ -609,13 +672,16 @@ o6.call(
 )
 class CleaningUnitType(ns0.objtypes.BaseObjectType):
     airConsumption: ConsumptionType | None = o6.hasComponent(
-        ConsumptionType(nodeId="ns=paefs;i=5078", browseName="ns=paefs;AirConsumption", description="Describes the current consumption of compressed air.")
+        ConsumptionType(
+            nodeId="ns=paefs;i=5078", browseName="ns=paefs;AirConsumption", description="Describes the current consumption of compressed air.", modellingRule="Optional"
+        )
     )
     automaticCleaningEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=paefs;i=6082",
             browseName="ns=paefs;AutomaticCleaningEnabled",
             description="If enabled, the cleaning unit may automatically perform the cleaning according to predefined rules when cleaning is necessary. Otherwise, automatic cleaning is blocked.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -623,13 +689,21 @@ class CleaningUnitType(ns0.objtypes.BaseObjectType):
     )
     cleaningActive: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=paefs;i=6161", browseName="ns=paefs;CleaningActive", description="Describes that the unit is currently in a cleaning cycle.", dataType=o6.Boolean
+            nodeId="ns=paefs;i=6161",
+            browseName="ns=paefs;CleaningActive",
+            description="Describes that the unit is currently in a cleaning cycle.",
+            modellingRule="Mandatory",
+            dataType=o6.Boolean,
         )
     )
     cleaningInterval: SensorSetpointWriteType | None
     cleaningRecommended: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=paefs;i=6187", browseName="ns=paefs;CleaningRecommended", description="Indicates that cleaning of the separator is recommended.", dataType=o6.Boolean
+            nodeId="ns=paefs;i=6187",
+            browseName="ns=paefs;CleaningRecommended",
+            description="Indicates that cleaning of the separator is recommended.",
+            modellingRule="Optional",
+            dataType=o6.Boolean,
         )
     )
     filterCleaningEffect: SensorSetpointWriteType | None
@@ -641,6 +715,7 @@ class CleaningUnitType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6406",
             browseName="ns=paefs;Malfunction",
             description="Indicates that the cleaning unit is malfunctioning. True in case of error. Malfunctions can be, for example, that the filter cleaning effect is not sufficient.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -649,6 +724,7 @@ class CleaningUnitType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=7007",
             browseName="ns=paefs;RequestCleaning",
             description="The Method RequestCleaning requests cleaning of the unit. The cleaning unit will perform the cleaning as soon as possible.",
+            modellingRule="Optional",
         )
     )
     reservoirPressure: SensorSetpointWriteType | None
@@ -657,6 +733,7 @@ class CleaningUnitType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6186",
             browseName="ns=paefs;TotalCleaningCycles",
             description="Count of the number of cleaning cycles carried out by the cleaning system.",
+            modellingRule="Optional",
             dataType=o6.UInt32,
         )
     )
@@ -680,6 +757,7 @@ class AirConnectionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=7009",
             browseName="ns=paefs;Close",
             description="The Method Close closes or switches some of the valves in the ducting system so that no air may pass through the ducting system to the device",
+            modellingRule="Optional",
         )
     )
     connectionOpen: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -687,6 +765,7 @@ class AirConnectionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6426",
             browseName="ns=paefs;ConnectionOpen",
             description="Indicates the connections status (open, closed, or a state in between)",
+            modellingRule="Optional",
             dataType=paefs_datypes.AirConnectionOpenEnum,
         )
     )
@@ -697,6 +776,7 @@ class AirConnectionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6428",
             browseName="ns=paefs;Malfunction",
             description="Indicates that the AirConnection is malfunctioning, i.e., an error occurs in a component that provides functionality for this abstract component; e.g., an error in the ducting system or a valve. True in case of error.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -705,6 +785,7 @@ class AirConnectionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=7008",
             browseName="ns=paefs;Open",
             description="The Method Open opens or switches all valves of the ducting system so that the air can pass through to the filter device",
+            modellingRule="Optional",
         )
     )
     pressure: SensorMonitoringType | None
@@ -724,7 +805,10 @@ o6.reference(AirConnectionType, "i=41", MalfunctionAlarmType)
 class FilterSystemType(ns0.objtypes.BaseObjectType):
     airConsumption: ConsumptionType | None = o6.hasComponent(
         ConsumptionType(
-            nodeId="ns=paefs;i=5002", browseName="ns=paefs;AirConsumption", description="Contains information regarding the consumption of compressed air of the filter system."
+            nodeId="ns=paefs;i=5002",
+            browseName="ns=paefs;AirConsumption",
+            description="Contains information regarding the consumption of compressed air of the filter system.",
+            modellingRule="Optional",
         )
     )
     airIntakeConnection: AirConnectionType = o6.hasComponent(
@@ -732,6 +816,7 @@ class FilterSystemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=5005",
             browseName="ns=paefs;AirIntakeConnection",
             description="The connection to the ducting system from which the process gas enters the filter system.",
+            modellingRule="Mandatory",
         )
     )
     airOutletConnection: AirConnectionType = o6.hasComponent(
@@ -739,6 +824,7 @@ class FilterSystemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=5008",
             browseName="ns=paefs;AirOutletConnection",
             description="The connection to the ducting system to which the cleaned process gas leaves the filter system.",
+            modellingRule="Mandatory",
         )
     )
     controlMode: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -746,6 +832,7 @@ class FilterSystemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6021",
             browseName="ns=paefs;ControlMode",
             description="Operating mode that describes whether the system can be controlled externally. Possible values are manual, auto and other.",
+            modellingRule="Optional",
             dataType=paefs_datypes.ControlModeEnum,
         )
     )
@@ -760,6 +847,7 @@ class FilterSystemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6238",
             browseName="ns=paefs;MaintenanceRequested",
             description="The maintenance request allows the manufacturer to inform the operator that the system requires maintenance. True = maintenance requested by system. False = no maintenance requested.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -768,20 +856,22 @@ class FilterSystemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6058",
             browseName="ns=paefs;Malfunction",
             description="Malfunction describes that the filter system has a collective fault message. True in case of error.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
     operationCycleCounter: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6181", browseName="ns=paefs;OperationCycleCounter", dataType=ns0.datatypes.UInteger)
+        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6181", browseName="ns=paefs;OperationCycleCounter", modellingRule="Optional", dataType=ns0.datatypes.UInteger)
     )
     operationDuration: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6180", browseName="ns=paefs;OperationDuration", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6180", browseName="ns=paefs;OperationDuration", modellingRule="Optional", dataType=ns0.datatypes.Duration)
     )
     operationOff: o6.node.MethodNode | None = o6.hasComponent(
         o6.call(
             nodeId="ns=paefs;i=7005",
             browseName="ns=paefs;OperationOff",
             description="The Method OperationOff turns the filter system machine off. As with the OperationOn method, this method should be present under the FilterSystemType if and only if the filter units are considered components of the system rather than individual machines.",
+            modellingRule="Optional",
         )
     )
     operationOn: o6.node.MethodNode | None = o6.hasComponent(
@@ -789,13 +879,19 @@ class FilterSystemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=7004",
             browseName="ns=paefs;OperationOn",
             description="The Method OperationOn turns the filter system machine on. It should only be available on the filter system if the filter units are considered components of the filter system and do not have their own OperationOn and OperationOff methods.",
+            modellingRule="Optional",
         )
     )
     powerConsumption: ConsumptionType | None = o6.hasComponent(
-        ConsumptionType(nodeId="ns=paefs;i=5017", browseName="ns=paefs;PowerConsumption", description="Contains information regarding the energy consumption of the filter system.")
+        ConsumptionType(
+            nodeId="ns=paefs;i=5017",
+            browseName="ns=paefs;PowerConsumption",
+            description="Contains information regarding the energy consumption of the filter system.",
+            modellingRule="Optional",
+        )
     )
     powerOnDuration: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6054", browseName="ns=paefs;PowerOnDuration", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6054", browseName="ns=paefs;PowerOnDuration", modellingRule="Optional", dataType=ns0.datatypes.Duration)
     )
     pressureLoss: SensorMonitoringType | None
     safetySystem_: SafetySystemType | None
@@ -816,13 +912,14 @@ o6.reference(FilterSystemType, "i=41", MalfunctionAlarmType)
 @o6.objecttype(nodeId="ns=paefs;i=1004", browseName="ns=paefs;FilterAidDeviceType", displayName="FilterAidDeviceType", description="Device for the application of a filter aid.")
 class FilterAidDeviceType(ns0.objtypes.BaseObjectType):
     airConsumption: ConsumptionType | None = o6.hasComponent(
-        ConsumptionType(nodeId="ns=paefs;i=5037", browseName="ns=paefs;AirConsumption", description="Describes the compressed air consumption.")
+        ConsumptionType(nodeId="ns=paefs;i=5037", browseName="ns=paefs;AirConsumption", description="Describes the compressed air consumption.", modellingRule="Optional")
     )
     automaticDosingEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=paefs;i=6204",
             browseName="ns=paefs;AutomaticDosingEnabled",
             description="If enabled, the filter aid device is allowed to perform dosing automatically.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -830,18 +927,30 @@ class FilterAidDeviceType(ns0.objtypes.BaseObjectType):
     )
     compressedAirSupplyInterrupted: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=paefs;i=6146", browseName="ns=paefs;CompressedAirSupplyInterrupted", description="Indicates that the air supply is interrupted.", dataType=o6.Boolean
+            nodeId="ns=paefs;i=6146",
+            browseName="ns=paefs;CompressedAirSupplyInterrupted",
+            description="Indicates that the air supply is interrupted.",
+            modellingRule="Optional",
+            dataType=o6.Boolean,
         )
     )
     containerOpen: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=paefs;i=6142", browseName="ns=paefs;ContainerOpen", description="Indicates that the filter aid reservoir is not closed.", dataType=o6.Boolean
+            nodeId="ns=paefs;i=6142",
+            browseName="ns=paefs;ContainerOpen",
+            description="Indicates that the filter aid reservoir is not closed.",
+            modellingRule="Optional",
+            dataType=o6.Boolean,
         )
     )
     dosageAmount: SensorSetpointWriteType | None
     dosingRequested: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=paefs;i=6144", browseName="ns=paefs;DosingRequested", description="Indicates that the filter system requests dosing.", dataType=o6.Boolean
+            nodeId="ns=paefs;i=6144",
+            browseName="ns=paefs;DosingRequested",
+            description="Indicates that the filter system requests dosing.",
+            modellingRule="Optional",
+            dataType=o6.Boolean,
         )
     )
     fillingLevel: SensorMonitoringType | None
@@ -850,6 +959,7 @@ class FilterAidDeviceType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6143",
             browseName="ns=paefs;FilterAidDeviceStatus",
             description="Describes the action performed by the dosage unit (see FilterAidDeviceStatusEnum).",
+            modellingRule="Optional",
             dataType=paefs_datypes.FilterAidDeviceStatusEnum,
         )
     )
@@ -861,17 +971,30 @@ class FilterAidDeviceType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6145",
             browseName="ns=paefs;Malfunction",
             description="Indicates that the filter aid device is malfunctioning. True in case of error. Malfunctions can be, for example, that there is no more filter aid or that there is a malfunction in the subsystems of the filter aid device.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
     powerConsumption: ConsumptionType | None = o6.hasComponent(
-        ConsumptionType(nodeId="ns=paefs;i=5035", browseName="ns=paefs;PowerConsumption", description="Describes the current power consumption of the filter aid device.")
+        ConsumptionType(
+            nodeId="ns=paefs;i=5035",
+            browseName="ns=paefs;PowerConsumption",
+            description="Describes the current power consumption of the filter aid device.",
+            modellingRule="Optional",
+        )
     )
     resetFillingLevel: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=paefs;i=7006", browseName="ns=paefs;ResetFillingLevel", description="The Method ResetFillingLevel resets the filling level of the filter aid reservoir.")
+        o6.call(
+            nodeId="ns=paefs;i=7006",
+            browseName="ns=paefs;ResetFillingLevel",
+            description="The Method ResetFillingLevel resets the filling level of the filter aid reservoir.",
+            modellingRule="Optional",
+        )
     )
     triggerDosing: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=paefs;i=7042", browseName="ns=paefs;TriggerDosing", description="The Method TriggerDosing triggers a single additional dosage.")
+        o6.call(
+            nodeId="ns=paefs;i=7042", browseName="ns=paefs;TriggerDosing", description="The Method TriggerDosing triggers a single additional dosage.", modellingRule="Optional"
+        )
     )
 
 
@@ -895,6 +1018,7 @@ o6.call(
     nodeId="ns=paefs;i=7071",
     browseName="ns=paefs;SetAndActivatePressureSetpoint",
     description="The Method SetPressureSetpoint sets a setpoint for the pressure. The value’s unit is the same as the one specified in object Pressure. Since setpoints are mutually exclusive, the method also sets the boolean IsActiveSetpoint of the setpoints for airflow and rotational speed to false.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=paefs;i=6278"]),
 )
 
@@ -913,6 +1037,7 @@ o6.call(
     nodeId="ns=paefs;i=7072",
     browseName="ns=paefs;SetAndActivateRotationalSpeedSetpoint",
     description="The Method SetRotationalSpeedSetpoint sets a setpoint for the rotational speed. The value’s unit is the same as the one specified in object RotationalSpeed. Since setpoints are mutually exclusive, the method also sets the boolean IsActiveSetpoint of the setpoints for airflow and pressure to false.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=paefs;i=6279"]),
 )
 
@@ -927,7 +1052,10 @@ o6.call(
 class FilterUnitType(ns0.objtypes.BaseObjectType):
     airConsumption: ConsumptionType | None = o6.hasComponent(
         ConsumptionType(
-            nodeId="ns=paefs;i=5030", browseName="ns=paefs;AirConsumption", description="Contains information regarding the consumption of compressed air of the filter unit."
+            nodeId="ns=paefs;i=5030",
+            browseName="ns=paefs;AirConsumption",
+            description="Contains information regarding the consumption of compressed air of the filter unit.",
+            modellingRule="Optional",
         )
     )
     airIntakeConnection: AirConnectionType = o6.hasComponent(
@@ -935,6 +1063,7 @@ class FilterUnitType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=5023",
             browseName="ns=paefs;AirIntakeConnection",
             description="The connection to the ducting system from which the polluted process gas enters the filter unit.",
+            modellingRule="Mandatory",
         )
     )
     airOutletConnection: AirConnectionType = o6.hasComponent(
@@ -942,6 +1071,7 @@ class FilterUnitType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=5024",
             browseName="ns=paefs;AirOutletConnection",
             description="The connection to the ducting system through which the cleaned process gas leaves the filter unit.",
+            modellingRule="Mandatory",
         )
     )
     airflow: SensorSetpointReadType | None
@@ -955,6 +1085,7 @@ class FilterUnitType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6141",
             browseName="ns=paefs;MaintenanceRequested",
             description="The maintenance request allows the manufacturer to inform the operator that the system requires maintenance. True = maintenance requested by system. False = no maintenance requested.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -963,20 +1094,22 @@ class FilterUnitType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=6036",
             browseName="ns=paefs;Malfunction",
             description="One or more subsystems of the filter unit have a malfunction. True in case of error.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
     operationCycleCounter: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6251", browseName="ns=paefs;OperationCycleCounter", dataType=ns0.datatypes.UInteger)
+        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6251", browseName="ns=paefs;OperationCycleCounter", modellingRule="Optional", dataType=ns0.datatypes.UInteger)
     )
     operationDuration: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6250", browseName="ns=paefs;OperationDuration", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6250", browseName="ns=paefs;OperationDuration", modellingRule="Optional", dataType=ns0.datatypes.Duration)
     )
     operationOff: o6.node.MethodNode | None = o6.hasComponent(
         o6.call(
             nodeId="ns=paefs;i=7002",
             browseName="ns=paefs;OperationOff",
             description="The Method OperationOff turns the machine off. As with the OperationOn Method, this method should be present under the filter unit if and only if the filter unit is considered a machine.",
+            modellingRule="Optional",
         )
     )
     operationOn: o6.node.MethodNode | None = o6.hasComponent(
@@ -984,13 +1117,19 @@ class FilterUnitType(ns0.objtypes.BaseObjectType):
             nodeId="ns=paefs;i=7001",
             browseName="ns=paefs;OperationOn",
             description="The Method OperationOn turns the machine on. It should only be available on the filter unit if the filter unit is considered a machine, rather than a component of a larger machine. If the filter unit is only a component of a larger machine, the OperationOn Method should be present on the filter system.",
+            modellingRule="Optional",
         )
     )
     powerConsumption: ConsumptionType | None = o6.hasComponent(
-        ConsumptionType(nodeId="ns=paefs;i=5029", browseName="ns=paefs;PowerConsumption", description="Contains information regarding the energy consumption of the filter unit.")
+        ConsumptionType(
+            nodeId="ns=paefs;i=5029",
+            browseName="ns=paefs;PowerConsumption",
+            description="Contains information regarding the energy consumption of the filter unit.",
+            modellingRule="Optional",
+        )
     )
     powerOnDuration: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6182", browseName="ns=paefs;PowerOnDuration", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6182", browseName="ns=paefs;PowerOnDuration", modellingRule="Optional", dataType=ns0.datatypes.Duration)
     )
     pressure: SensorSetpointReadType | None
     pressureLoss: SensorMonitoringType | None
@@ -1025,6 +1164,7 @@ class WashingAgentInflowOpenConditionType(ns0.objtypes.ConditionType):
             nodeId="ns=paefs;i=8419",
             browseName="ns=paefs;Open",
             description="Reflects the value of the WashingAgentInflowOpen property of the WetSeparatorType at the time the event was sent",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -1045,6 +1185,7 @@ class WashingAgentDrainOpenConditionType(ns0.objtypes.ConditionType):
             nodeId="ns=paefs;i=8420",
             browseName="ns=paefs;Open",
             description="Reflects the value of the WashingAgentDrainOpen property of the WetSeparatorType at the time the event was sent",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -1065,6 +1206,7 @@ class FilterAidDeviceStatusChangedConditionType(ns0.objtypes.ConditionType):
             nodeId="ns=paefs;i=8421",
             browseName="ns=paefs;Status",
             description="Reflects the value of the FilterAidDeviceStatus property at the time the condition was triggered",
+            modellingRule="Mandatory",
             dataType=paefs_datypes.FilterAidDeviceStatusEnum,
         )
     )
@@ -1085,6 +1227,7 @@ class CleaningUnitActiveConditionType(ns0.objtypes.ConditionType):
             nodeId="ns=paefs;i=8424",
             browseName="ns=paefs;Active",
             description="Reflects the value of the CleaningActive property of the CleaningUnitType at the time the condition was triggered",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -1105,6 +1248,7 @@ class DischargeContainerInstalledConditionType(ns0.objtypes.ConditionType):
             nodeId="ns=paefs;i=8425",
             browseName="ns=paefs;Installed",
             description="Reflects the value of the DischargeContainerInstalled property of the DischargeSystemType at the time the event was sent",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -1125,6 +1269,7 @@ class AirConnectionStatusChangedConditionType(ns0.objtypes.ConditionType):
             nodeId="ns=paefs;i=8427",
             browseName="ns=paefs;Status",
             description="Reflects the value of the ConnectionOpen property at the time the event is triggered",
+            modellingRule="Mandatory",
             dataType=paefs_datypes.AirConnectionOpenEnum,
         )
     )

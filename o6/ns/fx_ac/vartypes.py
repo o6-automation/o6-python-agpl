@@ -46,10 +46,14 @@ else:
 )
 class AggregatedHealthType(ns0.vartypes.BaseDataVariableType):
     aggregatedDeviceHealth: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6052", browseName="ns=fx_ac;AggregatedDeviceHealth", dataType=fx_ac_datypes.DeviceHealthOptionSet)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=fx_ac;i=6052", browseName="ns=fx_ac;AggregatedDeviceHealth", modellingRule="Mandatory", dataType=fx_ac_datypes.DeviceHealthOptionSet
+        )
     )
     aggregatedOperationalHealth: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6053", browseName="ns=fx_ac;AggregatedOperationalHealth", dataType=fx_ac_datypes.OperationalHealthOptionSet)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=fx_ac;i=6053", browseName="ns=fx_ac;AggregatedOperationalHealth", modellingRule="Mandatory", dataType=fx_ac_datypes.OperationalHealthOptionSet
+        )
     )
 
 

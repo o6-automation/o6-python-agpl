@@ -162,14 +162,16 @@ ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=ijt_base;i=6013",
     browseName="ns=ijt_base;PhysicalQuantity",
     description="PhysicalQuantity is to determine the type of the physical quantity associated to a given value(s).",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6014",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[29],
+                arrayDimensions=[0],
                 value=[
                     o6.LocalizedText("OTHER"),
                     o6.LocalizedText("TIME"),
@@ -211,14 +213,16 @@ ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=ijt_base;i=6021",
     browseName="ns=ijt_base;PhysicalQuantity",
     description="PhysicalQuantity is to determine the type of the physical quantity associated to a given value(s).",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6022",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[29],
+                arrayDimensions=[0],
                 value=[
                     o6.LocalizedText("OTHER"),
                     o6.LocalizedText("TIME"),
@@ -260,12 +264,14 @@ di.objtypes.FunctionalGroupType(
     nodeId="ns=ijt_base;i=5003",
     browseName="ns=ijt_base;Calibration",
     description="The Calibration Object provides a set of parameters related to the calibration operations performed on a given asset.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6019",
                 browseName="ns=ijt_base;LastCalibration",
                 description="LastCalibration is the date when the last calibration was completed.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.UtcTime,
                 value=o6.DateTime("2000-01-01T00:00:00Z"),
             )
@@ -275,6 +281,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=ijt_base;i=6020",
                 browseName="ns=ijt_base;NextCalibration",
                 description="NextCalibration is the date of the next planned calibration.",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.UtcTime,
                 value=o6.DateTime("2000-01-01T00:00:00Z"),
             )
@@ -284,6 +291,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=ijt_base;i=6028",
                 browseName="ns=ijt_base;CalibrationValue",
                 description="CalibrationValue is the configured value of the calibration.",
+                modellingRule="Optional",
                 dataType=o6.Double,
                 value=0.0,
             )
@@ -293,6 +301,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=ijt_base;i=6036",
                 browseName="ns=ijt_base;SensorScale",
                 description="SensorScale is the nominal scale of the sensor. It corresponds also with the measurement range of the sensor.",
+                modellingRule="Optional",
                 dataType=o6.Double,
                 value=0.0,
             )
@@ -302,6 +311,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=ijt_base;i=6037",
                 browseName="ns=ijt_base;CalibrationPlace",
                 description="CalibrationPlace is the location where the last calibration was completed.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 value="",
             )
@@ -311,6 +321,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=ijt_base;i=6038",
                 browseName="ns=ijt_base;CertificateUri",
                 description="CertificateUri contains the URI of a certificate of the calibration target in case the calibration target is certified and the information available. Otherwise, the Variable should be omitted. The String shall be a URI as defined by RFC 3986. Example: MCE test document.",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.UriString,
                 value="",
             )
@@ -321,14 +332,16 @@ ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=ijt_base;i=6035",
     browseName="ns=ijt_base;PhysicalQuantity",
     description="PhysicalQuantity is to determine the type of the physical quantity associated to a given value(s).",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6045",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[29],
+                arrayDimensions=[0],
                 value=[
                     o6.LocalizedText("OTHER"),
                     o6.LocalizedText("TIME"),
@@ -370,14 +383,16 @@ ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=ijt_base;i=6060",
     browseName="ns=ijt_base;PhysicalQuantity",
     description="PhysicalQuantity is to determine the type of the physical quantity associated to a given value(s).",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6065",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[29],
+                arrayDimensions=[0],
                 value=[
                     o6.LocalizedText("OTHER"),
                     o6.LocalizedText("TIME"),
@@ -419,14 +434,16 @@ ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=ijt_base;i=6073",
     browseName="ns=ijt_base;PhysicalQuantity",
     description="PhysicalQuantity is to determine the type of the physical quantity associated to a given value(s).",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6074",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[29],
+                arrayDimensions=[0],
                 value=[
                     o6.LocalizedText("OTHER"),
                     o6.LocalizedText("TIME"),
@@ -470,12 +487,13 @@ di.objtypes.FunctionalGroupType(
     description="The Health Object is an instance of FunctionalGroupType to group health related parameters for all the assets in a Joining System.",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5114", browseName="ns=di;DeviceHealthAlarms")),
+        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5114", browseName="ns=di;DeviceHealthAlarms", modellingRule="Optional")),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6005",
                 browseName="ns=di;DeviceHealth",
                 description="DeviceHealth indicates the status as defined by NAMUR Recommendation NE107. Clients can read or monitor this Variable to determine the device condition.",
+                modellingRule="Optional",
                 dataType=di.datatypes.DeviceHealthEnumeration,
                 value=di.datatypes.DeviceHealthEnumeration.NORMAL,
             )
@@ -485,6 +503,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=ijt_base;i=6077",
                 browseName="ns=ijt_base;ErrorMessage",
                 description="ErrorMessage is the user readable text of the error reported by the given asset.",
+                modellingRule="Optional",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText(),
             )
@@ -494,6 +513,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=ijt_base;i=6082",
                 browseName="ns=ijt_base;ErrorTimestamp",
                 description="ErrorTimestamp is the timestamp when the error occurred in the given asset.",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.UtcTime,
                 value=o6.DateTime("2000-01-01T00:00:00Z"),
             )
@@ -503,6 +523,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=ijt_base;i=6083",
                 browseName="ns=ijt_base;ErrorCode",
                 description="ErrorCode is the system specific code for the error occurred.",
+                modellingRule="Optional",
                 dataType=o6.Int64,
                 value=0,
             )
@@ -512,6 +533,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=ijt_base;i=6090",
                 browseName="ns=ijt_base;Temperature",
                 description="Temperature is the measured temperature of the asset.",
+                modellingRule="Optional",
                 dataType=o6.Double,
                 value=0.0,
             )
@@ -531,6 +553,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6008",
                 browseName="ns=ijt_base;Enabled",
                 description="Enabled indicates if a given asset is enabled or disabled. It can change by EnableAsset method or by some other external interface.",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
             )
@@ -540,6 +563,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6044",
                 browseName="ns=ijt_base;IOSignals",
                 description="IOSignals is an array of signals available for the asset.",
+                modellingRule="Optional",
                 dataType=ijt_base_datypes.SignalDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -550,6 +574,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6091",
                 browseName="ns=ijt_base;Connected",
                 description="Connected indicates if a given asset is connected or disconnected. It can change by DisconnectAsset method or by some other external interface.",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
             )
@@ -561,12 +586,14 @@ di.objtypes.FunctionalGroupType(
     nodeId="ns=ijt_base;i=5020",
     browseName="ns=ijt_base;Service",
     description="The Service Object provides a set of parameters related to the service operations performed on a given asset.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6049",
                 browseName="ns=ijt_base;ServiceReminderCycles",
                 description="ServiceReminderCycles is the configured threshold for the number of remaining cycles before the service reminder is sent. This is calculated based on the RemainingCycles.",
+                modellingRule="Optional",
                 dataType=o6.Int32,
                 value=0,
             )
@@ -576,6 +603,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=ijt_base;i=6050",
                 browseName="ns=ijt_base;ServiceOperationCycles",
                 description="ServiceOperationCycles is the value of the 2:OperationCycleCounter when the last service was performed.",
+                modellingRule="Optional",
                 dataType=o6.UInt64,
                 value=0,
             )
@@ -585,6 +613,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=ijt_base;i=6075",
                 browseName="ns=ijt_base;LastService",
                 description="LastService is the date when the last service was completed.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.UtcTime,
                 value=o6.DateTime("2000-01-01T00:00:00Z"),
             )
@@ -594,6 +623,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=ijt_base;i=6076",
                 browseName="ns=ijt_base;ServicePlace",
                 description="ServicePlace is the location where the last service was completed.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
             )
@@ -603,6 +633,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=ijt_base;i=6089",
                 browseName="ns=ijt_base;NextService",
                 description="NextService is the date of the next planned service.",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.UtcTime,
                 value=o6.DateTime("2000-01-01T00:00:00Z"),
             )
@@ -612,6 +643,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=ijt_base;i=6092",
                 browseName="ns=ijt_base;ServiceCycleSpan",
                 description="ServiceCycleSpan is the maximum allowed number of cycles between two services.",
+                modellingRule="Optional",
                 dataType=o6.Int32,
                 value=0,
             )
@@ -621,6 +653,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=ijt_base;i=6093",
                 browseName="ns=ijt_base;ServiceCycleCount",
                 description="ServiceCycleCount is the total cycle counter since the last service.",
+                modellingRule="Optional",
                 dataType=o6.Int32,
                 value=0,
             )
@@ -630,6 +663,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=ijt_base;i=6094",
                 browseName="ns=ijt_base;NumberOfServices",
                 description="NumberOfServices is the total number of services taken place.",
+                modellingRule="Optional",
                 dataType=o6.Int32,
                 value=0,
             )
@@ -639,6 +673,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=ijt_base;i=6109",
                 browseName="ns=ijt_base;ServiceReminderDays",
                 description="ServiceReminderDays is the number of days before a service reminder should be sent.",
+                modellingRule="Optional",
                 dataType=o6.Int16,
                 value=0,
             )
@@ -648,6 +683,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=ijt_base;i=6110",
                 browseName="ns=ijt_base;RemainingCycles",
                 description="RemainingCycles is the remaining cycles before the service or maintenance. It can go negative if a service is skipped to indicate overshoot cycles.",
+                modellingRule="Optional",
                 dataType=o6.Int32,
                 value=0,
             )
@@ -673,6 +709,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6117",
                 browseName="ns=ijt_base;Type",
                 description="Type is a user readable open string to describe the type of accessory such as socket selector, operator panel, etc.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 value="",
             )
@@ -691,6 +728,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6118",
                 browseName="ns=ijt_base;NodeNumber",
                 description="NodeNumber is the node identifier in multiple configurations. Examples: Cabinet with one controller and multiple servo/modules.",
+                modellingRule="Optional",
                 dataType=o6.Int16,
                 value=0,
             )
@@ -702,12 +740,14 @@ ijt_base_vartypes.JoiningDataVariableType(
     nodeId="ns=ijt_base;i=6119",
     browseName="ns=ijt_base;NominalVoltage",
     description="NominalVoltage is the nominal DC voltage of the battery.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6015",
                 browseName="ns=ijt_base;EngineeringUnits",
                 description="0:EngineeringUnits defines the engineering unit of the values.",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -728,6 +768,7 @@ machinery.objtypes.MachineryOperationCounterType(
                 nodeId="ns=ijt_base;i=6017",
                 browseName="ns=di;OperationCycleCounter",
                 description="OperationCycleCounter is counting the times the component switches from not performing an activity to performing an activity. For example, each time a valve starts moving, is counted. This value shall only increase during the lifetime of the component and shall not be reset when the component is restarted.",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.UInteger,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -738,6 +779,7 @@ machinery.objtypes.MachineryOperationCounterType(
                 nodeId="ns=ijt_base;i=6108",
                 browseName="ns=di;OperationDuration",
                 description="OperationDuration is the duration the MachineryItem has been powered and performing an activity. This counter is intended for machines and components where a distinction is made between switched on and in operation. For example, a drive might be powered on but not operating. It is not intended for machines or components always performing an activity like sensors always measuring data. This value shall only increase during the lifetime of the MachineryItem and shall not be reset when it is restarted. The OperationDuration is provided as Duration, i.e., in milliseconds or even fractions of a millisecond. However, the Server is not expected to update the value in such a high frequency, but maybe once a minute or once an hour, depending on the application.",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.Duration,
                 value=0.0,
                 accessLevel=3,
@@ -749,6 +791,7 @@ machinery.objtypes.MachineryOperationCounterType(
                 nodeId="ns=ijt_base;i=6120",
                 browseName="ns=di;PowerOnDuration",
                 description="PowerOnDuration is the duration the MachineryItem has been powered. The main purpose is to determine the time in which degradation of the MachineryItem occurred. The details, when the time is counted, is implementation-specific. Companion specifications might define specific rules. Typically, when the MachineryItem has supply voltage and the main CPU is running, the time is counted. This may include any kind of sleep mode, but may not include pure Wake on LAN. This value shall only increase during the lifetime of the MachineryItem and shall not be reset when it is restarted. The PowerOnDuration is provided as Duration, i.e., in milliseconds or even fractions of a millisecond. However, the Server is not expected to update the value in such a high frequency, but maybe once a minute or once an hour, depending on the application.",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.Duration,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -763,12 +806,14 @@ ijt_base_vartypes.JoiningDataVariableType(
     nodeId="ns=ijt_base;i=6121",
     browseName="ns=ijt_base;Capacity",
     description="Capacity is the nominal capacity of the battery.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6012",
                 browseName="ns=ijt_base;EngineeringUnits",
                 description="0:EngineeringUnits defines the engineering unit of the values.",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -791,6 +836,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6122",
                 browseName="ns=ijt_base;ChargeCycleCount",
                 description="ChargeCycleCount is the number of times the battery has been charged since the initial operation date.",
+                modellingRule="Optional",
                 dataType=o6.Int64,
                 value=0,
             )
@@ -800,6 +846,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6123",
                 browseName="ns=ijt_base;StateOfCharge",
                 description="StateOfCharge is the state of charge (SOC) indicator functions as a sort of fuel gauge that displays the usable amount of energy. This helps determine optimal charging and discharging. It is given in percentage.",
+                modellingRule="Optional",
                 dataType=o6.Byte,
                 value=0,
             )
@@ -809,6 +856,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6125",
                 browseName="ns=ijt_base;StateOfHealth",
                 description="StateOfHealth is the State of Health is a measurement that reflects the general condition of a battery and its ability to deliver the specified performance compared with a fresh battery. It considers such factors as charge acceptance, internal resistance, voltage, and self-discharge. It is given in percentage.",
+                modellingRule="Optional",
                 dataType=o6.Byte,
                 value=0,
             )
@@ -818,6 +866,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6126",
                 browseName="ns=ijt_base;Type",
                 description="Type is a user readable text to determine the type of battery such as pack type, technology, chemical composition, battery standard, etc.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 value="",
             )
@@ -829,14 +878,16 @@ ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=ijt_base;i=6128",
     browseName="ns=ijt_base;Type",
     description="Type is the classification of a Controller.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6129",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[7],
+                arrayDimensions=[0],
                 value=[
                     o6.LocalizedText("OTHER"),
                     o6.LocalizedText("SUPERVISORY_CONTROLLER"),
@@ -864,14 +915,16 @@ ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=ijt_base;i=6130",
     browseName="ns=ijt_base;Type",
     description="Type is the classification of the cable.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6131",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[7],
+                arrayDimensions=[0],
                 value=[
                     o6.LocalizedText("OTHER"),
                     o6.LocalizedText("TOOL_CABLE"),
@@ -896,7 +949,12 @@ ns0.objtypes.FolderType(
         o6.hasComponent(o6.ns["ns=ijt_base;i=6130"]),
         o6.hasComponent(
             ijt_base_vartypes.JoiningDataVariableType(
-                nodeId="ns=ijt_base;i=6132", browseName="ns=ijt_base;CableLength", description="CableLength is the length of the cable.", dataType=o6.Double, value=0.0
+                nodeId="ns=ijt_base;i=6132",
+                browseName="ns=ijt_base;CableLength",
+                description="CableLength is the length of the cable.",
+                modellingRule="Optional",
+                dataType=o6.Double,
+                value=0.0,
             )
         ),
     ],
@@ -906,14 +964,16 @@ ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=ijt_base;i=6133",
     browseName="ns=ijt_base;Type",
     description="Type is the classification of a Tool.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6134",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[4],
+                arrayDimensions=[0],
                 value=[o6.LocalizedText("OTHER"), o6.LocalizedText("FIXTURED"), o6.LocalizedText("HANDHELD"), o6.LocalizedText("MANUAL")],
             )
         )
@@ -940,6 +1000,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=ijt_base;i=6006",
                 browseName="ns=ijt_base;Description",
                 description="Description is the system specific description of the asset.",
+                modellingRule="Optional",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText(),
             )
@@ -949,6 +1010,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=ijt_base;i=6016",
                 browseName="ns=ijt_base;JoiningTechnology",
                 description="JoiningTechnology is a human readable text to identify the joining technology.",
+                modellingRule="Optional",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText(),
             )
@@ -958,6 +1020,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=ijt_base;i=6018",
                 browseName="ns=ijt_base;SupplierCode",
                 description="SupplierCode is the SAP or ERP Supplier Code of the asset.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 value="",
             )
@@ -967,6 +1030,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=ijt_base;i=6142",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -975,6 +1039,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=ijt_base;i=6143",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -988,14 +1053,16 @@ ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=ijt_base;i=6146",
     browseName="ns=ijt_base;Type",
     description="Type is the classification of a Feeder.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6147",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[9],
+                arrayDimensions=[0],
                 value=[
                     o6.LocalizedText("OTHER"),
                     o6.LocalizedText("BOWL"),
@@ -1017,12 +1084,14 @@ ijt_base_vartypes.JoiningDataVariableType(
     nodeId="ns=ijt_base;i=6149",
     browseName="ns=ijt_base;FeedingSpeed",
     description="FeedingSpeed indicates the output in parts per time. Example: fasteners / second.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6033",
                 browseName="ns=ijt_base;EngineeringUnits",
                 description="0:EngineeringUnits defines the engineering unit of the values.",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -1043,6 +1112,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6145",
                 browseName="ns=ijt_base;Material",
                 description="Material is the type or name of the part which is supplied by the feeder.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
             )
@@ -1053,6 +1123,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6148",
                 browseName="ns=ijt_base;FillLevel",
                 description="FillLevel is the fill level in the feeder in percentage [%]. (0%=empty, 100% = full).",
+                modellingRule="Optional",
                 dataType=o6.Byte,
                 value=0,
             )
@@ -1072,6 +1143,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6150",
                 browseName="ns=ijt_base;Type",
                 description="Type is the type of memory device. It may define the form factor, interface, or technology. Examples: Flash, CFAST, USB, etc.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 value="",
             )
@@ -1081,6 +1153,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6154",
                 browseName="ns=ijt_base;StorageCapacity",
                 description="StorageCapacity is the static information on size of the storage in Bytes.",
+                modellingRule="Optional",
                 dataType=o6.UInt64,
                 value=0,
             )
@@ -1090,6 +1163,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6155",
                 browseName="ns=ijt_base;UsedSpace",
                 description="UsedSpace is the static information on size of the used space in Bytes.",
+                modellingRule="Optional",
                 dataType=o6.UInt64,
                 value=0,
             )
@@ -1101,12 +1175,14 @@ ijt_base_vartypes.JoiningDataVariableType(
     nodeId="ns=ijt_base;i=6157",
     browseName="ns=ijt_base;NominalPower",
     description="NominalPower is the maximum output power of the power supply.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6066",
                 browseName="ns=ijt_base;EngineeringUnits",
                 description="0:EngineeringUnits defines the engineering unit of the values.",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -1120,12 +1196,14 @@ ijt_base_vartypes.JoiningDataVariableType(
     nodeId="ns=ijt_base;i=6158",
     browseName="ns=ijt_base;ActualPower",
     description="ActualPower is the actual load consumption of the power supply.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6054",
                 browseName="ns=ijt_base;EngineeringUnits",
                 description="0:EngineeringUnits defines the engineering unit of the values.",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -1140,12 +1218,13 @@ di.vartypes.LifetimeVariableType(
     browseName="ns=machinery;<LifetimeVariable>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ijt_base;i=6165", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ijt_base;i=6165", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6166",
                 browseName="ns=di;LimitValue",
                 description="LimitValue indicates when the end of lifetime has been reached.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Number,
             )
         ),
@@ -1154,6 +1233,7 @@ di.vartypes.LifetimeVariableType(
                 nodeId="ns=ijt_base;i=6167",
                 browseName="ns=di;StartValue",
                 description="StartValue indicates the initial value, when there is still the full lifetime left.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Number,
             )
         ),
@@ -1175,14 +1255,16 @@ ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=ijt_base;i=6169",
     browseName="ns=ijt_base;Type",
     description="Type is the classification of a Sensor.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6170",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[27],
+                arrayDimensions=[0],
                 value=[
                     o6.LocalizedText("OTHER"),
                     o6.LocalizedText("TIME"),
@@ -1230,6 +1312,7 @@ ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6010",
                 browseName="ns=ijt_base;OperationMode",
                 description="It provides information on how the joining operation was performed.",
+                modellingRule="Optional",
                 dataType=o6.Byte,
                 value=0,
             ),
@@ -1240,6 +1323,7 @@ ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6098",
                 browseName="ns=ijt_base;JoiningTechnology",
                 description="It is a human readable text to identify the joining technology.",
+                modellingRule="Optional",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText(),
             ),
@@ -1250,6 +1334,7 @@ ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6099",
                 browseName="ns=ijt_base;SequenceNumber",
                 description="It is a human readable text to identify the joining technology.",
+                modellingRule="Optional",
                 dataType=o6.Int64,
                 value=0,
             ),
@@ -1257,7 +1342,12 @@ ns0.vartypes.BaseDataVariableType(
         ),
         o6.reference(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=ijt_base;i=6100", browseName="ns=ijt_base;Name", description="It is the user-friendly name of the result.", dataType=o6.String, value=""
+                nodeId="ns=ijt_base;i=6100",
+                browseName="ns=ijt_base;Name",
+                description="It is the user-friendly name of the result.",
+                modellingRule="Optional",
+                dataType=o6.String,
+                value="",
             ),
             "i=24136",
         ),
@@ -1266,6 +1356,7 @@ ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6101",
                 browseName="ns=ijt_base;Description",
                 description="It is the additional information associated with the result. It can contain information on the ResultContent.",
+                modellingRule="Optional",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText(),
             ),
@@ -1276,6 +1367,7 @@ ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6124",
                 browseName="ns=ijt_base;Classification",
                 description="It provides information on the classification of the result in the joining system.",
+                modellingRule="Optional",
                 dataType=o6.Byte,
                 value=0,
             ),
@@ -1286,6 +1378,7 @@ ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6135",
                 browseName="ns=ijt_base;InterventionType",
                 description="It provides information on type of intervention which has occurred during the joining operation.",
+                modellingRule="Optional",
                 dataType=o6.Byte,
                 value=0,
             ),
@@ -1296,6 +1389,7 @@ ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6136",
                 browseName="ns=ijt_base;IsGeneratedOffline",
                 description="It indicates that the result is generated when the asset was offline. The default value is false.\nNote: The definition of offline status is application specific.\nExample: Wireless tool performing joining in radio shadow.",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
             ),
@@ -1306,6 +1400,7 @@ ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6137",
                 browseName="ns=ijt_base;AssociatedEntities",
                 description="It is a list of identifiers associated to the given result. \nExamples: ProductId, VIN, SocketId, JointId, JoiningProcessId, etc.",
+                modellingRule="Optional",
                 dataType=ijt_base_datypes.EntityDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -1317,6 +1412,7 @@ ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6138",
                 browseName="ns=ijt_base;ResultCounters",
                 description="It is a list of counters associated to the given result. \nExamples: Batch Counter, Retry Counter, Channel Counter, etc.",
+                modellingRule="Optional",
                 dataType=ijt_base_datypes.ResultCounterDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -1325,7 +1421,12 @@ ns0.vartypes.BaseDataVariableType(
         ),
         o6.reference(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=ijt_base;i=6139", browseName="ns=ijt_base;AssemblyType", description="It provides the type of joining operation.", dataType=o6.Byte, value=0
+                nodeId="ns=ijt_base;i=6139",
+                browseName="ns=ijt_base;AssemblyType",
+                description="It provides the type of joining operation.",
+                modellingRule="Optional",
+                dataType=o6.Byte,
+                value=0,
             ),
             "i=24136",
         ),
@@ -1334,6 +1435,7 @@ ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6160",
                 browseName="ns=machinery_result;ResultId",
                 description="System-wide unique identifier, which is assigned by the system. This ID can be used for fetching exactly this result using the method GetResultById and it is identical to the ResultId of the ResultReadyEventType.\nIf the system does not manage resultIds, it should always be set to “NA”.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.TrimmedString,
                 value="",
             ),
@@ -1344,6 +1446,7 @@ ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6173",
                 browseName="ns=ijt_base;ExtendedMetaData",
                 description="It is used to send any additional meta data which cannot be sent using the existing properties. It shall be used only for sending meta data but not any content.",
+                modellingRule="Optional",
                 dataType=ijt_base_datypes.KeyValueDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -1381,6 +1484,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6185",
                 browseName="ns=ijt_base;Type",
                 description="Type is a user readable open string to describe the type of subcomponent such as network module, etc.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 value="",
             )
@@ -1434,10 +1538,16 @@ o6.reference(o6.ns["ns=ijt_base;i=5111"], "i=39", o6.ns["ns=ijt_base;i=6206"])
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=ijt_base;i=6002",
     browseName="ns=machinery_result;ResultMetaData",
+    modellingRule="Mandatory",
     references=[
         o6.reference(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=ijt_base;i=6004", browseName="ns=ijt_base;AssemblyType", description="It provides the type of joining operation.", dataType=o6.Byte, value=0
+                nodeId="ns=ijt_base;i=6004",
+                browseName="ns=ijt_base;AssemblyType",
+                description="It provides the type of joining operation.",
+                modellingRule="Optional",
+                dataType=o6.Byte,
+                value=0,
             ),
             "i=24136",
         ),
@@ -1446,6 +1556,7 @@ ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6007",
                 browseName="ns=ijt_base;AssociatedEntities",
                 description="It is a list of identifiers associated to the given result. \nExamples: ProductId, VIN, SocketId, JointId, JoiningProcessId, etc.",
+                modellingRule="Optional",
                 dataType=ijt_base_datypes.EntityDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -1457,6 +1568,7 @@ ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6009",
                 browseName="ns=ijt_base;Classification",
                 description="It provides information on the classification of the result in the joining system.",
+                modellingRule="Optional",
                 dataType=o6.Byte,
                 value=0,
             ),
@@ -1467,6 +1579,7 @@ ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6011",
                 browseName="ns=ijt_base;Description",
                 description="It is the additional information associated with the result. It can contain information on the ResultContent.",
+                modellingRule="Optional",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText(),
             ),
@@ -1477,6 +1590,7 @@ ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6023",
                 browseName="ns=ijt_base;InterventionType",
                 description="It provides information on type of intervention which has occurred during the joining operation.",
+                modellingRule="Optional",
                 dataType=o6.Byte,
                 value=0,
             ),
@@ -1487,6 +1601,7 @@ ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6032",
                 browseName="ns=ijt_base;IsGeneratedOffline",
                 description="It indicates that the result is generated when the asset was offline. The default value is false.\nNote: The definition of offline status is application specific.\nExample: Wireless tool performing joining in radio shadow.",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
             ),
@@ -1497,6 +1612,7 @@ ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6048",
                 browseName="ns=ijt_base;JoiningTechnology",
                 description="It is a human readable text to identify the joining technology.",
+                modellingRule="Optional",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText(),
             ),
@@ -1504,7 +1620,12 @@ ns0.vartypes.BaseDataVariableType(
         ),
         o6.reference(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=ijt_base;i=6052", browseName="ns=ijt_base;Name", description="It is the user-friendly name of the result.", dataType=o6.String, value=""
+                nodeId="ns=ijt_base;i=6052",
+                browseName="ns=ijt_base;Name",
+                description="It is the user-friendly name of the result.",
+                modellingRule="Optional",
+                dataType=o6.String,
+                value="",
             ),
             "i=24136",
         ),
@@ -1513,6 +1634,7 @@ ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6071",
                 browseName="ns=ijt_base;ResultCounters",
                 description="It is a list of counters associated to the given result. \nExamples: Batch Counter, Retry Counter, Channel Counter, etc.",
+                modellingRule="Optional",
                 dataType=ijt_base_datypes.ResultCounterDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -1524,6 +1646,7 @@ ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6152",
                 browseName="ns=ijt_base;SequenceNumber",
                 description="It is a human readable text to identify the joining technology.",
+                modellingRule="Optional",
                 dataType=o6.Int64,
                 value=0,
             ),
@@ -1534,6 +1657,7 @@ ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6207",
                 browseName="ns=machinery_result;ResultId",
                 description="System-wide unique identifier, which is assigned by the system. This ID can be used for fetching exactly this result using the method GetResultById and it is identical to the ResultId of the ResultReadyEventType.\nIf the system does not manage resultIds, it should always be set to “NA”.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.TrimmedString,
                 value="",
             ),
@@ -1550,7 +1674,12 @@ ijt_base_vartypes.JoiningSystemResultType(
     modellingRule="Mandatory",
     references=[
         o6.reference(o6.ns["ns=ijt_base;i=6002"], "i=24136"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=ijt_base;i=6210", browseName="ns=machinery_result;ResultContent", valueRank=1, arrayDimensions=[0]), "i=24136"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ijt_base;i=6210", browseName="ns=machinery_result;ResultContent", modellingRule="Optional", valueRank=1, arrayDimensions=[0]
+            ),
+            "i=24136",
+        ),
     ],
     dataType=machinery_result.datatypes.ResultDataType,
     value=machinery_result.datatypes.ResultDataType(resultMetaData=machinery_result.datatypes.ResultMetaDataType(resultId=""), resultContent=[]),
@@ -1593,12 +1722,14 @@ o6.reference(o6.ns["ns=ijt_base;i=5057"], "i=39", o6.ns["ns=ijt_base;i=6222"])
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=ijt_base;i=6226",
     browseName="ns=machinery_result;ResultMetaData",
+    modellingRule="Mandatory",
     references=[
         o6.reference(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6208",
                 browseName="ns=machinery_result;ResultId",
                 description="System-wide unique identifier, which is assigned by the system. This ID can be used for fetching exactly this result using the method GetResultById and it is identical to the ResultId of the ResultReadyEventType.\nIf the system does not manage resultIds, it should always be set to “NA”.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.TrimmedString,
                 value="",
             ),
@@ -1612,7 +1743,12 @@ ijt_base_vartypes.JoiningSystemResultType(
     browseName="ns=ijt_base;<ResultVariable>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=ijt_base;i=6211", browseName="ns=machinery_result;ResultContent", valueRank=1, arrayDimensions=[0]), "i=24136"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ijt_base;i=6211", browseName="ns=machinery_result;ResultContent", modellingRule="Optional", valueRank=1, arrayDimensions=[0]
+            ),
+            "i=24136",
+        ),
         o6.reference(o6.ns["ns=ijt_base;i=6226"], "i=24136"),
     ],
     dataType=machinery_result.datatypes.ResultDataType,
@@ -1632,6 +1768,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6171",
                 browseName="ns=ijt_base;OverloadCount",
                 description="OverloadCount is the number of overloads of the sensor, where the permissible load of the sensor was exceeded.",
+                modellingRule="Optional",
                 dataType=o6.Int64,
                 value=0,
             )
@@ -1641,6 +1778,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6231",
                 browseName="ns=ijt_base;MeasuredValue",
                 description="MeasuredValue is the actual measured value reported from a sensor.",
+                modellingRule="Optional",
                 dataType=o6.Double,
                 value=0.0,
             )
@@ -1684,6 +1822,7 @@ ijt_base_objtypes.JoiningSystemIdentificationType(
                 nodeId="ns=ijt_base;i=6193",
                 browseName="ns=ijt_base;Name",
                 description="Name is the name of the joining system. It can also be the standard browse name of the instance of JoiningSystemType.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -1692,6 +1831,7 @@ ijt_base_objtypes.JoiningSystemIdentificationType(
                 nodeId="ns=ijt_base;i=6194",
                 browseName="ns=ijt_base;Description",
                 description="It is the description of the system which could be written by the customer to identify the system. It could be the purpose of the system in the assembly line.",
+                modellingRule="Optional",
                 dataType=o6.LocalizedText,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -1702,6 +1842,7 @@ ijt_base_objtypes.JoiningSystemIdentificationType(
                 nodeId="ns=ijt_base;i=6195",
                 browseName="ns=ijt_base;IntegratorName",
                 description="IntegratorName is the name of the system integrator.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -1712,6 +1853,7 @@ ijt_base_objtypes.JoiningSystemIdentificationType(
                 nodeId="ns=ijt_base;i=6196",
                 browseName="ns=ijt_base;JoiningTechnology",
                 description="JoiningTechnology is a human readable text to identify the joining technology of the joining system.",
+                modellingRule="Optional",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -1720,6 +1862,7 @@ ijt_base_objtypes.JoiningSystemIdentificationType(
                 nodeId="ns=ijt_base;i=6197",
                 browseName="ns=machinery;Location",
                 description="Location is the location of the given system in the given plant or factory in text format.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -1730,6 +1873,7 @@ ijt_base_objtypes.JoiningSystemIdentificationType(
                 nodeId="ns=ijt_base;i=6223",
                 browseName="ns=di;Manufacturer",
                 description="Manufacturer provides a human-readable, localized name of the joining system manufacturer.",
+                modellingRule="Optional",
                 dataType=o6.LocalizedText,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -1740,6 +1884,7 @@ ijt_base_objtypes.JoiningSystemIdentificationType(
                 nodeId="ns=ijt_base;i=6224",
                 browseName="ns=di;ManufacturerUri",
                 description="ManufacturerUri provides a unique identifier for this company. This identifier should be a fully qualified domain name; however, it may be a GUID or similar construct that ensures global uniqueness.",
+                modellingRule="Optional",
                 dataType=o6.String,
             )
         ),
@@ -1748,6 +1893,7 @@ ijt_base_objtypes.JoiningSystemIdentificationType(
                 nodeId="ns=ijt_base;i=6237",
                 browseName="ns=di;Model",
                 description="Model provides the type of the joining system. Examples: Fixtured System, Handheld System, etc.",
+                modellingRule="Optional",
                 dataType=o6.LocalizedText,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -1758,6 +1904,7 @@ ijt_base_objtypes.JoiningSystemIdentificationType(
                 nodeId="ns=ijt_base;i=6238",
                 browseName="ns=di;ProductInstanceUri",
                 description="ProductInstanceUri is a globally unique resource identifier provided by the manufacturer.",
+                modellingRule="Optional",
                 dataType=o6.String,
             )
         ),
@@ -1766,6 +1913,7 @@ ijt_base_objtypes.JoiningSystemIdentificationType(
                 nodeId="ns=ijt_base;i=6239",
                 browseName="ns=ijt_base;SystemId",
                 description="SystemId is the system integrator specific identifier for the system. It represents a reference to the manufacturer ERP system.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -1789,6 +1937,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6156",
                 browseName="ns=ijt_base;InputSpecification",
                 description="InputSpecification is the input specification of the power supply. Example: 230 V, 50/60 Hz, 10 A.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
             )
@@ -1800,6 +1949,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6249",
                 browseName="ns=ijt_base;OutputSpecification",
                 description="OutputSpecification is the output specification of the power supply.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 value="",
             )
@@ -1928,6 +2078,7 @@ ijt_base_vartypes.JoiningSystemEventContentType(
                 nodeId="ns=ijt_base;i=6275",
                 browseName="ns=ijt_base;AssociatedEntities",
                 description="AssociatedEntities is a list of identifiers of various entities/objects available in the given system. Example: An event maybe associated to Asset, Result, Joint, Error, etc.",
+                modellingRule="Optional",
                 dataType=ijt_base_datypes.EntityDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -1938,6 +2089,7 @@ ijt_base_vartypes.JoiningSystemEventContentType(
                 nodeId="ns=ijt_base;i=6276",
                 browseName="ns=ijt_base;EventCode",
                 description="EventCode is a system specific event code associated to the given event.",
+                modellingRule="Optional",
                 dataType=o6.Int64,
                 value=0,
             )
@@ -1947,6 +2099,7 @@ ijt_base_vartypes.JoiningSystemEventContentType(
                 nodeId="ns=ijt_base;i=6277",
                 browseName="ns=ijt_base;EventText",
                 description="EventText is a human readable text related to the context of the event.",
+                modellingRule="Optional",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText(),
             )
@@ -1956,6 +2109,7 @@ ijt_base_vartypes.JoiningSystemEventContentType(
                 nodeId="ns=ijt_base;i=6278",
                 browseName="ns=ijt_base;JoiningTechnology",
                 description="JoiningTechnology is a human readable text to identify the joining technology which has triggered the event. Examples: Tightening, Gluing, Riveting, Flow Drill Fastening, etc.",
+                modellingRule="Optional",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText(),
             )
@@ -1965,6 +2119,7 @@ ijt_base_vartypes.JoiningSystemEventContentType(
                 nodeId="ns=ijt_base;i=6280",
                 browseName="ns=ijt_base;ReportedValues",
                 description="ReportedValues is a list of values associated with the given event payload. Example: If it is an over temperature event, then the ReportedValue can be the measured value along with the corresponding limits.",
+                modellingRule="Optional",
                 dataType=ijt_base_datypes.ReportedValueDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -1984,6 +2139,7 @@ ijt_base_vartypes.JoiningSystemEventContentType(
                 nodeId="ns=ijt_base;i=6281",
                 browseName="ns=ijt_base;AssociatedEntities",
                 description="AssociatedEntities is a list of identifiers of various entities/objects available in the given system. Example: An event maybe associated to Asset, Result, Joint, Error, etc.",
+                modellingRule="Optional",
                 dataType=ijt_base_datypes.EntityDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -1994,6 +2150,7 @@ ijt_base_vartypes.JoiningSystemEventContentType(
                 nodeId="ns=ijt_base;i=6282",
                 browseName="ns=ijt_base;EventCode",
                 description="EventCode is a system specific event code associated to the given event.",
+                modellingRule="Optional",
                 dataType=o6.Int64,
                 value=0,
             )
@@ -2003,6 +2160,7 @@ ijt_base_vartypes.JoiningSystemEventContentType(
                 nodeId="ns=ijt_base;i=6283",
                 browseName="ns=ijt_base;EventText",
                 description="EventText is a human readable text related to the context of the event.",
+                modellingRule="Optional",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText(),
             )
@@ -2012,6 +2170,7 @@ ijt_base_vartypes.JoiningSystemEventContentType(
                 nodeId="ns=ijt_base;i=6284",
                 browseName="ns=ijt_base;JoiningTechnology",
                 description="JoiningTechnology is a human readable text to identify the joining technology which has triggered the event. Examples: Tightening, Gluing, Riveting, Flow Drill Fastening, etc.",
+                modellingRule="Optional",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText(),
             )
@@ -2021,6 +2180,7 @@ ijt_base_vartypes.JoiningSystemEventContentType(
                 nodeId="ns=ijt_base;i=6285",
                 browseName="ns=ijt_base;ReportedValues",
                 description="ReportedValues is a list of values associated with the given event payload. Example: If it is an over temperature event, then the ReportedValue can be the measured value along with the corresponding limits.",
+                modellingRule="Optional",
                 dataType=ijt_base_datypes.ReportedValueDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -2039,9 +2199,10 @@ ns0.vartypes.MultiStateDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6294",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[29],
+                arrayDimensions=[0],
                 value=[
                     o6.LocalizedText("OTHER"),
                     o6.LocalizedText("TIME"),
@@ -2084,12 +2245,14 @@ machinery.objtypes.MachineryItemIdentificationType(
     nodeId="ns=ijt_base;i=5077",
     browseName="ns=di;Identification",
     description="The Identification Object, using the standardized name defined in OPC 10000-100, provides identification information about the asset. This is a mandatory place holder and any asset inheriting IJoiningSystemAssetType will replace it with MachineIdentificationType or MachineryComponentIdentificationType.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6296",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -2098,6 +2261,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=ijt_base;i=6297",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -2114,23 +2278,26 @@ ns0.objtypes.BaseObjectType(
                 nodeId="ns=ijt_base;i=5092",
                 browseName="ns=ijt_base;Parameters",
                 description="The Parameters Object is an instance of 0:FolderType to group set of common parameters of an asset in a joining system.",
+                modellingRule="Mandatory",
             )
         ),
         o6.hasAddIn(o6.ns["ns=ijt_base;i=5077"]),
     ],
 )
 o6.reference(o6.ns["ns=ijt_base;i=5037"], "i=17603", ijt_base_objtypes.IControllerType)
-ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5018", browseName="ns=ijt_base;Controllers", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5037"])])
+ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5018", browseName="ns=ijt_base;Controllers", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5037"])])
 machinery.objtypes.MachineryItemIdentificationType(
     nodeId="ns=ijt_base;i=5093",
     browseName="ns=di;Identification",
     description="The Identification Object, using the standardized name defined in OPC 10000-100, provides identification information about the asset. This is a mandatory place holder and any asset inheriting IJoiningSystemAssetType will replace it with MachineIdentificationType or MachineryComponentIdentificationType.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6298",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -2139,6 +2306,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=ijt_base;i=6299",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -2155,23 +2323,26 @@ ns0.objtypes.BaseObjectType(
                 nodeId="ns=ijt_base;i=5094",
                 browseName="ns=ijt_base;Parameters",
                 description="The Parameters Object is an instance of 0:FolderType to group set of common parameters of an asset in a joining system.",
+                modellingRule="Mandatory",
             )
         ),
         o6.hasAddIn(o6.ns["ns=ijt_base;i=5093"]),
     ],
 )
 o6.reference(o6.ns["ns=ijt_base;i=5034"], "i=17603", ijt_base_objtypes.IAccessoryType)
-ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5032", browseName="ns=ijt_base;Accessories", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5034"])])
+ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5032", browseName="ns=ijt_base;Accessories", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5034"])])
 machinery.objtypes.MachineryItemIdentificationType(
     nodeId="ns=ijt_base;i=5127",
     browseName="ns=di;Identification",
     description="The Identification Object, using the standardized name defined in OPC 10000-100, provides identification information about the asset. This is a mandatory place holder and any asset inheriting IJoiningSystemAssetType will replace it with MachineIdentificationType or MachineryComponentIdentificationType.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6300",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -2180,6 +2351,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=ijt_base;i=6301",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -2190,12 +2362,14 @@ machinery.objtypes.MachineryItemIdentificationType(
     nodeId="ns=ijt_base;i=5129",
     browseName="ns=di;Identification",
     description="The Identification Object, using the standardized name defined in OPC 10000-100, provides identification information about the asset. This is a mandatory place holder and any asset inheriting IJoiningSystemAssetType will replace it with MachineIdentificationType or MachineryComponentIdentificationType.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6302",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -2204,6 +2378,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=ijt_base;i=6341",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -2220,23 +2395,26 @@ ns0.objtypes.BaseObjectType(
                 nodeId="ns=ijt_base;i=5130",
                 browseName="ns=ijt_base;Parameters",
                 description="The Parameters Object is an instance of 0:FolderType to group set of common parameters of an asset in a joining system.",
+                modellingRule="Mandatory",
             )
         ),
         o6.hasAddIn(o6.ns["ns=ijt_base;i=5129"]),
     ],
 )
 o6.reference(o6.ns["ns=ijt_base;i=5036"], "i=17603", ijt_base_objtypes.ICableType)
-ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5028", browseName="ns=ijt_base;Cables", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5036"])])
+ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5028", browseName="ns=ijt_base;Cables", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5036"])])
 machinery.objtypes.MachineryItemIdentificationType(
     nodeId="ns=ijt_base;i=5131",
     browseName="ns=di;Identification",
     description="The Identification Object, using the standardized name defined in OPC 10000-100, provides identification information about the asset. This is a mandatory place holder and any asset inheriting IJoiningSystemAssetType will replace it with MachineIdentificationType or MachineryComponentIdentificationType.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6342",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -2245,6 +2423,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=ijt_base;i=6343",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -2255,12 +2434,14 @@ machinery.objtypes.MachineryItemIdentificationType(
     nodeId="ns=ijt_base;i=5133",
     browseName="ns=di;Identification",
     description="The Identification Object, using the standardized name defined in OPC 10000-100, provides identification information about the asset. This is a mandatory place holder and any asset inheriting IJoiningSystemAssetType will replace it with MachineIdentificationType or MachineryComponentIdentificationType.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6344",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -2269,6 +2450,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=ijt_base;i=6345",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -2285,23 +2467,26 @@ ns0.objtypes.BaseObjectType(
                 nodeId="ns=ijt_base;i=5134",
                 browseName="ns=ijt_base;Parameters",
                 description="The Parameters Object is an instance of 0:FolderType to group set of common parameters of an asset in a joining system.",
+                modellingRule="Mandatory",
             )
         ),
         o6.hasAddIn(o6.ns["ns=ijt_base;i=5133"]),
     ],
 )
 o6.reference(o6.ns["ns=ijt_base;i=5039"], "i=17603", ijt_base_objtypes.IMemoryDeviceType)
-ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5023", browseName="ns=ijt_base;MemoryDevices", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5039"])])
+ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5023", browseName="ns=ijt_base;MemoryDevices", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5039"])])
 ns0.objtypes.FolderType(
     nodeId="ns=ijt_base;i=5132",
     browseName="ns=ijt_base;Parameters",
     description="The Parameters Object is an instance of 0:FolderType to group set of common parameters of an asset in a joining system.",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6346",
                 browseName="ns=ijt_base;Material",
                 description="Material is the type or name of the part which is supplied by the feeder.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
             )
@@ -2315,24 +2500,31 @@ ns0.objtypes.BaseObjectType(
     references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5132"]), o6.hasAddIn(o6.ns["ns=ijt_base;i=5131"])],
 )
 o6.reference(o6.ns["ns=ijt_base;i=5038"], "i=17603", ijt_base_objtypes.IFeederType)
-ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5031", browseName="ns=ijt_base;Feeders", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5038"])])
+ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5031", browseName="ns=ijt_base;Feeders", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5038"])])
 ns0.objtypes.FolderType(
     nodeId="ns=ijt_base;i=5128",
     browseName="ns=ijt_base;Parameters",
     description="The Parameters Object is an instance of 0:FolderType to group set of common parameters of an asset in a joining system.",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(
             ijt_base_vartypes.JoiningDataVariableType(
                 nodeId="ns=ijt_base;i=6370",
                 browseName="ns=ijt_base;NominalVoltage",
                 description="NominalVoltage is the nominal DC voltage of the battery.",
+                modellingRule="Mandatory",
                 dataType=o6.Double,
                 value=0.0,
             )
         ),
         o6.hasComponent(
             ijt_base_vartypes.JoiningDataVariableType(
-                nodeId="ns=ijt_base;i=6371", browseName="ns=ijt_base;Capacity", description="Capacity is the nominal capacity of the battery.", dataType=o6.Double, value=0.0
+                nodeId="ns=ijt_base;i=6371",
+                browseName="ns=ijt_base;Capacity",
+                description="Capacity is the nominal capacity of the battery.",
+                modellingRule="Mandatory",
+                dataType=o6.Double,
+                value=0.0,
             )
         ),
     ],
@@ -2345,17 +2537,19 @@ ns0.objtypes.BaseObjectType(
     references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5128"]), o6.hasAddIn(o6.ns["ns=ijt_base;i=5127"])],
 )
 o6.reference(o6.ns["ns=ijt_base;i=5035"], "i=17603", ijt_base_objtypes.IBatteryType)
-ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5029", browseName="ns=ijt_base;Batteries", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5035"])])
+ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5029", browseName="ns=ijt_base;Batteries", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5035"])])
 machinery.objtypes.MachineryItemIdentificationType(
     nodeId="ns=ijt_base;i=5135",
     browseName="ns=di;Identification",
     description="The Identification Object, using the standardized name defined in OPC 10000-100, provides identification information about the asset. This is a mandatory place holder and any asset inheriting IJoiningSystemAssetType will replace it with MachineIdentificationType or MachineryComponentIdentificationType.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6372",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -2364,6 +2558,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=ijt_base;i=6373",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -2374,12 +2569,14 @@ ns0.objtypes.FolderType(
     nodeId="ns=ijt_base;i=5136",
     browseName="ns=ijt_base;Parameters",
     description="The Parameters Object is an instance of 0:FolderType to group set of common parameters of an asset in a joining system.",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6390",
                 browseName="ns=ijt_base;InputSpecification",
                 description="InputSpecification is the input specification of the power supply. Example: 230 V, 50/60 Hz, 10 A.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
             )
@@ -2393,17 +2590,19 @@ ns0.objtypes.BaseObjectType(
     references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5136"]), o6.hasAddIn(o6.ns["ns=ijt_base;i=5135"])],
 )
 o6.reference(o6.ns["ns=ijt_base;i=5040"], "i=17603", ijt_base_objtypes.IPowerSupplyType)
-ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5030", browseName="ns=ijt_base;PowerSupplies", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5040"])])
+ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5030", browseName="ns=ijt_base;PowerSupplies", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5040"])])
 machinery.objtypes.MachineryItemIdentificationType(
     nodeId="ns=ijt_base;i=5137",
     browseName="ns=di;Identification",
     description="The Identification Object, using the standardized name defined in OPC 10000-100, provides identification information about the asset. This is a mandatory place holder and any asset inheriting IJoiningSystemAssetType will replace it with MachineIdentificationType or MachineryComponentIdentificationType.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6391",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -2412,6 +2611,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=ijt_base;i=6404",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -2428,23 +2628,26 @@ ns0.objtypes.BaseObjectType(
                 nodeId="ns=ijt_base;i=5138",
                 browseName="ns=ijt_base;Parameters",
                 description="The Parameters Object is an instance of 0:FolderType to group set of common parameters of an asset in a joining system.",
+                modellingRule="Mandatory",
             )
         ),
         o6.hasAddIn(o6.ns["ns=ijt_base;i=5137"]),
     ],
 )
 o6.reference(o6.ns["ns=ijt_base;i=5041"], "i=17603", ijt_base_objtypes.ISensorType)
-ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5025", browseName="ns=ijt_base;Sensors", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5041"])])
+ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5025", browseName="ns=ijt_base;Sensors", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5041"])])
 machinery.objtypes.MachineryItemIdentificationType(
     nodeId="ns=ijt_base;i=5139",
     browseName="ns=di;Identification",
     description="The Identification Object, using the standardized name defined in OPC 10000-100, provides identification information about the asset. This is a mandatory place holder and any asset inheriting IJoiningSystemAssetType will replace it with MachineIdentificationType or MachineryComponentIdentificationType.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6405",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -2453,6 +2656,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=ijt_base;i=6410",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -2463,12 +2667,14 @@ machinery.objtypes.MachineryItemIdentificationType(
     nodeId="ns=ijt_base;i=5140",
     browseName="ns=ijt_base;Parameters",
     description="The Parameters Object is an instance of 0:FolderType to group set of common parameters of an asset in a joining system.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6411",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -2477,6 +2683,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=ijt_base;i=6444",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -2490,17 +2697,19 @@ ns0.objtypes.BaseObjectType(
     references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5140"]), o6.hasAddIn(o6.ns["ns=ijt_base;i=5139"])],
 )
 o6.reference(o6.ns["ns=ijt_base;i=5042"], "i=17603", ijt_base_objtypes.IServoType)
-ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5022", browseName="ns=ijt_base;Servos", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5042"])])
+ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5022", browseName="ns=ijt_base;Servos", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5042"])])
 machinery.objtypes.MachineryItemIdentificationType(
     nodeId="ns=ijt_base;i=5141",
     browseName="ns=di;Identification",
     description="The Identification Object, using the standardized name defined in OPC 10000-100, provides identification information about the asset. This is a mandatory place holder and any asset inheriting IJoiningSystemAssetType will replace it with MachineIdentificationType or MachineryComponentIdentificationType.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6445",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -2509,6 +2718,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=ijt_base;i=6446",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -2525,23 +2735,26 @@ ns0.objtypes.BaseObjectType(
                 nodeId="ns=ijt_base;i=5142",
                 browseName="ns=ijt_base;Parameters",
                 description="The Parameters Object is an instance of 0:FolderType to group set of common parameters of an asset in a joining system.",
+                modellingRule="Mandatory",
             )
         ),
         o6.hasAddIn(o6.ns["ns=ijt_base;i=5141"]),
     ],
 )
 o6.reference(o6.ns["ns=ijt_base;i=5043"], "i=17603", ijt_base_objtypes.ISubComponentType)
-ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5033", browseName="ns=ijt_base;SubComponents", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5043"])])
+ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5033", browseName="ns=ijt_base;SubComponents", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5043"])])
 machinery.objtypes.MachineryItemIdentificationType(
     nodeId="ns=ijt_base;i=5143",
     browseName="ns=di;Identification",
     description="The Identification Object, using the standardized name defined in OPC 10000-100, provides identification information about the asset. This is a mandatory place holder and any asset inheriting IJoiningSystemAssetType will replace it with MachineIdentificationType or MachineryComponentIdentificationType.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6447",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -2550,6 +2763,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=ijt_base;i=6450",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -2560,17 +2774,21 @@ ns0.objtypes.BaseObjectType(
     nodeId="ns=ijt_base;i=5101", browseName="ns=ijt_base;<Software>", modellingRule="OptionalPlaceholder", references=[o6.hasAddIn(o6.ns["ns=ijt_base;i=5143"])]
 )
 o6.reference(o6.ns["ns=ijt_base;i=5101"], "i=17603", ijt_base_objtypes.ISoftwareType)
-ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5001", browseName="ns=ijt_base;SoftwareComponents", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5101"])])
+ns0.objtypes.FolderType(
+    nodeId="ns=ijt_base;i=5001", browseName="ns=ijt_base;SoftwareComponents", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5101"])]
+)
 machinery.objtypes.MachineryItemIdentificationType(
     nodeId="ns=ijt_base;i=5144",
     browseName="ns=di;Identification",
     description="The Identification Object, using the standardized name defined in OPC 10000-100, provides identification information about the asset. This is a mandatory place holder and any asset inheriting IJoiningSystemAssetType will replace it with MachineIdentificationType or MachineryComponentIdentificationType.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6451",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -2579,6 +2797,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=ijt_base;i=6453",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -2589,17 +2808,19 @@ ns0.objtypes.BaseObjectType(
     nodeId="ns=ijt_base;i=5088", browseName="ns=ijt_base;<VirtualStation>", modellingRule="OptionalPlaceholder", references=[o6.hasAddIn(o6.ns["ns=ijt_base;i=5144"])]
 )
 o6.reference(o6.ns["ns=ijt_base;i=5088"], "i=17603", ijt_base_objtypes.IVirtualStationType)
-ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5087", browseName="ns=ijt_base;VirtualStations", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5088"])])
+ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5087", browseName="ns=ijt_base;VirtualStations", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5088"])])
 machinery.objtypes.MachineryItemIdentificationType(
     nodeId="ns=ijt_base;i=5145",
     browseName="ns=di;Identification",
     description="The Identification Object, using the standardized name defined in OPC 10000-100, provides identification information about the asset. This is a mandatory place holder and any asset inheriting IJoiningSystemAssetType will replace it with MachineIdentificationType or MachineryComponentIdentificationType.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6454",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -2608,6 +2829,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=ijt_base;i=6455",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -2618,14 +2840,16 @@ ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=ijt_base;i=6456",
     browseName="ns=ijt_base;Type",
     description="Type is the classification of a Tool.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_base;i=6457",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[4],
+                arrayDimensions=[0],
                 value=[o6.LocalizedText("OTHER"), o6.LocalizedText("FIXTURED"), o6.LocalizedText("HANDHELD"), o6.LocalizedText("MANUAL")],
             )
         )
@@ -2637,6 +2861,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=ijt_base;i=5146",
     browseName="ns=ijt_base;Parameters",
     description="The Parameters Object is an instance of 0:FolderType to group set of common parameters of an asset in a joining system.",
+    modellingRule="Mandatory",
     references=[o6.hasComponent(o6.ns["ns=ijt_base;i=6456"])],
 )
 ns0.objtypes.BaseObjectType(
@@ -2646,11 +2871,12 @@ ns0.objtypes.BaseObjectType(
     references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5146"]), o6.hasAddIn(o6.ns["ns=ijt_base;i=5145"])],
 )
 o6.reference(o6.ns["ns=ijt_base;i=5044"], "i=17603", ijt_base_objtypes.IToolType)
-ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5021", browseName="ns=ijt_base;Tools", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5044"])])
+ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5021", browseName="ns=ijt_base;Tools", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=ijt_base;i=5044"])])
 ns0.objtypes.FolderType(
     nodeId="ns=ijt_base;i=5016",
     browseName="ns=ijt_base;Assets",
     description="The Assets Object is an instance of FolderType to group set of assets available in the given system.",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(o6.ns["ns=ijt_base;i=5001"]),
         o6.hasComponent(o6.ns["ns=ijt_base;i=5018"]),
@@ -2671,13 +2897,15 @@ ns0.objtypes.FolderType(
     nodeId="ns=ijt_base;i=5165",
     browseName="ns=machinery;Health",
     description="Entry point of health information of the MachineryItem.",
+    modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5168", browseName="ns=di;DeviceHealthAlarms")),
+        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5168", browseName="ns=di;DeviceHealthAlarms", modellingRule="Optional")),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6465",
                 browseName="ns=di;DeviceHealth",
                 description="DeviceHealth indicates the status as defined by NAMUR Recommendation NE107. Clients can read or monitor this Variable to determine the device condition.",
+                modellingRule="Optional",
                 dataType=di.datatypes.DeviceHealthEnumeration,
                 value=di.datatypes.DeviceHealthEnumeration.NORMAL,
             )
@@ -2687,6 +2915,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6466",
                 browseName="ns=ijt_base;ErrorCode",
                 description="ErrorCode is the system specific code for the error occurred.",
+                modellingRule="Optional",
                 dataType=o6.Int64,
                 value=0,
             )
@@ -2696,6 +2925,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6467",
                 browseName="ns=ijt_base;ErrorMessage",
                 description="ErrorMessage is the user readable text of the error reported by the given asset.",
+                modellingRule="Optional",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText(),
             )
@@ -2705,6 +2935,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6468",
                 browseName="ns=ijt_base;ErrorTimestamp",
                 description="ErrorTimestamp is the timestamp when the error occurred in the given asset.",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.UtcTime,
                 value=o6.DateTime("1999-12-31T23:00:00Z"),
             )
@@ -2714,6 +2945,7 @@ ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=6469",
                 browseName="ns=ijt_base;Temperature",
                 description="Temperature is the measured temperature of the asset.",
+                modellingRule="Optional",
                 dataType=o6.Double,
                 value=0.0,
             )
@@ -2727,17 +2959,25 @@ machinery.objtypes.MonitoringType(
     modellingRule="Optional",
     references=[
         o6.hasComponent(
-            ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5164", browseName="ns=machinery;Consumption", description="Entry point for consumption information of the MachineryItem.")
+            ns0.objtypes.FolderType(
+                nodeId="ns=ijt_base;i=5164",
+                browseName="ns=machinery;Consumption",
+                description="Entry point for consumption information of the MachineryItem.",
+                modellingRule="Optional",
+            )
         ),
         o6.hasComponent(o6.ns["ns=ijt_base;i=5165"]),
         o6.hasComponent(
-            ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5166", browseName="ns=machinery;Process", description="Entry point for process information of the MachineryItem.")
+            ns0.objtypes.FolderType(
+                nodeId="ns=ijt_base;i=5166", browseName="ns=machinery;Process", description="Entry point for process information of the MachineryItem.", modellingRule="Optional"
+            )
         ),
         o6.hasComponent(
             ns0.objtypes.FolderType(
                 nodeId="ns=ijt_base;i=5167",
                 browseName="ns=machinery;Status",
                 description="Entry point for status information of the MachineryItem. If this Object is provided, and the MachineryItemState is provided, it shall be referenced. If this Object is provided and the MachineryOperationMode is provided, it shall be referenced.",
+                modellingRule="Optional",
             )
         ),
     ],
@@ -2746,12 +2986,14 @@ o6.reference(ijt_base_objtypes.IJoiningSystemAssetType, ns0.reftypes.HasAddIn, o
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=ijt_base;i=6472",
     browseName="ns=machinery_result;ResultMetaData",
+    modellingRule="Mandatory",
     references=[
         o6.reference(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ijt_base;i=6473",
                 browseName="ns=machinery_result;ResultId",
                 description="System-wide unique identifier, which is assigned by the system. This ID can be used for fetching exactly this result using the method GetResultById and it is identical to the ResultId of the ResultReadyEventType.\nIf the system does not manage resultIds, it should always be set to “NA”.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.TrimmedString,
                 value="",
             ),
@@ -2834,6 +3076,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=ijt_base;i=7001",
     browseName="ns=machinery_result;GetLatestResult",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6106"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6107"]),
 )
@@ -2903,6 +3146,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7002",
     browseName="ns=machinery_result;GetResultById",
     description="The server shall return to each client requesting result data a system-wide unique handle identifying the result set / client combination. This handle should be used by the client to indicate to the server that the result data is no longer needed, allowing the server to optimize its resource handling.\nIf the instance of ResultManagementType does not support the ReleaseResultHandle Method, the resultHandle should always be set to 0.\nIf the error is set to a value other than 0, the resultHandle may be set to 0.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6095"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6096"]),
 )
@@ -2989,6 +3233,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=ijt_base;i=7003",
     browseName="ns=machinery_result;GetResultIdListFiltered",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6097"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6103"]),
 )
@@ -3036,6 +3281,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=ijt_base;i=7004",
     browseName="ns=machinery_result;ReleaseResultHandle",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6104"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6105"]),
 )
@@ -3046,7 +3292,7 @@ ijt_base_objtypes.JoiningSystemResultManagementType(
     description="The ResultManagement Object is an instance of JoiningSystemResultManagementType which provides mechanisms to access results generated by the joining system.",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5078", browseName="ns=machinery_result;Results")),
+        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=ijt_base;i=5078", browseName="ns=machinery_result;Results", modellingRule="Optional")),
         o6.hasComponent(o6.ns["ns=ijt_base;i=7001"]),
         o6.hasComponent(o6.ns["ns=ijt_base;i=7002"]),
         o6.hasComponent(o6.ns["ns=ijt_base;i=7003"]),
@@ -3108,6 +3354,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7031",
     browseName="ns=ijt_base;GetJoint",
     description="The Method GetJoint is used to get the joint based on the input identifier.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6316"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6317"]),
 )
@@ -3169,6 +3416,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7032",
     browseName="ns=ijt_base;GetJointComponent",
     description="The Method GetJointComponent is used to get the joint component based on the input identifier.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6318"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6319"]),
 )
@@ -3227,6 +3475,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7033",
     browseName="ns=ijt_base;GetJointComponentList",
     description="The Method GetJointComponentList is used to get the list of available joint components in the system.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6320"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6321"]),
 )
@@ -3292,6 +3541,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7034",
     browseName="ns=ijt_base;GetJointDesign",
     description="The Method GetJointDesign is used to get the joint design based on the input identifier.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6322"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6323"]),
 )
@@ -3350,6 +3600,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7035",
     browseName="ns=ijt_base;GetJointDesignList",
     description="The Method GetJointDesignList is used to get the list of available joint designs in the system.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6324"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6325"]),
 )
@@ -3408,6 +3659,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7036",
     browseName="ns=ijt_base;GetJointList",
     description="The Method GetJointList is used to get the list of available joints in the system.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6326"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6327"]),
 )
@@ -3473,6 +3725,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7037",
     browseName="ns=ijt_base;GetJointRevisionList",
     description="The Method GetJointRevisionList is used to get the list available revisions of a specific joint based on the JointOriginId.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6328"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6329"]),
 )
@@ -3542,6 +3795,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7038",
     browseName="ns=ijt_base;SelectJoint",
     description="The Method SelectJoint is used to select the joint and the associated joining process.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6330"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6331"]),
 )
@@ -3600,6 +3854,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7039",
     browseName="ns=ijt_base;SendJoint",
     description="The Method SendJoint is used to send a joint to a joining system. If the input joint already exists in the system, it shall be overwritten.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6332"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6333"]),
 )
@@ -3658,6 +3913,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7040",
     browseName="ns=ijt_base;SendJointComponent",
     description="The Method SendJointComponent is used to send a joint component to a joining system. If the input joint component already exists in the system, it shall be overwritten.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6334"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6335"]),
 )
@@ -3716,6 +3972,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7041",
     browseName="ns=ijt_base;SendJointDesign",
     description="The Method SendJointDesign is used to send a joint design to a joining system. If the input joint design already exists in the system, it shall be overwritten.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6336"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6337"]),
 )
@@ -3805,6 +4062,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7057",
     browseName="ns=ijt_base;AbortJoiningProcess",
     description="The Method AbortJoiningProcess is used to abort the input joining process if it is under execution.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6376"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6377"]),
 )
@@ -3872,6 +4130,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7058",
     browseName="ns=ijt_base;DecrementJoiningProcessCounter",
     description="The Method DecrementJoiningProcessCounter used to decrement the counter of the sequential joining processes such as Job, etc.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6378"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6379"]),
 )
@@ -3923,6 +4182,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7059",
     browseName="ns=ijt_base;DeselectJoiningProcess",
     description="The Method DeselectJoiningProcess is used to deselect any selected joining process.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6380"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6381"]),
 )
@@ -3981,6 +4241,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7060",
     browseName="ns=ijt_base;GetJoiningProcessList",
     description="The Method GetJoiningProcessList is used to get the list of joining process meta data available in the system.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6382"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6383"]),
 )
@@ -4046,6 +4307,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7061",
     browseName="ns=ijt_base;GetJoiningProcessRevisionList",
     description="The Method GetJoiningProcessRevisionList is used to get the list available revisions of a specific joining process based on the joiningProcessOriginId.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6384"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6385"]),
 )
@@ -4113,6 +4375,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7062",
     browseName="ns=ijt_base;IncrementJoiningProcessCounter",
     description="The Method IncrementJoiningProcessCounter is used to increment the counter of the sequential joining processes such as Job, etc.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6386"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6387"]),
 )
@@ -4173,6 +4436,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7063",
     browseName="ns=ijt_base;ResetJoiningProcess",
     description="The Method ResetJoiningProcess is used to reset/restart the sequential joining processes such as Job, etc.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6388"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6389"]),
 )
@@ -4233,6 +4497,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7065",
     browseName="ns=ijt_base;SelectJoiningProcess",
     description="The Method SelectJoiningProcess is used to select the joining process based on the input arguments.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6392"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6393"]),
 )
@@ -4298,6 +4563,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7066",
     browseName="ns=ijt_base;SendJoiningProcess",
     description="The Method SendJoiningProcess is used to send a joining process to the joining system. It can be used to insert a joining program or joining batch or joining job or any other process applicable to a joining system. It shall overwrite the joining process if it already exists in the joining system.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6394"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6395"]),
 )
@@ -4361,6 +4627,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7067",
     browseName="ns=ijt_base;SetJoiningProcessCounter",
     description="The Method SetJoiningProcessCounter is used to set the counter of a sequential joining processes (such as Job, etc.) to the given input value.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6396"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6397"]),
 )
@@ -4421,6 +4688,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7068",
     browseName="ns=ijt_base;SetJoiningProcessMapping",
     description="The Method SetJoiningProcessMapping is used to set the mapping of the joining process in a joining system. It can be used to map a joining process to a selection name.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6398"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6399"]),
 )
@@ -4488,6 +4756,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7069",
     browseName="ns=ijt_base;SetJoiningProcessSize",
     description="The Method SetJoiningProcessSize is used to set the size of the batch joining process.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6400"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6401"]),
 )
@@ -4555,6 +4824,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7070",
     browseName="ns=ijt_base;StartJoiningProcess",
     description="The Method StartJoiningProcess is used to start the input joining process. \nNote: It is not intended to be used in a hard real-time use case.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6402"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6403"]),
 )
@@ -4636,6 +4906,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=ijt_base;i=7075",
     browseName="ns=ijt_base;DisconnectAsset",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6412"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6413"]),
 )
@@ -4694,7 +4965,11 @@ ns0.vartypes.PropertyType(
     ],
 )
 o6.call(
-    nodeId="ns=ijt_base;i=7076", browseName="ns=ijt_base;EnableAsset", inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6414"]), outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6415"])
+    nodeId="ns=ijt_base;i=7076",
+    browseName="ns=ijt_base;EnableAsset",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6414"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6415"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -4766,6 +5041,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=ijt_base;i=7077",
     browseName="ns=ijt_base;ExecuteOperation",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6416"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6417"]),
 )
@@ -4833,6 +5109,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=ijt_base;i=7078",
     browseName="ns=ijt_base;GetErrorInformation",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6418"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6419"]),
 )
@@ -4892,6 +5169,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=ijt_base;i=7079",
     browseName="ns=ijt_base;GetFeedbackFileList",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6420"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6421"]),
 )
@@ -4958,6 +5236,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=ijt_base;i=7080",
     browseName="ns=ijt_base;GetIOSignals",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6422"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6423"]),
 )
@@ -5022,6 +5301,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=ijt_base;i=7081",
     browseName="ns=ijt_base;GetIdentifiers",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6424"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6425"]),
 )
@@ -5070,7 +5350,11 @@ ns0.vartypes.PropertyType(
     ],
 )
 o6.call(
-    nodeId="ns=ijt_base;i=7082", browseName="ns=ijt_base;RebootAsset", inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6426"]), outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6427"])
+    nodeId="ns=ijt_base;i=7082",
+    browseName="ns=ijt_base;RebootAsset",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6426"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6427"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -5147,6 +5431,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=ijt_base;i=7083",
     browseName="ns=ijt_base;ResetIdentifiers",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6428"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6429"]),
 )
@@ -5218,6 +5503,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=ijt_base;i=7084",
     browseName="ns=ijt_base;SendFeedback",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6430"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6431"]),
 )
@@ -5275,6 +5561,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=ijt_base;i=7085",
     browseName="ns=ijt_base;SendIdentifiers",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6432"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6433"]),
 )
@@ -5332,6 +5619,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=ijt_base;i=7086",
     browseName="ns=ijt_base;SendTextIdentifiers",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6434"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6435"]),
 )
@@ -5389,6 +5677,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=ijt_base;i=7087",
     browseName="ns=ijt_base;SetCalibration",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6436"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6437"]),
 )
@@ -5455,6 +5744,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=ijt_base;i=7088",
     browseName="ns=ijt_base;SetIOSignals",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6438"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6439"]),
 )
@@ -5512,6 +5802,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=ijt_base;i=7089",
     browseName="ns=ijt_base;SetOfflineTimer",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6440"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6441"]),
 )
@@ -5563,13 +5854,18 @@ ns0.vartypes.PropertyType(
     ],
 )
 o6.call(
-    nodeId="ns=ijt_base;i=7090", browseName="ns=ijt_base;SetTime", inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6442"]), outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6443"])
+    nodeId="ns=ijt_base;i=7090",
+    browseName="ns=ijt_base;SetTime",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6442"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6443"]),
 )
 
 ijt_base_objtypes.JoiningSystemAssetMethodSetType(
     nodeId="ns=ijt_base;i=5124",
     browseName="ns=di;MethodSet",
     description="The MethodSet Object is an instance of JoiningSystemAssetMethodSetType which provides set of methods for various assets in a joining system.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=ijt_base;i=7075"]),
         o6.hasComponent(o6.ns["ns=ijt_base;i=7076"]),

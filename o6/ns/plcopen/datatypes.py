@@ -33,29 +33,29 @@ else:
     _VariableNode = object
 
 
-@o6.datatype(nodeId="ns=plcopen;i=3001", browseName="BYTE", description="It describes that the type is used as bit string of length 8.", parent="i=3")
+@o6.datatype(nodeId="ns=plcopen;i=3001", browseName="ns=plcopen;BYTE", description="It describes that the type is used as bit string of length 8.", parent="i=3")
 class BYTE:
     pass
 
 
-@o6.datatype(nodeId="ns=plcopen;i=3002", browseName="WORD", description="It describes that the type is used as bit string of length 16.", parent="i=5")
+@o6.datatype(nodeId="ns=plcopen;i=3002", browseName="ns=plcopen;WORD", description="It describes that the type is used as bit string of length 16.", parent="i=5")
 class WORD:
     pass
 
 
-@o6.datatype(nodeId="ns=plcopen;i=3003", browseName="DWORD", description="It describes that the type is used as bit string of length 32.", parent="i=7")
+@o6.datatype(nodeId="ns=plcopen;i=3003", browseName="ns=plcopen;DWORD", description="It describes that the type is used as bit string of length 32.", parent="i=7")
 class DWORD:
     pass
 
 
-@o6.datatype(nodeId="ns=plcopen;i=3004", browseName="LWORD", description="It describes that the type is used as bit string of length 64.", parent="i=9")
+@o6.datatype(nodeId="ns=plcopen;i=3004", browseName="ns=plcopen;LWORD", description="It describes that the type is used as bit string of length 64.", parent="i=9")
 class LWORD:
     pass
 
 
 @o6.datatype(
     nodeId="ns=plcopen;i=3005",
-    browseName="TIME",
+    browseName="ns=plcopen;TIME",
     description="It describes that the type is used as interval of time in milliseconds. The representation contains information for days (d), hours (h), minutes (m), seconds (s) and milliseconds (ms). The range of valid values is vendor specific. The server has to check if the value has a valid range. Sample: T#+24d20h31m23s647ms.",
     parent="i=8",
 )
@@ -65,7 +65,7 @@ class TIME:
 
 @o6.datatype(
     nodeId="ns=plcopen;i=3006",
-    browseName="LTIME",
+    browseName="ns=plcopen;LTIME",
     description="It describes that the type is used as interval of time in nanoseconds. The valid range is LT#-106751d23h47m16s854ms775us808ns to LT#+106751d23h47m16s854ms775us807ns. The representation contains information for days (d), hours (h), minutes (m), seconds (s) milliseconds (ms), microseconds (us) and nanoseconds (ns).",
     parent="i=8",
 )
@@ -73,14 +73,14 @@ class LTIME:
     pass
 
 
-@o6.datatype(nodeId="ns=plcopen;i=3007", browseName="DATE", description="It describes that the type is used as a date only.", parent="i=13")
+@o6.datatype(nodeId="ns=plcopen;i=3007", browseName="ns=plcopen;DATE", description="It describes that the type is used as a date only.", parent="i=13")
 class DATE:
     pass
 
 
 @o6.datatype(
     nodeId="ns=plcopen;i=3008",
-    browseName="TOD",
+    browseName="ns=plcopen;TOD",
     description="TIME_OF_DAY stores number of milliseconds since the beginning of the day: TOD#00:00:00.000 to TOD#23:59:59.999.",
     parent="i=7",
 )
@@ -90,7 +90,7 @@ class TOD:
 
 @o6.datatype(
     nodeId="ns=plcopen;i=3009",
-    browseName="LTOD",
+    browseName="ns=plcopen;LTOD",
     description="LTIME_OF_DAY stores the number of nanoseconds since the beginning of the day: LTOD#00:00:00.000000000 to LTOD#23:59:59.999999999.",
     parent="i=8",
 )
@@ -98,34 +98,39 @@ class LTOD:
     pass
 
 
-@o6.datatype(nodeId="ns=plcopen;i=3010", browseName="DT", description="Vendor specific type.", parent="i=13")
+@o6.datatype(nodeId="ns=plcopen;i=3010", browseName="ns=plcopen;DT", description="Vendor specific type.", parent="i=13")
 class DT:
     pass
 
 
-@o6.datatype(nodeId="ns=plcopen;i=3011", browseName="CHAR", description=". It describes that the type is used as single-byte character.", parent="i=3")
+@o6.datatype(nodeId="ns=plcopen;i=3011", browseName="ns=plcopen;CHAR", description=". It describes that the type is used as single-byte character.", parent="i=3")
 class CHAR:
     pass
 
 
-@o6.datatype(nodeId="ns=plcopen;i=3012", browseName="WCHAR", description="It describes that the type is used as double-byte character.", parent="i=5")
+@o6.datatype(nodeId="ns=plcopen;i=3012", browseName="ns=plcopen;WCHAR", description="It describes that the type is used as double-byte character.", parent="i=5")
 class WCHAR:
     pass
 
 
-@o6.datatype(nodeId="ns=plcopen;i=3013", browseName="STRING", description="It describes that the type is used as a variable-length single-byte character string.", parent="i=12")
+@o6.datatype(
+    nodeId="ns=plcopen;i=3013", browseName="ns=plcopen;STRING", description="It describes that the type is used as a variable-length single-byte character string.", parent="i=12"
+)
 class STRING:
     pass
 
 
 @o6.datatype(
-    nodeId="ns=plcopen;i=3014", browseName="LDATE", description="It describes that the type is used as date only. The interval is nanoseconds since 1970-01-01.", parent="i=8"
+    nodeId="ns=plcopen;i=3014",
+    browseName="ns=plcopen;LDATE",
+    description="It describes that the type is used as date only. The interval is nanoseconds since 1970-01-01.",
+    parent="i=8",
 )
 class LDATE:
     pass
 
 
-@o6.datatype(nodeId="ns=plcopen;i=3015", browseName="LDT", description="It describes the number of nanoseconds elapsed since 1970-01-01-00:00:00.", parent="i=8")
+@o6.datatype(nodeId="ns=plcopen;i=3015", browseName="ns=plcopen;LDT", description="It describes the number of nanoseconds elapsed since 1970-01-01-00:00:00.", parent="i=8")
 class LDT:
     pass
 

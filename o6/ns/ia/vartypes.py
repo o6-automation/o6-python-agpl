@@ -44,7 +44,9 @@ else:
 )
 class CalibrationValueType(ns0.vartypes.DataItemType):
     engineeringUnits: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=ia;i=6057", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=ia;i=6057", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -57,10 +59,12 @@ class CalibrationValueType(ns0.vartypes.DataItemType):
 )
 class CapacityRangeType(ns0.vartypes.DataItemType):
     engineeringUnits: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=ia;i=6058", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=ia;i=6058", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1
+        )
     )
     resolution: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=ia;i=6059", browseName="ns=ia;Resolution", dataType=o6.Double, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=ia;i=6059", browseName="ns=ia;Resolution", modellingRule="Mandatory", dataType=o6.Double, accessLevel=3, userAccessLevel=1)
     )
 
 

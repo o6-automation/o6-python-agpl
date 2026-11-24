@@ -36,7 +36,12 @@ else:
 class ProjectInfoType(ns0.objtypes.BaseObjectType):
     comment: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=iredes;i=6016", browseName="ns=iredes;Comment", description="Comments concerning the project can be added here.", dataType=o6.String, accessLevel=3
+            nodeId="ns=iredes;i=6016",
+            browseName="ns=iredes;Comment",
+            description="Comments concerning the project can be added here.",
+            modellingRule="Optional",
+            dataType=o6.String,
+            accessLevel=3,
         )
     )
     defaultInstanceBrowseName: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -50,7 +55,9 @@ class ProjectInfoType(ns0.objtypes.BaseObjectType):
         )
     )
     signature: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6015", browseName="ns=iredes;Signature", description="Project signature.", dataType=o6.String, accessLevel=3)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=iredes;i=6015", browseName="ns=iredes;Signature", description="Project signature.", modellingRule="Optional", dataType=o6.String, accessLevel=3
+        )
     )
 
 
@@ -68,36 +75,58 @@ class EquipmentInfoType(ns0.objtypes.BaseObjectType):
     )
     eqpInfo: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=iredes;i=6023", browseName="ns=iredes;EqpInfo", description="Other equipment specific information. Free text.", dataType=o6.String, accessLevel=3
+            nodeId="ns=iredes;i=6023",
+            browseName="ns=iredes;EqpInfo",
+            description="Other equipment specific information. Free text.",
+            modellingRule="Optional",
+            dataType=o6.String,
+            accessLevel=3,
         )
     )
     eqpManufact: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6018", browseName="ns=iredes;EqpManufact", description="Name of the manufacturer.", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=iredes;i=6018", browseName="ns=iredes;EqpManufact", description="Name of the manufacturer.", modellingRule="Mandatory", dataType=o6.String
+        )
     )
     eqpModel: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=iredes;i=6020",
             browseName="ns=iredes;EqpModel",
             description="Equipment model describing the model in the specified EqpType. To be stated if required for unequivocal machine type identification.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
         )
     )
     eqpName: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=iredes;i=6024", browseName="ns=iredes;EqpName", description="Used for designation of the machine.", dataType=o6.String, accessLevel=3
+            nodeId="ns=iredes;i=6024",
+            browseName="ns=iredes;EqpName",
+            description="Used for designation of the machine.",
+            modellingRule="Optional",
+            dataType=o6.String,
+            accessLevel=3,
         )
     )
     eqpSerNo: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6021", browseName="ns=iredes;EqpSerNo", description="Serial number of the machine.", dataType=o6.String, accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=iredes;i=6021", browseName="ns=iredes;EqpSerNo", description="Serial number of the machine.", modellingRule="Optional", dataType=o6.String, accessLevel=3
+        )
     )
     eqpSysVer: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=iredes;i=6022", browseName="ns=iredes;EqpSysVer", description="Version Info Automation System / Software.", dataType=o6.String, accessLevel=3
+            nodeId="ns=iredes;i=6022",
+            browseName="ns=iredes;EqpSysVer",
+            description="Version Info Automation System / Software.",
+            modellingRule="Optional",
+            dataType=o6.String,
+            accessLevel=3,
         )
     )
     eqpType: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6019", browseName="ns=iredes;EqpType", description="Manufacturer internal type name of the machine.", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=iredes;i=6019", browseName="ns=iredes;EqpType", description="Manufacturer internal type name of the machine.", modellingRule="Mandatory", dataType=o6.String
+        )
     )
 
 
@@ -118,6 +147,7 @@ class GenHeadType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6028",
             browseName="ns=iredes;DownCompat",
             description="Downward compatibility of the profile version stated in “version” can be guaranteed down to the version number stated in this attribute. Fixed 2.0.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
         )
@@ -128,6 +158,7 @@ class GenHeadType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6026",
             browseName="ns=iredes;FileCreateDate",
             description="Date of file creation. This is the date/time stamp for initialization of the Data Set.",
+            modellingRule="Mandatory",
             dataType=o6.DateTime,
             accessLevel=3,
         )
@@ -137,12 +168,15 @@ class GenHeadType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6027",
             browseName="ns=iredes;IRVersion",
             description="Version of the IREDES main components of the standard. This version number changes any time IREDES top level schemas are modified. Please note to state downward compatibility in the separate Attribute. Type definition see below. Fixed 2.0.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
         )
     )
     projectInfo: ProjectInfoType | None = o6.hasAddIn(
-        ProjectInfoType(nodeId="ns=iredes;i=5007", browseName="ns=iredes;ProjectInfo", description="Project specific information. Type definition see below.")
+        ProjectInfoType(
+            nodeId="ns=iredes;i=5007", browseName="ns=iredes;ProjectInfo", description="Project specific information. Type definition see below.", modellingRule="Optional"
+        )
     )
 
 
@@ -153,6 +187,7 @@ class DisplayToOperatorType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6030",
             browseName="ns=iredes;AckFlag",
             description="Acknowledgement by the operator that he has read the message. (Will be transferred back as soon as the SiteHead is returned to the mine’s computer system with the next protocol exchange. Contains the name of the operator (user name in the Automation system) or simply ACK if automation system does not work with user logins.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
         )
@@ -172,12 +207,15 @@ class DisplayToOperatorType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6029",
             browseName="ns=iredes;DispFlag",
             description="States under which circumstances the line (message) has to be displayed to the operator.",
+            modellingRule="Optional",
             dataType=iredes_datypes.DispFlag,
             accessLevel=3,
         )
     )
     dispText: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6031", browseName="ns=iredes;DispText", description="Text to be displayed.", dataType=o6.String, accessLevel=3)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=iredes;i=6031", browseName="ns=iredes;DispText", description="Text to be displayed.", modellingRule="Optional", dataType=o6.String, accessLevel=3
+        )
     )
 
 
@@ -198,6 +236,7 @@ class IROptionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6034",
             browseName="ns=iredes;OptionSchema",
             description="URI for the schema that will extend the IREDES standard. This schema won’t be processed.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
         )
@@ -217,17 +256,29 @@ class SiteHeadType(ns0.objtypes.BaseObjectType):
         )
     )
     displayToOperator: DisplayToOperatorType = o6.hasAddIn(
-        DisplayToOperatorType(nodeId="ns=iredes;i=5009", browseName="ns=iredes;DisplayToOperator", description="Object used to display messages to the operator of a machine.")
+        DisplayToOperatorType(
+            nodeId="ns=iredes;i=5009",
+            browseName="ns=iredes;DisplayToOperator",
+            description="Object used to display messages to the operator of a machine.",
+            modellingRule="Mandatory",
+        )
     )
     siteOption: IROptionType = o6.hasAddIn(
-        IROptionType(nodeId="ns=iredes;i=5010", browseName="ns=iredes;SiteOption", description="Object that holds/references information that will not be processed.")
+        IROptionType(
+            nodeId="ns=iredes;i=5010",
+            browseName="ns=iredes;SiteOption",
+            description="Object that holds/references information that will not be processed.",
+            modellingRule="Mandatory",
+        )
     )
 
 
 @o6.objecttype(nodeId="ns=iredes;i=1015", browseName="ns=iredes;GenTrailerType", displayName="GenTrailerType")
 class GenTrailerType(ns0.objtypes.BaseObjectType):
     chkSum: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6038", browseName="ns=iredes;ChkSum", description="CRC 32 checksum.", dataType=o6.ByteString, accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=iredes;i=6038", browseName="ns=iredes;ChkSum", description="CRC 32 checksum.", modellingRule="Mandatory", dataType=o6.ByteString, accessLevel=3
+        )
     )
     defaultInstanceBrowseName: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
@@ -240,7 +291,14 @@ class GenTrailerType(ns0.objtypes.BaseObjectType):
         )
     )
     fileCloseDate: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6037", browseName="ns=iredes;FileCloseDate", description="Date the file was created.", dataType=o6.DateTime, accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=iredes;i=6037",
+            browseName="ns=iredes;FileCloseDate",
+            description="Date the file was created.",
+            modellingRule="Mandatory",
+            dataType=o6.DateTime,
+            accessLevel=3,
+        )
     )
 
 
@@ -262,13 +320,19 @@ class IREDESType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6044",
             browseName="ns=iredes;IRDownwCompat",
             description="Earliest version the IREDES Base system version stated in IRVersion is downward compatible to. Since this version, only extensions have been made but no changes affecting compatibility issues (data type changes etc).",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
         )
     )
     iRVersion: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=iredes;i=6043", browseName="ns=iredes;IRVersion", description="IREDES Base version needed to process this scheme.", dataType=o6.String, accessLevel=3
+            nodeId="ns=iredes;i=6043",
+            browseName="ns=iredes;IRVersion",
+            description="IREDES Base version needed to process this scheme.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            accessLevel=3,
         )
     )
     siteHead: SiteHeadType | None
@@ -288,7 +352,7 @@ class OpPerfLogType(ns0.objtypes.BaseObjectType):
     )
     mworking: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=iredes;i=6046", browseName="ns=iredes;Mworking", description="Machine working.", dataType=ns0.datatypes.Duration, accessLevel=3
+            nodeId="ns=iredes;i=6046", browseName="ns=iredes;Mworking", description="Machine working.", modellingRule="Mandatory", dataType=ns0.datatypes.Duration, accessLevel=3
         )
     )
     turnedOff: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
@@ -296,6 +360,7 @@ class OpPerfLogType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6051",
             browseName="ns=iredes;TurnedOff",
             description="Machine intentionally put in “OFF” state. This state is only counted if the machine is intentionally deactivated by an operator. Observe that a “switch off” while the machine is in “Wait Repair” mode will be counted as “wait repair” until the machine is switched on again.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
         )
@@ -305,6 +370,7 @@ class OpPerfLogType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6048",
             browseName="ns=iredes;WaitOperator",
             description="Time the machine waits for operator assistance during the reporting period. See “IREDES Drill Rig profile description” document.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
         )
@@ -314,6 +380,7 @@ class OpPerfLogType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6047",
             browseName="ns=iredes;WaitProcess",
             description="Machine waiting for other partners in the process or for process reasons not caused by the machine itself. This may be an (autonomous) machine waiting for access to a shared tramming zone or waiting for access to a dump shaft, a truck to become available etc. See “IREDES Drill Rig profile description” document.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
         )
@@ -323,6 +390,7 @@ class OpPerfLogType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6049",
             browseName="ns=iredes;WaitRepair",
             description="Waiting time for repair until the repair is finished and the machine manually is switched on again. See “IREDES Drill Rig profile description” document.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
         )
@@ -332,6 +400,7 @@ class OpPerfLogType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6050",
             browseName="ns=iredes;WaitSamples",
             description="Waiting time for external supplies like electric power, network connection for remote control (if not in local operation mode), water, material etc. See “IREDES Drill Rig profile description” document.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
         )
@@ -342,7 +411,12 @@ class OpPerfLogType(ns0.objtypes.BaseObjectType):
 class IRpPerfGenType(ns0.objtypes.BaseObjectType):
     comment: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=iredes;i=6066", browseName="ns=iredes;Comment", description="Project information concerning this log.", dataType=o6.String, accessLevel=3
+            nodeId="ns=iredes;i=6066",
+            browseName="ns=iredes;Comment",
+            description="Project information concerning this log.",
+            modellingRule="Optional",
+            dataType=o6.String,
+            accessLevel=3,
         )
     )
     defaultInstanceBrowseName: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -360,6 +434,7 @@ class IRpPerfGenType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6065",
             browseName="ns=iredes;EndLogTine",
             description="End of the reporting period. Date and time when the last entry to this xml-set was made.",
+            modellingRule="Mandatory",
             dataType=o6.DateTime,
             accessLevel=3,
         )
@@ -368,7 +443,12 @@ class IRpPerfGenType(ns0.objtypes.BaseObjectType):
     opPerfLog: OpPerfLogType | None
     reportId: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=iredes;i=6063", browseName="ns=iredes;ReportId", description="Report ID code, to uniquely identify this log report.", dataType=o6.String, accessLevel=3
+            nodeId="ns=iredes;i=6063",
+            browseName="ns=iredes;ReportId",
+            description="Report ID code, to uniquely identify this log report.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            accessLevel=3,
         )
     )
     startLogTime: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -376,6 +456,7 @@ class IRpPerfGenType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6064",
             browseName="ns=iredes;StartLogTime",
             description="Start of the reporting period. Date and time when the first entry to this xml-set was made.",
+            modellingRule="Mandatory",
             dataType=o6.DateTime,
             accessLevel=3,
         )
@@ -389,6 +470,7 @@ class IRplanGenType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6075",
             browseName="ns=iredes;Comment",
             description="Comments to the plan for example type of plan, purpose, tools to use.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=1,
             arrayDimensions=[8],
@@ -411,6 +493,7 @@ class IRplanGenType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6074",
             browseName="ns=iredes;PlanId",
             description="IREDES internal production plan ID used for reference e.g. by Production Quality data sets basing on a particular production plan.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
         )
@@ -420,6 +503,7 @@ class IRplanGenType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6073",
             browseName="ns=iredes;PlanName",
             description="Plan logical name to identify this specific plan to the human user. Useful to help the operator of a machine to logical identify a specific plan.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
         )
@@ -429,6 +513,7 @@ class IRplanGenType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6076",
             browseName="ns=iredes;Project",
             description="Project ID code. To identify the target project for this plan.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
         )
@@ -438,6 +523,7 @@ class IRplanGenType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6077",
             browseName="ns=iredes;WorkOrder",
             description="Work order ID code. To identify the work order associated with this plan.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
         )
@@ -448,7 +534,12 @@ class IRplanGenType(ns0.objtypes.BaseObjectType):
 class IRStatusGenType(ns0.objtypes.BaseObjectType):
     comment: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=iredes;i=6082", browseName="ns=iredes;Comment", description="Project information concerning this log.", dataType=o6.String, accessLevel=3
+            nodeId="ns=iredes;i=6082",
+            browseName="ns=iredes;Comment",
+            description="Project information concerning this log.",
+            modellingRule="Optional",
+            dataType=o6.String,
+            accessLevel=3,
         )
     )
     defaultInstanceBrowseName: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -466,6 +557,7 @@ class IRStatusGenType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6081",
             browseName="ns=iredes;EndLogTime",
             description="End of the reporting period. Date and time when the last entry to this xml-set was made.",
+            modellingRule="Mandatory",
             dataType=o6.DateTime,
             accessLevel=3,
         )
@@ -473,12 +565,22 @@ class IRStatusGenType(ns0.objtypes.BaseObjectType):
     iREDES: IREDESType
     operatorId: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=iredes;i=6083", browseName="ns=iredes;OperatorId", description="Identify the operator of the machine for reference.", dataType=o6.String, accessLevel=3
+            nodeId="ns=iredes;i=6083",
+            browseName="ns=iredes;OperatorId",
+            description="Identify the operator of the machine for reference.",
+            modellingRule="Optional",
+            dataType=o6.String,
+            accessLevel=3,
         )
     )
     reportId: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=iredes;i=6079", browseName="ns=iredes;ReportId", description="Report ID code, to uniquely identify this log report.", dataType=o6.String, accessLevel=3
+            nodeId="ns=iredes;i=6079",
+            browseName="ns=iredes;ReportId",
+            description="Report ID code, to uniquely identify this log report.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            accessLevel=3,
         )
     )
     startLogTime: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -486,6 +588,7 @@ class IRStatusGenType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6080",
             browseName="ns=iredes;StartLogTime",
             description="Start of the reporting period. Date and time when the first entry to this xml-set was made.",
+            modellingRule="Mandatory",
             dataType=o6.DateTime,
             accessLevel=3,
         )
@@ -496,7 +599,12 @@ class IRStatusGenType(ns0.objtypes.BaseObjectType):
 class IRWorkOrderReplyGenType(ns0.objtypes.BaseObjectType):
     answer: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=iredes;i=6085", browseName="ns=iredes;Answer", description="See Answer enumeration.", dataType=iredes_datypes.Answer, accessLevel=3
+            nodeId="ns=iredes;i=6085",
+            browseName="ns=iredes;Answer",
+            description="See Answer enumeration.",
+            modellingRule="Mandatory",
+            dataType=iredes_datypes.Answer,
+            accessLevel=3,
         )
     )
     condition: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -504,6 +612,7 @@ class IRWorkOrderReplyGenType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6087",
             browseName="ns=iredes;Condition",
             description='Only for "AcceptedWithCondition" option. Free text field for condition such as "need consumable", etc.',
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
         )
@@ -513,17 +622,25 @@ class IRWorkOrderReplyGenType(ns0.objtypes.BaseObjectType):
     )
     duration: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=iredes;i=6086", browseName="ns=iredes;Duration", description="For delayed option only.", dataType=ns0.datatypes.Duration, accessLevel=3
+            nodeId="ns=iredes;i=6086",
+            browseName="ns=iredes;Duration",
+            description="For delayed option only.",
+            modellingRule="Optional",
+            dataType=ns0.datatypes.Duration,
+            accessLevel=3,
         )
     )
     extra: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6088", browseName="ns=iredes;Extra", dataType=o6.String, valueRank=1, arrayDimensions=[10], accessLevel=3)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=iredes;i=6088", browseName="ns=iredes;Extra", modellingRule="Optional", dataType=o6.String, valueRank=1, arrayDimensions=[10], accessLevel=3
+        )
     )
     reason: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=iredes;i=6089",
             browseName="ns=iredes;Reason",
             description="Place to clarify reasons for delaying or denying the work order.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=1,
             arrayDimensions=[5],
@@ -535,7 +652,9 @@ class IRWorkOrderReplyGenType(ns0.objtypes.BaseObjectType):
 @o6.objecttype(nodeId="ns=iredes;i=1016", browseName="ns=iredes;IRreplyType", displayName="IRreplyType")
 class IRreplyType(ns0.objtypes.BaseObjectType):
     comment: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6092", browseName="ns=iredes;Comment", dataType=o6.String, valueRank=1, arrayDimensions=[5], accessLevel=3)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=iredes;i=6092", browseName="ns=iredes;Comment", modellingRule="Optional", dataType=o6.String, valueRank=1, arrayDimensions=[5], accessLevel=3
+        )
     )
     defaultInstanceBrowseName: ns0.vartypes.BaseDataVariableType = o6.hasProperty(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6090", browseName="DefaultInstanceBrowseName", dataType=o6.QualifiedName, accessLevel=3)
@@ -550,12 +669,15 @@ class IRWorkOrderGenType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6099",
             browseName="ns=iredes;AssignmentTime",
             description="Time the execution of the job is expected to take.",
+            modellingRule="Mandatory",
             dataType=iredes_datypes.JobAssignmentTimeDataType,
             accessLevel=3,
         )
     )
     comment: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6109", browseName="ns=iredes;Comment", dataType=o6.String, valueRank=1, arrayDimensions=[5], accessLevel=3)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=iredes;i=6109", browseName="ns=iredes;Comment", modellingRule="Optional", dataType=o6.String, valueRank=1, arrayDimensions=[5], accessLevel=3
+        )
     )
     defaultInstanceBrowseName: ns0.vartypes.BaseDataVariableType = o6.hasProperty(
         ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6093", browseName="DefaultInstanceBrowseName", dataType=o6.QualifiedName, accessLevel=3)
@@ -563,7 +685,12 @@ class IRWorkOrderGenType(ns0.objtypes.BaseObjectType):
     iREDESType: IREDESType
     issuer: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=iredes;i=6103", browseName="ns=iredes;Issuer", description="ID of the person or institute who issued this work order.", dataType=o6.String, accessLevel=3
+            nodeId="ns=iredes;i=6103",
+            browseName="ns=iredes;Issuer",
+            description="ID of the person or institute who issued this work order.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            accessLevel=3,
         )
     )
     machineId: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -571,6 +698,7 @@ class IRWorkOrderGenType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6104",
             browseName="ns=iredes;MachineId",
             description="Machine assigned to the work.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=1,
             arrayDimensions=[10],
@@ -582,6 +710,7 @@ class IRWorkOrderGenType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6105",
             browseName="ns=iredes;OperatorId",
             description="Operators assigned to the work.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=1,
             arrayDimensions=[10],
@@ -593,6 +722,7 @@ class IRWorkOrderGenType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6101",
             browseName="ns=iredes;PriorityLevel",
             description="Priority of the workorder. Level from 1 to 10 as 10 representing top priority.",
+            modellingRule="Mandatory",
             dataType=o6.UInt32,
             accessLevel=3,
         )
@@ -612,6 +742,7 @@ class IRWorkOrderGenType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6106",
             browseName="ns=iredes;SafetyAdvice",
             description="Work order shall be carried out. Schema should be defined separately within the IRoptionType.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=1,
             arrayDimensions=[10],
@@ -623,6 +754,7 @@ class IRWorkOrderGenType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6107",
             browseName="ns=iredes;SpecialCondition",
             description="E.g. electricity will be switched off in some region in mine during operation.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=1,
             arrayDimensions=[10],
@@ -634,24 +766,26 @@ class IRWorkOrderGenType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6108",
             browseName="ns=iredes;SpecialTask",
             description="Tasks that are not or hard to describe in workorder.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=1,
             arrayDimensions=[10],
             accessLevel=3,
         )
     )
-    workOrderContent: IROptionType = o6.hasAddIn(IROptionType(nodeId="ns=iredes;i=5044", browseName="ns=iredes;WorkOrderContent"))
+    workOrderContent: IROptionType = o6.hasAddIn(IROptionType(nodeId="ns=iredes;i=5044", browseName="ns=iredes;WorkOrderContent", modellingRule="Mandatory"))
     workOrderId: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=iredes;i=6102",
             browseName="ns=iredes;WorkOrderId",
             description="Identification of this work order. This ID has nothing to do with the, for example, work plan ID.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
         )
     )
     workOrderType: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6100", browseName="ns=iredes;WorkOrderType", dataType=o6.String, accessLevel=3)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6100", browseName="ns=iredes;WorkOrderType", modellingRule="Optional", dataType=o6.String, accessLevel=3)
     )
 
 
@@ -670,10 +804,12 @@ class IRLTMMonType(ns0.objtypes.BaseObjectType):
     genTrailer: GenTrailerType
     iREDES: IREDESType
     lTMMonDownwCompat: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6139", browseName="ns=iredes;LTMMonDownwCompat", description="2.0.", dataType=o6.String, accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=iredes;i=6139", browseName="ns=iredes;LTMMonDownwCompat", description="2.0.", modellingRule="Mandatory", dataType=o6.String, accessLevel=3
+        )
     )
     lTMMonVersion: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6138", browseName="ns=iredes;LTMMonVersion", description="2.0.", dataType=o6.String, accessLevel=3)
+        ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6138", browseName="ns=iredes;LTMMonVersion", description="2.0.", modellingRule="Mandatory", dataType=o6.String, accessLevel=3)
     )
 
 
@@ -692,10 +828,12 @@ class IRLTPlanType(ns0.objtypes.BaseObjectType):
     genTrailer: GenTrailerType
     iRplanGen: IRplanGenType
     lTPlanDownwCompat: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6156", browseName="ns=iredes;LTPlanDownwCompat", description="2.0.", dataType=o6.String, accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=iredes;i=6156", browseName="ns=iredes;LTPlanDownwCompat", description="2.0.", modellingRule="Mandatory", dataType=o6.String, accessLevel=3
+        )
     )
     lTPlanVersion: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6155", browseName="ns=iredes;LTPlanVersion", description="2.0.", dataType=o6.String, accessLevel=3)
+        ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6155", browseName="ns=iredes;LTPlanVersion", description="2.0.", modellingRule="Mandatory", dataType=o6.String, accessLevel=3)
     )
 
 
@@ -703,7 +841,12 @@ class IRLTPlanType(ns0.objtypes.BaseObjectType):
 class LTPPwaitProcType(ns0.objtypes.BaseObjectType):
     blastDelay: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=iredes;i=6158", browseName="ns=iredes;BlastDelay", description="Any Delay caused by blasting operations.", dataType=o6.DateTime, accessLevel=3
+            nodeId="ns=iredes;i=6158",
+            browseName="ns=iredes;BlastDelay",
+            description="Any Delay caused by blasting operations.",
+            modellingRule="Optional",
+            dataType=o6.DateTime,
+            accessLevel=3,
         )
     )
     cantDump: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -711,6 +854,7 @@ class LTPPwaitProcType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6159",
             browseName="ns=iredes;CantDump",
             description="Dump point blocked by another machine, boulders or dump shaft filled / truck missing.",
+            modellingRule="Optional",
             dataType=o6.DateTime,
             accessLevel=3,
         )
@@ -727,7 +871,7 @@ class LTPPwaitProcType(ns0.objtypes.BaseObjectType):
     )
     mineUtils: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=iredes;i=6162", browseName="ns=iredes;MineUtils", description="Waiting for mine utilities.", dataType=o6.DateTime, accessLevel=3
+            nodeId="ns=iredes;i=6162", browseName="ns=iredes;MineUtils", description="Waiting for mine utilities.", modellingRule="Optional", dataType=o6.DateTime, accessLevel=3
         )
     )
     noRock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -735,13 +879,19 @@ class LTPPwaitProcType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6161",
             browseName="ns=iredes;NoRock",
             description="Wait for material to handle - No access to material to load.",
+            modellingRule="Optional",
             dataType=o6.DateTime,
             accessLevel=3,
         )
     )
     roadMaint: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=iredes;i=6164", browseName="ns=iredes;RoadMaint", description="Waiting for roadway maintenance.", dataType=o6.DateTime, accessLevel=3
+            nodeId="ns=iredes;i=6164",
+            browseName="ns=iredes;RoadMaint",
+            description="Waiting for roadway maintenance.",
+            modellingRule="Optional",
+            dataType=o6.DateTime,
+            accessLevel=3,
         )
     )
     traffic: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -749,6 +899,7 @@ class LTPPwaitProcType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6160",
             browseName="ns=iredes;Traffic",
             description="Traffic caused delays: roadway blocked by another machine / cars / other traffic.",
+            modellingRule="Optional",
             dataType=o6.DateTime,
             accessLevel=3,
         )
@@ -768,10 +919,19 @@ class LTPPTimeRepType(ns0.objtypes.BaseObjectType):
         )
     )
     lTPPEndTime: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6167", browseName="ns=iredes;LTPPEndTime", description="Mission end time.", dataType=ns0.datatypes.UtcTime, accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=iredes;i=6167", browseName="ns=iredes;LTPPEndTime", description="Mission end time.", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime, accessLevel=3
+        )
     )
     lTPPStartTime: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6166", browseName="ns=iredes;LTPPStartTime", description="Mission start time.", dataType=ns0.datatypes.UtcTime, accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=iredes;i=6166",
+            browseName="ns=iredes;LTPPStartTime",
+            description="Mission start time.",
+            modellingRule="Mandatory",
+            dataType=ns0.datatypes.UtcTime,
+            accessLevel=3,
+        )
     )
 
 
@@ -792,6 +952,7 @@ class LTPPMissionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6180",
             browseName="ns=iredes;LTPPMaction",
             description="Action to be carried out at destination point specified in LTPPMptTo.",
+            modellingRule="Mandatory",
             dataType=iredes_datypes.LTPPMaction,
             accessLevel=3,
         )
@@ -801,6 +962,7 @@ class LTPPMissionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6176",
             browseName="ns=iredes;LTPPMarea",
             description="ID for the mine area the machine is operating in. Usually both departure and destination points should be located in this area.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
         )
@@ -810,6 +972,7 @@ class LTPPMissionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6169",
             browseName="ns=iredes;LTPPMisSeq",
             description="Sequence number of the mission. Starting at 1 with the first mission in the reporting period.",
+            modellingRule="Mandatory",
             dataType=o6.UInt64,
             accessLevel=3,
         )
@@ -819,23 +982,32 @@ class LTPPMissionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6178",
             browseName="ns=iredes;LTPPMissEnd",
             description="End time of the mission. Counting ends when the machine is ready to start the next mission, including all waiting before the next mission can be started.",
+            modellingRule="Mandatory",
             dataType=o6.DateTime,
             accessLevel=3,
         )
     )
     lTPPMisstart: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=iredes;i=6177", browseName="ns=iredes;LTPPMisstart", description="Time tag when the mission started.", dataType=o6.DateTime, accessLevel=3
+            nodeId="ns=iredes;i=6177",
+            browseName="ns=iredes;LTPPMisstart",
+            description="Time tag when the mission started.",
+            modellingRule="Mandatory",
+            dataType=o6.DateTime,
+            accessLevel=3,
         )
     )
     lTPPMopID: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=iredes;i=6186", browseName="ns=iredes;LTPPMopID", description="Operator ID.", dataType=o6.String, accessLevel=3)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=iredes;i=6186", browseName="ns=iredes;LTPPMopID", description="Operator ID.", modellingRule="Optional", dataType=o6.String, accessLevel=3
+        )
     )
     lTPPMpayld: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=iredes;i=6183",
             browseName="ns=iredes;LTPPMpayld",
             description="Tonnage of payload carried between start and destination points.",
+            modellingRule="Mandatory",
             dataType=o6.Float,
             accessLevel=3,
         )
@@ -845,6 +1017,7 @@ class LTPPMissionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6172",
             browseName="ns=iredes;LTPPMptFromID",
             description="Electronic (Tag) ID of the point where the mission originated (tramming started). Electronic ID of the point stated in LTPPMptFromN.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
         )
@@ -854,6 +1027,7 @@ class LTPPMissionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6170",
             browseName="ns=iredes;LTPPMptFromN",
             description="Name of the point where the mission originated (tramming started).",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
         )
@@ -863,6 +1037,7 @@ class LTPPMissionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6171",
             browseName="ns=iredes;LTPPMptFromType",
             description="Type of the point where the mission started.",
+            modellingRule="Optional",
             dataType=iredes_datypes.LTPPMptFromType,
             accessLevel=3,
         )
@@ -872,6 +1047,7 @@ class LTPPMissionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6174",
             browseName="ns=iredes;LTPPMptToID",
             description="Electronic (tag) ID of the point where the mission ended (destination point).",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
         )
@@ -881,6 +1057,7 @@ class LTPPMissionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6173",
             browseName="ns=iredes;LTPPMptToN",
             description="Name of the destination point, where the tramming finished and the mission ended.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
         )
@@ -890,6 +1067,7 @@ class LTPPMissionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6175",
             browseName="ns=iredes;LTPPMptToType",
             description="Type of the point where the mission ended.",
+            modellingRule="Optional",
             dataType=iredes_datypes.LTPPMptToType,
             accessLevel=3,
         )
@@ -899,6 +1077,7 @@ class LTPPMissionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6182",
             browseName="ns=iredes;LTPPMtimeAct",
             description="Duration of the action carried out at the destination point in LTPPMaction.",
+            modellingRule="Optional",
             dataType=o6.DateTime,
             accessLevel=3,
         )
@@ -908,6 +1087,7 @@ class LTPPMissionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6185",
             browseName="ns=iredes;LTPPMtramDist",
             description="Tramming distance between start and destination point. Unit: km; Resolution: 0.0001 km (10 cm).",
+            modellingRule="Mandatory",
             dataType=o6.Float,
             accessLevel=3,
         )
@@ -917,13 +1097,19 @@ class LTPPMissionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6184",
             browseName="ns=iredes;LTPPMtramEnd",
             description="Tramming end time: Time stamp when the tramming ended at destination point.",
+            modellingRule="Mandatory",
             dataType=o6.DateTime,
             accessLevel=3,
         )
     )
     lTPPMwaitPoint: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=iredes;i=6179", browseName="ns=iredes;LTPPMwaitPoint", description="Waiting time for destination point availability.", dataType=o6.DateTime, accessLevel=3
+            nodeId="ns=iredes;i=6179",
+            browseName="ns=iredes;LTPPMwaitPoint",
+            description="Waiting time for destination point availability.",
+            modellingRule="Optional",
+            dataType=o6.DateTime,
+            accessLevel=3,
         )
     )
     lTPPMwaitgen: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -931,6 +1117,7 @@ class LTPPMissionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6181",
             browseName="ns=iredes;LTPPMwaitgen",
             description="Accumulated waiting time during the mission, excluding the time reported in LTPPMwaitPoint.",
+            modellingRule="Optional",
             dataType=o6.DateTime,
             accessLevel=3,
         )
@@ -954,6 +1141,7 @@ class LTPPaccPtsType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6193",
             browseName="ns=iredes;LTPPLcycl",
             description="Number of cycles travelled between this point pair during reporting period.",
+            modellingRule="Mandatory",
             dataType=o6.UInt16,
             accessLevel=3,
         )
@@ -963,6 +1151,7 @@ class LTPPaccPtsType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6194",
             browseName="ns=iredes;LTPPLdist",
             description="Distance travelled between those two points during reporting period. Accumulated distance of al rounds travelled. Both routes are counted! Accuracy: 0.01 km.",
+            modellingRule="Mandatory",
             dataType=o6.Float,
             accessLevel=3,
         )
@@ -972,6 +1161,7 @@ class LTPPaccPtsType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6189",
             browseName="ns=iredes;LTPPLdrawPtID",
             description="Electronic (tag) ID of the draw (load point) in this combination (Name in 1.1.1.1).",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
         )
@@ -981,6 +1171,7 @@ class LTPPaccPtsType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6188",
             browseName="ns=iredes;LTPPLdrawPtN",
             description="Name of the draw (load point) accessed in the reported job.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
         )
@@ -990,13 +1181,19 @@ class LTPPaccPtsType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6191",
             browseName="ns=iredes;LTPPLdumpPtID",
             description="Electronic (tag) ID of the draw (load point) in this combination (Name in 1.1.1.1).",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
         )
     )
     lTPPLdumpPtN: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=iredes;i=6190", browseName="ns=iredes;LTPPLdumpPtN", description="Name of the dump point in this combination.", dataType=o6.String, accessLevel=3
+            nodeId="ns=iredes;i=6190",
+            browseName="ns=iredes;LTPPLdumpPtN",
+            description="Name of the dump point in this combination.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            accessLevel=3,
         )
     )
     lTPPLmass: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
@@ -1004,6 +1201,7 @@ class LTPPaccPtsType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6192",
             browseName="ns=iredes;LTPPLmass",
             description="Mass transported between this point pair during reporting period in t. Min accuracy: 0.01 t.",
+            modellingRule="Mandatory",
             dataType=o6.Float,
             accessLevel=3,
         )
@@ -1013,6 +1211,7 @@ class LTPPaccPtsType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6000",
             browseName="ns=iredes;LTPPLopObserv",
             description="Operator observations regarding the travel way, load or dump points during reporting period (e.g. loose rock, bad roadway,...). Preliminarily a string, later we can add preselect-lists for easier operator input!",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
         )
@@ -1037,6 +1236,7 @@ class LTPPLoadRepType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6198",
             browseName="ns=iredes;LTPPCyclTot",
             description="Total number of working cycles (rounds) completed during the reporting period.",
+            modellingRule="Mandatory",
             dataType=o6.UInt64,
             accessLevel=3,
         )
@@ -1048,6 +1248,7 @@ class LTPPLoadRepType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6199",
             browseName="ns=iredes;LTPPdistTot",
             description="Overall distance travelled in during the reporting period. This includes also non-performance related tramming e.g. to workshop. Minimum accuracy required by the standard: 0.1 km.",
+            modellingRule="Optional",
             dataType=o6.Float,
             accessLevel=3,
         )
@@ -1057,6 +1258,7 @@ class LTPPLoadRepType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6201",
             browseName="ns=iredes;LTPPloadTot",
             description="Total load carried under all completed working cycles during reporting period. Minimum accuracy required by the standard: 0.01.",
+            modellingRule="Mandatory",
             dataType=o6.Float,
             accessLevel=3,
         )
@@ -1066,6 +1268,7 @@ class LTPPLoadRepType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=5055",
             browseName="ns=iredes;LTPPwaitProc",
             description="Process caused waiting time - LHD specific! Specifies details of the WaitProc timing in the Application Profile!",
+            modellingRule="Optional",
         )
     )
     lTPPwrkDist: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -1073,6 +1276,7 @@ class LTPPLoadRepType(ns0.objtypes.BaseObjectType):
             nodeId="ns=iredes;i=6200",
             browseName="ns=iredes;LTPPwrkDist",
             description="Total distance travelled in a working mode (as reported by MWorking) during the reporting period.",
+            modellingRule="Optional",
             dataType=o6.Float,
             accessLevel=3,
         )
@@ -1094,10 +1298,14 @@ class IRLTPPerfType(ns0.objtypes.BaseObjectType):
     iRpPerfGen: IRpPerfGenType
     lTPPLoadRep: LTPPLoadRepType
     lTPPerfDownwCompat: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6221", browseName="ns=iredes;LTPPerfDownwCompat", description="2.0.", dataType=o6.String, accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=iredes;i=6221", browseName="ns=iredes;LTPPerfDownwCompat", description="2.0.", modellingRule="Mandatory", dataType=o6.String, accessLevel=3
+        )
     )
     lTPPerfVersion: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=iredes;i=6220", browseName="ns=iredes;LTPPerfVersion", description="2.0.", dataType=o6.String, accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=iredes;i=6220", browseName="ns=iredes;LTPPerfVersion", description="2.0.", modellingRule="Mandatory", dataType=o6.String, accessLevel=3
+        )
     )
 
 

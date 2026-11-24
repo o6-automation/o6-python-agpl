@@ -33,44 +33,44 @@ else:
 
 @o6.datatype(
     nodeId="ns=safety;i=3002",
-    browseName="NonSafetyDataPlaceholderDataType",
+    browseName="ns=safety;NonSafetyDataPlaceholderDataType",
     description="Dummy structure to be used when no non-safety data are used",
     defaultEncodingId="ns=safety;i=5003",
 )
 class NonSafetyDataPlaceholderDataType(ns0.datatypes.Structure):
-    dummy: o6.Boolean
+    dummy: o6.Boolean = o6.field(name="Dummy")
 
 
-@o6.optionsettype(nodeId="ns=safety;i=3005", browseName="InFlagsType", description="Byte with Non safety Flags from SafetyConsumer", base=o6.Byte)
+@o6.optionsettype(nodeId="ns=safety;i=3005", browseName="ns=safety;InFlagsType", description="Byte with Non safety Flags from SafetyConsumer", base=o6.Byte)
 class InFlagsType:
     COMMUNICATION_ERROR = o6.bitmask(0x01 << 0, name="CommunicationError")
     OPERATOR_ACK_REQUESTED = o6.bitmask(0x01 << 1, name="OperatorAckRequested")
     FSV_ACTIVATED = o6.bitmask(0x01 << 2, name="FSV_Activated")
 
 
-@o6.datatype(nodeId="ns=safety;i=3003", browseName="RequestSPDUDataType", defaultEncodingId="ns=safety;i=5010")
+@o6.datatype(nodeId="ns=safety;i=3003", browseName="ns=safety;RequestSPDUDataType", defaultEncodingId="ns=safety;i=5010")
 class RequestSPDUDataType(ns0.datatypes.Structure):
-    inSafetyConsumerID: o6.UInt32
-    inMonitoringNumber: o6.UInt32
-    inFlags: InFlagsType
+    inSafetyConsumerID: o6.UInt32 = o6.field(name="InSafetyConsumerID")
+    inMonitoringNumber: o6.UInt32 = o6.field(name="InMonitoringNumber")
+    inFlags: InFlagsType = o6.field(name="InFlags")
 
 
-@o6.optionsettype(nodeId="ns=safety;i=3006", browseName="OutFlagsType", description="Byte with Safety Flags from SafetyProvider", base=o6.Byte)
+@o6.optionsettype(nodeId="ns=safety;i=3006", browseName="ns=safety;OutFlagsType", description="Byte with Safety Flags from SafetyProvider", base=o6.Byte)
 class OutFlagsType:
     OPERATOR_ACK_PROVIDER = o6.bitmask(0x01 << 0, name="OperatorAckProvider")
     ACTIVATE_FSV = o6.bitmask(0x01 << 1, name="ActivateFSV")
     TEST_MODE_ACTIVATED = o6.bitmask(0x01 << 2, name="TestModeActivated")
 
 
-@o6.datatype(nodeId="ns=safety;i=3004", browseName="ResponseSPDUDataType", isAbstract=True)
+@o6.datatype(nodeId="ns=safety;i=3004", browseName="ns=safety;ResponseSPDUDataType", isAbstract=True)
 class ResponseSPDUDataType(ns0.datatypes.Structure):
-    outFlags: OutFlagsType
-    outSPDU_ID_1: o6.UInt32
-    outSPDU_ID_2: o6.UInt32
-    outSPDU_ID_3: o6.UInt32
-    outSafetyConsumerID: o6.UInt32
-    outMonitoringNumber: o6.UInt32
-    outCRC: o6.UInt32
+    outFlags: OutFlagsType = o6.field(name="OutFlags")
+    outSPDU_ID_1: o6.UInt32 = o6.field(name="OutSPDU_ID_1")
+    outSPDU_ID_2: o6.UInt32 = o6.field(name="OutSPDU_ID_2")
+    outSPDU_ID_3: o6.UInt32 = o6.field(name="OutSPDU_ID_3")
+    outSafetyConsumerID: o6.UInt32 = o6.field(name="OutSafetyConsumerID")
+    outMonitoringNumber: o6.UInt32 = o6.field(name="OutMonitoringNumber")
+    outCRC: o6.UInt32 = o6.field(name="OutCRC")
 
 
 del Any, TYPE_CHECKING, uuid, o6, ns0

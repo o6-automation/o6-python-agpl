@@ -63,18 +63,24 @@ class AdditiveManufacturingType(machine_tool.objtypes.MachineToolType):
 class FeedstockType(ns0.objtypes.BaseObjectType):
     cycle: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=additive_manufacturing;i=6012", browseName="ns=additive_manufacturing;Cycle", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            nodeId="ns=additive_manufacturing;i=6012", browseName="ns=additive_manufacturing;Cycle", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
         )
     )
     externalIdentifier: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=additive_manufacturing;i=6009", browseName="ns=additive_manufacturing;ExternalIdentifier", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            nodeId="ns=additive_manufacturing;i=6009",
+            browseName="ns=additive_manufacturing;ExternalIdentifier",
+            modellingRule="Optional",
+            dataType=o6.String,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     function: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=additive_manufacturing;i=6015",
             browseName="ns=additive_manufacturing;Function",
+            modellingRule="Optional",
             dataType=additive_manufacturing_datypes.FeedstockFunction,
             accessLevel=3,
             userAccessLevel=1,
@@ -82,20 +88,37 @@ class FeedstockType(ns0.objtypes.BaseObjectType):
     )
     identifier: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=additive_manufacturing;i=6008", browseName="ns=additive_manufacturing;Identifier", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            nodeId="ns=additive_manufacturing;i=6008",
+            browseName="ns=additive_manufacturing;Identifier",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     manufacturer: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=additive_manufacturing;i=6011", browseName="ns=additive_manufacturing;Manufacturer", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            nodeId="ns=additive_manufacturing;i=6011",
+            browseName="ns=additive_manufacturing;Manufacturer",
+            modellingRule="Optional",
+            dataType=o6.String,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     name: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=additive_manufacturing;i=6010", browseName="ns=additive_manufacturing;Name", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=additive_manufacturing;i=6010", browseName="ns=additive_manufacturing;Name", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
     readyForProduction: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=additive_manufacturing;i=6013", browseName="ns=additive_manufacturing;ReadyForProduction", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            nodeId="ns=additive_manufacturing;i=6013",
+            browseName="ns=additive_manufacturing;ReadyForProduction",
+            modellingRule="Optional",
+            dataType=o6.Boolean,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     remainingQuantity: ns0.vartypes.AnalogUnitType | None
@@ -112,6 +135,7 @@ class ProcessValueAMType(machinery_processvalues.objtypes.ProcessValueType):
         ns0.vartypes.PropertyType(
             nodeId="ns=additive_manufacturing;i=6063",
             browseName="ns=additive_manufacturing;Category",
+            modellingRule="Mandatory",
             dataType=additive_manufacturing_datypes.SensorCategory,
             accessLevel=3,
             userAccessLevel=1,
@@ -121,6 +145,7 @@ class ProcessValueAMType(machinery_processvalues.objtypes.ProcessValueType):
         ns0.vartypes.PropertyType(
             nodeId="ns=additive_manufacturing;i=6064",
             browseName="ns=additive_manufacturing;Severity",
+            modellingRule="Optional",
             dataType=additive_manufacturing_datypes.SensorSeverity,
             accessLevel=3,
             userAccessLevel=1,
@@ -137,7 +162,7 @@ class ProcessValueAMType(machinery_processvalues.objtypes.ProcessValueType):
 class FeedstockListType(ns0.objtypes.BaseObjectType):
     feedstock_: FeedstockType
     nodeVersion: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=additive_manufacturing;i=6073", browseName="NodeVersion", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=additive_manufacturing;i=6073", browseName="NodeVersion", modellingRule="Optional", dataType=o6.String)
     )
 
 
@@ -150,7 +175,12 @@ class FeedstockListType(ns0.objtypes.BaseObjectType):
 class MachineIdentificationAMType(machine_tool.objtypes.MachineToolIdentificationType):
     aMTechnologyIdentifier: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=additive_manufacturing;i=6078", browseName="ns=additive_manufacturing;AMTechnologyIdentifier", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            nodeId="ns=additive_manufacturing;i=6078",
+            browseName="ns=additive_manufacturing;AMTechnologyIdentifier",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
 

@@ -34,19 +34,25 @@ else:
 
 @o6.variabletype(nodeId="ns=sercos;i=2001", browseName="ns=sercos;SercosParameterType", displayName="SercosParameterType", valueRank=o6.ValueRank.ANY)
 class SercosParameterType(ns0.vartypes.BaseDataVariableType):
-    attribute: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=sercos;i=6004", browseName="ns=sercos;Attribute", dataType=o6.UInt32))
+    attribute: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=sercos;i=6004", browseName="ns=sercos;Attribute", modellingRule="Mandatory", dataType=o6.UInt32)
+    )
     displayMaxValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=sercos;i=6008", browseName="ns=sercos;DisplayMaxValue", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=sercos;i=6008", browseName="ns=sercos;DisplayMaxValue", modellingRule="Optional", dataType=o6.String)
     )
     displayMinValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=sercos;i=6007", browseName="ns=sercos;DisplayMinValue", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=sercos;i=6007", browseName="ns=sercos;DisplayMinValue", modellingRule="Optional", dataType=o6.String)
     )
-    displayValue: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=sercos;i=6009", browseName="ns=sercos;DisplayValue", dataType=o6.String))
-    exponent: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=sercos;i=6006", browseName="ns=sercos;Exponent", dataType=o6.SByte))
-    maxValue: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=sercos;i=6001", browseName="ns=sercos;MaxValue"))
-    minValue: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=sercos;i=6002", browseName="ns=sercos;MinValue"))
+    displayValue: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=sercos;i=6009", browseName="ns=sercos;DisplayValue", modellingRule="Mandatory", dataType=o6.String)
+    )
+    exponent: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=sercos;i=6006", browseName="ns=sercos;Exponent", modellingRule="Optional", dataType=o6.SByte)
+    )
+    maxValue: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=sercos;i=6001", browseName="ns=sercos;MaxValue", modellingRule="Optional"))
+    minValue: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=sercos;i=6002", browseName="ns=sercos;MinValue", modellingRule="Optional"))
     procedureCommand: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=sercos;i=6005", browseName="ns=sercos;ProcedureCommand", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=sercos;i=6005", browseName="ns=sercos;ProcedureCommand", modellingRule="Optional", dataType=o6.Boolean)
     )
 
 

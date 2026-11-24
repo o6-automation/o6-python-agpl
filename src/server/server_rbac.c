@@ -206,6 +206,7 @@ static PyObject *role_to_dict(PyServer *self, const UA_Role *role) {
 }
 
 PyObject *pyServer_close_session(PyObject *obj, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   PyObject *sid;
   UA_NodeId id;
@@ -221,6 +222,7 @@ PyObject *pyServer_close_session(PyObject *obj, PyObject *args) {
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 PyObject *pyServer_allow_transfer_subscription(PyObject *obj, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   PyObject *old_sid, *new_sid;
   UA_NodeId oldId, newId;
@@ -256,6 +258,7 @@ static int session_key(PyServer *self, PyObject *sid, PyObject *key,
 }
 
 PyObject *pyServer_get_session_attribute(PyObject *obj, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   PyObject *sid, *key;
   UA_NodeId id;
@@ -277,6 +280,7 @@ PyObject *pyServer_get_session_attribute(PyObject *obj, PyObject *args) {
 }
 
 PyObject *pyServer_set_session_attribute(PyObject *obj, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   PyObject *sid, *key, *pyvalue;
   UA_NodeId id;
@@ -303,6 +307,7 @@ PyObject *pyServer_set_session_attribute(PyObject *obj, PyObject *args) {
 }
 
 PyObject *pyServer_delete_session_attribute(PyObject *obj, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   PyObject *sid, *key;
   UA_NodeId id;
@@ -319,6 +324,7 @@ PyObject *pyServer_delete_session_attribute(PyObject *obj, PyObject *args) {
 }
 
 PyObject *pyServer_get_session_roles(PyObject *obj, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   PyObject *sid;
   UA_NodeId id;
@@ -342,6 +348,7 @@ PyObject *pyServer_get_session_roles(PyObject *obj, PyObject *args) {
 }
 
 PyObject *pyServer_set_session_roles(PyObject *obj, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   PyObject *sid, *roles;
   UA_NodeId id, *ids = NULL;
@@ -370,6 +377,7 @@ PyObject *pyServer_set_session_roles(PyObject *obj, PyObject *args) {
 /* The RolePermissions a session has on a node, as the default AccessControl
  * evaluates them. UA_PERMISSIONTYPE_ALL means that no rules apply. */
 PyObject *pyServer_effective_permissions(PyObject *obj, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   PyObject *sid, *node;
   UA_NodeId session_id, node_id;
@@ -396,6 +404,7 @@ PyObject *pyServer_effective_permissions(PyObject *obj, PyObject *args) {
 
 /* Store the AccessRestrictions of a node for the access-control layer */
 PyObject *pyServer_set_access_restrictions(PyObject *obj, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   PyObject *node;
   unsigned int restrictions;
@@ -428,6 +437,7 @@ static int parse_role(PyServer *self, PyObject *args, UA_Role *role) {
 }
 
 PyObject *pyServer_add_role(PyObject *obj, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   UA_Role role;
   UA_NodeId out;
@@ -443,6 +453,7 @@ PyObject *pyServer_add_role(PyObject *obj, PyObject *args) {
   return py;
 }
 PyObject *pyServer_update_role(PyObject *obj, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   UA_Role role;
   if (parse_role(self, args, &role) < 0)
@@ -454,6 +465,7 @@ PyObject *pyServer_update_role(PyObject *obj, PyObject *args) {
   Py_RETURN_NONE;
 }
 PyObject *pyServer_remove_role(PyObject *obj, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   PyObject *name;
   UA_QualifiedName qn;
@@ -468,6 +480,7 @@ PyObject *pyServer_remove_role(PyObject *obj, PyObject *args) {
   Py_RETURN_NONE;
 }
 PyObject *pyServer_get_role(PyObject *obj, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   PyObject *key;
   int byid;
@@ -497,6 +510,7 @@ PyObject *pyServer_get_role(PyObject *obj, PyObject *args) {
   return out;
 }
 PyObject *pyServer_get_roles(PyObject *obj, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   (void)args;
   PyServer *self = (PyServer *)obj;
   size_t size = 0;
@@ -524,6 +538,7 @@ static int node_and_role(PyServer *self, PyObject *node, PyObject *role,
   return 0;
 }
 PyObject *pyServer_set_node_role_permissions(PyObject *obj, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   PyObject *node, *mapping;
   int recursive;
@@ -546,6 +561,7 @@ PyObject *pyServer_set_node_role_permissions(PyObject *obj, PyObject *args) {
   Py_RETURN_NONE;
 }
 PyObject *pyServer_get_node_role_permissions(PyObject *obj, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   PyObject *node;
   UA_NodeId id;
@@ -564,6 +580,7 @@ PyObject *pyServer_get_node_role_permissions(PyObject *obj, PyObject *args) {
   return out;
 }
 PyObject *pyServer_remove_node_role_permissions(PyObject *obj, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   PyObject *node;
   int rec;
@@ -578,6 +595,7 @@ PyObject *pyServer_remove_node_role_permissions(PyObject *obj, PyObject *args) {
   Py_RETURN_NONE;
 }
 PyObject *pyServer_add_role_permissions(PyObject *obj, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   PyObject *node, *role;
   unsigned long perms;
@@ -596,6 +614,7 @@ PyObject *pyServer_add_role_permissions(PyObject *obj, PyObject *args) {
   Py_RETURN_NONE;
 }
 PyObject *pyServer_remove_role_permissions(PyObject *obj, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   PyObject *node, *role;
   unsigned long perms;
@@ -614,6 +633,7 @@ PyObject *pyServer_remove_role_permissions(PyObject *obj, PyObject *args) {
 }
 PyObject *pyServer_set_namespace_role_permissions(PyObject *obj,
                                                   PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   unsigned int ns;
   PyObject *mapping;
@@ -631,6 +651,7 @@ PyObject *pyServer_set_namespace_role_permissions(PyObject *obj,
 }
 PyObject *pyServer_get_namespace_role_permissions(PyObject *obj,
                                                   PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   unsigned int ns;
   UA_RolePermission *p = NULL;
@@ -647,6 +668,7 @@ PyObject *pyServer_get_namespace_role_permissions(PyObject *obj,
 }
 PyObject *pyServer_set_all_permissions_for_anonymous(PyObject *obj,
                                                      PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   int enabled;
   if (!PyArg_ParseTuple(args, "p", &enabled))

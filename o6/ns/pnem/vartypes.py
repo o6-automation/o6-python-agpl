@@ -37,16 +37,20 @@ else:
 @o6.variabletype(nodeId="ns=pnem;i=2002", browseName="ns=pnem;MeasurementValueType", displayName="MeasurementValueType", valueRank=o6.ValueRank.ANY)
 class MeasurementValueType(ns0.vartypes.BaseDataVariableType):
     accuracyClass: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6020", browseName="ns=pnem;AccuracyClass", dataType=pnem_datypes.AccuracyClassEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6020", browseName="ns=pnem;AccuracyClass", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyClassEnumeration)
     )
     accuracyDomain: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6019", browseName="ns=pnem;AccuracyDomain", dataType=pnem_datypes.AccuracyDomainEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6019", browseName="ns=pnem;AccuracyDomain", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyDomainEnumeration)
     )
     engineeringUnits: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6021", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)
+        ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6021", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
     )
-    peMeasurementID: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6018", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16))
-    valueBeforeReset: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6022", browseName="ns=pnem;ValueBeforeReset"))
+    peMeasurementID: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6018", browseName="ns=pnem;PeMeasurementID", modellingRule="Mandatory", dataType=o6.UInt16)
+    )
+    valueBeforeReset: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6022", browseName="ns=pnem;ValueBeforeReset", modellingRule="Optional")
+    )
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ns0, pnem_reftypes, pnem_datypes

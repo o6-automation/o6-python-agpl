@@ -37,7 +37,8 @@ else:
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=di;i=5",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 di_objtypes.PrepareForUpdateStateMachineType(
@@ -46,8 +47,8 @@ di_objtypes.PrepareForUpdateStateMachineType(
     modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=di;i=5"]),
-        o6.hasComponent(o6.call(nodeId="ns=di;i=19", browseName="ns=di;Prepare")),
-        o6.hasComponent(o6.call(nodeId="ns=di;i=20", browseName="ns=di;Abort")),
+        o6.hasComponent(o6.call(nodeId="ns=di;i=19", browseName="ns=di;Prepare", modellingRule="Mandatory")),
+        o6.hasComponent(o6.call(nodeId="ns=di;i=20", browseName="ns=di;Abort", modellingRule="Mandatory")),
     ],
 )
 o6.reference(di_objtypes.SoftwareUpdateType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=4"])
@@ -75,7 +76,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=di;i=36", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=di;i=37"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=38"]))
+o6.call(nodeId="ns=di;i=36", browseName="Open", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=di;i=37"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=38"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=di;i=62",
@@ -88,19 +89,20 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=di;i=39", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=di;i=62"]))
+o6.call(nodeId="ns=di;i=39", browseName="Close", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=di;i=62"]))
 
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=di;i=41",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=42", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=42", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 di_objtypes.InstallationStateMachineType(
     nodeId="ns=di;i=40",
     browseName="ns=di;Installation",
     modellingRule="Optional",
-    references=[o6.hasComponent(o6.ns["ns=di;i=41"]), o6.hasComponent(o6.call(nodeId="ns=di;i=61", browseName="ns=di;Resume"))],
+    references=[o6.hasComponent(o6.ns["ns=di;i=41"]), o6.hasComponent(o6.call(nodeId="ns=di;i=61", browseName="ns=di;Resume", modellingRule="Mandatory"))],
 )
 o6.reference(di_objtypes.SoftwareUpdateType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=40"])
 
@@ -130,7 +132,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=di;i=63", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=di;i=64"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=65"]))
+o6.call(nodeId="ns=di;i=63", browseName="Read", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=di;i=64"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=65"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=di;i=67",
@@ -146,7 +148,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="ns=di;i=66", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=di;i=67"]))
+o6.call(nodeId="ns=di;i=66", browseName="Write", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=di;i=67"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=di;i=69",
@@ -170,7 +172,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=di;i=68", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=di;i=69"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=70"]))
+o6.call(nodeId="ns=di;i=68", browseName="GetPosition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=di;i=69"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=70"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=di;i=72",
@@ -186,17 +188,17 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="ns=di;i=71", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=di;i=72"]))
+o6.call(nodeId="ns=di;i=71", browseName="SetPosition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=di;i=72"]))
 
 ns0.objtypes.FileType(
     nodeId="ns=di;i=28",
     browseName="ns=di;<DocumentFileId>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=29", browseName="Size", dataType=o6.UInt64)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=30", browseName="Writable", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=31", browseName="UserWritable", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=32", browseName="OpenCount", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=29", browseName="Size", modellingRule="Mandatory", dataType=o6.UInt64)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=30", browseName="Writable", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=31", browseName="UserWritable", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=32", browseName="OpenCount", modellingRule="Mandatory", dataType=o6.UInt16)),
         o6.hasComponent(o6.ns["ns=di;i=36"]),
         o6.hasComponent(o6.ns["ns=di;i=39"]),
         o6.hasComponent(o6.ns["ns=di;i=63"]),
@@ -213,7 +215,8 @@ maintenance = di_objtypes.FunctionalGroupType(nodeId="ns=di;i=75", browseName="n
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=di;i=77",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=78", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=78", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 di_objtypes.PowerCycleStateMachineType(nodeId="ns=di;i=76", browseName="ns=di;PowerCycle", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=di;i=77"])])
@@ -227,7 +230,8 @@ identification = di_objtypes.FunctionalGroupType(nodeId="ns=di;i=95", browseName
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=di;i=99",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=100", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=100", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 di_objtypes.ConfirmationStateMachineType(
@@ -236,8 +240,10 @@ di_objtypes.ConfirmationStateMachineType(
     modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=di;i=99"]),
-        o6.hasComponent(o6.call(nodeId="ns=di;i=112", browseName="ns=di;Confirm")),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=di;i=113", browseName="ns=di;ConfirmationTimeout", dataType=ns0.datatypes.Duration)),
+        o6.hasComponent(o6.call(nodeId="ns=di;i=112", browseName="ns=di;Confirm", modellingRule="Mandatory")),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=di;i=113", browseName="ns=di;ConfirmationTimeout", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
+        ),
     ],
 )
 o6.reference(di_objtypes.SoftwareUpdateType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=98"])
@@ -269,7 +275,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="ns=di;i=124", browseName="GenerateFileForRead", inputArgs=o6.hasProperty(o6.ns["ns=di;i=125"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=126"]))
+o6.call(
+    nodeId="ns=di;i=124",
+    browseName="GenerateFileForRead",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=di;i=125"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=di;i=126"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=di;i=128",
@@ -296,7 +308,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="ns=di;i=127", browseName="GenerateFileForWrite", inputArgs=o6.hasProperty(o6.ns["ns=di;i=128"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=129"]))
+o6.call(
+    nodeId="ns=di;i=127",
+    browseName="GenerateFileForWrite",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=di;i=128"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=di;i=129"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=di;i=131",
@@ -320,14 +338,16 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=di;i=130", browseName="CloseAndCommit", inputArgs=o6.hasProperty(o6.ns["ns=di;i=131"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=132"]))
+o6.call(
+    nodeId="ns=di;i=130", browseName="CloseAndCommit", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=di;i=131"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=132"])
+)
 
 ns0.objtypes.TemporaryFileTransferType(
     nodeId="ns=di;i=122",
     browseName="ns=di;Parameters",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=123", browseName="ClientProcessingTimeout", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=123", browseName="ClientProcessingTimeout", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
         o6.hasComponent(o6.ns["ns=di;i=124"]),
         o6.hasComponent(o6.ns["ns=di;i=127"]),
         o6.hasComponent(o6.ns["ns=di;i=130"]),
@@ -362,7 +382,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="ns=di;i=142", browseName="GenerateFileForRead", inputArgs=o6.hasProperty(o6.ns["ns=di;i=143"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=144"]))
+o6.call(
+    nodeId="ns=di;i=142",
+    browseName="GenerateFileForRead",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=di;i=143"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=di;i=144"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=di;i=146",
@@ -389,7 +415,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="ns=di;i=145", browseName="GenerateFileForWrite", inputArgs=o6.hasProperty(o6.ns["ns=di;i=146"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=147"]))
+o6.call(
+    nodeId="ns=di;i=145",
+    browseName="GenerateFileForWrite",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=di;i=146"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=di;i=147"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=di;i=149",
@@ -413,14 +445,16 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=di;i=148", browseName="CloseAndCommit", inputArgs=o6.hasProperty(o6.ns["ns=di;i=149"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=150"]))
+o6.call(
+    nodeId="ns=di;i=148", browseName="CloseAndCommit", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=di;i=149"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=150"])
+)
 
 ns0.objtypes.TemporaryFileTransferType(
     nodeId="ns=di;i=140",
     browseName="ns=di;FileTransfer",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=141", browseName="ClientProcessingTimeout", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=141", browseName="ClientProcessingTimeout", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
         o6.hasComponent(o6.ns["ns=di;i=142"]),
         o6.hasComponent(o6.ns["ns=di;i=145"]),
         o6.hasComponent(o6.ns["ns=di;i=148"]),
@@ -451,7 +485,9 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="DirectoryNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=di;i=195", browseName="CreateDirectory", inputArgs=o6.hasProperty(o6.ns["ns=di;i=196"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=197"]))
+o6.call(
+    nodeId="ns=di;i=195", browseName="CreateDirectory", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=di;i=196"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=197"])
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=di;i=199",
@@ -481,7 +517,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="ns=di;i=198", browseName="CreateFile", inputArgs=o6.hasProperty(o6.ns["ns=di;i=199"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=200"]))
+o6.call(nodeId="ns=di;i=198", browseName="CreateFile", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=di;i=199"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=200"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=di;i=202",
@@ -494,7 +530,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ObjectToDelete", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=di;i=201", browseName="Delete", inputArgs=o6.hasProperty(o6.ns["ns=di;i=202"]))
+o6.call(nodeId="ns=di;i=201", browseName="Delete", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=di;i=202"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=di;i=204",
@@ -523,7 +559,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="NewNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=di;i=203", browseName="MoveOrCopy", inputArgs=o6.hasProperty(o6.ns["ns=di;i=204"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=205"]))
+o6.call(nodeId="ns=di;i=203", browseName="MoveOrCopy", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=di;i=204"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=205"]))
 
 ns0.objtypes.FileDirectoryType(
     nodeId="ns=di;i=194",
@@ -535,31 +571,31 @@ o6.reference(di_objtypes.FileSystemLoadingType, ns0.reftypes.HasComponent, o6.ns
 ns0.objtypes.InitialStateType(
     nodeId="ns=di;i=231",
     browseName="ns=di;Idle",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=232", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=232", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(di_objtypes.PrepareForUpdateStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=231"])
 ns0.objtypes.StateType(
     nodeId="ns=di;i=233",
     browseName="ns=di;Preparing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=234", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=234", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(di_objtypes.PrepareForUpdateStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=233"])
 ns0.objtypes.StateType(
     nodeId="ns=di;i=235",
     browseName="ns=di;PreparedForUpdate",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=236", browseName="StateNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=236", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(di_objtypes.PrepareForUpdateStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=235"])
 ns0.objtypes.StateType(
     nodeId="ns=di;i=237",
     browseName="ns=di;Resuming",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=238", browseName="StateNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=238", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(di_objtypes.PrepareForUpdateStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=237"])
 ns0.objtypes.TransitionType(
     nodeId="ns=di;i=239",
     browseName="ns=di;IdleToPreparing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=240", browseName="TransitionNumber", dataType=o6.UInt32, value=12))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=240", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=12))],
 )
 o6.reference(di_objtypes.PrepareForUpdateStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=239"])
 o6.reference(o6.ns["ns=di;i=239"], "i=51", o6.ns["ns=di;i=231"])
@@ -569,7 +605,7 @@ o6.reference(o6.ns["ns=di;i=239"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=di;i=241",
     browseName="ns=di;PreparingToIdle",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=242", browseName="TransitionNumber", dataType=o6.UInt32, value=21))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=242", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=21))],
 )
 o6.reference(di_objtypes.PrepareForUpdateStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=241"])
 o6.reference(o6.ns["ns=di;i=241"], "i=51", o6.ns["ns=di;i=233"])
@@ -579,7 +615,7 @@ o6.reference(o6.ns["ns=di;i=241"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=di;i=243",
     browseName="ns=di;PreparingToPreparedForUpdate",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=244", browseName="TransitionNumber", dataType=o6.UInt32, value=23))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=244", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=23))],
 )
 o6.reference(di_objtypes.PrepareForUpdateStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=243"])
 o6.reference(o6.ns["ns=di;i=243"], "i=51", o6.ns["ns=di;i=233"])
@@ -588,7 +624,7 @@ o6.reference(o6.ns["ns=di;i=243"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=di;i=245",
     browseName="ns=di;PreparedForUpdateToResuming",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=246", browseName="TransitionNumber", dataType=o6.UInt32, value=34))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=246", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=34))],
 )
 o6.reference(di_objtypes.PrepareForUpdateStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=245"])
 o6.reference(o6.ns["ns=di;i=245"], "i=51", o6.ns["ns=di;i=235"])
@@ -598,7 +634,7 @@ o6.reference(o6.ns["ns=di;i=245"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=di;i=247",
     browseName="ns=di;ResumingToIdle",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=248", browseName="TransitionNumber", dataType=o6.UInt32, value=41))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=248", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=41))],
 )
 o6.reference(di_objtypes.PrepareForUpdateStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=247"])
 o6.reference(o6.ns["ns=di;i=247"], "i=51", o6.ns["ns=di;i=237"])
@@ -608,25 +644,25 @@ o6.reference(o6.ns["ns=di;i=247"], "i=54", "i=2311")
 ns0.objtypes.InitialStateType(
     nodeId="ns=di;i=271",
     browseName="ns=di;Idle",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=272", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=272", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(di_objtypes.InstallationStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=271"])
 ns0.objtypes.StateType(
     nodeId="ns=di;i=273",
     browseName="ns=di;Installing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=274", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=274", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(di_objtypes.InstallationStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=273"])
 ns0.objtypes.StateType(
     nodeId="ns=di;i=275",
     browseName="ns=di;Error",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=276", browseName="StateNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=276", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(di_objtypes.InstallationStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=275"])
 ns0.objtypes.TransitionType(
     nodeId="ns=di;i=279",
     browseName="ns=di;InstallingToIdle",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=280", browseName="TransitionNumber", dataType=o6.UInt32, value=21))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=280", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=21))],
 )
 o6.reference(di_objtypes.InstallationStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=279"])
 o6.reference(o6.ns["ns=di;i=279"], "i=51", o6.ns["ns=di;i=273"])
@@ -635,7 +671,7 @@ o6.reference(o6.ns["ns=di;i=279"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=di;i=281",
     browseName="ns=di;InstallingToError",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=282", browseName="TransitionNumber", dataType=o6.UInt32, value=23))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=282", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=23))],
 )
 o6.reference(di_objtypes.InstallationStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=281"])
 o6.reference(o6.ns["ns=di;i=281"], "i=51", o6.ns["ns=di;i=273"])
@@ -644,7 +680,7 @@ o6.reference(o6.ns["ns=di;i=281"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=di;i=283",
     browseName="ns=di;ErrorToIdle",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=284", browseName="TransitionNumber", dataType=o6.UInt32, value=31))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=284", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=31))],
 )
 o6.reference(di_objtypes.InstallationStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=283"])
 o6.reference(o6.ns["ns=di;i=283"], "i=51", o6.ns["ns=di;i=275"])
@@ -654,19 +690,19 @@ o6.reference(o6.ns["ns=di;i=283"], "i=54", "i=2311")
 ns0.objtypes.InitialStateType(
     nodeId="ns=di;i=299",
     browseName="ns=di;NotWaitingForPowerCycle",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=300", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=300", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(di_objtypes.PowerCycleStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=299"])
 ns0.objtypes.StateType(
     nodeId="ns=di;i=301",
     browseName="ns=di;WaitingForPowerCycle",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=302", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=302", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(di_objtypes.PowerCycleStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=301"])
 ns0.objtypes.TransitionType(
     nodeId="ns=di;i=303",
     browseName="ns=di;NotWaitingForPowerCycleToWaitingForPowerCycle",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=304", browseName="TransitionNumber", dataType=o6.UInt32, value=12))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=304", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=12))],
 )
 o6.reference(di_objtypes.PowerCycleStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=303"])
 o6.reference(o6.ns["ns=di;i=303"], "i=51", o6.ns["ns=di;i=299"])
@@ -675,7 +711,7 @@ o6.reference(o6.ns["ns=di;i=303"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=di;i=305",
     browseName="ns=di;WaitingForPowerCycleToNotWaitingForPowerCycle",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=306", browseName="TransitionNumber", dataType=o6.UInt32, value=21))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=306", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=21))],
 )
 o6.reference(di_objtypes.PowerCycleStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=305"])
 o6.reference(o6.ns["ns=di;i=305"], "i=51", o6.ns["ns=di;i=301"])
@@ -684,19 +720,19 @@ o6.reference(o6.ns["ns=di;i=305"], "i=54", "i=2311")
 ns0.objtypes.InitialStateType(
     nodeId="ns=di;i=323",
     browseName="ns=di;NotWaitingForConfirm",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=324", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=324", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(di_objtypes.ConfirmationStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=323"])
 ns0.objtypes.StateType(
     nodeId="ns=di;i=325",
     browseName="ns=di;WaitingForConfirm",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=326", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=326", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(di_objtypes.ConfirmationStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=325"])
 ns0.objtypes.TransitionType(
     nodeId="ns=di;i=327",
     browseName="ns=di;NotWaitingForConfirmToWaitingForConfirm",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=328", browseName="TransitionNumber", dataType=o6.UInt32, value=12))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=328", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=12))],
 )
 o6.reference(di_objtypes.ConfirmationStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=327"])
 o6.reference(o6.ns["ns=di;i=327"], "i=51", o6.ns["ns=di;i=323"])
@@ -705,7 +741,7 @@ o6.reference(o6.ns["ns=di;i=327"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=di;i=329",
     browseName="ns=di;WaitingForConfirmToNotWaitingForConfirm",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=330", browseName="TransitionNumber", dataType=o6.UInt32, value=21))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=330", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=21))],
 )
 o6.reference(di_objtypes.ConfirmationStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=329"])
 o6.reference(o6.ns["ns=di;i=329"], "i=51", o6.ns["ns=di;i=325"])
@@ -727,9 +763,9 @@ di_objtypes.SoftwareVersionType(
     browseName="ns=di;CurrentVersion",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=345", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=346", browseName="ns=di;ManufacturerUri", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=347", browseName="ns=di;SoftwareRevision", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=345", browseName="ns=di;Manufacturer", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=346", browseName="ns=di;ManufacturerUri", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=347", browseName="ns=di;SoftwareRevision", modellingRule="Mandatory", dataType=o6.String)),
     ],
 )
 o6.reference(di_objtypes.PackageLoadingType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=139"])
@@ -738,9 +774,9 @@ di_objtypes.SoftwareVersionType(
     browseName="ns=di;PendingVersion",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=366", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=367", browseName="ns=di;ManufacturerUri", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=368", browseName="ns=di;SoftwareRevision", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=366", browseName="ns=di;Manufacturer", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=367", browseName="ns=di;ManufacturerUri", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=368", browseName="ns=di;SoftwareRevision", modellingRule="Mandatory", dataType=o6.String)),
     ],
 )
 o6.reference(di_objtypes.CachedLoadingType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=187"])
@@ -749,16 +785,16 @@ di_objtypes.SoftwareVersionType(
     browseName="ns=di;FallbackVersion",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=373", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=374", browseName="ns=di;ManufacturerUri", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=375", browseName="ns=di;SoftwareRevision", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=373", browseName="ns=di;Manufacturer", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=374", browseName="ns=di;ManufacturerUri", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=375", browseName="ns=di;SoftwareRevision", modellingRule="Mandatory", dataType=o6.String)),
     ],
 )
 o6.reference(di_objtypes.CachedLoadingType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=188"])
 ns0.objtypes.TransitionType(
     nodeId="ns=di;i=277",
     browseName="ns=di;IdleToInstalling",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=387", browseName="TransitionNumber", dataType=o6.UInt32, value=12))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=387", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=12))],
 )
 o6.reference(di_objtypes.InstallationStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=277"])
 o6.reference(o6.ns["ns=di;i=277"], "i=51", o6.ns["ns=di;i=271"])
@@ -842,7 +878,9 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=di;i=6166", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=di;i=6167"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=6168"]))
+o6.call(
+    nodeId="ns=di;i=6166", browseName="ns=di;InitLock", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=di;i=6167"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=6168"])
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=di;i=6170",
@@ -855,7 +893,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=di;i=6169", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=di;i=6170"]))
+o6.call(nodeId="ns=di;i=6169", browseName="ns=di;RenewLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=di;i=6170"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=di;i=6172",
@@ -868,7 +906,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=di;i=6171", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=di;i=6172"]))
+o6.call(nodeId="ns=di;i=6171", browseName="ns=di;ExitLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=di;i=6172"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=di;i=6174",
@@ -881,7 +919,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=di;i=6173", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=di;i=6174"]))
+o6.call(nodeId="ns=di;i=6173", browseName="ns=di;BreakLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=di;i=6174"]))
 
 ns0.objtypes.FolderType(
     nodeId="ns=di;i=6209",
@@ -931,14 +969,14 @@ di_objtypes.FunctionalGroupType(
     nodeId="ns=di;i=6027",
     browseName="ns=di;<GroupIdentifier>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(di_vartypes.UIElementType(nodeId="ns=di;i=6242", browseName="ns=di;UIElement", _allow_abstract=True))],
+    references=[o6.hasComponent(di_vartypes.UIElementType(nodeId="ns=di;i=6242", browseName="ns=di;UIElement", modellingRule="Optional", _allow_abstract=True))],
 )
 o6.reference(di_objtypes.FunctionalGroupType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=6027"])
 cPIdentifier_ = di_objtypes.ConnectionPointType(
     nodeId="ns=di;i=6248",
     browseName="ns=di;<CPIdentifier>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(di_objtypes.FunctionalGroupType(nodeId="ns=di;i=6292", browseName="ns=di;NetworkAddress"))],
+    references=[o6.hasComponent(di_objtypes.FunctionalGroupType(nodeId="ns=di;i=6292", browseName="ns=di;NetworkAddress", modellingRule="Mandatory"))],
     _allow_abstract=True,
 )
 o6.reference(di_objtypes.NetworkType, "ns=di;i=6030", "ns=di;i=6248")
@@ -967,7 +1005,9 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=di;i=6299", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=di;i=6300"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=6301"]))
+o6.call(
+    nodeId="ns=di;i=6299", browseName="ns=di;InitLock", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=di;i=6300"]), outputArgs=o6.hasProperty(o6.ns["ns=di;i=6301"])
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=di;i=6303",
@@ -980,7 +1020,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=di;i=6302", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=di;i=6303"]))
+o6.call(nodeId="ns=di;i=6302", browseName="ns=di;RenewLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=di;i=6303"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=di;i=6305",
@@ -993,7 +1033,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=di;i=6304", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=di;i=6305"]))
+o6.call(nodeId="ns=di;i=6304", browseName="ns=di;ExitLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=di;i=6305"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=di;i=6307",
@@ -1006,7 +1046,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=di;i=6306", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=di;i=6307"]))
+o6.call(nodeId="ns=di;i=6306", browseName="ns=di;BreakLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=di;i=6307"]))
 
 maxInactiveLockTime = ns0.vartypes.PropertyType(
     nodeId="ns=di;i=6387", browseName="ns=di;MaxInactiveLockTime", parent="i=2268", referenceType=ns0.reftypes.HasProperty, dataType=ns0.datatypes.Duration
@@ -1026,10 +1066,10 @@ di_objtypes.LockingServicesType(
     browseName="ns=di;Lock",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6163", browseName="ns=di;LockingClient", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6164", browseName="ns=di;LockingUser", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6165", browseName="ns=di;RemainingLockTime", dataType=ns0.datatypes.Duration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6468", browseName="ns=di;Locked", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6163", browseName="ns=di;LockingClient", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6164", browseName="ns=di;LockingUser", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6165", browseName="ns=di;RemainingLockTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6468", browseName="ns=di;Locked", modellingRule="Mandatory", dataType=o6.Boolean)),
         o6.hasComponent(o6.ns["ns=di;i=6166"]),
         o6.hasComponent(o6.ns["ns=di;i=6169"]),
         o6.hasComponent(o6.ns["ns=di;i=6171"]),
@@ -1042,10 +1082,10 @@ di_objtypes.LockingServicesType(
     browseName="ns=di;Lock",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6296", browseName="ns=di;LockingClient", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6297", browseName="ns=di;LockingUser", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6298", browseName="ns=di;RemainingLockTime", dataType=ns0.datatypes.Duration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6497", browseName="ns=di;Locked", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6296", browseName="ns=di;LockingClient", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6297", browseName="ns=di;LockingUser", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6298", browseName="ns=di;RemainingLockTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=6497", browseName="ns=di;Locked", modellingRule="Mandatory", dataType=o6.Boolean)),
         o6.hasComponent(o6.ns["ns=di;i=6299"]),
         o6.hasComponent(o6.ns["ns=di;i=6302"]),
         o6.hasComponent(o6.ns["ns=di;i=6304"]),
@@ -1071,7 +1111,7 @@ di_objtypes.ConnectionPointType(
     nodeId="ns=di;i=6571",
     browseName="ns=di;<CPIdentifier>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(di_objtypes.FunctionalGroupType(nodeId="ns=di;i=6592", browseName="ns=di;NetworkAddress"))],
+    references=[o6.hasComponent(di_objtypes.FunctionalGroupType(nodeId="ns=di;i=6592", browseName="ns=di;NetworkAddress", modellingRule="Mandatory"))],
     _allow_abstract=True,
 )
 o6.reference(di_objtypes.DeviceType, ns0.reftypes.HasComponent, o6.ns["ns=di;i=6571"])
@@ -1090,12 +1130,12 @@ http_opcfoundation_org_UA_DI_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=15005", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=di;i=15006", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=di;i=15006", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=di;i=15007", browseName="StaticNumericNodeIdRange", dataType=ns0.datatypes.NumericRange, valueRank=1, arrayDimensions=[1], value=["1:2147483647"]
+                nodeId="ns=di;i=15007", browseName="StaticNumericNodeIdRange", dataType=ns0.datatypes.NumericRange, valueRank=1, arrayDimensions=[0], value=["1:2147483647"]
             )
         ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=di;i=15008", browseName="StaticStringNodeIdPattern", dataType=o6.String, value="")),

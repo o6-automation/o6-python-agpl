@@ -46,8 +46,10 @@ additive_manufacturing_objtypes.EquipmentAMType(
     browseName="ns=machine_tool;Equipment",
     modellingRule="Mandatory",
     references=[
-        o6.hasComponent(additive_manufacturing_objtypes.FeedstockListType(nodeId="ns=additive_manufacturing;i=5005", browseName="ns=additive_manufacturing;Feedstock")),
-        o6.hasComponent(machine_tool.objtypes.ToolListType(nodeId="ns=additive_manufacturing;i=5015", browseName="ns=machine_tool;Tools")),
+        o6.hasComponent(
+            additive_manufacturing_objtypes.FeedstockListType(nodeId="ns=additive_manufacturing;i=5005", browseName="ns=additive_manufacturing;Feedstock", modellingRule="Optional")
+        ),
+        o6.hasComponent(machine_tool.objtypes.ToolListType(nodeId="ns=additive_manufacturing;i=5015", browseName="ns=machine_tool;Tools", modellingRule="Optional")),
     ],
 )
 o6.reference(additive_manufacturing_objtypes.AdditiveManufacturingType, ns0.reftypes.HasComponent, o6.ns["ns=additive_manufacturing;i=5007"])
@@ -117,10 +119,14 @@ ns0.vartypes.PropertyType(
 machine_tool.objtypes.MachineOperationMonitoringType(
     nodeId="ns=additive_manufacturing;i=5006",
     browseName="ns=machine_tool;MachineTool",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=additive_manufacturing;i=6016", browseName="ns=machine_tool;OperationMode", dataType=machine_tool.datatypes.MachineOperationMode
+                nodeId="ns=additive_manufacturing;i=6016",
+                browseName="ns=machine_tool;OperationMode",
+                modellingRule="Mandatory",
+                dataType=machine_tool.datatypes.MachineOperationMode,
             )
         )
     ],
@@ -131,22 +137,27 @@ machine_tool.objtypes.MonitoringType(
     modellingRule="Mandatory",
     references=[
         o6.hasComponent(o6.ns["ns=additive_manufacturing;i=5006"]),
-        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=additive_manufacturing;i=5009", browseName="ns=machinery;Process")),
-        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=additive_manufacturing;i=5010", browseName="ns=machinery;Health")),
+        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=additive_manufacturing;i=5009", browseName="ns=machinery;Process", modellingRule="Optional")),
+        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=additive_manufacturing;i=5010", browseName="ns=machinery;Health", modellingRule="Optional")),
     ],
 )
 o6.reference(additive_manufacturing_objtypes.AdditiveManufacturingType, ns0.reftypes.HasComponent, o6.ns["ns=additive_manufacturing;i=5001"])
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=additive_manufacturing;i=6017",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=additive_manufacturing;i=6018", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=additive_manufacturing;i=6018", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=additive_manufacturing;i=6014",
     browseName="ns=additive_manufacturing;RemainingQuantity",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=additive_manufacturing;i=6033", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=additive_manufacturing;i=6033", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -159,7 +170,12 @@ additive_manufacturing_objtypes.FeedstockType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=additive_manufacturing;i=6065", browseName="ns=additive_manufacturing;Identifier", dataType=o6.String, accessLevel=3, userAccessLevel=1
+                nodeId="ns=additive_manufacturing;i=6065",
+                browseName="ns=additive_manufacturing;Identifier",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         )
     ],
@@ -174,14 +190,20 @@ o6.reference(additive_manufacturing_objtypes.EquipmentAMType, ns0.reftypes.HasCo
 isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
     nodeId="ns=additive_manufacturing;i=5013",
     browseName="ns=machinery_jobs;JobOrderControl",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=additive_manufacturing;i=6023", browseName="ns=isa95_jobcontrol_v2;MaxDownloadableJobOrders", dataType=o6.UInt16)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=additive_manufacturing;i=6023", browseName="ns=isa95_jobcontrol_v2;MaxDownloadableJobOrders", modellingRule="Mandatory", dataType=o6.UInt16
+            )
+        ),
         o6.hasComponent(o6.ns["ns=additive_manufacturing;i=6017"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=additive_manufacturing;i=6019",
                 browseName="ns=isa95_jobcontrol_v2;EquipmentID",
                 description="Defines a read-only set of Equipment Class IDs and Equipment IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -192,6 +214,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=additive_manufacturing;i=6020",
                 browseName="ns=isa95_jobcontrol_v2;JobOrderList",
                 description="Defines a read-only list of job order information available from the server.",
+                modellingRule="Mandatory",
                 dataType=isa95_jobcontrol_v2.datatypes.ISA95JobOrderAndStateDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -202,6 +225,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=additive_manufacturing;i=6021",
                 browseName="ns=isa95_jobcontrol_v2;MaterialClassID",
                 description="Defines a read-only set of Material Classes IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -212,6 +236,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=additive_manufacturing;i=6022",
                 browseName="ns=isa95_jobcontrol_v2;MaterialDefinitionID",
                 description="Defines a read-only set of Material Classes IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -222,6 +247,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=additive_manufacturing;i=6024",
                 browseName="ns=isa95_jobcontrol_v2;PersonnelID",
                 description="Defines a read-only set of Personnel IDs and Person IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -232,6 +258,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=additive_manufacturing;i=6025",
                 browseName="ns=isa95_jobcontrol_v2;PhysicalAssetID",
                 description="Defines a read-only set of Physical Asset Class IDs and Physical Asset IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -242,6 +269,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=additive_manufacturing;i=6066",
                 browseName="ns=isa95_jobcontrol_v2;WorkMaster",
                 description="Defines a read-only set of work master IDs that may be specified in a job order, and the read-only set of parameters that may be specified for a specific work master.",
+                modellingRule="Mandatory",
                 dataType=isa95_jobcontrol_v2.datatypes.ISA95WorkMasterDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -296,7 +324,12 @@ additive_manufacturing_objtypes.MachineIdentificationAMType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=additive_manufacturing;i=6079", browseName="ns=additive_manufacturing;AMTechnologyIdentifier", dataType=o6.String, accessLevel=3, userAccessLevel=1
+                nodeId="ns=additive_manufacturing;i=6079",
+                browseName="ns=additive_manufacturing;AMTechnologyIdentifier",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
@@ -304,6 +337,7 @@ additive_manufacturing_objtypes.MachineIdentificationAMType(
                 nodeId="ns=additive_manufacturing;i=6080",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -312,6 +346,7 @@ additive_manufacturing_objtypes.MachineIdentificationAMType(
                 nodeId="ns=additive_manufacturing;i=6081",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -320,6 +355,7 @@ additive_manufacturing_objtypes.MachineIdentificationAMType(
                 nodeId="ns=additive_manufacturing;i=6082",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -329,7 +365,12 @@ o6.reference(additive_manufacturing_objtypes.AdditiveManufacturingType, ns0.reft
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=additive_manufacturing;i=6077",
     browseName="ns=additive_manufacturing;RemainingQuantity",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=additive_manufacturing;i=6099", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=additive_manufacturing;i=6099", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -341,31 +382,59 @@ additive_manufacturing_objtypes.FeedstockType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=additive_manufacturing;i=6026", browseName="ns=additive_manufacturing;Identifier", dataType=o6.String, accessLevel=3, userAccessLevel=1
+                nodeId="ns=additive_manufacturing;i=6026",
+                browseName="ns=additive_manufacturing;Identifier",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=additive_manufacturing;i=6028", browseName="ns=additive_manufacturing;ExternalIdentifier", dataType=o6.String, accessLevel=3, userAccessLevel=1
+                nodeId="ns=additive_manufacturing;i=6028",
+                browseName="ns=additive_manufacturing;ExternalIdentifier",
+                modellingRule="Optional",
+                dataType=o6.String,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=additive_manufacturing;i=6030", browseName="ns=additive_manufacturing;Manufacturer", dataType=o6.String, accessLevel=3, userAccessLevel=1
+                nodeId="ns=additive_manufacturing;i=6030",
+                browseName="ns=additive_manufacturing;Manufacturer",
+                modellingRule="Optional",
+                dataType=o6.String,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=additive_manufacturing;i=6031", browseName="ns=additive_manufacturing;Name", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=additive_manufacturing;i=6031",
+                browseName="ns=additive_manufacturing;Name",
+                modellingRule="Optional",
+                dataType=o6.String,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=additive_manufacturing;i=6027", browseName="ns=additive_manufacturing;Cycle", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+                nodeId="ns=additive_manufacturing;i=6027",
+                browseName="ns=additive_manufacturing;Cycle",
+                modellingRule="Optional",
+                dataType=o6.UInt32,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=additive_manufacturing;i=6029",
                 browseName="ns=additive_manufacturing;Function",
+                modellingRule="Optional",
                 dataType=additive_manufacturing_datypes.FeedstockFunction,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -373,7 +442,12 @@ additive_manufacturing_objtypes.FeedstockType(
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=additive_manufacturing;i=6032", browseName="ns=additive_manufacturing;ReadyForProduction", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+                nodeId="ns=additive_manufacturing;i=6032",
+                browseName="ns=additive_manufacturing;ReadyForProduction",
+                modellingRule="Optional",
+                dataType=o6.Boolean,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=additive_manufacturing;i=6077"]),
@@ -402,7 +476,7 @@ http_opcfoundation_org_UA_AdditiveManufacturing_ = ns0.objtypes.NamespaceMetadat
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),
@@ -464,6 +538,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=additive_manufacturing;i=7001",
     browseName="ns=isa95_jobcontrol_v2;RequestJobResponseByJobOrderID",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=additive_manufacturing;i=6067"]),
     outputArgs=o6.hasProperty(o6.ns["ns=additive_manufacturing;i=6068"]),
 )
@@ -516,6 +591,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=additive_manufacturing;i=7002",
     browseName="ns=isa95_jobcontrol_v2;RequestJobResponseByJobOrderState",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=additive_manufacturing;i=6069"]),
     outputArgs=o6.hasProperty(o6.ns["ns=additive_manufacturing;i=6070"]),
 )
@@ -523,11 +599,13 @@ o6.call(
 isa95_jobcontrol_v2.objtypes.ISA95JobResponseProviderObjectType(
     nodeId="ns=additive_manufacturing;i=5014",
     browseName="ns=machinery_jobs;JobOrderResults",
+    modellingRule="Mandatory",
     references=[o6.hasComponent(o6.ns["ns=additive_manufacturing;i=7001"]), o6.hasComponent(o6.ns["ns=additive_manufacturing;i=7002"])],
 )
 machinery_jobs.objtypes.JobManagementType(
     nodeId="ns=additive_manufacturing;i=5012",
     browseName="ns=machinery_jobs;JobManagement",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=additive_manufacturing;i=5013"]), o6.hasComponent(o6.ns["ns=additive_manufacturing;i=5014"])],
 )
 ns0.objtypes.FolderType(

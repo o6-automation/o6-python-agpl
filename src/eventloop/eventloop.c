@@ -20,8 +20,87 @@
 #include <open62541/plugin/log.h>
 #include <open62541/types.h>
 
+/* asyncio._get_running_loop, cached by AsyncIOEventLoop_initTypes */
+static PyObject *getRunningLoop;
+
+/* Return 1 when the caller runs the loop of el or no thread runs it, 0 when
+ * another thread runs it, and -1 with an exception set. is_running() is only
+ * asked off the loop thread. */
+static int
+AsyncIOLoop_callerMayEnter(const AsyncIOLoop *el) {
+    if(!el->pyLoop)
+        return 1;
+    PyObject *running = PyObject_CallNoArgs(getRunningLoop);
+    if(!running)
+        return -1;
+    int onLoop = running == el->pyLoop;
+    Py_DECREF(running);
+    if(onLoop)
+        return 1;
+    PyObject *isRunning = PyObject_CallMethod(el->pyLoop, "is_running", NULL);
+    if(!isRunning)
+        return -1;
+    int loopRuns = PyObject_IsTrue(isRunning);
+    Py_DECREF(isRunning);
+    if(loopRuns < 0)
+        return -1;
+    return !loopRuns;
+}
+
+int
+o6_require_loop_thread(const UA_EventLoop *el) {
+    if(!el)
+        return 0;
+    int mayEnter = AsyncIOLoop_callerMayEnter((const AsyncIOLoop *)el);
+    if(mayEnter < 0)
+        return -1;
+    if(mayEnter)
+        return 0;
+    PyErr_SetString(PyExc_RuntimeError,
+                    "o6 native call from a thread other than the event-loop thread");
+    return -1;
+}
+
+#ifdef UA_DEBUG
+/* Debug backstop behind the entry-point guards: open62541 takes the event-loop
+ * lock (lockServer/lockClient) before it touches native state, so a native
+ * call that reached it off the loop thread while the loop runs skipped a
+ * guard. Abort with the Python stack instead of racing. */
+static void
+AsyncIOLoop_assertLoopThread(AsyncIOLoop *el) {
+    /* At interpreter exit, daemon worker threads are frozen inside a running
+     * loop while the finalizing thread deallocates what is left. */
+#if PY_VERSION_HEX >= 0x030D0000
+    if(Py_IsFinalizing())
+        return;
+#else
+    if(_Py_IsFinalizing())
+        return;
+#endif
+    /* A deallocating owner tears its loop down from the thread dropping the
+     * last reference; no Python calls once teardown has started. */
+    if(el->tearingDown)
+        return;
+    PyObject *type, *value, *traceback;
+    PyErr_Fetch(&type, &value, &traceback);
+    int mayEnter = AsyncIOLoop_callerMayEnter(el);
+    if(mayEnter < 0)
+        PyErr_Clear();
+    PyErr_Restore(type, value, traceback);
+    if(mayEnter != 0)
+        return;
+    UA_LOG_FATAL(el->cLoop.logger, UA_LOGCATEGORY_EVENTLOOP,
+                 "Event-loop lock taken off the loop thread while the loop runs");
+    Py_FatalError("o6 event-loop lock taken off the loop thread while the "
+                  "loop runs (an unguarded native entry point)");
+}
+#endif
+
 static void
 AsyncIOLoop_lock(AsyncIOLoop *public_el) {
+#ifdef UA_DEBUG
+    AsyncIOLoop_assertLoopThread(public_el);
+#endif
     Py_BEGIN_ALLOW_THREADS
     UA_LOCK(&((AsyncIOLoop*)public_el)->elMutex);
     Py_END_ALLOW_THREADS
@@ -754,6 +833,15 @@ AsyncIOLoop_free(AsyncIOLoop *el) {
 
 int
 AsyncIOEventLoop_initTypes(void) {
+    if(!getRunningLoop) {
+        PyObject *asyncio = PyImport_ImportModule("asyncio");
+        if(!asyncio)
+            return -1;
+        getRunningLoop = PyObject_GetAttrString(asyncio, "_get_running_loop");
+        Py_DECREF(asyncio);
+        if(!getRunningLoop)
+            return -1;
+    }
     if(PyUATimerType.tp_flags & Py_TPFLAGS_READY)
         return 0;
     return PyType_Ready(&PyUATimerType);

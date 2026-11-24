@@ -38,13 +38,13 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=paefs;i=3002", browseName="AnalogDigitalEnum", description="Specifies the type of a sensor")
+@o6.enumtype(nodeId="ns=paefs;i=3002", browseName="ns=paefs;AnalogDigitalEnum", description="Specifies the type of a sensor")
 class AnalogDigitalEnum(ns0.datatypes.Enumeration):
     ANALOG = o6.enumfield(0, name="Analog")
     DIGITAL = o6.enumfield(1, name="Digital")
 
 
-@o6.enumtype(nodeId="ns=paefs;i=3003", browseName="ControlModeEnum", description="Describes the possibility of controlling the system externally")
+@o6.enumtype(nodeId="ns=paefs;i=3003", browseName="ns=paefs;ControlModeEnum", description="Describes the possibility of controlling the system externally")
 class ControlModeEnum(ns0.datatypes.Enumeration):
     AUTOMATIC = o6.enumfield(0, name="Automatic")
     MANUAL = o6.enumfield(1, name="Manual")
@@ -53,7 +53,7 @@ class ControlModeEnum(ns0.datatypes.Enumeration):
 
 @o6.enumtype(
     nodeId="ns=paefs;i=3005",
-    browseName="AirConnectionOpenEnum",
+    browseName="ns=paefs;AirConnectionOpenEnum",
     description="Describes whether the air connection is open, i.e., it is in a state in which air can be passed through",
 )
 class AirConnectionOpenEnum(ns0.datatypes.Enumeration):
@@ -63,7 +63,7 @@ class AirConnectionOpenEnum(ns0.datatypes.Enumeration):
     CLOSING = o6.enumfield(3, name="Closing")
 
 
-@o6.enumtype(nodeId="ns=paefs;i=3006", browseName="FilterAidDeviceStatusEnum", description="Describes the action performed by the device for filter aid")
+@o6.enumtype(nodeId="ns=paefs;i=3006", browseName="ns=paefs;FilterAidDeviceStatusEnum", description="Describes the action performed by the device for filter aid")
 class FilterAidDeviceStatusEnum(ns0.datatypes.Enumeration):
     DEVICE_ACTIVE = o6.enumfield(0, name="DeviceActive")
     DEVICE_INACTIVE = o6.enumfield(1, name="DeviceInactive")

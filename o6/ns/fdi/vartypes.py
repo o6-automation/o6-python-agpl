@@ -40,14 +40,28 @@ class UIDescriptionType(di.vartypes.UIElementType):
 
 @o6.variabletype(nodeId="ns=fdi;i=2", browseName="ns=fdi;UIPlugInType", displayName="UIPlugInType", dataType=o6.Byte, valueRank=o6.ValueRank.ARRAY_1D, arrayDimensions=[0])
 class UIPlugInType(di.vartypes.UIElementType):
-    cpuInformation: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi;i=6", browseName="ns=fdi;CpuInformation", dataType=o6.String))
-    documentation: ns0.objtypes.FolderType | None = o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=fdi;i=10", browseName="ns=fdi;Documentation"))
-    fDITechnologyVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi;i=4", browseName="ns=fdi;FDITechnologyVersion", dataType=o6.String))
-    platformId: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi;i=7", browseName="ns=fdi;PlatformId", dataType=o6.String))
-    runtimeId: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi;i=5", browseName="ns=fdi;RuntimeId", dataType=o6.String))
-    startElementName: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi;i=9", browseName="ns=fdi;StartElementName", dataType=o6.String))
-    style: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi;i=8", browseName="ns=fdi;Style", dataType=fdi_datypes.StyleType))
-    uIPVariantVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi;i=3", browseName="ns=fdi;UIPVariantVersion", dataType=o6.String))
+    cpuInformation: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=fdi;i=6", browseName="ns=fdi;CpuInformation", modellingRule="Mandatory", dataType=o6.String)
+    )
+    documentation: ns0.objtypes.FolderType | None = o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=fdi;i=10", browseName="ns=fdi;Documentation", modellingRule="Optional"))
+    fDITechnologyVersion: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=fdi;i=4", browseName="ns=fdi;FDITechnologyVersion", modellingRule="Mandatory", dataType=o6.String)
+    )
+    platformId: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=fdi;i=7", browseName="ns=fdi;PlatformId", modellingRule="Mandatory", dataType=o6.String)
+    )
+    runtimeId: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=fdi;i=5", browseName="ns=fdi;RuntimeId", modellingRule="Mandatory", dataType=o6.String)
+    )
+    startElementName: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=fdi;i=9", browseName="ns=fdi;StartElementName", modellingRule="Mandatory", dataType=o6.String)
+    )
+    style: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=fdi;i=8", browseName="ns=fdi;Style", modellingRule="Mandatory", dataType=fdi_datypes.StyleType)
+    )
+    uIPVariantVersion: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=fdi;i=3", browseName="ns=fdi;UIPVariantVersion", modellingRule="Mandatory", dataType=o6.String)
+    )
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ns0, fdi_datypes

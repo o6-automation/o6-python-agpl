@@ -41,11 +41,19 @@ class GsdGenIoBitDataItemVariableType(ns0.vartypes.BaseDataVariableType):
 
 @o6.variabletype(nodeId="ns=pngsdgm;i=2002", browseName="ns=pngsdgm;GsdGenParameterVariableType", displayName="GsdGenParameterVariableType")
 class GsdGenParameterVariableType(ns0.vartypes.BaseDataVariableType):
-    bitLength: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6019", browseName="ns=pngsdgm;BitLength", dataType=o6.UInt16))
-    bitOffset: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6018", browseName="ns=pngsdgm;BitOffset", dataType=o6.UInt16))
-    byteOffset: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6017", browseName="ns=pngsdgm;ByteOffset", dataType=o6.UInt32))
-    defaultValue: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6015", browseName="ns=pngsdgm;DefaultValue"))
-    index: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6016", browseName="ns=pngsdgm;Index", dataType=o6.UInt16))
+    bitLength: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6019", browseName="ns=pngsdgm;BitLength", modellingRule="Optional", dataType=o6.UInt16)
+    )
+    bitOffset: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6018", browseName="ns=pngsdgm;BitOffset", modellingRule="Optional", dataType=o6.UInt16)
+    )
+    byteOffset: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6017", browseName="ns=pngsdgm;ByteOffset", modellingRule="Optional", dataType=o6.UInt32)
+    )
+    defaultValue: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6015", browseName="ns=pngsdgm;DefaultValue", modellingRule="Mandatory"))
+    index: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6016", browseName="ns=pngsdgm;Index", modellingRule="Optional", dataType=o6.UInt16)
+    )
 
 
 @o6.variabletype(nodeId="ns=pngsdgm;i=2004", browseName="ns=pngsdgm;GsdGenIoDataItemVariableType", displayName="GsdGenIoDataItemVariableType")
@@ -53,7 +61,9 @@ class GsdGenIoDataItemVariableType(ns0.vartypes.BaseDataVariableType):
     bitDataItem_: GsdGenIoBitDataItemVariableType | None = o6.hasComponent(
         GsdGenIoBitDataItemVariableType(nodeId="ns=pngsdgm;i=6021", browseName="ns=pngsdgm;<BitDataItem>", modellingRule="OptionalPlaceholder", dataType=o6.Byte, value=0)
     )
-    useAsBits: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6020", browseName="ns=pngsdgm;UseAsBits", dataType=o6.Boolean))
+    useAsBits: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6020", browseName="ns=pngsdgm;UseAsBits", modellingRule="Mandatory", dataType=o6.Boolean)
+    )
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ns0, pngsdgm_reftypes, pngsdgm_datypes

@@ -122,8 +122,9 @@ def main():
         for package in ("tests", "tests/_support", "tests/connections"):
             (work / package).mkdir(parents=True, exist_ok=True)
             (work / package / "__init__.py").touch()
-        for helper in ("helpers.py", "registration.py"):
-            shutil.copy2(source / "tests/_support" / helper, work / "tests/_support" / helper)
+        # Copy every helper, so a new import between helpers cannot break the check
+        for helper in (source / "tests/_support").glob("*.py"):
+            shutil.copy2(helper, work / "tests/_support" / helper.name)
         for name in files:
             shutil.copy2(source / "tests/connections" / name, work / "tests/connections" / name)
         report = evidence / "junit.xml"

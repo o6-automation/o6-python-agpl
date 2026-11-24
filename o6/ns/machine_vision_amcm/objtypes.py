@@ -190,7 +190,7 @@ class VisionSystemAssetType(ns0.objtypes.BaseObjectType):
     calibrationTargets: VisionItemFolderType | None
     climateControllers: VisionItemFolderType | None
     components: machinery.objtypes.MachineComponentsType | None = o6.hasAddIn(
-        machinery.objtypes.MachineComponentsType(nodeId="ns=machine_vision_amcm;i=5009", browseName="ns=machinery;Components")
+        machinery.objtypes.MachineComponentsType(nodeId="ns=machine_vision_amcm;i=5009", browseName="ns=machinery;Components", modellingRule="Optional")
     )
     computingDevices: VisionItemFolderType | None
     displayUnits: VisionItemFolderType | None
@@ -226,6 +226,7 @@ class VisionMaintenanceInfoType(di.objtypes.FunctionalGroupType):
             nodeId="ns=machine_vision_amcm;i=6005",
             browseName="ns=machine_vision_amcm;CalibrationNeeded",
             description="a flag that if True denotes that the item needs calibration",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -236,6 +237,7 @@ class VisionMaintenanceInfoType(di.objtypes.FunctionalGroupType):
             nodeId="ns=machine_vision_amcm;i=6225",
             browseName="ns=machine_vision_amcm;FirmwareInfo",
             description="denotes the information about the firmware of the Item",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -246,6 +248,7 @@ class VisionMaintenanceInfoType(di.objtypes.FunctionalGroupType):
             nodeId="ns=machine_vision_amcm;i=6006",
             browseName="ns=machine_vision_amcm;LastCalibration",
             description="denotes the time when the previous calibration was carried out on the item",
+            modellingRule="Optional",
             dataType=ns0.datatypes.UtcTime,
             accessLevel=3,
             userAccessLevel=1,
@@ -256,6 +259,7 @@ class VisionMaintenanceInfoType(di.objtypes.FunctionalGroupType):
             nodeId="ns=machine_vision_amcm;i=6025",
             browseName="ns=machine_vision_amcm;LastService",
             description="denotes the last moment in time when the most recent service was carried out on the item",
+            modellingRule="Optional",
             dataType=ns0.datatypes.UtcTime,
             accessLevel=3,
             userAccessLevel=1,
@@ -266,6 +270,7 @@ class VisionMaintenanceInfoType(di.objtypes.FunctionalGroupType):
             nodeId="ns=machine_vision_amcm;i=6009",
             browseName="ns=machine_vision_amcm;MaintenanceRecord",
             description="provides the most recent note that was recorded while performing maintenance. This property can be historized if a history of previous maintenance notes is to be made available",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -276,6 +281,7 @@ class VisionMaintenanceInfoType(di.objtypes.FunctionalGroupType):
             nodeId="ns=machine_vision_amcm;i=6007",
             browseName="ns=machine_vision_amcm;NextCalibration",
             description="denotes the planned time when the next calibration is to be carried out on the item.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.UtcTime,
             accessLevel=3,
             userAccessLevel=1,
@@ -286,6 +292,7 @@ class VisionMaintenanceInfoType(di.objtypes.FunctionalGroupType):
             nodeId="ns=machine_vision_amcm;i=6003",
             browseName="ns=machine_vision_amcm;NextService",
             description="denotes the planned moment in time when the next service is to be carried out on the item",
+            modellingRule="Optional",
             dataType=ns0.datatypes.UtcTime,
             accessLevel=3,
             userAccessLevel=1,
@@ -298,6 +305,7 @@ class VisionMaintenanceInfoType(di.objtypes.FunctionalGroupType):
             nodeId="ns=machine_vision_amcm;i=6001",
             browseName="ns=machine_vision_amcm;StartOfWarranty",
             description="denotes the beginning of the warranty period of the item",
+            modellingRule="Optional",
             dataType=ns0.datatypes.UtcTime,
             accessLevel=3,
             userAccessLevel=1,
@@ -311,7 +319,9 @@ class VisionMaintenanceInfoType(di.objtypes.FunctionalGroupType):
 class VisionFrameGrabberType(ns0.objtypes.BaseObjectType):
     health: VisionHealthInfoType | None
     identification: VisionComponentIdentificationType
-    maintenance: VisionMaintenanceInfoType | None = o6.hasAddIn(VisionMaintenanceInfoType(nodeId="ns=machine_vision_amcm;i=5156", browseName="ns=di;Maintenance"))
+    maintenance: VisionMaintenanceInfoType | None = o6.hasAddIn(
+        VisionMaintenanceInfoType(nodeId="ns=machine_vision_amcm;i=5156", browseName="ns=di;Maintenance", modellingRule="Optional")
+    )
 
 
 @o6.objecttype(
@@ -323,6 +333,7 @@ class VisionHealthInfoType(di.objtypes.FunctionalGroupType):
             nodeId="ns=machine_vision_amcm;i=6497",
             browseName="ns=di;DeviceHealth",
             description="indicates the status as defined by NAMUR Recommendation NE107. The DeviceHealthEnumeration DataType is formally defined in OPC 10000-100 Device Model",
+            modellingRule="Optional",
             dataType=di.datatypes.DeviceHealthEnumeration,
             accessLevel=3,
             userAccessLevel=1,
@@ -333,6 +344,7 @@ class VisionHealthInfoType(di.objtypes.FunctionalGroupType):
             nodeId="ns=machine_vision_amcm;i=5221",
             browseName="ns=di;DeviceHealthAlarms",
             description="folder to organize the Alarms and Conditions related to the item if these Alarms and Conditions are instantiated in the address space",
+            modellingRule="Optional",
         )
     )
     remainingLifeTime: di.vartypes.LifetimeVariableType | None
@@ -342,21 +354,31 @@ class VisionHealthInfoType(di.objtypes.FunctionalGroupType):
 
 @o6.objecttype(nodeId="ns=machine_vision_amcm;i=1034", browseName="ns=machine_vision_amcm;VisionHousingType", displayName="VisionHousingType", interfaces=[IVisionInfoType])
 class VisionHousingType(ns0.objtypes.BaseObjectType):
-    health: VisionHealthInfoType | None = o6.hasAddIn(VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5158", browseName="ns=machine_vision_amcm;Health"))
+    health: VisionHealthInfoType | None = o6.hasAddIn(
+        VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5158", browseName="ns=machine_vision_amcm;Health", modellingRule="Optional")
+    )
     identification: VisionComponentIdentificationType
-    maintenance: VisionMaintenanceInfoType | None = o6.hasAddIn(VisionMaintenanceInfoType(nodeId="ns=machine_vision_amcm;i=5159", browseName="ns=di;Maintenance"))
+    maintenance: VisionMaintenanceInfoType | None = o6.hasAddIn(
+        VisionMaintenanceInfoType(nodeId="ns=machine_vision_amcm;i=5159", browseName="ns=di;Maintenance", modellingRule="Optional")
+    )
 
 
 @o6.objecttype(nodeId="ns=machine_vision_amcm;i=1020", browseName="ns=machine_vision_amcm;VisionImageSensorType", displayName="VisionImageSensorType", interfaces=[IVisionInfoType])
 class VisionImageSensorType(ns0.objtypes.BaseObjectType):
-    health: VisionHealthInfoType | None = o6.hasAddIn(VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5161", browseName="ns=machine_vision_amcm;Health"))
+    health: VisionHealthInfoType | None = o6.hasAddIn(
+        VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5161", browseName="ns=machine_vision_amcm;Health", modellingRule="Optional")
+    )
     identification: VisionComponentIdentificationType
-    maintenance: VisionMaintenanceInfoType | None = o6.hasAddIn(VisionMaintenanceInfoType(nodeId="ns=machine_vision_amcm;i=5163", browseName="ns=di;Maintenance"))
+    maintenance: VisionMaintenanceInfoType | None = o6.hasAddIn(
+        VisionMaintenanceInfoType(nodeId="ns=machine_vision_amcm;i=5163", browseName="ns=di;Maintenance", modellingRule="Optional")
+    )
 
 
 @o6.objecttype(nodeId="ns=machine_vision_amcm;i=1028", browseName="ns=machine_vision_amcm;VisionLampType", displayName="VisionLampType", interfaces=[ILampType])
 class VisionLampType(ns0.objtypes.BaseObjectType):
-    health: VisionHealthInfoType | None = o6.hasAddIn(VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5166", browseName="ns=machine_vision_amcm;Health"))
+    health: VisionHealthInfoType | None = o6.hasAddIn(
+        VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5166", browseName="ns=machine_vision_amcm;Health", modellingRule="Optional")
+    )
     identification: VisionComponentIdentificationType
     maintenance: VisionMaintenanceInfoType | None
 
@@ -365,21 +387,29 @@ class VisionLampType(ns0.objtypes.BaseObjectType):
     nodeId="ns=machine_vision_amcm;i=1023", browseName="ns=machine_vision_amcm;VisionLensControllerType", displayName="VisionLensControllerType", interfaces=[IVisionInfoType]
 )
 class VisionLensControllerType(ns0.objtypes.BaseObjectType):
-    health: VisionHealthInfoType | None = o6.hasAddIn(VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5169", browseName="ns=machine_vision_amcm;Health"))
+    health: VisionHealthInfoType | None = o6.hasAddIn(
+        VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5169", browseName="ns=machine_vision_amcm;Health", modellingRule="Optional")
+    )
     identification: VisionComponentIdentificationType
-    maintenance: VisionMaintenanceInfoType | None = o6.hasAddIn(VisionMaintenanceInfoType(nodeId="ns=machine_vision_amcm;i=5167", browseName="ns=di;Maintenance"))
+    maintenance: VisionMaintenanceInfoType | None = o6.hasAddIn(
+        VisionMaintenanceInfoType(nodeId="ns=machine_vision_amcm;i=5167", browseName="ns=di;Maintenance", modellingRule="Optional")
+    )
 
 
 @o6.objecttype(nodeId="ns=machine_vision_amcm;i=1022", browseName="ns=machine_vision_amcm;VisionLensType", displayName="VisionLensType", interfaces=[ILensType])
 class VisionLensType(ns0.objtypes.BaseObjectType):
-    health: VisionHealthInfoType | None = o6.hasAddIn(VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5170", browseName="ns=machine_vision_amcm;Health"))
+    health: VisionHealthInfoType | None = o6.hasAddIn(
+        VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5170", browseName="ns=machine_vision_amcm;Health", modellingRule="Optional")
+    )
     identification: VisionComponentIdentificationType
     maintenance: VisionMaintenanceInfoType | None
 
 
 @o6.objecttype(nodeId="ns=machine_vision_amcm;i=1036", browseName="ns=machine_vision_amcm;VisionLicenseType", displayName="VisionLicenseType", interfaces=[ILicenseType])
 class VisionLicenseType(ns0.objtypes.BaseObjectType):
-    health: VisionHealthInfoType | None = o6.hasAddIn(VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5175", browseName="ns=machine_vision_amcm;Health"))
+    health: VisionHealthInfoType | None = o6.hasAddIn(
+        VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5175", browseName="ns=machine_vision_amcm;Health", modellingRule="Optional")
+    )
     identification: VisionComponentIdentificationType
     maintenance: VisionMaintenanceInfoType | None
 
@@ -391,7 +421,9 @@ class VisionLicenseType(ns0.objtypes.BaseObjectType):
     interfaces=[ILightingControllerType],
 )
 class VisionLightingControllerType(ns0.objtypes.BaseObjectType):
-    health: VisionHealthInfoType | None = o6.hasAddIn(VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5178", browseName="ns=machine_vision_amcm;Health"))
+    health: VisionHealthInfoType | None = o6.hasAddIn(
+        VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5178", browseName="ns=machine_vision_amcm;Health", modellingRule="Optional")
+    )
     identification: VisionComponentIdentificationType
     maintenance: VisionMaintenanceInfoType | None
 
@@ -400,18 +432,26 @@ class VisionLightingControllerType(ns0.objtypes.BaseObjectType):
     nodeId="ns=machine_vision_amcm;i=1037", browseName="ns=machine_vision_amcm;VisionNetworkDeviceType", displayName="VisionNetworkDeviceType", interfaces=[IVisionInfoType]
 )
 class VisionNetworkDeviceType(ns0.objtypes.BaseObjectType):
-    health: VisionHealthInfoType | None = o6.hasAddIn(VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5186", browseName="ns=machine_vision_amcm;Health"))
+    health: VisionHealthInfoType | None = o6.hasAddIn(
+        VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5186", browseName="ns=machine_vision_amcm;Health", modellingRule="Optional")
+    )
     identification: VisionComponentIdentificationType
-    maintenance: VisionMaintenanceInfoType | None = o6.hasAddIn(VisionMaintenanceInfoType(nodeId="ns=machine_vision_amcm;i=5185", browseName="ns=di;Maintenance"))
+    maintenance: VisionMaintenanceInfoType | None = o6.hasAddIn(
+        VisionMaintenanceInfoType(nodeId="ns=machine_vision_amcm;i=5185", browseName="ns=di;Maintenance", modellingRule="Optional")
+    )
 
 
 @o6.objecttype(
     nodeId="ns=machine_vision_amcm;i=1024", browseName="ns=machine_vision_amcm;VisionOpticalFilterType", displayName="VisionOpticalFilterType", interfaces=[IVisionInfoType]
 )
 class VisionOpticalFilterType(ns0.objtypes.BaseObjectType):
-    health: VisionHealthInfoType | None = o6.hasAddIn(VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5190", browseName="ns=machine_vision_amcm;Health"))
+    health: VisionHealthInfoType | None = o6.hasAddIn(
+        VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5190", browseName="ns=machine_vision_amcm;Health", modellingRule="Optional")
+    )
     identification: VisionComponentIdentificationType
-    maintenance: VisionMaintenanceInfoType | None = o6.hasAddIn(VisionMaintenanceInfoType(nodeId="ns=machine_vision_amcm;i=5189", browseName="ns=di;Maintenance"))
+    maintenance: VisionMaintenanceInfoType | None = o6.hasAddIn(
+        VisionMaintenanceInfoType(nodeId="ns=machine_vision_amcm;i=5189", browseName="ns=di;Maintenance", modellingRule="Optional")
+    )
 
 
 @o6.objecttype(
@@ -421,25 +461,37 @@ class VisionOpticalFilterType(ns0.objtypes.BaseObjectType):
     interfaces=[IVisionInfoType],
 )
 class VisionOtherOpticalEquipmentType(ns0.objtypes.BaseObjectType):
-    health: VisionHealthInfoType | None = o6.hasAddIn(VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5191", browseName="ns=machine_vision_amcm;Health"))
+    health: VisionHealthInfoType | None = o6.hasAddIn(
+        VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5191", browseName="ns=machine_vision_amcm;Health", modellingRule="Optional")
+    )
     identification: VisionComponentIdentificationType
-    maintenance: VisionMaintenanceInfoType | None = o6.hasAddIn(VisionMaintenanceInfoType(nodeId="ns=machine_vision_amcm;i=5192", browseName="ns=di;Maintenance"))
+    maintenance: VisionMaintenanceInfoType | None = o6.hasAddIn(
+        VisionMaintenanceInfoType(nodeId="ns=machine_vision_amcm;i=5192", browseName="ns=di;Maintenance", modellingRule="Optional")
+    )
 
 
 @o6.objecttype(
     nodeId="ns=machine_vision_amcm;i=1030", browseName="ns=machine_vision_amcm;VisionPatternGeneratorType", displayName="VisionPatternGeneratorType", interfaces=[IVisionInfoType]
 )
 class VisionPatternGeneratorType(ns0.objtypes.BaseObjectType):
-    health: VisionHealthInfoType | None = o6.hasAddIn(VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5196", browseName="ns=machine_vision_amcm;Health"))
+    health: VisionHealthInfoType | None = o6.hasAddIn(
+        VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5196", browseName="ns=machine_vision_amcm;Health", modellingRule="Optional")
+    )
     identification: VisionComponentIdentificationType
-    maintenance: VisionMaintenanceInfoType | None = o6.hasAddIn(VisionMaintenanceInfoType(nodeId="ns=machine_vision_amcm;i=5195", browseName="ns=di;Maintenance"))
+    maintenance: VisionMaintenanceInfoType | None = o6.hasAddIn(
+        VisionMaintenanceInfoType(nodeId="ns=machine_vision_amcm;i=5195", browseName="ns=di;Maintenance", modellingRule="Optional")
+    )
 
 
 @o6.objecttype(nodeId="ns=machine_vision_amcm;i=1031", browseName="ns=machine_vision_amcm;VisionPowerSupplyType", displayName="VisionPowerSupplyType", interfaces=[IVisionInfoType])
 class VisionPowerSupplyType(ns0.objtypes.BaseObjectType):
-    health: VisionHealthInfoType | None = o6.hasAddIn(VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5200", browseName="ns=machine_vision_amcm;Health"))
+    health: VisionHealthInfoType | None = o6.hasAddIn(
+        VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5200", browseName="ns=machine_vision_amcm;Health", modellingRule="Optional")
+    )
     identification: VisionComponentIdentificationType
-    maintenance: VisionMaintenanceInfoType | None = o6.hasAddIn(VisionMaintenanceInfoType(nodeId="ns=machine_vision_amcm;i=5201", browseName="ns=di;Maintenance"))
+    maintenance: VisionMaintenanceInfoType | None = o6.hasAddIn(
+        VisionMaintenanceInfoType(nodeId="ns=machine_vision_amcm;i=5201", browseName="ns=di;Maintenance", modellingRule="Optional")
+    )
 
 
 @o6.objecttype(
@@ -449,9 +501,13 @@ class VisionPowerSupplyType(ns0.objtypes.BaseObjectType):
     interfaces=[IVisionInfoType],
 )
 class VisionSurroundingEnvironmentType(ns0.objtypes.BaseObjectType):
-    health: VisionHealthInfoType | None = o6.hasAddIn(VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5205", browseName="ns=machine_vision_amcm;Health"))
+    health: VisionHealthInfoType | None = o6.hasAddIn(
+        VisionHealthInfoType(nodeId="ns=machine_vision_amcm;i=5205", browseName="ns=machine_vision_amcm;Health", modellingRule="Optional")
+    )
     identification: VisionComponentIdentificationType
-    maintenance: VisionMaintenanceInfoType | None = o6.hasAddIn(VisionMaintenanceInfoType(nodeId="ns=machine_vision_amcm;i=5204", browseName="ns=di;Maintenance"))
+    maintenance: VisionMaintenanceInfoType | None = o6.hasAddIn(
+        VisionMaintenanceInfoType(nodeId="ns=machine_vision_amcm;i=5204", browseName="ns=di;Maintenance", modellingRule="Optional")
+    )
 
 
 @o6.objecttype(nodeId="ns=machine_vision_amcm;i=1007", browseName="ns=machine_vision_amcm;VisionComponentIdentificationType", displayName="VisionComponentIdentificationType")
@@ -461,6 +517,7 @@ class VisionComponentIdentificationType(machinery.objtypes.MachineryComponentIde
             nodeId="ns=machine_vision_amcm;i=6768",
             browseName="ns=di;AssetId",
             description="To be used by end users to store a unique identification in the context of their overall application. Servers shall support at least 40 Unicode characters for the clients writing this value, this means clients can expect to be able to write strings with a length of 40 Unicode characters into that field.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -472,6 +529,7 @@ class VisionComponentIdentificationType(machinery.objtypes.MachineryComponentIde
             nodeId="ns=machine_vision_amcm;i=6769",
             browseName="ns=di;ComponentName",
             description="To be used by end users to store a human-readable localized text for the MachineryItem. The minimum number of locales supported for this property shall be two. Servers shall support at least 40 Unicode characters for the clients writing the text part of each locale, this means clients can expect to be able to write texts with a length of 40 Unicode characters into that field.",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
             value=o6.LocalizedText(),
             accessLevel=3,
@@ -483,6 +541,7 @@ class VisionComponentIdentificationType(machinery.objtypes.MachineryComponentIde
             nodeId="ns=machine_vision_amcm;i=6029",
             browseName="ns=machine_vision_amcm;ConfigurationCode",
             description="provides the specific information how the machine vision system has been configured for a specific use case or application",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -493,6 +552,7 @@ class VisionComponentIdentificationType(machinery.objtypes.MachineryComponentIde
             nodeId="ns=machine_vision_amcm;i=6770",
             browseName="ns=di;DeviceClass",
             description="Indicates in which domain or for what purpose the MachineryItem is used.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -501,6 +561,7 @@ class VisionComponentIdentificationType(machinery.objtypes.MachineryComponentIde
             nodeId="ns=machine_vision_amcm;i=6767",
             browseName="ns=di;DeviceRevision",
             description="A string representation of the overall revision level of the component. Often, it is increased when either the SoftwareRevision and / or the HardwareRevision of the component is increased. As an example, it can be used in ERP systems together with the ProductCode.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -511,6 +572,7 @@ class VisionComponentIdentificationType(machinery.objtypes.MachineryComponentIde
             nodeId="ns=machine_vision_amcm;i=6771",
             browseName="ns=di;HardwareRevision",
             description="provides the revision level of the hardware of the machine vision system following the rules of Sematic Versioning 2.0.0",
+            modellingRule="Optional",
             dataType=ns0.datatypes.SemanticVersionString,
         )
     )
@@ -519,6 +581,7 @@ class VisionComponentIdentificationType(machinery.objtypes.MachineryComponentIde
             nodeId="ns=machine_vision_amcm;i=6772",
             browseName="ns=machinery;InitialOperationDate",
             description="The date, when the MachineryItem was switched on the first time after it has left the manufacturer plant.",
+            modellingRule="Optional",
             dataType=o6.DateTime,
         )
     )
@@ -527,6 +590,7 @@ class VisionComponentIdentificationType(machinery.objtypes.MachineryComponentIde
             nodeId="ns=machine_vision_amcm;i=6773",
             browseName="ns=di;Manufacturer",
             description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+            modellingRule="Mandatory",
             dataType=o6.LocalizedText,
         )
     )
@@ -535,6 +599,7 @@ class VisionComponentIdentificationType(machinery.objtypes.MachineryComponentIde
             nodeId="ns=machine_vision_amcm;i=6774",
             browseName="ns=di;ManufacturerUri",
             description="A globally unique identifier of the manufacturer of the MachineryItem.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -543,6 +608,7 @@ class VisionComponentIdentificationType(machinery.objtypes.MachineryComponentIde
             nodeId="ns=machine_vision_amcm;i=6775",
             browseName="ns=di;Model",
             description="A human-readable, localized name of the model of the MachineryItem.",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
         )
     )
@@ -551,6 +617,7 @@ class VisionComponentIdentificationType(machinery.objtypes.MachineryComponentIde
             nodeId="ns=machine_vision_amcm;i=6776",
             browseName="ns=machinery;MonthOfConstruction",
             description="The month in which the manufacturing process of the MachineryItem has been completed. It shall be a number between 1 and 12, representing the month from January to December.",
+            modellingRule="Optional",
             dataType=o6.Byte,
         )
     )
@@ -559,6 +626,7 @@ class VisionComponentIdentificationType(machinery.objtypes.MachineryComponentIde
             nodeId="ns=machine_vision_amcm;i=6777",
             browseName="ns=di;ProductCode",
             description="A machine-readable string of the model of the MachineryItem, that might include options like the hardware configuration of the model. This information might be provided by the ERP system of the vendor. For example, it can be used as order information.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -567,6 +635,7 @@ class VisionComponentIdentificationType(machinery.objtypes.MachineryComponentIde
             nodeId="ns=machine_vision_amcm;i=6778",
             browseName="ns=di;ProductInstanceUri",
             description="A globally unique resource identifier provided by the manufacturer of the MachineryItem.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -575,6 +644,7 @@ class VisionComponentIdentificationType(machinery.objtypes.MachineryComponentIde
             nodeId="ns=machine_vision_amcm;i=6779",
             browseName="ns=di;SerialNumber",
             description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -583,6 +653,7 @@ class VisionComponentIdentificationType(machinery.objtypes.MachineryComponentIde
             nodeId="ns=machine_vision_amcm;i=6780",
             browseName="ns=di;SoftwareRevision",
             description="property provides the version or revision level of the software in the machine vision system following the rules of Semantic Versioning 2.0.0.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.SemanticVersionString,
         )
     )
@@ -591,6 +662,7 @@ class VisionComponentIdentificationType(machinery.objtypes.MachineryComponentIde
             nodeId="ns=machine_vision_amcm;i=6781",
             browseName="ns=machinery;YearOfConstruction",
             description="The year (Gregorian calendar) in which the manufacturing process of the MachineryItem has been completed. It shall be a four-digit number and never change during the life-cycle of a MachineryItem.",
+            modellingRule="Optional",
             dataType=o6.UInt16,
         )
     )
@@ -603,6 +675,7 @@ class VisionMachineIdentificationType(machinery.objtypes.MachineIdentificationTy
             nodeId="ns=machine_vision_amcm;i=6785",
             browseName="ns=di;AssetId",
             description="To be used by end users to store a unique identification in the context of their overall application. Servers shall support at least 40 Unicode characters for the clients writing this value, this means clients can expect to be able to write strings with a length of 40 Unicode characters into that field.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -614,6 +687,7 @@ class VisionMachineIdentificationType(machinery.objtypes.MachineIdentificationTy
             nodeId="ns=machine_vision_amcm;i=6786",
             browseName="ns=di;ComponentName",
             description="To be used by end users to store a human-readable localized text for the MachineryItem. The minimum number of locales supported for this property shall be two. Servers shall support at least 40 Unicode characters for the clients writing the text part of each locale, this means clients can expect to be able to write texts with a length of 40 Unicode characters into that field.",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
             value=o6.LocalizedText(),
             accessLevel=3,
@@ -625,6 +699,7 @@ class VisionMachineIdentificationType(machinery.objtypes.MachineIdentificationTy
             nodeId="ns=machine_vision_amcm;i=6026",
             browseName="ns=machine_vision_amcm;ConfigurationCode",
             description="provides the specific information how the machine vision system has been configured for a specific use case or application",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -635,6 +710,7 @@ class VisionMachineIdentificationType(machinery.objtypes.MachineIdentificationTy
             nodeId="ns=machine_vision_amcm;i=6787",
             browseName="ns=di;DeviceClass",
             description="Indicates in which domain or for what purpose the MachineryItem is used.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -643,6 +719,7 @@ class VisionMachineIdentificationType(machinery.objtypes.MachineIdentificationTy
             nodeId="ns=machine_vision_amcm;i=6788",
             browseName="ns=di;HardwareRevision",
             description="provides the revision level of the hardware of the machine vision system following the rules of Sematic Versioning 2.0.0",
+            modellingRule="Optional",
             dataType=ns0.datatypes.SemanticVersionString,
         )
     )
@@ -651,6 +728,7 @@ class VisionMachineIdentificationType(machinery.objtypes.MachineIdentificationTy
             nodeId="ns=machine_vision_amcm;i=6789",
             browseName="ns=machinery;InitialOperationDate",
             description="The date, when the MachineryItem was switched on the first time after it has left the manufacturer plant.",
+            modellingRule="Optional",
             dataType=o6.DateTime,
         )
     )
@@ -659,6 +737,7 @@ class VisionMachineIdentificationType(machinery.objtypes.MachineIdentificationTy
             nodeId="ns=machine_vision_amcm;i=6783",
             browseName="ns=machinery;Location",
             description="To be used by end users to store the location of the machine in a scheme specific to the end user. Servers shall support at least 60 Unicode characters for the clients writing this value, this means clients can expect to be able to write strings with a length of 60 Unicode characters into that field.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -669,6 +748,7 @@ class VisionMachineIdentificationType(machinery.objtypes.MachineIdentificationTy
             nodeId="ns=machine_vision_amcm;i=6790",
             browseName="ns=di;Manufacturer",
             description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+            modellingRule="Mandatory",
             dataType=o6.LocalizedText,
         )
     )
@@ -677,6 +757,7 @@ class VisionMachineIdentificationType(machinery.objtypes.MachineIdentificationTy
             nodeId="ns=machine_vision_amcm;i=6791",
             browseName="ns=di;ManufacturerUri",
             description="A globally unique identifier of the manufacturer of the MachineryItem.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -685,6 +766,7 @@ class VisionMachineIdentificationType(machinery.objtypes.MachineIdentificationTy
             nodeId="ns=machine_vision_amcm;i=6792",
             browseName="ns=di;Model",
             description="A human-readable, localized name of the model of the MachineryItem.",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
         )
     )
@@ -693,6 +775,7 @@ class VisionMachineIdentificationType(machinery.objtypes.MachineIdentificationTy
             nodeId="ns=machine_vision_amcm;i=6793",
             browseName="ns=machinery;MonthOfConstruction",
             description="The month in which the manufacturing process of the MachineryItem has been completed. It shall be a number between 1 and 12, representing the month from January to December.",
+            modellingRule="Optional",
             dataType=o6.Byte,
         )
     )
@@ -701,6 +784,7 @@ class VisionMachineIdentificationType(machinery.objtypes.MachineIdentificationTy
             nodeId="ns=machine_vision_amcm;i=6794",
             browseName="ns=di;ProductCode",
             description="A machine-readable string of the model of the MachineryItem, that might include options like the hardware configuration of the model. This information might be provided by the ERP system of the vendor. For example, it can be used as order information.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -709,6 +793,7 @@ class VisionMachineIdentificationType(machinery.objtypes.MachineIdentificationTy
             nodeId="ns=machine_vision_amcm;i=6784",
             browseName="ns=di;ProductInstanceUri",
             description="A globally unique resource identifier provided by the manufacturer of the machine",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -717,6 +802,7 @@ class VisionMachineIdentificationType(machinery.objtypes.MachineIdentificationTy
             nodeId="ns=machine_vision_amcm;i=6795",
             browseName="ns=di;SerialNumber",
             description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -725,6 +811,7 @@ class VisionMachineIdentificationType(machinery.objtypes.MachineIdentificationTy
             nodeId="ns=machine_vision_amcm;i=6796",
             browseName="ns=di;SoftwareRevision",
             description="property provides the version or revision level of the software in the machine vision system following the rules of Semantic Versioning 2.0.0.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.SemanticVersionString,
         )
     )
@@ -733,6 +820,7 @@ class VisionMachineIdentificationType(machinery.objtypes.MachineIdentificationTy
             nodeId="ns=machine_vision_amcm;i=6797",
             browseName="ns=machinery;YearOfConstruction",
             description="The year (Gregorian calendar) in which the manufacturing process of the MachineryItem has been completed. It shall be a four-digit number and never change during the life-cycle of a MachineryItem.",
+            modellingRule="Optional",
             dataType=o6.UInt16,
         )
     )

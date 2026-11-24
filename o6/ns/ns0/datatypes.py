@@ -171,8 +171,8 @@ class AccessRestrictionType:
 
 @o6.datatype(nodeId="i=96", browseName="RolePermissionType", defaultEncodingId="i=128")
 class RolePermissionType(Structure):
-    roleId: o6.NodeId
-    permissions: PermissionType
+    roleId: o6.NodeId = o6.field(name="RoleId")
+    permissions: PermissionType = o6.field(name="Permissions")
 
 
 @o6.datatype(nodeId="i=97", browseName="DataTypeDefinition", defaultEncodingId="i=121", isAbstract=True)
@@ -191,21 +191,21 @@ class StructureType(Enumeration):
 
 @o6.datatype(nodeId="i=101", browseName="StructureField", defaultEncodingId="i=14844")
 class StructureField(Structure):
-    name: o6.String
-    description: o6.LocalizedText
-    dataType: o6.NodeId
-    valueRank: o6.Int32
-    arrayDimensions: list[o6.UInt32]
-    maxStringLength: o6.UInt32
-    isOptional: o6.Boolean
+    name: o6.String = o6.field(name="Name")
+    description: o6.LocalizedText = o6.field(name="Description")
+    dataType: o6.NodeId = o6.field(name="DataType")
+    valueRank: o6.Int32 = o6.field(name="ValueRank")
+    arrayDimensions: list[o6.UInt32] = o6.field(name="ArrayDimensions")
+    maxStringLength: o6.UInt32 = o6.field(name="MaxStringLength")
+    isOptional: o6.Boolean = o6.field(name="IsOptional")
 
 
 @o6.datatype(nodeId="i=99", browseName="StructureDefinition", defaultEncodingId="i=122")
 class StructureDefinition(DataTypeDefinition):
-    defaultEncodingId: o6.NodeId
-    baseDataType: o6.NodeId
-    structureType: StructureType
-    fields: list[StructureField]
+    defaultEncodingId: o6.NodeId = o6.field(name="DefaultEncodingId")
+    baseDataType: o6.NodeId = o6.field(name="BaseDataType")
+    structureType: StructureType = o6.field(name="StructureType")
+    fields: list[StructureField] = o6.field(name="Fields")
 
 
 @o6.enumtype(nodeId="i=120", browseName="NamingRuleType")
@@ -238,24 +238,24 @@ class NodeClass(Enumeration):
 
 @o6.datatype(nodeId="i=285", browseName="ReferenceNode", defaultEncodingId="i=287")
 class ReferenceNode(Structure):
-    referenceTypeId: o6.NodeId
-    isInverse: o6.Boolean
-    targetId: o6.ExpandedNodeId
+    referenceTypeId: o6.NodeId = o6.field(name="ReferenceTypeId")
+    isInverse: o6.Boolean = o6.field(name="IsInverse")
+    targetId: o6.ExpandedNodeId = o6.field(name="TargetId")
 
 
 @o6.datatype(nodeId="i=258", browseName="Node", defaultEncodingId="i=260")
 class Node(Structure):
-    nodeId: o6.NodeId
-    nodeClass: NodeClass
-    browseName: o6.QualifiedName
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
-    rolePermissions: list[RolePermissionType]
-    userRolePermissions: list[RolePermissionType]
-    accessRestrictions: o6.UInt16
-    references: list[ReferenceNode]
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    nodeClass: NodeClass = o6.field(name="NodeClass")
+    browseName: o6.QualifiedName = o6.field(name="BrowseName")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
+    rolePermissions: list[RolePermissionType] = o6.field(name="RolePermissions")
+    userRolePermissions: list[RolePermissionType] = o6.field(name="UserRolePermissions")
+    accessRestrictions: o6.UInt16 = o6.field(name="AccessRestrictions")
+    references: list[ReferenceNode] = o6.field(name="References")
 
 
 @o6.datatype(nodeId="i=288", browseName="IntegerId", parent="i=7")
@@ -290,17 +290,17 @@ class LocaleId:
 
 @o6.datatype(nodeId="i=296", browseName="Argument", defaultEncodingId="i=298")
 class Argument(Structure):
-    name: o6.String
-    dataType: o6.NodeId
-    valueRank: o6.Int32
-    arrayDimensions: list[o6.UInt32]
-    description: o6.LocalizedText
+    name: o6.String = o6.field(name="Name")
+    dataType: o6.NodeId = o6.field(name="DataType")
+    valueRank: o6.Int32 = o6.field(name="ValueRank")
+    arrayDimensions: list[o6.UInt32] = o6.field(name="ArrayDimensions")
+    description: o6.LocalizedText = o6.field(name="Description")
 
 
 @o6.datatype(nodeId="i=299", browseName="StatusResult", defaultEncodingId="i=301")
 class StatusResult(Structure):
-    statusCode: o6.StatusCode
-    diagnosticInfo: o6.DiagnosticInfo
+    statusCode: o6.StatusCode = o6.field(name="StatusCode")
+    diagnosticInfo: o6.DiagnosticInfo = o6.field(name="DiagnosticInfo")
 
 
 @o6.enumtype(nodeId="i=302", browseName="MessageSecurityMode")
@@ -321,11 +321,11 @@ class UserTokenType(Enumeration):
 
 @o6.datatype(nodeId="i=304", browseName="UserTokenPolicy", defaultEncodingId="i=306")
 class UserTokenPolicy(Structure):
-    policyId: o6.String
-    tokenType: UserTokenType
-    issuedTokenType: o6.String
-    issuerEndpointUrl: o6.String
-    securityPolicyUri: o6.String
+    policyId: o6.String = o6.field(name="PolicyId")
+    tokenType: UserTokenType = o6.field(name="TokenType")
+    issuedTokenType: o6.String = o6.field(name="IssuedTokenType")
+    issuerEndpointUrl: o6.String = o6.field(name="IssuerEndpointUrl")
+    securityPolicyUri: o6.String = o6.field(name="SecurityPolicyUri")
 
 
 @o6.enumtype(nodeId="i=307", browseName="ApplicationType")
@@ -338,13 +338,13 @@ class ApplicationType(Enumeration):
 
 @o6.datatype(nodeId="i=308", browseName="ApplicationDescription", defaultEncodingId="i=310")
 class ApplicationDescription(Structure):
-    applicationUri: o6.String
-    productUri: o6.String
-    applicationName: o6.LocalizedText
-    applicationType: ApplicationType
-    gatewayServerUri: o6.String
-    discoveryProfileUri: o6.String
-    discoveryUrls: list[o6.String]
+    applicationUri: o6.String = o6.field(name="ApplicationUri")
+    productUri: o6.String = o6.field(name="ProductUri")
+    applicationName: o6.LocalizedText = o6.field(name="ApplicationName")
+    applicationType: ApplicationType = o6.field(name="ApplicationType")
+    gatewayServerUri: o6.String = o6.field(name="GatewayServerUri")
+    discoveryProfileUri: o6.String = o6.field(name="DiscoveryProfileUri")
+    discoveryUrls: list[o6.String] = o6.field(name="DiscoveryUrls")
 
 
 @o6.datatype(nodeId="i=311", browseName="ApplicationInstanceCertificate", parent="i=15")
@@ -354,14 +354,14 @@ class ApplicationInstanceCertificate:
 
 @o6.datatype(nodeId="i=312", browseName="EndpointDescription", defaultEncodingId="i=314")
 class EndpointDescription(Structure):
-    endpointUrl: o6.String
-    server: ApplicationDescription
-    serverCertificate: o6.ByteString
-    securityMode: MessageSecurityMode
-    securityPolicyUri: o6.String
-    userIdentityTokens: list[UserTokenPolicy]
-    transportProfileUri: o6.String
-    securityLevel: o6.Byte
+    endpointUrl: o6.String = o6.field(name="EndpointUrl")
+    server: ApplicationDescription = o6.field(name="Server")
+    serverCertificate: o6.ByteString = o6.field(name="ServerCertificate")
+    securityMode: MessageSecurityMode = o6.field(name="SecurityMode")
+    securityPolicyUri: o6.String = o6.field(name="SecurityPolicyUri")
+    userIdentityTokens: list[UserTokenPolicy] = o6.field(name="UserIdentityTokens")
+    transportProfileUri: o6.String = o6.field(name="TransportProfileUri")
+    securityLevel: o6.Byte = o6.field(name="SecurityLevel")
 
 
 @o6.enumtype(nodeId="i=315", browseName="SecurityTokenRequestType")
@@ -372,55 +372,55 @@ class SecurityTokenRequestType(Enumeration):
 
 @o6.datatype(nodeId="i=316", browseName="UserIdentityToken", defaultEncodingId="i=318", isAbstract=True)
 class UserIdentityToken(Structure):
-    policyId: o6.String
+    policyId: o6.String = o6.field(name="PolicyId")
 
 
 @o6.datatype(nodeId="i=319", browseName="AnonymousIdentityToken", defaultEncodingId="i=321")
 class AnonymousIdentityToken(UserIdentityToken):
-    policyId: o6.String
+    policyId: o6.String = o6.field(name="PolicyId")
 
 
 @o6.datatype(nodeId="i=322", browseName="UserNameIdentityToken", defaultEncodingId="i=324")
 class UserNameIdentityToken(UserIdentityToken):
-    policyId: o6.String
-    userName: o6.String
-    password: o6.ByteString
-    encryptionAlgorithm: o6.String
+    policyId: o6.String = o6.field(name="PolicyId")
+    userName: o6.String = o6.field(name="UserName")
+    password: o6.ByteString = o6.field(name="Password")
+    encryptionAlgorithm: o6.String = o6.field(name="EncryptionAlgorithm")
 
 
 @o6.datatype(nodeId="i=325", browseName="X509IdentityToken", defaultEncodingId="i=327")
 class X509IdentityToken(UserIdentityToken):
-    policyId: o6.String
-    certificateData: o6.ByteString
+    policyId: o6.String = o6.field(name="PolicyId")
+    certificateData: o6.ByteString = o6.field(name="CertificateData")
 
 
 @o6.datatype(nodeId="i=331", browseName="EndpointConfiguration", defaultEncodingId="i=333")
 class EndpointConfiguration(Structure):
-    operationTimeout: o6.Int32
-    useBinaryEncoding: o6.Boolean
-    maxStringLength: o6.Int32
-    maxByteStringLength: o6.Int32
-    maxArrayLength: o6.Int32
-    maxMessageSize: o6.Int32
-    maxBufferSize: o6.Int32
-    channelLifetime: o6.Int32
-    securityTokenLifetime: o6.Int32
+    operationTimeout: o6.Int32 = o6.field(name="OperationTimeout")
+    useBinaryEncoding: o6.Boolean = o6.field(name="UseBinaryEncoding")
+    maxStringLength: o6.Int32 = o6.field(name="MaxStringLength")
+    maxByteStringLength: o6.Int32 = o6.field(name="MaxByteStringLength")
+    maxArrayLength: o6.Int32 = o6.field(name="MaxArrayLength")
+    maxMessageSize: o6.Int32 = o6.field(name="MaxMessageSize")
+    maxBufferSize: o6.Int32 = o6.field(name="MaxBufferSize")
+    channelLifetime: o6.Int32 = o6.field(name="ChannelLifetime")
+    securityTokenLifetime: o6.Int32 = o6.field(name="SecurityTokenLifetime")
 
 
 @o6.datatype(nodeId="i=338", browseName="BuildInfo", defaultEncodingId="i=340")
 class BuildInfo(Structure):
-    productUri: o6.String
-    manufacturerName: o6.String
-    productName: o6.String
-    softwareVersion: o6.String
-    buildNumber: o6.String
-    buildDate: o6.DateTime
+    productUri: o6.String = o6.field(name="ProductUri")
+    manufacturerName: o6.String = o6.field(name="ManufacturerName")
+    productName: o6.String = o6.field(name="ProductName")
+    softwareVersion: o6.String = o6.field(name="SoftwareVersion")
+    buildNumber: o6.String = o6.field(name="BuildNumber")
+    buildDate: o6.DateTime = o6.field(name="BuildDate")
 
 
 @o6.datatype(nodeId="i=344", browseName="SignedSoftwareCertificate", defaultEncodingId="i=346")
 class SignedSoftwareCertificate(Structure):
-    certificateData: o6.ByteString
-    signature: o6.ByteString
+    certificateData: o6.ByteString = o6.field(name="CertificateData")
+    signature: o6.ByteString = o6.field(name="Signature")
 
 
 @o6.optionsettype(nodeId="i=347", browseName="AttributeWriteMask", base=o6.UInt32)
@@ -494,142 +494,142 @@ class NodeAttributesMask(Enumeration):
 
 @o6.datatype(nodeId="i=349", browseName="NodeAttributes", defaultEncodingId="i=351")
 class NodeAttributes(Structure):
-    specifiedAttributes: o6.UInt32
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
+    specifiedAttributes: o6.UInt32 = o6.field(name="SpecifiedAttributes")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
 
 
 @o6.datatype(nodeId="i=352", browseName="ObjectAttributes", defaultEncodingId="i=354")
 class ObjectAttributes(NodeAttributes):
-    specifiedAttributes: o6.UInt32
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
-    eventNotifier: o6.Byte
+    specifiedAttributes: o6.UInt32 = o6.field(name="SpecifiedAttributes")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
+    eventNotifier: o6.Byte = o6.field(name="EventNotifier")
 
 
 @o6.datatype(nodeId="i=355", browseName="VariableAttributes", defaultEncodingId="i=357")
 class VariableAttributes(NodeAttributes):
-    specifiedAttributes: o6.UInt32
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
-    value: Any
-    dataType: o6.NodeId
-    valueRank: o6.Int32
-    arrayDimensions: list[o6.UInt32]
-    accessLevel: o6.Byte
-    userAccessLevel: o6.Byte
-    minimumSamplingInterval: o6.Double
-    historizing: o6.Boolean
+    specifiedAttributes: o6.UInt32 = o6.field(name="SpecifiedAttributes")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
+    value: Any = o6.field(name="Value")
+    dataType: o6.NodeId = o6.field(name="DataType")
+    valueRank: o6.Int32 = o6.field(name="ValueRank")
+    arrayDimensions: list[o6.UInt32] = o6.field(name="ArrayDimensions")
+    accessLevel: o6.Byte = o6.field(name="AccessLevel")
+    userAccessLevel: o6.Byte = o6.field(name="UserAccessLevel")
+    minimumSamplingInterval: o6.Double = o6.field(name="MinimumSamplingInterval")
+    historizing: o6.Boolean = o6.field(name="Historizing")
 
 
 @o6.datatype(nodeId="i=358", browseName="MethodAttributes", defaultEncodingId="i=360")
 class MethodAttributes(NodeAttributes):
-    specifiedAttributes: o6.UInt32
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
-    executable: o6.Boolean
-    userExecutable: o6.Boolean
+    specifiedAttributes: o6.UInt32 = o6.field(name="SpecifiedAttributes")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
+    executable: o6.Boolean = o6.field(name="Executable")
+    userExecutable: o6.Boolean = o6.field(name="UserExecutable")
 
 
 @o6.datatype(nodeId="i=361", browseName="ObjectTypeAttributes", defaultEncodingId="i=363")
 class ObjectTypeAttributes(NodeAttributes):
-    specifiedAttributes: o6.UInt32
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
-    isAbstract: o6.Boolean
+    specifiedAttributes: o6.UInt32 = o6.field(name="SpecifiedAttributes")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
+    isAbstract: o6.Boolean = o6.field(name="IsAbstract")
 
 
 @o6.datatype(nodeId="i=364", browseName="VariableTypeAttributes", defaultEncodingId="i=366")
 class VariableTypeAttributes(NodeAttributes):
-    specifiedAttributes: o6.UInt32
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
-    value: Any
-    dataType: o6.NodeId
-    valueRank: o6.Int32
-    arrayDimensions: list[o6.UInt32]
-    isAbstract: o6.Boolean
+    specifiedAttributes: o6.UInt32 = o6.field(name="SpecifiedAttributes")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
+    value: Any = o6.field(name="Value")
+    dataType: o6.NodeId = o6.field(name="DataType")
+    valueRank: o6.Int32 = o6.field(name="ValueRank")
+    arrayDimensions: list[o6.UInt32] = o6.field(name="ArrayDimensions")
+    isAbstract: o6.Boolean = o6.field(name="IsAbstract")
 
 
 @o6.datatype(nodeId="i=367", browseName="ReferenceTypeAttributes", defaultEncodingId="i=369")
 class ReferenceTypeAttributes(NodeAttributes):
-    specifiedAttributes: o6.UInt32
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
-    isAbstract: o6.Boolean
-    symmetric: o6.Boolean
-    inverseName: o6.LocalizedText
+    specifiedAttributes: o6.UInt32 = o6.field(name="SpecifiedAttributes")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
+    isAbstract: o6.Boolean = o6.field(name="IsAbstract")
+    symmetric: o6.Boolean = o6.field(name="Symmetric")
+    inverseName: o6.LocalizedText = o6.field(name="InverseName")
 
 
 @o6.datatype(nodeId="i=370", browseName="DataTypeAttributes", defaultEncodingId="i=372")
 class DataTypeAttributes(NodeAttributes):
-    specifiedAttributes: o6.UInt32
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
-    isAbstract: o6.Boolean
+    specifiedAttributes: o6.UInt32 = o6.field(name="SpecifiedAttributes")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
+    isAbstract: o6.Boolean = o6.field(name="IsAbstract")
 
 
 @o6.datatype(nodeId="i=373", browseName="ViewAttributes", defaultEncodingId="i=375")
 class ViewAttributes(NodeAttributes):
-    specifiedAttributes: o6.UInt32
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
-    containsNoLoops: o6.Boolean
-    eventNotifier: o6.Byte
+    specifiedAttributes: o6.UInt32 = o6.field(name="SpecifiedAttributes")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
+    containsNoLoops: o6.Boolean = o6.field(name="ContainsNoLoops")
+    eventNotifier: o6.Byte = o6.field(name="EventNotifier")
 
 
 @o6.datatype(nodeId="i=376", browseName="AddNodesItem", defaultEncodingId="i=378")
 class AddNodesItem(Structure):
-    parentNodeId: o6.ExpandedNodeId
-    referenceTypeId: o6.NodeId
-    requestedNewNodeId: o6.ExpandedNodeId
-    browseName: o6.QualifiedName
-    nodeClass: NodeClass
-    nodeAttributes: o6.ExtensionObject
-    typeDefinition: o6.ExpandedNodeId
+    parentNodeId: o6.ExpandedNodeId = o6.field(name="ParentNodeId")
+    referenceTypeId: o6.NodeId = o6.field(name="ReferenceTypeId")
+    requestedNewNodeId: o6.ExpandedNodeId = o6.field(name="RequestedNewNodeId")
+    browseName: o6.QualifiedName = o6.field(name="BrowseName")
+    nodeClass: NodeClass = o6.field(name="NodeClass")
+    nodeAttributes: o6.ExtensionObject = o6.field(name="NodeAttributes")
+    typeDefinition: o6.ExpandedNodeId = o6.field(name="TypeDefinition")
 
 
 @o6.datatype(nodeId="i=379", browseName="AddReferencesItem", defaultEncodingId="i=381")
 class AddReferencesItem(Structure):
-    sourceNodeId: o6.NodeId
-    referenceTypeId: o6.NodeId
-    isForward: o6.Boolean
-    targetServerUri: o6.String
-    targetNodeId: o6.ExpandedNodeId
-    targetNodeClass: NodeClass
+    sourceNodeId: o6.NodeId = o6.field(name="SourceNodeId")
+    referenceTypeId: o6.NodeId = o6.field(name="ReferenceTypeId")
+    isForward: o6.Boolean = o6.field(name="IsForward")
+    targetServerUri: o6.String = o6.field(name="TargetServerUri")
+    targetNodeId: o6.ExpandedNodeId = o6.field(name="TargetNodeId")
+    targetNodeClass: NodeClass = o6.field(name="TargetNodeClass")
 
 
 @o6.datatype(nodeId="i=382", browseName="DeleteNodesItem", defaultEncodingId="i=384")
 class DeleteNodesItem(Structure):
-    nodeId: o6.NodeId
-    deleteTargetReferences: o6.Boolean
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    deleteTargetReferences: o6.Boolean = o6.field(name="DeleteTargetReferences")
 
 
 @o6.datatype(nodeId="i=385", browseName="DeleteReferencesItem", defaultEncodingId="i=387")
 class DeleteReferencesItem(Structure):
-    sourceNodeId: o6.NodeId
-    referenceTypeId: o6.NodeId
-    isForward: o6.Boolean
-    targetNodeId: o6.ExpandedNodeId
-    deleteBidirectional: o6.Boolean
+    sourceNodeId: o6.NodeId = o6.field(name="SourceNodeId")
+    referenceTypeId: o6.NodeId = o6.field(name="ReferenceTypeId")
+    isForward: o6.Boolean = o6.field(name="IsForward")
+    targetNodeId: o6.ExpandedNodeId = o6.field(name="TargetNodeId")
+    deleteBidirectional: o6.Boolean = o6.field(name="DeleteBidirectional")
 
 
 @o6.datatype(nodeId="i=388", browseName="SessionAuthenticationToken", parent="i=17")
@@ -639,247 +639,247 @@ class SessionAuthenticationToken:
 
 @o6.datatype(nodeId="i=389", browseName="RequestHeader", defaultEncodingId="i=391")
 class RequestHeader(Structure):
-    authenticationToken: o6.NodeId
-    timestamp: o6.DateTime
-    requestHandle: o6.UInt32
-    returnDiagnostics: o6.UInt32
-    auditEntryId: o6.String
-    timeoutHint: o6.UInt32
-    additionalHeader: o6.ExtensionObject
+    authenticationToken: o6.NodeId = o6.field(name="AuthenticationToken")
+    timestamp: o6.DateTime = o6.field(name="Timestamp")
+    requestHandle: o6.UInt32 = o6.field(name="RequestHandle")
+    returnDiagnostics: o6.UInt32 = o6.field(name="ReturnDiagnostics")
+    auditEntryId: o6.String = o6.field(name="AuditEntryId")
+    timeoutHint: o6.UInt32 = o6.field(name="TimeoutHint")
+    additionalHeader: o6.ExtensionObject = o6.field(name="AdditionalHeader")
 
 
 @o6.datatype(nodeId="i=392", browseName="ResponseHeader", defaultEncodingId="i=394")
 class ResponseHeader(Structure):
-    timestamp: o6.DateTime
-    requestHandle: o6.UInt32
-    serviceResult: o6.StatusCode
-    serviceDiagnostics: o6.DiagnosticInfo
-    stringTable: list[o6.String]
-    additionalHeader: o6.ExtensionObject
+    timestamp: o6.DateTime = o6.field(name="Timestamp")
+    requestHandle: o6.UInt32 = o6.field(name="RequestHandle")
+    serviceResult: o6.StatusCode = o6.field(name="ServiceResult")
+    serviceDiagnostics: o6.DiagnosticInfo = o6.field(name="ServiceDiagnostics")
+    stringTable: list[o6.String] = o6.field(name="StringTable")
+    additionalHeader: o6.ExtensionObject = o6.field(name="AdditionalHeader")
 
 
 @o6.datatype(nodeId="i=395", browseName="ServiceFault", defaultEncodingId="i=397")
 class ServiceFault(Structure):
-    responseHeader: ResponseHeader
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
 
 
 @o6.datatype(nodeId="i=420", browseName="FindServersRequest", defaultEncodingId="i=422")
 class FindServersRequest(Structure):
-    requestHeader: RequestHeader
-    endpointUrl: o6.String
-    localeIds: list[o6.String]
-    serverUris: list[o6.String]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    endpointUrl: o6.String = o6.field(name="EndpointUrl")
+    localeIds: list[o6.String] = o6.field(name="LocaleIds")
+    serverUris: list[o6.String] = o6.field(name="ServerUris")
 
 
 @o6.datatype(nodeId="i=423", browseName="FindServersResponse", defaultEncodingId="i=425")
 class FindServersResponse(Structure):
-    responseHeader: ResponseHeader
-    servers: list[ApplicationDescription]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    servers: list[ApplicationDescription] = o6.field(name="Servers")
 
 
 @o6.datatype(nodeId="i=426", browseName="GetEndpointsRequest", defaultEncodingId="i=428")
 class GetEndpointsRequest(Structure):
-    requestHeader: RequestHeader
-    endpointUrl: o6.String
-    localeIds: list[o6.String]
-    profileUris: list[o6.String]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    endpointUrl: o6.String = o6.field(name="EndpointUrl")
+    localeIds: list[o6.String] = o6.field(name="LocaleIds")
+    profileUris: list[o6.String] = o6.field(name="ProfileUris")
 
 
 @o6.datatype(nodeId="i=429", browseName="GetEndpointsResponse", defaultEncodingId="i=431")
 class GetEndpointsResponse(Structure):
-    responseHeader: ResponseHeader
-    endpoints: list[EndpointDescription]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    endpoints: list[EndpointDescription] = o6.field(name="Endpoints")
 
 
 @o6.datatype(nodeId="i=432", browseName="RegisteredServer", defaultEncodingId="i=434")
 class RegisteredServer(Structure):
-    serverUri: o6.String
-    productUri: o6.String
-    serverNames: list[o6.LocalizedText]
-    serverType: ApplicationType
-    gatewayServerUri: o6.String
-    discoveryUrls: list[o6.String]
-    semaphoreFilePath: o6.String
-    isOnline: o6.Boolean
+    serverUri: o6.String = o6.field(name="ServerUri")
+    productUri: o6.String = o6.field(name="ProductUri")
+    serverNames: list[o6.LocalizedText] = o6.field(name="ServerNames")
+    serverType: ApplicationType = o6.field(name="ServerType")
+    gatewayServerUri: o6.String = o6.field(name="GatewayServerUri")
+    discoveryUrls: list[o6.String] = o6.field(name="DiscoveryUrls")
+    semaphoreFilePath: o6.String = o6.field(name="SemaphoreFilePath")
+    isOnline: o6.Boolean = o6.field(name="IsOnline")
 
 
 @o6.datatype(nodeId="i=435", browseName="RegisterServerRequest", defaultEncodingId="i=437")
 class RegisterServerRequest(Structure):
-    requestHeader: RequestHeader
-    server: RegisteredServer
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    server: RegisteredServer = o6.field(name="Server")
 
 
 @o6.datatype(nodeId="i=438", browseName="RegisterServerResponse", defaultEncodingId="i=440")
 class RegisterServerResponse(Structure):
-    responseHeader: ResponseHeader
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
 
 
 @o6.datatype(nodeId="i=441", browseName="ChannelSecurityToken", defaultEncodingId="i=443")
 class ChannelSecurityToken(Structure):
-    channelId: o6.UInt32
-    tokenId: o6.UInt32
-    createdAt: o6.DateTime
-    revisedLifetime: o6.UInt32
+    channelId: o6.UInt32 = o6.field(name="ChannelId")
+    tokenId: o6.UInt32 = o6.field(name="TokenId")
+    createdAt: o6.DateTime = o6.field(name="CreatedAt")
+    revisedLifetime: o6.UInt32 = o6.field(name="RevisedLifetime")
 
 
 @o6.datatype(nodeId="i=444", browseName="OpenSecureChannelRequest", defaultEncodingId="i=446")
 class OpenSecureChannelRequest(Structure):
-    requestHeader: RequestHeader
-    clientProtocolVersion: o6.UInt32
-    requestType: SecurityTokenRequestType
-    securityMode: MessageSecurityMode
-    clientNonce: o6.ByteString
-    requestedLifetime: o6.UInt32
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    clientProtocolVersion: o6.UInt32 = o6.field(name="ClientProtocolVersion")
+    requestType: SecurityTokenRequestType = o6.field(name="RequestType")
+    securityMode: MessageSecurityMode = o6.field(name="SecurityMode")
+    clientNonce: o6.ByteString = o6.field(name="ClientNonce")
+    requestedLifetime: o6.UInt32 = o6.field(name="RequestedLifetime")
 
 
 @o6.datatype(nodeId="i=447", browseName="OpenSecureChannelResponse", defaultEncodingId="i=449")
 class OpenSecureChannelResponse(Structure):
-    responseHeader: ResponseHeader
-    serverProtocolVersion: o6.UInt32
-    securityToken: ChannelSecurityToken
-    serverNonce: o6.ByteString
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    serverProtocolVersion: o6.UInt32 = o6.field(name="ServerProtocolVersion")
+    securityToken: ChannelSecurityToken = o6.field(name="SecurityToken")
+    serverNonce: o6.ByteString = o6.field(name="ServerNonce")
 
 
 @o6.datatype(nodeId="i=450", browseName="CloseSecureChannelRequest", defaultEncodingId="i=452")
 class CloseSecureChannelRequest(Structure):
-    requestHeader: RequestHeader
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
 
 
 @o6.datatype(nodeId="i=453", browseName="CloseSecureChannelResponse", defaultEncodingId="i=455")
 class CloseSecureChannelResponse(Structure):
-    responseHeader: ResponseHeader
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
 
 
 @o6.datatype(nodeId="i=456", browseName="SignatureData", defaultEncodingId="i=458")
 class SignatureData(Structure):
-    algorithm: o6.String
-    signature: o6.ByteString
+    algorithm: o6.String = o6.field(name="Algorithm")
+    signature: o6.ByteString = o6.field(name="Signature")
 
 
 @o6.datatype(nodeId="i=459", browseName="CreateSessionRequest", defaultEncodingId="i=461")
 class CreateSessionRequest(Structure):
-    requestHeader: RequestHeader
-    clientDescription: ApplicationDescription
-    serverUri: o6.String
-    endpointUrl: o6.String
-    sessionName: o6.String
-    clientNonce: o6.ByteString
-    clientCertificate: o6.ByteString
-    requestedSessionTimeout: o6.Double
-    maxResponseMessageSize: o6.UInt32
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    clientDescription: ApplicationDescription = o6.field(name="ClientDescription")
+    serverUri: o6.String = o6.field(name="ServerUri")
+    endpointUrl: o6.String = o6.field(name="EndpointUrl")
+    sessionName: o6.String = o6.field(name="SessionName")
+    clientNonce: o6.ByteString = o6.field(name="ClientNonce")
+    clientCertificate: o6.ByteString = o6.field(name="ClientCertificate")
+    requestedSessionTimeout: o6.Double = o6.field(name="RequestedSessionTimeout")
+    maxResponseMessageSize: o6.UInt32 = o6.field(name="MaxResponseMessageSize")
 
 
 @o6.datatype(nodeId="i=462", browseName="CreateSessionResponse", defaultEncodingId="i=464")
 class CreateSessionResponse(Structure):
-    responseHeader: ResponseHeader
-    sessionId: o6.NodeId
-    authenticationToken: o6.NodeId
-    revisedSessionTimeout: o6.Double
-    serverNonce: o6.ByteString
-    serverCertificate: o6.ByteString
-    serverEndpoints: list[EndpointDescription]
-    serverSoftwareCertificates: list[SignedSoftwareCertificate]
-    serverSignature: SignatureData
-    maxRequestMessageSize: o6.UInt32
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    sessionId: o6.NodeId = o6.field(name="SessionId")
+    authenticationToken: o6.NodeId = o6.field(name="AuthenticationToken")
+    revisedSessionTimeout: o6.Double = o6.field(name="RevisedSessionTimeout")
+    serverNonce: o6.ByteString = o6.field(name="ServerNonce")
+    serverCertificate: o6.ByteString = o6.field(name="ServerCertificate")
+    serverEndpoints: list[EndpointDescription] = o6.field(name="ServerEndpoints")
+    serverSoftwareCertificates: list[SignedSoftwareCertificate] = o6.field(name="ServerSoftwareCertificates")
+    serverSignature: SignatureData = o6.field(name="ServerSignature")
+    maxRequestMessageSize: o6.UInt32 = o6.field(name="MaxRequestMessageSize")
 
 
 @o6.datatype(nodeId="i=465", browseName="ActivateSessionRequest", defaultEncodingId="i=467")
 class ActivateSessionRequest(Structure):
-    requestHeader: RequestHeader
-    clientSignature: SignatureData
-    clientSoftwareCertificates: list[SignedSoftwareCertificate]
-    localeIds: list[o6.String]
-    userIdentityToken: o6.ExtensionObject
-    userTokenSignature: SignatureData
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    clientSignature: SignatureData = o6.field(name="ClientSignature")
+    clientSoftwareCertificates: list[SignedSoftwareCertificate] = o6.field(name="ClientSoftwareCertificates")
+    localeIds: list[o6.String] = o6.field(name="LocaleIds")
+    userIdentityToken: o6.ExtensionObject = o6.field(name="UserIdentityToken")
+    userTokenSignature: SignatureData = o6.field(name="UserTokenSignature")
 
 
 @o6.datatype(nodeId="i=468", browseName="ActivateSessionResponse", defaultEncodingId="i=470")
 class ActivateSessionResponse(Structure):
-    responseHeader: ResponseHeader
-    serverNonce: o6.ByteString
-    results: list[o6.StatusCode]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    serverNonce: o6.ByteString = o6.field(name="ServerNonce")
+    results: list[o6.StatusCode] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=471", browseName="CloseSessionRequest", defaultEncodingId="i=473")
 class CloseSessionRequest(Structure):
-    requestHeader: RequestHeader
-    deleteSubscriptions: o6.Boolean
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    deleteSubscriptions: o6.Boolean = o6.field(name="DeleteSubscriptions")
 
 
 @o6.datatype(nodeId="i=474", browseName="CloseSessionResponse", defaultEncodingId="i=476")
 class CloseSessionResponse(Structure):
-    responseHeader: ResponseHeader
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
 
 
 @o6.datatype(nodeId="i=477", browseName="CancelRequest", defaultEncodingId="i=479")
 class CancelRequest(Structure):
-    requestHeader: RequestHeader
-    requestHandle: o6.UInt32
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    requestHandle: o6.UInt32 = o6.field(name="RequestHandle")
 
 
 @o6.datatype(nodeId="i=480", browseName="CancelResponse", defaultEncodingId="i=482")
 class CancelResponse(Structure):
-    responseHeader: ResponseHeader
-    cancelCount: o6.UInt32
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    cancelCount: o6.UInt32 = o6.field(name="CancelCount")
 
 
 @o6.datatype(nodeId="i=483", browseName="AddNodesResult", defaultEncodingId="i=485")
 class AddNodesResult(Structure):
-    statusCode: o6.StatusCode
-    addedNodeId: o6.NodeId
+    statusCode: o6.StatusCode = o6.field(name="StatusCode")
+    addedNodeId: o6.NodeId = o6.field(name="AddedNodeId")
 
 
 @o6.datatype(nodeId="i=486", browseName="AddNodesRequest", defaultEncodingId="i=488")
 class AddNodesRequest(Structure):
-    requestHeader: RequestHeader
-    nodesToAdd: list[AddNodesItem]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    nodesToAdd: list[AddNodesItem] = o6.field(name="NodesToAdd")
 
 
 @o6.datatype(nodeId="i=489", browseName="AddNodesResponse", defaultEncodingId="i=491")
 class AddNodesResponse(Structure):
-    responseHeader: ResponseHeader
-    results: list[AddNodesResult]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    results: list[AddNodesResult] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=492", browseName="AddReferencesRequest", defaultEncodingId="i=494")
 class AddReferencesRequest(Structure):
-    requestHeader: RequestHeader
-    referencesToAdd: list[AddReferencesItem]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    referencesToAdd: list[AddReferencesItem] = o6.field(name="ReferencesToAdd")
 
 
 @o6.datatype(nodeId="i=495", browseName="AddReferencesResponse", defaultEncodingId="i=497")
 class AddReferencesResponse(Structure):
-    responseHeader: ResponseHeader
-    results: list[o6.StatusCode]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    results: list[o6.StatusCode] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=498", browseName="DeleteNodesRequest", defaultEncodingId="i=500")
 class DeleteNodesRequest(Structure):
-    requestHeader: RequestHeader
-    nodesToDelete: list[DeleteNodesItem]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    nodesToDelete: list[DeleteNodesItem] = o6.field(name="NodesToDelete")
 
 
 @o6.datatype(nodeId="i=501", browseName="DeleteNodesResponse", defaultEncodingId="i=503")
 class DeleteNodesResponse(Structure):
-    responseHeader: ResponseHeader
-    results: list[o6.StatusCode]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    results: list[o6.StatusCode] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=504", browseName="DeleteReferencesRequest", defaultEncodingId="i=506")
 class DeleteReferencesRequest(Structure):
-    requestHeader: RequestHeader
-    referencesToDelete: list[DeleteReferencesItem]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    referencesToDelete: list[DeleteReferencesItem] = o6.field(name="ReferencesToDelete")
 
 
 @o6.datatype(nodeId="i=507", browseName="DeleteReferencesResponse", defaultEncodingId="i=509")
 class DeleteReferencesResponse(Structure):
-    responseHeader: ResponseHeader
-    results: list[o6.StatusCode]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    results: list[o6.StatusCode] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.enumtype(nodeId="i=510", browseName="BrowseDirection")
@@ -892,19 +892,19 @@ class BrowseDirection(Enumeration):
 
 @o6.datatype(nodeId="i=511", browseName="ViewDescription", defaultEncodingId="i=513")
 class ViewDescription(Structure):
-    viewId: o6.NodeId
-    timestamp: o6.DateTime
-    viewVersion: o6.UInt32
+    viewId: o6.NodeId = o6.field(name="ViewId")
+    timestamp: o6.DateTime = o6.field(name="Timestamp")
+    viewVersion: o6.UInt32 = o6.field(name="ViewVersion")
 
 
 @o6.datatype(nodeId="i=514", browseName="BrowseDescription", defaultEncodingId="i=516")
 class BrowseDescription(Structure):
-    nodeId: o6.NodeId
-    browseDirection: BrowseDirection
-    referenceTypeId: o6.NodeId
-    includeSubtypes: o6.Boolean
-    nodeClassMask: o6.UInt32
-    resultMask: o6.UInt32
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    browseDirection: BrowseDirection = o6.field(name="BrowseDirection")
+    referenceTypeId: o6.NodeId = o6.field(name="ReferenceTypeId")
+    includeSubtypes: o6.Boolean = o6.field(name="IncludeSubtypes")
+    nodeClassMask: o6.UInt32 = o6.field(name="NodeClassMask")
+    resultMask: o6.UInt32 = o6.field(name="ResultMask")
 
 
 @o6.enumtype(nodeId="i=517", browseName="BrowseResultMask")
@@ -923,13 +923,13 @@ class BrowseResultMask(Enumeration):
 
 @o6.datatype(nodeId="i=518", browseName="ReferenceDescription", defaultEncodingId="i=520")
 class ReferenceDescription(Structure):
-    referenceTypeId: o6.NodeId
-    isForward: o6.Boolean
-    nodeId: o6.ExpandedNodeId
-    browseName: o6.QualifiedName
-    displayName: o6.LocalizedText
-    nodeClass: NodeClass
-    typeDefinition: o6.ExpandedNodeId
+    referenceTypeId: o6.NodeId = o6.field(name="ReferenceTypeId")
+    isForward: o6.Boolean = o6.field(name="IsForward")
+    nodeId: o6.ExpandedNodeId = o6.field(name="NodeId")
+    browseName: o6.QualifiedName = o6.field(name="BrowseName")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    nodeClass: NodeClass = o6.field(name="NodeClass")
+    typeDefinition: o6.ExpandedNodeId = o6.field(name="TypeDefinition")
 
 
 @o6.datatype(nodeId="i=521", browseName="ContinuationPoint", parent="i=15")
@@ -939,119 +939,119 @@ class ContinuationPoint:
 
 @o6.datatype(nodeId="i=522", browseName="BrowseResult", defaultEncodingId="i=524")
 class BrowseResult(Structure):
-    statusCode: o6.StatusCode
-    continuationPoint: o6.ByteString
-    references: list[ReferenceDescription]
+    statusCode: o6.StatusCode = o6.field(name="StatusCode")
+    continuationPoint: o6.ByteString = o6.field(name="ContinuationPoint")
+    references: list[ReferenceDescription] = o6.field(name="References")
 
 
 @o6.datatype(nodeId="i=525", browseName="BrowseRequest", defaultEncodingId="i=527")
 class BrowseRequest(Structure):
-    requestHeader: RequestHeader
-    view: ViewDescription
-    requestedMaxReferencesPerNode: o6.UInt32
-    nodesToBrowse: list[BrowseDescription]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    view: ViewDescription = o6.field(name="View")
+    requestedMaxReferencesPerNode: o6.UInt32 = o6.field(name="RequestedMaxReferencesPerNode")
+    nodesToBrowse: list[BrowseDescription] = o6.field(name="NodesToBrowse")
 
 
 @o6.datatype(nodeId="i=528", browseName="BrowseResponse", defaultEncodingId="i=530")
 class BrowseResponse(Structure):
-    responseHeader: ResponseHeader
-    results: list[BrowseResult]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    results: list[BrowseResult] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=531", browseName="BrowseNextRequest", defaultEncodingId="i=533")
 class BrowseNextRequest(Structure):
-    requestHeader: RequestHeader
-    releaseContinuationPoints: o6.Boolean
-    continuationPoints: list[o6.ByteString]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    releaseContinuationPoints: o6.Boolean = o6.field(name="ReleaseContinuationPoints")
+    continuationPoints: list[o6.ByteString] = o6.field(name="ContinuationPoints")
 
 
 @o6.datatype(nodeId="i=534", browseName="BrowseNextResponse", defaultEncodingId="i=536")
 class BrowseNextResponse(Structure):
-    responseHeader: ResponseHeader
-    results: list[BrowseResult]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    results: list[BrowseResult] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=537", browseName="RelativePathElement", defaultEncodingId="i=539")
 class RelativePathElement(Structure):
-    referenceTypeId: o6.NodeId
-    isInverse: o6.Boolean
-    includeSubtypes: o6.Boolean
-    targetName: o6.QualifiedName
+    referenceTypeId: o6.NodeId = o6.field(name="ReferenceTypeId")
+    isInverse: o6.Boolean = o6.field(name="IsInverse")
+    includeSubtypes: o6.Boolean = o6.field(name="IncludeSubtypes")
+    targetName: o6.QualifiedName = o6.field(name="TargetName")
 
 
 @o6.datatype(nodeId="i=540", browseName="RelativePath", defaultEncodingId="i=542")
 class RelativePath(Structure):
-    elements: list[RelativePathElement]
+    elements: list[RelativePathElement] = o6.field(name="Elements")
 
 
 @o6.datatype(nodeId="i=543", browseName="BrowsePath", defaultEncodingId="i=545")
 class BrowsePath(Structure):
-    startingNode: o6.NodeId
-    relativePath: RelativePath
+    startingNode: o6.NodeId = o6.field(name="StartingNode")
+    relativePath: RelativePath = o6.field(name="RelativePath")
 
 
 @o6.datatype(nodeId="i=546", browseName="BrowsePathTarget", defaultEncodingId="i=548")
 class BrowsePathTarget(Structure):
-    targetId: o6.ExpandedNodeId
-    remainingPathIndex: o6.UInt32
+    targetId: o6.ExpandedNodeId = o6.field(name="TargetId")
+    remainingPathIndex: o6.UInt32 = o6.field(name="RemainingPathIndex")
 
 
 @o6.datatype(nodeId="i=549", browseName="BrowsePathResult", defaultEncodingId="i=551")
 class BrowsePathResult(Structure):
-    statusCode: o6.StatusCode
-    targets: list[BrowsePathTarget]
+    statusCode: o6.StatusCode = o6.field(name="StatusCode")
+    targets: list[BrowsePathTarget] = o6.field(name="Targets")
 
 
 @o6.datatype(nodeId="i=552", browseName="TranslateBrowsePathsToNodeIdsRequest", defaultEncodingId="i=554")
 class TranslateBrowsePathsToNodeIdsRequest(Structure):
-    requestHeader: RequestHeader
-    browsePaths: list[BrowsePath]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    browsePaths: list[BrowsePath] = o6.field(name="BrowsePaths")
 
 
 @o6.datatype(nodeId="i=555", browseName="TranslateBrowsePathsToNodeIdsResponse", defaultEncodingId="i=557")
 class TranslateBrowsePathsToNodeIdsResponse(Structure):
-    responseHeader: ResponseHeader
-    results: list[BrowsePathResult]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    results: list[BrowsePathResult] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=558", browseName="RegisterNodesRequest", defaultEncodingId="i=560")
 class RegisterNodesRequest(Structure):
-    requestHeader: RequestHeader
-    nodesToRegister: list[o6.NodeId]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    nodesToRegister: list[o6.NodeId] = o6.field(name="NodesToRegister")
 
 
 @o6.datatype(nodeId="i=561", browseName="RegisterNodesResponse", defaultEncodingId="i=563")
 class RegisterNodesResponse(Structure):
-    responseHeader: ResponseHeader
-    registeredNodeIds: list[o6.NodeId]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    registeredNodeIds: list[o6.NodeId] = o6.field(name="RegisteredNodeIds")
 
 
 @o6.datatype(nodeId="i=564", browseName="UnregisterNodesRequest", defaultEncodingId="i=566")
 class UnregisterNodesRequest(Structure):
-    requestHeader: RequestHeader
-    nodesToUnregister: list[o6.NodeId]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    nodesToUnregister: list[o6.NodeId] = o6.field(name="NodesToUnregister")
 
 
 @o6.datatype(nodeId="i=567", browseName="UnregisterNodesResponse", defaultEncodingId="i=569")
 class UnregisterNodesResponse(Structure):
-    responseHeader: ResponseHeader
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
 
 
 @o6.datatype(nodeId="i=570", browseName="QueryDataDescription", defaultEncodingId="i=572")
 class QueryDataDescription(Structure):
-    relativePath: RelativePath
-    attributeId: o6.UInt32
-    indexRange: o6.String
+    relativePath: RelativePath = o6.field(name="RelativePath")
+    attributeId: o6.UInt32 = o6.field(name="AttributeId")
+    indexRange: o6.String = o6.field(name="IndexRange")
 
 
 @o6.datatype(nodeId="i=573", browseName="NodeTypeDescription", defaultEncodingId="i=575")
 class NodeTypeDescription(Structure):
-    typeDefinitionNode: o6.ExpandedNodeId
-    includeSubTypes: o6.Boolean
-    dataToReturn: list[QueryDataDescription]
+    typeDefinitionNode: o6.ExpandedNodeId = o6.field(name="TypeDefinitionNode")
+    includeSubTypes: o6.Boolean = o6.field(name="IncludeSubTypes")
+    dataToReturn: list[QueryDataDescription] = o6.field(name="DataToReturn")
 
 
 @o6.enumtype(nodeId="i=576", browseName="FilterOperator")
@@ -1078,28 +1078,28 @@ class FilterOperator(Enumeration):
 
 @o6.datatype(nodeId="i=577", browseName="QueryDataSet", defaultEncodingId="i=579")
 class QueryDataSet(Structure):
-    nodeId: o6.ExpandedNodeId
-    typeDefinitionNode: o6.ExpandedNodeId
-    values: list[Any]
+    nodeId: o6.ExpandedNodeId = o6.field(name="NodeId")
+    typeDefinitionNode: o6.ExpandedNodeId = o6.field(name="TypeDefinitionNode")
+    values: list[Any] = o6.field(name="Values")
 
 
 @o6.datatype(nodeId="i=580", browseName="NodeReference", defaultEncodingId="i=582")
 class NodeReference(Structure):
-    nodeId: o6.NodeId
-    referenceTypeId: o6.NodeId
-    isForward: o6.Boolean
-    referencedNodeIds: list[o6.NodeId]
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    referenceTypeId: o6.NodeId = o6.field(name="ReferenceTypeId")
+    isForward: o6.Boolean = o6.field(name="IsForward")
+    referencedNodeIds: list[o6.NodeId] = o6.field(name="ReferencedNodeIds")
 
 
 @o6.datatype(nodeId="i=583", browseName="ContentFilterElement", defaultEncodingId="i=585")
 class ContentFilterElement(Structure):
-    filterOperator: FilterOperator
-    filterOperands: list[o6.ExtensionObject]
+    filterOperator: FilterOperator = o6.field(name="FilterOperator")
+    filterOperands: list[o6.ExtensionObject] = o6.field(name="FilterOperands")
 
 
 @o6.datatype(nodeId="i=586", browseName="ContentFilter", defaultEncodingId="i=588")
 class ContentFilter(Structure):
-    elements: list[ContentFilterElement]
+    elements: list[ContentFilterElement] = o6.field(name="Elements")
 
 
 @o6.datatype(nodeId="i=589", browseName="FilterOperand", defaultEncodingId="i=591", isAbstract=True)
@@ -1109,83 +1109,83 @@ class FilterOperand(Structure):
 
 @o6.datatype(nodeId="i=592", browseName="ElementOperand", defaultEncodingId="i=594")
 class ElementOperand(FilterOperand):
-    index: o6.UInt32
+    index: o6.UInt32 = o6.field(name="Index")
 
 
 @o6.datatype(nodeId="i=595", browseName="LiteralOperand", defaultEncodingId="i=597")
 class LiteralOperand(FilterOperand):
-    value: Any
+    value: Any = o6.field(name="Value")
 
 
 @o6.datatype(nodeId="i=598", browseName="AttributeOperand", defaultEncodingId="i=600")
 class AttributeOperand(FilterOperand):
-    nodeId: o6.NodeId
-    alias: o6.String
-    browsePath: RelativePath
-    attributeId: o6.UInt32
-    indexRange: o6.String
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    alias: o6.String = o6.field(name="Alias")
+    browsePath: RelativePath = o6.field(name="BrowsePath")
+    attributeId: o6.UInt32 = o6.field(name="AttributeId")
+    indexRange: o6.String = o6.field(name="IndexRange")
 
 
 @o6.datatype(nodeId="i=601", browseName="SimpleAttributeOperand", defaultEncodingId="i=603")
 class SimpleAttributeOperand(FilterOperand):
-    typeDefinitionId: o6.NodeId
-    browsePath: list[o6.QualifiedName]
-    attributeId: o6.UInt32
-    indexRange: o6.String
+    typeDefinitionId: o6.NodeId = o6.field(name="TypeDefinitionId")
+    browsePath: list[o6.QualifiedName] = o6.field(name="BrowsePath")
+    attributeId: o6.UInt32 = o6.field(name="AttributeId")
+    indexRange: o6.String = o6.field(name="IndexRange")
 
 
 @o6.datatype(nodeId="i=604", browseName="ContentFilterElementResult", defaultEncodingId="i=606")
 class ContentFilterElementResult(Structure):
-    statusCode: o6.StatusCode
-    operandStatusCodes: list[o6.StatusCode]
-    operandDiagnosticInfos: list[o6.DiagnosticInfo]
+    statusCode: o6.StatusCode = o6.field(name="StatusCode")
+    operandStatusCodes: list[o6.StatusCode] = o6.field(name="OperandStatusCodes")
+    operandDiagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="OperandDiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=607", browseName="ContentFilterResult", defaultEncodingId="i=609")
 class ContentFilterResult(Structure):
-    elementResults: list[ContentFilterElementResult]
-    elementDiagnosticInfos: list[o6.DiagnosticInfo]
+    elementResults: list[ContentFilterElementResult] = o6.field(name="ElementResults")
+    elementDiagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="ElementDiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=610", browseName="ParsingResult", defaultEncodingId="i=612")
 class ParsingResult(Structure):
-    statusCode: o6.StatusCode
-    dataStatusCodes: list[o6.StatusCode]
-    dataDiagnosticInfos: list[o6.DiagnosticInfo]
+    statusCode: o6.StatusCode = o6.field(name="StatusCode")
+    dataStatusCodes: list[o6.StatusCode] = o6.field(name="DataStatusCodes")
+    dataDiagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DataDiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=613", browseName="QueryFirstRequest", defaultEncodingId="i=615")
 class QueryFirstRequest(Structure):
-    requestHeader: RequestHeader
-    view: ViewDescription
-    nodeTypes: list[NodeTypeDescription]
-    filter: ContentFilter
-    maxDataSetsToReturn: o6.UInt32
-    maxReferencesToReturn: o6.UInt32
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    view: ViewDescription = o6.field(name="View")
+    nodeTypes: list[NodeTypeDescription] = o6.field(name="NodeTypes")
+    filter: ContentFilter = o6.field(name="Filter")
+    maxDataSetsToReturn: o6.UInt32 = o6.field(name="MaxDataSetsToReturn")
+    maxReferencesToReturn: o6.UInt32 = o6.field(name="MaxReferencesToReturn")
 
 
 @o6.datatype(nodeId="i=616", browseName="QueryFirstResponse", defaultEncodingId="i=618")
 class QueryFirstResponse(Structure):
-    responseHeader: ResponseHeader
-    queryDataSets: list[QueryDataSet]
-    continuationPoint: o6.ByteString
-    parsingResults: list[ParsingResult]
-    diagnosticInfos: list[o6.DiagnosticInfo]
-    filterResult: ContentFilterResult
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    queryDataSets: list[QueryDataSet] = o6.field(name="QueryDataSets")
+    continuationPoint: o6.ByteString = o6.field(name="ContinuationPoint")
+    parsingResults: list[ParsingResult] = o6.field(name="ParsingResults")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
+    filterResult: ContentFilterResult = o6.field(name="FilterResult")
 
 
 @o6.datatype(nodeId="i=619", browseName="QueryNextRequest", defaultEncodingId="i=621")
 class QueryNextRequest(Structure):
-    requestHeader: RequestHeader
-    releaseContinuationPoint: o6.Boolean
-    continuationPoint: o6.ByteString
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    releaseContinuationPoint: o6.Boolean = o6.field(name="ReleaseContinuationPoint")
+    continuationPoint: o6.ByteString = o6.field(name="ContinuationPoint")
 
 
 @o6.datatype(nodeId="i=622", browseName="QueryNextResponse", defaultEncodingId="i=624")
 class QueryNextResponse(Structure):
-    responseHeader: ResponseHeader
-    queryDataSets: list[QueryDataSet]
-    revisedContinuationPoint: o6.ByteString
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    queryDataSets: list[QueryDataSet] = o6.field(name="QueryDataSets")
+    revisedContinuationPoint: o6.ByteString = o6.field(name="RevisedContinuationPoint")
 
 
 @o6.enumtype(nodeId="i=625", browseName="TimestampsToReturn")
@@ -1199,40 +1199,40 @@ class TimestampsToReturn(Enumeration):
 
 @o6.datatype(nodeId="i=626", browseName="ReadValueId", defaultEncodingId="i=628")
 class ReadValueId(Structure):
-    nodeId: o6.NodeId
-    attributeId: o6.UInt32
-    indexRange: o6.String
-    dataEncoding: o6.QualifiedName
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    attributeId: o6.UInt32 = o6.field(name="AttributeId")
+    indexRange: o6.String = o6.field(name="IndexRange")
+    dataEncoding: o6.QualifiedName = o6.field(name="DataEncoding")
 
 
 @o6.datatype(nodeId="i=629", browseName="ReadRequest", defaultEncodingId="i=631")
 class ReadRequest(Structure):
-    requestHeader: RequestHeader
-    maxAge: o6.Double
-    timestampsToReturn: TimestampsToReturn
-    nodesToRead: list[ReadValueId]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    maxAge: o6.Double = o6.field(name="MaxAge")
+    timestampsToReturn: TimestampsToReturn = o6.field(name="TimestampsToReturn")
+    nodesToRead: list[ReadValueId] = o6.field(name="NodesToRead")
 
 
 @o6.datatype(nodeId="i=632", browseName="ReadResponse", defaultEncodingId="i=634")
 class ReadResponse(Structure):
-    responseHeader: ResponseHeader
-    results: list[o6.DataValue]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    results: list[o6.DataValue] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=635", browseName="HistoryReadValueId", defaultEncodingId="i=637")
 class HistoryReadValueId(Structure):
-    nodeId: o6.NodeId
-    indexRange: o6.String
-    dataEncoding: o6.QualifiedName
-    continuationPoint: o6.ByteString
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    indexRange: o6.String = o6.field(name="IndexRange")
+    dataEncoding: o6.QualifiedName = o6.field(name="DataEncoding")
+    continuationPoint: o6.ByteString = o6.field(name="ContinuationPoint")
 
 
 @o6.datatype(nodeId="i=638", browseName="HistoryReadResult", defaultEncodingId="i=640")
 class HistoryReadResult(Structure):
-    statusCode: o6.StatusCode
-    continuationPoint: o6.ByteString
-    historyData: o6.ExtensionObject
+    statusCode: o6.StatusCode = o6.field(name="StatusCode")
+    continuationPoint: o6.ByteString = o6.field(name="ContinuationPoint")
+    historyData: o6.ExtensionObject = o6.field(name="HistoryData")
 
 
 @o6.datatype(nodeId="i=641", browseName="HistoryReadDetails", defaultEncodingId="i=643", isAbstract=True)
@@ -1242,59 +1242,59 @@ class HistoryReadDetails(Structure):
 
 @o6.datatype(nodeId="i=647", browseName="ReadRawModifiedDetails", defaultEncodingId="i=649")
 class ReadRawModifiedDetails(HistoryReadDetails):
-    isReadModified: o6.Boolean
-    startTime: o6.DateTime
-    endTime: o6.DateTime
-    numValuesPerNode: o6.UInt32
-    returnBounds: o6.Boolean
+    isReadModified: o6.Boolean = o6.field(name="IsReadModified")
+    startTime: o6.DateTime = o6.field(name="StartTime")
+    endTime: o6.DateTime = o6.field(name="EndTime")
+    numValuesPerNode: o6.UInt32 = o6.field(name="NumValuesPerNode")
+    returnBounds: o6.Boolean = o6.field(name="ReturnBounds")
 
 
 @o6.datatype(nodeId="i=653", browseName="ReadAtTimeDetails", defaultEncodingId="i=655")
 class ReadAtTimeDetails(HistoryReadDetails):
-    reqTimes: list[o6.DateTime]
-    useSimpleBounds: o6.Boolean
+    reqTimes: list[o6.DateTime] = o6.field(name="ReqTimes")
+    useSimpleBounds: o6.Boolean = o6.field(name="UseSimpleBounds")
 
 
 @o6.datatype(nodeId="i=656", browseName="HistoryData", defaultEncodingId="i=658")
 class HistoryData(Structure):
-    dataValues: list[o6.DataValue]
+    dataValues: list[o6.DataValue] = o6.field(name="DataValues")
 
 
 @o6.datatype(nodeId="i=662", browseName="HistoryReadRequest", defaultEncodingId="i=664")
 class HistoryReadRequest(Structure):
-    requestHeader: RequestHeader
-    historyReadDetails: o6.ExtensionObject
-    timestampsToReturn: TimestampsToReturn
-    releaseContinuationPoints: o6.Boolean
-    nodesToRead: list[HistoryReadValueId]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    historyReadDetails: o6.ExtensionObject = o6.field(name="HistoryReadDetails")
+    timestampsToReturn: TimestampsToReturn = o6.field(name="TimestampsToReturn")
+    releaseContinuationPoints: o6.Boolean = o6.field(name="ReleaseContinuationPoints")
+    nodesToRead: list[HistoryReadValueId] = o6.field(name="NodesToRead")
 
 
 @o6.datatype(nodeId="i=665", browseName="HistoryReadResponse", defaultEncodingId="i=667")
 class HistoryReadResponse(Structure):
-    responseHeader: ResponseHeader
-    results: list[HistoryReadResult]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    results: list[HistoryReadResult] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=668", browseName="WriteValue", defaultEncodingId="i=670")
 class WriteValue(Structure):
-    nodeId: o6.NodeId
-    attributeId: o6.UInt32
-    indexRange: o6.String
-    value: o6.DataValue
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    attributeId: o6.UInt32 = o6.field(name="AttributeId")
+    indexRange: o6.String = o6.field(name="IndexRange")
+    value: o6.DataValue = o6.field(name="Value")
 
 
 @o6.datatype(nodeId="i=671", browseName="WriteRequest", defaultEncodingId="i=673")
 class WriteRequest(Structure):
-    requestHeader: RequestHeader
-    nodesToWrite: list[WriteValue]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    nodesToWrite: list[WriteValue] = o6.field(name="NodesToWrite")
 
 
 @o6.datatype(nodeId="i=674", browseName="WriteResponse", defaultEncodingId="i=676")
 class WriteResponse(Structure):
-    responseHeader: ResponseHeader
-    results: list[o6.StatusCode]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    results: list[o6.StatusCode] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=677", browseName="HistoryUpdateDetails", defaultEncodingId="i=679", isAbstract=True)
@@ -1304,70 +1304,70 @@ class HistoryUpdateDetails(Structure):
 
 @o6.datatype(nodeId="i=686", browseName="DeleteRawModifiedDetails", defaultEncodingId="i=688")
 class DeleteRawModifiedDetails(HistoryUpdateDetails):
-    nodeId: o6.NodeId
-    isDeleteModified: o6.Boolean
-    startTime: o6.DateTime
-    endTime: o6.DateTime
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    isDeleteModified: o6.Boolean = o6.field(name="IsDeleteModified")
+    startTime: o6.DateTime = o6.field(name="StartTime")
+    endTime: o6.DateTime = o6.field(name="EndTime")
 
 
 @o6.datatype(nodeId="i=689", browseName="DeleteAtTimeDetails", defaultEncodingId="i=691")
 class DeleteAtTimeDetails(HistoryUpdateDetails):
-    nodeId: o6.NodeId
-    reqTimes: list[o6.DateTime]
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    reqTimes: list[o6.DateTime] = o6.field(name="ReqTimes")
 
 
 @o6.datatype(nodeId="i=692", browseName="DeleteEventDetails", defaultEncodingId="i=694")
 class DeleteEventDetails(HistoryUpdateDetails):
-    nodeId: o6.NodeId
-    eventIds: list[o6.ByteString]
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    eventIds: list[o6.ByteString] = o6.field(name="EventIds")
 
 
 @o6.datatype(nodeId="i=695", browseName="HistoryUpdateResult", defaultEncodingId="i=697")
 class HistoryUpdateResult(Structure):
-    statusCode: o6.StatusCode
-    operationResults: list[o6.StatusCode]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    statusCode: o6.StatusCode = o6.field(name="StatusCode")
+    operationResults: list[o6.StatusCode] = o6.field(name="OperationResults")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=698", browseName="HistoryUpdateRequest", defaultEncodingId="i=700")
 class HistoryUpdateRequest(Structure):
-    requestHeader: RequestHeader
-    historyUpdateDetails: list[o6.ExtensionObject]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    historyUpdateDetails: list[o6.ExtensionObject] = o6.field(name="HistoryUpdateDetails")
 
 
 @o6.datatype(nodeId="i=701", browseName="HistoryUpdateResponse", defaultEncodingId="i=703")
 class HistoryUpdateResponse(Structure):
-    responseHeader: ResponseHeader
-    results: list[HistoryUpdateResult]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    results: list[HistoryUpdateResult] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=704", browseName="CallMethodRequest", defaultEncodingId="i=706")
 class CallMethodRequest(Structure):
-    objectId: o6.NodeId
-    methodId: o6.NodeId
-    inputArguments: list[Any]
+    objectId: o6.NodeId = o6.field(name="ObjectId")
+    methodId: o6.NodeId = o6.field(name="MethodId")
+    inputArguments: list[Any] = o6.field(name="InputArguments")
 
 
 @o6.datatype(nodeId="i=707", browseName="CallMethodResult", defaultEncodingId="i=709")
 class CallMethodResult(Structure):
-    statusCode: o6.StatusCode
-    inputArgumentResults: list[o6.StatusCode]
-    inputArgumentDiagnosticInfos: list[o6.DiagnosticInfo]
-    outputArguments: list[Any]
+    statusCode: o6.StatusCode = o6.field(name="StatusCode")
+    inputArgumentResults: list[o6.StatusCode] = o6.field(name="InputArgumentResults")
+    inputArgumentDiagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="InputArgumentDiagnosticInfos")
+    outputArguments: list[Any] = o6.field(name="OutputArguments")
 
 
 @o6.datatype(nodeId="i=710", browseName="CallRequest", defaultEncodingId="i=712")
 class CallRequest(Structure):
-    requestHeader: RequestHeader
-    methodsToCall: list[CallMethodRequest]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    methodsToCall: list[CallMethodRequest] = o6.field(name="MethodsToCall")
 
 
 @o6.datatype(nodeId="i=713", browseName="CallResponse", defaultEncodingId="i=715")
 class CallResponse(Structure):
-    responseHeader: ResponseHeader
-    results: list[CallMethodResult]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    results: list[CallMethodResult] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.enumtype(nodeId="i=716", browseName="MonitoringMode")
@@ -1398,9 +1398,9 @@ class MonitoringFilter(Structure):
 
 @o6.datatype(nodeId="i=722", browseName="DataChangeFilter", defaultEncodingId="i=724")
 class DataChangeFilter(MonitoringFilter):
-    trigger: DataChangeTrigger
-    deadbandType: o6.UInt32
-    deadbandValue: o6.Double
+    trigger: DataChangeTrigger = o6.field(name="Trigger")
+    deadbandType: o6.UInt32 = o6.field(name="DeadbandType")
+    deadbandValue: o6.Double = o6.field(name="DeadbandValue")
 
 
 @o6.datatype(nodeId="i=725", browseName="EventFilter", defaultEncodingId="i=727")
@@ -1408,16 +1408,16 @@ class EventFilter(MonitoringFilter):
     @classmethod
     def parse(cls, query: str, logger: object | None = None) -> EventFilter: ...
 
-    selectClauses: list[SimpleAttributeOperand]
-    whereClause: ContentFilter
+    selectClauses: list[SimpleAttributeOperand] = o6.field(name="SelectClauses")
+    whereClause: ContentFilter = o6.field(name="WhereClause")
 
 
 @o6.datatype(nodeId="i=644", browseName="ReadEventDetails", defaultEncodingId="i=646")
 class ReadEventDetails(HistoryReadDetails):
-    numValuesPerNode: o6.UInt32
-    startTime: o6.DateTime
-    endTime: o6.DateTime
-    filter: EventFilter
+    numValuesPerNode: o6.UInt32 = o6.field(name="NumValuesPerNode")
+    startTime: o6.DateTime = o6.field(name="StartTime")
+    endTime: o6.DateTime = o6.field(name="EndTime")
+    filter: EventFilter = o6.field(name="Filter")
 
 
 @o6.datatype(nodeId="i=731", browseName="MonitoringFilterResult", defaultEncodingId="i=733")
@@ -1427,260 +1427,260 @@ class MonitoringFilterResult(Structure):
 
 @o6.datatype(nodeId="i=734", browseName="EventFilterResult", defaultEncodingId="i=736")
 class EventFilterResult(MonitoringFilterResult):
-    selectClauseResults: list[o6.StatusCode]
-    selectClauseDiagnosticInfos: list[o6.DiagnosticInfo]
-    whereClauseResult: ContentFilterResult
+    selectClauseResults: list[o6.StatusCode] = o6.field(name="SelectClauseResults")
+    selectClauseDiagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="SelectClauseDiagnosticInfos")
+    whereClauseResult: ContentFilterResult = o6.field(name="WhereClauseResult")
 
 
 @o6.datatype(nodeId="i=740", browseName="MonitoringParameters", defaultEncodingId="i=742")
 class MonitoringParameters(Structure):
-    clientHandle: o6.UInt32
-    samplingInterval: o6.Double
-    filter: o6.ExtensionObject
-    queueSize: o6.UInt32
-    discardOldest: o6.Boolean
+    clientHandle: o6.UInt32 = o6.field(name="ClientHandle")
+    samplingInterval: o6.Double = o6.field(name="SamplingInterval")
+    filter: o6.ExtensionObject = o6.field(name="Filter")
+    queueSize: o6.UInt32 = o6.field(name="QueueSize")
+    discardOldest: o6.Boolean = o6.field(name="DiscardOldest")
 
 
 @o6.datatype(nodeId="i=743", browseName="MonitoredItemCreateRequest", defaultEncodingId="i=745")
 class MonitoredItemCreateRequest(Structure):
-    itemToMonitor: ReadValueId
-    monitoringMode: MonitoringMode
-    requestedParameters: MonitoringParameters
+    itemToMonitor: ReadValueId = o6.field(name="ItemToMonitor")
+    monitoringMode: MonitoringMode = o6.field(name="MonitoringMode")
+    requestedParameters: MonitoringParameters = o6.field(name="RequestedParameters")
 
 
 @o6.datatype(nodeId="i=746", browseName="MonitoredItemCreateResult", defaultEncodingId="i=748")
 class MonitoredItemCreateResult(Structure):
-    statusCode: o6.StatusCode
-    monitoredItemId: o6.UInt32
-    revisedSamplingInterval: o6.Double
-    revisedQueueSize: o6.UInt32
-    filterResult: o6.ExtensionObject
+    statusCode: o6.StatusCode = o6.field(name="StatusCode")
+    monitoredItemId: o6.UInt32 = o6.field(name="MonitoredItemId")
+    revisedSamplingInterval: o6.Double = o6.field(name="RevisedSamplingInterval")
+    revisedQueueSize: o6.UInt32 = o6.field(name="RevisedQueueSize")
+    filterResult: o6.ExtensionObject = o6.field(name="FilterResult")
 
 
 @o6.datatype(nodeId="i=749", browseName="CreateMonitoredItemsRequest", defaultEncodingId="i=751")
 class CreateMonitoredItemsRequest(Structure):
-    requestHeader: RequestHeader
-    subscriptionId: o6.UInt32
-    timestampsToReturn: TimestampsToReturn
-    itemsToCreate: list[MonitoredItemCreateRequest]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    subscriptionId: o6.UInt32 = o6.field(name="SubscriptionId")
+    timestampsToReturn: TimestampsToReturn = o6.field(name="TimestampsToReturn")
+    itemsToCreate: list[MonitoredItemCreateRequest] = o6.field(name="ItemsToCreate")
 
 
 @o6.datatype(nodeId="i=752", browseName="CreateMonitoredItemsResponse", defaultEncodingId="i=754")
 class CreateMonitoredItemsResponse(Structure):
-    responseHeader: ResponseHeader
-    results: list[MonitoredItemCreateResult]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    results: list[MonitoredItemCreateResult] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=755", browseName="MonitoredItemModifyRequest", defaultEncodingId="i=757")
 class MonitoredItemModifyRequest(Structure):
-    monitoredItemId: o6.UInt32
-    requestedParameters: MonitoringParameters
+    monitoredItemId: o6.UInt32 = o6.field(name="MonitoredItemId")
+    requestedParameters: MonitoringParameters = o6.field(name="RequestedParameters")
 
 
 @o6.datatype(nodeId="i=758", browseName="MonitoredItemModifyResult", defaultEncodingId="i=760")
 class MonitoredItemModifyResult(Structure):
-    statusCode: o6.StatusCode
-    revisedSamplingInterval: o6.Double
-    revisedQueueSize: o6.UInt32
-    filterResult: o6.ExtensionObject
+    statusCode: o6.StatusCode = o6.field(name="StatusCode")
+    revisedSamplingInterval: o6.Double = o6.field(name="RevisedSamplingInterval")
+    revisedQueueSize: o6.UInt32 = o6.field(name="RevisedQueueSize")
+    filterResult: o6.ExtensionObject = o6.field(name="FilterResult")
 
 
 @o6.datatype(nodeId="i=761", browseName="ModifyMonitoredItemsRequest", defaultEncodingId="i=763")
 class ModifyMonitoredItemsRequest(Structure):
-    requestHeader: RequestHeader
-    subscriptionId: o6.UInt32
-    timestampsToReturn: TimestampsToReturn
-    itemsToModify: list[MonitoredItemModifyRequest]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    subscriptionId: o6.UInt32 = o6.field(name="SubscriptionId")
+    timestampsToReturn: TimestampsToReturn = o6.field(name="TimestampsToReturn")
+    itemsToModify: list[MonitoredItemModifyRequest] = o6.field(name="ItemsToModify")
 
 
 @o6.datatype(nodeId="i=764", browseName="ModifyMonitoredItemsResponse", defaultEncodingId="i=766")
 class ModifyMonitoredItemsResponse(Structure):
-    responseHeader: ResponseHeader
-    results: list[MonitoredItemModifyResult]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    results: list[MonitoredItemModifyResult] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=767", browseName="SetMonitoringModeRequest", defaultEncodingId="i=769")
 class SetMonitoringModeRequest(Structure):
-    requestHeader: RequestHeader
-    subscriptionId: o6.UInt32
-    monitoringMode: MonitoringMode
-    monitoredItemIds: list[o6.UInt32]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    subscriptionId: o6.UInt32 = o6.field(name="SubscriptionId")
+    monitoringMode: MonitoringMode = o6.field(name="MonitoringMode")
+    monitoredItemIds: list[o6.UInt32] = o6.field(name="MonitoredItemIds")
 
 
 @o6.datatype(nodeId="i=770", browseName="SetMonitoringModeResponse", defaultEncodingId="i=772")
 class SetMonitoringModeResponse(Structure):
-    responseHeader: ResponseHeader
-    results: list[o6.StatusCode]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    results: list[o6.StatusCode] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=773", browseName="SetTriggeringRequest", defaultEncodingId="i=775")
 class SetTriggeringRequest(Structure):
-    requestHeader: RequestHeader
-    subscriptionId: o6.UInt32
-    triggeringItemId: o6.UInt32
-    linksToAdd: list[o6.UInt32]
-    linksToRemove: list[o6.UInt32]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    subscriptionId: o6.UInt32 = o6.field(name="SubscriptionId")
+    triggeringItemId: o6.UInt32 = o6.field(name="TriggeringItemId")
+    linksToAdd: list[o6.UInt32] = o6.field(name="LinksToAdd")
+    linksToRemove: list[o6.UInt32] = o6.field(name="LinksToRemove")
 
 
 @o6.datatype(nodeId="i=776", browseName="SetTriggeringResponse", defaultEncodingId="i=778")
 class SetTriggeringResponse(Structure):
-    responseHeader: ResponseHeader
-    addResults: list[o6.StatusCode]
-    addDiagnosticInfos: list[o6.DiagnosticInfo]
-    removeResults: list[o6.StatusCode]
-    removeDiagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    addResults: list[o6.StatusCode] = o6.field(name="AddResults")
+    addDiagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="AddDiagnosticInfos")
+    removeResults: list[o6.StatusCode] = o6.field(name="RemoveResults")
+    removeDiagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="RemoveDiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=779", browseName="DeleteMonitoredItemsRequest", defaultEncodingId="i=781")
 class DeleteMonitoredItemsRequest(Structure):
-    requestHeader: RequestHeader
-    subscriptionId: o6.UInt32
-    monitoredItemIds: list[o6.UInt32]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    subscriptionId: o6.UInt32 = o6.field(name="SubscriptionId")
+    monitoredItemIds: list[o6.UInt32] = o6.field(name="MonitoredItemIds")
 
 
 @o6.datatype(nodeId="i=782", browseName="DeleteMonitoredItemsResponse", defaultEncodingId="i=784")
 class DeleteMonitoredItemsResponse(Structure):
-    responseHeader: ResponseHeader
-    results: list[o6.StatusCode]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    results: list[o6.StatusCode] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=785", browseName="CreateSubscriptionRequest", defaultEncodingId="i=787")
 class CreateSubscriptionRequest(Structure):
-    requestHeader: RequestHeader
-    requestedPublishingInterval: o6.Double
-    requestedLifetimeCount: o6.UInt32
-    requestedMaxKeepAliveCount: o6.UInt32
-    maxNotificationsPerPublish: o6.UInt32
-    publishingEnabled: o6.Boolean
-    priority: o6.Byte
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    requestedPublishingInterval: o6.Double = o6.field(name="RequestedPublishingInterval")
+    requestedLifetimeCount: o6.UInt32 = o6.field(name="RequestedLifetimeCount")
+    requestedMaxKeepAliveCount: o6.UInt32 = o6.field(name="RequestedMaxKeepAliveCount")
+    maxNotificationsPerPublish: o6.UInt32 = o6.field(name="MaxNotificationsPerPublish")
+    publishingEnabled: o6.Boolean = o6.field(name="PublishingEnabled")
+    priority: o6.Byte = o6.field(name="Priority")
 
 
 @o6.datatype(nodeId="i=788", browseName="CreateSubscriptionResponse", defaultEncodingId="i=790")
 class CreateSubscriptionResponse(Structure):
-    responseHeader: ResponseHeader
-    subscriptionId: o6.UInt32
-    revisedPublishingInterval: o6.Double
-    revisedLifetimeCount: o6.UInt32
-    revisedMaxKeepAliveCount: o6.UInt32
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    subscriptionId: o6.UInt32 = o6.field(name="SubscriptionId")
+    revisedPublishingInterval: o6.Double = o6.field(name="RevisedPublishingInterval")
+    revisedLifetimeCount: o6.UInt32 = o6.field(name="RevisedLifetimeCount")
+    revisedMaxKeepAliveCount: o6.UInt32 = o6.field(name="RevisedMaxKeepAliveCount")
 
 
 @o6.datatype(nodeId="i=791", browseName="ModifySubscriptionRequest", defaultEncodingId="i=793")
 class ModifySubscriptionRequest(Structure):
-    requestHeader: RequestHeader
-    subscriptionId: o6.UInt32
-    requestedPublishingInterval: o6.Double
-    requestedLifetimeCount: o6.UInt32
-    requestedMaxKeepAliveCount: o6.UInt32
-    maxNotificationsPerPublish: o6.UInt32
-    priority: o6.Byte
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    subscriptionId: o6.UInt32 = o6.field(name="SubscriptionId")
+    requestedPublishingInterval: o6.Double = o6.field(name="RequestedPublishingInterval")
+    requestedLifetimeCount: o6.UInt32 = o6.field(name="RequestedLifetimeCount")
+    requestedMaxKeepAliveCount: o6.UInt32 = o6.field(name="RequestedMaxKeepAliveCount")
+    maxNotificationsPerPublish: o6.UInt32 = o6.field(name="MaxNotificationsPerPublish")
+    priority: o6.Byte = o6.field(name="Priority")
 
 
 @o6.datatype(nodeId="i=794", browseName="ModifySubscriptionResponse", defaultEncodingId="i=796")
 class ModifySubscriptionResponse(Structure):
-    responseHeader: ResponseHeader
-    revisedPublishingInterval: o6.Double
-    revisedLifetimeCount: o6.UInt32
-    revisedMaxKeepAliveCount: o6.UInt32
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    revisedPublishingInterval: o6.Double = o6.field(name="RevisedPublishingInterval")
+    revisedLifetimeCount: o6.UInt32 = o6.field(name="RevisedLifetimeCount")
+    revisedMaxKeepAliveCount: o6.UInt32 = o6.field(name="RevisedMaxKeepAliveCount")
 
 
 @o6.datatype(nodeId="i=797", browseName="SetPublishingModeRequest", defaultEncodingId="i=799")
 class SetPublishingModeRequest(Structure):
-    requestHeader: RequestHeader
-    publishingEnabled: o6.Boolean
-    subscriptionIds: list[o6.UInt32]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    publishingEnabled: o6.Boolean = o6.field(name="PublishingEnabled")
+    subscriptionIds: list[o6.UInt32] = o6.field(name="SubscriptionIds")
 
 
 @o6.datatype(nodeId="i=800", browseName="SetPublishingModeResponse", defaultEncodingId="i=802")
 class SetPublishingModeResponse(Structure):
-    responseHeader: ResponseHeader
-    results: list[o6.StatusCode]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    results: list[o6.StatusCode] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=803", browseName="NotificationMessage", defaultEncodingId="i=805")
 class NotificationMessage(Structure):
-    sequenceNumber: o6.UInt32
-    publishTime: o6.DateTime
-    notificationData: list[o6.ExtensionObject]
+    sequenceNumber: o6.UInt32 = o6.field(name="SequenceNumber")
+    publishTime: o6.DateTime = o6.field(name="PublishTime")
+    notificationData: list[o6.ExtensionObject] = o6.field(name="NotificationData")
 
 
 @o6.datatype(nodeId="i=806", browseName="MonitoredItemNotification", defaultEncodingId="i=808")
 class MonitoredItemNotification(Structure):
-    clientHandle: o6.UInt32
-    value: o6.DataValue
+    clientHandle: o6.UInt32 = o6.field(name="ClientHandle")
+    value: o6.DataValue = o6.field(name="Value")
 
 
 @o6.datatype(nodeId="i=821", browseName="SubscriptionAcknowledgement", defaultEncodingId="i=823")
 class SubscriptionAcknowledgement(Structure):
-    subscriptionId: o6.UInt32
-    sequenceNumber: o6.UInt32
+    subscriptionId: o6.UInt32 = o6.field(name="SubscriptionId")
+    sequenceNumber: o6.UInt32 = o6.field(name="SequenceNumber")
 
 
 @o6.datatype(nodeId="i=824", browseName="PublishRequest", defaultEncodingId="i=826")
 class PublishRequest(Structure):
-    requestHeader: RequestHeader
-    subscriptionAcknowledgements: list[SubscriptionAcknowledgement]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    subscriptionAcknowledgements: list[SubscriptionAcknowledgement] = o6.field(name="SubscriptionAcknowledgements")
 
 
 @o6.datatype(nodeId="i=827", browseName="PublishResponse", defaultEncodingId="i=829")
 class PublishResponse(Structure):
-    responseHeader: ResponseHeader
-    subscriptionId: o6.UInt32
-    availableSequenceNumbers: list[o6.UInt32]
-    moreNotifications: o6.Boolean
-    notificationMessage: NotificationMessage
-    results: list[o6.StatusCode]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    subscriptionId: o6.UInt32 = o6.field(name="SubscriptionId")
+    availableSequenceNumbers: list[o6.UInt32] = o6.field(name="AvailableSequenceNumbers")
+    moreNotifications: o6.Boolean = o6.field(name="MoreNotifications")
+    notificationMessage: NotificationMessage = o6.field(name="NotificationMessage")
+    results: list[o6.StatusCode] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=830", browseName="RepublishRequest", defaultEncodingId="i=832")
 class RepublishRequest(Structure):
-    requestHeader: RequestHeader
-    subscriptionId: o6.UInt32
-    retransmitSequenceNumber: o6.UInt32
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    subscriptionId: o6.UInt32 = o6.field(name="SubscriptionId")
+    retransmitSequenceNumber: o6.UInt32 = o6.field(name="RetransmitSequenceNumber")
 
 
 @o6.datatype(nodeId="i=833", browseName="RepublishResponse", defaultEncodingId="i=835")
 class RepublishResponse(Structure):
-    responseHeader: ResponseHeader
-    notificationMessage: NotificationMessage
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    notificationMessage: NotificationMessage = o6.field(name="NotificationMessage")
 
 
 @o6.datatype(nodeId="i=836", browseName="TransferResult", defaultEncodingId="i=838")
 class TransferResult(Structure):
-    statusCode: o6.StatusCode
-    availableSequenceNumbers: list[o6.UInt32]
+    statusCode: o6.StatusCode = o6.field(name="StatusCode")
+    availableSequenceNumbers: list[o6.UInt32] = o6.field(name="AvailableSequenceNumbers")
 
 
 @o6.datatype(nodeId="i=839", browseName="TransferSubscriptionsRequest", defaultEncodingId="i=841")
 class TransferSubscriptionsRequest(Structure):
-    requestHeader: RequestHeader
-    subscriptionIds: list[o6.UInt32]
-    sendInitialValues: o6.Boolean
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    subscriptionIds: list[o6.UInt32] = o6.field(name="SubscriptionIds")
+    sendInitialValues: o6.Boolean = o6.field(name="SendInitialValues")
 
 
 @o6.datatype(nodeId="i=842", browseName="TransferSubscriptionsResponse", defaultEncodingId="i=844")
 class TransferSubscriptionsResponse(Structure):
-    responseHeader: ResponseHeader
-    results: list[TransferResult]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    results: list[TransferResult] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=845", browseName="DeleteSubscriptionsRequest", defaultEncodingId="i=847")
 class DeleteSubscriptionsRequest(Structure):
-    requestHeader: RequestHeader
-    subscriptionIds: list[o6.UInt32]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    subscriptionIds: list[o6.UInt32] = o6.field(name="SubscriptionIds")
 
 
 @o6.datatype(nodeId="i=848", browseName="DeleteSubscriptionsResponse", defaultEncodingId="i=850")
 class DeleteSubscriptionsResponse(Structure):
-    responseHeader: ResponseHeader
-    results: list[o6.StatusCode]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    results: list[o6.StatusCode] = o6.field(name="Results")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.enumtype(nodeId="i=851", browseName="RedundancySupport")
@@ -1707,165 +1707,165 @@ class ServerState(Enumeration):
 
 @o6.datatype(nodeId="i=853", browseName="RedundantServerDataType", defaultEncodingId="i=855")
 class RedundantServerDataType(Structure):
-    serverId: o6.String
-    serviceLevel: o6.Byte
-    serverState: ServerState
+    serverId: o6.String = o6.field(name="ServerId")
+    serviceLevel: o6.Byte = o6.field(name="ServiceLevel")
+    serverState: ServerState = o6.field(name="ServerState")
 
 
 @o6.datatype(nodeId="i=856", browseName="SamplingIntervalDiagnosticsDataType", defaultEncodingId="i=858")
 class SamplingIntervalDiagnosticsDataType(Structure):
-    samplingInterval: o6.Double
-    monitoredItemCount: o6.UInt32
-    maxMonitoredItemCount: o6.UInt32
-    disabledMonitoredItemCount: o6.UInt32
+    samplingInterval: o6.Double = o6.field(name="SamplingInterval")
+    monitoredItemCount: o6.UInt32 = o6.field(name="MonitoredItemCount")
+    maxMonitoredItemCount: o6.UInt32 = o6.field(name="MaxMonitoredItemCount")
+    disabledMonitoredItemCount: o6.UInt32 = o6.field(name="DisabledMonitoredItemCount")
 
 
 @o6.datatype(nodeId="i=859", browseName="ServerDiagnosticsSummaryDataType", defaultEncodingId="i=861")
 class ServerDiagnosticsSummaryDataType(Structure):
-    serverViewCount: o6.UInt32
-    currentSessionCount: o6.UInt32
-    cumulatedSessionCount: o6.UInt32
-    securityRejectedSessionCount: o6.UInt32
-    rejectedSessionCount: o6.UInt32
-    sessionTimeoutCount: o6.UInt32
-    sessionAbortCount: o6.UInt32
-    currentSubscriptionCount: o6.UInt32
-    cumulatedSubscriptionCount: o6.UInt32
-    publishingIntervalCount: o6.UInt32
-    securityRejectedRequestsCount: o6.UInt32
-    rejectedRequestsCount: o6.UInt32
+    serverViewCount: o6.UInt32 = o6.field(name="ServerViewCount")
+    currentSessionCount: o6.UInt32 = o6.field(name="CurrentSessionCount")
+    cumulatedSessionCount: o6.UInt32 = o6.field(name="CumulatedSessionCount")
+    securityRejectedSessionCount: o6.UInt32 = o6.field(name="SecurityRejectedSessionCount")
+    rejectedSessionCount: o6.UInt32 = o6.field(name="RejectedSessionCount")
+    sessionTimeoutCount: o6.UInt32 = o6.field(name="SessionTimeoutCount")
+    sessionAbortCount: o6.UInt32 = o6.field(name="SessionAbortCount")
+    currentSubscriptionCount: o6.UInt32 = o6.field(name="CurrentSubscriptionCount")
+    cumulatedSubscriptionCount: o6.UInt32 = o6.field(name="CumulatedSubscriptionCount")
+    publishingIntervalCount: o6.UInt32 = o6.field(name="PublishingIntervalCount")
+    securityRejectedRequestsCount: o6.UInt32 = o6.field(name="SecurityRejectedRequestsCount")
+    rejectedRequestsCount: o6.UInt32 = o6.field(name="RejectedRequestsCount")
 
 
 @o6.datatype(nodeId="i=862", browseName="ServerStatusDataType", defaultEncodingId="i=864")
 class ServerStatusDataType(Structure):
-    startTime: o6.DateTime
-    currentTime: o6.DateTime
-    state: ServerState
-    buildInfo: BuildInfo
-    secondsTillShutdown: o6.UInt32
-    shutdownReason: o6.LocalizedText
+    startTime: o6.DateTime = o6.field(name="StartTime")
+    currentTime: o6.DateTime = o6.field(name="CurrentTime")
+    state: ServerState = o6.field(name="State")
+    buildInfo: BuildInfo = o6.field(name="BuildInfo")
+    secondsTillShutdown: o6.UInt32 = o6.field(name="SecondsTillShutdown")
+    shutdownReason: o6.LocalizedText = o6.field(name="ShutdownReason")
 
 
 @o6.datatype(nodeId="i=868", browseName="SessionSecurityDiagnosticsDataType", defaultEncodingId="i=870")
 class SessionSecurityDiagnosticsDataType(Structure):
-    sessionId: o6.NodeId
-    clientUserIdOfSession: o6.String
-    clientUserIdHistory: list[o6.String]
-    authenticationMechanism: o6.String
-    encoding: o6.String
-    transportProtocol: o6.String
-    securityMode: MessageSecurityMode
-    securityPolicyUri: o6.String
-    clientCertificate: o6.ByteString
+    sessionId: o6.NodeId = o6.field(name="SessionId")
+    clientUserIdOfSession: o6.String = o6.field(name="ClientUserIdOfSession")
+    clientUserIdHistory: list[o6.String] = o6.field(name="ClientUserIdHistory")
+    authenticationMechanism: o6.String = o6.field(name="AuthenticationMechanism")
+    encoding: o6.String = o6.field(name="Encoding")
+    transportProtocol: o6.String = o6.field(name="TransportProtocol")
+    securityMode: MessageSecurityMode = o6.field(name="SecurityMode")
+    securityPolicyUri: o6.String = o6.field(name="SecurityPolicyUri")
+    clientCertificate: o6.ByteString = o6.field(name="ClientCertificate")
 
 
 @o6.datatype(nodeId="i=871", browseName="ServiceCounterDataType", defaultEncodingId="i=873")
 class ServiceCounterDataType(Structure):
-    totalCount: o6.UInt32
-    errorCount: o6.UInt32
+    totalCount: o6.UInt32 = o6.field(name="TotalCount")
+    errorCount: o6.UInt32 = o6.field(name="ErrorCount")
 
 
 @o6.datatype(nodeId="i=865", browseName="SessionDiagnosticsDataType", defaultEncodingId="i=867")
 class SessionDiagnosticsDataType(Structure):
-    sessionId: o6.NodeId
-    sessionName: o6.String
-    clientDescription: ApplicationDescription
-    serverUri: o6.String
-    endpointUrl: o6.String
-    localeIds: list[o6.String]
-    actualSessionTimeout: o6.Double
-    maxResponseMessageSize: o6.UInt32
-    clientConnectionTime: o6.DateTime
-    clientLastContactTime: o6.DateTime
-    currentSubscriptionsCount: o6.UInt32
-    currentMonitoredItemsCount: o6.UInt32
-    currentPublishRequestsInQueue: o6.UInt32
-    totalRequestCount: ServiceCounterDataType
-    unauthorizedRequestCount: o6.UInt32
-    readCount: ServiceCounterDataType
-    historyReadCount: ServiceCounterDataType
-    writeCount: ServiceCounterDataType
-    historyUpdateCount: ServiceCounterDataType
-    callCount: ServiceCounterDataType
-    createMonitoredItemsCount: ServiceCounterDataType
-    modifyMonitoredItemsCount: ServiceCounterDataType
-    setMonitoringModeCount: ServiceCounterDataType
-    setTriggeringCount: ServiceCounterDataType
-    deleteMonitoredItemsCount: ServiceCounterDataType
-    createSubscriptionCount: ServiceCounterDataType
-    modifySubscriptionCount: ServiceCounterDataType
-    setPublishingModeCount: ServiceCounterDataType
-    publishCount: ServiceCounterDataType
-    republishCount: ServiceCounterDataType
-    transferSubscriptionsCount: ServiceCounterDataType
-    deleteSubscriptionsCount: ServiceCounterDataType
-    addNodesCount: ServiceCounterDataType
-    addReferencesCount: ServiceCounterDataType
-    deleteNodesCount: ServiceCounterDataType
-    deleteReferencesCount: ServiceCounterDataType
-    browseCount: ServiceCounterDataType
-    browseNextCount: ServiceCounterDataType
-    translateBrowsePathsToNodeIdsCount: ServiceCounterDataType
-    queryFirstCount: ServiceCounterDataType
-    queryNextCount: ServiceCounterDataType
-    registerNodesCount: ServiceCounterDataType
-    unregisterNodesCount: ServiceCounterDataType
+    sessionId: o6.NodeId = o6.field(name="SessionId")
+    sessionName: o6.String = o6.field(name="SessionName")
+    clientDescription: ApplicationDescription = o6.field(name="ClientDescription")
+    serverUri: o6.String = o6.field(name="ServerUri")
+    endpointUrl: o6.String = o6.field(name="EndpointUrl")
+    localeIds: list[o6.String] = o6.field(name="LocaleIds")
+    actualSessionTimeout: o6.Double = o6.field(name="ActualSessionTimeout")
+    maxResponseMessageSize: o6.UInt32 = o6.field(name="MaxResponseMessageSize")
+    clientConnectionTime: o6.DateTime = o6.field(name="ClientConnectionTime")
+    clientLastContactTime: o6.DateTime = o6.field(name="ClientLastContactTime")
+    currentSubscriptionsCount: o6.UInt32 = o6.field(name="CurrentSubscriptionsCount")
+    currentMonitoredItemsCount: o6.UInt32 = o6.field(name="CurrentMonitoredItemsCount")
+    currentPublishRequestsInQueue: o6.UInt32 = o6.field(name="CurrentPublishRequestsInQueue")
+    totalRequestCount: ServiceCounterDataType = o6.field(name="TotalRequestCount")
+    unauthorizedRequestCount: o6.UInt32 = o6.field(name="UnauthorizedRequestCount")
+    readCount: ServiceCounterDataType = o6.field(name="ReadCount")
+    historyReadCount: ServiceCounterDataType = o6.field(name="HistoryReadCount")
+    writeCount: ServiceCounterDataType = o6.field(name="WriteCount")
+    historyUpdateCount: ServiceCounterDataType = o6.field(name="HistoryUpdateCount")
+    callCount: ServiceCounterDataType = o6.field(name="CallCount")
+    createMonitoredItemsCount: ServiceCounterDataType = o6.field(name="CreateMonitoredItemsCount")
+    modifyMonitoredItemsCount: ServiceCounterDataType = o6.field(name="ModifyMonitoredItemsCount")
+    setMonitoringModeCount: ServiceCounterDataType = o6.field(name="SetMonitoringModeCount")
+    setTriggeringCount: ServiceCounterDataType = o6.field(name="SetTriggeringCount")
+    deleteMonitoredItemsCount: ServiceCounterDataType = o6.field(name="DeleteMonitoredItemsCount")
+    createSubscriptionCount: ServiceCounterDataType = o6.field(name="CreateSubscriptionCount")
+    modifySubscriptionCount: ServiceCounterDataType = o6.field(name="ModifySubscriptionCount")
+    setPublishingModeCount: ServiceCounterDataType = o6.field(name="SetPublishingModeCount")
+    publishCount: ServiceCounterDataType = o6.field(name="PublishCount")
+    republishCount: ServiceCounterDataType = o6.field(name="RepublishCount")
+    transferSubscriptionsCount: ServiceCounterDataType = o6.field(name="TransferSubscriptionsCount")
+    deleteSubscriptionsCount: ServiceCounterDataType = o6.field(name="DeleteSubscriptionsCount")
+    addNodesCount: ServiceCounterDataType = o6.field(name="AddNodesCount")
+    addReferencesCount: ServiceCounterDataType = o6.field(name="AddReferencesCount")
+    deleteNodesCount: ServiceCounterDataType = o6.field(name="DeleteNodesCount")
+    deleteReferencesCount: ServiceCounterDataType = o6.field(name="DeleteReferencesCount")
+    browseCount: ServiceCounterDataType = o6.field(name="BrowseCount")
+    browseNextCount: ServiceCounterDataType = o6.field(name="BrowseNextCount")
+    translateBrowsePathsToNodeIdsCount: ServiceCounterDataType = o6.field(name="TranslateBrowsePathsToNodeIdsCount")
+    queryFirstCount: ServiceCounterDataType = o6.field(name="QueryFirstCount")
+    queryNextCount: ServiceCounterDataType = o6.field(name="QueryNextCount")
+    registerNodesCount: ServiceCounterDataType = o6.field(name="RegisterNodesCount")
+    unregisterNodesCount: ServiceCounterDataType = o6.field(name="UnregisterNodesCount")
 
 
 @o6.datatype(nodeId="i=874", browseName="SubscriptionDiagnosticsDataType", defaultEncodingId="i=876")
 class SubscriptionDiagnosticsDataType(Structure):
-    sessionId: o6.NodeId
-    subscriptionId: o6.UInt32
-    priority: o6.Byte
-    publishingInterval: o6.Double
-    maxKeepAliveCount: o6.UInt32
-    maxLifetimeCount: o6.UInt32
-    maxNotificationsPerPublish: o6.UInt32
-    publishingEnabled: o6.Boolean
-    modifyCount: o6.UInt32
-    enableCount: o6.UInt32
-    disableCount: o6.UInt32
-    republishRequestCount: o6.UInt32
-    republishMessageRequestCount: o6.UInt32
-    republishMessageCount: o6.UInt32
-    transferRequestCount: o6.UInt32
-    transferredToAltClientCount: o6.UInt32
-    transferredToSameClientCount: o6.UInt32
-    publishRequestCount: o6.UInt32
-    dataChangeNotificationsCount: o6.UInt32
-    eventNotificationsCount: o6.UInt32
-    notificationsCount: o6.UInt32
-    latePublishRequestCount: o6.UInt32
-    currentKeepAliveCount: o6.UInt32
-    currentLifetimeCount: o6.UInt32
-    unacknowledgedMessageCount: o6.UInt32
-    discardedMessageCount: o6.UInt32
-    monitoredItemCount: o6.UInt32
-    disabledMonitoredItemCount: o6.UInt32
-    monitoringQueueOverflowCount: o6.UInt32
-    nextSequenceNumber: o6.UInt32
-    eventQueueOverflowCount: o6.UInt32
+    sessionId: o6.NodeId = o6.field(name="SessionId")
+    subscriptionId: o6.UInt32 = o6.field(name="SubscriptionId")
+    priority: o6.Byte = o6.field(name="Priority")
+    publishingInterval: o6.Double = o6.field(name="PublishingInterval")
+    maxKeepAliveCount: o6.UInt32 = o6.field(name="MaxKeepAliveCount")
+    maxLifetimeCount: o6.UInt32 = o6.field(name="MaxLifetimeCount")
+    maxNotificationsPerPublish: o6.UInt32 = o6.field(name="MaxNotificationsPerPublish")
+    publishingEnabled: o6.Boolean = o6.field(name="PublishingEnabled")
+    modifyCount: o6.UInt32 = o6.field(name="ModifyCount")
+    enableCount: o6.UInt32 = o6.field(name="EnableCount")
+    disableCount: o6.UInt32 = o6.field(name="DisableCount")
+    republishRequestCount: o6.UInt32 = o6.field(name="RepublishRequestCount")
+    republishMessageRequestCount: o6.UInt32 = o6.field(name="RepublishMessageRequestCount")
+    republishMessageCount: o6.UInt32 = o6.field(name="RepublishMessageCount")
+    transferRequestCount: o6.UInt32 = o6.field(name="TransferRequestCount")
+    transferredToAltClientCount: o6.UInt32 = o6.field(name="TransferredToAltClientCount")
+    transferredToSameClientCount: o6.UInt32 = o6.field(name="TransferredToSameClientCount")
+    publishRequestCount: o6.UInt32 = o6.field(name="PublishRequestCount")
+    dataChangeNotificationsCount: o6.UInt32 = o6.field(name="DataChangeNotificationsCount")
+    eventNotificationsCount: o6.UInt32 = o6.field(name="EventNotificationsCount")
+    notificationsCount: o6.UInt32 = o6.field(name="NotificationsCount")
+    latePublishRequestCount: o6.UInt32 = o6.field(name="LatePublishRequestCount")
+    currentKeepAliveCount: o6.UInt32 = o6.field(name="CurrentKeepAliveCount")
+    currentLifetimeCount: o6.UInt32 = o6.field(name="CurrentLifetimeCount")
+    unacknowledgedMessageCount: o6.UInt32 = o6.field(name="UnacknowledgedMessageCount")
+    discardedMessageCount: o6.UInt32 = o6.field(name="DiscardedMessageCount")
+    monitoredItemCount: o6.UInt32 = o6.field(name="MonitoredItemCount")
+    disabledMonitoredItemCount: o6.UInt32 = o6.field(name="DisabledMonitoredItemCount")
+    monitoringQueueOverflowCount: o6.UInt32 = o6.field(name="MonitoringQueueOverflowCount")
+    nextSequenceNumber: o6.UInt32 = o6.field(name="NextSequenceNumber")
+    eventQueueOverflowCount: o6.UInt32 = o6.field(name="EventQueueOverflowCount")
 
 
 @o6.datatype(nodeId="i=877", browseName="ModelChangeStructureDataType", defaultEncodingId="i=879")
 class ModelChangeStructureDataType(Structure):
-    affected: o6.NodeId
-    affectedType: o6.NodeId
-    verb: o6.Byte
+    affected: o6.NodeId = o6.field(name="Affected")
+    affectedType: o6.NodeId = o6.field(name="AffectedType")
+    verb: o6.Byte = o6.field(name="Verb")
 
 
 @o6.datatype(nodeId="i=884", browseName="Range", defaultEncodingId="i=886")
 class Range(Structure):
-    low: o6.Double
-    high: o6.Double
+    low: o6.Double = o6.field(name="Low")
+    high: o6.Double = o6.field(name="High")
 
 
 @o6.datatype(nodeId="i=887", browseName="EUInformation", defaultEncodingId="i=889")
 class EUInformation(Structure):
-    namespaceUri: o6.String
-    unitId: o6.Int32
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
+    namespaceUri: o6.String = o6.field(name="NamespaceUri")
+    unitId: o6.Int32 = o6.field(name="UnitId")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
 
 
 @o6.enumtype(nodeId="i=890", browseName="ExceptionDeviationFormat")
@@ -1879,52 +1879,52 @@ class ExceptionDeviationFormat(Enumeration):
 
 @o6.datatype(nodeId="i=891", browseName="Annotation", defaultEncodingId="i=893")
 class Annotation(Structure):
-    message: o6.String
-    userName: o6.String
-    annotationTime: o6.DateTime
+    message: o6.String = o6.field(name="Message")
+    userName: o6.String = o6.field(name="UserName")
+    annotationTime: o6.DateTime = o6.field(name="AnnotationTime")
 
 
 @o6.datatype(nodeId="i=894", browseName="ProgramDiagnosticDataType", defaultEncodingId="i=896")
 class ProgramDiagnosticDataType(Structure):
-    createSessionId: o6.NodeId
-    createClientName: o6.String
-    invocationCreationTime: o6.DateTime
-    lastTransitionTime: o6.DateTime
-    lastMethodCall: o6.String
-    lastMethodSessionId: o6.NodeId
-    lastMethodInputArguments: list[Argument]
-    lastMethodOutputArguments: list[Argument]
-    lastMethodCallTime: o6.DateTime
-    lastMethodReturnStatus: StatusResult
+    createSessionId: o6.NodeId = o6.field(name="CreateSessionId")
+    createClientName: o6.String = o6.field(name="CreateClientName")
+    invocationCreationTime: o6.DateTime = o6.field(name="InvocationCreationTime")
+    lastTransitionTime: o6.DateTime = o6.field(name="LastTransitionTime")
+    lastMethodCall: o6.String = o6.field(name="LastMethodCall")
+    lastMethodSessionId: o6.NodeId = o6.field(name="LastMethodSessionId")
+    lastMethodInputArguments: list[Argument] = o6.field(name="LastMethodInputArguments")
+    lastMethodOutputArguments: list[Argument] = o6.field(name="LastMethodOutputArguments")
+    lastMethodCallTime: o6.DateTime = o6.field(name="LastMethodCallTime")
+    lastMethodReturnStatus: StatusResult = o6.field(name="LastMethodReturnStatus")
 
 
 @o6.datatype(nodeId="i=897", browseName="SemanticChangeStructureDataType", defaultEncodingId="i=899")
 class SemanticChangeStructureDataType(Structure):
-    affected: o6.NodeId
-    affectedType: o6.NodeId
+    affected: o6.NodeId = o6.field(name="Affected")
+    affectedType: o6.NodeId = o6.field(name="AffectedType")
 
 
 @o6.datatype(nodeId="i=917", browseName="EventFieldList", defaultEncodingId="i=919")
 class EventFieldList(Structure):
-    clientHandle: o6.UInt32
-    eventFields: list[Any]
+    clientHandle: o6.UInt32 = o6.field(name="ClientHandle")
+    eventFields: list[Any] = o6.field(name="EventFields")
 
 
 @o6.datatype(nodeId="i=920", browseName="HistoryEventFieldList", defaultEncodingId="i=922")
 class HistoryEventFieldList(Structure):
-    eventFields: list[Any]
+    eventFields: list[Any] = o6.field(name="EventFields")
 
 
 @o6.datatype(nodeId="i=659", browseName="HistoryEvent", defaultEncodingId="i=661")
 class HistoryEvent(Structure):
-    events: list[HistoryEventFieldList]
+    events: list[HistoryEventFieldList] = o6.field(name="Events")
 
 
 @o6.datatype(nodeId="i=938", browseName="IssuedIdentityToken", defaultEncodingId="i=940")
 class IssuedIdentityToken(UserIdentityToken):
-    policyId: o6.String
-    tokenData: o6.ByteString
-    encryptionAlgorithm: o6.String
+    policyId: o6.String = o6.field(name="PolicyId")
+    tokenData: o6.ByteString = o6.field(name="TokenData")
+    encryptionAlgorithm: o6.String = o6.field(name="EncryptionAlgorithm")
 
 
 @o6.datatype(nodeId="i=945", browseName="NotificationData", defaultEncodingId="i=947")
@@ -1934,52 +1934,52 @@ class NotificationData(Structure):
 
 @o6.datatype(nodeId="i=809", browseName="DataChangeNotification", defaultEncodingId="i=811")
 class DataChangeNotification(NotificationData):
-    monitoredItems: list[MonitoredItemNotification]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    monitoredItems: list[MonitoredItemNotification] = o6.field(name="MonitoredItems")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.datatype(nodeId="i=818", browseName="StatusChangeNotification", defaultEncodingId="i=820")
 class StatusChangeNotification(NotificationData):
-    status: o6.StatusCode
-    diagnosticInfo: o6.DiagnosticInfo
+    status: o6.StatusCode = o6.field(name="Status")
+    diagnosticInfo: o6.DiagnosticInfo = o6.field(name="DiagnosticInfo")
 
 
 @o6.datatype(nodeId="i=914", browseName="EventNotificationList", defaultEncodingId="i=916")
 class EventNotificationList(NotificationData):
-    events: list[EventFieldList]
+    events: list[EventFieldList] = o6.field(name="Events")
 
 
 @o6.datatype(nodeId="i=948", browseName="AggregateConfiguration", defaultEncodingId="i=950")
 class AggregateConfiguration(Structure):
-    useServerCapabilitiesDefaults: o6.Boolean
-    treatUncertainAsBad: o6.Boolean
-    percentDataBad: o6.Byte
-    percentDataGood: o6.Byte
-    useSlopedExtrapolation: o6.Boolean
+    useServerCapabilitiesDefaults: o6.Boolean = o6.field(name="UseServerCapabilitiesDefaults")
+    treatUncertainAsBad: o6.Boolean = o6.field(name="TreatUncertainAsBad")
+    percentDataBad: o6.Byte = o6.field(name="PercentDataBad")
+    percentDataGood: o6.Byte = o6.field(name="PercentDataGood")
+    useSlopedExtrapolation: o6.Boolean = o6.field(name="UseSlopedExtrapolation")
 
 
 @o6.datatype(nodeId="i=650", browseName="ReadProcessedDetails", defaultEncodingId="i=652")
 class ReadProcessedDetails(HistoryReadDetails):
-    startTime: o6.DateTime
-    endTime: o6.DateTime
-    processingInterval: o6.Double
-    aggregateType: list[o6.NodeId]
-    aggregateConfiguration: AggregateConfiguration
+    startTime: o6.DateTime = o6.field(name="StartTime")
+    endTime: o6.DateTime = o6.field(name="EndTime")
+    processingInterval: o6.Double = o6.field(name="ProcessingInterval")
+    aggregateType: list[o6.NodeId] = o6.field(name="AggregateType")
+    aggregateConfiguration: AggregateConfiguration = o6.field(name="AggregateConfiguration")
 
 
 @o6.datatype(nodeId="i=728", browseName="AggregateFilter", defaultEncodingId="i=730")
 class AggregateFilter(MonitoringFilter):
-    startTime: o6.DateTime
-    aggregateType: o6.NodeId
-    processingInterval: o6.Double
-    aggregateConfiguration: AggregateConfiguration
+    startTime: o6.DateTime = o6.field(name="StartTime")
+    aggregateType: o6.NodeId = o6.field(name="AggregateType")
+    processingInterval: o6.Double = o6.field(name="ProcessingInterval")
+    aggregateConfiguration: AggregateConfiguration = o6.field(name="AggregateConfiguration")
 
 
 @o6.datatype(nodeId="i=737", browseName="AggregateFilterResult", defaultEncodingId="i=739")
 class AggregateFilterResult(MonitoringFilterResult):
-    revisedStartTime: o6.DateTime
-    revisedProcessingInterval: o6.Double
-    revisedAggregateConfiguration: AggregateConfiguration
+    revisedStartTime: o6.DateTime = o6.field(name="RevisedStartTime")
+    revisedProcessingInterval: o6.Double = o6.field(name="RevisedProcessingInterval")
+    revisedAggregateConfiguration: AggregateConfiguration = o6.field(name="RevisedAggregateConfiguration")
 
 
 @o6.datatype(nodeId="i=2000", browseName="ImageBMP", parent="i=30")
@@ -2004,28 +2004,28 @@ class ImagePNG:
 
 @o6.datatype(nodeId="i=7594", browseName="EnumValueType", defaultEncodingId="i=8251")
 class EnumValueType(Structure):
-    value: o6.Int64
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
+    value: o6.Int64 = o6.field(name="Value")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
 
 
 @o6.datatype(nodeId="i=102", browseName="EnumField", defaultEncodingId="i=14845")
 class EnumField(EnumValueType):
-    value: o6.Int64
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    name: o6.String
+    value: o6.Int64 = o6.field(name="Value")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    name: o6.String = o6.field(name="Name")
 
 
 @o6.datatype(nodeId="i=100", browseName="EnumDefinition", defaultEncodingId="i=123")
 class EnumDefinition(DataTypeDefinition):
-    fields: list[EnumField]
+    fields: list[EnumField] = o6.field(name="Fields")
 
 
 @o6.datatype(nodeId="i=8912", browseName="TimeZoneDataType", defaultEncodingId="i=8917")
 class TimeZoneDataType(Structure):
-    offset: o6.Int16
-    daylightSavingInOffset: o6.Boolean
+    offset: o6.Int16 = o6.field(name="Offset")
+    daylightSavingInOffset: o6.Boolean = o6.field(name="DaylightSavingInOffset")
 
 
 @o6.enumtype(nodeId="i=11234", browseName="HistoryUpdateType")
@@ -2038,15 +2038,15 @@ class HistoryUpdateType(Enumeration):
 
 @o6.datatype(nodeId="i=11216", browseName="ModificationInfo", defaultEncodingId="i=11226")
 class ModificationInfo(Structure):
-    modificationTime: o6.DateTime
-    updateType: HistoryUpdateType
-    userName: o6.String
+    modificationTime: o6.DateTime = o6.field(name="ModificationTime")
+    updateType: HistoryUpdateType = o6.field(name="UpdateType")
+    userName: o6.String = o6.field(name="UserName")
 
 
 @o6.datatype(nodeId="i=11217", browseName="HistoryModifiedData", defaultEncodingId="i=11227")
 class HistoryModifiedData(HistoryData):
-    dataValues: list[o6.DataValue]
-    modificationInfos: list[ModificationInfo]
+    dataValues: list[o6.DataValue] = o6.field(name="DataValues")
+    modificationInfos: list[ModificationInfo] = o6.field(name="ModificationInfos")
 
 
 @o6.enumtype(nodeId="i=11293", browseName="PerformUpdateType")
@@ -2059,24 +2059,24 @@ class PerformUpdateType(Enumeration):
 
 @o6.datatype(nodeId="i=680", browseName="UpdateDataDetails", defaultEncodingId="i=682")
 class UpdateDataDetails(HistoryUpdateDetails):
-    nodeId: o6.NodeId
-    performInsertReplace: PerformUpdateType
-    updateValues: list[o6.DataValue]
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    performInsertReplace: PerformUpdateType = o6.field(name="PerformInsertReplace")
+    updateValues: list[o6.DataValue] = o6.field(name="UpdateValues")
 
 
 @o6.datatype(nodeId="i=683", browseName="UpdateEventDetails", defaultEncodingId="i=685")
 class UpdateEventDetails(HistoryUpdateDetails):
-    nodeId: o6.NodeId
-    performInsertReplace: PerformUpdateType
-    filter: EventFilter
-    eventData: list[HistoryEventFieldList]
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    performInsertReplace: PerformUpdateType = o6.field(name="PerformInsertReplace")
+    filter: EventFilter = o6.field(name="Filter")
+    eventData: list[HistoryEventFieldList] = o6.field(name="EventData")
 
 
 @o6.datatype(nodeId="i=11295", browseName="UpdateStructureDataDetails", defaultEncodingId="i=11300")
 class UpdateStructureDataDetails(HistoryUpdateDetails):
-    nodeId: o6.NodeId
-    performInsertReplace: PerformUpdateType
-    updateValues: list[o6.DataValue]
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    performInsertReplace: PerformUpdateType = o6.field(name="PerformInsertReplace")
+    updateValues: list[o6.DataValue] = o6.field(name="UpdateValues")
 
 
 @o6.datatype(nodeId="i=11737", browseName="BitFieldMaskDataType", parent="i=9")
@@ -2086,177 +2086,177 @@ class BitFieldMaskDataType:
 
 @o6.datatype(nodeId="i=11879", browseName="InstanceNode", defaultEncodingId="i=11889")
 class InstanceNode(Node):
-    nodeId: o6.NodeId
-    nodeClass: NodeClass
-    browseName: o6.QualifiedName
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
-    rolePermissions: list[RolePermissionType]
-    userRolePermissions: list[RolePermissionType]
-    accessRestrictions: o6.UInt16
-    references: list[ReferenceNode]
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    nodeClass: NodeClass = o6.field(name="NodeClass")
+    browseName: o6.QualifiedName = o6.field(name="BrowseName")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
+    rolePermissions: list[RolePermissionType] = o6.field(name="RolePermissions")
+    userRolePermissions: list[RolePermissionType] = o6.field(name="UserRolePermissions")
+    accessRestrictions: o6.UInt16 = o6.field(name="AccessRestrictions")
+    references: list[ReferenceNode] = o6.field(name="References")
 
 
 @o6.datatype(nodeId="i=261", browseName="ObjectNode", defaultEncodingId="i=263")
 class ObjectNode(InstanceNode):
-    nodeId: o6.NodeId
-    nodeClass: NodeClass
-    browseName: o6.QualifiedName
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
-    rolePermissions: list[RolePermissionType]
-    userRolePermissions: list[RolePermissionType]
-    accessRestrictions: o6.UInt16
-    references: list[ReferenceNode]
-    eventNotifier: o6.Byte
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    nodeClass: NodeClass = o6.field(name="NodeClass")
+    browseName: o6.QualifiedName = o6.field(name="BrowseName")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
+    rolePermissions: list[RolePermissionType] = o6.field(name="RolePermissions")
+    userRolePermissions: list[RolePermissionType] = o6.field(name="UserRolePermissions")
+    accessRestrictions: o6.UInt16 = o6.field(name="AccessRestrictions")
+    references: list[ReferenceNode] = o6.field(name="References")
+    eventNotifier: o6.Byte = o6.field(name="EventNotifier")
 
 
 @o6.datatype(nodeId="i=267", browseName="VariableNode", defaultEncodingId="i=269")
 class VariableNode(InstanceNode):
-    nodeId: o6.NodeId
-    nodeClass: NodeClass
-    browseName: o6.QualifiedName
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
-    rolePermissions: list[RolePermissionType]
-    userRolePermissions: list[RolePermissionType]
-    accessRestrictions: o6.UInt16
-    references: list[ReferenceNode]
-    value: Any
-    dataType: o6.NodeId
-    valueRank: o6.Int32
-    arrayDimensions: list[o6.UInt32]
-    accessLevel: o6.Byte
-    userAccessLevel: o6.Byte
-    minimumSamplingInterval: o6.Double
-    historizing: o6.Boolean
-    accessLevelEx: o6.UInt32
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    nodeClass: NodeClass = o6.field(name="NodeClass")
+    browseName: o6.QualifiedName = o6.field(name="BrowseName")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
+    rolePermissions: list[RolePermissionType] = o6.field(name="RolePermissions")
+    userRolePermissions: list[RolePermissionType] = o6.field(name="UserRolePermissions")
+    accessRestrictions: o6.UInt16 = o6.field(name="AccessRestrictions")
+    references: list[ReferenceNode] = o6.field(name="References")
+    value: Any = o6.field(name="Value")
+    dataType: o6.NodeId = o6.field(name="DataType")
+    valueRank: o6.Int32 = o6.field(name="ValueRank")
+    arrayDimensions: list[o6.UInt32] = o6.field(name="ArrayDimensions")
+    accessLevel: o6.Byte = o6.field(name="AccessLevel")
+    userAccessLevel: o6.Byte = o6.field(name="UserAccessLevel")
+    minimumSamplingInterval: o6.Double = o6.field(name="MinimumSamplingInterval")
+    historizing: o6.Boolean = o6.field(name="Historizing")
+    accessLevelEx: o6.UInt32 = o6.field(name="AccessLevelEx")
 
 
 @o6.datatype(nodeId="i=276", browseName="MethodNode", defaultEncodingId="i=278")
 class MethodNode(InstanceNode):
-    nodeId: o6.NodeId
-    nodeClass: NodeClass
-    browseName: o6.QualifiedName
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
-    rolePermissions: list[RolePermissionType]
-    userRolePermissions: list[RolePermissionType]
-    accessRestrictions: o6.UInt16
-    references: list[ReferenceNode]
-    executable: o6.Boolean
-    userExecutable: o6.Boolean
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    nodeClass: NodeClass = o6.field(name="NodeClass")
+    browseName: o6.QualifiedName = o6.field(name="BrowseName")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
+    rolePermissions: list[RolePermissionType] = o6.field(name="RolePermissions")
+    userRolePermissions: list[RolePermissionType] = o6.field(name="UserRolePermissions")
+    accessRestrictions: o6.UInt16 = o6.field(name="AccessRestrictions")
+    references: list[ReferenceNode] = o6.field(name="References")
+    executable: o6.Boolean = o6.field(name="Executable")
+    userExecutable: o6.Boolean = o6.field(name="UserExecutable")
 
 
 @o6.datatype(nodeId="i=279", browseName="ViewNode", defaultEncodingId="i=281")
 class ViewNode(InstanceNode):
-    nodeId: o6.NodeId
-    nodeClass: NodeClass
-    browseName: o6.QualifiedName
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
-    rolePermissions: list[RolePermissionType]
-    userRolePermissions: list[RolePermissionType]
-    accessRestrictions: o6.UInt16
-    references: list[ReferenceNode]
-    containsNoLoops: o6.Boolean
-    eventNotifier: o6.Byte
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    nodeClass: NodeClass = o6.field(name="NodeClass")
+    browseName: o6.QualifiedName = o6.field(name="BrowseName")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
+    rolePermissions: list[RolePermissionType] = o6.field(name="RolePermissions")
+    userRolePermissions: list[RolePermissionType] = o6.field(name="UserRolePermissions")
+    accessRestrictions: o6.UInt16 = o6.field(name="AccessRestrictions")
+    references: list[ReferenceNode] = o6.field(name="References")
+    containsNoLoops: o6.Boolean = o6.field(name="ContainsNoLoops")
+    eventNotifier: o6.Byte = o6.field(name="EventNotifier")
 
 
 @o6.datatype(nodeId="i=11880", browseName="TypeNode", defaultEncodingId="i=11890")
 class TypeNode(Node):
-    nodeId: o6.NodeId
-    nodeClass: NodeClass
-    browseName: o6.QualifiedName
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
-    rolePermissions: list[RolePermissionType]
-    userRolePermissions: list[RolePermissionType]
-    accessRestrictions: o6.UInt16
-    references: list[ReferenceNode]
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    nodeClass: NodeClass = o6.field(name="NodeClass")
+    browseName: o6.QualifiedName = o6.field(name="BrowseName")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
+    rolePermissions: list[RolePermissionType] = o6.field(name="RolePermissions")
+    userRolePermissions: list[RolePermissionType] = o6.field(name="UserRolePermissions")
+    accessRestrictions: o6.UInt16 = o6.field(name="AccessRestrictions")
+    references: list[ReferenceNode] = o6.field(name="References")
 
 
 @o6.datatype(nodeId="i=264", browseName="ObjectTypeNode", defaultEncodingId="i=266")
 class ObjectTypeNode(TypeNode):
-    nodeId: o6.NodeId
-    nodeClass: NodeClass
-    browseName: o6.QualifiedName
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
-    rolePermissions: list[RolePermissionType]
-    userRolePermissions: list[RolePermissionType]
-    accessRestrictions: o6.UInt16
-    references: list[ReferenceNode]
-    isAbstract: o6.Boolean
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    nodeClass: NodeClass = o6.field(name="NodeClass")
+    browseName: o6.QualifiedName = o6.field(name="BrowseName")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
+    rolePermissions: list[RolePermissionType] = o6.field(name="RolePermissions")
+    userRolePermissions: list[RolePermissionType] = o6.field(name="UserRolePermissions")
+    accessRestrictions: o6.UInt16 = o6.field(name="AccessRestrictions")
+    references: list[ReferenceNode] = o6.field(name="References")
+    isAbstract: o6.Boolean = o6.field(name="IsAbstract")
 
 
 @o6.datatype(nodeId="i=270", browseName="VariableTypeNode", defaultEncodingId="i=272")
 class VariableTypeNode(TypeNode):
-    nodeId: o6.NodeId
-    nodeClass: NodeClass
-    browseName: o6.QualifiedName
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
-    rolePermissions: list[RolePermissionType]
-    userRolePermissions: list[RolePermissionType]
-    accessRestrictions: o6.UInt16
-    references: list[ReferenceNode]
-    value: Any
-    dataType: o6.NodeId
-    valueRank: o6.Int32
-    arrayDimensions: list[o6.UInt32]
-    isAbstract: o6.Boolean
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    nodeClass: NodeClass = o6.field(name="NodeClass")
+    browseName: o6.QualifiedName = o6.field(name="BrowseName")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
+    rolePermissions: list[RolePermissionType] = o6.field(name="RolePermissions")
+    userRolePermissions: list[RolePermissionType] = o6.field(name="UserRolePermissions")
+    accessRestrictions: o6.UInt16 = o6.field(name="AccessRestrictions")
+    references: list[ReferenceNode] = o6.field(name="References")
+    value: Any = o6.field(name="Value")
+    dataType: o6.NodeId = o6.field(name="DataType")
+    valueRank: o6.Int32 = o6.field(name="ValueRank")
+    arrayDimensions: list[o6.UInt32] = o6.field(name="ArrayDimensions")
+    isAbstract: o6.Boolean = o6.field(name="IsAbstract")
 
 
 @o6.datatype(nodeId="i=273", browseName="ReferenceTypeNode", defaultEncodingId="i=275")
 class ReferenceTypeNode(TypeNode):
-    nodeId: o6.NodeId
-    nodeClass: NodeClass
-    browseName: o6.QualifiedName
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
-    rolePermissions: list[RolePermissionType]
-    userRolePermissions: list[RolePermissionType]
-    accessRestrictions: o6.UInt16
-    references: list[ReferenceNode]
-    isAbstract: o6.Boolean
-    symmetric: o6.Boolean
-    inverseName: o6.LocalizedText
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    nodeClass: NodeClass = o6.field(name="NodeClass")
+    browseName: o6.QualifiedName = o6.field(name="BrowseName")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
+    rolePermissions: list[RolePermissionType] = o6.field(name="RolePermissions")
+    userRolePermissions: list[RolePermissionType] = o6.field(name="UserRolePermissions")
+    accessRestrictions: o6.UInt16 = o6.field(name="AccessRestrictions")
+    references: list[ReferenceNode] = o6.field(name="References")
+    isAbstract: o6.Boolean = o6.field(name="IsAbstract")
+    symmetric: o6.Boolean = o6.field(name="Symmetric")
+    inverseName: o6.LocalizedText = o6.field(name="InverseName")
 
 
 @o6.datatype(nodeId="i=282", browseName="DataTypeNode", defaultEncodingId="i=284")
 class DataTypeNode(TypeNode):
-    nodeId: o6.NodeId
-    nodeClass: NodeClass
-    browseName: o6.QualifiedName
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
-    rolePermissions: list[RolePermissionType]
-    userRolePermissions: list[RolePermissionType]
-    accessRestrictions: o6.UInt16
-    references: list[ReferenceNode]
-    isAbstract: o6.Boolean
-    dataTypeDefinition: o6.ExtensionObject
+    nodeId: o6.NodeId = o6.field(name="NodeId")
+    nodeClass: NodeClass = o6.field(name="NodeClass")
+    browseName: o6.QualifiedName = o6.field(name="BrowseName")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
+    rolePermissions: list[RolePermissionType] = o6.field(name="RolePermissions")
+    userRolePermissions: list[RolePermissionType] = o6.field(name="UserRolePermissions")
+    accessRestrictions: o6.UInt16 = o6.field(name="AccessRestrictions")
+    references: list[ReferenceNode] = o6.field(name="References")
+    isAbstract: o6.Boolean = o6.field(name="IsAbstract")
+    dataTypeDefinition: o6.ExtensionObject = o6.field(name="DataTypeDefinition")
 
 
 @o6.enumtype(nodeId="i=11939", browseName="OpenFileMode")
@@ -2278,13 +2278,13 @@ class ModelChangeStructureVerbMask(Enumeration):
 
 @o6.datatype(nodeId="i=11943", browseName="EndpointUrlListDataType", defaultEncodingId="i=11957")
 class EndpointUrlListDataType(Structure):
-    endpointUrlList: list[o6.String]
+    endpointUrlList: list[o6.String] = o6.field(name="EndpointUrlList")
 
 
 @o6.datatype(nodeId="i=11944", browseName="NetworkGroupDataType", defaultEncodingId="i=11958")
 class NetworkGroupDataType(Structure):
-    serverUri: o6.String
-    networkPaths: list[EndpointUrlListDataType]
+    serverUri: o6.String = o6.field(name="ServerUri")
+    networkPaths: list[EndpointUrlListDataType] = o6.field(name="NetworkPaths")
 
 
 @o6.enumtype(nodeId="i=12077", browseName="AxisScaleEnumeration")
@@ -2296,66 +2296,66 @@ class AxisScaleEnumeration(Enumeration):
 
 @o6.datatype(nodeId="i=12079", browseName="AxisInformation", defaultEncodingId="i=12089")
 class AxisInformation(Structure):
-    engineeringUnits: EUInformation
-    eURange: Range
-    title: o6.LocalizedText
-    axisScaleType: AxisScaleEnumeration
-    axisSteps: list[o6.Double]
+    engineeringUnits: EUInformation = o6.field(name="EngineeringUnits")
+    eURange: Range = o6.field(name="EURange")
+    title: o6.LocalizedText = o6.field(name="Title")
+    axisScaleType: AxisScaleEnumeration = o6.field(name="AxisScaleType")
+    axisSteps: list[o6.Double] = o6.field(name="AxisSteps")
 
 
 @o6.datatype(nodeId="i=12080", browseName="XVType", defaultEncodingId="i=12090")
 class XVType(Structure):
-    x: o6.Double
-    value: o6.Float
+    x: o6.Double = o6.field(name="X")
+    value: o6.Float = o6.field(name="Value")
 
 
 @o6.datatype(nodeId="i=12171", browseName="ComplexNumberType", defaultEncodingId="i=12181")
 class ComplexNumberType(Structure):
-    real: o6.Float
-    imaginary: o6.Float
+    real: o6.Float = o6.field(name="Real")
+    imaginary: o6.Float = o6.field(name="Imaginary")
 
 
 @o6.datatype(nodeId="i=12172", browseName="DoubleComplexNumberType", defaultEncodingId="i=12182")
 class DoubleComplexNumberType(Structure):
-    real: o6.Double
-    imaginary: o6.Double
+    real: o6.Double = o6.field(name="Real")
+    imaginary: o6.Double = o6.field(name="Imaginary")
 
 
 @o6.datatype(nodeId="i=12189", browseName="ServerOnNetwork", defaultEncodingId="i=12207")
 class ServerOnNetwork(Structure):
-    recordId: o6.UInt32
-    serverName: o6.String
-    discoveryUrl: o6.String
-    serverCapabilities: list[o6.String]
+    recordId: o6.UInt32 = o6.field(name="RecordId")
+    serverName: o6.String = o6.field(name="ServerName")
+    discoveryUrl: o6.String = o6.field(name="DiscoveryUrl")
+    serverCapabilities: list[o6.String] = o6.field(name="ServerCapabilities")
 
 
 @o6.datatype(nodeId="i=12190", browseName="FindServersOnNetworkRequest", defaultEncodingId="i=12208")
 class FindServersOnNetworkRequest(Structure):
-    requestHeader: RequestHeader
-    startingRecordId: o6.UInt32
-    maxRecordsToReturn: o6.UInt32
-    serverCapabilityFilter: list[o6.String]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    startingRecordId: o6.UInt32 = o6.field(name="StartingRecordId")
+    maxRecordsToReturn: o6.UInt32 = o6.field(name="MaxRecordsToReturn")
+    serverCapabilityFilter: list[o6.String] = o6.field(name="ServerCapabilityFilter")
 
 
 @o6.datatype(nodeId="i=12191", browseName="FindServersOnNetworkResponse", defaultEncodingId="i=12209")
 class FindServersOnNetworkResponse(Structure):
-    responseHeader: ResponseHeader
-    lastCounterResetTime: o6.DateTime
-    servers: list[ServerOnNetwork]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    lastCounterResetTime: o6.DateTime = o6.field(name="LastCounterResetTime")
+    servers: list[ServerOnNetwork] = o6.field(name="Servers")
 
 
 @o6.datatype(nodeId="i=12193", browseName="RegisterServer2Request", defaultEncodingId="i=12211")
 class RegisterServer2Request(Structure):
-    requestHeader: RequestHeader
-    server: RegisteredServer
-    discoveryConfiguration: list[o6.ExtensionObject]
+    requestHeader: RequestHeader = o6.field(name="RequestHeader")
+    server: RegisteredServer = o6.field(name="Server")
+    discoveryConfiguration: list[o6.ExtensionObject] = o6.field(name="DiscoveryConfiguration")
 
 
 @o6.datatype(nodeId="i=12194", browseName="RegisterServer2Response", defaultEncodingId="i=12212")
 class RegisterServer2Response(Structure):
-    responseHeader: ResponseHeader
-    configurationResults: list[o6.StatusCode]
-    diagnosticInfos: list[o6.DiagnosticInfo]
+    responseHeader: ResponseHeader = o6.field(name="ResponseHeader")
+    configurationResults: list[o6.StatusCode] = o6.field(name="ConfigurationResults")
+    diagnosticInfos: list[o6.DiagnosticInfo] = o6.field(name="DiagnosticInfos")
 
 
 @o6.enumtype(nodeId="i=12552", browseName="TrustListMasks")
@@ -2370,17 +2370,17 @@ class TrustListMasks(Enumeration):
 
 @o6.datatype(nodeId="i=12554", browseName="TrustListDataType", defaultEncodingId="i=12680")
 class TrustListDataType(Structure):
-    specifiedLists: o6.UInt32
-    trustedCertificates: list[o6.ByteString]
-    trustedCrls: list[o6.ByteString]
-    issuerCertificates: list[o6.ByteString]
-    issuerCrls: list[o6.ByteString]
+    specifiedLists: o6.UInt32 = o6.field(name="SpecifiedLists")
+    trustedCertificates: list[o6.ByteString] = o6.field(name="TrustedCertificates")
+    trustedCrls: list[o6.ByteString] = o6.field(name="TrustedCrls")
+    issuerCertificates: list[o6.ByteString] = o6.field(name="IssuerCertificates")
+    issuerCrls: list[o6.ByteString] = o6.field(name="IssuerCrls")
 
 
 @o6.datatype(nodeId="i=12755", browseName="OptionSet", defaultEncodingId="i=12765", isAbstract=True)
 class OptionSet(Structure):
-    value: o6.ByteString
-    validBits: o6.ByteString
+    value: o6.ByteString = o6.field(name="Value")
+    validBits: o6.ByteString = o6.field(name="ValidBits")
 
 
 @o6.datatype(nodeId="i=12756", browseName="Union", defaultEncodingId="i=12766", isAbstract=True)
@@ -2420,38 +2420,38 @@ class DiscoveryConfiguration(Structure):
 
 @o6.datatype(nodeId="i=12891", browseName="MdnsDiscoveryConfiguration", defaultEncodingId="i=12901")
 class MdnsDiscoveryConfiguration(DiscoveryConfiguration):
-    mdnsServerName: o6.String
-    serverCapabilities: list[o6.String]
+    mdnsServerName: o6.String = o6.field(name="MdnsServerName")
+    serverCapabilities: list[o6.String] = o6.field(name="ServerCapabilities")
 
 
 @o6.datatype(nodeId="i=14273", browseName="PublishedVariableDataType", defaultEncodingId="i=14323")
 class PublishedVariableDataType(Structure):
-    publishedVariable: o6.NodeId
-    attributeId: o6.UInt32
-    samplingIntervalHint: o6.Double
-    deadbandType: o6.UInt32
-    deadbandValue: o6.Double
-    indexRange: o6.String
-    substituteValue: Any
-    metaDataProperties: list[o6.QualifiedName]
+    publishedVariable: o6.NodeId = o6.field(name="PublishedVariable")
+    attributeId: o6.UInt32 = o6.field(name="AttributeId")
+    samplingIntervalHint: o6.Double = o6.field(name="SamplingIntervalHint")
+    deadbandType: o6.UInt32 = o6.field(name="DeadbandType")
+    deadbandValue: o6.Double = o6.field(name="DeadbandValue")
+    indexRange: o6.String = o6.field(name="IndexRange")
+    substituteValue: Any = o6.field(name="SubstituteValue")
+    metaDataProperties: list[o6.QualifiedName] = o6.field(name="MetaDataProperties")
 
 
 @o6.datatype(nodeId="i=14525", browseName="DataTypeDescription", defaultEncodingId="i=125", isAbstract=True)
 class DataTypeDescription(Structure):
-    dataTypeId: o6.NodeId
-    name: o6.QualifiedName
+    dataTypeId: o6.NodeId = o6.field(name="DataTypeId")
+    name: o6.QualifiedName = o6.field(name="Name")
 
 
 @o6.datatype(nodeId="i=14533", browseName="KeyValuePair", defaultEncodingId="i=14846")
 class KeyValuePair(Structure):
-    key: o6.QualifiedName
-    value: Any
+    key: o6.QualifiedName = o6.field(name="Key")
+    value: Any = o6.field(name="Value")
 
 
 @o6.datatype(nodeId="i=14593", browseName="ConfigurationVersionDataType", defaultEncodingId="i=14847")
 class ConfigurationVersionDataType(Structure):
-    majorVersion: o6.UInt32
-    minorVersion: o6.UInt32
+    majorVersion: o6.UInt32 = o6.field(name="MajorVersion")
+    minorVersion: o6.UInt32 = o6.field(name="MinorVersion")
 
 
 @o6.enumtype(nodeId="i=14647", browseName="PubSubState")
@@ -2465,10 +2465,10 @@ class PubSubState(Enumeration):
 
 @o6.datatype(nodeId="i=15005", browseName="SimpleTypeDescription", defaultEncodingId="i=15421")
 class SimpleTypeDescription(DataTypeDescription):
-    dataTypeId: o6.NodeId
-    name: o6.QualifiedName
-    baseDataType: o6.NodeId
-    builtInType: o6.Byte
+    dataTypeId: o6.NodeId = o6.field(name="DataTypeId")
+    name: o6.QualifiedName = o6.field(name="Name")
+    baseDataType: o6.NodeId = o6.field(name="BaseDataType")
+    builtInType: o6.Byte = o6.field(name="BuiltInType")
 
 
 @o6.enumtype(nodeId="i=15008", browseName="BrokerTransportQualityOfService")
@@ -2517,67 +2517,67 @@ class AccessLevelExType:
 
 @o6.datatype(nodeId="i=15434", browseName="BaseConfigurationDataType", defaultEncodingId="i=16538", isAbstract=True)
 class BaseConfigurationDataType(Structure):
-    configurationVersion: o6.UInt32
-    configurationProperties: list[KeyValuePair]
+    configurationVersion: o6.UInt32 = o6.field(name="ConfigurationVersion")
+    configurationProperties: list[KeyValuePair] = o6.field(name="ConfigurationProperties")
 
 
 @o6.datatype(nodeId="i=15435", browseName="BaseConfigurationRecordDataType", defaultEncodingId="i=16539", isAbstract=True)
 class BaseConfigurationRecordDataType(Structure):
-    name: o6.String
-    recordProperties: list[KeyValuePair]
+    name: o6.String = o6.field(name="Name")
+    recordProperties: list[KeyValuePair] = o6.field(name="RecordProperties")
 
 
 @o6.datatype(nodeId="i=15487", browseName="StructureDescription", defaultEncodingId="i=126")
 class StructureDescription(DataTypeDescription):
-    dataTypeId: o6.NodeId
-    name: o6.QualifiedName
-    structureDefinition: StructureDefinition
+    dataTypeId: o6.NodeId = o6.field(name="DataTypeId")
+    name: o6.QualifiedName = o6.field(name="Name")
+    structureDefinition: StructureDefinition = o6.field(name="StructureDefinition")
 
 
 @o6.datatype(nodeId="i=15488", browseName="EnumDescription", defaultEncodingId="i=127")
 class EnumDescription(DataTypeDescription):
-    dataTypeId: o6.NodeId
-    name: o6.QualifiedName
-    enumDefinition: EnumDefinition
-    builtInType: o6.Byte
+    dataTypeId: o6.NodeId = o6.field(name="DataTypeId")
+    name: o6.QualifiedName = o6.field(name="Name")
+    enumDefinition: EnumDefinition = o6.field(name="EnumDefinition")
+    builtInType: o6.Byte = o6.field(name="BuiltInType")
 
 
 @o6.datatype(nodeId="i=15502", browseName="NetworkAddressDataType", defaultEncodingId="i=21151", isAbstract=True)
 class NetworkAddressDataType(Structure):
-    networkInterface: o6.String
+    networkInterface: o6.String = o6.field(name="NetworkInterface")
 
 
 @o6.datatype(nodeId="i=15510", browseName="NetworkAddressUrlDataType", defaultEncodingId="i=21152")
 class NetworkAddressUrlDataType(NetworkAddressDataType):
-    networkInterface: o6.String
-    url: o6.String
+    networkInterface: o6.String = o6.field(name="NetworkInterface")
+    url: o6.String = o6.field(name="Url")
 
 
 @o6.datatype(nodeId="i=15528", browseName="EndpointType", defaultEncodingId="i=15671")
 class EndpointType(Structure):
-    endpointUrl: o6.String
-    securityMode: MessageSecurityMode
-    securityPolicyUri: o6.String
-    transportProfileUri: o6.String
+    endpointUrl: o6.String = o6.field(name="EndpointUrl")
+    securityMode: MessageSecurityMode = o6.field(name="SecurityMode")
+    securityPolicyUri: o6.String = o6.field(name="SecurityPolicyUri")
+    transportProfileUri: o6.String = o6.field(name="TransportProfileUri")
 
 
 @o6.datatype(nodeId="i=15534", browseName="DataTypeSchemaHeader", defaultEncodingId="i=15676", isAbstract=True)
 class DataTypeSchemaHeader(Structure):
-    namespaces: list[o6.String]
-    structureDataTypes: list[StructureDescription]
-    enumDataTypes: list[EnumDescription]
-    simpleDataTypes: list[SimpleTypeDescription]
+    namespaces: list[o6.String] = o6.field(name="Namespaces")
+    structureDataTypes: list[StructureDescription] = o6.field(name="StructureDataTypes")
+    enumDataTypes: list[EnumDescription] = o6.field(name="EnumDataTypes")
+    simpleDataTypes: list[SimpleTypeDescription] = o6.field(name="SimpleDataTypes")
 
 
 @o6.datatype(nodeId="i=15006", browseName="UABinaryFileDataType", defaultEncodingId="i=15422")
 class UABinaryFileDataType(DataTypeSchemaHeader):
-    namespaces: list[o6.String]
-    structureDataTypes: list[StructureDescription]
-    enumDataTypes: list[EnumDescription]
-    simpleDataTypes: list[SimpleTypeDescription]
-    schemaLocation: o6.String
-    fileHeader: list[KeyValuePair]
-    body: Any
+    namespaces: list[o6.String] = o6.field(name="Namespaces")
+    structureDataTypes: list[StructureDescription] = o6.field(name="StructureDataTypes")
+    enumDataTypes: list[EnumDescription] = o6.field(name="EnumDataTypes")
+    simpleDataTypes: list[SimpleTypeDescription] = o6.field(name="SimpleDataTypes")
+    schemaLocation: o6.String = o6.field(name="SchemaLocation")
+    fileHeader: list[KeyValuePair] = o6.field(name="FileHeader")
+    body: Any = o6.field(name="Body")
 
 
 @o6.enumtype(nodeId="i=15539", browseName="ConfigurationUpdateType")
@@ -2590,61 +2590,61 @@ class ConfigurationUpdateType(Enumeration):
 
 @o6.datatype(nodeId="i=15538", browseName="ConfigurationUpdateTargetType", defaultEncodingId="i=16541")
 class ConfigurationUpdateTargetType(Structure):
-    path: o6.String
-    updateType: ConfigurationUpdateType
+    path: o6.String = o6.field(name="Path")
+    updateType: ConfigurationUpdateType = o6.field(name="UpdateType")
 
 
 @o6.datatype(nodeId="i=15556", browseName="ApplicationIdentityDataType", defaultEncodingId="i=16543")
 class ApplicationIdentityDataType(BaseConfigurationRecordDataType):
-    name: o6.String
-    recordProperties: list[KeyValuePair]
-    applicationUri: o6.String
-    applicationNames: list[o6.LocalizedText]
-    additionalServers: list[ApplicationDescription]
+    name: o6.String = o6.field(name="Name")
+    recordProperties: list[KeyValuePair] = o6.field(name="RecordProperties")
+    applicationUri: o6.String = o6.field(name="ApplicationUri")
+    applicationNames: list[o6.LocalizedText] = o6.field(name="ApplicationNames")
+    additionalServers: list[ApplicationDescription] = o6.field(name="AdditionalServers")
 
 
 @o6.datatype(nodeId="i=15557", browseName="EndpointDataType", defaultEncodingId="i=16544")
 class EndpointDataType(BaseConfigurationRecordDataType):
-    name: o6.String
-    recordProperties: list[KeyValuePair]
-    discoveryUrls: list[o6.String]
-    networkName: o6.String
-    port: o6.UInt16
+    name: o6.String = o6.field(name="Name")
+    recordProperties: list[KeyValuePair] = o6.field(name="RecordProperties")
+    discoveryUrls: list[o6.String] = o6.field(name="DiscoveryUrls")
+    networkName: o6.String = o6.field(name="NetworkName")
+    port: o6.UInt16 = o6.field(name="Port")
 
 
 @o6.datatype(nodeId="i=15558", browseName="ServerEndpointDataType", defaultEncodingId="i=16545")
 class ServerEndpointDataType(EndpointDataType):
-    name: o6.String
-    recordProperties: list[KeyValuePair]
-    discoveryUrls: list[o6.String]
-    networkName: o6.String
-    port: o6.UInt16
-    endpointUrls: list[o6.String]
-    securitySettingNames: list[o6.String]
-    transportProfileUri: o6.String
-    userTokenSettingNames: list[o6.String]
-    reverseConnectUrls: list[o6.String]
+    name: o6.String = o6.field(name="Name")
+    recordProperties: list[KeyValuePair] = o6.field(name="RecordProperties")
+    discoveryUrls: list[o6.String] = o6.field(name="DiscoveryUrls")
+    networkName: o6.String = o6.field(name="NetworkName")
+    port: o6.UInt16 = o6.field(name="Port")
+    endpointUrls: list[o6.String] = o6.field(name="EndpointUrls")
+    securitySettingNames: list[o6.String] = o6.field(name="SecuritySettingNames")
+    transportProfileUri: o6.String = o6.field(name="TransportProfileUri")
+    userTokenSettingNames: list[o6.String] = o6.field(name="UserTokenSettingNames")
+    reverseConnectUrls: list[o6.String] = o6.field(name="ReverseConnectUrls")
 
 
 @o6.datatype(nodeId="i=15559", browseName="SecuritySettingsDataType", defaultEncodingId="i=16546")
 class SecuritySettingsDataType(BaseConfigurationRecordDataType):
-    name: o6.String
-    recordProperties: list[KeyValuePair]
-    securityModes: list[MessageSecurityMode]
-    securityPolicyUris: list[o6.String]
-    certificateGroupName: o6.String
+    name: o6.String = o6.field(name="Name")
+    recordProperties: list[KeyValuePair] = o6.field(name="RecordProperties")
+    securityModes: list[MessageSecurityMode] = o6.field(name="SecurityModes")
+    securityPolicyUris: list[o6.String] = o6.field(name="SecurityPolicyUris")
+    certificateGroupName: o6.String = o6.field(name="CertificateGroupName")
 
 
 @o6.datatype(nodeId="i=15560", browseName="UserTokenSettingsDataType", defaultEncodingId="i=16547")
 class UserTokenSettingsDataType(BaseConfigurationRecordDataType):
-    name: o6.String
-    recordProperties: list[KeyValuePair]
-    tokenType: UserTokenType
-    issuedTokenType: o6.String
-    issuerEndpointUrl: o6.String
-    securityPolicyUri: o6.String
-    certificateGroupName: o6.String
-    authorizationServiceName: o6.String
+    name: o6.String = o6.field(name="Name")
+    recordProperties: list[KeyValuePair] = o6.field(name="RecordProperties")
+    tokenType: UserTokenType = o6.field(name="TokenType")
+    issuedTokenType: o6.String = o6.field(name="IssuedTokenType")
+    issuerEndpointUrl: o6.String = o6.field(name="IssuerEndpointUrl")
+    securityPolicyUri: o6.String = o6.field(name="SecurityPolicyUri")
+    certificateGroupName: o6.String = o6.field(name="CertificateGroupName")
+    authorizationServiceName: o6.String = o6.field(name="AuthorizationServiceName")
 
 
 @o6.datatype(nodeId="i=15580", browseName="PublishedDataSetSourceDataType", defaultEncodingId="i=15678", isAbstract=True)
@@ -2654,14 +2654,14 @@ class PublishedDataSetSourceDataType(Structure):
 
 @o6.datatype(nodeId="i=15581", browseName="PublishedDataItemsDataType", defaultEncodingId="i=15679")
 class PublishedDataItemsDataType(PublishedDataSetSourceDataType):
-    publishedData: list[PublishedVariableDataType]
+    publishedData: list[PublishedVariableDataType] = o6.field(name="PublishedData")
 
 
 @o6.datatype(nodeId="i=15582", browseName="PublishedEventsDataType", defaultEncodingId="i=15681")
 class PublishedEventsDataType(PublishedDataSetSourceDataType):
-    eventNotifier: o6.NodeId
-    selectedFields: list[SimpleAttributeOperand]
-    filter: ContentFilter
+    eventNotifier: o6.NodeId = o6.field(name="EventNotifier")
+    selectedFields: list[SimpleAttributeOperand] = o6.field(name="SelectedFields")
+    filter: ContentFilter = o6.field(name="Filter")
 
 
 @o6.optionsettype(nodeId="i=15583", browseName="DataSetFieldContentMask", base=o6.UInt32)
@@ -2686,26 +2686,26 @@ class DataSetWriterMessageDataType(Structure):
 
 @o6.datatype(nodeId="i=15597", browseName="DataSetWriterDataType", defaultEncodingId="i=15682")
 class DataSetWriterDataType(Structure):
-    name: o6.String
-    enabled: o6.Boolean
-    dataSetWriterId: o6.UInt16
-    dataSetFieldContentMask: DataSetFieldContentMask
-    keyFrameCount: o6.UInt32
-    dataSetName: o6.String
-    dataSetWriterProperties: list[KeyValuePair]
-    transportSettings: DataSetWriterTransportDataType
-    messageSettings: DataSetWriterMessageDataType
+    name: o6.String = o6.field(name="Name")
+    enabled: o6.Boolean = o6.field(name="Enabled")
+    dataSetWriterId: o6.UInt16 = o6.field(name="DataSetWriterId")
+    dataSetFieldContentMask: DataSetFieldContentMask = o6.field(name="DataSetFieldContentMask")
+    keyFrameCount: o6.UInt32 = o6.field(name="KeyFrameCount")
+    dataSetName: o6.String = o6.field(name="DataSetName")
+    dataSetWriterProperties: list[KeyValuePair] = o6.field(name="DataSetWriterProperties")
+    transportSettings: DataSetWriterTransportDataType = o6.field(name="TransportSettings")
+    messageSettings: DataSetWriterMessageDataType = o6.field(name="MessageSettings")
 
 
 @o6.datatype(nodeId="i=15609", browseName="PubSubGroupDataType", defaultEncodingId="i=15689", isAbstract=True)
 class PubSubGroupDataType(Structure):
-    name: o6.String
-    enabled: o6.Boolean
-    securityMode: MessageSecurityMode
-    securityGroupId: o6.String
-    securityKeyServices: list[EndpointDescription]
-    maxNetworkMessageSize: o6.UInt32
-    groupProperties: list[KeyValuePair]
+    name: o6.String = o6.field(name="Name")
+    enabled: o6.Boolean = o6.field(name="Enabled")
+    securityMode: MessageSecurityMode = o6.field(name="SecurityMode")
+    securityGroupId: o6.String = o6.field(name="SecurityGroupId")
+    securityKeyServices: list[EndpointDescription] = o6.field(name="SecurityKeyServices")
+    maxNetworkMessageSize: o6.UInt32 = o6.field(name="MaxNetworkMessageSize")
+    groupProperties: list[KeyValuePair] = o6.field(name="GroupProperties")
 
 
 @o6.datatype(nodeId="i=15611", browseName="WriterGroupTransportDataType", defaultEncodingId="i=15691", isAbstract=True)
@@ -2715,8 +2715,8 @@ class WriterGroupTransportDataType(Structure):
 
 @o6.datatype(nodeId="i=15532", browseName="DatagramWriterGroupTransportDataType", defaultEncodingId="i=21155")
 class DatagramWriterGroupTransportDataType(WriterGroupTransportDataType):
-    messageRepeatCount: o6.Byte
-    messageRepeatDelay: o6.Double
+    messageRepeatCount: o6.Byte = o6.field(name="MessageRepeatCount")
+    messageRepeatDelay: o6.Double = o6.field(name="MessageRepeatDelay")
 
 
 @o6.datatype(nodeId="i=15616", browseName="WriterGroupMessageDataType", defaultEncodingId="i=15693", isAbstract=True)
@@ -2726,22 +2726,22 @@ class WriterGroupMessageDataType(Structure):
 
 @o6.datatype(nodeId="i=15480", browseName="WriterGroupDataType", defaultEncodingId="i=21150")
 class WriterGroupDataType(PubSubGroupDataType):
-    name: o6.String
-    enabled: o6.Boolean
-    securityMode: MessageSecurityMode
-    securityGroupId: o6.String
-    securityKeyServices: list[EndpointDescription]
-    maxNetworkMessageSize: o6.UInt32
-    groupProperties: list[KeyValuePair]
-    writerGroupId: o6.UInt16
-    publishingInterval: o6.Double
-    keepAliveTime: o6.Double
-    priority: o6.Byte
-    localeIds: list[o6.String]
-    headerLayoutUri: o6.String
-    transportSettings: WriterGroupTransportDataType
-    messageSettings: WriterGroupMessageDataType
-    dataSetWriters: list[DataSetWriterDataType]
+    name: o6.String = o6.field(name="Name")
+    enabled: o6.Boolean = o6.field(name="Enabled")
+    securityMode: MessageSecurityMode = o6.field(name="SecurityMode")
+    securityGroupId: o6.String = o6.field(name="SecurityGroupId")
+    securityKeyServices: list[EndpointDescription] = o6.field(name="SecurityKeyServices")
+    maxNetworkMessageSize: o6.UInt32 = o6.field(name="MaxNetworkMessageSize")
+    groupProperties: list[KeyValuePair] = o6.field(name="GroupProperties")
+    writerGroupId: o6.UInt16 = o6.field(name="WriterGroupId")
+    publishingInterval: o6.Double = o6.field(name="PublishingInterval")
+    keepAliveTime: o6.Double = o6.field(name="KeepAliveTime")
+    priority: o6.Byte = o6.field(name="Priority")
+    localeIds: list[o6.String] = o6.field(name="LocaleIds")
+    headerLayoutUri: o6.String = o6.field(name="HeaderLayoutUri")
+    transportSettings: WriterGroupTransportDataType = o6.field(name="TransportSettings")
+    messageSettings: WriterGroupMessageDataType = o6.field(name="MessageSettings")
+    dataSetWriters: list[DataSetWriterDataType] = o6.field(name="DataSetWriters")
 
 
 @o6.datatype(nodeId="i=15618", browseName="ConnectionTransportDataType", defaultEncodingId="i=15695", isAbstract=True)
@@ -2751,8 +2751,8 @@ class ConnectionTransportDataType(Structure):
 
 @o6.datatype(nodeId="i=15007", browseName="BrokerConnectionTransportDataType", defaultEncodingId="i=15479")
 class BrokerConnectionTransportDataType(ConnectionTransportDataType):
-    resourceUri: o6.String
-    authenticationProfileUri: o6.String
+    resourceUri: o6.String = o6.field(name="ResourceUri")
+    authenticationProfileUri: o6.String = o6.field(name="AuthenticationProfileUri")
 
 
 @o6.datatype(nodeId="i=15621", browseName="ReaderGroupTransportDataType", defaultEncodingId="i=15701", isAbstract=True)
@@ -2795,14 +2795,14 @@ class IdentityCriteriaType(Enumeration):
 
 @o6.datatype(nodeId="i=15634", browseName="IdentityMappingRuleType", defaultEncodingId="i=15736")
 class IdentityMappingRuleType(Structure):
-    criteriaType: IdentityCriteriaType
-    criteria: o6.String
+    criteriaType: IdentityCriteriaType = o6.field(name="CriteriaType")
+    criteria: o6.String = o6.field(name="Criteria")
 
 
 @o6.datatype(nodeId="i=15635", browseName="SubscribedDataSetMirrorDataType", defaultEncodingId="i=15713")
 class SubscribedDataSetMirrorDataType(SubscribedDataSetDataType):
-    parentNodeName: o6.String
-    rolePermissions: list[RolePermissionType]
+    parentNodeName: o6.String = o6.field(name="ParentNodeName")
+    rolePermissions: list[RolePermissionType] = o6.field(name="RolePermissions")
 
 
 @o6.optionsettype(nodeId="i=15642", browseName="UadpNetworkMessageContentMask", base=o6.UInt32)
@@ -2832,23 +2832,23 @@ class UadpDataSetMessageContentMask:
 
 @o6.datatype(nodeId="i=15652", browseName="UadpDataSetWriterMessageDataType", defaultEncodingId="i=15717")
 class UadpDataSetWriterMessageDataType(DataSetWriterMessageDataType):
-    dataSetMessageContentMask: UadpDataSetMessageContentMask
-    configuredSize: o6.UInt16
-    networkMessageNumber: o6.UInt16
-    dataSetOffset: o6.UInt16
+    dataSetMessageContentMask: UadpDataSetMessageContentMask = o6.field(name="DataSetMessageContentMask")
+    configuredSize: o6.UInt16 = o6.field(name="ConfiguredSize")
+    networkMessageNumber: o6.UInt16 = o6.field(name="NetworkMessageNumber")
+    dataSetOffset: o6.UInt16 = o6.field(name="DataSetOffset")
 
 
 @o6.datatype(nodeId="i=15653", browseName="UadpDataSetReaderMessageDataType", defaultEncodingId="i=15718")
 class UadpDataSetReaderMessageDataType(DataSetReaderMessageDataType):
-    groupVersion: o6.UInt32
-    networkMessageNumber: o6.UInt16
-    dataSetOffset: o6.UInt16
-    dataSetClassId: o6.Guid
-    networkMessageContentMask: UadpNetworkMessageContentMask
-    dataSetMessageContentMask: UadpDataSetMessageContentMask
-    publishingInterval: o6.Double
-    receiveOffset: o6.Double
-    processingOffset: o6.Double
+    groupVersion: o6.UInt32 = o6.field(name="GroupVersion")
+    networkMessageNumber: o6.UInt16 = o6.field(name="NetworkMessageNumber")
+    dataSetOffset: o6.UInt16 = o6.field(name="DataSetOffset")
+    dataSetClassId: o6.Guid = o6.field(name="DataSetClassId")
+    networkMessageContentMask: UadpNetworkMessageContentMask = o6.field(name="NetworkMessageContentMask")
+    dataSetMessageContentMask: UadpDataSetMessageContentMask = o6.field(name="DataSetMessageContentMask")
+    publishingInterval: o6.Double = o6.field(name="PublishingInterval")
+    receiveOffset: o6.Double = o6.field(name="ReceiveOffset")
+    processingOffset: o6.Double = o6.field(name="ProcessingOffset")
 
 
 @o6.optionsettype(nodeId="i=15654", browseName="JsonNetworkMessageContentMask", base=o6.UInt32)
@@ -2864,7 +2864,7 @@ class JsonNetworkMessageContentMask:
 
 @o6.datatype(nodeId="i=15657", browseName="JsonWriterGroupMessageDataType", defaultEncodingId="i=15719")
 class JsonWriterGroupMessageDataType(WriterGroupMessageDataType):
-    networkMessageContentMask: JsonNetworkMessageContentMask
+    networkMessageContentMask: JsonNetworkMessageContentMask = o6.field(name="NetworkMessageContentMask")
 
 
 @o6.optionsettype(nodeId="i=15658", browseName="JsonDataSetMessageContentMask", base=o6.UInt32)
@@ -2885,40 +2885,40 @@ class JsonDataSetMessageContentMask:
 
 @o6.datatype(nodeId="i=15664", browseName="JsonDataSetWriterMessageDataType", defaultEncodingId="i=15724")
 class JsonDataSetWriterMessageDataType(DataSetWriterMessageDataType):
-    dataSetMessageContentMask: JsonDataSetMessageContentMask
+    dataSetMessageContentMask: JsonDataSetMessageContentMask = o6.field(name="DataSetMessageContentMask")
 
 
 @o6.datatype(nodeId="i=15665", browseName="JsonDataSetReaderMessageDataType", defaultEncodingId="i=15725")
 class JsonDataSetReaderMessageDataType(DataSetReaderMessageDataType):
-    networkMessageContentMask: JsonNetworkMessageContentMask
-    dataSetMessageContentMask: JsonDataSetMessageContentMask
+    networkMessageContentMask: JsonNetworkMessageContentMask = o6.field(name="NetworkMessageContentMask")
+    dataSetMessageContentMask: JsonDataSetMessageContentMask = o6.field(name="DataSetMessageContentMask")
 
 
 @o6.datatype(nodeId="i=15667", browseName="BrokerWriterGroupTransportDataType", defaultEncodingId="i=15727")
 class BrokerWriterGroupTransportDataType(WriterGroupTransportDataType):
-    queueName: o6.String
-    resourceUri: o6.String
-    authenticationProfileUri: o6.String
-    requestedDeliveryGuarantee: BrokerTransportQualityOfService
+    queueName: o6.String = o6.field(name="QueueName")
+    resourceUri: o6.String = o6.field(name="ResourceUri")
+    authenticationProfileUri: o6.String = o6.field(name="AuthenticationProfileUri")
+    requestedDeliveryGuarantee: BrokerTransportQualityOfService = o6.field(name="RequestedDeliveryGuarantee")
 
 
 @o6.datatype(nodeId="i=15669", browseName="BrokerDataSetWriterTransportDataType", defaultEncodingId="i=15729")
 class BrokerDataSetWriterTransportDataType(DataSetWriterTransportDataType):
-    queueName: o6.String
-    resourceUri: o6.String
-    authenticationProfileUri: o6.String
-    requestedDeliveryGuarantee: BrokerTransportQualityOfService
-    metaDataQueueName: o6.String
-    metaDataUpdateTime: o6.Double
+    queueName: o6.String = o6.field(name="QueueName")
+    resourceUri: o6.String = o6.field(name="ResourceUri")
+    authenticationProfileUri: o6.String = o6.field(name="AuthenticationProfileUri")
+    requestedDeliveryGuarantee: BrokerTransportQualityOfService = o6.field(name="RequestedDeliveryGuarantee")
+    metaDataQueueName: o6.String = o6.field(name="MetaDataQueueName")
+    metaDataUpdateTime: o6.Double = o6.field(name="MetaDataUpdateTime")
 
 
 @o6.datatype(nodeId="i=15670", browseName="BrokerDataSetReaderTransportDataType", defaultEncodingId="i=15733")
 class BrokerDataSetReaderTransportDataType(DataSetReaderTransportDataType):
-    queueName: o6.String
-    resourceUri: o6.String
-    authenticationProfileUri: o6.String
-    requestedDeliveryGuarantee: BrokerTransportQualityOfService
-    metaDataQueueName: o6.String
+    queueName: o6.String = o6.field(name="QueueName")
+    resourceUri: o6.String = o6.field(name="ResourceUri")
+    authenticationProfileUri: o6.String = o6.field(name="AuthenticationProfileUri")
+    requestedDeliveryGuarantee: BrokerTransportQualityOfService = o6.field(name="RequestedDeliveryGuarantee")
+    metaDataQueueName: o6.String = o6.field(name="MetaDataQueueName")
 
 
 @o6.enumtype(nodeId="i=15874", browseName="OverrideValueHandling")
@@ -2930,27 +2930,27 @@ class OverrideValueHandling(Enumeration):
 
 @o6.datatype(nodeId="i=14744", browseName="FieldTargetDataType", defaultEncodingId="i=14848")
 class FieldTargetDataType(Structure):
-    dataSetFieldId: o6.Guid
-    receiverIndexRange: o6.String
-    targetNodeId: o6.NodeId
-    attributeId: o6.UInt32
-    writeIndexRange: o6.String
-    overrideValueHandling: OverrideValueHandling
-    overrideValue: Any
+    dataSetFieldId: o6.Guid = o6.field(name="DataSetFieldId")
+    receiverIndexRange: o6.String = o6.field(name="ReceiverIndexRange")
+    targetNodeId: o6.NodeId = o6.field(name="TargetNodeId")
+    attributeId: o6.UInt32 = o6.field(name="AttributeId")
+    writeIndexRange: o6.String = o6.field(name="WriteIndexRange")
+    overrideValueHandling: OverrideValueHandling = o6.field(name="OverrideValueHandling")
+    overrideValue: Any = o6.field(name="OverrideValue")
 
 
 @o6.datatype(nodeId="i=15631", browseName="TargetVariablesDataType", defaultEncodingId="i=15712")
 class TargetVariablesDataType(SubscribedDataSetDataType):
-    targetVariables: list[FieldTargetDataType]
+    targetVariables: list[FieldTargetDataType] = o6.field(name="TargetVariables")
 
 
 @o6.datatype(nodeId="i=15901", browseName="SessionlessInvokeRequestType", defaultEncodingId="i=15903")
 class SessionlessInvokeRequestType(Structure):
-    urisVersion: o6.UInt32
-    namespaceUris: list[o6.String]
-    serverUris: list[o6.String]
-    localeIds: list[o6.String]
-    serviceId: o6.UInt32
+    urisVersion: o6.UInt32 = o6.field(name="UrisVersion")
+    namespaceUris: list[o6.String] = o6.field(name="NamespaceUris")
+    serverUris: list[o6.String] = o6.field(name="ServerUris")
+    localeIds: list[o6.String] = o6.field(name="LocaleIds")
+    serviceId: o6.UInt32 = o6.field(name="ServiceId")
 
 
 @o6.optionsettype(nodeId="i=15904", browseName="DataSetFieldFlags", base=o6.UInt16)
@@ -2960,93 +2960,93 @@ class DataSetFieldFlags:
 
 @o6.datatype(nodeId="i=14524", browseName="FieldMetaData", defaultEncodingId="i=14839")
 class FieldMetaData(Structure):
-    name: o6.String
-    description: o6.LocalizedText
-    fieldFlags: DataSetFieldFlags
-    builtInType: o6.Byte
-    dataType: o6.NodeId
-    valueRank: o6.Int32
-    arrayDimensions: list[o6.UInt32]
-    maxStringLength: o6.UInt32
-    dataSetFieldId: o6.Guid
-    properties: list[KeyValuePair]
+    name: o6.String = o6.field(name="Name")
+    description: o6.LocalizedText = o6.field(name="Description")
+    fieldFlags: DataSetFieldFlags = o6.field(name="FieldFlags")
+    builtInType: o6.Byte = o6.field(name="BuiltInType")
+    dataType: o6.NodeId = o6.field(name="DataType")
+    valueRank: o6.Int32 = o6.field(name="ValueRank")
+    arrayDimensions: list[o6.UInt32] = o6.field(name="ArrayDimensions")
+    maxStringLength: o6.UInt32 = o6.field(name="MaxStringLength")
+    dataSetFieldId: o6.Guid = o6.field(name="DataSetFieldId")
+    properties: list[KeyValuePair] = o6.field(name="Properties")
 
 
 @o6.datatype(nodeId="i=14523", browseName="DataSetMetaDataType", defaultEncodingId="i=124")
 class DataSetMetaDataType(DataTypeSchemaHeader):
-    namespaces: list[o6.String]
-    structureDataTypes: list[StructureDescription]
-    enumDataTypes: list[EnumDescription]
-    simpleDataTypes: list[SimpleTypeDescription]
-    name: o6.String
-    description: o6.LocalizedText
-    fields: list[FieldMetaData]
-    dataSetClassId: o6.Guid
-    configurationVersion: ConfigurationVersionDataType
+    namespaces: list[o6.String] = o6.field(name="Namespaces")
+    structureDataTypes: list[StructureDescription] = o6.field(name="StructureDataTypes")
+    enumDataTypes: list[EnumDescription] = o6.field(name="EnumDataTypes")
+    simpleDataTypes: list[SimpleTypeDescription] = o6.field(name="SimpleDataTypes")
+    name: o6.String = o6.field(name="Name")
+    description: o6.LocalizedText = o6.field(name="Description")
+    fields: list[FieldMetaData] = o6.field(name="Fields")
+    dataSetClassId: o6.Guid = o6.field(name="DataSetClassId")
+    configurationVersion: ConfigurationVersionDataType = o6.field(name="ConfigurationVersion")
 
 
 @o6.datatype(nodeId="i=15578", browseName="PublishedDataSetDataType", defaultEncodingId="i=15677")
 class PublishedDataSetDataType(Structure):
-    name: o6.String
-    dataSetFolder: list[o6.String]
-    dataSetMetaData: DataSetMetaDataType
-    extensionFields: list[KeyValuePair]
-    dataSetSource: PublishedDataSetSourceDataType
+    name: o6.String = o6.field(name="Name")
+    dataSetFolder: list[o6.String] = o6.field(name="DataSetFolder")
+    dataSetMetaData: DataSetMetaDataType = o6.field(name="DataSetMetaData")
+    extensionFields: list[KeyValuePair] = o6.field(name="ExtensionFields")
+    dataSetSource: PublishedDataSetSourceDataType = o6.field(name="DataSetSource")
 
 
 @o6.datatype(nodeId="i=15623", browseName="DataSetReaderDataType", defaultEncodingId="i=15703")
 class DataSetReaderDataType(Structure):
-    name: o6.String
-    enabled: o6.Boolean
-    publisherId: Any
-    writerGroupId: o6.UInt16
-    dataSetWriterId: o6.UInt16
-    dataSetMetaData: DataSetMetaDataType
-    dataSetFieldContentMask: DataSetFieldContentMask
-    messageReceiveTimeout: o6.Double
-    keyFrameCount: o6.UInt32
-    headerLayoutUri: o6.String
-    securityMode: MessageSecurityMode
-    securityGroupId: o6.String
-    securityKeyServices: list[EndpointDescription]
-    dataSetReaderProperties: list[KeyValuePair]
-    transportSettings: DataSetReaderTransportDataType
-    messageSettings: DataSetReaderMessageDataType
-    subscribedDataSet: SubscribedDataSetDataType
+    name: o6.String = o6.field(name="Name")
+    enabled: o6.Boolean = o6.field(name="Enabled")
+    publisherId: Any = o6.field(name="PublisherId")
+    writerGroupId: o6.UInt16 = o6.field(name="WriterGroupId")
+    dataSetWriterId: o6.UInt16 = o6.field(name="DataSetWriterId")
+    dataSetMetaData: DataSetMetaDataType = o6.field(name="DataSetMetaData")
+    dataSetFieldContentMask: DataSetFieldContentMask = o6.field(name="DataSetFieldContentMask")
+    messageReceiveTimeout: o6.Double = o6.field(name="MessageReceiveTimeout")
+    keyFrameCount: o6.UInt32 = o6.field(name="KeyFrameCount")
+    headerLayoutUri: o6.String = o6.field(name="HeaderLayoutUri")
+    securityMode: MessageSecurityMode = o6.field(name="SecurityMode")
+    securityGroupId: o6.String = o6.field(name="SecurityGroupId")
+    securityKeyServices: list[EndpointDescription] = o6.field(name="SecurityKeyServices")
+    dataSetReaderProperties: list[KeyValuePair] = o6.field(name="DataSetReaderProperties")
+    transportSettings: DataSetReaderTransportDataType = o6.field(name="TransportSettings")
+    messageSettings: DataSetReaderMessageDataType = o6.field(name="MessageSettings")
+    subscribedDataSet: SubscribedDataSetDataType = o6.field(name="SubscribedDataSet")
 
 
 @o6.datatype(nodeId="i=15520", browseName="ReaderGroupDataType", defaultEncodingId="i=21153")
 class ReaderGroupDataType(PubSubGroupDataType):
-    name: o6.String
-    enabled: o6.Boolean
-    securityMode: MessageSecurityMode
-    securityGroupId: o6.String
-    securityKeyServices: list[EndpointDescription]
-    maxNetworkMessageSize: o6.UInt32
-    groupProperties: list[KeyValuePair]
-    transportSettings: ReaderGroupTransportDataType
-    messageSettings: ReaderGroupMessageDataType
-    dataSetReaders: list[DataSetReaderDataType]
+    name: o6.String = o6.field(name="Name")
+    enabled: o6.Boolean = o6.field(name="Enabled")
+    securityMode: MessageSecurityMode = o6.field(name="SecurityMode")
+    securityGroupId: o6.String = o6.field(name="SecurityGroupId")
+    securityKeyServices: list[EndpointDescription] = o6.field(name="SecurityKeyServices")
+    maxNetworkMessageSize: o6.UInt32 = o6.field(name="MaxNetworkMessageSize")
+    groupProperties: list[KeyValuePair] = o6.field(name="GroupProperties")
+    transportSettings: ReaderGroupTransportDataType = o6.field(name="TransportSettings")
+    messageSettings: ReaderGroupMessageDataType = o6.field(name="MessageSettings")
+    dataSetReaders: list[DataSetReaderDataType] = o6.field(name="DataSetReaders")
 
 
 @o6.datatype(nodeId="i=15617", browseName="PubSubConnectionDataType", defaultEncodingId="i=15694")
 class PubSubConnectionDataType(Structure):
-    name: o6.String
-    enabled: o6.Boolean
-    publisherId: Any
-    transportProfileUri: o6.String
-    address: NetworkAddressDataType
-    connectionProperties: list[KeyValuePair]
-    transportSettings: ConnectionTransportDataType
-    writerGroups: list[WriterGroupDataType]
-    readerGroups: list[ReaderGroupDataType]
+    name: o6.String = o6.field(name="Name")
+    enabled: o6.Boolean = o6.field(name="Enabled")
+    publisherId: Any = o6.field(name="PublisherId")
+    transportProfileUri: o6.String = o6.field(name="TransportProfileUri")
+    address: NetworkAddressDataType = o6.field(name="Address")
+    connectionProperties: list[KeyValuePair] = o6.field(name="ConnectionProperties")
+    transportSettings: ConnectionTransportDataType = o6.field(name="TransportSettings")
+    writerGroups: list[WriterGroupDataType] = o6.field(name="WriterGroups")
+    readerGroups: list[ReaderGroupDataType] = o6.field(name="ReaderGroups")
 
 
 @o6.datatype(nodeId="i=15530", browseName="PubSubConfigurationDataType", defaultEncodingId="i=21154")
 class PubSubConfigurationDataType(Structure):
-    publishedDataSets: list[PublishedDataSetDataType]
-    connections: list[PubSubConnectionDataType]
-    enabled: o6.Boolean
+    publishedDataSets: list[PublishedDataSetDataType] = o6.field(name="PublishedDataSets")
+    connections: list[PubSubConnectionDataType] = o6.field(name="Connections")
+    enabled: o6.Boolean = o6.field(name="Enabled")
 
 
 @o6.datatype(nodeId="i=16307", browseName="AudioDataType", parent="i=15")
@@ -3056,12 +3056,12 @@ class AudioDataType:
 
 @o6.datatype(nodeId="i=16313", browseName="AdditionalParametersType", defaultEncodingId="i=17537")
 class AdditionalParametersType(Structure):
-    parameters: list[KeyValuePair]
+    parameters: list[KeyValuePair] = o6.field(name="Parameters")
 
 
 @o6.datatype(nodeId="i=17467", browseName="DatagramConnectionTransportDataType", defaultEncodingId="i=17468")
 class DatagramConnectionTransportDataType(ConnectionTransportDataType):
-    discoveryAddress: NetworkAddressDataType
+    discoveryAddress: NetworkAddressDataType = o6.field(name="DiscoveryAddress")
 
 
 @o6.datatype(nodeId="i=17545", browseName="RsaEncryptedSecret", parent="i=24")
@@ -3076,8 +3076,8 @@ class EccEncryptedSecret:
 
 @o6.datatype(nodeId="i=17548", browseName="EphemeralKeyType", defaultEncodingId="i=17549")
 class EphemeralKeyType(Structure):
-    publicKey: o6.ByteString
-    signature: o6.ByteString
+    publicKey: o6.ByteString = o6.field(name="PublicKey")
+    signature: o6.ByteString = o6.field(name="Signature")
 
 
 @o6.datatype(nodeId="i=17588", browseName="Index", parent="i=7")
@@ -3087,37 +3087,37 @@ class Index:
 
 @o6.datatype(nodeId="i=17606", browseName="GenericAttributeValue", defaultEncodingId="i=17610")
 class GenericAttributeValue(Structure):
-    attributeId: o6.UInt32
-    value: Any
+    attributeId: o6.UInt32 = o6.field(name="AttributeId")
+    value: Any = o6.field(name="Value")
 
 
 @o6.datatype(nodeId="i=17607", browseName="GenericAttributes", defaultEncodingId="i=17611")
 class GenericAttributes(NodeAttributes):
-    specifiedAttributes: o6.UInt32
-    displayName: o6.LocalizedText
-    description: o6.LocalizedText
-    writeMask: o6.UInt32
-    userWriteMask: o6.UInt32
-    attributeValues: list[GenericAttributeValue]
+    specifiedAttributes: o6.UInt32 = o6.field(name="SpecifiedAttributes")
+    displayName: o6.LocalizedText = o6.field(name="DisplayName")
+    description: o6.LocalizedText = o6.field(name="Description")
+    writeMask: o6.UInt32 = o6.field(name="WriteMask")
+    userWriteMask: o6.UInt32 = o6.field(name="UserWriteMask")
+    attributeValues: list[GenericAttributeValue] = o6.field(name="AttributeValues")
 
 
 @o6.datatype(nodeId="i=17861", browseName="DecimalDataType", defaultEncodingId="i=17863")
 class DecimalDataType(Structure):
-    scale: o6.Int16
-    value: o6.ByteString
+    scale: o6.Int16 = o6.field(name="Scale")
+    value: o6.ByteString = o6.field(name="Value")
 
 
 @o6.datatype(nodeId="i=18593", browseName="ActionTargetDataType", defaultEncodingId="i=18598")
 class ActionTargetDataType(Structure):
-    actionTargetId: o6.UInt16
-    name: o6.String
-    description: o6.LocalizedText
+    actionTargetId: o6.UInt16 = o6.field(name="ActionTargetId")
+    name: o6.String = o6.field(name="Name")
+    description: o6.LocalizedText = o6.field(name="Description")
 
 
 @o6.datatype(nodeId="i=18594", browseName="PublishedActionDataType", defaultEncodingId="i=18599")
 class PublishedActionDataType(PublishedDataSetSourceDataType):
-    requestDataSetMetaData: DataSetMetaDataType
-    actionTargets: list[ActionTargetDataType]
+    requestDataSetMetaData: DataSetMetaDataType = o6.field(name="RequestDataSetMetaData")
+    actionTargets: list[ActionTargetDataType] = o6.field(name="ActionTargets")
 
 
 @o6.enumtype(nodeId="i=18595", browseName="ActionState")
@@ -3129,8 +3129,8 @@ class ActionState(Enumeration):
 
 @o6.datatype(nodeId="i=18597", browseName="ActionMethodDataType", defaultEncodingId="i=18600")
 class ActionMethodDataType(Structure):
-    objectId: o6.NodeId
-    methodId: o6.NodeId
+    objectId: o6.NodeId = o6.field(name="ObjectId")
+    methodId: o6.NodeId = o6.field(name="MethodId")
 
 
 @o6.enumtype(nodeId="i=18646", browseName="SortOrderType")
@@ -3141,39 +3141,39 @@ class SortOrderType(Enumeration):
 
 @o6.datatype(nodeId="i=18648", browseName="SortRuleElement", defaultEncodingId="i=18650")
 class SortRuleElement(Structure):
-    sortOrder: SortOrderType
-    eventField: SimpleAttributeOperand
+    sortOrder: SortOrderType = o6.field(name="SortOrder")
+    eventField: SimpleAttributeOperand = o6.field(name="EventField")
 
 
 @o6.datatype(nodeId="i=18649", browseName="ReadEventDetailsSorted", defaultEncodingId="i=18651")
 class ReadEventDetailsSorted(ReadEventDetails):
-    numValuesPerNode: o6.UInt32
-    startTime: o6.DateTime
-    endTime: o6.DateTime
-    filter: EventFilter
-    sortClause: list[SortRuleElement]
+    numValuesPerNode: o6.UInt32 = o6.field(name="NumValuesPerNode")
+    startTime: o6.DateTime = o6.field(name="StartTime")
+    endTime: o6.DateTime = o6.field(name="EndTime")
+    filter: EventFilter = o6.field(name="Filter")
+    sortClause: list[SortRuleElement] = o6.field(name="SortClause")
 
 
 @o6.datatype(nodeId="i=18793", browseName="PublishedActionMethodDataType", defaultEncodingId="i=18795")
 class PublishedActionMethodDataType(PublishedActionDataType):
-    requestDataSetMetaData: DataSetMetaDataType
-    actionTargets: list[ActionTargetDataType]
-    actionMethods: list[ActionMethodDataType]
+    requestDataSetMetaData: DataSetMetaDataType = o6.field(name="RequestDataSetMetaData")
+    actionTargets: list[ActionTargetDataType] = o6.field(name="ActionTargets")
+    actionMethods: list[ActionMethodDataType] = o6.field(name="ActionMethods")
 
 
 @o6.datatype(nodeId="i=18794", browseName="DtlsPubSubConnectionDataType", defaultEncodingId="i=18930")
 class DtlsPubSubConnectionDataType(Structure):
-    clientCipherSuite: o6.String
-    serverCipherSuites: list[o6.String]
-    zeroRTT: o6.Boolean
-    certificateGroupId: o6.NodeId
-    verifyClientCertificate: o6.Boolean
+    clientCipherSuite: o6.String = o6.field(name="ClientCipherSuite")
+    serverCipherSuites: list[o6.String] = o6.field(name="ServerCipherSuites")
+    zeroRTT: o6.Boolean = o6.field(name="ZeroRTT")
+    certificateGroupId: o6.NodeId = o6.field(name="CertificateGroupId")
+    verifyClientCertificate: o6.Boolean = o6.field(name="VerifyClientCertificate")
 
 
 @o6.datatype(nodeId="i=18806", browseName="RationalNumber", defaultEncodingId="i=18815")
 class RationalNumber(Structure):
-    numerator: o6.Int32
-    denominator: o6.UInt32
+    numerator: o6.Int32 = o6.field(name="Numerator")
+    denominator: o6.UInt32 = o6.field(name="Denominator")
 
 
 @o6.datatype(nodeId="i=18807", browseName="Vector", defaultEncodingId="i=18816", isAbstract=True)
@@ -3183,9 +3183,9 @@ class Vector(Structure):
 
 @o6.datatype(nodeId="i=18808", browseName="3DVector", defaultEncodingId="i=18817")
 class ThreeDVector(Vector):
-    x: o6.Double
-    y: o6.Double
-    z: o6.Double
+    x: o6.Double = o6.field(name="X")
+    y: o6.Double = o6.field(name="Y")
+    z: o6.Double = o6.field(name="Z")
 
 
 @o6.datatype(nodeId="i=18809", browseName="CartesianCoordinates", defaultEncodingId="i=18818", isAbstract=True)
@@ -3195,9 +3195,9 @@ class CartesianCoordinates(Structure):
 
 @o6.datatype(nodeId="i=18810", browseName="3DCartesianCoordinates", defaultEncodingId="i=18819")
 class ThreeDCartesianCoordinates(CartesianCoordinates):
-    x: o6.Double
-    y: o6.Double
-    z: o6.Double
+    x: o6.Double = o6.field(name="X")
+    y: o6.Double = o6.field(name="Y")
+    z: o6.Double = o6.field(name="Z")
 
 
 @o6.datatype(nodeId="i=18811", browseName="Orientation", defaultEncodingId="i=18820", isAbstract=True)
@@ -3207,9 +3207,9 @@ class Orientation(Structure):
 
 @o6.datatype(nodeId="i=18812", browseName="3DOrientation", defaultEncodingId="i=18821")
 class ThreeDOrientation(Orientation):
-    a: o6.Double
-    b: o6.Double
-    c: o6.Double
+    a: o6.Double = o6.field(name="A")
+    b: o6.Double = o6.field(name="B")
+    c: o6.Double = o6.field(name="C")
 
 
 @o6.datatype(nodeId="i=18813", browseName="Frame", defaultEncodingId="i=18822", isAbstract=True)
@@ -3219,8 +3219,8 @@ class Frame(Structure):
 
 @o6.datatype(nodeId="i=18814", browseName="3DFrame", defaultEncodingId="i=18823")
 class ThreeDFrame(Frame):
-    cartesianCoordinates: ThreeDCartesianCoordinates
-    orientation: ThreeDOrientation
+    cartesianCoordinates: ThreeDCartesianCoordinates = o6.field(name="CartesianCoordinates")
+    orientation: ThreeDOrientation = o6.field(name="Orientation")
 
 
 @o6.enumtype(nodeId="i=18947", browseName="ChassisIdSubtype")
@@ -3255,26 +3255,26 @@ class ManAddrIfSubtype(Enumeration):
 
 @o6.datatype(nodeId="i=18953", browseName="LldpManagementAddressTxPortType", defaultEncodingId="i=19079")
 class LldpManagementAddressTxPortType(Structure):
-    addressSubtype: o6.UInt32
-    manAddress: o6.String
-    txEnable: o6.Boolean
-    addrLen: o6.UInt32
-    ifSubtype: ManAddrIfSubtype
-    ifId: o6.UInt32
+    addressSubtype: o6.UInt32 = o6.field(name="AddressSubtype")
+    manAddress: o6.String = o6.field(name="ManAddress")
+    txEnable: o6.Boolean = o6.field(name="TxEnable")
+    addrLen: o6.UInt32 = o6.field(name="AddrLen")
+    ifSubtype: ManAddrIfSubtype = o6.field(name="IfSubtype")
+    ifId: o6.UInt32 = o6.field(name="IfId")
 
 
 @o6.datatype(nodeId="i=18954", browseName="LldpManagementAddressType", defaultEncodingId="i=19080")
 class LldpManagementAddressType(Structure):
-    addressSubtype: o6.UInt32
-    address: o6.String
-    ifSubtype: ManAddrIfSubtype
-    ifId: o6.UInt32
+    addressSubtype: o6.UInt32 = o6.field(name="AddressSubtype")
+    address: o6.String = o6.field(name="Address")
+    ifSubtype: ManAddrIfSubtype = o6.field(name="IfSubtype")
+    ifId: o6.UInt32 = o6.field(name="IfId")
 
 
 @o6.datatype(nodeId="i=18955", browseName="LldpTlvType", defaultEncodingId="i=19081")
 class LldpTlvType(Structure):
-    tlvType: o6.UInt32
-    tlvInfo: o6.ByteString
+    tlvType: o6.UInt32 = o6.field(name="TlvType")
+    tlvInfo: o6.ByteString = o6.field(name="TlvInfo")
 
 
 @o6.optionsettype(nodeId="i=18956", browseName="LldpSystemCapabilitiesMap", base=o6.UInt32)
@@ -3294,146 +3294,146 @@ class LldpSystemCapabilitiesMap:
 
 @o6.datatype(nodeId="i=19311", browseName="JsonNetworkMessage")
 class JsonNetworkMessage(Structure):
-    messageId: o6.String
-    messageType: o6.String
-    publisherId: o6.String
-    writerGroupName: o6.String
-    dataSetClassId: o6.String
-    messages: list[o6.ExtensionObject]
+    messageId: o6.String = o6.field(name="MessageId")
+    messageType: o6.String = o6.field(name="MessageType")
+    publisherId: o6.String = o6.field(name="PublisherId")
+    writerGroupName: o6.String = o6.field(name="WriterGroupName")
+    dataSetClassId: o6.String = o6.field(name="DataSetClassId")
+    messages: list[o6.ExtensionObject] = o6.field(name="Messages")
 
 
 @o6.datatype(nodeId="i=19312", browseName="JsonDataSetMessage")
 class JsonDataSetMessage(Structure):
-    dataSetWriterId: o6.UInt16
-    dataSetWriterName: o6.String
-    publisherId: o6.String
-    writerGroupName: o6.String
-    sequenceNumber: o6.UInt32
-    metaDataVersion: ConfigurationVersionDataType
-    minorVersion: o6.UInt32
-    timestamp: o6.DateTime
-    status: o6.StatusCode
-    messageType: o6.String
-    payload: o6.ExtensionObject
+    dataSetWriterId: o6.UInt16 = o6.field(name="DataSetWriterId")
+    dataSetWriterName: o6.String = o6.field(name="DataSetWriterName")
+    publisherId: o6.String = o6.field(name="PublisherId")
+    writerGroupName: o6.String = o6.field(name="WriterGroupName")
+    sequenceNumber: o6.UInt32 = o6.field(name="SequenceNumber")
+    metaDataVersion: ConfigurationVersionDataType = o6.field(name="MetaDataVersion")
+    minorVersion: o6.UInt32 = o6.field(name="MinorVersion")
+    timestamp: o6.DateTime = o6.field(name="Timestamp")
+    status: o6.StatusCode = o6.field(name="Status")
+    messageType: o6.String = o6.field(name="MessageType")
+    payload: o6.ExtensionObject = o6.field(name="Payload")
 
 
 @o6.datatype(nodeId="i=19313", browseName="JsonDataSetMetaDataMessage")
 class JsonDataSetMetaDataMessage(Structure):
-    messageId: o6.String
-    messageType: o6.String
-    publisherId: o6.String
-    dataSetWriterId: o6.UInt16
-    writerGroupName: o6.String
-    dataSetWriterName: o6.String
-    timestamp: o6.DateTime
-    metaData: DataSetMetaDataType
+    messageId: o6.String = o6.field(name="MessageId")
+    messageType: o6.String = o6.field(name="MessageType")
+    publisherId: o6.String = o6.field(name="PublisherId")
+    dataSetWriterId: o6.UInt16 = o6.field(name="DataSetWriterId")
+    writerGroupName: o6.String = o6.field(name="WriterGroupName")
+    dataSetWriterName: o6.String = o6.field(name="DataSetWriterName")
+    timestamp: o6.DateTime = o6.field(name="Timestamp")
+    metaData: DataSetMetaDataType = o6.field(name="MetaData")
 
 
 @o6.datatype(nodeId="i=19314", browseName="JsonApplicationDescriptionMessage")
 class JsonApplicationDescriptionMessage(Structure):
-    messageId: o6.String
-    messageType: o6.String
-    publisherId: o6.String
-    timestamp: o6.DateTime
-    description: ApplicationDescription
-    serverCapabilities: list[o6.String]
+    messageId: o6.String = o6.field(name="MessageId")
+    messageType: o6.String = o6.field(name="MessageType")
+    publisherId: o6.String = o6.field(name="PublisherId")
+    timestamp: o6.DateTime = o6.field(name="Timestamp")
+    description: ApplicationDescription = o6.field(name="Description")
+    serverCapabilities: list[o6.String] = o6.field(name="ServerCapabilities")
 
 
 @o6.datatype(nodeId="i=19315", browseName="JsonServerEndpointsMessage")
 class JsonServerEndpointsMessage(Structure):
-    messageId: o6.String
-    messageType: o6.String
-    publisherId: o6.String
-    timestamp: o6.DateTime
-    description: ApplicationDescription
-    endpoints: list[EndpointDescription]
+    messageId: o6.String = o6.field(name="MessageId")
+    messageType: o6.String = o6.field(name="MessageType")
+    publisherId: o6.String = o6.field(name="PublisherId")
+    timestamp: o6.DateTime = o6.field(name="Timestamp")
+    description: ApplicationDescription = o6.field(name="Description")
+    endpoints: list[EndpointDescription] = o6.field(name="Endpoints")
 
 
 @o6.datatype(nodeId="i=19316", browseName="JsonStatusMessage")
 class JsonStatusMessage(Structure):
-    messageId: o6.String
-    messageType: o6.String
-    publisherId: o6.String
-    timestamp: o6.DateTime
-    isCyclic: o6.Boolean
-    status: PubSubState
-    nextReportTime: o6.DateTime
+    messageId: o6.String = o6.field(name="MessageId")
+    messageType: o6.String = o6.field(name="MessageType")
+    publisherId: o6.String = o6.field(name="PublisherId")
+    timestamp: o6.DateTime = o6.field(name="Timestamp")
+    isCyclic: o6.Boolean = o6.field(name="IsCyclic")
+    status: PubSubState = o6.field(name="Status")
+    nextReportTime: o6.DateTime = o6.field(name="NextReportTime")
 
 
 @o6.datatype(nodeId="i=19317", browseName="JsonPubSubConnectionMessage")
 class JsonPubSubConnectionMessage(Structure):
-    messageId: o6.String
-    messageType: o6.String
-    publisherId: o6.String
-    timestamp: o6.DateTime
-    connection: PubSubConnectionDataType
+    messageId: o6.String = o6.field(name="MessageId")
+    messageType: o6.String = o6.field(name="MessageType")
+    publisherId: o6.String = o6.field(name="PublisherId")
+    timestamp: o6.DateTime = o6.field(name="Timestamp")
+    connection: PubSubConnectionDataType = o6.field(name="Connection")
 
 
 @o6.datatype(nodeId="i=19318", browseName="JsonActionMetaDataMessage")
 class JsonActionMetaDataMessage(Structure):
-    messageId: o6.String
-    messageType: o6.String
-    publisherId: o6.String
-    dataSetWriterId: o6.UInt16
-    dataSetWriterName: o6.String
-    timestamp: o6.DateTime
-    actionTargets: list[ActionTargetDataType]
-    request: DataSetMetaDataType
-    response: DataSetMetaDataType
-    actionMethods: list[ActionMethodDataType]
+    messageId: o6.String = o6.field(name="MessageId")
+    messageType: o6.String = o6.field(name="MessageType")
+    publisherId: o6.String = o6.field(name="PublisherId")
+    dataSetWriterId: o6.UInt16 = o6.field(name="DataSetWriterId")
+    dataSetWriterName: o6.String = o6.field(name="DataSetWriterName")
+    timestamp: o6.DateTime = o6.field(name="Timestamp")
+    actionTargets: list[ActionTargetDataType] = o6.field(name="ActionTargets")
+    request: DataSetMetaDataType = o6.field(name="Request")
+    response: DataSetMetaDataType = o6.field(name="Response")
+    actionMethods: list[ActionMethodDataType] = o6.field(name="ActionMethods")
 
 
 @o6.datatype(nodeId="i=19319", browseName="JsonActionResponderMessage")
 class JsonActionResponderMessage(Structure):
-    messageId: o6.String
-    messageType: o6.String
-    publisherId: o6.String
-    timestamp: o6.DateTime
-    connection: PubSubConnectionDataType
+    messageId: o6.String = o6.field(name="MessageId")
+    messageType: o6.String = o6.field(name="MessageType")
+    publisherId: o6.String = o6.field(name="PublisherId")
+    timestamp: o6.DateTime = o6.field(name="Timestamp")
+    connection: PubSubConnectionDataType = o6.field(name="Connection")
 
 
 @o6.datatype(nodeId="i=19320", browseName="JsonActionNetworkMessage")
 class JsonActionNetworkMessage(Structure):
-    messageId: o6.String
-    messageType: o6.String
-    publisherId: o6.String
-    timestamp: o6.DateTime
-    responseAddress: o6.String
-    correlationData: o6.ByteString
-    requestorId: o6.String
-    timeoutHint: o6.Double
-    messages: list[o6.ExtensionObject]
+    messageId: o6.String = o6.field(name="MessageId")
+    messageType: o6.String = o6.field(name="MessageType")
+    publisherId: o6.String = o6.field(name="PublisherId")
+    timestamp: o6.DateTime = o6.field(name="Timestamp")
+    responseAddress: o6.String = o6.field(name="ResponseAddress")
+    correlationData: o6.ByteString = o6.field(name="CorrelationData")
+    requestorId: o6.String = o6.field(name="RequestorId")
+    timeoutHint: o6.Double = o6.field(name="TimeoutHint")
+    messages: list[o6.ExtensionObject] = o6.field(name="Messages")
 
 
 @o6.datatype(nodeId="i=19321", browseName="JsonActionRequestMessage")
 class JsonActionRequestMessage(Structure):
-    dataSetWriterId: o6.UInt16
-    actionTargetId: o6.UInt16
-    dataSetWriterName: o6.String
-    writerGroupName: o6.String
-    metaDataVersion: ConfigurationVersionDataType
-    minorVersion: o6.UInt32
-    timestamp: o6.DateTime
-    messageType: o6.String
-    requestId: o6.UInt16
-    actionState: ActionState
-    payload: o6.ExtensionObject
+    dataSetWriterId: o6.UInt16 = o6.field(name="DataSetWriterId")
+    actionTargetId: o6.UInt16 = o6.field(name="ActionTargetId")
+    dataSetWriterName: o6.String = o6.field(name="DataSetWriterName")
+    writerGroupName: o6.String = o6.field(name="WriterGroupName")
+    metaDataVersion: ConfigurationVersionDataType = o6.field(name="MetaDataVersion")
+    minorVersion: o6.UInt32 = o6.field(name="MinorVersion")
+    timestamp: o6.DateTime = o6.field(name="Timestamp")
+    messageType: o6.String = o6.field(name="MessageType")
+    requestId: o6.UInt16 = o6.field(name="RequestId")
+    actionState: ActionState = o6.field(name="ActionState")
+    payload: o6.ExtensionObject = o6.field(name="Payload")
 
 
 @o6.datatype(nodeId="i=19322", browseName="JsonActionResponseMessage")
 class JsonActionResponseMessage(Structure):
-    dataSetWriterId: o6.UInt16
-    actionTargetId: o6.UInt16
-    dataSetWriterName: o6.String
-    writerGroupName: o6.String
-    metaDataVersion: ConfigurationVersionDataType
-    minorVersion: o6.UInt32
-    timestamp: o6.DateTime
-    status: o6.StatusCode
-    messageType: o6.String
-    requestId: o6.UInt16
-    actionState: ActionState
-    payload: o6.ExtensionObject
+    dataSetWriterId: o6.UInt16 = o6.field(name="DataSetWriterId")
+    actionTargetId: o6.UInt16 = o6.field(name="ActionTargetId")
+    dataSetWriterName: o6.String = o6.field(name="DataSetWriterName")
+    writerGroupName: o6.String = o6.field(name="WriterGroupName")
+    metaDataVersion: ConfigurationVersionDataType = o6.field(name="MetaDataVersion")
+    minorVersion: o6.UInt32 = o6.field(name="MinorVersion")
+    timestamp: o6.DateTime = o6.field(name="Timestamp")
+    status: o6.StatusCode = o6.field(name="Status")
+    messageType: o6.String = o6.field(name="MessageType")
+    requestId: o6.UInt16 = o6.field(name="RequestId")
+    actionState: ActionState = o6.field(name="ActionState")
+    payload: o6.ExtensionObject = o6.field(name="Payload")
 
 
 @o6.enumtype(nodeId="i=19723", browseName="DiagnosticsLevel")
@@ -3453,39 +3453,39 @@ class PubSubDiagnosticsCounterClassification(Enumeration):
 
 @o6.datatype(nodeId="i=19746", browseName="SpanContextDataType", defaultEncodingId="i=19754")
 class SpanContextDataType(Structure):
-    traceId: o6.Guid
-    spanId: o6.UInt64
+    traceId: o6.Guid = o6.field(name="TraceId")
+    spanId: o6.UInt64 = o6.field(name="SpanId")
 
 
 @o6.datatype(nodeId="i=19747", browseName="TraceContextDataType", defaultEncodingId="i=19755")
 class TraceContextDataType(SpanContextDataType):
-    traceId: o6.Guid
-    spanId: o6.UInt64
-    parentSpanId: o6.UInt64
-    parentIdentifier: o6.String
+    traceId: o6.Guid = o6.field(name="TraceId")
+    spanId: o6.UInt64 = o6.field(name="SpanId")
+    parentSpanId: o6.UInt64 = o6.field(name="ParentSpanId")
+    parentIdentifier: o6.String = o6.field(name="ParentIdentifier")
 
 
 @o6.datatype(nodeId="i=19748", browseName="NameValuePair", defaultEncodingId="i=19756")
 class NameValuePair(Structure):
-    name: o6.String
-    value: Any
+    name: o6.String = o6.field(name="Name")
+    value: Any = o6.field(name="Value")
 
 
 @o6.datatype(nodeId="i=19361", browseName="LogRecord", defaultEncodingId="i=19379")
 class LogRecord(Structure):
-    time: o6.DateTime
-    severity: o6.UInt16
-    eventType: o6.NodeId | None
-    sourceNode: o6.NodeId | None
-    sourceName: o6.String | None
-    message: o6.LocalizedText
-    traceContext: TraceContextDataType | None
-    additionalData: list[NameValuePair] | None
+    time: o6.DateTime = o6.field(name="Time")
+    severity: o6.UInt16 = o6.field(name="Severity")
+    eventType: o6.NodeId | None = o6.field(name="EventType")
+    sourceNode: o6.NodeId | None = o6.field(name="SourceNode")
+    sourceName: o6.String | None = o6.field(name="SourceName")
+    message: o6.LocalizedText = o6.field(name="Message")
+    traceContext: TraceContextDataType | None = o6.field(name="TraceContext")
+    additionalData: list[NameValuePair] | None = o6.field(name="AdditionalData")
 
 
 @o6.datatype(nodeId="i=19745", browseName="LogRecordsDataType", defaultEncodingId="i=19753")
 class LogRecordsDataType(Structure):
-    logRecordArray: list[LogRecord]
+    logRecordArray: list[LogRecord] = o6.field(name="LogRecordArray")
 
 
 @o6.optionsettype(nodeId="i=19749", browseName="LogRecordMask", base=o6.UInt32)
@@ -3506,11 +3506,11 @@ class DataSetOrderingType(Enumeration):
 
 @o6.datatype(nodeId="i=15645", browseName="UadpWriterGroupMessageDataType", defaultEncodingId="i=15715")
 class UadpWriterGroupMessageDataType(WriterGroupMessageDataType):
-    groupVersion: o6.UInt32
-    dataSetOrdering: DataSetOrderingType
-    networkMessageContentMask: UadpNetworkMessageContentMask
-    samplingOffset: o6.Double
-    publishingOffset: list[o6.Double]
+    groupVersion: o6.UInt32 = o6.field(name="GroupVersion")
+    dataSetOrdering: DataSetOrderingType = o6.field(name="DataSetOrdering")
+    networkMessageContentMask: UadpNetworkMessageContentMask = o6.field(name="NetworkMessageContentMask")
+    samplingOffset: o6.Double = o6.field(name="SamplingOffset")
+    publishingOffset: list[o6.Double] = o6.field(name="PublishingOffset")
 
 
 @o6.datatype(nodeId="i=20998", browseName="VersionTime", parent="i=7")
@@ -3520,28 +3520,28 @@ class VersionTime:
 
 @o6.datatype(nodeId="i=20999", browseName="SessionlessInvokeResponseType", defaultEncodingId="i=21001")
 class SessionlessInvokeResponseType(Structure):
-    namespaceUris: list[o6.String]
-    serverUris: list[o6.String]
-    serviceId: o6.UInt32
+    namespaceUris: list[o6.String] = o6.field(name="NamespaceUris")
+    serverUris: list[o6.String] = o6.field(name="ServerUris")
+    serviceId: o6.UInt32 = o6.field(name="ServiceId")
 
 
 @o6.datatype(nodeId="i=23468", browseName="AliasNameDataType", defaultEncodingId="i=23499")
 class AliasNameDataType(Structure):
-    aliasName: o6.QualifiedName
-    referencedNodes: list[o6.ExpandedNodeId]
+    aliasName: o6.QualifiedName = o6.field(name="AliasName")
+    referencedNodes: list[o6.ExpandedNodeId] = o6.field(name="ReferencedNodes")
 
 
 @o6.datatype(nodeId="i=23497", browseName="ReadAnnotationDataDetails", defaultEncodingId="i=23500")
 class ReadAnnotationDataDetails(HistoryReadDetails):
-    reqTimes: list[o6.DateTime]
+    reqTimes: list[o6.DateTime] = o6.field(name="ReqTimes")
 
 
 @o6.datatype(nodeId="i=23498", browseName="CurrencyUnitType", defaultEncodingId="i=23507")
 class CurrencyUnitType(Structure):
-    numericCode: o6.Int16
-    exponent: o6.SByte
-    alphabeticCode: o6.String
-    currency: o6.LocalizedText
+    numericCode: o6.Int16 = o6.field(name="NumericCode")
+    exponent: o6.SByte = o6.field(name="Exponent")
+    alphabeticCode: o6.String = o6.field(name="AlphabeticCode")
+    currency: o6.LocalizedText = o6.field(name="Currency")
 
 
 @o6.optionsettype(nodeId="i=23564", browseName="TrustListValidationOptions", base=o6.UInt32)
@@ -3557,38 +3557,38 @@ class TrustListValidationOptions:
 
 @o6.datatype(nodeId="i=15436", browseName="CertificateGroupDataType", defaultEncodingId="i=16540")
 class CertificateGroupDataType(BaseConfigurationRecordDataType):
-    name: o6.String
-    recordProperties: list[KeyValuePair]
-    purpose: o6.NodeId
-    certificateTypes: list[o6.NodeId]
-    isCertificateAssigned: list[o6.Boolean]
-    validationOptions: TrustListValidationOptions
+    name: o6.String = o6.field(name="Name")
+    recordProperties: list[KeyValuePair] = o6.field(name="RecordProperties")
+    purpose: o6.NodeId = o6.field(name="Purpose")
+    certificateTypes: list[o6.NodeId] = o6.field(name="CertificateTypes")
+    isCertificateAssigned: list[o6.Boolean] = o6.field(name="IsCertificateAssigned")
+    validationOptions: TrustListValidationOptions = o6.field(name="ValidationOptions")
 
 
 @o6.datatype(nodeId="i=23599", browseName="StandaloneSubscribedDataSetRefDataType", defaultEncodingId="i=23851")
 class StandaloneSubscribedDataSetRefDataType(SubscribedDataSetDataType):
-    dataSetName: o6.String
+    dataSetName: o6.String = o6.field(name="DataSetName")
 
 
 @o6.datatype(nodeId="i=23600", browseName="StandaloneSubscribedDataSetDataType", defaultEncodingId="i=23852")
 class StandaloneSubscribedDataSetDataType(SubscribedDataSetDataType):
-    name: o6.String
-    dataSetFolder: list[o6.String]
-    dataSetMetaData: DataSetMetaDataType
-    subscribedDataSet: SubscribedDataSetDataType
+    name: o6.String = o6.field(name="Name")
+    dataSetFolder: list[o6.String] = o6.field(name="DataSetFolder")
+    dataSetMetaData: DataSetMetaDataType = o6.field(name="DataSetMetaData")
+    subscribedDataSet: SubscribedDataSetDataType = o6.field(name="SubscribedDataSet")
 
 
 @o6.datatype(nodeId="i=23601", browseName="SecurityGroupDataType", defaultEncodingId="i=23853")
 class SecurityGroupDataType(Structure):
-    name: o6.String
-    securityGroupFolder: list[o6.String]
-    keyLifetime: o6.Double
-    securityPolicyUri: o6.String
-    maxFutureKeyCount: o6.UInt32
-    maxPastKeyCount: o6.UInt32
-    securityGroupId: o6.String
-    rolePermissions: list[RolePermissionType]
-    groupProperties: list[KeyValuePair]
+    name: o6.String = o6.field(name="Name")
+    securityGroupFolder: list[o6.String] = o6.field(name="SecurityGroupFolder")
+    keyLifetime: o6.Double = o6.field(name="KeyLifetime")
+    securityPolicyUri: o6.String = o6.field(name="SecurityPolicyUri")
+    maxFutureKeyCount: o6.UInt32 = o6.field(name="MaxFutureKeyCount")
+    maxPastKeyCount: o6.UInt32 = o6.field(name="MaxPastKeyCount")
+    securityGroupId: o6.String = o6.field(name="SecurityGroupId")
+    rolePermissions: list[RolePermissionType] = o6.field(name="RolePermissions")
+    groupProperties: list[KeyValuePair] = o6.field(name="GroupProperties")
 
 
 @o6.datatype(nodeId="i=23603", browseName="QosDataType", defaultEncodingId="i=23855", isAbstract=True)
@@ -3603,7 +3603,7 @@ class TransmitQosDataType(QosDataType):
 
 @o6.datatype(nodeId="i=23605", browseName="TransmitQosPriorityDataType", defaultEncodingId="i=23857")
 class TransmitQosPriorityDataType(TransmitQosDataType):
-    priorityLabel: o6.String
+    priorityLabel: o6.String = o6.field(name="PriorityLabel")
 
 
 @o6.datatype(nodeId="i=23608", browseName="ReceiveQosDataType", defaultEncodingId="i=23860", isAbstract=True)
@@ -3613,65 +3613,65 @@ class ReceiveQosDataType(QosDataType):
 
 @o6.datatype(nodeId="i=23609", browseName="ReceiveQosPriorityDataType", defaultEncodingId="i=23861")
 class ReceiveQosPriorityDataType(ReceiveQosDataType):
-    priorityLabel: o6.String
+    priorityLabel: o6.String = o6.field(name="PriorityLabel")
 
 
 @o6.datatype(nodeId="i=23612", browseName="DatagramConnectionTransport2DataType", defaultEncodingId="i=23864")
 class DatagramConnectionTransport2DataType(DatagramConnectionTransportDataType):
-    discoveryAddress: NetworkAddressDataType
-    discoveryAnnounceRate: o6.UInt32
-    discoveryMaxMessageSize: o6.UInt32
-    qosCategory: o6.String
-    datagramQos: list[QosDataType]
+    discoveryAddress: NetworkAddressDataType = o6.field(name="DiscoveryAddress")
+    discoveryAnnounceRate: o6.UInt32 = o6.field(name="DiscoveryAnnounceRate")
+    discoveryMaxMessageSize: o6.UInt32 = o6.field(name="DiscoveryMaxMessageSize")
+    qosCategory: o6.String = o6.field(name="QosCategory")
+    datagramQos: list[QosDataType] = o6.field(name="DatagramQos")
 
 
 @o6.datatype(nodeId="i=23613", browseName="DatagramWriterGroupTransport2DataType", defaultEncodingId="i=23865")
 class DatagramWriterGroupTransport2DataType(DatagramWriterGroupTransportDataType):
-    messageRepeatCount: o6.Byte
-    messageRepeatDelay: o6.Double
-    address: NetworkAddressDataType
-    qosCategory: o6.String
-    datagramQos: list[TransmitQosDataType]
-    discoveryAnnounceRate: o6.UInt32
-    topic: o6.String
+    messageRepeatCount: o6.Byte = o6.field(name="MessageRepeatCount")
+    messageRepeatDelay: o6.Double = o6.field(name="MessageRepeatDelay")
+    address: NetworkAddressDataType = o6.field(name="Address")
+    qosCategory: o6.String = o6.field(name="QosCategory")
+    datagramQos: list[TransmitQosDataType] = o6.field(name="DatagramQos")
+    discoveryAnnounceRate: o6.UInt32 = o6.field(name="DiscoveryAnnounceRate")
+    topic: o6.String = o6.field(name="Topic")
 
 
 @o6.datatype(nodeId="i=23614", browseName="DatagramDataSetReaderTransportDataType", defaultEncodingId="i=23866")
 class DatagramDataSetReaderTransportDataType(DataSetReaderTransportDataType):
-    address: NetworkAddressDataType
-    qosCategory: o6.String
-    datagramQos: list[ReceiveQosDataType]
-    topic: o6.String
+    address: NetworkAddressDataType = o6.field(name="Address")
+    qosCategory: o6.String = o6.field(name="QosCategory")
+    datagramQos: list[ReceiveQosDataType] = o6.field(name="DatagramQos")
+    topic: o6.String = o6.field(name="Topic")
 
 
 @o6.datatype(nodeId="i=23724", browseName="ServiceCertificateDataType", defaultEncodingId="i=23725")
 class ServiceCertificateDataType(Structure):
-    certificate: o6.ByteString
-    issuers: list[o6.ByteString]
-    validFrom: o6.DateTime
-    validTo: o6.DateTime
+    certificate: o6.ByteString = o6.field(name="Certificate")
+    issuers: list[o6.ByteString] = o6.field(name="Issuers")
+    validFrom: o6.DateTime = o6.field(name="ValidFrom")
+    validTo: o6.DateTime = o6.field(name="ValidTo")
 
 
 @o6.datatype(nodeId="i=23744", browseName="AuthorizationServiceConfigurationDataType", defaultEncodingId="i=23755")
 class AuthorizationServiceConfigurationDataType(BaseConfigurationRecordDataType):
-    name: o6.String
-    recordProperties: list[KeyValuePair]
-    serviceUri: o6.String
-    serviceCertificates: list[ServiceCertificateDataType]
-    issuerEndpointSettings: o6.String
+    name: o6.String = o6.field(name="Name")
+    recordProperties: list[KeyValuePair] = o6.field(name="RecordProperties")
+    serviceUri: o6.String = o6.field(name="ServiceUri")
+    serviceCertificates: list[ServiceCertificateDataType] = o6.field(name="ServiceCertificates")
+    issuerEndpointSettings: o6.String = o6.field(name="IssuerEndpointSettings")
 
 
 @o6.datatype(nodeId="i=23743", browseName="ApplicationConfigurationDataType", defaultEncodingId="i=23754")
 class ApplicationConfigurationDataType(BaseConfigurationDataType):
-    configurationVersion: o6.UInt32
-    configurationProperties: list[KeyValuePair]
-    applicationIdentity: ApplicationIdentityDataType
-    certificateGroups: list[CertificateGroupDataType]
-    serverEndpoints: list[ServerEndpointDataType]
-    clientEndpoints: list[EndpointDataType]
-    securitySettings: list[SecuritySettingsDataType]
-    userTokenSettings: list[UserTokenSettingsDataType]
-    authorizationServices: list[AuthorizationServiceConfigurationDataType]
+    configurationVersion: o6.UInt32 = o6.field(name="ConfigurationVersion")
+    configurationProperties: list[KeyValuePair] = o6.field(name="ConfigurationProperties")
+    applicationIdentity: ApplicationIdentityDataType = o6.field(name="ApplicationIdentity")
+    certificateGroups: list[CertificateGroupDataType] = o6.field(name="CertificateGroups")
+    serverEndpoints: list[ServerEndpointDataType] = o6.field(name="ServerEndpoints")
+    clientEndpoints: list[EndpointDataType] = o6.field(name="ClientEndpoints")
+    securitySettings: list[SecuritySettingsDataType] = o6.field(name="SecuritySettings")
+    userTokenSettings: list[UserTokenSettingsDataType] = o6.field(name="UserTokenSettings")
+    authorizationServices: list[AuthorizationServiceConfigurationDataType] = o6.field(name="AuthorizationServices")
 
 
 @o6.datatype(nodeId="i=23751", browseName="UriString", parent="i=12")
@@ -3681,62 +3681,62 @@ class UriString:
 
 @o6.datatype(nodeId="i=23903", browseName="NumberRange", defaultEncodingId="i=24250")
 class NumberRange(Structure):
-    low: Any
-    high: Any
+    low: Any = o6.field(name="Low")
+    high: Any = o6.field(name="High")
 
 
 @o6.datatype(nodeId="i=24033", browseName="ProgramDiagnostic2DataType", defaultEncodingId="i=24034")
 class ProgramDiagnostic2DataType(Structure):
-    createSessionId: o6.NodeId
-    createClientName: o6.String
-    invocationCreationTime: o6.DateTime
-    lastTransitionTime: o6.DateTime
-    lastMethodCall: o6.String
-    lastMethodSessionId: o6.NodeId
-    lastMethodInputArguments: list[Argument]
-    lastMethodOutputArguments: list[Argument]
-    lastMethodInputValues: list[Any]
-    lastMethodOutputValues: list[Any]
-    lastMethodCallTime: o6.DateTime
-    lastMethodReturnStatus: o6.StatusCode
+    createSessionId: o6.NodeId = o6.field(name="CreateSessionId")
+    createClientName: o6.String = o6.field(name="CreateClientName")
+    invocationCreationTime: o6.DateTime = o6.field(name="InvocationCreationTime")
+    lastTransitionTime: o6.DateTime = o6.field(name="LastTransitionTime")
+    lastMethodCall: o6.String = o6.field(name="LastMethodCall")
+    lastMethodSessionId: o6.NodeId = o6.field(name="LastMethodSessionId")
+    lastMethodInputArguments: list[Argument] = o6.field(name="LastMethodInputArguments")
+    lastMethodOutputArguments: list[Argument] = o6.field(name="LastMethodOutputArguments")
+    lastMethodInputValues: list[Any] = o6.field(name="LastMethodInputValues")
+    lastMethodOutputValues: list[Any] = o6.field(name="LastMethodOutputValues")
+    lastMethodCallTime: o6.DateTime = o6.field(name="LastMethodCallTime")
+    lastMethodReturnStatus: o6.StatusCode = o6.field(name="LastMethodReturnStatus")
 
 
 @o6.datatype(nodeId="i=24051", browseName="AliasNameVerboseDataType", defaultEncodingId="i=24262")
 class AliasNameVerboseDataType(Structure):
-    aliasName: o6.QualifiedName
-    referencedNodes: list[o6.ExpandedNodeId]
-    serverUris: list[o6.String]
-    aliasNameCategoryId: o6.NodeId
+    aliasName: o6.QualifiedName = o6.field(name="AliasName")
+    referencedNodes: list[o6.ExpandedNodeId] = o6.field(name="ReferencedNodes")
+    serverUris: list[o6.String] = o6.field(name="ServerUris")
+    aliasNameCategoryId: o6.NodeId = o6.field(name="AliasNameCategoryId")
 
 
 @o6.datatype(nodeId="i=24105", browseName="PortableQualifiedName", defaultEncodingId="i=24108")
 class PortableQualifiedName(Structure):
-    namespaceUri: o6.String
-    name: o6.String
+    namespaceUri: o6.String = o6.field(name="NamespaceUri")
+    name: o6.String = o6.field(name="Name")
 
 
 @o6.datatype(nodeId="i=24106", browseName="PortableNodeId", defaultEncodingId="i=24109")
 class PortableNodeId(Structure):
-    namespaceUri: o6.String
-    identifier: o6.NodeId
+    namespaceUri: o6.String = o6.field(name="NamespaceUri")
+    identifier: o6.NodeId = o6.field(name="Identifier")
 
 
 @o6.datatype(nodeId="i=24052", browseName="AliasCategoryUpdateDataType", defaultEncodingId="i=24338")
 class AliasCategoryUpdateDataType(Structure):
-    category: PortableNodeId
-    lastChange: o6.UInt32
+    category: PortableNodeId = o6.field(name="Category")
+    lastChange: o6.UInt32 = o6.field(name="LastChange")
 
 
 @o6.datatype(nodeId="i=24053", browseName="AliasUpdateDataType", defaultEncodingId="i=24339")
 class AliasUpdateDataType(Structure):
-    applicationUri: o6.String
-    categories: list[AliasCategoryUpdateDataType]
+    applicationUri: o6.String = o6.field(name="ApplicationUri")
+    categories: list[AliasCategoryUpdateDataType] = o6.field(name="Categories")
 
 
 @o6.datatype(nodeId="i=24107", browseName="UnsignedRationalNumber", defaultEncodingId="i=24110")
 class UnsignedRationalNumber(Structure):
-    numerator: o6.UInt32
-    denominator: o6.UInt32
+    numerator: o6.UInt32 = o6.field(name="Numerator")
+    denominator: o6.UInt32 = o6.field(name="Denominator")
 
 
 @o6.enumtype(nodeId="i=24210", browseName="Duplex")
@@ -3855,49 +3855,49 @@ class UserConfigurationMask:
 
 @o6.datatype(nodeId="i=24281", browseName="UserManagementDataType", defaultEncodingId="i=24292")
 class UserManagementDataType(Structure):
-    userName: o6.String
-    userConfiguration: UserConfigurationMask
-    description: o6.String
+    userName: o6.String = o6.field(name="UserName")
+    userConfiguration: UserConfigurationMask = o6.field(name="UserConfiguration")
+    description: o6.String = o6.field(name="Description")
 
 
 @o6.datatype(nodeId="i=25220", browseName="PriorityMappingEntryType", defaultEncodingId="i=25239")
 class PriorityMappingEntryType(Structure):
-    mappingUri: o6.String
-    priorityLabel: o6.String
-    priorityValue_PCP: o6.Byte
-    priorityValue_DSCP: o6.UInt32
+    mappingUri: o6.String = o6.field(name="MappingUri")
+    priorityLabel: o6.String = o6.field(name="PriorityLabel")
+    priorityValue_PCP: o6.Byte = o6.field(name="PriorityValue_PCP")
+    priorityValue_DSCP: o6.UInt32 = o6.field(name="PriorityValue_DSCP")
 
 
 @o6.datatype(nodeId="i=25269", browseName="PublishedDataSetCustomSourceDataType", defaultEncodingId="i=25529")
 class PublishedDataSetCustomSourceDataType(PublishedDataSetSourceDataType):
-    cyclicDataSet: o6.Boolean
+    cyclicDataSet: o6.Boolean = o6.field(name="CyclicDataSet")
 
 
 @o6.datatype(nodeId="i=25270", browseName="PubSubKeyPushTargetDataType", defaultEncodingId="i=25530")
 class PubSubKeyPushTargetDataType(Structure):
-    applicationUri: o6.String
-    pushTargetFolder: list[o6.String]
-    endpointUrl: o6.String
-    securityPolicyUri: o6.String
-    userTokenType: UserTokenPolicy
-    requestedKeyCount: o6.UInt16
-    retryInterval: o6.Double
-    pushTargetProperties: list[KeyValuePair]
-    securityGroups: list[o6.String]
+    applicationUri: o6.String = o6.field(name="ApplicationUri")
+    pushTargetFolder: list[o6.String] = o6.field(name="PushTargetFolder")
+    endpointUrl: o6.String = o6.field(name="EndpointUrl")
+    securityPolicyUri: o6.String = o6.field(name="SecurityPolicyUri")
+    userTokenType: UserTokenPolicy = o6.field(name="UserTokenType")
+    requestedKeyCount: o6.UInt16 = o6.field(name="RequestedKeyCount")
+    retryInterval: o6.Double = o6.field(name="RetryInterval")
+    pushTargetProperties: list[KeyValuePair] = o6.field(name="PushTargetProperties")
+    securityGroups: list[o6.String] = o6.field(name="SecurityGroups")
 
 
 @o6.datatype(nodeId="i=23602", browseName="PubSubConfiguration2DataType", defaultEncodingId="i=23854")
 class PubSubConfiguration2DataType(PubSubConfigurationDataType):
-    publishedDataSets: list[PublishedDataSetDataType]
-    connections: list[PubSubConnectionDataType]
-    enabled: o6.Boolean
-    subscribedDataSets: list[StandaloneSubscribedDataSetDataType]
-    dataSetClasses: list[DataSetMetaDataType]
-    defaultSecurityKeyServices: list[EndpointDescription]
-    securityGroups: list[SecurityGroupDataType]
-    pubSubKeyPushTargets: list[PubSubKeyPushTargetDataType]
-    configurationVersion: o6.UInt32
-    configurationProperties: list[KeyValuePair]
+    publishedDataSets: list[PublishedDataSetDataType] = o6.field(name="PublishedDataSets")
+    connections: list[PubSubConnectionDataType] = o6.field(name="Connections")
+    enabled: o6.Boolean = o6.field(name="Enabled")
+    subscribedDataSets: list[StandaloneSubscribedDataSetDataType] = o6.field(name="SubscribedDataSets")
+    dataSetClasses: list[DataSetMetaDataType] = o6.field(name="DataSetClasses")
+    defaultSecurityKeyServices: list[EndpointDescription] = o6.field(name="DefaultSecurityKeyServices")
+    securityGroups: list[SecurityGroupDataType] = o6.field(name="SecurityGroups")
+    pubSubKeyPushTargets: list[PubSubKeyPushTargetDataType] = o6.field(name="PubSubKeyPushTargets")
+    configurationVersion: o6.UInt32 = o6.field(name="ConfigurationVersion")
+    configurationProperties: list[KeyValuePair] = o6.field(name="ConfigurationProperties")
 
 
 @o6.optionsettype(nodeId="i=25517", browseName="PubSubConfigurationRefMask", base=o6.UInt32)
@@ -3919,17 +3919,17 @@ class PubSubConfigurationRefMask:
 
 @o6.datatype(nodeId="i=25519", browseName="PubSubConfigurationRefDataType", defaultEncodingId="i=25531")
 class PubSubConfigurationRefDataType(Structure):
-    configurationMask: PubSubConfigurationRefMask
-    elementIndex: o6.UInt16
-    connectionIndex: o6.UInt16
-    groupIndex: o6.UInt16
+    configurationMask: PubSubConfigurationRefMask = o6.field(name="ConfigurationMask")
+    elementIndex: o6.UInt16 = o6.field(name="ElementIndex")
+    connectionIndex: o6.UInt16 = o6.field(name="ConnectionIndex")
+    groupIndex: o6.UInt16 = o6.field(name="GroupIndex")
 
 
 @o6.datatype(nodeId="i=25520", browseName="PubSubConfigurationValueDataType", defaultEncodingId="i=25532")
 class PubSubConfigurationValueDataType(Structure):
-    configurationElement: PubSubConfigurationRefDataType
-    name: o6.String
-    identifier: Any
+    configurationElement: PubSubConfigurationRefDataType = o6.field(name="ConfigurationElement")
+    name: o6.String = o6.field(name="Name")
+    identifier: Any = o6.field(name="Identifier")
 
 
 @o6.datatype(nodeId="i=25726", browseName="EncodedTicket", parent="i=12")
@@ -3956,9 +3956,9 @@ class AlarmMask:
 
 @o6.datatype(nodeId="i=32285", browseName="TransactionErrorType", defaultEncodingId="i=32382")
 class TransactionErrorType(Structure):
-    targetId: o6.NodeId
-    error: o6.StatusCode
-    message: o6.LocalizedText
+    targetId: o6.NodeId = o6.field(name="TargetId")
+    error: o6.StatusCode = o6.field(name="Error")
+    message: o6.LocalizedText = o6.field(name="Message")
 
 
 @o6.enumtype(nodeId="i=32417", browseName="RedundantServerMode")
@@ -3971,26 +3971,26 @@ class RedundantServerMode(Enumeration):
 
 @o6.datatype(nodeId="i=32421", browseName="BitFieldDefinition", defaultEncodingId="i=32422")
 class BitFieldDefinition(Structure):
-    name: o6.String
-    description: o6.LocalizedText
-    reserved: o6.Boolean
-    startingBitPosition: o6.UInt32
-    endingBitPosition: o6.UInt32
+    name: o6.String = o6.field(name="Name")
+    description: o6.LocalizedText = o6.field(name="Description")
+    reserved: o6.Boolean = o6.field(name="Reserved")
+    startingBitPosition: o6.UInt32 = o6.field(name="StartingBitPosition")
+    endingBitPosition: o6.UInt32 = o6.field(name="EndingBitPosition")
 
 
 @o6.datatype(nodeId="i=32434", browseName="AnnotationDataType", defaultEncodingId="i=32560")
 class AnnotationDataType(Structure):
-    annotation: o6.String
-    discipline: o6.String
-    uri: o6.String
+    annotation: o6.String = o6.field(name="Annotation")
+    discipline: o6.String = o6.field(name="Discipline")
+    uri: o6.String = o6.field(name="Uri")
 
 
 @o6.datatype(nodeId="i=32435", browseName="LinearConversionDataType", defaultEncodingId="i=32561")
 class LinearConversionDataType(Structure):
-    initialAddend: o6.Float
-    multiplicand: o6.Float
-    divisor: o6.Float
-    finalAddend: o6.Float
+    initialAddend: o6.Float = o6.field(name="InitialAddend")
+    multiplicand: o6.Float = o6.field(name="Multiplicand")
+    divisor: o6.Float = o6.field(name="Divisor")
+    finalAddend: o6.Float = o6.field(name="FinalAddend")
 
 
 @o6.enumtype(nodeId="i=32436", browseName="ConversionLimitEnum")
@@ -4002,44 +4002,44 @@ class ConversionLimitEnum(Enumeration):
 
 @o6.datatype(nodeId="i=32438", browseName="QuantityDimension", defaultEncodingId="i=32562")
 class QuantityDimension(Structure):
-    massExponent: o6.SByte
-    lengthExponent: o6.SByte
-    timeExponent: o6.SByte
-    electricCurrentExponent: o6.SByte
-    amountOfSubstanceExponent: o6.SByte
-    luminousIntensityExponent: o6.SByte
-    absoluteTemperatureExponent: o6.SByte
-    dimensionlessExponent: o6.SByte
+    massExponent: o6.SByte = o6.field(name="MassExponent")
+    lengthExponent: o6.SByte = o6.field(name="LengthExponent")
+    timeExponent: o6.SByte = o6.field(name="TimeExponent")
+    electricCurrentExponent: o6.SByte = o6.field(name="ElectricCurrentExponent")
+    amountOfSubstanceExponent: o6.SByte = o6.field(name="AmountOfSubstanceExponent")
+    luminousIntensityExponent: o6.SByte = o6.field(name="LuminousIntensityExponent")
+    absoluteTemperatureExponent: o6.SByte = o6.field(name="AbsoluteTemperatureExponent")
+    dimensionlessExponent: o6.SByte = o6.field(name="DimensionlessExponent")
 
 
 @o6.datatype(nodeId="i=32659", browseName="ReferenceDescriptionDataType", defaultEncodingId="i=32661")
 class ReferenceDescriptionDataType(Structure):
-    sourceNode: o6.NodeId
-    referenceType: o6.NodeId
-    isForward: o6.Boolean
-    targetNode: o6.ExpandedNodeId
+    sourceNode: o6.NodeId = o6.field(name="SourceNode")
+    referenceType: o6.NodeId = o6.field(name="ReferenceType")
+    isForward: o6.Boolean = o6.field(name="IsForward")
+    targetNode: o6.ExpandedNodeId = o6.field(name="TargetNode")
 
 
 @o6.datatype(nodeId="i=32660", browseName="ReferenceListEntryDataType", defaultEncodingId="i=32662")
 class ReferenceListEntryDataType(Structure):
-    referenceType: o6.NodeId
-    isForward: o6.Boolean
-    targetNode: o6.ExpandedNodeId
+    referenceType: o6.NodeId = o6.field(name="ReferenceType")
+    isForward: o6.Boolean = o6.field(name="IsForward")
+    targetNode: o6.ExpandedNodeId = o6.field(name="TargetNode")
 
 
 @o6.datatype(nodeId="i=32799", browseName="ReadEventDetails2", defaultEncodingId="i=32800")
 class ReadEventDetails2(ReadEventDetails):
-    numValuesPerNode: o6.UInt32
-    startTime: o6.DateTime
-    endTime: o6.DateTime
-    filter: EventFilter
-    readModified: o6.Boolean
+    numValuesPerNode: o6.UInt32 = o6.field(name="NumValuesPerNode")
+    startTime: o6.DateTime = o6.field(name="StartTime")
+    endTime: o6.DateTime = o6.field(name="EndTime")
+    filter: EventFilter = o6.field(name="Filter")
+    readModified: o6.Boolean = o6.field(name="ReadModified")
 
 
 @o6.datatype(nodeId="i=32824", browseName="HistoryModifiedEvent", defaultEncodingId="i=32825")
 class HistoryModifiedEvent(HistoryEvent):
-    events: list[HistoryEventFieldList]
-    modificationInfos: list[ModificationInfo]
+    events: list[HistoryEventFieldList] = o6.field(name="Events")
+    modificationInfos: list[ModificationInfo] = o6.field(name="ModificationInfos")
 
 
 del Any, TYPE_CHECKING, uuid, o6, ns0_reftypes

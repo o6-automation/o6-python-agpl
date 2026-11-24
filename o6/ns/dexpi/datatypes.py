@@ -32,61 +32,61 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1000", browseName="SiphonClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1000", browseName="ns=dexpi;SiphonClassification")
 class SiphonClassification(ns0.datatypes.Enumeration):
     NO_SIPHON = o6.enumfield(0, name="NoSiphon")
     SIPHON = o6.enumfield(1, name="Siphon")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1002", browseName="PipingNetworkSegmentFlowClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1002", browseName="ns=dexpi;PipingNetworkSegmentFlowClassification")
 class PipingNetworkSegmentFlowClassification(ns0.datatypes.Enumeration):
     DUAL_FLOW_PIPING_NETWORK_SEGMENT = o6.enumfield(0, name="DualFlowPipingNetworkSegment")
     SINGLE_FLOW_PIPING_NETWORK_SEGMENT = o6.enumfield(1, name="SingleFlowPipingNetworkSegment")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1004", browseName="GuaranteedSupplyFunctionClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1004", browseName="ns=dexpi;GuaranteedSupplyFunctionClassification")
 class GuaranteedSupplyFunctionClassification(ns0.datatypes.Enumeration):
     GUARANTEED_SUPPLY_FUNCTION = o6.enumfield(0, name="GuaranteedSupplyFunction")
     NON_GUARANTEED_SUPPLY_FUNCTION = o6.enumfield(1, name="NonGuaranteedSupplyFunction")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1006", browseName="FireResistantArtefactClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1006", browseName="ns=dexpi;FireResistantArtefactClassification")
 class FireResistantArtefactClassification(ns0.datatypes.Enumeration):
     FIRE_RESISTANT_ARTEFACT = o6.enumfield(0, name="FireResistantArtefact")
     NON_FIRE_RESISTANT_ARTEFACT = o6.enumfield(1, name="NonFireResistantArtefact")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1008", browseName="OnHoldClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1008", browseName="ns=dexpi;OnHoldClassification")
 class OnHoldClassification(ns0.datatypes.Enumeration):
     NOT_ON_HOLD = o6.enumfield(0, name="NotOnHold")
     ON_HOLD = o6.enumfield(1, name="OnHold")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1010", browseName="QualityRelevanceClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1010", browseName="ns=dexpi;QualityRelevanceClassification")
 class QualityRelevanceClassification(ns0.datatypes.Enumeration):
     NON_QUALITY_RELEVANT_FUNCTION = o6.enumfield(0, name="NonQualityRelevantFunction")
     QUALITY_RELEVANT_FUNCTION = o6.enumfield(1, name="QualityRelevantFunction")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1012", browseName="ConfidentialityClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1012", browseName="ns=dexpi;ConfidentialityClassification")
 class ConfidentialityClassification(ns0.datatypes.Enumeration):
     CONFIDENTIAL_INFORMATION = o6.enumfield(0, name="ConfidentialInformation")
     NON_CONFIDENTIAL_INFORMATION = o6.enumfield(1, name="NonConfidentialInformation")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1014", browseName="ExplosionProofArtefactClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1014", browseName="ns=dexpi;ExplosionProofArtefactClassification")
 class ExplosionProofArtefactClassification(ns0.datatypes.Enumeration):
     EXPLOSION_PROOF_ARTEFACT = o6.enumfield(0, name="ExplosionProofArtefact")
     NON_EXPLOSION_PROOF_ARTEFACT = o6.enumfield(1, name="NonExplosionProofArtefact")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1016", browseName="PipingClassBreakClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1016", browseName="ns=dexpi;PipingClassBreakClassification")
 class PipingClassBreakClassification(ns0.datatypes.Enumeration):
     NO_PIPING_CLASS_BREAK = o6.enumfield(0, name="NoPipingClassBreak")
     PIPING_CLASS_BREAK = o6.enumfield(1, name="PipingClassBreak")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1018", browseName="NominalPressureStandardClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1018", browseName="ns=dexpi;NominalPressureStandardClassification")
 class NominalPressureStandardClassification(ns0.datatypes.Enumeration):
     CLASS10000_PSI_ARTEFACT = o6.enumfield(0, name="Class10000PsiArtefact")
     CLASS1000_KPA_ARTEFACT = o6.enumfield(1, name="Class1000KpaArtefact")
@@ -134,44 +134,44 @@ class NominalPressureStandardClassification(ns0.datatypes.Enumeration):
     EN1333_PN6_ARTEFACT = o6.enumfield(43, name="En1333Pn6Artefact")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1020", browseName="GmpRelevanceClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1020", browseName="ns=dexpi;GmpRelevanceClassification")
 class GmpRelevanceClassification(ns0.datatypes.Enumeration):
     GMP_RELEVANT_FUNCTION = o6.enumfield(0, name="GmpRelevantFunction")
     NON_GMP_RELEVANT_FUNCTION = o6.enumfield(1, name="NonGmpRelevantFunction")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1022", browseName="NumberOfPortsClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1022", browseName="ns=dexpi;NumberOfPortsClassification")
 class NumberOfPortsClassification(ns0.datatypes.Enumeration):
     FOUR_PORT_VALVE = o6.enumfield(0, name="FourPortValve")
     THREE_PORT_VALVE = o6.enumfield(1, name="ThreePortValve")
     TWO_PORT_VALVE = o6.enumfield(2, name="TwoPortValve")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1024", browseName="DetonationProofArtefactClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1024", browseName="ns=dexpi;DetonationProofArtefactClassification")
 class DetonationProofArtefactClassification(ns0.datatypes.Enumeration):
     DETONATION_PROOF_ARTEFACT = o6.enumfield(0, name="DetonationProofArtefact")
     NON_DETONATION_PROOF_ARTEFACT = o6.enumfield(1, name="NonDetonationProofArtefact")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1026", browseName="CompositionBreakClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1026", browseName="ns=dexpi;CompositionBreakClassification")
 class CompositionBreakClassification(ns0.datatypes.Enumeration):
     COMPOSITION_BREAK = o6.enumfield(0, name="CompositionBreak")
     NO_COMPOSITION_BREAK = o6.enumfield(1, name="NoCompositionBreak")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1028", browseName="NodeFlowClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1028", browseName="ns=dexpi;NodeFlowClassification")
 class NodeFlowClassification(ns0.datatypes.Enumeration):
     MAIN_FLOW_IN_NODE = o6.enumfield(0, name="MainFlowInNode")
     MAIN_FLOW_OUT_NODE = o6.enumfield(1, name="MainFlowOutNode")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1030", browseName="InsulationBreakClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1030", browseName="ns=dexpi;InsulationBreakClassification")
 class InsulationBreakClassification(ns0.datatypes.Enumeration):
     INSULATION_BREAK = o6.enumfield(0, name="InsulationBreak")
     NO_INSULATION_BREAK = o6.enumfield(1, name="NoInsulationBreak")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1032", browseName="NominalDiameterStandardClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1032", browseName="ns=dexpi;NominalDiameterStandardClassification")
 class NominalDiameterStandardClassification(ns0.datatypes.Enumeration):
     DIN2448_OBJECT_DN100 = o6.enumfield(0, name="Din2448ObjectDn100")
     DIN2448_OBJECT_DN125 = o6.enumfield(1, name="Din2448ObjectDn125")
@@ -240,19 +240,19 @@ class NominalDiameterStandardClassification(ns0.datatypes.Enumeration):
     NPS8_ARTEFACT = o6.enumfield(64, name="Nps8Artefact")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1034", browseName="PipingNetworkSegmentSlopeClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1034", browseName="ns=dexpi;PipingNetworkSegmentSlopeClassification")
 class PipingNetworkSegmentSlopeClassification(ns0.datatypes.Enumeration):
     SLOPED_PIPING_NETWORK_SEGMENT = o6.enumfield(0, name="SlopedPipingNetworkSegment")
     UNSLOPED_PIPING_NETWORK_SEGMENT = o6.enumfield(1, name="UnslopedPipingNetworkSegment")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1036", browseName="PipingClassArtefactClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1036", browseName="ns=dexpi;PipingClassArtefactClassification")
 class PipingClassArtefactClassification(ns0.datatypes.Enumeration):
     NON_PIPING_CLASS_ARTEFACT = o6.enumfield(0, name="NonPipingClassArtefact")
     PIPING_CLASS_ARTEFACT = o6.enumfield(1, name="PipingClassArtefact")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1038", browseName="HeatTracingTypeClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1038", browseName="ns=dexpi;HeatTracingTypeClassification")
 class HeatTracingTypeClassification(ns0.datatypes.Enumeration):
     ELECTRICAL_HEAT_TRACING_SYSTEM = o6.enumfield(0, name="ElectricalHeatTracingSystem")
     HEAT_TRACING_SYSTEM = o6.enumfield(1, name="HeatTracingSystem")
@@ -261,7 +261,7 @@ class HeatTracingTypeClassification(ns0.datatypes.Enumeration):
     TUBULAR_HEAT_TRACING_SYSTEM = o6.enumfield(4, name="TubularHeatTracingSystem")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1040", browseName="SignalConveyingTypeClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1040", browseName="ns=dexpi;SignalConveyingTypeClassification")
 class SignalConveyingTypeClassification(ns0.datatypes.Enumeration):
     CAPILLARY_SIGNAL_CONVEYING = o6.enumfield(0, name="CapillarySignalConveying")
     CONDUCTED_RADIATION_SIGNAL_CONVEYING = o6.enumfield(1, name="ConductedRadiationSignalConveying")
@@ -270,13 +270,13 @@ class SignalConveyingTypeClassification(ns0.datatypes.Enumeration):
     PNEUMATIC_SIGNAL_CONVEYING = o6.enumfield(4, name="PneumaticSignalConveying")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1042", browseName="PrimarySecondaryPipingNetworkSegmentClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1042", browseName="ns=dexpi;PrimarySecondaryPipingNetworkSegmentClassification")
 class PrimarySecondaryPipingNetworkSegmentClassification(ns0.datatypes.Enumeration):
     PRIMARY_PIPING_NETWORK_SEGMENT = o6.enumfield(0, name="PrimaryPipingNetworkSegment")
     SECONDARY_PIPING_NETWORK_SEGMENT = o6.enumfield(1, name="SecondaryPipingNetworkSegment")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1044", browseName="ChamberFunctionClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1044", browseName="ns=dexpi;ChamberFunctionClassification")
 class ChamberFunctionClassification(ns0.datatypes.Enumeration):
     COOLING = o6.enumfield(0, name="Cooling")
     HEATING = o6.enumfield(1, name="Heating")
@@ -284,39 +284,39 @@ class ChamberFunctionClassification(ns0.datatypes.Enumeration):
     TEMPERING = o6.enumfield(3, name="Tempering")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1046", browseName="OperationClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1046", browseName="ns=dexpi;OperationClassification")
 class OperationClassification(ns0.datatypes.Enumeration):
     CONTINUOUS_OPERATION = o6.enumfield(0, name="ContinuousOperation")
     INTERMITTENT_OPERATION = o6.enumfield(1, name="IntermittentOperation")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1048", browseName="NominalDiameterBreakClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1048", browseName="ns=dexpi;NominalDiameterBreakClassification")
 class NominalDiameterBreakClassification(ns0.datatypes.Enumeration):
     NO_NOMINAL_DIAMETER_BREAK = o6.enumfield(0, name="NoNominalDiameterBreak")
     NOMINAL_DIAMETER_BREAK = o6.enumfield(1, name="NominalDiameterBreak")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1050", browseName="FailActionClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1050", browseName="ns=dexpi;FailActionClassification")
 class FailActionClassification(ns0.datatypes.Enumeration):
     FAIL_CLOSE = o6.enumfield(0, name="FailClose")
     FAIL_OPEN = o6.enumfield(1, name="FailOpen")
     FAIL_RETAIN_POSITION = o6.enumfield(2, name="FailRetainPosition")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1052", browseName="JacketedPipeClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1052", browseName="ns=dexpi;JacketedPipeClassification")
 class JacketedPipeClassification(ns0.datatypes.Enumeration):
     JACKETED_PIPE = o6.enumfield(0, name="JacketedPipe")
     UNJACKETED_PIPE = o6.enumfield(1, name="UnjacketedPipe")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1054", browseName="LocationClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1054", browseName="ns=dexpi;LocationClassification")
 class LocationClassification(ns0.datatypes.Enumeration):
     CENTRAL_LOCATION = o6.enumfield(0, name="CentralLocation")
     CONTROL_PANEL = o6.enumfield(1, name="ControlPanel")
     FIELD = o6.enumfield(2, name="Field")
 
 
-@o6.enumtype(nodeId="ns=dexpi;i=1056", browseName="PortStatusClassification")
+@o6.enumtype(nodeId="ns=dexpi;i=1056", browseName="ns=dexpi;PortStatusClassification")
 class PortStatusClassification(ns0.datatypes.Enumeration):
     STATUS_HIGH_HIGH_HIGH_PORT = o6.enumfield(0, name="StatusHighHighHighPort")
     STATUS_HIGH_HIGH_PORT = o6.enumfield(1, name="StatusHighHighPort")

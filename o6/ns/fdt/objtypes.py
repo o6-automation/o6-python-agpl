@@ -74,7 +74,9 @@ class ModbusTCPConnectionPoint(di.objtypes.ConnectionPointType):
 @o6.objecttype(nodeId="ns=fdt;i=1013", browseName="ns=fdt;FdtTransferServiceType", displayName="FdtTransferServiceType")
 class FdtTransferServiceType(di.objtypes.TransferServicesType):
     supportedTransfer: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6005", browseName="ns=fdt;SupportedTransfer", dataType=fdt_datypes.SupportedTransfer, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fdt;i=6005", browseName="ns=fdt;SupportedTransfer", modellingRule="Mandatory", dataType=fdt_datypes.SupportedTransfer, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -87,26 +89,30 @@ class FdtTransferServiceType(di.objtypes.TransferServicesType):
 )
 class FdtProtocolType(di.objtypes.ProtocolType):
     busCategory: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6012", browseName="ns=fdt;BusCategory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6012", browseName="ns=fdt;BusCategory", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
 
 
 @o6.objecttype(nodeId="ns=fdt;i=1004", browseName="ns=fdt;FdtDocumentType", displayName="FdtDocumentType", isAbstract=True)
 class FdtDocumentType(ns0.objtypes.BaseObjectType):
     classification: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6018", browseName="ns=fdt;Classification", dataType=fdt_datypes.DocumentClassification, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fdt;i=6018", browseName="ns=fdt;Classification", modellingRule="Mandatory", dataType=fdt_datypes.DocumentClassification, accessLevel=3, userAccessLevel=1
+        )
     )
     help: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6019", browseName="ns=fdt;Help", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6019", browseName="ns=fdt;Help", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     language: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6022", browseName="ns=fdt;Language", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6022", browseName="ns=fdt;Language", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     mediaType: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6023", browseName="ns=fdt;MediaType", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6023", browseName="ns=fdt;MediaType", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     semanticInfo: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6025", browseName="ns=fdt;SemanticInfo", dataType=fdt_datypes.SemanticInfoType, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fdt;i=6025", browseName="ns=fdt;SemanticInfo", modellingRule="Optional", dataType=fdt_datypes.SemanticInfoType, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -118,34 +124,38 @@ class FdtDocumentFile(FdtDocumentType):
 @o6.objecttype(nodeId="ns=fdt;i=1006", browseName="ns=fdt;FdtDocumentUrl", displayName="FdtDocumentUrl")
 class FdtDocumentUrl(FdtDocumentType):
     uRL: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6051", browseName="ns=fdt;URL", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6051", browseName="ns=fdt;URL", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
 
 
 @o6.objecttype(nodeId="ns=fdt;i=1014", browseName="ns=fdt;FdtFunctionalGroupType", displayName="FdtFunctionalGroupType")
 class FdtFunctionalGroupType(di.objtypes.FunctionalGroupType):
     applicationId: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6052", browseName="ns=fdt;ApplicationId", dataType=fdt_datypes.ApplicationIdEnumeration, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fdt;i=6052", browseName="ns=fdt;ApplicationId", modellingRule="Optional", dataType=fdt_datypes.ApplicationIdEnumeration, accessLevel=3, userAccessLevel=1
+        )
     )
     semanticInfo: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6028", browseName="ns=fdt;SemanticInfo", dataType=fdt_datypes.SemanticInfoType, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fdt;i=6028", browseName="ns=fdt;SemanticInfo", modellingRule="Optional", dataType=fdt_datypes.SemanticInfoType, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
 @o6.objecttype(nodeId="ns=fdt;i=1007", browseName="ns=fdt;FdtAuditWriteUpdateEventType", displayName="FdtAuditWriteUpdateEventType")
 class FdtAuditWriteUpdateEventType(ns0.objtypes.AuditWriteUpdateEventType):
     newUnit: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6062", browseName="ns=fdt;NewUnit", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6062", browseName="ns=fdt;NewUnit", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     oldUnit: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6061", browseName="ns=fdt;OldUnit", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6061", browseName="ns=fdt;OldUnit", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
 
 
 @o6.objecttype(nodeId="ns=fdt;i=1017", browseName="ns=fdt;IFdtDeviceHealthType", displayName="IFdtDeviceHealthType", isAbstract=True)
 class IFdtDeviceHealthType(di.objtypes.IDeviceHealthType):
     deviceHealth: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=fdt;i=6066", browseName="ns=di;DeviceHealth", dataType=di.datatypes.DeviceHealthEnumeration)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=fdt;i=6066", browseName="ns=di;DeviceHealth", modellingRule="Mandatory", dataType=di.datatypes.DeviceHealthEnumeration)
     )
 
 
@@ -157,43 +167,57 @@ class IFdtDeviceHealthType(di.objtypes.IDeviceHealthType):
 )
 class FdtIoSignalInfoType(ns0.objtypes.BaseObjectType):
     description: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6056", browseName="ns=fdt;Description", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6056", browseName="ns=fdt;Description", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     frameApplicationTag: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6057", browseName="ns=fdt;FrameApplicationTag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6057", browseName="ns=fdt;FrameApplicationTag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     hasAlarmInfo: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6011", browseName="ns=fdt;HasAlarmInfo", dataType=fdt_datypes.DataRefType, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fdt;i=6011", browseName="ns=fdt;HasAlarmInfo", modellingRule="Optional", dataType=fdt_datypes.DataRefType, accessLevel=3, userAccessLevel=1
+        )
     )
     hasDeviceData: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6014", browseName="ns=fdt;HasDeviceData", dataType=fdt_datypes.DataRefType, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fdt;i=6014", browseName="ns=fdt;HasDeviceData", modellingRule="Optional", dataType=fdt_datypes.DataRefType, accessLevel=3, userAccessLevel=1
+        )
     )
     hasRange: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6016", browseName="ns=fdt;HasRange", dataType=fdt_datypes.DataRefType, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fdt;i=6016", browseName="ns=fdt;HasRange", modellingRule="Optional", dataType=fdt_datypes.DataRefType, accessLevel=3, userAccessLevel=1
+        )
     )
     hasSubstituteValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6024", browseName="ns=fdt;HasSubstituteValue", dataType=fdt_datypes.DataRefType, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fdt;i=6024", browseName="ns=fdt;HasSubstituteValue", modellingRule="Optional", dataType=fdt_datypes.DataRefType, accessLevel=3, userAccessLevel=1
+        )
     )
     hasUnit: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6045", browseName="ns=fdt;HasUnit", dataType=fdt_datypes.DataRefType, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6045", browseName="ns=fdt;HasUnit", modellingRule="Optional", dataType=fdt_datypes.DataRefType, accessLevel=3, userAccessLevel=1)
     )
     iECDatatype: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6059", browseName="ns=fdt;IECDatatype", dataType=fdt_datypes.IECDatatype, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fdt;i=6059", browseName="ns=fdt;IECDatatype", modellingRule="Mandatory", dataType=fdt_datypes.IECDatatype, accessLevel=3, userAccessLevel=1
+        )
     )
     isLocked: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6060", browseName="ns=fdt;IsLocked", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6060", browseName="ns=fdt;IsLocked", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
     )
     isSafety: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6063", browseName="ns=fdt;IsSafety", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6063", browseName="ns=fdt;IsSafety", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
     )
     routedIoSignalId: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6064", browseName="ns=fdt;RoutedIoSignalId", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6064", browseName="ns=fdt;RoutedIoSignalId", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     semanticInfo: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6026", browseName="ns=fdt;SemanticInfo", dataType=fdt_datypes.SemanticInfoType, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fdt;i=6026", browseName="ns=fdt;SemanticInfo", modellingRule="Optional", dataType=fdt_datypes.SemanticInfoType, accessLevel=3, userAccessLevel=1
+        )
     )
     signalType: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6069", browseName="ns=fdt;SignalType", dataType=fdt_datypes.SignalTypeEnumeration, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fdt;i=6069", browseName="ns=fdt;SignalType", modellingRule="Mandatory", dataType=fdt_datypes.SignalTypeEnumeration, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -203,33 +227,40 @@ o6.reference(fdt_vartypes.FdtParameter, "ns=fdt;i=4002", FdtIoSignalInfoType)
 @o6.objecttype(nodeId="ns=fdt;i=1010", browseName="ns=fdt;FdtEndMethodEventType", displayName="FdtEndMethodEventType")
 class FdtEndMethodEventType(ns0.objtypes.AuditUpdateMethodEventType):
     result: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6081", browseName="ns=fdt;Result", dataType=fdt_datypes.FunctionExecutionResultState, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fdt;i=6081", browseName="ns=fdt;Result", modellingRule="Mandatory", dataType=fdt_datypes.FunctionExecutionResultState, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
 @o6.objecttype(nodeId="ns=fdt;i=1019", browseName="ns=fdt;FdtDeviceType", displayName="FdtDeviceType", isAbstract=True, interfaces=[IFdtSupportInfoType, IFdtDeviceHealthType])
 class FdtDeviceType(di.objtypes.DeviceType):
     deviceHealth: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=fdt;i=6065", browseName="ns=fdt;DeviceHealth", dataType=di.datatypes.DeviceHealthEnumeration)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=fdt;i=6065", browseName="ns=fdt;DeviceHealth", modellingRule="Mandatory", dataType=di.datatypes.DeviceHealthEnumeration)
     )
     deviceTag: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6132", browseName="ns=fdt;DeviceTag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6132", browseName="ns=fdt;DeviceTag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     deviceTypeId: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6131", browseName="ns=fdt;DeviceTypeId", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6131", browseName="ns=fdt;DeviceTypeId", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     documentation: ns0.objtypes.FolderType | None
     identification: di.objtypes.FunctionalGroupType = o6.hasComponent(
         di.objtypes.FunctionalGroupType(
-            nodeId="ns=fdt;i=5462", browseName="ns=di;Identification", description="Used to organize parameters for identification of this TopologyElement"
+            nodeId="ns=fdt;i=5462",
+            browseName="ns=di;Identification",
+            description="Used to organize parameters for identification of this TopologyElement",
+            modellingRule="Mandatory",
         )
     )
     manufacturerId: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6232", browseName="ns=fdt;ManufacturerId", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6232", browseName="ns=fdt;ManufacturerId", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
-    methodSet: ns0.objtypes.BaseObjectType = o6.hasComponent(ns0.objtypes.BaseObjectType(nodeId="ns=fdt;i=5466", browseName="ns=di;MethodSet", description="Flat list of Methods"))
+    methodSet: ns0.objtypes.BaseObjectType = o6.hasComponent(
+        ns0.objtypes.BaseObjectType(nodeId="ns=fdt;i=5466", browseName="ns=di;MethodSet", description="Flat list of Methods", modellingRule="Mandatory")
+    )
     parameterSet: ns0.objtypes.BaseObjectType = o6.hasComponent(
-        ns0.objtypes.BaseObjectType(nodeId="ns=fdt;i=5467", browseName="ns=di;ParameterSet", description="Flat list of Parameters")
+        ns0.objtypes.BaseObjectType(nodeId="ns=fdt;i=5467", browseName="ns=di;ParameterSet", description="Flat list of Parameters", modellingRule="Mandatory")
     )
     protocolSupport: ns0.objtypes.FolderType | None
 
@@ -241,10 +272,16 @@ class FdtDataType(di.objtypes.ConfigurableObjectType):
             nodeId="ns=fdt;i=7008",
             browseName="ns=fdt;Clone",
             description="Creates a new object that is a deep-copy of the current instance. All objects are duplicated - the top-level objects are duplicated as well as all the lower levels. The cloned object can be modified without affecting the original object.",
+            modellingRule="Mandatory",
         )
     )
     verify: o6.node.MethodNode = o6.hasComponent(
-        o6.call(nodeId="ns=fdt;i=7009", browseName="ns=fdt;Verify", description="Verifies that all properties are valid (e.g. mandatory properties have a value).")
+        o6.call(
+            nodeId="ns=fdt;i=7009",
+            browseName="ns=fdt;Verify",
+            description="Verifies that all properties are valid (e.g. mandatory properties have a value).",
+            modellingRule="Mandatory",
+        )
     )
 
 
@@ -257,7 +294,13 @@ class FdtDataType(di.objtypes.ConfigurableObjectType):
 class RegularExpression(FdtDataType):
     text: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=fdt;i=6027", browseName="ns=fdt;Text", description="Regular expression text.", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            nodeId="ns=fdt;i=6027",
+            browseName="ns=fdt;Text",
+            description="Regular expression text.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
 

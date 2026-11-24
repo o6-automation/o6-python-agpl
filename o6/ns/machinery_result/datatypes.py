@@ -31,7 +31,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=machinery_result;i=3002", browseName="ResultEvaluationEnum", description="Indicates whether a result was in tolerance")
+@o6.enumtype(nodeId="ns=machinery_result;i=3002", browseName="ns=machinery_result;ResultEvaluationEnum", description="Indicates whether a result was in tolerance")
 class ResultEvaluationEnum(ns0.datatypes.Enumeration):
     UNDEFINED = o6.enumfield(0, name="Undefined")
     OK = o6.enumfield(1, name="OK")
@@ -41,75 +41,75 @@ class ResultEvaluationEnum(ns0.datatypes.Enumeration):
 
 @o6.datatype(
     nodeId="ns=machinery_result;i=3005",
-    browseName="BaseResultTransferOptionsDataType",
+    browseName="ns=machinery_result;BaseResultTransferOptionsDataType",
     description="Abstract type containing information which file should be provided.",
     isAbstract=True,
 )
 class BaseResultTransferOptionsDataType(ns0.datatypes.Structure):
-    resultId: o6.String
+    resultId: o6.String = o6.field(name="ResultId")
 
 
 @o6.datatype(
     nodeId="ns=machinery_result;i=3004",
-    browseName="ResultTransferOptionsDataType",
+    browseName="ns=machinery_result;ResultTransferOptionsDataType",
     description="Contains information which file should be provided.",
     defaultEncodingId="ns=machinery_result;i=5001",
 )
 class ResultTransferOptionsDataType(BaseResultTransferOptionsDataType):
-    resultId: o6.String
+    resultId: o6.String = o6.field(name="ResultId")
 
 
 @o6.datatype(
     nodeId="ns=machinery_result;i=3006",
-    browseName="ProcessingTimesDataType",
+    browseName="ns=machinery_result;ProcessingTimesDataType",
     description="Contains measured times that were generated during the execution of a recipe.",
     defaultEncodingId="ns=machinery_result;i=5003",
 )
 class ProcessingTimesDataType(ns0.datatypes.Structure):
-    startTime: o6.DateTime
-    endTime: o6.DateTime
-    acquisitionDuration: o6.Double | None
-    processingDuration: o6.Double | None
+    startTime: o6.DateTime = o6.field(name="StartTime")
+    endTime: o6.DateTime = o6.field(name="EndTime")
+    acquisitionDuration: o6.Double | None = o6.field(name="AcquisitionDuration")
+    processingDuration: o6.Double | None = o6.field(name="ProcessingDuration")
 
 
 @o6.datatype(
     nodeId="ns=machinery_result;i=3007",
-    browseName="ResultMetaDataType",
+    browseName="ns=machinery_result;ResultMetaDataType",
     description="Meta data of a result, describing the result.",
     defaultEncodingId="ns=machinery_result;i=5005",
 )
 class ResultMetaDataType(ns0.datatypes.Structure):
-    resultId: o6.String
-    hasTransferableDataOnFile: o6.Boolean | None
-    isPartial: o6.Boolean | None
-    isSimulated: o6.Boolean | None
-    resultState: o6.Int32 | None
-    stepId: o6.String | None
-    partId: o6.String | None
-    externalRecipeId: o6.String | None
-    internalRecipeId: o6.String | None
-    productId: o6.String | None
-    externalConfigurationId: o6.String | None
-    internalConfigurationId: o6.String | None
-    jobId: o6.String | None
-    creationTime: o6.DateTime | None
-    processingTimes: ProcessingTimesDataType | None
-    resultUri: list[o6.String] | None = o6.field(arrayDimensions=[0])
-    resultEvaluation: ResultEvaluationEnum | None
-    resultEvaluationCode: o6.Int64 | None
-    resultEvaluationDetails: o6.LocalizedText | None
-    fileFormat: list[o6.String] | None = o6.field(arrayDimensions=[0])
+    resultId: o6.String = o6.field(name="ResultId")
+    hasTransferableDataOnFile: o6.Boolean | None = o6.field(name="HasTransferableDataOnFile")
+    isPartial: o6.Boolean | None = o6.field(name="IsPartial")
+    isSimulated: o6.Boolean | None = o6.field(name="IsSimulated")
+    resultState: o6.Int32 | None = o6.field(name="ResultState")
+    stepId: o6.String | None = o6.field(name="StepId")
+    partId: o6.String | None = o6.field(name="PartId")
+    externalRecipeId: o6.String | None = o6.field(name="ExternalRecipeId")
+    internalRecipeId: o6.String | None = o6.field(name="InternalRecipeId")
+    productId: o6.String | None = o6.field(name="ProductId")
+    externalConfigurationId: o6.String | None = o6.field(name="ExternalConfigurationId")
+    internalConfigurationId: o6.String | None = o6.field(name="InternalConfigurationId")
+    jobId: o6.String | None = o6.field(name="JobId")
+    creationTime: o6.DateTime | None = o6.field(name="CreationTime")
+    processingTimes: ProcessingTimesDataType | None = o6.field(name="ProcessingTimes")
+    resultUri: list[o6.String] | None = o6.field(name="ResultUri", arrayDimensions=[0])
+    resultEvaluation: ResultEvaluationEnum | None = o6.field(name="ResultEvaluation")
+    resultEvaluationCode: o6.Int64 | None = o6.field(name="ResultEvaluationCode")
+    resultEvaluationDetails: o6.LocalizedText | None = o6.field(name="ResultEvaluationDetails")
+    fileFormat: list[o6.String] | None = o6.field(name="FileFormat", arrayDimensions=[0])
 
 
 @o6.datatype(
     nodeId="ns=machinery_result;i=3008",
-    browseName="ResultDataType",
+    browseName="ns=machinery_result;ResultDataType",
     description="Contains fields that were created during the execution of a recipe.",
     defaultEncodingId="ns=machinery_result;i=5008",
 )
 class ResultDataType(ns0.datatypes.Structure):
-    resultMetaData: ResultMetaDataType
-    resultContent: list[Any] = o6.field(arrayDimensions=[0])
+    resultMetaData: ResultMetaDataType = o6.field(name="ResultMetaData")
+    resultContent: list[Any] = o6.field(name="ResultContent", arrayDimensions=[0])
 
 
 del Any, TYPE_CHECKING, uuid, o6, ns0

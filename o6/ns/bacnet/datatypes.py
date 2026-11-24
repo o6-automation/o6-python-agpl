@@ -31,7 +31,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3001", browseName="BACnetReliability")
+@o6.enumtype(nodeId="ns=bacnet;i=3001", browseName="ns=bacnet;BACnetReliability")
 class BACnetReliability(ns0.datatypes.Enumeration):
     NO_FAULT_DETECTED = o6.enumfield(0, name="NoFaultDetected")
     NO_SENSOR = o6.enumfield(1, name="NoSensor")
@@ -50,14 +50,14 @@ class BACnetReliability(ns0.datatypes.Enumeration):
     TRIPPED = o6.enumfield(15, name="TRIPPED")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3002", browseName="BACnetNotifyType")
+@o6.enumtype(nodeId="ns=bacnet;i=3002", browseName="ns=bacnet;BACnetNotifyType")
 class BACnetNotifyType(ns0.datatypes.Enumeration):
     ALARM = o6.enumfield(0, name="Alarm")
     EVENT = o6.enumfield(1, name="Event")
     ACK_NOTIFICATION = o6.enumfield(2, name="AckNotification")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3003", browseName="BACnetEventState")
+@o6.enumtype(nodeId="ns=bacnet;i=3003", browseName="ns=bacnet;BACnetEventState")
 class BACnetEventState(ns0.datatypes.Enumeration):
     NORMAL = o6.enumfield(0, name="Normal")
     FAULT = o6.enumfield(1, name="Fault")
@@ -67,45 +67,45 @@ class BACnetEventState(ns0.datatypes.Enumeration):
     LIFE_SAFETY_ALARM = o6.enumfield(5, name="LifeSafetyAlarm")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3005", browseName="BACnetBinaryPV")
+@o6.enumtype(nodeId="ns=bacnet;i=3005", browseName="ns=bacnet;BACnetBinaryPV")
 class BACnetBinaryPV(ns0.datatypes.Enumeration):
     INACTIVE = o6.enumfield(0, name="Inactive")
     ACTIVE = o6.enumfield(1, name="Active")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3007", browseName="BACnetPolarity")
+@o6.enumtype(nodeId="ns=bacnet;i=3007", browseName="ns=bacnet;BACnetPolarity")
 class BACnetPolarity(ns0.datatypes.Enumeration):
     NORMAL = o6.enumfield(0, name="Normal")
     REVERSE = o6.enumfield(1, name="Reverse")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3008", browseName="BACnetAction")
+@o6.enumtype(nodeId="ns=bacnet;i=3008", browseName="ns=bacnet;BACnetAction")
 class BACnetAction(ns0.datatypes.Enumeration):
     DIRECT = o6.enumfield(0, name="direct")
     REVERSE = o6.enumfield(1, name="reverse")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3010", browseName="BACnetElementCount", parent="i=7")
+@o6.datatype(nodeId="ns=bacnet;i=3010", browseName="ns=bacnet;BACnetElementCount", parent="i=7")
 class BACnetElementCount:
     pass
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3011", browseName="BACnetPropertyCount", parent="i=7")
+@o6.datatype(nodeId="ns=bacnet;i=3011", browseName="ns=bacnet;BACnetPropertyCount", parent="i=7")
 class BACnetPropertyCount:
     pass
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3012", browseName="BACnetObjectCount", parent="i=7")
+@o6.datatype(nodeId="ns=bacnet;i=3012", browseName="ns=bacnet;BACnetObjectCount", parent="i=7")
 class BACnetObjectCount:
     pass
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3013", browseName="BACnetDeviceCount", parent="i=7")
+@o6.datatype(nodeId="ns=bacnet;i=3013", browseName="ns=bacnet;BACnetDeviceCount", parent="i=7")
 class BACnetDeviceCount:
     pass
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3014", browseName="BACnetMonth")
+@o6.enumtype(nodeId="ns=bacnet;i=3014", browseName="ns=bacnet;BACnetMonth")
 class BACnetMonth(ns0.datatypes.Enumeration):
     JANUARY = o6.enumfield(1, name="January")
     FEBRUARY = o6.enumfield(2, name="February")
@@ -124,32 +124,32 @@ class BACnetMonth(ns0.datatypes.Enumeration):
     UNSPECIFIED = o6.enumfield(255, name="Unspecified")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3015", browseName="BACnetYear", description="0 = Undefined", parent="i=5")
+@o6.datatype(nodeId="ns=bacnet;i=3015", browseName="ns=bacnet;BACnetYear", description="0 = Undefined", parent="i=5")
 class BACnetYear:
     pass
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3018", browseName="BACnetDeviceCommunicationEnabled")
+@o6.enumtype(nodeId="ns=bacnet;i=3018", browseName="ns=bacnet;BACnetDeviceCommunicationEnabled")
 class BACnetDeviceCommunicationEnabled(ns0.datatypes.Enumeration):
     ENABLE = o6.enumfield(0, name="Enable")
     DISABLE = o6.enumfield(1, name="Disable")
     DISABLE_INITIATION = o6.enumfield(2, name="DisableInitiation")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3019", browseName="BACnetTime", defaultEncodingId="ns=bacnet;i=5021")
+@o6.datatype(nodeId="ns=bacnet;i=3019", browseName="ns=bacnet;BACnetTime", defaultEncodingId="ns=bacnet;i=5021")
 class BACnetTime(ns0.datatypes.Structure):
-    hour: o6.Byte
-    minute: o6.Byte
-    second: o6.Byte
-    hundredths: o6.Byte
+    hour: o6.Byte = o6.field(name="Hour")
+    minute: o6.Byte = o6.field(name="Minute")
+    second: o6.Byte = o6.field(name="Second")
+    hundredths: o6.Byte = o6.field(name="Hundredths")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3020", browseName="BACnetObjectIdentifier", parent="i=7")
+@o6.datatype(nodeId="ns=bacnet;i=3020", browseName="ns=bacnet;BACnetObjectIdentifier", parent="i=7")
 class BACnetObjectIdentifier:
     pass
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3021", browseName="BACnetDay")
+@o6.enumtype(nodeId="ns=bacnet;i=3021", browseName="ns=bacnet;BACnetDay")
 class BACnetDay(ns0.datatypes.Enumeration):
     DAYS_NUMBERED_1_7 = o6.enumfield(1, name="days numbered 1-7")
     DAYS_NUMBERED_8_14 = o6.enumfield(2, name="days numbered 8-14")
@@ -160,18 +160,18 @@ class BACnetDay(ns0.datatypes.Enumeration):
     ANY_WEEK_OF_THIS_MONTH = o6.enumfield(255, name="any week of this month")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3022", browseName="BACnetAddress", defaultEncodingId="ns=bacnet;i=5041")
+@o6.datatype(nodeId="ns=bacnet;i=3022", browseName="ns=bacnet;BACnetAddress", defaultEncodingId="ns=bacnet;i=5041")
 class BACnetAddress(ns0.datatypes.Structure):
-    networkNumber: o6.UInt16
-    macAddress: o6.ByteString
+    networkNumber: o6.UInt16 = o6.field(name="NetworkNumber")
+    macAddress: o6.ByteString = o6.field(name="MacAddress")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3023", browseName="BACnetClientCOV", defaultEncodingId="ns=bacnet;i=5011")
+@o6.datatype(nodeId="ns=bacnet;i=3023", browseName="ns=bacnet;BACnetClientCOV", defaultEncodingId="ns=bacnet;i=5011")
 class BACnetClientCOV(ns0.datatypes.Union):
-    real_increment: o6.Float
+    real_increment: o6.Float = o6.field(name="Real-increment")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3025", browseName="BACnetDayOfMonth")
+@o6.enumtype(nodeId="ns=bacnet;i=3025", browseName="ns=bacnet;BACnetDayOfMonth")
 class BACnetDayOfMonth(ns0.datatypes.Enumeration):
     _1 = o6.enumfield(1, name="1")
     _2 = o6.enumfield(2, name="2")
@@ -210,7 +210,7 @@ class BACnetDayOfMonth(ns0.datatypes.Enumeration):
     UNSPECIFIED = o6.enumfield(255, name="Unspecified")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3029", browseName="BACnetEventEnumType")
+@o6.enumtype(nodeId="ns=bacnet;i=3029", browseName="ns=bacnet;BACnetEventEnumType")
 class BACnetEventEnumType(ns0.datatypes.Enumeration):
     CHANGE_OF_BITSTRING = o6.enumfield(0, name="ChangeOfBitstring")
     CHANGE_OF_STATE = o6.enumfield(1, name="ChangeOfState")
@@ -224,7 +224,7 @@ class BACnetEventEnumType(ns0.datatypes.Enumeration):
     UNSIGNED_RANGE = o6.enumfield(11, name="UnsignedRange")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3030", browseName="BACnetProgramRequest")
+@o6.enumtype(nodeId="ns=bacnet;i=3030", browseName="ns=bacnet;BACnetProgramRequest")
 class BACnetProgramRequest(ns0.datatypes.Enumeration):
     READY = o6.enumfield(0, name="Ready")
     LOAD = o6.enumfield(1, name="Load")
@@ -234,7 +234,7 @@ class BACnetProgramRequest(ns0.datatypes.Enumeration):
     UNLOAD = o6.enumfield(5, name="Unload")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3031", browseName="BACnetProgramStates")
+@o6.enumtype(nodeId="ns=bacnet;i=3031", browseName="ns=bacnet;BACnetProgramStates")
 class BACnetProgramStates(ns0.datatypes.Enumeration):
     IDLE = o6.enumfield(0, name="Idle")
     LOADING = o6.enumfield(1, name="Loading")
@@ -244,7 +244,7 @@ class BACnetProgramStates(ns0.datatypes.Enumeration):
     UNLOADING = o6.enumfield(5, name="Unloading")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3032", browseName="BACnetProgramError")
+@o6.enumtype(nodeId="ns=bacnet;i=3032", browseName="ns=bacnet;BACnetProgramError")
 class BACnetProgramError(ns0.datatypes.Enumeration):
     NORMAL = o6.enumfield(0, name="Normal")
     LOAD_FAILED = o6.enumfield(1, name="LoadFailed")
@@ -253,7 +253,7 @@ class BACnetProgramError(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(4, name="Other")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3033", browseName="BACnetDeviceStatus")
+@o6.enumtype(nodeId="ns=bacnet;i=3033", browseName="ns=bacnet;BACnetDeviceStatus")
 class BACnetDeviceStatus(ns0.datatypes.Enumeration):
     OPERATIONAL = o6.enumfield(0, name="Operational")
     OPERATIONAL_READ_ONLY = o6.enumfield(1, name="OperationalReadOnly")
@@ -263,7 +263,7 @@ class BACnetDeviceStatus(ns0.datatypes.Enumeration):
     BACKUP_IN_PROGRESS = o6.enumfield(5, name="BackupInProgress")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3035", browseName="BACnetLifeSafetyMode")
+@o6.enumtype(nodeId="ns=bacnet;i=3035", browseName="ns=bacnet;BACnetLifeSafetyMode")
 class BACnetLifeSafetyMode(ns0.datatypes.Enumeration):
     OFF = o6.enumfield(0, name="Off")
     ON = o6.enumfield(1, name="On")
@@ -282,7 +282,7 @@ class BACnetLifeSafetyMode(ns0.datatypes.Enumeration):
     DEFAULT = o6.enumfield(14, name="Default")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3036", browseName="BACnetLifeSafetyState")
+@o6.enumtype(nodeId="ns=bacnet;i=3036", browseName="ns=bacnet;BACnetLifeSafetyState")
 class BACnetLifeSafetyState(ns0.datatypes.Enumeration):
     QUIET = o6.enumfield(0, name="Quiet")
     PRE_ALARM = o6.enumfield(1, name="PreAlarm")
@@ -310,25 +310,25 @@ class BACnetLifeSafetyState(ns0.datatypes.Enumeration):
     TEST_SUPERVISORY = o6.enumfield(23, name="TestSupervisory")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3028", browseName="BACnetPropertyStates", defaultEncodingId="ns=bacnet;i=5047")
+@o6.datatype(nodeId="ns=bacnet;i=3028", browseName="ns=bacnet;BACnetPropertyStates", defaultEncodingId="ns=bacnet;i=5047")
 class BACnetPropertyStates(ns0.datatypes.Structure):
-    booleanValue: o6.Boolean
-    binaryValue: BACnetBinaryPV
-    eventType: BACnetEventEnumType
-    polarity: BACnetPolarity
-    programChange: BACnetProgramRequest
-    programState: BACnetProgramStates
-    programError: BACnetProgramError
-    reliability: BACnetReliability
-    state: BACnetEventState
-    systemStatus: BACnetDeviceStatus
-    units: ns0.datatypes.EUInformation
-    unsignedValue: o6.UInt32
-    lifeSafetyMode: BACnetLifeSafetyMode
-    lifeSafetyState: BACnetLifeSafetyState
+    booleanValue: o6.Boolean = o6.field(name="BooleanValue")
+    binaryValue: BACnetBinaryPV = o6.field(name="BinaryValue")
+    eventType: BACnetEventEnumType = o6.field(name="EventType")
+    polarity: BACnetPolarity = o6.field(name="Polarity")
+    programChange: BACnetProgramRequest = o6.field(name="ProgramChange")
+    programState: BACnetProgramStates = o6.field(name="ProgramState")
+    programError: BACnetProgramError = o6.field(name="ProgramError")
+    reliability: BACnetReliability = o6.field(name="Reliability")
+    state: BACnetEventState = o6.field(name="State")
+    systemStatus: BACnetDeviceStatus = o6.field(name="SystemStatus")
+    units: ns0.datatypes.EUInformation = o6.field(name="Units")
+    unsignedValue: o6.UInt32 = o6.field(name="UnsignedValue")
+    lifeSafetyMode: BACnetLifeSafetyMode = o6.field(name="LifeSafetyMode")
+    lifeSafetyState: BACnetLifeSafetyState = o6.field(name="LifeSafetyState")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3044", browseName="BACnetLifeSafetyOperation")
+@o6.enumtype(nodeId="ns=bacnet;i=3044", browseName="ns=bacnet;BACnetLifeSafetyOperation")
 class BACnetLifeSafetyOperation(ns0.datatypes.Enumeration):
     NONE = o6.enumfield(0, name="None")
     SILENCE = o6.enumfield(1, name="Silence")
@@ -342,14 +342,14 @@ class BACnetLifeSafetyOperation(ns0.datatypes.Enumeration):
     UNSILENCE_VISIBLE = o6.enumfield(9, name="UnsilenceVisible")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3027", browseName="BACnetEventParameterChangeOfLifeSafety", defaultEncodingId="ns=bacnet;i=5024")
+@o6.datatype(nodeId="ns=bacnet;i=3027", browseName="ns=bacnet;BACnetEventParameterChangeOfLifeSafety", defaultEncodingId="ns=bacnet;i=5024")
 class BACnetEventParameterChangeOfLifeSafety(ns0.datatypes.Structure):
-    newState: BACnetLifeSafetyState
-    newMode: BACnetLifeSafetyMode
-    operationExtended: BACnetLifeSafetyOperation
+    newState: BACnetLifeSafetyState = o6.field(name="NewState")
+    newMode: BACnetLifeSafetyMode = o6.field(name="NewMode")
+    operationExtended: BACnetLifeSafetyOperation = o6.field(name="OperationExtended")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3045", browseName="BACnetNodeType")
+@o6.enumtype(nodeId="ns=bacnet;i=3045", browseName="ns=bacnet;BACnetNodeType")
 class BACnetNodeType(ns0.datatypes.Enumeration):
     UNKNOWN = o6.enumfield(0, name="UNKNOWN")
     SYSTEM = o6.enumfield(1, name="SYSTEM")
@@ -365,7 +365,7 @@ class BACnetNodeType(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(11, name="OTHER")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3046", browseName="BACnetPropertyIdentifier")
+@o6.enumtype(nodeId="ns=bacnet;i=3046", browseName="ns=bacnet;BACnetPropertyIdentifier")
 class BACnetPropertyIdentifier(ns0.datatypes.Enumeration):
     ACKED_TRANSITIONS = o6.enumfield(0, name="AckedTransitions")
     ACK_REQUIRED = o6.enumfield(1, name="AckRequired")
@@ -756,7 +756,7 @@ class BACnetPropertyIdentifier(ns0.datatypes.Enumeration):
     EGRESS_ACTIVE = o6.enumfield(386, name="EgressActive")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3049", browseName="BACnetReinitializedStateofDevice")
+@o6.enumtype(nodeId="ns=bacnet;i=3049", browseName="ns=bacnet;BACnetReinitializedStateofDevice")
 class BACnetReinitializedStateofDevice(ns0.datatypes.Enumeration):
     COLDSTART = o6.enumfield(0, name="Coldstart")
     WARMSTART = o6.enumfield(1, name="Warmstart")
@@ -767,54 +767,54 @@ class BACnetReinitializedStateofDevice(ns0.datatypes.Enumeration):
     ABORTRESTORE = o6.enumfield(6, name="Abortrestore")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3052", browseName="BACnetMessageClass", defaultEncodingId="ns=bacnet;i=5028")
+@o6.datatype(nodeId="ns=bacnet;i=3052", browseName="ns=bacnet;BACnetMessageClass", defaultEncodingId="ns=bacnet;i=5028")
 class BACnetMessageClass(ns0.datatypes.Union):
-    unsigned: Any
-    string: o6.String
+    unsigned: Any = o6.field(name="Unsigned")
+    string: o6.String = o6.field(name="String")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3053", browseName="BACnetPriorityValue", defaultEncodingId="ns=bacnet;i=5030")
+@o6.datatype(nodeId="ns=bacnet;i=3053", browseName="ns=bacnet;BACnetPriorityValue", defaultEncodingId="ns=bacnet;i=5030")
 class BACnetPriorityValue(ns0.datatypes.Union):
-    real: o6.Float
-    enumerated: o6.Int32
-    unsigned: Any
-    boolean: o6.Boolean
-    signed: Any
-    double: o6.Double
+    real: o6.Float = o6.field(name="Real")
+    enumerated: o6.Int32 = o6.field(name="Enumerated")
+    unsigned: Any = o6.field(name="Unsigned")
+    boolean: o6.Boolean = o6.field(name="Boolean")
+    signed: Any = o6.field(name="Signed")
+    double: o6.Double = o6.field(name="Double")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3054", browseName="BACnetRecipient", defaultEncodingId="ns=bacnet;i=5032")
+@o6.datatype(nodeId="ns=bacnet;i=3054", browseName="ns=bacnet;BACnetRecipient", defaultEncodingId="ns=bacnet;i=5032")
 class BACnetRecipient(ns0.datatypes.Union):
-    device: o6.UInt32
-    address: BACnetAddress
+    device: o6.UInt32 = o6.field(name="Device")
+    address: BACnetAddress = o6.field(name="Address")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=3057", browseName="BACnetMessagePriority")
+@o6.enumtype(nodeId="ns=bacnet;i=3057", browseName="ns=bacnet;BACnetMessagePriority")
 class BACnetMessagePriority(ns0.datatypes.Enumeration):
     NORMAL = o6.enumfield(0, name="normal")
     URGENT = o6.enumfield(1, name="urgent")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3058", browseName="BACnetEventParameterDoubleOutOfRange", defaultEncodingId="ns=bacnet;i=5010")
+@o6.datatype(nodeId="ns=bacnet;i=3058", browseName="ns=bacnet;BACnetEventParameterDoubleOutOfRange", defaultEncodingId="ns=bacnet;i=5010")
 class BACnetEventParameterDoubleOutOfRange(ns0.datatypes.Structure):
-    time_delay: o6.UInt32
-    low_limit: o6.Double
-    high_limit: o6.Double
-    deadband: o6.Double
+    time_delay: o6.UInt32 = o6.field(name="Time-delay")
+    low_limit: o6.Double = o6.field(name="Low-limit")
+    high_limit: o6.Double = o6.field(name="High-limit")
+    deadband: o6.Double = o6.field(name="Deadband")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3059", browseName="BACnetEventParameterSignedOutOfRange", defaultEncodingId="ns=bacnet;i=5064")
+@o6.datatype(nodeId="ns=bacnet;i=3059", browseName="ns=bacnet;BACnetEventParameterSignedOutOfRange", defaultEncodingId="ns=bacnet;i=5064")
 class BACnetEventParameterSignedOutOfRange(ns0.datatypes.Structure):
-    time_delay: o6.UInt32
-    low_limit: o6.Int32
-    high_limit: o6.Int32
-    deadband: o6.UInt32
+    time_delay: o6.UInt32 = o6.field(name="Time-delay")
+    low_limit: o6.Int32 = o6.field(name="Low-limit")
+    high_limit: o6.Int32 = o6.field(name="High-limit")
+    deadband: o6.UInt32 = o6.field(name="Deadband")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3060", browseName="BACnetDaysOfWeek", defaultEncodingId="ns=bacnet;i=5125")
+@o6.datatype(nodeId="ns=bacnet;i=3060", browseName="ns=bacnet;BACnetDaysOfWeek", defaultEncodingId="ns=bacnet;i=5125")
 class BACnetDaysOfWeek(ns0.datatypes.OptionSet):
-    value: o6.ByteString
-    validBits: o6.ByteString
+    value: o6.ByteString = o6.field(name="Value")
+    validBits: o6.ByteString = o6.field(name="ValidBits")
     monday = o6.optionsetbit(0, name="monday")
     tuesday = o6.optionsetbit(1, name="tuesday")
     wednesday = o6.optionsetbit(2, name="wednesday")
@@ -824,27 +824,27 @@ class BACnetDaysOfWeek(ns0.datatypes.OptionSet):
     sunday = o6.optionsetbit(6, name="sunday")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3061", browseName="BACnetEventTransitionBits", defaultEncodingId="ns=bacnet;i=5129")
+@o6.datatype(nodeId="ns=bacnet;i=3061", browseName="ns=bacnet;BACnetEventTransitionBits", defaultEncodingId="ns=bacnet;i=5129")
 class BACnetEventTransitionBits(ns0.datatypes.OptionSet):
-    value: o6.ByteString
-    validBits: o6.ByteString
+    value: o6.ByteString = o6.field(name="Value")
+    validBits: o6.ByteString = o6.field(name="ValidBits")
     to_offnormal = o6.optionsetbit(0, name="to-offnormal")
     to_fault = o6.optionsetbit(1, name="to-fault")
     to_normal = o6.optionsetbit(2, name="to-normal")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3062", browseName="BACnetLimitEnable", defaultEncodingId="ns=bacnet;i=5131")
+@o6.datatype(nodeId="ns=bacnet;i=3062", browseName="ns=bacnet;BACnetLimitEnable", defaultEncodingId="ns=bacnet;i=5131")
 class BACnetLimitEnable(ns0.datatypes.OptionSet):
-    value: o6.ByteString
-    validBits: o6.ByteString
+    value: o6.ByteString = o6.field(name="Value")
+    validBits: o6.ByteString = o6.field(name="ValidBits")
     lowLimitEnable = o6.optionsetbit(0, name="lowLimitEnable")
     highLimitEnable = o6.optionsetbit(1, name="highLimitEnable")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3063", browseName="BACnetObjectTypeSupportedBits", defaultEncodingId="ns=bacnet;i=5133")
+@o6.datatype(nodeId="ns=bacnet;i=3063", browseName="ns=bacnet;BACnetObjectTypeSupportedBits", defaultEncodingId="ns=bacnet;i=5133")
 class BACnetObjectTypeSupportedBits(ns0.datatypes.OptionSet):
-    value: o6.ByteString
-    validBits: o6.ByteString
+    value: o6.ByteString = o6.field(name="Value")
+    validBits: o6.ByteString = o6.field(name="ValidBits")
     analog_input = o6.optionsetbit(0, name="analog-input")
     analog_output = o6.optionsetbit(1, name="analog-output")
     analog_value = o6.optionsetbit(2, name="analog-value")
@@ -902,10 +902,10 @@ class BACnetObjectTypeSupportedBits(ns0.datatypes.OptionSet):
     lighting_output = o6.optionsetbit(54, name="lighting-output")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3064", browseName="BACnetServicesSupportedBits", defaultEncodingId="ns=bacnet;i=5135")
+@o6.datatype(nodeId="ns=bacnet;i=3064", browseName="ns=bacnet;BACnetServicesSupportedBits", defaultEncodingId="ns=bacnet;i=5135")
 class BACnetServicesSupportedBits(ns0.datatypes.OptionSet):
-    value: o6.ByteString
-    validBits: o6.ByteString
+    value: o6.ByteString = o6.field(name="Value")
+    validBits: o6.ByteString = o6.field(name="ValidBits")
     acknowledgeAlarm = o6.optionsetbit(0, name="acknowledgeAlarm")
     confirmedCOVNotification = o6.optionsetbit(1, name="confirmedCOVNotification")
     confirmedEventNotification = o6.optionsetbit(2, name="confirmedEventNotification")
@@ -948,74 +948,74 @@ class BACnetServicesSupportedBits(ns0.datatypes.OptionSet):
     writeGroup = o6.optionsetbit(39, name="writeGroup")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3065", browseName="BACnetStatusFlags", defaultEncodingId="ns=bacnet;i=5146")
+@o6.datatype(nodeId="ns=bacnet;i=3065", browseName="ns=bacnet;BACnetStatusFlags", defaultEncodingId="ns=bacnet;i=5146")
 class BACnetStatusFlags(ns0.datatypes.OptionSet):
-    value: o6.ByteString
-    validBits: o6.ByteString
+    value: o6.ByteString = o6.field(name="Value")
+    validBits: o6.ByteString = o6.field(name="ValidBits")
     inAlarm = o6.optionsetbit(0, name="InAlarm")
     fault = o6.optionsetbit(1, name="Fault")
     overriden = o6.optionsetbit(2, name="Overriden")
     outOfService = o6.optionsetbit(3, name="OutOfService")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3066", browseName="BACnetEventParameterChangeOfCharacterString", defaultEncodingId="ns=bacnet;i=5081")
+@o6.datatype(nodeId="ns=bacnet;i=3066", browseName="ns=bacnet;BACnetEventParameterChangeOfCharacterString", defaultEncodingId="ns=bacnet;i=5081")
 class BACnetEventParameterChangeOfCharacterString(ns0.datatypes.Structure):
-    time_delay: o6.UInt32
-    alarmValues: list[o6.String] = o6.field(arrayDimensions=[0])
+    time_delay: o6.UInt32 = o6.field(name="Time-delay")
+    alarmValues: list[o6.String] = o6.field(name="AlarmValues", arrayDimensions=[0])
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3067", browseName="BACnetEventParameterUnsignedRange", defaultEncodingId="ns=bacnet;i=5083")
+@o6.datatype(nodeId="ns=bacnet;i=3067", browseName="ns=bacnet;BACnetEventParameterUnsignedRange", defaultEncodingId="ns=bacnet;i=5083")
 class BACnetEventParameterUnsignedRange(ns0.datatypes.Structure):
-    time_delay: o6.UInt32
-    low_limit: o6.UInt32
-    high_limit: o6.UInt32
+    time_delay: o6.UInt32 = o6.field(name="Time-delay")
+    low_limit: o6.UInt32 = o6.field(name="Low-limit")
+    high_limit: o6.UInt32 = o6.field(name="High-limit")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103002", browseName="BACnetDeviceObjectPropertyReference", defaultEncodingId="ns=bacnet;i=105003")
+@o6.datatype(nodeId="ns=bacnet;i=103002", browseName="ns=bacnet;BACnetDeviceObjectPropertyReference", defaultEncodingId="ns=bacnet;i=105003")
 class BACnetDeviceObjectPropertyReference(ns0.datatypes.Structure):
-    objectIdentifier: o6.UInt32
-    propertyIdentifier: BACnetPropertyIdentifier | None
-    propertyArrayIndex: o6.UInt32 | None
-    deviceIdentifier: o6.UInt32 | None
+    objectIdentifier: o6.UInt32 = o6.field(name="ObjectIdentifier")
+    propertyIdentifier: BACnetPropertyIdentifier | None = o6.field(name="PropertyIdentifier")
+    propertyArrayIndex: o6.UInt32 | None = o6.field(name="PropertyArrayIndex")
+    deviceIdentifier: o6.UInt32 | None = o6.field(name="DeviceIdentifier")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103005", browseName="BACnetEventParameterChangeOfBitstring", defaultEncodingId="ns=bacnet;i=105009")
+@o6.datatype(nodeId="ns=bacnet;i=103005", browseName="ns=bacnet;BACnetEventParameterChangeOfBitstring", defaultEncodingId="ns=bacnet;i=105009")
 class BACnetEventParameterChangeOfBitstring(ns0.datatypes.Structure):
-    time_delay: o6.UInt32
-    bitmask: ns0.datatypes.OptionSet
-    list_of_bitstring_values: list[ns0.datatypes.OptionSet] = o6.field(arrayDimensions=[0])
+    time_delay: o6.UInt32 = o6.field(name="Time-delay")
+    bitmask: ns0.datatypes.OptionSet = o6.field(name="Bitmask")
+    list_of_bitstring_values: list[ns0.datatypes.OptionSet] = o6.field(name="List-of-bitstring-values", arrayDimensions=[0])
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103009", browseName="BACnetEventParameterChangeOfState", defaultEncodingId="ns=bacnet;i=105017")
+@o6.datatype(nodeId="ns=bacnet;i=103009", browseName="ns=bacnet;BACnetEventParameterChangeOfState", defaultEncodingId="ns=bacnet;i=105017")
 class BACnetEventParameterChangeOfState(ns0.datatypes.Structure):
-    time_delay: o6.UInt32
-    list_of_values: list[BACnetPropertyStates] = o6.field(arrayDimensions=[0])
+    time_delay: o6.UInt32 = o6.field(name="Time-delay")
+    list_of_values: list[BACnetPropertyStates] = o6.field(name="List-of-values", arrayDimensions=[0])
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103010", browseName="BACnetTimeValueValue", defaultEncodingId="ns=bacnet;i=105019")
+@o6.datatype(nodeId="ns=bacnet;i=103010", browseName="ns=bacnet;BACnetTimeValueValue", defaultEncodingId="ns=bacnet;i=105019")
 class BACnetTimeValueValue(ns0.datatypes.Structure):
-    booleanValue: o6.Boolean
-    unsignedValue: Any
-    signedValue: Any
-    octedStringValue: o6.ByteString
-    charStringValue: o6.String
-    objectIdentifierValue: o6.UInt32
-    enumerationValue: o6.Int32
-    bitStringValue: ns0.datatypes.OptionSet
+    booleanValue: o6.Boolean = o6.field(name="BooleanValue")
+    unsignedValue: Any = o6.field(name="UnsignedValue")
+    signedValue: Any = o6.field(name="SignedValue")
+    octedStringValue: o6.ByteString = o6.field(name="OctedStringValue")
+    charStringValue: o6.String = o6.field(name="CharStringValue")
+    objectIdentifierValue: o6.UInt32 = o6.field(name="ObjectIdentifierValue")
+    enumerationValue: o6.Int32 = o6.field(name="EnumerationValue")
+    bitStringValue: ns0.datatypes.OptionSet = o6.field(name="BitStringValue")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103004", browseName="BACnetTimeValue", defaultEncodingId="ns=bacnet;i=105007")
+@o6.datatype(nodeId="ns=bacnet;i=103004", browseName="ns=bacnet;BACnetTimeValue", defaultEncodingId="ns=bacnet;i=105007")
 class BACnetTimeValue(ns0.datatypes.Structure):
-    time: BACnetTime
-    value: BACnetTimeValueValue
+    time: BACnetTime = o6.field(name="Time")
+    value: BACnetTimeValueValue = o6.field(name="Value")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103001", browseName="BACnetDailySchedule", defaultEncodingId="ns=bacnet;i=105001")
+@o6.datatype(nodeId="ns=bacnet;i=103001", browseName="ns=bacnet;BACnetDailySchedule", defaultEncodingId="ns=bacnet;i=105001")
 class BACnetDailySchedule(ns0.datatypes.Structure):
-    day_schedule: list[BACnetTimeValue] = o6.field(arrayDimensions=[0])
+    day_schedule: list[BACnetTimeValue] = o6.field(name="Day-schedule", arrayDimensions=[0])
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=103011", browseName="BACnetSegmentation")
+@o6.enumtype(nodeId="ns=bacnet;i=103011", browseName="ns=bacnet;BACnetSegmentation")
 class BACnetSegmentation(ns0.datatypes.Enumeration):
     SEGMENTED_BOTH = o6.enumfield(0, name="segmented-both")
     SEGMENTED_TRANSMIT = o6.enumfield(1, name="segmented-transmit")
@@ -1023,13 +1023,13 @@ class BACnetSegmentation(ns0.datatypes.Enumeration):
     NO_SEGMENTATION = o6.enumfield(3, name="no-segmentation")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103015", browseName="BACnetAddressBinding", defaultEncodingId="ns=bacnet;i=105025")
+@o6.datatype(nodeId="ns=bacnet;i=103015", browseName="ns=bacnet;BACnetAddressBinding", defaultEncodingId="ns=bacnet;i=105025")
 class BACnetAddressBinding(ns0.datatypes.Structure):
-    deviceObjectIdentifier: o6.UInt32
-    deviceAddress: BACnetAddress
+    deviceObjectIdentifier: o6.UInt32 = o6.field(name="DeviceObjectIdentifier")
+    deviceAddress: BACnetAddress = o6.field(name="DeviceAddress")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=103016", browseName="BACnetBackupState")
+@o6.enumtype(nodeId="ns=bacnet;i=103016", browseName="ns=bacnet;BACnetBackupState")
 class BACnetBackupState(ns0.datatypes.Enumeration):
     IDLE = o6.enumfield(0, name="Idle")
     PREPARING_FOR_BACKUP = o6.enumfield(1, name="Preparing_For_Backup")
@@ -1040,22 +1040,22 @@ class BACnetBackupState(ns0.datatypes.Enumeration):
     RESTORE_FAILURE = o6.enumfield(6, name="Restore_Failure")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103018", browseName="BACnetRecipientProcess", defaultEncodingId="ns=bacnet;i=105029")
+@o6.datatype(nodeId="ns=bacnet;i=103018", browseName="ns=bacnet;BACnetRecipientProcess", defaultEncodingId="ns=bacnet;i=105029")
 class BACnetRecipientProcess(ns0.datatypes.Structure):
-    recipient: BACnetRecipient
-    processIdentifier: o6.UInt32
+    recipient: BACnetRecipient = o6.field(name="Recipient")
+    processIdentifier: o6.UInt32 = o6.field(name="ProcessIdentifier")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103017", browseName="BACnetCOVSubscription", defaultEncodingId="ns=bacnet;i=105027")
+@o6.datatype(nodeId="ns=bacnet;i=103017", browseName="ns=bacnet;BACnetCOVSubscription", defaultEncodingId="ns=bacnet;i=105027")
 class BACnetCOVSubscription(ns0.datatypes.Structure):
-    recipient: BACnetRecipientProcess
-    monitoredPropertyReference: BACnetDeviceObjectPropertyReference
-    issueConfirmedNotifications: o6.Boolean
-    timeRemaining: o6.UInt32
-    covIncrement: o6.Float | None
+    recipient: BACnetRecipientProcess = o6.field(name="Recipient")
+    monitoredPropertyReference: BACnetDeviceObjectPropertyReference = o6.field(name="MonitoredPropertyReference")
+    issueConfirmedNotifications: o6.Boolean = o6.field(name="IssueConfirmedNotifications")
+    timeRemaining: o6.UInt32 = o6.field(name="TimeRemaining")
+    covIncrement: o6.Float | None = o6.field(name="CovIncrement")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=103019", browseName="BACnetRestartReason")
+@o6.enumtype(nodeId="ns=bacnet;i=103019", browseName="ns=bacnet;BACnetRestartReason")
 class BACnetRestartReason(ns0.datatypes.Enumeration):
     UNKNOWN = o6.enumfield(0, name="unknown")
     COLDSTART = o6.enumfield(1, name="coldstart")
@@ -1067,18 +1067,18 @@ class BACnetRestartReason(ns0.datatypes.Enumeration):
     SUSPENDED = o6.enumfield(7, name="suspended")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103020", browseName="BACnetDestination", defaultEncodingId="ns=bacnet;i=105031")
+@o6.datatype(nodeId="ns=bacnet;i=103020", browseName="ns=bacnet;BACnetDestination", defaultEncodingId="ns=bacnet;i=105031")
 class BACnetDestination(ns0.datatypes.Structure):
-    validDays: BACnetDaysOfWeek
-    fromTime: BACnetTime
-    toTime: BACnetTime
-    recipient: BACnetRecipient
-    processIdentifier: o6.UInt32
-    issueConfirmedNotifications: o6.Boolean
-    transitions: BACnetEventTransitionBits
+    validDays: BACnetDaysOfWeek = o6.field(name="ValidDays")
+    fromTime: BACnetTime = o6.field(name="FromTime")
+    toTime: BACnetTime = o6.field(name="ToTime")
+    recipient: BACnetRecipient = o6.field(name="Recipient")
+    processIdentifier: o6.UInt32 = o6.field(name="ProcessIdentifier")
+    issueConfirmedNotifications: o6.Boolean = o6.field(name="IssueConfirmedNotifications")
+    transitions: BACnetEventTransitionBits = o6.field(name="Transitions")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=103028", browseName="BACnetFaultType")
+@o6.enumtype(nodeId="ns=bacnet;i=103028", browseName="ns=bacnet;BACnetFaultType")
 class BACnetFaultType(ns0.datatypes.Enumeration):
     NONE = o6.enumfield(0, name="none")
     FAULT_CHARACTERSTRING = o6.enumfield(1, name="fault-characterstring")
@@ -1088,28 +1088,28 @@ class BACnetFaultType(ns0.datatypes.Enumeration):
     FAULT_STATUS_FLAGS = o6.enumfield(5, name="fault-status-flags")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103030", browseName="BACnetFaultParameterFaultCharacterstring", defaultEncodingId="ns=bacnet;i=105036")
+@o6.datatype(nodeId="ns=bacnet;i=103030", browseName="ns=bacnet;BACnetFaultParameterFaultCharacterstring", defaultEncodingId="ns=bacnet;i=105036")
 class BACnetFaultParameterFaultCharacterstring(ns0.datatypes.Structure):
-    fault_characterstring: o6.String
+    fault_characterstring: o6.String = o6.field(name="Fault-characterstring")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103032", browseName="BACnetFaultParameterFaultLifeSafety", defaultEncodingId="ns=bacnet;i=105040")
+@o6.datatype(nodeId="ns=bacnet;i=103032", browseName="ns=bacnet;BACnetFaultParameterFaultLifeSafety", defaultEncodingId="ns=bacnet;i=105040")
 class BACnetFaultParameterFaultLifeSafety(ns0.datatypes.Structure):
-    list_of_fault_values: list[BACnetLifeSafetyState] = o6.field(arrayDimensions=[0])
-    mode_property_reference: BACnetDeviceObjectPropertyReference
+    list_of_fault_values: list[BACnetLifeSafetyState] = o6.field(name="List-of-fault-values", arrayDimensions=[0])
+    mode_property_reference: BACnetDeviceObjectPropertyReference = o6.field(name="Mode-property-reference")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103033", browseName="BACnetFaultParameterFaultState", defaultEncodingId="ns=bacnet;i=105042")
+@o6.datatype(nodeId="ns=bacnet;i=103033", browseName="ns=bacnet;BACnetFaultParameterFaultState", defaultEncodingId="ns=bacnet;i=105042")
 class BACnetFaultParameterFaultState(ns0.datatypes.Structure):
-    list_of_fault_values: list[BACnetProgramStates] = o6.field(arrayDimensions=[0])
+    list_of_fault_values: list[BACnetProgramStates] = o6.field(name="List-of-fault-values", arrayDimensions=[0])
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103034", browseName="BACnetFaultParameterFaultStatusFlags", defaultEncodingId="ns=bacnet;i=105044")
+@o6.datatype(nodeId="ns=bacnet;i=103034", browseName="ns=bacnet;BACnetFaultParameterFaultStatusFlags", defaultEncodingId="ns=bacnet;i=105044")
 class BACnetFaultParameterFaultStatusFlags(ns0.datatypes.Structure):
-    status_flags_reference: list[BACnetDeviceObjectPropertyReference] = o6.field(arrayDimensions=[0])
+    status_flags_reference: list[BACnetDeviceObjectPropertyReference] = o6.field(name="Status-flags-reference", arrayDimensions=[0])
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=103036", browseName="BACnetDayOfWeek")
+@o6.enumtype(nodeId="ns=bacnet;i=103036", browseName="ns=bacnet;BACnetDayOfWeek")
 class BACnetDayOfWeek(ns0.datatypes.Enumeration):
     MONDAY = o6.enumfield(1, name="Monday")
     TUESDAY = o6.enumfield(2, name="Tuesday")
@@ -1121,163 +1121,163 @@ class BACnetDayOfWeek(ns0.datatypes.Enumeration):
     UNSPECIFIED = o6.enumfield(255, name="unspecified")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3017", browseName="BACnetDate", defaultEncodingId="ns=bacnet;i=5019")
+@o6.datatype(nodeId="ns=bacnet;i=3017", browseName="ns=bacnet;BACnetDate", defaultEncodingId="ns=bacnet;i=5019")
 class BACnetDate(ns0.datatypes.Structure):
-    year: o6.UInt16
-    month: BACnetMonth
-    dayOfMonth: BACnetDayOfMonth
-    dayOfWeek: BACnetDayOfWeek
+    year: o6.UInt16 = o6.field(name="Year")
+    month: BACnetMonth = o6.field(name="Month")
+    dayOfMonth: BACnetDayOfMonth = o6.field(name="DayOfMonth")
+    dayOfWeek: BACnetDayOfWeek = o6.field(name="DayOfWeek")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3006", browseName="BACnetDateTime", defaultEncodingId="ns=bacnet;i=5005")
+@o6.datatype(nodeId="ns=bacnet;i=3006", browseName="ns=bacnet;BACnetDateTime", defaultEncodingId="ns=bacnet;i=5005")
 class BACnetDateTime(ns0.datatypes.Structure):
-    date: BACnetDate
-    time: BACnetTime
+    date: BACnetDate = o6.field(name="Date")
+    time: BACnetTime = o6.field(name="Time")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3009", browseName="BACnetDateRange", defaultEncodingId="ns=bacnet;i=5017")
+@o6.datatype(nodeId="ns=bacnet;i=3009", browseName="ns=bacnet;BACnetDateRange", defaultEncodingId="ns=bacnet;i=5017")
 class BACnetDateRange(ns0.datatypes.Structure):
-    startDate: BACnetDate
-    endTime: BACnetDate
+    startDate: BACnetDate = o6.field(name="StartDate")
+    endTime: BACnetDate = o6.field(name="EndTime")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3024", browseName="BACnetWeekNDay", defaultEncodingId="ns=bacnet;i=5013")
+@o6.datatype(nodeId="ns=bacnet;i=3024", browseName="ns=bacnet;BACnetWeekNDay", defaultEncodingId="ns=bacnet;i=5013")
 class BACnetWeekNDay(ns0.datatypes.Structure):
-    month: BACnetMonth
-    day: BACnetDay
-    dayOfWeek: BACnetDayOfWeek
+    month: BACnetMonth = o6.field(name="Month")
+    day: BACnetDay = o6.field(name="Day")
+    dayOfWeek: BACnetDayOfWeek = o6.field(name="DayOfWeek")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3016", browseName="BACnetCalendarEntry", defaultEncodingId="ns=bacnet;i=5002")
+@o6.datatype(nodeId="ns=bacnet;i=3016", browseName="ns=bacnet;BACnetCalendarEntry", defaultEncodingId="ns=bacnet;i=5002")
 class BACnetCalendarEntry(ns0.datatypes.Union):
-    date: BACnetDate
-    dateRange: BACnetDateRange
-    weekNDay: BACnetWeekNDay
+    date: BACnetDate = o6.field(name="Date")
+    dateRange: BACnetDateRange = o6.field(name="DateRange")
+    weekNDay: BACnetWeekNDay = o6.field(name="WeekNDay")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3055", browseName="BACnetSpecialEventPeriod", defaultEncodingId="ns=bacnet;i=5034")
+@o6.datatype(nodeId="ns=bacnet;i=3055", browseName="ns=bacnet;BACnetSpecialEventPeriod", defaultEncodingId="ns=bacnet;i=5034")
 class BACnetSpecialEventPeriod(ns0.datatypes.Union):
-    calendarEntry: BACnetCalendarEntry
-    calendarReference: o6.UInt32
+    calendarEntry: BACnetCalendarEntry = o6.field(name="CalendarEntry")
+    calendarReference: o6.UInt32 = o6.field(name="CalendarReference")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3056", browseName="BACnetTimeStamp", defaultEncodingId="ns=bacnet;i=5069")
+@o6.datatype(nodeId="ns=bacnet;i=3056", browseName="ns=bacnet;BACnetTimeStamp", defaultEncodingId="ns=bacnet;i=5069")
 class BACnetTimeStamp(ns0.datatypes.Union):
-    time: BACnetTime
-    sequenceNumber: o6.UInt16
-    dateTime: BACnetDateTime
+    time: BACnetTime = o6.field(name="Time")
+    sequenceNumber: o6.UInt16 = o6.field(name="SequenceNumber")
+    dateTime: BACnetDateTime = o6.field(name="DateTime")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3068", browseName="BACnetEventParameterExtendedParameters", defaultEncodingId="ns=bacnet;i=5085")
+@o6.datatype(nodeId="ns=bacnet;i=3068", browseName="ns=bacnet;BACnetEventParameterExtendedParameters", defaultEncodingId="ns=bacnet;i=5085")
 class BACnetEventParameterExtendedParameters(ns0.datatypes.Union):
-    real: o6.Double
-    unsigned: o6.UInt32
-    boolean: o6.Boolean
-    double: o6.Double
-    octed: list[o6.Byte] = o6.field(arrayDimensions=[0])
-    characterString: o6.String
-    bitString: ns0.datatypes.OptionSet
-    enum: o6.UInt32
-    date: BACnetDate
-    time: BACnetTime
-    objectIdentifier: o6.UInt32
-    reference: BACnetDeviceObjectPropertyReference
-    integer: o6.Int32
+    real: o6.Double = o6.field(name="Real")
+    unsigned: o6.UInt32 = o6.field(name="Unsigned")
+    boolean: o6.Boolean = o6.field(name="Boolean")
+    double: o6.Double = o6.field(name="Double")
+    octed: list[o6.Byte] = o6.field(name="Octed", arrayDimensions=[0])
+    characterString: o6.String = o6.field(name="CharacterString")
+    bitString: ns0.datatypes.OptionSet = o6.field(name="BitString")
+    enum: o6.UInt32 = o6.field(name="Enum")
+    date: BACnetDate = o6.field(name="Date")
+    time: BACnetTime = o6.field(name="Time")
+    objectIdentifier: o6.UInt32 = o6.field(name="ObjectIdentifier")
+    reference: BACnetDeviceObjectPropertyReference = o6.field(name="Reference")
+    integer: o6.Int32 = o6.field(name="Integer")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103003", browseName="BACnetSpecialEvent", defaultEncodingId="ns=bacnet;i=105005")
+@o6.datatype(nodeId="ns=bacnet;i=103003", browseName="ns=bacnet;BACnetSpecialEvent", defaultEncodingId="ns=bacnet;i=105005")
 class BACnetSpecialEvent(ns0.datatypes.Structure):
-    period: BACnetSpecialEventPeriod
-    listOfTimeValues: list[BACnetTimeValue] = o6.field(arrayDimensions=[0])
-    eventPriority: o6.Byte
+    period: BACnetSpecialEventPeriod = o6.field(name="Period")
+    listOfTimeValues: list[BACnetTimeValue] = o6.field(name="ListOfTimeValues", arrayDimensions=[0])
+    eventPriority: o6.Byte = o6.field(name="EventPriority")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103031", browseName="BACnetEventFaultParameterExtended", defaultEncodingId="ns=bacnet;i=105038")
+@o6.datatype(nodeId="ns=bacnet;i=103031", browseName="ns=bacnet;BACnetEventFaultParameterExtended", defaultEncodingId="ns=bacnet;i=105038")
 class BACnetEventFaultParameterExtended(ns0.datatypes.Structure):
-    vendorId: o6.UInt16
-    extended_fault_type: Any
-    parameters: list[BACnetEventParameterExtendedParameters] = o6.field(arrayDimensions=[0])
+    vendorId: o6.UInt16 = o6.field(name="VendorId")
+    extended_fault_type: Any = o6.field(name="Extended-fault-type")
+    parameters: list[BACnetEventParameterExtendedParameters] = o6.field(name="Parameters", arrayDimensions=[0])
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3051", browseName="BACnetFaultParameter", defaultEncodingId="ns=bacnet;i=5023")
+@o6.datatype(nodeId="ns=bacnet;i=3051", browseName="ns=bacnet;BACnetFaultParameter", defaultEncodingId="ns=bacnet;i=5023")
 class BACnetFaultParameter(ns0.datatypes.Union):
-    fault_characterstring: BACnetFaultParameterFaultCharacterstring
-    fault_life_safety: BACnetFaultParameterFaultLifeSafety
-    fault_state: BACnetFaultParameterFaultState
-    fault_status_flags: BACnetFaultParameterFaultStatusFlags
-    fault_extended: BACnetEventFaultParameterExtended
+    fault_characterstring: BACnetFaultParameterFaultCharacterstring = o6.field(name="Fault-characterstring")
+    fault_life_safety: BACnetFaultParameterFaultLifeSafety = o6.field(name="Fault-life-safety")
+    fault_state: BACnetFaultParameterFaultState = o6.field(name="Fault-state")
+    fault_status_flags: BACnetFaultParameterFaultStatusFlags = o6.field(name="Fault-status-flags")
+    fault_extended: BACnetEventFaultParameterExtended = o6.field(name="Fault-extended")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103037", browseName="BACnetEventParameterChangeOfValue", defaultEncodingId="ns=bacnet;i=105048")
+@o6.datatype(nodeId="ns=bacnet;i=103037", browseName="ns=bacnet;BACnetEventParameterChangeOfValue", defaultEncodingId="ns=bacnet;i=105048")
 class BACnetEventParameterChangeOfValue(ns0.datatypes.Structure):
-    time_delay: o6.UInt32
-    cov_criteria_bitmask: ns0.datatypes.OptionSet
-    cov_criteria_referenced_property_increment: o6.Float
+    time_delay: o6.UInt32 = o6.field(name="Time-delay")
+    cov_criteria_bitmask: ns0.datatypes.OptionSet = o6.field(name="Cov-criteria-bitmask")
+    cov_criteria_referenced_property_increment: o6.Float = o6.field(name="Cov-criteria-referenced-property-increment")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103039", browseName="BACnetEventParameterCommandFailure", defaultEncodingId="ns=bacnet;i=105052")
+@o6.datatype(nodeId="ns=bacnet;i=103039", browseName="ns=bacnet;BACnetEventParameterCommandFailure", defaultEncodingId="ns=bacnet;i=105052")
 class BACnetEventParameterCommandFailure(ns0.datatypes.Structure):
-    time_delay: o6.UInt32
-    feedback_property_reference: BACnetDeviceObjectPropertyReference
+    time_delay: o6.UInt32 = o6.field(name="Time-delay")
+    feedback_property_reference: BACnetDeviceObjectPropertyReference = o6.field(name="Feedback-property-reference")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103040", browseName="BACnetEventParameterFloatingLimit", defaultEncodingId="ns=bacnet;i=105054")
+@o6.datatype(nodeId="ns=bacnet;i=103040", browseName="ns=bacnet;BACnetEventParameterFloatingLimit", defaultEncodingId="ns=bacnet;i=105054")
 class BACnetEventParameterFloatingLimit(ns0.datatypes.Structure):
-    time_delay: o6.UInt32
-    setpoint_reference: BACnetDeviceObjectPropertyReference
-    low_diff_limit: o6.Double
-    high_diff_limit: o6.Double
-    deadband: o6.Double
+    time_delay: o6.UInt32 = o6.field(name="Time-delay")
+    setpoint_reference: BACnetDeviceObjectPropertyReference = o6.field(name="Setpoint-reference")
+    low_diff_limit: o6.Double = o6.field(name="Low-diff-limit")
+    high_diff_limit: o6.Double = o6.field(name="High-diff-limit")
+    deadband: o6.Double = o6.field(name="Deadband")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103041", browseName="BACnetEventParameterOutOfRange", defaultEncodingId="ns=bacnet;i=105056")
+@o6.datatype(nodeId="ns=bacnet;i=103041", browseName="ns=bacnet;BACnetEventParameterOutOfRange", defaultEncodingId="ns=bacnet;i=105056")
 class BACnetEventParameterOutOfRange(ns0.datatypes.Structure):
-    time_delay: o6.UInt32
-    low_limit: o6.Double
-    high_limit: o6.Double
-    deadband: o6.Double
+    time_delay: o6.UInt32 = o6.field(name="Time-delay")
+    low_limit: o6.Double = o6.field(name="Low-limit")
+    high_limit: o6.Double = o6.field(name="High-limit")
+    deadband: o6.Double = o6.field(name="Deadband")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103042", browseName="BACnetEventParameterBufferReady", defaultEncodingId="ns=bacnet;i=105058")
+@o6.datatype(nodeId="ns=bacnet;i=103042", browseName="ns=bacnet;BACnetEventParameterBufferReady", defaultEncodingId="ns=bacnet;i=105058")
 class BACnetEventParameterBufferReady(ns0.datatypes.Structure):
-    notification_threshold: o6.UInt32
-    previous_notification_count: o6.UInt32
+    notification_threshold: o6.UInt32 = o6.field(name="Notification-threshold")
+    previous_notification_count: o6.UInt32 = o6.field(name="Previous-notification-count")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=103043", browseName="BACnetEventParameterUnsignedOutOfRange", defaultEncodingId="ns=bacnet;i=105060")
+@o6.datatype(nodeId="ns=bacnet;i=103043", browseName="ns=bacnet;BACnetEventParameterUnsignedOutOfRange", defaultEncodingId="ns=bacnet;i=105060")
 class BACnetEventParameterUnsignedOutOfRange(ns0.datatypes.Structure):
-    time_delay: o6.UInt32
-    low_limit: o6.UInt32
-    high_limit: o6.UInt32
-    deadband: o6.UInt32
+    time_delay: o6.UInt32 = o6.field(name="Time-delay")
+    low_limit: o6.UInt32 = o6.field(name="Low-limit")
+    high_limit: o6.UInt32 = o6.field(name="High-limit")
+    deadband: o6.UInt32 = o6.field(name="Deadband")
 
 
-@o6.datatype(nodeId="ns=bacnet;i=3050", browseName="BACnetEventParameter", defaultEncodingId="ns=bacnet;i=5015")
+@o6.datatype(nodeId="ns=bacnet;i=3050", browseName="ns=bacnet;BACnetEventParameter", defaultEncodingId="ns=bacnet;i=5015")
 class BACnetEventParameter(ns0.datatypes.Union):
-    change_of_bitstring: BACnetEventParameterChangeOfBitstring
-    change_of_state: BACnetEventParameterChangeOfState
-    change_of_value: BACnetEventParameterChangeOfValue
-    command_failure: BACnetEventParameterCommandFailure
-    floating_limit: BACnetEventParameterFloatingLimit
-    out_of_range: BACnetEventParameterOutOfRange
-    extended: BACnetEventFaultParameterExtended
-    buffer_ready: BACnetEventParameterBufferReady
-    unsigned_range: BACnetEventParameterUnsignedRange
-    double_out_of_range: BACnetEventParameterDoubleOutOfRange
-    signed_out_of_range: BACnetEventParameterSignedOutOfRange
-    unsigned_out_of_range: BACnetEventParameterUnsignedOutOfRange
-    change_of_characterstring: BACnetEventParameterChangeOfCharacterString
-    change_of_life_safety: BACnetEventParameterChangeOfLifeSafety
+    change_of_bitstring: BACnetEventParameterChangeOfBitstring = o6.field(name="Change-of-bitstring")
+    change_of_state: BACnetEventParameterChangeOfState = o6.field(name="Change-of-state")
+    change_of_value: BACnetEventParameterChangeOfValue = o6.field(name="Change-of-value")
+    command_failure: BACnetEventParameterCommandFailure = o6.field(name="Command-failure")
+    floating_limit: BACnetEventParameterFloatingLimit = o6.field(name="Floating-limit")
+    out_of_range: BACnetEventParameterOutOfRange = o6.field(name="Out-of-range")
+    extended: BACnetEventFaultParameterExtended = o6.field(name="Extended")
+    buffer_ready: BACnetEventParameterBufferReady = o6.field(name="Buffer-ready")
+    unsigned_range: BACnetEventParameterUnsignedRange = o6.field(name="Unsigned-range")
+    double_out_of_range: BACnetEventParameterDoubleOutOfRange = o6.field(name="Double-out-of-range")
+    signed_out_of_range: BACnetEventParameterSignedOutOfRange = o6.field(name="Signed-out-of-range")
+    unsigned_out_of_range: BACnetEventParameterUnsignedOutOfRange = o6.field(name="Unsigned-out-of-range")
+    change_of_characterstring: BACnetEventParameterChangeOfCharacterString = o6.field(name="Change-of-characterstring")
+    change_of_life_safety: BACnetEventParameterChangeOfLifeSafety = o6.field(name="Change-of-life-safety")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=103048", browseName="BACnetLoggingType")
+@o6.enumtype(nodeId="ns=bacnet;i=103048", browseName="ns=bacnet;BACnetLoggingType")
 class BACnetLoggingType(ns0.datatypes.Enumeration):
     POLLED = o6.enumfield(0, name="Polled")
     COV = o6.enumfield(1, name="COV")
     TRIGGERED = o6.enumfield(2, name="Triggered")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=103053", browseName="BACnetObjectTypeEnum")
+@o6.enumtype(nodeId="ns=bacnet;i=103053", browseName="ns=bacnet;BACnetObjectTypeEnum")
 class BACnetObjectTypeEnum(ns0.datatypes.Enumeration):
     ANALOG_INPUT = o6.enumfield(0, name="analog-input")
     ANALOG_OUTPUT = o6.enumfield(1, name="analog-output")
@@ -1336,7 +1336,7 @@ class BACnetObjectTypeEnum(ns0.datatypes.Enumeration):
     LIGHTING_OUTPUT = o6.enumfield(54, name="lighting-output")
 
 
-@o6.enumtype(nodeId="ns=bacnet;i=103054", browseName="BACnetEventType")
+@o6.enumtype(nodeId="ns=bacnet;i=103054", browseName="ns=bacnet;BACnetEventType")
 class BACnetEventType(ns0.datatypes.Enumeration):
     CHANGE_OF_BITSTRING = o6.enumfield(0, name="change-of-bitstring")
     CHANGE_OF_STATE = o6.enumfield(1, name="change-of-state")

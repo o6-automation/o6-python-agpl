@@ -53,29 +53,37 @@ class TTDResultReadyEventType(machinery_result.objtypes.ResultReadyEventType):
 
 @o6.objecttype(nodeId="ns=ttd;i=1009", browseName="ns=ttd;JobStatisticsType", displayName="JobStatisticsType")
 class JobStatisticsType(ns0.objtypes.BaseObjectType):
-    endTime: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6056", browseName="ns=ttd;EndTime", dataType=ns0.datatypes.UtcTime))
-    startTime: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6057", browseName="ns=ttd;StartTime", dataType=ns0.datatypes.UtcTime))
+    endTime: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6056", browseName="ns=ttd;EndTime", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)
+    )
+    startTime: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6057", browseName="ns=ttd;StartTime", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)
+    )
     totalInitializingTime: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6058", browseName="ns=ttd;TotalInitializingTime", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6058", browseName="ns=ttd;TotalInitializingTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
     )
     totalInterruptedTime: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6059", browseName="ns=ttd;TotalInterruptedTime", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6059", browseName="ns=ttd;TotalInterruptedTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
     )
     totalRunningTime: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6060", browseName="ns=ttd;TotalRunningTime", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6060", browseName="ns=ttd;TotalRunningTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
     )
 
 
 @o6.objecttype(nodeId="ns=ttd;i=1004", browseName="ns=ttd;RecurrentPrognosisType", displayName="RecurrentPrognosisType")
 class RecurrentPrognosisType(machine_tool.objtypes.PrognosisType):
     activity: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6066", browseName="ns=ttd;Activity", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=ttd;i=6066", browseName="ns=ttd;Activity", modellingRule="Mandatory", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1
+        )
     )
     interval: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6067", browseName="ns=ttd;Interval", dataType=ns0.datatypes.UtcTime, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6067", browseName="ns=ttd;Interval", modellingRule="Optional", dataType=ns0.datatypes.UtcTime, accessLevel=3, userAccessLevel=1)
     )
     lastExecutionTime: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6068", browseName="ns=ttd;LastExecutionTime", dataType=ns0.datatypes.UtcTime, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=ttd;i=6068", browseName="ns=ttd;LastExecutionTime", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -85,6 +93,7 @@ class TextileTestingDeviceType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.PropertyType(
             nodeId="ns=ttd;i=6131",
             browseName="ns=ttd;AvailableExchangeableParts",
+            modellingRule="Mandatory",
             dataType=ttd_datypes.ExchangeablePartDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -97,6 +106,7 @@ class TextileTestingDeviceType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.PropertyType(
             nodeId="ns=ttd;i=6135",
             browseName="ns=ttd;InstalledTesterModules",
+            modellingRule="Mandatory",
             dataType=ttd_datypes.OptionalModuleDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -107,13 +117,14 @@ class TextileTestingDeviceType(ns0.objtypes.BaseObjectType):
     machineStatistics: MachineStatisticsType
     machineryBuildingBlocks: ns0.objtypes.FolderType
     notification: machine_tool.objtypes.NotificationType = o6.hasComponent(
-        machine_tool.objtypes.NotificationType(nodeId="ns=ttd;i=5050", browseName="ns=machine_tool;Notification")
+        machine_tool.objtypes.NotificationType(nodeId="ns=ttd;i=5050", browseName="ns=machine_tool;Notification", modellingRule="Mandatory")
     )
     recipeManagement: RecipeManagementType
     testProcedureIds: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=ttd;i=6146",
             browseName="ns=ttd;TestProcedureIds",
+            modellingRule="Mandatory",
             dataType=ttd_datypes.TestProcedureIdDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -134,7 +145,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RecipeIds", dataType=o6.NodeId("ns=ttd;i=3003"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=ttd;i=7001", browseName="ns=ttd;GetRecipeIds", outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6049"]))
+o6.call(nodeId="ns=ttd;i=7001", browseName="ns=ttd;GetRecipeIds", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6049"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=ttd;i=6050",
@@ -158,7 +169,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Recipe", dataType=o6.NodeId("ns=ttd;i=3018"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=ttd;i=7002", browseName="ns=ttd;GetRecipe", inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6050"]), outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6051"]))
+o6.call(
+    nodeId="ns=ttd;i=7002",
+    browseName="ns=ttd;GetRecipe",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6050"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6051"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=ttd;i=6052",
@@ -174,7 +191,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Overwrite", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=ttd;i=7003", browseName="ns=ttd;SetRecipe", inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6052"]))
+o6.call(nodeId="ns=ttd;i=7003", browseName="ns=ttd;SetRecipe", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6052"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=ttd;i=6053",
@@ -187,7 +204,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RecipeId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=ttd;i=7004", browseName="ns=ttd;DeleteRecipe", inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6053"]))
+o6.call(nodeId="ns=ttd;i=7004", browseName="ns=ttd;DeleteRecipe", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6053"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=ttd;i=6054",
@@ -200,7 +217,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Recipes", dataType=o6.NodeId("ns=ttd;i=3018"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=ttd;i=7005", browseName="ns=ttd;GetRecipes", outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6054"]))
+o6.call(nodeId="ns=ttd;i=7005", browseName="ns=ttd;GetRecipes", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6054"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=ttd;i=6055",
@@ -216,7 +233,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Overwrite", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=ttd;i=7006", browseName="ns=ttd;SetRecipes", inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6055"]))
+o6.call(nodeId="ns=ttd;i=7006", browseName="ns=ttd;SetRecipes", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6055"]))
 
 
 @o6.objecttype(nodeId="ns=ttd;i=1003", browseName="ns=ttd;RecipeManagementType", displayName="RecipeManagementType")
@@ -227,7 +244,14 @@ class RecipeManagementType(ns0.objtypes.BaseObjectType):
     getRecipes: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=ttd;i=7005"])
     recipeIds: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=ttd;i=6016", browseName="ns=ttd;RecipeIds", dataType=ttd_datypes.RecipeIdDataType, valueRank=1, arrayDimensions=[0], accessLevel=3, userAccessLevel=1
+            nodeId="ns=ttd;i=6016",
+            browseName="ns=ttd;RecipeIds",
+            modellingRule="Mandatory",
+            dataType=ttd_datypes.RecipeIdDataType,
+            valueRank=1,
+            arrayDimensions=[0],
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     setRecipe: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=ttd;i=7003"])
@@ -236,21 +260,25 @@ class RecipeManagementType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=ttd;i=1012", browseName="ns=ttd;MachineStatisticsType", displayName="MachineStatisticsType", interfaces=[ia.objtypes.IStatisticsType])
 class MachineStatisticsType(ns0.objtypes.BaseObjectType):
-    resetStatistics: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=ttd;i=7007", browseName="ns=ia;ResetStatistics"))
+    resetStatistics: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=ttd;i=7007", browseName="ns=ia;ResetStatistics", modellingRule="Optional"))
     startTime: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6065", browseName="ns=ia;StartTime", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6065", browseName="ns=ia;StartTime", modellingRule="Optional", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1)
     )
     totalExecutingTime: ns0.vartypes.BaseDataVariableType = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6061", browseName="ns=ttd;TotalExecutingTime", dataType=ns0.datatypes.Duration), "ns=ia;i=4002"
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6061", browseName="ns=ttd;TotalExecutingTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration),
+        "ns=ia;i=4002",
     )
     totalNotAvailableTime: ns0.vartypes.BaseDataVariableType = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6062", browseName="ns=ttd;TotalNotAvailableTime", dataType=ns0.datatypes.Duration), "ns=ia;i=4002"
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6062", browseName="ns=ttd;TotalNotAvailableTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration),
+        "ns=ia;i=4002",
     )
     totalNotExecutingTime: ns0.vartypes.BaseDataVariableType = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6063", browseName="ns=ttd;TotalNotExecutingTime", dataType=ns0.datatypes.Duration), "ns=ia;i=4002"
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6063", browseName="ns=ttd;TotalNotExecutingTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration),
+        "ns=ia;i=4002",
     )
     totalOutOfServiceTime: ns0.vartypes.BaseDataVariableType = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6064", browseName="ns=ttd;TotalOutOfServiceTime", dataType=ns0.datatypes.Duration), "ns=ia;i=4002"
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6064", browseName="ns=ttd;TotalOutOfServiceTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration),
+        "ns=ia;i=4002",
     )
 
 
@@ -315,7 +343,13 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=ttd;i=7009", browseName="ns=machinery_result;GetResultById", inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6111"]), outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6112"]))
+o6.call(
+    nodeId="ns=ttd;i=7009",
+    browseName="ns=machinery_result;GetResultById",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6111"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6112"]),
+)
 
 
 @o6.objecttype(nodeId="ns=ttd;i=1007", browseName="ns=ttd;TTDResultManagementType", displayName="TTDResultManagementType")

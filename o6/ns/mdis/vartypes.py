@@ -52,9 +52,13 @@ class InterlockVariableType(ns0.vartypes.BaseDataVariableType):
     dataType=mdis_datypes.MDISVersionDataType,
 )
 class MDISVersionVariableType(ns0.vartypes.BaseDataVariableType):
-    build: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mdis;i=1293", browseName="ns=mdis;Build", dataType=o6.Byte))
-    majorVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mdis;i=1291", browseName="ns=mdis;MajorVersion", dataType=o6.Byte))
-    minorVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mdis;i=1292", browseName="ns=mdis;MinorVersion", dataType=o6.Byte))
+    build: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mdis;i=1293", browseName="ns=mdis;Build", modellingRule="Mandatory", dataType=o6.Byte))
+    majorVersion: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=1291", browseName="ns=mdis;MajorVersion", modellingRule="Mandatory", dataType=o6.Byte)
+    )
+    minorVersion: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=mdis;i=1292", browseName="ns=mdis;MinorVersion", modellingRule="Mandatory", dataType=o6.Byte)
+    )
 
 
 del Any, TYPE_CHECKING, uuid, o6, ns0, mdis_reftypes, mdis_datypes

@@ -155,7 +155,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=pnem;i=6032",
     browseName="ns=pnem;ModePowerConsumption",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6033", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6033", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Float,
 )
 o6.reference(pnem_objtypes.EnergySavingModeType, ns0.reftypes.HasComponent, o6.ns["ns=pnem;i=6032"])
@@ -163,7 +163,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=pnem;i=6034",
     browseName="ns=pnem;EnergyConsumptionToPause",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6035", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6035", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Float,
 )
 o6.reference(pnem_objtypes.EnergySavingModeType, ns0.reftypes.HasComponent, o6.ns["ns=pnem;i=6034"])
@@ -171,7 +171,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=pnem;i=6036",
     browseName="ns=pnem;EnergyConsumptionToOperate",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6037", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6037", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Float,
 )
 o6.reference(pnem_objtypes.EnergySavingModeType, ns0.reftypes.HasComponent, o6.ns["ns=pnem;i=6036"])
@@ -184,9 +184,10 @@ ns0.vartypes.MultiStateDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=pnem;i=6038",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[9],
+                arrayDimensions=[0],
                 value=[
                     o6.LocalizedText("Energy saving disabled"),
                     o6.LocalizedText("Power Off"),
@@ -213,6 +214,7 @@ pnem_objtypes.EnergySavingModeStatusType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=pnem;i=6039",
                 browseName="ns=pnem;StateInformation",
+                modellingRule="Mandatory",
                 dataType=pnem_datypes.EnergyStateInformationDataType,
                 value=pnem_datypes.EnergyStateInformationDataType(iDSource=0, iDDestination=0, regularTimeToOperate=0.0, modePowerConsumption=0.0),
             )
@@ -258,7 +260,7 @@ http_opcfoundation_org_UA_PNEM_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6118", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=pnem;i=6119", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=pnem;i=6119", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
@@ -299,19 +301,22 @@ ns0.vartypes.PropertyType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=pnem;i=6141",
     browseName="ns=pnem;EnergyConsumptionToOperate",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6142", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6142", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=pnem;i=6143",
     browseName="ns=pnem;EnergyConsumptionToPause",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6144", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6144", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=pnem;i=6145",
     browseName="ns=pnem;ModePowerConsumption",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6146", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6146", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Float,
 )
 pnem_objtypes.EnergySavingModeType(
@@ -319,15 +324,21 @@ pnem_objtypes.EnergySavingModeType(
     browseName="ns=pnem;<EnergySavingModes>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6140", browseName="ns=pnem;DynamicData", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6140", browseName="ns=pnem;DynamicData", modellingRule="Mandatory", dataType=o6.Boolean)),
         o6.hasComponent(o6.ns["ns=pnem;i=6141"]),
         o6.hasComponent(o6.ns["ns=pnem;i=6143"]),
         o6.hasComponent(o6.ns["ns=pnem;i=6145"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pnem;i=6147", browseName="ns=pnem;RegularTimeToOperate", dataType=ns0.datatypes.Duration)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pnem;i=6148", browseName="ns=pnem;TimeMaxLengthOfStay", dataType=ns0.datatypes.Duration)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pnem;i=6149", browseName="ns=pnem;TimeMinLengthOfStay", dataType=ns0.datatypes.Duration)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pnem;i=6150", browseName="ns=pnem;TimeMinPause", dataType=ns0.datatypes.Duration)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pnem;i=6151", browseName="ns=pnem;TimeToPause", dataType=ns0.datatypes.Duration)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=pnem;i=6147", browseName="ns=pnem;RegularTimeToOperate", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=pnem;i=6148", browseName="ns=pnem;TimeMaxLengthOfStay", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=pnem;i=6149", browseName="ns=pnem;TimeMinLengthOfStay", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
+        ),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pnem;i=6150", browseName="ns=pnem;TimeMinPause", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pnem;i=6151", browseName="ns=pnem;TimeToPause", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
     ],
 )
 o6.reference(pnem_objtypes.EnergySavingModesContainerType, ns0.reftypes.HasComponent, o6.ns["ns=pnem;i=5016"])
@@ -336,19 +347,24 @@ pnem_vartypes.MeasurementValueType(
     browseName="ns=pnem;<MeasurementValue>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6057", browseName="ns=pnem;AccuracyClass", dataType=pnem_datypes.AccuracyClassEnumeration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6058", browseName="ns=pnem;AccuracyDomain", dataType=pnem_datypes.AccuracyDomainEnumeration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6057", browseName="ns=pnem;AccuracyClass", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyClassEnumeration)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6058", browseName="ns=pnem;AccuracyDomain", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyDomainEnumeration)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=pnem;i=6059",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6152", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6152", browseName="ns=pnem;PeMeasurementID", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
     dataType=ns0.datatypes.Number,
 )
@@ -358,19 +374,24 @@ pnem_vartypes.MeasurementValueType(
     browseName="ns=pnem;AcCurrent",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6061", browseName="ns=pnem;AccuracyClass", dataType=pnem_datypes.AccuracyClassEnumeration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6062", browseName="ns=pnem;AccuracyDomain", dataType=pnem_datypes.AccuracyDomainEnumeration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6061", browseName="ns=pnem;AccuracyClass", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyClassEnumeration)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6062", browseName="ns=pnem;AccuracyDomain", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyDomainEnumeration)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=pnem;i=6063",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=4279632, displayName=o6.LocalizedText("A"), description=o6.LocalizedText("ampere")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6153", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6153", browseName="ns=pnem;PeMeasurementID", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
     dataType=pnem_datypes.AcPeDataType,
     value=pnem_datypes.AcPeDataType(a=0.0, b=0.0, c=0.0),
@@ -383,19 +404,24 @@ pnem_vartypes.MeasurementValueType(
     browseName="ns=pnem;AcActivePowerTotal",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6065", browseName="ns=pnem;AccuracyClass", dataType=pnem_datypes.AccuracyClassEnumeration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6066", browseName="ns=pnem;AccuracyDomain", dataType=pnem_datypes.AccuracyDomainEnumeration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6065", browseName="ns=pnem;AccuracyClass", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyClassEnumeration)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6066", browseName="ns=pnem;AccuracyDomain", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyDomainEnumeration)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=pnem;i=6067",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5723220, displayName=o6.LocalizedText("W"), description=o6.LocalizedText("watt")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6154", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6154", browseName="ns=pnem;PeMeasurementID", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
     dataType=o6.Float,
     accessLevel=3,
@@ -407,19 +433,24 @@ pnem_vartypes.MeasurementValueType(
     browseName="ns=pnem;AcActivePowerTotal",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6069", browseName="ns=pnem;AccuracyClass", dataType=pnem_datypes.AccuracyClassEnumeration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6070", browseName="ns=pnem;AccuracyDomain", dataType=pnem_datypes.AccuracyDomainEnumeration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6069", browseName="ns=pnem;AccuracyClass", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyClassEnumeration)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6070", browseName="ns=pnem;AccuracyDomain", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyDomainEnumeration)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=pnem;i=6071",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5723220, displayName=o6.LocalizedText("W"), description=o6.LocalizedText("watt")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6155", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6155", browseName="ns=pnem;PeMeasurementID", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
     dataType=o6.Float,
     accessLevel=3,
@@ -431,19 +462,24 @@ pnem_vartypes.MeasurementValueType(
     browseName="ns=pnem;AcActiveEnergyTotalImportLp",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6073", browseName="ns=pnem;AccuracyClass", dataType=pnem_datypes.AccuracyClassEnumeration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6074", browseName="ns=pnem;AccuracyDomain", dataType=pnem_datypes.AccuracyDomainEnumeration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6073", browseName="ns=pnem;AccuracyClass", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyClassEnumeration)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6074", browseName="ns=pnem;AccuracyDomain", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyDomainEnumeration)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=pnem;i=6075",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5720146, displayName=o6.LocalizedText("W·h"), description=o6.LocalizedText("watt hour")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6156", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6156", browseName="ns=pnem;PeMeasurementID", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
     dataType=o6.Float,
     accessLevel=3,
@@ -455,19 +491,24 @@ pnem_vartypes.MeasurementValueType(
     browseName="ns=pnem;AcActiveEnergyTotalExportLp",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6077", browseName="ns=pnem;AccuracyClass", dataType=pnem_datypes.AccuracyClassEnumeration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6078", browseName="ns=pnem;AccuracyDomain", dataType=pnem_datypes.AccuracyDomainEnumeration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6077", browseName="ns=pnem;AccuracyClass", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyClassEnumeration)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6078", browseName="ns=pnem;AccuracyDomain", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyDomainEnumeration)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=pnem;i=6079",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5720146, displayName=o6.LocalizedText("W·h"), description=o6.LocalizedText("watt hour")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6157", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6157", browseName="ns=pnem;PeMeasurementID", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
     dataType=o6.Float,
     accessLevel=3,
@@ -479,19 +520,24 @@ pnem_vartypes.MeasurementValueType(
     browseName="ns=pnem;AcActivePower",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6122", browseName="ns=pnem;AccuracyClass", dataType=pnem_datypes.AccuracyClassEnumeration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6123", browseName="ns=pnem;AccuracyDomain", dataType=pnem_datypes.AccuracyDomainEnumeration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6122", browseName="ns=pnem;AccuracyClass", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyClassEnumeration)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6123", browseName="ns=pnem;AccuracyDomain", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyDomainEnumeration)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=pnem;i=6124",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5723220, displayName=o6.LocalizedText("W"), description=o6.LocalizedText("watt")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6158", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6158", browseName="ns=pnem;PeMeasurementID", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
     dataType=pnem_datypes.AcPeDataType,
     value=pnem_datypes.AcPeDataType(a=0.0, b=0.0, c=0.0),
@@ -504,19 +550,24 @@ pnem_vartypes.MeasurementValueType(
     browseName="ns=pnem;AcReactivePower",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6131", browseName="ns=pnem;AccuracyClass", dataType=pnem_datypes.AccuracyClassEnumeration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6132", browseName="ns=pnem;AccuracyDomain", dataType=pnem_datypes.AccuracyDomainEnumeration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6131", browseName="ns=pnem;AccuracyClass", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyClassEnumeration)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6132", browseName="ns=pnem;AccuracyDomain", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyDomainEnumeration)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=pnem;i=6133",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=4469812, displayName=o6.LocalizedText("var"), description=o6.LocalizedText("var")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6159", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6159", browseName="ns=pnem;PeMeasurementID", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
     dataType=pnem_datypes.AcPeDataType,
     value=pnem_datypes.AcPeDataType(a=0.0, b=0.0, c=0.0),
@@ -529,19 +580,24 @@ pnem_vartypes.MeasurementValueType(
     browseName="ns=pnem;AcActiveEnergyTotalImportHp",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6083", browseName="ns=pnem;AccuracyClass", dataType=pnem_datypes.AccuracyClassEnumeration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6084", browseName="ns=pnem;AccuracyDomain", dataType=pnem_datypes.AccuracyDomainEnumeration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6083", browseName="ns=pnem;AccuracyClass", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyClassEnumeration)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6084", browseName="ns=pnem;AccuracyDomain", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyDomainEnumeration)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=pnem;i=6085",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5720146, displayName=o6.LocalizedText("W·h"), description=o6.LocalizedText("watt hour")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6160", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6160", browseName="ns=pnem;PeMeasurementID", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
     dataType=o6.Double,
     accessLevel=3,
@@ -553,19 +609,24 @@ pnem_vartypes.MeasurementValueType(
     browseName="ns=pnem;AcActiveEnergyTotalExportHp",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6087", browseName="ns=pnem;AccuracyClass", dataType=pnem_datypes.AccuracyClassEnumeration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6088", browseName="ns=pnem;AccuracyDomain", dataType=pnem_datypes.AccuracyDomainEnumeration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6087", browseName="ns=pnem;AccuracyClass", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyClassEnumeration)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6088", browseName="ns=pnem;AccuracyDomain", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyDomainEnumeration)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=pnem;i=6089",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5720146, displayName=o6.LocalizedText("W·h"), description=o6.LocalizedText("watt hour")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6161", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6161", browseName="ns=pnem;PeMeasurementID", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
     dataType=o6.Double,
     accessLevel=3,
@@ -577,19 +638,24 @@ pnem_vartypes.MeasurementValueType(
     browseName="ns=pnem;AcReactiveEnergyTotalImportHp",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6091", browseName="ns=pnem;AccuracyClass", dataType=pnem_datypes.AccuracyClassEnumeration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6092", browseName="ns=pnem;AccuracyDomain", dataType=pnem_datypes.AccuracyDomainEnumeration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6091", browseName="ns=pnem;AccuracyClass", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyClassEnumeration)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6092", browseName="ns=pnem;AccuracyDomain", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyDomainEnumeration)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=pnem;i=6093",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6162", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6162", browseName="ns=pnem;PeMeasurementID", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
     dataType=o6.Double,
     accessLevel=3,
@@ -601,19 +667,24 @@ pnem_vartypes.MeasurementValueType(
     browseName="ns=pnem;AcReactiveEnergyTotalExportHp",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6095", browseName="ns=pnem;AccuracyClass", dataType=pnem_datypes.AccuracyClassEnumeration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6096", browseName="ns=pnem;AccuracyDomain", dataType=pnem_datypes.AccuracyDomainEnumeration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6095", browseName="ns=pnem;AccuracyClass", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyClassEnumeration)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6096", browseName="ns=pnem;AccuracyDomain", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyDomainEnumeration)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=pnem;i=6097",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=0, displayName=o6.LocalizedText(), description=o6.LocalizedText()
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6163", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6163", browseName="ns=pnem;PeMeasurementID", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
     dataType=o6.Double,
     accessLevel=3,
@@ -625,19 +696,24 @@ pnem_vartypes.MeasurementValueType(
     browseName="ns=pnem;AcVoltagePe",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6134", browseName="ns=pnem;AccuracyClass", dataType=pnem_datypes.AccuracyClassEnumeration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6135", browseName="ns=pnem;AccuracyDomain", dataType=pnem_datypes.AccuracyDomainEnumeration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6134", browseName="ns=pnem;AccuracyClass", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyClassEnumeration)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6135", browseName="ns=pnem;AccuracyDomain", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyDomainEnumeration)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=pnem;i=6136",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5655636, displayName=o6.LocalizedText("V"), description=o6.LocalizedText("volt")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6164", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6164", browseName="ns=pnem;PeMeasurementID", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
     dataType=pnem_datypes.AcPeDataType,
     value=pnem_datypes.AcPeDataType(a=0.0, b=0.0, c=0.0),
@@ -650,19 +726,24 @@ pnem_vartypes.MeasurementValueType(
     browseName="ns=pnem;AcVoltagePp",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6137", browseName="ns=pnem;AccuracyClass", dataType=pnem_datypes.AccuracyClassEnumeration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6138", browseName="ns=pnem;AccuracyDomain", dataType=pnem_datypes.AccuracyDomainEnumeration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6137", browseName="ns=pnem;AccuracyClass", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyClassEnumeration)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6138", browseName="ns=pnem;AccuracyDomain", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyDomainEnumeration)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=pnem;i=6139",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5655636, displayName=o6.LocalizedText("V"), description=o6.LocalizedText("volt")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6165", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6165", browseName="ns=pnem;PeMeasurementID", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
     dataType=pnem_datypes.AcPpDataType,
     value=pnem_datypes.AcPpDataType(a_b=0.0, b_c=0.0, c_a=0.0),
@@ -675,19 +756,24 @@ pnem_vartypes.MeasurementValueType(
     browseName="ns=pnem;AcCurrent",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6125", browseName="ns=pnem;AccuracyClass", dataType=pnem_datypes.AccuracyClassEnumeration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6126", browseName="ns=pnem;AccuracyDomain", dataType=pnem_datypes.AccuracyDomainEnumeration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6125", browseName="ns=pnem;AccuracyClass", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyClassEnumeration)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6126", browseName="ns=pnem;AccuracyDomain", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyDomainEnumeration)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=pnem;i=6127",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=4279632, displayName=o6.LocalizedText("A"), description=o6.LocalizedText("ampere")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6166", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6166", browseName="ns=pnem;PeMeasurementID", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
     dataType=pnem_datypes.AcPeDataType,
     value=pnem_datypes.AcPeDataType(a=0.0, b=0.0, c=0.0),
@@ -700,9 +786,13 @@ pnem_vartypes.MeasurementValueType(
     browseName="ns=pnem;AcPowerFactor",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6128", browseName="ns=pnem;AccuracyClass", dataType=pnem_datypes.AccuracyClassEnumeration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6129", browseName="ns=pnem;AccuracyDomain", dataType=pnem_datypes.AccuracyDomainEnumeration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6167", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6128", browseName="ns=pnem;AccuracyClass", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyClassEnumeration)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6129", browseName="ns=pnem;AccuracyDomain", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyDomainEnumeration)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6167", browseName="ns=pnem;PeMeasurementID", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
     dataType=pnem_datypes.AcPeDataType,
     value=pnem_datypes.AcPeDataType(a=0.0, b=0.0, c=0.0),
@@ -715,19 +805,24 @@ pnem_vartypes.MeasurementValueType(
     browseName="ns=pnem;DcCurrent",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6103", browseName="ns=pnem;AccuracyClass", dataType=pnem_datypes.AccuracyClassEnumeration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6104", browseName="ns=pnem;AccuracyDomain", dataType=pnem_datypes.AccuracyDomainEnumeration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6103", browseName="ns=pnem;AccuracyClass", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyClassEnumeration)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6104", browseName="ns=pnem;AccuracyDomain", modellingRule="Mandatory", dataType=pnem_datypes.AccuracyDomainEnumeration)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=pnem;i=6105",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=4279632, displayName=o6.LocalizedText("A"), description=o6.LocalizedText("ampere")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6168", browseName="ns=pnem;PeMeasurementID", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6168", browseName="ns=pnem;PeMeasurementID", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
     dataType=o6.Float,
     accessLevel=3,
@@ -744,10 +839,10 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnem;i=7001", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=pnem;i=6041"]))
+o6.call(nodeId="ns=pnem;i=7001", browseName="ns=di;BreakLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=pnem;i=6041"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnem;i=6042",
@@ -757,10 +852,10 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnem;i=7002", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=pnem;i=6042"]))
+o6.call(nodeId="ns=pnem;i=7002", browseName="ns=di;ExitLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=pnem;i=6042"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnem;i=6043",
@@ -770,7 +865,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="Context", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
@@ -781,10 +876,16 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnem;i=7003", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=pnem;i=6043"]), outputArgs=o6.hasProperty(o6.ns["ns=pnem;i=6044"]))
+o6.call(
+    nodeId="ns=pnem;i=7003",
+    browseName="ns=di;InitLock",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=pnem;i=6043"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=pnem;i=6044"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnem;i=6049",
@@ -794,20 +895,20 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnem;i=7004", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=pnem;i=6049"]))
+o6.call(nodeId="ns=pnem;i=7004", browseName="ns=di;RenewLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=pnem;i=6049"]))
 
 di.objtypes.LockingServicesType(
     nodeId="ns=pnem;i=5020",
     browseName="ns=pnem;Lock",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6045", browseName="ns=di;Locked", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6046", browseName="ns=di;LockingClient", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6047", browseName="ns=di;LockingUser", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6048", browseName="ns=di;RemainingLockTime", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6045", browseName="ns=di;Locked", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6046", browseName="ns=di;LockingClient", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6047", browseName="ns=di;LockingUser", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnem;i=6048", browseName="ns=di;RemainingLockTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
         o6.hasComponent(o6.ns["ns=pnem;i=7001"]),
         o6.hasComponent(o6.ns["ns=pnem;i=7002"]),
         o6.hasComponent(o6.ns["ns=pnem;i=7003"]),

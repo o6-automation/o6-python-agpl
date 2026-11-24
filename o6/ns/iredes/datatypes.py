@@ -31,55 +31,55 @@ else:
     _VariableNode = object
 
 
-@o6.datatype(nodeId="ns=iredes;i=3000", browseName="IRtextShort", parent="i=12")
+@o6.datatype(nodeId="ns=iredes;i=3000", browseName="ns=iredes;IRtextShort", parent="i=12")
 class IRtextShort:
     pass
 
 
-@o6.datatype(nodeId="ns=iredes;i=3001", browseName="IRtext", parent="i=12")
+@o6.datatype(nodeId="ns=iredes;i=3001", browseName="ns=iredes;IRtext", parent="i=12")
 class IRtext:
     pass
 
 
-@o6.datatype(nodeId="ns=iredes;i=3002", browseName="IRtextLong", parent="i=12")
+@o6.datatype(nodeId="ns=iredes;i=3002", browseName="ns=iredes;IRtextLong", parent="i=12")
 class IRtextLong:
     pass
 
 
-@o6.datatype(nodeId="ns=iredes;i=3003", browseName="IRLengthDataType", defaultEncodingId="ns=iredes;i=5001")
+@o6.datatype(nodeId="ns=iredes;i=3003", browseName="ns=iredes;IRLengthDataType", defaultEncodingId="ns=iredes;i=5001")
 class IRLengthDataType(ns0.datatypes.Structure):
-    value: o6.Double
-    unit: ns0.datatypes.EUInformation
+    value: o6.Double = o6.field(name="Value")
+    unit: ns0.datatypes.EUInformation = o6.field(name="Unit")
 
 
-@o6.datatype(nodeId="ns=iredes;i=3004", browseName="JobAssignmentTimeDataType", defaultEncodingId="ns=iredes;i=5004")
+@o6.datatype(nodeId="ns=iredes;i=3004", browseName="ns=iredes;JobAssignmentTimeDataType", defaultEncodingId="ns=iredes;i=5004")
 class JobAssignmentTimeDataType(ns0.datatypes.Union):
-    expectedFinishTime: o6.DateTime
-    expectedDuration: o6.Double
+    expectedFinishTime: o6.DateTime = o6.field(name="ExpectedFinishTime")
+    expectedDuration: o6.Double = o6.field(name="ExpectedDuration")
 
 
-@o6.datatype(nodeId="ns=iredes;i=3005", browseName="IRangle", parent="i=10")
+@o6.datatype(nodeId="ns=iredes;i=3005", browseName="ns=iredes;IRangle", parent="i=10")
 class IRangle:
     pass
 
 
-@o6.enumtype(nodeId="ns=iredes;i=3006", browseName="DispFlag")
+@o6.enumtype(nodeId="ns=iredes;i=3006", browseName="ns=iredes;DispFlag")
 class DispFlag(ns0.datatypes.Enumeration):
     MACH_START = o6.enumfield(0, name="MachStart")
     FILE_LOAD = o6.enumfield(1, name="FileLoad")
 
 
-@o6.datatype(nodeId="ns=iredes;i=3007", browseName="IRVersion", parent="i=12")
+@o6.datatype(nodeId="ns=iredes;i=3007", browseName="ns=iredes;IRVersion", parent="i=12")
 class IRVersion:
     pass
 
 
-@o6.datatype(nodeId="ns=iredes;i=3008", browseName="AnyURI", parent="i=12")
+@o6.datatype(nodeId="ns=iredes;i=3008", browseName="ns=iredes;AnyURI", parent="i=12")
 class AnyURI:
     pass
 
 
-@o6.enumtype(nodeId="ns=iredes;i=3009", browseName="Answer")
+@o6.enumtype(nodeId="ns=iredes;i=3009", browseName="ns=iredes;Answer")
 class Answer(ns0.datatypes.Enumeration):
     ACCEPTED = o6.enumfield(0, name="Accepted")
     DELAYED = o6.enumfield(1, name="Delayed")
@@ -87,7 +87,7 @@ class Answer(ns0.datatypes.Enumeration):
     DENIED = o6.enumfield(3, name="Denied")
 
 
-@o6.enumtype(nodeId="ns=iredes;i=3012", browseName="LTPPMptFromType")
+@o6.enumtype(nodeId="ns=iredes;i=3012", browseName="ns=iredes;LTPPMptFromType")
 class LTPPMptFromType(ns0.datatypes.Enumeration):
     LOAD_PT = o6.enumfield(0, name="LoadPt")
     DUMP_PT = o6.enumfield(1, name="DumpPt")
@@ -96,7 +96,7 @@ class LTPPMptFromType(ns0.datatypes.Enumeration):
     OTHERS = o6.enumfield(4, name="Others")
 
 
-@o6.enumtype(nodeId="ns=iredes;i=3015", browseName="LTPPMptToType")
+@o6.enumtype(nodeId="ns=iredes;i=3015", browseName="ns=iredes;LTPPMptToType")
 class LTPPMptToType(ns0.datatypes.Enumeration):
     LOAD_PT = o6.enumfield(0, name="LoadPt")
     DUMP_PT = o6.enumfield(1, name="DumpPt")
@@ -106,7 +106,7 @@ class LTPPMptToType(ns0.datatypes.Enumeration):
     OTHERS = o6.enumfield(5, name="Others")
 
 
-@o6.enumtype(nodeId="ns=iredes;i=3018", browseName="LTPPMaction")
+@o6.enumtype(nodeId="ns=iredes;i=3018", browseName="ns=iredes;LTPPMaction")
 class LTPPMaction(ns0.datatypes.Enumeration):
     LOAD = o6.enumfield(0, name="Load")
     DUMP = o6.enumfield(1, name="Dump")

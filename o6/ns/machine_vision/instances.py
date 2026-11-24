@@ -198,13 +198,15 @@ o6.reference(o6.ns["ns=machine_vision;i=5275"], "i=39", o6.ns["ns=machine_vision
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6058",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6060", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6060", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6063",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6064", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6064", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.DataTypeDescriptionType(nodeId="ns=machine_vision;i=6071", browseName="ns=machine_vision;ProductIdDataType", dataType=o6.String, value="ProductIdDataType")
@@ -230,13 +232,16 @@ o6.reference(o6.ns["ns=machine_vision;i=5019"], "i=39", o6.ns["ns=machine_vision
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6080",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6081", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6081", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5045",
     browseName="ns=machine_vision;InitializedToReadyProduct",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6084", browseName="TransitionNumber", dataType=o6.UInt32, value=562))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6084", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=562))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionAutomaticModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5045"])
 o6.reference(o6.ns["ns=machine_vision;i=5045"], "i=53", o6.ns["ns=machine_vision;i=7060"])
@@ -245,13 +250,15 @@ o6.reference(o6.ns["ns=machine_vision;i=5045"], "i=54", machine_vision_objtypes.
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6085",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6088", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6088", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6091",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6092", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6092", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.DataTypeDescriptionType(
@@ -286,25 +293,30 @@ o6.reference(o6.ns["ns=machine_vision;i=5279"], "i=39", o6.ns["ns=machine_vision
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6135",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6136", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6136", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6162",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6163", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6163", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6082",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6166", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6166", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5253",
     browseName="ns=machine_vision;PreoperationalToOperational",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6171", browseName="TransitionNumber", dataType=o6.UInt32, value=141))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6171", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=141))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5253"])
 o6.reference(o6.ns["ns=machine_vision;i=5253"], "i=53", o6.ns["ns=machine_vision;i=7095"])
@@ -312,7 +324,8 @@ o6.reference(o6.ns["ns=machine_vision;i=5253"], "i=54", machine_vision_objtypes.
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6175",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6178", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6178", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.DataTypeDescriptionType(nodeId="ns=machine_vision;i=6188", browseName="ns=machine_vision;RecipeTransferOptions", dataType=o6.String, value="RecipeTransferOptions")
@@ -324,26 +337,30 @@ o6.reference(o6.ns["ns=machine_vision;i=5249"], "i=39", o6.ns["ns=machine_vision
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6183",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6211", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6211", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6219",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6220", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6220", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5254",
     browseName="ns=machine_vision;PreoperationalToOperationalAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6221", browseName="TransitionNumber", dataType=o6.UInt32, value=140))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6221", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=140))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5254"])
 o6.reference(o6.ns["ns=machine_vision;i=5254"], "i=54", machine_vision_objtypes.StateChangedEventType)
 ns0.objtypes.StateType(
     nodeId="ns=machine_vision;i=5028",
     browseName="ns=machine_vision;Preoperational",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6226", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6226", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5028"])
 o6.reference(o6.ns["ns=machine_vision;i=5028"], "ns=machine_vision;i=4003", o6.ns["ns=machine_vision;i=5253"])
@@ -353,19 +370,19 @@ o6.reference(o6.ns["ns=machine_vision;i=5254"], "i=51", o6.ns["ns=machine_vision
 ns0.objtypes.StateType(
     nodeId="ns=machine_vision;i=5029",
     browseName="ns=machine_vision;Halted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6227", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6227", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5029"])
 ns0.objtypes.StateType(
     nodeId="ns=machine_vision;i=5030",
     browseName="ns=machine_vision;Error",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6228", browseName="StateNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6228", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5030"])
 ns0.objtypes.StateType(
     nodeId="ns=machine_vision;i=5031",
     browseName="ns=machine_vision;Operational",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6229", browseName="StateNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6229", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5031"])
 o6.reference(o6.ns["ns=machine_vision;i=5031"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5253"])
@@ -375,7 +392,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5254"], "i=52", o6.ns["ns=machine_vision
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5032",
     browseName="ns=machine_vision;PreoperationalToHalted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6230", browseName="TransitionNumber", dataType=o6.UInt32, value=121))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6230", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=121))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5032"])
 o6.reference(o6.ns["ns=machine_vision;i=5028"], "ns=machine_vision;i=4003", o6.ns["ns=machine_vision;i=5032"])
@@ -387,7 +406,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5032"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5033",
     browseName="ns=machine_vision;PreoperationalToHaltedAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6231", browseName="TransitionNumber", dataType=o6.UInt32, value=120))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6231", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=120))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5033"])
 o6.reference(o6.ns["ns=machine_vision;i=5028"], "ns=machine_vision;i=4003", o6.ns["ns=machine_vision;i=5033"])
@@ -398,7 +419,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5033"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5034",
     browseName="ns=machine_vision;PreoperationalToErrorAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6232", browseName="TransitionNumber", dataType=o6.UInt32, value=130))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6232", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=130))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5034"])
 o6.reference(o6.ns["ns=machine_vision;i=5028"], "ns=machine_vision;i=4003", o6.ns["ns=machine_vision;i=5034"])
@@ -410,7 +433,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5034"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5035",
     browseName="ns=machine_vision;PreoperationalToInitialized",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6233", browseName="TransitionNumber", dataType=o6.UInt32, value=151))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6233", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=151))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5035"])
 o6.reference(o6.ns["ns=machine_vision;i=5028"], "ns=machine_vision;i=4003", o6.ns["ns=machine_vision;i=5035"])
@@ -420,7 +445,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5035"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5036",
     browseName="ns=machine_vision;PreoperationalToInitializedAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6234", browseName="TransitionNumber", dataType=o6.UInt32, value=150))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6234", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=150))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5036"])
 o6.reference(o6.ns["ns=machine_vision;i=5028"], "ns=machine_vision;i=4003", o6.ns["ns=machine_vision;i=5036"])
@@ -429,7 +456,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5036"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5037",
     browseName="ns=machine_vision;HaltedToPreoperational",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6235", browseName="TransitionNumber", dataType=o6.UInt32, value=211))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6235", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=211))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5037"])
 o6.reference(o6.ns["ns=machine_vision;i=5028"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5037"])
@@ -441,7 +470,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5037"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5038",
     browseName="ns=machine_vision;HaltedToPreoperationalAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6236", browseName="TransitionNumber", dataType=o6.UInt32, value=210))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6236", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=210))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5038"])
 o6.reference(o6.ns["ns=machine_vision;i=5028"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5038"])
@@ -452,7 +483,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5038"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5039",
     browseName="ns=machine_vision;ErrorToPreoperational",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6237", browseName="TransitionNumber", dataType=o6.UInt32, value=311))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6237", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=311))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5039"])
 o6.reference(o6.ns["ns=machine_vision;i=5028"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5039"])
@@ -464,7 +497,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5039"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5040",
     browseName="ns=machine_vision;ErrorToPreoperationalAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6238", browseName="TransitionNumber", dataType=o6.UInt32, value=310))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6238", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=310))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5040"])
 o6.reference(o6.ns["ns=machine_vision;i=5028"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5040"])
@@ -475,7 +510,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5040"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5041",
     browseName="ns=machine_vision;ErrorToHalted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6239", browseName="TransitionNumber", dataType=o6.UInt32, value=321))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6239", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=321))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5041"])
 o6.reference(o6.ns["ns=machine_vision;i=5029"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5041"])
@@ -487,7 +524,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5041"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5042",
     browseName="ns=machine_vision;ErrorToHaltedAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6240", browseName="TransitionNumber", dataType=o6.UInt32, value=320))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6240", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=320))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5042"])
 o6.reference(o6.ns["ns=machine_vision;i=5029"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5042"])
@@ -498,13 +537,16 @@ o6.reference(o6.ns["ns=machine_vision;i=5042"], "i=54", machine_vision_objtypes.
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6139",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6242", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6242", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5044",
     browseName="ns=machine_vision;ReadyToInitializedProduct",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6243", browseName="TransitionNumber", dataType=o6.UInt32, value=652))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6243", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=652))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionAutomaticModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5044"])
 o6.reference(o6.ns["ns=machine_vision;i=5044"], "i=53", o6.ns["ns=machine_vision;i=7059"])
@@ -512,7 +554,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5044"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5047",
     browseName="ns=machine_vision;OperationalToPreoperational",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6245", browseName="TransitionNumber", dataType=o6.UInt32, value=411))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6245", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=411))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5047"])
 o6.reference(o6.ns["ns=machine_vision;i=5028"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5047"])
@@ -524,7 +568,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5047"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5048",
     browseName="ns=machine_vision;OperationalToPreoperationalAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6246", browseName="TransitionNumber", dataType=o6.UInt32, value=410))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6246", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=410))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5048"])
 o6.reference(o6.ns["ns=machine_vision;i=5028"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5048"])
@@ -535,7 +581,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5048"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5049",
     browseName="ns=machine_vision;OperationalToHalted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6247", browseName="TransitionNumber", dataType=o6.UInt32, value=421))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6247", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=421))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5049"])
 o6.reference(o6.ns["ns=machine_vision;i=5029"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5049"])
@@ -547,7 +595,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5049"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5050",
     browseName="ns=machine_vision;OperationalToHaltedAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6248", browseName="TransitionNumber", dataType=o6.UInt32, value=420))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6248", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=420))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5050"])
 o6.reference(o6.ns["ns=machine_vision;i=5029"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5050"])
@@ -558,7 +608,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5050"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5051",
     browseName="ns=machine_vision;OperationalToErrorAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6249", browseName="TransitionNumber", dataType=o6.UInt32, value=430))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6249", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=430))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5051"])
 o6.reference(o6.ns["ns=machine_vision;i=5030"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5051"])
@@ -569,13 +621,14 @@ o6.reference(o6.ns["ns=machine_vision;i=5051"], "i=54", machine_vision_objtypes.
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6244",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6250", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6250", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.objtypes.StateType(
     nodeId="ns=machine_vision;i=5056",
     browseName="ns=machine_vision;Initialized",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6259", browseName="StateNumber", dataType=o6.UInt32, value=5))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6259", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=5))],
 )
 o6.reference(machine_vision_objtypes.VisionAutomaticModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5056"])
 o6.reference(o6.ns["ns=machine_vision;i=5035"], "i=52", o6.ns["ns=machine_vision;i=5056"])
@@ -587,7 +640,7 @@ o6.reference(o6.ns["ns=machine_vision;i=5056"], "ns=machine_vision;i=4003", o6.n
 ns0.objtypes.StateType(
     nodeId="ns=machine_vision;i=5057",
     browseName="ns=machine_vision;Ready",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6260", browseName="StateNumber", dataType=o6.UInt32, value=6))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6260", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=6))],
 )
 o6.reference(machine_vision_objtypes.VisionAutomaticModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5057"])
 o6.reference(o6.ns["ns=machine_vision;i=5044"], "i=51", o6.ns["ns=machine_vision;i=5057"])
@@ -597,19 +650,21 @@ o6.reference(o6.ns["ns=machine_vision;i=5057"], "ns=machine_vision;i=4003", o6.n
 ns0.objtypes.StateType(
     nodeId="ns=machine_vision;i=5058",
     browseName="ns=machine_vision;SingleExecution",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6261", browseName="StateNumber", dataType=o6.UInt32, value=7))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6261", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=7))],
 )
 o6.reference(machine_vision_objtypes.VisionAutomaticModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5058"])
 ns0.objtypes.StateType(
     nodeId="ns=machine_vision;i=5059",
     browseName="ns=machine_vision;ContinuousExecution",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6262", browseName="StateNumber", dataType=o6.UInt32, value=8))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6262", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=8))],
 )
 o6.reference(machine_vision_objtypes.VisionAutomaticModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5059"])
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5060",
     browseName="ns=machine_vision;InitializedToReadyRecipe",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6263", browseName="TransitionNumber", dataType=o6.UInt32, value=561))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6263", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=561))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionAutomaticModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5060"])
 o6.reference(o6.ns["ns=machine_vision;i=5056"], "ns=machine_vision;i=4003", o6.ns["ns=machine_vision;i=5060"])
@@ -622,7 +677,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5060"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5061",
     browseName="ns=machine_vision;InitializedToReadyAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6264", browseName="TransitionNumber", dataType=o6.UInt32, value=560))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6264", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=560))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionAutomaticModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5061"])
 o6.reference(o6.ns["ns=machine_vision;i=5056"], "ns=machine_vision;i=4003", o6.ns["ns=machine_vision;i=5061"])
@@ -633,7 +690,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5061"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5062",
     browseName="ns=machine_vision;ReadyToInitializedRecipe",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6265", browseName="TransitionNumber", dataType=o6.UInt32, value=651))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6265", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=651))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionAutomaticModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5062"])
 o6.reference(o6.ns["ns=machine_vision;i=5056"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5062"])
@@ -645,7 +704,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5062"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5063",
     browseName="ns=machine_vision;ReadyToInitializedAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6266", browseName="TransitionNumber", dataType=o6.UInt32, value=650))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6266", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=650))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionAutomaticModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5063"])
 o6.reference(o6.ns["ns=machine_vision;i=5056"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5063"])
@@ -656,7 +717,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5063"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5064",
     browseName="ns=machine_vision;ReadyToSingleExecution",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6267", browseName="TransitionNumber", dataType=o6.UInt32, value=671))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6267", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=671))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionAutomaticModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5064"])
 o6.reference(o6.ns["ns=machine_vision;i=5057"], "ns=machine_vision;i=4003", o6.ns["ns=machine_vision;i=5064"])
@@ -669,7 +732,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5064"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5065",
     browseName="ns=machine_vision;ReadyToSingleExecutionAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6268", browseName="TransitionNumber", dataType=o6.UInt32, value=670))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6268", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=670))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionAutomaticModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5065"])
 o6.reference(o6.ns["ns=machine_vision;i=5057"], "ns=machine_vision;i=4003", o6.ns["ns=machine_vision;i=5065"])
@@ -681,7 +746,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5065"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5066",
     browseName="ns=machine_vision;ReadyToContinuousExecution",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6269", browseName="TransitionNumber", dataType=o6.UInt32, value=681))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6269", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=681))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionAutomaticModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5066"])
 o6.reference(o6.ns["ns=machine_vision;i=5057"], "ns=machine_vision;i=4003", o6.ns["ns=machine_vision;i=5066"])
@@ -694,7 +761,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5066"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5067",
     browseName="ns=machine_vision;ReadyToContinuousExecutionAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6270", browseName="TransitionNumber", dataType=o6.UInt32, value=680))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6270", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=680))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionAutomaticModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5067"])
 o6.reference(o6.ns["ns=machine_vision;i=5057"], "ns=machine_vision;i=4003", o6.ns["ns=machine_vision;i=5067"])
@@ -706,7 +775,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5067"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5068",
     browseName="ns=machine_vision;SingleExecutionToReadyStop",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6271", browseName="TransitionNumber", dataType=o6.UInt32, value=761))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6271", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=761))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionAutomaticModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5068"])
 o6.reference(o6.ns["ns=machine_vision;i=5057"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5068"])
@@ -719,7 +790,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5068"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5069",
     browseName="ns=machine_vision;SingleExecutionToReadyAbort",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6272", browseName="TransitionNumber", dataType=o6.UInt32, value=762))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6272", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=762))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionAutomaticModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5069"])
 o6.reference(o6.ns["ns=machine_vision;i=5057"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5069"])
@@ -732,7 +805,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5069"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5070",
     browseName="ns=machine_vision;SingleExecutionToReadyAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6273", browseName="TransitionNumber", dataType=o6.UInt32, value=760))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6273", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=760))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionAutomaticModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5070"])
 o6.reference(o6.ns["ns=machine_vision;i=5057"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5070"])
@@ -744,7 +819,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5070"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5071",
     browseName="ns=machine_vision;ContinuousExecutionToReadyStop",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6274", browseName="TransitionNumber", dataType=o6.UInt32, value=861))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6274", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=861))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionAutomaticModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5071"])
 o6.reference(o6.ns["ns=machine_vision;i=5057"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5071"])
@@ -757,7 +834,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5071"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5072",
     browseName="ns=machine_vision;ContinuousExecutionToReadyAbort",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6275", browseName="TransitionNumber", dataType=o6.UInt32, value=862))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6275", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=862))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionAutomaticModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5072"])
 o6.reference(o6.ns["ns=machine_vision;i=5057"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5072"])
@@ -770,7 +849,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5072"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5073",
     browseName="ns=machine_vision;ContinuousExecutionToReadyAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6276", browseName="TransitionNumber", dataType=o6.UInt32, value=860))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6276", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=860))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionAutomaticModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5073"])
 o6.reference(o6.ns["ns=machine_vision;i=5057"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5073"])
@@ -782,37 +863,40 @@ o6.reference(o6.ns["ns=machine_vision;i=5073"], "i=54", machine_vision_objtypes.
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6277",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6278", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6278", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.objtypes.InitialStateType(
     nodeId="ns=machine_vision;i=5078",
     browseName="ns=machine_vision;Entry",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6309", browseName="StateNumber", dataType=o6.UInt32, value=11))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6309", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=11))],
 )
 o6.reference(machine_vision_objtypes.VisionStepModelStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5078"])
 ns0.objtypes.StateType(
     nodeId="ns=machine_vision;i=5079",
     browseName="ns=machine_vision;Exit",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6310", browseName="StateNumber", dataType=o6.UInt32, value=12))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6310", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=12))],
 )
 o6.reference(machine_vision_objtypes.VisionStepModelStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5079"])
 ns0.objtypes.StateType(
     nodeId="ns=machine_vision;i=5080",
     browseName="ns=machine_vision;Wait",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6311", browseName="StateNumber", dataType=o6.UInt32, value=13))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6311", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=13))],
 )
 o6.reference(machine_vision_objtypes.VisionStepModelStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5080"])
 ns0.objtypes.StateType(
     nodeId="ns=machine_vision;i=5081",
     browseName="ns=machine_vision;Step",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6312", browseName="StateNumber", dataType=o6.UInt32, value=14))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6312", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=14))],
 )
 o6.reference(machine_vision_objtypes.VisionStepModelStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5081"])
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5082",
     browseName="ns=machine_vision;EntryToExitAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6313", browseName="TransitionNumber", dataType=o6.UInt32, value=11120))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6313", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=11120))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStepModelStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5082"])
 o6.reference(o6.ns["ns=machine_vision;i=5078"], "ns=machine_vision;i=4003", o6.ns["ns=machine_vision;i=5082"])
@@ -823,7 +907,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5082"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5083",
     browseName="ns=machine_vision;EntryToWaitAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6314", browseName="TransitionNumber", dataType=o6.UInt32, value=11130))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6314", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=11130))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStepModelStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5083"])
 o6.reference(o6.ns["ns=machine_vision;i=5078"], "ns=machine_vision;i=4003", o6.ns["ns=machine_vision;i=5083"])
@@ -835,7 +921,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5083"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5084",
     browseName="ns=machine_vision;WaitToStep",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6315", browseName="TransitionNumber", dataType=o6.UInt32, value=13141))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6315", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=13141))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStepModelStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5084"])
 o6.reference(o6.ns["ns=machine_vision;i=5080"], "ns=machine_vision;i=4003", o6.ns["ns=machine_vision;i=5084"])
@@ -847,7 +935,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5084"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5085",
     browseName="ns=machine_vision;WaitToStepAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6316", browseName="TransitionNumber", dataType=o6.UInt32, value=13140))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6316", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=13140))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStepModelStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5085"])
 o6.reference(o6.ns["ns=machine_vision;i=5080"], "ns=machine_vision;i=4003", o6.ns["ns=machine_vision;i=5085"])
@@ -858,7 +948,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5085"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5086",
     browseName="ns=machine_vision;StepToWaitAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6317", browseName="TransitionNumber", dataType=o6.UInt32, value=14130))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6317", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=14130))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStepModelStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5086"])
 o6.reference(o6.ns["ns=machine_vision;i=5080"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5086"])
@@ -870,7 +962,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5086"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5087",
     browseName="ns=machine_vision;StepToExitAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6318", browseName="TransitionNumber", dataType=o6.UInt32, value=14120))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6318", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=14120))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStepModelStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5087"])
 o6.reference(o6.ns["ns=machine_vision;i=5079"], "ns=machine_vision;i=4002", o6.ns["ns=machine_vision;i=5087"])
@@ -882,7 +976,9 @@ o6.reference(o6.ns["ns=machine_vision;i=5087"], "i=54", machine_vision_objtypes.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_vision;i=5255",
     browseName="ns=machine_vision;ErrorToOperationalAuto",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6341", browseName="TransitionNumber", dataType=o6.UInt32, value=340))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6341", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=340))
+    ],
 )
 o6.reference(machine_vision_objtypes.VisionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_vision;i=5255"])
 o6.reference(o6.ns["ns=machine_vision;i=5030"], "ns=machine_vision;i=4003", o6.ns["ns=machine_vision;i=5255"])
@@ -989,10 +1085,16 @@ ns0.vartypes.PropertyType(
 machine_vision_objtypes.ProductFolderType(
     nodeId="ns=machine_vision;i=5095",
     browseName="ns=machine_vision;Products",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=machine_vision;i=6373", browseName="ns=machine_vision;<Product>", dataType=machine_vision_datypes.ProductDataType, accessLevel=3, userAccessLevel=1
+                nodeId="ns=machine_vision;i=6373",
+                browseName="ns=machine_vision;<Product>",
+                modellingRule="Mandatory",
+                dataType=machine_vision_datypes.ProductDataType,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         )
     ],
@@ -1000,64 +1102,75 @@ machine_vision_objtypes.ProductFolderType(
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6358",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6390", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6390", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6401",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6402", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6402", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6407",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6408", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6408", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.objtypes.StateType(
     nodeId="ns=machine_vision;i=5101",
     browseName="ns=machine_vision;Preoperational",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6415", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6415", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6416",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6417", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6417", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6420",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6421", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6421", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6424",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6425", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6425", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_vision;i=6430",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6431", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6431", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.objtypes.StateType(
     nodeId="ns=machine_vision;i=5106",
     browseName="ns=machine_vision;Halted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6434", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6434", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 ns0.objtypes.StateType(
     nodeId="ns=machine_vision;i=5107",
     browseName="ns=machine_vision;Error",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6435", browseName="StateNumber", dataType=o6.UInt32, value=3))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6435", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 ns0.objtypes.StateType(
     nodeId="ns=machine_vision;i=5108",
     browseName="ns=machine_vision;Operational",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6436", browseName="StateNumber", dataType=o6.UInt32, value=4))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6436", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 machine_vision_vartypes.ResultType(
     nodeId="ns=machine_vision;i=6168",
@@ -1066,13 +1179,19 @@ machine_vision_vartypes.ResultType(
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=machine_vision;i=6334", browseName="ns=machine_vision;CreationTime", dataType=ns0.datatypes.UtcTime, accessLevel=3, userAccessLevel=1
+                nodeId="ns=machine_vision;i=6334",
+                browseName="ns=machine_vision;CreationTime",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.UtcTime,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=machine_vision;i=6335",
                 browseName="ns=machine_vision;InternalConfigurationId",
+                modellingRule="Mandatory",
                 dataType=machine_vision_datypes.ConfigurationIdDataType,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -1082,27 +1201,45 @@ machine_vision_vartypes.ResultType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=machine_vision;i=6336",
                 browseName="ns=machine_vision;InternalRecipeId",
+                modellingRule="Mandatory",
                 dataType=machine_vision_datypes.RecipeIdInternalDataType,
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_vision;i=6356", browseName="ns=machine_vision;IsPartial", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
-        ),
-        o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=machine_vision;i=6357", browseName="ns=machine_vision;JobId", dataType=machine_vision_datypes.JobIdDataType, accessLevel=3, userAccessLevel=1
+                nodeId="ns=machine_vision;i=6356", browseName="ns=machine_vision;IsPartial", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
             )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=machine_vision;i=6379", browseName="ns=machine_vision;ResultId", dataType=machine_vision_datypes.ResultIdDataType, accessLevel=3, userAccessLevel=1
+                nodeId="ns=machine_vision;i=6357",
+                browseName="ns=machine_vision;JobId",
+                modellingRule="Mandatory",
+                dataType=machine_vision_datypes.JobIdDataType,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=machine_vision;i=6548", browseName="ns=machine_vision;ResultState", dataType=machine_vision_datypes.ResultStateDataType, accessLevel=3, userAccessLevel=1
+                nodeId="ns=machine_vision;i=6379",
+                browseName="ns=machine_vision;ResultId",
+                modellingRule="Mandatory",
+                dataType=machine_vision_datypes.ResultIdDataType,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=machine_vision;i=6548",
+                browseName="ns=machine_vision;ResultState",
+                modellingRule="Mandatory",
+                dataType=machine_vision_datypes.ResultStateDataType,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
     ],
@@ -1200,7 +1337,12 @@ machine_vision_objtypes.ProductFolderType(
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=machine_vision;i=6622", browseName="ns=machine_vision;<Product>", dataType=machine_vision_datypes.ProductDataType, accessLevel=3, userAccessLevel=1
+                nodeId="ns=machine_vision;i=6622",
+                browseName="ns=machine_vision;<Product>",
+                modellingRule="Mandatory",
+                dataType=machine_vision_datypes.ProductDataType,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         )
     ],
@@ -1219,7 +1361,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=machine_vision;i=7001", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6004"]))
+o6.call(nodeId="ns=machine_vision;i=7001", browseName="Close", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6004"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6005",
@@ -1246,6 +1388,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7002",
     browseName="GetPosition",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6005"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6006"]),
 )
@@ -1273,7 +1416,11 @@ ns0.vartypes.PropertyType(
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
-    nodeId="ns=machine_vision;i=7003", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6007"]), outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6008"])
+    nodeId="ns=machine_vision;i=7003",
+    browseName="Open",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6007"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6008"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -1302,7 +1449,11 @@ ns0.vartypes.PropertyType(
     value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
-    nodeId="ns=machine_vision;i=7004", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6010"]), outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6011"])
+    nodeId="ns=machine_vision;i=7004",
+    browseName="Read",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6010"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6011"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -1319,7 +1470,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=machine_vision;i=7005", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6012"]))
+o6.call(nodeId="ns=machine_vision;i=7005", browseName="SetPosition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6012"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6016",
@@ -1335,7 +1486,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=machine_vision;i=7006", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6016"]))
+o6.call(nodeId="ns=machine_vision;i=7006", browseName="Write", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6016"]))
 
 ns0.objtypes.FileType(
     nodeId="ns=machine_vision;i=5001",
@@ -1344,15 +1495,29 @@ ns0.objtypes.FileType(
     modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6009", browseName="OpenCount", description="The current number of open file handles.", dataType=o6.UInt16)
-        ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6013", browseName="Size", description="The size of the file in bytes.", dataType=o6.UInt64)),
-        o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=machine_vision;i=6014", browseName="UserWritable", description="Whether the file is writable by the current user.", dataType=o6.Boolean
+                nodeId="ns=machine_vision;i=6009", browseName="OpenCount", description="The current number of open file handles.", modellingRule="Mandatory", dataType=o6.UInt16
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6015", browseName="Writable", description="Whether the file is writable.", dataType=o6.Boolean)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=machine_vision;i=6013", browseName="Size", description="The size of the file in bytes.", modellingRule="Mandatory", dataType=o6.UInt64
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=machine_vision;i=6014",
+                browseName="UserWritable",
+                description="Whether the file is writable by the current user.",
+                modellingRule="Mandatory",
+                dataType=o6.Boolean,
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=machine_vision;i=6015", browseName="Writable", description="Whether the file is writable.", modellingRule="Mandatory", dataType=o6.Boolean
+            )
+        ),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7001"]),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7002"]),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7003"]),
@@ -1389,6 +1554,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7008",
     browseName="ns=machine_vision;ActivateConfiguration",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6026"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6027"]),
 )
@@ -1421,6 +1587,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7010",
     browseName="ns=machine_vision;Sync",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6056"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6057"]),
 )
@@ -1463,6 +1630,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7011",
     browseName="ns=machine_vision;Sync",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6061"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6062"]),
 )
@@ -1506,6 +1674,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7012",
     browseName="GenerateFileForRead",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6337"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6338"]),
 )
@@ -1542,6 +1711,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7016",
     browseName="ns=machine_vision;GetConfigurationById",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6044"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6098"]),
 )
@@ -1581,6 +1751,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7017",
     browseName="ns=machine_vision;GetConfigurationList",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6099"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6102"]),
 )
@@ -1623,6 +1794,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7018",
     browseName="ns=machine_vision;GetRecipeListFiltered",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6103"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6106"]),
 )
@@ -1655,6 +1827,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7019",
     browseName="ns=machine_vision;Sync",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6252"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6349"]),
 )
@@ -1697,6 +1870,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7020",
     browseName="ns=machine_vision;Abort",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6065"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6066"]),
 )
@@ -1735,6 +1909,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7021",
     browseName="ns=machine_vision;StartContinuous",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6067"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6068"]),
 )
@@ -1773,6 +1948,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7022",
     browseName="ns=machine_vision;StartSingleJob",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6069"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6070"]),
 )
@@ -1805,6 +1981,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7023",
     browseName="ns=machine_vision;Stop",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6078"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6079"]),
 )
@@ -1837,6 +2014,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7024",
     browseName="ns=machine_vision;Sync",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6059"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6083"]),
 )
@@ -1879,6 +2057,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7027",
     browseName="ns=machine_vision;Sync",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6089"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6090"]),
 )
@@ -1921,6 +2100,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7028",
     browseName="ns=machine_vision;Sync",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6129"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6134"]),
 )
@@ -1963,6 +2143,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7029",
     browseName="GenerateFileForWrite",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6339"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6340"]),
 )
@@ -1995,6 +2176,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7030",
     browseName="ns=machine_vision;Sync",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6137"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6138"]),
 )
@@ -2041,6 +2223,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7031",
     browseName="ns=machine_vision;PrepareRecipe",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6107"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6110"]),
 )
@@ -2076,6 +2259,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7032",
     browseName="ns=machine_vision;UnprepareRecipe",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6111"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6114"]),
 )
@@ -2112,6 +2296,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7033",
     browseName="ns=machine_vision;GetResultById",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6115"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6118"]),
 )
@@ -2162,6 +2347,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7034",
     browseName="ns=machine_vision;GetResultComponentsById",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6119"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6123"]),
 )
@@ -2210,6 +2396,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7035",
     browseName="ns=machine_vision;GetResultListFiltered",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6124"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6133"]),
 )
@@ -2242,6 +2429,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7036",
     browseName="ns=machine_vision;ReportSafetyState",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6146"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6147"]),
 )
@@ -2253,12 +2441,22 @@ machine_vision_objtypes.SafetyStateManagementType(
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=machine_vision;i=6150", browseName="ns=machine_vision;VisionSafetyInformation", dataType=o6.String, accessLevel=3, userAccessLevel=1
+                nodeId="ns=machine_vision;i=6150",
+                browseName="ns=machine_vision;VisionSafetyInformation",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=machine_vision;i=6151", browseName="ns=machine_vision;VisionSafetyTriggered", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+                nodeId="ns=machine_vision;i=6151",
+                browseName="ns=machine_vision;VisionSafetyTriggered",
+                modellingRule="Mandatory",
+                dataType=o6.Boolean,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7036"]),
@@ -2295,6 +2493,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7037",
     browseName="ns=machine_vision;Halt",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6154"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6155"]),
 )
@@ -2327,6 +2526,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7038",
     browseName="ns=machine_vision;Reset",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6158"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6159"]),
 )
@@ -2359,6 +2559,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7039",
     browseName="ns=machine_vision;Sync",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6167"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6174"]),
 )
@@ -2366,6 +2567,7 @@ o6.call(
 machine_vision_objtypes.VisionStepModelStateMachineType(
     nodeId="ns=machine_vision;i=5025",
     browseName="ns=machine_vision;ContinuousExecutionStepModel",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=machine_vision;i=6082"]), o6.hasComponent(o6.ns["ns=machine_vision;i=7039"])],
 )
 
@@ -2398,6 +2600,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7040",
     browseName="ns=machine_vision;Sync",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6179"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6182"]),
 )
@@ -2405,6 +2608,7 @@ o6.call(
 machine_vision_objtypes.VisionStepModelStateMachineType(
     nodeId="ns=machine_vision;i=5055",
     browseName="ns=machine_vision;InitializedStepModel",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=machine_vision;i=6175"]), o6.hasComponent(o6.ns["ns=machine_vision;i=7040"])],
 )
 
@@ -2437,6 +2641,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7042",
     browseName="ns=machine_vision;Sync",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6212"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6215"]),
 )
@@ -2444,6 +2649,7 @@ o6.call(
 machine_vision_objtypes.VisionStepModelStateMachineType(
     nodeId="ns=machine_vision;i=5074",
     browseName="ns=machine_vision;ReadyStepModel",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=machine_vision;i=6183"]), o6.hasComponent(o6.ns["ns=machine_vision;i=7042"])],
 )
 
@@ -2477,6 +2683,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7044",
     browseName="ns=machine_vision;SimulationMode",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6326"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6400"]),
 )
@@ -2492,7 +2699,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=machine_vision;i=7049", browseName="ns=machine_vision;ConfirmAll", inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6216"]))
+o6.call(nodeId="ns=machine_vision;i=7049", browseName="ns=machine_vision;ConfirmAll", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6216"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6224",
@@ -2522,6 +2729,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7050",
     browseName="ns=machine_vision;Sync",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6224"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6225"]),
 )
@@ -2529,6 +2737,7 @@ o6.call(
 machine_vision_objtypes.VisionStepModelStateMachineType(
     nodeId="ns=machine_vision;i=5075",
     browseName="ns=machine_vision;ErrorStepModel",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=machine_vision;i=6219"]), o6.hasComponent(o6.ns["ns=machine_vision;i=7050"])],
 )
 
@@ -2561,6 +2770,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7051",
     browseName="ns=machine_vision;Sync",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6251"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6253"]),
 )
@@ -2568,6 +2778,7 @@ o6.call(
 machine_vision_objtypes.VisionStepModelStateMachineType(
     nodeId="ns=machine_vision;i=5076",
     browseName="ns=machine_vision;HaltedStepModel",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=machine_vision;i=6244"]), o6.hasComponent(o6.ns["ns=machine_vision;i=7051"])],
 )
 
@@ -2600,6 +2811,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7052",
     browseName="ns=machine_vision;Sync",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6279"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6280"]),
 )
@@ -2607,6 +2819,7 @@ o6.call(
 machine_vision_objtypes.VisionStepModelStateMachineType(
     nodeId="ns=machine_vision;i=5077",
     browseName="ns=machine_vision;PreoperationalStepModel",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=machine_vision;i=6277"]), o6.hasComponent(o6.ns["ns=machine_vision;i=7052"])],
 )
 
@@ -2622,7 +2835,9 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=machine_vision;i=7053", browseName="ns=machine_vision;SelectModeAutomatic", outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6325"]))
+o6.call(
+    nodeId="ns=machine_vision;i=7053", browseName="ns=machine_vision;SelectModeAutomatic", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6325"])
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6342",
@@ -2654,6 +2869,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7054",
     browseName="ns=machine_vision;AddConfiguration",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6342"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6348"]),
 )
@@ -2687,6 +2903,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7067",
     browseName="GenerateFileForRead",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6541"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6542"]),
 )
@@ -2716,6 +2933,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7068",
     browseName="CloseAndCommit",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6351"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6359"]),
 )
@@ -2749,6 +2967,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7069",
     browseName="GenerateFileForRead",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6360"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6361"]),
 )
@@ -2781,6 +3000,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7070",
     browseName="GenerateFileForWrite",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6362"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6363"]),
 )
@@ -2788,8 +3008,11 @@ o6.call(
 machine_vision_objtypes.ConfigurationTransferType(
     nodeId="ns=machine_vision;i=5093",
     browseName="ns=machine_vision;ConfigurationTransfer",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6350", browseName="ClientProcessingTimeout", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6350", browseName="ClientProcessingTimeout", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
+        ),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7068"]),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7069"]),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7070"]),
@@ -2822,6 +3045,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7071",
     browseName="CloseAndCommit",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6544"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6545"]),
 )
@@ -2851,6 +3075,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7072",
     browseName="ns=machine_vision;ReleaseConfigurationHandle",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6364"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6365"]),
 )
@@ -2880,6 +3105,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7073",
     browseName="ns=machine_vision;RemoveConfiguration",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6366"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6368"]),
 )
@@ -2890,11 +3116,14 @@ machine_vision_objtypes.ConfigurationManagementType(
     modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=machine_vision;i=5093"]),
-        o6.hasComponent(machine_vision_objtypes.ConfigurationFolderType(nodeId="ns=machine_vision;i=5094", browseName="ns=machine_vision;Configurations")),
+        o6.hasComponent(
+            machine_vision_objtypes.ConfigurationFolderType(nodeId="ns=machine_vision;i=5094", browseName="ns=machine_vision;Configurations", modellingRule="Optional")
+        ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=machine_vision;i=6043",
                 browseName="ns=machine_vision;ActiveConfiguration",
+                modellingRule="Mandatory",
                 dataType=machine_vision_datypes.ConfigurationDataType,
                 value=machine_vision_datypes.ConfigurationDataType(
                     internalId=machine_vision_datypes.ConfigurationIdDataType(id="\n              "), lastModified=o6.DateTime("1900-01-01T00:00:00Z")
@@ -2948,6 +3177,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7074",
     browseName="ns=machine_vision;AddRecipe",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6369"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6370"]),
 )
@@ -2980,6 +3210,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7075",
     browseName="ns=machine_vision;PrepareProduct",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6371"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6372"]),
 )
@@ -3009,6 +3240,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7076",
     browseName="ns=machine_vision;LinkProduct",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6613"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6614"]),
 )
@@ -3041,6 +3273,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7077",
     browseName="GenerateFileForWrite",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6546"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6547"]),
 )
@@ -3050,7 +3283,9 @@ machine_vision_objtypes.ResultTransferType(
     browseName="ns=machine_vision;ResultTransfer",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6543", browseName="ClientProcessingTimeout", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6543", browseName="ClientProcessingTimeout", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
+        ),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7067"]),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7071"]),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7077"]),
@@ -3084,6 +3319,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7078",
     browseName="CloseAndCommit",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6375"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6376"]),
 )
@@ -3117,6 +3353,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7079",
     browseName="GenerateFileForRead",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6377"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6378"]),
 )
@@ -3149,6 +3386,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7080",
     browseName="GenerateFileForWrite",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6380"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6381"]),
 )
@@ -3156,8 +3394,11 @@ o6.call(
 machine_vision_objtypes.RecipeTransferType(
     nodeId="ns=machine_vision;i=5096",
     browseName="ns=machine_vision;RecipeTransfer",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6374", browseName="ClientProcessingTimeout", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6374", browseName="ClientProcessingTimeout", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
+        ),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7078"]),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7079"]),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7080"]),
@@ -3190,6 +3431,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7081",
     browseName="ns=machine_vision;ReleaseRecipeHandle",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6382"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6383"]),
 )
@@ -3219,6 +3461,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7082",
     browseName="ns=machine_vision;RemoveRecipe",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6384"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6385"]),
 )
@@ -3251,6 +3494,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7083",
     browseName="ns=machine_vision;UnlinkProduct",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6386"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6387"]),
 )
@@ -3283,6 +3527,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7084",
     browseName="ns=machine_vision;UnprepareProduct",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6388"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6389"]),
 )
@@ -3294,7 +3539,7 @@ machine_vision_objtypes.RecipeManagementType(
     references=[
         o6.hasComponent(o6.ns["ns=machine_vision;i=5095"]),
         o6.hasComponent(o6.ns["ns=machine_vision;i=5096"]),
-        o6.hasComponent(machine_vision_objtypes.RecipeFolderType(nodeId="ns=machine_vision;i=5097", browseName="ns=machine_vision;Recipes")),
+        o6.hasComponent(machine_vision_objtypes.RecipeFolderType(nodeId="ns=machine_vision;i=5097", browseName="ns=machine_vision;Recipes", modellingRule="Optional")),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7018"]),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7031"]),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7032"]),
@@ -3334,6 +3579,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7085",
     browseName="ns=machine_vision;ReleaseResultHandle",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6391"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6392"]),
 )
@@ -3363,6 +3609,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7086",
     browseName="CloseAndCommit",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6394"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6395"]),
 )
@@ -3396,6 +3643,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7087",
     browseName="GenerateFileForRead",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6396"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6397"]),
 )
@@ -3428,6 +3676,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7088",
     browseName="GenerateFileForWrite",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6398"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6399"]),
 )
@@ -3435,8 +3684,11 @@ o6.call(
 machine_vision_objtypes.ResultTransferType(
     nodeId="ns=machine_vision;i=5098",
     browseName="ns=machine_vision;ResultTransfer",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6393", browseName="ClientProcessingTimeout", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6393", browseName="ClientProcessingTimeout", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
+        ),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7086"]),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7087"]),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7088"]),
@@ -3448,7 +3700,7 @@ machine_vision_objtypes.ResultManagementType(
     modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=machine_vision;i=5098"]),
-        o6.hasComponent(machine_vision_objtypes.ResultFolderType(nodeId="ns=machine_vision;i=5099", browseName="ns=machine_vision;Results")),
+        o6.hasComponent(machine_vision_objtypes.ResultFolderType(nodeId="ns=machine_vision;i=5099", browseName="ns=machine_vision;Results", modellingRule="Optional")),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7033"]),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7034"]),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7035"]),
@@ -3486,6 +3738,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7091",
     browseName="ns=machine_vision;Sync",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6403"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6404"]),
 )
@@ -3493,6 +3746,7 @@ o6.call(
 machine_vision_objtypes.VisionStepModelStateMachineType(
     nodeId="ns=machine_vision;i=5092",
     browseName="ns=machine_vision;SingleExecutionStepModel",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=machine_vision;i=6401"]), o6.hasComponent(o6.ns["ns=machine_vision;i=7091"])],
 )
 machine_vision_objtypes.VisionAutomaticModeStateMachineType(
@@ -3544,6 +3798,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7092",
     browseName="ns=machine_vision;Abort",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6405"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6406"]),
 )
@@ -3582,6 +3837,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7099",
     browseName="ns=machine_vision;StartContinuous",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6409"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6410"]),
 )
@@ -3620,6 +3876,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7102",
     browseName="ns=machine_vision;StartSingleJob",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6411"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6412"]),
 )
@@ -3652,6 +3909,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7103",
     browseName="ns=machine_vision;Stop",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6413"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6414"]),
 )
@@ -3684,6 +3942,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7104",
     browseName="ns=machine_vision;Sync",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6418"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6419"]),
 )
@@ -3691,6 +3950,7 @@ o6.call(
 machine_vision_objtypes.VisionStepModelStateMachineType(
     nodeId="ns=machine_vision;i=5102",
     browseName="ns=machine_vision;ContinuousExecutionStepModel",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=machine_vision;i=6416"]), o6.hasComponent(o6.ns["ns=machine_vision;i=7104"])],
 )
 
@@ -3723,6 +3983,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7105",
     browseName="ns=machine_vision;Sync",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6422"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6423"]),
 )
@@ -3730,6 +3991,7 @@ o6.call(
 machine_vision_objtypes.VisionStepModelStateMachineType(
     nodeId="ns=machine_vision;i=5103",
     browseName="ns=machine_vision;InitializedStepModel",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=machine_vision;i=6420"]), o6.hasComponent(o6.ns["ns=machine_vision;i=7105"])],
 )
 
@@ -3762,6 +4024,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7106",
     browseName="ns=machine_vision;Sync",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6426"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6427"]),
 )
@@ -3769,6 +4032,7 @@ o6.call(
 machine_vision_objtypes.VisionStepModelStateMachineType(
     nodeId="ns=machine_vision;i=5104",
     browseName="ns=machine_vision;ReadyStepModel",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=machine_vision;i=6424"]), o6.hasComponent(o6.ns["ns=machine_vision;i=7106"])],
 )
 
@@ -3802,6 +4066,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7107",
     browseName="ns=machine_vision;SimulationMode",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6428"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6429"]),
 )
@@ -3834,6 +4099,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7108",
     browseName="ns=machine_vision;Sync",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6432"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6433"]),
 )
@@ -3841,11 +4107,13 @@ o6.call(
 machine_vision_objtypes.VisionStepModelStateMachineType(
     nodeId="ns=machine_vision;i=5105",
     browseName="ns=machine_vision;SingleExecutionStepModel",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=machine_vision;i=6430"]), o6.hasComponent(o6.ns["ns=machine_vision;i=7108"])],
 )
 machine_vision_objtypes.VisionAutomaticModeStateMachineType(
     nodeId="ns=machine_vision;i=5100",
     browseName="ns=machine_vision;AutomaticModeStateMachine",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=machine_vision;i=5102"]),
         o6.hasComponent(o6.ns["ns=machine_vision;i=5103"]),
@@ -3907,6 +4175,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7113",
     browseName="CloseAndCommit",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6600"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6601"]),
 )
@@ -3916,7 +4185,9 @@ machine_vision_objtypes.ConfigurationTransferType(
     browseName="ns=machine_vision;ConfigurationTransfer",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6599", browseName="ClientProcessingTimeout", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6599", browseName="ClientProcessingTimeout", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
+        ),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7012"]),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7029"]),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7113"]),
@@ -3939,7 +4210,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=machine_vision;i=7114", browseName="ns=machine_vision;Prepare", outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6615"]))
+o6.call(nodeId="ns=machine_vision;i=7114", browseName="ns=machine_vision;Prepare", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6615"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6586",
@@ -3966,6 +4237,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7115",
     browseName="CloseAndCommit",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6586"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6587"]),
 )
@@ -3999,6 +4271,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7118",
     browseName="GenerateFileForRead",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6186"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6187"]),
 )
@@ -4031,6 +4304,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7119",
     browseName="GenerateFileForWrite",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6588"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6589"]),
 )
@@ -4040,7 +4314,9 @@ machine_vision_objtypes.RecipeTransferType(
     browseName="ns=machine_vision;RecipeTransfer",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6585", browseName="ClientProcessingTimeout", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6585", browseName="ClientProcessingTimeout", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
+        ),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7115"]),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7118"]),
         o6.hasComponent(o6.ns["ns=machine_vision;i=7119"]),
@@ -4074,6 +4350,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7120",
     browseName="ns=machine_vision;UnlinkProduct",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6616"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6619"]),
 )
@@ -4089,7 +4366,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=machine_vision;i=7121", browseName="ns=machine_vision;Unprepare", outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6620"]))
+o6.call(nodeId="ns=machine_vision;i=7121", browseName="ns=machine_vision;Unprepare", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6620"]))
 
 machine_vision_objtypes.RecipeType(
     nodeId="ns=machine_vision;i=5270",
@@ -4101,6 +4378,7 @@ machine_vision_objtypes.RecipeType(
                 nodeId="ns=machine_vision;i=6608",
                 browseName="ns=machine_vision;ExternalId",
                 description="Recipe ID for identifying the recipe outside the vision system. The ExternalID is only managed by the host system.",
+                modellingRule="Optional",
                 dataType=machine_vision_datypes.RecipeIdExternalDataType,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -4111,19 +4389,23 @@ machine_vision_objtypes.RecipeType(
                 nodeId="ns=machine_vision;i=6609",
                 browseName="ns=machine_vision;InternalId",
                 description="System-wide unique ID for identifying a recipe. This ID is assigned by the vision system.",
+                modellingRule="Mandatory",
                 dataType=machine_vision_datypes.RecipeIdInternalDataType,
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6610", browseName="ns=machine_vision;IsPrepared", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=machine_vision;i=6610", browseName="ns=machine_vision;IsPrepared", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machine_vision;i=6611",
                 browseName="ns=machine_vision;LastModified",
                 description="The time when this recipe was last modified.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.UtcTime,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -4133,6 +4415,7 @@ machine_vision_objtypes.RecipeType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machine_vision;i=6612",
                 browseName="ns=machine_vision;LinkedProducts",
+                modellingRule="Optional",
                 dataType=machine_vision_datypes.ProductIdDataType,
                 valueRank=1,
                 arrayDimensions=[0],

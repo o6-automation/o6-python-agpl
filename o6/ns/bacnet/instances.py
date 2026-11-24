@@ -221,7 +221,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=bacnet;i=6002",
     browseName="ns=bacnet;Present_Value",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6003", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6003", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
     accessLevel=3,
@@ -243,8 +245,8 @@ ns0.vartypes.TwoStateDiscreteType(
     browseName="ns=bacnet;Present_Value",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6020", browseName="FalseState", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6021", browseName="TrueState", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6020", browseName="FalseState", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6021", browseName="TrueState", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.Boolean,
     accessLevel=3,
@@ -255,7 +257,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=bacnet;i=6025",
     browseName="ns=bacnet;Present_Value",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6027", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6027", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
     accessLevel=3,
@@ -339,18 +343,29 @@ bacnet_objtypes.BACnetEventReportingType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6105", browseName="ns=bacnet;Acked_Transitions", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6105",
+                browseName="ns=bacnet;Acked_Transitions",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6116", browseName="ns=bacnet;Event_Enable", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6116",
+                browseName="ns=bacnet;Event_Enable",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6117",
                 browseName="ns=bacnet;Event_State",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetEventState,
                 value=bacnet_datypes.BACnetEventState.NORMAL,
                 accessLevel=3,
@@ -361,6 +376,7 @@ bacnet_objtypes.BACnetEventReportingType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6118",
                 browseName="ns=bacnet;Event_Time_Stamps",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetTimeStamp,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -368,9 +384,15 @@ bacnet_objtypes.BACnetEventReportingType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6119", browseName="ns=bacnet;Notification_Class", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6120", browseName="ns=bacnet;Notify_Type", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6119", browseName="ns=bacnet;Notification_Class", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6120", browseName="ns=bacnet;Notify_Type", modellingRule="Mandatory", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1
+            )
         ),
     ],
 )
@@ -1152,6 +1174,7 @@ bacnet_objtypes.BACnetNotifierType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6206",
                 browseName="ns=bacnet;Recipient_List",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetDestination,
                 value=bacnet_datypes.BACnetDestination(
                     validDays=bacnet_datypes.BACnetDaysOfWeek(value=b"\x00", validBits=b"\x7f"),
@@ -1168,7 +1191,12 @@ bacnet_objtypes.BACnetNotifierType(
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6211", browseName="ns=bacnet;Object_Identifier", dataType=bacnet_datypes.BACnetObjectIdentifier, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6211",
+                browseName="ns=bacnet;Object_Identifier",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetObjectIdentifier,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
     ],
@@ -1185,7 +1213,12 @@ bacnet_objtypes.BACnetObjectType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6231", browseName="ns=bacnet;Object_Identifier", dataType=bacnet_datypes.BACnetObjectIdentifier, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6231",
+                browseName="ns=bacnet;Object_Identifier",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetObjectIdentifier,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         )
     ],
@@ -1198,7 +1231,12 @@ bacnet_objtypes.BACnetObjectType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6232", browseName="ns=bacnet;Object_Identifier", dataType=bacnet_datypes.BACnetObjectIdentifier, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6232",
+                browseName="ns=bacnet;Object_Identifier",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetObjectIdentifier,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         )
     ],
@@ -1211,12 +1249,15 @@ bacnet_objtypes.BACnetStructuredViewType(
     modellingRule="OptionalPlaceholder",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6081", browseName="ns=bacnet;Node_Type", dataType=bacnet_datypes.BACnetNodeType, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6081", browseName="ns=bacnet;Node_Type", modellingRule="Mandatory", dataType=bacnet_datypes.BACnetNodeType, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6082",
                 browseName="ns=bacnet;Subordinate_List",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetDeviceObjectPropertyReference,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -1226,7 +1267,12 @@ bacnet_objtypes.BACnetStructuredViewType(
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6236", browseName="ns=bacnet;Object_Identifier", dataType=bacnet_datypes.BACnetObjectIdentifier, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6236",
+                browseName="ns=bacnet;Object_Identifier",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetObjectIdentifier,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
     ],
@@ -1240,7 +1286,12 @@ bacnet_objtypes.BACnetObjectType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6237", browseName="ns=bacnet;Object_Identifier", dataType=bacnet_datypes.BACnetObjectIdentifier, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6237",
+                browseName="ns=bacnet;Object_Identifier",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetObjectIdentifier,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         )
     ],
@@ -1253,12 +1304,15 @@ bacnet_objtypes.BACnetStructuredViewType(
     modellingRule="OptionalPlaceholder",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6079", browseName="ns=bacnet;Node_Type", dataType=bacnet_datypes.BACnetNodeType, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6079", browseName="ns=bacnet;Node_Type", modellingRule="Mandatory", dataType=bacnet_datypes.BACnetNodeType, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6080",
                 browseName="ns=bacnet;Subordinate_List",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetDeviceObjectPropertyReference,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -1268,7 +1322,12 @@ bacnet_objtypes.BACnetStructuredViewType(
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6239", browseName="ns=bacnet;Object_Identifier", dataType=bacnet_datypes.BACnetObjectIdentifier, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6239",
+                browseName="ns=bacnet;Object_Identifier",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetObjectIdentifier,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
     ],
@@ -1292,7 +1351,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=bacnet;i=6268",
     browseName="ns=bacnet;Controlled_Variable_Value",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6269", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6269", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
     accessLevel=3,
@@ -1313,7 +1374,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=bacnet;i=6327",
     browseName="ns=bacnet;Setpoint",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6328", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6328", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     accessLevel=3,
     userAccessLevel=1,
@@ -1332,10 +1395,16 @@ o6.reference(o6.ns["ns=bacnet;i=5083"], "i=39", o6.ns["ns=bacnet;i=6342"])
 bacnet_objtypes.BACnetFaultAlgorithmType(
     nodeId="ns=bacnet;i=5071",
     browseName="ns=bacnet;FaultAlgorithm",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6379", browseName="ns=bacnet;Object_Identifier", dataType=bacnet_datypes.BACnetObjectIdentifier, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6379",
+                browseName="ns=bacnet;Object_Identifier",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetObjectIdentifier,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         )
     ],
@@ -1345,7 +1414,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=bacnet;i=6382",
     browseName="ns=bacnet;Proportional_Constant",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6383", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6383", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
     accessLevel=3,
@@ -1356,7 +1427,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=bacnet;i=6384",
     browseName="ns=bacnet;Integral_Constant",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6385", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6385", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
     accessLevel=3,
@@ -1367,7 +1440,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=bacnet;i=6386",
     browseName="ns=bacnet;Bias",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6387", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6387", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     accessLevel=3,
     userAccessLevel=1,
@@ -1377,7 +1452,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=bacnet;i=6388",
     browseName="ns=bacnet;Derivative_Constant",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6389", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6389", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
     accessLevel=3,
@@ -1396,7 +1473,7 @@ http_opcfoundation_org_UA_BACnet_V2_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6393", browseName="NamespaceVersion", dataType=o6.String, value="2.00.1")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6394", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=bacnet;i=6394", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
@@ -1495,8 +1572,14 @@ bacnet_objtypes.BACnetEventAlgorithmType(
     browseName="ns=bacnet;EventAlgorithm",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6440", browseName="ns=bacnet;TimeDelay", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6441", browseName="ns=bacnet;TimeDelayNormal", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6440", browseName="ns=bacnet;TimeDelay", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6441", browseName="ns=bacnet;TimeDelayNormal", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
     _allow_abstract=True,
 )
@@ -1826,10 +1909,21 @@ ns0.vartypes.PropertyType(
 bacnet_objtypes.BACnetChangeOfStateAlgorithmType(
     nodeId="ns=bacnet;i=5137",
     browseName="ns=bacnet;EventAlgorithm",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6434", browseName="ns=bacnet;AlarmValues", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6663", browseName="ns=bacnet;TimeDelay", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6664", browseName="ns=bacnet;TimeDelayNormal", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6434", browseName="ns=bacnet;AlarmValues", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6663", browseName="ns=bacnet;TimeDelay", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6664", browseName="ns=bacnet;TimeDelayNormal", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
 )
 bacnet_objtypes.BACnetEventReportingType(
@@ -1839,18 +1933,29 @@ bacnet_objtypes.BACnetEventReportingType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6279", browseName="ns=bacnet;Acked_Transitions", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6279",
+                browseName="ns=bacnet;Acked_Transitions",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6280", browseName="ns=bacnet;Event_Enable", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6280",
+                browseName="ns=bacnet;Event_Enable",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6281",
                 browseName="ns=bacnet;Event_State",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetEventState,
                 value=bacnet_datypes.BACnetEventState.NORMAL,
                 accessLevel=3,
@@ -1861,6 +1966,7 @@ bacnet_objtypes.BACnetEventReportingType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6282",
                 browseName="ns=bacnet;Event_Time_Stamps",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetTimeStamp,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -1868,9 +1974,15 @@ bacnet_objtypes.BACnetEventReportingType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6283", browseName="ns=bacnet;Notification_Class", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6284", browseName="ns=bacnet;Notify_Type", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6283", browseName="ns=bacnet;Notification_Class", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6284", browseName="ns=bacnet;Notify_Type", modellingRule="Mandatory", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=bacnet;i=5137"]),
     ],
@@ -1879,14 +1991,26 @@ o6.reference(bacnet_objtypes.BACnetBinaryInputType, ns0.reftypes.HasComponent, o
 bacnet_objtypes.BACnetCommandFailureAlgorithmType(
     nodeId="ns=bacnet;i=5138",
     browseName="ns=bacnet;EventAlgorithm",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6665", browseName="ns=bacnet;FeedbackValueRef", dataType=bacnet_datypes.BACnetDeviceObjectPropertyReference, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6665",
+                browseName="ns=bacnet;FeedbackValueRef",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetDeviceObjectPropertyReference,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6666", browseName="ns=bacnet;TimeDelay", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6667", browseName="ns=bacnet;TimeDelayNormal", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6666", browseName="ns=bacnet;TimeDelay", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6667", browseName="ns=bacnet;TimeDelayNormal", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
 )
 bacnet_objtypes.BACnetEventReportingType(
@@ -1896,18 +2020,29 @@ bacnet_objtypes.BACnetEventReportingType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6285", browseName="ns=bacnet;Acked_Transitions", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6285",
+                browseName="ns=bacnet;Acked_Transitions",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6286", browseName="ns=bacnet;Event_Enable", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6286",
+                browseName="ns=bacnet;Event_Enable",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6287",
                 browseName="ns=bacnet;Event_State",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetEventState,
                 value=bacnet_datypes.BACnetEventState.NORMAL,
                 accessLevel=3,
@@ -1918,6 +2053,7 @@ bacnet_objtypes.BACnetEventReportingType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6288",
                 browseName="ns=bacnet;Event_Time_Stamps",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetTimeStamp,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -1925,9 +2061,15 @@ bacnet_objtypes.BACnetEventReportingType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6289", browseName="ns=bacnet;Notification_Class", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6290", browseName="ns=bacnet;Notify_Type", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6289", browseName="ns=bacnet;Notification_Class", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6290", browseName="ns=bacnet;Notify_Type", modellingRule="Mandatory", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=bacnet;i=5138"]),
     ],
@@ -1936,10 +2078,21 @@ o6.reference(bacnet_objtypes.BACnetBinaryOutputType, ns0.reftypes.HasComponent, 
 bacnet_objtypes.BACnetChangeOfStateAlgorithmType(
     nodeId="ns=bacnet;i=5139",
     browseName="ns=bacnet;EventAlgorithm",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6668", browseName="ns=bacnet;AlarmValues", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6669", browseName="ns=bacnet;TimeDelay", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6670", browseName="ns=bacnet;TimeDelayNormal", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6668", browseName="ns=bacnet;AlarmValues", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6669", browseName="ns=bacnet;TimeDelay", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6670", browseName="ns=bacnet;TimeDelayNormal", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
 )
 bacnet_objtypes.BACnetEventReportingType(
@@ -1949,18 +2102,29 @@ bacnet_objtypes.BACnetEventReportingType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6292", browseName="ns=bacnet;Acked_Transitions", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6292",
+                browseName="ns=bacnet;Acked_Transitions",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6293", browseName="ns=bacnet;Event_Enable", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6293",
+                browseName="ns=bacnet;Event_Enable",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6294",
                 browseName="ns=bacnet;Event_State",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetEventState,
                 value=bacnet_datypes.BACnetEventState.NORMAL,
                 accessLevel=3,
@@ -1971,6 +2135,7 @@ bacnet_objtypes.BACnetEventReportingType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6295",
                 browseName="ns=bacnet;Event_Time_Stamps",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetTimeStamp,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -1978,9 +2143,15 @@ bacnet_objtypes.BACnetEventReportingType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6296", browseName="ns=bacnet;Notification_Class", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6297", browseName="ns=bacnet;Notify_Type", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6296", browseName="ns=bacnet;Notification_Class", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6297", browseName="ns=bacnet;Notify_Type", modellingRule="Mandatory", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=bacnet;i=5139"]),
     ],
@@ -1989,14 +2160,28 @@ o6.reference(bacnet_objtypes.BACnetBinaryValueType, ns0.reftypes.HasComponent, o
 bacnet_objtypes.BACnetChangeOfStateAlgorithmType(
     nodeId="ns=bacnet;i=5140",
     browseName="ns=bacnet;EventAlgorithm",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6671", browseName="ns=bacnet;AlarmValues", dataType=ns0.datatypes.UInteger, valueRank=1, arrayDimensions=[0], accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6671",
+                browseName="ns=bacnet;AlarmValues",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.UInteger,
+                valueRank=1,
+                arrayDimensions=[0],
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6672", browseName="ns=bacnet;TimeDelay", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6673", browseName="ns=bacnet;TimeDelayNormal", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6672", browseName="ns=bacnet;TimeDelay", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6673", browseName="ns=bacnet;TimeDelayNormal", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
 )
 bacnet_objtypes.BACnetEventReportingType(
@@ -2006,18 +2191,29 @@ bacnet_objtypes.BACnetEventReportingType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6298", browseName="ns=bacnet;Acked_Transitions", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6298",
+                browseName="ns=bacnet;Acked_Transitions",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6299", browseName="ns=bacnet;Event_Enable", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6299",
+                browseName="ns=bacnet;Event_Enable",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6300",
                 browseName="ns=bacnet;Event_State",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetEventState,
                 value=bacnet_datypes.BACnetEventState.NORMAL,
                 accessLevel=3,
@@ -2028,6 +2224,7 @@ bacnet_objtypes.BACnetEventReportingType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6301",
                 browseName="ns=bacnet;Event_Time_Stamps",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetTimeStamp,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -2035,9 +2232,15 @@ bacnet_objtypes.BACnetEventReportingType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6302", browseName="ns=bacnet;Notification_Class", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6303", browseName="ns=bacnet;Notify_Type", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6302", browseName="ns=bacnet;Notification_Class", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6303", browseName="ns=bacnet;Notify_Type", modellingRule="Mandatory", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=bacnet;i=5140"]),
     ],
@@ -2046,10 +2249,18 @@ o6.reference(bacnet_objtypes.BACnetMultiStateInputType, ns0.reftypes.HasComponen
 bacnet_objtypes.BACnetFaultStateAlgorithmType(
     nodeId="ns=bacnet;i=5141",
     browseName="ns=bacnet;FaultAlgorithm",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6674", browseName="ns=bacnet;FaultValues", dataType=ns0.datatypes.UInteger, valueRank=1, arrayDimensions=[0], accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6674",
+                browseName="ns=bacnet;FaultValues",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.UInteger,
+                valueRank=1,
+                arrayDimensions=[0],
+                accessLevel=3,
+                userAccessLevel=1,
             )
         )
     ],
@@ -2060,7 +2271,14 @@ bacnet_objtypes.BACnetFaultEvaluationType(
     modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6319", browseName="ns=bacnet;Reliability", dataType=bacnet_datypes.BACnetReliability, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6319",
+                browseName="ns=bacnet;Reliability",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetReliability,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
         o6.hasComponent(o6.ns["ns=bacnet;i=5141"]),
     ],
@@ -2069,14 +2287,26 @@ o6.reference(bacnet_objtypes.BACnetMultiStateInputType, ns0.reftypes.HasComponen
 bacnet_objtypes.BACnetCommandFailureAlgorithmType(
     nodeId="ns=bacnet;i=5142",
     browseName="ns=bacnet;EventAlgorithm",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6675", browseName="ns=bacnet;FeedbackValueRef", dataType=bacnet_datypes.BACnetDeviceObjectPropertyReference, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6675",
+                browseName="ns=bacnet;FeedbackValueRef",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetDeviceObjectPropertyReference,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6676", browseName="ns=bacnet;TimeDelay", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6677", browseName="ns=bacnet;TimeDelayNormal", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6676", browseName="ns=bacnet;TimeDelay", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6677", browseName="ns=bacnet;TimeDelayNormal", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
 )
 bacnet_objtypes.BACnetEventReportingType(
@@ -2086,18 +2316,29 @@ bacnet_objtypes.BACnetEventReportingType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6306", browseName="ns=bacnet;Acked_Transitions", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6306",
+                browseName="ns=bacnet;Acked_Transitions",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6307", browseName="ns=bacnet;Event_Enable", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6307",
+                browseName="ns=bacnet;Event_Enable",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6308",
                 browseName="ns=bacnet;Event_State",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetEventState,
                 value=bacnet_datypes.BACnetEventState.NORMAL,
                 accessLevel=3,
@@ -2108,6 +2349,7 @@ bacnet_objtypes.BACnetEventReportingType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6309",
                 browseName="ns=bacnet;Event_Time_Stamps",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetTimeStamp,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -2115,9 +2357,15 @@ bacnet_objtypes.BACnetEventReportingType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6310", browseName="ns=bacnet;Notification_Class", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6311", browseName="ns=bacnet;Notify_Type", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6310", browseName="ns=bacnet;Notification_Class", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6311", browseName="ns=bacnet;Notify_Type", modellingRule="Mandatory", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=bacnet;i=5142"]),
     ],
@@ -2126,14 +2374,28 @@ o6.reference(bacnet_objtypes.BACnetMultiStateOutputType, ns0.reftypes.HasCompone
 bacnet_objtypes.BACnetChangeOfStateAlgorithmType(
     nodeId="ns=bacnet;i=5143",
     browseName="ns=bacnet;EventAlgorithm",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6678", browseName="ns=bacnet;AlarmValues", dataType=ns0.datatypes.UInteger, valueRank=1, arrayDimensions=[0], accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6678",
+                browseName="ns=bacnet;AlarmValues",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.UInteger,
+                valueRank=1,
+                arrayDimensions=[0],
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6679", browseName="ns=bacnet;TimeDelay", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6680", browseName="ns=bacnet;TimeDelayNormal", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6679", browseName="ns=bacnet;TimeDelay", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6680", browseName="ns=bacnet;TimeDelayNormal", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
 )
 bacnet_objtypes.BACnetEventReportingType(
@@ -2143,18 +2405,29 @@ bacnet_objtypes.BACnetEventReportingType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6313", browseName="ns=bacnet;Acked_Transitions", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6313",
+                browseName="ns=bacnet;Acked_Transitions",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6314", browseName="ns=bacnet;Event_Enable", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6314",
+                browseName="ns=bacnet;Event_Enable",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6315",
                 browseName="ns=bacnet;Event_State",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetEventState,
                 value=bacnet_datypes.BACnetEventState.NORMAL,
                 accessLevel=3,
@@ -2165,6 +2438,7 @@ bacnet_objtypes.BACnetEventReportingType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6316",
                 browseName="ns=bacnet;Event_Time_Stamps",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetTimeStamp,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -2172,9 +2446,15 @@ bacnet_objtypes.BACnetEventReportingType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6317", browseName="ns=bacnet;Notification_Class", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6318", browseName="ns=bacnet;Notify_Type", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6317", browseName="ns=bacnet;Notification_Class", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6318", browseName="ns=bacnet;Notify_Type", modellingRule="Mandatory", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=bacnet;i=5143"]),
     ],
@@ -2183,10 +2463,18 @@ o6.reference(bacnet_objtypes.BACnetMultiStateValueType, ns0.reftypes.HasComponen
 bacnet_objtypes.BACnetFaultStateAlgorithmType(
     nodeId="ns=bacnet;i=5144",
     browseName="ns=bacnet;FaultAlgorithm",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6681", browseName="ns=bacnet;FaultValues", dataType=ns0.datatypes.UInteger, valueRank=1, arrayDimensions=[0], accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6681",
+                browseName="ns=bacnet;FaultValues",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.UInteger,
+                valueRank=1,
+                arrayDimensions=[0],
+                accessLevel=3,
+                userAccessLevel=1,
             )
         )
     ],
@@ -2197,7 +2485,14 @@ bacnet_objtypes.BACnetFaultEvaluationType(
     modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6320", browseName="ns=bacnet;Reliability", dataType=bacnet_datypes.BACnetReliability, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6320",
+                browseName="ns=bacnet;Reliability",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetReliability,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
         o6.hasComponent(o6.ns["ns=bacnet;i=5144"]),
     ],
@@ -2206,17 +2501,39 @@ o6.reference(bacnet_objtypes.BACnetMultiStateValueType, ns0.reftypes.HasComponen
 bacnet_objtypes.BACnetFloatingLimitAlgorithmType(
     nodeId="ns=bacnet;i=5145",
     browseName="ns=bacnet;EventAlgorithm",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6683", browseName="ns=bacnet;Deadband", dataType=o6.Float, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6684", browseName="ns=bacnet;HighDiffLimit", dataType=o6.Float, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6685", browseName="ns=bacnet;LowDiffLimit", dataType=o6.Float, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6683", browseName="ns=bacnet;Deadband", modellingRule="Mandatory", dataType=o6.Float, accessLevel=3, userAccessLevel=1)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6686", browseName="ns=bacnet;SetpointReference", dataType=bacnet_datypes.BACnetDeviceObjectPropertyReference, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6684", browseName="ns=bacnet;HighDiffLimit", modellingRule="Mandatory", dataType=o6.Float, accessLevel=3, userAccessLevel=1
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6687", browseName="ns=bacnet;TimeDelay", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6688", browseName="ns=bacnet;TimeDelayNormal", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6685", browseName="ns=bacnet;LowDiffLimit", modellingRule="Mandatory", dataType=o6.Float, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6686",
+                browseName="ns=bacnet;SetpointReference",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetDeviceObjectPropertyReference,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6687", browseName="ns=bacnet;TimeDelay", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6688", browseName="ns=bacnet;TimeDelayNormal", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
 )
 ns0.vartypes.PropertyType(
@@ -2255,17 +2572,26 @@ bacnet_objtypes.BACnetChangeOfStateCountType(
     modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6065", browseName="ns=bacnet;Change_Of_State_Count", dataType=o6.UInt32, value=0, accessLevel=3, userAccessLevel=1)
-        ),
-        o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6066", browseName="ns=bacnet;Change_Of_State_Time", dataType=bacnet_datypes.BACnetDateTime, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6065", browseName="ns=bacnet;Change_Of_State_Count", modellingRule="Mandatory", dataType=o6.UInt32, value=0, accessLevel=3, userAccessLevel=1
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6067", browseName="ns=bacnet;Time_Of_State_Count_Reset", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6066",
+                browseName="ns=bacnet;Change_Of_State_Time",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetDateTime,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
-        o6.hasComponent(o6.call(nodeId="ns=bacnet;i=7002", browseName="ns=bacnet;Reset")),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6067", browseName="ns=bacnet;Time_Of_State_Count_Reset", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasComponent(o6.call(nodeId="ns=bacnet;i=7002", browseName="ns=bacnet;Reset", modellingRule="Mandatory")),
     ],
 )
 o6.reference(bacnet_objtypes.BACnetBinaryType, ns0.reftypes.HasComponent, o6.ns["ns=bacnet;i=5007"])
@@ -2275,12 +2601,16 @@ bacnet_objtypes.BACnetElapsedActiveTimeType(
     modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6074", browseName="ns=bacnet;Elapsed_Active_Time", dataType=o6.UInt32, value=0, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6074", browseName="ns=bacnet;Elapsed_Active_Time", modellingRule="Mandatory", dataType=o6.UInt32, value=0, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6075", browseName="ns=bacnet;Time_Of_Active_Time_Reset", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6075", browseName="ns=bacnet;Time_Of_Active_Time_Reset", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1
+            )
         ),
-        o6.hasComponent(o6.call(nodeId="ns=bacnet;i=7004", browseName="ns=bacnet;Reset")),
+        o6.hasComponent(o6.call(nodeId="ns=bacnet;i=7004", browseName="ns=bacnet;Reset", modellingRule="Mandatory")),
     ],
 )
 o6.reference(bacnet_objtypes.BACnetBinaryType, ns0.reftypes.HasComponent, o6.ns["ns=bacnet;i=5008"])
@@ -2297,7 +2627,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Time", dataType=o6.NodeId("i=294"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=bacnet;i=7026", browseName="ns=bacnet;TimeSynchronization", inputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6347"]))
+o6.call(nodeId="ns=bacnet;i=7026", browseName="ns=bacnet;TimeSynchronization", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6347"]))
 
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=bacnet;i=105001", browseName="Default Binary")
 o6.reference(o6.ns["ns=bacnet;i=105001"], "i=39", o6.ns["ns=bacnet;i=6174"])
@@ -2415,7 +2745,14 @@ bacnet_objtypes.BACnetFaultEvaluationType(
     modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6374", browseName="ns=bacnet;Reliability", dataType=bacnet_datypes.BACnetReliability, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6374",
+                browseName="ns=bacnet;Reliability",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetReliability,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         )
     ],
 )
@@ -2426,7 +2763,14 @@ bacnet_objtypes.BACnetFaultEvaluationType(
     modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6375", browseName="ns=bacnet;Reliability", dataType=bacnet_datypes.BACnetReliability, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6375",
+                browseName="ns=bacnet;Reliability",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetReliability,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         )
     ],
 )
@@ -2437,7 +2781,14 @@ bacnet_objtypes.BACnetFaultEvaluationType(
     modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6376", browseName="ns=bacnet;Reliability", dataType=bacnet_datypes.BACnetReliability, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6376",
+                browseName="ns=bacnet;Reliability",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetReliability,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         )
     ],
 )
@@ -2448,7 +2799,14 @@ bacnet_objtypes.BACnetFaultEvaluationType(
     modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6377", browseName="ns=bacnet;Reliability", dataType=bacnet_datypes.BACnetReliability, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6377",
+                browseName="ns=bacnet;Reliability",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetReliability,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         )
     ],
 )
@@ -2459,7 +2817,14 @@ bacnet_objtypes.BACnetFaultEvaluationType(
     modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6378", browseName="ns=bacnet;Reliability", dataType=bacnet_datypes.BACnetReliability, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6378",
+                browseName="ns=bacnet;Reliability",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetReliability,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         )
     ],
 )
@@ -2473,6 +2838,7 @@ ns0.objtypes.BaseObjectType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6230",
                 browseName="ns=bacnet;Object_List",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetObjectIdentifier,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -2493,6 +2859,7 @@ bacnet_objtypes.BACnetTimeManagementType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6240",
                 browseName="ns=bacnet;Local_Date",
+                modellingRule="Optional",
                 dataType=bacnet_datypes.BACnetDate,
                 value=bacnet_datypes.BACnetDate(
                     year=0, month=bacnet_datypes.BACnetMonth.JANUARY, dayOfMonth=bacnet_datypes.BACnetDayOfMonth(1), dayOfWeek=bacnet_datypes.BACnetDayOfWeek.MONDAY
@@ -2502,10 +2869,18 @@ bacnet_objtypes.BACnetTimeManagementType(
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6241", browseName="ns=bacnet;Local_Time", dataType=bacnet_datypes.BACnetTime, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6241", browseName="ns=bacnet;Local_Time", modellingRule="Optional", dataType=bacnet_datypes.BACnetTime, accessLevel=3, userAccessLevel=1
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6242", browseName="ns=bacnet;UTC_Offse", dataType=o6.Int16, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6243", browseName="ns=bacnet;Daylight_Savings_Status", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6242", browseName="ns=bacnet;UTC_Offse", modellingRule="Optional", dataType=o6.Int16, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6243", browseName="ns=bacnet;Daylight_Savings_Status", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
+        ),
         o6.hasComponent(o6.ns["ns=bacnet;i=7026"]),
     ],
 )
@@ -2519,6 +2894,7 @@ ns0.objtypes.BaseObjectType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6235",
                 browseName="ns=bacnet;Structured_Object_List",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetObjectIdentifier,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -2533,11 +2909,13 @@ o6.reference(bacnet_objtypes.BACnetDeviceType, ns0.reftypes.HasComponent, o6.ns[
 ns0.objtypes.BaseObjectType(
     nodeId="ns=bacnet;i=105095",
     browseName="ns=bacnet;Object_List",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6233",
                 browseName="ns=bacnet;Object_List",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetObjectIdentifier,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -2555,46 +2933,102 @@ bacnet_objtypes.BACnetDeviceType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6028", browseName="ns=bacnet;Object_Identifier", dataType=bacnet_datypes.BACnetObjectIdentifier, accessLevel=3, userAccessLevel=1
-            )
-        ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6214", browseName="ns=bacnet;Serial_Number", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6215", browseName="ns=bacnet;Vendor_Name", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6216", browseName="ns=bacnet;Vendor_Identifier", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6217", browseName="ns=bacnet;Model_Name", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6218", browseName="ns=bacnet;Protocol_Version", dataType=ns0.datatypes.UInteger, accessLevel=3, userAccessLevel=1)
-        ),
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6219", browseName="ns=bacnet;Protocol_Revision", dataType=ns0.datatypes.UInteger, accessLevel=3, userAccessLevel=1)
-        ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6220", browseName="ns=bacnet;Firmware_Revision", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6221", browseName="ns=bacnet;Application_Software_Version", dataType=o6.String, accessLevel=3, userAccessLevel=1)
-        ),
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6223", browseName="ns=bacnet;Segmentation_Supported", dataType=bacnet_datypes.BACnetSegmentation, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6028",
+                browseName="ns=bacnet;Object_Identifier",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetObjectIdentifier,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6224", browseName="ns=bacnet;Max_APDU_Length_Accepted", dataType=ns0.datatypes.UInteger, accessLevel=3, userAccessLevel=1)
-        ),
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6225", browseName="ns=bacnet;APDU_Timeout", dataType=ns0.datatypes.UInteger, accessLevel=3, userAccessLevel=1)
-        ),
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6226", browseName="ns=bacnet;Number_Of_APDU_Retries", dataType=ns0.datatypes.UInteger, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6214", browseName="ns=bacnet;Serial_Number", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6227", browseName="ns=bacnet;Protocol_Services_Supported", dataType=bacnet_datypes.BACnetServicesSupportedBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6215", browseName="ns=bacnet;Vendor_Name", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6216", browseName="ns=bacnet;Vendor_Identifier", modellingRule="Mandatory", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6217", browseName="ns=bacnet;Model_Name", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6218", browseName="ns=bacnet;Protocol_Version", modellingRule="Mandatory", dataType=ns0.datatypes.UInteger, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6219", browseName="ns=bacnet;Protocol_Revision", modellingRule="Mandatory", dataType=ns0.datatypes.UInteger, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6220", browseName="ns=bacnet;Firmware_Revision", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6221", browseName="ns=bacnet;Application_Software_Version", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6223",
+                browseName="ns=bacnet;Segmentation_Supported",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetSegmentation,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6224",
+                browseName="ns=bacnet;Max_APDU_Length_Accepted",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.UInteger,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6225", browseName="ns=bacnet;APDU_Timeout", modellingRule="Mandatory", dataType=ns0.datatypes.UInteger, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6226",
+                browseName="ns=bacnet;Number_Of_APDU_Retries",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.UInteger,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6227",
+                browseName="ns=bacnet;Protocol_Services_Supported",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetServicesSupportedBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6228",
                 browseName="ns=bacnet;Device_Address_Binding",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetAddressBinding,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -2603,15 +3037,25 @@ bacnet_objtypes.BACnetDeviceType(
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6229", browseName="ns=bacnet;Database_Revision", dataType=ns0.datatypes.UInteger, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6229", browseName="ns=bacnet;Database_Revision", modellingRule="Mandatory", dataType=ns0.datatypes.UInteger, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6244", browseName="ns=bacnet;System_Status", dataType=bacnet_datypes.BACnetDeviceStatus, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6244",
+                browseName="ns=bacnet;System_Status",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetDeviceStatus,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6397",
                 browseName="ns=bacnet;Protocol_Object_Types_Supported",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetObjectTypeSupportedBits,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -2627,7 +3071,14 @@ bacnet_objtypes.BACnetFaultEvaluationType(
     modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6380", browseName="ns=bacnet;Reliability", dataType=bacnet_datypes.BACnetReliability, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6380",
+                browseName="ns=bacnet;Reliability",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetReliability,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
         o6.hasComponent(o6.ns["ns=bacnet;i=5071"]),
     ],
@@ -2639,7 +3090,14 @@ bacnet_objtypes.BACnetFaultEvaluationType(
     modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6381", browseName="ns=bacnet;Reliability", dataType=bacnet_datypes.BACnetReliability, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6381",
+                browseName="ns=bacnet;Reliability",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetReliability,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         )
     ],
 )
@@ -2733,6 +3191,7 @@ bacnet_objtypes.BACnetEventReportingType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6357",
                 browseName="ns=bacnet;Event_State",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetEventState,
                 value=bacnet_datypes.BACnetEventState.NORMAL,
                 accessLevel=3,
@@ -2741,18 +3200,29 @@ bacnet_objtypes.BACnetEventReportingType(
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=106016", browseName="ns=bacnet;Acked_Transitions", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=106016",
+                browseName="ns=bacnet;Acked_Transitions",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=106023", browseName="ns=bacnet;Event_Enable", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=106023",
+                browseName="ns=bacnet;Event_Enable",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=106025",
                 browseName="ns=bacnet;Event_Time_Stamps",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetTimeStamp,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -2760,9 +3230,20 @@ bacnet_objtypes.BACnetEventReportingType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106026", browseName="ns=bacnet;Notification_Class", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106027", browseName="ns=bacnet;Notify_Type", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=106026", browseName="ns=bacnet;Notification_Class", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=106027",
+                browseName="ns=bacnet;Notify_Type",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetNotifyType,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
         o6.hasComponent(o6.ns["ns=bacnet;i=5145"]),
     ],
@@ -2818,11 +3299,16 @@ bacnet_objtypes.BACnetMstpMasterType(
     browseName="ns=bacnet;MstpMaster",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6262", browseName="ns=bacnet;Auto_Slave_Discovery", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6262", browseName="ns=bacnet;Auto_Slave_Discovery", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6263",
                 browseName="ns=bacnet;Manual_Slave_Address_Binding",
+                modellingRule="Optional",
                 dataType=bacnet_datypes.BACnetAddressBinding,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -2834,6 +3320,7 @@ bacnet_objtypes.BACnetMstpMasterType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6264",
                 browseName="ns=bacnet;Slave_Address_Binding",
+                modellingRule="Optional",
                 dataType=bacnet_datypes.BACnetAddressBinding,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -2841,11 +3328,19 @@ bacnet_objtypes.BACnetMstpMasterType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6265", browseName="ns=bacnet;Slave_Proxy_Enable", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106125", browseName="ns=bacnet;Max_Info_Frames", dataType=ns0.datatypes.UInteger, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6265", browseName="ns=bacnet;Slave_Proxy_Enable", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106126", browseName="ns=bacnet;Max_Master", dataType=o6.Byte, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=106125", browseName="ns=bacnet;Max_Info_Frames", modellingRule="Mandatory", dataType=ns0.datatypes.UInteger, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106126", browseName="ns=bacnet;Max_Master", modellingRule="Mandatory", dataType=o6.Byte, accessLevel=3, userAccessLevel=1)
+        ),
     ],
 )
 o6.reference(bacnet_objtypes.BACnetDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=bacnet;i=105087"])
@@ -2890,11 +3385,26 @@ ns0.vartypes.PropertyType(
 bacnet_objtypes.BACnetBufferReadyAlgorithmType(
     nodeId="ns=bacnet;i=105077",
     browseName="ns=bacnet;EventAlgorithm",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6654", browseName="ns=bacnet;TimeDelay", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6655", browseName="ns=bacnet;TimeDelayNormal", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106230", browseName="ns=bacnet;Threshold", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106231", browseName="ns=bacnet;PreviousCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6654", browseName="ns=bacnet;TimeDelay", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6655", browseName="ns=bacnet;TimeDelayNormal", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=106230", browseName="ns=bacnet;Threshold", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=106231", browseName="ns=bacnet;PreviousCount", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
 )
 bacnet_objtypes.BACnetEventReportingType(
@@ -2906,6 +3416,7 @@ bacnet_objtypes.BACnetEventReportingType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6359",
                 browseName="ns=bacnet;Event_State",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetEventState,
                 value=bacnet_datypes.BACnetEventState.NORMAL,
                 accessLevel=3,
@@ -2914,23 +3425,41 @@ bacnet_objtypes.BACnetEventReportingType(
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=106220", browseName="ns=bacnet;Event_Message_Texts", dataType=o6.String, valueRank=1, arrayDimensions=[3], accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=106220",
+                browseName="ns=bacnet;Event_Message_Texts",
+                modellingRule="Optional",
+                dataType=o6.String,
+                valueRank=1,
+                arrayDimensions=[3],
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=106221", browseName="ns=bacnet;Acked_Transitions", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=106221",
+                browseName="ns=bacnet;Acked_Transitions",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=106222", browseName="ns=bacnet;Event_Enable", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=106222",
+                browseName="ns=bacnet;Event_Enable",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=106224",
                 browseName="ns=bacnet;Event_Time_Stamps",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetTimeStamp,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -2938,14 +3467,26 @@ bacnet_objtypes.BACnetEventReportingType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106225", browseName="ns=bacnet;Notification_Class", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106226", browseName="ns=bacnet;Notify_Type", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=106225", browseName="ns=bacnet;Notification_Class", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=106226",
+                browseName="ns=bacnet;Notify_Type",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetNotifyType,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=106227",
                 browseName="ns=bacnet;Event_Message_Texts_Config",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -2970,15 +3511,41 @@ ns0.vartypes.PropertyType(
 bacnet_objtypes.BACnetOutOfRangeAlgorithmType(
     nodeId="ns=bacnet;i=105068",
     browseName="ns=bacnet;EventAlgorithm",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6650", browseName="ns=bacnet;TimeDelay", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6651", browseName="ns=bacnet;TimeDelayNormal", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106257", browseName="ns=bacnet;Deadband", dataType=o6.Float, value=0.0, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106258", browseName="ns=bacnet;HighLimit", dataType=o6.Float, value=0.0, accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106259", browseName="ns=bacnet;LimitEnable", dataType=bacnet_datypes.BACnetLimitEnable, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6650", browseName="ns=bacnet;TimeDelay", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106260", browseName="ns=bacnet;LowLimit", dataType=o6.Float, value=0.0, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6651", browseName="ns=bacnet;TimeDelayNormal", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=106257", browseName="ns=bacnet;Deadband", modellingRule="Mandatory", dataType=o6.Float, value=0.0, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=106258", browseName="ns=bacnet;HighLimit", modellingRule="Mandatory", dataType=o6.Float, value=0.0, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=106259",
+                browseName="ns=bacnet;LimitEnable",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetLimitEnable,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=106260", browseName="ns=bacnet;LowLimit", modellingRule="Mandatory", dataType=o6.Float, value=0.0, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
 )
 bacnet_objtypes.BACnetEventReportingType(
@@ -2988,18 +3555,29 @@ bacnet_objtypes.BACnetEventReportingType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6005", browseName="ns=bacnet;Acked_Transitions", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6005",
+                browseName="ns=bacnet;Acked_Transitions",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6006", browseName="ns=bacnet;Event_Enable", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6006",
+                browseName="ns=bacnet;Event_Enable",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6009",
                 browseName="ns=bacnet;Event_Time_Stamps",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetTimeStamp,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -3007,15 +3585,26 @@ bacnet_objtypes.BACnetEventReportingType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6010", browseName="ns=bacnet;Notification_Class", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6011", browseName="ns=bacnet;Notify_Type", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6010", browseName="ns=bacnet;Notification_Class", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6036", browseName="ns=bacnet;Event_Algorithm_Inhibit", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6011", browseName="ns=bacnet;Notify_Type", modellingRule="Mandatory", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6036", browseName="ns=bacnet;Event_Algorithm_Inhibit", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6056",
                 browseName="ns=bacnet;Event_State",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetEventState,
                 value=bacnet_datypes.BACnetEventState.NORMAL,
                 accessLevel=3,
@@ -3026,20 +3615,39 @@ bacnet_objtypes.BACnetEventReportingType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6275",
                 browseName="ns=bacnet;Event_Algorithm_Inhibit_Ref",
+                modellingRule="Optional",
                 dataType=bacnet_datypes.BACnetDeviceObjectPropertyReference,
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6276", browseName="ns=bacnet;Event_Detection_Enable", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6277", browseName="ns=bacnet;Event_Message_Texts", dataType=o6.String, valueRank=1, arrayDimensions=[3], accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6276", browseName="ns=bacnet;Event_Detection_Enable", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=6278", browseName="ns=bacnet;Event_Message_Texts_Config", dataType=o6.String, valueRank=1, arrayDimensions=[3], accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6277",
+                browseName="ns=bacnet;Event_Message_Texts",
+                modellingRule="Optional",
+                dataType=o6.String,
+                valueRank=1,
+                arrayDimensions=[3],
+                accessLevel=3,
+                userAccessLevel=1,
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6278",
+                browseName="ns=bacnet;Event_Message_Texts_Config",
+                modellingRule="Optional",
+                dataType=o6.String,
+                valueRank=1,
+                arrayDimensions=[3],
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=bacnet;i=105068"]),
@@ -3055,6 +3663,7 @@ bacnet_objtypes.BACnetEventReportingType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6360",
                 browseName="ns=bacnet;Event_State",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetEventState,
                 value=bacnet_datypes.BACnetEventState.NORMAL,
                 accessLevel=3,
@@ -3063,18 +3672,29 @@ bacnet_objtypes.BACnetEventReportingType(
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=106264", browseName="ns=bacnet;Acked_Transitions", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=106264",
+                browseName="ns=bacnet;Acked_Transitions",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=106265", browseName="ns=bacnet;Event_Enable", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=106265",
+                browseName="ns=bacnet;Event_Enable",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=106267",
                 browseName="ns=bacnet;Event_Time_Stamps",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetTimeStamp,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -3082,9 +3702,20 @@ bacnet_objtypes.BACnetEventReportingType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106268", browseName="ns=bacnet;Notification_Class", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106269", browseName="ns=bacnet;Notify_Type", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=106268", browseName="ns=bacnet;Notification_Class", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=106269",
+                browseName="ns=bacnet;Notify_Type",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetNotifyType,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
     ],
 )
@@ -3191,6 +3822,7 @@ bacnet_objtypes.BACnetEventReportingType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6358",
                 browseName="ns=bacnet;Event_State",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetEventState,
                 value=bacnet_datypes.BACnetEventState.NORMAL,
                 accessLevel=3,
@@ -3199,18 +3831,29 @@ bacnet_objtypes.BACnetEventReportingType(
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=106054", browseName="ns=bacnet;Acked_Transitions", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=106054",
+                browseName="ns=bacnet;Acked_Transitions",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=106192", browseName="ns=bacnet;Event_Enable", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=106192",
+                browseName="ns=bacnet;Event_Enable",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=106278",
                 browseName="ns=bacnet;Event_Time_Stamps",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetTimeStamp,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -3218,9 +3861,20 @@ bacnet_objtypes.BACnetEventReportingType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106279", browseName="ns=bacnet;Notification_Class", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106280", browseName="ns=bacnet;Notify_Type", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=106279", browseName="ns=bacnet;Notification_Class", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=106280",
+                browseName="ns=bacnet;Notify_Type",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetNotifyType,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
     ],
 )
@@ -3234,6 +3888,7 @@ bacnet_objtypes.BACnetEventReportingType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=6361",
                 browseName="ns=bacnet;Event_State",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetEventState,
                 value=bacnet_datypes.BACnetEventState.NORMAL,
                 accessLevel=3,
@@ -3242,18 +3897,29 @@ bacnet_objtypes.BACnetEventReportingType(
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=106296", browseName="ns=bacnet;Acked_Transitions", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=106296",
+                browseName="ns=bacnet;Acked_Transitions",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=106297", browseName="ns=bacnet;Event_Enable", dataType=bacnet_datypes.BACnetEventTransitionBits, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=106297",
+                browseName="ns=bacnet;Event_Enable",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetEventTransitionBits,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=106299",
                 browseName="ns=bacnet;Event_Time_Stamps",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetTimeStamp,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -3261,9 +3927,20 @@ bacnet_objtypes.BACnetEventReportingType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106300", browseName="ns=bacnet;Notification_Class", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=106301", browseName="ns=bacnet;Notify_Type", dataType=bacnet_datypes.BACnetNotifyType, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=106300", browseName="ns=bacnet;Notification_Class", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=106301",
+                browseName="ns=bacnet;Notify_Type",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetNotifyType,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
     ],
 )
@@ -3275,7 +3952,12 @@ bacnet_objtypes.BACnetFaultAlgorithmType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=106329", browseName="ns=bacnet;Object_Identifier", dataType=bacnet_datypes.BACnetObjectIdentifier, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=106329",
+                browseName="ns=bacnet;Object_Identifier",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetObjectIdentifier,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         )
     ],
@@ -3287,19 +3969,41 @@ bacnet_objtypes.BACnetBackupRestoreType(
     browseName="ns=bacnet;BackupRestore",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6253", browseName="ns=bacnet;Backup_Failure_Timeout", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6259", browseName="ns=bacnet;Backup_Preparation_Time", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6260", browseName="ns=bacnet;Restore_Preparation_Time", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6261", browseName="ns=bacnet;Restore_Completion_Time", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=106082", browseName="ns=bacnet;Backup_And_Restore_State", dataType=bacnet_datypes.BACnetBackupState, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=6253", browseName="ns=bacnet;Backup_Failure_Timeout", modellingRule="Mandatory", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6259", browseName="ns=bacnet;Backup_Preparation_Time", modellingRule="Optional", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6260", browseName="ns=bacnet;Restore_Preparation_Time", modellingRule="Optional", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=6261", browseName="ns=bacnet;Restore_Completion_Time", modellingRule="Optional", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=bacnet;i=106082",
+                browseName="ns=bacnet;Backup_And_Restore_State",
+                modellingRule="Optional",
+                dataType=bacnet_datypes.BACnetBackupState,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=106123",
                 browseName="ns=bacnet;Configuration_Files",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetDeviceObjectPropertyReference,
                 valueRank=1,
                 arrayDimensions=[1],
@@ -3311,14 +4015,15 @@ bacnet_objtypes.BACnetBackupRestoreType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=106124",
                 browseName="ns=bacnet;Last_Restore_Time",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetTimeStamp,
                 value=bacnet_datypes.BACnetTimeStamp(),
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasComponent(o6.call(nodeId="ns=bacnet;i=107008", browseName="ns=bacnet;BACnetBackup")),
-        o6.hasComponent(o6.call(nodeId="ns=bacnet;i=107009", browseName="ns=bacnet;BACnetRestore")),
+        o6.hasComponent(o6.call(nodeId="ns=bacnet;i=107008", browseName="ns=bacnet;BACnetBackup", modellingRule="Mandatory")),
+        o6.hasComponent(o6.call(nodeId="ns=bacnet;i=107009", browseName="ns=bacnet;BACnetRestore", modellingRule="Mandatory")),
     ],
 )
 o6.reference(bacnet_objtypes.BACnetDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=bacnet;i=105086"])
@@ -3349,6 +4054,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=bacnet;i=107010",
     browseName="ns=bacnet;AddRestartRecipients",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6110"]),
     outputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6139"]),
 )
@@ -3378,6 +4084,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=bacnet;i=107011",
     browseName="ns=bacnet;RemoveRestartRecipients",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6148"]),
     outputArgs=o6.hasProperty(o6.ns["ns=bacnet;i=6142"]),
 )
@@ -3389,13 +4096,19 @@ bacnet_objtypes.BACnetDeviceRestartType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=bacnet;i=106128", browseName="ns=bacnet;Last_Restart_Reason", dataType=bacnet_datypes.BACnetRestartReason, accessLevel=3, userAccessLevel=1
+                nodeId="ns=bacnet;i=106128",
+                browseName="ns=bacnet;Last_Restart_Reason",
+                modellingRule="Mandatory",
+                dataType=bacnet_datypes.BACnetRestartReason,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=106129",
                 browseName="ns=bacnet;Restart_Notification_Recipients",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetRecipient,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -3407,6 +4120,7 @@ bacnet_objtypes.BACnetDeviceRestartType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=bacnet;i=106130",
                 browseName="ns=bacnet;Time_Of_Device_Restart",
+                modellingRule="Mandatory",
                 dataType=bacnet_datypes.BACnetTimeStamp,
                 value=bacnet_datypes.BACnetTimeStamp(),
                 accessLevel=3,

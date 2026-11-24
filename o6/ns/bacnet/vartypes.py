@@ -37,7 +37,7 @@ else:
 )
 class BACNetAnalogItemType(ns0.vartypes.AnalogItemType):
     engineeringUnits: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6001", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)
+        ns0.vartypes.PropertyType(nodeId="ns=bacnet;i=6001", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
     )
 
 

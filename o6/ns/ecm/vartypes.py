@@ -37,19 +37,32 @@ else:
 @o6.variabletype(nodeId="ns=ecm;i=2002", browseName="ns=ecm;EnergyMeasurementValueType", displayName="EnergyMeasurementValueType", valueRank=o6.ValueRank.ANY)
 class EnergyMeasurementValueType(ns0.vartypes.BaseDataVariableType):
     accuracyClass: ns0.vartypes.MultiStateValueDiscreteType
-    accuracyDomain: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6019", browseName="ns=ecm;AccuracyDomain", dataType=o6.NodeId))
+    accuracyDomain: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6019", browseName="ns=ecm;AccuracyDomain", modellingRule="Mandatory", dataType=o6.NodeId)
+    )
     accuracyRange: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6010", browseName="ns=ecm;AccuracyRange", dataType=o6.Float, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6010", browseName="ns=ecm;AccuracyRange", modellingRule="Optional", dataType=o6.Float, accessLevel=3, userAccessLevel=1)
     )
     engineeringUnits: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6021", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)
+        ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6021", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
     )
-    measurementID: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6018", browseName="ns=ecm;MeasurementID", dataType=o6.UInt16))
+    measurementID: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6018", browseName="ns=ecm;MeasurementID", modellingRule="Optional", dataType=o6.UInt16)
+    )
     measurementPeriod: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6015", browseName="ns=ecm;MeasurementPeriod", dataType=ecm_datypes.MeasurementPeriodDataType, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=ecm;i=6015",
+            browseName="ns=ecm;MeasurementPeriod",
+            modellingRule="Optional",
+            dataType=ecm_datypes.MeasurementPeriodDataType,
+            accessLevel=3,
+            userAccessLevel=1,
+        )
     )
     resource: ns0.vartypes.MultiStateValueDiscreteType
-    valueBeforeReset: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6022", browseName="ns=ecm;ValueBeforeReset", valueRank=-2))
+    valueBeforeReset: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6022", browseName="ns=ecm;ValueBeforeReset", modellingRule="Optional", valueRank=-2)
+    )
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ia, ns0, ecm_datypes

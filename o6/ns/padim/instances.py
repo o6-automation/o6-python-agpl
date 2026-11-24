@@ -78,7 +78,7 @@ http_opcfoundation_org_UA_PADIM_ = ns0.objtypes.NamespaceMetadataType(
                 description="A list of IdTypes for nodes which are the same in every server that exposes them.",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),
@@ -109,7 +109,7 @@ di.objtypes.ConfigurableObjectType(
     nodeId="ns=padim;i=1025",
     browseName="ns=padim;SubDevices",
     modellingRule="Optional",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=padim;i=1026", browseName="ns=di;SupportedTypes"))],
+    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=padim;i=1026", browseName="ns=di;SupportedTypes", modellingRule="Mandatory"))],
 )
 o6.reference(padim_objtypes.PADIMType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1025"])
 ns0.vartypes.PropertyType(
@@ -143,7 +143,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.EnumValueType(value=255, displayName=o6.LocalizedText("Abort"), description=o6.LocalizedText("Abort the commissioning procedure, if it is being executed")),
     ],
 )
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1160", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1160", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, value="", accessLevel=3)
 o6.reference(o6.ns["ns=padim;i=1160"], "i=17597", "ns=irdi;s=0112/2///61987#ABB271#009")
 padim_objtypes.SignalType(
     nodeId="ns=padim;i=1024", browseName="ns=padim;<SignalIdentifier>", modellingRule="OptionalPlaceholder", references=[o6.hasProperty(o6.ns["ns=padim;i=1160"])]
@@ -159,6 +159,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1161",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[27, 1],
@@ -197,6 +198,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1162",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[27],
@@ -235,16 +237,21 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1163",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
                 value=[o6.NodeId("ns=irdi;s=0112/2///61987#ABK984#001")],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1164", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Pt100", "en"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1164", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Pt100", "en")
+            )
+        ),
     ],
     dataType=o6.UInt32,
-    valueRank=-2,
+    valueRank=-1,
     value=8,
     accessLevel=3,
 )
@@ -259,6 +266,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1165",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[4, 1],
@@ -274,6 +282,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1166",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[4],
@@ -289,16 +298,21 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1167",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
                 value=[o6.NodeId("ns=irdi;s=0112/2///61987#ABL113#001")],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1168", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("4-wire", "en"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1168", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("4-wire", "en")
+            )
+        ),
     ],
     dataType=o6.UInt32,
-    valueRank=-2,
+    valueRank=-1,
     value=0,
     accessLevel=3,
 )
@@ -314,6 +328,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1169",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[4, 1],
@@ -329,6 +344,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1170",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[4],
@@ -344,6 +360,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1171",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
@@ -351,11 +368,13 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=padim;i=1172", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("internal cold junction", "en"))
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1172", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("internal cold junction", "en")
+            )
         ),
     ],
     dataType=o6.UInt32,
-    valueRank=-2,
+    valueRank=-1,
     value=1,
     accessLevel=3,
 )
@@ -371,6 +390,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1173",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[3, 1],
@@ -381,6 +401,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1174",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -395,16 +416,21 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1175",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
                 value=[o6.NodeId("ns=irdi;s=0112/2///61987#ABM885#001")],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1176", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("positive", "en"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1176", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("positive", "en")
+            )
+        ),
     ],
     dataType=o6.UInt32,
-    valueRank=-2,
+    valueRank=-1,
     value=0,
     accessLevel=3,
 )
@@ -420,6 +446,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1177",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[3, 1],
@@ -430,6 +457,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1178",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -444,13 +472,18 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1179",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
                 value=[o6.NodeId("ns=irdi;s=0112/2///61987#ABL147#001")],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1180", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("direct", "en"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1180", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("direct", "en")
+            )
+        ),
     ],
     dataType=o6.UInt32,
     value=0,
@@ -468,6 +501,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1181",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[3, 1],
@@ -478,6 +512,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1182",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -492,6 +527,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1183",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
@@ -499,7 +535,9 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=padim;i=1184", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("sliding-stem linear", "en"))
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1184", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("sliding-stem linear", "en")
+            )
         ),
     ],
     dataType=o6.UInt32,
@@ -514,8 +552,12 @@ padim_vartypes.TwoStateDiscreteSignalVariableType(
     displayName="Two-state I/O value",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1185", browseName="FalseState", dataType=o6.LocalizedText, value=o6.LocalizedText("FALSE"))),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1186", browseName="TrueState", dataType=o6.LocalizedText, value=o6.LocalizedText("TRUE"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=padim;i=1185", browseName="FalseState", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("FALSE"))
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=padim;i=1186", browseName="TrueState", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("TRUE"))
+        ),
     ],
     dataType=o6.Boolean,
     valueRank=-2,
@@ -534,6 +576,7 @@ padim_vartypes.MultiStateDiscreteSignalVariableType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1187",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[11, 1],
@@ -556,6 +599,7 @@ padim_vartypes.MultiStateDiscreteSignalVariableType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1188",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[11],
@@ -574,7 +618,9 @@ padim_vartypes.MultiStateDiscreteSignalVariableType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1189", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("false"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=padim;i=1189", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("false"))
+        ),
     ],
     dataType=o6.UInt32,
     value=7,
@@ -582,14 +628,17 @@ padim_vartypes.MultiStateDiscreteSignalVariableType(
 )
 o6.reference(padim_objtypes.MultiStateDiscreteSignalType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1041"])
 o6.reference(o6.ns["ns=padim;i=1041"], "i=17597", "ns=irdi;s=0112/2///61987#ABN636#002")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1190", browseName="EngineeringUnits", displayName="Unit", dataType=ns0.datatypes.EUInformation)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1190", browseName="EngineeringUnits", displayName="Unit", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
 o6.reference(o6.ns["ns=padim;i=1190"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 padim_vartypes.AnalogSignalVariableType(
     nodeId="ns=padim;i=1027",
     browseName="ns=padim;AnalogSignal",
     displayName="Value",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(o6.ns["ns=padim;i=1190"]), o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1191", browseName="EURange", dataType=ns0.datatypes.Range))],
+    references=[
+        o6.hasProperty(o6.ns["ns=padim;i=1190"]),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1191", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+    ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
     accessLevel=3,
@@ -600,6 +649,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1193",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741328, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -610,11 +660,13 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
     nodeId="ns=padim;i=1192",
     browseName="ns=padim;ActuatorType",
     displayName="Actuator type",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1197",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[3, 1],
@@ -625,6 +677,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1198",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -639,6 +692,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1199",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
@@ -646,7 +700,9 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=padim;i=1200", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("sliding-stem linear", "en"))
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1200", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("sliding-stem linear", "en")
+            )
         ),
     ],
     dataType=o6.UInt32,
@@ -658,11 +714,13 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
     nodeId="ns=padim;i=1195",
     browseName="ns=padim;OperatingDirection",
     displayName="Operat. direction",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1201",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[3, 1],
@@ -673,6 +731,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1202",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -687,13 +746,18 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1203",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
                 value=[o6.NodeId("ns=irdi;s=0112/2///61987#ABL147#001")],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1204", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("direct", "en"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1204", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("direct", "en")
+            )
+        ),
     ],
     dataType=o6.UInt32,
     value=0,
@@ -704,6 +768,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1205",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Optional",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741328, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -726,6 +791,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1207",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Optional",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741328, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -733,7 +799,13 @@ ns0.vartypes.PropertyType(
 )
 o6.reference(o6.ns["ns=padim;i=1207"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.BaseAnalogType(
-    nodeId="ns=padim;i=1196", browseName="ns=padim;Setpoint", references=[o6.hasProperty(o6.ns["ns=padim;i=1207"])], dataType=o6.Float, value=0.0, accessLevel=3
+    nodeId="ns=padim;i=1196",
+    browseName="ns=padim;Setpoint",
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(o6.ns["ns=padim;i=1207"])],
+    dataType=o6.Float,
+    value=0.0,
+    accessLevel=3,
 )
 o6.reference(o6.ns["ns=padim;i=1196"], "i=17597", "ns=irdi;s=0112/2///61987#ABN607#002")
 padim_vartypes.ControlVariableType(
@@ -743,7 +815,11 @@ padim_vartypes.ControlVariableType(
     modellingRule="Mandatory",
     references=[
         o6.hasProperty(o6.ns["ns=padim;i=1193"]),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1194", browseName="EURange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=100.0))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1194", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=100.0)
+            )
+        ),
         o6.hasComponent(o6.ns["ns=padim;i=1192"]),
         o6.hasComponent(o6.ns["ns=padim;i=1195"]),
         o6.hasComponent(o6.ns["ns=padim;i=1196"]),
@@ -765,6 +841,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1211",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[3, 1],
@@ -775,6 +852,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1212",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -789,32 +867,37 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1213",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
                 value=[o6.NodeId("ns=irdi;s=0112/2///61987#ABL238#001")],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1214", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("RTD", "en"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=padim;i=1214", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("RTD", "en"))
+        ),
     ],
     dataType=o6.UInt32,
-    valueRank=-2,
+    valueRank=-1,
     value=0,
     accessLevel=3,
 )
 o6.reference(padim_vartypes.TemperatureMeasurementVariableType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1210"])
 o6.reference(o6.ns["ns=padim;i=1210"], "i=17597", "ns=irdi;s=0112/2///61987#ABF288#004")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1225", browseName="EngineeringUnits", displayName="Unit", dataType=ns0.datatypes.EUInformation)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1225", browseName="EngineeringUnits", displayName="Unit", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
 o6.reference(o6.ns["ns=padim;i=1225"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
     nodeId="ns=padim;i=1228",
     browseName="ns=padim;OperatingDirection",
     displayName="Operating direction",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1234",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[3, 1],
@@ -825,6 +908,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1235",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -839,13 +923,18 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1236",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
                 value=[o6.NodeId("ns=irdi;s=0112/2///61987#ABL147#001")],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1237", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("direct", "en"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1237", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("direct", "en")
+            )
+        ),
     ],
     dataType=o6.UInt32,
     value=0,
@@ -854,9 +943,14 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=padim;i=1243",
     browseName="ns=padim;Setpoint",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1244", browseName="FalseState", dataType=o6.LocalizedText, value=o6.LocalizedText("FALSE"))),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1245", browseName="TrueState", dataType=o6.LocalizedText, value=o6.LocalizedText("TRUE"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=padim;i=1244", browseName="FalseState", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("FALSE"))
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=padim;i=1245", browseName="TrueState", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("TRUE"))
+        ),
     ],
     dataType=o6.Boolean,
     valueRank=-2,
@@ -869,8 +963,12 @@ padim_vartypes.TwoStateDiscreteControlVariableType(
     displayName="Discrete two-state control value",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1241", browseName="FalseState", dataType=o6.LocalizedText, value=o6.LocalizedText("FALSE"))),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1242", browseName="TrueState", dataType=o6.LocalizedText, value=o6.LocalizedText("TRUE"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=padim;i=1241", browseName="FalseState", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("FALSE"))
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=padim;i=1242", browseName="TrueState", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("TRUE"))
+        ),
         o6.hasComponent(o6.ns["ns=padim;i=1228"]),
         o6.hasComponent(o6.ns["ns=padim;i=1243"]),
     ],
@@ -883,20 +981,32 @@ o6.reference(padim_objtypes.TwoStateDiscreteControlSignalType, ns0.reftypes.HasC
 ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
     nodeId="ns=padim;i=1246",
     browseName="ns=padim;Setpoint",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1250", browseName="EnumDictionaryEntries", dataType=o6.NodeId, valueRank=2, arrayDimensions=[11, 1])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1251", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[11])),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1250", browseName="EnumDictionaryEntries", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=2, arrayDimensions=[11, 1]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1251", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[11]
+            )
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1252",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
                 value=[o6.NodeId("ns=irdi;s=0112/2///61987#ABN841#001")],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1253", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("false"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=padim;i=1253", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("false"))
+        ),
     ],
     dataType=o6.UInt32,
     value=7,
@@ -908,9 +1018,11 @@ padim_vartypes.MultiStateDiscreteControlVariableType(
     displayName="Discrete multi-state control value",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1247", browseName="EnumDictionaryEntries", dataType=o6.NodeId, valueRank=2)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1248", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1249", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("false"))),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1247", browseName="EnumDictionaryEntries", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=2)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1248", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=padim;i=1249", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("false"))
+        ),
         o6.hasComponent(o6.ns["ns=padim;i=1246"]),
     ],
     dataType=o6.UInt32,
@@ -928,6 +1040,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1254",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[3, 1],
@@ -938,6 +1051,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1255",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -952,13 +1066,18 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1256",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
                 value=[o6.NodeId("ns=irdi;s=0112/2///61987#ABL147#001")],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1257", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("direct", "en"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1257", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("direct", "en")
+            )
+        ),
     ],
     dataType=o6.UInt32,
     value=0,
@@ -972,8 +1091,12 @@ ns0.vartypes.TwoStateDiscreteType(
     displayName="Two-state fault value",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1258", browseName="FalseState", dataType=o6.LocalizedText, value=o6.LocalizedText("FALSE"))),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1259", browseName="TrueState", dataType=o6.LocalizedText, value=o6.LocalizedText("TRUE"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=padim;i=1258", browseName="FalseState", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("FALSE"))
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=padim;i=1259", browseName="TrueState", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("TRUE"))
+        ),
     ],
     dataType=o6.Boolean,
     value=False,
@@ -987,8 +1110,12 @@ ns0.vartypes.TwoStateDiscreteType(
     displayName="Two-state setpoint value",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1260", browseName="FalseState", dataType=o6.LocalizedText, value=o6.LocalizedText("FALSE"))),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1261", browseName="TrueState", dataType=o6.LocalizedText, value=o6.LocalizedText("TRUE"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=padim;i=1260", browseName="FalseState", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("FALSE"))
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=padim;i=1261", browseName="TrueState", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("TRUE"))
+        ),
     ],
     dataType=o6.Boolean,
     valueRank=-2,
@@ -1007,6 +1134,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1262",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[11, 1],
@@ -1029,6 +1157,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1263",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[11],
@@ -1047,8 +1176,8 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1264", browseName="ValueAsDictionaryEntries", dataType=o6.NodeId, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1265", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1264", browseName="ValueAsDictionaryEntries", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=1)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1265", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -1065,6 +1194,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1266",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[3, 1],
@@ -1075,6 +1205,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1267",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -1089,13 +1220,18 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1268",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
                 value=[o6.NodeId("ns=irdi;s=0112/2///61987#ABL147#001")],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1269", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("direct", "en"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1269", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("direct", "en")
+            )
+        ),
     ],
     dataType=o6.UInt32,
     value=0,
@@ -1113,6 +1249,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1270",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[11, 1],
@@ -1135,6 +1272,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1271",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[11],
@@ -1157,13 +1295,16 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1272",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
                 value=[o6.NodeId("ns=irdi;s=0112/2///61987#ABN841#001")],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1273", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("false"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=padim;i=1273", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("false"))
+        ),
     ],
     dataType=o6.UInt32,
     value=7,
@@ -1188,6 +1329,7 @@ o6.reference(padim_objtypes.IGeneralDeviceConditionSetType, ns0.reftypes.HasComp
 ns0.objtypes.BaseObjectType(
     nodeId="ns=padim;i=1285",
     browseName="ns=padim;DeviceComponentConditions",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(
             padim_objtypes.GeneralDeviceConditionSetType(nodeId="ns=padim;i=1287", browseName="ns=padim;<DeviceComponentIdentifier>", modellingRule="OptionalPlaceholder")
@@ -1200,7 +1342,7 @@ ns0.objtypes.BaseObjectType(
     modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=padim;i=1285"]),
-        o6.hasComponent(padim_objtypes.GeneralDeviceConditionSetType(nodeId="ns=padim;i=1286", browseName="ns=padim;GeneralDeviceConditions")),
+        o6.hasComponent(padim_objtypes.GeneralDeviceConditionSetType(nodeId="ns=padim;i=1286", browseName="ns=padim;GeneralDeviceConditions", modellingRule="Optional")),
     ],
 )
 o6.reference(padim_objtypes.PADIMType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1284"])
@@ -1209,6 +1351,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1309",
     browseName="ns=padim;CalibrationTimestamp",
     displayName="Timestamp of calibration",
+    modellingRule="Optional",
     dataType=o6.DateTime,
     value=o6.DateTime("1601-01-01T00:00:00Z"),
     accessLevel=3,
@@ -1218,11 +1361,13 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
     nodeId="ns=padim;i=1310",
     browseName="ns=padim;TypeOfCalibration",
     displayName="Type of calibration",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1311",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[4, 1],
@@ -1238,6 +1383,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1312",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[4],
@@ -1253,13 +1399,18 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1313",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
                 value=[o6.NodeId("ns=irdi;s=0112/2///61987#ABP732#001")],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1314", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("adjustment", "en"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1314", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("adjustment", "en")
+            )
+        ),
     ],
     dataType=o6.UInt32,
     value=0,
@@ -1272,7 +1423,7 @@ ns0.objtypes.BaseObjectType(
     modellingRule="OptionalPlaceholder",
     references=[
         o6.hasProperty(o6.ns["ns=padim;i=1309"]),
-        o6.hasComponent(padim_objtypes.CalibrationPointSetType(nodeId="ns=padim;i=1289", browseName="ns=padim;CalibrationPointSet")),
+        o6.hasComponent(padim_objtypes.CalibrationPointSetType(nodeId="ns=padim;i=1289", browseName="ns=padim;CalibrationPointSet", modellingRule="Optional")),
         o6.hasComponent(o6.ns["ns=padim;i=1310"]),
     ],
 )
@@ -1283,7 +1434,10 @@ padim_vartypes.PatMeasurementVariableType(
     browseName="ns=padim;AnalogSignal",
     displayName="Value",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(o6.ns["ns=padim;i=1225"]), o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1226", browseName="EURange", dataType=ns0.datatypes.Range))],
+    references=[
+        o6.hasProperty(o6.ns["ns=padim;i=1225"]),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1226", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+    ],
     dataType=o6.Float,
     accessLevel=3,
 )
@@ -1293,6 +1447,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1333",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -1303,6 +1458,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1329",
     browseName="ns=padim;BlockTemperature",
     displayName="Block temperature",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1333"])],
     dataType=o6.Float,
     value=0.0,
@@ -1312,6 +1468,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1334",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -1322,6 +1479,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1330",
     browseName="ns=padim;CatalystTemperature",
     displayName="Catalyst temperature",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1334"])],
     dataType=o6.Float,
     value=0.0,
@@ -1331,6 +1489,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1336",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749552, displayName=o6.LocalizedText("mbar"), description=o6.LocalizedText("millibar")
@@ -1341,6 +1500,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1331",
     browseName="ns=padim;CombustionAirPressure",
     displayName="Air pressure",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1336"])],
     dataType=o6.Float,
     value=0.0,
@@ -1350,6 +1510,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1337",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749552, displayName=o6.LocalizedText("mbar"), description=o6.LocalizedText("millibar")
@@ -1360,6 +1521,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1332",
     browseName="ns=padim;FuelGasPressure",
     displayName="Fuel gas pressure",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1337"])],
     dataType=o6.Float,
     value=0.0,
@@ -1382,6 +1544,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1363",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749652, displayName=o6.LocalizedText("ml"), description=o6.LocalizedText("millilitre")
@@ -1392,6 +1555,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1340",
     browseName="ns=padim;ActualInjectedVolume",
     displayName="Injected volume",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1363"])],
     dataType=o6.Float,
     value=0.0,
@@ -1401,6 +1565,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1367",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749552, displayName=o6.LocalizedText("mbar"), description=o6.LocalizedText("millibar")
@@ -1411,6 +1576,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1341",
     browseName="ns=padim;CarrierGasGaugePressure",
     displayName="Carrier gas pressure",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1367"])],
     dataType=o6.Float,
     value=0.0,
@@ -1420,6 +1586,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1371",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705747637, displayName=o6.LocalizedText("l/h"), description=o6.LocalizedText("litre per hour")
@@ -1430,6 +1597,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1342",
     browseName="ns=padim;CarrierGasVolumeFlow",
     displayName="Carrier gas volume flow",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1371"])],
     dataType=o6.Float,
     value=0.0,
@@ -1439,6 +1607,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1372",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -1449,6 +1618,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1350",
     browseName="ns=padim;CoolerTemperature",
     displayName="Cooler temperature",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1372"])],
     dataType=o6.Float,
     value=0.0,
@@ -1458,6 +1628,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1373",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -1468,6 +1639,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1358",
     browseName="ns=padim;ReactorTemperature",
     displayName="TOC reactor temperature",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1373"])],
     dataType=o6.Float,
     value=0.0,
@@ -1477,6 +1649,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1375",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749652, displayName=o6.LocalizedText("ml"), description=o6.LocalizedText("millilitre")
@@ -1487,6 +1660,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1359",
     browseName="ns=padim;ReferenceInjectionVolume",
     displayName="Injection volume",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1375"])],
     dataType=o6.Float,
     value=0.0,
@@ -1496,6 +1670,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1379",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720",
@@ -1509,6 +1684,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1362",
     browseName="ns=padim;SampleWaterVolumeFlow",
     displayName="Sample water volume flow",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1379"])],
     dataType=o6.Float,
     value=0.0,
@@ -1531,13 +1707,19 @@ ns0.objtypes.BaseObjectType(
 o6.reference(padim_objtypes.TocAnalyserType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1299"])
 o6.reference(o6.ns["ns=padim;i=1299"], "i=17603", padim_objtypes.ITocDeviceConditionSetType)
 ns0.vartypes.PropertyType(
-    nodeId="ns=padim;i=1380", browseName="ns=padim;SourceResidualLife", displayName="Residual operational life of radiation source", dataType=o6.Float, value=1.0
+    nodeId="ns=padim;i=1380",
+    browseName="ns=padim;SourceResidualLife",
+    displayName="Residual operational life of radiation source",
+    modellingRule="Optional",
+    dataType=o6.Float,
+    value=1.0,
 )
 o6.reference(o6.ns["ns=padim;i=1380"], "i=17597", "ns=irdi;s=0112/2///61987#ABP552#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1381",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749552, displayName=o6.LocalizedText("mbar"), description=o6.LocalizedText("millibar")
@@ -1548,6 +1730,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1315",
     browseName="ns=padim;AbsoluteSampleGasPressure",
     displayName="Sample gas pressure",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1381"])],
     dataType=o6.Float,
     value=0.0,
@@ -1557,6 +1740,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1382",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Optional",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741328, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -1567,6 +1751,7 @@ ns0.vartypes.BaseAnalogType(
     nodeId="ns=padim;i=1325",
     browseName="ns=padim;ChopperFrequencyDeviation",
     displayName="Chopper frequency (deviation)",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1382"])],
     dataType=o6.Float,
     value=0.0,
@@ -1576,6 +1761,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1383",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -1586,6 +1772,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1326",
     browseName="ns=padim;SampleCellTemperature",
     displayName="Sample cell temperature",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1383"])],
     dataType=o6.Float,
     value=0.0,
@@ -1605,13 +1792,19 @@ ns0.objtypes.BaseObjectType(
 o6.reference(padim_objtypes.NonDispersiveInfraredSignalType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1293"])
 o6.reference(o6.ns["ns=padim;i=1293"], "i=17603", padim_objtypes.INonDispersiveInfraredSignalConditionSetType)
 ns0.vartypes.PropertyType(
-    nodeId="ns=padim;i=1407", browseName="ns=padim;SourceResidualLife", displayName="Residual operational life of radiation source", dataType=o6.Float, value=1.0
+    nodeId="ns=padim;i=1407",
+    browseName="ns=padim;SourceResidualLife",
+    displayName="Residual operational life of radiation source",
+    modellingRule="Optional",
+    dataType=o6.Float,
+    value=1.0,
 )
 o6.reference(o6.ns["ns=padim;i=1407"], "i=17597", "ns=irdi;s=0112/2///61987#ABP552#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1408",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749552, displayName=o6.LocalizedText("mbar"), description=o6.LocalizedText("millibar")
@@ -1622,6 +1815,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1388",
     browseName="ns=padim;AbsoluteSampleGasPressure",
     displayName="Sample gas pressure",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1408"])],
     dataType=o6.Float,
     value=0.0,
@@ -1631,6 +1825,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1409",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Optional",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741328, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -1641,6 +1836,7 @@ ns0.vartypes.BaseAnalogType(
     nodeId="ns=padim;i=1390",
     browseName="ns=padim;ChopperFrequencyDeviation",
     displayName="Chopper frequency (deviation)",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1409"])],
     dataType=o6.Float,
     value=0.0,
@@ -1650,6 +1846,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1410",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705848917, displayName=o6.LocalizedText("ppm"), description=o6.LocalizedText("parts per million")
@@ -1660,6 +1857,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1393",
     browseName="ns=padim;DetectorZeroSignal",
     displayName="Detector zero signal",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1410"])],
     dataType=o6.Float,
     value=0.0,
@@ -1669,6 +1867,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1411",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741328, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -1679,6 +1878,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1399",
     browseName="ns=padim;RelativeReagentLevel",
     displayName="Reagent level",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1411"])],
     dataType=o6.Float,
     valueRank=-2,
@@ -1689,6 +1889,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1412",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -1699,6 +1900,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1405",
     browseName="ns=padim;SampleCellTemperature",
     displayName="Sample cell temperature",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1412"])],
     dataType=o6.Float,
     value=0.0,
@@ -1708,6 +1910,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1413",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705747637, displayName=o6.LocalizedText("l/h"), description=o6.LocalizedText("litre per hour")
@@ -1718,6 +1921,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1406",
     browseName="ns=padim;SampleGasVolumeFlow",
     displayName="Sample gas volume flow",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1413"])],
     dataType=o6.Float,
     value=0.0,
@@ -1743,6 +1947,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1416",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -1753,6 +1958,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1414",
     browseName="ns=padim;SampleTemperature",
     displayName="Sample temperature",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1416"])],
     dataType=o6.Float,
     value=0.0,
@@ -1762,6 +1968,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1417",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -1772,6 +1979,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1415",
     browseName="ns=padim;SensingElementTemperature",
     displayName="Temperature sensing element",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1417"])],
     dataType=o6.Float,
     value=0.0,
@@ -1789,6 +1997,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1419",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -1799,6 +2008,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1418",
     browseName="ns=padim;SampleTemperature",
     displayName="Sample temperature",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1419"])],
     dataType=o6.Float,
     value=0.0,
@@ -1807,9 +2017,13 @@ o6.reference(o6.ns["ns=padim;i=1418"], "i=17597", "ns=irdi;s=0112/2///61987#ABP5
 ns0.objtypes.BaseObjectType(nodeId="ns=padim;i=1302", browseName="ns=padim;SignalConditionSet", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=padim;i=1418"])])
 o6.reference(padim_objtypes.ThermalConductivitySignalType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1302"])
 o6.reference(o6.ns["ns=padim;i=1302"], "i=17603", padim_objtypes.IThermalConductivitySignalConditionSetType)
-ns0.vartypes.DataItemType(nodeId="ns=padim;i=1426", browseName="ns=padim;SignalFitQuality", displayName="Signal fit quality", dataType=o6.Float, value=0.0, accessLevel=3)
+ns0.vartypes.DataItemType(
+    nodeId="ns=padim;i=1426", browseName="ns=padim;SignalFitQuality", displayName="Signal fit quality", modellingRule="Optional", dataType=o6.Float, value=0.0, accessLevel=3
+)
 o6.reference(o6.ns["ns=padim;i=1426"], "i=17597", "ns=irdi;s=0112/2///61987#ABP580#001")
-ns0.vartypes.DataItemType(nodeId="ns=padim;i=1428", browseName="ns=padim;SignalNoiseRatio", displayName="Signal/noise ratio", dataType=o6.Float, value=0.0)
+ns0.vartypes.DataItemType(
+    nodeId="ns=padim;i=1428", browseName="ns=padim;SignalNoiseRatio", displayName="Signal/noise ratio", modellingRule="Optional", dataType=o6.Float, value=0.0
+)
 o6.reference(o6.ns["ns=padim;i=1428"], "i=17597", "ns=irdi;s=0112/2///61987#ABP581#001")
 ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
     nodeId="ns=padim;i=1356",
@@ -1821,6 +2035,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1397",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[4, 1],
@@ -1836,6 +2051,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1404",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[4],
@@ -1851,25 +2067,33 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1421",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
                 value=[o6.NodeId("ns=irdi;s=0112/2///61987#ABP718#001")],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1429", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("glass electrode", "en"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1429", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("glass electrode", "en")
+            )
+        ),
     ],
     dataType=o6.UInt32,
     value=0,
 )
 o6.reference(padim_objtypes.IPhSignalConditionSetType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1356"])
 o6.reference(o6.ns["ns=padim;i=1356"], "i=17597", "ns=irdi;s=0112/2///61987#ABP640#002")
-ns0.vartypes.DataItemType(nodeId="ns=padim;i=1430", browseName="ns=padim;TransmissionRatio", displayName="Transmission ratio", dataType=o6.Float, value=0.0)
+ns0.vartypes.DataItemType(
+    nodeId="ns=padim;i=1430", browseName="ns=padim;TransmissionRatio", displayName="Transmission ratio", modellingRule="Optional", dataType=o6.Float, value=0.0
+)
 o6.reference(o6.ns["ns=padim;i=1430"], "i=17597", "ns=irdi;s=0112/2///61987#ABP582#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1431",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749552, displayName=o6.LocalizedText("mbar"), description=o6.LocalizedText("millibar")
@@ -1880,6 +2104,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1420",
     browseName="ns=padim;AbsoluteSampleGasPressure",
     displayName="Sample gas pressure",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1431"])],
     dataType=o6.Float,
     value=0.0,
@@ -1889,6 +2114,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1432",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -1899,6 +2125,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1422",
     browseName="ns=padim;LaserTemperature",
     displayName="Laser temperature",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1432"])],
     dataType=o6.Float,
     value=0.0,
@@ -1908,6 +2135,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1433",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -1918,6 +2146,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1423",
     browseName="ns=padim;SampleTemperature",
     displayName="Sample temperature",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1433"])],
     dataType=o6.Float,
     value=0.0,
@@ -1942,6 +2171,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1437",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705747637, displayName=o6.LocalizedText("l/h"), description=o6.LocalizedText("litre per hour")
@@ -1952,6 +2182,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1435",
     browseName="ns=padim;SampleGasVolumeFlow",
     displayName="Sample gas volume flow",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1437"])],
     dataType=o6.Float,
     value=0.0,
@@ -1961,6 +2192,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1438",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -1971,17 +2203,21 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1436",
     browseName="ns=padim;SensingElementTemperature",
     displayName="Temperature sensing element",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1438"])],
     dataType=o6.Float,
     value=0.0,
 )
 o6.reference(o6.ns["ns=padim;i=1436"], "i=17597", "ns=irdi;s=0112/2///61987#ABP565#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1442", browseName="ns=padim;SensorT90", displayName="Settling time t90 at calibration", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(
+    nodeId="ns=padim;i=1442", browseName="ns=padim;SensorT90", displayName="Settling time t90 at calibration", modellingRule="Optional", dataType=o6.Float, value=0.0
+)
 o6.reference(o6.ns["ns=padim;i=1442"], "i=17597", "ns=irdi;s=0112/2///61987#ABP569#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1443",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705746519, displayName=o6.LocalizedText("hPa"), description=o6.LocalizedText("hectopascal")
@@ -1992,17 +2228,19 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1439",
     browseName="ns=padim;AbsoluteAirPressure",
     displayName="Absolute air pressure",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1443"])],
     dataType=o6.Float,
     value=0.0,
 )
 o6.reference(o6.ns["ns=padim;i=1439"], "i=17597", "ns=irdi;s=0112/2///61987#ABP574#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1444", browseName="EngineeringUnits", displayName="Unit", dataType=ns0.datatypes.EUInformation)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1444", browseName="EngineeringUnits", displayName="Unit", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
 o6.reference(o6.ns["ns=padim;i=1444"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1440",
     browseName="ns=padim;AmperometricSensorSlope",
     displayName="Amperometric sensing element slope",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1444"])],
     dataType=o6.Float,
 )
@@ -2011,6 +2249,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1445",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705750616, displayName=o6.LocalizedText("pA"), description=o6.LocalizedText("picoampere")
@@ -2021,6 +2260,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1441",
     browseName="ns=padim;AmperometricSensorZeroPoint",
     displayName="Amperometric sensing element zero point",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1445"])],
     dataType=o6.Float,
     value=0.0,
@@ -2039,14 +2279,17 @@ ns0.objtypes.BaseObjectType(
 )
 o6.reference(padim_objtypes.AmperometricSignalType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1291"])
 o6.reference(o6.ns["ns=padim;i=1291"], "i=17603", padim_objtypes.IAmperometricCalibrationType)
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1446", browseName="ns=padim;SensorCleaningsCounter", displayName="CIP counter", dataType=o6.UInt32, value=0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1446", browseName="ns=padim;SensorCleaningsCounter", displayName="CIP counter", modellingRule="Optional", dataType=o6.UInt32, value=0)
 o6.reference(o6.ns["ns=padim;i=1446"], "i=17597", "ns=irdi;s=0112/2///61987#ABP546#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1448", browseName="ns=padim;SensorSterilisationsCounter", displayName="SIP counter", dataType=o6.UInt32, value=0)
+ns0.vartypes.PropertyType(
+    nodeId="ns=padim;i=1448", browseName="ns=padim;SensorSterilisationsCounter", displayName="SIP counter", modellingRule="Optional", dataType=o6.UInt32, value=0
+)
 o6.reference(o6.ns["ns=padim;i=1448"], "i=17597", "ns=irdi;s=0112/2///61987#ABP547#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1450",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705745431, displayName=o6.LocalizedText("d"), description=o6.LocalizedText("day")
@@ -2057,6 +2300,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1447",
     browseName="ns=padim;SensorNextCalibration",
     displayName="Days until next calibration",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1450"])],
     dataType=o6.UInt32,
     value=0,
@@ -2066,6 +2310,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1451",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -2076,6 +2321,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1449",
     browseName="ns=padim;SensingElementTemperature",
     displayName="Temperature sensing element",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1451"])],
     dataType=o6.Float,
     value=0.0,
@@ -2094,12 +2340,15 @@ ns0.objtypes.BaseObjectType(
 )
 o6.reference(padim_objtypes.AmperometricSignalType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1296"])
 o6.reference(o6.ns["ns=padim;i=1296"], "i=17603", padim_objtypes.IAmperometricSignalConditionSetType)
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1455", browseName="ns=padim;SensorT90", displayName="Settling time t90 at calibration", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(
+    nodeId="ns=padim;i=1455", browseName="ns=padim;SensorT90", displayName="Settling time t90 at calibration", modellingRule="Optional", dataType=o6.Float, value=0.0
+)
 o6.reference(o6.ns["ns=padim;i=1455"], "i=17597", "ns=irdi;s=0112/2///61987#ABP569#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1456",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705746519, displayName=o6.LocalizedText("hPa"), description=o6.LocalizedText("hectopascal")
@@ -2110,17 +2359,19 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1452",
     browseName="ns=padim;AbsoluteAirPressure",
     displayName="Absolute air pressure",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1456"])],
     dataType=o6.Float,
     value=0.0,
 )
 o6.reference(o6.ns["ns=padim;i=1452"], "i=17597", "ns=irdi;s=0112/2///61987#ABP574#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1457", browseName="EngineeringUnits", displayName="Unit", dataType=ns0.datatypes.EUInformation)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1457", browseName="EngineeringUnits", displayName="Unit", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
 o6.reference(o6.ns["ns=padim;i=1457"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1453",
     browseName="ns=padim;OpticalFluorescenseQuenchingSensorSlope",
     displayName="Optical fluorescence quenching sensing element slope",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1457"])],
     dataType=o6.Float,
 )
@@ -2129,6 +2380,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1458",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741621, displayName=o6.LocalizedText("µs"), description=o6.LocalizedText("microsecond")
@@ -2139,6 +2391,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1454",
     browseName="ns=padim;OpticalFluorescenseQuenchingSensorZeroPoint",
     displayName="Optical fluorescence quenching sensing element zero point",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1458"])],
     dataType=o6.Float,
     value=0.0,
@@ -2157,14 +2410,17 @@ ns0.objtypes.BaseObjectType(
 )
 o6.reference(padim_objtypes.OpticalFluorescenseQuenchingSignalType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1300"])
 o6.reference(o6.ns["ns=padim;i=1300"], "i=17603", padim_objtypes.IOpticalFluorescenseQuenchingCalibrationType)
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1459", browseName="ns=padim;SensorCleaningsCounter", displayName="CIP counter", dataType=o6.UInt32, value=0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1459", browseName="ns=padim;SensorCleaningsCounter", displayName="CIP counter", modellingRule="Optional", dataType=o6.UInt32, value=0)
 o6.reference(o6.ns["ns=padim;i=1459"], "i=17597", "ns=irdi;s=0112/2///61987#ABP546#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1461", browseName="ns=padim;SensorSterilisationsCounter", displayName="SIP counter", dataType=o6.UInt32, value=0)
+ns0.vartypes.PropertyType(
+    nodeId="ns=padim;i=1461", browseName="ns=padim;SensorSterilisationsCounter", displayName="SIP counter", modellingRule="Optional", dataType=o6.UInt32, value=0
+)
 o6.reference(o6.ns["ns=padim;i=1461"], "i=17597", "ns=irdi;s=0112/2///61987#ABP547#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1463",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705745431, displayName=o6.LocalizedText("d"), description=o6.LocalizedText("day")
@@ -2175,6 +2431,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1460",
     browseName="ns=padim;SensorNextCalibration",
     displayName="Days until next calibration",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1463"])],
     dataType=o6.UInt32,
     value=0,
@@ -2184,6 +2441,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1464",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -2194,6 +2452,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1462",
     browseName="ns=padim;SensingElementTemperature",
     displayName="Temperature sensing element",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1464"])],
     dataType=o6.Float,
     value=0.0,
@@ -2212,12 +2471,15 @@ ns0.objtypes.BaseObjectType(
 )
 o6.reference(padim_objtypes.OpticalFluorescenseQuenchingSignalType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1301"])
 o6.reference(o6.ns["ns=padim;i=1301"], "i=17603", padim_objtypes.IOpticalFluorescenseQuenchingSignalConditionSetType)
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1468", browseName="ns=padim;SensorT90", displayName="Settling time t90 at calibration", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(
+    nodeId="ns=padim;i=1468", browseName="ns=padim;SensorT90", displayName="Settling time t90 at calibration", modellingRule="Optional", dataType=o6.Float, value=0.0
+)
 o6.reference(o6.ns["ns=padim;i=1468"], "i=17597", "ns=irdi;s=0112/2///61987#ABP569#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1469",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749524, displayName=o6.LocalizedText("mV"), description=o6.LocalizedText("millivolt")
@@ -2228,6 +2490,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1465",
     browseName="ns=padim;SensorAsymmetryPotential",
     displayName="pH sensing element asymmetry potential",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1469"])],
     dataType=o6.Float,
     value=0.0,
@@ -2237,6 +2500,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1470",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749524, displayName=o6.LocalizedText("mV"), description=o6.LocalizedText("millivolt")
@@ -2247,6 +2511,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1466",
     browseName="ns=padim;SensorSlope",
     displayName="pH sensing element slope",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1470"])],
     dataType=o6.Float,
     value=0.0,
@@ -2260,7 +2525,7 @@ ns0.objtypes.BaseObjectType(
 )
 o6.reference(padim_objtypes.PhSignalType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1294"])
 o6.reference(o6.ns["ns=padim;i=1294"], "i=17603", padim_objtypes.IPhCalibrationType)
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1473", browseName="ns=padim;SensorCleaningsCounter", displayName="CIP counter", dataType=o6.UInt32, value=0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1473", browseName="ns=padim;SensorCleaningsCounter", displayName="CIP counter", modellingRule="Optional", dataType=o6.UInt32, value=0)
 o6.reference(o6.ns["ns=padim;i=1473"], "i=17597", "ns=irdi;s=0112/2///61987#ABP546#001")
 ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
     nodeId="ns=padim;i=1366",
@@ -2272,6 +2537,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1467",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[4, 1],
@@ -2287,6 +2553,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1476",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[4],
@@ -2302,30 +2569,39 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1477",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
                 value=[o6.NodeId("ns=irdi;s=0112/2///61987#ABP721#001")],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1478", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("inductive", "en"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1478", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("inductive", "en")
+            )
+        ),
     ],
     dataType=o6.UInt32,
     value=0,
 )
 o6.reference(padim_objtypes.IConductivitySignalConditionSetType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1366"])
 o6.reference(o6.ns["ns=padim;i=1366"], "i=17597", "ns=irdi;s=0112/2///61987#ABP641#002")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1479", browseName="ns=padim;SensorSterilisationsCounter", displayName="SIP counter", dataType=o6.UInt32, value=0)
+ns0.vartypes.PropertyType(
+    nodeId="ns=padim;i=1479", browseName="ns=padim;SensorSterilisationsCounter", displayName="SIP counter", modellingRule="Optional", dataType=o6.UInt32, value=0
+)
 o6.reference(o6.ns["ns=padim;i=1479"], "i=17597", "ns=irdi;s=0112/2///61987#ABP547#001")
 ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
     nodeId="ns=padim;i=1471",
     browseName="ns=padim;PhMeasuringMethod",
     displayName="pH measuring method",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1482",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[4, 1],
@@ -2341,6 +2617,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1484",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[4],
@@ -2356,13 +2633,18 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1485",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
                 value=[o6.NodeId("ns=irdi;s=0112/2///61987#ABP718#001")],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1486", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("glass electrode", "en"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1486", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("glass electrode", "en")
+            )
+        ),
     ],
     dataType=o6.UInt32,
     value=0,
@@ -2372,6 +2654,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1487",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741367, displayName=o6.LocalizedText("Ω"), description=o6.LocalizedText("ohm")
@@ -2382,6 +2665,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1472",
     browseName="ns=padim;SensingElementImpedance",
     displayName="pH sensing element impedance",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1487"])],
     dataType=o6.Float,
     value=0.0,
@@ -2391,6 +2675,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1489",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705745431, displayName=o6.LocalizedText("d"), description=o6.LocalizedText("day")
@@ -2401,6 +2686,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1474",
     browseName="ns=padim;SensorNextCalibration",
     displayName="Days until next calibration",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1489"])],
     dataType=o6.UInt32,
     value=0,
@@ -2410,6 +2696,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1490",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741367, displayName=o6.LocalizedText("Ω"), description=o6.LocalizedText("ohm")
@@ -2420,6 +2707,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1475",
     browseName="ns=padim;SensorReferenceImpedance",
     displayName="pH reference system impedance",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1490"])],
     dataType=o6.Float,
     value=0.0,
@@ -2429,6 +2717,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1491",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -2439,6 +2728,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1480",
     browseName="ns=padim;SensingElementTemperature",
     displayName="Temperature sensing element",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1491"])],
     dataType=o6.Float,
     value=0.0,
@@ -2470,6 +2760,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1481",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[9, 1],
@@ -2490,6 +2781,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1483",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[9],
@@ -2510,6 +2802,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1488",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
@@ -2517,7 +2810,13 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=padim;i=1492", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("no temperature compensation", "en"))
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1492",
+                browseName="ValueAsText",
+                modellingRule="Mandatory",
+                dataType=o6.LocalizedText,
+                value=o6.LocalizedText("no temperature compensation", "en"),
+            )
         ),
     ],
     dataType=o6.UInt32,
@@ -2529,6 +2828,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1494",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720",
@@ -2542,6 +2842,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1493",
     browseName="ns=padim;ConductivityCellConstant",
     displayName="Cell constant",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1494"])],
     dataType=o6.Float,
     value=0.0,
@@ -2552,19 +2853,23 @@ ns0.objtypes.BaseObjectType(
 )
 o6.reference(padim_objtypes.ConductivitySignalType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1295"])
 o6.reference(o6.ns["ns=padim;i=1295"], "i=17603", padim_objtypes.IConductivityCalibrationType)
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1496", browseName="ns=padim;SensorCleaningsCounter", displayName="CIP counter", dataType=o6.UInt32, value=0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1496", browseName="ns=padim;SensorCleaningsCounter", displayName="CIP counter", modellingRule="Optional", dataType=o6.UInt32, value=0)
 o6.reference(o6.ns["ns=padim;i=1496"], "i=17597", "ns=irdi;s=0112/2///61987#ABP546#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1497", browseName="ns=padim;SensorSterilisationsCounter", displayName="SIP counter", dataType=o6.UInt32, value=0)
+ns0.vartypes.PropertyType(
+    nodeId="ns=padim;i=1497", browseName="ns=padim;SensorSterilisationsCounter", displayName="SIP counter", modellingRule="Optional", dataType=o6.UInt32, value=0
+)
 o6.reference(o6.ns["ns=padim;i=1497"], "i=17597", "ns=irdi;s=0112/2///61987#ABP547#001")
 ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
     nodeId="ns=padim;i=1495",
     browseName="ns=padim;ConductivityMeasuringMethod",
     displayName="Conductivity measuring method",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1500",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[4, 1],
@@ -2580,6 +2885,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1501",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[4],
@@ -2595,13 +2901,18 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1502",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
                 value=[o6.NodeId("ns=irdi;s=0112/2///61987#ABP721#001")],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1503", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("inductive", "en"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1503", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("inductive", "en")
+            )
+        ),
     ],
     dataType=o6.UInt32,
     value=0,
@@ -2611,6 +2922,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1504",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -2621,6 +2933,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1498",
     browseName="ns=padim;SensingElementTemperature",
     displayName="Temperature sensing element",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=1504"])],
     dataType=o6.Float,
     value=0.0,
@@ -2630,11 +2943,13 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
     nodeId="ns=padim;i=1499",
     browseName="ns=padim;TemperatureCompensationStyle",
     displayName="Temperature compensation",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1506",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[9, 1],
@@ -2655,6 +2970,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1508",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[9],
@@ -2675,6 +2991,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1509",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
@@ -2682,7 +2999,13 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=padim;i=1514", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("no temperature compensation", "en"))
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1514",
+                browseName="ValueAsText",
+                modellingRule="Mandatory",
+                dataType=o6.LocalizedText,
+                value=o6.LocalizedText("no temperature compensation", "en"),
+            )
         ),
     ],
     dataType=o6.UInt32,
@@ -2722,6 +3045,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1524",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749552, displayName=o6.LocalizedText("mbar"), description=o6.LocalizedText("millibar")
@@ -2743,6 +3067,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1525",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -2764,6 +3089,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1526",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Optional",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741328, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -2785,6 +3111,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1527",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Optional",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741328, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -2806,6 +3133,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1530",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -2827,6 +3155,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1531",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705848917, displayName=o6.LocalizedText("ppm"), description=o6.LocalizedText("parts per million")
@@ -2848,6 +3177,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1532",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741328, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -2870,6 +3200,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1533",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749552, displayName=o6.LocalizedText("mbar"), description=o6.LocalizedText("millibar")
@@ -2891,6 +3222,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1534",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705747637, displayName=o6.LocalizedText("l/h"), description=o6.LocalizedText("litre per hour")
@@ -2912,6 +3244,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1535",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749524, displayName=o6.LocalizedText("mV"), description=o6.LocalizedText("millivolt")
@@ -2933,6 +3266,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1536",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749524, displayName=o6.LocalizedText("mV"), description=o6.LocalizedText("millivolt")
@@ -2954,6 +3288,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1537",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720",
@@ -2974,7 +3309,7 @@ ns0.vartypes.AnalogUnitType(
 )
 o6.reference(padim_objtypes.IConductivityCalibrationType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1505"])
 o6.reference(o6.ns["ns=padim;i=1505"], "i=17597", "ns=irdi;s=0112/2///61987#ABF161#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1538", browseName="EngineeringUnits", displayName="Unit", dataType=ns0.datatypes.EUInformation)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1538", browseName="EngineeringUnits", displayName="Unit", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
 o6.reference(o6.ns["ns=padim;i=1538"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1319",
@@ -2990,6 +3325,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1539",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705750616, displayName=o6.LocalizedText("pA"), description=o6.LocalizedText("picoampere")
@@ -3011,6 +3347,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1540",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705746519, displayName=o6.LocalizedText("hPa"), description=o6.LocalizedText("hectopascal")
@@ -3032,6 +3369,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1541",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705746519, displayName=o6.LocalizedText("hPa"), description=o6.LocalizedText("hectopascal")
@@ -3049,7 +3387,7 @@ ns0.vartypes.AnalogUnitType(
 )
 o6.reference(padim_objtypes.IOpticalFluorescenseQuenchingCalibrationType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=1516"])
 o6.reference(o6.ns["ns=padim;i=1516"], "i=17597", "ns=irdi;s=0112/2///61987#ABP574#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1542", browseName="EngineeringUnits", displayName="Unit", dataType=ns0.datatypes.EUInformation)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1542", browseName="EngineeringUnits", displayName="Unit", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
 o6.reference(o6.ns["ns=padim;i=1542"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1517",
@@ -3065,6 +3403,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1543",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741621, displayName=o6.LocalizedText("µs"), description=o6.LocalizedText("microsecond")
@@ -3086,6 +3425,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1544",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -3107,6 +3447,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1545",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -3128,6 +3469,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1546",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -3149,6 +3491,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1547",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749552, displayName=o6.LocalizedText("mbar"), description=o6.LocalizedText("millibar")
@@ -3170,6 +3513,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1548",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -3191,6 +3535,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1549",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -3212,6 +3557,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1550",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705747637, displayName=o6.LocalizedText("l/h"), description=o6.LocalizedText("litre per hour")
@@ -3233,6 +3579,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1551",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -3254,6 +3601,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1552",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -3275,6 +3623,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1553",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705745431, displayName=o6.LocalizedText("d"), description=o6.LocalizedText("day")
@@ -3296,6 +3645,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1554",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749652, displayName=o6.LocalizedText("ml"), description=o6.LocalizedText("millilitre")
@@ -3317,6 +3667,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1555",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741367, displayName=o6.LocalizedText("Ω"), description=o6.LocalizedText("ohm")
@@ -3338,6 +3689,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1556",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741367, displayName=o6.LocalizedText("Ω"), description=o6.LocalizedText("ohm")
@@ -3359,6 +3711,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1557",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -3380,6 +3733,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1558",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -3401,6 +3755,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1559",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705745431, displayName=o6.LocalizedText("d"), description=o6.LocalizedText("day")
@@ -3422,6 +3777,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1560",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -3443,6 +3799,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1561",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705745431, displayName=o6.LocalizedText("d"), description=o6.LocalizedText("day")
@@ -3464,6 +3821,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1564",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -3486,6 +3844,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1565",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749552, displayName=o6.LocalizedText("mbar"), description=o6.LocalizedText("millibar")
@@ -3507,6 +3866,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1566",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705747637, displayName=o6.LocalizedText("l/h"), description=o6.LocalizedText("litre per hour")
@@ -3528,6 +3888,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1567",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -3549,6 +3910,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1568",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -3570,6 +3932,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1569",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749652, displayName=o6.LocalizedText("ml"), description=o6.LocalizedText("millilitre")
@@ -3591,6 +3954,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1570",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720",
@@ -3615,6 +3979,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1571",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -3636,6 +4001,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1572",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -3657,6 +4023,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1573",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749552, displayName=o6.LocalizedText("mbar"), description=o6.LocalizedText("millibar")
@@ -3678,6 +4045,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1574",
     browseName="EngineeringUnits",
     displayName="Unit",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749552, displayName=o6.LocalizedText("mbar"), description=o6.LocalizedText("millibar")
@@ -3705,6 +4073,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1575",
                 browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=2,
                 arrayDimensions=[4, 1],
@@ -3720,6 +4089,7 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1576",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[4],
@@ -3735,13 +4105,18 @@ ns0.vartypes.MultiStateDictionaryEntryDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=padim;i=1577",
                 browseName="ValueAsDictionaryEntries",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[1],
                 value=[o6.NodeId("ns=irdi;s=0112/2///61987#ABP732#001")],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=padim;i=1578", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("adjustment", "en"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=padim;i=1578", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("adjustment", "en")
+            )
+        ),
     ],
     dataType=o6.UInt32,
     value=0,
@@ -3752,6 +4127,7 @@ o6.reference(o6.ns["ns=padim;i=1308"], "i=17597", "ns=irdi;s=0112/2///61987#ABH6
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6002",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705848917, displayName=o6.LocalizedText("ppm"), description=o6.LocalizedText("parts per million")
@@ -3772,6 +4148,7 @@ o6.reference(o6.ns["ns=padim;i=6001"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ0
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6004",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705848917, displayName=o6.LocalizedText("ppm"), description=o6.LocalizedText("parts per million")
@@ -3792,6 +4169,7 @@ o6.reference(o6.ns["ns=padim;i=6003"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ0
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6007",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705848917, displayName=o6.LocalizedText("ppm"), description=o6.LocalizedText("parts per million")
@@ -3812,6 +4190,7 @@ o6.reference(o6.ns["ns=padim;i=6006"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ0
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6009",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705848917, displayName=o6.LocalizedText("ppm"), description=o6.LocalizedText("parts per million")
@@ -3832,6 +4211,7 @@ o6.reference(o6.ns["ns=padim;i=6008"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ0
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6012",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705848917, displayName=o6.LocalizedText("ppm"), description=o6.LocalizedText("parts per million")
@@ -3852,6 +4232,7 @@ o6.reference(o6.ns["ns=padim;i=6011"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ0
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6014",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705848917, displayName=o6.LocalizedText("ppm"), description=o6.LocalizedText("parts per million")
@@ -3872,6 +4253,7 @@ o6.reference(o6.ns["ns=padim;i=6013"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ0
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6018",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741328, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -3891,6 +4273,7 @@ o6.reference(o6.ns["ns=padim;i=6017"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ0
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6020",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749524, displayName=o6.LocalizedText("mV"), description=o6.LocalizedText("millivolt")
@@ -3902,15 +4285,16 @@ ns0.vartypes.AnalogUnitType(
 )
 o6.reference(padim_objtypes.IGasChromatographDeviceConditionSetType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=6019"])
 o6.reference(o6.ns["ns=padim;i=6019"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ036#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6030", browseName="ns=padim;ValveName", dataType=o6.LocalizedText, valueRank=1)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6030", browseName="ns=padim;ValveName", modellingRule="Optional", dataType=o6.LocalizedText, valueRank=1)
 o6.reference(o6.ns["ns=padim;i=6030"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ046#001")
 # WARNING: The source NodeSet value does not match the declared DataType.
 # It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6031", browseName="ns=padim;ValveSwitchingCyclesCounter", dataType=o6.UInt32, valueRank=1)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6031", browseName="ns=padim;ValveSwitchingCyclesCounter", modellingRule="Optional", dataType=o6.UInt32, valueRank=1)
 o6.reference(o6.ns["ns=padim;i=6031"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ007#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6033",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741328, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -3918,19 +4302,27 @@ ns0.vartypes.PropertyType(
 )
 o6.reference(o6.ns["ns=padim;i=6033"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
-    nodeId="ns=padim;i=6032", browseName="ns=padim;TotalAreaMeasuredPeaks", references=[o6.hasProperty(o6.ns["ns=padim;i=6033"])], dataType=o6.Float, value=0.0
+    nodeId="ns=padim;i=6032",
+    browseName="ns=padim;TotalAreaMeasuredPeaks",
+    modellingRule="Optional",
+    references=[o6.hasProperty(o6.ns["ns=padim;i=6033"])],
+    dataType=o6.Float,
+    value=0.0,
 )
 o6.reference(o6.ns["ns=padim;i=6032"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ043#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6035",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749524, displayName=o6.LocalizedText("mV"), description=o6.LocalizedText("millivolt")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=6035"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
-ns0.vartypes.AnalogUnitType(nodeId="ns=padim;i=6034", browseName="ns=padim;BaselineNoise", references=[o6.hasProperty(o6.ns["ns=padim;i=6035"])], dataType=o6.Float, value=0.0)
+ns0.vartypes.AnalogUnitType(
+    nodeId="ns=padim;i=6034", browseName="ns=padim;BaselineNoise", modellingRule="Optional", references=[o6.hasProperty(o6.ns["ns=padim;i=6035"])], dataType=o6.Float, value=0.0
+)
 o6.reference(o6.ns["ns=padim;i=6034"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ036#001")
 ns0.objtypes.BaseObjectType(
     nodeId="ns=padim;i=5000",
@@ -3945,9 +4337,9 @@ ns0.objtypes.BaseObjectType(
 )
 o6.reference(padim_objtypes.GasChromatographType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=5000"])
 o6.reference(o6.ns["ns=padim;i=5000"], "i=17603", padim_objtypes.IGasChromatographDeviceConditionSetType)
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6050", browseName="ns=padim;Watchdog", dataType=o6.Boolean, value=False)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6050", browseName="ns=padim;Watchdog", modellingRule="Optional", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=padim;i=6050"], "i=17597", "ns=irdi;s=0112/2///61987#ABP996#002")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6051", browseName="ns=padim;RemainingDataStorageCapacity", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6051", browseName="ns=padim;RemainingDataStorageCapacity", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6051"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ039#001")
 ns0.objtypes.BaseObjectType(
     nodeId="ns=padim;i=5040",
@@ -3957,9 +4349,9 @@ ns0.objtypes.BaseObjectType(
 )
 o6.reference(padim_objtypes.DiodeArraySpectrometerType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=5040"])
 o6.reference(o6.ns["ns=padim;i=5040"], "i=17603", padim_objtypes.IDiodeArrayDeviceConditionSetType)
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6060", browseName="ns=padim;Watchdog", dataType=o6.Boolean, value=False)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6060", browseName="ns=padim;Watchdog", modellingRule="Optional", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=padim;i=6060"], "i=17597", "ns=irdi;s=0112/2///61987#ABP996#002")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6061", browseName="ns=padim;RemainingDataStorageCapacity", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6061", browseName="ns=padim;RemainingDataStorageCapacity", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6061"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ039#001")
 ns0.objtypes.BaseObjectType(
     nodeId="ns=padim;i=5050",
@@ -3969,9 +4361,9 @@ ns0.objtypes.BaseObjectType(
 )
 o6.reference(padim_objtypes.RamanSpectrometerType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=5050"])
 o6.reference(o6.ns["ns=padim;i=5050"], "i=17603", padim_objtypes.IRamanDeviceConditionSetType)
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6070", browseName="ns=padim;Watchdog", dataType=o6.Boolean, value=False)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6070", browseName="ns=padim;Watchdog", modellingRule="Optional", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=padim;i=6070"], "i=17597", "ns=irdi;s=0112/2///61987#ABP996#002")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6071", browseName="ns=padim;RemainingDataStorageCapacity", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6071", browseName="ns=padim;RemainingDataStorageCapacity", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6071"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ039#001")
 ns0.objtypes.BaseObjectType(
     nodeId="ns=padim;i=5060",
@@ -3984,6 +4376,7 @@ o6.reference(o6.ns["ns=padim;i=5060"], "i=17603", padim_objtypes.IFtnirOrFtirDev
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6073",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -4003,6 +4396,7 @@ o6.reference(o6.ns["ns=padim;i=6072"], "i=17597", "ns=irdi;s=0112/2///61987#ABP5
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6102",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -4010,26 +4404,31 @@ ns0.vartypes.PropertyType(
 )
 o6.reference(o6.ns["ns=padim;i=6102"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
-    nodeId="ns=padim;i=6101", browseName="ns=padim;SensingElementTemperature", references=[o6.hasProperty(o6.ns["ns=padim;i=6102"])], dataType=o6.Float, value=0.0
+    nodeId="ns=padim;i=6101",
+    browseName="ns=padim;SensingElementTemperature",
+    modellingRule="Optional",
+    references=[o6.hasProperty(o6.ns["ns=padim;i=6102"])],
+    dataType=o6.Float,
+    value=0.0,
 )
 o6.reference(o6.ns["ns=padim;i=6101"], "i=17597", "ns=irdi;s=0112/2///61987#ABP565#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6103", browseName="ns=padim;SensorNextCalibrationFixed", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6103", browseName="ns=padim;SensorNextCalibrationFixed", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6103"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ016#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6104", browseName="ns=padim;SensorNextCalibrationDynamic", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6104", browseName="ns=padim;SensorNextCalibrationDynamic", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6104"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ017#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6105", browseName="ns=padim;PowerOnDurationSensor", dataType=ns0.datatypes.Duration, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6105", browseName="ns=padim;PowerOnDurationSensor", modellingRule="Optional", dataType=ns0.datatypes.Duration, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6105"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ010#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6106", browseName="ns=padim;SensingElementResidualLife", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6106", browseName="ns=padim;SensingElementResidualLife", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6106"], "i=17597", "ns=irdi;s=0112/2///61987#ABP584#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6107", browseName="ns=padim;RelativeGasFlowRate", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6107", browseName="ns=padim;RelativeGasFlowRate", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6107"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ011#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6108", browseName="ns=padim;ConsumedSensorCapacity", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6108", browseName="ns=padim;ConsumedSensorCapacity", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6108"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ018#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6109", browseName="ns=padim;RangeExceedancePeakValue", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6109", browseName="ns=padim;RangeExceedancePeakValue", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6109"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ019#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6110", browseName="ns=padim;RangeExceedanceDuration", dataType=ns0.datatypes.Duration, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6110", browseName="ns=padim;RangeExceedanceDuration", modellingRule="Optional", dataType=ns0.datatypes.Duration, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6110"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ020#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6111", browseName="ns=padim;SensingElementResidualSensitivity", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6111", browseName="ns=padim;SensingElementResidualSensitivity", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6111"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ040#001")
 ns0.objtypes.BaseObjectType(
     nodeId="ns=padim;i=5070",
@@ -4050,13 +4449,16 @@ ns0.objtypes.BaseObjectType(
 )
 o6.reference(padim_objtypes.AmperometricGasDetectorSignalType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=5070"])
 o6.reference(o6.ns["ns=padim;i=5070"], "i=17603", padim_objtypes.IAmperometricGasDetectorSignalConditionSetType)
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6113", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6113", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
 o6.reference(o6.ns["ns=padim;i=6113"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
-ns0.vartypes.AnalogUnitType(nodeId="ns=padim;i=6112", browseName="ns=padim;AmperometricSensorSlope", references=[o6.hasProperty(o6.ns["ns=padim;i=6113"])], dataType=o6.Float)
+ns0.vartypes.AnalogUnitType(
+    nodeId="ns=padim;i=6112", browseName="ns=padim;AmperometricSensorSlope", modellingRule="Optional", references=[o6.hasProperty(o6.ns["ns=padim;i=6113"])], dataType=o6.Float
+)
 o6.reference(o6.ns["ns=padim;i=6112"], "i=17597", "ns=irdi;s=0112/2///61987#ABP572#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6115",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705750616, displayName=o6.LocalizedText("pA"), description=o6.LocalizedText("picoampere")
@@ -4064,12 +4466,18 @@ ns0.vartypes.PropertyType(
 )
 o6.reference(o6.ns["ns=padim;i=6115"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
-    nodeId="ns=padim;i=6114", browseName="ns=padim;AmperometricSensorZeroPoint", references=[o6.hasProperty(o6.ns["ns=padim;i=6115"])], dataType=o6.Float, value=0.0
+    nodeId="ns=padim;i=6114",
+    browseName="ns=padim;AmperometricSensorZeroPoint",
+    modellingRule="Optional",
+    references=[o6.hasProperty(o6.ns["ns=padim;i=6115"])],
+    dataType=o6.Float,
+    value=0.0,
 )
 o6.reference(o6.ns["ns=padim;i=6114"], "i=17597", "ns=irdi;s=0112/2///61987#ABP573#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6117",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705746519, displayName=o6.LocalizedText("hPa"), description=o6.LocalizedText("hectopascal")
@@ -4077,10 +4485,15 @@ ns0.vartypes.PropertyType(
 )
 o6.reference(o6.ns["ns=padim;i=6117"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
-    nodeId="ns=padim;i=6116", browseName="ns=padim;AbsoluteAirPressure", references=[o6.hasProperty(o6.ns["ns=padim;i=6117"])], dataType=o6.Float, value=0.0
+    nodeId="ns=padim;i=6116",
+    browseName="ns=padim;AbsoluteAirPressure",
+    modellingRule="Optional",
+    references=[o6.hasProperty(o6.ns["ns=padim;i=6117"])],
+    dataType=o6.Float,
+    value=0.0,
 )
 o6.reference(o6.ns["ns=padim;i=6116"], "i=17597", "ns=irdi;s=0112/2///61987#ABP574#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6118", browseName="ns=padim;SensorT90", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6118", browseName="ns=padim;SensorT90", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6118"], "i=17597", "ns=irdi;s=0112/2///61987#ABP569#001")
 ns0.objtypes.BaseObjectType(
     nodeId="ns=padim;i=5071",
@@ -4098,6 +4511,7 @@ o6.reference(o6.ns["ns=padim;i=5071"], "i=17603", padim_objtypes.IAmperometricCa
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6120",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705750770, displayName=o6.LocalizedText("s"), description=o6.LocalizedText("second")
@@ -4112,6 +4526,7 @@ o6.reference(o6.ns["ns=padim;i=6119"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ0
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6122",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705743670, displayName=o6.LocalizedText("V"), description=o6.LocalizedText("volt")
@@ -4126,6 +4541,7 @@ o6.reference(o6.ns["ns=padim;i=6121"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ0
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6124",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741328, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -4140,6 +4556,7 @@ o6.reference(o6.ns["ns=padim;i=6123"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ0
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6127",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705750770, displayName=o6.LocalizedText("s"), description=o6.LocalizedText("second")
@@ -4159,6 +4576,7 @@ o6.reference(o6.ns["ns=padim;i=6126"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ0
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6129",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705750770, displayName=o6.LocalizedText("s"), description=o6.LocalizedText("second")
@@ -4175,11 +4593,12 @@ ns0.vartypes.AnalogUnitType(
 )
 o6.reference(padim_objtypes.IGasChromatographSignalConditionSetType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=6128"])
 o6.reference(o6.ns["ns=padim;i=6128"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ035#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6140", browseName="ns=padim;CalibrationRange1ResponseFactor", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6140", browseName="ns=padim;CalibrationRange1ResponseFactor", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6140"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ024#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6142",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705848917, displayName=o6.LocalizedText("ppm"), description=o6.LocalizedText("parts per million")
@@ -4187,12 +4606,18 @@ ns0.vartypes.PropertyType(
 )
 o6.reference(o6.ns["ns=padim;i=6142"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
-    nodeId="ns=padim;i=6141", browseName="ns=padim;CalibrationRange1LowerRangeValue", references=[o6.hasProperty(o6.ns["ns=padim;i=6142"])], dataType=o6.Float, value=0.0
+    nodeId="ns=padim;i=6141",
+    browseName="ns=padim;CalibrationRange1LowerRangeValue",
+    modellingRule="Optional",
+    references=[o6.hasProperty(o6.ns["ns=padim;i=6142"])],
+    dataType=o6.Float,
+    value=0.0,
 )
 o6.reference(o6.ns["ns=padim;i=6141"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ025#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6144",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705848917, displayName=o6.LocalizedText("ppm"), description=o6.LocalizedText("parts per million")
@@ -4200,14 +4625,20 @@ ns0.vartypes.PropertyType(
 )
 o6.reference(o6.ns["ns=padim;i=6144"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
-    nodeId="ns=padim;i=6143", browseName="ns=padim;CalibrationRange1UpperRangeValue", references=[o6.hasProperty(o6.ns["ns=padim;i=6144"])], dataType=o6.Float, value=100.0
+    nodeId="ns=padim;i=6143",
+    browseName="ns=padim;CalibrationRange1UpperRangeValue",
+    modellingRule="Optional",
+    references=[o6.hasProperty(o6.ns["ns=padim;i=6144"])],
+    dataType=o6.Float,
+    value=100.0,
 )
 o6.reference(o6.ns["ns=padim;i=6143"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ026#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6145", browseName="ns=padim;CalibrationRange2ResponseFactor", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6145", browseName="ns=padim;CalibrationRange2ResponseFactor", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6145"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ027#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6147",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705848917, displayName=o6.LocalizedText("ppm"), description=o6.LocalizedText("parts per million")
@@ -4215,12 +4646,18 @@ ns0.vartypes.PropertyType(
 )
 o6.reference(o6.ns["ns=padim;i=6147"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
-    nodeId="ns=padim;i=6146", browseName="ns=padim;CalibrationRange2LowerRangeValue", references=[o6.hasProperty(o6.ns["ns=padim;i=6147"])], dataType=o6.Float, value=0.0
+    nodeId="ns=padim;i=6146",
+    browseName="ns=padim;CalibrationRange2LowerRangeValue",
+    modellingRule="Optional",
+    references=[o6.hasProperty(o6.ns["ns=padim;i=6147"])],
+    dataType=o6.Float,
+    value=0.0,
 )
 o6.reference(o6.ns["ns=padim;i=6146"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ028#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6149",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705848917, displayName=o6.LocalizedText("ppm"), description=o6.LocalizedText("parts per million")
@@ -4228,14 +4665,20 @@ ns0.vartypes.PropertyType(
 )
 o6.reference(o6.ns["ns=padim;i=6149"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
-    nodeId="ns=padim;i=6148", browseName="ns=padim;CalibrationRange2UpperRangeValue", references=[o6.hasProperty(o6.ns["ns=padim;i=6149"])], dataType=o6.Float, value=100.0
+    nodeId="ns=padim;i=6148",
+    browseName="ns=padim;CalibrationRange2UpperRangeValue",
+    modellingRule="Optional",
+    references=[o6.hasProperty(o6.ns["ns=padim;i=6149"])],
+    dataType=o6.Float,
+    value=100.0,
 )
 o6.reference(o6.ns["ns=padim;i=6148"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ029#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6150", browseName="ns=padim;CalibrationRange3ResponseFactor", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6150", browseName="ns=padim;CalibrationRange3ResponseFactor", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6150"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ030#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6152",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705848917, displayName=o6.LocalizedText("ppm"), description=o6.LocalizedText("parts per million")
@@ -4243,12 +4686,18 @@ ns0.vartypes.PropertyType(
 )
 o6.reference(o6.ns["ns=padim;i=6152"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
-    nodeId="ns=padim;i=6151", browseName="ns=padim;CalibrationRange3LowerRangeValue", references=[o6.hasProperty(o6.ns["ns=padim;i=6152"])], dataType=o6.Float, value=0.0
+    nodeId="ns=padim;i=6151",
+    browseName="ns=padim;CalibrationRange3LowerRangeValue",
+    modellingRule="Optional",
+    references=[o6.hasProperty(o6.ns["ns=padim;i=6152"])],
+    dataType=o6.Float,
+    value=0.0,
 )
 o6.reference(o6.ns["ns=padim;i=6151"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ031#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6154",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705848917, displayName=o6.LocalizedText("ppm"), description=o6.LocalizedText("parts per million")
@@ -4256,7 +4705,12 @@ ns0.vartypes.PropertyType(
 )
 o6.reference(o6.ns["ns=padim;i=6154"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
-    nodeId="ns=padim;i=6153", browseName="ns=padim;CalibrationRange3UpperRangeValue", references=[o6.hasProperty(o6.ns["ns=padim;i=6154"])], dataType=o6.Float, value=100.0
+    nodeId="ns=padim;i=6153",
+    browseName="ns=padim;CalibrationRange3UpperRangeValue",
+    modellingRule="Optional",
+    references=[o6.hasProperty(o6.ns["ns=padim;i=6154"])],
+    dataType=o6.Float,
+    value=100.0,
 )
 o6.reference(o6.ns["ns=padim;i=6153"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ032#001")
 ns0.objtypes.BaseObjectType(
@@ -4280,41 +4734,51 @@ o6.reference(o6.ns["ns=padim;i=5072"], "i=17603", padim_objtypes.IGasChromatogra
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6156",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705750770, displayName=o6.LocalizedText("s"), description=o6.LocalizedText("second")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=6156"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
-ns0.vartypes.AnalogUnitType(nodeId="ns=padim;i=6155", browseName="ns=padim;PeakWidth", references=[o6.hasProperty(o6.ns["ns=padim;i=6156"])], dataType=o6.Float, value=0.0)
+ns0.vartypes.AnalogUnitType(
+    nodeId="ns=padim;i=6155", browseName="ns=padim;PeakWidth", modellingRule="Optional", references=[o6.hasProperty(o6.ns["ns=padim;i=6156"])], dataType=o6.Float, value=0.0
+)
 o6.reference(o6.ns["ns=padim;i=6155"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ022#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6158",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705743670, displayName=o6.LocalizedText("V"), description=o6.LocalizedText("volt")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=6158"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
-ns0.vartypes.AnalogUnitType(nodeId="ns=padim;i=6157", browseName="ns=padim;PeakHeight", references=[o6.hasProperty(o6.ns["ns=padim;i=6158"])], dataType=o6.Float, value=0.0)
+ns0.vartypes.AnalogUnitType(
+    nodeId="ns=padim;i=6157", browseName="ns=padim;PeakHeight", modellingRule="Optional", references=[o6.hasProperty(o6.ns["ns=padim;i=6158"])], dataType=o6.Float, value=0.0
+)
 o6.reference(o6.ns["ns=padim;i=6157"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ023#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6160",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741328, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=6160"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
-ns0.vartypes.AnalogUnitType(nodeId="ns=padim;i=6159", browseName="ns=padim;PeakArea", references=[o6.hasProperty(o6.ns["ns=padim;i=6160"])], dataType=o6.Float, value=0.0)
+ns0.vartypes.AnalogUnitType(
+    nodeId="ns=padim;i=6159", browseName="ns=padim;PeakArea", modellingRule="Optional", references=[o6.hasProperty(o6.ns["ns=padim;i=6160"])], dataType=o6.Float, value=0.0
+)
 o6.reference(o6.ns["ns=padim;i=6159"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ042#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6161", browseName="ns=padim;TailingFactor", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6161", browseName="ns=padim;TailingFactor", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6161"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ033#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6163",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705750770, displayName=o6.LocalizedText("s"), description=o6.LocalizedText("second")
@@ -4322,12 +4786,18 @@ ns0.vartypes.PropertyType(
 )
 o6.reference(o6.ns["ns=padim;i=6163"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
-    nodeId="ns=padim;i=6162", browseName="ns=padim;ExpectedRetentionTime", references=[o6.hasProperty(o6.ns["ns=padim;i=6163"])], dataType=o6.Float, value=0.0
+    nodeId="ns=padim;i=6162",
+    browseName="ns=padim;ExpectedRetentionTime",
+    modellingRule="Optional",
+    references=[o6.hasProperty(o6.ns["ns=padim;i=6163"])],
+    dataType=o6.Float,
+    value=0.0,
 )
 o6.reference(o6.ns["ns=padim;i=6162"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ034#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6165",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705750770, displayName=o6.LocalizedText("s"), description=o6.LocalizedText("second")
@@ -4335,12 +4805,17 @@ ns0.vartypes.PropertyType(
 )
 o6.reference(o6.ns["ns=padim;i=6165"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
-    nodeId="ns=padim;i=6164", browseName="ns=padim;ActualRetentionTime", references=[o6.hasProperty(o6.ns["ns=padim;i=6165"])], dataType=o6.Float, value=0.0
+    nodeId="ns=padim;i=6164",
+    browseName="ns=padim;ActualRetentionTime",
+    modellingRule="Optional",
+    references=[o6.hasProperty(o6.ns["ns=padim;i=6165"])],
+    dataType=o6.Float,
+    value=0.0,
 )
 o6.reference(o6.ns["ns=padim;i=6164"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ035#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6166", browseName="ns=padim;InjectionTime", dataType=o6.DateTime, value=o6.DateTime("1601-01-01T00:00:00Z"))
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6166", browseName="ns=padim;InjectionTime", modellingRule="Optional", dataType=o6.DateTime, value=o6.DateTime("1601-01-01T00:00:00Z"))
 o6.reference(o6.ns["ns=padim;i=6166"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ006#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6167", browseName="ns=padim;ComponentName", dataType=o6.String)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6167", browseName="ns=padim;ComponentName", modellingRule="Optional", dataType=o6.String)
 o6.reference(o6.ns["ns=padim;i=6167"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ045#001")
 ns0.objtypes.BaseObjectType(
     nodeId="ns=padim;i=5073",
@@ -4362,6 +4837,7 @@ o6.reference(o6.ns["ns=padim;i=5073"], "i=17603", padim_objtypes.IGasChromatogra
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6170",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -4378,11 +4854,12 @@ ns0.vartypes.AnalogUnitType(
 )
 o6.reference(padim_objtypes.IFtnirOrFtirSignalConditionSetType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=6169"])
 o6.reference(o6.ns["ns=padim;i=6169"], "i=17597", "ns=irdi;s=0112/2///61987#ABP565#001")
-ns0.vartypes.DataItemType(nodeId="ns=padim;i=6180", browseName="ns=padim;TransmissionRatio", dataType=o6.Float, value=0.0)
+ns0.vartypes.DataItemType(nodeId="ns=padim;i=6180", browseName="ns=padim;TransmissionRatio", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6180"], "i=17597", "ns=irdi;s=0112/2///61987#ABP582#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6182",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -4390,16 +4867,21 @@ ns0.vartypes.PropertyType(
 )
 o6.reference(o6.ns["ns=padim;i=6182"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
-    nodeId="ns=padim;i=6181", browseName="ns=padim;SensingElementTemperature", references=[o6.hasProperty(o6.ns["ns=padim;i=6182"])], dataType=o6.Float, value=0.0
+    nodeId="ns=padim;i=6181",
+    browseName="ns=padim;SensingElementTemperature",
+    modellingRule="Optional",
+    references=[o6.hasProperty(o6.ns["ns=padim;i=6182"])],
+    dataType=o6.Float,
+    value=0.0,
 )
 o6.reference(o6.ns["ns=padim;i=6181"], "i=17597", "ns=irdi;s=0112/2///61987#ABP565#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6183", browseName="ns=padim;MahalanobisDistance", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6183", browseName="ns=padim;MahalanobisDistance", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6183"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ037#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6184", browseName="ns=padim;SpectralResidual", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6184", browseName="ns=padim;SpectralResidual", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6184"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ038#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6185", browseName="ns=padim;ElectronicsReadNoise", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6185", browseName="ns=padim;ElectronicsReadNoise", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6185"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ057#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6186", browseName="ns=padim;LaserResidualLife", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6186", browseName="ns=padim;LaserResidualLife", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6186"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ044#001")
 ns0.objtypes.BaseObjectType(
     nodeId="ns=padim;i=5075",
@@ -4419,6 +4901,7 @@ o6.reference(o6.ns["ns=padim;i=5075"], "i=17603", padim_objtypes.IFtnirOrFtirSig
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6189",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -4435,11 +4918,12 @@ ns0.vartypes.AnalogUnitType(
 )
 o6.reference(padim_objtypes.IDiodeArraySignalConditionSetType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=6188"])
 o6.reference(o6.ns["ns=padim;i=6188"], "i=17597", "ns=irdi;s=0112/2///61987#ABP565#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6200", browseName="ns=padim;SourceResidualLife", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6200", browseName="ns=padim;SourceResidualLife", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6200"], "i=17597", "ns=irdi;s=0112/2///61987#ABP552#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6202",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -4447,14 +4931,19 @@ ns0.vartypes.PropertyType(
 )
 o6.reference(o6.ns["ns=padim;i=6202"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
-    nodeId="ns=padim;i=6201", browseName="ns=padim;SensingElementTemperature", references=[o6.hasProperty(o6.ns["ns=padim;i=6202"])], dataType=o6.Float, value=0.0
+    nodeId="ns=padim;i=6201",
+    browseName="ns=padim;SensingElementTemperature",
+    modellingRule="Optional",
+    references=[o6.hasProperty(o6.ns["ns=padim;i=6202"])],
+    dataType=o6.Float,
+    value=0.0,
 )
 o6.reference(o6.ns["ns=padim;i=6201"], "i=17597", "ns=irdi;s=0112/2///61987#ABP565#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6203", browseName="ns=padim;MahalanobisDistance", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6203", browseName="ns=padim;MahalanobisDistance", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6203"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ037#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6204", browseName="ns=padim;SpectralResidual", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6204", browseName="ns=padim;SpectralResidual", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6204"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ038#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6205", browseName="ns=padim;ElectronicsReadNoise", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6205", browseName="ns=padim;ElectronicsReadNoise", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6205"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ057#001")
 ns0.objtypes.BaseObjectType(
     nodeId="ns=padim;i=5077",
@@ -4473,6 +4962,7 @@ o6.reference(o6.ns["ns=padim;i=5077"], "i=17603", padim_objtypes.IDiodeArraySign
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6208",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -4489,11 +4979,12 @@ ns0.vartypes.AnalogUnitType(
 )
 o6.reference(padim_objtypes.IRamanSignalConditionSetType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=6207"])
 o6.reference(o6.ns["ns=padim;i=6207"], "i=17597", "ns=irdi;s=0112/2///61987#ABP565#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6220", browseName="ns=padim;SourceResidualLife", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6220", browseName="ns=padim;SourceResidualLife", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6220"], "i=17597", "ns=irdi;s=0112/2///61987#ABP552#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6222",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -4501,14 +4992,19 @@ ns0.vartypes.PropertyType(
 )
 o6.reference(o6.ns["ns=padim;i=6222"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
-    nodeId="ns=padim;i=6221", browseName="ns=padim;SensingElementTemperature", references=[o6.hasProperty(o6.ns["ns=padim;i=6222"])], dataType=o6.Float, value=0.0
+    nodeId="ns=padim;i=6221",
+    browseName="ns=padim;SensingElementTemperature",
+    modellingRule="Optional",
+    references=[o6.hasProperty(o6.ns["ns=padim;i=6222"])],
+    dataType=o6.Float,
+    value=0.0,
 )
 o6.reference(o6.ns["ns=padim;i=6221"], "i=17597", "ns=irdi;s=0112/2///61987#ABP565#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6223", browseName="ns=padim;MahalanobisDistance", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6223", browseName="ns=padim;MahalanobisDistance", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6223"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ037#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6224", browseName="ns=padim;SpectralResidual", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6224", browseName="ns=padim;SpectralResidual", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6224"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ038#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6225", browseName="ns=padim;ElectronicsReadNoise", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6225", browseName="ns=padim;ElectronicsReadNoise", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6225"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ057#001")
 ns0.objtypes.BaseObjectType(
     nodeId="ns=padim;i=5079",
@@ -4527,6 +5023,7 @@ o6.reference(o6.ns["ns=padim;i=5079"], "i=17603", padim_objtypes.IRamanSignalCon
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6227",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -4546,6 +5043,7 @@ o6.reference(o6.ns["ns=padim;i=6226"], "i=17597", "ns=irdi;s=0112/2///61987#ABP5
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6241",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -4553,24 +5051,29 @@ ns0.vartypes.PropertyType(
 )
 o6.reference(o6.ns["ns=padim;i=6241"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
-    nodeId="ns=padim;i=6240", browseName="ns=padim;SensingElementTemperature", references=[o6.hasProperty(o6.ns["ns=padim;i=6241"])], dataType=o6.Float, value=0.0
+    nodeId="ns=padim;i=6240",
+    browseName="ns=padim;SensingElementTemperature",
+    modellingRule="Optional",
+    references=[o6.hasProperty(o6.ns["ns=padim;i=6241"])],
+    dataType=o6.Float,
+    value=0.0,
 )
 o6.reference(o6.ns["ns=padim;i=6240"], "i=17597", "ns=irdi;s=0112/2///61987#ABP565#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6242", browseName="ns=padim;SourceResidualLife", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6242", browseName="ns=padim;SourceResidualLife", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6242"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ041#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6243", browseName="ns=padim;TransmissionRatio", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6243", browseName="ns=padim;TransmissionRatio", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6243"], "i=17597", "ns=irdi;s=0112/2///61987#ABP582#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6244", browseName="ns=padim;SensorNextCalibrationFixed", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6244", browseName="ns=padim;SensorNextCalibrationFixed", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6244"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ016#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6245", browseName="ns=padim;SensorNextCalibrationDynamic", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6245", browseName="ns=padim;SensorNextCalibrationDynamic", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6245"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ017#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6246", browseName="ns=padim;PowerOnDurationSensor", dataType=ns0.datatypes.Duration, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6246", browseName="ns=padim;PowerOnDurationSensor", modellingRule="Optional", dataType=ns0.datatypes.Duration, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6246"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ010#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6247", browseName="ns=padim;SensingElementResidualLife", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6247", browseName="ns=padim;SensingElementResidualLife", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6247"], "i=17597", "ns=irdi;s=0112/2///61987#ABP584#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6248", browseName="ns=padim;RelativeGasFlowRate", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6248", browseName="ns=padim;RelativeGasFlowRate", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6248"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ011#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6249", browseName="ns=padim;SensingElementResidualSensitivity", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6249", browseName="ns=padim;SensingElementResidualSensitivity", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6249"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ040#001")
 ns0.objtypes.BaseObjectType(
     nodeId="ns=padim;i=5080",
@@ -4590,7 +5093,7 @@ ns0.objtypes.BaseObjectType(
 )
 o6.reference(padim_objtypes.InfraredSignalType, ns0.reftypes.HasComponent, o6.ns["ns=padim;i=5080"])
 o6.reference(o6.ns["ns=padim;i=5080"], "i=17603", padim_objtypes.IInfraredSignalConditionSetType)
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6252", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6252", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
 o6.reference(o6.ns["ns=padim;i=6252"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=6251", browseName="ns=padim;CellResistance", modellingRule="Optional", references=[o6.hasProperty(o6.ns["ns=padim;i=6252"])], dataType=o6.Float, value=0.0
@@ -4600,6 +5103,7 @@ o6.reference(o6.ns["ns=padim;i=6251"], "i=17597", "ns=irdi;s=0112/2///61987#ABP5
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6254",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -4619,6 +5123,7 @@ o6.reference(o6.ns["ns=padim;i=6253"], "i=17597", "ns=irdi;s=0112/2///61987#ABP5
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6261",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749524, displayName=o6.LocalizedText("mV"), description=o6.LocalizedText("millivolt")
@@ -4633,6 +5138,7 @@ o6.reference(o6.ns["ns=padim;i=6260"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ0
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6282",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741427, displayName=o6.LocalizedText("°C"), description=o6.LocalizedText("degree Celsius")
@@ -4640,31 +5146,39 @@ ns0.vartypes.PropertyType(
 )
 o6.reference(o6.ns["ns=padim;i=6282"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
 ns0.vartypes.AnalogUnitType(
-    nodeId="ns=padim;i=6281", browseName="ns=padim;SensingElementTemperature", references=[o6.hasProperty(o6.ns["ns=padim;i=6282"])], dataType=o6.Float, value=0.0
+    nodeId="ns=padim;i=6281",
+    browseName="ns=padim;SensingElementTemperature",
+    modellingRule="Optional",
+    references=[o6.hasProperty(o6.ns["ns=padim;i=6282"])],
+    dataType=o6.Float,
+    value=0.0,
 )
 o6.reference(o6.ns["ns=padim;i=6281"], "i=17597", "ns=irdi;s=0112/2///61987#ABP565#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6283", browseName="ns=padim;SensorNextCalibrationFixed", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6283", browseName="ns=padim;SensorNextCalibrationFixed", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6283"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ016#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6284", browseName="ns=padim;SensorNextCalibrationDynamic", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6284", browseName="ns=padim;SensorNextCalibrationDynamic", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6284"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ017#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6285", browseName="ns=padim;PowerOnDurationSensor", dataType=ns0.datatypes.Duration, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6285", browseName="ns=padim;PowerOnDurationSensor", modellingRule="Optional", dataType=ns0.datatypes.Duration, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6285"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ010#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6286", browseName="ns=padim;SensingElementResidualLife", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6286", browseName="ns=padim;SensingElementResidualLife", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6286"], "i=17597", "ns=irdi;s=0112/2///61987#ABP584#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6287", browseName="ns=padim;RelativeGasFlowRate", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6287", browseName="ns=padim;RelativeGasFlowRate", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6287"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ011#001")
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6289",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705749524, displayName=o6.LocalizedText("mV"), description=o6.LocalizedText("millivolt")
     ),
 )
 o6.reference(o6.ns["ns=padim;i=6289"], "i=17597", "ns=irdi;s=0112/2///61987#ABA968#004")
-ns0.vartypes.AnalogUnitType(nodeId="ns=padim;i=6288", browseName="ns=padim;SensorValue", references=[o6.hasProperty(o6.ns["ns=padim;i=6289"])], dataType=o6.Float, value=0.0)
+ns0.vartypes.AnalogUnitType(
+    nodeId="ns=padim;i=6288", browseName="ns=padim;SensorValue", modellingRule="Optional", references=[o6.hasProperty(o6.ns["ns=padim;i=6289"])], dataType=o6.Float, value=0.0
+)
 o6.reference(o6.ns["ns=padim;i=6288"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ021#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6290", browseName="ns=padim;SensingElementResidualSensitivity", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6290", browseName="ns=padim;SensingElementResidualSensitivity", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6290"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ040#001")
 ns0.objtypes.BaseObjectType(
     nodeId="ns=padim;i=5081",
@@ -4686,6 +5200,7 @@ o6.reference(o6.ns["ns=padim;i=5081"], "i=17603", padim_objtypes.ICatalyticBeadS
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6291",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741328, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -4706,6 +5221,7 @@ o6.reference(o6.ns["ns=padim;i=1354"], "i=17597", "ns=irdi;s=0112/2///61987#ABP5
 ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=6292",
     browseName="EngineeringUnits",
+    modellingRule="Mandatory",
     dataType=ns0.datatypes.EUInformation,
     value=ns0.datatypes.EUInformation(
         namespaceUri="http://www.opcfoundation.org/UA/units/cdd/IEC62720", unitId=705741328, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -4716,6 +5232,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=padim;i=1434",
     browseName="ns=padim;RelativeHeatOutput",
     displayName="Relative heat output",
+    modellingRule="Optional",
     references=[o6.hasProperty(o6.ns["ns=padim;i=6292"])],
     dataType=o6.Float,
     value=0.0,

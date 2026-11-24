@@ -456,7 +456,10 @@ class ReceivedEntityConditionClassType(ns0.objtypes.BaseConditionClassType):
 
 
 ns0.objtypes.FolderType(
-    nodeId="ns=ijt_base;i=5074", browseName="ns=machinery;MachineryBuildingBlocks", description="The MachineryBuildingBlocks contains building blocks from OPC UA for Machinery."
+    nodeId="ns=ijt_base;i=5074",
+    browseName="ns=machinery;MachineryBuildingBlocks",
+    description="The MachineryBuildingBlocks contains building blocks from OPC UA for Machinery.",
+    modellingRule="Optional",
 )
 
 
@@ -476,7 +479,10 @@ class JoiningSystemType(ns0.objtypes.BaseObjectType):
 
 
 ns0.objtypes.FolderType(
-    nodeId="ns=ijt_base;i=5080", browseName="ns=machinery;MachineryBuildingBlocks", description="The MachineryBuildingBlocks contains building blocks from OPC UA for Machinery."
+    nodeId="ns=ijt_base;i=5080",
+    browseName="ns=machinery;MachineryBuildingBlocks",
+    description="The MachineryBuildingBlocks contains building blocks from OPC UA for Machinery.",
+    modellingRule="Optional",
 )
 
 
@@ -495,7 +501,9 @@ class IJoiningSystemAssetType(ns0.objtypes.BaseInterfaceType):
     maintenance: di.objtypes.FunctionalGroupType | None
     monitoring: machinery.objtypes.MonitoringType | None
     notifications: machinery.objtypes.NotificationsType | None = o6.hasAddIn(
-        machinery.objtypes.NotificationsType(nodeId="ns=ijt_base;i=5163", browseName="ns=machinery;Notifications", description="Provides notifications as events or objects.")
+        machinery.objtypes.NotificationsType(
+            nodeId="ns=ijt_base;i=5163", browseName="ns=machinery;Notifications", description="Provides notifications as events or objects.", modellingRule="Optional"
+        )
     )
     operationCounters: machinery.objtypes.MachineryOperationCounterType | None
     parameters: ns0.objtypes.FolderType | None
@@ -579,6 +587,7 @@ class IJoiningAdditionalInformationType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=ijt_base;i=6175",
             browseName="ns=ijt_base;Description",
             description="Description is the system specific description of the asset.",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
             value=o6.LocalizedText(),
         )
@@ -588,6 +597,7 @@ class IJoiningAdditionalInformationType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=ijt_base;i=6176",
             browseName="ns=ijt_base;JoiningTechnology",
             description="JoiningTechnology is a human readable text to identify the joining technology.",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
             value=o6.LocalizedText(),
         )
@@ -597,6 +607,7 @@ class IJoiningAdditionalInformationType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=ijt_base;i=6452",
             browseName="ns=ijt_base;SupplierCode",
             description="SupplierCode is the SAP or ERP Supplier Code of the asset.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
         )
@@ -624,6 +635,7 @@ class JoiningSystemIdentificationType(di.objtypes.FunctionalGroupType):
             nodeId="ns=ijt_base;i=6242",
             browseName="ns=ijt_base;Description",
             description="It is the description of the system which could be written by the customer to identify the system. It could be the purpose of the system in the assembly line.",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
             accessLevel=3,
             userAccessLevel=1,
@@ -634,6 +646,7 @@ class JoiningSystemIdentificationType(di.objtypes.FunctionalGroupType):
             nodeId="ns=ijt_base;i=6241",
             browseName="ns=ijt_base;IntegratorName",
             description="IntegratorName is the name of the system integrator.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -644,6 +657,7 @@ class JoiningSystemIdentificationType(di.objtypes.FunctionalGroupType):
             nodeId="ns=ijt_base;i=6244",
             browseName="ns=ijt_base;JoiningTechnology",
             description="JoiningTechnology is a human readable text to identify the joining technology of the joining system.",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
         )
     )
@@ -652,6 +666,7 @@ class JoiningSystemIdentificationType(di.objtypes.FunctionalGroupType):
             nodeId="ns=ijt_base;i=6458",
             browseName="ns=machinery;Location",
             description="Location is the location of the given system in the given plant or factory in text format.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -662,6 +677,7 @@ class JoiningSystemIdentificationType(di.objtypes.FunctionalGroupType):
             nodeId="ns=ijt_base;i=6245",
             browseName="ns=di;Manufacturer",
             description="Manufacturer provides a human-readable, localized name of the joining system manufacturer.",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
             accessLevel=3,
             userAccessLevel=1,
@@ -672,6 +688,7 @@ class JoiningSystemIdentificationType(di.objtypes.FunctionalGroupType):
             nodeId="ns=ijt_base;i=6246",
             browseName="ns=di;ManufacturerUri",
             description="ManufacturerUri provides a unique identifier for this company. This identifier should be a fully qualified domain name; however, it may be a GUID or similar construct that ensures global uniqueness.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -680,6 +697,7 @@ class JoiningSystemIdentificationType(di.objtypes.FunctionalGroupType):
             nodeId="ns=ijt_base;i=6247",
             browseName="ns=di;Model",
             description="Model provides the type of the joining system. Examples: Fixtured System, Handheld System, etc.",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
             accessLevel=3,
             userAccessLevel=1,
@@ -690,6 +708,7 @@ class JoiningSystemIdentificationType(di.objtypes.FunctionalGroupType):
             nodeId="ns=ijt_base;i=6240",
             browseName="ns=ijt_base;Name",
             description="Name is the name of the joining system. It can also be the standard browse name of the instance of JoiningSystemType.",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -698,6 +717,7 @@ class JoiningSystemIdentificationType(di.objtypes.FunctionalGroupType):
             nodeId="ns=ijt_base;i=6236",
             browseName="ns=di;ProductInstanceUri",
             description="ProductInstanceUri is a globally unique resource identifier provided by the manufacturer.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -706,6 +726,7 @@ class JoiningSystemIdentificationType(di.objtypes.FunctionalGroupType):
             nodeId="ns=ijt_base;i=6248",
             browseName="ns=ijt_base;SystemId",
             description="SystemId is the system integrator specific identifier for the system. It represents a reference to the manufacturer ERP system.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -767,6 +788,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7005",
     browseName="ns=ijt_base;SetCalibration",
     description="The Method SetCalibration is used to set the calibration information of a given asset. \nIt is intended to set the basic calibration information and does not cover the certification process.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6040"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6041"]),
 )
@@ -828,6 +850,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7006",
     browseName="ns=ijt_base;EnableAsset",
     description="The Method EnableAsset is used to Enable or Disable a given asset. It is mostly applicable for Tool.\nThe joining system can report a respective event when an asset is enabled or disabled.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6043"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6046"]),
 )
@@ -886,6 +909,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7007",
     browseName="ns=ijt_base;DisconnectAsset",
     description="The Method DisconnectAsset is used to disconnect or connect the asset.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6047"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6051"]),
 )
@@ -937,6 +961,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7008",
     browseName="ns=ijt_base;RebootAsset",
     description="The Method RebootAsset is used to reboot an asset.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6053"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6055"]),
 )
@@ -995,6 +1020,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7009",
     browseName="ns=ijt_base;SetOfflineTimer",
     description="The Method SetOfflineTimer is used to set the offline timer for the asset to determine how long the asset can perform the joining operations in an offline mode. \nNote: If an asset performs the joining operation in offline mode after setting the offline timer, the corresponding results generated shall have the IsGeneratedOffline flag set to TRUE.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6056"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6057"]),
 )
@@ -1067,6 +1093,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7010",
     browseName="ns=ijt_base;SendFeedback",
     description="The Method SendFeedback is used to send any type of feedback to a given asset. The feedback can be a text input or other types of feedback supported by the asset.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6058"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6059"]),
 )
@@ -1127,6 +1154,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7011",
     browseName="ns=ijt_base;GetFeedbackFileList",
     description="The Method GetFeedbackFileList is used to get the list of feedback files from the asset.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6061"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6062"]),
 )
@@ -1194,6 +1222,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7012",
     browseName="ns=ijt_base;SetIOSignals",
     description="The Method SetIOSignals is used to set a list of IO signals of the asset. The type of operations mapped to each signal is application specific.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6063"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6064"]),
 )
@@ -1261,6 +1290,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7013",
     browseName="ns=ijt_base;GetIOSignals",
     description="The Method GetIOSignals is used to get the list of available signals from the asset.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6067"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6068"]),
 )
@@ -1326,6 +1356,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7014",
     browseName="ns=ijt_base;GetIdentifiers",
     description="The Method GetIdentifiers is used to get the list of identifiers available in the system which were managed by external systems.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6069"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6070"]),
 )
@@ -1384,6 +1415,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7015",
     browseName="ns=ijt_base;SendIdentifiers",
     description="The Method SendIdentifiers is used to send one or more identifiers to the joining system.\nThese identifiers can be used for selection of a joining process, etc.\nThese identifiers can often be part of the generated result. \nThe input argument to this method is an array of EntityDataType structure where every entity in the joining system can be associated to a specific type for filtering.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6072"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6078"]),
 )
@@ -1442,6 +1474,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7016",
     browseName="ns=ijt_base;SendTextIdentifiers",
     description="The Method SendTextIdentifiers is used to send one or more identifiers to a joining system. \nThese identifiers can be used for selection of a joining process, etc.\nThese identifiers can often be part of the generated result. \nNote: The decision on which set of identifiers are used for the selection of a joining process and which set of identifiers should be part of the generated result is application specific.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6079"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6080"]),
 )
@@ -1521,6 +1554,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7017",
     browseName="ns=ijt_base;ResetIdentifiers",
     description="The Method ResetIdentifiers is used to reset the specified identifiers.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6081"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6085"]),
 )
@@ -1595,6 +1629,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7018",
     browseName="ns=ijt_base;ExecuteOperation",
     description="The Method ExecuteOperation is an application specific interface to execute any generic operations supported by a joining system.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6086"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6087"]),
 )
@@ -1663,6 +1698,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7019",
     browseName="ns=ijt_base;GetErrorInformation",
     description="The Method GetErrorInformation is used to get the error information based on the input identifier. The details returned from the joining system is application specific.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6088"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6102"]),
 )
@@ -1721,6 +1757,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7020",
     browseName="ns=ijt_base;SendJoint",
     description="The Method SendJoint is used to send a joint to a joining system. If the input joint already exists in the system, it shall be overwritten.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6183"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6184"]),
 )
@@ -1779,6 +1816,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7021",
     browseName="ns=ijt_base;SendJointDesign",
     description="The Method SendJointDesign is used to send a joint design to a joining system. If the input joint design already exists in the system, it shall be overwritten.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6186"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6191"]),
 )
@@ -1837,6 +1875,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7022",
     browseName="ns=ijt_base;SendJointComponent",
     description="The Method SendJointComponent is used to send a joint component to a joining system. If the input joint component already exists in the system, it shall be overwritten.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6192"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6228"]),
 )
@@ -1906,6 +1945,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7023",
     browseName="ns=ijt_base;SelectJoint",
     description="The Method SelectJoint is used to select the joint and the associated joining process.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6229"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6230"]),
 )
@@ -1964,6 +2004,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7024",
     browseName="ns=ijt_base;GetJointList",
     description="The Method GetJointList is used to get the list of available joints in the system.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6235"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6303"]),
 )
@@ -2022,6 +2063,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7025",
     browseName="ns=ijt_base;GetJointDesignList",
     description="The Method GetJointDesignList is used to get the list of available joint designs in the system.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6304"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6305"]),
 )
@@ -2080,6 +2122,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7026",
     browseName="ns=ijt_base;GetJointComponentList",
     description="The Method GetJointComponentList is used to get the list of available joint components in the system.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6306"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6307"]),
 )
@@ -2145,6 +2188,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7027",
     browseName="ns=ijt_base;GetJointRevisionList",
     description="The Method GetJointRevisionList is used to get the list available revisions of a specific joint based on the JointOriginId.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6308"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6309"]),
 )
@@ -2200,6 +2244,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7028",
     browseName="ns=ijt_base;GetJoint",
     description="The Method GetJoint is used to get the joint based on the input identifier.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6310"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6311"]),
 )
@@ -2265,6 +2310,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7029",
     browseName="ns=ijt_base;GetJointDesign",
     description="The Method GetJointDesign is used to get the joint design based on the input identifier.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6312"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6313"]),
 )
@@ -2326,6 +2372,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7030",
     browseName="ns=ijt_base;GetJointComponent",
     description="The Method GetJointComponent is used to get the joint component based on the input identifier.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6314"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6315"]),
 )
@@ -2391,6 +2438,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7042",
     browseName="ns=ijt_base;SendJoiningProcess",
     description="The Method SendJoiningProcess is used to send a joining process to the joining system. It can be used to insert a joining program or joining batch or joining job or any other process applicable to a joining system. It shall overwrite the joining process if it already exists in the joining system.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6340"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6347"]),
 )
@@ -2449,6 +2497,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7043",
     browseName="ns=ijt_base;GetJoiningProcessList",
     description="The Method GetJoiningProcessList is used to get the list of joining process meta data available in the system.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6348"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6349"]),
 )
@@ -2514,6 +2563,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7044",
     browseName="ns=ijt_base;GetJoiningProcessRevisionList",
     description="The Method GetJoiningProcessRevisionList is used to get the list available revisions of a specific joining process based on the joiningProcessOriginId.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6350"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6351"]),
 )
@@ -2574,6 +2624,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7045",
     browseName="ns=ijt_base;SetJoiningProcessMapping",
     description="The Method SetJoiningProcessMapping is used to set the mapping of the joining process in a joining system. It can be used to map a joining process to a selection name.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6352"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6353"]),
 )
@@ -2634,6 +2685,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7046",
     browseName="ns=ijt_base;SelectJoiningProcess",
     description="The Method SelectJoiningProcess is used to select the joining process based on the input arguments.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6354"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6355"]),
 )
@@ -2685,6 +2737,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7047",
     browseName="ns=ijt_base;DeselectJoiningProcess",
     description="The Method DeselectJoiningProcess is used to deselect any selected joining process.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6356"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6357"]),
 )
@@ -2752,6 +2805,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7048",
     browseName="ns=ijt_base;IncrementJoiningProcessCounter",
     description="The Method IncrementJoiningProcessCounter is used to increment the counter of the sequential joining processes such as Job, etc.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6358"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6359"]),
 )
@@ -2819,6 +2873,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7049",
     browseName="ns=ijt_base;DecrementJoiningProcessCounter",
     description="The Method DecrementJoiningProcessCounter used to decrement the counter of the sequential joining processes such as Job, etc.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6360"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6361"]),
 )
@@ -2882,6 +2937,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7050",
     browseName="ns=ijt_base;SetJoiningProcessCounter",
     description="The Method SetJoiningProcessCounter is used to set the counter of a sequential joining processes (such as Job, etc.) to the given input value.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6362"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6363"]),
 )
@@ -2949,6 +3005,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7051",
     browseName="ns=ijt_base;SetJoiningProcessSize",
     description="The Method SetJoiningProcessSize is used to set the size of the batch joining process.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6364"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6365"]),
 )
@@ -3009,6 +3066,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7052",
     browseName="ns=ijt_base;ResetJoiningProcess",
     description="The Method ResetJoiningProcess is used to reset/restart the sequential joining processes such as Job, etc.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6366"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6367"]),
 )
@@ -3076,6 +3134,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7053",
     browseName="ns=ijt_base;AbortJoiningProcess",
     description="The Method AbortJoiningProcess is used to abort the input joining process if it is under execution.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6368"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6369"]),
 )
@@ -3136,6 +3195,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7054",
     browseName="ns=ijt_base;DeleteJoiningProcess",
     description="The Method DeleteJoiningProcess is used to delete the input joining process.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6127"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6140"]),
 )
@@ -3197,6 +3257,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7055",
     browseName="ns=ijt_base;DeleteJoint",
     description="The Method DeleteJoint is used to delete the joint based on the input identifier.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6141"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6151"]),
 )
@@ -3264,6 +3325,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7056",
     browseName="ns=ijt_base;StartJoiningProcess",
     description="The Method StartJoiningProcess is used to start the input joining process. \nNote: It is not intended to be used in a hard real-time use case.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6374"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6375"]),
 )
@@ -3318,6 +3380,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7064",
     browseName="ns=ijt_base;DeleteJointDesign",
     description="The Method DeleteJointDesign is used to delete the joint design based on the input identifier.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6153"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6161"]),
 )
@@ -3372,6 +3435,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7071",
     browseName="ns=ijt_base;DeleteJointComponent",
     description="The Method DeleteJointComponent is used to delete the joint component based on the input identifier.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6162"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6163"]),
 )
@@ -3459,6 +3523,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7072",
     browseName="ns=ijt_base;SetTime",
     description="The Method SetTime is used to set the time of the asset manually. It is recommended to be used only when an asset does not have automated time synchronization.\nThe joining system can report a respective event when the time is configured manually using this method.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6406"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6407"]),
 )
@@ -3552,6 +3617,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7073",
     browseName="ns=ijt_base;StartSelectedJoining",
     description="The Method StartSelectedJoining is used to start the selected joining. The joining operation can be selected using SelectJoiningProcess or SelectJoint. \nNote: It is not intended to be used in a hard real-time use case.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6408"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6409"]),
 )
@@ -3648,6 +3714,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=ijt_base;i=7074",
     browseName="ns=ijt_base;RequestResults",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6459"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6460"]),
 )
@@ -3707,6 +3774,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7091",
     browseName="ns=ijt_base;GetSelectedJoiningProgram",
     description="The Method GetSelectedJoiningProgram is used to get the selected joining program for a given asset.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6461"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6462"]),
 )
@@ -3779,6 +3847,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=ijt_base;i=7092",
     browseName="ns=ijt_base;RequestUnacknowledgedResults",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6470"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6471"]),
 )
@@ -3864,6 +3933,7 @@ o6.call(
     nodeId="ns=ijt_base;i=7093",
     browseName="ns=ijt_base;GetJoiningProcess",
     description="The Method GetJoiningProcess is used to get the joining process based on the input identifier.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6448"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ijt_base;i=6449"]),
 )

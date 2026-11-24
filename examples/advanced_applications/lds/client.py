@@ -21,6 +21,7 @@ import argparse
 import o6
 
 LDS_URL = "opc.tcp://localhost:4840"
+APPLICATION_NAME = "O6-LDS-Application"
 
 
 # BEGIN MD
@@ -40,7 +41,7 @@ def main(mdns=False):
                 print(
                     f"Network: {record.serverName} {record.discoveryUrl} {list(record.serverCapabilities)}"
                 )
-                if record.serverName == "O6-LDS-Application":
+                if record.serverName == APPLICATION_NAME:
                     url = record.discoveryUrl
         else:
             for application in lds.findServers(LDS_URL):

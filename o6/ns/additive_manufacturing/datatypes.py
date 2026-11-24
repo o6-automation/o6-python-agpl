@@ -40,7 +40,11 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=additive_manufacturing;i=3000", browseName="FeedstockFunction", description="This enumeration indicates the function of a specific feedstock.")
+@o6.enumtype(
+    nodeId="ns=additive_manufacturing;i=3000",
+    browseName="ns=additive_manufacturing;FeedstockFunction",
+    description="This enumeration indicates the function of a specific feedstock.",
+)
 class FeedstockFunction(ns0.datatypes.Enumeration):
     UNDEFINED = o6.enumfield(0, name="Undefined")
     MAIN = o6.enumfield(1, name="Main")
@@ -48,21 +52,25 @@ class FeedstockFunction(ns0.datatypes.Enumeration):
     CONSUMABLE = o6.enumfield(3, name="Consumable")
 
 
-@o6.datatype(nodeId="ns=additive_manufacturing;i=3001", browseName="RunInfoDataType", defaultEncodingId="ns=additive_manufacturing;i=5036")
+@o6.datatype(nodeId="ns=additive_manufacturing;i=3001", browseName="ns=additive_manufacturing;RunInfoDataType", defaultEncodingId="ns=additive_manufacturing;i=5036")
 class RunInfoDataType(ns0.datatypes.Structure):
-    currentLayer: o6.UInt32 | None
-    identifier: o6.String
-    state: isa95_jobcontrol_v2.datatypes.ISA95StateDataType
-    remainingTime: o6.Double | None
+    currentLayer: o6.UInt32 | None = o6.field(name="CurrentLayer")
+    identifier: o6.String = o6.field(name="Identifier")
+    state: isa95_jobcontrol_v2.datatypes.ISA95StateDataType = o6.field(name="State")
+    remainingTime: o6.Double | None = o6.field(name="RemainingTime")
 
 
-@o6.enumtype(nodeId="ns=additive_manufacturing;i=3002", browseName="SensorSeverity", description="This enumeration indicates the severity of a specific sensor.")
+@o6.enumtype(
+    nodeId="ns=additive_manufacturing;i=3002", browseName="ns=additive_manufacturing;SensorSeverity", description="This enumeration indicates the severity of a specific sensor."
+)
 class SensorSeverity(ns0.datatypes.Enumeration):
     INFO = o6.enumfield(0, name="Info")
     CRITICAL = o6.enumfield(1, name="Critical")
 
 
-@o6.enumtype(nodeId="ns=additive_manufacturing;i=3003", browseName="SensorCategory", description="This enumeration indicates the severity of a specific sensor.")
+@o6.enumtype(
+    nodeId="ns=additive_manufacturing;i=3003", browseName="ns=additive_manufacturing;SensorCategory", description="This enumeration indicates the severity of a specific sensor."
+)
 class SensorCategory(ns0.datatypes.Enumeration):
     MACHINE_HEALTH = o6.enumfield(0, name="MachineHealth")
     MAINTENANCE_TRACKING = o6.enumfield(1, name="MaintenanceTracking")

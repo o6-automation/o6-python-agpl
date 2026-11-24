@@ -331,9 +331,13 @@ serverAsyncCallCallback(UA_Server *server, void *asyncOpContext, const UA_CallMe
  *
  * Return GOOD once the context is handed over; otherwise the caller keeps it. */
 
-/* The future of the facade call in progress. Set to NULL when a Task takes it
- * over. Facade calls nest when a synchronous node callback makes a request. */
-static ServerAsyncCtx *syncRequester;
+/* The future of the facade call in progress on this thread. Set to NULL when a
+ * Task takes it over. Facade calls nest when a synchronous node callback makes
+ * a request, and the cancellation that hands it to a Task happens inside the
+ * facade call, so only its own thread uses it. It is per thread because
+ * lockServer releases the GIL: another thread's facade call, on the same server
+ * or another one, can run in between. */
+static O6_THREAD_LOCAL ServerAsyncCtx *syncRequester;
 
 static UA_Boolean
 acceptsAsyncRequests(UA_Server *server) {
@@ -523,6 +527,7 @@ build_write_value(const UA_NodeId *nodeId, UA_Boolean copyNodeId,
 
 PyObject *
 pyServer_find_data_type(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *nodeId_obj;
     if (!PyArg_ParseTuple(args, "O", &nodeId_obj))
         return NULL;
@@ -743,6 +748,7 @@ attr_type_for_nodeclass(UA_NodeClass nodeClass) {
  * add_node_finish(nodeid) completes the instantiation. */
 PyObject *
 pyServer_add_node_begin(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     int nodeClassInt;
     PyObject *py_requested, *py_parent, *py_reftype,
              *py_browse, *py_typedef, *py_attr;
@@ -764,6 +770,7 @@ pyServer_add_node_begin(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_add_node_raw(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     int nodeClassInt;
     PyObject *pyRequested, *pyBrowse, *pyTypeDef, *pyAttr, *pyType, *backend;
     if(!PyArg_ParseTuple(args, "iOOOOOO", &nodeClassInt, &pyRequested,
@@ -852,6 +859,7 @@ failBrowse:
 
 PyObject *
 pyServer_add_node_prepare(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *pyNode, *pyParent, *pyRefType, *pyTypeDef;
     if(!PyArg_ParseTuple(args, "OOOO", &pyNode, &pyParent,
                          &pyRefType, &pyTypeDef))
@@ -899,6 +907,7 @@ failParent:
 
 PyObject *
 pyServer_add_node_finish(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_nodeid;
     if (!PyArg_ParseTuple(args, "O", &py_nodeid))
         return NULL;
@@ -923,6 +932,7 @@ pyServer_add_node_finish(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_set_type_abstract(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_nodeid;
     int isAbstract;
     if(!PyArg_ParseTuple(args, "Op", &py_nodeid, &isAbstract))
@@ -959,6 +969,7 @@ pyServer_set_type_abstract(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_set_allow_empty_variables(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     int allow;
     if(!PyArg_ParseTuple(args, "p", &allow))
         return NULL;
@@ -974,6 +985,7 @@ pyServer_set_allow_empty_variables(PyObject *self, PyObject *args) {
  * ==================================================== */
 PyObject *
 pyServer_add_variable_node(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_requested, *py_parent, *py_reftype,
              *py_browse, *py_typedef, *py_attr;
     if (!PyArg_ParseTuple(args, "OOOOOO", &py_requested, &py_parent,
@@ -990,6 +1002,7 @@ pyServer_add_variable_node(PyObject *self, PyObject *args) {
  * ==================================================== */
 PyObject *
 pyServer_add_object_node(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_requested, *py_parent, *py_reftype,
              *py_browse, *py_typedef, *py_attr;
     if (!PyArg_ParseTuple(args, "OOOOOO", &py_requested, &py_parent,
@@ -1006,6 +1019,7 @@ pyServer_add_object_node(PyObject *self, PyObject *args) {
  * ==================================================== */
 PyObject *
 pyServer_add_object_type_node(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_requested, *py_parent, *py_reftype, *py_browse, *py_attr;
     if (!PyArg_ParseTuple(args, "OOOOO", &py_requested, &py_parent,
                           &py_reftype, &py_browse, &py_attr))
@@ -1021,6 +1035,7 @@ pyServer_add_object_type_node(PyObject *self, PyObject *args) {
  * ==================================================== */
 PyObject *
 pyServer_add_variable_type_node(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_requested, *py_parent, *py_reftype,
              *py_browse, *py_typedef, *py_attr;
     if (!PyArg_ParseTuple(args, "OOOOOO", &py_requested, &py_parent,
@@ -1037,6 +1052,7 @@ pyServer_add_variable_type_node(PyObject *self, PyObject *args) {
  * ==================================================== */
 PyObject *
 pyServer_add_data_type_node(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_requested, *py_parent, *py_reftype, *py_browse, *py_attr;
     if (!PyArg_ParseTuple(args, "OOOOO", &py_requested, &py_parent,
                           &py_reftype, &py_browse, &py_attr))
@@ -1052,6 +1068,7 @@ pyServer_add_data_type_node(PyObject *self, PyObject *args) {
  * ==================================================== */
 PyObject *
 pyServer_add_reference_type_node(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_requested, *py_parent, *py_reftype, *py_browse, *py_attr;
     if (!PyArg_ParseTuple(args, "OOOOO", &py_requested, &py_parent,
                           &py_reftype, &py_browse, &py_attr))
@@ -1067,6 +1084,7 @@ pyServer_add_reference_type_node(PyObject *self, PyObject *args) {
  * ==================================================== */
 PyObject *
 pyServer_add_view_node(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_requested, *py_parent, *py_reftype, *py_browse, *py_attr;
     if (!PyArg_ParseTuple(args, "OOOOO", &py_requested, &py_parent,
                           &py_reftype, &py_browse, &py_attr))
@@ -2147,6 +2165,7 @@ pyVariableWriteCallback(UA_Server *server,
  * ==================================================== */  
 PyObject *
 pyServer_add_method_node(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_requested, *py_parent, *py_reftype,
              *py_browse, *py_attr,
              *py_inargs, *py_outargs, *py_inargs_id, *py_outargs_id;
@@ -2303,6 +2322,7 @@ attachedCallbackNode(PyServer *server, PyObject *object,
 
 PyObject *
 pyServer_set_callback_slot(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *pyNode, *callback, *receiver;
     int kind;
     if(!PyArg_ParseTuple(args, "OiOO", &pyNode, &kind, &callback, &receiver))
@@ -2378,6 +2398,7 @@ pyServer_set_callback_slot(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_set_local_value(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *pyNode, *pyValue;
     if(!PyArg_ParseTuple(args, "OO", &pyNode, &pyValue))
         return NULL;
@@ -2437,6 +2458,7 @@ pyServer_set_local_value(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_get_callback(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *pyNode;
     int kind;
     if(!PyArg_ParseTuple(args, "Oi", &pyNode, &kind))
@@ -2458,6 +2480,7 @@ pyServer_get_callback(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_get_node_type(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *pyNode;
     if(!PyArg_ParseTuple(args, "O", &pyNode))
         return NULL;
@@ -2488,6 +2511,7 @@ pyServer_get_node_type(PyObject *self, PyObject *args) {
  * ==================================================== */
 PyObject *
 pyServer_add_reference(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_source, *py_reftype, *py_target;
     int is_forward = 1;
 
@@ -2529,6 +2553,7 @@ pyServer_add_reference(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_delete_reference(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_source, *py_reftype, *py_target;
     int is_forward = 1;
     int delete_bidirectional = 1;
@@ -2573,6 +2598,7 @@ pyServer_delete_reference(PyObject *self, PyObject *args) {
  * ==================================================== */  
 PyObject *
 pyServer_delete_node(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_nodeid;
     int delete_refs = 1;
 
@@ -2600,6 +2626,7 @@ pyServer_delete_node(PyObject *self, PyObject *args) {
  ************************************************************/
 PyObject *
 pyServer_read_data_value(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_item;
     int timestamps;
     if (!PyArg_ParseTuple(args, "Oi", &py_item, &timestamps))
@@ -2638,6 +2665,7 @@ pyServer_read_data_value(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_read_value(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_nodeid;
     const char *indexRange = NULL;
 
@@ -2685,6 +2713,7 @@ pyServer_read_value(PyObject *self, PyObject *args) {
  * ==================================================== */
 PyObject *
 pyServer_write_value(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_nodeid, *py_value;
     const char *indexRange = NULL;
     int return_status = 0;
@@ -2734,6 +2763,7 @@ pyServer_write_value(PyObject *self, PyObject *args) {
  * ==================================================== */
 PyObject *
 pyServer_call(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_object_id, *py_method_id, *py_input_args;
     unsigned int timeout = 0;
     int return_status = 0;
@@ -2965,6 +2995,7 @@ history_add(PyServer *srv, PyObject *py_nodeId, int capacity, int unbounded,
 
 PyObject *
 pyServer_history_add(PyObject *self, PyObject *args, PyObject *kwds) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     static char *kwlist[] = {"nodeId", "capacity", "strategy", "interval", NULL};
     PyObject *py_nodeId = NULL;
     PyObject *py_capacity = NULL; /* absent or 0 takes the database default */
@@ -2985,6 +3016,7 @@ pyServer_history_add(PyObject *self, PyObject *args, PyObject *kwds) {
 
 PyObject *
 pyServer_register_historizing(PyObject *self, PyObject *args, PyObject *kwds) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     static char *kwlist[] = {"nodeid", "max_values", "max_response", NULL};
     PyObject *py_nodeId = NULL;
     int max_values = 0;
@@ -3004,6 +3036,7 @@ pyServer_register_historizing(PyObject *self, PyObject *args, PyObject *kwds) {
 
 PyObject *
 pyServer_history_pause(PyObject *self, PyObject *args, PyObject *kwds) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     static char *kwlist[] = {"nodeId", "paused", NULL};
     PyObject *py_nodeId = NULL;
     int paused = 1;
@@ -3030,6 +3063,7 @@ pyServer_history_pause(PyObject *self, PyObject *args, PyObject *kwds) {
 
 PyObject *
 pyServer_history_read(PyObject *self, PyObject *args, PyObject *kwds) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     static char *kwlist[] = {"nodeId", "start",   "end",
                              "limit",  "reverse", NULL};
     PyObject *py_nodeId = NULL;
@@ -3092,6 +3126,7 @@ pyServer_history_read(PyObject *self, PyObject *args, PyObject *kwds) {
 
 PyObject *
 pyServer_history_insert(PyObject *self, PyObject *args, PyObject *kwds) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     static char *kwlist[] = {"nodeId", "value", NULL};
     PyObject *py_nodeId = NULL;
     PyObject *py_value = NULL;
@@ -3133,6 +3168,7 @@ pyServer_history_insert(PyObject *self, PyObject *args, PyObject *kwds) {
 
 PyObject *
 pyServer_history_remove(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_nodeId = NULL;
     if (!PyArg_ParseTuple(args, "O", &py_nodeId))
         return NULL;
@@ -3165,6 +3201,7 @@ history_stats_entry(PyObject *dict, const char *key, PyObject *value) {
 
 PyObject *
 pyServer_history_stats(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_nodeId = NULL;
     if (!PyArg_ParseTuple(args, "O", &py_nodeId))
         return NULL;
@@ -3223,6 +3260,7 @@ pyServer_history_stats(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_history_clear(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_nodeId = NULL;
     if (!PyArg_ParseTuple(args, "O", &py_nodeId))
         return NULL;
@@ -3247,6 +3285,7 @@ pyServer_history_clear(PyObject *self, PyObject *args) {
  * ==================================================== */
 PyObject *
 pyServer_read_object_property(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_objectid, *py_property_name;
     if (!PyArg_ParseTuple(args, "OO", &py_objectid, &py_property_name))
         return NULL;
@@ -3291,6 +3330,7 @@ pyServer_read_object_property(PyObject *self, PyObject *args) {
  ************************************************************/
 PyObject *
 pyServer_write_object_property(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_objectid, *py_property_name, *py_value;
     if (!PyArg_ParseTuple(args, "OOO", &py_objectid, &py_property_name,
                           &py_value))
@@ -3336,6 +3376,7 @@ pyServer_write_object_property(PyObject *self, PyObject *args) {
  * ==================================================== */
 PyObject *
 pyServer_read_attribute(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_nodeid;
     int attr_id;
 
@@ -3384,6 +3425,7 @@ pyServer_read_attribute(PyObject *self, PyObject *args) {
 
 PyObject *
 pyNode_read_attribute(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyNode_eventLoop(self), NULL);
     int attr_id;
     if(!PyArg_ParseTuple(args, "i", &attr_id))
         return NULL;
@@ -3422,6 +3464,7 @@ pyNode_read_attribute(PyObject *self, PyObject *args) {
  * ==================================================== */
 PyObject *
 pyServer_write_data_value(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_nodeid, *py_datavalue;
     const char *indexRange = NULL;
     int attr_id = UA_ATTRIBUTEID_VALUE;
@@ -3501,6 +3544,7 @@ pyServer_write_data_value(PyObject *self, PyObject *args) {
  * ==================================================== */
 PyObject *
 pyServer_write_attribute(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_nodeid, *py_value;
     int attr_id;
     int return_status = 0;
@@ -3552,6 +3596,7 @@ clearWriteValueWithBorrowedNodeId(UA_WriteValue *wv) {
 
 PyObject *
 pyNode_write_attribute(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyNode_eventLoop(self), NULL);
     int attr_id;
     PyObject *py_value;
     if(!PyArg_ParseTuple(args, "iO", &attr_id, &py_value))
@@ -3594,6 +3639,7 @@ pyNode_write_attribute(PyObject *self, PyObject *args) {
  * ==================================================== */
 PyObject *
 pyServer_translate_browse_paths(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_request;
 
     if (!PyArg_ParseTuple(args, "O", &py_request))
@@ -3655,9 +3701,10 @@ discoveryVerifyCertificate(UA_CertificateGroup *certGroup,
         return UA_STATUSCODE_BADCERTIFICATEUNTRUSTED;
     lockServer(server);
     UA_CertificateGroup *pki = &UA_Server_getConfig(server)->secureChannelPKI;
+    /* A group without verifyCertificate accepts all certificates */
     UA_StatusCode res = pki->verifyCertificate
         ? pki->verifyCertificate(pki, certificate)
-        : UA_STATUSCODE_BADCERTIFICATEUNTRUSTED;
+        : UA_STATUSCODE_GOOD;
     unlockServer(server);
     return res;
 }
@@ -3962,6 +4009,7 @@ registerDiscovery(PyServer *srv, PyObject *pyUrl, PyObject *pySemaphorePath,
 
 PyObject *
 pyServer_register_discovery(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *pyUrl;
     PyObject *pySemaphorePath = Py_None;
     int securityMode = UA_MESSAGESECURITYMODE_INVALID;
@@ -3975,6 +4023,7 @@ pyServer_register_discovery(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_deregister_discovery(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *pyUrl;
     int securityMode = UA_MESSAGESECURITYMODE_INVALID;
     PyObject *pySecurityPolicy = Py_None;
@@ -3984,114 +4033,11 @@ pyServer_deregister_discovery(PyObject *self, PyObject *args) {
                              securityMode, pySecurityPolicy, true);
 }
 
-/* Convert a Python sequence of `str` into a freshly-allocated UA_String
- * array. Returns 0 on success (`*out`/`*size` set; `*out` is NULL for an
- * empty sequence), -1 with a Python exception set on failure. */
-static int
-pystrs_to_ua_string_array(PyObject *seq, const UA_NamespaceMapping *nsMapping,
-                          const UA_DataTypeArray *customDataTypes,
-                          UA_String **out, size_t *size) {
-    PyObject *fast = PySequence_Fast(seq, "expected an iterable of str");
-    if (!fast)
-        return -1;
-    Py_ssize_t count = PySequence_Fast_GET_SIZE(fast);
-    UA_String *items = count
-        ? (UA_String *)UA_Array_new((size_t)count, &UA_TYPES[UA_TYPES_STRING])
-        : NULL;
-    if (count && !items) {
-        Py_DECREF(fast);
-        PyErr_NoMemory();
-        return -1;
-    }
-    for (Py_ssize_t i = 0; i < count; i++) {
-        if (!PY2UA(PySequence_Fast_GET_ITEM(fast, i), &items[i],
-                   &UA_TYPES[UA_TYPES_STRING], nsMapping, customDataTypes)) {
-            UA_Array_delete(items, (size_t)count, &UA_TYPES[UA_TYPES_STRING]);
-            Py_DECREF(fast);
-            return -1;
-        }
-    }
-    Py_DECREF(fast);
-    *out = items;
-    *size = (size_t)count;
-    return 0;
-}
-
-PyObject *
-pyServer_register_server(PyObject *self, PyObject *args) {
-    PyObject *py_registered_server;
-    if (!PyArg_ParseTuple(args, "O", &py_registered_server))
-        return NULL;
-
-    PyServer *srv = (PyServer *)self;
-    const UA_NamespaceMapping *nsMapping = &srv->nsMapPy2UA;
-    const UA_DataTypeArray *customDataTypes =
-        UA_Server_getConfig(srv->server)->customDataTypes;
-
-    UA_RegisteredServer rs;
-    UA_RegisteredServer_init(&rs);
-    if (!PY2UA(py_registered_server, &rs, &UA_TYPES[UA_TYPES_REGISTEREDSERVER],
-               nsMapping, customDataTypes)) {
-        UA_RegisteredServer_clear(&rs);
-        return NULL;
-    }
-
-    UA_StatusCode status = UA_Server_registerServer(srv->server, &rs, 0, NULL, NULL);
-    UA_RegisteredServer_clear(&rs);
-
-    if (status != UA_STATUSCODE_GOOD)
-        return PyErr_StatusCode(status);
-    Py_RETURN_NONE;
-}
-
-PyObject *
-pyServer_deregister_server(PyObject *self, PyObject *args) {
-    PyObject *py_server_uri;
-    PyObject *py_discovery_urls = NULL;
-    if (!PyArg_ParseTuple(args, "O|O", &py_server_uri, &py_discovery_urls))
-        return NULL;
-
-    PyServer *srv = (PyServer *)self;
-    const UA_NamespaceMapping *nsMapping = &srv->nsMapPy2UA;
-    const UA_DataTypeArray *customDataTypes =
-        UA_Server_getConfig(srv->server)->customDataTypes;
-
-    UA_String server_uri;
-    UA_String_init(&server_uri);
-    if (!PY2UA(py_server_uri, &server_uri, &UA_TYPES[UA_TYPES_STRING],
-               nsMapping, customDataTypes)) {
-        UA_String_clear(&server_uri);
-        return NULL;
-    }
-
-    UA_String *discovery_urls = NULL;
-    size_t discovery_urls_size = 0;
-    if (py_discovery_urls && py_discovery_urls != Py_None) {
-        if (pystrs_to_ua_string_array(py_discovery_urls, nsMapping, customDataTypes,
-                                      &discovery_urls, &discovery_urls_size) < 0) {
-            UA_String_clear(&server_uri);
-            return NULL;
-        }
-    }
-
-    UA_StatusCode status = UA_Server_deregisterServer(
-        srv->server, server_uri, discovery_urls_size, discovery_urls);
-
-    UA_String_clear(&server_uri);
-    UA_Array_delete(discovery_urls, discovery_urls_size, &UA_TYPES[UA_TYPES_STRING]);
-
-    if (status != UA_STATUSCODE_GOOD)
-        return PyErr_StatusCode(status);
-    Py_RETURN_NONE;
-}
-
 PyObject *
 pyServer_register_server_on_network(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_server_on_network;
-    PyObject *py_remote_address = Py_None;
-    PyObject *py_ttl = Py_None;
-    if (!PyArg_ParseTuple(args, "O|OO", &py_server_on_network,
-                          &py_remote_address, &py_ttl))
+    if (!PyArg_ParseTuple(args, "O", &py_server_on_network))
         return NULL;
 
     PyServer *srv = (PyServer *)self;
@@ -4107,55 +4053,17 @@ pyServer_register_server_on_network(PyObject *self, PyObject *args) {
         return NULL;
     }
 
-    UA_String remote_address = UA_STRING_NULL;
-    UA_UInt32 ttl = 0;
+    /* The record is published by this server. open62541 announces it only on
+     * request. */
     UA_Boolean announce = true;
-    UA_KeyValuePair kvp[3];
-    size_t kvp_size = 0;
-
-    /* A record without a remote address is published by this server. open62541
-     * announces it only on request. */
-    if (py_remote_address == Py_None) {
-        kvp[kvp_size].key.namespaceIndex = 0;
-        kvp[kvp_size].key.name = (UA_String)UA_STRING_STATIC("announce");
-        UA_Variant_setScalar(&kvp[kvp_size].value, &announce, &UA_TYPES[UA_TYPES_BOOLEAN]);
-        kvp_size++;
-    }
-
-    if (py_remote_address != Py_None) {
-        if (!PY2UA(py_remote_address, &remote_address, &UA_TYPES[UA_TYPES_STRING],
-                   nsMapping, customDataTypes)) {
-            UA_ServerOnNetwork_clear(&son);
-            return NULL;
-        }
-        kvp[kvp_size].key.namespaceIndex = 0;
-        kvp[kvp_size].key.name = (UA_String)UA_STRING_STATIC("remote-address");
-        UA_Variant_setScalar(&kvp[kvp_size].value, &remote_address,
-                             &UA_TYPES[UA_TYPES_STRING]);
-        kvp_size++;
-    }
-
-    if (py_ttl != Py_None) {
-        long ttl_value = PyLong_AsLong(py_ttl);
-        if (ttl_value < 0 && PyErr_Occurred()) {
-            UA_String_clear(&remote_address);
-            UA_ServerOnNetwork_clear(&son);
-            return NULL;
-        }
-        ttl = (UA_UInt32)ttl_value;
-        kvp[kvp_size].key.namespaceIndex = 0;
-        kvp[kvp_size].key.name = (UA_String)UA_STRING_STATIC("ttl");
-        UA_Variant_setScalar(&kvp[kvp_size].value, &ttl, &UA_TYPES[UA_TYPES_UINT32]);
-        kvp_size++;
-    }
-
-    UA_KeyValueMap kvm = {kvp_size, kvp_size ? kvp : NULL};
+    UA_KeyValuePair kvp;
+    kvp.key.namespaceIndex = 0;
+    kvp.key.name = (UA_String)UA_STRING_STATIC("announce");
+    UA_Variant_setScalar(&kvp.value, &announce, &UA_TYPES[UA_TYPES_BOOLEAN]);
+    UA_KeyValueMap kvm = {1, &kvp};
     UA_StatusCode status = UA_Server_registerServerOnNetwork(srv->server, &son, kvm);
-    /* A received record replaces a local one */
     if (status == UA_STATUSCODE_GOOD)
-        pyMdns_recordChanged(srv, &son.serverName, py_remote_address == Py_None ? &son : NULL);
-
-    UA_String_clear(&remote_address);
+        pyMdns_recordChanged(srv, &son.serverName, &son);
     UA_ServerOnNetwork_clear(&son);
 
     if (status != UA_STATUSCODE_GOOD)
@@ -4165,6 +4073,7 @@ pyServer_register_server_on_network(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_deregister_server_on_network(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_server_name;
     if (!PyArg_ParseTuple(args, "O", &py_server_name))
         return NULL;
@@ -4195,6 +4104,7 @@ pyServer_deregister_server_on_network(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_set_register_server_callback(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     (void)self;
     (void)args;
     PyErr_SetString(PyExc_NotImplementedError,
@@ -4205,6 +4115,7 @@ pyServer_set_register_server_callback(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_set_server_on_network_callback(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     (void)self;
     (void)args;
     PyErr_SetString(PyExc_NotImplementedError,

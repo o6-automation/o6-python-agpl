@@ -78,9 +78,11 @@ creation. Call `await server.waitReady()` afterwards, or use
 `async with server`. Cancelling the readiness wait shuts down startup and
 closes its listeners.
 
-If a running server is garbage-collected, `__del__` stops it and releases the
-native resources. Don't rely on this: keep the server in a variable for as long
-as it serves, and stop it explicitly.
+If a running server is garbage-collected, `__del__` emits a `ResourceWarning`
+and schedules the shutdown on the server's event loop. The shutdown serves
+`config.shutdownDelay`, then releases the native resources. The collecting
+thread does not wait for it. Don't rely on this: keep the server in a variable
+for as long as it serves, and stop it explicitly.
 
 ### Well-known entry points
 
@@ -148,7 +150,8 @@ server.config.buildInfo = build_info
 encryption.
 
 `server.config.logger` is write-only and redirects all server log output to a
-Python logger. You can also pass the logger as `Server(logger=...)`.
+Python logger. Like the other settings, it can be assigned only while the server
+is fully stopped. You can also pass the logger as `Server(logger=...)`.
 
 ### Quotas, intervals, and listening addresses
 
@@ -342,7 +345,10 @@ client = o6.Client(
 ```
 
 These three policies use RSA certificates. Elliptic-curve policies require an
-EC certificate. The deprecated `Basic128Rsa15` and `Basic256` policies are
+EC certificate. The bundled SDK enables `ECC_nistP256_AesGcm` and
+`ECC_nistP256_ChaChaPoly` by default for a compatible EC certificate; deprecated
+ECC policies, including `ECC_curve25519` and `ECC_curve448`, are excluded.
+The deprecated `Basic128Rsa15` and `Basic256` policies are
 offered only when you select them, as described next. Each endpoint advertises
 each user token policy once.
 
@@ -375,7 +381,7 @@ constructor.
 The same selection works for `server.config.setDefaultWithFilestore()` through
 its `securityPolicies` argument. Without it, that call keeps everything
 open62541 sets up for the certificate, including `"None"` and the deprecated
-policies.
+RSA policies.
 
 Requests normally carry a RequestHeader timestamp. By default the server
 answers a request with a timestamp of 0 with `BadInvalidTimestamp`. To log a
@@ -567,6 +573,15 @@ it serves network traffic and pending callbacks. A synchronous caller on
 another thread can wait for a result; a callback on the owning loop cannot
 block that loop to wait for itself. See
 [Calling the API from callbacks](callbacks.md#calling-the-api-from-callbacks).
+
+!!! warning "Do not block the loop thread on a thread that calls the server"
+    A server call from a different thread runs on the loop thread. Do not let
+    the loop thread wait for a thread that calls the server, for example with
+    `Thread.join()`, a lock or `Future.result()`. If it does, the two threads
+    wait for each other forever. Keep the loop thread free, or wait with
+    `await`, for example `await asyncio.to_thread(worker.join)` or
+    `await loop.run_in_executor(...)`. See
+    [GIL and event-loop bridging](../implementation-details/gil-and-event-loop.md#python-marshalling).
 
 ### Manual startup and shutdown
 

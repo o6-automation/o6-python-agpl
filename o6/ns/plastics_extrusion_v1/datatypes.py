@@ -33,7 +33,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=plastics_extrusion_v1;i=3001", browseName="ExtrusionMessageClassificationEnumeration")
+@o6.enumtype(nodeId="ns=plastics_extrusion_v1;i=3001", browseName="ns=plastics_extrusion_v1;ExtrusionMessageClassificationEnumeration")
 class ExtrusionMessageClassificationEnumeration(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="OTHER")
     LINE_CONTROL = o6.enumfield(1, name="LINE_CONTROL")
@@ -66,7 +66,7 @@ class ExtrusionMessageClassificationEnumeration(ns0.datatypes.Enumeration):
     MANUAL_OPERATION = o6.enumfield(28, name="MANUAL_OPERATION")
 
 
-@o6.enumtype(nodeId="ns=plastics_extrusion_v1;i=3003", browseName="ComponentStatusEnumeration")
+@o6.enumtype(nodeId="ns=plastics_extrusion_v1;i=3003", browseName="ns=plastics_extrusion_v1;ComponentStatusEnumeration")
 class ComponentStatusEnumeration(ns0.datatypes.Enumeration):
     OFFLINE = o6.enumfield(0, name="OFFLINE")
     IDLE = o6.enumfield(1, name="IDLE")

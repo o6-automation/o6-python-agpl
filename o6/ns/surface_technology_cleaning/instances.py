@@ -44,43 +44,71 @@ surface_technology_cleaning_objtypes.STCompCondenserType(
     nodeId="ns=surface_technology_cleaning;i=5069",
     browseName="ns=surface_technology_cleaning;<Condenser>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5070", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5070", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompCoolerType(
     nodeId="ns=surface_technology_cleaning;i=5071",
     browseName="ns=surface_technology_cleaning;<Cooler>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5072", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5072", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompHeaterType(
     nodeId="ns=surface_technology_cleaning;i=5073",
     browseName="ns=surface_technology_cleaning;<Heater>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5074", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5074", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompPressurizedAirType(
     nodeId="ns=surface_technology_cleaning;i=5075",
     browseName="ns=surface_technology_cleaning;<PressurizedAir>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5076", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5076", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompPumpType(
     nodeId="ns=surface_technology_cleaning;i=5077",
     browseName="ns=surface_technology_cleaning;<Pump>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5078", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5078", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompValveType(
     nodeId="ns=surface_technology_cleaning;i=5079",
     browseName="ns=surface_technology_cleaning;<Valve>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5080", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5080", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompVesselType(
     nodeId="ns=surface_technology_cleaning;i=5081",
     browseName="ns=surface_technology_cleaning;<Vessel>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5082", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5082", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 machinery.objtypes.MachineComponentsType(
     nodeId="ns=surface_technology_cleaning;i=5065",
@@ -101,37 +129,61 @@ surface_technology_cleaning_objtypes.STCompCoolerType(
     nodeId="ns=surface_technology_cleaning;i=5084",
     browseName="ns=surface_technology_cleaning;<Cooler>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5085", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5085", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompHeaterType(
     nodeId="ns=surface_technology_cleaning;i=5086",
     browseName="ns=surface_technology_cleaning;<Heater>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5087", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5087", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompPumpType(
     nodeId="ns=surface_technology_cleaning;i=5088",
     browseName="ns=surface_technology_cleaning;<Pump>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5089", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5089", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompUltrasonicEmitterType(
     nodeId="ns=surface_technology_cleaning;i=5090",
     browseName="ns=surface_technology_cleaning;<UltrasonicEmitter>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5091", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5091", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompValveType(
     nodeId="ns=surface_technology_cleaning;i=5092",
     browseName="ns=surface_technology_cleaning;<Valve>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5093", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5093", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompVesselType(
     nodeId="ns=surface_technology_cleaning;i=5094",
     browseName="ns=surface_technology_cleaning;<Vessel>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5095", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5095", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 machinery.objtypes.MachineComponentsType(
     nodeId="ns=surface_technology_cleaning;i=5083",
@@ -151,25 +203,41 @@ surface_technology_cleaning_objtypes.STCompCoolerType(
     nodeId="ns=surface_technology_cleaning;i=5100",
     browseName="ns=surface_technology_cleaning;<Cooler>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5101", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5101", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompDryerType(
     nodeId="ns=surface_technology_cleaning;i=5102",
     browseName="ns=surface_technology_cleaning;<Dryer>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5103", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5103", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompPressurizedAirType(
     nodeId="ns=surface_technology_cleaning;i=5104",
     browseName="ns=surface_technology_cleaning;<PressurizedAir>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5105", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5105", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompValveType(
     nodeId="ns=surface_technology_cleaning;i=5106",
     browseName="ns=surface_technology_cleaning;<Valve>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5107", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5107", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 machinery.objtypes.MachineComponentsType(
     nodeId="ns=surface_technology_cleaning;i=5096",
@@ -187,43 +255,71 @@ surface_technology_cleaning_objtypes.STCompCoolerType(
     nodeId="ns=surface_technology_cleaning;i=5113",
     browseName="ns=surface_technology_cleaning;<Cooler>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5114", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5114", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompDryerType(
     nodeId="ns=surface_technology_cleaning;i=5115",
     browseName="ns=surface_technology_cleaning;<Dryer>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5116", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5116", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompHeaterType(
     nodeId="ns=surface_technology_cleaning;i=5117",
     browseName="ns=surface_technology_cleaning;<Heater>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5118", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5118", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompPressurizedAirType(
     nodeId="ns=surface_technology_cleaning;i=5119",
     browseName="ns=surface_technology_cleaning;<PressurizedAir>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5120", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5120", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompPumpType(
     nodeId="ns=surface_technology_cleaning;i=5121",
     browseName="ns=surface_technology_cleaning;<Pump>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5122", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5122", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompValveType(
     nodeId="ns=surface_technology_cleaning;i=5123",
     browseName="ns=surface_technology_cleaning;<Valve>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5124", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5124", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompVesselType(
     nodeId="ns=surface_technology_cleaning;i=5125",
     browseName="ns=surface_technology_cleaning;<Vessel>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5126", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5126", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 machinery.objtypes.MachineComponentsType(
     nodeId="ns=surface_technology_cleaning;i=5108",
@@ -244,19 +340,31 @@ surface_technology_cleaning_objtypes.STCompDryerType(
     nodeId="ns=surface_technology_cleaning;i=5131",
     browseName="ns=surface_technology_cleaning;<Dryer>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5132", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5132", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompPressurizedAirType(
     nodeId="ns=surface_technology_cleaning;i=5133",
     browseName="ns=surface_technology_cleaning;<PressurizedAir>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5134", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5134", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompValveType(
     nodeId="ns=surface_technology_cleaning;i=5135",
     browseName="ns=surface_technology_cleaning;<Valve>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5136", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5136", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 machinery.objtypes.MachineComponentsType(
     nodeId="ns=surface_technology_cleaning;i=5127",
@@ -273,25 +381,41 @@ surface_technology_cleaning_objtypes.STCompPumpType(
     nodeId="ns=surface_technology_cleaning;i=5138",
     browseName="ns=surface_technology_cleaning;<Pump>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5139", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5139", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompStirrerType(
     nodeId="ns=surface_technology_cleaning;i=5140",
     browseName="ns=surface_technology_cleaning;<Stirrer>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5141", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5141", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompValveType(
     nodeId="ns=surface_technology_cleaning;i=5142",
     browseName="ns=surface_technology_cleaning;<Valve>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5143", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5143", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompVesselType(
     nodeId="ns=surface_technology_cleaning;i=5144",
     browseName="ns=surface_technology_cleaning;<Vessel>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5145", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5145", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 machinery.objtypes.MachineComponentsType(
     nodeId="ns=surface_technology_cleaning;i=5137",
@@ -309,37 +433,61 @@ surface_technology_cleaning_objtypes.STCompCoolerType(
     nodeId="ns=surface_technology_cleaning;i=5158",
     browseName="ns=surface_technology_cleaning;<Cooler>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5159", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5159", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompHeaterType(
     nodeId="ns=surface_technology_cleaning;i=5160",
     browseName="ns=surface_technology_cleaning;<Heater>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5161", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5161", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompPumpType(
     nodeId="ns=surface_technology_cleaning;i=5162",
     browseName="ns=surface_technology_cleaning;<Pump>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5163", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5163", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompUltrasonicEmitterType(
     nodeId="ns=surface_technology_cleaning;i=5164",
     browseName="ns=surface_technology_cleaning;<UltrasonicEmitter>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5165", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5165", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompValveType(
     nodeId="ns=surface_technology_cleaning;i=5166",
     browseName="ns=surface_technology_cleaning;<Valve>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5167", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5167", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompVesselType(
     nodeId="ns=surface_technology_cleaning;i=5168",
     browseName="ns=surface_technology_cleaning;<Vessel>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5169", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5169", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 machinery.objtypes.MachineComponentsType(
     nodeId="ns=surface_technology_cleaning;i=5157",
@@ -359,25 +507,41 @@ surface_technology_cleaning_objtypes.STCompHeaterType(
     nodeId="ns=surface_technology_cleaning;i=5171",
     browseName="ns=surface_technology_cleaning;<Heater>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5172", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5172", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompPumpType(
     nodeId="ns=surface_technology_cleaning;i=5173",
     browseName="ns=surface_technology_cleaning;<Pump>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5174", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5174", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompValveType(
     nodeId="ns=surface_technology_cleaning;i=5175",
     browseName="ns=surface_technology_cleaning;<Valve>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5176", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5176", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 surface_technology_cleaning_objtypes.STCompVesselType(
     nodeId="ns=surface_technology_cleaning;i=5177",
     browseName="ns=surface_technology_cleaning;<Vessel>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5178", browseName="ns=surface_technology;MachineryBuildingBlocks"))],
+    references=[
+        o6.hasComponent(
+            ns0.objtypes.FolderType(nodeId="ns=surface_technology_cleaning;i=5178", browseName="ns=surface_technology;MachineryBuildingBlocks", modellingRule="Mandatory")
+        )
+    ],
 )
 machinery.objtypes.MachineComponentsType(
     nodeId="ns=surface_technology_cleaning;i=5170",
@@ -416,7 +580,7 @@ http_opcfoundation_org_UA_SurfaceTechnology_CleaningPretreatment_ = ns0.objtypes
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),
@@ -434,9 +598,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6008",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6009", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6010", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6009", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6010", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -450,7 +619,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6011", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6011",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6008"]),
@@ -460,9 +636,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6012",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6013", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6014", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6013", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6014", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -476,7 +657,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6015", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6015",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6012"]),
@@ -486,6 +674,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_cleaning;i=5003",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5004"]), o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5005"])],
 )
 machinery.objtypes.MonitoringType(
@@ -499,9 +688,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6016",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6017", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6018", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6017", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6018", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -515,7 +709,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6019", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6019",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6016"]),
@@ -525,6 +726,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_cleaning;i=5007",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5008"])],
 )
 machinery.objtypes.MonitoringType(
@@ -538,9 +740,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6020",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6021", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6022", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6021", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6022", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -554,7 +761,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6023", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6023",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6020"]),
@@ -564,9 +778,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6024",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6025", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6026", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6025", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6026", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -580,7 +799,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6027", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6027",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6024"]),
@@ -590,9 +816,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6028",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6029", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6030", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6029", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6030", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -606,7 +837,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6031", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6031",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6028"]),
@@ -616,6 +854,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_cleaning;i=5010",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5011"]),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5012"]),
@@ -633,9 +872,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6032",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6033", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6034", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6033", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6034", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -649,7 +893,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6035", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6035",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6032"]),
@@ -659,9 +910,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6036",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6037", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6038", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6037", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6038", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -675,7 +931,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6039", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6039",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6036"]),
@@ -685,9 +948,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6040",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6041", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6042", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6041", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6042", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -701,7 +969,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6043", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6043",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6040"]),
@@ -711,6 +986,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_cleaning;i=5015",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5016"]),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5017"]),
@@ -728,9 +1004,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6044",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6045", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6046", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6045", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6046", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -744,7 +1025,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6047", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6047",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6044"]),
@@ -754,9 +1042,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6048",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6049", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6050", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6049", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6050", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -770,7 +1063,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6051", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6051",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6048"]),
@@ -780,9 +1080,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6052",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6053", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6054", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6053", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6054", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -796,7 +1101,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6055", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6055",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6052"]),
@@ -806,6 +1118,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_cleaning;i=5020",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5021"]),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5022"]),
@@ -823,9 +1136,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6056",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6057", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6058", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6057", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6058", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -839,7 +1157,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6059", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6059",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6056"]),
@@ -849,9 +1174,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6060",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6061", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6062", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6061", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6062", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -865,7 +1195,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6063", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6063",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6060"]),
@@ -875,9 +1212,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6064",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6065", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6066", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6065", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6066", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -891,7 +1233,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6067", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6067",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6064"]),
@@ -901,9 +1250,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6068",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6069", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6070", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6069", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6070", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -917,7 +1271,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6071", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6071",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6068"]),
@@ -927,9 +1288,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6072",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6073", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6074", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6073", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6074", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -943,7 +1309,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6075", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6075",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6072"]),
@@ -953,9 +1326,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6076",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6077", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6078", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6077", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6078", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -969,7 +1347,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6079", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6079",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6076"]),
@@ -979,9 +1364,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6080",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6081", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6082", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6081", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6082", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -995,7 +1385,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6083", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6083",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6080"]),
@@ -1005,6 +1402,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_cleaning;i=5025",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5026"]),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5027"]),
@@ -1026,9 +1424,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6084",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6085", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6086", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6085", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6086", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1042,7 +1445,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6087", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6087",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6084"]),
@@ -1052,6 +1462,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_cleaning;i=5034",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5035"])],
 )
 machinery.objtypes.MonitoringType(
@@ -1065,9 +1476,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6088",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6089", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6090", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6089", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6090", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1081,7 +1497,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6091", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6091",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6088"]),
@@ -1091,9 +1514,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6092",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6093", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6094", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6093", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6094", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1107,7 +1535,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6095", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6095",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6092"]),
@@ -1117,6 +1552,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_cleaning;i=5037",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5038"]), o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5039"])],
 )
 machinery.objtypes.MonitoringType(
@@ -1130,9 +1566,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6096",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6097", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6098", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6097", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6098", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1146,7 +1587,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6099", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6099",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6096"]),
@@ -1156,9 +1604,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6100",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6101", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6102", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6101", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6102", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1172,7 +1625,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6103", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6103",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6100"]),
@@ -1182,6 +1642,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_cleaning;i=5041",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5042"]), o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5043"])],
 )
 machinery.objtypes.MonitoringType(
@@ -1195,9 +1656,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6104",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6105", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6106", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6105", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6106", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1211,7 +1677,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6107", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6107",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6104"]),
@@ -1221,9 +1694,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6108",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6109", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6110", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6109", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6110", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1237,7 +1715,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6111", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6111",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6108"]),
@@ -1247,9 +1732,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6112",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6113", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6114", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6113", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6114", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1263,7 +1753,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6115", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6115",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6112"]),
@@ -1273,17 +1770,26 @@ padim.vartypes.MultiStateDiscreteSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6116",
     browseName="ns=padim;MultiStateDiscreteSignal",
     displayName="Multistate I/O value",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6117", browseName="EnumDictionaryEntries", dataType=o6.NodeId, valueRank=2, arrayDimensions=[0, 0])
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6117",
+                browseName="EnumDictionaryEntries",
+                modellingRule="Mandatory",
+                dataType=o6.NodeId,
+                valueRank=2,
+                arrayDimensions=[0, 0],
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=surface_technology_cleaning;i=6118",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[5],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Empty", "en"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("Low", "en"), description=o6.LocalizedText()),
@@ -1294,7 +1800,9 @@ padim.vartypes.MultiStateDiscreteSignalVariableType(
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6119", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Empty"))
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6119", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Empty")
+            )
         ),
     ],
     dataType=o6.UInt32,
@@ -1309,7 +1817,14 @@ padim.objtypes.MultiStateDiscreteSignalType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6120", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6120",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6116"]),
@@ -1319,9 +1834,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6121",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6122", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6123", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6122", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6123", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1335,7 +1855,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6124", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6124",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6121"]),
@@ -1345,9 +1872,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6126",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6127", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6128", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6127", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6128", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1361,7 +1893,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6129", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6129",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6126"]),
@@ -1371,9 +1910,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6130",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6131", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6132", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6131", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6132", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1387,7 +1931,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6133", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6133",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6130"]),
@@ -1397,9 +1948,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6134",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6135", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6136", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6135", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6136", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1413,7 +1969,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6137", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6137",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6134"]),
@@ -1423,9 +1986,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6138",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6139", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6140", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6139", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6140", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1439,7 +2007,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6141", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6141",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6138"]),
@@ -1449,9 +2024,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6142",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6143", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6144", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6143", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6144", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1465,7 +2045,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6145", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6145",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6142"]),
@@ -1475,9 +2062,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6146",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6147", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6148", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6147", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6148", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1491,7 +2083,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6149", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6149",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6146"]),
@@ -1501,9 +2100,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6150",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6151", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6152", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6151", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6152", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1517,7 +2121,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6153", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6153",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6150"]),
@@ -1527,9 +2138,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6154",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6155", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6156", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6155", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6156", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1543,7 +2159,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6157", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6157",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6154"]),
@@ -1553,9 +2176,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6158",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6159", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6160", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6159", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6160", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1569,7 +2197,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6161", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6161",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6158"]),
@@ -1579,9 +2214,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6162",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6163", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6164", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6163", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6164", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1595,7 +2235,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6165", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6165",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6162"]),
@@ -1605,9 +2252,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6166",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6167", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6168", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6167", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6168", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1621,7 +2273,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6169", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6169",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6166"]),
@@ -1631,9 +2290,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6170",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6171", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6172", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6171", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6172", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1647,7 +2311,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6173", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6173",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6170"]),
@@ -1657,9 +2328,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6174",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6175", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6176", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6175", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6176", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1673,7 +2349,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6177", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6177",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6174"]),
@@ -1683,9 +2366,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6178",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6179", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6180", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6179", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6180", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1699,7 +2387,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6181", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6181",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6178"]),
@@ -1709,9 +2404,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6182",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6183", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6184", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6183", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6184", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1725,7 +2425,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6185", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6185",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6182"]),
@@ -1735,9 +2442,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6186",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6187", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6188", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6187", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6188", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1751,7 +2463,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6189", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6189",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6186"]),
@@ -1761,6 +2480,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_cleaning;i=5067",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5068"])],
 )
 machinery.objtypes.MonitoringType(
@@ -1774,9 +2494,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6190",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6191", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6192", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6191", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6192", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1790,7 +2515,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6193", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6193",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6190"]),
@@ -1800,6 +2532,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_cleaning;i=5098",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5099"])],
 )
 machinery.objtypes.MonitoringType(
@@ -1813,9 +2546,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6194",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6195", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6196", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6195", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6196", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1829,7 +2567,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6197", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6197",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6194"]),
@@ -1839,9 +2584,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6198",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6199", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6200", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6199", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6200", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1855,7 +2605,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6201", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6201",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6198"]),
@@ -1865,6 +2622,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_cleaning;i=5110",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5111"]), o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5112"])],
 )
 machinery.objtypes.MonitoringType(
@@ -1878,9 +2636,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6202",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6203", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6204", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6203", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6204", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1894,7 +2657,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6205", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6205",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6202"]),
@@ -1904,6 +2674,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_cleaning;i=5129",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5130"])],
 )
 machinery.objtypes.MonitoringType(
@@ -1917,9 +2688,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6206",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6207", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6208", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6207", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6208", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1933,7 +2709,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6209", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6209",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6206"]),
@@ -1943,9 +2726,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6210",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6211", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6212", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6211", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6212", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1959,7 +2747,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6213", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6213",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6210"]),
@@ -1969,9 +2764,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6214",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6215", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6216", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6215", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6216", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1985,7 +2785,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6217", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6217",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6214"]),
@@ -1995,9 +2802,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6218",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6219", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6220", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6219", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6220", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -2011,7 +2823,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6221", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6221",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6218"]),
@@ -2021,9 +2840,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6222",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6223", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6224", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6223", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6224", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -2037,7 +2861,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6225", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6225",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6222"]),
@@ -2047,9 +2878,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6226",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6227", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6228", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6227", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6228", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -2063,7 +2899,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6229", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6229",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6226"]),
@@ -2073,9 +2916,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6230",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6231", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6232", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6231", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6232", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -2089,7 +2937,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6233", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6233",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6230"]),
@@ -2099,9 +2954,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6234",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6235", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6236", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6235", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6236", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -2115,7 +2975,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6237", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6237",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6234"]),
@@ -2125,9 +2992,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6238",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6239", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6240", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6239", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6240", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -2141,7 +3013,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6241", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6241",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6238"]),
@@ -2151,6 +3030,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_cleaning;i=5147",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5148"]),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5149"]),
@@ -2174,9 +3054,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6242",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6243", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6244", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6243", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6244", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -2190,7 +3075,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6245", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6245",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6242"]),
@@ -2200,9 +3092,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6246",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6247", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6248", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6247", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6248", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -2216,7 +3113,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6249", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6249",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6246"]),
@@ -2226,9 +3130,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6250",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6251", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6252", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6251", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6252", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -2242,7 +3151,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6253", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6253",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6250"]),
@@ -2252,9 +3168,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6254",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6255", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6256", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6255", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6256", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -2268,7 +3189,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6257", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6257",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6254"]),
@@ -2278,9 +3206,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6258",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6259", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6260", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6259", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6260", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -2294,7 +3227,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6261", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6261",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6258"]),
@@ -2304,9 +3244,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6262",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6263", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6264", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6263", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6264", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -2320,7 +3265,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6265", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6265",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6262"]),
@@ -2330,9 +3282,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6266",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6267", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6268", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6267", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6268", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -2346,7 +3303,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6269", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6269",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6266"]),
@@ -2356,9 +3320,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6125",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6270", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6271", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6270", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6271", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -2372,7 +3341,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6272", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6272",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6125"]),
@@ -2382,9 +3358,14 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_cleaning;i=6274",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6275", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6276", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_cleaning;i=6275", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_cleaning;i=6276", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -2398,7 +3379,14 @@ machinery_processvalues.objtypes.ProcessValueType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_cleaning;i=6277", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_cleaning;i=6277",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=6274"]),
@@ -2408,6 +3396,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_cleaning;i=5045",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5046"]),
         o6.hasComponent(o6.ns["ns=surface_technology_cleaning;i=5047"]),

@@ -50,6 +50,7 @@ class AFCStateType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mining_armoured_face_conveyor;i=6021",
             browseName="ns=mining_armoured_face_conveyor;AFCNormalRunningDirection",
             description="Direction of the normal AFC operation",
+            modellingRule="Mandatory",
             dataType=mining_armoured_face_conveyor_datypes.AFCNormalRunningDirectionEnum,
         )
     )

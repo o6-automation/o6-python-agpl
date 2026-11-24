@@ -39,20 +39,22 @@ else:
 ns0.vartypes.ThreeDCartesianCoordinatesType(
     nodeId="ns=mining_hydraulic_excavator;i=6008",
     browseName="CartesianCoordinates",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6009", browseName="X", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6010", browseName="Y", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6011", browseName="Z", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6009", browseName="X", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6010", browseName="Y", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6011", browseName="Z", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDCartesianCoordinates,
 )
 ns0.vartypes.ThreeDOrientationType(
     nodeId="ns=mining_hydraulic_excavator;i=6012",
     browseName="Orientation",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6013", browseName="A", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6014", browseName="B", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6015", browseName="C", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6013", browseName="A", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6014", browseName="B", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6015", browseName="C", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDOrientation,
 )
@@ -60,10 +62,11 @@ ns0.vartypes.ThreeDFrameType(
     nodeId="ns=mining_hydraulic_excavator;i=6007",
     browseName="ns=mining_loading;ExclusionZone",
     description="The ExclusionZone property describes the area that haulage machines, which are to be loaded, are not allowed to enter when approaching the loading machine",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_hydraulic_excavator;i=6002", browseName="Constant", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_hydraulic_excavator;i=6003", browseName="FixedBase", dataType=o6.Boolean)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6001", browseName="BaseFrame", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_hydraulic_excavator;i=6002", browseName="Constant", modellingRule="Optional", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_hydraulic_excavator;i=6003", browseName="FixedBase", modellingRule="Optional", dataType=o6.Boolean)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6001", browseName="BaseFrame", modellingRule="Optional", dataType=o6.NodeId)),
         o6.hasComponent(o6.ns["ns=mining_hydraulic_excavator;i=6008"]),
         o6.hasComponent(o6.ns["ns=mining_hydraulic_excavator;i=6012"]),
     ],
@@ -93,7 +96,7 @@ http_opcfoundation_org_UA_Mining_Loading_HydraulicExcavator_ = ns0.objtypes.Name
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[2],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC, ns0.datatypes.IdType.STRING],
             )
         ),
@@ -110,20 +113,22 @@ http_opcfoundation_org_UA_Mining_Loading_HydraulicExcavator_ = ns0.objtypes.Name
 ns0.vartypes.ThreeDCartesianCoordinatesType(
     nodeId="ns=mining_hydraulic_excavator;i=6025",
     browseName="CartesianCoordinates",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6026", browseName="X", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6027", browseName="Y", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6028", browseName="Z", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6026", browseName="X", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6027", browseName="Y", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6028", browseName="Z", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDCartesianCoordinates,
 )
 ns0.vartypes.ThreeDOrientationType(
     nodeId="ns=mining_hydraulic_excavator;i=6029",
     browseName="Orientation",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6036", browseName="A", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6037", browseName="B", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6038", browseName="C", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6036", browseName="A", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6037", browseName="B", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6038", browseName="C", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDOrientation,
 )
@@ -131,12 +136,13 @@ ns0.vartypes.ThreeDFrameType(
     nodeId="ns=mining_hydraulic_excavator;i=6024",
     browseName="ns=mining_loading;MachinePose",
     description="The MachinePose variable describes the pose of the loading machine in terms of location coordinates, orientation and (optional) base frame.",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_hydraulic_excavator;i=6040", browseName="Constant", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_hydraulic_excavator;i=6041", browseName="FixedBase", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_hydraulic_excavator;i=6040", browseName="Constant", modellingRule="Optional", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_hydraulic_excavator;i=6041", browseName="FixedBase", modellingRule="Optional", dataType=o6.Boolean)),
         o6.hasComponent(o6.ns["ns=mining_hydraulic_excavator;i=6025"]),
         o6.hasComponent(o6.ns["ns=mining_hydraulic_excavator;i=6029"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6039", browseName="BaseFrame", dataType=o6.NodeId)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_hydraulic_excavator;i=6039", browseName="BaseFrame", modellingRule="Optional", dataType=o6.NodeId)),
     ],
     dataType=ns0.datatypes.ThreeDFrame,
     value=ns0.datatypes.ThreeDFrame(
@@ -147,6 +153,7 @@ ns0.objtypes.BaseObjectType(
     nodeId="ns=mining_hydraulic_excavator;i=5004",
     browseName="ns=di;ParameterSet",
     description="Flat list of Parameters",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=mining_hydraulic_excavator;i=6007"]), o6.hasComponent(o6.ns["ns=mining_hydraulic_excavator;i=6024"])],
 )
 mining.objtypes.MiningEquipmentIdentificationType(
@@ -159,6 +166,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_hydraulic_excavator;i=6004",
                 browseName="ns=di;AssetId",
                 description="To be used by end users to store a unique identification in the context of their overall application. Servers shall support at least 40 Unicode characters for the clients writing this value, this means clients can expect to be able to write strings with a length of 40 Unicode characters into that field.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
                 accessLevel=3,
@@ -170,6 +178,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_hydraulic_excavator;i=6031",
                 browseName="ns=di;DeviceClass",
                 description="Indicates in which domain or for what purpose the MachineryItem is used.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -178,6 +187,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_hydraulic_excavator;i=6032",
                 browseName="ns=di;ManufacturerUri",
                 description="A globally unique identifier of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -186,6 +196,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_hydraulic_excavator;i=6033",
                 browseName="ns=di;Model",
                 description="A human-readable, localized name of the model of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -194,6 +205,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_hydraulic_excavator;i=6034",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -202,6 +214,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_hydraulic_excavator;i=6035",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -210,6 +223,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_hydraulic_excavator;i=6042",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -241,6 +255,7 @@ o6.call(
     nodeId="ns=mining_hydraulic_excavator;i=7001",
     browseName="ns=mining_loading;RequestForLoading",
     description="The RequestForLoading method is called by a partnering machine when they want to start the loading procedure.",
+    modellingRule="Optional",
     outputArgs=o6.hasProperty(o6.ns["ns=mining_hydraulic_excavator;i=6005"]),
 )
 
@@ -267,6 +282,7 @@ o6.call(
     nodeId="ns=mining_hydraulic_excavator;i=7002",
     browseName="ns=mining_loading;StopLoading",
     description="The StopLoading method is called by a partnering machine when they want to abort the loading procedure",
+    modellingRule="Optional",
     outputArgs=o6.hasProperty(o6.ns["ns=mining_hydraulic_excavator;i=6006"]),
 )
 
@@ -293,6 +309,7 @@ o6.call(
     nodeId="ns=mining_hydraulic_excavator;i=7003",
     browseName="ns=mining_loading;PositioningComplete",
     description="The PositioningComplete method is called by a partnering machine when they have finished to position themselves in front of the loading machine",
+    modellingRule="Optional",
     outputArgs=o6.hasProperty(o6.ns["ns=mining_hydraulic_excavator;i=6043"]),
 )
 
@@ -300,6 +317,7 @@ ns0.objtypes.BaseObjectType(
     nodeId="ns=mining_hydraulic_excavator;i=5003",
     browseName="ns=di;MethodSet",
     description="Flat list of Methods",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=mining_hydraulic_excavator;i=7001"]),
         o6.hasComponent(o6.ns["ns=mining_hydraulic_excavator;i=7002"]),

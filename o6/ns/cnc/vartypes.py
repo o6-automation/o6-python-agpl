@@ -42,17 +42,25 @@ else:
 )
 class CncPositionVariableType(ns0.vartypes.BaseDataVariableType):
     actPos: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6046", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=cnc;i=6046", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+        )
     )
     cmdPos: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6044", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=cnc;i=6044", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+        )
     )
-    eURange: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6881", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3))
+    eURange: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6881", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)
+    )
     engineeringUnits: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6829", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6829", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
     )
     remDist: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6050", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=cnc;i=6050", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+        )
     )
 
 

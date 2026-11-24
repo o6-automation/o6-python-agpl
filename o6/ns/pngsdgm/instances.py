@@ -167,8 +167,8 @@ pngsdgm_objtypes.GsdGenIoChannelDataType(
     browseName="ns=pngsdgm;Data",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6042", browseName="ns=pngsdgm;BitLength", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6043", browseName="ns=pngsdgm;BitOffset", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6042", browseName="ns=pngsdgm;BitLength", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6043", browseName="ns=pngsdgm;BitOffset", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
 )
 o6.reference(pngsdgm_objtypes.GsdGenIoChannelType, ns0.reftypes.HasComponent, o6.ns["ns=pngsdgm;i=5007"])
@@ -177,8 +177,12 @@ pngsdgm_objtypes.GsdGenIoChannelQualityType(
     browseName="ns=pngsdgm;Quality",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6044", browseName="ns=pngsdgm;BitOffset", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6045", browseName="ns=pngsdgm;Format", dataType=pngsdgm_datypes.GsdGenIoQualityFormatEnumeration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6044", browseName="ns=pngsdgm;BitOffset", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=pngsdgm;i=6045", browseName="ns=pngsdgm;Format", modellingRule="Mandatory", dataType=pngsdgm_datypes.GsdGenIoQualityFormatEnumeration
+            )
+        ),
     ],
 )
 o6.reference(pngsdgm_objtypes.GsdGenIoChannelType, ns0.reftypes.HasComponent, o6.ns["ns=pngsdgm;i=5008"])
@@ -186,15 +190,16 @@ pngsdgm_vartypes.GsdGenIoDataItemVariableType(
     nodeId="ns=pngsdgm;i=6047",
     browseName="ns=pngsdgm;<DataItemx>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6048", browseName="ns=pngsdgm;UseAsBits", dataType=o6.Boolean))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6048", browseName="ns=pngsdgm;UseAsBits", modellingRule="Mandatory", dataType=o6.Boolean))],
 )
 o6.reference(pngsdgm_objtypes.GsdGenIoDataType, ns0.reftypes.HasComponent, o6.ns["ns=pngsdgm;i=6047"])
 pngsdgm_objtypes.GsdGenIoChannelDataType(
     nodeId="ns=pngsdgm;i=5010",
     browseName="ns=pngsdgm;Data",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6049", browseName="ns=pngsdgm;BitLength", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6050", browseName="ns=pngsdgm;BitOffset", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6049", browseName="ns=pngsdgm;BitLength", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6050", browseName="ns=pngsdgm;BitOffset", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
 )
 pngsdgm_objtypes.GsdGenIoChannelType(
@@ -202,7 +207,7 @@ pngsdgm_objtypes.GsdGenIoChannelType(
     browseName="ns=pngsdgm;<InputChannelx>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6051", browseName="ns=pngsdgm;Number", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6051", browseName="ns=pngsdgm;Number", modellingRule="Mandatory", dataType=o6.UInt16)),
         o6.hasComponent(o6.ns["ns=pngsdgm;i=5010"]),
     ],
 )
@@ -210,9 +215,10 @@ o6.reference(pngsdgm_objtypes.GsdGenIoDataType, ns0.reftypes.HasComponent, o6.ns
 pngsdgm_objtypes.GsdGenIoChannelDataType(
     nodeId="ns=pngsdgm;i=5012",
     browseName="ns=pngsdgm;Data",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6052", browseName="ns=pngsdgm;BitLength", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6053", browseName="ns=pngsdgm;BitOffset", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6052", browseName="ns=pngsdgm;BitLength", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6053", browseName="ns=pngsdgm;BitOffset", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
 )
 pngsdgm_objtypes.GsdGenIoChannelType(
@@ -220,7 +226,7 @@ pngsdgm_objtypes.GsdGenIoChannelType(
     browseName="ns=pngsdgm;<OutputChannelx>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6054", browseName="ns=pngsdgm;Number", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6054", browseName="ns=pngsdgm;Number", modellingRule="Mandatory", dataType=o6.UInt16)),
         o6.hasComponent(o6.ns["ns=pngsdgm;i=5012"]),
     ],
 )
@@ -230,7 +236,11 @@ pngsdgm_objtypes.GsdGenIoDataType(
     browseName="ns=pngsdgm;Input",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6055", browseName="ns=pngsdgm;Consistency", dataType=pngsdgm_datypes.GsdGenIoConsistencyEnumeration))
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=pngsdgm;i=6055", browseName="ns=pngsdgm;Consistency", modellingRule="Mandatory", dataType=pngsdgm_datypes.GsdGenIoConsistencyEnumeration
+            )
+        )
     ],
 )
 o6.reference(pngsdgm_objtypes.GsdGenSubmoduleApplicationType, ns0.reftypes.HasComponent, o6.ns["ns=pngsdgm;i=5013"])
@@ -239,7 +249,11 @@ pngsdgm_objtypes.GsdGenIoDataType(
     browseName="ns=pngsdgm;Output",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6056", browseName="ns=pngsdgm;Consistency", dataType=pngsdgm_datypes.GsdGenIoConsistencyEnumeration))
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=pngsdgm;i=6056", browseName="ns=pngsdgm;Consistency", modellingRule="Mandatory", dataType=pngsdgm_datypes.GsdGenIoConsistencyEnumeration
+            )
+        )
     ],
 )
 o6.reference(pngsdgm_objtypes.GsdGenSubmoduleApplicationType, ns0.reftypes.HasComponent, o6.ns["ns=pngsdgm;i=5014"])
@@ -255,7 +269,7 @@ http_opcfoundation_org_UA_PNGSDGM_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6062", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=pngsdgm;i=6063", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=pngsdgm;i=6063", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
@@ -286,12 +300,16 @@ ns0.vartypes.BaseDataVariableType(
     browseName="ns=pngsdgm;<ValueVariable>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6010", browseName="ns=pngsdgm;BMPNumber", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6067", browseName="ns=pngsdgm;EngineeringUnit", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6068", browseName="ns=pngsdgm;EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6069", browseName="ns=pngsdgm;Dimension", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6071", browseName="ns=pngsdgm;Text", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6072", browseName="ns=pngsdgm;TextArray", dataType=o6.String, valueRank=1, arrayDimensions=[0])),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6010", browseName="ns=pngsdgm;BMPNumber", modellingRule="Optional", dataType=o6.UInt16)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6067", browseName="ns=pngsdgm;EngineeringUnit", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6068", browseName="ns=pngsdgm;EURange", modellingRule="Optional", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6069", browseName="ns=pngsdgm;Dimension", modellingRule="Optional", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6071", browseName="ns=pngsdgm;Text", modellingRule="Optional", dataType=o6.String)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6072", browseName="ns=pngsdgm;TextArray", modellingRule="Optional", dataType=o6.String, valueRank=1, arrayDimensions=[0])
+        ),
     ],
     valueRank=-3,
 )
@@ -316,8 +334,8 @@ ns0.vartypes.AnalogUnitType(
     browseName="ns=pngsdgm;<UnitVariable>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6070", browseName="ns=pngsdgm;BMPNumber", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6085", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6070", browseName="ns=pngsdgm;BMPNumber", modellingRule="Optional", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6085", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-3,
@@ -328,9 +346,9 @@ ns0.vartypes.AnalogUnitRangeType(
     browseName="ns=pngsdgm;<UnitRangeVariable>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6087", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6088", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6092", browseName="ns=pngsdgm;BMPNumber", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6087", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6088", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6092", browseName="ns=pngsdgm;BMPNumber", modellingRule="Optional", dataType=o6.UInt16)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-3,
@@ -341,9 +359,11 @@ ns0.vartypes.BaseDataVariableType(
     browseName="ns=pngsdgm;<EnumerationVariable>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6093", browseName="ns=pngsdgm;BMPNumber", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6096", browseName="ns=pngsdgm;EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6097", browseName="ns=pngsdgm;EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6093", browseName="ns=pngsdgm;BMPNumber", modellingRule="Optional", dataType=o6.UInt16)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6096", browseName="ns=pngsdgm;EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6097", browseName="ns=pngsdgm;EURange", modellingRule="Optional", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Enumeration,
 )
@@ -353,9 +373,11 @@ di.objtypes.FunctionalGroupType(
     browseName="ns=pngsdgm;<ArrayFolder>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6095", browseName="ns=pngsdgm;BMPNumber", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6098", browseName="ns=pngsdgm;EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6099", browseName="ns=pngsdgm;EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6095", browseName="ns=pngsdgm;BMPNumber", modellingRule="Optional", dataType=o6.UInt16)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6098", browseName="ns=pngsdgm;EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6099", browseName="ns=pngsdgm;EURange", modellingRule="Optional", dataType=ns0.datatypes.Range)),
         o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pngsdgm;i=6100", browseName="ns=pngsdgm;Element", modellingRule="MandatoryPlaceholder")),
     ],
 )
@@ -365,9 +387,15 @@ ns0.vartypes.OptionSetType(
     browseName="ns=pngsdgm;<OptionSetVariable>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6091", browseName="OptionSetValues", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6094", browseName="ns=pngsdgm;BMPNumber", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6101", browseName="ns=pngsdgm;BitMask", dataType=o6.Boolean, valueRank=1, arrayDimensions=[0])),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=pngsdgm;i=6091", browseName="OptionSetValues", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6094", browseName="ns=pngsdgm;BMPNumber", modellingRule="Optional", dataType=o6.UInt16)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6101", browseName="ns=pngsdgm;BitMask", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=1, arrayDimensions=[0])
+        ),
     ],
 )
 o6.reference(pngsdgm_objtypes.GsdGenSubmoduleApplicationType, ns0.reftypes.HasComponent, o6.ns["ns=pngsdgm;i=6090"])
@@ -415,10 +443,10 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pngsdgm;i=7002", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=pngsdgm;i=6075"]))
+o6.call(nodeId="ns=pngsdgm;i=7002", browseName="ns=di;BreakLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=pngsdgm;i=6075"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pngsdgm;i=6076",
@@ -428,10 +456,10 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pngsdgm;i=7003", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=pngsdgm;i=6076"]))
+o6.call(nodeId="ns=pngsdgm;i=7003", browseName="ns=di;ExitLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=pngsdgm;i=6076"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pngsdgm;i=6077",
@@ -441,7 +469,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="Context", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
@@ -452,10 +480,16 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pngsdgm;i=7004", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=pngsdgm;i=6077"]), outputArgs=o6.hasProperty(o6.ns["ns=pngsdgm;i=6078"]))
+o6.call(
+    nodeId="ns=pngsdgm;i=7004",
+    browseName="ns=di;InitLock",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=pngsdgm;i=6077"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=pngsdgm;i=6078"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pngsdgm;i=6083",
@@ -465,20 +499,20 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pngsdgm;i=7005", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=pngsdgm;i=6083"]))
+o6.call(nodeId="ns=pngsdgm;i=7005", browseName="ns=di;RenewLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=pngsdgm;i=6083"]))
 
 di.objtypes.LockingServicesType(
     nodeId="ns=pngsdgm;i=5018",
     browseName="ns=pngsdgm;Lock",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6079", browseName="ns=di;Locked", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6080", browseName="ns=di;LockingClient", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6081", browseName="ns=di;LockingUser", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6082", browseName="ns=di;RemainingLockTime", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6079", browseName="ns=di;Locked", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6080", browseName="ns=di;LockingClient", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6081", browseName="ns=di;LockingUser", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6082", browseName="ns=di;RemainingLockTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
         o6.hasComponent(o6.ns["ns=pngsdgm;i=7002"]),
         o6.hasComponent(o6.ns["ns=pngsdgm;i=7003"]),
         o6.hasComponent(o6.ns["ns=pngsdgm;i=7004"]),

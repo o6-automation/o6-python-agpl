@@ -37,23 +37,39 @@ else:
 @o6.objecttype(nodeId="ns=plastics_extrusion_v1_pelletizer;i=1002", browseName="ns=plastics_extrusion_v1_pelletizer;DiePlateType", displayName="DiePlateType")
 class DiePlateType(ns0.objtypes.BaseObjectType):
     activeTime: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_pelletizer;i=6006", browseName="ns=plastics_extrusion_v1_pelletizer;ActiveTime", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_v1_pelletizer;i=6006",
+            browseName="ns=plastics_extrusion_v1_pelletizer;ActiveTime",
+            modellingRule="Optional",
+            dataType=ns0.datatypes.Duration,
+        )
     )
     name: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_pelletizer;i=6001", browseName="ns=plastics_extrusion_v1_pelletizer;Name", dataType=o6.LocalizedText)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_v1_pelletizer;i=6001", browseName="ns=plastics_extrusion_v1_pelletizer;Name", modellingRule="Mandatory", dataType=o6.LocalizedText
+        )
     )
 
 
 @o6.objecttype(nodeId="ns=plastics_extrusion_v1_pelletizer;i=1003", browseName="ns=plastics_extrusion_v1_pelletizer;KnifePackageType", displayName="KnifePackageType")
 class KnifePackageType(ns0.objtypes.BaseObjectType):
     activeTime: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_pelletizer;i=6010", browseName="ns=plastics_extrusion_v1_pelletizer;ActiveTime", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_v1_pelletizer;i=6010",
+            browseName="ns=plastics_extrusion_v1_pelletizer;ActiveTime",
+            modellingRule="Optional",
+            dataType=ns0.datatypes.Duration,
+        )
     )
     amount: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_pelletizer;i=6009", browseName="ns=plastics_extrusion_v1_pelletizer;Amount", dataType=o6.UInt16)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_v1_pelletizer;i=6009", browseName="ns=plastics_extrusion_v1_pelletizer;Amount", modellingRule="Mandatory", dataType=o6.UInt16
+        )
     )
     name: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_pelletizer;i=6008", browseName="ns=plastics_extrusion_v1_pelletizer;Name", dataType=o6.LocalizedText)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_v1_pelletizer;i=6008", browseName="ns=plastics_extrusion_v1_pelletizer;Name", modellingRule="Mandatory", dataType=o6.LocalizedText
+        )
     )
 
 
@@ -66,12 +82,16 @@ class Pelletizer_InterfaceType(plastics_extrusion_v1.objtypes.ExtrusionDeviceTyp
     drive: plastics_rubber.objtypes.DriveType
     knifePackage_Nr_: KnifePackageType | None
     pelletizerClosed: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_pelletizer;i=6108", browseName="ns=plastics_extrusion_v1_pelletizer;PelletizerClosed", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_v1_pelletizer;i=6108", browseName="ns=plastics_extrusion_v1_pelletizer;PelletizerClosed", modellingRule="Optional", dataType=o6.Boolean
+        )
     )
     pressureZones: plastics_rubber.objtypes.MeasuringDevicesType | None
     temperatureZones: plastics_extrusion_v1.objtypes.ExtrusionTemperatureZonesType | None
     waterFlowActive: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_pelletizer;i=6109", browseName="ns=plastics_extrusion_v1_pelletizer;WaterFlowActive", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_v1_pelletizer;i=6109", browseName="ns=plastics_extrusion_v1_pelletizer;WaterFlowActive", modellingRule="Optional", dataType=o6.Boolean
+        )
     )
 
 

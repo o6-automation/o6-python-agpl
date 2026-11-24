@@ -56,7 +56,12 @@ class ToolManufacturingMachineType(machine_tool.objtypes.MachineToolType):
 class CuttingToolFileType(ns0.objtypes.FileType):
     fileFormat: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=cutting_tool;i=6070", browseName="ns=cutting_tool;FileFormat", dataType=cutting_tool_datypes.FileFormatDataType, accessLevel=3, userAccessLevel=1
+            nodeId="ns=cutting_tool;i=6070",
+            browseName="ns=cutting_tool;FileFormat",
+            modellingRule="Mandatory",
+            dataType=cutting_tool_datypes.FileFormatDataType,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
 

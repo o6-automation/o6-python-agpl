@@ -17,12 +17,17 @@
 
 import o6
 
+import importlib
+import importlib.machinery
 import importlib.util
 import os
 import sys
+import threading
 from types import ModuleType
 from typing import Any, cast
 
+
+from o6._registration_lock import REGISTRATION_LOCK as _REGISTRATION_LOCK
 
 from ._generated_nodesets import _GLOBAL_NAMESPACES
 
@@ -32,6 +37,9 @@ _REGISTER_NAMESPACE = o6._o6._register_namespace
 _SET_NAMESPACE_RESOLVER = o6._o6._set_namespace_resolver
 _NODEID_PREFIXES = ("i=", "s=", "g=", "b=", "ns=", "nsu=")
 _GLOBAL_SCOPE = "::global"
+# Serialises the read-modify-write of a namespace's `__O6_NEXT_NODEID__`. A leaf
+# lock: nothing else is acquired while it is held.
+_NEXT_NODEID_LOCK = threading.Lock()
 
 
 def _register_namespace(
@@ -41,6 +49,17 @@ def _register_namespace(
     *,
     version: str | None = None,
     publication_date: str | None = None,
+) -> "NamespaceModule":
+    with _REGISTRATION_LOCK:
+        return _register_namespace_locked(shortname, uri, scope, version, publication_date)
+
+
+def _register_namespace_locked(
+    shortname: str,
+    uri: str,
+    scope: str,
+    version: str | None,
+    publication_date: str | None,
 ) -> "NamespaceModule":
     version = version or ""
     publication_date = publication_date or ""
@@ -64,22 +83,24 @@ def _register_namespace(
         publicationDate=publication_date,
         scope=scope,
         index=index,
-        __package__="o6.ns",
         __O6_NODEIDS__={},
         __O6_INSTANCES__=[],
         __O6_NEXT_NODEID__=6000,
     )
-    if shortname in _PACKAGED_SHORTNAMES:
+    packaged = shortname in _PACKAGED_SHORTNAMES
+    if packaged:
+        # Imported on first use by `_PackagedNamespaceFinder`, into this module.
         module.__dict__["_o6_source"] = os.path.join(os.path.dirname(__file__), shortname, "__init__.py")
         module.__dict__["_o6_loaded"] = False
     else:
-        module.__dict__["_o6_loaded"] = True
+        module.__dict__.update(__package__="o6.ns", _o6_loaded=True)
 
     _INDEX_BY_SHORTNAME[shortname] = index
     _NAMESPACE_TABLE.append(module)
     if index == 0:
         _NAMESPACE_TABLE.append(None)  # ns=1 is application-local
-    sys.modules[module_name] = module
+    if not packaged:
+        sys.modules[module_name] = module
     setattr(sys.modules[__name__], shortname, module)
     _REGISTER_NAMESPACE(shortname, index, module)
     return module
@@ -149,8 +170,9 @@ def _register_declaration(value: Any, *, instance: bool = False) -> Any:
 def _next_nodeid(shortname: str) -> str:
     """Allocate one import-time NodeId in a registered namespace."""
     namespace = _module_for_shortname(shortname)
-    next_id = int(namespace.__dict__.get("__O6_NEXT_NODEID__", 6000)) + 1
-    namespace.__dict__["__O6_NEXT_NODEID__"] = next_id
+    with _NEXT_NODEID_LOCK:
+        next_id = int(namespace.__dict__.get("__O6_NEXT_NODEID__", 6000)) + 1
+        namespace.__dict__["__O6_NEXT_NODEID__"] = next_id
     return f"ns={shortname};i={next_id}"
 
 
@@ -188,57 +210,20 @@ class NamespaceModule(ModuleType):
     index: int
     """Namespace index in the process-wide namespace table."""
 
-    def _prepare(self) -> None:
-        """Give the module its package dunders without running its body.
+    def _load(self) -> None:
+        """Import the packaged module body, if it is not loaded yet.
 
-        Answering `__path__` and `__spec__` has to be separable from executing the
-        body, because the import machinery reads them *while* importing a
-        submodule: `_find_and_load_unlocked` re-checks `sys.modules` for the
-        submodule before it reads the parent's `__path__`, so a body that imports
-        the submodule itself — which every generated package does — would leave the
-        importer to load and execute it a second time, registering every DataType
-        in it twice.
+        The import system runs the body once, into this module, and makes other
+        threads wait until it finishes, as for any other module.
         """
         state = self.__dict__
-        if "__path__" in state:
-            return
-        source = state.get("_o6_source")
-        if source is None:
-            return
-        package_dir = os.path.dirname(source)
-        spec = importlib.util.spec_from_file_location(self.__name__, source, submodule_search_locations=[package_dir])
-        if spec is None or spec.loader is None:
-            raise ImportError(f"cannot load namespace package {self.__name__!r}")
-        state.update(
-            __file__=source,
-            __loader__=spec.loader,
-            __package__=self.__name__,
-            __path__=[package_dir],
-            __spec__=spec,
-        )
-
-    def _load(self) -> None:
-        state = self.__dict__
-        if state.get("_o6_loaded", True) or state.get("_o6_loading", False):
-            return
-        if state.get("_o6_source") is None:
-            return
-
-        self._prepare()
-        state["_o6_loading"] = True
-        loader = state["__loader__"]
-        try:
-            loader.exec_module(self)
-        except Exception:
-            state.pop("_o6_loading", None)
-            raise
-        state["_o6_loaded"] = True
-        state.pop("_o6_loading", None)
+        if not state.get("_o6_loaded", True):
+            importlib.import_module(self.__name__)
+            if sys.modules.get(self.__name__) is self:
+                state["_o6_loaded"] = True
 
     def __getattr__(self, name: str) -> Any:
-        if name in _PACKAGE_DUNDERS:
-            self._prepare()
-        else:
+        if name not in _IMPORT_SYSTEM_ATTRIBUTES:
             self._load()
         try:
             return self.__dict__[name]
@@ -251,10 +236,50 @@ class NamespaceModule(ModuleType):
         return f"<o6 namespace {self.shortname!r} version={self.version!r} uri={self.uri!r}>"
 
 
-#: What the import machinery reads on a package before it can load a submodule.
-#: These are answered by `NamespaceModule._prepare`, which does not run the
-#: package body — see the note there.
-_PACKAGE_DUNDERS = frozenset({"__path__", "__spec__", "__loader__", "__file__"})
+#: What the import system reads on a module while it imports it, before the body runs.
+_IMPORT_SYSTEM_ATTRIBUTES = frozenset({"__path__", "__file__", "__cached__", "__spec__", "__loader__", "__package__"})
+
+
+class _PackagedNamespaceLoader(importlib.machinery.SourceFileLoader):
+    """Runs a packaged namespace's generated source into its registered module."""
+
+    def __init__(self, module: NamespaceModule, path: str) -> None:
+        super().__init__(module.__name__, path)
+        self._module = module
+
+    def create_module(self, spec: Any) -> NamespaceModule:
+        return self._module
+
+    def exec_module(self, module: ModuleType) -> None:
+        super().exec_module(module)
+        module.__dict__["_o6_loaded"] = True
+
+
+class _PackagedNamespaceFinder:
+    """Imports a registered packaged namespace into the module `o6.ns` already hands out.
+
+    The module exists from registration on, so that its index and metadata are
+    usable before the generated source runs. This finder lets the import system
+    run that source into it, so `import o6.ns.<name>`, its submodules and first
+    attribute access load it like any other package.
+    """
+
+    @staticmethod
+    def find_spec(fullname: str, path: Any = None, target: Any = None) -> Any:
+        prefix, _, shortname = fullname.rpartition(".")
+        if prefix != __name__ or shortname not in _INDEX_BY_SHORTNAME:
+            return None
+        module = _module_for_shortname(shortname)
+        source = module.__dict__.get("_o6_source")
+        if source is None or module.__dict__.get("_o6_loaded", True):
+            return None
+        return importlib.util.spec_from_file_location(
+            fullname,
+            source,
+            loader=_PackagedNamespaceLoader(module, source),
+            submodule_search_locations=[os.path.dirname(source)],
+        )
+
 
 _INDEX_BY_SHORTNAME: dict[str, int] = {}
 _NAMESPACE_TABLE: list[NamespaceModule | None] = []
@@ -262,6 +287,11 @@ _NAMESPACE_TABLE: list[NamespaceModule | None] = []
 
 def _adopt_namespace_module(module: ModuleType, namespace: NamespaceModule) -> NamespaceModule:
     """Make an existing caller module the canonical namespace module."""
+    with _REGISTRATION_LOCK:
+        return _adopt_namespace_module_locked(module, namespace)
+
+
+def _adopt_namespace_module_locked(module: ModuleType, namespace: NamespaceModule) -> NamespaceModule:
     if module is namespace:
         return namespace
     if not isinstance(module, NamespaceModule):
@@ -344,15 +374,28 @@ def _initialize_namespace(
 ) -> NamespaceModule:
     """Register and explicitly initialize an imported namespace module."""
     module = sys.modules[module_name]
-    namespace_module = _register_namespace(
-        shortname=shortname,
-        uri=uri,
-        scope=_GLOBAL_SCOPE,
-        version=version,
-        publication_date=publication_date,
-    )
-    namespace_module = _adopt_namespace_module(module, namespace_module)
-    module.__dict__.setdefault("__NAMESPACES__", set()).add(namespace_module)
+    with _REGISTRATION_LOCK:
+        namespace_module = _register_namespace(
+            shortname=shortname,
+            uri=uri,
+            scope=_GLOBAL_SCOPE,
+            version=version,
+            publication_date=publication_date,
+        )
+        state = namespace_module.__dict__
+        if module is not namespace_module and "_o6_source" in state and not state.get("_o6_loaded", True):
+            # Another loader, such as an import hook ahead of `_PackagedNamespaceFinder`,
+            # runs a packaged body in a module of its own. Finish the import in the
+            # module `o6.ns` hands out: the import system returns the module that
+            # replaced itself in sys.modules, and binds the submodules to it.
+            state.update({name: module.__dict__[name] for name in _IMPORT_SYSTEM_ATTRIBUTES if name in module.__dict__})
+            sys.modules[module_name] = namespace_module
+            # The body still runs in its own globals, where declarations look for it.
+            module.__dict__.setdefault("__NAMESPACES__", set()).add(namespace_module)
+            module = namespace_module
+        else:
+            namespace_module = _adopt_namespace_module(module, namespace_module)
+        module.__dict__.setdefault("__NAMESPACES__", set()).add(namespace_module)
     return namespace_module
 
 
@@ -539,13 +582,6 @@ def namespace(shortname: str, uri: str, version: str = "1.0", publicationDate: s
 
     See [Writing a Nodeset in Python](manual/information-model-authoring/namespace-modules.md#the-shape-of-a-namespace-module).
     """
-    namespace_module = _register_namespace(
-        shortname=shortname,
-        uri=uri,
-        scope=_GLOBAL_SCOPE,
-        version=version,
-        publication_date=publicationDate,
-    )
     # Inject the shortname into the caller module's __NAMESPACE__ list for later retrieval by o6.server.Server.ns.append().
     import inspect
 
@@ -553,14 +589,22 @@ def namespace(shortname: str, uri: str, version: str = "1.0", publicationDate: s
     caller_frame = current_frame.f_back if current_frame is not None else None
     module = inspect.getmodule(caller_frame)
 
-    if module is not None:
-        ns = module.__dict__.setdefault("__NAMESPACES__", set())
-        configured_shortname = module.__dict__.get("shortname")
-        if configured_shortname in (None, shortname):
-            namespace_module = _adopt_namespace_module(module, namespace_module)
-        else:
-            namespace_module = _module_for_shortname(shortname)
-        ns.add(namespace_module)
+    with _REGISTRATION_LOCK:
+        namespace_module = _register_namespace(
+            shortname=shortname,
+            uri=uri,
+            scope=_GLOBAL_SCOPE,
+            version=version,
+            publication_date=publicationDate,
+        )
+        if module is not None:
+            ns = module.__dict__.setdefault("__NAMESPACES__", set())
+            configured_shortname = module.__dict__.get("shortname")
+            if configured_shortname in (None, shortname):
+                namespace_module = _adopt_namespace_module(module, namespace_module)
+            else:
+                namespace_module = _module_for_shortname(shortname)
+            ns.add(namespace_module)
 
 
 # Pin the shipped companion specs to their deterministic global indices as soon
@@ -569,6 +613,7 @@ def namespace(shortname: str, uri: str, version: str = "1.0", publicationDate: s
 # ``namespace()`` call dedups against these entries rather than defining a new
 # (import-order-dependent) index.
 _SET_NAMESPACE_RESOLVER(_resolve_namespace_token)
+sys.meta_path.insert(0, _PackagedNamespaceFinder)
 for _shortname, _uri, _version in _GLOBAL_NAMESPACES:
     _register_namespace(shortname=_shortname, uri=_uri, scope=_GLOBAL_SCOPE, version=_version)
 del _shortname, _uri, _version

@@ -41,7 +41,7 @@ http_opcfoundation_org_UA_XML_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=xml;i=6004", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=xml;i=6005", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=xml;i=6005", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(

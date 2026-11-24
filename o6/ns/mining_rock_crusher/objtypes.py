@@ -49,6 +49,7 @@ class RockCrusherType(mining.objtypes.MiningEquipmentType):
             nodeId="ns=mining_rock_crusher;i=5001",
             browseName="ns=mining;Components",
             description="The components add-in contains placeholders for sub-components of an equipment asset",
+            modellingRule="Mandatory",
         )
     )
     miningEquipmentIdentification: mining.objtypes.MiningEquipmentIdentificationType

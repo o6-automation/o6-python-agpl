@@ -75,11 +75,13 @@ class LoadType(ns0.objtypes.BaseObjectType):
 @o6.objecttype(nodeId="ns=robotics;i=1016", browseName="ns=robotics;TaskModuleType", displayName="TaskModuleType")
 class TaskModuleType(ns0.objtypes.BaseObjectType):
     isReferenced: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6056", browseName="ns=robotics;IsReferenced", dataType=o6.Boolean, accessLevel=3)
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6056", browseName="ns=robotics;IsReferenced", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3)
     )
-    name: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6054", browseName="ns=robotics;Name", dataType=o6.String, accessLevel=3))
+    name: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6054", browseName="ns=robotics;Name", modellingRule="Mandatory", dataType=o6.String, accessLevel=3)
+    )
     version: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6055", browseName="ns=robotics;Version", dataType=o6.String, accessLevel=3)
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6055", browseName="ns=robotics;Version", modellingRule="Optional", dataType=o6.String, accessLevel=3)
     )
 
 
@@ -106,7 +108,9 @@ class TaskControlOperationType(ns0.objtypes.BaseObjectType):
         )
     )
     motionDevicesUnderControl: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6131", browseName="ns=robotics;MotionDevicesUnderControl", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+        ns0.vartypes.PropertyType(
+            nodeId="ns=robotics;i=6131", browseName="ns=robotics;MotionDevicesUnderControl", modellingRule="Optional", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]
+        )
     )
     taskControlStateMachine: TaskControlStateMachineType
 
@@ -115,7 +119,13 @@ class TaskControlOperationType(ns0.objtypes.BaseObjectType):
 class MultiAcknowledgeableConditionType(ns0.objtypes.AcknowledgeableConditionType):
     conditionDescriptions: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=robotics;i=6140", browseName="ns=robotics;ConditionDescriptions", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0], accessLevel=3
+            nodeId="ns=robotics;i=6140",
+            browseName="ns=robotics;ConditionDescriptions",
+            modellingRule="Mandatory",
+            dataType=o6.LocalizedText,
+            valueRank=1,
+            arrayDimensions=[0],
+            accessLevel=3,
         )
     )
 
@@ -128,7 +138,7 @@ class MultiAcknowledgeableConditionType(ns0.objtypes.AcknowledgeableConditionTyp
 )
 class MotionDeviceSystemType(di.objtypes.ComponentType):
     componentName: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6171", browseName="ns=di;ComponentName", dataType=o6.LocalizedText)
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6171", browseName="ns=di;ComponentName", modellingRule="Optional", dataType=o6.LocalizedText)
     )
     controllers: ns0.objtypes.FolderType
     motionDevices: ns0.objtypes.FolderType
@@ -143,7 +153,7 @@ class MotionDeviceSystemType(di.objtypes.ComponentType):
 )
 class SafetyStateType(di.objtypes.ComponentType):
     componentName: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6179", browseName="ns=di;ComponentName", dataType=o6.LocalizedText)
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6179", browseName="ns=di;ComponentName", modellingRule="Optional", dataType=o6.LocalizedText)
     )
     emergencyStopFunctions: ns0.objtypes.FolderType | None
     parameterSet: ns0.objtypes.BaseObjectType
@@ -171,7 +181,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=robotics;i=7001", browseName="ns=robotics;Start", outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6023"]))
+o6.call(nodeId="ns=robotics;i=7001", browseName="ns=robotics;Start", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6023"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=robotics;i=6024",
@@ -215,13 +225,21 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=robotics;i=7002", browseName="ns=robotics;Stop", inputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6024"]), outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6025"]))
+o6.call(
+    nodeId="ns=robotics;i=7002",
+    browseName="ns=robotics;Stop",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6024"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6025"]),
+)
 
 
 @o6.objecttype(nodeId="ns=robotics;i=1006", browseName="ns=robotics;OperationStateMachineType", displayName="OperationStateMachineType", isAbstract=True)
 class OperationStateMachineType(ns0.objtypes.FiniteStateMachineType):
     configuredDefaultStopMode: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=robotics;i=6009", browseName="ns=robotics;ConfiguredDefaultStopMode", dataType=o6.Int16, accessLevel=3)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=robotics;i=6009", browseName="ns=robotics;ConfiguredDefaultStopMode", modellingRule="Optional", dataType=o6.Int16, accessLevel=3
+        )
     )
     executing: ns0.objtypes.StateType
     executingToIdle: ns0.objtypes.TransitionType
@@ -235,9 +253,10 @@ class OperationStateMachineType(ns0.objtypes.FiniteStateMachineType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=robotics;i=6008",
             browseName="ns=robotics;PossibleStopModes",
+            modellingRule="Optional",
             dataType=ns0.datatypes.EnumValueType,
             valueRank=1,
-            arrayDimensions=[5],
+            arrayDimensions=[0],
             value=[
                 ns0.datatypes.EnumValueType(
                     value=1,
@@ -304,7 +323,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=robotics;i=7003", browseName="ns=robotics;ResetToProgramStart", outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6053"]))
+o6.call(nodeId="ns=robotics;i=7003", browseName="ns=robotics;ResetToProgramStart", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6053"]))
 
 
 @o6.objecttype(nodeId="ns=robotics;i=1012", browseName="ns=robotics;ReadySubstateMachineType", displayName="ReadySubstateMachineType")
@@ -342,7 +361,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=robotics;i=7004", browseName="ns=robotics;Start", outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6064"]))
+o6.call(nodeId="ns=robotics;i=7004", browseName="ns=robotics;Start", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6064"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=robotics;i=6065",
@@ -386,7 +405,13 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=robotics;i=7005", browseName="ns=robotics;Stop", inputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6065"]), outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6066"]))
+o6.call(
+    nodeId="ns=robotics;i=7005",
+    browseName="ns=robotics;Stop",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6065"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6066"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=robotics;i=6068",
@@ -409,7 +434,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=robotics;i=7006", browseName="ns=robotics;GetReady", outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6068"]))
+o6.call(nodeId="ns=robotics;i=7006", browseName="ns=robotics;GetReady", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6068"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=robotics;i=6070",
@@ -432,13 +457,15 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=robotics;i=7007", browseName="ns=robotics;StandDown", outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6070"]))
+o6.call(nodeId="ns=robotics;i=7007", browseName="ns=robotics;StandDown", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6070"]))
 
 
 @o6.objecttype(nodeId="ns=robotics;i=1021", browseName="ns=robotics;SystemOperationStateMachineType", displayName="SystemOperationStateMachineType")
 class SystemOperationStateMachineType(OperationStateMachineType):
     configuredDefaultStopMode: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=robotics;i=6057", browseName="ns=robotics;ConfiguredDefaultStopMode", dataType=o6.Int16, accessLevel=3)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=robotics;i=6057", browseName="ns=robotics;ConfiguredDefaultStopMode", modellingRule="Optional", dataType=o6.Int16, accessLevel=3
+        )
     )
     executing: ns0.objtypes.StateType
     executingSubstateMachine: ExecutingSubstateMachineType | None
@@ -455,9 +482,10 @@ class SystemOperationStateMachineType(OperationStateMachineType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=robotics;i=6063",
             browseName="ns=robotics;PossibleStopModes",
+            modellingRule="Optional",
             dataType=ns0.datatypes.EnumValueType,
             valueRank=1,
-            arrayDimensions=[5],
+            arrayDimensions=[0],
             value=[
                 ns0.datatypes.EnumValueType(
                     value=1,
@@ -525,7 +553,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=robotics;i=7008", browseName="ns=robotics;Start", outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6101"]))
+o6.call(nodeId="ns=robotics;i=7008", browseName="ns=robotics;Start", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6101"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=robotics;i=6102",
@@ -569,7 +597,13 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=robotics;i=7009", browseName="ns=robotics;Stop", inputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6102"]), outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6103"]))
+o6.call(
+    nodeId="ns=robotics;i=7009",
+    browseName="ns=robotics;Stop",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6102"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6103"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=robotics;i=6141",
@@ -614,6 +648,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=robotics;i=7010",
     browseName="ns=robotics;LoadByNodeId",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6141"]),
     outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6142"]),
 )
@@ -655,7 +690,11 @@ ns0.vartypes.PropertyType(
     ],
 )
 o6.call(
-    nodeId="ns=robotics;i=7011", browseName="ns=robotics;LoadByName", inputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6143"]), outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6144"])
+    nodeId="ns=robotics;i=7011",
+    browseName="ns=robotics;LoadByName",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6143"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6144"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -679,7 +718,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=robotics;i=7012", browseName="ns=robotics;UnloadProgram", outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6145"]))
+o6.call(nodeId="ns=robotics;i=7012", browseName="ns=robotics;UnloadProgram", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6145"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=robotics;i=6146",
@@ -720,6 +759,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=robotics;i=7013",
     browseName="ns=robotics;UnloadByNodeId",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6146"]),
     outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6147"]),
 )
@@ -749,6 +789,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=robotics;i=7014",
     browseName="ns=robotics;UnloadByName",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6067"]),
     outputArgs=o6.hasProperty(o6.ns["ns=robotics;i=6069"]),
 )
@@ -757,7 +798,9 @@ o6.call(
 @o6.objecttype(nodeId="ns=robotics;i=1025", browseName="ns=robotics;TaskControlStateMachineType", displayName="TaskControlStateMachineType")
 class TaskControlStateMachineType(OperationStateMachineType):
     configuredDefaultStopMode: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=robotics;i=6094", browseName="ns=robotics;ConfiguredDefaultStopMode", dataType=o6.Int16, accessLevel=3)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=robotics;i=6094", browseName="ns=robotics;ConfiguredDefaultStopMode", modellingRule="Optional", dataType=o6.Int16, accessLevel=3
+        )
     )
     executing: ns0.objtypes.StateType
     executingToIdle: ns0.objtypes.TransitionType
@@ -773,9 +816,10 @@ class TaskControlStateMachineType(OperationStateMachineType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=robotics;i=6100",
             browseName="ns=robotics;PossibleStopModes",
+            modellingRule="Optional",
             dataType=ns0.datatypes.EnumValueType,
             valueRank=1,
-            arrayDimensions=[5],
+            arrayDimensions=[0],
             value=[
                 ns0.datatypes.EnumValueType(
                     value=1,
@@ -825,9 +869,14 @@ class TaskControlStateMachineType(OperationStateMachineType):
 o6.reference(TaskControlStateMachineType, "i=41", "i=2311")
 
 
-ns0.objtypes.FolderType(nodeId="ns=robotics;i=15305", browseName="ns=robotics;Axes", description="Axes is a container for one or more instances of the AxisType.")
 ns0.objtypes.FolderType(
-    nodeId="ns=robotics;i=16443", browseName="ns=robotics;PowerTrains", description="PowerTrains is a container for one or more instances of the PowerTrainType."
+    nodeId="ns=robotics;i=15305", browseName="ns=robotics;Axes", description="Axes is a container for one or more instances of the AxisType.", modellingRule="Mandatory"
+)
+ns0.objtypes.FolderType(
+    nodeId="ns=robotics;i=16443",
+    browseName="ns=robotics;PowerTrains",
+    description="PowerTrains is a container for one or more instances of the PowerTrainType.",
+    modellingRule="Mandatory",
 )
 
 
@@ -839,41 +888,57 @@ ns0.objtypes.FolderType(
 )
 class MotionDeviceType(di.objtypes.ComponentType):
     additionalComponents: ns0.objtypes.FolderType | None
-    assetId: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6172", browseName="ns=di;AssetId", dataType=o6.String))
+    assetId: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6172", browseName="ns=di;AssetId", modellingRule="Optional", dataType=o6.String)
+    )
     axes: ns0.objtypes.FolderType = o6.hasComponent(o6.ns["ns=robotics;i=15305"])
     componentName: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6173", browseName="ns=di;ComponentName", dataType=o6.LocalizedText)
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6173", browseName="ns=di;ComponentName", modellingRule="Optional", dataType=o6.LocalizedText)
     )
-    deviceManual: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6174", browseName="ns=di;DeviceManual", dataType=o6.String))
+    deviceManual: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6174", browseName="ns=di;DeviceManual", modellingRule="Optional", dataType=o6.String)
+    )
     flangeLoad: LoadType | None
-    manufacturer: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=16351", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText))
-    model: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=16353", browseName="ns=di;Model", dataType=o6.LocalizedText))
+    manufacturer: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=16351", browseName="ns=di;Manufacturer", modellingRule="Mandatory", dataType=o6.LocalizedText)
+    )
+    model: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=16353", browseName="ns=di;Model", modellingRule="Mandatory", dataType=o6.LocalizedText)
+    )
     motionDeviceCategory: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=robotics;i=16362",
             browseName="ns=robotics;MotionDeviceCategory",
             description="The variable MotionDeviceCategory provides the kind of motion device defined by MotionDeviceCategoryEnumeration based on ISO 8373.",
+            modellingRule="Mandatory",
             dataType=robotics_datypes.MotionDeviceCategoryEnumeration,
         )
     )
     parameterSet: ns0.objtypes.BaseObjectType
     powerTrains: ns0.objtypes.FolderType = o6.hasComponent(o6.ns["ns=robotics;i=16443"])
-    productCode: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=16359", browseName="ns=di;ProductCode", dataType=o6.String))
-    serialNumber: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=16354", browseName="ns=di;SerialNumber", dataType=o6.String))
+    productCode: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=16359", browseName="ns=di;ProductCode", modellingRule="Mandatory", dataType=o6.String)
+    )
+    serialNumber: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=16354", browseName="ns=di;SerialNumber", modellingRule="Mandatory", dataType=o6.String)
+    )
     taskControlReference: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=robotics;i=6001", browseName="ns=robotics;TaskControlReference", dataType=o6.NodeId)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=robotics;i=6001", browseName="ns=robotics;TaskControlReference", modellingRule="Optional", dataType=o6.NodeId)
     )
 
 
 @o6.objecttype(nodeId="ns=robotics;i=16601", browseName="ns=robotics;AxisType", displayName="AxisType", description="The AxisType describes an axis of a motion device.")
 class AxisType(di.objtypes.ComponentType):
     additionalLoad: LoadType | None
-    assetId: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6175", browseName="ns=di;AssetId", dataType=o6.String))
+    assetId: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6175", browseName="ns=di;AssetId", modellingRule="Optional", dataType=o6.String)
+    )
     motionProfile: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=robotics;i=16637",
             browseName="ns=robotics;MotionProfile",
             description="The kind of axis motion as defined with the AxisMotionProfileEnumeration.",
+            modellingRule="Mandatory",
             dataType=robotics_datypes.AxisMotionProfileEnumeration,
         )
     )
@@ -890,7 +955,7 @@ class AxisType(di.objtypes.ComponentType):
 class PowerTrainType(di.objtypes.ComponentType):
     axisIdentifier_: AxisType | None
     componentName: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6176", browseName="ns=di;ComponentName", dataType=o6.LocalizedText)
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6176", browseName="ns=di;ComponentName", modellingRule="Optional", dataType=o6.LocalizedText)
     )
     gearIdentifier_: GearType | None
     powerTrainIdentifier_: PowerTrainType | None
@@ -900,15 +965,25 @@ class PowerTrainType(di.objtypes.ComponentType):
     nodeId="ns=robotics;i=1019", browseName="ns=robotics;MotorType", displayName="MotorType", description="The MotorType is for representing instances of electric motors."
 )
 class MotorType(di.objtypes.ComponentType):
-    assetId: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6177", browseName="ns=di;AssetId", dataType=o6.String))
+    assetId: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6177", browseName="ns=di;AssetId", modellingRule="Optional", dataType=o6.String)
+    )
     driveIdentifier_: ns0.objtypes.BaseObjectType | None = o6.reference(
         ns0.objtypes.BaseObjectType(nodeId="ns=robotics;i=5060", browseName="ns=robotics;<DriveIdentifier>", modellingRule="OptionalPlaceholder"), "ns=robotics;i=18180"
     )
-    manufacturer: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17101", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText))
-    model: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17103", browseName="ns=di;Model", dataType=o6.LocalizedText))
+    manufacturer: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17101", browseName="ns=di;Manufacturer", modellingRule="Mandatory", dataType=o6.LocalizedText)
+    )
+    model: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17103", browseName="ns=di;Model", modellingRule="Mandatory", dataType=o6.LocalizedText)
+    )
     parameterSet: ns0.objtypes.BaseObjectType
-    productCode: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17109", browseName="ns=di;ProductCode", dataType=o6.String))
-    serialNumber: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17104", browseName="ns=di;SerialNumber", dataType=o6.String))
+    productCode: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17109", browseName="ns=di;ProductCode", modellingRule="Mandatory", dataType=o6.String)
+    )
+    serialNumber: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17104", browseName="ns=di;SerialNumber", modellingRule="Mandatory", dataType=o6.String)
+    )
 
 
 @o6.objecttype(
@@ -918,20 +993,31 @@ class MotorType(di.objtypes.ComponentType):
     description="The GearType describes a gear in a powertrain, e.g. a gear box or a spindle.",
 )
 class GearType(di.objtypes.ComponentType):
-    assetId: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6178", browseName="ns=di;AssetId", dataType=o6.String))
+    assetId: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6178", browseName="ns=di;AssetId", modellingRule="Optional", dataType=o6.String)
+    )
     gearRatio: ns0.vartypes.RationalNumberType
-    manufacturer: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17152", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText))
-    model: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17154", browseName="ns=di;Model", dataType=o6.LocalizedText))
+    manufacturer: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17152", browseName="ns=di;Manufacturer", modellingRule="Mandatory", dataType=o6.LocalizedText)
+    )
+    model: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17154", browseName="ns=di;Model", modellingRule="Mandatory", dataType=o6.LocalizedText)
+    )
     pitch: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=robotics;i=17165",
             browseName="ns=robotics;Pitch",
             description="Pitch describes the distance covered in millimeters (mm) for linear motion per one revolution of the output side of the driving unit. Pitch is used in combination with GearRatio to describe the overall transmission from input to output of the gear.",
+            modellingRule="Optional",
             dataType=o6.Double,
         )
     )
-    productCode: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17160", browseName="ns=di;ProductCode", dataType=o6.String))
-    serialNumber: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17155", browseName="ns=di;SerialNumber", dataType=o6.String))
+    productCode: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17160", browseName="ns=di;ProductCode", modellingRule="Mandatory", dataType=o6.String)
+    )
+    serialNumber: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17155", browseName="ns=di;SerialNumber", modellingRule="Mandatory", dataType=o6.String)
+    )
 
 
 @o6.objecttype(
@@ -946,6 +1032,7 @@ class EmergencyStopFunctionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=robotics;i=17232",
             browseName="ns=robotics;Active",
             description="The Active variable is TRUE if this particular emergency stop function is active, e.g. that the emergency stop button is pressed, FALSE otherwise.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -954,6 +1041,7 @@ class EmergencyStopFunctionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=robotics;i=17231",
             browseName="ns=robotics;Name",
             description="The Name of the EmergencyStopFunctionType provides a manufacturer-specific emergency stop function identifier within the safety system.",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -971,6 +1059,7 @@ class ProtectiveStopFunctionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=robotics;i=17236",
             browseName="ns=robotics;Active",
             description="–\tThe Active variable is TRUE if this particular protective stop function is active, i.e. that a stop is initiated, FALSE otherwise. If Enabled is FALSE then Active shall be FALSE.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -979,6 +1068,7 @@ class ProtectiveStopFunctionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=robotics;i=17235",
             browseName="ns=robotics;Enabled",
             description="–\tThe Enabled variable is TRUE if this protective stop function is currently supervising the system, FALSE otherwise. A protective stop function may or may not be enabled at all times, e.g. the protective stop function of the safety doors are typically enabled in automatic operational mode and disabled in manual mode. On the other hand for example, the protective stop function of the teach pendant enabling device is enabled in manual modes and disabled in automatic modes.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -987,6 +1077,7 @@ class ProtectiveStopFunctionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=robotics;i=17234",
             browseName="ns=robotics;Name",
             description="The Name of the ProtectiveStopFunctionType provides a manufacturer-specific protective stop function identifier within the safety system.",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -999,21 +1090,33 @@ class ProtectiveStopFunctionType(ns0.objtypes.BaseObjectType):
     description="The ControllerType describes the control unit of motion devices. One motion device system can have one or more instances of the ControllerType.",
 )
 class ControllerType(di.objtypes.ComponentType):
-    assetId: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6180", browseName="ns=di;AssetId", dataType=o6.String))
+    assetId: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6180", browseName="ns=di;AssetId", modellingRule="Optional", dataType=o6.String)
+    )
     componentName: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6181", browseName="ns=di;ComponentName", dataType=o6.LocalizedText)
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6181", browseName="ns=di;ComponentName", modellingRule="Optional", dataType=o6.LocalizedText)
     )
     components: ns0.objtypes.FolderType | None
     currentUser: UserType
-    deviceManual: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6182", browseName="ns=di;DeviceManual", dataType=o6.String))
-    manufacturer: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17237", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText))
-    model: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17239", browseName="ns=di;Model", dataType=o6.LocalizedText))
+    deviceManual: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6182", browseName="ns=di;DeviceManual", modellingRule="Optional", dataType=o6.String)
+    )
+    manufacturer: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17237", browseName="ns=di;Manufacturer", modellingRule="Mandatory", dataType=o6.LocalizedText)
+    )
+    model: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17239", browseName="ns=di;Model", modellingRule="Mandatory", dataType=o6.LocalizedText)
+    )
     motionDeviceIdentifier_: MotionDeviceType | None
     parameterSet: ns0.objtypes.BaseObjectType | None
-    productCode: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17245", browseName="ns=di;ProductCode", dataType=o6.String))
+    productCode: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17245", browseName="ns=di;ProductCode", modellingRule="Mandatory", dataType=o6.String)
+    )
     programs: ns0.objtypes.FileDirectoryType | None
     safetyStatesIdentifier_: SafetyStateType | None
-    serialNumber: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17240", browseName="ns=di;SerialNumber", dataType=o6.String))
+    serialNumber: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=17240", browseName="ns=di;SerialNumber", modellingRule="Mandatory", dataType=o6.String)
+    )
     software: ns0.objtypes.FolderType
     systemOperation: SystemOperationType | None
     taskControls: ns0.objtypes.FolderType
@@ -1026,12 +1129,15 @@ class ControllerType(di.objtypes.ComponentType):
     description="Components mounted in a controller cabinet or a motion device e.g. an IO-board or a power supply.",
 )
 class AuxiliaryComponentType(di.objtypes.ComponentType):
-    assetId: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6183", browseName="ns=di;AssetId", dataType=o6.String))
+    assetId: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6183", browseName="ns=di;AssetId", modellingRule="Optional", dataType=o6.String)
+    )
     productCode: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=robotics;i=17756",
             browseName="ns=di;ProductCode",
             description="The ProductCode property provides a unique combination of numbers and letters used to identify the product. It may be the order information displayed on type shields or in ERP systems.",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -1044,12 +1150,15 @@ class AuxiliaryComponentType(di.objtypes.ComponentType):
     description="Drives (multi-slot or single-slot axis amplifier) mounted in a controller cabinet or a motion device.",
 )
 class DriveType(di.objtypes.ComponentType):
-    assetId: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6184", browseName="ns=di;AssetId", dataType=o6.String))
+    assetId: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=robotics;i=6184", browseName="ns=di;AssetId", modellingRule="Optional", dataType=o6.String)
+    )
     productCode: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=robotics;i=17824",
             browseName="ns=di;ProductCode",
             description="The ProductCode property provides a unique combination of numbers and letters used to identify the product. It may be the order information displayed on type shields or in ERP systems.",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -1064,6 +1173,7 @@ class TaskControlType(di.objtypes.ComponentType):
             nodeId="ns=robotics;i=17873",
             browseName="ns=di;ComponentName",
             description="A user writable name provided by the vendor, integrator or user of the device.",
+            modellingRule="Mandatory",
             dataType=o6.LocalizedText,
         )
     )
@@ -1085,12 +1195,17 @@ class UserType(ns0.objtypes.BaseObjectType):
             nodeId="ns=robotics;i=18176",
             browseName="ns=robotics;Level",
             description="Provides information about the access rights and determines what can be viewed, updated, or deleted by a user",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
     name: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=robotics;i=18177", browseName="ns=robotics;Name", description="The name for the current user within the control system.", dataType=o6.String
+            nodeId="ns=robotics;i=18177",
+            browseName="ns=robotics;Name",
+            description="The name for the current user within the control system.",
+            modellingRule="Optional",
+            dataType=o6.String,
         )
     )
 

@@ -47,9 +47,10 @@ ns0.vartypes.MultiStateDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_tightening;i=6006",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[6],
+                arrayDimensions=[0],
                 value=[
                     o6.LocalizedText("OTHER"),
                     o6.LocalizedText("PISTOL"),
@@ -100,9 +101,10 @@ ns0.vartypes.MultiStateDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_tightening;i=6015",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[8],
+                arrayDimensions=[0],
                 value=[
                     o6.LocalizedText("OTHER"),
                     o6.LocalizedText("CONTINUOUS"),
@@ -130,9 +132,10 @@ ns0.vartypes.MultiStateDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_tightening;i=6017",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[5],
+                arrayDimensions=[0],
                 value=[o6.LocalizedText("OTHER"), o6.LocalizedText("ELECTRIC"), o6.LocalizedText("HYDRAULIC"), o6.LocalizedText("PNEUMATIC"), o6.LocalizedText("MANUAL")],
             )
         )
@@ -151,9 +154,10 @@ ns0.vartypes.MultiStateDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_tightening;i=6019",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[4],
+                arrayDimensions=[0],
                 value=[o6.LocalizedText("OTHER"), o6.LocalizedText("MECHANICAL"), o6.LocalizedText("CURRENT"), o6.LocalizedText("TRANSDUCER")],
             )
         )
@@ -166,14 +170,16 @@ ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=ijt_tightening;i=6026",
     browseName="ns=ijt_base;PhysicalQuantity",
     description="PhysicalQuantity is to determine the type of the physical quantity associated to a given value(s).",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_tightening;i=6027",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[29],
+                arrayDimensions=[0],
                 value=[
                     o6.LocalizedText("OTHER"),
                     o6.LocalizedText("TIME"),
@@ -263,14 +269,16 @@ ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=ijt_tightening;i=6029",
     browseName="ns=ijt_base;PhysicalQuantity",
     description="PhysicalQuantity is to determine the type of the physical quantity associated to a given value(s).",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_tightening;i=6032",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[29],
+                arrayDimensions=[0],
                 value=[
                     o6.LocalizedText("OTHER"),
                     o6.LocalizedText("TIME"),
@@ -319,6 +327,7 @@ ijt_base.vartypes.JoiningDataVariableType(
                 nodeId="ns=ijt_tightening;i=6028",
                 browseName="ns=ijt_base;EngineeringUnits",
                 description="0:EngineeringUnits defines the engineering unit of the values.",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -333,14 +342,16 @@ ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=ijt_tightening;i=6025",
     browseName="ns=ijt_base;PhysicalQuantity",
     description="PhysicalQuantity is to determine the type of the physical quantity associated to a given value(s).",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=ijt_tightening;i=6033",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[29],
+                arrayDimensions=[0],
                 value=[
                     o6.LocalizedText("OTHER"),
                     o6.LocalizedText("TIME"),
@@ -389,6 +400,7 @@ ijt_base.vartypes.JoiningDataVariableType(
                 nodeId="ns=ijt_tightening;i=6024",
                 browseName="ns=ijt_base;EngineeringUnits",
                 description="0:EngineeringUnits defines the engineering unit of the values.",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -410,6 +422,7 @@ ijt_base.vartypes.JoiningDataVariableType(
                 nodeId="ns=ijt_tightening;i=6036",
                 browseName="ns=ijt_base;EngineeringUnits",
                 description="0:EngineeringUnits defines the engineering unit of the values.",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )

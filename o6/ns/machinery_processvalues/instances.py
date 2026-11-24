@@ -57,7 +57,7 @@ http_opcfoundation_org_UA_Machinery_ProcessValues_ = ns0.objtypes.NamespaceMetad
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),
@@ -81,6 +81,7 @@ ns0.vartypes.AnalogUnitRangeType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_processvalues;i=6009",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -89,7 +90,11 @@ ns0.vartypes.AnalogUnitRangeType(
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=machinery_processvalues;i=6010", browseName="EURange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=100.0)
+                nodeId="ns=machinery_processvalues;i=6010",
+                browseName="EURange",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.Range,
+                value=ns0.datatypes.Range(low=0.0, high=100.0),
             )
         ),
     ],
@@ -103,7 +108,11 @@ ns0.vartypes.AnalogUnitType(
     browseName="ns=machinery_processvalues;LowLowLimit",
     description="Defines the absolute low low limit",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6012", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6012", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -114,7 +123,11 @@ ns0.vartypes.AnalogUnitType(
     browseName="ns=machinery_processvalues;LowLimit",
     description="Defines the absolute low limit",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6014", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6014", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -125,7 +138,11 @@ ns0.vartypes.AnalogUnitType(
     browseName="ns=machinery_processvalues;HighLimit",
     description="Defines the absolute high limit",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6016", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6016", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -136,7 +153,11 @@ ns0.vartypes.AnalogUnitType(
     browseName="ns=machinery_processvalues;HighHighLimit",
     description="Defines the absolute high high limit",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6018", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6018", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -147,7 +168,11 @@ ns0.vartypes.AnalogUnitType(
     browseName="ns=machinery_processvalues;LowLowDeviation",
     description="Defines the low low limit for deviation, relative to the process value setpoint.",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6020", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6020", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -158,7 +183,11 @@ ns0.vartypes.AnalogUnitType(
     browseName="ns=machinery_processvalues;LowDeviation",
     description="Defines the low limit for deviation, relative to the process value setpoint.",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6022", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6022", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -169,7 +198,11 @@ ns0.vartypes.AnalogUnitType(
     browseName="ns=machinery_processvalues;HighDeviation",
     description="Defines the high limit for deviation, relative to the process value setpoint.",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6024", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6024", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -180,7 +213,11 @@ ns0.vartypes.AnalogUnitType(
     browseName="ns=machinery_processvalues;HighHighDeviation",
     description="Defines the high high limit for deviation, relative to the process value setpoint.",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6026", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6026", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -196,9 +233,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_processvalues;i=6029",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[3],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("FINE"), description=o6.LocalizedText("tight tolerances")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("MIDDLE"), description=o6.LocalizedText("mean tolerances")),
@@ -206,7 +244,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6030", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6030", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -219,8 +257,10 @@ machinery_processvalues_vartypes.ProcessValueSetpointVariableType(
     description="The desired value, may or may not be controlled by the server.",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6037", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6038", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6037", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6038", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -231,93 +271,131 @@ o6.reference(machinery_processvalues_objtypes.ProcessValueType, ns0.reftypes.Has
 ns0.vartypes.TwoStateVariableType(
     nodeId="ns=machinery_processvalues;i=6040",
     browseName="ActiveState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6041", browseName="Id", dataType=o6.Boolean))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6041", browseName="Id", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machinery_processvalues;i=6042",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6043", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6043", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.objtypes.ExclusiveLimitStateMachineType(
-    nodeId="ns=machinery_processvalues;i=5003", browseName="LimitState", references=[o6.hasComponent(o6.ns["ns=machinery_processvalues;i=6042"])]
+    nodeId="ns=machinery_processvalues;i=5003", browseName="LimitState", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=machinery_processvalues;i=6042"])]
 )
 o6.reference(o6.ns["ns=machinery_processvalues;i=6040"], "i=9004", o6.ns["ns=machinery_processvalues;i=5003"])
 ns0.vartypes.TwoStateVariableType(
     nodeId="ns=machinery_processvalues;i=6044",
     browseName="EnabledState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6045", browseName="Id", dataType=o6.Boolean))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6045", browseName="Id", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.LocalizedText,
 )
 o6.reference(o6.ns["ns=machinery_processvalues;i=6044"], "i=9004", o6.ns["ns=machinery_processvalues;i=6040"])
 ns0.vartypes.TwoStateVariableType(
     nodeId="ns=machinery_processvalues;i=6048",
     browseName="AckedState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6049", browseName="Id", dataType=o6.Boolean))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6049", browseName="Id", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.ConditionVariableType(
     nodeId="ns=machinery_processvalues;i=6054",
     browseName="Comment",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6055", browseName="SourceTimestamp", dataType=ns0.datatypes.UtcTime))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6055", browseName="SourceTimestamp", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)
+        )
+    ],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.ConditionVariableType(
     nodeId="ns=machinery_processvalues;i=6059",
     browseName="LastSeverity",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6060", browseName="SourceTimestamp", dataType=ns0.datatypes.UtcTime))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6060", browseName="SourceTimestamp", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)
+        )
+    ],
     dataType=o6.UInt16,
 )
 ns0.vartypes.ConditionVariableType(
     nodeId="ns=machinery_processvalues;i=6061",
     browseName="Quality",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6062", browseName="SourceTimestamp", dataType=ns0.datatypes.UtcTime))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6062", browseName="SourceTimestamp", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)
+        )
+    ],
     dataType=o6.StatusCode,
 )
 ns0.vartypes.TwoStateVariableType(
     nodeId="ns=machinery_processvalues;i=6072",
     browseName="ActiveState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6073", browseName="Id", dataType=o6.Boolean))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6073", browseName="Id", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machinery_processvalues;i=6074",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6075", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6075", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.objtypes.ExclusiveLimitStateMachineType(
-    nodeId="ns=machinery_processvalues;i=5005", browseName="LimitState", references=[o6.hasComponent(o6.ns["ns=machinery_processvalues;i=6074"])]
+    nodeId="ns=machinery_processvalues;i=5005", browseName="LimitState", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=machinery_processvalues;i=6074"])]
 )
 ns0.vartypes.TwoStateVariableType(
     nodeId="ns=machinery_processvalues;i=6076",
     browseName="EnabledState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6077", browseName="Id", dataType=o6.Boolean))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6077", browseName="Id", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.TwoStateVariableType(
     nodeId="ns=machinery_processvalues;i=6080",
     browseName="AckedState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6081", browseName="Id", dataType=o6.Boolean))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6081", browseName="Id", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.ConditionVariableType(
     nodeId="ns=machinery_processvalues;i=6086",
     browseName="Comment",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6087", browseName="SourceTimestamp", dataType=ns0.datatypes.UtcTime))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6087", browseName="SourceTimestamp", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)
+        )
+    ],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.ConditionVariableType(
     nodeId="ns=machinery_processvalues;i=6091",
     browseName="LastSeverity",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6092", browseName="SourceTimestamp", dataType=ns0.datatypes.UtcTime))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6092", browseName="SourceTimestamp", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)
+        )
+    ],
     dataType=o6.UInt16,
 )
 ns0.vartypes.ConditionVariableType(
     nodeId="ns=machinery_processvalues;i=6093",
     browseName="Quality",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6094", browseName="SourceTimestamp", dataType=ns0.datatypes.UtcTime))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6094", browseName="SourceTimestamp", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)
+        )
+    ],
     dataType=o6.StatusCode,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
@@ -330,9 +408,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_processvalues;i=6106",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[11],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("NONE"), description=o6.LocalizedText("Not monitoring")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("UNKNOWN"), description=o6.LocalizedText("Status not known")),
@@ -350,7 +429,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6107", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6107", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -367,9 +446,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_processvalues;i=6109",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[3],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("OFF"), description=o6.LocalizedText("no alarm suppression")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("HORN"), description=o6.LocalizedText("suppressess only horn")),
@@ -377,7 +457,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6110", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6110", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -388,11 +468,13 @@ ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=machinery_processvalues;i=6104",
     browseName="ns=machinery_processvalues;PercentageValue",
     description="Provides the process value in percentage.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_processvalues;i=6111",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -401,7 +483,11 @@ ns0.vartypes.AnalogUnitRangeType(
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=machinery_processvalues;i=6112", browseName="EURange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=100.0)
+                nodeId="ns=machinery_processvalues;i=6112",
+                browseName="EURange",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.Range,
+                value=ns0.datatypes.Range(low=0.0, high=100.0),
             )
         ),
     ],
@@ -413,7 +499,12 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=machinery_processvalues;i=6113",
     browseName="ns=machinery_processvalues;LowLowLimit",
     description="Defines the absolute low low limit",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6114", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6114", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -422,7 +513,12 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=machinery_processvalues;i=6115",
     browseName="ns=machinery_processvalues;LowLimit",
     description="Defines the absolute low limit",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6116", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6116", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -431,7 +527,12 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=machinery_processvalues;i=6117",
     browseName="ns=machinery_processvalues;HighLimit",
     description="Defines the absolute high limit",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6118", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6118", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -440,7 +541,12 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=machinery_processvalues;i=6119",
     browseName="ns=machinery_processvalues;HighHighLimit",
     description="Defines the absolute high high limit",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6120", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6120", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -451,8 +557,10 @@ padim.vartypes.AnalogSignalVariableType(
     description="The process value.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6034", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6035", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6034", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6035", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasComponent(o6.ns["ns=machinery_processvalues;i=6104"]),
         o6.hasComponent(o6.ns["ns=machinery_processvalues;i=6113"]),
         o6.hasComponent(o6.ns["ns=machinery_processvalues;i=6115"]),
@@ -475,7 +583,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
@@ -483,7 +591,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
-o6.call(nodeId="ns=machinery_processvalues;i=7002", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=machinery_processvalues;i=6050"]))
+o6.call(nodeId="ns=machinery_processvalues;i=7002", browseName="Acknowledge", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=machinery_processvalues;i=6050"]))
 o6.reference(o6.ns["ns=machinery_processvalues;i=7002"], "i=3065", "i=8944")
 
 ns0.vartypes.PropertyType(
@@ -494,7 +602,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
@@ -502,13 +610,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
-o6.call(nodeId="ns=machinery_processvalues;i=7003", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=machinery_processvalues;i=6051"]))
+o6.call(nodeId="ns=machinery_processvalues;i=7003", browseName="AddComment", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=machinery_processvalues;i=6051"]))
 o6.reference(o6.ns["ns=machinery_processvalues;i=7003"], "i=3065", "i=2829")
 
-o6.call(nodeId="ns=machinery_processvalues;i=7004", browseName="Disable")
+o6.call(nodeId="ns=machinery_processvalues;i=7004", browseName="Disable", modellingRule="Mandatory")
 o6.reference(o6.ns["ns=machinery_processvalues;i=7004"], "i=3065", "i=2803")
 
-o6.call(nodeId="ns=machinery_processvalues;i=7005", browseName="Enable")
+o6.call(nodeId="ns=machinery_processvalues;i=7005", browseName="Enable", modellingRule="Mandatory")
 o6.reference(o6.ns["ns=machinery_processvalues;i=7005"], "i=3065", "i=2803")
 
 ns0.objtypes.ExclusiveDeviationAlarmType(
@@ -517,23 +625,25 @@ ns0.objtypes.ExclusiveDeviationAlarmType(
     description="Becomes active, when the process values derivates from the ProcessValueSetpoint.",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6039", browseName="SetpointNode", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6046", browseName="InputNode", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6047", browseName="SuppressedOrShelved", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6052", browseName="BranchId", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6053", browseName="ClientUserId", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6056", browseName="ConditionClassId", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6057", browseName="ConditionClassName", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6058", browseName="ConditionName", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6063", browseName="Retain", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6064", browseName="EventId", dataType=o6.ByteString)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6065", browseName="EventType", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6066", browseName="Message", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6067", browseName="ReceiveTime", dataType=ns0.datatypes.UtcTime)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6068", browseName="Severity", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6069", browseName="SourceName", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6070", browseName="SourceNode", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6071", browseName="Time", dataType=ns0.datatypes.UtcTime)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6039", browseName="SetpointNode", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6046", browseName="InputNode", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6047", browseName="SuppressedOrShelved", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6052", browseName="BranchId", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6053", browseName="ClientUserId", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6056", browseName="ConditionClassId", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6057", browseName="ConditionClassName", modellingRule="Mandatory", dataType=o6.LocalizedText)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6058", browseName="ConditionName", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6063", browseName="Retain", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6064", browseName="EventId", modellingRule="Mandatory", dataType=o6.ByteString)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6065", browseName="EventType", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6066", browseName="Message", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6067", browseName="ReceiveTime", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6068", browseName="Severity", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6069", browseName="SourceName", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6070", browseName="SourceNode", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6071", browseName="Time", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)),
         o6.hasComponent(o6.ns["ns=machinery_processvalues;i=5003"]),
         o6.hasComponent(o6.ns["ns=machinery_processvalues;i=6040"]),
         o6.hasComponent(o6.ns["ns=machinery_processvalues;i=6044"]),
@@ -558,7 +668,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
@@ -566,7 +676,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
-o6.call(nodeId="ns=machinery_processvalues;i=7006", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=machinery_processvalues;i=6082"]))
+o6.call(nodeId="ns=machinery_processvalues;i=7006", browseName="Acknowledge", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=machinery_processvalues;i=6082"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=machinery_processvalues;i=6083",
@@ -576,7 +686,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="EventId", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The identifier for the event to comment.")
@@ -584,7 +694,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
-o6.call(nodeId="ns=machinery_processvalues;i=7007", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=machinery_processvalues;i=6083"]))
+o6.call(nodeId="ns=machinery_processvalues;i=7007", browseName="AddComment", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=machinery_processvalues;i=6083"]))
 
 ns0.objtypes.ExclusiveLimitAlarmType(
     nodeId="ns=machinery_processvalues;i=5004",
@@ -592,22 +702,24 @@ ns0.objtypes.ExclusiveLimitAlarmType(
     description="Becomes active, when absolute limits are reached.",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6078", browseName="InputNode", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6079", browseName="SuppressedOrShelved", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6084", browseName="BranchId", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6085", browseName="ClientUserId", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6088", browseName="ConditionClassId", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6089", browseName="ConditionClassName", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6090", browseName="ConditionName", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6095", browseName="Retain", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6096", browseName="EventId", dataType=o6.ByteString)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6097", browseName="EventType", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6098", browseName="Message", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6099", browseName="ReceiveTime", dataType=ns0.datatypes.UtcTime)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6100", browseName="Severity", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6101", browseName="SourceName", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6102", browseName="SourceNode", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6103", browseName="Time", dataType=ns0.datatypes.UtcTime)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6078", browseName="InputNode", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6079", browseName="SuppressedOrShelved", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6084", browseName="BranchId", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6085", browseName="ClientUserId", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6088", browseName="ConditionClassId", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6089", browseName="ConditionClassName", modellingRule="Mandatory", dataType=o6.LocalizedText)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6090", browseName="ConditionName", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6095", browseName="Retain", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6096", browseName="EventId", modellingRule="Mandatory", dataType=o6.ByteString)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6097", browseName="EventType", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6098", browseName="Message", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6099", browseName="ReceiveTime", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6100", browseName="Severity", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6101", browseName="SourceName", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6102", browseName="SourceNode", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_processvalues;i=6103", browseName="Time", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)),
         o6.hasComponent(o6.ns["ns=machinery_processvalues;i=5005"]),
         o6.hasComponent(o6.ns["ns=machinery_processvalues;i=6072"]),
         o6.hasComponent(o6.ns["ns=machinery_processvalues;i=6076"]),
@@ -617,8 +729,8 @@ ns0.objtypes.ExclusiveLimitAlarmType(
         o6.hasComponent(o6.ns["ns=machinery_processvalues;i=6093"]),
         o6.hasComponent(o6.ns["ns=machinery_processvalues;i=7006"]),
         o6.hasComponent(o6.ns["ns=machinery_processvalues;i=7007"]),
-        o6.hasComponent(o6.call(nodeId="ns=machinery_processvalues;i=7008", browseName="Disable")),
-        o6.hasComponent(o6.call(nodeId="ns=machinery_processvalues;i=7009", browseName="Enable")),
+        o6.hasComponent(o6.call(nodeId="ns=machinery_processvalues;i=7008", browseName="Disable", modellingRule="Mandatory")),
+        o6.hasComponent(o6.call(nodeId="ns=machinery_processvalues;i=7009", browseName="Enable", modellingRule="Mandatory")),
     ],
 )
 o6.reference(machinery_processvalues_objtypes.ProcessValueType, ns0.reftypes.HasComponent, o6.ns["ns=machinery_processvalues;i=5004"])

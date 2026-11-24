@@ -78,10 +78,10 @@ machinery.objtypes.MachineComponentsType(
 )
 o6.reference(surface_technology_plasma_objtypes.PlantCoolingSystemType, ns0.reftypes.HasAddIn, o6.ns["ns=surface_technology_plasma;i=5048"])
 o6.reference(o6.ns["ns=surface_technology_plasma;i=5050"], "i=17604", o6.ns["ns=surface_technology_plasma;i=5048"])
-machinery.objtypes.MachineComponentsType(nodeId="ns=surface_technology_plasma;i=5073", browseName="ns=machinery;Components")
-ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5074", browseName="ns=machinery;MachineryBuildingBlocks")
+machinery.objtypes.MachineComponentsType(nodeId="ns=surface_technology_plasma;i=5073", browseName="ns=machinery;Components", modellingRule="Mandatory")
+ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5074", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
 o6.reference(o6.ns["ns=surface_technology_plasma;i=5074"], "i=17604", o6.ns["ns=surface_technology_plasma;i=5073"])
-machinery.objtypes.MonitoringType(nodeId="ns=surface_technology_plasma;i=5075", browseName="ns=machinery;Monitoring")
+machinery.objtypes.MonitoringType(nodeId="ns=surface_technology_plasma;i=5075", browseName="ns=machinery;Monitoring", modellingRule="Mandatory")
 o6.reference(o6.ns["ns=surface_technology_plasma;i=5074"], "i=17604", o6.ns["ns=surface_technology_plasma;i=5075"])
 surface_technology_plasma_objtypes.GasSystemType(
     nodeId="ns=surface_technology_plasma;i=5013",
@@ -93,11 +93,11 @@ surface_technology_plasma_objtypes.GasSystemType(
         o6.hasAddIn(o6.ns["ns=surface_technology_plasma;i=5073"]),
     ],
 )
-ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5077", browseName="ns=machinery;MachineryBuildingBlocks")
-machinery.objtypes.MonitoringType(nodeId="ns=surface_technology_plasma;i=5078", browseName="ns=machinery;Monitoring")
+ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5077", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
+machinery.objtypes.MonitoringType(nodeId="ns=surface_technology_plasma;i=5078", browseName="ns=machinery;Monitoring", modellingRule="Mandatory")
 o6.reference(o6.ns["ns=surface_technology_plasma;i=5077"], "i=17604", o6.ns["ns=surface_technology_plasma;i=5078"])
-ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5079", browseName="ns=machinery;MachineryBuildingBlocks")
-machinery.objtypes.MonitoringType(nodeId="ns=surface_technology_plasma;i=5080", browseName="ns=machinery;Monitoring")
+ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5079", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
+machinery.objtypes.MonitoringType(nodeId="ns=surface_technology_plasma;i=5080", browseName="ns=machinery;Monitoring", modellingRule="Mandatory")
 o6.reference(o6.ns["ns=surface_technology_plasma;i=5079"], "i=17604", o6.ns["ns=surface_technology_plasma;i=5080"])
 surface_technology_plasma_objtypes.PlasmaGeneratorType(
     nodeId="ns=surface_technology_plasma;i=5011",
@@ -105,10 +105,10 @@ surface_technology_plasma_objtypes.PlasmaGeneratorType(
     modellingRule="MandatoryPlaceholder",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=5079"]), o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=5080"])],
 )
-machinery.objtypes.MachineComponentsType(nodeId="ns=surface_technology_plasma;i=5081", browseName="ns=machinery;Components")
-ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5082", browseName="ns=machinery;MachineryBuildingBlocks")
+machinery.objtypes.MachineComponentsType(nodeId="ns=surface_technology_plasma;i=5081", browseName="ns=machinery;Components", modellingRule="Mandatory")
+ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5082", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
 o6.reference(o6.ns["ns=surface_technology_plasma;i=5082"], "i=17604", o6.ns["ns=surface_technology_plasma;i=5081"])
-machinery.objtypes.MonitoringType(nodeId="ns=surface_technology_plasma;i=5083", browseName="ns=machinery;Monitoring")
+machinery.objtypes.MonitoringType(nodeId="ns=surface_technology_plasma;i=5083", browseName="ns=machinery;Monitoring", modellingRule="Mandatory")
 o6.reference(o6.ns["ns=surface_technology_plasma;i=5082"], "i=17604", o6.ns["ns=surface_technology_plasma;i=5083"])
 surface_technology_plasma_objtypes.PrecursorSystemType(
     nodeId="ns=surface_technology_plasma;i=5012",
@@ -120,8 +120,8 @@ surface_technology_plasma_objtypes.PrecursorSystemType(
         o6.hasAddIn(o6.ns["ns=surface_technology_plasma;i=5081"]),
     ],
 )
-ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5084", browseName="ns=machinery;MachineryBuildingBlocks")
-machinery.objtypes.MonitoringType(nodeId="ns=surface_technology_plasma;i=5085", browseName="ns=machinery;Monitoring")
+ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5084", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
+machinery.objtypes.MonitoringType(nodeId="ns=surface_technology_plasma;i=5085", browseName="ns=machinery;Monitoring", modellingRule="Mandatory")
 o6.reference(o6.ns["ns=surface_technology_plasma;i=5084"], "i=17604", o6.ns["ns=surface_technology_plasma;i=5085"])
 surface_technology_plasma_objtypes.HeatingSystemType(
     nodeId="ns=surface_technology_plasma;i=5022",
@@ -129,8 +129,8 @@ surface_technology_plasma_objtypes.HeatingSystemType(
     modellingRule="OptionalPlaceholder",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=5084"]), o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=5085"])],
 )
-ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5086", browseName="ns=machinery;MachineryBuildingBlocks")
-machinery.objtypes.MonitoringType(nodeId="ns=surface_technology_plasma;i=5087", browseName="ns=machinery;Monitoring")
+ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5086", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
+machinery.objtypes.MonitoringType(nodeId="ns=surface_technology_plasma;i=5087", browseName="ns=machinery;Monitoring", modellingRule="Mandatory")
 o6.reference(o6.ns["ns=surface_technology_plasma;i=5086"], "i=17604", o6.ns["ns=surface_technology_plasma;i=5087"])
 surface_technology_plasma_objtypes.ProcessingChamberType(
     nodeId="ns=surface_technology_plasma;i=5021",
@@ -138,8 +138,8 @@ surface_technology_plasma_objtypes.ProcessingChamberType(
     modellingRule="MandatoryPlaceholder",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=5086"]), o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=5087"])],
 )
-ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5088", browseName="ns=machinery;MachineryBuildingBlocks")
-machinery.objtypes.MonitoringType(nodeId="ns=surface_technology_plasma;i=5089", browseName="ns=machinery;Monitoring")
+ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5088", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
+machinery.objtypes.MonitoringType(nodeId="ns=surface_technology_plasma;i=5089", browseName="ns=machinery;Monitoring", modellingRule="Mandatory")
 o6.reference(o6.ns["ns=surface_technology_plasma;i=5088"], "i=17604", o6.ns["ns=surface_technology_plasma;i=5089"])
 surface_technology_plasma_objtypes.WorkpieceMotionDeviceType(
     nodeId="ns=surface_technology_plasma;i=5023",
@@ -158,8 +158,8 @@ machinery.objtypes.MachineComponentsType(
     ],
 )
 o6.reference(surface_technology_plasma_objtypes.LowPressurePlasmaSurfaceMachineType, ns0.reftypes.HasAddIn, o6.ns["ns=surface_technology_plasma;i=5018"])
-ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5095", browseName="ns=machinery;MachineryBuildingBlocks")
-machinery.objtypes.MonitoringType(nodeId="ns=surface_technology_plasma;i=5096", browseName="ns=machinery;Monitoring")
+ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5095", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
+machinery.objtypes.MonitoringType(nodeId="ns=surface_technology_plasma;i=5096", browseName="ns=machinery;Monitoring", modellingRule="Mandatory")
 o6.reference(o6.ns["ns=surface_technology_plasma;i=5095"], "i=17604", o6.ns["ns=surface_technology_plasma;i=5096"])
 surface_technology_plasma_objtypes.PlasmaJetType(
     nodeId="ns=surface_technology_plasma;i=5019",
@@ -177,6 +177,7 @@ o6.reference(surface_technology_plasma_objtypes.AtmosphericPressurePlasmaSurface
 machinery.objtypes.MachineComponentsType(
     nodeId="ns=surface_technology_plasma;i=5076",
     browseName="ns=machinery;Components",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(
             surface_technology_plasma_objtypes.CirculationSystemType(
@@ -231,7 +232,7 @@ http_opcfoundation_org_UA_SurfaceTechnology_Plasma_ = ns0.objtypes.NamespaceMeta
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),
@@ -266,6 +267,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=surface_technology_plasma;i=6008",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -274,6 +276,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=surface_technology_plasma;i=6009",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -282,6 +285,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=surface_technology_plasma;i=6011",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -292,26 +296,38 @@ o6.reference(o6.ns["ns=surface_technology_plasma;i=5010"], "i=17604", o6.ns["ns=
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6012",
     browseName="ns=surface_technology_plasma;BiasArcCounter",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6013", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6013", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.UInt32,
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=surface_technology_plasma;i=6016",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6017", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6017", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
     nodeId="ns=surface_technology_plasma;i=5008",
     browseName="ns=machinery_jobs;JobOrderControl",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6022", browseName="ns=isa95_jobcontrol_v2;MaxDownloadableJobOrders", dataType=o6.UInt16)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_plasma;i=6022", browseName="ns=isa95_jobcontrol_v2;MaxDownloadableJobOrders", modellingRule="Mandatory", dataType=o6.UInt16
+            )
+        ),
         o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6016"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=surface_technology_plasma;i=6018",
                 browseName="ns=isa95_jobcontrol_v2;EquipmentID",
                 description="Defines a read-only set of Equipment Class IDs and Equipment IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -322,6 +338,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=surface_technology_plasma;i=6019",
                 browseName="ns=isa95_jobcontrol_v2;JobOrderList",
                 description="Defines a read-only list of job order information available from the server.",
+                modellingRule="Mandatory",
                 dataType=isa95_jobcontrol_v2.datatypes.ISA95JobOrderAndStateDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -332,6 +349,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=surface_technology_plasma;i=6020",
                 browseName="ns=isa95_jobcontrol_v2;MaterialClassID",
                 description="Defines a read-only set of Material Classes IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -342,6 +360,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=surface_technology_plasma;i=6021",
                 browseName="ns=isa95_jobcontrol_v2;MaterialDefinitionID",
                 description="Defines a read-only set of Material Classes IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -352,6 +371,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=surface_technology_plasma;i=6023",
                 browseName="ns=isa95_jobcontrol_v2;PersonnelID",
                 description="Defines a read-only set of Personnel IDs and Person IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -362,6 +382,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=surface_technology_plasma;i=6024",
                 browseName="ns=isa95_jobcontrol_v2;PhysicalAssetID",
                 description="Defines a read-only set of Physical Asset Class IDs and Physical Asset IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -372,6 +393,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=surface_technology_plasma;i=6025",
                 browseName="ns=isa95_jobcontrol_v2;WorkMaster",
                 description="Defines a read-only set of work master IDs that may be specified in a job order, and the read-only set of parameters that may be specified for a specific work master.",
+                modellingRule="Mandatory",
                 dataType=isa95_jobcontrol_v2.datatypes.ISA95WorkMasterDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -382,33 +404,50 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6030",
     browseName="ns=surface_technology_plasma;PowerConsumption",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6031", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6031", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_plasma;i=5015",
     browseName="ns=machinery;Consumption",
     description="Entry point for consumption information of the MachineryItem.",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6030"])],
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6032",
     browseName="ns=surface_technology_plasma;SubstrateTemperature",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6033", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6033", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_plasma;i=5016",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6032"])],
 )
 ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_plasma;i=5017",
     browseName="ns=machinery;Status",
     description="Entry point for status information of the MachineryItem. If this Object is provided, and the MachineryItemState is provided, it shall be referenced. If this Object is provided and the MachineryOperationMode is provided, it shall be referenced.",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6034", browseName="ns=surface_technology_plasma;MainSwitchOn", dataType=o6.Boolean))
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_plasma;i=6034", browseName="ns=surface_technology_plasma;MainSwitchOn", modellingRule="Mandatory", dataType=o6.Boolean
+            )
+        )
     ],
 )
 machinery.objtypes.MonitoringType(
@@ -433,6 +472,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=surface_technology_plasma;i=6035",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -441,6 +481,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=surface_technology_plasma;i=6036",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -451,33 +492,60 @@ o6.reference(o6.ns["ns=surface_technology_plasma;i=5032"], "i=17604", o6.ns["ns=
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6037",
     browseName="ns=surface_technology_plasma;EvaporatorCurrent",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6038", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6038", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6039",
     browseName="ns=surface_technology_plasma;EvaporatorVoltage",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6040", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6040", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6041",
     browseName="ns=surface_technology_plasma;EvaporatorPower",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6042", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6042", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6044",
     browseName="ns=surface_technology_plasma;BiasDutyCycle",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6045", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6045", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.UInt16,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6015",
     browseName="ns=surface_technology_plasma;BiasPulseFrequency",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6043", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6046", browseName="ns=surface_technology_plasma;BiasPolarity", dataType=o6.String)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6043", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_plasma;i=6046", browseName="ns=surface_technology_plasma;BiasPolarity", modellingRule="Optional", dataType=o6.String
+            )
+        ),
         o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6044"]),
     ],
     dataType=o6.Double,
@@ -486,48 +554,88 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6049",
     browseName="ns=surface_technology_plasma;BiasCurrent",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6050", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6050", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6051",
     browseName="ns=surface_technology_plasma;BiasVoltage",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6052", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6052", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6053",
     browseName="ns=surface_technology_plasma;BiasPower",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6054", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6054", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_plasma;i=5034",
     browseName="ns=machinery;Status",
     description="Entry point for status information of the MachineryItem. If this Object is provided, and the MachineryItemState is provided, it shall be referenced. If this Object is provided and the MachineryOperationMode is provided, it shall be referenced.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6014", browseName="ns=surface_technology_plasma;EvaporatorGeneratorSwitchOn", dataType=o6.Boolean)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_plasma;i=6014", browseName="ns=surface_technology_plasma;EvaporatorGeneratorSwitchOn", modellingRule="Optional", dataType=o6.Boolean
+            )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6055", browseName="ns=surface_technology_plasma;BiasGeneratorSwitchOn", dataType=o6.Boolean)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_plasma;i=6055", browseName="ns=surface_technology_plasma;BiasGeneratorSwitchOn", modellingRule="Optional", dataType=o6.Boolean
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6056", browseName="ns=surface_technology_plasma;PlasmaReadyToStart", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6057", browseName="ns=surface_technology_plasma;PlasmaActive", dataType=o6.Boolean)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_plasma;i=6056", browseName="ns=surface_technology_plasma;PlasmaReadyToStart", modellingRule="Optional", dataType=o6.Boolean
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_plasma;i=6057", browseName="ns=surface_technology_plasma;PlasmaActive", modellingRule="Optional", dataType=o6.Boolean
+            )
+        ),
     ],
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6060",
     browseName="ns=surface_technology_plasma;EvaporatorDutyCycle",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6061", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6061", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.UInt16,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6058",
     browseName="ns=surface_technology_plasma;EvaporatorPulseFrequency",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6047", browseName="ns=surface_technology_plasma;EvaporatorPolarity", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6059", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_plasma;i=6047", browseName="ns=surface_technology_plasma;EvaporatorPolarity", modellingRule="Optional", dataType=o6.String
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6059", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
         o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6060"]),
     ],
     dataType=o6.Double,
@@ -536,19 +644,30 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6048",
     browseName="ns=surface_technology_plasma;EvaporatorReversePower",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6062", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6062", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6063",
     browseName="ns=surface_technology_plasma;BiasReversePower",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6064", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6064", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_plasma;i=5033",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6012"]),
         o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6015"]),
@@ -581,6 +700,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=surface_technology_plasma;i=6065",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -589,6 +709,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=surface_technology_plasma;i=6066",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -599,13 +720,19 @@ o6.reference(o6.ns["ns=surface_technology_plasma;i=5038"], "i=17604", o6.ns["ns=
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6067",
     browseName="ns=surface_technology_plasma;PrimaryPressureControl",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6068", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6068", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_plasma;i=5039",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6067"])],
 )
 machinery.objtypes.MonitoringType(
@@ -626,6 +753,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=surface_technology_plasma;i=6069",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -634,6 +762,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=surface_technology_plasma;i=6070",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -644,13 +773,19 @@ o6.reference(o6.ns["ns=surface_technology_plasma;i=5044"], "i=17604", o6.ns["ns=
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6071",
     browseName="ns=surface_technology_plasma;PrimaryPressureControl",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6072", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6072", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_plasma;i=5045",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6071"])],
 )
 machinery.objtypes.MonitoringType(
@@ -665,7 +800,11 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6073",
     browseName="ns=surface_technology_plasma;GasFlow",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6074", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6074", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 o6.reference(surface_technology_plasma_objtypes.RegulatorType, ns0.reftypes.HasComponent, o6.ns["ns=surface_technology_plasma;i=6073"])
@@ -673,7 +812,11 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6075",
     browseName="ns=surface_technology_plasma;GasConsumption",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6076", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6076", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 o6.reference(surface_technology_plasma_objtypes.RegulatorType, ns0.reftypes.HasComponent, o6.ns["ns=surface_technology_plasma;i=6075"])
@@ -681,7 +824,11 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6077",
     browseName="ns=surface_technology_plasma;PrecursorMassFlow",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6078", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6078", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 o6.reference(surface_technology_plasma_objtypes.RegulatorType, ns0.reftypes.HasComponent, o6.ns["ns=surface_technology_plasma;i=6077"])
@@ -689,7 +836,11 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6079",
     browseName="ns=surface_technology_plasma;PrecursorVolumeFlow",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6080", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6080", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 o6.reference(surface_technology_plasma_objtypes.RegulatorType, ns0.reftypes.HasComponent, o6.ns["ns=surface_technology_plasma;i=6079"])
@@ -697,7 +848,11 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6081",
     browseName="ns=surface_technology_plasma;TFittingTemperature",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6082", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6082", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 o6.reference(surface_technology_plasma_objtypes.RegulatorType, ns0.reftypes.HasComponent, o6.ns["ns=surface_technology_plasma;i=6081"])
@@ -705,7 +860,11 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6083",
     browseName="ns=surface_technology_plasma;HeaterTemperature",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6084", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6084", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 o6.reference(surface_technology_plasma_objtypes.RegulatorType, ns0.reftypes.HasComponent, o6.ns["ns=surface_technology_plasma;i=6083"])
@@ -713,7 +872,11 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6085",
     browseName="ns=surface_technology_plasma;JetHeadTemperature",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6086", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6086", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 o6.reference(surface_technology_plasma_objtypes.RegulatorType, ns0.reftypes.HasComponent, o6.ns["ns=surface_technology_plasma;i=6085"])
@@ -726,9 +889,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=surface_technology_plasma;i=6089",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[6],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Ar"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("N2"), description=o6.LocalizedText()),
@@ -739,7 +903,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6090", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6090", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -755,9 +919,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=surface_technology_plasma;i=6092",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[6],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Ar"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("N2"), description=o6.LocalizedText()),
@@ -768,7 +933,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6093", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6093", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -785,6 +950,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=surface_technology_plasma;i=6094",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -793,6 +959,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=surface_technology_plasma;i=6095",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -803,37 +970,63 @@ o6.reference(o6.ns["ns=surface_technology_plasma;i=5050"], "i=17604", o6.ns["ns=
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6096",
     browseName="ns=surface_technology_plasma;FlowRate",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6097", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6097", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6098",
     browseName="ns=surface_technology_plasma;CoolingSystemTemperatureOutlet",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6099", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6099", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6100",
     browseName="ns=surface_technology_plasma;CoolingSystemTemperatureInlet",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6101", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6101", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6102",
     browseName="ns=surface_technology_plasma;CoolingSystemPressureInlet",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6103", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6103", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6104",
     browseName="ns=surface_technology_plasma;CoolingSystemPressureOutlet",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6105", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6105", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_plasma;i=5052",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6096"]),
         o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6098"]),
@@ -854,7 +1047,11 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6106",
     browseName="ns=surface_technology_plasma;CoolingCircuitTemperatureOutlet",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6107", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6107", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 o6.reference(surface_technology_plasma_objtypes.CirculationSystemType, ns0.reftypes.HasComponent, o6.ns["ns=surface_technology_plasma;i=6106"])
@@ -862,7 +1059,11 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6108",
     browseName="ns=surface_technology_plasma;CoolingCircuitFlowRate",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6109", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6109", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 o6.reference(surface_technology_plasma_objtypes.CirculationSystemType, ns0.reftypes.HasComponent, o6.ns["ns=surface_technology_plasma;i=6108"])
@@ -876,6 +1077,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=surface_technology_plasma;i=6110",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -884,6 +1086,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=surface_technology_plasma;i=6111",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -894,34 +1097,60 @@ o6.reference(o6.ns["ns=surface_technology_plasma;i=5056"], "i=17604", o6.ns["ns=
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6112",
     browseName="ns=surface_technology_plasma;ChamberPrePressure",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6113", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6113", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6114",
     browseName="ns=surface_technology_plasma;ChamberPressure",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6115", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6115", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6116",
     browseName="ns=surface_technology_plasma;ChamberTemperature",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6117", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6117", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6118",
     browseName="ns=surface_technology_plasma;LeakRate",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6119", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6119", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_plasma;i=5057",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6120", browseName="ns=surface_technology_plasma;PumpDownTime", dataType=ns0.datatypes.DurationString)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_plasma;i=6120",
+                browseName="ns=surface_technology_plasma;PumpDownTime",
+                modellingRule="Optional",
+                dataType=ns0.datatypes.DurationString,
+            )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6112"]),
         o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6114"]),
@@ -947,6 +1176,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=surface_technology_plasma;i=6121",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -955,6 +1185,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=surface_technology_plasma;i=6122",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -965,31 +1196,52 @@ o6.reference(o6.ns["ns=surface_technology_plasma;i=5060"], "i=17604", o6.ns["ns=
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6123",
     browseName="ns=surface_technology_plasma;HeaterCurrent",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6124", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6124", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6125",
     browseName="ns=surface_technology_plasma;HeaterVoltage",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6126", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6126", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6127",
     browseName="ns=surface_technology_plasma;HeaterPower",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6128", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6128", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6129",
     browseName="ns=surface_technology_plasma;HeaterTemperature",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6130", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6130", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_plasma;i=5061",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6123"]),
         o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6125"]),
@@ -1015,6 +1267,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=surface_technology_plasma;i=6131",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -1023,6 +1276,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=surface_technology_plasma;i=6132",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -1033,9 +1287,16 @@ o6.reference(o6.ns["ns=surface_technology_plasma;i=5064"], "i=17604", o6.ns["ns=
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6133",
     browseName="ns=surface_technology_plasma;RotationSpeed",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6134", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6135", browseName="ns=surface_technology_plasma;RotationDirection", dataType=o6.Boolean)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6134", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_plasma;i=6135", browseName="ns=surface_technology_plasma;RotationDirection", modellingRule="Optional", dataType=o6.Boolean
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1043,24 +1304,40 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6136",
     browseName="ns=surface_technology_plasma;RotationPosition",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6137", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6137", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Int16,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6139",
     browseName="ns=surface_technology_plasma;ZMotionSpeed",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6140", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6140", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6141",
     browseName="ns=surface_technology_plasma;ZMotionPosition",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6142", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6142", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Int16,
 )
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=surface_technology_plasma;i=6138",
     browseName="ns=surface_technology_plasma;ZMotion",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6139"]), o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6141"])],
     dataType=o6.Boolean,
     value=False,
@@ -1069,6 +1346,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_plasma;i=5065",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6133"]),
         o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6136"]),
@@ -1093,6 +1371,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=surface_technology_plasma;i=6143",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -1101,6 +1380,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=surface_technology_plasma;i=6144",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -1111,55 +1391,96 @@ o6.reference(o6.ns["ns=surface_technology_plasma;i=5070"], "i=17604", o6.ns["ns=
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6149",
     browseName="ns=surface_technology_plasma;PlasmaVoltage",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6150", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6150", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6151",
     browseName="ns=surface_technology_plasma;PlasmaCurrent",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6152", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6152", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6153",
     browseName="ns=surface_technology_plasma;PlasmaJetPressure",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6154", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6154", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6155",
     browseName="ns=surface_technology_plasma;PlasmaJetRotation",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6156", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6156", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Int32,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6157",
     browseName="ns=surface_technology_plasma;PlasmaJetFlow",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6158", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6158", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6159",
     browseName="ns=surface_technology_plasma;PlasmaJetPower",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6160", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6160", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6161",
     browseName="ns=surface_technology_plasma;PlasmaFrequency",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6162", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6162", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_plasma;i=6163",
     browseName="ns=surface_technology_plasma;PlasmaCycleTime",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6164", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6164", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.UInt16,
 )
 ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_plasma;i=5071",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6149"]),
         o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6151"]),
@@ -1175,9 +1496,12 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_plasma;i=5072",
     browseName="ns=machinery;Status",
     description="Entry point for status information of the MachineryItem. If this Object is provided, and the MachineryItemState is provided, it shall be referenced. If this Object is provided and the MachineryOperationMode is provided, it shall be referenced.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6165", browseName="ns=surface_technology_plasma;TransformatorInformation", dataType=o6.String)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=surface_technology_plasma;i=6165", browseName="ns=surface_technology_plasma;TransformatorInformation", modellingRule="Mandatory", dataType=o6.String
+            )
         )
     ],
 )
@@ -1193,21 +1517,29 @@ ns0.objtypes.StateType(
     nodeId="ns=surface_technology_plasma;i=5091",
     browseName="ns=surface_technology_plasma;Vented",
     description="The machine is being prepared for the next run",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6167", browseName="StateNumber", dataType=o6.UInt32, value=0))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6167", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=0))
+    ],
 )
 o6.reference(surface_technology_plasma_objtypes.LowPressurePlasmaNotExecutingSubState_StateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=surface_technology_plasma;i=5091"])
 ns0.objtypes.StateType(
     nodeId="ns=surface_technology_plasma;i=5092",
     browseName="ns=surface_technology_plasma;Standby",
     description="The vacuum chamber is evacuated and the system is ready to start",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6168", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6168", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))
+    ],
 )
 o6.reference(surface_technology_plasma_objtypes.LowPressurePlasmaNotExecutingSubState_StateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=surface_technology_plasma;i=5092"])
 ns0.objtypes.TransitionType(
     nodeId="ns=surface_technology_plasma;i=5093",
     browseName="ns=surface_technology_plasma;FromStandbyToVented",
     description="Transition from state Standby to state Vented",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6169", browseName="TransitionNumber", dataType=o6.UInt32, value=0))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6169", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=0)
+        )
+    ],
 )
 o6.reference(surface_technology_plasma_objtypes.LowPressurePlasmaNotExecutingSubState_StateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=surface_technology_plasma;i=5093"])
 o6.reference(o6.ns["ns=surface_technology_plasma;i=5093"], "i=51", o6.ns["ns=surface_technology_plasma;i=5092"])
@@ -1216,7 +1548,11 @@ ns0.objtypes.TransitionType(
     nodeId="ns=surface_technology_plasma;i=5094",
     browseName="ns=surface_technology_plasma;FromVentedToStandby",
     description="Transition from state Vented to state Standby",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6170", browseName="TransitionNumber", dataType=o6.UInt32, value=1))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6170", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1)
+        )
+    ],
 )
 o6.reference(surface_technology_plasma_objtypes.LowPressurePlasmaNotExecutingSubState_StateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=surface_technology_plasma;i=5094"])
 o6.reference(o6.ns["ns=surface_technology_plasma;i=5094"], "i=51", o6.ns["ns=surface_technology_plasma;i=5091"])
@@ -1224,7 +1560,8 @@ o6.reference(o6.ns["ns=surface_technology_plasma;i=5094"], "i=52", o6.ns["ns=sur
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=surface_technology_plasma;i=6171",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6172", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6172", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 surface_technology_plasma_objtypes.LowPressurePlasmaNotExecutingSubState_StateMachineType(
@@ -1239,7 +1576,9 @@ ns0.objtypes.StateType(
     nodeId="ns=surface_technology_plasma;i=5097",
     browseName="ns=surface_technology_plasma;Idle",
     description="The machine is being prepared for the next run",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6174", browseName="StateNumber", dataType=o6.UInt32, value=0))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6174", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=0))
+    ],
 )
 o6.reference(
     surface_technology_plasma_objtypes.AtmosphericPressurePlasmaNotExecutingSubState_StateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=surface_technology_plasma;i=5097"]
@@ -1248,7 +1587,9 @@ ns0.objtypes.StateType(
     nodeId="ns=surface_technology_plasma;i=5098",
     browseName="ns=surface_technology_plasma;Standby",
     description="The system is ready to start",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6175", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6175", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))
+    ],
 )
 o6.reference(
     surface_technology_plasma_objtypes.AtmosphericPressurePlasmaNotExecutingSubState_StateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=surface_technology_plasma;i=5098"]
@@ -1257,7 +1598,11 @@ ns0.objtypes.TransitionType(
     nodeId="ns=surface_technology_plasma;i=5099",
     browseName="ns=surface_technology_plasma;FromStandbyToIdle",
     description="Transition from state Standby to state Idle",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6176", browseName="TransitionNumber", dataType=o6.UInt32, value=0))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6176", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=0)
+        )
+    ],
 )
 o6.reference(
     surface_technology_plasma_objtypes.AtmosphericPressurePlasmaNotExecutingSubState_StateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=surface_technology_plasma;i=5099"]
@@ -1268,7 +1613,11 @@ ns0.objtypes.TransitionType(
     nodeId="ns=surface_technology_plasma;i=5100",
     browseName="ns=surface_technology_plasma;FromIdleToStandby",
     description="Transition from state Idle to state Standby",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6177", browseName="TransitionNumber", dataType=o6.UInt32, value=1))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6177", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1)
+        )
+    ],
 )
 o6.reference(
     surface_technology_plasma_objtypes.AtmosphericPressurePlasmaNotExecutingSubState_StateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=surface_technology_plasma;i=5100"]
@@ -1278,7 +1627,8 @@ o6.reference(o6.ns["ns=surface_technology_plasma;i=5100"], "i=52", o6.ns["ns=sur
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=surface_technology_plasma;i=6178",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6179", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6179", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 surface_technology_plasma_objtypes.AtmosphericPressurePlasmaNotExecutingSubState_StateMachineType(
@@ -1294,29 +1644,34 @@ o6.reference(o6.ns["ns=surface_technology_plasma;i=5101"], "i=117", "ns=machiner
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=surface_technology_plasma;i=6180",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6181", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6181", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 surface_technology_plasma_objtypes.AtmosphericPressurePlasmaNotExecutingSubState_StateMachineType(
     nodeId="ns=surface_technology_plasma;i=5102",
     browseName="ns=surface_technology_plasma;AtmosphericPressurePlasmaNotExecutingSubState",
+    modellingRule="Mandatory",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6180"])],
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=surface_technology_plasma;i=6182",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6183", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6183", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 surface_technology_plasma_objtypes.AtmosphericPressurePlasmaMachineryItemState_StateMachineType(
     nodeId="ns=surface_technology_plasma;i=5029",
     browseName="ns=machinery;MachineryItemState",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=5102"]), o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6182"])],
 )
 ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_plasma;i=5028",
     browseName="ns=machinery;Status",
     description="Entry point for status information of the MachineryItem. If this Object is provided, and the MachineryItemState is provided, it shall be referenced. If this Object is provided and the MachineryOperationMode is provided, it shall be referenced.",
+    modellingRule="Optional",
     references=[o6.hasAddIn(o6.ns["ns=surface_technology_plasma;i=5029"])],
 )
 machinery.objtypes.MonitoringType(
@@ -1329,29 +1684,34 @@ o6.reference(surface_technology_plasma_objtypes.AtmosphericPressurePlasmaSurface
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=surface_technology_plasma;i=6184",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6185", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6185", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 surface_technology_plasma_objtypes.LowPressurePlasmaNotExecutingSubState_StateMachineType(
     nodeId="ns=surface_technology_plasma;i=5103",
     browseName="ns=surface_technology_plasma;LowPressurePlasmaNotExecutingSubState",
+    modellingRule="Mandatory",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6184"])],
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=surface_technology_plasma;i=6186",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6187", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_plasma;i=6187", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 surface_technology_plasma_objtypes.LowPressurePlasmaMachineryItemState_StateMachineType(
     nodeId="ns=surface_technology_plasma;i=5025",
     browseName="ns=machinery;MachineryItemState",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=5103"]), o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=6186"])],
 )
 ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_plasma;i=5024",
     browseName="ns=machinery;Status",
     description="Entry point for status information of the MachineryItem. If this Object is provided, and the MachineryItemState is provided, it shall be referenced. If this Object is provided and the MachineryOperationMode is provided, it shall be referenced.",
+    modellingRule="Optional",
     references=[o6.hasAddIn(o6.ns["ns=surface_technology_plasma;i=5025"])],
 )
 machinery.objtypes.MonitoringType(
@@ -1409,6 +1769,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=surface_technology_plasma;i=7001",
     browseName="ns=isa95_jobcontrol_v2;RequestJobResponseByJobOrderID",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=surface_technology_plasma;i=6026"]),
     outputArgs=o6.hasProperty(o6.ns["ns=surface_technology_plasma;i=6027"]),
 )
@@ -1461,6 +1822,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=surface_technology_plasma;i=7002",
     browseName="ns=isa95_jobcontrol_v2;RequestJobResponseByJobOrderState",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=surface_technology_plasma;i=6028"]),
     outputArgs=o6.hasProperty(o6.ns["ns=surface_technology_plasma;i=6029"]),
 )
@@ -1468,6 +1830,7 @@ o6.call(
 isa95_jobcontrol_v2.objtypes.ISA95JobResponseProviderObjectType(
     nodeId="ns=surface_technology_plasma;i=5009",
     browseName="ns=machinery_jobs;JobOrderResults",
+    modellingRule="Mandatory",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=7001"]), o6.hasComponent(o6.ns["ns=surface_technology_plasma;i=7002"])],
 )
 machinery_jobs.objtypes.JobManagementType(

@@ -57,13 +57,19 @@ class Filter_InterfaceType(plastics_extrusion.objtypes.ExtrusionDeviceType):
 class ScreenPackageType(ns0.objtypes.BaseObjectType):
     area: ns0.vartypes.AnalogUnitType | None
     name: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_filter;i=6151", browseName="ns=plastics_extrusion_filter;Name", dataType=o6.LocalizedText)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_filter;i=6151", browseName="ns=plastics_extrusion_filter;Name", modellingRule="Mandatory", dataType=o6.LocalizedText
+        )
     )
     packageSetup: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_filter;i=6153", browseName="ns=plastics_extrusion_filter;PackageSetup", dataType=o6.String, value="")
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_filter;i=6153", browseName="ns=plastics_extrusion_filter;PackageSetup", modellingRule="Optional", dataType=o6.String, value=""
+        )
     )
     serialNr: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_filter;i=6154", browseName="ns=plastics_extrusion_filter;SerialNr", dataType=o6.String, value="")
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_filter;i=6154", browseName="ns=plastics_extrusion_filter;SerialNr", modellingRule="Optional", dataType=o6.String, value=""
+        )
     )
 
 
@@ -71,21 +77,31 @@ class ScreenPackageType(ns0.objtypes.BaseObjectType):
 class FilterPackageType(ns0.objtypes.BaseObjectType):
     area: ns0.vartypes.AnalogUnitType | None
     backflushCounter: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_filter;i=6169", browseName="ns=plastics_extrusion_filter;BackflushCounter", dataType=o6.UInt32)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_filter;i=6169", browseName="ns=plastics_extrusion_filter;BackflushCounter", modellingRule="Optional", dataType=o6.UInt32
+        )
     )
     backflushTime: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_extrusion_filter;i=6168", browseName="ns=plastics_extrusion_filter;BackflushTime", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1
+            nodeId="ns=plastics_extrusion_filter;i=6168",
+            browseName="ns=plastics_extrusion_filter;BackflushTime",
+            modellingRule="Optional",
+            dataType=ns0.datatypes.Duration,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     name: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_filter;i=6276", browseName="ns=plastics_extrusion_filter;Name", dataType=o6.LocalizedText)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_filter;i=6276", browseName="ns=plastics_extrusion_filter;Name", modellingRule="Mandatory", dataType=o6.LocalizedText
+        )
     )
     screenPackage_Nr_: ScreenPackageType | None
     status: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_extrusion_filter;i=6165",
             browseName="ns=plastics_extrusion_filter;Status",
+            modellingRule="Mandatory",
             dataType=plastics_extrusion_filter_datypes.FilterPackageStatusEnumeration,
         )
     )

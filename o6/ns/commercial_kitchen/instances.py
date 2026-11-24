@@ -142,11 +142,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6026", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6026", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6033",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -165,11 +166,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6024", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6024", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6034",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -188,11 +190,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetProcessTime",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6028", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6028", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6035",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -211,11 +214,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;TimeRemaining",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6030", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6030", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6036",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -232,11 +236,13 @@ o6.reference(commercial_kitchen_objtypes.FryerParameterType, ns0.reftypes.HasCom
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6039",
     browseName="ns=commercial_kitchen;ActualTemperature",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6040",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -246,18 +252,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6041", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6041", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6043",
     browseName="ns=commercial_kitchen;SetProcessTime",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6044",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -267,18 +275,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6045", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6045", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Int32,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6046",
     browseName="ns=commercial_kitchen;SetTemperature",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6047",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -288,18 +298,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6048", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6048", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6050",
     browseName="ns=commercial_kitchen;TimeRemaining",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6051",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -309,7 +321,7 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6052", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6052", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Int32,
 )
@@ -321,14 +333,20 @@ commercial_kitchen_objtypes.FryerParameterType(
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6039"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=commercial_kitchen;i=6042", browseName="ns=commercial_kitchen;ProgramMode", dataType=commercial_kitchen_datypes.FryerModeEnumeration
+                nodeId="ns=commercial_kitchen;i=6042",
+                browseName="ns=commercial_kitchen;ProgramMode",
+                modellingRule="Mandatory",
+                dataType=commercial_kitchen_datypes.FryerModeEnumeration,
             )
         ),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6043"]),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6046"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=commercial_kitchen;i=6049", browseName="ns=commercial_kitchen;SignalMode", dataType=commercial_kitchen_datypes.SignalModeEnumeration
+                nodeId="ns=commercial_kitchen;i=6049",
+                browseName="ns=commercial_kitchen;SignalMode",
+                modellingRule="Mandatory",
+                dataType=commercial_kitchen_datypes.SignalModeEnumeration,
             )
         ),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6050"]),
@@ -361,11 +379,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetCoreTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6065", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6065", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6066",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -384,11 +403,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualCoreTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6068", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6068", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6073",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -407,11 +427,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualPressurePan",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6071", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6071", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6074",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5063250, displayName=o6.LocalizedText("mbar"), description=o6.LocalizedText("millibar")
@@ -427,11 +448,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6059", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6059", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6075",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -450,11 +472,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetProcessTime",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6061", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6061", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6076",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -473,11 +496,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6057", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6057", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6077",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -496,11 +520,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;TimeRemaining",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6063", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6063", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6078",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -517,11 +542,13 @@ o6.reference(commercial_kitchen_objtypes.FryingPanParameterType, ns0.reftypes.Ha
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6081",
     browseName="ns=commercial_kitchen;ActualCoreTemperature",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6082",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -531,18 +558,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6083", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6083", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6084",
     browseName="ns=commercial_kitchen;ActualTemperature",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6085",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -552,18 +581,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6086", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6086", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6089",
     browseName="ns=commercial_kitchen;SetCoreTemperature",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6090",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -573,18 +604,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6091", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6091", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6092",
     browseName="ns=commercial_kitchen;SetProcessTime",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6093",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -594,18 +627,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6094", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6094", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Int32,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6095",
     browseName="ns=commercial_kitchen;SetTemperature",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6096",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -615,18 +650,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6097", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6097", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6099",
     browseName="ns=commercial_kitchen;TimeRemaining",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6100",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -636,7 +673,7 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6101", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6101", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Int32,
 )
@@ -647,10 +684,15 @@ commercial_kitchen_objtypes.FryingPanParameterType(
     references=[
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6081"]),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6084"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6087", browseName="ns=commercial_kitchen;CookingLevel", dataType=o6.Int32)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6087", browseName="ns=commercial_kitchen;CookingLevel", modellingRule="Mandatory", dataType=o6.Int32)
+        ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=commercial_kitchen;i=6088", browseName="ns=commercial_kitchen;ProgramMode", dataType=commercial_kitchen_datypes.FryingPanModeEnumeration
+                nodeId="ns=commercial_kitchen;i=6088",
+                browseName="ns=commercial_kitchen;ProgramMode",
+                modellingRule="Mandatory",
+                dataType=commercial_kitchen_datypes.FryingPanModeEnumeration,
             )
         ),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6089"]),
@@ -658,7 +700,10 @@ commercial_kitchen_objtypes.FryingPanParameterType(
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6095"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=commercial_kitchen;i=6098", browseName="ns=commercial_kitchen;SignalMode", dataType=commercial_kitchen_datypes.SignalModeEnumeration
+                nodeId="ns=commercial_kitchen;i=6098",
+                browseName="ns=commercial_kitchen;SignalMode",
+                modellingRule="Mandatory",
+                dataType=commercial_kitchen_datypes.SignalModeEnumeration,
             )
         ),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6099"]),
@@ -691,11 +736,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualExternalCoreTemperature_<No.>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6120", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6120", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6134",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -714,11 +760,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualHumidity",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6129", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6129", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6135",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -734,11 +781,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualInternalCoreTemperature_<No.>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6116", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6116", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6136",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -757,11 +805,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualTemperatureChamber_<No.>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6108", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6108", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6137",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -780,11 +829,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetExternalCoreTemperature",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6118", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6118", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6138",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -803,11 +853,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetHumidity",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6127", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6127", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6139",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -823,11 +874,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetInternalCoreTemperature",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6114", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6114", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6140",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -846,11 +898,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetProcessTimeProgram",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6110", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6110", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6141",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -869,11 +922,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetProcessTimeStep",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6123", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6123", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6142",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -892,11 +946,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6106", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6106", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6143",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -915,11 +970,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;TimeRemainingProgram",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6112", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6112", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6144",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -938,11 +994,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;TimeRemainingStep",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6125", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6125", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6145",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -959,11 +1016,13 @@ o6.reference(commercial_kitchen_objtypes.CombiSteamerParameterType, ns0.reftypes
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6151",
     browseName="ns=commercial_kitchen;ActualInternalCoreTemperature_<No.>",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6152",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -973,18 +1032,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6153", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6153", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6154",
     browseName="ns=commercial_kitchen;ActualTemperatureChamber_<No.>",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6155",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -994,18 +1055,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6156", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6156", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6159",
     browseName="ns=commercial_kitchen;SetProcessTimeProgram",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6160",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -1015,18 +1078,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6161", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6161", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Int32,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6162",
     browseName="ns=commercial_kitchen;SetTemperature",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6163",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -1036,18 +1101,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6164", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6164", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6165",
     browseName="ns=commercial_kitchen;TimeRemainingProgram",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6166",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -1057,7 +1124,7 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6167", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6167", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Int32,
 )
@@ -1070,10 +1137,15 @@ commercial_kitchen_objtypes.CombiSteamerParameterType(
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6154"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=commercial_kitchen;i=6157", browseName="ns=commercial_kitchen;CombiSteamerMode", dataType=commercial_kitchen_datypes.CombiSteamerModeEnumeration
+                nodeId="ns=commercial_kitchen;i=6157",
+                browseName="ns=commercial_kitchen;CombiSteamerMode",
+                modellingRule="Mandatory",
+                dataType=commercial_kitchen_datypes.CombiSteamerModeEnumeration,
             )
         ),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6158", browseName="ns=commercial_kitchen;IsDoorOpen", dataType=o6.Boolean)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6158", browseName="ns=commercial_kitchen;IsDoorOpen", modellingRule="Mandatory", dataType=o6.Boolean)
+        ),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6159"]),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6162"]),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6165"]),
@@ -1110,7 +1182,10 @@ commercial_kitchen_objtypes.ChamberType(
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=commercial_kitchen;i=6205", browseName="ns=commercial_kitchen;OperationMode", dataType=commercial_kitchen_datypes.ChamberModeEnumeration
+                nodeId="ns=commercial_kitchen;i=6205",
+                browseName="ns=commercial_kitchen;OperationMode",
+                modellingRule="Mandatory",
+                dataType=commercial_kitchen_datypes.ChamberModeEnumeration,
             )
         )
     ],
@@ -1222,11 +1297,13 @@ ns0.vartypes.PropertyType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6351",
     browseName="ns=commercial_kitchen;ActualTemperature",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6352",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -1236,18 +1313,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6353", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6353", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6356",
     browseName="ns=commercial_kitchen;SetProcessTime",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6357",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -1257,18 +1336,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6358", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6358", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Int32,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6359",
     browseName="ns=commercial_kitchen;SetTemperature",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6360",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -1278,18 +1359,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6361", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6361", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6363",
     browseName="ns=commercial_kitchen;TimeRemaining",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6364",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -1299,7 +1382,7 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6365", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6365", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Int32,
 )
@@ -1309,17 +1392,25 @@ commercial_kitchen_objtypes.PastaCookerParameterType(
     modellingRule="Mandatory",
     references=[
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6351"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6354", browseName="ns=commercial_kitchen;CookingLevel", dataType=o6.Int32)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6354", browseName="ns=commercial_kitchen;CookingLevel", modellingRule="Mandatory", dataType=o6.Int32)
+        ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=commercial_kitchen;i=6355", browseName="ns=commercial_kitchen;ProgramMode", dataType=commercial_kitchen_datypes.PastaCookerModeEnumeration
+                nodeId="ns=commercial_kitchen;i=6355",
+                browseName="ns=commercial_kitchen;ProgramMode",
+                modellingRule="Mandatory",
+                dataType=commercial_kitchen_datypes.PastaCookerModeEnumeration,
             )
         ),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6356"]),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6359"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=commercial_kitchen;i=6362", browseName="ns=commercial_kitchen;SignalMode", dataType=commercial_kitchen_datypes.SignalModeEnumeration
+                nodeId="ns=commercial_kitchen;i=6362",
+                browseName="ns=commercial_kitchen;SignalMode",
+                modellingRule="Mandatory",
+                dataType=commercial_kitchen_datypes.SignalModeEnumeration,
             )
         ),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6363"]),
@@ -1353,11 +1444,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;BoilerPressureWater",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6370", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6370", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6380",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5259596, displayName=o6.LocalizedText("Pa"), description=o6.LocalizedText("pascal")
@@ -1373,8 +1465,10 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;BoilerTempSteam",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6374", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6381", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6374", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6381", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Float,
 )
@@ -1384,11 +1478,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;BoilerTempWater",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6372", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6372", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6382",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -1407,11 +1502,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;GrinderRuntime_<No.>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6379", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6379", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6383",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -1429,7 +1525,11 @@ ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=commercial_kitchen;i=6391",
     browseName="ns=commercial_kitchen;Container",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6392", browseName="EnumStrings", dataType=o6.LocalizedText, valueRank=1))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6392", browseName="EnumStrings", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=1)
+        )
+    ],
     dataType=o6.UInt32,
 )
 o6.reference(commercial_kitchen_objtypes.CoffeeMachineRecipeParameterType, ns0.reftypes.HasComponent, o6.ns["ns=commercial_kitchen;i=6391"])
@@ -1437,7 +1537,11 @@ ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=commercial_kitchen;i=6393",
     browseName="ns=commercial_kitchen;CoffeeType",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6394", browseName="EnumStrings", dataType=o6.LocalizedText, valueRank=1))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6394", browseName="EnumStrings", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=1)
+        )
+    ],
     dataType=o6.UInt32,
     accessLevel=3,
 )
@@ -1446,7 +1550,11 @@ ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=commercial_kitchen;i=6395",
     browseName="ns=commercial_kitchen;RcpType",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6396", browseName="EnumStrings", dataType=o6.LocalizedText, valueRank=1))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6396", browseName="EnumStrings", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=1)
+        )
+    ],
     dataType=o6.UInt32,
     accessLevel=3,
 )
@@ -1457,12 +1565,19 @@ ns0.vartypes.AnalogItemType(
     modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6385", browseName="EURange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=50.0, high=150.0))
+            ns0.vartypes.PropertyType(
+                nodeId="ns=commercial_kitchen;i=6385",
+                browseName="EURange",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.Range,
+                value=ns0.datatypes.Range(low=50.0, high=150.0),
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6403",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -1479,11 +1594,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;FoamAmount",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6400", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6400", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6404",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5065812, displayName=o6.LocalizedText("ml"), description=o6.LocalizedText("millilitre")
@@ -1500,11 +1616,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;GroundsAmount",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6388", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6388", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6405",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=4674125, displayName=o6.LocalizedText("g"), description=o6.LocalizedText("gram")
@@ -1521,11 +1638,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;GroundsWater",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6390", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6390", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6406",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5065812, displayName=o6.LocalizedText("ml"), description=o6.LocalizedText("millilitre")
@@ -1542,11 +1660,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;MilkAmount",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6398", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6398", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6407",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5065812, displayName=o6.LocalizedText("ml"), description=o6.LocalizedText("millilitre")
@@ -1563,11 +1682,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;PowderAmount",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6402", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6402", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6408",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=4674125, displayName=o6.LocalizedText("g"), description=o6.LocalizedText("gram")
@@ -1582,29 +1702,33 @@ o6.reference(commercial_kitchen_objtypes.CoffeeMachineRecipeParameterType, ns0.r
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6409",
     browseName="ns=commercial_kitchen;BoilerPressureWater",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6410",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5259596, displayName=o6.LocalizedText("Pa"), description=o6.LocalizedText("pascal")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6411", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6411", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6412",
     browseName="ns=commercial_kitchen;BoilerTempWater",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6413",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -1614,18 +1738,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6414", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6414", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6418",
     browseName="ns=commercial_kitchen;BeverageSize",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6419",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -1633,7 +1759,13 @@ ns0.vartypes.AnalogItemType(
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6420", browseName="EURange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=50.0, high=150.0))
+            ns0.vartypes.PropertyType(
+                nodeId="ns=commercial_kitchen;i=6420",
+                browseName="EURange",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.Range,
+                value=ns0.datatypes.Range(low=50.0, high=150.0),
+            )
         ),
     ],
     dataType=o6.Float,
@@ -1642,31 +1774,43 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=commercial_kitchen;i=6422",
     browseName="ns=commercial_kitchen;CoffeeType",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6423", browseName="EnumStrings", dataType=o6.LocalizedText, valueRank=1))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6423", browseName="EnumStrings", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=1)
+        )
+    ],
     dataType=o6.UInt32,
     accessLevel=3,
 )
 ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=commercial_kitchen;i=6424",
     browseName="ns=commercial_kitchen;Container",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6425", browseName="EnumStrings", dataType=o6.LocalizedText, valueRank=1))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6425", browseName="EnumStrings", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=1)
+        )
+    ],
     dataType=o6.UInt32,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6426",
     browseName="ns=commercial_kitchen;FoamAmount",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6427",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5065812, displayName=o6.LocalizedText("ml"), description=o6.LocalizedText("millilitre")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6428", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6428", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
     accessLevel=3,
@@ -1674,18 +1818,20 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6429",
     browseName="ns=commercial_kitchen;GroundsAmount",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6430",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=4674125, displayName=o6.LocalizedText("g"), description=o6.LocalizedText("gram")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6431", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6431", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
     accessLevel=3,
@@ -1693,18 +1839,20 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6432",
     browseName="ns=commercial_kitchen;GroundsWater",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6433",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5065812, displayName=o6.LocalizedText("ml"), description=o6.LocalizedText("millilitre")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6434", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6434", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
     accessLevel=3,
@@ -1712,18 +1860,20 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6435",
     browseName="ns=commercial_kitchen;MilkAmount",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6436",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5065812, displayName=o6.LocalizedText("ml"), description=o6.LocalizedText("millilitre")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6437", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6437", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
     accessLevel=3,
@@ -1731,18 +1881,20 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6438",
     browseName="ns=commercial_kitchen;PowderAmount",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6439",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=4674125, displayName=o6.LocalizedText("g"), description=o6.LocalizedText("gram")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6440", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6440", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
     accessLevel=3,
@@ -1750,7 +1902,12 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=commercial_kitchen;i=6441",
     browseName="ns=commercial_kitchen;RcpType",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6442", browseName="EnumStrings", dataType=o6.LocalizedText, valueRank=1))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6442", browseName="EnumStrings", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=1)
+        )
+    ],
     dataType=o6.UInt32,
     accessLevel=3,
 )
@@ -1762,7 +1919,11 @@ commercial_kitchen_objtypes.CoffeeMachineRecipeParameterType(
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6418"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=commercial_kitchen;i=6421", browseName="ns=commercial_kitchen;BeverageSML", dataType=commercial_kitchen_datypes.BeverageSMLEnumeration, accessLevel=3
+                nodeId="ns=commercial_kitchen;i=6421",
+                browseName="ns=commercial_kitchen;BeverageSML",
+                modellingRule="Mandatory",
+                dataType=commercial_kitchen_datypes.BeverageSMLEnumeration,
+                accessLevel=3,
             )
         ),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6422"]),
@@ -1849,11 +2010,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualFinalRinseTemperature_<No.>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6471", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6471", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6477",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -1872,11 +2034,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualMainTankTemperature_<No.>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6465", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6465", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6478",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -1895,11 +2058,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualPreTankTemperature_<No.>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6462", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6462", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6479",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -1918,11 +2082,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualPumpedFinalRinseTemperature_<No.>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6468", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6468", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6480",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -1941,11 +2106,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;FinalRinseTemperatureSetpoint_<No.>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6459", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6459", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6481",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -1964,11 +2130,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;MainTankTemperatureSetpoint_<No.>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6453", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6453", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6482",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -1987,11 +2154,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;PreTankTemperatureSetpoint_<No.>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6450", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6450", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6483",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2010,11 +2178,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;PumpedFinalRinseTemperatureSetpoint_<No.>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6456", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6456", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6484",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2037,6 +2206,7 @@ ns0.vartypes.AnalogItemType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6486",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2046,7 +2216,7 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6487", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6487", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.UInt16,
 )
@@ -2057,33 +2227,52 @@ commercial_kitchen_objtypes.DishWashingMachineProgramParameterType(
     references=[
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6485"]),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6488", browseName="ns=commercial_kitchen;ActualFinalRinseTemperatureNo", dataType=o6.UInt16)
-        ),
-        o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6489", browseName="ns=commercial_kitchen;ActualMainTankTemperatureNo", dataType=o6.UInt16)
-        ),
-        o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6490", browseName="ns=commercial_kitchen;ActualPreTankTemperatureNo", dataType=o6.UInt16)
-        ),
-        o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6491", browseName="ns=commercial_kitchen;ActualPumpedFinalRinseTemperatureNo", dataType=o6.UInt16)
-        ),
-        o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6492", browseName="ns=commercial_kitchen;FinalRinseTemperatureSetpointNo", dataType=o6.UInt16)
-        ),
-        o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6493", browseName="ns=commercial_kitchen;MainTankTemperatureSetpointNo", dataType=o6.UInt16)
-        ),
-        o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=commercial_kitchen;i=6494", browseName="ns=commercial_kitchen;OperationMode", dataType=commercial_kitchen_datypes.OperationModeEnumeration
+                nodeId="ns=commercial_kitchen;i=6488", browseName="ns=commercial_kitchen;ActualFinalRinseTemperatureNo", modellingRule="Mandatory", dataType=o6.UInt16
             )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6495", browseName="ns=commercial_kitchen;PreTankTemperatureSetpointNo", dataType=o6.UInt16)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=commercial_kitchen;i=6489", browseName="ns=commercial_kitchen;ActualMainTankTemperatureNo", modellingRule="Mandatory", dataType=o6.UInt16
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6496", browseName="ns=commercial_kitchen;PumpedFinalRinseTemperatureSetpointNo", dataType=o6.UInt16)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=commercial_kitchen;i=6490", browseName="ns=commercial_kitchen;ActualPreTankTemperatureNo", modellingRule="Mandatory", dataType=o6.UInt16
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=commercial_kitchen;i=6491", browseName="ns=commercial_kitchen;ActualPumpedFinalRinseTemperatureNo", modellingRule="Mandatory", dataType=o6.UInt16
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=commercial_kitchen;i=6492", browseName="ns=commercial_kitchen;FinalRinseTemperatureSetpointNo", modellingRule="Mandatory", dataType=o6.UInt16
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=commercial_kitchen;i=6493", browseName="ns=commercial_kitchen;MainTankTemperatureSetpointNo", modellingRule="Mandatory", dataType=o6.UInt16
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=commercial_kitchen;i=6494",
+                browseName="ns=commercial_kitchen;OperationMode",
+                modellingRule="Mandatory",
+                dataType=commercial_kitchen_datypes.OperationModeEnumeration,
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=commercial_kitchen;i=6495", browseName="ns=commercial_kitchen;PreTankTemperatureSetpointNo", modellingRule="Mandatory", dataType=o6.UInt16
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=commercial_kitchen;i=6496", browseName="ns=commercial_kitchen;PumpedFinalRinseTemperatureSetpointNo", modellingRule="Mandatory", dataType=o6.UInt16
+            )
         ),
     ],
 )
@@ -2133,11 +2322,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActiveSince",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6507", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6507", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6510",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2156,11 +2346,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6501", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6501", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6511",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2179,11 +2370,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;OperatingCounter",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6509", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6509", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6512",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2202,11 +2394,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6503", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6503", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6513",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2224,11 +2417,13 @@ o6.reference(commercial_kitchen_objtypes.TrayType, ns0.reftypes.HasComponent, o6
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6514",
     browseName="ns=commercial_kitchen;ActiveSince",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6515",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2238,18 +2433,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6516", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6516", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Int32,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6517",
     browseName="ns=commercial_kitchen;ActualTemperature",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6518",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2259,18 +2456,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6519", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6519", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6521",
     browseName="ns=commercial_kitchen;OperatingCounter",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6522",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2280,18 +2479,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6523", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6523", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Int32,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6525",
     browseName="ns=commercial_kitchen;SetTemperature",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6526",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2301,7 +2502,7 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6527", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6527", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
     accessLevel=3,
@@ -2311,19 +2512,25 @@ commercial_kitchen_objtypes.TrayType(
     browseName="ns=commercial_kitchen;Tray_<No.>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6520", browseName="ns=commercial_kitchen;Name", dataType=o6.String, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6520", browseName="ns=commercial_kitchen;Name", modellingRule="Mandatory", dataType=o6.String, accessLevel=3)
+        ),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6514"]),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6517"]),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6521"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=commercial_kitchen;i=6524", browseName="ns=commercial_kitchen;ProgramMode", dataType=commercial_kitchen_datypes.TrayModeEnumeration, accessLevel=3
+                nodeId="ns=commercial_kitchen;i=6524",
+                browseName="ns=commercial_kitchen;ProgramMode",
+                modellingRule="Mandatory",
+                dataType=commercial_kitchen_datypes.TrayModeEnumeration,
+                accessLevel=3,
             )
         ),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6525"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=commercial_kitchen;i=6528", browseName="ns=commercial_kitchen;Type", dataType=commercial_kitchen_datypes.TrayTypeEnumeration
+                nodeId="ns=commercial_kitchen;i=6528", browseName="ns=commercial_kitchen;Type", modellingRule="Mandatory", dataType=commercial_kitchen_datypes.TrayTypeEnumeration
             )
         ),
     ],
@@ -2345,8 +2552,10 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualPower",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6541", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6545", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6541", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6545", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Float,
 )
@@ -2356,11 +2565,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualProcessTime",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6537", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6537", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6546",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2379,11 +2589,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualTemperature",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6533", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6533", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6547",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2402,11 +2613,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;NominalPower",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6544", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6544", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6548",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5723220, displayName=o6.LocalizedText("W"), description=o6.LocalizedText("watt")
@@ -2423,12 +2635,15 @@ ns0.vartypes.AnalogItemType(
     modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6539", browseName="EURange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=100.0))
+            ns0.vartypes.PropertyType(
+                nodeId="ns=commercial_kitchen;i=6539", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=100.0)
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6549",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -2444,11 +2659,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetTemperature",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6535", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6535", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6550",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2467,11 +2683,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;NominalVoltage",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6554", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6554", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6556",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5655636, displayName=o6.LocalizedText("V"), description=o6.LocalizedText("volt")
@@ -2498,11 +2715,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualGrillTemperature_<No.>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6561", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6561", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6574",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2521,11 +2739,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualPlatenTemperature_<No.>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6565", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6565", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6575",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2544,11 +2763,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;RemainingProcessTime",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6571", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6571", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6576",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2567,11 +2787,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetGrillTemperature_<No.>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6563", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6563", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6577",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2590,11 +2811,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetPlatenTemperature_<No.>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6567", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6567", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6578",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2613,11 +2835,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetProcessTime",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6569", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6569", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6579",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2657,11 +2880,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualTemperatureChamber",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6583", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6583", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6599",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2681,12 +2905,15 @@ ns0.vartypes.AnalogItemType(
     modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6594", browseName="EURange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=100.0))
+            ns0.vartypes.PropertyType(
+                nodeId="ns=commercial_kitchen;i=6594", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=100.0)
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6600",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -2703,12 +2930,15 @@ ns0.vartypes.AnalogItemType(
     modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6596", browseName="EURange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=100.0))
+            ns0.vartypes.PropertyType(
+                nodeId="ns=commercial_kitchen;i=6596", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=100.0)
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6601",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -2724,11 +2954,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;RemainingProcessTime",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6589", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6589", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6602",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2747,11 +2978,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;RemainingProcessTimeStep",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6591", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6591", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6603",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2770,11 +3002,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetProcessTime",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6587", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6587", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6604",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2793,11 +3026,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6585", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6585", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6605",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2814,11 +3048,13 @@ o6.reference(commercial_kitchen_objtypes.MicrowaveCombiOvenParameterType, ns0.re
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6606",
     browseName="ns=commercial_kitchen;ActualTemperatureChamber",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6607",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2828,18 +3064,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6608", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6608", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6611",
     browseName="ns=commercial_kitchen;RemainingProcessTime",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6612",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2849,18 +3087,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6613", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6613", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Int32,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6614",
     browseName="ns=commercial_kitchen;SetProcessTime",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6615",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2870,18 +3110,20 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6616", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6616", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Int32,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6617",
     browseName="ns=commercial_kitchen;SetTemperature",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6618",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2891,7 +3133,7 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6619", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6619", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Float,
 )
@@ -2902,11 +3144,16 @@ commercial_kitchen_objtypes.MicrowaveCombiOvenParameterType(
     references=[
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6606"]),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6609", browseName="ns=commercial_kitchen;IsDoorOpen", dataType=o6.Boolean, accessLevel=3)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=commercial_kitchen;i=6609", browseName="ns=commercial_kitchen;IsDoorOpen", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3
+            )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=commercial_kitchen;i=6610", browseName="ns=commercial_kitchen;OperatingMode", dataType=commercial_kitchen_datypes.OperatingModeEnumeration
+                nodeId="ns=commercial_kitchen;i=6610",
+                browseName="ns=commercial_kitchen;OperatingMode",
+                modellingRule="Mandatory",
+                dataType=commercial_kitchen_datypes.OperatingModeEnumeration,
             )
         ),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6611"]),
@@ -2951,11 +3198,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;LastFreezeTime",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6623", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6623", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6630",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2974,11 +3222,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;LastHarvestTime",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6625", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6625", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6631",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2997,11 +3246,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;Temperature_<No.>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6629", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6629", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6632",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3020,11 +3270,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;WaterFillTime",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6627", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6627", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6633",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3043,11 +3294,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6343", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6343", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6634",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3066,11 +3318,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetProcessTime",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6345", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6345", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6635",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3089,11 +3342,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6341", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6341", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6636",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3112,11 +3366,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;TimeRemaining",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6347", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6347", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6637",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3135,11 +3390,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualCoreTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6304", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6304", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6638",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3156,12 +3412,14 @@ o6.reference(commercial_kitchen_objtypes.MultiFunctionPanParameterType, ns0.reft
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6322",
     browseName="ns=commercial_kitchen;ActualCoreTemperature",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6323", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6323", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6639",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3179,11 +3437,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualPressureAbsolute",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6306", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6306", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6640",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5063250, displayName=o6.LocalizedText("mbar"), description=o6.LocalizedText("millibar")
@@ -3199,11 +3458,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualTemperatureBottom",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6294", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6294", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6641",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3220,12 +3480,14 @@ o6.reference(commercial_kitchen_objtypes.MultiFunctionPanParameterType, ns0.reft
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6324",
     browseName="ns=commercial_kitchen;ActualTemperatureBottom",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6325", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6325", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6642",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3243,11 +3505,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualTemperatureCup",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6296", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6296", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6643",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3264,12 +3527,14 @@ o6.reference(commercial_kitchen_objtypes.MultiFunctionPanParameterType, ns0.reft
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6326",
     browseName="ns=commercial_kitchen;ActualTemperatureCup",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6327", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6327", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6644",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3287,8 +3552,10 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualZoneTemperature_<No.>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6314", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6645", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6314", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6645", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Float,
 )
@@ -3298,11 +3565,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetCoreTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6302", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6302", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6646",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3319,12 +3587,14 @@ o6.reference(commercial_kitchen_objtypes.MultiFunctionPanParameterType, ns0.reft
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6329",
     browseName="ns=commercial_kitchen;SetCoreTemperature",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6330", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6330", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6647",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3342,11 +3612,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetProcessTimeProgram",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6298", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6298", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6648",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3363,12 +3634,14 @@ o6.reference(commercial_kitchen_objtypes.MultiFunctionPanParameterType, ns0.reft
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6331",
     browseName="ns=commercial_kitchen;SetProcessTimeProgram",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6332", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6332", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6649",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3386,11 +3659,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetProcessTimeStep",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6308", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6308", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6650",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3409,11 +3683,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6292", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6292", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6651",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3430,12 +3705,14 @@ o6.reference(commercial_kitchen_objtypes.MultiFunctionPanParameterType, ns0.reft
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6333",
     browseName="ns=commercial_kitchen;SetTemperature",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6334", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6334", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6652",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3453,11 +3730,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetZoneTemperature_<No.>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6312", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6312", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6653",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3476,11 +3754,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;TimeRemainingProgram",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6300", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6300", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6654",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3497,12 +3776,14 @@ o6.reference(commercial_kitchen_objtypes.MultiFunctionPanParameterType, ns0.reft
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6335",
     browseName="ns=commercial_kitchen;TimeRemainingProgram",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6336", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6336", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6655",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3525,7 +3806,10 @@ commercial_kitchen_objtypes.MultiFunctionPanParameterType(
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6326"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=commercial_kitchen;i=6328", browseName="ns=commercial_kitchen;MultiFunctionPanMode", dataType=commercial_kitchen_datypes.MultiFunctionPanModeEnumeration
+                nodeId="ns=commercial_kitchen;i=6328",
+                browseName="ns=commercial_kitchen;MultiFunctionPanMode",
+                modellingRule="Mandatory",
+                dataType=commercial_kitchen_datypes.MultiFunctionPanModeEnumeration,
             )
         ),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6329"]),
@@ -3540,11 +3824,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;TimeRemainingStep",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6310", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6310", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6656",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3563,11 +3848,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualCoreTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6266", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6266", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6657",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3584,12 +3870,14 @@ o6.reference(commercial_kitchen_objtypes.CookingKettleParameterType, ns0.reftype
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6271",
     browseName="ns=commercial_kitchen;ActualCoreTemperature",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6272", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6272", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6658",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3607,11 +3895,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6258", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6258", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6660",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3628,12 +3917,14 @@ o6.reference(commercial_kitchen_objtypes.CookingKettleParameterType, ns0.reftype
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6273",
     browseName="ns=commercial_kitchen;ActualTemperature",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6274", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6274", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6661",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3650,7 +3941,7 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6659",
     browseName="ns=commercial_kitchen;BoilerPressureSteam",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6662", browseName="EURange", dataType=ns0.datatypes.Range))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6662", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range))],
     dataType=o6.Float,
 )
 o6.reference(commercial_kitchen_objtypes.CoffeeMachineParameterType, ns0.reftypes.HasComponent, o6.ns["ns=commercial_kitchen;i=6659"])
@@ -3659,11 +3950,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetCoreTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6264", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6264", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6663",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3680,12 +3972,14 @@ o6.reference(commercial_kitchen_objtypes.CookingKettleParameterType, ns0.reftype
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6277",
     browseName="ns=commercial_kitchen;SetCoreTemperature",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6278", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6278", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6664",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3703,11 +3997,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetProcessTime",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6260", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6260", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6666",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3724,12 +4019,14 @@ o6.reference(commercial_kitchen_objtypes.CookingKettleParameterType, ns0.reftype
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6279",
     browseName="ns=commercial_kitchen;SetProcessTime",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6280", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6280", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6667",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3745,7 +4042,8 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6665",
     browseName="ns=commercial_kitchen;BoilerPressureSteam",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6668", browseName="EURange", dataType=ns0.datatypes.Range))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6668", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range))],
     dataType=o6.Float,
 )
 commercial_kitchen_objtypes.CoffeeMachineParameterType(
@@ -3759,12 +4057,19 @@ commercial_kitchen_objtypes.CoffeeMachineParameterType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=commercial_kitchen;i=6415",
                 browseName="ns=commercial_kitchen;CurrentState",
+                modellingRule="Mandatory",
                 dataType=commercial_kitchen_datypes.CoffeeMachineModeEnumeration,
                 accessLevel=3,
             )
         ),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6416", browseName="ns=commercial_kitchen;SystemClean", dataType=o6.DateTime)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6417", browseName="ns=commercial_kitchen;TotalMix", dataType=o6.UInt64)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=commercial_kitchen;i=6416", browseName="ns=commercial_kitchen;SystemClean", modellingRule="Mandatory", dataType=o6.DateTime
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6417", browseName="ns=commercial_kitchen;TotalMix", modellingRule="Mandatory", dataType=o6.UInt64)
+        ),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6665"]),
     ],
 )
@@ -3774,11 +4079,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6256", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6256", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6669",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3795,12 +4101,14 @@ o6.reference(commercial_kitchen_objtypes.CookingKettleParameterType, ns0.reftype
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6281",
     browseName="ns=commercial_kitchen;SetTemperature",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6282", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6282", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6670",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3818,13 +4126,29 @@ commercial_kitchen_objtypes.BatchInformationType(
     browseName="ns=commercial_kitchen;BatchInformation",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6017", browseName="ns=commercial_kitchen;BatchId", dataType=o6.String, accessLevel=3)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6018", browseName="ns=commercial_kitchen;LocalTime", dataType=ns0.datatypes.TimeZoneDataType, accessLevel=3)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=commercial_kitchen;i=6017", browseName="ns=commercial_kitchen;BatchId", modellingRule="Mandatory", dataType=o6.String, accessLevel=3
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6019", browseName="ns=commercial_kitchen;OrderId", dataType=o6.String, accessLevel=3)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6671", browseName="ns=commercial_kitchen;SystemTime", dataType=ns0.datatypes.UtcTime, accessLevel=3)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=commercial_kitchen;i=6018",
+                browseName="ns=commercial_kitchen;LocalTime",
+                modellingRule="Optional",
+                dataType=ns0.datatypes.TimeZoneDataType,
+                accessLevel=3,
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=commercial_kitchen;i=6019", browseName="ns=commercial_kitchen;OrderId", modellingRule="Mandatory", dataType=o6.String, accessLevel=3
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=commercial_kitchen;i=6671", browseName="ns=commercial_kitchen;SystemTime", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime, accessLevel=3
+            )
         ),
     ],
 )
@@ -3834,11 +4158,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;TimeRemaining",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6262", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6262", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6672",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3855,12 +4180,14 @@ o6.reference(commercial_kitchen_objtypes.CookingKettleParameterType, ns0.reftype
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6284",
     browseName="ns=commercial_kitchen;TimeRemaining",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6285", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6285", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6673",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3880,10 +4207,15 @@ commercial_kitchen_objtypes.CookingKettleParameterType(
     references=[
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6271"]),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6273"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6275", browseName="ns=commercial_kitchen;CookingLevel", dataType=o6.Int32)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6275", browseName="ns=commercial_kitchen;CookingLevel", modellingRule="Mandatory", dataType=o6.Int32)
+        ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=commercial_kitchen;i=6276", browseName="ns=commercial_kitchen;ProgramMode", dataType=commercial_kitchen_datypes.CookingKettleModeEnumeration
+                nodeId="ns=commercial_kitchen;i=6276",
+                browseName="ns=commercial_kitchen;ProgramMode",
+                modellingRule="Mandatory",
+                dataType=commercial_kitchen_datypes.CookingKettleModeEnumeration,
             )
         ),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6277"]),
@@ -3891,7 +4223,10 @@ commercial_kitchen_objtypes.CookingKettleParameterType(
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6281"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=commercial_kitchen;i=6283", browseName="ns=commercial_kitchen;SignalMode", dataType=commercial_kitchen_datypes.SignalModeEnumeration
+                nodeId="ns=commercial_kitchen;i=6283",
+                browseName="ns=commercial_kitchen;SignalMode",
+                modellingRule="Mandatory",
+                dataType=commercial_kitchen_datypes.SignalModeEnumeration,
             )
         ),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6284"]),
@@ -3903,11 +4238,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualCoreTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6220", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6220", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6675",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3924,12 +4260,14 @@ o6.reference(commercial_kitchen_objtypes.PressureCookingKettleParameterType, ns0
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6230",
     browseName="ns=commercial_kitchen;ActualCoreTemperature",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6231", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6231", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6676",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -3947,11 +4285,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualPressureAbsolute",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6222", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6222", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6677",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5063250, displayName=o6.LocalizedText("mbar"), description=o6.LocalizedText("millibar")
@@ -3965,12 +4304,14 @@ o6.reference(commercial_kitchen_objtypes.PressureCookingKettleParameterType, ns0
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6232",
     browseName="ns=commercial_kitchen;ActualPressureAbsolute",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6233", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6233", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6678",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5063250, displayName=o6.LocalizedText("mbar"), description=o6.LocalizedText("millibar")
@@ -3985,11 +4326,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualPressureKettle",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6224", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6224", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6679",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5063250, displayName=o6.LocalizedText("mbar"), description=o6.LocalizedText("millibar")
@@ -4003,12 +4345,14 @@ o6.reference(commercial_kitchen_objtypes.PressureCookingKettleParameterType, ns0
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6234",
     browseName="ns=commercial_kitchen;ActualPressureKettle",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6235", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6235", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6680",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5063250, displayName=o6.LocalizedText("mbar"), description=o6.LocalizedText("millibar")
@@ -4023,11 +4367,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6212", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6212", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6681",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4044,12 +4389,14 @@ o6.reference(commercial_kitchen_objtypes.PressureCookingKettleParameterType, ns0
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6236",
     browseName="ns=commercial_kitchen;ActualTemperature",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6237", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6237", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6682",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4067,11 +4414,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetCoreTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6218", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6218", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6683",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4088,12 +4436,14 @@ o6.reference(commercial_kitchen_objtypes.PressureCookingKettleParameterType, ns0
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6243",
     browseName="ns=commercial_kitchen;SetCoreTemperature",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6244", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6244", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6684",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4111,11 +4461,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetProcessTime",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6214", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6214", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6685",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4132,12 +4483,14 @@ o6.reference(commercial_kitchen_objtypes.PressureCookingKettleParameterType, ns0
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6245",
     browseName="ns=commercial_kitchen;SetProcessTime",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6246", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6246", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6686",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4155,11 +4508,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetTemperature",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6210", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6210", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6687",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4176,12 +4530,14 @@ o6.reference(commercial_kitchen_objtypes.PressureCookingKettleParameterType, ns0
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6247",
     browseName="ns=commercial_kitchen;SetTemperature",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6248", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6248", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6688",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4199,11 +4555,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;TimeRemaining",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6216", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6216", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6689",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4220,12 +4577,14 @@ o6.reference(commercial_kitchen_objtypes.PressureCookingKettleParameterType, ns0
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6250",
     browseName="ns=commercial_kitchen;TimeRemaining",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6251", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6251", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6690",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4247,13 +4606,28 @@ commercial_kitchen_objtypes.PressureCookingKettleParameterType(
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6232"]),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6234"]),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6236"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6238", browseName="ns=commercial_kitchen;CookingLevel", dataType=o6.Int32)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6239", browseName="ns=commercial_kitchen;IsLidLocked", dataType=o6.Boolean)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6240", browseName="ns=commercial_kitchen;IsOpenExpressActive", dataType=o6.Boolean)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6241", browseName="ns=commercial_kitchen;IsSteamActive", dataType=o6.Boolean)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6238", browseName="ns=commercial_kitchen;CookingLevel", modellingRule="Mandatory", dataType=o6.Int32)
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6239", browseName="ns=commercial_kitchen;IsLidLocked", modellingRule="Mandatory", dataType=o6.Boolean)
+        ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=commercial_kitchen;i=6242", browseName="ns=commercial_kitchen;ProgramMode", dataType=commercial_kitchen_datypes.PressureCookingKettleModeEnumeration
+                nodeId="ns=commercial_kitchen;i=6240", browseName="ns=commercial_kitchen;IsOpenExpressActive", modellingRule="Optional", dataType=o6.Boolean
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=commercial_kitchen;i=6241", browseName="ns=commercial_kitchen;IsSteamActive", modellingRule="Mandatory", dataType=o6.Boolean
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=commercial_kitchen;i=6242",
+                browseName="ns=commercial_kitchen;ProgramMode",
+                modellingRule="Mandatory",
+                dataType=commercial_kitchen_datypes.PressureCookingKettleModeEnumeration,
             )
         ),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6243"]),
@@ -4261,7 +4635,10 @@ commercial_kitchen_objtypes.PressureCookingKettleParameterType(
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6247"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=commercial_kitchen;i=6249", browseName="ns=commercial_kitchen;SignalMode", dataType=commercial_kitchen_datypes.SignalModeEnumeration
+                nodeId="ns=commercial_kitchen;i=6249",
+                browseName="ns=commercial_kitchen;SignalMode",
+                modellingRule="Mandatory",
+                dataType=commercial_kitchen_datypes.SignalModeEnumeration,
             )
         ),
         o6.hasComponent(o6.ns["ns=commercial_kitchen;i=6250"]),
@@ -4273,11 +4650,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualBoilerTemperature_<No.>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6193", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6193", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6691",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4296,11 +4674,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualBottomTemperature_<No.>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6189", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6189", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6692",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4319,11 +4698,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualChamberTemperature_<No.>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6183", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6183", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6693",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4342,11 +4722,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualCoreTemperature_<No.>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6191", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6191", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6694",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4365,11 +4746,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualFanSpeed_<No.>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6202", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6202", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6695",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -4385,11 +4767,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualHumidity_<No.>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6197", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6197", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6696",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -4405,11 +4788,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;ActualTopTemperature_<No.>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6187", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6187", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6697",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4428,11 +4812,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetBoilerTemperature",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6181", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6181", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6698",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4451,11 +4836,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetBottomTemperature",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6177", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6177", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6699",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4474,11 +4860,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetChamberTemperature",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6173", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6173", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6700",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4497,11 +4884,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetCoreTemperature",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6179", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6179", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6701",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4520,11 +4908,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetFanSpeed",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6204", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6204", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6702",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -4540,11 +4929,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetHumidity",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6195", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6195", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6703",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -4560,11 +4950,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetProcessTimeProgram",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6185", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6185", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6704",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4583,11 +4974,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;SetTopTemperature",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6175", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6175", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6705",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4606,11 +4998,12 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=commercial_kitchen;TimeRemaining",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6171", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6171", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6706",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4700,18 +5093,20 @@ http_opcfoundation_org_UA_CommercialKitchenEquipment_ = ns0.objtypes.NamespaceMe
 ns0.vartypes.AnalogItemType(
     nodeId="ns=commercial_kitchen;i=6674",
     browseName="ns=commercial_kitchen;NominalPower",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=commercial_kitchen;i=6714",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5723220, displayName=o6.LocalizedText("W"), description=o6.LocalizedText("watt")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6715", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6715", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Int32,
 )
@@ -4726,7 +5121,13 @@ commercial_kitchen_objtypes.FryingAndGrillingParameterType(
     nodeId="ns=commercial_kitchen;i=5018",
     browseName="ns=commercial_kitchen;GrillingZone_<No.>",
     modellingRule="MandatoryPlaceholder",
-    references=[o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6716", browseName="ns=commercial_kitchen;IsWithPlaten", dataType=o6.Boolean))],
+    references=[
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=commercial_kitchen;i=6716", browseName="ns=commercial_kitchen;IsWithPlaten", modellingRule="Mandatory", dataType=o6.Boolean
+            )
+        )
+    ],
 )
 o6.reference(commercial_kitchen_objtypes.FryingAndGrillingDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=commercial_kitchen;i=5018"])
 ns0.vartypes.PropertyType(

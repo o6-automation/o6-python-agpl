@@ -43,9 +43,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6001",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6002", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6003", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6002", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6003", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -59,7 +60,9 @@ machinery_processvalues.objtypes.ProcessValueType(
     modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6004", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6004", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6001"]),
     ],
@@ -76,6 +79,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=paefs;i=6005",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -84,6 +88,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=paefs;i=6006",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -127,9 +132,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6008",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6014", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6015", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6014", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6015", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -140,9 +146,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5034",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6017", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6017", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6008"]),
     ],
@@ -159,9 +168,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6018",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6019", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6022", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6019", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6022", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -172,9 +182,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5050",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6023", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6023", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6018"]),
     ],
@@ -191,9 +204,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6024",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6025", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6026", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6025", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6026", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -204,9 +218,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5052",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6027", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6027", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6024"]),
     ],
@@ -224,7 +241,9 @@ ns0.vartypes.AnalogUnitType(
     browseName="ns=paefs;LifetimeConsumption",
     description="Consumption over total machine lifetime. The AnalogUnitType variables InstrumentRange and EURange must not be used.",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6030", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6030", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
 )
 o6.reference(paefs_objtypes.ConsumptionType, ns0.reftypes.HasComponent, o6.ns["ns=paefs;i=6016"])
@@ -232,9 +251,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6028",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6029", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6031", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6029", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6031", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -245,9 +265,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5053",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6032", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6032", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6028"]),
     ],
@@ -264,9 +287,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6033",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6035", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6038", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6035", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6038", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -277,9 +301,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5056",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6040", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6040", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6033"]),
     ],
@@ -296,9 +323,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6041",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6042", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6043", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6042", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6043", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -309,9 +337,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6045",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6051", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6052", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6051", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6052", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -322,9 +351,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5058",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6053", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6053", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6045"]),
     ],
@@ -341,9 +373,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6055",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6056", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6057", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6056", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6057", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -354,9 +387,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5059",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6063", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6063", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6055"]),
     ],
@@ -373,9 +409,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6064",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6065", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6066", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6065", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6066", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -386,9 +423,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5060",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6067", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6067", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6064"]),
     ],
@@ -405,9 +445,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6068",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6069", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6070", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6069", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6070", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -418,9 +459,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5061",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6071", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6071", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6068"]),
     ],
@@ -437,9 +481,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6072",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6073", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6074", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6073", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6074", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -450,9 +495,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5062",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6075", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6075", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6072"]),
     ],
@@ -469,9 +517,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6076",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6077", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6078", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6077", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6078", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -482,9 +531,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5063",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6079", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6079", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6076"]),
     ],
@@ -501,9 +553,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6080",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6083", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6084", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6083", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6084", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -516,8 +569,8 @@ ns0.vartypes.AnalogUnitRangeType(
     description="Current output of the high voltage unit.",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6089", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6090", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6089", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6090", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
 )
@@ -526,9 +579,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6086",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6094", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6095", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6094", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6095", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -539,9 +593,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5069",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6096", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6096", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6086"]),
     ],
@@ -550,15 +607,17 @@ paefs_objtypes.SensorMonitoringType(
     nodeId="ns=paefs;i=5038",
     browseName="ns=paefs;PressureLoss",
     description="The specification of the total pressure loss of the filter unit between the device intake connection on the raw gas side and the device outlet on the clean gas side.",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=paefs;i=5069"])],
 )
 padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6097",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6099", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6100", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6099", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6100", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -569,9 +628,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5070",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6101", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6101", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6097"]),
     ],
@@ -580,6 +642,7 @@ paefs_objtypes.SensorMonitoringType(
     nodeId="ns=paefs;i=5040",
     browseName="ns=paefs;IonizerOutput",
     description="Describes the current flow or the voltage to the ionizer.",
+    modellingRule="Mandatory",
     references=[o6.hasComponent(o6.ns["ns=paefs;i=5070"])],
 )
 paefs_objtypes.IonizerType(
@@ -594,9 +657,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6102",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6103", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6104", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6103", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6104", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -607,9 +671,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5071",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6105", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6105", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6102"]),
     ],
@@ -618,6 +685,7 @@ paefs_objtypes.SensorMonitoringType(
     nodeId="ns=paefs;i=5042",
     browseName="ns=paefs;CollectorOutput",
     description="Describes the current flow or the voltage to the collector.",
+    modellingRule="Mandatory",
     references=[o6.hasComponent(o6.ns["ns=paefs;i=5071"])],
 )
 paefs_objtypes.CollectorType(
@@ -639,6 +707,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=paefs;i=6034",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -647,6 +716,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=paefs;i=6107",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -658,9 +728,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6106",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6108", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6109", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6108", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6109", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -671,9 +742,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6112",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6113", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6114", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6113", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6114", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -684,9 +756,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6116",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6117", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6118", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6117", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6118", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -697,9 +770,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6120",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6121", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6122", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6121", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6122", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -710,9 +784,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5075",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6123", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6123", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6120"]),
     ],
@@ -729,9 +806,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6124",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6125", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6126", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6125", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6126", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -742,9 +820,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5076",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6127", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6127", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6124"]),
     ],
@@ -761,9 +842,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6128",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6129", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6130", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6129", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6130", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -774,9 +856,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5096",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6131", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6131", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6128"]),
     ],
@@ -799,7 +884,7 @@ http_opcfoundation_org_UA_PAEFS_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6135", browseName="NamespaceVersion", dataType=o6.String, value="1.0.1")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=paefs;i=6136", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=paefs;i=6136", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
@@ -813,7 +898,8 @@ http_opcfoundation_org_UA_PAEFS_ = ns0.objtypes.NamespaceMetadataType(
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=paefs;i=6111",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6150", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6150", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
@@ -829,9 +915,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6148",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6149", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6151", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6149", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6151", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -842,9 +929,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5097",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6152", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6152", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6148"]),
     ],
@@ -861,9 +951,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6153",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6154", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6155", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6154", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6155", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -874,9 +965,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6157",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6158", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6159", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6158", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6159", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -887,9 +979,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6162",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6163", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6164", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6163", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6164", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -900,9 +993,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5100",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6165", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6165", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6162"]),
     ],
@@ -919,9 +1015,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6166",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6167", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6168", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6167", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6168", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -932,9 +1029,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5101",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6169", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6169", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6166"]),
     ],
@@ -951,9 +1051,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6170",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6171", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6172", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6171", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6172", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -964,9 +1065,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5102",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6173", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6173", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6170"]),
     ],
@@ -983,9 +1087,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=paefs;i=6174",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6175", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6183", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6175", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6183", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -995,9 +1100,10 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.vartypes.ProcessValueSetpointVariableType(
     nodeId="ns=paefs;i=6185",
     browseName="ns=machinery_processvalues;ProcessValueSetpoint",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6188", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6189", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6188", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6189", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1009,7 +1115,9 @@ machinery_processvalues.objtypes.ProcessValueType(
     modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6160", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6160", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6157"]),
         o6.hasComponent(o6.ns["ns=paefs;i=6185"]),
@@ -1019,9 +1127,10 @@ o6.reference(paefs_objtypes.SensorSetpointReadType, ns0.reftypes.HasComponent, o
 machinery_processvalues.vartypes.ProcessValueSetpointVariableType(
     nodeId="ns=paefs;i=6190",
     browseName="ns=machinery_processvalues;ProcessValueSetpoint",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6191", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6192", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6191", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6192", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1035,7 +1144,9 @@ machinery_processvalues.objtypes.ProcessValueType(
     modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6044", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6044", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6041"]),
         o6.hasComponent(o6.ns["ns=paefs;i=6190"]),
@@ -1045,9 +1156,10 @@ o6.reference(paefs_objtypes.SensorSetpointWriteType, ns0.reftypes.HasComponent, 
 machinery_processvalues.vartypes.ProcessValueSetpointVariableType(
     nodeId="ns=paefs;i=6193",
     browseName="ns=machinery_processvalues;ProcessValueSetpoint",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6196", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6197", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6196", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6197", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1058,9 +1170,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5068",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6085", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6085", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6080"]),
         o6.hasComponent(o6.ns["ns=paefs;i=6193"]),
@@ -1085,10 +1200,15 @@ paefs_objtypes.CleaningUnitValveType(
                 nodeId="ns=paefs;i=6195",
                 browseName="ns=paefs;Malfunction",
                 description="Indicates that the cleaning unit valve is malfunctioning. True in case of error. Malfunctions can be, for example, that the valve does not open or close.",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6198", browseName="ns=paefs;Open", description="Indicates that the valve is open.", dataType=o6.Boolean)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6198", browseName="ns=paefs;Open", description="Indicates that the valve is open.", modellingRule="Optional", dataType=o6.Boolean
+            )
+        ),
     ],
 )
 o6.reference(paefs_objtypes.CleaningUnitType, ns0.reftypes.HasComponent, o6.ns["ns=paefs;i=5049"])
@@ -1103,6 +1223,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=paefs;i=6199",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -1111,6 +1232,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=paefs;i=6200",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -1122,12 +1244,14 @@ machinery.objtypes.MachineryComponentIdentificationType(
     nodeId="ns=paefs;i=5088",
     browseName="ns=di;Identification",
     description="Data for machine identification (OPC 40001-1).",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=paefs;i=6194",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -1136,6 +1260,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=paefs;i=6201",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -1152,6 +1277,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=paefs;i=6202",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -1160,6 +1286,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=paefs;i=6203",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -1170,9 +1297,10 @@ o6.reference(o6.ns["ns=paefs;i=5111"], "i=17604", o6.ns["ns=paefs;i=5089"])
 machinery_processvalues.vartypes.ProcessValueSetpointVariableType(
     nodeId="ns=paefs;i=6205",
     browseName="ns=machinery_processvalues;ProcessValueSetpoint",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6207", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6209", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6207", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6209", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1183,9 +1311,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5072",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6110", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6110", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6106"]),
         o6.hasComponent(o6.ns["ns=paefs;i=6205"]),
@@ -1202,9 +1333,10 @@ o6.reference(paefs_objtypes.FilterAidDeviceType, ns0.reftypes.HasComponent, o6.n
 machinery_processvalues.vartypes.ProcessValueSetpointVariableType(
     nodeId="ns=paefs;i=6210",
     browseName="ns=machinery_processvalues;ProcessValueSetpoint",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6211", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6212", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6211", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6212", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1215,9 +1347,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5073",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6115", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6115", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6112"]),
         o6.hasComponent(o6.ns["ns=paefs;i=6210"]),
@@ -1234,9 +1369,10 @@ o6.reference(paefs_objtypes.CleaningUnitType, ns0.reftypes.HasComponent, o6.ns["
 machinery_processvalues.vartypes.ProcessValueSetpointVariableType(
     nodeId="ns=paefs;i=6213",
     browseName="ns=machinery_processvalues;ProcessValueSetpoint",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6214", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6215", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6214", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6215", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1247,9 +1383,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5074",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6119", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6119", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6116"]),
         o6.hasComponent(o6.ns["ns=paefs;i=6213"]),
@@ -1266,9 +1405,10 @@ o6.reference(paefs_objtypes.TemperatureRegulatorType, ns0.reftypes.HasComponent,
 machinery_processvalues.vartypes.ProcessValueSetpointVariableType(
     nodeId="ns=paefs;i=6216",
     browseName="ns=machinery_processvalues;ProcessValueSetpoint",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6217", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6218", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6217", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6218", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1279,9 +1419,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5098",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6156", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6156", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6153"]),
         o6.hasComponent(o6.ns["ns=paefs;i=6216"]),
@@ -1298,9 +1441,10 @@ o6.reference(paefs_objtypes.CleaningUnitType, ns0.reftypes.HasComponent, o6.ns["
 machinery_processvalues.vartypes.ProcessValueSetpointVariableType(
     nodeId="ns=paefs;i=6221",
     browseName="ns=machinery_processvalues;ProcessValueSetpoint",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6222", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6223", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6222", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6223", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1311,9 +1455,12 @@ machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=paefs;i=5103",
     browseName="ns=paefs;Signal",
     description="Value of the signal. This includes min/max ranges, unit and other meta information. The optional setpoint should be implemented only for SensorSetpointReadType and SensorSetpointWriteType types.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6184", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=paefs;i=6184", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=6174"]),
         o6.hasComponent(o6.ns["ns=paefs;i=6221"]),
@@ -1330,7 +1477,8 @@ o6.reference(paefs_objtypes.CleaningUnitType, ns0.reftypes.HasComponent, o6.ns["
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=paefs;i=6236",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6237", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6237", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
@@ -1373,6 +1521,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=paefs;i=6020",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -1381,6 +1530,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=paefs;i=6242",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -1392,9 +1542,10 @@ ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=paefs;i=6244",
     browseName="ns=paefs;RatedPower",
     description="The rated power of the filter system is the nominal electrical power of the unit under operating conditions specified by the manufacturer.",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6245", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6246", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6245", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6246", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
 )
@@ -1402,9 +1553,10 @@ ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=paefs;i=6247",
     browseName="ns=paefs;NominalAirflow",
     description="The nominal airflow of the filter system is the value specified by the manufacturer which defines the nominal extraction capacity of a unit under operating conditions.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6248", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6249", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6248", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6249", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
 )
@@ -1419,6 +1571,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=paefs;i=6177",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -1427,6 +1580,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=paefs;i=6178",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -1435,6 +1589,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=paefs;i=6179",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -1443,6 +1598,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=paefs;i=6243",
                 browseName="ns=paefs;ExIdentification",
                 description="The marking on the type plate of the filter system regarding explosion protection.",
+                modellingRule="Optional",
                 dataType=o6.String,
             )
         ),
@@ -1456,9 +1612,10 @@ ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=paefs;i=6253",
     browseName="ns=paefs;NominalAirflow",
     description="The nominal airflow of the filter unit is the value specified by the manufacturer which defines the nominal extraction capacity of a filter unit under operating conditions.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6254", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6255", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6254", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6255", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
 )
@@ -1466,9 +1623,10 @@ ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=paefs;i=6256",
     browseName="ns=paefs;RatedPower",
     description="The rated power of the filter unit is the nominal electrical power of the filter unit under operating conditions specified by the manufacturer.",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6257", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6258", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6257", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6258", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
 )
@@ -1476,9 +1634,10 @@ ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=paefs;i=6259",
     browseName="ns=paefs;RatedPower",
     description="The rated power of the filter unit is the nominal electrical power of the filter unit under operating conditions specified by the manufacturer.",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6260", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6261", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6260", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6261", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
 )
@@ -1486,9 +1645,10 @@ ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=paefs;i=6262",
     browseName="ns=paefs;NominalAirflow",
     description="The nominal airflow of the filter unit is the value specified by the manufacturer which defines the nominal extraction capacity of a filter unit under operating conditions.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6263", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6264", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6263", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6264", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
 )
@@ -1505,7 +1665,8 @@ ns0.vartypes.PropertyType(
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=paefs;i=6429",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6431", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6431", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
@@ -1528,6 +1689,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=paefs;i=6433",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -1536,6 +1698,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=paefs;i=6434",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -1547,12 +1710,14 @@ machinery.objtypes.MachineryComponentIdentificationType(
     nodeId="ns=paefs;i=5081",
     browseName="ns=di;Identification",
     description="Data for component identification (OPC 40001-1).",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=paefs;i=6435",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -1561,6 +1726,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=paefs;i=6436",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -1571,8 +1737,8 @@ ns0.vartypes.AnalogUnitRangeType(
     browseName="ns=paefs;NominalAirflow",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6438", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6439", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6438", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6439", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     accessLevel=3,
@@ -1584,8 +1750,8 @@ ns0.vartypes.AnalogUnitRangeType(
     browseName="ns=paefs;RatedPower",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6442", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6443", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6442", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6443", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     accessLevel=3,
@@ -1603,6 +1769,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=paefs;i=6252",
                 browseName="ns=paefs;ExIdentification",
                 description="The marking on the type plate of the filter unit regarding explosion protection.",
+                modellingRule="Optional",
                 dataType=o6.String,
             )
         ),
@@ -1611,6 +1778,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=paefs;i=6444",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -1619,6 +1787,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=paefs;i=6445",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -1633,12 +1802,14 @@ machinery.objtypes.MachineryItemIdentificationType(
     nodeId="ns=paefs;i=5083",
     browseName="ns=di;Identification",
     description="Data for machine identification (OPC 40001-1): The Identification folder can have either the concrete type MachineIdentificationType or MachineryComponentType. If the filter unit is considered a component of a larger filter machine, MachineryComponentType is used. If the filter unit is considered a machine by itself, MachineIdentificationType is used.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=paefs;i=6446",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -1647,6 +1818,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=paefs;i=6447",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -1666,6 +1838,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=paefs;i=6462",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -1674,6 +1847,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=paefs;i=6463",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -1685,12 +1859,14 @@ machinery.objtypes.MachineryComponentIdentificationType(
     nodeId="ns=paefs;i=5086",
     browseName="ns=di;Identification",
     description="Data for machine identification (OPC 40001-1).",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=paefs;i=6464",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -1699,6 +1875,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=paefs;i=6465",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -1708,12 +1885,14 @@ machinery.objtypes.MachineryComponentIdentificationType(
     nodeId="ns=paefs;i=5090",
     browseName="ns=di;Identification",
     description="Data for component identification (OPC 40001-1).",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=paefs;i=6466",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -1722,6 +1901,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=paefs;i=6467",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -1738,6 +1918,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=paefs;i=6468",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -1746,6 +1927,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=paefs;i=6469",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -1756,7 +1938,8 @@ o6.reference(o6.ns["ns=paefs;i=5113"], "i=17604", o6.ns["ns=paefs;i=5091"])
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=paefs;i=6470",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6471", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=6471", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
@@ -1771,7 +1954,8 @@ o6.reference(o6.ns["ns=paefs;i=5108"], "i=17604", o6.ns["ns=paefs;i=5092"])
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=paefs;i=6407",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8422", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8422", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
@@ -1786,13 +1970,15 @@ o6.reference(o6.ns["ns=paefs;i=5114"], "i=17604", o6.ns["ns=paefs;i=5199"])
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=paefs;i=8429",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8430", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8430", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
     nodeId="ns=paefs;i=5200",
     browseName="ns=machinery;MachineryItemState",
     description="StateMachine representing the operating state of the unit (OPC 40001-1).",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=paefs;i=8429"])],
 )
 paefs_objtypes.CleaningUnitType(
@@ -1803,7 +1989,11 @@ paefs_objtypes.CleaningUnitType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=paefs;i=6206", browseName="ns=paefs;CleaningActive", description="Describes that the unit is currently in a cleaning cycle.", dataType=o6.Boolean
+                nodeId="ns=paefs;i=6206",
+                browseName="ns=paefs;CleaningActive",
+                description="Describes that the unit is currently in a cleaning cycle.",
+                modellingRule="Mandatory",
+                dataType=o6.Boolean,
             )
         ),
         o6.hasAddIn(o6.ns["ns=paefs;i=5088"]),
@@ -1814,7 +2004,8 @@ o6.reference(paefs_objtypes.FilterUnitType, ns0.reftypes.HasComponent, o6.ns["ns
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=paefs;i=6419",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8431", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8431", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
@@ -1829,13 +2020,15 @@ o6.reference(o6.ns["ns=paefs;i=5115"], "i=17604", o6.ns["ns=paefs;i=5201"])
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=paefs;i=8432",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8433", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8433", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
     nodeId="ns=paefs;i=5202",
     browseName="ns=machinery;MachineryItemState",
     description="StateMachine representing the operating state of the discharge system (OPC 40001-1).",
+    modellingRule="Mandatory",
     references=[o6.hasComponent(o6.ns["ns=paefs;i=8432"])],
 )
 paefs_objtypes.DischargeSystemType(
@@ -1849,6 +2042,7 @@ paefs_objtypes.DischargeSystemType(
                 nodeId="ns=paefs;i=6425",
                 browseName="ns=paefs;MaintenanceSwitchOn",
                 description="Status of a physical maintenance switch on the discharge system. True when the switch is on.",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
             )
         ),
@@ -1859,7 +2053,8 @@ o6.reference(paefs_objtypes.FilterUnitType, ns0.reftypes.HasComponent, o6.ns["ns
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=paefs;i=6396",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8434", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8434", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
@@ -1874,13 +2069,15 @@ o6.reference(o6.ns["ns=paefs;i=5109"], "i=17604", o6.ns["ns=paefs;i=5203"])
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=paefs;i=8435",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8436", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8436", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
     nodeId="ns=paefs;i=5204",
     browseName="ns=machinery;MachineryItemState",
     description="StateMachine representing the operating state of the fan (OPC 40001-1).",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=paefs;i=8435"])],
 )
 paefs_objtypes.FanType(
@@ -1894,7 +2091,8 @@ o6.reference(paefs_objtypes.FilterSystemType, ns0.reftypes.HasComponent, o6.ns["
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=paefs;i=6147",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8437", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8437", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
@@ -1909,13 +2107,15 @@ o6.reference(o6.ns["ns=paefs;i=5112"], "i=17604", o6.ns["ns=paefs;i=5205"])
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=paefs;i=8438",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8439", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8439", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
     nodeId="ns=paefs;i=5206",
     browseName="ns=machinery;MachineryItemState",
     description="StateMachine representing the operating state of the device (OPC 40001-1).",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=paefs;i=8438"])],
 )
 paefs_objtypes.FilterAidDeviceType(
@@ -1929,6 +2129,7 @@ paefs_objtypes.FilterAidDeviceType(
                 nodeId="ns=paefs;i=6235",
                 browseName="ns=paefs;Malfunction",
                 description="Indicates that the filter aid device is malfunctioning. True in case of error. Malfunctions can be, for example, that there is no more filter aid or that there is a malfunction in the subsystems of the filter aid device.",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
             )
         ),
@@ -1940,7 +2141,8 @@ o6.reference(paefs_objtypes.FilterSystemType, ns0.reftypes.HasComponent, o6.ns["
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=paefs;i=8440",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8441", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8441", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
@@ -1955,13 +2157,15 @@ o6.reference(o6.ns["ns=paefs;i=5107"], "i=17604", o6.ns["ns=paefs;i=5207"])
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=paefs;i=8442",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8443", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8443", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
     nodeId="ns=paefs;i=5208",
     browseName="ns=machinery;MachineryItemState",
     description="StateMachine representing the operating state of the filter unit (OPC 40001-1).",
+    modellingRule="Mandatory",
     references=[o6.hasComponent(o6.ns["ns=paefs;i=8442"])],
 )
 paefs_objtypes.FilterUnitType(
@@ -1975,6 +2179,7 @@ paefs_objtypes.FilterUnitType(
                 nodeId="ns=paefs;i=6037",
                 browseName="ns=paefs;MaintenanceRequested",
                 description="The maintenance request allows the manufacturer to inform the operator that the system requires maintenance. True = maintenance requested by system. False = no maintenance requested.",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
             )
         ),
@@ -1983,6 +2188,7 @@ paefs_objtypes.FilterUnitType(
                 nodeId="ns=paefs;i=6452",
                 browseName="ns=paefs;Malfunction",
                 description="One or more subsystems of the filter unit have a malfunction. True in case of error.",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
             )
         ),
@@ -2000,6 +2206,7 @@ paefs_objtypes.FilterUnitType(
                 nodeId="ns=paefs;i=5020",
                 browseName="ns=paefs;AirIntakeConnection",
                 description="The connection to the ducting system from which the polluted process gas enters the filter unit.",
+                modellingRule="Mandatory",
             )
         ),
         o6.hasComponent(
@@ -2007,6 +2214,7 @@ paefs_objtypes.FilterUnitType(
                 nodeId="ns=paefs;i=5021",
                 browseName="ns=paefs;AirOutletConnection",
                 description="The connection to the ducting system through which the cleaned process gas leaves the filter unit.",
+                modellingRule="Mandatory",
             )
         ),
         o6.hasComponent(o6.ns["ns=paefs;i=5038"]),
@@ -2018,22 +2226,27 @@ o6.reference(paefs_objtypes.FilterSystemType, ns0.reftypes.HasComponent, o6.ns["
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=paefs;i=8444",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8445", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8445", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
     nodeId="ns=paefs;i=5210",
     browseName="ns=machinery;MachineryItemState",
     description="StateMachine representing the operating state of the unit (OPC 40001-1).",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=paefs;i=8444"])],
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=paefs;i=8446",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8447", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=paefs;i=8447", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
-machinery.objtypes.MachineryItemState_StateMachineType(nodeId="ns=paefs;i=5211", browseName="ns=paefs;MachineryState", references=[o6.hasComponent(o6.ns["ns=paefs;i=8446"])])
+machinery.objtypes.MachineryItemState_StateMachineType(
+    nodeId="ns=paefs;i=5211", browseName="ns=paefs;MachineryState", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=paefs;i=8446"])]
+)
 paefs_objtypes.SafetySystemType(
     nodeId="ns=paefs;i=5006",
     browseName="ns=paefs;<SafetySystem>",
@@ -2045,6 +2258,7 @@ paefs_objtypes.SafetySystemType(
                 nodeId="ns=paefs;i=6220",
                 browseName="ns=paefs;Triggered",
                 description="Indicates that the safety system has been triggered. If true the safety system has been triggered.",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
             )
         ),
@@ -2053,6 +2267,7 @@ paefs_objtypes.SafetySystemType(
                 nodeId="ns=paefs;i=6432",
                 browseName="ns=paefs;Malfunction",
                 description="Indicates that the safety system is malfunctioning. True in case of error.",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
             )
         ),

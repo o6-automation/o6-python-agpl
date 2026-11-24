@@ -114,9 +114,14 @@ restore_o6_config_invariants(UA_ServerConfig *cfg) {
     clamp_pubsub(cfg);
 }
 
+static bool
+config_writable(const PyServerConfig *self, const char *name);
+
 /* --- Logger --- */
 static int
 PyServerConfig_set_logger(PyServerConfig *self, PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "logger"),
+                               pyServerConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -143,6 +148,7 @@ PyServerConfig_set_logger(PyServerConfig *self, PyObject *value, void *closure) 
 /* --- Application Description --- */
 static PyObject *
 PyServerConfig_get_applicationDescription(PyServerConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyServerConfig_eventLoop(self), NULL);
     UA_ServerConfig *cfg = get_config(self);
     if (!cfg) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
@@ -164,6 +170,8 @@ PyServerConfig_get_applicationDescription(PyServerConfig *self, void *closure) {
 static int
 PyServerConfig_set_applicationDescription(PyServerConfig *self, PyObject *value,
                                           void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(pyServerConfig_notRunning(self, "modify", "applicationDescription"),
+                               pyServerConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -191,11 +199,34 @@ PyServerConfig_set_applicationDescription(PyServerConfig *self, PyObject *value,
     return 0;
 }
 
+/* Lock-free part of config_require_stopped, checked before the loop-thread
+ * guard so that a write while the server runs reports that from any thread.
+ * Python sets configLocked from start() until shutdown completes. */
+static bool
+config_writable(const PyServerConfig *self, const char *name) {
+    const PyServer *server = self->py_server;
+    if(!server || !(server->configLocked || server->running))
+        return true;
+    PyErr_Format(PyExc_RuntimeError,
+                 "Cannot modify %s unless the server is fully stopped", name);
+    return false;
+}
+
+/* Before taking the lock after a conversion that can run user code, which
+ * may start the server: the lifecycle check, then the loop-thread guard. */
+static int
+config_recheck(PyServerConfig *self, const char *name) {
+    if(!config_writable(self, name))
+        return -1;
+    return o6_require_loop_thread(pyServerConfig_eventLoop(self));
+}
+
 /* --- Build Info (Server/ServerStatus/BuildInfo) --- */
 static int config_require_stopped(PyServerConfig *self, const char *name);
 
 static PyObject *
 PyServerConfig_get_buildInfo(PyServerConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyServerConfig_eventLoop(self), NULL);
     UA_ServerConfig *cfg = get_config(self);
     if (!cfg) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
@@ -216,6 +247,8 @@ PyServerConfig_get_buildInfo(PyServerConfig *self, void *closure) {
 
 static int
 PyServerConfig_set_buildInfo(PyServerConfig *self, PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "buildInfo"),
+                               pyServerConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -241,6 +274,10 @@ PyServerConfig_set_buildInfo(PyServerConfig *self, PyObject *value, void *closur
     }
 
     /* The conversion can run user code; check the lifecycle afterwards */
+    if(config_recheck(self, "buildInfo") < 0) {
+        UA_BuildInfo_clear(&tmp);
+        return -1;
+    }
     lockServer(self->py_server->server);
     int allowed = config_require_stopped(self, "buildInfo");
     if(allowed == 0) {
@@ -256,6 +293,7 @@ PyServerConfig_set_buildInfo(PyServerConfig *self, PyObject *value, void *closur
 /* --- Application URI --- */
 static PyObject *
 PyServerConfig_get_applicationUri(PyServerConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyServerConfig_eventLoop(self), NULL);
     UA_ServerConfig *cfg = get_config(self);
     if (!cfg) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
@@ -271,6 +309,8 @@ PyServerConfig_get_applicationUri(PyServerConfig *self, void *closure) {
 static int
 PyServerConfig_set_applicationUri(PyServerConfig *self, PyObject *value,
                                   void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(pyServerConfig_notRunning(self, "modify", "application_uri"),
+                               pyServerConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -297,6 +337,7 @@ PyServerConfig_set_applicationUri(PyServerConfig *self, PyObject *value,
 
 static PyObject *
 PyServerConfig_get_allow_none_policy_password(PyServerConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyServerConfig_eventLoop(self), NULL);
     UA_ServerConfig *cfg = get_config(self);
     if (!cfg) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
@@ -308,6 +349,8 @@ PyServerConfig_get_allow_none_policy_password(PyServerConfig *self, void *closur
 static int
 PyServerConfig_set_allow_none_policy_password(PyServerConfig *self,
                                                PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(pyServerConfig_notRunning(self, "modify", "allow_none_policy_password"),
+                               pyServerConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -333,6 +376,7 @@ static int config_require_stopped(PyServerConfig *self, const char *name);
 
 static PyObject *
 PyServerConfig_get_verify_request_timestamp(PyServerConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyServerConfig_eventLoop(self), NULL);
     UA_ServerConfig *cfg = get_config(self);
     if (!cfg) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
@@ -345,6 +389,8 @@ PyServerConfig_get_verify_request_timestamp(PyServerConfig *self, void *closure)
 static int
 PyServerConfig_set_verify_request_timestamp(PyServerConfig *self,
                                             PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "verifyRequestTimestamp"),
+                               pyServerConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -369,6 +415,7 @@ PyServerConfig_set_verify_request_timestamp(PyServerConfig *self,
 
 static PyObject *
 PyServerConfig_get_auditing_enabled(PyServerConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyServerConfig_eventLoop(self), NULL);
     UA_ServerConfig *cfg = get_config(self);
     if (!cfg) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
@@ -379,6 +426,8 @@ PyServerConfig_get_auditing_enabled(PyServerConfig *self, void *closure) {
 
 static int
 PyServerConfig_set_auditing_enabled(PyServerConfig *self, PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "auditingEnabled"),
+                               pyServerConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -397,6 +446,7 @@ PyServerConfig_set_auditing_enabled(PyServerConfig *self, PyObject *value, void 
 
 static PyObject *
 PyServerConfig_get_copy_methods_on_instances(PyServerConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyServerConfig_eventLoop(self), NULL);
     UA_ServerConfig *cfg = get_config(self);
     if (!cfg) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
@@ -407,6 +457,7 @@ PyServerConfig_get_copy_methods_on_instances(PyServerConfig *self, void *closure
 
 static PyObject *
 PyServerConfig_get_application_type(PyServerConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyServerConfig_eventLoop(self), NULL);
     UA_ServerConfig *cfg = get_config(self);
     if (!cfg) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
@@ -417,6 +468,8 @@ PyServerConfig_get_application_type(PyServerConfig *self, void *closure) {
 
 static int
 PyServerConfig_set_application_type(PyServerConfig *self, PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "applicationType"),
+                               pyServerConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -442,6 +495,7 @@ PyServerConfig_set_application_type(PyServerConfig *self, PyObject *value, void 
 
 static PyObject *
 PyServerConfig_get_registered_servers_enabled(PyServerConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyServerConfig_eventLoop(self), NULL);
     UA_ServerConfig *cfg = get_config(self);
     if (!cfg) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
@@ -453,6 +507,8 @@ PyServerConfig_get_registered_servers_enabled(PyServerConfig *self, void *closur
 static int
 PyServerConfig_set_registered_servers_enabled(PyServerConfig *self, PyObject *value,
                                               void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "registeredServersEnabled"),
+                               pyServerConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -471,6 +527,7 @@ PyServerConfig_set_registered_servers_enabled(PyServerConfig *self, PyObject *va
 
 static PyObject *
 PyServerConfig_get_servers_on_network_enabled(PyServerConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyServerConfig_eventLoop(self), NULL);
     UA_ServerConfig *cfg = get_config(self);
     if (!cfg) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
@@ -482,6 +539,8 @@ PyServerConfig_get_servers_on_network_enabled(PyServerConfig *self, void *closur
 static int
 PyServerConfig_set_servers_on_network_enabled(PyServerConfig *self, PyObject *value,
                                               void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "serversOnNetworkEnabled"),
+                               pyServerConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -500,6 +559,7 @@ PyServerConfig_set_servers_on_network_enabled(PyServerConfig *self, PyObject *va
 
 static PyObject *
 PyServerConfig_get_history_enabled(PyServerConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyServerConfig_eventLoop(self), NULL);
     (void)closure;
     if (!self->py_server)
         Py_RETURN_FALSE;
@@ -509,7 +569,8 @@ PyServerConfig_get_history_enabled(PyServerConfig *self, void *closure) {
 /* --- Native limits and listener configuration --- */
 typedef enum {
     CONFIG_UINT16, CONFIG_UINT32, CONFIG_DURATION, CONFIG_BOOL,
-    CONFIG_DURATION_RANGE, CONFIG_UINT32_RANGE, CONFIG_URLS, CONFIG_CAPABILITIES
+    CONFIG_DURATION_RANGE, CONFIG_UINT32_RANGE, CONFIG_URLS, CONFIG_CAPABILITIES,
+    CONFIG_RULE
 } ConfigKind;
 
 typedef struct {
@@ -521,6 +582,7 @@ typedef struct {
 #define CONFIG_PROPERTY(NAME, KIND) \
     static const ConfigProperty prop_##NAME = {#NAME, KIND, offsetof(UA_ServerConfig, NAME)}
 
+CONFIG_PROPERTY(certificateEkuRule, CONFIG_RULE);
 CONFIG_PROPERTY(maxSessions, CONFIG_UINT16);
 CONFIG_PROPERTY(maxSessionTimeout, CONFIG_DURATION);
 CONFIG_PROPERTY(shutdownDelay, CONFIG_DURATION);
@@ -567,6 +629,7 @@ config_require_stopped(PyServerConfig *self, const char *name) {
 }
 
 typedef union {
+    UA_RuleHandling rule;
     UA_UInt16 u16;
     UA_UInt32 u32;
     UA_UInt64 capabilities;
@@ -579,6 +642,7 @@ typedef union {
 static size_t
 config_value_size(ConfigKind kind) {
     switch(kind) {
+    case CONFIG_RULE: return sizeof(UA_RuleHandling);
     case CONFIG_UINT16: return sizeof(UA_UInt16);
     case CONFIG_UINT32: return sizeof(UA_UInt32);
     case CONFIG_CAPABILITIES: return sizeof(UA_UInt64);
@@ -593,6 +657,7 @@ config_value_size(ConfigKind kind) {
 
 static PyObject *
 PyServerConfig_get_native(PyServerConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyServerConfig_eventLoop(self), NULL);
     const ConfigProperty *prop = closure;
     UA_ServerConfig *cfg = get_config(self);
     if(!cfg) {
@@ -618,6 +683,15 @@ PyServerConfig_get_native(PyServerConfig *self, void *closure) {
         return PyErr_StatusCode(status);
 
     switch(prop->kind) {
+    case CONFIG_RULE:
+        switch(value.rule) {
+        case UA_RULEHANDLING_DEFAULT: return PyUnicode_FromString("default");
+        case UA_RULEHANDLING_ABORT: return PyUnicode_FromString("abort");
+        case UA_RULEHANDLING_WARN: return PyUnicode_FromString("warn");
+        case UA_RULEHANDLING_ACCEPT: return PyUnicode_FromString("accept");
+        }
+        PyErr_SetString(PyExc_RuntimeError, "Unknown native rule handling value");
+        return NULL;
     case CONFIG_UINT16: return PyLong_FromUnsignedLong(value.u16);
     case CONFIG_UINT32: return PyLong_FromUnsignedLong(value.u32);
     case CONFIG_CAPABILITIES: {
@@ -802,6 +876,8 @@ config_urls(PyObject *value, UA_String **urls, size_t *size) {
 
 static int
 PyServerConfig_set_native(PyServerConfig *self, PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, ((const ConfigProperty *)closure)->name),
+                               pyServerConfig_eventLoop(self), -1);
     const ConfigProperty *prop = closure;
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
@@ -823,6 +899,30 @@ PyServerConfig_set_native(PyServerConfig *self, PyObject *value, void *closure) 
     size_t size = 0;
     UA_UInt32 integer;
     switch(prop->kind) {
+    case CONFIG_RULE: {
+        if(!PyUnicode_Check(value)) {
+            PyErr_Format(PyExc_TypeError, "%s must be str", prop->name);
+            return -1;
+        }
+        Py_ssize_t length;
+        const char *text = PyUnicode_AsUTF8AndSize(value, &length);
+        if(!text)
+            return -1;
+        if(length == 7 && memcmp(text, "default", 7) == 0)
+            converted.rule = UA_RULEHANDLING_DEFAULT;
+        else if(length == 5 && memcmp(text, "abort", 5) == 0)
+            converted.rule = UA_RULEHANDLING_ABORT;
+        else if(length == 4 && memcmp(text, "warn", 4) == 0)
+            converted.rule = UA_RULEHANDLING_WARN;
+        else if(length == 6 && memcmp(text, "accept", 6) == 0)
+            converted.rule = UA_RULEHANDLING_ACCEPT;
+        else {
+            PyErr_Format(PyExc_ValueError,
+                         "%s must be 'default', 'abort', 'warn' or 'accept'", prop->name);
+            return -1;
+        }
+        break;
+    }
     case CONFIG_UINT16:
         if(config_unsigned(value, UA_UINT16_MAX, &integer, prop->name) < 0)
             return -1;
@@ -861,6 +961,11 @@ PyServerConfig_set_native(PyServerConfig *self, PyObject *value, void *closure) 
         break;
     }
 
+    if(config_recheck(self, prop->name) < 0) {
+        if(urls)
+            UA_Array_delete(urls, size, &UA_TYPES[UA_TYPES_STRING]);
+        return -1;
+    }
     lockServer(self->py_server->server);
     allowed = config_require_stopped(self, prop->name);
     if(allowed == 0) {
@@ -932,6 +1037,7 @@ static PyGetSetDef PyServerConfig_getset[] = {
     {"historyEnabled",
      (getter)PyServerConfig_get_history_enabled, NULL,
      "Whether setHistoryDatabase() has configured a history database", NULL},
+    NATIVE_CONFIG(certificateEkuRule, "Certificate extended-key-usage handling: default, abort, warn or accept"),
     NATIVE_CONFIG(maxSessions, "Maximum sessions (UInt16); 0 = unlimited"),
     NATIVE_CONFIG(maxSessionTimeout, "Maximum session timeout in milliseconds; finite and non-negative"),
     NATIVE_CONFIG(shutdownDelay, "Time in milliseconds stop() keeps serving with ServerStatus/State Shutdown before shutting down; finite and non-negative; 0 = none"),
@@ -1441,13 +1547,17 @@ verify_user_certificate(UA_CertificateGroup *group, const UA_ByteString *certifi
     return status;
 }
 
+/* A group without verifyCertificate accepts all certificates and rejects none,
+ * so it stays unwrapped */
 static void
 wrap_certificate_verification(PyServer *server, UA_ServerConfig *cfg) {
-    if(cfg->secureChannelPKI.verifyCertificate != verify_application_certificate) {
+    if(cfg->secureChannelPKI.verifyCertificate &&
+       cfg->secureChannelPKI.verifyCertificate != verify_application_certificate) {
         server->verifyApplicationCertificate = cfg->secureChannelPKI.verifyCertificate;
         cfg->secureChannelPKI.verifyCertificate = verify_application_certificate;
     }
-    if(cfg->sessionPKI.verifyCertificate != verify_user_certificate) {
+    if(cfg->sessionPKI.verifyCertificate &&
+       cfg->sessionPKI.verifyCertificate != verify_user_certificate) {
         server->verifyUserCertificate = cfg->sessionPKI.verifyCertificate;
         cfg->sessionPKI.verifyCertificate = verify_user_certificate;
     }
@@ -1456,6 +1566,7 @@ wrap_certificate_verification(PyServer *server, UA_ServerConfig *cfg) {
 /* The rejected application certificates, oldest first */
 PyObject *
 pyServer_rejected_certificates(PyObject *obj, PyObject *Py_UNUSED(ignored)) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
     PyServer *self = (PyServer *)obj;
     if(!self->server) {
         PyErr_SetString(PyExc_RuntimeError, "Server not initialized");
@@ -1490,6 +1601,9 @@ pyServer_rejected_certificates(PyObject *obj, PyObject *Py_UNUSED(ignored)) {
 static PyObject *
 PyServerConfig_set_encryption(PyServerConfig *self,
                               PyObject *args, PyObject *kwds) {
+    O6_REQUIRE_WRITABLE_CONFIG(pyServerConfig_notRunning(self, "configure", "encryption") &&
+                                   config_writable(self, "encryption"),
+                               pyServerConfig_eventLoop(self), NULL);
     static char *kwlist[] = {"certificate", "privateKey", "port",
                              "trustList", "issuerList", "revocationList",
                              "secureOnly", "securityPolicies", NULL};
@@ -1617,6 +1731,8 @@ PyServerConfig_set_encryption(PyServerConfig *self,
 /* --- setDefaultWithFilestore method --- */
 static PyObject *
 PyServerConfig_set_filestore(PyServerConfig *self, PyObject *args, PyObject *kwds) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "filestore"),
+                               pyServerConfig_eventLoop(self), NULL);
     static char *kwlist[] = {"certificate", "privateKey", "storePath", "port",
                              "securityPolicies", NULL};
     PyObject *py_cert, *py_key, *py_path;
@@ -1807,6 +1923,8 @@ check_json(PyObject *arg) {
 
 static PyObject *
 PyServerConfig_load_json(PyServerConfig *self, PyObject *args, PyObject *kwds) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "the configuration"),
+                               pyServerConfig_eventLoop(self), NULL);
     static char *kwlist[] = {"json", "addEndpoints", "dryRun", NULL};
     PyObject *arg;
     int add_endpoints = 0, dry_run = 0;
@@ -1887,6 +2005,8 @@ PyServerConfig_load_json(PyServerConfig *self, PyObject *args, PyObject *kwds) {
 /* --- set_accept_all_certificates method --- */
 static PyObject *
 PyServerConfig_set_accept_all(PyServerConfig *self, PyObject *args) {
+    O6_REQUIRE_WRITABLE_CONFIG(pyServerConfig_notRunning(self, "modify", "certificate policy"),
+                               pyServerConfig_eventLoop(self), NULL);
     UA_ServerConfig *cfg = get_config(self);
     if (!cfg) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_Server attached");
@@ -1910,6 +2030,8 @@ PyServerConfig_set_accept_all(PyServerConfig *self, PyObject *args) {
 static PyObject *
 PyServerConfig_set_history_database(PyServerConfig *self,
                                     PyObject *args, PyObject *kwds) {
+    O6_REQUIRE_WRITABLE_CONFIG(pyServerConfig_notRunning(self, "configure", "history database"),
+                               pyServerConfig_eventLoop(self), NULL);
     static char *kwlist[] = {"maxNodes", "capacity", "maxResponseSize",
                              "backend", NULL};
     int max_nodes = PYO6_HISTORY_MAX_NODES_DEFAULT;

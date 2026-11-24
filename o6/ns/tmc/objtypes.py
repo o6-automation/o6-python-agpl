@@ -109,6 +109,7 @@ class UserInterfaceType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=5088",
             browseName="ns=tmc;ControlPanelVURO",
             description="The control panel area where read-only objects are shown. Objects connected to a ControlPanelVURO by \nmeans of a non-hierarchical reference of type IsDisplayedBy are shown in the control panel.",
+            modellingRule="Mandatory",
         )
     )
     controlPanelVURW: ns0.objtypes.BaseObjectType = o6.hasComponent(
@@ -116,6 +117,7 @@ class UserInterfaceType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=5089",
             browseName="ns=tmc;ControlPanelVURW",
             description="The control panel area where read-write objects are shown. Objects connected to a ControlPanelVURW by \nmeans of a non-hierarchical reference of type IsDisplayedBy are shown in the control panel.",
+            modellingRule="Mandatory",
         )
     )
     kPIVU: ns0.objtypes.BaseObjectType = o6.hasComponent(
@@ -123,6 +125,7 @@ class UserInterfaceType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=5286",
             browseName="ns=tmc;KPIVU",
             description="The object collecting variables to be displayed in the KPI section. Objects connected to a KPIVU by means \nof a non-hierarchical reference of type IsDisplayedBy are shown in the KPI display area.",
+            modellingRule="Mandatory",
         )
     )
     loopVUReferences: ns0.objtypes.BaseObjectType = o6.hasComponent(
@@ -130,6 +133,7 @@ class UserInterfaceType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=5290",
             browseName="ns=tmc;LoopVUReferences",
             description="The collection of references to control loops to be displayed. Non-hierarchical references connected to \nLoopVuReferences by means of a non-hierarchical reference of type IsDisplayedBy are shown in the control \npanel.",
+            modellingRule="Mandatory",
         )
     )
     overVU: ns0.objtypes.BaseObjectType = o6.hasComponent(
@@ -137,6 +141,7 @@ class UserInterfaceType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=5291",
             browseName="ns=tmc;OverVU",
             description="The overview of the UI interface. Objects connected to an OverVU by means of a non-hierarchical \nreference of type IsDisplayedBy are shown in the overview display.",
+            modellingRule="Mandatory",
         )
     )
     zoomedVU: ns0.objtypes.BaseObjectType = o6.hasComponent(
@@ -144,6 +149,7 @@ class UserInterfaceType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=5292",
             browseName="ns=tmc;ZoomedVU",
             description="The zooned view of the UI interface. Objects connected to a ZoomedVU by means of a non-hierarchical \nreference of type IsDisplayedBy are shown in the zoomed in area.",
+            modellingRule="Mandatory",
         )
     )
 
@@ -164,11 +170,17 @@ class ControlModuleConfigurationType(ns0.objtypes.BaseObjectType):
         )
     )
     deviceLifeSpan: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6100", browseName="ns=tmc;DeviceLifeSpan", description="The control module expected life span duration.", dataType=o6.UInt32)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=tmc;i=6100", browseName="ns=tmc;DeviceLifeSpan", description="The control module expected life span duration.", modellingRule="Optional", dataType=o6.UInt32
+        )
     )
     validSince: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=6101", browseName="ns=tmc;ValidSince", description="The UTC date and time when the configuration was last changed.", dataType=ns0.datatypes.UtcTime
+            nodeId="ns=tmc;i=6101",
+            browseName="ns=tmc;ValidSince",
+            description="The UTC date and time when the configuration was last changed.",
+            modellingRule="Mandatory",
+            dataType=ns0.datatypes.UtcTime,
         )
     )
 
@@ -186,6 +198,7 @@ class MachineModuleHistoricalRecordType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6155",
             browseName="ns=tmc;ValidUntil",
             description="The ValidUntil Propertyontains the date and time the MachineModuleSpecification was last \nvalid.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.UtcTime,
             value=o6.DateTime("2000-01-01T00:00:00Z"),
         )
@@ -196,6 +209,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=tmc;i=6275",
     browseName="ns=tmc;RejectionMode",
     description="When RejectionMode is True, the rejection trap discharges material when triggered, \notherwise no material is rejected.",
+    modellingRule="Mandatory",
     dataType=o6.Boolean,
     value=False,
     accessLevel=3,
@@ -245,6 +259,7 @@ o6.call(
     nodeId="ns=tmc;i=7001",
     browseName="ns=tmc;SetRemoteControl",
     description="The SetRemoteControl Method enables or disables the remote control mode.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6041"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6042"]),
 )
@@ -272,6 +287,7 @@ o6.call(
     nodeId="ns=tmc;i=7007",
     browseName="ns=tmc;EndSubCarrierLoading",
     description="The EndSubCarrierLoading Method informs the underlying system that the loading of (sub) carriers into \nthe carrier is complete.",
+    modellingRule="Mandatory",
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=13434"]),
 )
 
@@ -338,6 +354,7 @@ o6.call(
     nodeId="ns=tmc;i=7029",
     browseName="ns=tmc;SetNewSpecification",
     description="The Method SetNewSpecification saves its arguments as the new specification for the machine module. \nPrior to that it saves the previous specification into the PastSpecification Records Object of the same \nmachine module.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6180"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6367"]),
 )
@@ -384,6 +401,7 @@ o6.call(
     nodeId="ns=tmc;i=7033",
     browseName="ns=tmc;LoadMaterialList",
     description="The LoadMaterialList Method loads the material list to the underlying system after having validated that \n(a) the material list is complete and (b) the material list is valid.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6305"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6329"]),
 )
@@ -451,6 +469,7 @@ o6.call(
     nodeId="ns=tmc;i=7034",
     browseName="ns=tmc;ValidateDataSet",
     description="The ValidateDataSet Method transfers a dataset, complete when IsCompleteDataSet is True, to the underlying system and returns the result of the validation, i.e. verifying that the dataset is complete and can run in production.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6185"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6186"]),
 )
@@ -504,6 +523,7 @@ o6.call(
     nodeId="ns=tmc;i=7042",
     browseName="ns=tmc;LoadDataSet",
     description="The LoadDataSet Method loads the dataset to the underlying system after having validated that (a) the dataset is complete when IsCompleteDataset is True and (b) the dataset is valid.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6437"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6438"]),
 )
@@ -564,6 +584,7 @@ o6.call(
     nodeId="ns=tmc;i=7043",
     browseName="ns=tmc;ValidateMaterialList",
     description="The ValidateMaterialList Method transfers a material list to the underlying system and returns the result \nof the validation.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6331"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6332"]),
 )
@@ -581,6 +602,7 @@ class MachineModuleSetupType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6177",
             browseName="ns=tmc;DataSet",
             description="DataSet contains all the digital settings (other than the mechanical settings stored in the folder \nMechanicalAdjustments) required by the machine module.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.DataSetType,
             value=tmc_datypes.DataSetType(iD="", description=o6.LocalizedText(), values=[]),
             accessLevel=3,
@@ -595,6 +617,7 @@ class MachineModuleSetupType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6330",
             browseName="ns=tmc;MaterialList",
             description="MaterialList contains the list of materials that are going to be used for the production of the current \nproduction order.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialListType,
         )
     )
@@ -645,6 +668,7 @@ o6.call(
     nodeId="ns=tmc;i=7044",
     browseName="ns=tmc;SetControlMode",
     description="The SetControlMode Method sets the control mode of the machine module.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6232"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6389"]),
 )
@@ -672,6 +696,7 @@ o6.call(
     nodeId="ns=tmc;i=7045",
     browseName="ns=tmc;ResetAggregates",
     description="The ResetAggregates Method resets the aggregates of the control module.",
+    modellingRule="Mandatory",
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6098"]),
 )
 
@@ -694,7 +719,11 @@ class ControlModuleAggregatesType(ns0.objtypes.BaseObjectType):
     resetAggregates: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=tmc;i=7045"])
     validSince: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=6245", browseName="ns=tmc;ValidSince", description="The time of the last reset for the aggregates.", dataType=ns0.datatypes.UtcTime
+            nodeId="ns=tmc;i=6245",
+            browseName="ns=tmc;ValidSince",
+            description="The time of the last reset for the aggregates.",
+            modellingRule="Mandatory",
+            dataType=ns0.datatypes.UtcTime,
         )
     )
 
@@ -737,6 +766,7 @@ o6.call(
     nodeId="ns=tmc;i=7052",
     browseName="ns=tmc;SendCommand",
     description="The Method SendCommand sends a command to change the state of the machine module state machine.\nThe Method SendCommand sends a command to change the state of the machine module state machine.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6241"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6385"]),
 )
@@ -764,6 +794,7 @@ o6.call(
     nodeId="ns=tmc;i=7053",
     browseName="ns=tmc;AcknowledgeAlarms",
     description="The AcknowledgeAlarms Method acknowledges the alarms of the control module.",
+    modellingRule="Optional",
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6405"]),
 )
 
@@ -805,6 +836,7 @@ o6.call(
     nodeId="ns=tmc;i=7056",
     browseName="ns=tmc;SetIdleEnergySavingMode",
     description="The Method SetIdleEnergySavingMode activates the energy saving mode when the machine \nmodule is idle.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6246"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6393"]),
 )
@@ -851,6 +883,7 @@ o6.call(
     nodeId="ns=tmc;i=7063",
     browseName="ns=tmc;SetRejectionMode",
     description="The Method SetRejectionMode turns the rejection on or off.\nThe Method SetRejectionMode turns the rejection on or off.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6868"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6917"]),
 )
@@ -904,6 +937,7 @@ o6.call(
     nodeId="ns=tmc;i=7072",
     browseName="ns=tmc;SetRootCauseLists",
     description="The SetRootCauseLists Method sets both the RootCauseList and RootCauseGroupList \naccording to the input arguments.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6326"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6327"]),
 )
@@ -973,6 +1007,7 @@ o6.call(
     nodeId="ns=tmc;i=7104",
     browseName="ns=tmc;GetDataSetList",
     description="The GetDatasetList Method returns the list of descriptions for parameters of the dataset filtered \nby the dependency and subset created by the user.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6425"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6429"]),
 )
@@ -1003,6 +1038,7 @@ o6.call(
     nodeId="ns=tmc;i=7105",
     browseName="ns=tmc;GetRootCauseList",
     description="The GetRootCauseList Method returns the complete list of root causes as persisted by the \nserver.",
+    modellingRule="Mandatory",
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6210"]),
 )
 
@@ -1032,12 +1068,13 @@ o6.call(
     nodeId="ns=tmc;i=7106",
     browseName="ns=tmc;GetStopReasonList",
     description="The GetStopReasonList Method returns the complete list of stop reasons as persisted by the \nserver.",
+    modellingRule="Mandatory",
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6306"]),
 )
 
-o6.call(nodeId="ns=tmc;i=7109", browseName="ns=pack_ml;Abort")
+o6.call(nodeId="ns=tmc;i=7109", browseName="ns=pack_ml;Abort", modellingRule="Optional")
 
-o6.call(nodeId="ns=tmc;i=7121", browseName="ns=pack_ml;Clear")
+o6.call(nodeId="ns=tmc;i=7121", browseName="ns=pack_ml;Clear", modellingRule="Optional")
 
 
 @o6.objecttype(nodeId="ns=tmc;i=1018", browseName="ns=tmc;TMCStateMachineType", displayName="TMCStateMachineType")
@@ -1061,9 +1098,9 @@ class TMCStateMachineType(pack_ml.objtypes.PackMLBaseStateMachineType):
 o6.reference(TMCStateMachineType, "i=41", "i=2311")
 
 
-o6.call(nodeId="ns=tmc;i=7122", browseName="ns=pack_ml;Reset")
+o6.call(nodeId="ns=tmc;i=7122", browseName="ns=pack_ml;Reset", modellingRule="Optional")
 
-o6.call(nodeId="ns=tmc;i=7149", browseName="ns=pack_ml;Stop")
+o6.call(nodeId="ns=tmc;i=7149", browseName="ns=pack_ml;Stop", modellingRule="Optional")
 
 
 @o6.objecttype(nodeId="ns=tmc;i=1019", browseName="ns=tmc;TMCMachineStateMachineType", displayName="TMCMachineStateMachineType")
@@ -1113,6 +1150,7 @@ o6.call(
     nodeId="ns=tmc;i=7201",
     browseName="ns=tmc;ResetProductionTotals",
     description="The Method ResetProductionTotals simultaneously resets the totals of the machine components \nbelonging to the following machine folders: DefectDetectionSensors, MaterialLoadingPoints, MaterialOutputPoints, MaterialRejectionPoints.",
+    modellingRule="Mandatory",
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6089"]),
 )
 
@@ -1154,6 +1192,7 @@ o6.call(
     nodeId="ns=tmc;i=7257",
     browseName="ns=tmc;SendCommand",
     description="The Method SendCommand sends a command to change the state of the control module state \nmachine remotely.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7258"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7259"]),
 )
@@ -1200,6 +1239,7 @@ o6.call(
     nodeId="ns=tmc;i=7276",
     browseName="ns=tmc;SetControlMode",
     description="The SetControlMode Method sets the control mode of the control module.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7279"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7280"]),
 )
@@ -1219,6 +1259,7 @@ class ControlModuleLiveStatusType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6448",
             browseName="ns=tmc;ControlMode",
             description="The ControlMode describes the current control mode of the equipment module.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.ControlModeEnumeration,
             accessLevel=3,
             userAccessLevel=1,
@@ -1235,6 +1276,7 @@ class ControlModuleLiveStatusType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=7282",
             browseName="ns=tmc;State",
             description="The State Property describes the status of the state machine controlling the control module. State provides \na subset of the information of the state machine, when the latter is implemented.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.StateEnumeration,
         )
     )
@@ -1295,7 +1337,10 @@ class ControlModuleType(TMCDeviceType):
     liveStatus: ControlModuleLiveStatusType
     setup: ControlModuleSetupType | None = o6.hasComponent(
         ControlModuleSetupType(
-            nodeId="ns=tmc;i=5143", browseName="ns=tmc;Setup", description="Setup provides the value of all the digital settings required to run the control module."
+            nodeId="ns=tmc;i=5143",
+            browseName="ns=tmc;Setup",
+            description="Setup provides the value of all the digital settings required to run the control module.",
+            modellingRule="Optional",
         )
     )
 
@@ -1319,14 +1364,18 @@ class DigitalInputType(ControlModuleType):
 
 @o6.objecttype(nodeId="ns=tmc;i=1066", browseName="ns=tmc;SensorType", displayName="SensorType", description="The MotorType ObjectType describes a sensor.")
 class SensorType(ControlModuleType):
-    setup: ControlModuleSetupType = o6.hasComponent(ControlModuleSetupType(nodeId="ns=tmc;i=5263", browseName="ns=tmc;Setup", description="The settings to set up the motor."))
+    setup: ControlModuleSetupType = o6.hasComponent(
+        ControlModuleSetupType(nodeId="ns=tmc;i=5263", browseName="ns=tmc;Setup", description="The settings to set up the motor.", modellingRule="Mandatory")
+    )
 
 
 @o6.objecttype(nodeId="ns=tmc;i=1067", browseName="ns=tmc;ValveType", displayName="ValveType", description="The MotorType ObjectType describes a valve.")
 class ValveType(ControlModuleType):
     aggregates: ValveAggregatesType
     configuration: ControlModuleConfigurationType
-    setup: ValveSetupType = o6.hasComponent(ValveSetupType(nodeId="ns=tmc;i=5293", browseName="ns=tmc;Setup", description="The settings to set up the valve."))
+    setup: ValveSetupType = o6.hasComponent(
+        ValveSetupType(nodeId="ns=tmc;i=5293", browseName="ns=tmc;Setup", description="The settings to set up the valve.", modellingRule="Mandatory")
+    )
 
 
 @o6.objecttype(
@@ -1338,7 +1387,11 @@ class ValveType(ControlModuleType):
 class ValveAggregatesType(ControlModuleAggregatesType):
     cycleCounter: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=tmc;i=7303", browseName="ns=tmc;CycleCounter", description="The total number of times the solenoid valve was energized and de-energised.", dataType=o6.UInt32
+            nodeId="ns=tmc;i=7303",
+            browseName="ns=tmc;CycleCounter",
+            description="The total number of times the solenoid valve was energized and de-energised.",
+            modellingRule="Mandatory",
+            dataType=o6.UInt32,
         )
     )
 
@@ -1352,12 +1405,20 @@ class ValveAggregatesType(ControlModuleAggregatesType):
 class MotorAggregatesType(ControlModuleAggregatesType):
     totalRunningHours: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=tmc;i=7310", browseName="ns=tmc;TotalRunningHours", description="The total number of running hours for the motor.", dataType=o6.UInt32
+            nodeId="ns=tmc;i=7310",
+            browseName="ns=tmc;TotalRunningHours",
+            description="The total number of running hours for the motor.",
+            modellingRule="Mandatory",
+            dataType=o6.UInt32,
         )
     )
     totalStartStopCounter: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=tmc;i=7311", browseName="ns=tmc;TotalStartStopCounter", description="The total number of times the motor was started and stopped.", dataType=o6.UInt32
+            nodeId="ns=tmc;i=7311",
+            browseName="ns=tmc;TotalStartStopCounter",
+            description="The total number of times the motor was started and stopped.",
+            modellingRule="Mandatory",
+            dataType=o6.UInt32,
         )
     )
 
@@ -1374,6 +1435,7 @@ class DigitalInputSetupType(ControlModuleSetupType):
             nodeId="ns=tmc;i=7313",
             browseName="ns=tmc;ForcedValue",
             description="The value to set as the input Value when ControlMode is MANUAL.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -1407,6 +1469,7 @@ o6.call(
     nodeId="ns=tmc;i=7314",
     browseName="ns=tmc;GetRootCauseGroupList",
     description="The GetRootCauseGroupList Method returns the complete list of root cause groups as persisted \nby the server.",
+    modellingRule="Mandatory",
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7322"]),
 )
 
@@ -1423,6 +1486,7 @@ class MotorSetupType(ControlModuleSetupType):
             nodeId="ns=tmc;i=7317",
             browseName="ns=tmc;Direction",
             description="The rotation direction of the motor.",
+            modellingRule="Optional",
             dataType=tmc_datypes.MotorDirectionEnumeration,
             accessLevel=3,
             userAccessLevel=1,
@@ -1433,12 +1497,14 @@ class MotorSetupType(ControlModuleSetupType):
 @o6.objecttype(nodeId="ns=tmc;i=1065", browseName="ns=tmc;MotorType", displayName="MotorType", description="The MotorType ObjectType describes a motor.")
 class MotorType(ControlModuleType):
     aggregates: MotorAggregatesType
-    setup: MotorSetupType = o6.hasComponent(MotorSetupType(nodeId="ns=tmc;i=5258", browseName="ns=tmc;Setup", description="The settings to set up the motor"))
+    setup: MotorSetupType = o6.hasComponent(
+        MotorSetupType(nodeId="ns=tmc;i=5258", browseName="ns=tmc;Setup", description="The settings to set up the motor", modellingRule="Mandatory")
+    )
 
 
-o6.call(nodeId="ns=tmc;i=7350", browseName="ns=pack_ml;Hold")
+o6.call(nodeId="ns=tmc;i=7350", browseName="ns=pack_ml;Hold", modellingRule="Optional")
 
-o6.call(nodeId="ns=tmc;i=7351", browseName="ns=pack_ml;Reset")
+o6.call(nodeId="ns=tmc;i=7351", browseName="ns=pack_ml;Reset", modellingRule="Optional")
 
 ns0.vartypes.PropertyType(
     nodeId="ns=tmc;i=6935",
@@ -1459,15 +1525,15 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=tmc;i=7352", browseName="ns=pack_ml;Start", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6935"]))
+o6.call(nodeId="ns=tmc;i=7352", browseName="ns=pack_ml;Start", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6935"]))
 
-o6.call(nodeId="ns=tmc;i=7353", browseName="ns=pack_ml;Suspend")
+o6.call(nodeId="ns=tmc;i=7353", browseName="ns=pack_ml;Suspend", modellingRule="Optional")
 
-o6.call(nodeId="ns=tmc;i=7357", browseName="ns=pack_ml;Unhold")
+o6.call(nodeId="ns=tmc;i=7357", browseName="ns=pack_ml;Unhold", modellingRule="Optional")
 
-o6.call(nodeId="ns=tmc;i=7358", browseName="ns=pack_ml;Unsuspend")
+o6.call(nodeId="ns=tmc;i=7358", browseName="ns=pack_ml;Unsuspend", modellingRule="Optional")
 
-o6.call(nodeId="ns=tmc;i=7361", browseName="ns=pack_ml;ToComplete")
+o6.call(nodeId="ns=tmc;i=7361", browseName="ns=pack_ml;ToComplete", modellingRule="Optional")
 
 
 @o6.objecttype(nodeId="ns=tmc;i=1028", browseName="ns=tmc;TMCExecuteStateMachineType", displayName="TMCExecuteStateMachineType")
@@ -1580,6 +1646,7 @@ o6.call(
     nodeId="ns=tmc;i=7428",
     browseName="ns=tmc;SetDetectionMode",
     description="The Method SetDetectionMode enables or disables the defect reason.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6184"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6189"]),
 )
@@ -1597,6 +1664,7 @@ class DefectReasonType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=7291",
             browseName="ns=tmc;DetectionCountMasterTotal",
             description="The total number of times the defect reason occurred. The total is never reset to zero.",
+            modellingRule="Mandatory",
             dataType=o6.UInt64,
         )
     )
@@ -1605,6 +1673,7 @@ class DefectReasonType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=7349",
             browseName="ns=tmc;DetectionCountTotal",
             description="The total number of times a defect reason occurred. The total is reset to zero only when the \nResetProductionTotals method in the MachineModuleProductionType is executed successfully.",
+            modellingRule="Mandatory",
             dataType=o6.UInt64,
             accessLevel=5,
             userAccessLevel=1,
@@ -1615,6 +1684,7 @@ class DefectReasonType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=7359",
             browseName="ns=tmc;DetectionMode",
             description="When DetectionMode is True, the defect reason is triggered. When DetectionMode is False, the \ndefect reason is not active, i.e. never triggered.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -1666,6 +1736,7 @@ o6.call(
     nodeId="ns=tmc;i=7437",
     browseName="ns=tmc;LoadReferenceFeatures",
     description="The Method LoadReferenceFeatures loads binary profiles to be used as references for defect detection.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7443"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6233"]),
 )
@@ -1712,6 +1783,7 @@ o6.call(
     nodeId="ns=tmc;i=7440",
     browseName="ns=tmc;SetDetectionMode",
     description="The method SetDetectionMode enables or disables the detection function and the underneath defect reasons.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7441"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7442"]),
 )
@@ -1730,6 +1802,7 @@ class SensorFunctionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6193",
             browseName="ns=tmc;DetectionMode",
             description="When DetectionMode is True, the sensor function measures the sensor value and the inner \ndefect reasons are enabled, meaning they can be active or not.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -1783,6 +1856,7 @@ o6.call(
     nodeId="ns=tmc;i=7465",
     browseName="ns=tmc;SetDetectionMode",
     description="The Method SetDetectionMode enables or disables the defect detection sensor.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7467"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=7468"]),
 )
@@ -1801,6 +1875,7 @@ class DefectDetectionSensorType(TMCDeviceType):
             nodeId="ns=tmc;i=7460",
             browseName="ns=tmc;DetectionCountMasterTotal",
             description="The total number of times a detection occurred. The total is never reset to zero.",
+            modellingRule="Mandatory",
             dataType=o6.UInt64,
         )
     )
@@ -1809,6 +1884,7 @@ class DefectDetectionSensorType(TMCDeviceType):
             nodeId="ns=tmc;i=7461",
             browseName="ns=tmc;DetectionCountTotal",
             description="The total number of times a detection occurred. The total is reset to zero only when the \nResetProductionTotals method in the MachineModuleProductionType is executed successfully.",
+            modellingRule="Mandatory",
             dataType=o6.UInt64,
             accessLevel=5,
             userAccessLevel=1,
@@ -1819,6 +1895,7 @@ class DefectDetectionSensorType(TMCDeviceType):
             nodeId="ns=tmc;i=7462",
             browseName="ns=tmc;DetectionMode",
             description="When DetectionMode is True, the defect detection sensor or system detects defects and the \ninner sensor functions are enabled, meaning they can be active or not.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -1840,6 +1917,7 @@ class MaterialRejectionPointType(TMCDeviceType):
             nodeId="ns=tmc;i=7356",
             browseName="ns=tmc;MES_ID",
             description="Unique identifier for the material point in an external system, e.g. MES.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -1851,6 +1929,7 @@ class MaterialRejectionPointType(TMCDeviceType):
             nodeId="ns=tmc;i=6673",
             browseName="ns=tmc;MaterialDefinition",
             description="The material definition for the material to be rejected at the rejection trap",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialDefinitionType,
         )
     )
@@ -1859,8 +1938,10 @@ class MaterialRejectionPointType(TMCDeviceType):
             nodeId="ns=tmc;i=7698",
             browseName="ns=tmc;MaterialPointDefinition",
             description="The Property MaterialPointDefinition contains the identification of the material point and the material that is processed.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialPointType,
             value=tmc_datypes.MaterialPointType(iD="", description=o6.LocalizedText(), materialCapability=[], propagatesProductionOrder=False),
+            accessLevel=1,
             historizing=True,
         )
     )
@@ -1870,6 +1951,7 @@ class MaterialRejectionPointType(TMCDeviceType):
             nodeId="ns=tmc;i=6282",
             browseName="ns=tmc;RejectedMaterialRatio",
             description="The Variable MaterialRejectedRatio is the ratio of the total material rejected \n(MaterialRejectedTotal) over the total good product and is computed by the underlying \nsystem.",
+            modellingRule="Mandatory",
             dataType=o6.Double,
             value=0.0,
         )
@@ -1880,6 +1962,7 @@ class MaterialRejectionPointType(TMCDeviceType):
             nodeId="ns=tmc;i=6271",
             browseName="ns=tmc;RejectionCountMasterTotal",
             description="The total number of times the rejection trap was triggered. The total is never reset to zero.",
+            modellingRule="Mandatory",
             dataType=o6.UInt64,
             value=0,
         )
@@ -1889,6 +1972,7 @@ class MaterialRejectionPointType(TMCDeviceType):
             nodeId="ns=tmc;i=6264",
             browseName="ns=tmc;RejectionCountTotal",
             description="The total number of times the rejection trap was triggered. The total is reset to zero only\nwhen the ResetRejectionTotals is invoked.",
+            modellingRule="Mandatory",
             dataType=o6.UInt64,
             value=0,
             accessLevel=5,
@@ -1901,6 +1985,7 @@ class MaterialRejectionPointType(TMCDeviceType):
             nodeId="ns=tmc;i=6281",
             browseName="ns=tmc;RejectionsRatio",
             description="The Variable RejectionsRatio is the ratio between the good product output total and the \nrejected quantity total.",
+            modellingRule="Mandatory",
             dataType=o6.Double,
             value=0.0,
             accessLevel=5,
@@ -1923,12 +2008,17 @@ class SubCarrierUnloadedLogType(LogbookEventType):
             nodeId="ns=tmc;i=6088",
             browseName="ns=tmc;CarrierID",
             description="The unique identifier for the carrier that has been unloaded with the subcarrier.",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
     subCarrierID: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=8871", browseName="ns=tmc;SubCarrierID", description="The unique identifier for the subcarrier that has been unloaded.", dataType=o6.String
+            nodeId="ns=tmc;i=8871",
+            browseName="ns=tmc;SubCarrierID",
+            description="The unique identifier for the subcarrier that has been unloaded.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
         )
     )
 
@@ -1942,7 +2032,11 @@ class SubCarrierUnloadedLogType(LogbookEventType):
 class CarrierSublotsChangeLogType(LogbookEventType):
     carrierID: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=8873", browseName="ns=tmc;CarrierID", description="The unique identifier for the carrier whose payload is modified", dataType=o6.String
+            nodeId="ns=tmc;i=8873",
+            browseName="ns=tmc;CarrierID",
+            description="The unique identifier for the carrier whose payload is modified",
+            modellingRule="Mandatory",
+            dataType=o6.String,
         )
     )
     sublots: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -1950,6 +2044,7 @@ class CarrierSublotsChangeLogType(LogbookEventType):
             nodeId="ns=tmc;i=8874",
             browseName="ns=tmc;Sublots",
             description="The sublots after the modification.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialSublotType,
             valueRank=1,
             arrayDimensions=[0],
@@ -1966,12 +2061,20 @@ class CarrierSublotsChangeLogType(LogbookEventType):
 class SubCarrierLoadedLogType(LogbookEventType):
     carrierID: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=6087", browseName="ns=tmc;CarrierID", description="The unique identifier of the carrier where the subcarrier is loaded.", dataType=o6.String
+            nodeId="ns=tmc;i=6087",
+            browseName="ns=tmc;CarrierID",
+            description="The unique identifier of the carrier where the subcarrier is loaded.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
         )
     )
     subCarrierID: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=8875", browseName="ns=tmc;SubCarrierID", description="The unique identifier for the subcarrier that is loaded on the carrier.", dataType=o6.String
+            nodeId="ns=tmc;i=8875",
+            browseName="ns=tmc;SubCarrierID",
+            description="The unique identifier for the subcarrier that is loaded on the carrier.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
         )
     )
 
@@ -1985,7 +2088,11 @@ class SubCarrierLoadedLogType(LogbookEventType):
 class SubCarrierLoadingEndedLogType(LogbookEventType):
     carrierID: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=8876", browseName="ns=tmc;CarrierID", description="The unique identifier for the carrier that ended loading.", dataType=o6.String
+            nodeId="ns=tmc;i=8876",
+            browseName="ns=tmc;CarrierID",
+            description="The unique identifier for the carrier that ended loading.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
         )
     )
 
@@ -1999,7 +2106,11 @@ class SubCarrierLoadingEndedLogType(LogbookEventType):
 class SubCarrierLoadingStartedLogType(LogbookEventType):
     carrierID: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=8877", browseName="ns=tmc;CarrierID", description="The unique identifier for the carrier that staretd loading.", dataType=o6.String
+            nodeId="ns=tmc;i=8877",
+            browseName="ns=tmc;CarrierID",
+            description="The unique identifier for the carrier that staretd loading.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
         )
     )
 
@@ -2013,7 +2124,11 @@ class SubCarrierLoadingStartedLogType(LogbookEventType):
 class SubCarrierUnloadingEndedLogType(LogbookEventType):
     carrierID: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=8878", browseName="ns=tmc;CarrierID", description="The unique identifier for the carrier that ended unloading.", dataType=o6.String
+            nodeId="ns=tmc;i=8878",
+            browseName="ns=tmc;CarrierID",
+            description="The unique identifier for the carrier that ended unloading.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
         )
     )
 
@@ -2027,7 +2142,11 @@ class SubCarrierUnloadingEndedLogType(LogbookEventType):
 class SubCarrierUnloadingStartedLogType(LogbookEventType):
     carrierID: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=8879", browseName="ns=tmc;CarrierID", description="The unique identifier for the carrier that started unloading.", dataType=o6.String
+            nodeId="ns=tmc;i=8879",
+            browseName="ns=tmc;CarrierID",
+            description="The unique identifier for the carrier that started unloading.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
         )
     )
 
@@ -2075,6 +2194,7 @@ o6.call(
     nodeId="ns=tmc;i=9030",
     browseName="ns=tmc;SetDataSetListMESID",
     description="The SetDataSetListMESID Method sets the MES_ID of one or more items of the array Definitions contained in the DataSetList.\nEach item of Definitions is identified by its ID.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=9125"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=19982"]),
 )
@@ -2092,6 +2212,7 @@ class MachineModuleConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6175",
             browseName="ns=tmc;DataSetList",
             description="The Property DataSetList of type DataSetDefinition contains the descriptors for all the \nparameters used to set up the machine.",
+            modellingRule="Optional",
             dataType=tmc_datypes.DataSetDefinitionType,
             value=tmc_datypes.DataSetDefinitionType(iD="", description=o6.LocalizedText(), definitions=[]),
         )
@@ -2105,6 +2226,7 @@ class MachineModuleConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6215",
             browseName="ns=tmc;LastChangeDate",
             description="The Property LastChangeDate is the date and time of the last change applied to the machine \nmodule configuration and the effective date of the modification.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.UtcTime,
             value=o6.DateTime("2000-01-01T00:00:00Z"),
         )
@@ -2114,6 +2236,7 @@ class MachineModuleConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6167",
             browseName="ns=tmc;LongestMicroStopDuration",
             description="The Property LongestMicroStopDuration is the maximum duration of a micro-stop in seconds, \nlonger stops are not micro-stops. Operators are not required to enter a root cause for micro-stops.",
+            modellingRule="Mandatory",
             dataType=o6.Double,
             value=0.0,
             accessLevel=3,
@@ -2125,6 +2248,7 @@ class MachineModuleConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=7269",
             browseName="ns=tmc;RootCauseGroupList",
             description="The Property RootCauseGroupList is the list of groups that root causes can be grouped in. \nThey are defined by the end user.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.RootCauseGroupType,
             valueRank=1,
             arrayDimensions=[0],
@@ -2137,6 +2261,7 @@ class MachineModuleConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6156",
             browseName="ns=tmc;RootCauseList",
             description="The Property RootCauseList is the complete list of the root causes that the end user has defined \nto classify and organize the downtime due to the machine module stops. The RootCauseList is \nuser defined.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.RootCauseMessageType,
             valueRank=1,
             arrayDimensions=[0],
@@ -2149,6 +2274,7 @@ class MachineModuleConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6165",
             browseName="ns=tmc;RootCauseListInputIsMandatory",
             description="The Property RootCauseListInputIsMandatory is true when the operator is mandatorily required \nto select the root cause that best describes the current stop situation. For micro- stops such \nrequirement does not apply.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             value=False,
             accessLevel=3,
@@ -2162,6 +2288,7 @@ class MachineModuleConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6158",
             browseName="ns=tmc;StopReasonList",
             description="The Property StopReasonList is a list containing the descriptors for all the possible machine \nmodule messages, including alarms and warnings. Messages include their localization. The list is \ndefined, created and maintained by the OEM.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MessageType,
             valueRank=1,
             arrayDimensions=[0],
@@ -2207,6 +2334,7 @@ o6.call(
     nodeId="ns=tmc;i=9178",
     browseName="ns=tmc;LoadSublots",
     description="The LoadSublot Method requests the underlying system to load one or more material sublots into the \ncarrier that is currently being loaded.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=6401"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=9213"]),
 )
@@ -2260,6 +2388,7 @@ o6.call(
     nodeId="ns=tmc;i=9267",
     browseName="ns=tmc;LoadMachineModuleDocumentation",
     description="The LoadMachineModuleDocumentation Method allows to securely load any machine module \ndocumentation to the documentation repository DocumentationRep folder where it can be reached by \napplications.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=9268"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=9269"]),
 )
@@ -2306,6 +2435,7 @@ o6.call(
     nodeId="ns=tmc;i=9270",
     browseName="ns=tmc;RemoveMachineModuleDocumentation",
     description="The RemoveMachineModuleDocumentation Method allows to securely remove, i.e. permanently delete,\nany machine module documentation from the documentation repository Documentation.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=9271"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=9272"]),
 )
@@ -2334,6 +2464,7 @@ class MachineModuleType(TMCDeviceType):
             nodeId="ns=tmc;i=9311",
             browseName="ns=tmc;Remote",
             description="When Remote is True, all methods exposed by the machine module and contained objects are \nexecuted and all variables marked as RW can be written to.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -2390,7 +2521,11 @@ ns0.vartypes.PropertyType(
     ],
 )
 o6.call(
-    nodeId="ns=tmc;i=9653", browseName="ns=tmc;StartAssignedProductionOrder", inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=9654"]), outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=9655"])
+    nodeId="ns=tmc;i=9653",
+    browseName="ns=tmc;StartAssignedProductionOrder",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=9654"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=9655"]),
 )
 
 
@@ -2430,6 +2565,7 @@ class EquipmentModuleType(TMCDeviceType):
             nodeId="ns=tmc;i=5303",
             browseName="ns=tmc;Setup",
             description="The Setup Object contains the value of all the settings (including mechanical adjustments) required to run \nproduction as well as affordances to validate and load settings for the equipment module.",
+            modellingRule="Mandatory",
         )
     )
 
@@ -2472,6 +2608,7 @@ o6.call(
     nodeId="ns=tmc;i=10315",
     browseName="ns=tmc;SetMessage",
     description="The Method SetMessage sets the Message that the underlying system will display for the alarm.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10316"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10317"]),
 )
@@ -2489,6 +2626,7 @@ class ExternalAlarmType(ns0.objtypes.DiscreteAlarmType):
             nodeId="ns=tmc;i=6692",
             browseName="ns=tmc;ExternalAlarmCondition",
             description="The condition that causes the alarm.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -2513,6 +2651,7 @@ class ProcessControlLoopType(TMCDeviceType):
             nodeId="ns=tmc;i=10483",
             browseName="ns=tmc;WatchdogEnabled",
             description="When WatchdogEnable is True, if a ProcessControlLoop component’s RemoteControl is True and the time \nbetween two consecutive writes of the RemoteAnalogMeasurement is longer than WatchdogTimeout, \nthen the underlying system will generate an alarm, set RemoteControl to False and take control of the \nloop. When WatchdogEnable is False, no watchdog alarm is generated.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -2523,6 +2662,7 @@ class ProcessControlLoopType(TMCDeviceType):
             nodeId="ns=tmc;i=10490",
             browseName="ns=tmc;WatchdogTimeout",
             description="The longest time between two write actions before a watchdog alarm is generated by the underlying \nsystem. The value is expressed in milliseconds.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
             userAccessLevel=1,
@@ -2575,6 +2715,7 @@ o6.call(
     nodeId="ns=tmc;i=10820",
     browseName="ns=tmc;UnloadSublots",
     description="The UnloadSublots Method requests the underlying system to unload one or more sublots from the \ncarrier that is currently being unloaded.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10821"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=10822"]),
 )
@@ -2600,6 +2741,7 @@ class EquipmentModuleConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=11661",
             browseName="ns=tmc;LastChangeDate",
             description="The UTC date and time when the configuration was last changed.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.UtcTime,
         )
     )
@@ -2628,6 +2770,7 @@ o6.call(
     nodeId="ns=tmc;i=11662",
     browseName="ns=tmc;AcknowledgeAlarms",
     description="The AcknowledgeAlarms method acknowledges the alarms of the equipment module and control \nmodules belonging to it.",
+    modellingRule="Optional",
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11663"]),
 )
 
@@ -2669,6 +2812,7 @@ o6.call(
     nodeId="ns=tmc;i=11701",
     browseName="ns=tmc;SendCommand",
     description="The Method SendCommand sends a command to change the state of the equipment module \nstate machine remotely.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11702"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11703"]),
 )
@@ -2715,6 +2859,7 @@ o6.call(
     nodeId="ns=tmc;i=11704",
     browseName="ns=tmc;SetControlMode",
     description="The SetControlMode Method sets the control mode of the equipment module.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11705"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11706"]),
 )
@@ -2734,6 +2879,7 @@ class EquipmentModuleLiveStatusType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=11699",
             browseName="ns=tmc;ControlMode",
             description="The ControlMode describes the current control mode of the equipment module.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.ControlModeEnumeration,
             accessLevel=3,
             userAccessLevel=1,
@@ -2747,6 +2893,7 @@ class EquipmentModuleLiveStatusType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=11707",
             browseName="ns=tmc;State",
             description="The State Property describes the status of the state machine controlling the equipment module. State \nprovides a subset of the information of the state machine, when the latter is implemented.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.StateEnumeration,
         )
     )
@@ -2795,6 +2942,7 @@ class ProductionOrderExecutionStateMachineType(ns0.objtypes.FiniteStateMachineTy
             nodeId="ns=tmc;i=11933",
             browseName="ns=tmc;ProductionOrderHeader",
             description="The ProductionOrderHeader of the production order in execution. When no production order is in execution, the ProductionOrderNumber in the ProductionOrderHeader is an empty string.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.ProductionOrderHeaderType,
             value=tmc_datypes.ProductionOrderHeaderType(
                 number="",
@@ -2880,6 +3028,7 @@ o6.call(
     nodeId="ns=tmc;i=11949",
     browseName="ns=tmc;AbortProductionOrder",
     description="The AbortProductionOrder Method is used to abort a production order that is in execution or starting or \ncompleting in the production line.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11950"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11951"]),
 )
@@ -2929,6 +3078,7 @@ o6.call(
     nodeId="ns=tmc;i=11952",
     browseName="ns=tmc;AssignProductionOrder",
     description="The AssignProductionOrder Method is used to assign a production order to one infeed machine module \nwhere it shall be executed.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11953"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11954"]),
 )
@@ -2978,6 +3128,7 @@ o6.call(
     nodeId="ns=tmc;i=11955",
     browseName="ns=tmc;CompleteProductionOrder",
     description="The CompleteProductionOrder Method is used to complete a production order in execution.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11956"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11957"]),
 )
@@ -3038,6 +3189,7 @@ o6.call(
     nodeId="ns=tmc;i=11958",
     browseName="ns=tmc;GetDataSet",
     description="The GetDataset Method is used to retrieve the data set from a production order header.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11959"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11960"]),
 )
@@ -3098,6 +3250,7 @@ o6.call(
     nodeId="ns=tmc;i=11961",
     browseName="ns=tmc;GetMaterialList",
     description="The GetMaterialList Method is used to retrieve the material list information from a production order \nheader.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11962"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11963"]),
 )
@@ -3158,6 +3311,7 @@ o6.call(
     nodeId="ns=tmc;i=11964",
     browseName="ns=tmc;GetProductionOrder",
     description="The GetProductionOrder Method is used to retrieve the complete production order information starting \nwith a production order header as an input argument.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11965"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=11966"]),
 )
@@ -3211,6 +3365,7 @@ o6.call(
     nodeId="ns=tmc;i=12007",
     browseName="ns=tmc;ReleaseProductionOrder",
     description="The ReleaseProductionOrder Method is used to make a production order available to a machine module \nfor orchestrated execution in a production line (Process Cell according to ANSI/ISA-88.00.01-2010 \nPhysical Model).",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=12008"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=12009"]),
 )
@@ -3278,6 +3433,7 @@ o6.call(
     nodeId="ns=tmc;i=12010",
     browseName="ns=tmc;StartProductionOrder",
     description="The StartProductionOrder Method is used to start the execution of a production order at a machine \nmodule specifying the loading points that input materials will be fed to and the output points where output \nwill be directed.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=12011"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=12012"]),
 )
@@ -3324,6 +3480,7 @@ o6.call(
     nodeId="ns=tmc;i=12013",
     browseName="ns=tmc;UnassignProductionOrder",
     description="The UnAssignProductionOrder Method is used to unassign a production order previously assigned to \nan infeed machine module.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=12014"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=12015"]),
 )
@@ -3370,6 +3527,7 @@ o6.call(
     nodeId="ns=tmc;i=12016",
     browseName="ns=tmc;UnreleaseProductionOrder",
     description="The UnreleaseProductionOrder Method is used to reverse the effect of the ReleaseProductionOrder\nmethod and make a previously released production order unavailable for assignment and production.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=12017"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=12018"]),
 )
@@ -3394,6 +3552,7 @@ class ProductionOrderOrchestrationLayerType(TMCDeviceType):
             nodeId="ns=tmc;i=12006",
             browseName="ns=tmc;ProductionOrdersRetentionTime",
             description="The time in hours a ProductionOrderStateMachine is retained in memory after the production \norder is complete.",
+            modellingRule="Mandatory",
             dataType=o6.UInt32,
             accessLevel=3,
             userAccessLevel=1,
@@ -3418,6 +3577,7 @@ class MachineContextLogType(LogbookEventType):
             nodeId="ns=tmc;i=12092",
             browseName="ns=tmc;ExecuteStateMachineStateNumber",
             description="The value of the state number attribute for the ExecuteStateMachine of the object containing the \nevent notifier.",
+            modellingRule="Mandatory",
             dataType=o6.UInt32,
         )
     )
@@ -3426,11 +3586,14 @@ class MachineContextLogType(LogbookEventType):
             nodeId="ns=tmc;i=12091",
             browseName="ns=tmc;StateMachineStateNumber",
             description="The value of the state number attribute for the TMCStateMachine of the object containing the \nevent notifier.",
+            modellingRule="Mandatory",
             dataType=o6.UInt32,
         )
     )
     userMachineName: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=tmc;i=12094", browseName="ns=tmc;UserMachineName", description="The name of the machine for the user.", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=tmc;i=12094", browseName="ns=tmc;UserMachineName", description="The name of the machine for the user.", modellingRule="Mandatory", dataType=o6.String
+        )
     )
 
 
@@ -3443,12 +3606,20 @@ class MachineContextLogType(LogbookEventType):
 class ControlModeChangeLogType(MachineContextLogType):
     newControlMode: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=6104", browseName="ns=tmc;NewControlMode", description="The control mode after the change.", dataType=tmc_datypes.ControlModeEnumeration
+            nodeId="ns=tmc;i=6104",
+            browseName="ns=tmc;NewControlMode",
+            description="The control mode after the change.",
+            modellingRule="Mandatory",
+            dataType=tmc_datypes.ControlModeEnumeration,
         )
     )
     oldControlMode: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=6103", browseName="ns=tmc;OldControlMode", description="The control mode prior to the change.", dataType=tmc_datypes.ControlModeEnumeration
+            nodeId="ns=tmc;i=6103",
+            browseName="ns=tmc;OldControlMode",
+            description="The control mode prior to the change.",
+            modellingRule="Mandatory",
+            dataType=tmc_datypes.ControlModeEnumeration,
         )
     )
 
@@ -3470,6 +3641,7 @@ class ProductionContextLogType(MachineContextLogType):
             nodeId="ns=tmc;i=6140",
             browseName="ns=tmc;PONumber",
             description="The PO number for the production order running in the machine module containing the node \nthat generates the event.",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -3478,6 +3650,7 @@ class ProductionContextLogType(MachineContextLogType):
             nodeId="ns=tmc;i=12093",
             browseName="ns=tmc;ProductionStateMachineStateNumber",
             description="The value of the state number attribute for the ProductionStateMachine of the machine \nmodule containing the event notifier.",
+            modellingRule="Mandatory",
             dataType=o6.UInt32,
         )
     )
@@ -3495,6 +3668,7 @@ class RootCauseListChangeLogType(MachineContextLogType):
             nodeId="ns=tmc;i=6170",
             browseName="ns=tmc;NewRootCauseMessages",
             description="The list of modified root cause messages.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.RootCauseMessageType,
             valueRank=1,
             arrayDimensions=[0],
@@ -3505,6 +3679,7 @@ class RootCauseListChangeLogType(MachineContextLogType):
             nodeId="ns=tmc;i=6169",
             browseName="ns=tmc;OldRootCauseMessages",
             description="The list of root cause messages prior to the change.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.RootCauseMessageType,
             valueRank=1,
             arrayDimensions=[0],
@@ -3527,6 +3702,7 @@ class StopReasonListChangeLogType(MachineContextLogType):
             nodeId="ns=tmc;i=6172",
             browseName="ns=tmc;NewStopReasonMessages",
             description="The list of modified stop reasons.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MessageType,
             valueRank=1,
             arrayDimensions=[0],
@@ -3537,6 +3713,7 @@ class StopReasonListChangeLogType(MachineContextLogType):
             nodeId="ns=tmc;i=6171",
             browseName="ns=tmc;OldStopReasonMessages",
             description="The list of stop reasons prior to the change.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MessageType,
             valueRank=1,
             arrayDimensions=[0],
@@ -3559,6 +3736,7 @@ class DataSetChangeLogType(ProductionContextLogType):
             nodeId="ns=tmc;i=6179",
             browseName="ns=tmc;NewDataSetEntries",
             description="The list of modified dataset entries.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.DataSetEntryType,
             valueRank=1,
             arrayDimensions=[0],
@@ -3566,7 +3744,11 @@ class DataSetChangeLogType(ProductionContextLogType):
     )
     newDataSetID: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=6286", browseName="ns=tmc;NewDataSetID", description="The unique identifier for the dataset after the modification.", dataType=o6.String
+            nodeId="ns=tmc;i=6286",
+            browseName="ns=tmc;NewDataSetID",
+            description="The unique identifier for the dataset after the modification.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
         )
     )
     oldDataSetEntries: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -3574,6 +3756,7 @@ class DataSetChangeLogType(ProductionContextLogType):
             nodeId="ns=tmc;i=6178",
             browseName="ns=tmc;OldDataSetEntries",
             description="The list of dataset entries prior to the change.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.DataSetEntryType,
             valueRank=1,
             arrayDimensions=[0],
@@ -3581,7 +3764,11 @@ class DataSetChangeLogType(ProductionContextLogType):
     )
     oldDataSetID: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=6287", browseName="ns=tmc;OldDataSetID", description="The unique identifier for the dataset after the modification.", dataType=o6.String
+            nodeId="ns=tmc;i=6287",
+            browseName="ns=tmc;OldDataSetID",
+            description="The unique identifier for the dataset after the modification.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
         )
     )
 
@@ -3597,10 +3784,14 @@ o6.reference(MachineModuleSetupType, "i=41", DataSetChangeLogType)
 )
 class StateChangeLogType(ProductionContextLogType):
     newState: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6221", browseName="ns=tmc;NewState", description="The state after the change.", dataType=tmc_datypes.StateEnumeration)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=tmc;i=6221", browseName="ns=tmc;NewState", description="The state after the change.", modellingRule="Mandatory", dataType=tmc_datypes.StateEnumeration
+        )
     )
     oldState: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6220", browseName="ns=tmc;OldState", description="The state prior to the change.", dataType=tmc_datypes.StateEnumeration)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=tmc;i=6220", browseName="ns=tmc;OldState", description="The state prior to the change.", modellingRule="Mandatory", dataType=tmc_datypes.StateEnumeration
+        )
     )
 
 
@@ -3620,6 +3811,7 @@ class DowntimeLogType(ProductionContextLogType):
             nodeId="ns=tmc;i=6252",
             browseName="ns=tmc;Duration",
             description="The duration of the downtime in seconds until the machine restarts.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.Duration,
             value=0.0,
         )
@@ -3629,6 +3821,7 @@ class DowntimeLogType(ProductionContextLogType):
             nodeId="ns=tmc;i=6251",
             browseName="ns=tmc;RootCauses",
             description="The root causes reported by the machine during the downtime.",
+            modellingRule="Optional",
             dataType=tmc_datypes.RootCauseMessageType,
             valueRank=1,
             arrayDimensions=[0],
@@ -3639,6 +3832,7 @@ class DowntimeLogType(ProductionContextLogType):
             nodeId="ns=tmc;i=6250",
             browseName="ns=tmc;StopReasons",
             description="The stop reasons reported by the machine during the downtime.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MessageType,
             valueRank=1,
             arrayDimensions=[0],
@@ -3658,6 +3852,7 @@ class DefectDetectedLogType(ProductionContextLogType):
             nodeId="ns=tmc;i=6277",
             browseName="ns=tmc;DefectEU",
             description="The engineering units of the measurement of the defect.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.EUInformation,
             valueRank=1,
             arrayDimensions=[0],
@@ -3665,12 +3860,22 @@ class DefectDetectedLogType(ProductionContextLogType):
     )
     defectPicture: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=6278", browseName="ns=tmc;DefectPicture", description="The picture relevant to the defect detected.", dataType=ns0.datatypes.Image
+            nodeId="ns=tmc;i=6278",
+            browseName="ns=tmc;DefectPicture",
+            description="The picture relevant to the defect detected.",
+            modellingRule="Optional",
+            dataType=ns0.datatypes.Image,
         )
     )
     defectValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=6276", browseName="ns=tmc;DefectValue", description="The measurement of the defects.", dataType=o6.Double, valueRank=1, arrayDimensions=[0]
+            nodeId="ns=tmc;i=6276",
+            browseName="ns=tmc;DefectValue",
+            description="The measurement of the defects.",
+            modellingRule="Optional",
+            dataType=o6.Double,
+            valueRank=1,
+            arrayDimensions=[0],
         )
     )
 
@@ -3686,7 +3891,9 @@ o6.reference(DefectReasonType, "i=41", DefectDetectedLogType)
 )
 class RejectionModeChangeLogType(ProductionContextLogType):
     rejectionMode: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=tmc;i=7695", browseName="ns=tmc;RejectionMode", description="The rejection mode after the change.", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=tmc;i=7695", browseName="ns=tmc;RejectionMode", description="The rejection mode after the change.", modellingRule="Mandatory", dataType=o6.Boolean
+        )
     )
 
 
@@ -3703,7 +3910,11 @@ o6.reference(o6.ns["ns=tmc;i=6275"], "i=41", RejectionModeChangeLogType)
 class ProcessItemResetLogType(ProductionContextLogType):
     aggregationWindow: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=6288", browseName="ns=tmc;AggregationWindow", description="Tthe number of samples over which the aggregates are computed.", dataType=o6.UInt32
+            nodeId="ns=tmc;i=6288",
+            browseName="ns=tmc;AggregationWindow",
+            description="Tthe number of samples over which the aggregates are computed.",
+            modellingRule="Mandatory",
+            dataType=o6.UInt32,
         )
     )
     avg: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
@@ -3711,6 +3922,7 @@ class ProcessItemResetLogType(ProductionContextLogType):
             nodeId="ns=tmc;i=6370",
             browseName="ns=tmc;Avg",
             description="The average of valid values over the last AggregationWindow samples and after the last reset.",
+            modellingRule="Mandatory",
             dataType=o6.Double,
         )
     )
@@ -3719,6 +3931,7 @@ class ProcessItemResetLogType(ProductionContextLogType):
             nodeId="ns=tmc;i=7066",
             browseName="ns=tmc;LastResetTime",
             description="The time (in UTC) when ResetAggregates was last successfully executed.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.UtcTime,
         )
     )
@@ -3727,6 +3940,7 @@ class ProcessItemResetLogType(ProductionContextLogType):
             nodeId="ns=tmc;i=8986",
             browseName="ns=tmc;Max",
             description="The maximum valid value for the last AggregationWindow samples and after the last reset.",
+            modellingRule="Mandatory",
             dataType=o6.Double,
         )
     )
@@ -3735,6 +3949,7 @@ class ProcessItemResetLogType(ProductionContextLogType):
             nodeId="ns=tmc;i=8988",
             browseName="ns=tmc;Min",
             description="The minimum valid value for the last AggregationWindow samples and after the last reset.",
+            modellingRule="Mandatory",
             dataType=o6.Double,
         )
     )
@@ -3744,6 +3959,7 @@ class ProcessItemResetLogType(ProductionContextLogType):
             nodeId="ns=tmc;i=8992",
             browseName="ns=tmc;Std",
             description="The standard deviation of the valid value for the last AggregationWindow samples and after the last reset.",
+            modellingRule="Mandatory",
             dataType=o6.Double,
         )
     )
@@ -3752,6 +3968,7 @@ class ProcessItemResetLogType(ProductionContextLogType):
             nodeId="ns=tmc;i=8993",
             browseName="ns=tmc;Total",
             description="The accumulated total of the valid value for the last AggregationWindow samples and after the last reset.",
+            modellingRule="Mandatory",
             dataType=o6.Double,
         )
     )
@@ -3769,6 +3986,7 @@ class RootCauseGroupListChangeLogType(MachineContextLogType):
             nodeId="ns=tmc;i=7355",
             browseName="ns=tmc;NewRootCauseGroups",
             description="The root cause groups after the change.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.RootCauseGroupType,
             valueRank=1,
             arrayDimensions=[0],
@@ -3779,6 +3997,7 @@ class RootCauseGroupListChangeLogType(MachineContextLogType):
             nodeId="ns=tmc;i=7354",
             browseName="ns=tmc;OldRootCauseGroups",
             description="The root cause groups prior to the change.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.RootCauseGroupType,
             valueRank=1,
             arrayDimensions=[0],
@@ -3797,7 +4016,9 @@ o6.reference(MachineModuleConfigurationType, "i=41", RootCauseGroupListChangeLog
 )
 class DetectionModeChangeLogType(ProductionContextLogType):
     detectionMode: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6243", browseName="ns=tmc;DetectionMode", description="The detection mode after the change.", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=tmc;i=6243", browseName="ns=tmc;DetectionMode", description="The detection mode after the change.", modellingRule="Mandatory", dataType=o6.Boolean
+        )
     )
 
 
@@ -3819,6 +4040,7 @@ class MaterialContextLogType(ProductionContextLogType):
             nodeId="ns=tmc;i=9265",
             browseName="ns=tmc;MaterialPointID",
             description="The unique identifier of the material point (loading point, rejection point or output point).",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -3827,6 +4049,7 @@ class MaterialContextLogType(ProductionContextLogType):
             nodeId="ns=tmc;i=9266",
             browseName="ns=tmc;MaterialPointMES_ID",
             description="The higher-level system unique identifier of the material point (loading point, rejection point or output point).",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -3869,6 +4092,7 @@ class LoadingPointUnloadedLogType(MaterialContextLogType):
             nodeId="ns=tmc;i=6130",
             browseName="ns=tmc;MaterialSublot",
             description="The material sublot unloaded from the loading point.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialSublotType,
             value=tmc_datypes.MaterialSublotType(
                 iD="",
@@ -3917,6 +4141,7 @@ class MaterialUnloadingRequiredLogType(MaterialContextLogType):
             nodeId="ns=tmc;i=6356",
             browseName="ns=tmc;MaterialSublot",
             description="The material sublot that is requested to be unloaded.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialSublotType,
             value=tmc_datypes.MaterialSublotType(
                 iD="",
@@ -3954,6 +4179,7 @@ class NewPresentedMaterialLogType(MaterialContextLogType):
             nodeId="ns=tmc;i=6357",
             browseName="ns=tmc;MaterialSublot",
             description="The material sublot that is presented.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialSublotType,
             value=tmc_datypes.MaterialSublotType(
                 iD="",
@@ -3991,6 +4217,7 @@ class IntegrityRejectedMaterialLogType(MaterialContextLogType):
             nodeId="ns=tmc;i=7479",
             browseName="ns=tmc;RejectedSublot",
             description="The sublot of the rejected material.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialSublotType,
             value=tmc_datypes.MaterialSublotType(
                 iD="",
@@ -4067,6 +4294,7 @@ o6.call(
     nodeId="ns=tmc;i=12165",
     browseName="ns=tmc;AcknowledgeAlarms",
     description="The AcknowledgeAlarms Method acknowledges all alarms of the machine module.",
+    modellingRule="Mandatory",
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=12166"]),
 )
 
@@ -4112,6 +4340,7 @@ o6.call(
     nodeId="ns=tmc;i=12168",
     browseName="ns=tmc;DeleteSpecificationRecord",
     description="The DeleteSpecificationRecord Method deletes a specification record.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=12169"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=12170"]),
 )
@@ -4139,6 +4368,7 @@ o6.call(
     nodeId="ns=tmc;i=13435",
     browseName="ns=tmc;EndSubCarrierUnloading",
     description="The EndSubCarrierUnloading Method informs the underlying system that the unloading of (sub) carriers \ninto the carrier is complete.",
+    modellingRule="Mandatory",
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=13436"]),
 )
 
@@ -4197,6 +4427,7 @@ o6.call(
     nodeId="ns=tmc;i=13438",
     browseName="ns=tmc;LoadSubCarrier",
     description="The LoadSubCarrier Method requests the underlying system to load a subcarrier into the carrier that is \ncurrently being loaded.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=13439"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=13440"]),
 )
@@ -4224,6 +4455,7 @@ o6.call(
     nodeId="ns=tmc;i=13442",
     browseName="ns=tmc;StartSubCarrierLoading",
     description="The StartSubCarrierLoading Method informs the underlying system that the loading of (sub) carriers into \nthe carrier has started.",
+    modellingRule="Mandatory",
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=13443"]),
 )
 
@@ -4250,6 +4482,7 @@ o6.call(
     nodeId="ns=tmc;i=13444",
     browseName="ns=tmc;StartSubCarrierUnloading",
     description="The StartSubCarrierUnLoading Method informs the underlying system that the unloading of (sub) \ncarriers from the carrier has started.",
+    modellingRule="Mandatory",
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=13445"]),
 )
 
@@ -4291,6 +4524,7 @@ o6.call(
     nodeId="ns=tmc;i=13447",
     browseName="ns=tmc;UnloadSubCarrier",
     description="The UnloadSubCarrier Method requests the underlying system to unload a subcarrier from the carrier \nthat is currently being unloaded.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=13448"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=13449"]),
 )
@@ -4308,11 +4542,17 @@ class CarrierType(ns0.objtypes.BaseObjectType):
     endSubCarrierUnloading: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=tmc;i=13435"])
     formFactor: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=6056", browseName="ns=tmc;FormFactor", description="The form factor of the carrier e.g., trolley, AGV, core, IBC, etc.", dataType=o6.String
+            nodeId="ns=tmc;i=6056",
+            browseName="ns=tmc;FormFactor",
+            description="The form factor of the carrier e.g., trolley, AGV, core, IBC, etc.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
         )
     )
     iD: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=tmc;i=13437", browseName="ns=tmc;ID", description="The underlying system identification of the carrier.", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=tmc;i=13437", browseName="ns=tmc;ID", description="The underlying system identification of the carrier.", modellingRule="Mandatory", dataType=o6.String
+        )
     )
     loadSubCarrier: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=tmc;i=13438"])
     loadSublots: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=tmc;i=9178"])
@@ -4321,6 +4561,7 @@ class CarrierType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=13441",
             browseName="ns=tmc;MES_ID",
             description="A higher-level system e.g., MES, identification of the carrier.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -4331,6 +4572,7 @@ class CarrierType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6063",
             browseName="ns=tmc;ParentCarrierID",
             description="The unique identifier of the carrier that contains the carrier in question.",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -4342,6 +4584,7 @@ class CarrierType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=13446",
             browseName="ns=tmc;Sublots",
             description="The subLots contained in the carrier.",
+            modellingRule="Optional",
             dataType=tmc_datypes.MaterialSublotType,
             valueRank=1,
             arrayDimensions=[0],
@@ -4372,6 +4615,7 @@ class MaterialLocationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=13468",
             browseName="ns=tmc;CanReceive",
             description="When True, material sublots or carriers can be stored in the material location. It is set by the underlying \nsystem to make the material location available for receiving.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -4380,29 +4624,41 @@ class MaterialLocationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=13469",
             browseName="ns=tmc;CanSend",
             description="When True, material sublots or carriers can be removed in the material location. It is set by the underlying \nsystem to make the material location available for sending.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
     carriers: ns0.objtypes.FolderType
     iD: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=tmc;i=13508", browseName="ns=tmc;ID", description="The unique identifier for the material location.", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=tmc;i=13508", browseName="ns=tmc;ID", description="The unique identifier for the material location.", modellingRule="Mandatory", dataType=o6.String
+        )
     )
     mES_ID: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=tmc;i=13509",
             browseName="ns=tmc;MES_ID",
             description="The unique identifier of the material location according to a higher-level system, e.g. MES or ERP.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
         )
     )
     state: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=tmc;i=13510", browseName="ns=tmc;State", description="The state the material location is in.", dataType=tmc_datypes.StateEnumeration)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=tmc;i=13510",
+            browseName="ns=tmc;State",
+            description="The state the material location is in.",
+            modellingRule="Optional",
+            dataType=tmc_datypes.StateEnumeration,
+        )
     )
     stateMachine: TMCStateMachineType | None
     sublots: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=tmc;i=11638", browseName="ns=tmc;Sublots", dataType=tmc_datypes.MaterialSublotType, valueRank=1, arrayDimensions=[0])
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=tmc;i=11638", browseName="ns=tmc;Sublots", modellingRule="Mandatory", dataType=tmc_datypes.MaterialSublotType, valueRank=1, arrayDimensions=[0]
+        )
     )
     uIInfo: UIInformationType | None
 
@@ -4452,6 +4708,7 @@ o6.call(
     nodeId="ns=tmc;i=13569",
     browseName="ns=tmc;SetPresentedMaterialValidationStatus",
     description="The SetPresentedMaterialValidationStatus Method provides a client with an affordance to perform the \nvalidation of the PresentedMaterial against the ExpectedMaterials and set the result of the validation in \nthe PresentedMaterialValidationStatus variable.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=13570"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=13571"]),
 )
@@ -4466,7 +4723,11 @@ o6.call(
 class CarrierEnteredLogType(LogbookEventType):
     carrierID: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=13587", browseName="ns=tmc;CarrierID", description="The unique identifier for the carrier that has just entered.", dataType=o6.String
+            nodeId="ns=tmc;i=13587",
+            browseName="ns=tmc;CarrierID",
+            description="The unique identifier for the carrier that has just entered.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
         )
     )
 
@@ -4482,7 +4743,13 @@ o6.reference(MaterialLocationType, "i=41", CarrierEnteredLogType)
 )
 class CarrierReleasedLogType(LogbookEventType):
     carrierID: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=tmc;i=13588", browseName="ns=tmc;CarrierID", description="The unique identifier for the carrier that is released.", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=tmc;i=13588",
+            browseName="ns=tmc;CarrierID",
+            description="The unique identifier for the carrier that is released.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+        )
     )
 
 
@@ -4501,13 +4768,18 @@ class ProductionOrderTransitionLogType(ns0.objtypes.TransitionEventType):
             nodeId="ns=tmc;i=13589",
             browseName="ns=tmc;PONumber",
             description="The PO active when the production order state machine performed a transition.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
         )
     )
     userMachineName: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=12095", browseName="ns=tmc;UserMachineName", description="The user name for the machine producing the production order.", dataType=o6.String
+            nodeId="ns=tmc;i=12095",
+            browseName="ns=tmc;UserMachineName",
+            description="The user name for the machine producing the production order.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
         )
     )
 
@@ -4565,6 +4837,7 @@ o6.call(
     nodeId="ns=tmc;i=16538",
     browseName="ns=tmc;LoadUIResource",
     description="The Method LoadUIResource loads a UI resource in the underlying system for visualization. It will \noverride the existing UI resource by the same name.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=16539"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=16540"]),
 )
@@ -4611,6 +4884,7 @@ o6.call(
     nodeId="ns=tmc;i=16541",
     browseName="ns=tmc;DeleteUIResource",
     description="The Method DeleteUIResource permanently removes a UI resource from the underlying system \nmemory.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=16748"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=16749"]),
 )
@@ -4638,6 +4912,7 @@ o6.call(
     nodeId="ns=tmc;i=19798",
     browseName="ns=tmc;ResetAggregates",
     description="The method resets all aggregated values calculated by each ProcessItem",
+    modellingRule="Mandatory",
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=19799"]),
 )
 
@@ -4656,6 +4931,7 @@ class MachineModuleLiveStatusType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6108",
             browseName="ns=tmc;ControlMode",
             description="The ControlMode property describes the current control mode of the machine.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.ControlModeEnumeration,
             accessLevel=3,
             userAccessLevel=1,
@@ -4667,6 +4943,7 @@ class MachineModuleLiveStatusType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6349",
             browseName="ns=tmc;IdleEnergySavingMode",
             description="The IdleEnergySavingMode Property is set to True when the energy saving mode during the idle phase is \nset.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             value=False,
             accessLevel=3,
@@ -4682,6 +4959,7 @@ class MachineModuleLiveStatusType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6109",
             browseName="ns=tmc;State",
             description="The Property State describes the status of the state machine controlling the machine module. State \nprovides a subset of the information of the state machine, when the latter is implemented.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.StateEnumeration,
         )
     )
@@ -4710,6 +4988,7 @@ class MaterialStorageBufferType(TMCDeviceType):
             nodeId="ns=tmc;i=6947",
             browseName="ns=tmc;MES_ID",
             description="Unique identifier for the material point in an external system, e.g. MES.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4721,6 +5000,7 @@ class MaterialStorageBufferType(TMCDeviceType):
             nodeId="ns=tmc;i=19992",
             browseName="ns=tmc;MaterialPointDefinition",
             description="The Property MaterialPointDefinition contains the identification of the material point and the material that is processed or stored in the buffer.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialStorageBufferDataType,
             value=tmc_datypes.MaterialStorageBufferDataType(
                 iD="",
@@ -4743,6 +5023,7 @@ class MaterialStorageBufferType(TMCDeviceType):
             nodeId="ns=tmc;i=9312",
             browseName="ns=tmc;MixingLogic",
             description="MixingLogic identifies if and how materials can be mixed in the MaterialStorageBuffer.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.StorageMixingLogicEnumeration,
             accessLevel=3,
             userAccessLevel=1,
@@ -4755,6 +5036,7 @@ class MaterialStorageBufferType(TMCDeviceType):
             nodeId="ns=tmc;i=6951",
             browseName="ns=tmc;StorageLogic",
             description="The logic used at the buffer storage to store and retrieve material.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.StorageLogicEnumeration,
         )
     )
@@ -4764,6 +5046,7 @@ class MaterialStorageBufferType(TMCDeviceType):
             nodeId="ns=tmc;i=6950",
             browseName="ns=tmc;TotalStorageCapacity",
             description="The total capacity of the material storage buffer.",
+            modellingRule="Mandatory",
             dataType=o6.Double,
             value=0.0,
             accessLevel=3,
@@ -4786,6 +5069,7 @@ class MaterialOutputPointType(TMCDeviceType):
             nodeId="ns=tmc;i=6001",
             browseName="ns=tmc;DownstreamHeld",
             description="When the downstream machine module cannot receive the product flow, the upstream \nmachine is required to hold the transfer of product to the downstream machine module.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             value=False,
         )
@@ -4795,6 +5079,7 @@ class MaterialOutputPointType(TMCDeviceType):
             nodeId="ns=tmc;i=19995",
             browseName="ns=tmc;MES_ID",
             description="Unique identifier for the material point in an external system, e.g. MES.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -4805,6 +5090,7 @@ class MaterialOutputPointType(TMCDeviceType):
             nodeId="ns=tmc;i=6667",
             browseName="ns=tmc;MaterialDefinition",
             description="The Property MaterialPointDefinition contains the identification of the material point and the material that is processed.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialDefinitionType,
         )
     )
@@ -4813,6 +5099,7 @@ class MaterialOutputPointType(TMCDeviceType):
             nodeId="ns=tmc;i=7530",
             browseName="ns=tmc;MaterialPointDefinition",
             description="The identification of the material output physical location and the material capabilities.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialPointType,
             value=tmc_datypes.MaterialPointType(iD="", description=o6.LocalizedText(), materialCapability=[], propagatesProductionOrder=False),
         )
@@ -4823,6 +5110,7 @@ class MaterialOutputPointType(TMCDeviceType):
             nodeId="ns=tmc;i=6123",
             browseName="ns=tmc;ProducedMaterial",
             description="The sublot currently being produced by the material output. The sublot quantity is updated by \nthe underlying system as output is generated.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialSublotType,
             value=tmc_datypes.MaterialSublotType(
                 iD="",
@@ -4867,6 +5155,7 @@ class MaterialLoadingPointType(TMCDeviceType):
             nodeId="ns=tmc;i=7699",
             browseName="ns=tmc;AllowMixedLots",
             description="When AllowMixedLots is False and BatchManaged in the material definition of the \nExpectedMaterials is True, then one material lot will be processed i.e. the first material lot \nreceived.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -4882,6 +5171,7 @@ class MaterialLoadingPointType(TMCDeviceType):
             nodeId="ns=tmc;i=7362",
             browseName="ns=tmc;ExpectedMaterials",
             description="The array of sublots of the material that are expected at the machine loading point for the \ncurrent production.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialSublotType,
             valueRank=1,
             arrayDimensions=[0],
@@ -4892,6 +5182,7 @@ class MaterialLoadingPointType(TMCDeviceType):
             nodeId="ns=tmc;i=6097",
             browseName="ns=tmc;LoadedMaterial",
             description="An array of the sublots that entered the machine loading point. When a sublot is unloaded, it is \nalso removed from the array.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialSublotType,
             valueRank=1,
             arrayDimensions=[0],
@@ -4902,6 +5193,7 @@ class MaterialLoadingPointType(TMCDeviceType):
             nodeId="ns=tmc;i=20257",
             browseName="ns=tmc;MES_ID",
             description="Unique identifier for the material point in an external system, e.g. MES.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -4912,6 +5204,7 @@ class MaterialLoadingPointType(TMCDeviceType):
             nodeId="ns=tmc;i=6141",
             browseName="ns=tmc;MaterialIntegrityAgent",
             description="MaterialIntegrityAgent defines how material validation is performed.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialIntegrityAgentEnumeration,
             accessLevel=3,
             userAccessLevel=1,
@@ -4922,6 +5215,7 @@ class MaterialLoadingPointType(TMCDeviceType):
             nodeId="ns=tmc;i=6066",
             browseName="ns=tmc;MaterialPointDefinition",
             description="The Property MaterialPointDefinition contains the identification of the material point and the material that is processed.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialPointType,
             value=tmc_datypes.MaterialPointType(iD="", description=o6.LocalizedText(), materialCapability=[], propagatesProductionOrder=False),
         )
@@ -4932,6 +5226,7 @@ class MaterialLoadingPointType(TMCDeviceType):
             nodeId="ns=tmc;i=6061",
             browseName="ns=tmc;PresentedMaterial",
             description="The material presented to the material loading point, but not yet loaded.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialSublotType,
             value=tmc_datypes.MaterialSublotType(
                 iD="",
@@ -4962,6 +5257,7 @@ class MaterialLoadingPointType(TMCDeviceType):
             nodeId="ns=tmc;i=6065",
             browseName="ns=tmc;PresentedMaterialValidationStatus",
             description="The status of the validation of the presented material.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialValidationStatusEnumeration,
         )
     )
@@ -4971,6 +5267,7 @@ class MaterialLoadingPointType(TMCDeviceType):
             nodeId="ns=tmc;i=6002",
             browseName="ns=tmc;UpstreamHold",
             description="UpstreamHold is true when the loading point cannot receive more product and the upstream \nmachine is required to stop loading, False when the loading point can receive product.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -4999,6 +5296,7 @@ class MachineModuleSpecificationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=7284",
             browseName="ns=tmc;LocationName",
             description="The Property LocationName of type String contains the location of the machine module within \nthe user production site.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -5010,6 +5308,7 @@ class MachineModuleSpecificationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6080",
             browseName="ns=tmc;MaterialLoadingPoints",
             description="The Property MaterialLoadingPoints identifies the loading points of the machine module and their capability in terms of what materials can be loaded at a loading point. The Property MaterialLoadingPoints is defined as a list of objects of type MaterialPointType.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialPointType,
             valueRank=1,
             arrayDimensions=[0],
@@ -5020,6 +5319,7 @@ class MachineModuleSpecificationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=12098",
             browseName="ns=tmc;MaterialOutputPoints",
             description="The Property MaterialOutputPoints identifies the output points of the machine module and their capability in terms of what materials can be output The Property MaterialOutputPoints is defined as a list of objects of type MaterialPointType.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialPointType,
             valueRank=1,
             arrayDimensions=[0],
@@ -5030,6 +5330,7 @@ class MachineModuleSpecificationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=20259",
             browseName="ns=tmc;MaterialRejectionPoints",
             description="The Property MaterialRejectionPoints identifies the rejection points of the machine module and their capability in terms of what materials are rejected The Property MaterialRejectionPoints is defined as a list of objects of type MaterialPointType.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialPointType,
             valueRank=1,
             arrayDimensions=[0],
@@ -5040,6 +5341,7 @@ class MachineModuleSpecificationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6084",
             browseName="ns=tmc;MaterialStorageBuffers",
             description="The Property MaterialStorageBuffers describes the buffers inside the machine module and their current status. The Property MaterialStorageBuffers is a list of objects of type MaterialStorageBufferDataType.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialStorageBufferDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -5052,6 +5354,7 @@ class MachineModuleSpecificationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=7300",
             browseName="ns=tmc;TimeZone",
             description="The local time zone where the machine operates. It is required to convert UTC times into local \ntime.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.TimeZoneDataType,
             accessLevel=3,
             userAccessLevel=1,
@@ -5062,6 +5365,7 @@ class MachineModuleSpecificationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6198",
             browseName="ns=tmc;TotalRunningHours",
             description="The Property TotalRunningHours counts the number of hours the machine module has been in operation \nsince the last time its configuration was changed.",
+            modellingRule="Mandatory",
             dataType=o6.UInt64,
             value=0,
         )
@@ -5071,6 +5375,7 @@ class MachineModuleSpecificationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=7285",
             browseName="ns=tmc;UserMachineName",
             description="The Property UserMachineName of type String contains the name used by the user to identify \nthe machine module. LocationName and UserMachineName uniquely identify the machine \nmodule in the user organization.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -5082,6 +5387,7 @@ class MachineModuleSpecificationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6145",
             browseName="ns=tmc;ValidSince",
             description="The Property ValidSince is the date since the configuration was last modified.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.UtcTime,
             value=o6.DateTime("2000-01-01T00:00:00Z"),
         )
@@ -5100,6 +5406,7 @@ class MachineModuleSpecificationChangeLogType(MachineContextLogType):
             nodeId="ns=tmc;i=8880",
             browseName="ns=tmc;NewMaterialLoadingPoints",
             description="The specification of the material loading points after the change.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialPointType,
             valueRank=1,
             arrayDimensions=[0],
@@ -5110,6 +5417,7 @@ class MachineModuleSpecificationChangeLogType(MachineContextLogType):
             nodeId="ns=tmc;i=8881",
             browseName="ns=tmc;NewMaterialOutputPoints",
             description="The specification of the material output points after the change.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialPointType,
             valueRank=1,
             arrayDimensions=[0],
@@ -5120,6 +5428,7 @@ class MachineModuleSpecificationChangeLogType(MachineContextLogType):
             nodeId="ns=tmc;i=20263",
             browseName="ns=tmc;NewMaterialRejectionPoints",
             description="The specification of the material rejection points after the change.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialPointType,
             valueRank=1,
             arrayDimensions=[0],
@@ -5130,6 +5439,7 @@ class MachineModuleSpecificationChangeLogType(MachineContextLogType):
             nodeId="ns=tmc;i=8882",
             browseName="ns=tmc;NewMaterialStorageBuffers",
             description="The specification of the material storage buffers after the change.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialStorageBufferDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -5137,7 +5447,11 @@ class MachineModuleSpecificationChangeLogType(MachineContextLogType):
     )
     newValidSince: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=8883", browseName="ns=tmc;NewValidSince", description="When the change to the specifications occurred.", dataType=ns0.datatypes.UtcTime
+            nodeId="ns=tmc;i=8883",
+            browseName="ns=tmc;NewValidSince",
+            description="When the change to the specifications occurred.",
+            modellingRule="Mandatory",
+            dataType=ns0.datatypes.UtcTime,
         )
     )
     oldMaterialLoadingPoints: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -5145,6 +5459,7 @@ class MachineModuleSpecificationChangeLogType(MachineContextLogType):
             nodeId="ns=tmc;i=6190",
             browseName="ns=tmc;OldMaterialLoadingPoints",
             description="The specification of the material loading points prior to the change.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialPointType,
             valueRank=1,
             arrayDimensions=[0],
@@ -5155,6 +5470,7 @@ class MachineModuleSpecificationChangeLogType(MachineContextLogType):
             nodeId="ns=tmc;i=6223",
             browseName="ns=tmc;OldMaterialOutputPoints",
             description="The specification of the material output points prior to the change.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialPointType,
             valueRank=1,
             arrayDimensions=[0],
@@ -5165,6 +5481,7 @@ class MachineModuleSpecificationChangeLogType(MachineContextLogType):
             nodeId="ns=tmc;i=20264",
             browseName="ns=tmc;OldMaterialRejectionPoints",
             description="The specification of the material rejection points prior to the change.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialPointType,
             valueRank=1,
             arrayDimensions=[0],
@@ -5175,6 +5492,7 @@ class MachineModuleSpecificationChangeLogType(MachineContextLogType):
             nodeId="ns=tmc;i=6285",
             browseName="ns=tmc;OldMaterialStorageBuffers",
             description="The specification of the material storage buffers prior to the change.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialStorageBufferDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -5200,6 +5518,7 @@ o6.call(
     nodeId="ns=tmc;i=22388",
     browseName="ns=tmc;ResetAggregates",
     description="The Method ResetAggregates restarts from new the computation of aggregates performed by the \nunderlying system.",
+    modellingRule="Mandatory",
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=22389"]),
 )
 
@@ -5216,6 +5535,7 @@ class ProcessItemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6230",
             browseName="ns=tmc;AggregationWindow",
             description="Tthe number of samples over which the aggregates are computed. When the number of aggregated \nsamples since the last reset exceeds the AggregationWindow, the aggregates are rolled over, i.e. computed \nover the last AggregationWindow number of samples.",
+            modellingRule="Mandatory",
             dataType=o6.UInt32,
             accessLevel=3,
             userAccessLevel=1,
@@ -5226,6 +5546,7 @@ class ProcessItemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6231",
             browseName="ns=tmc;Avg",
             description="The average of valid values over the last AggregationWindow samples and after the last reset. \nIt is only reset by the successful execution of the ResetAggregates method.",
+            modellingRule="Mandatory",
             dataType=o6.Double,
             accessLevel=5,
             userAccessLevel=1,
@@ -5236,6 +5557,7 @@ class ProcessItemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6234",
             browseName="ns=tmc;LastResetTime",
             description="The time (in UTC) when ResetAggregates was last successfully executed.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.UtcTime,
         )
     )
@@ -5245,6 +5567,7 @@ class ProcessItemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6235",
             browseName="ns=tmc;Max",
             description="The maximum valid value for the last AggregationWindow samples and after the last reset.\nIt is only reset by the successful execution of the ResetAggregates method.",
+            modellingRule="Mandatory",
             dataType=o6.Double,
         )
     )
@@ -5253,6 +5576,7 @@ class ProcessItemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6236",
             browseName="ns=tmc;Min",
             description="The minimum valid value for the last AggregationWindow samples and after the last reset.\nIt is only reset by the successful execution of the ResetAggregates method.",
+            modellingRule="Mandatory",
             dataType=o6.Double,
         )
     )
@@ -5263,6 +5587,7 @@ class ProcessItemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=7290",
             browseName="ns=tmc;Std",
             description="The standard deviation of the valid value for the last AggregationWindow samples and after the last reset.",
+            modellingRule="Mandatory",
             dataType=o6.Double,
             accessLevel=5,
             userAccessLevel=1,
@@ -5273,6 +5598,7 @@ class ProcessItemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=7292",
             browseName="ns=tmc;Total",
             description="The accumulated total of the valid value for the last AggregationWindow samples and after the last reset.\nIt is only reset by the successful execution of the ResetAggregates method.",
+            modellingRule="Mandatory",
             dataType=o6.Double,
         )
     )
@@ -5296,6 +5622,7 @@ class ProcessControlItemType(ProcessItemType):
             nodeId="ns=tmc;i=20298",
             browseName="ns=tmc;OperatorControl",
             description="The OperatorControl variable qualifies the source of the ProcessControlItem Value when RemoteControl is False, otherwise OperatorControl is undefined. When OperatorControl is True, the underlying system exposes the information that the ProcessControlItem Value is modified by the operator with respect to the nominal value, e.g. NominalRate, a.k.a. design speed for a speed control loop. When OperatorControl is False, the underlying system exposes the information that the ProcessControlItem Value is not modified by the operator.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             accessLevel=5,
             userAccessLevel=1,
@@ -5306,6 +5633,7 @@ class ProcessControlItemType(ProcessItemType):
             nodeId="ns=tmc;i=6040",
             browseName="ns=tmc;RemoteControl",
             description="The RemoteControl variable lets the underlying system expose which system is currently in control of the ProcessControlItem. More specifically, if RemoteControl is True, the underlying system copies the RemoteValue to the ProcesControlItem Value to drive it, i.e. the ProcessControlItem is remotely controlled. If RemoteControl is False, the underlying system is not using RemoteValue to drive the ProcessControlItem, but another value that is exposed as the ProcessControlItem Value, i.e. the ProcessControlItem is locally controlled.\nA client requests (resp. releases) control of the ProcessControlItem by setting RemoteControl to True (resp. False) preferably by invoking the SetRemoteControl Method. If the client does not support methods, then the client sets RemoteControl to True. The underlying system will reset RemoteControl to False if remote control is not activated.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             accessLevel=7,
             userAccessLevel=1,
@@ -5316,6 +5644,7 @@ class ProcessControlItemType(ProcessItemType):
             nodeId="ns=tmc;i=20265",
             browseName="ns=tmc;RemoteControlEnable",
             description="The RemoteControlEnable variable exposes when the underlying system is ready to activate the RemoteControl upon a request by a client. When RemoteControlEnable is False, the underlying system is not ready and will not activate a request to remotely control the ProcessControlItem.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             accessLevel=5,
             userAccessLevel=1,
@@ -5326,6 +5655,7 @@ class ProcessControlItemType(ProcessItemType):
             nodeId="ns=tmc;i=6039",
             browseName="ns=tmc;RemoteValue",
             description="The value set by the client to override the object value.",
+            modellingRule="Mandatory",
             dataType=o6.Double,
             accessLevel=7,
             userAccessLevel=1,
@@ -5372,6 +5702,7 @@ o6.call(
     nodeId="ns=tmc;i=22398",
     browseName="ns=tmc;AbortProductionOrder",
     description="The AbortProductionOrder method is used to abnormally terminate, or abort, a production order \nthat is in execution or starting or completing. Aborting cannot be reversed or undone.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=22399"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=22400"]),
 )
@@ -5399,6 +5730,7 @@ o6.call(
     nodeId="ns=tmc;i=22402",
     browseName="ns=tmc;ClearProductionOrder",
     description="The ClearProductionOrder method is used to positively confirm that the machine module where \na production order is aborted has been cleared of the product or parts left by the aborted \nproduction order.",
+    modellingRule="Optional",
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=22403"]),
 )
 
@@ -5425,6 +5757,7 @@ o6.call(
     nodeId="ns=tmc;i=22404",
     browseName="ns=tmc;CompleteProductionOrder",
     description="The CompleteProductionOrder method is used to complete a production order in execution.",
+    modellingRule="Mandatory",
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=22405"]),
 )
 
@@ -5480,6 +5813,7 @@ o6.call(
     nodeId="ns=tmc;i=22408",
     browseName="ns=tmc;StartProductionOrder",
     description="The StartProductionOrder Method starts a production order at the machine module.",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=22409"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=22410"]),
 )
@@ -5526,6 +5860,7 @@ o6.call(
     nodeId="ns=tmc;i=22411",
     browseName="ns=tmc;UnassignProductionOrder",
     description="The UnAssignProductionOrder method is used to remove the specified production order from \nAssignedProductionOrders[] of an infeed machine module.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=22412"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=22413"]),
 )
@@ -5572,6 +5907,7 @@ o6.call(
     nodeId="ns=tmc;i=22537",
     browseName="ns=tmc;AssignProductionOrder",
     description="The AssignProductionOrder Method is used to transfer the information of an upcoming \nproduction order to the machine module.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=tmc;i=22538"]),
     outputArgs=o6.hasProperty(o6.ns["ns=tmc;i=22539"]),
 )
@@ -5591,6 +5927,7 @@ class MachineModuleProductionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=22401",
             browseName="ns=tmc;AssignedProductionOrders",
             description="The AssignedProductionOrders array contains the production orders that have been assigned to the \nmachine module and have not yet been started or unassigned.",
+            modellingRule="Optional",
             dataType=tmc_datypes.ProductionOrderType,
             valueRank=1,
             arrayDimensions=[0],
@@ -5601,6 +5938,7 @@ class MachineModuleProductionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6124",
             browseName="ns=tmc;AutoComplete",
             description="The AutoComplete boolean defines how to trigger the machine module to complete the execution of a \nproduction order.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             value=False,
             accessLevel=3,
@@ -5612,6 +5950,7 @@ class MachineModuleProductionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6129",
             browseName="ns=tmc;AutoStart",
             description="The Autostart Boolean defines how to trigger the machine module to start a production order.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             value=False,
             accessLevel=3,
@@ -5626,6 +5965,7 @@ class MachineModuleProductionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6091",
             browseName="ns=tmc;ProductionOrder",
             description="The production order header in execution at the machine module.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.ProductionOrderHeaderType,
             value=tmc_datypes.ProductionOrderHeaderType(
                 number="",
@@ -5652,6 +5992,7 @@ class MachineModuleProductionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6093",
             browseName="ns=tmc;ProductionStatus",
             description="The execution status of the production order.",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.ProductionStatusEnumeration,
         )
     )
@@ -5680,6 +6021,7 @@ class UIInformationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6183",
             browseName="ns=tmc;PositionX",
             description="PositionX is the relative horizontal position of the top-left corner of the object rendering in the target \nvisualization scope.",
+            modellingRule="Mandatory",
             dataType=o6.Double,
             value=0.0,
             accessLevel=3,
@@ -5691,6 +6033,7 @@ class UIInformationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6217",
             browseName="ns=tmc;PositionY",
             description="PositionX is the relative vertical position of the top-left corner of the object rendering in the target \nvisualization scope.",
+            modellingRule="Mandatory",
             dataType=o6.Double,
             value=0.0,
             accessLevel=3,
@@ -5702,6 +6045,7 @@ class UIInformationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=22540",
             browseName="ns=tmc;PositionZ",
             description="PositionZ is the depth of the object rendering in the target visualization scope.",
+            modellingRule="Mandatory",
             dataType=o6.Double,
             accessLevel=3,
             userAccessLevel=1,
@@ -5712,6 +6056,7 @@ class UIInformationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=7346",
             browseName="ns=tmc;Resizable",
             description="When Resizable is True, the UI resource Width is rescaled based on the actual display size.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -5723,6 +6068,7 @@ class UIInformationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=tmc;i=6218",
             browseName="ns=tmc;Width",
             description="Width is the width of the object visualization in the target visualization scope.",
+            modellingRule="Mandatory",
             dataType=o6.Double,
             value=0.0,
             accessLevel=3,

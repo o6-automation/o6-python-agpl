@@ -296,6 +296,7 @@ pySubscription_createCallback(UA_Client *cClient, void *userdata,
 
 PyObject *
 pyClient_subscriptions_create(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     PyObject *request_obj;
     PyObject *created_cb = Py_None;
     PyObject *status_change_cb = Py_None;
@@ -378,6 +379,7 @@ pyClient_subscriptions_create(PyObject *self, PyObject *args) {
 // Implementation of UA_Client_Subscriptions_delete functionality
 PyObject *
 pyClient_subscriptions_delete(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     const UA_NamespaceMapping *nsMapping = &((PyClient*)self)->nsMapPy2UA;
     UA_Client *client = ((PyClient*)self)->client;
     UA_ClientConfig *config = UA_Client_getConfig(client);
@@ -410,6 +412,7 @@ pyClient_subscriptions_delete(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_subscriptions_modify(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     const UA_NamespaceMapping *nsMapping = &((PyClient*)self)->nsMapPy2UA;
     UA_Client *client = ((PyClient*)self)->client;
     UA_ClientConfig *config = UA_Client_getConfig(client);
@@ -441,6 +444,7 @@ pyClient_subscriptions_modify(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_subscriptions_setPublishingMode(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_SETPUBLISHINGMODEREQUEST],
                             &UA_TYPES[UA_TYPES_SETPUBLISHINGMODERESPONSE]);
@@ -628,6 +632,7 @@ monitoredItems_createEvents_async_thunk(
 
 PyObject *
 pyClient_monitoredItems_createDataChange(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return pyClient_monitoredItems_createCommon(
         self, args, "OO|OO:monitoredItems_createDataChange",
         (void *)dataChangeNotificationCallback,
@@ -637,6 +642,7 @@ pyClient_monitoredItems_createDataChange(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_monitoredItems_createEvent(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return pyClient_monitoredItems_createCommon(
         self, args, "OO|OO:monitoredItems_createEvent",
         (void *)eventNotificationCallback,
@@ -646,6 +652,7 @@ pyClient_monitoredItems_createEvent(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_monitoredItems_delete(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     const UA_NamespaceMapping *nsMapping = &((PyClient*)self)->nsMapPy2UA;
     UA_Client *client = ((PyClient*)self)->client;
     UA_ClientConfig *config = UA_Client_getConfig(client);
@@ -679,6 +686,7 @@ pyClient_monitoredItems_delete(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_monitoredItems_modify(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     const UA_NamespaceMapping *nsMapping = &((PyClient*)self)->nsMapPy2UA;
     UA_Client *client = ((PyClient*)self)->client;
     UA_ClientConfig *config = UA_Client_getConfig(client);
@@ -712,6 +720,7 @@ pyClient_monitoredItems_modify(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_monitoredItems_setMonitoringMode(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     const UA_NamespaceMapping *nsMapping = &((PyClient*)self)->nsMapPy2UA;
     UA_Client *client = ((PyClient*)self)->client;
     UA_ClientConfig *config = UA_Client_getConfig(client);
@@ -745,6 +754,7 @@ pyClient_monitoredItems_setMonitoringMode(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_monitoredItems_setTriggering(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     const UA_NamespaceMapping *nsMapping = &((PyClient*)self)->nsMapPy2UA;
     UA_Client *client = ((PyClient*)self)->client;
     UA_ClientConfig *config = UA_Client_getConfig(client);

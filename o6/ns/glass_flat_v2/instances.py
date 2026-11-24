@@ -75,11 +75,12 @@ o6.hasEncoding(glass_flat_v2_datypes.UserProfileDataType, o6.ns["ns=glass_flat_v
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=glass_flat_v2;i=6001",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6002", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6002", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
-    nodeId="ns=glass_flat_v2;i=5022", browseName="ns=machinery;MachineryItemState", references=[o6.hasComponent(o6.ns["ns=glass_flat_v2;i=6001"])]
+    nodeId="ns=glass_flat_v2;i=5022", browseName="ns=machinery;MachineryItemState", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=glass_flat_v2;i=6001"])]
 )
 ns0.vartypes.DataTypeDescriptionType(nodeId="ns=glass_flat_v2;i=6004", browseName="ns=glass_flat_v2;ReasonDescriptionType", dataType=o6.String, value="ReasonDescriptionType")
 o6.reference(o6.ns["ns=glass_flat_v2;i=5003"], "i=39", o6.ns["ns=glass_flat_v2;i=6004"])
@@ -90,29 +91,35 @@ o6.reference(o6.ns["ns=glass_flat_v2;i=5008"], "i=39", o6.ns["ns=glass_flat_v2;i
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=glass_flat_v2;i=6003",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6017", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6017", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryOperationModeStateMachineType(
-    nodeId="ns=glass_flat_v2;i=5023", browseName="ns=machinery;MachineryOperationMode", references=[o6.hasComponent(o6.ns["ns=glass_flat_v2;i=6003"])]
+    nodeId="ns=glass_flat_v2;i=5023", browseName="ns=machinery;MachineryOperationMode", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=glass_flat_v2;i=6003"])]
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=glass_flat_v2;i=6018",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6019", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6019", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
     nodeId="ns=glass_flat_v2;i=5024",
     browseName="ns=machinery_jobs;JobOrderControl",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6025", browseName="ns=isa95_jobcontrol_v2;MaxDownloadableJobOrders", dataType=o6.UInt16)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6025", browseName="ns=isa95_jobcontrol_v2;MaxDownloadableJobOrders", modellingRule="Mandatory", dataType=o6.UInt16)
+        ),
         o6.hasComponent(o6.ns["ns=glass_flat_v2;i=6018"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=glass_flat_v2;i=6020",
                 browseName="ns=isa95_jobcontrol_v2;EquipmentID",
                 description="Defines a read-only set of Equipment Class IDs and Equipment IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -123,6 +130,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=glass_flat_v2;i=6021",
                 browseName="ns=isa95_jobcontrol_v2;JobOrderList",
                 description="Defines a read-only list of job order information available from the server.",
+                modellingRule="Mandatory",
                 dataType=isa95_jobcontrol_v2.datatypes.ISA95JobOrderAndStateDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -133,6 +141,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=glass_flat_v2;i=6022",
                 browseName="ns=isa95_jobcontrol_v2;MaterialClassID",
                 description="Defines a read-only set of Material Classes IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -143,6 +152,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=glass_flat_v2;i=6023",
                 browseName="ns=isa95_jobcontrol_v2;MaterialDefinitionID",
                 description="Defines a read-only set of Material Classes IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -153,6 +163,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=glass_flat_v2;i=6026",
                 browseName="ns=isa95_jobcontrol_v2;PersonnelID",
                 description="Defines a read-only set of Personnel IDs and Person IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -163,6 +174,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=glass_flat_v2;i=6027",
                 browseName="ns=isa95_jobcontrol_v2;PhysicalAssetID",
                 description="Defines a read-only set of Physical Asset Class IDs and Physical Asset IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -173,6 +185,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=glass_flat_v2;i=6028",
                 browseName="ns=isa95_jobcontrol_v2;WorkMaster",
                 description="Defines a read-only set of work master IDs that may be specified in a job order, and the read-only set of parameters that may be specified for a specific work master.",
+                modellingRule="Mandatory",
                 dataType=isa95_jobcontrol_v2.datatypes.ISA95WorkMasterDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -269,6 +282,7 @@ glass_flat_v2_objtypes.GlassMachineIdentificationType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=glass_flat_v2;i=6030",
                 browseName="ns=glass_flat_v2;ProcessingCategories",
+                modellingRule="Mandatory",
                 dataType=glass_flat_v2_datypes.ProcessingCategoryDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -280,6 +294,7 @@ glass_flat_v2_objtypes.GlassMachineIdentificationType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=glass_flat_v2;i=6057",
                 browseName="ns=glass_flat_v2;LoggedInProfiles",
+                modellingRule="Optional",
                 dataType=glass_flat_v2_datypes.UserProfileDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -290,6 +305,7 @@ glass_flat_v2_objtypes.GlassMachineIdentificationType(
                 nodeId="ns=glass_flat_v2;i=6058",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -298,6 +314,7 @@ glass_flat_v2_objtypes.GlassMachineIdentificationType(
                 nodeId="ns=glass_flat_v2;i=6061",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -306,6 +323,7 @@ glass_flat_v2_objtypes.GlassMachineIdentificationType(
                 nodeId="ns=glass_flat_v2;i=6062",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -321,6 +339,7 @@ glass_flat_v2_objtypes.ConfigurationRulesType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=glass_flat_v2;i=6067",
                 browseName="ns=glass_flat_v2;MachineProcessingCoordinateSystem",
+                modellingRule="Mandatory",
                 dataType=glass_flat_v2_datypes.CoordinateSystemEnumeration,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -387,7 +406,7 @@ http_opcfoundation_org_UA_Glass_Flat_v2_ = ns0.objtypes.NamespaceMetadataType(
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),
@@ -431,10 +450,10 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=glass_flat_v2;i=7001", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6081"]))
+o6.call(nodeId="ns=glass_flat_v2;i=7001", browseName="Close", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6081"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=glass_flat_v2;i=6082",
@@ -444,7 +463,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
@@ -455,12 +474,13 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=glass_flat_v2;i=7002",
     browseName="GetPosition",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6082"]),
     outputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6083"]),
 )
@@ -511,6 +531,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=glass_flat_v2;i=7003",
     browseName="ns=isa95_jobcontrol_v2;RequestJobResponseByJobOrderID",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6047"]),
     outputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6048"]),
 )
@@ -563,6 +584,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=glass_flat_v2;i=7004",
     browseName="ns=isa95_jobcontrol_v2;RequestJobResponseByJobOrderState",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6049"]),
     outputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6050"]),
 )
@@ -570,11 +592,13 @@ o6.call(
 isa95_jobcontrol_v2.objtypes.ISA95JobResponseProviderObjectType(
     nodeId="ns=glass_flat_v2;i=5025",
     browseName="ns=machinery_jobs;JobOrderResults",
+    modellingRule="Mandatory",
     references=[o6.hasComponent(o6.ns["ns=glass_flat_v2;i=7003"]), o6.hasComponent(o6.ns["ns=glass_flat_v2;i=7004"])],
 )
 machinery_jobs.objtypes.JobManagementType(
     nodeId="ns=glass_flat_v2;i=5015",
     browseName="ns=machinery_jobs;JobManagement",
+    modellingRule="Mandatory",
     references=[o6.hasComponent(o6.ns["ns=glass_flat_v2;i=5024"]), o6.hasComponent(o6.ns["ns=glass_flat_v2;i=5025"])],
 )
 ns0.objtypes.FolderType(
@@ -595,7 +619,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
@@ -606,11 +630,15 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
-    nodeId="ns=glass_flat_v2;i=7005", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6084"]), outputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6085"])
+    nodeId="ns=glass_flat_v2;i=7005",
+    browseName="Open",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6084"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6085"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -621,7 +649,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
         ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
@@ -635,11 +663,15 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
-    nodeId="ns=glass_flat_v2;i=7012", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6124"]), outputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6139"])
+    nodeId="ns=glass_flat_v2;i=7012",
+    browseName="Read",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6124"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6139"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -650,13 +682,13 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
         ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=glass_flat_v2;i=7013", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6140"]))
+o6.call(nodeId="ns=glass_flat_v2;i=7013", browseName="SetPosition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6140"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=glass_flat_v2;i=6175",
@@ -666,23 +698,23 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
         ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=glass_flat_v2;i=7014", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6175"]))
+o6.call(nodeId="ns=glass_flat_v2;i=7014", browseName="Write", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6175"]))
 
 ns0.objtypes.FileType(
     nodeId="ns=glass_flat_v2;i=5017",
     browseName="ns=glass_flat_v2;<LocalManuals>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6086", browseName="OpenCount", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6157", browseName="Size", dataType=o6.UInt64)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6158", browseName="UserWritable", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6172", browseName="Writable", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6086", browseName="OpenCount", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6157", browseName="Size", modellingRule="Mandatory", dataType=o6.UInt64)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6158", browseName="UserWritable", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6172", browseName="Writable", modellingRule="Mandatory", dataType=o6.Boolean)),
         o6.hasComponent(o6.ns["ns=glass_flat_v2;i=7001"]),
         o6.hasComponent(o6.ns["ns=glass_flat_v2;i=7002"]),
         o6.hasComponent(o6.ns["ns=glass_flat_v2;i=7005"]),
@@ -719,6 +751,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=glass_flat_v2;i=7024",
     browseName="CreateDirectory",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6112"]),
     outputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6113"]),
 )
@@ -754,6 +787,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=glass_flat_v2;i=7025",
     browseName="CreateFile",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6153"]),
     outputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6179"]),
 )
@@ -769,7 +803,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ObjectToDelete", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=glass_flat_v2;i=7026", browseName="Delete", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6180"]))
+o6.call(nodeId="ns=glass_flat_v2;i=7026", browseName="Delete", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6180"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=glass_flat_v2;i=6187",
@@ -801,6 +835,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=glass_flat_v2;i=7031",
     browseName="MoveOrCopy",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6187"]),
     outputArgs=o6.hasProperty(o6.ns["ns=glass_flat_v2;i=6190"]),
 )

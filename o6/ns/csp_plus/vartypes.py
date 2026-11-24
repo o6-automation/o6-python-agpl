@@ -36,7 +36,9 @@ else:
     nodeId="ns=csp_plus;i=2001", browseName="ns=csp_plus;CsppAnalogItemType", displayName="CsppAnalogItemType", dataType=ns0.datatypes.Number, valueRank=o6.ValueRank.ANY
 )
 class CsppAnalogItemType(ns0.vartypes.AnalogItemType):
-    duration: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=csp_plus;i=6006", browseName="ns=csp_plus;Duration", dataType=ns0.datatypes.Number))
+    duration: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=csp_plus;i=6006", browseName="ns=csp_plus;Duration", modellingRule="Mandatory", dataType=ns0.datatypes.Number)
+    )
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ns0

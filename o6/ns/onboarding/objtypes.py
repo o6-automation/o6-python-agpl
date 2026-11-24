@@ -57,6 +57,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=onboarding;i=1176",
     browseName="ns=onboarding;RegisterTickets",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=onboarding;i=1177"]),
     outputArgs=o6.hasProperty(o6.ns["ns=onboarding;i=1178"]),
 )
@@ -86,6 +87,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=onboarding;i=1179",
     browseName="ns=onboarding;UnregisterTickets",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=onboarding;i=1180"]),
     outputArgs=o6.hasProperty(o6.ns["ns=onboarding;i=1181"]),
 )
@@ -133,6 +135,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=onboarding;i=1260",
     browseName="ns=onboarding;ProvideIdentities",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=onboarding;i=1261"]),
     outputArgs=o6.hasProperty(o6.ns["ns=onboarding;i=1262"]),
 )
@@ -148,7 +151,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Application", dataType=o6.NodeId("i=308"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=onboarding;i=1263", browseName="ns=onboarding;RegisterDeviceEndpoint", inputArgs=o6.hasProperty(o6.ns["ns=onboarding;i=1264"]))
+o6.call(nodeId="ns=onboarding;i=1263", browseName="ns=onboarding;RegisterDeviceEndpoint", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=onboarding;i=1264"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=onboarding;i=1504",
@@ -165,7 +168,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="SoftwareRevision", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="ns=onboarding;i=1503", browseName="ns=onboarding;UpdateSoftwareStatus", inputArgs=o6.hasProperty(o6.ns["ns=onboarding;i=1504"]))
+o6.call(nodeId="ns=onboarding;i=1503", browseName="ns=onboarding;UpdateSoftwareStatus", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=onboarding;i=1504"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=onboarding;i=1506",
@@ -178,7 +181,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Managers", dataType=o6.NodeId("ns=onboarding;i=1495"), valueRank=1, arrayDimensions=[0])],
 )
-o6.call(nodeId="ns=onboarding;i=1505", browseName="ns=onboarding;GetManagers", outputArgs=o6.hasProperty(o6.ns["ns=onboarding;i=1506"]))
+o6.call(nodeId="ns=onboarding;i=1505", browseName="ns=onboarding;GetManagers", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=onboarding;i=1506"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=onboarding;i=1508",
@@ -208,6 +211,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=onboarding;i=1507",
     browseName="ns=onboarding;RegisterManagedApplication",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=onboarding;i=1508"]),
     outputArgs=o6.hasProperty(o6.ns["ns=onboarding;i=1509"]),
 )
@@ -226,29 +230,31 @@ class DeviceRegistrarType(ns0.objtypes.BaseObjectType):
 @o6.objecttype(nodeId="ns=onboarding;i=1517", browseName="ns=onboarding;DeviceRegistrationAuditEventType", displayName="DeviceRegistrationAuditEventType", isAbstract=True)
 class DeviceRegistrationAuditEventType(ns0.objtypes.AuditEventType):
     productInstanceUri: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=1532", browseName="ns=onboarding;ProductInstanceUri", dataType=ns0.datatypes.UriString)
+        ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=1532", browseName="ns=onboarding;ProductInstanceUri", modellingRule="Mandatory", dataType=ns0.datatypes.UriString)
     )
 
 
 @o6.objecttype(nodeId="ns=onboarding;i=1533", browseName="ns=onboarding;DeviceIdentityAcceptedAuditEventType", displayName="DeviceIdentityAcceptedAuditEventType", isAbstract=True)
 class DeviceIdentityAcceptedAuditEventType(DeviceRegistrationAuditEventType):
     certificate: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=1549", browseName="ns=onboarding;Certificate", dataType=o6.ByteString)
+        ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=1549", browseName="ns=onboarding;Certificate", modellingRule="Mandatory", dataType=o6.ByteString)
     )
     composite: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=1551", browseName="ns=onboarding;Composite", dataType=ns0.datatypes.EncodedTicket)
+        ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=1551", browseName="ns=onboarding;Composite", modellingRule="Mandatory", dataType=ns0.datatypes.EncodedTicket)
     )
     ticket: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=1550", browseName="ns=onboarding;Ticket", dataType=ns0.datatypes.EncodedTicket)
+        ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=1550", browseName="ns=onboarding;Ticket", modellingRule="Mandatory", dataType=ns0.datatypes.EncodedTicket)
     )
 
 
 @o6.objecttype(nodeId="ns=onboarding;i=1552", browseName="ns=onboarding;DeviceSoftwareUpdatedAuditEventType", displayName="DeviceSoftwareUpdatedAuditEventType", isAbstract=True)
 class DeviceSoftwareUpdatedAuditEventType(DeviceRegistrationAuditEventType):
     softwareRevision: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=1568", browseName="ns=onboarding;SoftwareRevision", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=1568", browseName="ns=onboarding;SoftwareRevision", modellingRule="Mandatory", dataType=o6.String)
     )
-    status: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=1563", browseName="ns=onboarding;Status", dataType=o6.Boolean))
+    status: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=onboarding;i=1563", browseName="ns=onboarding;Status", modellingRule="Mandatory", dataType=o6.Boolean)
+    )
 
 
 del Any, TYPE_CHECKING, uuid, o6, gds, ns0, onboarding_datypes

@@ -33,7 +33,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=io_link;i=3000", browseName="EncodingEnum")
+@o6.enumtype(nodeId="ns=io_link;i=3000", browseName="ns=io_link;EncodingEnum")
 class EncodingEnum(ns0.datatypes.Enumeration):
     ASCII_0 = o6.enumfield(0, name="ASCII_0")
     UTF8_1 = o6.enumfield(1, name="UTF8_1")

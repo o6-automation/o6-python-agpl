@@ -35,21 +35,21 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=plastics_dosing;i=3003", browseName="ActivateRemoteControl")
+@o6.enumtype(nodeId="ns=plastics_dosing;i=3003", browseName="ns=plastics_dosing;ActivateRemoteControl")
 class ActivateRemoteControl(ns0.datatypes.Enumeration):
     OFF = o6.enumfield(0, name="OFF")
     SEPARATE_INTERFACE = o6.enumfield(1, name="SEPARATE_INTERFACE")
     OPC_UA = o6.enumfield(2, name="OPC_UA")
 
 
-@o6.enumtype(nodeId="ns=plastics_dosing;i=3006", browseName="RemoteControlActivated")
+@o6.enumtype(nodeId="ns=plastics_dosing;i=3006", browseName="ns=plastics_dosing;RemoteControlActivated")
 class RemoteControlActivated(ns0.datatypes.Enumeration):
     OFF = o6.enumfield(0, name="OFF")
     SEPARATE_INTERFACE = o6.enumfield(1, name="SEPARATE_INTERFACE")
     OPC_UA = o6.enumfield(2, name="OPC_UA")
 
 
-@o6.enumtype(nodeId="ns=plastics_dosing;i=3008", browseName="ComponentStateEnumeration")
+@o6.enumtype(nodeId="ns=plastics_dosing;i=3008", browseName="ns=plastics_dosing;ComponentStateEnumeration")
 class ComponentStateEnumeration(ns0.datatypes.Enumeration):
     OFF = o6.enumfield(0, name="Off")
     READY = o6.enumfield(1, name="Ready")
@@ -61,7 +61,7 @@ class ComponentStateEnumeration(ns0.datatypes.Enumeration):
     PRIMING = o6.enumfield(7, name="Priming")
 
 
-@o6.enumtype(nodeId="ns=plastics_dosing;i=3011", browseName="DosingModeEnumeration")
+@o6.enumtype(nodeId="ns=plastics_dosing;i=3011", browseName="ns=plastics_dosing;DosingModeEnumeration")
 class DosingModeEnumeration(ns0.datatypes.Enumeration):
     ONLY_CONVEYING = o6.enumfield(0, name="ONLY_CONVEYING")
     VOLUMETRIC = o6.enumfield(1, name="VOLUMETRIC")

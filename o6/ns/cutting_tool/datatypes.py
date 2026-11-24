@@ -39,11 +39,11 @@ else:
     _VariableNode = object
 
 
-@o6.datatype(nodeId="ns=cutting_tool;i=3003", browseName="FileFormatDataType", defaultEncodingId="ns=cutting_tool;i=5021")
+@o6.datatype(nodeId="ns=cutting_tool;i=3003", browseName="ns=cutting_tool;FileFormatDataType", defaultEncodingId="ns=cutting_tool;i=5021")
 class FileFormatDataType(ns0.datatypes.Structure):
-    name: o6.String
-    fileExtension: o6.String
-    version: o6.String
+    name: o6.String = o6.field(name="Name")
+    fileExtension: o6.String = o6.field(name="FileExtension")
+    version: o6.String = o6.field(name="Version")
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, gms, ia, isa95_jobcontrol_v2, machine_tool, machinery, machinery_jobs, machinery_result, ns0

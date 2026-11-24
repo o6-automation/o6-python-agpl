@@ -33,6 +33,7 @@ import numpy as np
 import o6
 from o6._browse import _browse_description, _finish_request
 from o6._datatype_registration import _INT_ENUM_FACTORY, add_datatype, add_enum
+from o6._registration_lock import REGISTRATION_LOCK
 from o6._information_model import (
     _BASE_DATA_TYPE,
     _ENUMERATION,
@@ -279,6 +280,10 @@ class _DataTypeLoader:
         Returns:
             The registered Python classes, in registration order.
         """
+        with REGISTRATION_LOCK:
+            return self._load(failed, reported)
+
+    def _load(self, failed: dict[NodeRef, str] | None, reported: set[NodeRef] | None) -> list[type]:
         self.failedTypes.update(failed or {})
         pending = self.pendingTypes
         pending.update(

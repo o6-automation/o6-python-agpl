@@ -83,18 +83,28 @@ class ModellingRuleType(BaseObjectType):
 @o6.objecttype(nodeId="i=2020", browseName="ServerDiagnosticsType", displayName="ServerDiagnosticsType")
 class ServerDiagnosticsType(BaseObjectType):
     enabledFlag: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2025", browseName="EnabledFlag", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0_vartypes.PropertyType(nodeId="i=2025", browseName="EnabledFlag", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1, accessLevel=3, userAccessLevel=1)
     )
     samplingIntervalDiagnosticsArray: ns0_vartypes.SamplingIntervalDiagnosticsArrayType | None = o6.hasComponent(
         ns0_vartypes.SamplingIntervalDiagnosticsArrayType(
-            nodeId="i=2022", browseName="SamplingIntervalDiagnosticsArray", dataType=ns0_datypes.SamplingIntervalDiagnosticsDataType, valueRank=1, arrayDimensions=[0]
+            nodeId="i=2022",
+            browseName="SamplingIntervalDiagnosticsArray",
+            modellingRule="Optional",
+            dataType=ns0_datypes.SamplingIntervalDiagnosticsDataType,
+            valueRank=1,
+            arrayDimensions=[0],
         )
     )
     serverDiagnosticsSummary: ns0_vartypes.ServerDiagnosticsSummaryType
     sessionsDiagnosticsSummary: SessionsDiagnosticsSummaryType
     subscriptionDiagnosticsArray: ns0_vartypes.SubscriptionDiagnosticsArrayType = o6.hasComponent(
         ns0_vartypes.SubscriptionDiagnosticsArrayType(
-            nodeId="i=2023", browseName="SubscriptionDiagnosticsArray", dataType=ns0_datypes.SubscriptionDiagnosticsDataType, valueRank=1, arrayDimensions=[0]
+            nodeId="i=2023",
+            browseName="SubscriptionDiagnosticsArray",
+            modellingRule="Mandatory",
+            dataType=ns0_datypes.SubscriptionDiagnosticsDataType,
+            valueRank=1,
+            arrayDimensions=[0],
         )
     )
 
@@ -104,12 +114,17 @@ class SessionsDiagnosticsSummaryType(BaseObjectType):
     clientName_: SessionDiagnosticsObjectType | None
     sessionDiagnosticsArray: ns0_vartypes.SessionDiagnosticsArrayType = o6.hasComponent(
         ns0_vartypes.SessionDiagnosticsArrayType(
-            nodeId="i=2027", browseName="SessionDiagnosticsArray", dataType=ns0_datypes.SessionDiagnosticsDataType, valueRank=1, arrayDimensions=[0]
+            nodeId="i=2027", browseName="SessionDiagnosticsArray", modellingRule="Mandatory", dataType=ns0_datypes.SessionDiagnosticsDataType, valueRank=1, arrayDimensions=[0]
         )
     )
     sessionSecurityDiagnosticsArray: ns0_vartypes.SessionSecurityDiagnosticsArrayType = o6.hasComponent(
         ns0_vartypes.SessionSecurityDiagnosticsArrayType(
-            nodeId="i=2028", browseName="SessionSecurityDiagnosticsArray", dataType=ns0_datypes.SessionSecurityDiagnosticsDataType, valueRank=1, arrayDimensions=[0]
+            nodeId="i=2028",
+            browseName="SessionSecurityDiagnosticsArray",
+            modellingRule="Mandatory",
+            dataType=ns0_datypes.SessionSecurityDiagnosticsDataType,
+            valueRank=1,
+            arrayDimensions=[0],
         )
     )
 
@@ -127,7 +142,9 @@ class StateMachineType(BaseObjectType):
 
 @o6.objecttype(nodeId="i=2307", browseName="StateType", displayName="StateType")
 class StateType(BaseObjectType):
-    stateNumber: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2308", browseName="StateNumber", dataType=o6.UInt32))
+    stateNumber: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2308", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=2309", browseName="InitialStateType", displayName="InitialStateType")
@@ -137,7 +154,9 @@ class InitialStateType(StateType):
 
 @o6.objecttype(nodeId="i=2310", browseName="TransitionType", displayName="TransitionType")
 class TransitionType(BaseObjectType):
-    transitionNumber: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2312", browseName="TransitionNumber", dataType=o6.UInt32))
+    transitionNumber: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2312", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=2340", browseName="AggregateFunctionType", displayName="AggregateFunctionType")
@@ -155,9 +174,9 @@ o6.call(nodeId="i=2429", browseName="Halt", modellingRule="OptionalPlaceholder")
 
 o6.call(nodeId="i=2430", browseName="Reset", modellingRule="OptionalPlaceholder")
 
-o6.call(nodeId="i=2947", browseName="Unshelve")
+o6.call(nodeId="i=2947", browseName="Unshelve", modellingRule="Mandatory")
 
-o6.call(nodeId="i=2948", browseName="OneShotShelve")
+o6.call(nodeId="i=2948", browseName="OneShotShelve", modellingRule="Mandatory")
 
 ns0_vartypes.PropertyType(
     nodeId="i=2991",
@@ -170,7 +189,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="ShelvingTime", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=2949", browseName="TimedShelve", inputArgs=o6.hasProperty(o6.ns["i=2991"]))
+o6.call(nodeId="i=2949", browseName="TimedShelve", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=2991"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=3876",
@@ -189,9 +208,9 @@ ns0_vartypes.PropertyType(
 )
 o6.call(nodeId="i=3875", browseName="ConditionRefresh", inputArgs=o6.hasProperty(o6.ns["i=3876"]))
 
-o6.call(nodeId="i=9027", browseName="Enable")
+o6.call(nodeId="i=9027", browseName="Enable", modellingRule="Mandatory")
 
-o6.call(nodeId="i=9028", browseName="Disable")
+o6.call(nodeId="i=9028", browseName="Disable", modellingRule="Mandatory")
 
 ns0_vartypes.PropertyType(
     nodeId="i=9030",
@@ -209,7 +228,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
-o6.call(nodeId="i=9029", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["i=9030"]))
+o6.call(nodeId="i=9029", browseName="AddComment", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=9030"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=9070",
@@ -222,7 +241,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="SelectedResponse", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=9069", browseName="Respond", inputArgs=o6.hasProperty(o6.ns["i=9070"]))
+o6.call(nodeId="i=9069", browseName="Respond", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=9070"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=9112",
@@ -240,7 +259,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
-o6.call(nodeId="i=9111", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["i=9112"]))
+o6.call(nodeId="i=9111", browseName="Acknowledge", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=9112"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=9114",
@@ -258,7 +277,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
-o6.call(nodeId="i=9113", browseName="Confirm", inputArgs=o6.hasProperty(o6.ns["i=9114"]))
+o6.call(nodeId="i=9113", browseName="Confirm", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=9114"]))
 
 
 @o6.objecttype(nodeId="i=11163", browseName="BaseConditionClassType", displayName="BaseConditionClassType", isAbstract=True)
@@ -283,10 +302,18 @@ class SystemConditionClassType(BaseConditionClassType):
 
 @o6.objecttype(nodeId="i=11187", browseName="AggregateConfigurationType", displayName="AggregateConfigurationType")
 class AggregateConfigurationType(BaseObjectType):
-    percentDataBad: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11189", browseName="PercentDataBad", dataType=o6.Byte))
-    percentDataGood: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11190", browseName="PercentDataGood", dataType=o6.Byte))
-    treatUncertainAsBad: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11188", browseName="TreatUncertainAsBad", dataType=o6.Boolean))
-    useSlopedExtrapolation: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11191", browseName="UseSlopedExtrapolation", dataType=o6.Boolean))
+    percentDataBad: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11189", browseName="PercentDataBad", modellingRule="Mandatory", dataType=o6.Byte, valueRank=-1)
+    )
+    percentDataGood: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11190", browseName="PercentDataGood", modellingRule="Mandatory", dataType=o6.Byte, valueRank=-1)
+    )
+    treatUncertainAsBad: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11188", browseName="TreatUncertainAsBad", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
+    useSlopedExtrapolation: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11191", browseName="UseSlopedExtrapolation", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
 
 
 ns0_vartypes.PropertyType(
@@ -314,7 +341,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="ClientHandles", dataType=o6.NodeId("i=7"), valueRank=1, arrayDimensions=[0]),
     ],
 )
-o6.call(nodeId="i=11489", browseName="GetMonitoredItems", inputArgs=o6.hasProperty(o6.ns["i=11490"]), outputArgs=o6.hasProperty(o6.ns["i=11491"]))
+o6.call(nodeId="i=11489", browseName="GetMonitoredItems", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=11490"]), outputArgs=o6.hasProperty(o6.ns["i=11491"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=11581",
@@ -338,7 +365,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=11580", browseName="Open", inputArgs=o6.hasProperty(o6.ns["i=11581"]), outputArgs=o6.hasProperty(o6.ns["i=11582"]))
+o6.call(nodeId="i=11580", browseName="Open", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=11581"]), outputArgs=o6.hasProperty(o6.ns["i=11582"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=11584",
@@ -351,7 +378,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=11583", browseName="Close", inputArgs=o6.hasProperty(o6.ns["i=11584"]))
+o6.call(nodeId="i=11583", browseName="Close", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=11584"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=11586",
@@ -378,7 +405,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=11585", browseName="Read", inputArgs=o6.hasProperty(o6.ns["i=11586"]), outputArgs=o6.hasProperty(o6.ns["i=11587"]))
+o6.call(nodeId="i=11585", browseName="Read", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=11586"]), outputArgs=o6.hasProperty(o6.ns["i=11587"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=11589",
@@ -394,7 +421,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=11588", browseName="Write", inputArgs=o6.hasProperty(o6.ns["i=11589"]))
+o6.call(nodeId="i=11588", browseName="Write", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=11589"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=11591",
@@ -418,7 +445,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=11590", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["i=11591"]), outputArgs=o6.hasProperty(o6.ns["i=11592"]))
+o6.call(nodeId="i=11590", browseName="GetPosition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=11591"]), outputArgs=o6.hasProperty(o6.ns["i=11592"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=11594",
@@ -434,7 +461,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=11593", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["i=11594"]))
+o6.call(nodeId="i=11593", browseName="SetPosition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=11594"]))
 
 
 @o6.objecttype(nodeId="i=11645", browseName="NamespacesType", displayName="NamespacesType")
@@ -445,33 +472,41 @@ class NamespacesType(BaseObjectType):
 @o6.objecttype(nodeId="i=11564", browseName="OperationLimitsType", displayName="OperationLimitsType")
 class OperationLimitsType(FolderType):
     maxMonitoredItemsPerCall: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=11574", browseName="MaxMonitoredItemsPerCall", dataType=o6.UInt32)
+        ns0_vartypes.PropertyType(nodeId="i=11574", browseName="MaxMonitoredItemsPerCall", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
-    maxNodesPerBrowse: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11570", browseName="MaxNodesPerBrowse", dataType=o6.UInt32))
+    maxNodesPerBrowse: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11570", browseName="MaxNodesPerBrowse", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
+    )
     maxNodesPerHistoryReadData: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=12161", browseName="MaxNodesPerHistoryReadData", dataType=o6.UInt32)
+        ns0_vartypes.PropertyType(nodeId="i=12161", browseName="MaxNodesPerHistoryReadData", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
     maxNodesPerHistoryReadEvents: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=12162", browseName="MaxNodesPerHistoryReadEvents", dataType=o6.UInt32)
+        ns0_vartypes.PropertyType(nodeId="i=12162", browseName="MaxNodesPerHistoryReadEvents", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
     maxNodesPerHistoryUpdateData: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=12163", browseName="MaxNodesPerHistoryUpdateData", dataType=o6.UInt32)
+        ns0_vartypes.PropertyType(nodeId="i=12163", browseName="MaxNodesPerHistoryUpdateData", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
     maxNodesPerHistoryUpdateEvents: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=12164", browseName="MaxNodesPerHistoryUpdateEvents", dataType=o6.UInt32)
+        ns0_vartypes.PropertyType(nodeId="i=12164", browseName="MaxNodesPerHistoryUpdateEvents", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
-    maxNodesPerMethodCall: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11569", browseName="MaxNodesPerMethodCall", dataType=o6.UInt32))
+    maxNodesPerMethodCall: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11569", browseName="MaxNodesPerMethodCall", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
+    )
     maxNodesPerNodeManagement: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=11573", browseName="MaxNodesPerNodeManagement", dataType=o6.UInt32)
+        ns0_vartypes.PropertyType(nodeId="i=11573", browseName="MaxNodesPerNodeManagement", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
-    maxNodesPerRead: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11565", browseName="MaxNodesPerRead", dataType=o6.UInt32))
+    maxNodesPerRead: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11565", browseName="MaxNodesPerRead", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
+    )
     maxNodesPerRegisterNodes: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=11571", browseName="MaxNodesPerRegisterNodes", dataType=o6.UInt32)
+        ns0_vartypes.PropertyType(nodeId="i=11571", browseName="MaxNodesPerRegisterNodes", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
     maxNodesPerTranslateBrowsePathsToNodeIds: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=11572", browseName="MaxNodesPerTranslateBrowsePathsToNodeIds", dataType=o6.UInt32)
+        ns0_vartypes.PropertyType(nodeId="i=11572", browseName="MaxNodesPerTranslateBrowsePathsToNodeIds", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
-    maxNodesPerWrite: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11567", browseName="MaxNodesPerWrite", dataType=o6.UInt32))
+    maxNodesPerWrite: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11567", browseName="MaxNodesPerWrite", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
+    )
 
 
 ns0_vartypes.PropertyType(
@@ -496,7 +531,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=12543", browseName="OpenWithMasks", inputArgs=o6.hasProperty(o6.ns["i=12544"]), outputArgs=o6.hasProperty(o6.ns["i=12545"]))
+o6.call(nodeId="i=12543", browseName="OpenWithMasks", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=12544"]), outputArgs=o6.hasProperty(o6.ns["i=12545"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=12547",
@@ -520,7 +555,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=12546", browseName="CloseAndUpdate", inputArgs=o6.hasProperty(o6.ns["i=12705"]), outputArgs=o6.hasProperty(o6.ns["i=12547"]))
+o6.call(nodeId="i=12546", browseName="CloseAndUpdate", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=12705"]), outputArgs=o6.hasProperty(o6.ns["i=12547"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=12549",
@@ -536,7 +571,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="IsTrustedCertificate", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=12548", browseName="AddCertificate", inputArgs=o6.hasProperty(o6.ns["i=12549"]))
+o6.call(nodeId="i=12548", browseName="AddCertificate", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=12549"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=12551",
@@ -552,7 +587,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="IsTrustedCertificate", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=12550", browseName="RemoveCertificate", inputArgs=o6.hasProperty(o6.ns["i=12551"]))
+o6.call(nodeId="i=12550", browseName="RemoveCertificate", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=12551"]))
 
 
 @o6.objecttype(nodeId="i=12556", browseName="CertificateType", displayName="CertificateType", isAbstract=True)
@@ -609,7 +644,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="ApplyChangesRequired", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=12616", browseName="UpdateCertificate", inputArgs=o6.hasProperty(o6.ns["i=12617"]), outputArgs=o6.hasProperty(o6.ns["i=12618"]))
+o6.call(nodeId="i=12616", browseName="UpdateCertificate", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=12617"]), outputArgs=o6.hasProperty(o6.ns["i=12618"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=12732",
@@ -639,7 +674,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="CertificateRequest", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=12731", browseName="CreateSigningRequest", inputArgs=o6.hasProperty(o6.ns["i=12732"]), outputArgs=o6.hasProperty(o6.ns["i=12733"]))
+o6.call(nodeId="i=12731", browseName="CreateSigningRequest", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=12732"]), outputArgs=o6.hasProperty(o6.ns["i=12733"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=12747",
@@ -666,7 +701,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="RevisedLifetimeInHours", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=12746", browseName="SetSubscriptionDurable", inputArgs=o6.hasProperty(o6.ns["i=12747"]), outputArgs=o6.hasProperty(o6.ns["i=12748"]))
+o6.call(nodeId="i=12746", browseName="SetSubscriptionDurable", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=12747"]), outputArgs=o6.hasProperty(o6.ns["i=12748"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=12776",
@@ -679,7 +714,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="Certificates", dataType=o6.NodeId("i=15"), valueRank=1, arrayDimensions=[0])],
 )
-o6.call(nodeId="i=12775", browseName="GetRejectedList", outputArgs=o6.hasProperty(o6.ns["i=12776"]))
+o6.call(nodeId="i=12775", browseName="GetRejectedList", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["i=12776"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=12872",
@@ -692,7 +727,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="SubscriptionId", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=12871", browseName="ResendData", inputArgs=o6.hasProperty(o6.ns["i=12872"]))
+o6.call(nodeId="i=12871", browseName="ResendData", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=12872"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=12884",
@@ -711,7 +746,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="Restart", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=12883", browseName="RequestServerStateChange", inputArgs=o6.hasProperty(o6.ns["i=12884"]))
+o6.call(nodeId="i=12883", browseName="RequestServerStateChange", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=12884"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=12913",
@@ -755,7 +790,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="DirectoryNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=13387", browseName="CreateDirectory", inputArgs=o6.hasProperty(o6.ns["i=13388"]), outputArgs=o6.hasProperty(o6.ns["i=13389"]))
+o6.call(nodeId="i=13387", browseName="CreateDirectory", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=13388"]), outputArgs=o6.hasProperty(o6.ns["i=13389"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=13391",
@@ -785,7 +820,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=13390", browseName="CreateFile", inputArgs=o6.hasProperty(o6.ns["i=13391"]), outputArgs=o6.hasProperty(o6.ns["i=13392"]))
+o6.call(nodeId="i=13390", browseName="CreateFile", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=13391"]), outputArgs=o6.hasProperty(o6.ns["i=13392"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=13394",
@@ -798,7 +833,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="ObjectToDelete", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=13393", browseName="Delete", inputArgs=o6.hasProperty(o6.ns["i=13394"]))
+o6.call(nodeId="i=13393", browseName="Delete", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=13394"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=13396",
@@ -827,7 +862,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="NewNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=13395", browseName="MoveOrCopy", inputArgs=o6.hasProperty(o6.ns["i=13396"]), outputArgs=o6.hasProperty(o6.ns["i=13397"]))
+o6.call(nodeId="i=13395", browseName="MoveOrCopy", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=13396"]), outputArgs=o6.hasProperty(o6.ns["i=13397"]))
 
 
 @o6.objecttype(nodeId="i=13353", browseName="FileDirectoryType", displayName="FileDirectoryType")
@@ -859,7 +894,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="GroupId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=14225", browseName="RemoveGroup", inputArgs=o6.hasProperty(o6.ns["i=14226"]))
+o6.call(nodeId="i=14225", browseName="RemoveGroup", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=14226"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=14433",
@@ -872,7 +907,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="ConnectionId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=14432", browseName="RemoveConnection", inputArgs=o6.hasProperty(o6.ns["i=14433"]))
+o6.call(nodeId="i=14432", browseName="RemoveConnection", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=14433"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=14494",
@@ -905,7 +940,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="AddResults", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0]),
     ],
 )
-o6.call(nodeId="i=14493", browseName="AddPublishedDataItems", inputArgs=o6.hasProperty(o6.ns["i=14494"]), outputArgs=o6.hasProperty(o6.ns["i=14495"]))
+o6.call(nodeId="i=14493", browseName="AddPublishedDataItems", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=14494"]), outputArgs=o6.hasProperty(o6.ns["i=14495"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=14497",
@@ -939,7 +974,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="DataSetNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=14496", browseName="AddPublishedEvents", inputArgs=o6.hasProperty(o6.ns["i=14497"]), outputArgs=o6.hasProperty(o6.ns["i=14498"]))
+o6.call(nodeId="i=14496", browseName="AddPublishedEvents", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=14497"]), outputArgs=o6.hasProperty(o6.ns["i=14498"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=14500",
@@ -952,7 +987,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="DataSetNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=14499", browseName="RemovePublishedDataSet", inputArgs=o6.hasProperty(o6.ns["i=14500"]))
+o6.call(nodeId="i=14499", browseName="RemovePublishedDataSet", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=14500"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=14556",
@@ -984,7 +1019,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="AddResults", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0]),
     ],
 )
-o6.call(nodeId="i=14555", browseName="AddVariables", inputArgs=o6.hasProperty(o6.ns["i=14556"]), outputArgs=o6.hasProperty(o6.ns["i=14557"]))
+o6.call(nodeId="i=14555", browseName="AddVariables", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=14556"]), outputArgs=o6.hasProperty(o6.ns["i=14557"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=14559",
@@ -1014,14 +1049,16 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="RemoveResults", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0]),
     ],
 )
-o6.call(nodeId="i=14558", browseName="RemoveVariables", inputArgs=o6.hasProperty(o6.ns["i=14559"]), outputArgs=o6.hasProperty(o6.ns["i=14560"]))
+o6.call(nodeId="i=14558", browseName="RemoveVariables", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=14559"]), outputArgs=o6.hasProperty(o6.ns["i=14560"]))
 
 
 @o6.objecttype(nodeId="i=14643", browseName="PubSubStatusType", displayName="PubSubStatusType")
 class PubSubStatusType(BaseObjectType):
-    disable: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="i=14646", browseName="Disable"))
-    enable: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="i=14645", browseName="Enable"))
-    state: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=14644", browseName="State", dataType=ns0_datypes.PubSubState))
+    disable: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="i=14646", browseName="Disable", modellingRule="Optional"))
+    enable: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="i=14645", browseName="Enable", modellingRule="Optional"))
+    state: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=14644", browseName="State", modellingRule="Mandatory", dataType=ns0_datypes.PubSubState, valueRank=-1)
+    )
 
 
 ns0_vartypes.PropertyType(
@@ -1051,7 +1088,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="NewConfigurationVersion", dataType=o6.NodeId("i=14593"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=15052", browseName="ModifyFieldSelection", inputArgs=o6.hasProperty(o6.ns["i=15053"]), outputArgs=o6.hasProperty(o6.ns["i=15517"]))
+o6.call(nodeId="i=15052", browseName="ModifyFieldSelection", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=15053"]), outputArgs=o6.hasProperty(o6.ns["i=15517"]))
 
 
 @o6.objecttype(nodeId="i=15108", browseName="SubscribedDataSetType", displayName="SubscribedDataSetType")
@@ -1089,7 +1126,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="AddResults", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0])],
 )
-o6.call(nodeId="i=15115", browseName="AddTargetVariables", inputArgs=o6.hasProperty(o6.ns["i=15116"]), outputArgs=o6.hasProperty(o6.ns["i=15117"]))
+o6.call(nodeId="i=15115", browseName="AddTargetVariables", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=15116"]), outputArgs=o6.hasProperty(o6.ns["i=15117"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=15119",
@@ -1116,7 +1153,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="RemoveResults", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0])],
 )
-o6.call(nodeId="i=15118", browseName="RemoveTargetVariables", inputArgs=o6.hasProperty(o6.ns["i=15119"]), outputArgs=o6.hasProperty(o6.ns["i=15120"]))
+o6.call(nodeId="i=15118", browseName="RemoveTargetVariables", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=15119"]), outputArgs=o6.hasProperty(o6.ns["i=15120"]))
 
 
 @o6.objecttype(nodeId="i=15111", browseName="TargetVariablesType", displayName="TargetVariablesType")
@@ -1124,7 +1161,9 @@ class TargetVariablesType(SubscribedDataSetType):
     addTargetVariables: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=15115"])
     removeTargetVariables: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=15118"])
     targetVariables: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=15114", browseName="TargetVariables", dataType=ns0_datypes.FieldTargetDataType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=15114", browseName="TargetVariables", modellingRule="Mandatory", dataType=ns0_datypes.FieldTargetDataType, valueRank=1, arrayDimensions=[0]
+        )
     )
 
 
@@ -1174,7 +1213,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="SecurityGroupNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=15461", browseName="AddSecurityGroup", inputArgs=o6.hasProperty(o6.ns["i=15462"]), outputArgs=o6.hasProperty(o6.ns["i=15463"]))
+o6.call(nodeId="i=15461", browseName="AddSecurityGroup", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=15462"]), outputArgs=o6.hasProperty(o6.ns["i=15463"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=15465",
@@ -1187,7 +1226,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="SecurityGroupNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=15464", browseName="RemoveSecurityGroup", inputArgs=o6.hasProperty(o6.ns["i=15465"]))
+o6.call(nodeId="i=15464", browseName="RemoveSecurityGroup", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=15465"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=15492",
@@ -1214,7 +1253,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="FieldId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=15491", browseName="AddExtensionField", inputArgs=o6.hasProperty(o6.ns["i=15492"]), outputArgs=o6.hasProperty(o6.ns["i=15493"]))
+o6.call(nodeId="i=15491", browseName="AddExtensionField", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=15492"]), outputArgs=o6.hasProperty(o6.ns["i=15493"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=15495",
@@ -1227,14 +1266,14 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="FieldId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=15494", browseName="RemoveExtensionField", inputArgs=o6.hasProperty(o6.ns["i=15495"]))
+o6.call(nodeId="i=15494", browseName="RemoveExtensionField", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=15495"]))
 
 
 @o6.objecttype(nodeId="i=15489", browseName="ExtensionFieldsType", displayName="ExtensionFieldsType")
 class ExtensionFieldsType(BaseObjectType):
     addExtensionField: o6.node.MethodNode = o6.hasComponent(o6.ns["i=15491"])
     extensionFieldName_: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=15490", browseName="<ExtensionFieldName>", modellingRule="OptionalPlaceholder")
+        ns0_vartypes.PropertyType(nodeId="i=15490", browseName="<ExtensionFieldName>", modellingRule="OptionalPlaceholder", valueRank=-1)
     )
     removeExtensionField: o6.node.MethodNode = o6.hasComponent(o6.ns["i=15494"])
 
@@ -1271,7 +1310,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="UpdateId", dataType=o6.NodeId("i=14"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=15505", browseName="CloseAndUpdate", inputArgs=o6.hasProperty(o6.ns["i=15506"]), outputArgs=o6.hasProperty(o6.ns["i=15507"]))
+o6.call(nodeId="i=15505", browseName="CloseAndUpdate", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=15506"]), outputArgs=o6.hasProperty(o6.ns["i=15507"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=15511",
@@ -1284,7 +1323,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="UpdateId", dataType=o6.NodeId("i=14"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=15508", browseName="ConfirmUpdate", inputArgs=o6.hasProperty(o6.ns["i=15511"]))
+o6.call(nodeId="i=15508", browseName="ConfirmUpdate", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=15511"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=15625",
@@ -1297,7 +1336,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="Rule", dataType=o6.NodeId("i=15634"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=15624", browseName="AddIdentity", inputArgs=o6.hasProperty(o6.ns["i=15625"]))
+o6.call(nodeId="i=15624", browseName="AddIdentity", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=15625"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=15627",
@@ -1310,7 +1349,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="Rule", dataType=o6.NodeId("i=15634"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=15626", browseName="RemoveIdentity", inputArgs=o6.hasProperty(o6.ns["i=15627"]))
+o6.call(nodeId="i=15626", browseName="RemoveIdentity", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=15627"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=15747",
@@ -1338,7 +1377,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=15746", browseName="GenerateFileForRead", inputArgs=o6.hasProperty(o6.ns["i=15747"]), outputArgs=o6.hasProperty(o6.ns["i=15748"]))
+o6.call(nodeId="i=15746", browseName="GenerateFileForRead", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=15747"]), outputArgs=o6.hasProperty(o6.ns["i=15748"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=15750",
@@ -1365,7 +1404,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="GenerateOptions", dataType=o6.NodeId("i=24"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=15749", browseName="GenerateFileForWrite", inputArgs=o6.hasProperty(o6.ns["i=16359"]), outputArgs=o6.hasProperty(o6.ns["i=15750"]))
+o6.call(nodeId="i=15749", browseName="GenerateFileForWrite", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=16359"]), outputArgs=o6.hasProperty(o6.ns["i=15750"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=15752",
@@ -1389,13 +1428,13 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=15751", browseName="CloseAndCommit", inputArgs=o6.hasProperty(o6.ns["i=15752"]), outputArgs=o6.hasProperty(o6.ns["i=15753"]))
+o6.call(nodeId="i=15751", browseName="CloseAndCommit", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=15752"]), outputArgs=o6.hasProperty(o6.ns["i=15753"]))
 
 
 @o6.objecttype(nodeId="i=15744", browseName="TemporaryFileTransferType", displayName="TemporaryFileTransferType")
 class TemporaryFileTransferType(BaseObjectType):
     clientProcessingTimeout: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=15745", browseName="ClientProcessingTimeout", dataType=ns0_datypes.Duration)
+        ns0_vartypes.PropertyType(nodeId="i=15745", browseName="ClientProcessingTimeout", modellingRule="Mandatory", dataType=ns0_datypes.Duration, valueRank=-1)
     )
     closeAndCommit: o6.node.MethodNode = o6.hasComponent(o6.ns["i=15751"])
     generateFileForRead: o6.node.MethodNode = o6.hasComponent(o6.ns["i=15746"])
@@ -1435,7 +1474,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="KeyLifetime", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=15907", browseName="GetSecurityKeys", inputArgs=o6.hasProperty(o6.ns["i=15908"]), outputArgs=o6.hasProperty(o6.ns["i=15909"]))
+o6.call(nodeId="i=15907", browseName="GetSecurityKeys", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=15908"]), outputArgs=o6.hasProperty(o6.ns["i=15909"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=15911",
@@ -1459,7 +1498,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="SecurityGroupNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=15910", browseName="GetSecurityGroup", inputArgs=o6.hasProperty(o6.ns["i=15911"]), outputArgs=o6.hasProperty(o6.ns["i=15912"]))
+o6.call(nodeId="i=15910", browseName="GetSecurityGroup", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=15911"]), outputArgs=o6.hasProperty(o6.ns["i=15912"]))
 
 
 @o6.objecttype(nodeId="i=15906", browseName="PubSubKeyServiceType", displayName="PubSubKeyServiceType")
@@ -1495,7 +1534,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="RoleNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=15997", browseName="AddRole", inputArgs=o6.hasProperty(o6.ns["i=15998"]), outputArgs=o6.hasProperty(o6.ns["i=15999"]))
+o6.call(nodeId="i=15997", browseName="AddRole", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=15998"]), outputArgs=o6.hasProperty(o6.ns["i=15999"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=16001",
@@ -1508,7 +1547,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="RoleNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=16000", browseName="RemoveRole", inputArgs=o6.hasProperty(o6.ns["i=16001"]))
+o6.call(nodeId="i=16000", browseName="RemoveRole", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=16001"]))
 
 
 @o6.objecttype(nodeId="i=15607", browseName="RoleSetType", displayName="RoleSetType")
@@ -1529,7 +1568,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="ApplicationUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=16176", browseName="AddApplication", inputArgs=o6.hasProperty(o6.ns["i=16177"]))
+o6.call(nodeId="i=16176", browseName="AddApplication", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=16177"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=16179",
@@ -1542,7 +1581,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="ApplicationUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=16178", browseName="RemoveApplication", inputArgs=o6.hasProperty(o6.ns["i=16179"]))
+o6.call(nodeId="i=16178", browseName="RemoveApplication", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=16179"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=16181",
@@ -1555,7 +1594,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="Endpoint", dataType=o6.NodeId("i=15528"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=16180", browseName="AddEndpoint", inputArgs=o6.hasProperty(o6.ns["i=16181"]))
+o6.call(nodeId="i=16180", browseName="AddEndpoint", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=16181"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=16183",
@@ -1568,11 +1607,11 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="Endpoint", dataType=o6.NodeId("i=15528"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=16182", browseName="RemoveEndpoint", inputArgs=o6.hasProperty(o6.ns["i=16183"]))
+o6.call(nodeId="i=16182", browseName="RemoveEndpoint", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=16183"]))
 
-o6.call(nodeId="i=16402", browseName="Silence")
+o6.call(nodeId="i=16402", browseName="Silence", modellingRule="Optional")
 
-o6.call(nodeId="i=16403", browseName="Suppress")
+o6.call(nodeId="i=16403", browseName="Suppress", modellingRule="Optional")
 
 
 @o6.objecttype(nodeId="i=16405", browseName="AlarmGroupType", displayName="AlarmGroupType")
@@ -1602,7 +1641,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="ConnectionId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=16598", browseName="AddConnection", inputArgs=o6.hasProperty(o6.ns["i=16599"]), outputArgs=o6.hasProperty(o6.ns["i=16600"]))
+o6.call(nodeId="i=16598", browseName="AddConnection", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=16599"]), outputArgs=o6.hasProperty(o6.ns["i=16600"]))
 
 
 @o6.objecttype(nodeId="i=16662", browseName="ApplicationConfigurationFolderType", displayName="ApplicationConfigurationFolderType")
@@ -1639,7 +1678,9 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="AddResults", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0]),
     ],
 )
-o6.call(nodeId="i=16935", browseName="AddPublishedDataItemsTemplate", inputArgs=o6.hasProperty(o6.ns["i=16958"]), outputArgs=o6.hasProperty(o6.ns["i=16959"]))
+o6.call(
+    nodeId="i=16935", browseName="AddPublishedDataItemsTemplate", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=16958"]), outputArgs=o6.hasProperty(o6.ns["i=16959"])
+)
 
 ns0_vartypes.PropertyType(
     nodeId="i=16961",
@@ -1669,7 +1710,9 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="DataSetNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=16960", browseName="AddPublishedEventsTemplate", inputArgs=o6.hasProperty(o6.ns["i=16961"]), outputArgs=o6.hasProperty(o6.ns["i=16971"]))
+o6.call(
+    nodeId="i=16960", browseName="AddPublishedEventsTemplate", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=16961"]), outputArgs=o6.hasProperty(o6.ns["i=16971"])
+)
 
 ns0_vartypes.PropertyType(
     nodeId="i=16995",
@@ -1693,7 +1736,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="DataSetFolderNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=16994", browseName="AddDataSetFolder", inputArgs=o6.hasProperty(o6.ns["i=16995"]), outputArgs=o6.hasProperty(o6.ns["i=16996"]))
+o6.call(nodeId="i=16994", browseName="AddDataSetFolder", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=16995"]), outputArgs=o6.hasProperty(o6.ns["i=16996"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=17007",
@@ -1706,7 +1749,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="DataSetFolderNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=16997", browseName="RemoveDataSetFolder", inputArgs=o6.hasProperty(o6.ns["i=17007"]))
+o6.call(nodeId="i=16997", browseName="RemoveDataSetFolder", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=17007"]))
 
 
 @o6.objecttype(nodeId="i=14477", browseName="DataSetFolderType", displayName="DataSetFolderType")
@@ -1761,7 +1804,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="KeyLifetime", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=17296", browseName="SetSecurityKeys", inputArgs=o6.hasProperty(o6.ns["i=17297"]))
+o6.call(nodeId="i=17296", browseName="SetSecurityKeys", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=17297"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=17387",
@@ -1788,7 +1831,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="AddResults", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0])],
 )
-o6.call(nodeId="i=17386", browseName="CreateTargetVariables", inputArgs=o6.hasProperty(o6.ns["i=17387"]), outputArgs=o6.hasProperty(o6.ns["i=17388"]))
+o6.call(nodeId="i=17386", browseName="CreateTargetVariables", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=17387"]), outputArgs=o6.hasProperty(o6.ns["i=17388"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=17390",
@@ -1815,7 +1858,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="ParentNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=17389", browseName="CreateDataSetMirror", inputArgs=o6.hasProperty(o6.ns["i=17390"]), outputArgs=o6.hasProperty(o6.ns["i=17391"]))
+o6.call(nodeId="i=17389", browseName="CreateDataSetMirror", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=17390"]), outputArgs=o6.hasProperty(o6.ns["i=17391"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=17428",
@@ -1839,7 +1882,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="GroupId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=17427", browseName="AddWriterGroup", inputArgs=o6.hasProperty(o6.ns["i=17428"]), outputArgs=o6.hasProperty(o6.ns["i=17456"]))
+o6.call(nodeId="i=17427", browseName="AddWriterGroup", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=17428"]), outputArgs=o6.hasProperty(o6.ns["i=17456"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=17507",
@@ -1863,7 +1906,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="GroupId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=17465", browseName="AddReaderGroup", inputArgs=o6.hasProperty(o6.ns["i=17507"]), outputArgs=o6.hasProperty(o6.ns["i=17508"]))
+o6.call(nodeId="i=17465", browseName="AddReaderGroup", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=17507"]), outputArgs=o6.hasProperty(o6.ns["i=17508"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=17523",
@@ -1892,7 +1935,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="CredentialNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=17522", browseName="CreateCredential", inputArgs=o6.hasProperty(o6.ns["i=17523"]), outputArgs=o6.hasProperty(o6.ns["i=17524"]))
+o6.call(nodeId="i=17522", browseName="CreateCredential", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=17523"]), outputArgs=o6.hasProperty(o6.ns["i=17524"]))
 
 
 @o6.objecttype(nodeId="i=17496", browseName="KeyCredentialConfigurationFolderType", displayName="KeyCredentialConfigurationFolderType")
@@ -1929,7 +1972,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="RevisedSecurityPolicyUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=17534", browseName="GetEncryptingKey", inputArgs=o6.hasProperty(o6.ns["i=17535"]), outputArgs=o6.hasProperty(o6.ns["i=17536"]))
+o6.call(nodeId="i=17534", browseName="GetEncryptingKey", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=17535"]), outputArgs=o6.hasProperty(o6.ns["i=17536"]))
 
 
 @o6.objecttype(nodeId="i=17589", browseName="DictionaryEntryType", displayName="DictionaryEntryType", isAbstract=True)
@@ -1962,36 +2005,46 @@ class BaseInterfaceType(BaseObjectType):
 
 @o6.objecttype(nodeId="i=2004", browseName="ServerType", displayName="ServerType")
 class ServerType(BaseObjectType):
-    auditing: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2742", browseName="Auditing", dataType=o6.Boolean))
-    estimatedReturnTime: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=12882", browseName="EstimatedReturnTime", dataType=o6.DateTime))
-    getMonitoredItems: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=11489"])
-    localTime: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=17612", browseName="LocalTime", dataType=ns0_datypes.TimeZoneDataType))
-    namespaceArray: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2006", browseName="NamespaceArray", dataType=o6.String, valueRank=1, arrayDimensions=[0])
+    auditing: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2742", browseName="Auditing", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
     )
-    namespaces: NamespacesType | None = o6.hasComponent(NamespacesType(nodeId="i=11527", browseName="Namespaces"))
+    estimatedReturnTime: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=12882", browseName="EstimatedReturnTime", modellingRule="Optional", dataType=o6.DateTime, valueRank=-1)
+    )
+    getMonitoredItems: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=11489"])
+    localTime: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=17612", browseName="LocalTime", modellingRule="Optional", dataType=ns0_datypes.TimeZoneDataType, valueRank=-1)
+    )
+    namespaceArray: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2006", browseName="NamespaceArray", modellingRule="Mandatory", dataType=o6.String, valueRank=1, arrayDimensions=[0])
+    )
+    namespaces: NamespacesType | None = o6.hasComponent(NamespacesType(nodeId="i=11527", browseName="Namespaces", modellingRule="Optional"))
     requestServerStateChange: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=12883"])
     resendData: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=12871"])
     serverArray: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2005", browseName="ServerArray", dataType=o6.String, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=2005", browseName="ServerArray", modellingRule="Mandatory", dataType=o6.String, valueRank=1, arrayDimensions=[0])
     )
     serverCapabilities: ServerCapabilitiesType
     serverDiagnostics: ServerDiagnosticsType
     serverRedundancy: ServerRedundancyType
     serverStatus: ns0_vartypes.ServerStatusType
-    serviceLevel: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2008", browseName="ServiceLevel", dataType=o6.Byte))
+    serviceLevel: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2008", browseName="ServiceLevel", modellingRule="Mandatory", dataType=o6.Byte, valueRank=-1)
+    )
     setSubscriptionDurable: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=12746"])
-    urisVersion: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15003", browseName="UrisVersion", dataType=ns0_datypes.VersionTime))
-    vendorServerInfo: VendorServerInfoType = o6.hasComponent(VendorServerInfoType(nodeId="i=2011", browseName="VendorServerInfo"))
+    urisVersion: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15003", browseName="UrisVersion", modellingRule="Optional", dataType=ns0_datypes.VersionTime, valueRank=-1)
+    )
+    vendorServerInfo: VendorServerInfoType = o6.hasComponent(VendorServerInfoType(nodeId="i=2011", browseName="VendorServerInfo", modellingRule="Mandatory"))
 
 
 @o6.objecttype(nodeId="i=2771", browseName="FiniteStateMachineType", displayName="FiniteStateMachineType", isAbstract=True)
 class FiniteStateMachineType(StateMachineType):
     availableStates: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=17635", browseName="AvailableStates", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.BaseDataVariableType(nodeId="i=17635", browseName="AvailableStates", modellingRule="Optional", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
     )
     availableTransitions: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=17636", browseName="AvailableTransitions", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.BaseDataVariableType(nodeId="i=17636", browseName="AvailableTransitions", modellingRule="Optional", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
     )
     currentState: ns0_vartypes.FiniteStateVariableType
     lastTransition: ns0_vartypes.FiniteTransitionVariableType | None
@@ -1999,23 +2052,29 @@ class FiniteStateMachineType(StateMachineType):
 
 @o6.objecttype(nodeId="i=2391", browseName="ProgramStateMachineType", displayName="ProgramStateMachineType")
 class ProgramStateMachineType(FiniteStateMachineType):
-    autoDelete: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2394", browseName="AutoDelete", dataType=o6.Boolean))
-    creatable: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2392", browseName="Creatable", dataType=o6.Boolean))
+    autoDelete: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2394", browseName="AutoDelete", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
+    creatable: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2392", browseName="Creatable", dataType=o6.Boolean, valueRank=-1))
     currentState: ns0_vartypes.FiniteStateVariableType
-    deletable: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2393", browseName="Deletable", dataType=o6.Boolean))
-    finalResultData: BaseObjectType | None = o6.hasComponent(BaseObjectType(nodeId="i=3850", browseName="FinalResultData"))
+    deletable: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2393", browseName="Deletable", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
+    finalResultData: BaseObjectType | None = o6.hasComponent(BaseObjectType(nodeId="i=3850", browseName="FinalResultData", modellingRule="Optional"))
     halt: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=2429"])
     halted: StateType
     haltedToReady: TransitionType
-    instanceCount: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2396", browseName="InstanceCount", dataType=o6.UInt32))
+    instanceCount: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2396", browseName="InstanceCount", dataType=o6.UInt32, valueRank=-1))
     lastTransition: ns0_vartypes.FiniteTransitionVariableType
-    maxInstanceCount: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2397", browseName="MaxInstanceCount", dataType=o6.UInt32))
-    maxRecycleCount: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2398", browseName="MaxRecycleCount", dataType=o6.UInt32))
+    maxInstanceCount: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2397", browseName="MaxInstanceCount", dataType=o6.UInt32, valueRank=-1))
+    maxRecycleCount: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2398", browseName="MaxRecycleCount", dataType=o6.UInt32, valueRank=-1))
     programDiagnostic: ns0_vartypes.ProgramDiagnostic2Type | None
     ready: StateType
     readyToHalted: TransitionType
     readyToRunning: TransitionType
-    recycleCount: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2395", browseName="RecycleCount", dataType=o6.Int32))
+    recycleCount: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2395", browseName="RecycleCount", modellingRule="Mandatory", dataType=o6.Int32, valueRank=-1)
+    )
     reset: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=2430"])
     resume: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=2428"])
     running: StateType
@@ -2058,7 +2117,7 @@ class FileTransferStateMachineType(FiniteStateMachineType):
     readTransfer: StateType
     readTransferToError: TransitionType
     readTransferToIdle: TransitionType
-    reset: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="i=15843", browseName="Reset"))
+    reset: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="i=15843", browseName="Reset", modellingRule="Mandatory"))
 
 
 @o6.objecttype(nodeId="i=17721", browseName="ConnectionTransportType", displayName="ConnectionTransportType", isAbstract=True)
@@ -2068,8 +2127,12 @@ class ConnectionTransportType(BaseObjectType):
 
 @o6.objecttype(nodeId="i=15155", browseName="BrokerConnectionTransportType", displayName="BrokerConnectionTransportType")
 class BrokerConnectionTransportType(ConnectionTransportType):
-    authenticationProfileUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15178", browseName="AuthenticationProfileUri", dataType=o6.String))
-    resourceUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15156", browseName="ResourceUri", dataType=o6.String))
+    authenticationProfileUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15178", browseName="AuthenticationProfileUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    resourceUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15156", browseName="ResourceUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=14209", browseName="PubSubConnectionType", displayName="PubSubConnectionType")
@@ -2078,37 +2141,49 @@ class PubSubConnectionType(BaseObjectType):
     addWriterGroup: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=17427"])
     address: NetworkAddressType
     connectionProperties: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=17485", browseName="ConnectionProperties", dataType=ns0_datypes.KeyValuePair, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=17485", browseName="ConnectionProperties", modellingRule="Mandatory", dataType=ns0_datypes.KeyValuePair, valueRank=1, arrayDimensions=[0]
+        )
     )
     diagnostics: PubSubDiagnosticsConnectionType | None
-    publisherId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=14595", browseName="PublisherId"))
+    publisherId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=14595", browseName="PublisherId", modellingRule="Mandatory", valueRank=-1))
     readerGroupName_: ReaderGroupType | None
     removeGroup: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=14225"])
     status: PubSubStatusType
     transportProfileUri: ns0_vartypes.SelectionListType
-    transportSettings: ConnectionTransportType | None = o6.hasComponent(ConnectionTransportType(nodeId="i=17203", browseName="TransportSettings", _allow_abstract=True))
+    transportSettings: ConnectionTransportType | None = o6.hasComponent(
+        ConnectionTransportType(nodeId="i=17203", browseName="TransportSettings", modellingRule="Optional", _allow_abstract=True)
+    )
     writerGroupName_: WriterGroupType | None
 
 
 @o6.objecttype(nodeId="i=14232", browseName="PubSubGroupType", displayName="PubSubGroupType", isAbstract=True)
 class PubSubGroupType(BaseObjectType):
     groupProperties: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=17488", browseName="GroupProperties", dataType=ns0_datypes.KeyValuePair, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=17488", browseName="GroupProperties", modellingRule="Mandatory", dataType=ns0_datypes.KeyValuePair, valueRank=1, arrayDimensions=[0])
     )
-    maxNetworkMessageSize: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=17724", browseName="MaxNetworkMessageSize", dataType=o6.UInt32))
-    securityGroupId: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15927", browseName="SecurityGroupId", dataType=o6.String))
+    maxNetworkMessageSize: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=17724", browseName="MaxNetworkMessageSize", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
+    securityGroupId: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15927", browseName="SecurityGroupId", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
     securityKeyServices: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=15928", browseName="SecurityKeyServices", dataType=ns0_datypes.EndpointDescription, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=15928", browseName="SecurityKeyServices", modellingRule="Optional", dataType=ns0_datypes.EndpointDescription, valueRank=1, arrayDimensions=[0]
+        )
     )
-    securityMode: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15926", browseName="SecurityMode", dataType=ns0_datypes.MessageSecurityMode))
+    securityMode: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15926", browseName="SecurityMode", modellingRule="Mandatory", dataType=ns0_datypes.MessageSecurityMode, valueRank=-1)
+    )
     status: PubSubStatusType
 
 
-o6.call(nodeId="i=17868", browseName="Unsuppress")
+o6.call(nodeId="i=17868", browseName="Unsuppress", modellingRule="Optional")
 
-o6.call(nodeId="i=17869", browseName="RemoveFromService")
+o6.call(nodeId="i=17869", browseName="RemoveFromService", modellingRule="Optional")
 
-o6.call(nodeId="i=17870", browseName="PlaceInService")
+o6.call(nodeId="i=17870", browseName="PlaceInService", modellingRule="Optional")
 
 ns0_vartypes.PropertyType(
     nodeId="i=17976",
@@ -2132,7 +2207,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="DataSetWriterNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=17969", browseName="AddDataSetWriter", inputArgs=o6.hasProperty(o6.ns["i=17976"]), outputArgs=o6.hasProperty(o6.ns["i=17987"]))
+o6.call(nodeId="i=17969", browseName="AddDataSetWriter", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=17976"]), outputArgs=o6.hasProperty(o6.ns["i=17987"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=17993",
@@ -2145,7 +2220,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="DataSetWriterNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=17992", browseName="RemoveDataSetWriter", inputArgs=o6.hasProperty(o6.ns["i=17993"]))
+o6.call(nodeId="i=17992", browseName="RemoveDataSetWriter", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=17993"]))
 
 
 @o6.objecttype(nodeId="i=17997", browseName="WriterGroupTransportType", displayName="WriterGroupTransportType", isAbstract=True)
@@ -2163,17 +2238,31 @@ class WriterGroupType(PubSubGroupType):
     addDataSetWriter: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=17969"])
     dataSetWriterName_: DataSetWriterType | None
     diagnostics: PubSubDiagnosticsWriterGroupType | None
-    headerLayoutUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=17559", browseName="HeaderLayoutUri", dataType=o6.String))
-    keepAliveTime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=17738", browseName="KeepAliveTime", dataType=ns0_datypes.Duration))
-    localeIds: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=17740", browseName="LocaleIds", dataType=ns0_datypes.LocaleId, valueRank=1, arrayDimensions=[0])
+    headerLayoutUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=17559", browseName="HeaderLayoutUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
     )
-    messageSettings: WriterGroupMessageType | None = o6.hasComponent(WriterGroupMessageType(nodeId="i=17742", browseName="MessageSettings", _allow_abstract=True))
-    priority: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=17739", browseName="Priority", dataType=o6.Byte))
-    publishingInterval: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=17737", browseName="PublishingInterval", dataType=ns0_datypes.Duration))
+    keepAliveTime: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=17738", browseName="KeepAliveTime", modellingRule="Mandatory", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
+    localeIds: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=17740", browseName="LocaleIds", modellingRule="Mandatory", dataType=ns0_datypes.LocaleId, valueRank=1, arrayDimensions=[0])
+    )
+    messageSettings: WriterGroupMessageType | None = o6.hasComponent(
+        WriterGroupMessageType(nodeId="i=17742", browseName="MessageSettings", modellingRule="Optional", _allow_abstract=True)
+    )
+    priority: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=17739", browseName="Priority", modellingRule="Mandatory", dataType=o6.Byte, valueRank=-1)
+    )
+    publishingInterval: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=17737", browseName="PublishingInterval", modellingRule="Mandatory", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
     removeDataSetWriter: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=17992"])
-    transportSettings: WriterGroupTransportType | None = o6.hasComponent(WriterGroupTransportType(nodeId="i=17741", browseName="TransportSettings", _allow_abstract=True))
-    writerGroupId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=17736", browseName="WriterGroupId", dataType=o6.UInt16))
+    transportSettings: WriterGroupTransportType | None = o6.hasComponent(
+        WriterGroupTransportType(nodeId="i=17741", browseName="TransportSettings", modellingRule="Optional", _allow_abstract=True)
+    )
+    writerGroupId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=17736", browseName="WriterGroupId", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
+    )
 
 
 ns0_vartypes.PropertyType(
@@ -2192,30 +2281,44 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="SecurityPolicyUri", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=18006", browseName="UpdateCredential", inputArgs=o6.hasProperty(o6.ns["i=18007"]))
+o6.call(nodeId="i=18006", browseName="UpdateCredential", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=18007"]))
 
 
 @o6.objecttype(nodeId="i=17852", browseName="AuthorizationServiceConfigurationType", displayName="AuthorizationServiceConfigurationType")
 class AuthorizationServiceConfigurationType(BaseObjectType):
-    issuerEndpointUrl: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=18073", browseName="IssuerEndpointUrl", dataType=o6.String))
-    serviceCertificate: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=17860", browseName="ServiceCertificate", dataType=o6.ByteString))
-    serviceUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=18072", browseName="ServiceUri", dataType=o6.String))
+    issuerEndpointUrl: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=18073", browseName="IssuerEndpointUrl", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    serviceCertificate: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=17860", browseName="ServiceCertificate", modellingRule="Mandatory", dataType=o6.ByteString, valueRank=-1)
+    )
+    serviceUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=18072", browseName="ServiceUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
 
 
-o6.call(nodeId="i=18199", browseName="Reset")
+o6.call(nodeId="i=18199", browseName="Reset", modellingRule="Optional")
 
 
 @o6.objecttype(nodeId="i=18001", browseName="KeyCredentialConfigurationType", displayName="KeyCredentialConfigurationType")
 class KeyCredentialConfigurationType(BaseObjectType):
-    credentialId: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=18657", browseName="CredentialId", dataType=o6.String))
-    deleteCredential: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="i=18008", browseName="DeleteCredential"))
+    credentialId: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=18657", browseName="CredentialId", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
+    deleteCredential: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="i=18008", browseName="DeleteCredential", modellingRule="Optional"))
     endpointUrls: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=18004", browseName="EndpointUrls", dataType=o6.String, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=18004", browseName="EndpointUrls", modellingRule="Optional", dataType=o6.String, valueRank=1, arrayDimensions=[0])
     )
     getEncryptingKey: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=17534"])
-    profileUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=18165", browseName="ProfileUri", dataType=o6.String))
-    resourceUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=18069", browseName="ResourceUri", dataType=o6.String))
-    serviceStatus: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=18005", browseName="ServiceStatus", dataType=o6.StatusCode))
+    profileUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=18165", browseName="ProfileUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    resourceUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=18069", browseName="ResourceUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    serviceStatus: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=18005", browseName="ServiceStatus", modellingRule="Optional", dataType=o6.StatusCode, valueRank=-1)
+    )
     updateCredential: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=18006"])
 
 
@@ -2224,24 +2327,30 @@ class StatisticalConditionClassType(BaseConditionClassType):
     pass
 
 
-o6.call(nodeId="i=18666", browseName="Reset")
+o6.call(nodeId="i=18666", browseName="Reset", modellingRule="Mandatory")
 
 
 @o6.objecttype(nodeId="i=17279", browseName="AlarmMetricsType", displayName="AlarmMetricsType")
 class AlarmMetricsType(BaseObjectType):
-    alarmCount: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=17280", browseName="AlarmCount", dataType=o6.UInt32))
+    alarmCount: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=17280", browseName="AlarmCount", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
     averageAlarmRate: ns0_vartypes.AlarmRateVariableType
     currentAlarmRate: ns0_vartypes.AlarmRateVariableType
     maximumActiveState: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=17281", browseName="MaximumActiveState", dataType=ns0_datypes.Duration)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=17281", browseName="MaximumActiveState", modellingRule="Mandatory", dataType=ns0_datypes.Duration, valueRank=-1)
     )
     maximumAlarmRate: ns0_vartypes.AlarmRateVariableType
     maximumReAlarmCount: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=17283", browseName="MaximumReAlarmCount", dataType=o6.UInt32)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=17283", browseName="MaximumReAlarmCount", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
     )
-    maximumUnAck: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=17282", browseName="MaximumUnAck", dataType=ns0_datypes.Duration))
+    maximumUnAck: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=17282", browseName="MaximumUnAck", modellingRule="Mandatory", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
     reset: o6.node.MethodNode = o6.hasComponent(o6.ns["i=18666"])
-    startTime: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=17991", browseName="StartTime", dataType=ns0_datypes.UtcTime))
+    startTime: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=17991", browseName="StartTime", modellingRule="Mandatory", dataType=ns0_datypes.UtcTime, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=18973", browseName="LldpInformationType", displayName="LldpInformationType")
@@ -2253,119 +2362,194 @@ class LldpInformationType(BaseObjectType):
 
 @o6.objecttype(nodeId="i=18996", browseName="LldpRemoteStatisticsType", displayName="LldpRemoteStatisticsType")
 class LldpRemoteStatisticsType(BaseObjectType):
-    lastChangeTime: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=18997", browseName="LastChangeTime", dataType=o6.UInt32))
-    remoteAgeouts: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=19001", browseName="RemoteAgeouts", dataType=o6.UInt32))
-    remoteDeletes: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=18999", browseName="RemoteDeletes", dataType=o6.UInt32))
-    remoteDrops: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=19000", browseName="RemoteDrops", dataType=o6.UInt32))
-    remoteInserts: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=18998", browseName="RemoteInserts", dataType=o6.UInt32))
+    lastChangeTime: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=18997", browseName="LastChangeTime", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
+    remoteAgeouts: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=19001", browseName="RemoteAgeouts", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
+    remoteDeletes: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=18999", browseName="RemoteDeletes", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
+    remoteDrops: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=19000", browseName="RemoteDrops", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
+    remoteInserts: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=18998", browseName="RemoteInserts", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=19002", browseName="LldpLocalSystemType", displayName="LldpLocalSystemType")
 class LldpLocalSystemType(BaseObjectType):
-    chassisId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19004", browseName="ChassisId", dataType=o6.String))
-    chassisIdSubtype: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19003", browseName="ChassisIdSubtype", dataType=ns0_datypes.ChassisIdSubtype))
+    chassisId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19004", browseName="ChassisId", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    chassisIdSubtype: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19003", browseName="ChassisIdSubtype", modellingRule="Mandatory", dataType=ns0_datypes.ChassisIdSubtype, valueRank=-1)
+    )
     systemCapabilitiesEnabled: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=19008", browseName="SystemCapabilitiesEnabled", dataType=ns0_datypes.LldpSystemCapabilitiesMap)
+        ns0_vartypes.PropertyType(nodeId="i=19008", browseName="SystemCapabilitiesEnabled", modellingRule="Optional", dataType=ns0_datypes.LldpSystemCapabilitiesMap, valueRank=-1)
     )
     systemCapabilitiesSupported: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=19007", browseName="SystemCapabilitiesSupported", dataType=ns0_datypes.LldpSystemCapabilitiesMap)
+        ns0_vartypes.PropertyType(
+            nodeId="i=19007", browseName="SystemCapabilitiesSupported", modellingRule="Optional", dataType=ns0_datypes.LldpSystemCapabilitiesMap, valueRank=-1
+        )
     )
-    systemDescription: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19006", browseName="SystemDescription", dataType=o6.String))
-    systemName: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19005", browseName="SystemName", dataType=o6.String))
+    systemDescription: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19006", browseName="SystemDescription", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    systemName: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19005", browseName="SystemName", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=19009", browseName="LldpPortInformationType", displayName="LldpPortInformationType")
 class LldpPortInformationType(BaseObjectType):
     destMacAddress: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=19011", browseName="DestMacAddress", dataType=o6.Byte, valueRank=1, arrayDimensions=[6])
+        ns0_vartypes.PropertyType(nodeId="i=19011", browseName="DestMacAddress", modellingRule="Mandatory", dataType=o6.Byte, valueRank=1, arrayDimensions=[6])
     )
     ietfBaseNetworkInterfaceName: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=19010", browseName="IetfBaseNetworkInterfaceName", dataType=o6.String)
+        ns0_vartypes.PropertyType(nodeId="i=19010", browseName="IetfBaseNetworkInterfaceName", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
     )
     managementAddressTxPort: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=19015", browseName="ManagementAddressTxPort", dataType=ns0_datypes.LldpManagementAddressTxPortType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=19015", browseName="ManagementAddressTxPort", modellingRule="Optional", dataType=ns0_datypes.LldpManagementAddressTxPortType, valueRank=1, arrayDimensions=[0]
+        )
     )
-    portDescription: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19014", browseName="PortDescription", dataType=o6.String))
-    portId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19013", browseName="PortId", dataType=o6.String))
-    portIdSubtype: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19012", browseName="PortIdSubtype", dataType=ns0_datypes.PortIdSubtype))
+    portDescription: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19014", browseName="PortDescription", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
+    portId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19013", browseName="PortId", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    portIdSubtype: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19012", browseName="PortIdSubtype", modellingRule="Mandatory", dataType=ns0_datypes.PortIdSubtype, valueRank=-1)
+    )
     remoteSystemsData: FolderType | None
 
 
 @o6.objecttype(nodeId="i=19033", browseName="LldpRemoteSystemType", displayName="LldpRemoteSystemType")
 class LldpRemoteSystemType(BaseObjectType):
-    chassisId: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=19037", browseName="ChassisId", dataType=o6.String))
+    chassisId: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=19037", browseName="ChassisId", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
     chassisIdSubtype: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=19036", browseName="ChassisIdSubtype", dataType=ns0_datypes.ChassisIdSubtype)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=19036", browseName="ChassisIdSubtype", modellingRule="Mandatory", dataType=ns0_datypes.ChassisIdSubtype, valueRank=-1)
     )
     managementAddress: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=19047", browseName="ManagementAddress", dataType=ns0_datypes.LldpManagementAddressType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.BaseDataVariableType(
+            nodeId="i=19047", browseName="ManagementAddress", modellingRule="Optional", dataType=ns0_datypes.LldpManagementAddressType, valueRank=1, arrayDimensions=[0]
+        )
     )
     portDescription: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=19040", browseName="PortDescription", dataType=o6.String)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=19040", browseName="PortDescription", modellingRule="Optional", dataType=o6.String, valueRank=-1)
     )
-    portId: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=19039", browseName="PortId", dataType=o6.String))
+    portId: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=19039", browseName="PortId", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
     portIdSubtype: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=19038", browseName="PortIdSubtype", dataType=ns0_datypes.PortIdSubtype)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=19038", browseName="PortIdSubtype", modellingRule="Mandatory", dataType=ns0_datypes.PortIdSubtype, valueRank=-1)
     )
-    remoteChanges: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=19045", browseName="RemoteChanges", dataType=o6.Boolean))
-    remoteIndex: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=19035", browseName="RemoteIndex", dataType=o6.UInt32))
+    remoteChanges: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=19045", browseName="RemoteChanges", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1)
+    )
+    remoteIndex: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=19035", browseName="RemoteIndex", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
     remoteTooManyNeighbors: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=19046", browseName="RemoteTooManyNeighbors", dataType=o6.Boolean)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=19046", browseName="RemoteTooManyNeighbors", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1)
     )
     remoteUnknownTlv: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=19078", browseName="RemoteUnknownTlv", dataType=ns0_datypes.LldpTlvType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.BaseDataVariableType(
+            nodeId="i=19078", browseName="RemoteUnknownTlv", modellingRule="Optional", dataType=ns0_datypes.LldpTlvType, valueRank=1, arrayDimensions=[0]
+        )
     )
     systemCapabilitiesEnabled: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=19044", browseName="SystemCapabilitiesEnabled", dataType=ns0_datypes.LldpSystemCapabilitiesMap)
+        ns0_vartypes.BaseDataVariableType(
+            nodeId="i=19044", browseName="SystemCapabilitiesEnabled", modellingRule="Optional", dataType=ns0_datypes.LldpSystemCapabilitiesMap, valueRank=-1
+        )
     )
     systemCapabilitiesSupported: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=19043", browseName="SystemCapabilitiesSupported", dataType=ns0_datypes.LldpSystemCapabilitiesMap)
+        ns0_vartypes.BaseDataVariableType(
+            nodeId="i=19043", browseName="SystemCapabilitiesSupported", modellingRule="Optional", dataType=ns0_datypes.LldpSystemCapabilitiesMap, valueRank=-1
+        )
     )
     systemDescription: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=19042", browseName="SystemDescription", dataType=o6.String)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=19042", browseName="SystemDescription", modellingRule="Optional", dataType=o6.String, valueRank=-1)
     )
-    systemName: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=19041", browseName="SystemName", dataType=o6.String))
-    timeMark: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=19034", browseName="TimeMark", dataType=o6.UInt32))
+    systemName: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=19041", browseName="SystemName", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
+    timeMark: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=19034", browseName="TimeMark", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=2330", browseName="HistoryServerCapabilitiesType", displayName="HistoryServerCapabilitiesType")
 class HistoryServerCapabilitiesType(BaseObjectType):
     accessHistoryDataCapability: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2331", browseName="AccessHistoryDataCapability", dataType=o6.Boolean)
+        ns0_vartypes.PropertyType(nodeId="i=2331", browseName="AccessHistoryDataCapability", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
     )
     accessHistoryEventsCapability: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2332", browseName="AccessHistoryEventsCapability", dataType=o6.Boolean)
+        ns0_vartypes.PropertyType(nodeId="i=2332", browseName="AccessHistoryEventsCapability", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
     )
-    aggregateFunctions: FolderType = o6.hasComponent(FolderType(nodeId="i=11172", browseName="AggregateFunctions"))
-    deleteAtTimeCapability: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2338", browseName="DeleteAtTimeCapability", dataType=o6.Boolean))
-    deleteEventCapability: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11501", browseName="DeleteEventCapability", dataType=o6.Boolean))
-    deleteRawCapability: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2337", browseName="DeleteRawCapability", dataType=o6.Boolean))
+    aggregateFunctions: FolderType = o6.hasComponent(FolderType(nodeId="i=11172", browseName="AggregateFunctions", modellingRule="Mandatory"))
+    deleteAtTimeCapability: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2338", browseName="DeleteAtTimeCapability", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
+    deleteEventCapability: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11501", browseName="DeleteEventCapability", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
+    deleteRawCapability: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2337", browseName="DeleteRawCapability", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
     insertAnnotationCapability: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=11270", browseName="InsertAnnotationCapability", dataType=o6.Boolean)
+        ns0_vartypes.PropertyType(nodeId="i=11270", browseName="InsertAnnotationCapability", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
     )
-    insertDataCapability: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2334", browseName="InsertDataCapability", dataType=o6.Boolean))
-    insertEventCapability: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11278", browseName="InsertEventCapability", dataType=o6.Boolean))
-    maxReturnDataValues: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11268", browseName="MaxReturnDataValues", dataType=o6.UInt32))
-    maxReturnEventValues: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11269", browseName="MaxReturnEventValues", dataType=o6.UInt32))
-    replaceDataCapability: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2335", browseName="ReplaceDataCapability", dataType=o6.Boolean))
-    replaceEventCapability: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11279", browseName="ReplaceEventCapability", dataType=o6.Boolean))
+    insertDataCapability: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2334", browseName="InsertDataCapability", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
+    insertEventCapability: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11278", browseName="InsertEventCapability", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
+    maxReturnDataValues: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11268", browseName="MaxReturnDataValues", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
+    maxReturnEventValues: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11269", browseName="MaxReturnEventValues", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
+    replaceDataCapability: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2335", browseName="ReplaceDataCapability", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
+    replaceEventCapability: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11279", browseName="ReplaceEventCapability", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
     serverTimestampSupported: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=19094", browseName="ServerTimestampSupported", dataType=o6.Boolean)
+        ns0_vartypes.PropertyType(nodeId="i=19094", browseName="ServerTimestampSupported", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1)
     )
-    updateDataCapability: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2336", browseName="UpdateDataCapability", dataType=o6.Boolean))
-    updateEventCapability: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11280", browseName="UpdateEventCapability", dataType=o6.Boolean))
+    updateDataCapability: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2336", browseName="UpdateDataCapability", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
+    updateEventCapability: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11280", browseName="UpdateEventCapability", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=2029", browseName="SessionDiagnosticsObjectType", displayName="SessionDiagnosticsObjectType")
 class SessionDiagnosticsObjectType(BaseObjectType):
     currentRoleIds: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=19303", browseName="CurrentRoleIds", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=19303", browseName="CurrentRoleIds", modellingRule="Optional", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
     )
     sessionDiagnostics: ns0_vartypes.SessionDiagnosticsVariableType
     sessionSecurityDiagnostics: ns0_vartypes.SessionSecurityDiagnosticsType
     subscriptionDiagnosticsArray: ns0_vartypes.SubscriptionDiagnosticsArrayType = o6.hasComponent(
         ns0_vartypes.SubscriptionDiagnosticsArrayType(
-            nodeId="i=2032", browseName="SubscriptionDiagnosticsArray", dataType=ns0_datypes.SubscriptionDiagnosticsDataType, valueRank=1, arrayDimensions=[0]
+            nodeId="i=2032",
+            browseName="SubscriptionDiagnosticsArray",
+            modellingRule="Mandatory",
+            dataType=ns0_datypes.SubscriptionDiagnosticsDataType,
+            valueRank=1,
+            arrayDimensions=[0],
         )
     )
 
@@ -2420,7 +2604,9 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="Certificate", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=19337", browseName="CreateSelfSignedCertificate", inputArgs=o6.hasProperty(o6.ns["i=19338"]), outputArgs=o6.hasProperty(o6.ns["i=19339"]))
+o6.call(
+    nodeId="i=19337", browseName="CreateSelfSignedCertificate", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=19338"]), outputArgs=o6.hasProperty(o6.ns["i=19339"])
+)
 
 ns0_vartypes.PropertyType(
     nodeId="i=19341",
@@ -2436,7 +2622,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="CertificateTypeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=19340", browseName="DeleteCertificate", inputArgs=o6.hasProperty(o6.ns["i=19341"]))
+o6.call(nodeId="i=19340", browseName="DeleteCertificate", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=19341"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=19354",
@@ -2470,7 +2656,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="ContinuationPointOut", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=19353", browseName="GetRecords", inputArgs=o6.hasProperty(o6.ns["i=19354"]), outputArgs=o6.hasProperty(o6.ns["i=19355"]))
+o6.call(nodeId="i=19353", browseName="GetRecords", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=19354"]), outputArgs=o6.hasProperty(o6.ns["i=19355"]))
 
 
 @o6.objecttype(nodeId="i=19370", browseName="LogEntryConditionClassType", displayName="LogEntryConditionClassType", isAbstract=True)
@@ -2482,11 +2668,13 @@ class LogEntryConditionClassType(BaseConditionClassType):
 class PubSubDiagnosticsType(BaseObjectType):
     counters: BaseObjectType
     diagnosticsLevel: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=19678", browseName="DiagnosticsLevel", dataType=ns0_datypes.DiagnosticsLevel)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=19678", browseName="DiagnosticsLevel", modellingRule="Mandatory", dataType=ns0_datypes.DiagnosticsLevel, valueRank=-1)
     )
-    liveValues: BaseObjectType = o6.hasComponent(BaseObjectType(nodeId="i=19722", browseName="LiveValues"))
-    reset: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="i=19689", browseName="Reset"))
-    subError: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=19690", browseName="SubError", dataType=o6.Boolean))
+    liveValues: BaseObjectType = o6.hasComponent(BaseObjectType(nodeId="i=19722", browseName="LiveValues", modellingRule="Mandatory"))
+    reset: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="i=19689", browseName="Reset", modellingRule="Mandatory"))
+    subError: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=19690", browseName="SubError", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
     totalError: ns0_vartypes.PubSubDiagnosticsCounterType
     totalInformation: ns0_vartypes.PubSubDiagnosticsCounterType
 
@@ -2543,33 +2731,43 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="Results", dataType=o6.NodeId("i=6"), valueRank=1, arrayDimensions=[0])],
 )
-o6.call(nodeId="i=19839", browseName="ConfigureSerialization", inputArgs=o6.hasProperty(o6.ns["i=19840"]), outputArgs=o6.hasProperty(o6.ns["i=19841"]))
+o6.call(nodeId="i=19839", browseName="ConfigureSerialization", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=19840"]), outputArgs=o6.hasProperty(o6.ns["i=19841"]))
 
 
 @o6.objecttype(nodeId="i=19824", browseName="SerializationEntityType", displayName="SerializationEntityType")
 class SerializationEntityType(BaseObjectType):
     configureSerialization: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=19839"])
     considerSubElementSerializationProperties: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=19829", browseName="ConsiderSubElementSerializationProperties", dataType=o6.Boolean)
+        ns0_vartypes.PropertyType(nodeId="i=19829", browseName="ConsiderSubElementSerializationProperties", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1)
     )
     customMetaDataProperties: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=19830", browseName="CustomMetaDataProperties", dataType=ns0_datypes.KeyValuePair, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=19830", browseName="CustomMetaDataProperties", modellingRule="Optional", dataType=ns0_datypes.KeyValuePair, valueRank=1, arrayDimensions=[0]
+        )
     )
-    customMetaDataRef: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19835", browseName="CustomMetaDataRef", dataType=o6.NodeId))
+    customMetaDataRef: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19835", browseName="CustomMetaDataRef", modellingRule="Optional", dataType=o6.NodeId, valueRank=-1)
+    )
     excludeReferenceTypes: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=19827", browseName="ExcludeReferenceTypes", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=19827", browseName="ExcludeReferenceTypes", modellingRule="Optional", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
     )
     includeDictionaryReference: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=19838", browseName="IncludeDictionaryReference", dataType=o6.Boolean)
+        ns0_vartypes.PropertyType(nodeId="i=19838", browseName="IncludeDictionaryReference", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1)
     )
     includeReferenceTypes: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=19826", browseName="IncludeReferenceTypes", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=19826", browseName="IncludeReferenceTypes", modellingRule="Optional", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
     )
-    includeSourceTimestamp: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19837", browseName="IncludeSourceTimestamp", dataType=o6.Boolean))
-    includeStatus: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19836", browseName="IncludeStatus", dataType=o6.Boolean))
-    serializationDepth: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19828", browseName="SerializationDepth", dataType=o6.UInt16))
+    includeSourceTimestamp: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19837", browseName="IncludeSourceTimestamp", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1)
+    )
+    includeStatus: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19836", browseName="IncludeStatus", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1)
+    )
+    serializationDepth: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19828", browseName="SerializationDepth", modellingRule="Optional", dataType=o6.UInt16, valueRank=-1)
+    )
     serializedData: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=19825", browseName="SerializedData", dataType=ns0_datypes.Structure)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=19825", browseName="SerializedData", modellingRule="Mandatory", dataType=ns0_datypes.Structure, valueRank=-1)
     )
 
 
@@ -2613,7 +2811,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="DataSetReaderNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=21082", browseName="AddDataSetReader", inputArgs=o6.hasProperty(o6.ns["i=21083"]), outputArgs=o6.hasProperty(o6.ns["i=21084"]))
+o6.call(nodeId="i=21082", browseName="AddDataSetReader", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=21083"]), outputArgs=o6.hasProperty(o6.ns["i=21084"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=21086",
@@ -2626,7 +2824,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="DataSetReaderNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=21085", browseName="RemoveDataSetReader", inputArgs=o6.hasProperty(o6.ns["i=21086"]))
+o6.call(nodeId="i=21085", browseName="RemoveDataSetReader", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=21086"]))
 
 
 @o6.objecttype(nodeId="i=21090", browseName="ReaderGroupTransportType", displayName="ReaderGroupTransportType", isAbstract=True)
@@ -2644,9 +2842,13 @@ class ReaderGroupType(PubSubGroupType):
     addDataSetReader: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=21082"])
     dataSetReaderName_: DataSetReaderType | None
     diagnostics: PubSubDiagnosticsReaderGroupType | None
-    messageSettings: ReaderGroupMessageType | None = o6.hasComponent(ReaderGroupMessageType(nodeId="i=21081", browseName="MessageSettings", _allow_abstract=True))
+    messageSettings: ReaderGroupMessageType | None = o6.hasComponent(
+        ReaderGroupMessageType(nodeId="i=21081", browseName="MessageSettings", modellingRule="Optional", _allow_abstract=True)
+    )
     removeDataSetReader: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=21085"])
-    transportSettings: ReaderGroupTransportType | None = o6.hasComponent(ReaderGroupTransportType(nodeId="i=21080", browseName="TransportSettings", _allow_abstract=True))
+    transportSettings: ReaderGroupTransportType | None = o6.hasComponent(
+        ReaderGroupTransportType(nodeId="i=21080", browseName="TransportSettings", modellingRule="Optional", _allow_abstract=True)
+    )
 
 
 @o6.objecttype(nodeId="i=21096", browseName="DataSetWriterMessageType", displayName="DataSetWriterMessageType", isAbstract=True)
@@ -2657,17 +2859,27 @@ class DataSetWriterMessageType(BaseObjectType):
 @o6.objecttype(nodeId="i=15298", browseName="DataSetWriterType", displayName="DataSetWriterType")
 class DataSetWriterType(BaseObjectType):
     dataSetFieldContentMask: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=21093", browseName="DataSetFieldContentMask", dataType=ns0_datypes.DataSetFieldContentMask)
+        ns0_vartypes.PropertyType(nodeId="i=21093", browseName="DataSetFieldContentMask", modellingRule="Mandatory", dataType=ns0_datypes.DataSetFieldContentMask, valueRank=-1)
     )
-    dataSetWriterId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21092", browseName="DataSetWriterId", dataType=o6.UInt16))
+    dataSetWriterId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21092", browseName="DataSetWriterId", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
+    )
     dataSetWriterProperties: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=17493", browseName="DataSetWriterProperties", dataType=ns0_datypes.KeyValuePair, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=17493", browseName="DataSetWriterProperties", modellingRule="Mandatory", dataType=ns0_datypes.KeyValuePair, valueRank=1, arrayDimensions=[0]
+        )
     )
     diagnostics: PubSubDiagnosticsDataSetWriterType | None
-    keyFrameCount: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21094", browseName="KeyFrameCount", dataType=o6.UInt32))
-    messageSettings: DataSetWriterMessageType | None = o6.hasComponent(DataSetWriterMessageType(nodeId="i=21095", browseName="MessageSettings", _allow_abstract=True))
+    keyFrameCount: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21094", browseName="KeyFrameCount", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
+    )
+    messageSettings: DataSetWriterMessageType | None = o6.hasComponent(
+        DataSetWriterMessageType(nodeId="i=21095", browseName="MessageSettings", modellingRule="Optional", _allow_abstract=True)
+    )
     status: PubSubStatusType
-    transportSettings: DataSetWriterTransportType | None = o6.hasComponent(DataSetWriterTransportType(nodeId="i=15303", browseName="TransportSettings", _allow_abstract=True))
+    transportSettings: DataSetWriterTransportType | None = o6.hasComponent(
+        DataSetWriterTransportType(nodeId="i=15303", browseName="TransportSettings", modellingRule="Optional", _allow_abstract=True)
+    )
 
 
 @o6.objecttype(nodeId="i=21104", browseName="DataSetReaderMessageType", displayName="DataSetReaderMessageType", isAbstract=True)
@@ -2680,129 +2892,221 @@ class DataSetReaderType(BaseObjectType):
     createDataSetMirror: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=17389"])
     createTargetVariables: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=17386"])
     dataSetFieldContentMask: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=21101", browseName="DataSetFieldContentMask", dataType=ns0_datypes.DataSetFieldContentMask)
+        ns0_vartypes.PropertyType(nodeId="i=21101", browseName="DataSetFieldContentMask", modellingRule="Mandatory", dataType=ns0_datypes.DataSetFieldContentMask, valueRank=-1)
     )
-    dataSetMetaData: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21100", browseName="DataSetMetaData", dataType=ns0_datypes.DataSetMetaDataType))
+    dataSetMetaData: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21100", browseName="DataSetMetaData", modellingRule="Mandatory", dataType=ns0_datypes.DataSetMetaDataType, valueRank=-1)
+    )
     dataSetReaderProperties: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=17494", browseName="DataSetReaderProperties", dataType=ns0_datypes.KeyValuePair, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=17494", browseName="DataSetReaderProperties", modellingRule="Mandatory", dataType=ns0_datypes.KeyValuePair, valueRank=1, arrayDimensions=[0]
+        )
     )
-    dataSetWriterId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21099", browseName="DataSetWriterId", dataType=o6.UInt16))
+    dataSetWriterId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21099", browseName="DataSetWriterId", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
+    )
     diagnostics: PubSubDiagnosticsDataSetReaderType | None
-    headerLayoutUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=17564", browseName="HeaderLayoutUri", dataType=o6.String))
-    keyFrameCount: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=17563", browseName="KeyFrameCount", dataType=o6.UInt32))
-    messageReceiveTimeout: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=21102", browseName="MessageReceiveTimeout", dataType=ns0_datypes.Duration)
+    headerLayoutUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=17564", browseName="HeaderLayoutUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
     )
-    messageSettings: DataSetReaderMessageType | None = o6.hasComponent(DataSetReaderMessageType(nodeId="i=21103", browseName="MessageSettings", _allow_abstract=True))
-    publisherId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21097", browseName="PublisherId"))
-    securityGroupId: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15933", browseName="SecurityGroupId", dataType=o6.String))
+    keyFrameCount: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=17563", browseName="KeyFrameCount", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
+    messageReceiveTimeout: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21102", browseName="MessageReceiveTimeout", modellingRule="Mandatory", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
+    messageSettings: DataSetReaderMessageType | None = o6.hasComponent(
+        DataSetReaderMessageType(nodeId="i=21103", browseName="MessageSettings", modellingRule="Optional", _allow_abstract=True)
+    )
+    publisherId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21097", browseName="PublisherId", modellingRule="Mandatory", valueRank=-1))
+    securityGroupId: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15933", browseName="SecurityGroupId", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
     securityKeyServices: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=15934", browseName="SecurityKeyServices", dataType=ns0_datypes.EndpointDescription, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=15934", browseName="SecurityKeyServices", modellingRule="Optional", dataType=ns0_datypes.EndpointDescription, valueRank=1, arrayDimensions=[0]
+        )
     )
     securityMode: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=15932", browseName="SecurityMode", dataType=ns0_datypes.MessageSecurityMode)
+        ns0_vartypes.PropertyType(nodeId="i=15932", browseName="SecurityMode", modellingRule="Optional", dataType=ns0_datypes.MessageSecurityMode, valueRank=-1)
     )
     status: PubSubStatusType
-    subscribedDataSet: SubscribedDataSetType = o6.hasComponent(SubscribedDataSetType(nodeId="i=15316", browseName="SubscribedDataSet"))
-    transportSettings: DataSetReaderTransportType | None = o6.hasComponent(DataSetReaderTransportType(nodeId="i=15311", browseName="TransportSettings", _allow_abstract=True))
-    writerGroupId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21098", browseName="WriterGroupId", dataType=o6.UInt16))
+    subscribedDataSet: SubscribedDataSetType = o6.hasComponent(SubscribedDataSetType(nodeId="i=15316", browseName="SubscribedDataSet", modellingRule="Mandatory"))
+    transportSettings: DataSetReaderTransportType | None = o6.hasComponent(
+        DataSetReaderTransportType(nodeId="i=15311", browseName="TransportSettings", modellingRule="Optional", _allow_abstract=True)
+    )
+    writerGroupId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21098", browseName="WriterGroupId", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=21105", browseName="UadpWriterGroupMessageType", displayName="UadpWriterGroupMessageType")
 class UadpWriterGroupMessageType(WriterGroupMessageType):
-    dataSetOrdering: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21107", browseName="DataSetOrdering", dataType=ns0_datypes.DataSetOrderingType))
-    groupVersion: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21106", browseName="GroupVersion", dataType=ns0_datypes.VersionTime))
+    dataSetOrdering: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21107", browseName="DataSetOrdering", modellingRule="Mandatory", dataType=ns0_datypes.DataSetOrderingType, valueRank=-1)
+    )
+    groupVersion: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21106", browseName="GroupVersion", modellingRule="Mandatory", dataType=ns0_datypes.VersionTime, valueRank=-1)
+    )
     networkMessageContentMask: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=21108", browseName="NetworkMessageContentMask", dataType=ns0_datypes.UadpNetworkMessageContentMask)
+        ns0_vartypes.PropertyType(
+            nodeId="i=21108", browseName="NetworkMessageContentMask", modellingRule="Mandatory", dataType=ns0_datypes.UadpNetworkMessageContentMask, valueRank=-1
+        )
     )
     publishingOffset: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=21110", browseName="PublishingOffset", dataType=ns0_datypes.Duration, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=21110", browseName="PublishingOffset", modellingRule="Mandatory", dataType=ns0_datypes.Duration, valueRank=1, arrayDimensions=[0])
     )
-    samplingOffset: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21109", browseName="SamplingOffset", dataType=ns0_datypes.Duration))
+    samplingOffset: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21109", browseName="SamplingOffset", modellingRule="Optional", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=21111", browseName="UadpDataSetWriterMessageType", displayName="UadpDataSetWriterMessageType")
 class UadpDataSetWriterMessageType(DataSetWriterMessageType):
-    configuredSize: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21113", browseName="ConfiguredSize", dataType=o6.UInt16))
-    dataSetMessageContentMask: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=21112", browseName="DataSetMessageContentMask", dataType=ns0_datypes.UadpDataSetMessageContentMask)
+    configuredSize: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21113", browseName="ConfiguredSize", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
     )
-    dataSetOffset: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21115", browseName="DataSetOffset", dataType=o6.UInt16))
-    networkMessageNumber: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21114", browseName="NetworkMessageNumber", dataType=o6.UInt16))
+    dataSetMessageContentMask: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(
+            nodeId="i=21112", browseName="DataSetMessageContentMask", modellingRule="Mandatory", dataType=ns0_datypes.UadpDataSetMessageContentMask, valueRank=-1
+        )
+    )
+    dataSetOffset: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21115", browseName="DataSetOffset", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
+    )
+    networkMessageNumber: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21114", browseName="NetworkMessageNumber", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=21116", browseName="UadpDataSetReaderMessageType", displayName="UadpDataSetReaderMessageType")
 class UadpDataSetReaderMessageType(DataSetReaderMessageType):
-    dataSetClassId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21120", browseName="DataSetClassId", dataType=o6.Guid))
+    dataSetClassId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21120", browseName="DataSetClassId", modellingRule="Mandatory", dataType=o6.Guid, valueRank=-1)
+    )
     dataSetMessageContentMask: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=21122", browseName="DataSetMessageContentMask", dataType=ns0_datypes.UadpDataSetMessageContentMask)
+        ns0_vartypes.PropertyType(
+            nodeId="i=21122", browseName="DataSetMessageContentMask", modellingRule="Mandatory", dataType=ns0_datypes.UadpDataSetMessageContentMask, valueRank=-1
+        )
     )
-    dataSetOffset: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=17477", browseName="DataSetOffset", dataType=o6.UInt16))
-    groupVersion: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21117", browseName="GroupVersion", dataType=ns0_datypes.VersionTime))
+    dataSetOffset: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=17477", browseName="DataSetOffset", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
+    )
+    groupVersion: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21117", browseName="GroupVersion", modellingRule="Mandatory", dataType=ns0_datypes.VersionTime, valueRank=-1)
+    )
     networkMessageContentMask: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=21121", browseName="NetworkMessageContentMask", dataType=ns0_datypes.UadpNetworkMessageContentMask)
+        ns0_vartypes.PropertyType(
+            nodeId="i=21121", browseName="NetworkMessageContentMask", modellingRule="Mandatory", dataType=ns0_datypes.UadpNetworkMessageContentMask, valueRank=-1
+        )
     )
-    networkMessageNumber: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21119", browseName="NetworkMessageNumber", dataType=o6.UInt16))
-    processingOffset: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21124", browseName="ProcessingOffset", dataType=ns0_datypes.Duration))
-    publishingInterval: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21123", browseName="PublishingInterval", dataType=ns0_datypes.Duration))
-    receiveOffset: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21125", browseName="ReceiveOffset", dataType=ns0_datypes.Duration))
+    networkMessageNumber: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21119", browseName="NetworkMessageNumber", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
+    )
+    processingOffset: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21124", browseName="ProcessingOffset", modellingRule="Mandatory", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
+    publishingInterval: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21123", browseName="PublishingInterval", modellingRule="Mandatory", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
+    receiveOffset: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21125", browseName="ReceiveOffset", modellingRule="Mandatory", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=21126", browseName="JsonWriterGroupMessageType", displayName="JsonWriterGroupMessageType")
 class JsonWriterGroupMessageType(WriterGroupMessageType):
     networkMessageContentMask: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=21127", browseName="NetworkMessageContentMask", dataType=ns0_datypes.JsonNetworkMessageContentMask)
+        ns0_vartypes.PropertyType(
+            nodeId="i=21127", browseName="NetworkMessageContentMask", modellingRule="Mandatory", dataType=ns0_datypes.JsonNetworkMessageContentMask, valueRank=-1
+        )
     )
 
 
 @o6.objecttype(nodeId="i=21128", browseName="JsonDataSetWriterMessageType", displayName="JsonDataSetWriterMessageType")
 class JsonDataSetWriterMessageType(DataSetWriterMessageType):
     dataSetMessageContentMask: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=21129", browseName="DataSetMessageContentMask", dataType=ns0_datypes.JsonDataSetMessageContentMask)
+        ns0_vartypes.PropertyType(
+            nodeId="i=21129", browseName="DataSetMessageContentMask", modellingRule="Mandatory", dataType=ns0_datypes.JsonDataSetMessageContentMask, valueRank=-1
+        )
     )
 
 
 @o6.objecttype(nodeId="i=21130", browseName="JsonDataSetReaderMessageType", displayName="JsonDataSetReaderMessageType")
 class JsonDataSetReaderMessageType(DataSetReaderMessageType):
     dataSetMessageContentMask: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=21132", browseName="DataSetMessageContentMask", dataType=ns0_datypes.JsonDataSetMessageContentMask)
+        ns0_vartypes.PropertyType(
+            nodeId="i=21132", browseName="DataSetMessageContentMask", modellingRule="Mandatory", dataType=ns0_datypes.JsonDataSetMessageContentMask, valueRank=-1
+        )
     )
     networkMessageContentMask: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=21131", browseName="NetworkMessageContentMask", dataType=ns0_datypes.JsonNetworkMessageContentMask)
+        ns0_vartypes.PropertyType(
+            nodeId="i=21131", browseName="NetworkMessageContentMask", modellingRule="Mandatory", dataType=ns0_datypes.JsonNetworkMessageContentMask, valueRank=-1
+        )
     )
 
 
 @o6.objecttype(nodeId="i=21136", browseName="BrokerWriterGroupTransportType", displayName="BrokerWriterGroupTransportType")
 class BrokerWriterGroupTransportType(WriterGroupTransportType):
-    authenticationProfileUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15247", browseName="AuthenticationProfileUri", dataType=o6.String))
-    queueName: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21137", browseName="QueueName", dataType=o6.String))
-    requestedDeliveryGuarantee: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=15249", browseName="RequestedDeliveryGuarantee", dataType=ns0_datypes.BrokerTransportQualityOfService)
+    authenticationProfileUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15247", browseName="AuthenticationProfileUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
     )
-    resourceUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15246", browseName="ResourceUri", dataType=o6.String))
+    queueName: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21137", browseName="QueueName", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    requestedDeliveryGuarantee: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(
+            nodeId="i=15249", browseName="RequestedDeliveryGuarantee", modellingRule="Mandatory", dataType=ns0_datypes.BrokerTransportQualityOfService, valueRank=-1
+        )
+    )
+    resourceUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15246", browseName="ResourceUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=21138", browseName="BrokerDataSetWriterTransportType", displayName="BrokerDataSetWriterTransportType")
 class BrokerDataSetWriterTransportType(DataSetWriterTransportType):
-    authenticationProfileUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15251", browseName="AuthenticationProfileUri", dataType=o6.String))
-    metaDataQueueName: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21140", browseName="MetaDataQueueName", dataType=o6.String))
-    metaDataUpdateTime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21141", browseName="MetaDataUpdateTime", dataType=ns0_datypes.Duration))
-    queueName: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21139", browseName="QueueName", dataType=o6.String))
-    requestedDeliveryGuarantee: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=15330", browseName="RequestedDeliveryGuarantee", dataType=ns0_datypes.BrokerTransportQualityOfService)
+    authenticationProfileUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15251", browseName="AuthenticationProfileUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
     )
-    resourceUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15250", browseName="ResourceUri", dataType=o6.String))
+    metaDataQueueName: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21140", browseName="MetaDataQueueName", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    metaDataUpdateTime: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21141", browseName="MetaDataUpdateTime", modellingRule="Mandatory", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
+    queueName: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21139", browseName="QueueName", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    requestedDeliveryGuarantee: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(
+            nodeId="i=15330", browseName="RequestedDeliveryGuarantee", modellingRule="Mandatory", dataType=ns0_datypes.BrokerTransportQualityOfService, valueRank=-1
+        )
+    )
+    resourceUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15250", browseName="ResourceUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=21142", browseName="BrokerDataSetReaderTransportType", displayName="BrokerDataSetReaderTransportType")
 class BrokerDataSetReaderTransportType(DataSetReaderTransportType):
-    authenticationProfileUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15419", browseName="AuthenticationProfileUri", dataType=o6.String))
-    metaDataQueueName: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21144", browseName="MetaDataQueueName", dataType=o6.String))
-    queueName: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21143", browseName="QueueName", dataType=o6.String))
-    requestedDeliveryGuarantee: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=15420", browseName="RequestedDeliveryGuarantee", dataType=ns0_datypes.BrokerTransportQualityOfService)
+    authenticationProfileUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15419", browseName="AuthenticationProfileUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
     )
-    resourceUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15334", browseName="ResourceUri", dataType=o6.String))
+    metaDataQueueName: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21144", browseName="MetaDataQueueName", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    queueName: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21143", browseName="QueueName", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    requestedDeliveryGuarantee: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(
+            nodeId="i=15420", browseName="RequestedDeliveryGuarantee", modellingRule="Mandatory", dataType=ns0_datypes.BrokerTransportQualityOfService, valueRank=-1
+        )
+    )
+    resourceUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15334", browseName="ResourceUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=21145", browseName="NetworkAddressType", displayName="NetworkAddressType", isAbstract=True)
@@ -2812,7 +3116,9 @@ class NetworkAddressType(BaseObjectType):
 
 @o6.objecttype(nodeId="i=21147", browseName="NetworkAddressUrlType", displayName="NetworkAddressUrlType")
 class NetworkAddressUrlType(NetworkAddressType):
-    url: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=21149", browseName="Url", dataType=o6.String))
+    url: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=21149", browseName="Url", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=23455", browseName="AliasNameType", displayName="AliasNameType")
@@ -2845,17 +3151,21 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="AliasNodeList", dataType=o6.NodeId("i=23468"), valueRank=1, arrayDimensions=[0])],
 )
-o6.call(nodeId="i=23462", browseName="FindAlias", inputArgs=o6.hasProperty(o6.ns["i=23463"]), outputArgs=o6.hasProperty(o6.ns["i=23464"]))
+o6.call(nodeId="i=23462", browseName="FindAlias", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=23463"]), outputArgs=o6.hasProperty(o6.ns["i=23464"]))
 
 
 @o6.objecttype(nodeId="i=23513", browseName="IOrderedObjectType", displayName="IOrderedObjectType", isAbstract=True)
 class IOrderedObjectType(BaseInterfaceType):
-    numberInList: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23517", browseName="NumberInList", dataType=ns0_datypes.Number))
+    numberInList: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23517", browseName="NumberInList", modellingRule="Mandatory", dataType=ns0_datypes.Number, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=23518", browseName="OrderedListType", displayName="OrderedListType")
 class OrderedListType(BaseObjectType):
-    nodeVersion: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23525", browseName="NodeVersion", dataType=o6.String))
+    nodeVersion: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23525", browseName="NodeVersion", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
     orderedObject_: BaseObjectType | None
 
 
@@ -2870,17 +3180,19 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="Certificates", dataType=o6.NodeId("i=15"), valueRank=1, arrayDimensions=[0])],
 )
-o6.call(nodeId="i=23526", browseName="GetRejectedList", outputArgs=o6.hasProperty(o6.ns["i=23527"]))
+o6.call(nodeId="i=23526", browseName="GetRejectedList", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["i=23527"]))
 
 
 @o6.objecttype(nodeId="i=12555", browseName="CertificateGroupType", displayName="CertificateGroupType")
 class CertificateGroupType(BaseObjectType):
     certificateExpired: CertificateExpirationAlarmType | None
     certificateTypes: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=13631", browseName="CertificateTypes", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=13631", browseName="CertificateTypes", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
     )
     getRejectedList: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=23526"])
-    purpose: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19398", browseName="Purpose", dataType=o6.NodeId))
+    purpose: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19398", browseName="Purpose", modellingRule="Optional", dataType=o6.NodeId, valueRank=-1)
+    )
     trustList: TrustListType
     trustListOutOfDate: TrustListOutOfDateAlarmType | None
 
@@ -2947,7 +3259,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="SubscribedDataSetNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=23811", browseName="AddSubscribedDataSet", inputArgs=o6.hasProperty(o6.ns["i=23812"]), outputArgs=o6.hasProperty(o6.ns["i=23813"]))
+o6.call(nodeId="i=23811", browseName="AddSubscribedDataSet", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=23812"]), outputArgs=o6.hasProperty(o6.ns["i=23813"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=23815",
@@ -2960,7 +3272,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="SubscribedDataSetNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=23814", browseName="RemoveSubscribedDataSet", inputArgs=o6.hasProperty(o6.ns["i=23815"]))
+o6.call(nodeId="i=23814", browseName="RemoveSubscribedDataSet", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=23815"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=23817",
@@ -2984,7 +3296,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="DataSetFolderNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=23816", browseName="AddDataSetFolder", inputArgs=o6.hasProperty(o6.ns["i=23817"]), outputArgs=o6.hasProperty(o6.ns["i=23818"]))
+o6.call(nodeId="i=23816", browseName="AddDataSetFolder", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=23817"]), outputArgs=o6.hasProperty(o6.ns["i=23818"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=23820",
@@ -2997,7 +3309,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="DataSetFolderNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=23819", browseName="RemoveDataSetFolder", inputArgs=o6.hasProperty(o6.ns["i=23820"]))
+o6.call(nodeId="i=23819", browseName="RemoveDataSetFolder", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=23820"]))
 
 
 @o6.objecttype(nodeId="i=23795", browseName="SubscribedDataSetFolderType", displayName="SubscribedDataSetFolderType")
@@ -3012,9 +3324,13 @@ class SubscribedDataSetFolderType(FolderType):
 
 @o6.objecttype(nodeId="i=23828", browseName="StandaloneSubscribedDataSetType", displayName="StandaloneSubscribedDataSetType")
 class StandaloneSubscribedDataSetType(BaseObjectType):
-    dataSetMetaData: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23830", browseName="DataSetMetaData", dataType=ns0_datypes.DataSetMetaDataType))
-    isConnected: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23831", browseName="IsConnected", dataType=o6.Boolean))
-    subscribedDataSet: SubscribedDataSetType = o6.hasComponent(SubscribedDataSetType(nodeId="i=23829", browseName="SubscribedDataSet"))
+    dataSetMetaData: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23830", browseName="DataSetMetaData", modellingRule="Mandatory", dataType=ns0_datypes.DataSetMetaDataType, valueRank=-1)
+    )
+    isConnected: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23831", browseName="IsConnected", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
+    subscribedDataSet: SubscribedDataSetType = o6.hasComponent(SubscribedDataSetType(nodeId="i=23829", browseName="SubscribedDataSet", modellingRule="Mandatory"))
 
 
 ns0_vartypes.PropertyType(
@@ -3042,7 +3358,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="AliasNodeList", dataType=o6.NodeId("i=24051"), valueRank=1, arrayDimensions=[0])],
 )
-o6.call(nodeId="i=23963", browseName="FindAliasVerbose", inputArgs=o6.hasProperty(o6.ns["i=23964"]), outputArgs=o6.hasProperty(o6.ns["i=23971"]))
+o6.call(nodeId="i=23963", browseName="FindAliasVerbose", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=23964"]), outputArgs=o6.hasProperty(o6.ns["i=23971"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=23973",
@@ -3071,7 +3387,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="ErrorCodes", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0])],
 )
-o6.call(nodeId="i=23972", browseName="AddAliasesToCategory", inputArgs=o6.hasProperty(o6.ns["i=23973"]), outputArgs=o6.hasProperty(o6.ns["i=23974"]))
+o6.call(nodeId="i=23972", browseName="AddAliasesToCategory", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=23973"]), outputArgs=o6.hasProperty(o6.ns["i=23974"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=23976",
@@ -3098,7 +3414,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="ErrorCodes", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0])],
 )
-o6.call(nodeId="i=23975", browseName="DeleteAliasesFromCategory", inputArgs=o6.hasProperty(o6.ns["i=23976"]), outputArgs=o6.hasProperty(o6.ns["i=23986"]))
+o6.call(nodeId="i=23975", browseName="DeleteAliasesFromCategory", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=23976"]), outputArgs=o6.hasProperty(o6.ns["i=23986"]))
 
 
 @o6.objecttype(nodeId="i=15620", browseName="RoleType", displayName="RoleType")
@@ -3107,20 +3423,24 @@ class RoleType(BaseObjectType):
     addEndpoint: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=16180"])
     addIdentity: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=15624"])
     applications: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=16174", browseName="Applications", dataType=o6.String, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=16174", browseName="Applications", modellingRule="Optional", dataType=o6.String, valueRank=1, arrayDimensions=[0])
     )
     applicationsExclude: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=15410", browseName="ApplicationsExclude", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0_vartypes.PropertyType(nodeId="i=15410", browseName="ApplicationsExclude", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1, accessLevel=3, userAccessLevel=1)
     )
-    customConfiguration: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=24139", browseName="CustomConfiguration", dataType=o6.Boolean))
+    customConfiguration: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=24139", browseName="CustomConfiguration", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1)
+    )
     endpoints: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=16175", browseName="Endpoints", dataType=ns0_datypes.EndpointType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=16175", browseName="Endpoints", modellingRule="Optional", dataType=ns0_datypes.EndpointType, valueRank=1, arrayDimensions=[0])
     )
     endpointsExclude: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=15411", browseName="EndpointsExclude", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0_vartypes.PropertyType(nodeId="i=15411", browseName="EndpointsExclude", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1, accessLevel=3, userAccessLevel=1)
     )
     identities: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=16173", browseName="Identities", dataType=ns0_datypes.IdentityMappingRuleType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=16173", browseName="Identities", modellingRule="Mandatory", dataType=ns0_datypes.IdentityMappingRuleType, valueRank=1, arrayDimensions=[0]
+        )
     )
     removeApplication: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=16178"])
     removeEndpoint: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=16182"])
@@ -3130,122 +3450,160 @@ class RoleType(BaseObjectType):
 @o6.objecttype(nodeId="i=24148", browseName="IIetfBaseNetworkInterfaceType", displayName="IIetfBaseNetworkInterfaceType", isAbstract=True)
 class IIetfBaseNetworkInterfaceType(BaseInterfaceType):
     adminStatus: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=24149", browseName="AdminStatus", dataType=ns0_datypes.InterfaceAdminStatus)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24149", browseName="AdminStatus", modellingRule="Mandatory", dataType=ns0_datypes.InterfaceAdminStatus, valueRank=-1)
     )
     operStatus: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=24150", browseName="OperStatus", dataType=ns0_datypes.InterfaceOperStatus)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24150", browseName="OperStatus", modellingRule="Mandatory", dataType=ns0_datypes.InterfaceOperStatus, valueRank=-1)
     )
-    physAddress: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=24151", browseName="PhysAddress", dataType=o6.String))
+    physAddress: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24151", browseName="PhysAddress", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
     speed: ns0_vartypes.AnalogUnitType
 
 
 @o6.objecttype(nodeId="i=24158", browseName="IIeeeBaseEthernetPortType", displayName="IIeeeBaseEthernetPortType", isAbstract=True)
 class IIeeeBaseEthernetPortType(BaseInterfaceType):
-    duplex: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=24165", browseName="Duplex", dataType=ns0_datypes.Duplex))
-    maxFrameLength: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=24166", browseName="MaxFrameLength", dataType=o6.UInt16))
+    duplex: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24165", browseName="Duplex", modellingRule="Mandatory", dataType=ns0_datypes.Duplex, valueRank=-1)
+    )
+    maxFrameLength: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24166", browseName="MaxFrameLength", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
+    )
     speed: ns0_vartypes.AnalogUnitType
 
 
 @o6.objecttype(nodeId="i=24167", browseName="IBaseEthernetCapabilitiesType", displayName="IBaseEthernetCapabilitiesType", isAbstract=True)
 class IBaseEthernetCapabilitiesType(BaseInterfaceType):
-    vlanTagCapable: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=24168", browseName="VlanTagCapable", dataType=o6.Boolean))
+    vlanTagCapable: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24168", browseName="VlanTagCapable", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=24169", browseName="ISrClassType", displayName="ISrClassType", isAbstract=True)
 class ISrClassType(BaseInterfaceType):
-    id: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=24170", browseName="Id", dataType=o6.Byte))
-    priority: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=24171", browseName="Priority", dataType=o6.Byte))
-    vid: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=24172", browseName="Vid", dataType=o6.UInt16))
+    id: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24170", browseName="Id", modellingRule="Mandatory", dataType=o6.Byte, valueRank=-1)
+    )
+    priority: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24171", browseName="Priority", modellingRule="Mandatory", dataType=o6.Byte, valueRank=-1)
+    )
+    vid: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24172", browseName="Vid", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=24173", browseName="IIeeeBaseTsnStreamType", displayName="IIeeeBaseTsnStreamType", isAbstract=True)
 class IIeeeBaseTsnStreamType(BaseInterfaceType):
     accumulatedLatency: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=24177", browseName="AccumulatedLatency", dataType=o6.UInt32)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24177", browseName="AccumulatedLatency", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
-    srClassId: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=24178", browseName="SrClassId", dataType=o6.Byte))
-    state: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=24176", browseName="State", dataType=ns0_datypes.TsnStreamState))
+    srClassId: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24178", browseName="SrClassId", modellingRule="Optional", dataType=o6.Byte, valueRank=-1)
+    )
+    state: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24176", browseName="State", modellingRule="Mandatory", dataType=ns0_datypes.TsnStreamState, valueRank=-1)
+    )
     streamId: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=24174", browseName="StreamId", dataType=o6.Byte, valueRank=1, arrayDimensions=[8])
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24174", browseName="StreamId", modellingRule="Mandatory", dataType=o6.Byte, valueRank=1, arrayDimensions=[8])
     )
-    streamName: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=24175", browseName="StreamName", dataType=o6.String))
+    streamName: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24175", browseName="StreamName", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=24179", browseName="IIeeeBaseTsnTrafficSpecificationType", displayName="IIeeeBaseTsnTrafficSpecificationType", isAbstract=True)
 class IIeeeBaseTsnTrafficSpecificationType(BaseInterfaceType):
     interval: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=24182", browseName="Interval", dataType=ns0_datypes.UnsignedRationalNumber)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24182", browseName="Interval", modellingRule="Mandatory", dataType=ns0_datypes.UnsignedRationalNumber, valueRank=-1)
     )
-    maxFrameSize: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=24181", browseName="MaxFrameSize", dataType=o6.UInt32))
-    maxIntervalFrames: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=24180", browseName="MaxIntervalFrames", dataType=o6.UInt16))
+    maxFrameSize: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24181", browseName="MaxFrameSize", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
+    maxIntervalFrames: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24180", browseName="MaxIntervalFrames", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=24183", browseName="IIeeeBaseTsnStatusStreamType", displayName="IIeeeBaseTsnStatusStreamType", isAbstract=True)
 class IIeeeBaseTsnStatusStreamType(BaseInterfaceType):
     failureCode: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=24186", browseName="FailureCode", dataType=ns0_datypes.TsnFailureCode)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24186", browseName="FailureCode", modellingRule="Mandatory", dataType=ns0_datypes.TsnFailureCode, valueRank=-1)
     )
     failureSystemIdentifier: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=24187", browseName="FailureSystemIdentifier", dataType=o6.Byte, valueRank=2, arrayDimensions=[0, 8])
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24187", browseName="FailureSystemIdentifier", modellingRule="Mandatory", dataType=o6.Byte, valueRank=2, arrayDimensions=[0, 8])
     )
     listenerStatus: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=24185", browseName="ListenerStatus", dataType=ns0_datypes.TsnListenerStatus)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24185", browseName="ListenerStatus", modellingRule="Optional", dataType=ns0_datypes.TsnListenerStatus, valueRank=-1)
     )
     talkerStatus: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=24184", browseName="TalkerStatus", dataType=ns0_datypes.TsnTalkerStatus)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24184", browseName="TalkerStatus", modellingRule="Optional", dataType=ns0_datypes.TsnTalkerStatus, valueRank=-1)
     )
 
 
 @o6.objecttype(nodeId="i=24188", browseName="IIeeeTsnInterfaceConfigurationType", displayName="IIeeeTsnInterfaceConfigurationType", isAbstract=True)
 class IIeeeTsnInterfaceConfigurationType(BaseInterfaceType):
-    interfaceName: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=24190", browseName="InterfaceName", dataType=o6.String))
-    macAddress: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=24189", browseName="MacAddress", dataType=o6.String))
+    interfaceName: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24190", browseName="InterfaceName", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
+    macAddress: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24189", browseName="MacAddress", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=24191", browseName="IIeeeTsnInterfaceConfigurationTalkerType", displayName="IIeeeTsnInterfaceConfigurationTalkerType", isAbstract=True)
 class IIeeeTsnInterfaceConfigurationTalkerType(IIeeeTsnInterfaceConfigurationType):
     timeAwareOffset: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=24194", browseName="TimeAwareOffset", dataType=o6.UInt32)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24194", browseName="TimeAwareOffset", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
 
 
 @o6.objecttype(nodeId="i=24195", browseName="IIeeeTsnInterfaceConfigurationListenerType", displayName="IIeeeTsnInterfaceConfigurationListenerType", isAbstract=True)
 class IIeeeTsnInterfaceConfigurationListenerType(IIeeeTsnInterfaceConfigurationType):
-    receiveOffset: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=24198", browseName="ReceiveOffset", dataType=o6.UInt32))
+    receiveOffset: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24198", browseName="ReceiveOffset", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=24199", browseName="IIeeeTsnMacAddressType", displayName="IIeeeTsnMacAddressType", isAbstract=True)
 class IIeeeTsnMacAddressType(BaseInterfaceType):
     destinationAddress: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=24200", browseName="DestinationAddress", dataType=o6.Byte, valueRank=1, arrayDimensions=[6])
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24200", browseName="DestinationAddress", modellingRule="Mandatory", dataType=o6.Byte, valueRank=1, arrayDimensions=[6])
     )
     sourceAddress: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=24201", browseName="SourceAddress", dataType=o6.Byte, valueRank=1, arrayDimensions=[6])
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24201", browseName="SourceAddress", modellingRule="Optional", dataType=o6.Byte, valueRank=1, arrayDimensions=[6])
     )
 
 
 @o6.objecttype(nodeId="i=24202", browseName="IIeeeTsnVlanTagType", displayName="IIeeeTsnVlanTagType", isAbstract=True)
 class IIeeeTsnVlanTagType(BaseInterfaceType):
-    priorityCodePoint: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=24204", browseName="PriorityCodePoint", dataType=o6.Byte))
-    vlanId: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=24203", browseName="VlanId", dataType=o6.UInt16))
+    priorityCodePoint: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24204", browseName="PriorityCodePoint", modellingRule="Mandatory", dataType=o6.Byte, valueRank=-1)
+    )
+    vlanId: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24203", browseName="VlanId", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=24205", browseName="IPriorityMappingEntryType", displayName="IPriorityMappingEntryType", isAbstract=True)
 class IPriorityMappingEntryType(BaseInterfaceType):
-    mappingUri: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=24206", browseName="MappingUri", dataType=o6.String))
-    priorityLabel: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=24207", browseName="PriorityLabel", dataType=o6.String))
+    mappingUri: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24206", browseName="MappingUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    priorityLabel: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24207", browseName="PriorityLabel", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
     priorityValue_DSCP: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=24209", browseName="PriorityValue_DSCP", dataType=o6.UInt32)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24209", browseName="PriorityValue_DSCP", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
     priorityValue_PCP: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=24208", browseName="PriorityValue_PCP", dataType=o6.Byte)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24208", browseName="PriorityValue_PCP", modellingRule="Optional", dataType=o6.Byte, valueRank=-1)
     )
 
 
 @o6.objecttype(nodeId="i=24233", browseName="IIeeeAutoNegotiationStatusType", displayName="IIeeeAutoNegotiationStatusType", isAbstract=True)
 class IIeeeAutoNegotiationStatusType(BaseInterfaceType):
     negotiationStatus: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=24234", browseName="NegotiationStatus", dataType=ns0_datypes.NegotiationStatus)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=24234", browseName="NegotiationStatus", modellingRule="Mandatory", dataType=ns0_datypes.NegotiationStatus, valueRank=-1)
     )
 
 
@@ -3265,7 +3623,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="Description", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=24269", browseName="AddUser", inputArgs=o6.hasProperty(o6.ns["i=24270"]))
+o6.call(nodeId="i=24269", browseName="AddUser", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=24270"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=24272",
@@ -3286,7 +3644,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="Description", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=24271", browseName="ModifyUser", inputArgs=o6.hasProperty(o6.ns["i=24272"]))
+o6.call(nodeId="i=24271", browseName="ModifyUser", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=24272"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=24274",
@@ -3299,7 +3657,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="UserName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=24273", browseName="RemoveUser", inputArgs=o6.hasProperty(o6.ns["i=24274"]))
+o6.call(nodeId="i=24273", browseName="RemoveUser", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=24274"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=24276",
@@ -3315,7 +3673,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="NewPassword", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=24275", browseName="ChangePassword", inputArgs=o6.hasProperty(o6.ns["i=24276"]))
+o6.call(nodeId="i=24275", browseName="ChangePassword", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=24276"]))
 
 
 @o6.objecttype(nodeId="i=24264", browseName="UserManagementType", displayName="UserManagementType")
@@ -3323,14 +3681,18 @@ class UserManagementType(BaseObjectType):
     addUser: o6.node.MethodNode = o6.hasComponent(o6.ns["i=24269"])
     changePassword: o6.node.MethodNode = o6.hasComponent(o6.ns["i=24275"])
     modifyUser: o6.node.MethodNode = o6.hasComponent(o6.ns["i=24271"])
-    passwordLength: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=24266", browseName="PasswordLength", dataType=ns0_datypes.Range))
-    passwordOptions: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=24267", browseName="PasswordOptions", dataType=ns0_datypes.PasswordOptionsMask))
+    passwordLength: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=24266", browseName="PasswordLength", modellingRule="Mandatory", dataType=ns0_datypes.Range, valueRank=-1)
+    )
+    passwordOptions: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=24267", browseName="PasswordOptions", modellingRule="Mandatory", dataType=ns0_datypes.PasswordOptionsMask, valueRank=-1)
+    )
     passwordRestrictions: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=24268", browseName="PasswordRestrictions", dataType=o6.LocalizedText)
+        ns0_vartypes.PropertyType(nodeId="i=24268", browseName="PasswordRestrictions", modellingRule="Optional", dataType=o6.LocalizedText, valueRank=-1)
     )
     removeUser: o6.node.MethodNode = o6.hasComponent(o6.ns["i=24273"])
     users: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=24265", browseName="Users", dataType=ns0_datypes.UserManagementDataType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=24265", browseName="Users", modellingRule="Mandatory", dataType=ns0_datypes.UserManagementDataType, valueRank=1, arrayDimensions=[0])
     )
 
 
@@ -3348,7 +3710,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=24312", browseName="Respond2", inputArgs=o6.hasProperty(o6.ns["i=24313"]))
+o6.call(nodeId="i=24312", browseName="Respond2", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=24313"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=24317",
@@ -3361,7 +3723,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=24316", browseName="Suppress2", inputArgs=o6.hasProperty(o6.ns["i=24317"]))
+o6.call(nodeId="i=24316", browseName="Suppress2", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=24317"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=24319",
@@ -3374,7 +3736,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=24318", browseName="Unsuppress2", inputArgs=o6.hasProperty(o6.ns["i=24319"]))
+o6.call(nodeId="i=24318", browseName="Unsuppress2", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=24319"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=24321",
@@ -3387,7 +3749,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=24320", browseName="RemoveFromService2", inputArgs=o6.hasProperty(o6.ns["i=24321"]))
+o6.call(nodeId="i=24320", browseName="RemoveFromService2", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=24321"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=24323",
@@ -3400,7 +3762,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=24322", browseName="PlaceInService2", inputArgs=o6.hasProperty(o6.ns["i=24323"]))
+o6.call(nodeId="i=24322", browseName="PlaceInService2", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=24323"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=24325",
@@ -3413,7 +3775,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=24324", browseName="Reset2", inputArgs=o6.hasProperty(o6.ns["i=24325"]))
+o6.call(nodeId="i=24324", browseName="Reset2", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=24325"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=24373",
@@ -3426,17 +3788,21 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="ContinuationPointIn", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=24372", browseName="ReleaseContinuationPoint", inputArgs=o6.hasProperty(o6.ns["i=24373"]))
+o6.call(nodeId="i=24372", browseName="ReleaseContinuationPoint", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=24373"]))
 
 
 @o6.objecttype(nodeId="i=19352", browseName="LogObjectType", displayName="LogObjectType")
 class LogObjectType(BaseObjectType):
     getRecords: o6.node.MethodNode = o6.hasComponent(o6.ns["i=19353"])
-    maxRecords: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19356", browseName="MaxRecords", dataType=o6.UInt32))
-    maxStorageDuration: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=19357", browseName="MaxStorageDuration", dataType=ns0_datypes.Duration)
+    maxRecords: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19356", browseName="MaxRecords", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
-    minimumSeverity: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19744", browseName="MinimumSeverity", dataType=o6.UInt16))
+    maxStorageDuration: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19357", browseName="MaxStorageDuration", modellingRule="Optional", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
+    minimumSeverity: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19744", browseName="MinimumSeverity", modellingRule="Optional", dataType=o6.UInt16, valueRank=-1)
+    )
     releaseContinuationPoint: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=24372"])
 
 
@@ -3451,7 +3817,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="Groups", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0])],
 )
-o6.call(nodeId="i=24744", browseName="GetGroupMemberships", outputArgs=o6.hasProperty(o6.ns["i=25154"]))
+o6.call(nodeId="i=24744", browseName="GetGroupMemberships", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["i=25154"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=24757",
@@ -3467,7 +3833,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=24756", browseName="TimedShelve2", inputArgs=o6.hasProperty(o6.ns["i=24757"]))
+o6.call(nodeId="i=24756", browseName="TimedShelve2", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=24757"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=24759",
@@ -3480,7 +3846,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=24758", browseName="Unshelve2", inputArgs=o6.hasProperty(o6.ns["i=24759"]))
+o6.call(nodeId="i=24758", browseName="Unshelve2", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=24759"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=24761",
@@ -3493,7 +3859,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=24760", browseName="OneShotShelve2", inputArgs=o6.hasProperty(o6.ns["i=24761"]))
+o6.call(nodeId="i=24760", browseName="OneShotShelve2", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=24761"]))
 
 
 @o6.objecttype(nodeId="i=2929", browseName="ShelvedStateMachineType", displayName="ShelvedStateMachineType")
@@ -3510,7 +3876,9 @@ class ShelvedStateMachineType(FiniteStateMachineType):
     timedShelvedToUnshelved: TransitionType
     unshelve: o6.node.MethodNode = o6.hasComponent(o6.ns["i=2947"])
     unshelve2: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=24758"])
-    unshelveTime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=9115", browseName="UnshelveTime", dataType=ns0_datypes.Duration))
+    unshelveTime: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=9115", browseName="UnshelveTime", modellingRule="Mandatory", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
     unshelved: StateType
     unshelvedToOneShotShelved: TransitionType
     unshelvedToTimedShelved: TransitionType
@@ -3520,59 +3888,87 @@ class ShelvedStateMachineType(FiniteStateMachineType):
 class FileType(BaseObjectType):
     close: o6.node.MethodNode = o6.hasComponent(o6.ns["i=11583"])
     getPosition: o6.node.MethodNode = o6.hasComponent(o6.ns["i=11590"])
-    lastModifiedTime: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25200", browseName="LastModifiedTime", dataType=o6.DateTime))
-    maxByteStringLength: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=24244", browseName="MaxByteStringLength", dataType=o6.UInt32))
-    mimeType: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=13341", browseName="MimeType", dataType=o6.String))
+    lastModifiedTime: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=25200", browseName="LastModifiedTime", modellingRule="Optional", dataType=o6.DateTime, valueRank=-1)
+    )
+    maxByteStringLength: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=24244", browseName="MaxByteStringLength", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
+    )
+    mimeType: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=13341", browseName="MimeType", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
     open: o6.node.MethodNode = o6.hasComponent(o6.ns["i=11580"])
-    openCount: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11579", browseName="OpenCount", dataType=o6.UInt16))
+    openCount: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11579", browseName="OpenCount", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
+    )
     read: o6.node.MethodNode = o6.hasComponent(o6.ns["i=11585"])
     setPosition: o6.node.MethodNode = o6.hasComponent(o6.ns["i=11593"])
-    size: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11576", browseName="Size", dataType=o6.UInt64))
-    userWritable: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=12687", browseName="UserWritable", dataType=o6.Boolean))
-    writable: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=12686", browseName="Writable", dataType=o6.Boolean))
+    size: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11576", browseName="Size", modellingRule="Mandatory", dataType=o6.UInt64, valueRank=-1))
+    userWritable: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=12687", browseName="UserWritable", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
+    writable: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=12686", browseName="Writable", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
     write: o6.node.MethodNode = o6.hasComponent(o6.ns["i=11588"])
 
 
 @o6.objecttype(nodeId="i=11595", browseName="AddressSpaceFileType", displayName="AddressSpaceFileType")
 class AddressSpaceFileType(FileType):
-    exportNamespace: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="i=11615", browseName="ExportNamespace"))
+    exportNamespace: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="i=11615", browseName="ExportNamespace", modellingRule="Optional"))
 
 
 @o6.objecttype(nodeId="i=15437", browseName="ConfigurationFileType", displayName="ConfigurationFileType")
 class ConfigurationFileType(FileType):
-    activityTimeout: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15503", browseName="ActivityTimeout", dataType=ns0_datypes.Duration))
+    activityTimeout: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15503", browseName="ActivityTimeout", modellingRule="Mandatory", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
     closeAndUpdate: o6.node.MethodNode = o6.hasComponent(o6.ns["i=15505"])
     confirmUpdate: o6.node.MethodNode = o6.hasComponent(o6.ns["i=15508"])
-    currentVersion: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15439", browseName="CurrentVersion", dataType=ns0_datypes.VersionTime))
-    lastUpdateTime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15438", browseName="LastUpdateTime", dataType=ns0_datypes.UtcTime))
-    supportedDataType: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15504", browseName="SupportedDataType", dataType=o6.NodeId))
+    currentVersion: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15439", browseName="CurrentVersion", modellingRule="Mandatory", dataType=ns0_datypes.VersionTime, valueRank=-1)
+    )
+    lastUpdateTime: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15438", browseName="LastUpdateTime", modellingRule="Mandatory", dataType=ns0_datypes.UtcTime, valueRank=-1)
+    )
+    supportedDataType: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15504", browseName="SupportedDataType", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=15550", browseName="ApplicationConfigurationFileType", displayName="ApplicationConfigurationFileType")
 class ApplicationConfigurationFileType(ConfigurationFileType):
     availableNetworks: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=15551", browseName="AvailableNetworks", dataType=o6.String, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=15551", browseName="AvailableNetworks", modellingRule="Mandatory", dataType=o6.String, valueRank=1, arrayDimensions=[0])
     )
-    availablePorts: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15552", browseName="AvailablePorts", dataType=ns0_datypes.NumericRange))
+    availablePorts: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15552", browseName="AvailablePorts", modellingRule="Mandatory", dataType=ns0_datypes.NumericRange, valueRank=-1)
+    )
     certificateGroupPurposes: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=19416", browseName="CertificateGroupPurposes", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=19416", browseName="CertificateGroupPurposes", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
     )
     certificateTypes: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=15555", browseName="CertificateTypes", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=15555", browseName="CertificateTypes", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
     )
-    maxCertificateGroups: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19415", browseName="MaxCertificateGroups", dataType=o6.UInt16))
-    maxEndpoints: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19414", browseName="MaxEndpoints", dataType=o6.UInt16))
+    maxCertificateGroups: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19415", browseName="MaxCertificateGroups", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
+    )
+    maxEndpoints: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19414", browseName="MaxEndpoints", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
+    )
     securityPolicyUris: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=15553", browseName="SecurityPolicyUris", dataType=ns0_datypes.UriString, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=15553", browseName="SecurityPolicyUris", modellingRule="Mandatory", dataType=ns0_datypes.UriString, valueRank=1, arrayDimensions=[0])
     )
     userTokenTypes: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=15554", browseName="UserTokenTypes", dataType=ns0_datypes.UserTokenPolicy, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=15554", browseName="UserTokenTypes", modellingRule="Mandatory", dataType=ns0_datypes.UserTokenPolicy, valueRank=1, arrayDimensions=[0])
     )
 
 
 @o6.objecttype(nodeId="i=25218", browseName="IVlanIdType", displayName="IVlanIdType", isAbstract=True)
 class IVlanIdType(BaseInterfaceType):
-    vlanId: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=25219", browseName="VlanId", dataType=o6.UInt16))
+    vlanId: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=25219", browseName="VlanId", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
+    )
 
 
 BaseObjectType(nodeId="i=25226", browseName="<InterfaceName>", modellingRule="OptionalPlaceholder")
@@ -3582,13 +3978,15 @@ o6.reference(o6.ns["i=25226"], "i=17603", IIetfBaseNetworkInterfaceType)
 @o6.objecttype(nodeId="i=25221", browseName="IetfBaseNetworkInterfaceType", displayName="IetfBaseNetworkInterfaceType", interfaces=[IIetfBaseNetworkInterfaceType])
 class IetfBaseNetworkInterfaceType(BaseObjectType):
     adminStatus: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=25222", browseName="AdminStatus", dataType=ns0_datypes.InterfaceAdminStatus)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=25222", browseName="AdminStatus", modellingRule="Mandatory", dataType=ns0_datypes.InterfaceAdminStatus, valueRank=-1)
     )
     interfaceName_: BaseObjectType | None = o6.reference(o6.ns["i=25226"], "i=25238")
     operStatus: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=25223", browseName="OperStatus", dataType=ns0_datypes.InterfaceOperStatus)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=25223", browseName="OperStatus", modellingRule="Mandatory", dataType=ns0_datypes.InterfaceOperStatus, valueRank=-1)
     )
-    physAddress: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=25224", browseName="PhysAddress", dataType=o6.String))
+    physAddress: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=25224", browseName="PhysAddress", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
     speed: ns0_vartypes.AnalogUnitType
 
 
@@ -3608,7 +4006,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="PriorityValue_DSCP", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=25229", browseName="AddPriorityMappingEntry", inputArgs=o6.hasProperty(o6.ns["i=25230"]))
+o6.call(nodeId="i=25229", browseName="AddPriorityMappingEntry", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=25230"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=25232",
@@ -3624,7 +4022,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="PriorityLabel", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="i=25231", browseName="DeletePriorityMappingEntry", inputArgs=o6.hasProperty(o6.ns["i=25232"]))
+o6.call(nodeId="i=25231", browseName="DeletePriorityMappingEntry", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=25232"]))
 
 
 @o6.objecttype(nodeId="i=25227", browseName="PriorityMappingTableType", displayName="PriorityMappingTableType")
@@ -3632,7 +4030,9 @@ class PriorityMappingTableType(BaseObjectType):
     addPriorityMappingEntry: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=25229"])
     deletePriorityMappingEntry: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=25231"])
     priorityMapppingEntries: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=25228", browseName="PriorityMapppingEntries", dataType=ns0_datypes.PriorityMappingEntryType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=25228", browseName="PriorityMapppingEntries", modellingRule="Mandatory", dataType=ns0_datypes.PriorityMappingEntryType, valueRank=1, arrayDimensions=[0]
+        )
     )
 
 
@@ -3658,7 +4058,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="SecurityGroupFolderNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=25312", browseName="AddSecurityGroupFolder", inputArgs=o6.hasProperty(o6.ns["i=25313"]), outputArgs=o6.hasProperty(o6.ns["i=25314"]))
+o6.call(nodeId="i=25312", browseName="AddSecurityGroupFolder", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=25313"]), outputArgs=o6.hasProperty(o6.ns["i=25314"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=25316",
@@ -3671,7 +4071,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="SecurityGroupFolderNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=25315", browseName="RemoveSecurityGroupFolder", inputArgs=o6.hasProperty(o6.ns["i=25316"]))
+o6.call(nodeId="i=25315", browseName="RemoveSecurityGroupFolder", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=25316"]))
 
 
 @o6.objecttype(nodeId="i=15452", browseName="SecurityGroupFolderType", displayName="SecurityGroupFolderType")
@@ -3683,7 +4083,7 @@ class SecurityGroupFolderType(FolderType):
     securityGroupFolderName_: SecurityGroupFolderType | None
     securityGroupName_: SecurityGroupType | None
     supportedSecurityPolicyUris: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=25317", browseName="SupportedSecurityPolicyUris", dataType=o6.String, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=25317", browseName="SupportedSecurityPolicyUris", modellingRule="Optional", dataType=o6.String, valueRank=1, arrayDimensions=[0])
     )
 
 
@@ -3716,7 +4116,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="PushTargetId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=25366", browseName="AddPushTarget", inputArgs=o6.hasProperty(o6.ns["i=25367"]), outputArgs=o6.hasProperty(o6.ns["i=25368"]))
+o6.call(nodeId="i=25366", browseName="AddPushTarget", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=25367"]), outputArgs=o6.hasProperty(o6.ns["i=25368"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=25370",
@@ -3729,7 +4129,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="PushTargetId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=25369", browseName="RemovePushTarget", inputArgs=o6.hasProperty(o6.ns["i=25370"]))
+o6.call(nodeId="i=25369", browseName="RemovePushTarget", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=25370"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=25372",
@@ -3753,7 +4153,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="PushTargetFolderNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=25371", browseName="AddPushTargetFolder", inputArgs=o6.hasProperty(o6.ns["i=25372"]), outputArgs=o6.hasProperty(o6.ns["i=25373"]))
+o6.call(nodeId="i=25371", browseName="AddPushTargetFolder", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=25372"]), outputArgs=o6.hasProperty(o6.ns["i=25373"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=25375",
@@ -3766,7 +4166,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="PushTargetFolderNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="i=25374", browseName="RemovePushTargetFolder", inputArgs=o6.hasProperty(o6.ns["i=25375"]))
+o6.call(nodeId="i=25374", browseName="RemovePushTargetFolder", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=25375"]))
 
 
 @o6.objecttype(nodeId="i=25346", browseName="PubSubKeyPushTargetFolderType", displayName="PubSubKeyPushTargetFolderType")
@@ -3809,7 +4209,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="DataSetWriterIds", dataType=o6.NodeId("i=5"), valueRank=1, arrayDimensions=[0]),
     ],
 )
-o6.call(nodeId="i=25505", browseName="ReserveIds", inputArgs=o6.hasProperty(o6.ns["i=25506"]), outputArgs=o6.hasProperty(o6.ns["i=25507"]))
+o6.call(nodeId="i=25505", browseName="ReserveIds", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=25506"]), outputArgs=o6.hasProperty(o6.ns["i=25507"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=25509",
@@ -3842,7 +4242,7 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="ConfigurationObjects", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0]),
     ],
 )
-o6.call(nodeId="i=25508", browseName="CloseAndUpdate", inputArgs=o6.hasProperty(o6.ns["i=25509"]), outputArgs=o6.hasProperty(o6.ns["i=25510"]))
+o6.call(nodeId="i=25508", browseName="CloseAndUpdate", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=25509"]), outputArgs=o6.hasProperty(o6.ns["i=25510"]))
 
 
 @o6.objecttype(nodeId="i=25482", browseName="PubSubConfigurationType", displayName="PubSubConfigurationType")
@@ -3854,11 +4254,17 @@ class PubSubConfigurationType(FileType):
 @o6.objecttype(nodeId="i=14509", browseName="PublishedDataSetType", displayName="PublishedDataSetType")
 class PublishedDataSetType(BaseObjectType):
     configurationVersion: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=14519", browseName="ConfigurationVersion", dataType=ns0_datypes.ConfigurationVersionDataType)
+        ns0_vartypes.PropertyType(nodeId="i=14519", browseName="ConfigurationVersion", modellingRule="Mandatory", dataType=ns0_datypes.ConfigurationVersionDataType, valueRank=-1)
     )
-    cyclicDataSet: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25521", browseName="CyclicDataSet", dataType=o6.Boolean))
-    dataSetClassId: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=16759", browseName="DataSetClassId", dataType=o6.Guid))
-    dataSetMetaData: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15229", browseName="DataSetMetaData", dataType=ns0_datypes.DataSetMetaDataType))
+    cyclicDataSet: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=25521", browseName="CyclicDataSet", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1)
+    )
+    dataSetClassId: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=16759", browseName="DataSetClassId", modellingRule="Optional", dataType=o6.Guid, valueRank=-1)
+    )
+    dataSetMetaData: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15229", browseName="DataSetMetaData", modellingRule="Mandatory", dataType=ns0_datypes.DataSetMetaDataType, valueRank=-1)
+    )
     dataSetWriterName_: DataSetWriterType | None
     extensionFields: ExtensionFieldsType | None
 
@@ -3867,68 +4273,102 @@ class PublishedDataSetType(BaseObjectType):
 class PublishedDataItemsType(PublishedDataSetType):
     addVariables: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=14555"])
     publishedData: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=14548", browseName="PublishedData", dataType=ns0_datypes.PublishedVariableDataType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=14548", browseName="PublishedData", modellingRule="Mandatory", dataType=ns0_datypes.PublishedVariableDataType, valueRank=1, arrayDimensions=[0]
+        )
     )
     removeVariables: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=14558"])
 
 
 @o6.objecttype(nodeId="i=14572", browseName="PublishedEventsType", displayName="PublishedEventsType")
 class PublishedEventsType(PublishedDataSetType):
-    eventNotifier: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=14586", browseName="EventNotifier", dataType=o6.NodeId))
-    filter: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=14588", browseName="Filter", dataType=ns0_datypes.ContentFilter))
+    eventNotifier: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=14586", browseName="EventNotifier", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
+    filter: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=14588", browseName="Filter", modellingRule="Mandatory", dataType=ns0_datypes.ContentFilter, valueRank=-1)
+    )
     modifyFieldSelection: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=15052"])
     selectedFields: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=14587", browseName="SelectedFields", dataType=ns0_datypes.SimpleAttributeOperand, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=14587", browseName="SelectedFields", modellingRule="Mandatory", dataType=ns0_datypes.SimpleAttributeOperand, valueRank=1, arrayDimensions=[0]
+        )
     )
 
 
 @o6.objecttype(nodeId="i=15064", browseName="DatagramConnectionTransportType", displayName="DatagramConnectionTransportType")
 class DatagramConnectionTransportType(ConnectionTransportType):
     datagramQos: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=25526", browseName="DatagramQos", dataType=ns0_datypes.QosDataType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=25526", browseName="DatagramQos", modellingRule="Optional", dataType=ns0_datypes.QosDataType, valueRank=1, arrayDimensions=[0])
     )
     discoveryAddress: NetworkAddressType
-    discoveryAnnounceRate: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23839", browseName="DiscoveryAnnounceRate", dataType=o6.UInt32))
-    discoveryMaxMessageSize: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=23840", browseName="DiscoveryMaxMessageSize", dataType=o6.UInt32)
+    discoveryAnnounceRate: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23839", browseName="DiscoveryAnnounceRate", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
-    qosCategory: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25525", browseName="QosCategory", dataType=o6.String))
+    discoveryMaxMessageSize: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23840", browseName="DiscoveryMaxMessageSize", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
+    )
+    qosCategory: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=25525", browseName="QosCategory", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=21133", browseName="DatagramWriterGroupTransportType", displayName="DatagramWriterGroupTransportType")
 class DatagramWriterGroupTransportType(WriterGroupTransportType):
     address: NetworkAddressType | None
     datagramQos: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=23847", browseName="DatagramQos", dataType=ns0_datypes.TransmitQosDataType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=23847", browseName="DatagramQos", modellingRule="Optional", dataType=ns0_datypes.TransmitQosDataType, valueRank=1, arrayDimensions=[0])
     )
-    discoveryAnnounceRate: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23848", browseName="DiscoveryAnnounceRate", dataType=o6.UInt32))
-    messageRepeatCount: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=21134", browseName="MessageRepeatCount", dataType=o6.Byte))
+    discoveryAnnounceRate: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23848", browseName="DiscoveryAnnounceRate", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
+    )
+    messageRepeatCount: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=21134", browseName="MessageRepeatCount", modellingRule="Optional", dataType=o6.Byte, valueRank=-1)
+    )
     messageRepeatDelay: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=21135", browseName="MessageRepeatDelay", dataType=ns0_datypes.Duration)
+        ns0_vartypes.PropertyType(nodeId="i=21135", browseName="MessageRepeatDelay", modellingRule="Optional", dataType=ns0_datypes.Duration, valueRank=-1)
     )
-    qosCategory: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25527", browseName="QosCategory", dataType=o6.String))
-    topic: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23849", browseName="Topic", dataType=o6.String))
+    qosCategory: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=25527", browseName="QosCategory", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
+    topic: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23849", browseName="Topic", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=24016", browseName="DatagramDataSetReaderTransportType", displayName="DatagramDataSetReaderTransportType")
 class DatagramDataSetReaderTransportType(DataSetReaderTransportType):
     address: NetworkAddressType | None
     datagramQos: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=24022", browseName="DatagramQos", dataType=ns0_datypes.ReceiveQosDataType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=24022", browseName="DatagramQos", modellingRule="Optional", dataType=ns0_datypes.ReceiveQosDataType, valueRank=1, arrayDimensions=[0])
     )
-    qosCategory: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25528", browseName="QosCategory", dataType=o6.String))
-    topic: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=24023", browseName="Topic", dataType=o6.String))
+    qosCategory: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=25528", browseName="QosCategory", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
+    topic: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=24023", browseName="Topic", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=15471", browseName="SecurityGroupType", displayName="SecurityGroupType")
 class SecurityGroupType(BaseObjectType):
-    forceKeyRotation: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="i=25625", browseName="ForceKeyRotation"))
-    invalidateKeys: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="i=25624", browseName="InvalidateKeys"))
-    keyLifetime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15046", browseName="KeyLifetime", dataType=ns0_datypes.Duration))
-    maxFutureKeyCount: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15048", browseName="MaxFutureKeyCount", dataType=o6.UInt32))
-    maxPastKeyCount: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15056", browseName="MaxPastKeyCount", dataType=o6.UInt32))
-    securityGroupId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15472", browseName="SecurityGroupId", dataType=o6.String))
-    securityPolicyUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15047", browseName="SecurityPolicyUri", dataType=o6.String))
+    forceKeyRotation: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="i=25625", browseName="ForceKeyRotation", modellingRule="Optional"))
+    invalidateKeys: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="i=25624", browseName="InvalidateKeys", modellingRule="Optional"))
+    keyLifetime: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15046", browseName="KeyLifetime", modellingRule="Mandatory", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
+    maxFutureKeyCount: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15048", browseName="MaxFutureKeyCount", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
+    maxPastKeyCount: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15056", browseName="MaxPastKeyCount", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
+    securityGroupId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15472", browseName="SecurityGroupId", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    securityPolicyUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15047", browseName="SecurityPolicyUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
 
 
 ns0_vartypes.PropertyType(
@@ -3953,7 +4393,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="ConnectResults", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0])],
 )
-o6.call(nodeId="i=25641", browseName="ConnectSecurityGroups", inputArgs=o6.hasProperty(o6.ns["i=25642"]), outputArgs=o6.hasProperty(o6.ns["i=25643"]))
+o6.call(nodeId="i=25641", browseName="ConnectSecurityGroups", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=25642"]), outputArgs=o6.hasProperty(o6.ns["i=25643"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=25645",
@@ -3977,23 +4417,39 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="DisconnectResults", dataType=o6.NodeId("i=19"), valueRank=1, arrayDimensions=[0])],
 )
-o6.call(nodeId="i=25644", browseName="DisconnectSecurityGroups", inputArgs=o6.hasProperty(o6.ns["i=25645"]), outputArgs=o6.hasProperty(o6.ns["i=25646"]))
+o6.call(nodeId="i=25644", browseName="DisconnectSecurityGroups", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["i=25645"]), outputArgs=o6.hasProperty(o6.ns["i=25646"]))
 
 
 @o6.objecttype(nodeId="i=25337", browseName="PubSubKeyPushTargetType", displayName="PubSubKeyPushTargetType")
 class PubSubKeyPushTargetType(BaseObjectType):
-    applicationUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25634", browseName="ApplicationUri", dataType=o6.String))
+    applicationUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=25634", browseName="ApplicationUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
     connectSecurityGroups: o6.node.MethodNode = o6.hasComponent(o6.ns["i=25641"])
     disconnectSecurityGroups: o6.node.MethodNode = o6.hasComponent(o6.ns["i=25644"])
-    endpointUrl: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25635", browseName="EndpointUrl", dataType=o6.String))
-    lastPushErrorTime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25640", browseName="LastPushErrorTime", dataType=o6.DateTime))
-    lastPushExecutionTime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25639", browseName="LastPushExecutionTime", dataType=o6.DateTime))
-    requestedKeyCount: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25637", browseName="RequestedKeyCount", dataType=o6.UInt16))
-    retryInterval: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25638", browseName="RetryInterval", dataType=ns0_datypes.Duration))
+    endpointUrl: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=25635", browseName="EndpointUrl", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    lastPushErrorTime: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=25640", browseName="LastPushErrorTime", modellingRule="Mandatory", dataType=o6.DateTime, valueRank=-1)
+    )
+    lastPushExecutionTime: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=25639", browseName="LastPushExecutionTime", modellingRule="Mandatory", dataType=o6.DateTime, valueRank=-1)
+    )
+    requestedKeyCount: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=25637", browseName="RequestedKeyCount", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
+    )
+    retryInterval: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=25638", browseName="RetryInterval", modellingRule="Mandatory", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
     securityGroupName_: SecurityGroupType | None
-    securityPolicyUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25340", browseName="SecurityPolicyUri", dataType=o6.String))
-    triggerKeyUpdate: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="i=25647", browseName="TriggerKeyUpdate"))
-    userTokenType: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25636", browseName="UserTokenType", dataType=ns0_datypes.UserTokenPolicy))
+    securityPolicyUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=25340", browseName="SecurityPolicyUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    triggerKeyUpdate: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="i=25647", browseName="TriggerKeyUpdate", modellingRule="Mandatory"))
+    userTokenType: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=25636", browseName="UserTokenType", modellingRule="Mandatory", dataType=ns0_datypes.UserTokenPolicy, valueRank=-1)
+    )
 
 
 ns0_vartypes.PropertyType(
@@ -4007,7 +4463,7 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="Tickets", dataType=o6.NodeId("i=25726"), valueRank=1, arrayDimensions=[0])],
 )
-o6.call(nodeId="i=26873", browseName="RequestTickets", outputArgs=o6.hasProperty(o6.ns["i=26874"]))
+o6.call(nodeId="i=26873", browseName="RequestTickets", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["i=26874"]))
 
 ns0_vartypes.PropertyType(
     nodeId="i=26876",
@@ -4020,93 +4476,133 @@ ns0_vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0_datypes.Argument(name="Registrars", dataType=o6.NodeId("i=308"), valueRank=1, arrayDimensions=[0])],
 )
-o6.call(nodeId="i=26875", browseName="SetRegistrarEndpoints", inputArgs=o6.hasProperty(o6.ns["i=26876"]))
+o6.call(nodeId="i=26875", browseName="SetRegistrarEndpoints", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=26876"]))
 
 
 @o6.objecttype(nodeId="i=26871", browseName="ProvisionableDeviceType", displayName="ProvisionableDeviceType")
 class ProvisionableDeviceType(BaseObjectType):
     applicationName_: ApplicationConfigurationType | None
-    isSingleton: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=26872", browseName="IsSingleton", dataType=o6.Boolean))
+    isSingleton: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=26872", browseName="IsSingleton", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
     requestTickets: o6.node.MethodNode = o6.hasComponent(o6.ns["i=26873"])
     setRegistrarEndpoints: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=26875"])
 
 
 @o6.objecttype(nodeId="i=2013", browseName="ServerCapabilitiesType", displayName="ServerCapabilitiesType")
 class ServerCapabilitiesType(BaseObjectType):
-    aggregateFunctions: FolderType = o6.hasComponent(FolderType(nodeId="i=2754", browseName="AggregateFunctions"))
+    aggregateFunctions: FolderType = o6.hasComponent(FolderType(nodeId="i=2754", browseName="AggregateFunctions", modellingRule="Mandatory"))
     conformanceUnits: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=24094", browseName="ConformanceUnits", dataType=o6.QualifiedName, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=24094", browseName="ConformanceUnits", modellingRule="Optional", dataType=o6.QualifiedName, valueRank=1, arrayDimensions=[0])
     )
     localeIdArray: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2016", browseName="LocaleIdArray", dataType=ns0_datypes.LocaleId, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=2016", browseName="LocaleIdArray", modellingRule="Mandatory", dataType=ns0_datypes.LocaleId, valueRank=1, arrayDimensions=[0])
     )
-    maxArrayLength: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11549", browseName="MaxArrayLength", dataType=o6.UInt32))
+    maxArrayLength: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11549", browseName="MaxArrayLength", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
+    )
     maxBrowseContinuationPoints: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2732", browseName="MaxBrowseContinuationPoints", dataType=o6.UInt16)
+        ns0_vartypes.PropertyType(nodeId="i=2732", browseName="MaxBrowseContinuationPoints", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
     )
-    maxByteStringLength: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=12910", browseName="MaxByteStringLength", dataType=o6.UInt32))
+    maxByteStringLength: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=12910", browseName="MaxByteStringLength", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
+    )
     maxHistoryContinuationPoints: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2734", browseName="MaxHistoryContinuationPoints", dataType=o6.UInt16)
+        ns0_vartypes.PropertyType(nodeId="i=2734", browseName="MaxHistoryContinuationPoints", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
     )
     maxLogObjectContinuationPoints: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=19809", browseName="MaxLogObjectContinuationPoints", dataType=o6.UInt16)
+        ns0_vartypes.PropertyType(nodeId="i=19809", browseName="MaxLogObjectContinuationPoints", modellingRule="Optional", dataType=o6.UInt16, valueRank=-1)
     )
-    maxMonitoredItems: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=24090", browseName="MaxMonitoredItems", dataType=o6.UInt32))
+    maxMonitoredItems: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=24090", browseName="MaxMonitoredItems", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
+    )
     maxMonitoredItemsPerSubscription: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=24103", browseName="MaxMonitoredItemsPerSubscription", dataType=o6.UInt32)
+        ns0_vartypes.PropertyType(nodeId="i=24103", browseName="MaxMonitoredItemsPerSubscription", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
     maxMonitoredItemsQueueSize: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=31770", browseName="MaxMonitoredItemsQueueSize", dataType=o6.UInt32)
+        ns0_vartypes.PropertyType(nodeId="i=31770", browseName="MaxMonitoredItemsQueueSize", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
-    maxQueryContinuationPoints: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2733", browseName="MaxQueryContinuationPoints", dataType=o6.UInt16))
+    maxQueryContinuationPoints: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2733", browseName="MaxQueryContinuationPoints", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
+    )
     maxSelectClauseParameters: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=24092", browseName="MaxSelectClauseParameters", dataType=o6.UInt32)
+        ns0_vartypes.PropertyType(nodeId="i=24092", browseName="MaxSelectClauseParameters", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
-    maxSessions: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=24088", browseName="MaxSessions", dataType=o6.UInt32))
-    maxStringLength: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11550", browseName="MaxStringLength", dataType=o6.UInt32))
-    maxSubscriptions: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=24089", browseName="MaxSubscriptions", dataType=o6.UInt32))
+    maxSessions: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=24088", browseName="MaxSessions", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
+    )
+    maxStringLength: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11550", browseName="MaxStringLength", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
+    )
+    maxSubscriptions: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=24089", browseName="MaxSubscriptions", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
+    )
     maxSubscriptionsPerSession: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=24091", browseName="MaxSubscriptionsPerSession", dataType=o6.UInt32)
+        ns0_vartypes.PropertyType(nodeId="i=24091", browseName="MaxSubscriptionsPerSession", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
     maxWhereClauseParameters: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=24093", browseName="MaxWhereClauseParameters", dataType=o6.UInt32)
+        ns0_vartypes.PropertyType(nodeId="i=24093", browseName="MaxWhereClauseParameters", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
     minSupportedSampleRate: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2017", browseName="MinSupportedSampleRate", dataType=ns0_datypes.Duration)
+        ns0_vartypes.PropertyType(nodeId="i=2017", browseName="MinSupportedSampleRate", modellingRule="Mandatory", dataType=ns0_datypes.Duration, valueRank=-1)
     )
-    modellingRules: FolderType = o6.hasComponent(FolderType(nodeId="i=2019", browseName="ModellingRules"))
-    operationLimits: OperationLimitsType | None = o6.hasComponent(OperationLimitsType(nodeId="i=11551", browseName="OperationLimits"))
+    modellingRules: FolderType = o6.hasComponent(FolderType(nodeId="i=2019", browseName="ModellingRules", modellingRule="Mandatory"))
+    operationLimits: OperationLimitsType | None = o6.hasComponent(OperationLimitsType(nodeId="i=11551", browseName="OperationLimits", modellingRule="Optional"))
     roleSet: RoleSetType | None
     serverProfileArray: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2014", browseName="ServerProfileArray", dataType=o6.String, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=2014", browseName="ServerProfileArray", modellingRule="Mandatory", dataType=o6.String, valueRank=1, arrayDimensions=[0])
     )
     softwareCertificates: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=3049", browseName="SoftwareCertificates", dataType=ns0_datypes.SignedSoftwareCertificate, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=3049", browseName="SoftwareCertificates", modellingRule="Mandatory", dataType=ns0_datypes.SignedSoftwareCertificate, valueRank=1, arrayDimensions=[0]
+        )
     )
     vendorCapability_: ns0_vartypes.ServerVendorCapabilityType | None = o6.hasComponent(
-        ns0_vartypes.ServerVendorCapabilityType(nodeId="i=11562", browseName="<VendorCapability>", modellingRule="OptionalPlaceholder", _allow_abstract=True)
+        ns0_vartypes.ServerVendorCapabilityType(nodeId="i=11562", browseName="<VendorCapability>", modellingRule="OptionalPlaceholder", _allow_abstract=True, valueRank=-1)
     )
 
 
 @o6.objecttype(nodeId="i=2041", browseName="BaseEventType", displayName="BaseEventType", isAbstract=True)
 class BaseEventType(BaseObjectType):
-    conditionClassId: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=31771", browseName="ConditionClassId", dataType=o6.NodeId))
-    conditionClassName: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=31772", browseName="ConditionClassName", dataType=o6.LocalizedText))
+    conditionClassId: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=31771", browseName="ConditionClassId", modellingRule="Optional", dataType=o6.NodeId, valueRank=-1)
+    )
+    conditionClassName: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=31772", browseName="ConditionClassName", modellingRule="Optional", dataType=o6.LocalizedText, valueRank=-1)
+    )
     conditionSubClassId: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=31773", browseName="ConditionSubClassId", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=31773", browseName="ConditionSubClassId", modellingRule="Optional", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
     )
     conditionSubClassName: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=31774", browseName="ConditionSubClassName", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=31774", browseName="ConditionSubClassName", modellingRule="Optional", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0])
     )
-    eventId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2042", browseName="EventId", dataType=o6.ByteString))
-    eventType: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2043", browseName="EventType", dataType=o6.NodeId))
-    localTime: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=3190", browseName="LocalTime", dataType=ns0_datypes.TimeZoneDataType))
-    message: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2050", browseName="Message", dataType=o6.LocalizedText))
-    receiveTime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2047", browseName="ReceiveTime", dataType=ns0_datypes.UtcTime))
-    severity: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2051", browseName="Severity", dataType=o6.UInt16))
-    sourceName: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2045", browseName="SourceName", dataType=o6.String))
-    sourceNode: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2044", browseName="SourceNode", dataType=o6.NodeId))
-    time: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2046", browseName="Time", dataType=ns0_datypes.UtcTime))
+    eventId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2042", browseName="EventId", modellingRule="Mandatory", dataType=o6.ByteString, valueRank=-1)
+    )
+    eventType: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2043", browseName="EventType", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
+    localTime: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=3190", browseName="LocalTime", modellingRule="Optional", dataType=ns0_datypes.TimeZoneDataType, valueRank=-1)
+    )
+    message: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2050", browseName="Message", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=-1)
+    )
+    receiveTime: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2047", browseName="ReceiveTime", modellingRule="Mandatory", dataType=ns0_datypes.UtcTime, valueRank=-1)
+    )
+    severity: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2051", browseName="Severity", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
+    )
+    sourceName: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2045", browseName="SourceName", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    sourceNode: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2044", browseName="SourceNode", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
+    time: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2046", browseName="Time", modellingRule="Mandatory", dataType=ns0_datypes.UtcTime, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -4135,12 +4631,24 @@ class BaseEventType(BaseObjectType):
     isAbstract=True,
 )
 class AuditEventType(BaseEventType):
-    actionTimeStamp: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2053", browseName="ActionTimeStamp", dataType=ns0_datypes.UtcTime))
-    clientApplicationUri: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19811", browseName="ClientApplicationUri", dataType=o6.String))
-    clientAuditEntryId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2056", browseName="ClientAuditEntryId", dataType=o6.String))
-    clientUserId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2057", browseName="ClientUserId", dataType=o6.String))
-    serverId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2055", browseName="ServerId", dataType=o6.String))
-    status: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2054", browseName="Status", dataType=o6.Boolean))
+    actionTimeStamp: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2053", browseName="ActionTimeStamp", modellingRule="Mandatory", dataType=ns0_datypes.UtcTime, valueRank=-1)
+    )
+    clientApplicationUri: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19811", browseName="ClientApplicationUri", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
+    clientAuditEntryId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2056", browseName="ClientAuditEntryId", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    clientUserId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2057", browseName="ClientUserId", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    serverId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2055", browseName="ServerId", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    status: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2054", browseName="Status", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -4169,7 +4677,9 @@ class AuditEventType(BaseEventType):
     isAbstract=True,
 )
 class AuditSecurityEventType(AuditEventType):
-    statusCodeId: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=17615", browseName="StatusCodeId", dataType=o6.StatusCode))
+    statusCodeId: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=17615", browseName="StatusCodeId", modellingRule="Optional", dataType=o6.StatusCode, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -4198,7 +4708,9 @@ class AuditSecurityEventType(AuditEventType):
     isAbstract=True,
 )
 class AuditChannelEventType(AuditSecurityEventType):
-    secureChannelId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2745", browseName="SecureChannelId", dataType=o6.String))
+    secureChannelId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2745", browseName="SecureChannelId", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -4228,16 +4740,26 @@ class AuditChannelEventType(AuditSecurityEventType):
 )
 class AuditOpenSecureChannelEventType(AuditChannelEventType):
     certificateErrorEventId: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=24135", browseName="CertificateErrorEventId", dataType=o6.ByteString)
+        ns0_vartypes.PropertyType(nodeId="i=24135", browseName="CertificateErrorEventId", modellingRule="Optional", dataType=o6.ByteString, valueRank=-1)
     )
-    clientCertificate: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2061", browseName="ClientCertificate", dataType=o6.ByteString))
+    clientCertificate: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2061", browseName="ClientCertificate", modellingRule="Mandatory", dataType=o6.ByteString, valueRank=-1)
+    )
     clientCertificateThumbprint: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2746", browseName="ClientCertificateThumbprint", dataType=o6.String)
+        ns0_vartypes.PropertyType(nodeId="i=2746", browseName="ClientCertificateThumbprint", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
     )
-    requestType: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2062", browseName="RequestType", dataType=ns0_datypes.SecurityTokenRequestType))
-    requestedLifetime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2066", browseName="RequestedLifetime", dataType=ns0_datypes.Duration))
-    securityMode: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2065", browseName="SecurityMode", dataType=ns0_datypes.MessageSecurityMode))
-    securityPolicyUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2063", browseName="SecurityPolicyUri", dataType=o6.String))
+    requestType: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2062", browseName="RequestType", modellingRule="Mandatory", dataType=ns0_datypes.SecurityTokenRequestType, valueRank=-1)
+    )
+    requestedLifetime: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2066", browseName="RequestedLifetime", modellingRule="Mandatory", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
+    securityMode: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2065", browseName="SecurityMode", modellingRule="Mandatory", dataType=ns0_datypes.MessageSecurityMode, valueRank=-1)
+    )
+    securityPolicyUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2063", browseName="SecurityPolicyUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -4266,7 +4788,9 @@ class AuditOpenSecureChannelEventType(AuditChannelEventType):
     isAbstract=True,
 )
 class AuditSessionEventType(AuditSecurityEventType):
-    sessionId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2070", browseName="SessionId", dataType=o6.NodeId))
+    sessionId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2070", browseName="SessionId", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -4295,12 +4819,18 @@ class AuditSessionEventType(AuditSecurityEventType):
     isAbstract=True,
 )
 class AuditCreateSessionEventType(AuditSessionEventType):
-    clientCertificate: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2073", browseName="ClientCertificate", dataType=o6.ByteString))
-    clientCertificateThumbprint: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2747", browseName="ClientCertificateThumbprint", dataType=o6.String)
+    clientCertificate: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2073", browseName="ClientCertificate", modellingRule="Mandatory", dataType=o6.ByteString, valueRank=-1)
     )
-    revisedSessionTimeout: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2074", browseName="RevisedSessionTimeout", dataType=ns0_datypes.Duration))
-    secureChannelId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2072", browseName="SecureChannelId", dataType=o6.String))
+    clientCertificateThumbprint: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2747", browseName="ClientCertificateThumbprint", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    revisedSessionTimeout: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2074", browseName="RevisedSessionTimeout", modellingRule="Mandatory", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
+    secureChannelId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2072", browseName="SecureChannelId", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -4330,14 +4860,18 @@ class AuditCreateSessionEventType(AuditSessionEventType):
 )
 class AuditActivateSessionEventType(AuditSessionEventType):
     clientSoftwareCertificates: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2076", browseName="ClientSoftwareCertificates", dataType=ns0_datypes.SignedSoftwareCertificate, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=2076", browseName="ClientSoftwareCertificates", modellingRule="Mandatory", dataType=ns0_datypes.SignedSoftwareCertificate, valueRank=1, arrayDimensions=[0]
+        )
     )
     currentRoleIds: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=19304", browseName="CurrentRoleIds", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=19304", browseName="CurrentRoleIds", modellingRule="Optional", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
     )
-    secureChannelId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11485", browseName="SecureChannelId", dataType=o6.String))
+    secureChannelId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11485", browseName="SecureChannelId", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
     userIdentityToken: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2077", browseName="UserIdentityToken", dataType=ns0_datypes.UserIdentityToken)
+        ns0_vartypes.PropertyType(nodeId="i=2077", browseName="UserIdentityToken", modellingRule="Mandatory", dataType=ns0_datypes.UserIdentityToken, valueRank=-1)
     )
 
 
@@ -4367,7 +4901,9 @@ class AuditActivateSessionEventType(AuditSessionEventType):
     isAbstract=True,
 )
 class AuditCancelEventType(AuditSessionEventType):
-    requestHandle: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2079", browseName="RequestHandle", dataType=o6.UInt32))
+    requestHandle: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2079", browseName="RequestHandle", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -4396,7 +4932,9 @@ class AuditCancelEventType(AuditSessionEventType):
     isAbstract=True,
 )
 class AuditCertificateEventType(AuditSecurityEventType):
-    certificate: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2081", browseName="Certificate", dataType=o6.ByteString))
+    certificate: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2081", browseName="Certificate", modellingRule="Mandatory", dataType=o6.ByteString, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -4425,8 +4963,12 @@ class AuditCertificateEventType(AuditSecurityEventType):
     isAbstract=True,
 )
 class AuditCertificateDataMismatchEventType(AuditCertificateEventType):
-    invalidHostname: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2083", browseName="InvalidHostname", dataType=o6.String))
-    invalidUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2084", browseName="InvalidUri", dataType=o6.String))
+    invalidHostname: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2083", browseName="InvalidHostname", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    invalidUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2084", browseName="InvalidUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -4630,7 +5172,7 @@ class AuditNodeManagementEventType(AuditEventType):
 )
 class AuditAddNodesEventType(AuditNodeManagementEventType):
     nodesToAdd: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2092", browseName="NodesToAdd", dataType=ns0_datypes.AddNodesItem, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=2092", browseName="NodesToAdd", modellingRule="Mandatory", dataType=ns0_datypes.AddNodesItem, valueRank=1, arrayDimensions=[0])
     )
 
 
@@ -4661,7 +5203,7 @@ class AuditAddNodesEventType(AuditNodeManagementEventType):
 )
 class AuditDeleteNodesEventType(AuditNodeManagementEventType):
     nodesToDelete: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2094", browseName="NodesToDelete", dataType=ns0_datypes.DeleteNodesItem, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=2094", browseName="NodesToDelete", modellingRule="Mandatory", dataType=ns0_datypes.DeleteNodesItem, valueRank=1, arrayDimensions=[0])
     )
 
 
@@ -4692,7 +5234,9 @@ class AuditDeleteNodesEventType(AuditNodeManagementEventType):
 )
 class AuditAddReferencesEventType(AuditNodeManagementEventType):
     referencesToAdd: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2096", browseName="ReferencesToAdd", dataType=ns0_datypes.AddReferencesItem, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=2096", browseName="ReferencesToAdd", modellingRule="Mandatory", dataType=ns0_datypes.AddReferencesItem, valueRank=1, arrayDimensions=[0]
+        )
     )
 
 
@@ -4723,7 +5267,9 @@ class AuditAddReferencesEventType(AuditNodeManagementEventType):
 )
 class AuditDeleteReferencesEventType(AuditNodeManagementEventType):
     referencesToDelete: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2098", browseName="ReferencesToDelete", dataType=ns0_datypes.DeleteReferencesItem, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=2098", browseName="ReferencesToDelete", modellingRule="Mandatory", dataType=ns0_datypes.DeleteReferencesItem, valueRank=1, arrayDimensions=[0]
+        )
     )
 
 
@@ -4782,10 +5328,14 @@ class AuditUpdateEventType(AuditEventType):
     isAbstract=True,
 )
 class AuditWriteUpdateEventType(AuditUpdateEventType):
-    attributeId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2750", browseName="AttributeId", dataType=o6.UInt32))
-    indexRange: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2101", browseName="IndexRange", dataType=ns0_datypes.NumericRange))
-    newValue: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2103", browseName="NewValue"))
-    oldValue: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2102", browseName="OldValue"))
+    attributeId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2750", browseName="AttributeId", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
+    indexRange: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2101", browseName="IndexRange", modellingRule="Mandatory", dataType=ns0_datypes.NumericRange, valueRank=-1)
+    )
+    newValue: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2103", browseName="NewValue", modellingRule="Mandatory", valueRank=-1))
+    oldValue: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2102", browseName="OldValue", modellingRule="Mandatory", valueRank=-1))
 
 
 @o6.objecttype(
@@ -4814,7 +5364,9 @@ class AuditWriteUpdateEventType(AuditUpdateEventType):
     isAbstract=True,
 )
 class AuditHistoryUpdateEventType(AuditUpdateEventType):
-    parameterDataTypeId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2751", browseName="ParameterDataTypeId", dataType=o6.NodeId))
+    parameterDataTypeId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2751", browseName="ParameterDataTypeId", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -4843,10 +5395,18 @@ class AuditHistoryUpdateEventType(AuditUpdateEventType):
     isAbstract=True,
 )
 class AuditUpdateMethodEventType(AuditEventType):
-    inputArguments: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2129", browseName="InputArguments", valueRank=1, arrayDimensions=[0]))
-    methodId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2128", browseName="MethodId", dataType=o6.NodeId))
-    outputArguments: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19306", browseName="OutputArguments", valueRank=1, arrayDimensions=[0]))
-    statusCodeId: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19305", browseName="StatusCodeId", dataType=o6.StatusCode))
+    inputArguments: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2129", browseName="InputArguments", modellingRule="Mandatory", valueRank=1, arrayDimensions=[0])
+    )
+    methodId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2128", browseName="MethodId", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
+    outputArguments: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19306", browseName="OutputArguments", modellingRule="Optional", valueRank=1, arrayDimensions=[0])
+    )
+    statusCodeId: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19305", browseName="StatusCodeId", modellingRule="Optional", dataType=o6.StatusCode, valueRank=-1)
+    )
 
 
 o6.reference(o6.ns["i=18666"], "i=3065", AuditUpdateMethodEventType)
@@ -4870,7 +5430,9 @@ class BaseModelChangeEventType(BaseEventType):
 @o6.objecttype(nodeId="i=2133", browseName="GeneralModelChangeEventType", displayName="GeneralModelChangeEventType", isAbstract=True)
 class GeneralModelChangeEventType(BaseModelChangeEventType):
     changes: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2134", browseName="Changes", dataType=ns0_datypes.ModelChangeStructureDataType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=2134", browseName="Changes", modellingRule="Mandatory", dataType=ns0_datypes.ModelChangeStructureDataType, valueRank=1, arrayDimensions=[0]
+        )
     )
 
 
@@ -4910,19 +5472,23 @@ class TransitionEventType(BaseEventType):
     isAbstract=True,
 )
 class AuditUpdateStateEventType(AuditUpdateMethodEventType):
-    newStateId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2778", browseName="NewStateId"))
-    oldStateId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2777", browseName="OldStateId"))
+    newStateId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2778", browseName="NewStateId", modellingRule="Mandatory", valueRank=-1))
+    oldStateId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2777", browseName="OldStateId", modellingRule="Mandatory", valueRank=-1))
 
 
 @o6.objecttype(nodeId="i=2378", browseName="ProgramTransitionEventType", displayName="ProgramTransitionEventType", isAbstract=True)
 class ProgramTransitionEventType(TransitionEventType):
-    intermediateResult: ns0_vartypes.BaseDataVariableType = o6.hasComponent(ns0_vartypes.BaseDataVariableType(nodeId="i=2379", browseName="IntermediateResult"))
+    intermediateResult: ns0_vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0_vartypes.BaseDataVariableType(nodeId="i=2379", browseName="IntermediateResult", modellingRule="Mandatory", valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=2738", browseName="SemanticChangeEventType", displayName="SemanticChangeEventType", isAbstract=True)
 class SemanticChangeEventType(BaseEventType):
     changes: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2739", browseName="Changes", dataType=ns0_datypes.SemanticChangeStructureDataType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=2739", browseName="Changes", modellingRule="Mandatory", dataType=ns0_datypes.SemanticChangeStructureDataType, valueRank=1, arrayDimensions=[0]
+        )
     )
 
 
@@ -4952,7 +5518,9 @@ class SemanticChangeEventType(BaseEventType):
     isAbstract=True,
 )
 class AuditUrlMismatchEventType(AuditCreateSessionEventType):
-    endpointUrl: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2749", browseName="EndpointUrl", dataType=o6.String))
+    endpointUrl: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2749", browseName="EndpointUrl", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=2787", browseName="RefreshStartEventType", displayName="RefreshStartEventType", isAbstract=True)
@@ -5063,8 +5631,12 @@ o6.reference(o6.ns["i=9028"], "i=3065", AuditConditionEnableEventType)
     },
 )
 class AuditConditionCommentEventType(AuditConditionEventType):
-    comment: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11851", browseName="Comment", dataType=o6.LocalizedText))
-    conditionEventId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=17222", browseName="ConditionEventId", dataType=o6.ByteString))
+    comment: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11851", browseName="Comment", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=-1)
+    )
+    conditionEventId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=17222", browseName="ConditionEventId", modellingRule="Mandatory", dataType=o6.ByteString, valueRank=-1)
+    )
 
 
 o6.reference(o6.ns["i=9029"], "i=3065", AuditConditionCommentEventType)
@@ -5096,17 +5668,21 @@ o6.reference(o6.ns["i=9029"], "i=3065", AuditConditionCommentEventType)
     isAbstract=True,
 )
 class AuditHistoryEventUpdateEventType(AuditHistoryUpdateEventType):
-    filter: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=3003", browseName="Filter", dataType=ns0_datypes.EventFilter))
+    filter: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=3003", browseName="Filter", modellingRule="Mandatory", dataType=ns0_datypes.EventFilter, valueRank=-1)
+    )
     newValues: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=3029", browseName="NewValues", dataType=ns0_datypes.HistoryEventFieldList, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=3029", browseName="NewValues", modellingRule="Mandatory", dataType=ns0_datypes.HistoryEventFieldList, valueRank=1, arrayDimensions=[0])
     )
     oldValues: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=3030", browseName="OldValues", dataType=ns0_datypes.HistoryEventFieldList, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=3030", browseName="OldValues", modellingRule="Mandatory", dataType=ns0_datypes.HistoryEventFieldList, valueRank=1, arrayDimensions=[0])
     )
     performInsertReplace: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=3028", browseName="PerformInsertReplace", dataType=ns0_datypes.PerformUpdateType)
+        ns0_vartypes.PropertyType(nodeId="i=3028", browseName="PerformInsertReplace", modellingRule="Mandatory", dataType=ns0_datypes.PerformUpdateType, valueRank=-1)
     )
-    updatedNode: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=3025", browseName="UpdatedNode", dataType=o6.NodeId))
+    updatedNode: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=3025", browseName="UpdatedNode", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -5136,15 +5712,17 @@ class AuditHistoryEventUpdateEventType(AuditHistoryUpdateEventType):
 )
 class AuditHistoryValueUpdateEventType(AuditHistoryUpdateEventType):
     newValues: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=3032", browseName="NewValues", dataType=o6.DataValue, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=3032", browseName="NewValues", modellingRule="Mandatory", dataType=o6.DataValue, valueRank=1, arrayDimensions=[0])
     )
     oldValues: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=3033", browseName="OldValues", dataType=o6.DataValue, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=3033", browseName="OldValues", modellingRule="Mandatory", dataType=o6.DataValue, valueRank=1, arrayDimensions=[0])
     )
     performInsertReplace: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=3031", browseName="PerformInsertReplace", dataType=ns0_datypes.PerformUpdateType)
+        ns0_vartypes.PropertyType(nodeId="i=3031", browseName="PerformInsertReplace", modellingRule="Mandatory", dataType=ns0_datypes.PerformUpdateType, valueRank=-1)
     )
-    updatedNode: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=3026", browseName="UpdatedNode", dataType=o6.NodeId))
+    updatedNode: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=3026", browseName="UpdatedNode", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -5173,7 +5751,9 @@ class AuditHistoryValueUpdateEventType(AuditHistoryUpdateEventType):
     isAbstract=True,
 )
 class AuditHistoryDeleteEventType(AuditHistoryUpdateEventType):
-    updatedNode: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=3027", browseName="UpdatedNode", dataType=o6.NodeId))
+    updatedNode: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=3027", browseName="UpdatedNode", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -5202,12 +5782,18 @@ class AuditHistoryDeleteEventType(AuditHistoryUpdateEventType):
     isAbstract=True,
 )
 class AuditHistoryRawModifyDeleteEventType(AuditHistoryDeleteEventType):
-    endTime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=3017", browseName="EndTime", dataType=ns0_datypes.UtcTime))
-    isDeleteModified: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=3015", browseName="IsDeleteModified", dataType=o6.Boolean))
-    oldValues: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=3034", browseName="OldValues", dataType=o6.DataValue, valueRank=1, arrayDimensions=[0])
+    endTime: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=3017", browseName="EndTime", modellingRule="Mandatory", dataType=ns0_datypes.UtcTime, valueRank=-1)
     )
-    startTime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=3016", browseName="StartTime", dataType=ns0_datypes.UtcTime))
+    isDeleteModified: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=3015", browseName="IsDeleteModified", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
+    oldValues: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=3034", browseName="OldValues", modellingRule="Mandatory", dataType=o6.DataValue, valueRank=1, arrayDimensions=[0])
+    )
+    startTime: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=3016", browseName="StartTime", modellingRule="Mandatory", dataType=ns0_datypes.UtcTime, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -5237,10 +5823,10 @@ class AuditHistoryRawModifyDeleteEventType(AuditHistoryDeleteEventType):
 )
 class AuditHistoryAtTimeDeleteEventType(AuditHistoryDeleteEventType):
     oldValues: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=3021", browseName="OldValues", dataType=o6.DataValue, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=3021", browseName="OldValues", modellingRule="Mandatory", dataType=o6.DataValue, valueRank=1, arrayDimensions=[0])
     )
     reqTimes: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=3020", browseName="ReqTimes", dataType=ns0_datypes.UtcTime, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=3020", browseName="ReqTimes", modellingRule="Mandatory", dataType=ns0_datypes.UtcTime, valueRank=1, arrayDimensions=[0])
     )
 
 
@@ -5271,9 +5857,11 @@ class AuditHistoryAtTimeDeleteEventType(AuditHistoryDeleteEventType):
 )
 class AuditHistoryEventDeleteEventType(AuditHistoryDeleteEventType):
     eventIds: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=3023", browseName="EventIds", dataType=o6.ByteString, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=3023", browseName="EventIds", modellingRule="Mandatory", dataType=o6.ByteString, valueRank=1, arrayDimensions=[0])
     )
-    oldValues: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=3024", browseName="OldValues", dataType=ns0_datypes.HistoryEventFieldList))
+    oldValues: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=3024", browseName="OldValues", modellingRule="Mandatory", dataType=ns0_datypes.HistoryEventFieldList, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=3035", browseName="EventQueueOverflowEventType", displayName="EventQueueOverflowEventType", isAbstract=True)
@@ -5311,7 +5899,9 @@ class ProgramTransitionAuditEventType(AuditUpdateStateEventType):
     },
 )
 class AuditConditionRespondEventType(AuditConditionEventType):
-    selectedResponse: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11852", browseName="SelectedResponse", dataType=o6.UInt32))
+    selectedResponse: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11852", browseName="SelectedResponse", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
 
 
 o6.reference(o6.ns["i=9069"], "i=3065", AuditConditionRespondEventType)
@@ -5343,8 +5933,12 @@ o6.reference(o6.ns["i=24312"], "i=3065", AuditConditionRespondEventType)
     },
 )
 class AuditConditionAcknowledgeEventType(AuditConditionEventType):
-    comment: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11853", browseName="Comment", dataType=o6.LocalizedText))
-    conditionEventId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=17223", browseName="ConditionEventId", dataType=o6.ByteString))
+    comment: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11853", browseName="Comment", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=-1)
+    )
+    conditionEventId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=17223", browseName="ConditionEventId", modellingRule="Mandatory", dataType=o6.ByteString, valueRank=-1)
+    )
 
 
 o6.reference(o6.ns["i=9111"], "i=3065", AuditConditionAcknowledgeEventType)
@@ -5375,8 +5969,12 @@ o6.reference(o6.ns["i=9111"], "i=3065", AuditConditionAcknowledgeEventType)
     },
 )
 class AuditConditionConfirmEventType(AuditConditionEventType):
-    comment: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11854", browseName="Comment", dataType=o6.LocalizedText))
-    conditionEventId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=17224", browseName="ConditionEventId", dataType=o6.ByteString))
+    comment: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11854", browseName="Comment", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=-1)
+    )
+    conditionEventId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=17224", browseName="ConditionEventId", modellingRule="Mandatory", dataType=o6.ByteString, valueRank=-1)
+    )
 
 
 o6.reference(o6.ns["i=9113"], "i=3065", AuditConditionConfirmEventType)
@@ -5407,7 +6005,9 @@ o6.reference(o6.ns["i=9113"], "i=3065", AuditConditionConfirmEventType)
     },
 )
 class AuditConditionShelvingEventType(AuditConditionEventType):
-    shelvingTime: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11855", browseName="ShelvingTime", dataType=ns0_datypes.Duration))
+    shelvingTime: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11855", browseName="ShelvingTime", modellingRule="Optional", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
 
 
 o6.reference(o6.ns["i=2947"], "i=3065", AuditConditionShelvingEventType)
@@ -5420,13 +6020,17 @@ o6.reference(o6.ns["i=24760"], "i=3065", AuditConditionShelvingEventType)
 
 @o6.objecttype(nodeId="i=11436", browseName="ProgressEventType", displayName="ProgressEventType", isAbstract=True)
 class ProgressEventType(BaseEventType):
-    context: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=12502", browseName="Context"))
-    progress: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=12503", browseName="Progress", dataType=o6.UInt16))
+    context: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=12502", browseName="Context", modellingRule="Mandatory", valueRank=-1))
+    progress: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=12503", browseName="Progress", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=11446", browseName="SystemStatusChangeEventType", displayName="SystemStatusChangeEventType", isAbstract=True)
 class SystemStatusChangeEventType(SystemEventType):
-    systemState: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11696", browseName="SystemState", dataType=ns0_datypes.ServerState))
+    systemState: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11696", browseName="SystemState", modellingRule="Mandatory", dataType=ns0_datypes.ServerState, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -5455,13 +6059,19 @@ class SystemStatusChangeEventType(SystemEventType):
     isAbstract=True,
 )
 class AuditProgramTransitionEventType(AuditUpdateStateEventType):
-    transitionNumber: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11875", browseName="TransitionNumber", dataType=o6.UInt32))
+    transitionNumber: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11875", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=12620", browseName="CertificateUpdatedAuditEventType", displayName="CertificateUpdatedAuditEventType", isAbstract=True)
 class CertificateUpdatedAuditEventType(AuditUpdateMethodEventType):
-    certificateGroup: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=13735", browseName="CertificateGroup", dataType=o6.NodeId))
-    certificateType: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=13736", browseName="CertificateType", dataType=o6.NodeId))
+    certificateGroup: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=13735", browseName="CertificateGroup", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
+    certificateType: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=13736", browseName="CertificateType", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -5498,26 +6108,42 @@ o6.reference(o6.ns["i=24324"], "i=3065", AuditConditionResetEventType)
 
 @o6.objecttype(nodeId="i=15535", browseName="PubSubStatusEventType", displayName="PubSubStatusEventType", isAbstract=True)
 class PubSubStatusEventType(SystemEventType):
-    connectionId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15545", browseName="ConnectionId", dataType=o6.NodeId))
-    groupId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15546", browseName="GroupId", dataType=o6.NodeId))
-    state: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15547", browseName="State", dataType=ns0_datypes.PubSubState))
+    connectionId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15545", browseName="ConnectionId", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
+    groupId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15546", browseName="GroupId", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
+    state: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15547", browseName="State", modellingRule="Mandatory", dataType=ns0_datypes.PubSubState, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=15541", browseName="ConfigurationUpdatedAuditEventType", displayName="ConfigurationUpdatedAuditEventType", isAbstract=True)
 class ConfigurationUpdatedAuditEventType(AuditEventType):
-    newVersion: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15543", browseName="NewVersion", dataType=ns0_datypes.VersionTime))
-    oldVersion: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15542", browseName="OldVersion", dataType=ns0_datypes.VersionTime))
+    newVersion: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15543", browseName="NewVersion", modellingRule="Mandatory", dataType=ns0_datypes.VersionTime, valueRank=-1)
+    )
+    oldVersion: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15542", browseName="OldVersion", modellingRule="Mandatory", dataType=ns0_datypes.VersionTime, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=15548", browseName="PubSubTransportLimitsExceedEventType", displayName="PubSubTransportLimitsExceedEventType", isAbstract=True)
 class PubSubTransportLimitsExceedEventType(PubSubStatusEventType):
-    actual: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15561", browseName="Actual", dataType=o6.UInt32))
-    maximum: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15562", browseName="Maximum", dataType=o6.UInt32))
+    actual: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15561", browseName="Actual", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
+    maximum: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15562", browseName="Maximum", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=15563", browseName="PubSubCommunicationFailureEventType", displayName="PubSubCommunicationFailureEventType", isAbstract=True)
 class PubSubCommunicationFailureEventType(PubSubStatusEventType):
-    error: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=15576", browseName="Error", dataType=o6.StatusCode))
+    error: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=15576", browseName="Error", modellingRule="Mandatory", dataType=o6.StatusCode, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -5626,7 +6252,9 @@ class RoleMappingRuleChangedAuditEventType(AuditUpdateMethodEventType):
 
 @o6.objecttype(nodeId="i=18011", browseName="KeyCredentialAuditEventType", displayName="KeyCredentialAuditEventType", isAbstract=True)
 class KeyCredentialAuditEventType(AuditUpdateMethodEventType):
-    resourceUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=18028", browseName="ResourceUri", dataType=o6.String))
+    resourceUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=18028", browseName="ResourceUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=18029", browseName="KeyCredentialUpdatedAuditEventType", displayName="KeyCredentialUpdatedAuditEventType")
@@ -5636,7 +6264,9 @@ class KeyCredentialUpdatedAuditEventType(KeyCredentialAuditEventType):
 
 @o6.objecttype(nodeId="i=18047", browseName="KeyCredentialDeletedAuditEventType", displayName="KeyCredentialDeletedAuditEventType")
 class KeyCredentialDeletedAuditEventType(KeyCredentialAuditEventType):
-    resourceUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=18064", browseName="ResourceUri", dataType=o6.String))
+    resourceUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=18064", browseName="ResourceUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -5666,24 +6296,32 @@ class KeyCredentialDeletedAuditEventType(KeyCredentialAuditEventType):
 )
 class AuditHistoryAnnotationUpdateEventType(AuditHistoryUpdateEventType):
     newValues: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=19294", browseName="NewValues", dataType=ns0_datypes.Annotation, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=19294", browseName="NewValues", modellingRule="Mandatory", dataType=ns0_datypes.Annotation, valueRank=1, arrayDimensions=[0])
     )
     oldValues: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=19295", browseName="OldValues", dataType=ns0_datypes.Annotation, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=19295", browseName="OldValues", modellingRule="Mandatory", dataType=ns0_datypes.Annotation, valueRank=1, arrayDimensions=[0])
     )
     performInsertReplace: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=19293", browseName="PerformInsertReplace", dataType=ns0_datypes.PerformUpdateType)
+        ns0_vartypes.PropertyType(nodeId="i=19293", browseName="PerformInsertReplace", modellingRule="Mandatory", dataType=ns0_datypes.PerformUpdateType, valueRank=-1)
     )
 
 
 @o6.objecttype(nodeId="i=19362", browseName="BaseLogEventType", displayName="BaseLogEventType", isAbstract=True)
 class BaseLogEventType(BaseEventType):
-    conditionClassId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19363", browseName="ConditionClassId", dataType=o6.NodeId))
-    conditionClassName: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19364", browseName="ConditionClassName", dataType=o6.LocalizedText))
-    errorCode: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19365", browseName="ErrorCode", dataType=o6.StatusCode))
-    errorCodeNode: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19366", browseName="ErrorCodeNode", dataType=o6.NodeId))
+    conditionClassId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19363", browseName="ConditionClassId", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
+    conditionClassName: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19364", browseName="ConditionClassName", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=-1)
+    )
+    errorCode: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19365", browseName="ErrorCode", modellingRule="Optional", dataType=o6.StatusCode, valueRank=-1)
+    )
+    errorCodeNode: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19366", browseName="ErrorCodeNode", modellingRule="Optional", dataType=o6.NodeId, valueRank=-1)
+    )
     traceContext: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=24376", browseName="TraceContext", dataType=ns0_datypes.TraceContextDataType)
+        ns0_vartypes.PropertyType(nodeId="i=24376", browseName="TraceContext", modellingRule="Optional", dataType=ns0_datypes.TraceContextDataType, valueRank=-1)
     )
 
 
@@ -5718,7 +6356,9 @@ class LogOverflowEventType(BaseEventType):
     isAbstract=True,
 )
 class AuditClientEventType(AuditEventType):
-    serverUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23908", browseName="ServerUri", dataType=ns0_datypes.UriString))
+    serverUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23908", browseName="ServerUri", modellingRule="Mandatory", dataType=ns0_datypes.UriString, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -5747,52 +6387,86 @@ class AuditClientEventType(AuditEventType):
     isAbstract=True,
 )
 class AuditClientUpdateMethodResultEventType(AuditClientEventType):
-    inputArguments: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23999", browseName="InputArguments", valueRank=1, arrayDimensions=[0]))
-    methodId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23995", browseName="MethodId", dataType=o6.ExpandedNodeId))
-    objectId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23994", browseName="ObjectId", dataType=o6.ExpandedNodeId))
-    outputArguments: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25684", browseName="OutputArguments", valueRank=1, arrayDimensions=[0]))
-    statusCodeId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23998", browseName="StatusCodeId", dataType=o6.StatusCode))
+    inputArguments: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23999", browseName="InputArguments", modellingRule="Mandatory", valueRank=1, arrayDimensions=[0])
+    )
+    methodId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23995", browseName="MethodId", modellingRule="Mandatory", dataType=o6.ExpandedNodeId, valueRank=-1)
+    )
+    objectId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23994", browseName="ObjectId", modellingRule="Mandatory", dataType=o6.ExpandedNodeId, valueRank=-1)
+    )
+    outputArguments: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=25684", browseName="OutputArguments", modellingRule="Mandatory", valueRank=1, arrayDimensions=[0])
+    )
+    statusCodeId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23998", browseName="StatusCodeId", modellingRule="Mandatory", dataType=o6.StatusCode, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=2782", browseName="ConditionType", displayName="ConditionType", isAbstract=True)
 class ConditionType(BaseEventType):
     addComment: o6.node.MethodNode = o6.hasComponent(o6.ns["i=9029"])
-    branchId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=9010", browseName="BranchId", dataType=o6.NodeId))
-    clientUserId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=9026", browseName="ClientUserId", dataType=o6.String))
+    branchId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=9010", browseName="BranchId", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
+    clientUserId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=9026", browseName="ClientUserId", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
     comment: ns0_vartypes.ConditionVariableType
-    conditionClassId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11112", browseName="ConditionClassId", dataType=o6.NodeId))
-    conditionClassName: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11113", browseName="ConditionClassName", dataType=o6.LocalizedText))
-    conditionName: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=9009", browseName="ConditionName", dataType=o6.String))
+    conditionClassId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11112", browseName="ConditionClassId", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
+    conditionClassName: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11113", browseName="ConditionClassName", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=-1)
+    )
+    conditionName: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=9009", browseName="ConditionName", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
     conditionRefresh: o6.node.MethodNode = o6.hasComponent(o6.ns["i=3875"])
     conditionRefresh2: o6.node.MethodNode = o6.hasComponent(o6.ns["i=12912"])
     conditionSubClassId: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=16363", browseName="ConditionSubClassId", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=16363", browseName="ConditionSubClassId", modellingRule="Optional", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
     )
     conditionSubClassName: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=16364", browseName="ConditionSubClassName", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=16364", browseName="ConditionSubClassName", modellingRule="Optional", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0])
     )
     disable: o6.node.MethodNode = o6.hasComponent(o6.ns["i=9028"])
     enable: o6.node.MethodNode = o6.hasComponent(o6.ns["i=9027"])
     enabledState: ns0_vartypes.TwoStateVariableType
     lastSeverity: ns0_vartypes.ConditionVariableType
     quality: ns0_vartypes.ConditionVariableType
-    retain: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=3874", browseName="Retain", dataType=o6.Boolean))
-    supportsFilteredRetain: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32060", browseName="SupportsFilteredRetain", dataType=o6.Boolean))
+    retain: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=3874", browseName="Retain", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
+    supportsFilteredRetain: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32060", browseName="SupportsFilteredRetain", dataType=o6.Boolean, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=2830", browseName="DialogConditionType", displayName="DialogConditionType")
 class DialogConditionType(ConditionType):
-    cancelResponse: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=9067", browseName="CancelResponse", dataType=o6.Int32))
-    defaultResponse: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=9065", browseName="DefaultResponse", dataType=o6.Int32))
+    cancelResponse: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=9067", browseName="CancelResponse", modellingRule="Mandatory", dataType=o6.Int32, valueRank=-1)
+    )
+    defaultResponse: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=9065", browseName="DefaultResponse", modellingRule="Mandatory", dataType=o6.Int32, valueRank=-1)
+    )
     dialogState: ns0_vartypes.TwoStateVariableType
     enabledState: ns0_vartypes.TwoStateVariableType
-    lastResponse: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=9068", browseName="LastResponse", dataType=o6.Int32))
-    okResponse: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=9066", browseName="OkResponse", dataType=o6.Int32))
-    prompt: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2831", browseName="Prompt", dataType=o6.LocalizedText))
+    lastResponse: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=9068", browseName="LastResponse", modellingRule="Mandatory", dataType=o6.Int32, valueRank=-1)
+    )
+    okResponse: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=9066", browseName="OkResponse", modellingRule="Mandatory", dataType=o6.Int32, valueRank=-1)
+    )
+    prompt: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2831", browseName="Prompt", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=-1)
+    )
     respond: o6.node.MethodNode = o6.hasComponent(o6.ns["i=9069"])
     respond2: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=24312"])
     responseOptionSet: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=9064", browseName="ResponseOptionSet", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=9064", browseName="ResponseOptionSet", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0])
     )
 
 
@@ -5809,28 +6483,40 @@ class AcknowledgeableConditionType(ConditionType):
 class AlarmConditionType(AcknowledgeableConditionType):
     activeState: ns0_vartypes.TwoStateVariableType
     alarmGroup_: AlarmGroupType | None = o6.reference(AlarmGroupType(nodeId="i=16399", browseName="<AlarmGroup>", modellingRule="OptionalPlaceholder"), "i=16361")
-    audibleEnabled: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=16389", browseName="AudibleEnabled", dataType=o6.Boolean))
+    audibleEnabled: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=16389", browseName="AudibleEnabled", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1)
+    )
     audibleSound: ns0_vartypes.AudioVariableType | None = o6.hasComponent(
-        ns0_vartypes.AudioVariableType(nodeId="i=16390", browseName="AudibleSound", dataType=ns0_datypes.AudioDataType)
+        ns0_vartypes.AudioVariableType(nodeId="i=16390", browseName="AudibleSound", modellingRule="Optional", dataType=ns0_datypes.AudioDataType, valueRank=-1)
     )
     enabledState: ns0_vartypes.TwoStateVariableType
-    firstInGroup: AlarmGroupType | None = o6.hasComponent(AlarmGroupType(nodeId="i=16398", browseName="FirstInGroup"))
+    firstInGroup: AlarmGroupType | None = o6.hasComponent(AlarmGroupType(nodeId="i=16398", browseName="FirstInGroup", modellingRule="Optional"))
     firstInGroupFlag: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=16397", browseName="FirstInGroupFlag", dataType=o6.Boolean)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=16397", browseName="FirstInGroupFlag", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1)
     )
     getGroupMemberships: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=24744"])
-    inputNode: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11120", browseName="InputNode", dataType=o6.NodeId))
+    inputNode: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11120", browseName="InputNode", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
     latchedState: ns0_vartypes.TwoStateVariableType | None
-    maxTimeShelved: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=9216", browseName="MaxTimeShelved", dataType=ns0_datypes.Duration))
-    offDelay: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=16396", browseName="OffDelay", dataType=ns0_datypes.Duration))
-    onDelay: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=16395", browseName="OnDelay", dataType=ns0_datypes.Duration))
+    maxTimeShelved: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=9216", browseName="MaxTimeShelved", modellingRule="Optional", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
+    offDelay: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=16396", browseName="OffDelay", modellingRule="Optional", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
+    onDelay: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=16395", browseName="OnDelay", modellingRule="Optional", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
     outOfServiceState: ns0_vartypes.TwoStateVariableType | None
     placeInService: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=17870"])
     placeInService2: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=24322"])
     reAlarmRepeatCount: ns0_vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=16401", browseName="ReAlarmRepeatCount", dataType=o6.Int16)
+        ns0_vartypes.BaseDataVariableType(nodeId="i=16401", browseName="ReAlarmRepeatCount", modellingRule="Optional", dataType=o6.Int16, valueRank=-1)
     )
-    reAlarmTime: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=16400", browseName="ReAlarmTime", dataType=ns0_datypes.Duration))
+    reAlarmTime: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=16400", browseName="ReAlarmTime", modellingRule="Optional", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
     removeFromService: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=17869"])
     removeFromService2: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=24320"])
     reset: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=18199"])
@@ -5840,7 +6526,9 @@ class AlarmConditionType(AcknowledgeableConditionType):
     silenceState: ns0_vartypes.TwoStateVariableType | None
     suppress: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=16403"])
     suppress2: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=24316"])
-    suppressedOrShelved: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=9215", browseName="SuppressedOrShelved", dataType=o6.Boolean))
+    suppressedOrShelved: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=9215", browseName="SuppressedOrShelved", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
     suppressedState: ns0_vartypes.TwoStateVariableType | None
     unsuppress: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=17868"])
     unsuppress2: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=24318"])
@@ -5848,22 +6536,54 @@ class AlarmConditionType(AcknowledgeableConditionType):
 
 @o6.objecttype(nodeId="i=2955", browseName="LimitAlarmType", displayName="LimitAlarmType")
 class LimitAlarmType(AlarmConditionType):
-    baseHighHighLimit: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=16572", browseName="BaseHighHighLimit", dataType=o6.Double))
-    baseHighLimit: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=16573", browseName="BaseHighLimit", dataType=o6.Double))
-    baseLowLimit: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=16574", browseName="BaseLowLimit", dataType=o6.Double))
-    baseLowLowLimit: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=16575", browseName="BaseLowLowLimit", dataType=o6.Double))
-    highDeadband: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=24775", browseName="HighDeadband", dataType=o6.Double))
-    highHighDeadband: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=24774", browseName="HighHighDeadband", dataType=o6.Double))
-    highHighLimit: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11124", browseName="HighHighLimit", dataType=o6.Double))
-    highLimit: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11125", browseName="HighLimit", dataType=o6.Double))
-    lowDeadband: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=24776", browseName="LowDeadband", dataType=o6.Double))
-    lowLimit: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11126", browseName="LowLimit", dataType=o6.Double))
-    lowLowDeadband: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=24777", browseName="LowLowDeadband", dataType=o6.Double))
-    lowLowLimit: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11127", browseName="LowLowLimit", dataType=o6.Double))
-    severityHigh: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=24771", browseName="SeverityHigh", dataType=o6.UInt16))
-    severityHighHigh: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=24770", browseName="SeverityHighHigh", dataType=o6.UInt16))
-    severityLow: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=24772", browseName="SeverityLow", dataType=o6.UInt16))
-    severityLowLow: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=24773", browseName="SeverityLowLow", dataType=o6.UInt16))
+    baseHighHighLimit: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=16572", browseName="BaseHighHighLimit", modellingRule="Optional", dataType=o6.Double, valueRank=-1)
+    )
+    baseHighLimit: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=16573", browseName="BaseHighLimit", modellingRule="Optional", dataType=o6.Double, valueRank=-1)
+    )
+    baseLowLimit: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=16574", browseName="BaseLowLimit", modellingRule="Optional", dataType=o6.Double, valueRank=-1)
+    )
+    baseLowLowLimit: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=16575", browseName="BaseLowLowLimit", modellingRule="Optional", dataType=o6.Double, valueRank=-1)
+    )
+    highDeadband: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=24775", browseName="HighDeadband", modellingRule="Optional", dataType=o6.Double, valueRank=-1)
+    )
+    highHighDeadband: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=24774", browseName="HighHighDeadband", modellingRule="Optional", dataType=o6.Double, valueRank=-1)
+    )
+    highHighLimit: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11124", browseName="HighHighLimit", modellingRule="Optional", dataType=o6.Double, valueRank=-1)
+    )
+    highLimit: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11125", browseName="HighLimit", modellingRule="Optional", dataType=o6.Double, valueRank=-1)
+    )
+    lowDeadband: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=24776", browseName="LowDeadband", modellingRule="Optional", dataType=o6.Double, valueRank=-1)
+    )
+    lowLimit: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11126", browseName="LowLimit", modellingRule="Optional", dataType=o6.Double, valueRank=-1)
+    )
+    lowLowDeadband: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=24777", browseName="LowLowDeadband", modellingRule="Optional", dataType=o6.Double, valueRank=-1)
+    )
+    lowLowLimit: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11127", browseName="LowLowLimit", modellingRule="Optional", dataType=o6.Double, valueRank=-1)
+    )
+    severityHigh: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=24771", browseName="SeverityHigh", modellingRule="Optional", dataType=o6.UInt16, valueRank=-1)
+    )
+    severityHighHigh: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=24770", browseName="SeverityHighHigh", modellingRule="Optional", dataType=o6.UInt16, valueRank=-1)
+    )
+    severityLow: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=24772", browseName="SeverityLow", modellingRule="Optional", dataType=o6.UInt16, valueRank=-1)
+    )
+    severityLowLow: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=24773", browseName="SeverityLowLow", modellingRule="Optional", dataType=o6.UInt16, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=9341", browseName="ExclusiveLimitAlarmType", displayName="ExclusiveLimitAlarmType")
@@ -5880,14 +6600,18 @@ class ExclusiveLevelAlarmType(ExclusiveLimitAlarmType):
 @o6.objecttype(nodeId="i=9623", browseName="ExclusiveRateOfChangeAlarmType", displayName="ExclusiveRateOfChangeAlarmType")
 class ExclusiveRateOfChangeAlarmType(ExclusiveLimitAlarmType):
     engineeringUnits: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=16899", browseName="EngineeringUnits", dataType=ns0_datypes.EUInformation)
+        ns0_vartypes.PropertyType(nodeId="i=16899", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0_datypes.EUInformation, valueRank=-1)
     )
 
 
 @o6.objecttype(nodeId="i=9764", browseName="ExclusiveDeviationAlarmType", displayName="ExclusiveDeviationAlarmType")
 class ExclusiveDeviationAlarmType(ExclusiveLimitAlarmType):
-    baseSetpointNode: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=16817", browseName="BaseSetpointNode", dataType=o6.NodeId))
-    setpointNode: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=9905", browseName="SetpointNode", dataType=o6.NodeId))
+    baseSetpointNode: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=16817", browseName="BaseSetpointNode", modellingRule="Optional", dataType=o6.NodeId, valueRank=-1)
+    )
+    setpointNode: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=9905", browseName="SetpointNode", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=9906", browseName="NonExclusiveLimitAlarmType", displayName="NonExclusiveLimitAlarmType")
@@ -5907,14 +6631,18 @@ class NonExclusiveLevelAlarmType(NonExclusiveLimitAlarmType):
 @o6.objecttype(nodeId="i=10214", browseName="NonExclusiveRateOfChangeAlarmType", displayName="NonExclusiveRateOfChangeAlarmType")
 class NonExclusiveRateOfChangeAlarmType(NonExclusiveLimitAlarmType):
     engineeringUnits: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=16858", browseName="EngineeringUnits", dataType=ns0_datypes.EUInformation)
+        ns0_vartypes.PropertyType(nodeId="i=16858", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0_datypes.EUInformation, valueRank=-1)
     )
 
 
 @o6.objecttype(nodeId="i=10368", browseName="NonExclusiveDeviationAlarmType", displayName="NonExclusiveDeviationAlarmType")
 class NonExclusiveDeviationAlarmType(NonExclusiveLimitAlarmType):
-    baseSetpointNode: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=16776", browseName="BaseSetpointNode", dataType=o6.NodeId))
-    setpointNode: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=10522", browseName="SetpointNode", dataType=o6.NodeId))
+    baseSetpointNode: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=16776", browseName="BaseSetpointNode", modellingRule="Optional", dataType=o6.NodeId, valueRank=-1)
+    )
+    setpointNode: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=10522", browseName="SetpointNode", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=10523", browseName="DiscreteAlarmType", displayName="DiscreteAlarmType")
@@ -5924,7 +6652,9 @@ class DiscreteAlarmType(AlarmConditionType):
 
 @o6.objecttype(nodeId="i=10637", browseName="OffNormalAlarmType", displayName="OffNormalAlarmType")
 class OffNormalAlarmType(DiscreteAlarmType):
-    normalState: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11158", browseName="NormalState", dataType=o6.NodeId))
+    normalState: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11158", browseName="NormalState", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=10751", browseName="TripAlarmType", displayName="TripAlarmType")
@@ -5939,10 +6669,18 @@ class SystemOffNormalAlarmType(OffNormalAlarmType):
 
 @o6.objecttype(nodeId="i=13225", browseName="CertificateExpirationAlarmType", displayName="CertificateExpirationAlarmType")
 class CertificateExpirationAlarmType(SystemOffNormalAlarmType):
-    certificate: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=13327", browseName="Certificate", dataType=o6.ByteString))
-    certificateType: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=13326", browseName="CertificateType", dataType=o6.NodeId))
-    expirationDate: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=13325", browseName="ExpirationDate", dataType=o6.DateTime))
-    expirationLimit: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=14900", browseName="ExpirationLimit", dataType=ns0_datypes.Duration))
+    certificate: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=13327", browseName="Certificate", modellingRule="Mandatory", dataType=o6.ByteString, valueRank=-1)
+    )
+    certificateType: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=13326", browseName="CertificateType", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
+    expirationDate: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=13325", browseName="ExpirationDate", modellingRule="Mandatory", dataType=o6.DateTime, valueRank=-1)
+    )
+    expirationLimit: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=14900", browseName="ExpirationLimit", modellingRule="Optional", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
 
 
 o6.reference(CertificateGroupType, "i=9006", CertificateExpirationAlarmType)
@@ -5950,9 +6688,15 @@ o6.reference(CertificateGroupType, "i=9006", CertificateExpirationAlarmType)
 
 @o6.objecttype(nodeId="i=17080", browseName="DiscrepancyAlarmType", displayName="DiscrepancyAlarmType")
 class DiscrepancyAlarmType(AlarmConditionType):
-    expectedTime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=17216", browseName="ExpectedTime", dataType=ns0_datypes.Duration))
-    targetValueNode: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=17215", browseName="TargetValueNode", dataType=o6.NodeId))
-    tolerance: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=17217", browseName="Tolerance", dataType=o6.Double))
+    expectedTime: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=17216", browseName="ExpectedTime", modellingRule="Mandatory", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
+    targetValueNode: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=17215", browseName="TargetValueNode", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
+    tolerance: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=17217", browseName="Tolerance", modellingRule="Optional", dataType=o6.Double, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=18347", browseName="InstrumentDiagnosticAlarmType", displayName="InstrumentDiagnosticAlarmType")
@@ -5967,9 +6711,15 @@ class SystemDiagnosticAlarmType(OffNormalAlarmType):
 
 @o6.objecttype(nodeId="i=19297", browseName="TrustListOutOfDateAlarmType", displayName="TrustListOutOfDateAlarmType")
 class TrustListOutOfDateAlarmType(SystemOffNormalAlarmType):
-    lastUpdateTime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19447", browseName="LastUpdateTime", dataType=ns0_datypes.UtcTime))
-    trustListId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19446", browseName="TrustListId", dataType=o6.NodeId))
-    updateFrequency: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19448", browseName="UpdateFrequency", dataType=ns0_datypes.Duration))
+    lastUpdateTime: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19447", browseName="LastUpdateTime", modellingRule="Mandatory", dataType=ns0_datypes.UtcTime, valueRank=-1)
+    )
+    trustListId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19446", browseName="TrustListId", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
+    updateFrequency: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19448", browseName="UpdateFrequency", modellingRule="Mandatory", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
 
 
 o6.reference(CertificateGroupType, "i=9006", TrustListOutOfDateAlarmType)
@@ -5979,22 +6729,28 @@ o6.reference(CertificateGroupType, "i=9006", TrustListOutOfDateAlarmType)
 class AlarmSuppressionGroupType(AlarmGroupType):
     alarmCondition_: AlarmConditionType | None
     digitalVariable_: ns0_vartypes.BaseDataVariableType | None = o6.reference(
-        ns0_vartypes.BaseDataVariableType(nodeId="i=32226", browseName="<DigitalVariable>", modellingRule="OptionalPlaceholder", dataType=o6.Boolean), "i=32059"
+        ns0_vartypes.BaseDataVariableType(nodeId="i=32226", browseName="<DigitalVariable>", modellingRule="OptionalPlaceholder", dataType=o6.Boolean, valueRank=-1), "i=32059"
     )
 
 
 @o6.objecttype(nodeId="i=12522", browseName="TrustListType", displayName="TrustListType")
 class TrustListType(FileType):
-    activityTimeout: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32254", browseName="ActivityTimeout", dataType=ns0_datypes.Duration))
+    activityTimeout: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32254", browseName="ActivityTimeout", modellingRule="Optional", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
     addCertificate: o6.node.MethodNode = o6.hasComponent(o6.ns["i=12548"])
     closeAndUpdate: o6.node.MethodNode = o6.hasComponent(o6.ns["i=12546"])
     defaultValidationOptions: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=23563", browseName="DefaultValidationOptions", dataType=ns0_datypes.TrustListValidationOptions)
+        ns0_vartypes.PropertyType(nodeId="i=23563", browseName="DefaultValidationOptions", modellingRule="Optional", dataType=ns0_datypes.TrustListValidationOptions, valueRank=-1)
     )
-    lastUpdateTime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=12542", browseName="LastUpdateTime", dataType=ns0_datypes.UtcTime))
+    lastUpdateTime: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=12542", browseName="LastUpdateTime", modellingRule="Mandatory", dataType=ns0_datypes.UtcTime, valueRank=-1)
+    )
     openWithMasks: o6.node.MethodNode = o6.hasComponent(o6.ns["i=12543"])
     removeCertificate: o6.node.MethodNode = o6.hasComponent(o6.ns["i=12550"])
-    updateFrequency: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19296", browseName="UpdateFrequency", dataType=ns0_datypes.Duration))
+    updateFrequency: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19296", browseName="UpdateFrequency", modellingRule="Optional", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=32260", browseName="TrustListUpdateRequestedAuditEventType", displayName="TrustListUpdateRequestedAuditEventType", isAbstract=True)
@@ -6004,23 +6760,31 @@ class TrustListUpdateRequestedAuditEventType(AuditUpdateMethodEventType):
 
 @o6.objecttype(nodeId="i=12561", browseName="TrustListUpdatedAuditEventType", displayName="TrustListUpdatedAuditEventType", isAbstract=True)
 class TrustListUpdatedAuditEventType(AuditUpdateMethodEventType):
-    trustListId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32281", browseName="TrustListId", dataType=o6.NodeId))
+    trustListId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32281", browseName="TrustListId", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=32286", browseName="TransactionDiagnosticsType", displayName="TransactionDiagnosticsType")
 class TransactionDiagnosticsType(BaseObjectType):
     affectedCertificateGroups: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32291", browseName="AffectedCertificateGroups", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=32291", browseName="AffectedCertificateGroups", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
     )
     affectedTrustLists: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32290", browseName="AffectedTrustLists", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=32290", browseName="AffectedTrustLists", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
     )
-    endTime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32288", browseName="EndTime", dataType=ns0_datypes.UtcTime))
+    endTime: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32288", browseName="EndTime", modellingRule="Mandatory", dataType=ns0_datypes.UtcTime, valueRank=-1)
+    )
     errors: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32292", browseName="Errors", dataType=ns0_datypes.TransactionErrorType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=32292", browseName="Errors", modellingRule="Mandatory", dataType=ns0_datypes.TransactionErrorType, valueRank=1, arrayDimensions=[0])
     )
-    result: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32289", browseName="Result", dataType=o6.StatusCode))
-    startTime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32287", browseName="StartTime", dataType=ns0_datypes.UtcTime))
+    result: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32289", browseName="Result", modellingRule="Mandatory", dataType=o6.StatusCode, valueRank=-1)
+    )
+    startTime: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32287", browseName="StartTime", modellingRule="Mandatory", dataType=ns0_datypes.UtcTime, valueRank=-1)
+    )
 
 
 ns0_vartypes.PropertyType(
@@ -6048,20 +6812,22 @@ ns0_vartypes.PropertyType(
         ns0_datypes.Argument(name="Certificates", dataType=o6.NodeId("i=15"), valueRank=1, arrayDimensions=[0]),
     ],
 )
-o6.call(nodeId="i=32296", browseName="GetCertificates", inputArgs=o6.hasProperty(o6.ns["i=32297"]), outputArgs=o6.hasProperty(o6.ns["i=32298"]))
+o6.call(nodeId="i=32296", browseName="GetCertificates", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["i=32297"]), outputArgs=o6.hasProperty(o6.ns["i=32298"]))
 
 
 @o6.objecttype(nodeId="i=12581", browseName="ServerConfigurationType", displayName="ServerConfigurationType")
 class ServerConfigurationType(BaseObjectType):
     applicationNames: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=18660", browseName="ApplicationNames", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=18660", browseName="ApplicationNames", modellingRule="Optional", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0])
     )
     applicationType: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=25697", browseName="ApplicationType", dataType=ns0_datypes.ApplicationType)
+        ns0_vartypes.PropertyType(nodeId="i=25697", browseName="ApplicationType", modellingRule="Optional", dataType=ns0_datypes.ApplicationType, valueRank=-1)
     )
-    applicationUri: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25696", browseName="ApplicationUri", dataType=ns0_datypes.UriString))
-    applyChanges: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="i=12734", browseName="ApplyChanges"))
-    cancelChanges: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="i=25698", browseName="CancelChanges"))
+    applicationUri: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=25696", browseName="ApplicationUri", modellingRule="Optional", dataType=ns0_datypes.UriString, valueRank=-1)
+    )
+    applyChanges: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="i=12734", browseName="ApplyChanges", modellingRule="Mandatory"))
+    cancelChanges: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="i=25698", browseName="CancelChanges", modellingRule="Optional"))
     certificateGroups: CertificateGroupFolderType
     configurationFile: ApplicationConfigurationFileType | None
     createSelfSignedCertificate: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=19337"])
@@ -6069,34 +6835,58 @@ class ServerConfigurationType(BaseObjectType):
     deleteCertificate: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=19340"])
     getCertificates: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=32296"])
     getRejectedList: o6.node.MethodNode = o6.hasComponent(o6.ns["i=12775"])
-    hasSecureElement: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23593", browseName="HasSecureElement", dataType=o6.Boolean))
-    inApplicationSetup: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=19308", browseName="InApplicationSetup", dataType=o6.Boolean))
-    maxTrustListSize: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=12584", browseName="MaxTrustListSize", dataType=o6.UInt32))
-    multicastDnsEnabled: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=12585", browseName="MulticastDnsEnabled", dataType=o6.Boolean))
-    productUri: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=25724", browseName="ProductUri", dataType=ns0_datypes.UriString))
-    resetToServerDefaults: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="i=25699", browseName="ResetToServerDefaults"))
+    hasSecureElement: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23593", browseName="HasSecureElement", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1)
+    )
+    inApplicationSetup: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=19308", browseName="InApplicationSetup", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1)
+    )
+    maxTrustListSize: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=12584", browseName="MaxTrustListSize", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
+    multicastDnsEnabled: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=12585", browseName="MulticastDnsEnabled", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
+    productUri: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=25724", browseName="ProductUri", modellingRule="Optional", dataType=ns0_datypes.UriString, valueRank=-1)
+    )
+    resetToServerDefaults: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="i=25699", browseName="ResetToServerDefaults", modellingRule="Optional"))
     serverCapabilities: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=12708", browseName="ServerCapabilities", dataType=o6.String, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=12708", browseName="ServerCapabilities", modellingRule="Mandatory", dataType=o6.String, valueRank=1, arrayDimensions=[0])
     )
     supportedPrivateKeyFormats: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=12583", browseName="SupportedPrivateKeyFormats", dataType=o6.String, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=12583", browseName="SupportedPrivateKeyFormats", modellingRule="Mandatory", dataType=o6.String, valueRank=1, arrayDimensions=[0])
     )
-    supportsTransactions: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=18661", browseName="SupportsTransactions", dataType=o6.Boolean))
+    supportsTransactions: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=18661", browseName="SupportsTransactions", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1)
+    )
     transactionDiagnostics: TransactionDiagnosticsType | None
     updateCertificate: o6.node.MethodNode = o6.hasComponent(o6.ns["i=12616"])
 
 
 @o6.objecttype(nodeId="i=25731", browseName="ApplicationConfigurationType", displayName="ApplicationConfigurationType")
 class ApplicationConfigurationType(ServerConfigurationType):
-    applicationType: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=26852", browseName="ApplicationType", dataType=ns0_datypes.ApplicationType))
-    applicationUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=26850", browseName="ApplicationUri", dataType=ns0_datypes.UriString))
-    authorizationServices: AuthorizationServicesConfigurationFolderType | None = o6.hasComponent(
-        AuthorizationServicesConfigurationFolderType(nodeId="i=19427", browseName="AuthorizationServices")
+    applicationType: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=26852", browseName="ApplicationType", modellingRule="Mandatory", dataType=ns0_datypes.ApplicationType, valueRank=-1)
     )
-    enabled: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=26849", browseName="Enabled", dataType=o6.Boolean))
-    isNonUaApplication: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23741", browseName="IsNonUaApplication", dataType=o6.Boolean))
-    keyCredentials: KeyCredentialConfigurationFolderType | None = o6.hasComponent(KeyCredentialConfigurationFolderType(nodeId="i=19423", browseName="KeyCredentials"))
-    productUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=26851", browseName="ProductUri", dataType=ns0_datypes.UriString))
+    applicationUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=26850", browseName="ApplicationUri", modellingRule="Mandatory", dataType=ns0_datypes.UriString, valueRank=-1)
+    )
+    authorizationServices: AuthorizationServicesConfigurationFolderType | None = o6.hasComponent(
+        AuthorizationServicesConfigurationFolderType(nodeId="i=19427", browseName="AuthorizationServices", modellingRule="Optional")
+    )
+    enabled: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=26849", browseName="Enabled", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
+    isNonUaApplication: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23741", browseName="IsNonUaApplication", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1)
+    )
+    keyCredentials: KeyCredentialConfigurationFolderType | None = o6.hasComponent(
+        KeyCredentialConfigurationFolderType(nodeId="i=19423", browseName="KeyCredentials", modellingRule="Optional")
+    )
+    productUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=26851", browseName="ProductUri", modellingRule="Mandatory", dataType=ns0_datypes.UriString, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=32306", browseName="CertificateUpdateRequestedAuditEventType", displayName="CertificateUpdateRequestedAuditEventType", isAbstract=True)
@@ -6108,199 +6898,275 @@ class CertificateUpdateRequestedAuditEventType(AuditUpdateMethodEventType):
 class PublishSubscribeType(PubSubKeyServiceType):
     addConnection: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=16598"])
     configurationProperties: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32397", browseName="ConfigurationProperties", dataType=ns0_datypes.KeyValuePair, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=32397", browseName="ConfigurationProperties", modellingRule="Optional", dataType=ns0_datypes.KeyValuePair, valueRank=1, arrayDimensions=[0]
+        )
     )
     configurationVersion: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=25433", browseName="ConfigurationVersion", dataType=ns0_datypes.VersionTime)
+        ns0_vartypes.PropertyType(nodeId="i=25433", browseName="ConfigurationVersion", modellingRule="Optional", dataType=ns0_datypes.VersionTime, valueRank=-1)
     )
     connectionName_: PubSubConnectionType | None
     dataSetClasses: FolderType | None
     defaultDatagramPublisherId: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=25432", browseName="DefaultDatagramPublisherId", dataType=o6.UInt64)
+        ns0_vartypes.PropertyType(nodeId="i=25432", browseName="DefaultDatagramPublisherId", modellingRule="Optional", dataType=o6.UInt64, valueRank=-1)
     )
     defaultSecurityKeyServices: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32396", browseName="DefaultSecurityKeyServices", dataType=ns0_datypes.EndpointDescription, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=32396", browseName="DefaultSecurityKeyServices", modellingRule="Optional", dataType=ns0_datypes.EndpointDescription, valueRank=1, arrayDimensions=[0]
+        )
     )
     diagnostics: PubSubDiagnosticsRootType | None
     pubSubCapablities: PubSubCapabilitiesType | None
     pubSubConfiguration: PubSubConfigurationType | None
-    publishedDataSets: DataSetFolderType = o6.hasComponent(DataSetFolderType(nodeId="i=14434", browseName="PublishedDataSets"))
+    publishedDataSets: DataSetFolderType = o6.hasComponent(DataSetFolderType(nodeId="i=14434", browseName="PublishedDataSets", modellingRule="Mandatory"))
     removeConnection: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=14432"])
     setSecurityKeys: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=17296"])
     status: PubSubStatusType
-    subscribedDataSets: SubscribedDataSetFolderType | None = o6.hasComponent(SubscribedDataSetFolderType(nodeId="i=23622", browseName="SubscribedDataSets"))
+    subscribedDataSets: SubscribedDataSetFolderType | None = o6.hasComponent(
+        SubscribedDataSetFolderType(nodeId="i=23622", browseName="SubscribedDataSets", modellingRule="Optional")
+    )
     supportedTransportProfiles: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=17479", browseName="SupportedTransportProfiles", dataType=o6.String, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=17479", browseName="SupportedTransportProfiles", modellingRule="Mandatory", dataType=o6.String, valueRank=1, arrayDimensions=[0])
     )
 
 
 @o6.objecttype(nodeId="i=2034", browseName="ServerRedundancyType", displayName="ServerRedundancyType")
 class ServerRedundancyType(BaseObjectType):
     redundancySupport: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2035", browseName="RedundancySupport", dataType=ns0_datypes.RedundancySupport)
+        ns0_vartypes.PropertyType(nodeId="i=2035", browseName="RedundancySupport", modellingRule="Mandatory", dataType=ns0_datypes.RedundancySupport, valueRank=-1)
     )
     redundantServerArray: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32410", browseName="RedundantServerArray", dataType=ns0_datypes.RedundantServerDataType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=32410", browseName="RedundantServerArray", modellingRule="Optional", dataType=ns0_datypes.RedundantServerDataType, valueRank=1, arrayDimensions=[0]
+        )
     )
 
 
 @o6.objecttype(nodeId="i=2036", browseName="TransparentRedundancyType", displayName="TransparentRedundancyType")
 class TransparentRedundancyType(ServerRedundancyType):
-    currentServerId: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2037", browseName="CurrentServerId", dataType=o6.String))
+    currentServerId: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2037", browseName="CurrentServerId", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
     redundantServerArray: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2038", browseName="RedundantServerArray", dataType=ns0_datypes.RedundantServerDataType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=2038", browseName="RedundantServerArray", modellingRule="Mandatory", dataType=ns0_datypes.RedundantServerDataType, valueRank=1, arrayDimensions=[0]
+        )
     )
 
 
 @o6.objecttype(nodeId="i=2039", browseName="NonTransparentRedundancyType", displayName="NonTransparentRedundancyType")
 class NonTransparentRedundancyType(ServerRedundancyType):
     serverUriArray: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2040", browseName="ServerUriArray", dataType=o6.String, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=2040", browseName="ServerUriArray", modellingRule="Mandatory", dataType=o6.String, valueRank=1, arrayDimensions=[0])
     )
 
 
 @o6.objecttype(nodeId="i=11945", browseName="NonTransparentNetworkRedundancyType", displayName="NonTransparentNetworkRedundancyType")
 class NonTransparentNetworkRedundancyType(NonTransparentRedundancyType):
     serverNetworkGroups: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=11948", browseName="ServerNetworkGroups", dataType=ns0_datypes.NetworkGroupDataType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=11948", browseName="ServerNetworkGroups", modellingRule="Mandatory", dataType=ns0_datypes.NetworkGroupDataType, valueRank=1, arrayDimensions=[0]
+        )
     )
 
 
 @o6.objecttype(nodeId="i=32411", browseName="NonTransparentBackupRedundancyType", displayName="NonTransparentBackupRedundancyType")
 class NonTransparentBackupRedundancyType(NonTransparentRedundancyType):
-    failover: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="i=32416", browseName="Failover"))
-    mode: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32415", browseName="Mode", dataType=ns0_datypes.RedundantServerMode))
+    failover: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="i=32416", browseName="Failover", modellingRule="Mandatory"))
+    mode: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32415", browseName="Mode", modellingRule="Mandatory", dataType=ns0_datypes.RedundantServerMode, valueRank=-1)
+    )
     redundantServerArray: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32413", browseName="RedundantServerArray", dataType=ns0_datypes.RedundantServerDataType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=32413", browseName="RedundantServerArray", modellingRule="Mandatory", dataType=ns0_datypes.RedundantServerDataType, valueRank=1, arrayDimensions=[0]
+        )
     )
 
 
 @o6.objecttype(nodeId="i=11616", browseName="NamespaceMetadataType", displayName="NamespaceMetadataType")
 class NamespaceMetadataType(BaseObjectType):
     configurationVersion: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=25267", browseName="ConfigurationVersion", dataType=ns0_datypes.VersionTime)
+        ns0_vartypes.PropertyType(nodeId="i=25267", browseName="ConfigurationVersion", modellingRule="Optional", dataType=ns0_datypes.VersionTime, valueRank=-1)
     )
     defaultAccessRestrictions: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=16139", browseName="DefaultAccessRestrictions", dataType=ns0_datypes.AccessRestrictionType)
+        ns0_vartypes.PropertyType(nodeId="i=16139", browseName="DefaultAccessRestrictions", modellingRule="Optional", dataType=ns0_datypes.AccessRestrictionType, valueRank=-1)
     )
     defaultRolePermissions: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=16137", browseName="DefaultRolePermissions", dataType=ns0_datypes.RolePermissionType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=16137", browseName="DefaultRolePermissions", modellingRule="Optional", dataType=ns0_datypes.RolePermissionType, valueRank=1, arrayDimensions=[0]
+        )
     )
     defaultUserRolePermissions: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=16138", browseName="DefaultUserRolePermissions", dataType=ns0_datypes.RolePermissionType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=16138", browseName="DefaultUserRolePermissions", modellingRule="Optional", dataType=ns0_datypes.RolePermissionType, valueRank=1, arrayDimensions=[0]
+        )
     )
-    isNamespaceSubset: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11620", browseName="IsNamespaceSubset", dataType=o6.Boolean))
+    isNamespaceSubset: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11620", browseName="IsNamespaceSubset", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
     modelVersion: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32419", browseName="ModelVersion", dataType=ns0_datypes.SemanticVersionString)
+        ns0_vartypes.PropertyType(nodeId="i=32419", browseName="ModelVersion", modellingRule="Optional", dataType=ns0_datypes.SemanticVersionString, valueRank=-1)
     )
     namespaceFile: AddressSpaceFileType | None
-    namespacePublicationDate: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11619", browseName="NamespacePublicationDate", dataType=o6.DateTime))
-    namespaceUri: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11617", browseName="NamespaceUri", dataType=o6.String))
-    namespaceVersion: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11618", browseName="NamespaceVersion", dataType=o6.String))
+    namespacePublicationDate: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11619", browseName="NamespacePublicationDate", modellingRule="Mandatory", dataType=o6.DateTime, valueRank=-1)
+    )
+    namespaceUri: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11617", browseName="NamespaceUri", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
+    namespaceVersion: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11618", browseName="NamespaceVersion", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
     staticNodeIdTypes: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=11621", browseName="StaticNodeIdTypes", dataType=ns0_datypes.IdType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=11621", browseName="StaticNodeIdTypes", modellingRule="Mandatory", dataType=ns0_datypes.IdType, valueRank=1, arrayDimensions=[0])
     )
     staticNumericNodeIdRange: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=11622", browseName="StaticNumericNodeIdRange", dataType=ns0_datypes.NumericRange, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=11622", browseName="StaticNumericNodeIdRange", modellingRule="Mandatory", dataType=ns0_datypes.NumericRange, valueRank=1, arrayDimensions=[0]
+        )
     )
-    staticStringNodeIdPattern: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11623", browseName="StaticStringNodeIdPattern", dataType=o6.String))
+    staticStringNodeIdPattern: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11623", browseName="StaticStringNodeIdPattern", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=32439", browseName="SyntaxReferenceEntryType", displayName="SyntaxReferenceEntryType")
 class SyntaxReferenceEntryType(DictionaryEntryType):
-    commonName: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32441", browseName="CommonName", dataType=o6.String))
+    commonName: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32441", browseName="CommonName", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=32442", browseName="UnitType", displayName="UnitType", isAbstract=True)
 class UnitType(BaseObjectType):
-    discipline: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32446", browseName="Discipline", dataType=o6.String))
-    symbol: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32443", browseName="Symbol", dataType=o6.LocalizedText))
-    unitSystem: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32445", browseName="UnitSystem", dataType=o6.String))
+    discipline: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32446", browseName="Discipline", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
+    symbol: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32443", browseName="Symbol", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=-1)
+    )
+    unitSystem: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32445", browseName="UnitSystem", modellingRule="Mandatory", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=32447", browseName="ServerUnitType", displayName="ServerUnitType")
 class ServerUnitType(UnitType):
     alternativeUnits: BaseObjectType | None
     coherentUnit: UnitType | None
-    conversionLimit: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32461", browseName="ConversionLimit", dataType=ns0_datypes.ConversionLimitEnum))
+    conversionLimit: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32461", browseName="ConversionLimit", modellingRule="Mandatory", dataType=ns0_datypes.ConversionLimitEnum, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=32467", browseName="AlternativeUnitType", displayName="AlternativeUnitType")
 class AlternativeUnitType(UnitType):
     linearConversion: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32472", browseName="LinearConversion", dataType=ns0_datypes.LinearConversionDataType)
+        ns0_vartypes.PropertyType(nodeId="i=32472", browseName="LinearConversion", modellingRule="Optional", dataType=ns0_datypes.LinearConversionDataType, valueRank=-1)
     )
-    mathMLConversion: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32473", browseName="MathMLConversion", dataType=o6.String))
+    mathMLConversion: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32473", browseName="MathMLConversion", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
     mathMLInverseConversion: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32474", browseName="MathMLInverseConversion", dataType=o6.String)
+        ns0_vartypes.PropertyType(nodeId="i=32474", browseName="MathMLInverseConversion", modellingRule="Optional", dataType=o6.String, valueRank=-1)
     )
 
 
 @o6.objecttype(nodeId="i=32475", browseName="QuantityType", displayName="QuantityType")
 class QuantityType(BaseObjectType):
     annotation: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32478", browseName="Annotation", dataType=ns0_datypes.AnnotationDataType, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(nodeId="i=32478", browseName="Annotation", modellingRule="Optional", dataType=ns0_datypes.AnnotationDataType, valueRank=1, arrayDimensions=[0])
     )
     conversionService: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32479", browseName="ConversionService", dataType=ns0_datypes.UriString)
+        ns0_vartypes.PropertyType(nodeId="i=32479", browseName="ConversionService", modellingRule="Optional", dataType=ns0_datypes.UriString, valueRank=-1)
     )
-    dimension: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32480", browseName="Dimension", dataType=ns0_datypes.QuantityDimension))
+    dimension: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32480", browseName="Dimension", modellingRule="Mandatory", dataType=ns0_datypes.QuantityDimension, valueRank=-1)
+    )
     serverUnits: BaseObjectType
-    symbol: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32476", browseName="Symbol", dataType=o6.LocalizedText))
+    symbol: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32476", browseName="Symbol", modellingRule="Optional", dataType=o6.LocalizedText, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=2318", browseName="HistoricalDataConfigurationType", displayName="HistoricalDataConfigurationType")
 class HistoricalDataConfigurationType(BaseObjectType):
     aggregateConfiguration: AggregateConfigurationType
-    aggregateFunctions: FolderType | None = o6.hasComponent(FolderType(nodeId="i=11876", browseName="AggregateFunctions"))
-    definition: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2324", browseName="Definition", dataType=o6.String))
-    exceptionDeviation: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2327", browseName="ExceptionDeviation", dataType=o6.Double))
+    aggregateFunctions: FolderType | None = o6.hasComponent(FolderType(nodeId="i=11876", browseName="AggregateFunctions", modellingRule="Optional"))
+    definition: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2324", browseName="Definition", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
+    exceptionDeviation: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2327", browseName="ExceptionDeviation", modellingRule="Optional", dataType=o6.Double, valueRank=-1)
+    )
     exceptionDeviationFormat: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=2328", browseName="ExceptionDeviationFormat", dataType=ns0_datypes.ExceptionDeviationFormat)
+        ns0_vartypes.PropertyType(nodeId="i=2328", browseName="ExceptionDeviationFormat", modellingRule="Optional", dataType=ns0_datypes.ExceptionDeviationFormat, valueRank=-1)
     )
-    maxCountStoredValues: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32620", browseName="MaxCountStoredValues", dataType=o6.UInt32))
-    maxTimeInterval: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2325", browseName="MaxTimeInterval", dataType=ns0_datypes.Duration))
+    maxCountStoredValues: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32620", browseName="MaxCountStoredValues", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
+    )
+    maxTimeInterval: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2325", browseName="MaxTimeInterval", modellingRule="Optional", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
     maxTimeStoredValues: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32619", browseName="MaxTimeStoredValues", dataType=ns0_datypes.Duration)
+        ns0_vartypes.PropertyType(nodeId="i=32619", browseName="MaxTimeStoredValues", modellingRule="Optional", dataType=ns0_datypes.Duration, valueRank=-1)
     )
-    minTimeInterval: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2326", browseName="MinTimeInterval", dataType=ns0_datypes.Duration))
+    minTimeInterval: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2326", browseName="MinTimeInterval", modellingRule="Optional", dataType=ns0_datypes.Duration, valueRank=-1)
+    )
     serverTimestampSupported: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=19092", browseName="ServerTimestampSupported", dataType=o6.Boolean)
+        ns0_vartypes.PropertyType(nodeId="i=19092", browseName="ServerTimestampSupported", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1)
     )
-    startOfArchive: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=11499", browseName="StartOfArchive", dataType=ns0_datypes.UtcTime))
+    startOfArchive: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=11499", browseName="StartOfArchive", modellingRule="Optional", dataType=ns0_datypes.UtcTime, valueRank=-1)
+    )
     startOfOnlineArchive: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=11500", browseName="StartOfOnlineArchive", dataType=ns0_datypes.UtcTime)
+        ns0_vartypes.PropertyType(nodeId="i=11500", browseName="StartOfOnlineArchive", modellingRule="Optional", dataType=ns0_datypes.UtcTime, valueRank=-1)
     )
-    stepped: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=2323", browseName="Stepped", dataType=o6.Boolean))
+    stepped: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=2323", browseName="Stepped", modellingRule="Mandatory", dataType=o6.Boolean, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=32621", browseName="HistoricalEventConfigurationType", displayName="HistoricalEventConfigurationType")
 class HistoricalEventConfigurationType(BaseObjectType):
-    eventTypes: FolderType = o6.hasComponent(FolderType(nodeId="i=32622", browseName="EventTypes"))
+    eventTypes: FolderType = o6.hasComponent(FolderType(nodeId="i=32622", browseName="EventTypes", modellingRule="Mandatory"))
     sortByEventFields: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=18644", browseName="SortByEventFields", dataType=ns0_datypes.SimpleAttributeOperand, valueRank=1, arrayDimensions=[0])
+        ns0_vartypes.PropertyType(
+            nodeId="i=18644", browseName="SortByEventFields", modellingRule="Optional", dataType=ns0_datypes.SimpleAttributeOperand, valueRank=1, arrayDimensions=[0]
+        )
     )
-    startOfArchive: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32623", browseName="StartOfArchive", dataType=ns0_datypes.UtcTime))
+    startOfArchive: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32623", browseName="StartOfArchive", modellingRule="Optional", dataType=ns0_datypes.UtcTime, valueRank=-1)
+    )
     startOfOnlineArchive: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32624", browseName="StartOfOnlineArchive", dataType=ns0_datypes.UtcTime)
+        ns0_vartypes.PropertyType(nodeId="i=32624", browseName="StartOfOnlineArchive", modellingRule="Optional", dataType=ns0_datypes.UtcTime, valueRank=-1)
     )
 
 
 @o6.objecttype(nodeId="i=32625", browseName="HistoricalExternalEventSourceType", displayName="HistoricalExternalEventSourceType")
 class HistoricalExternalEventSourceType(BaseObjectType):
-    endpointUrl: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32627", browseName="EndpointUrl", dataType=o6.String))
+    endpointUrl: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32627", browseName="EndpointUrl", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
     historicalEventFilter: ns0_vartypes.PropertyType = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32632", browseName="HistoricalEventFilter", dataType=ns0_datypes.EventFilter)
+        ns0_vartypes.PropertyType(nodeId="i=32632", browseName="HistoricalEventFilter", modellingRule="Mandatory", dataType=ns0_datypes.EventFilter, valueRank=-1)
     )
     identityTokenPolicy: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32630", browseName="IdentityTokenPolicy", dataType=ns0_datypes.UserTokenPolicy)
+        ns0_vartypes.PropertyType(nodeId="i=32630", browseName="IdentityTokenPolicy", modellingRule="Optional", dataType=ns0_datypes.UserTokenPolicy, valueRank=-1)
     )
     securityMode: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32628", browseName="SecurityMode", dataType=ns0_datypes.MessageSecurityMode)
+        ns0_vartypes.PropertyType(nodeId="i=32628", browseName="SecurityMode", modellingRule="Optional", dataType=ns0_datypes.MessageSecurityMode, valueRank=-1)
     )
-    securityPolicyUri: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32629", browseName="SecurityPolicyUri", dataType=o6.String))
-    server: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32626", browseName="Server", dataType=o6.String))
-    transportProfileUri: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32631", browseName="TransportProfileUri", dataType=o6.String))
+    securityPolicyUri: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32629", browseName="SecurityPolicyUri", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
+    server: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32626", browseName="Server", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
+    transportProfileUri: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32631", browseName="TransportProfileUri", modellingRule="Optional", dataType=o6.String, valueRank=-1)
+    )
 
 
 @o6.objecttype(
@@ -6358,38 +7224,66 @@ class AuditHistoryConfigurationChangeEventType(AuditEventType):
     isAbstract=True,
 )
 class AuditHistoryBulkInsertEventType(AuditEventType):
-    endTime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32823", browseName="EndTime", dataType=ns0_datypes.UtcTime))
-    startTime: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32822", browseName="StartTime", dataType=ns0_datypes.UtcTime))
-    updatedNode: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32821", browseName="UpdatedNode", dataType=o6.NodeId))
+    endTime: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32823", browseName="EndTime", modellingRule="Mandatory", dataType=ns0_datypes.UtcTime, valueRank=-1)
+    )
+    startTime: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32822", browseName="StartTime", modellingRule="Mandatory", dataType=ns0_datypes.UtcTime, valueRank=-1)
+    )
+    updatedNode: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32821", browseName="UpdatedNode", modellingRule="Mandatory", dataType=o6.NodeId, valueRank=-1)
+    )
 
 
 @o6.objecttype(nodeId="i=23832", browseName="PubSubCapabilitiesType", displayName="PubSubCapabilitiesType")
 class PubSubCapabilitiesType(BaseObjectType):
-    maxDataSetReaders: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23837", browseName="MaxDataSetReaders", dataType=o6.UInt32))
-    maxDataSetWriters: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23836", browseName="MaxDataSetWriters", dataType=o6.UInt32))
-    maxDataSetWritersPerGroup: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32651", browseName="MaxDataSetWritersPerGroup", dataType=o6.UInt32)
+    maxDataSetReaders: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23837", browseName="MaxDataSetReaders", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
     )
-    maxFieldsPerDataSet: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23838", browseName="MaxFieldsPerDataSet", dataType=o6.UInt32))
+    maxDataSetWriters: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23836", browseName="MaxDataSetWriters", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
+    maxDataSetWritersPerGroup: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32651", browseName="MaxDataSetWritersPerGroup", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
+    )
+    maxFieldsPerDataSet: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23838", browseName="MaxFieldsPerDataSet", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
     maxNetworkMessageSizeBroker: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32653", browseName="MaxNetworkMessageSizeBroker", dataType=o6.UInt32)
+        ns0_vartypes.PropertyType(nodeId="i=32653", browseName="MaxNetworkMessageSizeBroker", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
     maxNetworkMessageSizeDatagram: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32652", browseName="MaxNetworkMessageSizeDatagram", dataType=o6.UInt32)
+        ns0_vartypes.PropertyType(nodeId="i=32652", browseName="MaxNetworkMessageSizeDatagram", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
-    maxPubSubConnections: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23833", browseName="MaxPubSubConnections", dataType=o6.UInt32))
-    maxPublishedDataSets: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32846", browseName="MaxPublishedDataSets", dataType=o6.UInt32))
-    maxPushTargets: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32845", browseName="MaxPushTargets", dataType=o6.UInt32))
-    maxReaderGroups: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23835", browseName="MaxReaderGroups", dataType=o6.UInt32))
-    maxSecurityGroups: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32844", browseName="MaxSecurityGroups", dataType=o6.UInt32))
+    maxPubSubConnections: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23833", browseName="MaxPubSubConnections", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
+    maxPublishedDataSets: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32846", browseName="MaxPublishedDataSets", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
+    )
+    maxPushTargets: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32845", browseName="MaxPushTargets", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
+    )
+    maxReaderGroups: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23835", browseName="MaxReaderGroups", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
+    maxSecurityGroups: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32844", browseName="MaxSecurityGroups", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
+    )
     maxStandaloneSubscribedDataSets: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32847", browseName="MaxStandaloneSubscribedDataSets", dataType=o6.UInt32)
+        ns0_vartypes.PropertyType(nodeId="i=32847", browseName="MaxStandaloneSubscribedDataSets", modellingRule="Optional", dataType=o6.UInt32, valueRank=-1)
     )
-    maxWriterGroups: ns0_vartypes.PropertyType = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=23834", browseName="MaxWriterGroups", dataType=o6.UInt32))
-    supportSecurityKeyPull: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32654", browseName="SupportSecurityKeyPull", dataType=o6.Boolean))
-    supportSecurityKeyPush: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32655", browseName="SupportSecurityKeyPush", dataType=o6.Boolean))
+    maxWriterGroups: ns0_vartypes.PropertyType = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=23834", browseName="MaxWriterGroups", modellingRule="Mandatory", dataType=o6.UInt32, valueRank=-1)
+    )
+    supportSecurityKeyPull: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32654", browseName="SupportSecurityKeyPull", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1)
+    )
+    supportSecurityKeyPush: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32655", browseName="SupportSecurityKeyPush", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1)
+    )
     supportSecurityKeyServer: ns0_vartypes.PropertyType | None = o6.hasProperty(
-        ns0_vartypes.PropertyType(nodeId="i=32848", browseName="SupportSecurityKeyServer", dataType=o6.Boolean)
+        ns0_vartypes.PropertyType(nodeId="i=32848", browseName="SupportSecurityKeyServer", modellingRule="Optional", dataType=o6.Boolean, valueRank=-1)
     )
 
 
@@ -6400,7 +7294,9 @@ class AliasNameCategoryType(FolderType):
     deleteAliasesFromCategory: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=23975"])
     findAlias: o6.node.MethodNode = o6.hasComponent(o6.ns["i=23462"])
     findAliasVerbose: o6.node.MethodNode | None = o6.hasComponent(o6.ns["i=23963"])
-    lastChange: ns0_vartypes.PropertyType | None = o6.hasProperty(ns0_vartypes.PropertyType(nodeId="i=32850", browseName="LastChange", dataType=ns0_datypes.VersionTime))
+    lastChange: ns0_vartypes.PropertyType | None = o6.hasProperty(
+        ns0_vartypes.PropertyType(nodeId="i=32850", browseName="LastChange", modellingRule="Optional", dataType=ns0_datypes.VersionTime, valueRank=-1)
+    )
     subAliasNameCategories_: AliasNameCategoryType | None
 
 

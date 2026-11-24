@@ -39,21 +39,36 @@ plastics_rubber.objtypes.MeasuringDevicesType(
     nodeId="ns=plastics_extrusion_v1_filter;i=5001",
     browseName="ns=plastics_extrusion_v1_filter;MeltPressureZones",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6001", browseName="NodeVersion", dataType=o6.String, value=""))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6001", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value="")
+        )
+    ],
 )
 o6.reference(plastics_extrusion_v1_filter_objtypes.Filter_InterfaceType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_extrusion_v1_filter;i=5001"])
 o6.reference(o6.ns["ns=plastics_extrusion_v1_filter;i=5001"], "i=41", "i=2133")
 plastics_rubber.objtypes.MeasuringDevicesType(
     nodeId="ns=plastics_extrusion_v1_filter;i=5004",
     browseName="ns=plastics_rubber;AdditionalMeasuringDevices",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6002", browseName="NodeVersion", dataType=o6.String, value=""))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6002", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value="")
+        )
+    ],
 )
 o6.reference(o6.ns["ns=plastics_extrusion_v1_filter;i=5004"], "i=41", "i=2133")
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6004",
     browseName="ns=plastics_extrusion_v1_filter;FiltrationFineness",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6005", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6005", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        )
+    ],
     dataType=o6.Double,
 )
 o6.reference(plastics_extrusion_v1_filter_objtypes.Filter_InterfaceType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_extrusion_v1_filter;i=6004"])
@@ -61,16 +76,27 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6011",
     browseName="ns=plastics_extrusion_v1_filter;Area",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6006", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6006", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        )
+    ],
     dataType=o6.Double,
 )
 o6.reference(plastics_extrusion_v1_filter_objtypes.Filter_InterfaceType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_extrusion_v1_filter;i=6011"])
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6007",
     browseName="ns=plastics_rubber;ActualValue",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6008", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6019", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6008", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6019", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -80,9 +106,14 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6020",
     browseName="ns=plastics_rubber;AlarmSuppression",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6021", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6022", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6021", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6022", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -92,9 +123,14 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6032",
     browseName="ns=plastics_rubber;MonitoringSensitivity",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6033", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6034", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6033", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6034", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -102,9 +138,14 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6016",
     browseName="ns=plastics_rubber;ActualValue",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6018", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6045", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6018", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6045", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -114,9 +155,14 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6046",
     browseName="ns=plastics_rubber;AlarmSuppression",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6047", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6048", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6047", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6048", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -126,9 +172,14 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6058",
     browseName="ns=plastics_rubber;MonitoringSensitivity",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6059", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6060", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6059", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6060", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -136,33 +187,57 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6074",
     browseName="ns=plastics_rubber;ActualPower",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6075", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6075", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        )
+    ],
     dataType=o6.Double,
     value=0.0,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6076",
     browseName="ns=plastics_rubber;ActualSpecificEnergy",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6078", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6078", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        )
+    ],
     dataType=o6.Double,
     value=0.0,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6079",
     browseName="ns=plastics_rubber;PowerConsumption",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6081", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6081", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        )
+    ],
     dataType=o6.Double,
     value=0.0,
 )
 plastics_rubber.objtypes.EnergyType(
     nodeId="ns=plastics_extrusion_v1_filter;i=5017",
     browseName="ns=plastics_rubber;Energy",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_filter;i=6074"]),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_filter;i=6076"]),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_filter;i=6079"]),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_extrusion_v1_filter;i=6082", browseName="ns=plastics_rubber;PowerFactor", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6082", browseName="ns=plastics_rubber;PowerFactor", modellingRule="Optional", dataType=o6.Double, value=0.0
+            )
         ),
     ],
 )
@@ -170,9 +245,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6084",
     browseName="ns=plastics_rubber;Interval",
     description="Regular interval between two maintenances",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6085", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6086", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6085", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6086", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -181,9 +261,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6087",
     browseName="ns=plastics_rubber;RemainingInterval",
     description="Interval before next maintenance is due",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6088", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6089", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6088", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6089", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -192,9 +277,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6090",
     browseName="ns=plastics_rubber;TotalOperation",
     description="How long is the component running in total",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6091", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6092", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6091", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6092", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
 )
@@ -202,9 +292,14 @@ ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6093",
     browseName="ns=plastics_rubber;AlarmSuppression",
     description="The start-up alarm suppression deactivates alarms of a monitored parameter during start up or a setpoint jump",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6094", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6095", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6094", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6095", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -215,9 +310,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6097",
     browseName="ns=plastics_rubber;LowerTolerance",
     description="Lower relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6098", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6099", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6098", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6099", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -228,9 +328,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6100",
     browseName="ns=plastics_rubber;LowerTolerance2",
     description="Second lower relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6101", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6102", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6101", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6102", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -241,9 +346,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6103",
     browseName="ns=plastics_rubber;MaxValue",
     description="Maximum absolute value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6104", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6105", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6104", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6105", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -254,9 +364,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6106",
     browseName="ns=plastics_rubber;MinValue",
     description="Minimum absolute value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6107", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6108", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6107", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6108", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -267,9 +382,14 @@ ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6109",
     browseName="ns=plastics_rubber;MonitoringSensitivity",
     description="Defines how closely the tolerances are set during the automatic limit setting",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6110", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6111", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6110", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6111", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -280,9 +400,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6112",
     browseName="ns=plastics_rubber;SetRampDown",
     description="Indication if SetValue that is lower than the actual value shall be reached as fast as possible (SetRampDown = 0) or within a given value change per time",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6113", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6114", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6113", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6114", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -291,9 +416,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6115",
     browseName="ns=plastics_rubber;SetRampUp",
     description="Indication if a SetValue that is higher than the actual value shall be reached as fast as possible (SetRampUp = 0) or within a given value change per time",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6116", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6117", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6116", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6117", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -302,9 +432,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6118",
     browseName="ns=plastics_rubber;SetValue",
     description="Set/nominal/target value of the monitored parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6119", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6120", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6119", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6120", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -315,9 +450,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6121",
     browseName="ns=plastics_rubber;UpperTolerance",
     description="Upper relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6122", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6123", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6122", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6123", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -328,9 +468,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6124",
     browseName="ns=plastics_rubber;UpperTolerance2",
     description="Second upper relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6125", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6126", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6125", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6126", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -341,9 +486,14 @@ ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6128",
     browseName="ns=plastics_rubber;AlarmSuppression",
     description="The start-up alarm suppression deactivates alarms of a monitored parameter during start up or a setpoint jump",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6129", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6130", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6129", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6130", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -353,9 +503,14 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6133",
     browseName="ns=plastics_rubber;Interval",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6134", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6135", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6134", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6135", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -363,9 +518,14 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6136",
     browseName="ns=plastics_rubber;RemainingInterval",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6137", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6138", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6137", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6138", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -374,7 +534,13 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6139",
     browseName="ns=plastics_extrusion_v1_filter;BackflushPressure",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6012", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6012", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -383,16 +549,28 @@ o6.reference(plastics_extrusion_v1_filter_objtypes.Filter_InterfaceType, ns0.ref
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6140",
     browseName="ns=plastics_extrusion_v1_filter;Area",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6141", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6141", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        )
+    ],
     dataType=o6.Double,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6145",
     browseName="ns=plastics_rubber;AlarmSuppression",
     description="The start-up alarm suppression deactivates alarms of a monitored parameter during start up or a setpoint jump",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6146", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6147", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6146", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6147", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -403,7 +581,11 @@ plastics_rubber.objtypes.MeasuringDevicesType(
     nodeId="ns=plastics_extrusion_v1_filter;i=5011",
     browseName="ns=plastics_extrusion_v1_filter;MeltTemperatureZones",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6149", browseName="NodeVersion", dataType=o6.String, value=""))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6149", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value="")
+        )
+    ],
 )
 o6.reference(plastics_extrusion_v1_filter_objtypes.Filter_InterfaceType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_extrusion_v1_filter;i=5011"])
 o6.reference(o6.ns["ns=plastics_extrusion_v1_filter;i=5011"], "i=41", "i=2133")
@@ -411,14 +593,24 @@ plastics_rubber.objtypes.MeasuringDevicesType(
     nodeId="ns=plastics_extrusion_v1_filter;i=5012",
     browseName="ns=plastics_extrusion_v1_filter;AdditionalMeasuringDevices",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6150", browseName="NodeVersion", dataType=o6.String, value=""))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6150", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value="")
+        )
+    ],
 )
 o6.reference(plastics_extrusion_v1_filter_objtypes.Filter_InterfaceType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_extrusion_v1_filter;i=5012"])
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6155",
     browseName="ns=plastics_extrusion_v1_filter;Area",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6156", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6156", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        )
+    ],
     dataType=o6.Double,
 )
 o6.reference(plastics_extrusion_v1_filter_objtypes.ScreenPackageType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_extrusion_v1_filter;i=6155"])
@@ -478,14 +670,27 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6166",
     browseName="ns=plastics_extrusion_v1_filter;Area",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6013", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6013", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        )
+    ],
     dataType=o6.Double,
 )
 o6.reference(plastics_extrusion_v1_filter_objtypes.FilterPackageType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_extrusion_v1_filter;i=6166"])
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6157",
     browseName="ns=plastics_extrusion_v1_filter;Area",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6167", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6167", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        )
+    ],
     dataType=o6.Double,
 )
 plastics_extrusion_v1_filter_objtypes.ScreenPackageType(
@@ -493,12 +698,20 @@ plastics_extrusion_v1_filter_objtypes.ScreenPackageType(
     browseName="ns=plastics_extrusion_v1_filter;ScreenPackage_<Nr>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6152", browseName="ns=plastics_extrusion_v1_filter;Name", dataType=o6.LocalizedText)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6175", browseName="ns=plastics_extrusion_v1_filter;PackageSetup", dataType=o6.String, value="")
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6152", browseName="ns=plastics_extrusion_v1_filter;Name", modellingRule="Mandatory", dataType=o6.LocalizedText
+            )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6176", browseName="ns=plastics_extrusion_v1_filter;SerialNr", dataType=o6.String, value="")
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6175", browseName="ns=plastics_extrusion_v1_filter;PackageSetup", modellingRule="Optional", dataType=o6.String, value=""
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6176", browseName="ns=plastics_extrusion_v1_filter;SerialNr", modellingRule="Optional", dataType=o6.String, value=""
+            )
         ),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_filter;i=6157"]),
     ],
@@ -508,9 +721,14 @@ ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6188",
     browseName="ns=plastics_rubber;MonitoringSensitivity",
     description="Defines how closely the tolerances are set during the automatic limit setting",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6189", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6190", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6189", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6190", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -521,9 +739,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6143",
     browseName="ns=plastics_rubber;ActualValue",
     description="Actual value of the monitored parameter",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6144", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6204", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6144", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6204", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -532,9 +755,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6163",
     browseName="ns=plastics_rubber;LowerTolerance",
     description="Lower relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6164", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6208", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6164", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6208", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -545,9 +773,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6170",
     browseName="ns=plastics_rubber;LowerTolerance2",
     description="Second lower relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6171", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6209", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6171", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6209", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -558,9 +791,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6211",
     browseName="ns=plastics_rubber;Interval",
     description="Regular interval between two maintenances",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6212", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6213", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6212", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6213", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -569,9 +807,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6214",
     browseName="ns=plastics_rubber;RemainingInterval",
     description="Interval before next maintenance is due",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6215", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6216", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6215", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6216", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -580,9 +823,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6217",
     browseName="ns=plastics_rubber;TotalOperation",
     description="How long is the component running in total",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6218", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6219", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6218", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6219", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
 )
@@ -590,9 +838,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6178",
     browseName="ns=plastics_rubber;MaxValue",
     description="Maximum absolute value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6185", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6220", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6185", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6220", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -603,9 +856,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6186",
     browseName="ns=plastics_rubber;MinValue",
     description="Minimum absolute value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6187", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6221", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6187", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6221", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -615,9 +873,14 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6050",
     browseName="ns=plastics_rubber;LowerTolerance",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6051", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6222", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6051", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6222", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -627,9 +890,14 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6052",
     browseName="ns=plastics_rubber;LowerTolerance2",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6053", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6223", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6053", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6223", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -639,9 +907,14 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6054",
     browseName="ns=plastics_rubber;MaxValue",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6055", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6224", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6055", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6224", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -651,9 +924,14 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6056",
     browseName="ns=plastics_rubber;MinValue",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6057", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6225", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6057", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6225", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -663,9 +941,14 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6061",
     browseName="ns=plastics_rubber;SetRampDown",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6062", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6226", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6062", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6226", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -673,9 +956,14 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6063",
     browseName="ns=plastics_rubber;SetRampUp",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6064", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6227", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6064", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6227", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -683,9 +971,14 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6065",
     browseName="ns=plastics_rubber;SetValue",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6066", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6228", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6066", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6228", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -695,9 +988,14 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6067",
     browseName="ns=plastics_rubber;UpperTolerance",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6068", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6229", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6068", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6229", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -707,9 +1005,14 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6069",
     browseName="ns=plastics_rubber;UpperTolerance2",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6070", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6230", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6070", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6230", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -720,9 +1023,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6231",
     browseName="ns=plastics_rubber;LowerTolerance",
     description="Lower relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6232", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6233", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6232", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6233", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -733,9 +1041,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6234",
     browseName="ns=plastics_rubber;LowerTolerance2",
     description="Second lower relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6235", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6236", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6235", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6236", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -746,9 +1059,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6237",
     browseName="ns=plastics_rubber;MaxValue",
     description="Maximum absolute value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6238", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6239", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6238", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6239", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -758,18 +1076,28 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6240",
     browseName="ns=plastics_rubber;TotalOperation",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6241", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6242", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6241", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6242", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6024",
     browseName="ns=plastics_rubber;LowerTolerance",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6025", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6243", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6025", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6243", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -779,9 +1107,14 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6026",
     browseName="ns=plastics_rubber;LowerTolerance2",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6027", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6244", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6027", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6244", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -791,9 +1124,14 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6028",
     browseName="ns=plastics_rubber;MaxValue",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6029", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6245", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6029", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6245", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -803,9 +1141,14 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6030",
     browseName="ns=plastics_rubber;MinValue",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6031", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6246", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6031", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6246", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -815,9 +1158,14 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6035",
     browseName="ns=plastics_rubber;SetRampDown",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6036", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6247", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6036", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6247", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -825,9 +1173,14 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6037",
     browseName="ns=plastics_rubber;SetRampUp",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6038", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6248", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6038", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6248", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -835,9 +1188,14 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6039",
     browseName="ns=plastics_rubber;SetValue",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6040", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6249", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6040", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6249", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -847,9 +1205,14 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6041",
     browseName="ns=plastics_rubber;UpperTolerance",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6042", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6250", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6042", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6250", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -859,9 +1222,14 @@ ns0.vartypes.AnalogItemType(
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6043",
     browseName="ns=plastics_rubber;UpperTolerance2",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6044", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6251", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6044", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6251", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -890,7 +1258,7 @@ http_opcfoundation_org_UA_PlasticsRubber_Extrusion_Filter_ = ns0.objtypes.Namesp
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),
@@ -908,9 +1276,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6253",
     browseName="ns=plastics_rubber;MinValue",
     description="Minimum absolute value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6254", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6255", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6254", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6255", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -921,9 +1294,14 @@ ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6256",
     browseName="ns=plastics_rubber;MonitoringSensitivity",
     description="Defines how closely the tolerances are set during the automatic limit setting",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6257", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6258", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6257", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6258", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -934,9 +1312,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6259",
     browseName="ns=plastics_rubber;SetRampDown",
     description="Indication if SetValue that is lower than the actual value shall be reached as fast as possible (SetRampDown = 0) or within a given value change per time",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6260", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6261", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6260", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6261", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -945,9 +1328,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6262",
     browseName="ns=plastics_rubber;SetRampUp",
     description="Indication if a SetValue that is higher than the actual value shall be reached as fast as possible (SetRampUp = 0) or within a given value change per time",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6263", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6264", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6263", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6264", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -956,9 +1344,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6265",
     browseName="ns=plastics_rubber;SetValue",
     description="Set/nominal/target value of the monitored parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6266", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6267", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6266", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6267", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -969,9 +1362,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6268",
     browseName="ns=plastics_rubber;UpperTolerance",
     description="Upper relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6269", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6270", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6269", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6270", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -982,9 +1380,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6193",
     browseName="ns=plastics_rubber;SetRampDown",
     description="Indication if SetValue that is lower than the actual value shall be reached as fast as possible (SetRampDown = 0) or within a given value change per time",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6194", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6273", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6194", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6273", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -995,9 +1398,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6271",
     browseName="ns=plastics_rubber;UpperTolerance2",
     description="Second upper relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6272", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6274", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6272", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6274", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1008,9 +1416,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6009",
     browseName="ns=plastics_rubber;ActualValue",
     description="Actual value of the monitored parameter",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6010", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6275", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6010", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6275", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1024,22 +1437,30 @@ plastics_extrusion_v1_filter_objtypes.FilterPackageType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=6179",
                 browseName="ns=plastics_extrusion_v1_filter;Status",
+                modellingRule="Mandatory",
                 dataType=plastics_extrusion_v1_filter_datypes.FilterPackageStatusEnumeration,
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6182", browseName="ns=plastics_extrusion_v1_filter;BackflushCounter", dataType=o6.UInt32)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6182", browseName="ns=plastics_extrusion_v1_filter;BackflushCounter", modellingRule="Optional", dataType=o6.UInt32
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=6183",
                 browseName="ns=plastics_extrusion_v1_filter;BackflushTime",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.Duration,
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6277", browseName="ns=plastics_extrusion_v1_filter;Name", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6277", browseName="ns=plastics_extrusion_v1_filter;Name", modellingRule="Mandatory", dataType=o6.LocalizedText
+            )
+        ),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_filter;i=6140"]),
     ],
 )
@@ -1048,9 +1469,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6195",
     browseName="ns=plastics_rubber;SetRampUp",
     description="Indication if a SetValue that is higher than the actual value shall be reached as fast as possible (SetRampUp = 0) or within a given value change per time",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6196", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6278", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6196", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6278", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1061,9 +1487,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6197",
     browseName="ns=plastics_rubber;SetValue",
     description="Set/nominal/target value of the monitored parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6198", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6279", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6198", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6279", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1074,9 +1505,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6200",
     browseName="ns=plastics_rubber;UpperTolerance",
     description="Upper relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6201", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6280", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6201", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6280", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1087,9 +1523,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6202",
     browseName="ns=plastics_rubber;UpperTolerance2",
     description="Second upper relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6203", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6281", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6203", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6281", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1100,9 +1541,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_v1_filter;i=6072",
     browseName="ns=plastics_rubber;ActualValue",
     description="Actual value of the monitored parameter",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6073", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6282", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6073", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6282", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1110,31 +1556,39 @@ ns0.vartypes.AnalogItemType(
 plastics_rubber.objtypes.MaintenanceType(
     nodeId="ns=plastics_extrusion_v1_filter;i=5009",
     browseName="ns=plastics_extrusion_v1;Maintenance",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=6015",
                 browseName="ns=plastics_rubber;Status",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber.datatypes.MaintenanceStatusEnumeration,
                 value=plastics_rubber.datatypes.MaintenanceStatusEnumeration.NOT_DUE,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6132", browseName="ns=plastics_rubber;AdditionalInformation", dataType=o6.String)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6132", browseName="ns=plastics_rubber;AdditionalInformation", modellingRule="Optional", dataType=o6.String
+            )
+        ),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_filter;i=6133"]),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_filter;i=6136"]),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_filter;i=6240"]),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_filter;i=7001", browseName="ns=plastics_rubber;Reset")),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_filter;i=7001", browseName="ns=plastics_rubber;Reset", modellingRule="Mandatory")),
     ],
 )
 plastics_rubber.objtypes.MaintenanceType(
     nodeId="ns=plastics_extrusion_v1_filter;i=5015",
     browseName="ns=plastics_rubber;Maintenance",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=6177",
                 browseName="ns=plastics_rubber;Status",
                 description="Maintenance status of the machine/device/component (represented by the parent element)",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber.datatypes.MaintenanceStatusEnumeration,
                 value=plastics_rubber.datatypes.MaintenanceStatusEnumeration.NOT_DUE,
             )
@@ -1144,6 +1598,7 @@ plastics_rubber.objtypes.MaintenanceType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=6210",
                 browseName="ns=plastics_rubber;AdditionalInformation",
                 description="Additional information on the necessary maintenance. Can be also a link to another document.",
+                modellingRule="Optional",
                 dataType=o6.String,
             )
         ),
@@ -1155,6 +1610,7 @@ plastics_rubber.objtypes.MaintenanceType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=7002",
                 browseName="ns=plastics_rubber;Reset",
                 description="This Method sets the CurrentInterval to 0 and Status to NOT_DUE_0",
+                modellingRule="Mandatory",
             )
         ),
     ],
@@ -1168,6 +1624,7 @@ plastics_rubber.objtypes.MonitoredParameterType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=6023",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -1186,7 +1643,7 @@ plastics_rubber.objtypes.MonitoredParameterType(
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_filter;i=6039"]),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_filter;i=6041"]),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_filter;i=6043"]),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_filter;i=7003", browseName="ns=plastics_rubber;ResetMonitoring")),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_filter;i=7003", browseName="ns=plastics_rubber;ResetMonitoring", modellingRule="Optional")),
     ],
 )
 o6.reference(plastics_extrusion_v1_filter_objtypes.Filter_InterfaceType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_extrusion_v1_filter;i=5003"])
@@ -1199,6 +1656,7 @@ plastics_rubber.objtypes.MonitoredParameterType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=6049",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -1217,19 +1675,21 @@ plastics_rubber.objtypes.MonitoredParameterType(
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_filter;i=6065"]),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_filter;i=6067"]),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_filter;i=6069"]),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_filter;i=7004", browseName="ns=plastics_rubber;ResetMonitoring")),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_filter;i=7004", browseName="ns=plastics_rubber;ResetMonitoring", modellingRule="Optional")),
     ],
 )
 o6.reference(plastics_extrusion_v1_filter_objtypes.Filter_InterfaceType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_extrusion_v1_filter;i=5006"])
 plastics_rubber.objtypes.MaintenanceType(
     nodeId="ns=plastics_extrusion_v1_filter;i=5018",
     browseName="ns=plastics_rubber;Maintenance",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=6003",
                 browseName="ns=plastics_rubber;Status",
                 description="Maintenance status of the machine/device/component (represented by the parent element)",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber.datatypes.MaintenanceStatusEnumeration,
                 value=plastics_rubber.datatypes.MaintenanceStatusEnumeration.NOT_DUE,
             )
@@ -1239,6 +1699,7 @@ plastics_rubber.objtypes.MaintenanceType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=6083",
                 browseName="ns=plastics_rubber;AdditionalInformation",
                 description="Additional information on the necessary maintenance. Can be also a link to another document.",
+                modellingRule="Optional",
                 dataType=o6.String,
             )
         ),
@@ -1250,6 +1711,7 @@ plastics_rubber.objtypes.MaintenanceType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=7006",
                 browseName="ns=plastics_rubber;Reset",
                 description="This Method sets the CurrentInterval to 0 and Status to NOT_DUE_0",
+                modellingRule="Mandatory",
             )
         ),
     ],
@@ -1258,12 +1720,14 @@ plastics_rubber.objtypes.ClosedLoopControlType(
     nodeId="ns=plastics_extrusion_v1_filter;i=5008",
     browseName="ns=plastics_rubber;ClosedLoopControl",
     description="With this type the client can do settings for the closed loop control on the device for a parameter",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=6205",
                 browseName="ns=plastics_rubber;AutoTuningActive",
                 description="Informs if the automatic tuning is currently active",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
             )
@@ -1273,6 +1737,7 @@ plastics_rubber.objtypes.ClosedLoopControlType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=6206",
                 browseName="ns=plastics_rubber;AutomaticControllerMode",
                 description="Determination if PID Parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -1283,6 +1748,7 @@ plastics_rubber.objtypes.ClosedLoopControlType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=6207",
                 browseName="ns=plastics_rubber;PIDParameters",
                 description="PID Parameters as array if several input signals (sensors) are used for the control",
+                modellingRule="Optional",
                 dataType=plastics_rubber.datatypes.PIDParametersDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -1295,22 +1761,30 @@ plastics_rubber.objtypes.ClosedLoopControlType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=7007",
                 browseName="ns=plastics_rubber;AutoTuningOff",
                 description="Stops an already active self-optimisation process (no control parameters are changed)",
+                modellingRule="Optional",
             )
         ),
         o6.hasComponent(
-            o6.call(nodeId="ns=plastics_extrusion_v1_filter;i=7008", browseName="ns=plastics_rubber;AutoTuningOn", description="Starts the self-optimisation of the controller")
+            o6.call(
+                nodeId="ns=plastics_extrusion_v1_filter;i=7008",
+                browseName="ns=plastics_rubber;AutoTuningOn",
+                description="Starts the self-optimisation of the controller",
+                modellingRule="Optional",
+            )
         ),
     ],
 )
 plastics_rubber.objtypes.MonitoredParameterType(
     nodeId="ns=plastics_extrusion_v1_filter;i=5019",
     browseName="ns=plastics_rubber;Speed",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=6096",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -1334,6 +1808,7 @@ plastics_rubber.objtypes.MonitoredParameterType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=7010",
                 browseName="ns=plastics_rubber;ResetMonitoring",
                 description="With this method the tolerance values are set according to the actual value and the set monitoring sensitivity",
+                modellingRule="Optional",
             )
         ),
     ],
@@ -1341,22 +1816,29 @@ plastics_rubber.objtypes.MonitoredParameterType(
 plastics_rubber.objtypes.StartDeviceType(
     nodeId="ns=plastics_extrusion_v1_filter;i=5016",
     browseName="ns=plastics_rubber;StartDevice",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=6199",
                 browseName="ns=plastics_rubber;Status",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber.datatypes.StartEnumeration,
                 value=plastics_rubber.datatypes.StartEnumeration.NOT_READY_TO_START,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_extrusion_v1_filter;i=6283", browseName="ns=plastics_rubber;StartBlockedByClient", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+                nodeId="ns=plastics_extrusion_v1_filter;i=6283",
+                browseName="ns=plastics_rubber;StartBlockedByClient",
+                modellingRule="Optional",
+                dataType=o6.Boolean,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_filter;i=7009", browseName="ns=plastics_rubber;StartRequest")),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_filter;i=7011", browseName="ns=plastics_rubber;StopRequest")),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_filter;i=7009", browseName="ns=plastics_rubber;StartRequest", modellingRule="Optional")),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_filter;i=7011", browseName="ns=plastics_rubber;StopRequest", modellingRule="Optional")),
     ],
 )
 plastics_rubber.objtypes.MeasuringDeviceType(
@@ -1368,17 +1850,25 @@ plastics_rubber.objtypes.MeasuringDeviceType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=6077",
                 browseName="ns=plastics_rubber;ControlMode",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber.datatypes.ControlModeEnumeration,
                 value=plastics_rubber.datatypes.ControlModeEnumeration.OTHER,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6080", browseName="ns=plastics_rubber;Id", dataType=o6.String, value="")),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6142", browseName="ns=plastics_rubber;IsPresent", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6080", browseName="ns=plastics_rubber;Id", modellingRule="Mandatory", dataType=o6.String, value="")
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6142", browseName="ns=plastics_rubber;IsPresent", modellingRule="Mandatory", dataType=o6.Boolean, value=False
+            )
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=6148",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -1386,9 +1876,13 @@ plastics_rubber.objtypes.MeasuringDeviceType(
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6191", browseName="ns=plastics_rubber;Name", dataType=o6.LocalizedText, value=o6.LocalizedText())
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_v1_filter;i=6191", browseName="ns=plastics_rubber;Name", modellingRule="Optional", dataType=o6.LocalizedText, value=o6.LocalizedText()
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6192", browseName="ns=plastics_rubber;Position", dataType=o6.String)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6192", browseName="ns=plastics_rubber;Position", modellingRule="Optional", dataType=o6.String)
+        ),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_filter;i=5008"]),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_filter;i=5015"]),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_filter;i=5016"]),
@@ -1409,6 +1903,7 @@ plastics_rubber.objtypes.MeasuringDeviceType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=7005",
                 browseName="ns=plastics_rubber;ResetMonitoring",
                 description="With this method the tolerance values are set according to the actual value and the set monitoring sensitivity",
+                modellingRule="Optional",
             )
         ),
     ],
@@ -1417,33 +1912,42 @@ o6.reference(plastics_extrusion_v1_filter_objtypes.Filter_InterfaceType, ns0.ref
 plastics_rubber.objtypes.StartDeviceType(
     nodeId="ns=plastics_extrusion_v1_filter;i=5020",
     browseName="ns=plastics_rubber;StartDrive",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=6071",
                 browseName="ns=plastics_rubber;Status",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber.datatypes.StartEnumeration,
                 value=plastics_rubber.datatypes.StartEnumeration.NOT_READY_TO_START,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_extrusion_v1_filter;i=6127", browseName="ns=plastics_rubber;StartBlockedByClient", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+                nodeId="ns=plastics_extrusion_v1_filter;i=6127",
+                browseName="ns=plastics_rubber;StartBlockedByClient",
+                modellingRule="Optional",
+                dataType=o6.Boolean,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_filter;i=7012", browseName="ns=plastics_rubber;StartRequest")),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_filter;i=7013", browseName="ns=plastics_rubber;StopRequest")),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_filter;i=7012", browseName="ns=plastics_rubber;StartRequest", modellingRule="Optional")),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_filter;i=7013", browseName="ns=plastics_rubber;StopRequest", modellingRule="Optional")),
     ],
 )
 plastics_rubber.objtypes.MonitoredParameterType(
     nodeId="ns=plastics_extrusion_v1_filter;i=5021",
     browseName="ns=plastics_rubber;Torque",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=6131",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -1467,6 +1971,7 @@ plastics_rubber.objtypes.MonitoredParameterType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=7014",
                 browseName="ns=plastics_rubber;ResetMonitoring",
                 description="With this method the tolerance values are set according to the actual value and the set monitoring sensitivity",
+                modellingRule="Optional",
             )
         ),
     ],
@@ -1488,22 +1993,29 @@ o6.reference(plastics_extrusion_v1_filter_objtypes.Filter_InterfaceType, ns0.ref
 plastics_rubber.objtypes.StartDeviceType(
     nodeId="ns=plastics_extrusion_v1_filter;i=5010",
     browseName="ns=plastics_extrusion_v1;StartTempering",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_v1_filter;i=6017",
                 browseName="ns=plastics_rubber;Status",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber.datatypes.StartEnumeration,
                 value=plastics_rubber.datatypes.StartEnumeration.NOT_READY_TO_START,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_extrusion_v1_filter;i=6284", browseName="ns=plastics_rubber;StartBlockedByClient", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+                nodeId="ns=plastics_extrusion_v1_filter;i=6284",
+                browseName="ns=plastics_rubber;StartBlockedByClient",
+                modellingRule="Optional",
+                dataType=o6.Boolean,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_filter;i=7015", browseName="ns=plastics_rubber;StartRequest")),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_filter;i=7016", browseName="ns=plastics_rubber;StopRequest")),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_filter;i=7015", browseName="ns=plastics_rubber;StartRequest", modellingRule="Optional")),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_filter;i=7016", browseName="ns=plastics_rubber;StopRequest", modellingRule="Optional")),
     ],
 )
 plastics_extrusion_v1.objtypes.ExtrusionTemperatureZonesType(
@@ -1511,7 +2023,9 @@ plastics_extrusion_v1.objtypes.ExtrusionTemperatureZonesType(
     browseName="ns=plastics_extrusion_v1_filter;TemperatureZones",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6014", browseName="NodeVersion", dataType=o6.Double, value=0.0)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_filter;i=6014", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.Double, value=0.0)
+        ),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_filter;i=5009"]),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_v1_filter;i=5010"]),
     ],

@@ -32,65 +32,65 @@ else:
     _VariableNode = object
 
 
-@o6.datatype(nodeId="ns=onboarding;i=1164", browseName="CertificateAuthorityType", defaultEncodingId="ns=onboarding;i=1439")
+@o6.datatype(nodeId="ns=onboarding;i=1164", browseName="ns=onboarding;CertificateAuthorityType", defaultEncodingId="ns=onboarding;i=1439")
 class CertificateAuthorityType(ns0.datatypes.Structure):
-    authorityCertificate: o6.ByteString
-    issuerCertificates: list[o6.ByteString]
+    authorityCertificate: o6.ByteString = o6.field(name="AuthorityCertificate")
+    issuerCertificates: list[o6.ByteString] = o6.field(name="IssuerCertificates")
 
 
-@o6.datatype(nodeId="ns=onboarding;i=1165", browseName="BaseTicketType", defaultEncodingId="ns=onboarding;i=1440", isAbstract=True)
+@o6.datatype(nodeId="ns=onboarding;i=1165", browseName="ns=onboarding;BaseTicketType", defaultEncodingId="ns=onboarding;i=1440", isAbstract=True)
 class BaseTicketType(ns0.datatypes.Structure):
-    manufacturerName: o6.String
-    modelName: o6.String
-    modelVersion: o6.String
-    hardwareRevision: o6.String
-    softwareRevision: o6.String
-    serialNumber: o6.String
-    manufactureDate: o6.DateTime
-    authorities: list[CertificateAuthorityType]
+    manufacturerName: o6.String = o6.field(name="ManufacturerName")
+    modelName: o6.String = o6.field(name="ModelName")
+    modelVersion: o6.String = o6.field(name="ModelVersion")
+    hardwareRevision: o6.String = o6.field(name="HardwareRevision")
+    softwareRevision: o6.String = o6.field(name="SoftwareRevision")
+    serialNumber: o6.String = o6.field(name="SerialNumber")
+    manufactureDate: o6.DateTime = o6.field(name="ManufactureDate")
+    authorities: list[CertificateAuthorityType] = o6.field(name="Authorities")
 
 
-@o6.datatype(nodeId="ns=onboarding;i=1166", browseName="DeviceIdentityTicketType", defaultEncodingId="ns=onboarding;i=1441")
+@o6.datatype(nodeId="ns=onboarding;i=1166", browseName="ns=onboarding;DeviceIdentityTicketType", defaultEncodingId="ns=onboarding;i=1441")
 class DeviceIdentityTicketType(BaseTicketType):
-    manufacturerName: o6.String
-    modelName: o6.String
-    modelVersion: o6.String
-    hardwareRevision: o6.String
-    softwareRevision: o6.String
-    serialNumber: o6.String
-    manufactureDate: o6.DateTime
-    authorities: list[CertificateAuthorityType]
-    productInstanceUri: o6.String
+    manufacturerName: o6.String = o6.field(name="ManufacturerName")
+    modelName: o6.String = o6.field(name="ModelName")
+    modelVersion: o6.String = o6.field(name="ModelVersion")
+    hardwareRevision: o6.String = o6.field(name="HardwareRevision")
+    softwareRevision: o6.String = o6.field(name="SoftwareRevision")
+    serialNumber: o6.String = o6.field(name="SerialNumber")
+    manufactureDate: o6.DateTime = o6.field(name="ManufactureDate")
+    authorities: list[CertificateAuthorityType] = o6.field(name="Authorities")
+    productInstanceUri: o6.String = o6.field(name="ProductInstanceUri")
 
 
-@o6.datatype(nodeId="ns=onboarding;i=1167", browseName="CompositeIdentityTicketType", defaultEncodingId="ns=onboarding;i=1442")
+@o6.datatype(nodeId="ns=onboarding;i=1167", browseName="ns=onboarding;CompositeIdentityTicketType", defaultEncodingId="ns=onboarding;i=1442")
 class CompositeIdentityTicketType(BaseTicketType):
-    manufacturerName: o6.String
-    modelName: o6.String
-    modelVersion: o6.String
-    hardwareRevision: o6.String
-    softwareRevision: o6.String
-    serialNumber: o6.String
-    manufactureDate: o6.DateTime
-    authorities: list[CertificateAuthorityType]
-    compositeInstanceUri: o6.String
-    devices: list[o6.String]
-    composites: list[o6.String]
+    manufacturerName: o6.String = o6.field(name="ManufacturerName")
+    modelName: o6.String = o6.field(name="ModelName")
+    modelVersion: o6.String = o6.field(name="ModelVersion")
+    hardwareRevision: o6.String = o6.field(name="HardwareRevision")
+    softwareRevision: o6.String = o6.field(name="SoftwareRevision")
+    serialNumber: o6.String = o6.field(name="SerialNumber")
+    manufactureDate: o6.DateTime = o6.field(name="ManufactureDate")
+    authorities: list[CertificateAuthorityType] = o6.field(name="Authorities")
+    compositeInstanceUri: o6.String = o6.field(name="CompositeInstanceUri")
+    devices: list[o6.String] = o6.field(name="Devices")
+    composites: list[o6.String] = o6.field(name="Composites")
 
 
-@o6.datatype(nodeId="ns=onboarding;i=1168", browseName="TicketListType", defaultEncodingId="ns=onboarding;i=1443")
+@o6.datatype(nodeId="ns=onboarding;i=1168", browseName="ns=onboarding;TicketListType", defaultEncodingId="ns=onboarding;i=1443")
 class TicketListType(ns0.datatypes.Structure):
-    devices: list[o6.String]
-    composites: list[o6.String]
+    devices: list[o6.String] = o6.field(name="Devices")
+    composites: list[o6.String] = o6.field(name="Composites")
 
 
-@o6.datatype(nodeId="ns=onboarding;i=1495", browseName="ManagerDescription", defaultEncodingId="ns=onboarding;i=4206")
+@o6.datatype(nodeId="ns=onboarding;i=1495", browseName="ns=onboarding;ManagerDescription", defaultEncodingId="ns=onboarding;i=4206")
 class ManagerDescription(ns0.datatypes.Structure):
-    name: o6.LocalizedText
-    isRequired: o6.Boolean
-    purposeUri: o6.String
-    protocolUri: o6.String
-    endpointUrls: list[o6.String]
+    name: o6.LocalizedText = o6.field(name="Name")
+    isRequired: o6.Boolean = o6.field(name="IsRequired")
+    purposeUri: o6.String = o6.field(name="PurposeUri")
+    protocolUri: o6.String = o6.field(name="ProtocolUri")
+    endpointUrls: list[o6.String] = o6.field(name="EndpointUrls")
 
 
 del Any, TYPE_CHECKING, uuid, o6, gds, ns0

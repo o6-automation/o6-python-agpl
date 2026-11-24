@@ -11,20 +11,26 @@ testpaths = ["tests"]
 pythonpath = ["."]
 # --dist only takes effect with -n/--numprocesses (pytest-xdist).
 addopts = "-p no:forked --dist=loadgroup"
+# A leaked live client or server warns from `__del__`, where the error is
+# unraisable; pytest reports that as the second warning, so both must error.
+filterwarnings = [
+    "error::ResourceWarning",
+    "error::pytest.PytestUnraisableExceptionWarning",
+]
 markers = [
     "common: tests for types and structs (no server needed)",
     "client: client API tests with fixture-owned servers",
     "server: server-only tests (self-contained)",
     "e2e: end-to-end tests (Python server + Python client)",
     "namespace: namespace loading tests",
-    "forked: run each test in a disposable child process",
+    "forked(timeout=900): run each test in a disposable child process, killed after timeout seconds (default 900, or O6_FORKED_ITEM_TIMEOUT)",
     "tooling: checks the repo toolchain, not o6 runtime behaviour",
     "examples: runs the example scripts end to end",
 ]
 
 [project]
 name = "o6"
-version = "3.0.0"
+version = "3.1.0"
 description = "High-performance OPC UA client and server for Python, built on open62541"
 readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">=3.11,<3.16"
@@ -131,6 +137,17 @@ manylinux-aarch64-image = "manylinux_2_28"
 before-all = """
 yum install -y cmake openssl-devel git pkg-config
 """
+
+# aarch64 wheels are built under QEMU on the x64 runners: no native aarch64
+# runner exists. Emulation slows everything down 10-50x, so the mDNS/TCP wheel
+# gate exceeds its own time limits there (its 30 s capability probe alone timed
+# out). Only check that the wheel installs and its extension module loads.
+[[tool.cibuildwheel.overrides]]
+select = "*-manylinux_aarch64"
+test-requires = []
+# o6/__init__.py deletes its `_o6` attribute, so `import o6._o6` cannot reach
+# the extension through the package afterwards; `from o6 import _o6` can.
+test-command = 'python -c "from o6 import _o6; print(_o6.__file__)"'
 
 [tool.cibuildwheel.macos]
 archs = ["x86_64", "arm64"]

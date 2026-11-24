@@ -37,7 +37,11 @@ rsl_vartypes.SpatialLocationType(
     nodeId="ns=rsl;i=6014",
     browseName="ns=rsl;PositionFrame",
     modellingRule="Mandatory",
-    references=[o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6015", browseName="ns=rsl;Base", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1))],
+    references=[
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6015", browseName="ns=rsl;Base", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1)
+        )
+    ],
     _allow_abstract=True,
     accessLevel=3,
     userAccessLevel=1,
@@ -47,7 +51,11 @@ rsl_vartypes.SpatialLocationType(
     nodeId="ns=rsl;i=6018",
     browseName="ns=rsl;<FrameIdentifier>",
     modellingRule="MandatoryPlaceholder",
-    references=[o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6019", browseName="ns=rsl;Base", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1))],
+    references=[
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6019", browseName="ns=rsl;Base", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1)
+        )
+    ],
     _allow_abstract=True,
     accessLevel=3,
     userAccessLevel=1,
@@ -58,7 +66,11 @@ rsl_vartypes.SpatialLocationType(
     nodeId="ns=rsl;i=6020",
     browseName="ns=rsl;<FrameIdentifier>",
     modellingRule="MandatoryPlaceholder",
-    references=[o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6021", browseName="ns=rsl;Base", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1))],
+    references=[
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6021", browseName="ns=rsl;Base", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1)
+        )
+    ],
     _allow_abstract=True,
     accessLevel=3,
     userAccessLevel=1,
@@ -69,7 +81,11 @@ rsl_vartypes.SpatialLocationType(
     nodeId="ns=rsl;i=6022",
     browseName="ns=rsl;<FrameIdentifier>",
     modellingRule="MandatoryPlaceholder",
-    references=[o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6023", browseName="ns=rsl;Base", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1))],
+    references=[
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6023", browseName="ns=rsl;Base", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1)
+        )
+    ],
     _allow_abstract=True,
     accessLevel=3,
     userAccessLevel=1,
@@ -86,6 +102,7 @@ rsl_vartypes.SpatialLocationType(
                 nodeId="ns=rsl;i=6026",
                 browseName="ns=rsl;Base",
                 description="WorldFrame as the origin of the coordinate system has no Base i.e. it must be null.",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -118,7 +135,12 @@ http_opcfoundation_org_UA_RSL_ = ns0.objtypes.NamespaceMetadataType(
 rsl_vartypes.SpatialLocationType(
     nodeId="ns=rsl;i=6038",
     browseName="ns=rsl;PositionFrame",
-    references=[o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6039", browseName="ns=rsl;Base", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6039", browseName="ns=rsl;Base", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1)
+        )
+    ],
     _allow_abstract=True,
     accessLevel=3,
     userAccessLevel=1,
@@ -133,6 +155,7 @@ rsl_objtypes.SpatialObjectType(
                 nodeId="ns=rsl;i=6035",
                 browseName="DefaultInstanceBrowseName",
                 description="The default BrowseName for instances of the type.",
+                modellingRule="Mandatory",
                 dataType=o6.QualifiedName,
                 value=o6.QualifiedName(o6.ns.rsl.index, "SpatialObject"),
                 accessLevel=3,
@@ -148,12 +171,13 @@ rsl_vartypes.RpyOrientationType(
     browseName="ns=rsl;Orientation",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=rsl;i=6036", browseName="AngleUnit", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=rsl;i=6036", browseName="AngleUnit", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=rsl;i=6042",
                 browseName="ns=rsl;A",
                 description="Rotation around X Axis (Roll) as per ISO 9787:2013",
+                modellingRule="Mandatory",
                 dataType=o6.Double,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -164,6 +188,7 @@ rsl_vartypes.RpyOrientationType(
                 nodeId="ns=rsl;i=6043",
                 browseName="ns=rsl;B",
                 description="Rotation around Y Axis (Pitch) as per ISO 9787:2013",
+                modellingRule="Mandatory",
                 dataType=o6.Double,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -171,7 +196,13 @@ rsl_vartypes.RpyOrientationType(
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=rsl;i=6044", browseName="ns=rsl;C", description="Rotation around Z Axis (Yaw) as per ISO 9787:2013", dataType=o6.Double, accessLevel=3, userAccessLevel=1
+                nodeId="ns=rsl;i=6044",
+                browseName="ns=rsl;C",
+                description="Rotation around Z Axis (Yaw) as per ISO 9787:2013",
+                modellingRule="Mandatory",
+                dataType=o6.Double,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
     ],
@@ -186,10 +217,10 @@ ns0.vartypes.ThreeDCartesianCoordinatesType(
     browseName="ns=rsl;Position",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=rsl;i=6045", browseName="LengthUnit", dataType=ns0.datatypes.EUInformation)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6011", browseName="X", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6012", browseName="Y", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6013", browseName="Z", dataType=o6.Double)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=rsl;i=6045", browseName="LengthUnit", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6011", browseName="X", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6012", browseName="Y", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6013", browseName="Z", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDCartesianCoordinates,
     accessLevel=3,

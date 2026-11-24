@@ -115,6 +115,7 @@ wire_harness_objtypes.WireHarnessMachineIdentificationType(
                 nodeId="ns=wire_harness;i=6009",
                 browseName="ns=di;AssetId",
                 description="To be used by end users to store a unique identification in the context of their overall application. Servers shall support at least 40 Unicode characters for the clients writing this value, this means clients can expect to be able to write strings with a length of 40 Unicode characters into that field.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -125,6 +126,7 @@ wire_harness_objtypes.WireHarnessMachineIdentificationType(
                 nodeId="ns=wire_harness;i=6010",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -133,6 +135,7 @@ wire_harness_objtypes.WireHarnessMachineIdentificationType(
                 nodeId="ns=wire_harness;i=6011",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -141,21 +144,22 @@ wire_harness_objtypes.WireHarnessMachineIdentificationType(
                 nodeId="ns=wire_harness;i=6012",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
     ],
 )
 o6.reference(wire_harness_objtypes.WireHarnessMachineType, ns0.reftypes.HasAddIn, o6.ns["ns=wire_harness;i=5001"])
-ns0.vartypes.FiniteStateVariableType(nodeId="ns=wire_harness;i=6015", browseName="CurrentState", dataType=o6.LocalizedText)
+ns0.vartypes.FiniteStateVariableType(nodeId="ns=wire_harness;i=6015", browseName="CurrentState", modellingRule="Mandatory", dataType=o6.LocalizedText)
 o6.reference(o6.ns["ns=wire_harness;i=6015"], "i=46", "i=3728")
 machinery.objtypes.MachineryItemState_StateMachineType(
-    nodeId="ns=wire_harness;i=5003", browseName="ns=machinery;MachineryItemState", references=[o6.hasComponent(o6.ns["ns=wire_harness;i=6015"])]
+    nodeId="ns=wire_harness;i=5003", browseName="ns=machinery;MachineryItemState", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=wire_harness;i=6015"])]
 )
-ns0.vartypes.FiniteStateVariableType(nodeId="ns=wire_harness;i=6016", browseName="CurrentState", dataType=o6.LocalizedText)
+ns0.vartypes.FiniteStateVariableType(nodeId="ns=wire_harness;i=6016", browseName="CurrentState", modellingRule="Mandatory", dataType=o6.LocalizedText)
 o6.reference(o6.ns["ns=wire_harness;i=6016"], "i=46", "i=3728")
 machinery.objtypes.MachineryOperationModeStateMachineType(
-    nodeId="ns=wire_harness;i=5004", browseName="ns=machinery;MachineryOperationMode", references=[o6.hasComponent(o6.ns["ns=wire_harness;i=6016"])]
+    nodeId="ns=wire_harness;i=5004", browseName="ns=machinery;MachineryOperationMode", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=wire_harness;i=6016"])]
 )
 wire_harness_objtypes.ArticleSpecManagementType(
     nodeId="ns=wire_harness;i=5010",
@@ -166,6 +170,7 @@ wire_harness_objtypes.ArticleSpecManagementType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=wire_harness;i=6019",
                 browseName="ns=wire_harness;ArticleSpecList",
+                modellingRule="Mandatory",
                 dataType=isa95_jobcontrol_v2.datatypes.ISA95MaterialDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -396,7 +401,7 @@ typeDictionary_2 = ns0.vartypes.DataTypeDictionaryType(
 )
 
 
-o6.call(nodeId="ns=wire_harness;i=7000", browseName="ns=isa95_jobcontrol_v2;Store")
+o6.call(nodeId="ns=wire_harness;i=7000", browseName="ns=isa95_jobcontrol_v2;Store", modellingRule="Mandatory")
 o6.reference(o6.ns["ns=wire_harness;i=7000"], "i=46", "ns=isa95_jobcontrol_v2;i=6040")
 o6.reference(o6.ns["ns=wire_harness;i=7000"], "i=46", "ns=isa95_jobcontrol_v2;i=6041")
 
@@ -482,6 +487,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=wire_harness;i=7001",
     browseName="ns=machinery_result;GetResultIdListFiltered",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6013"]),
     outputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6014"]),
 )
@@ -489,8 +495,9 @@ o6.call(
 machinery_result.objtypes.ResultManagementType(
     nodeId="ns=wire_harness;i=5043",
     browseName="ns=machinery_result;ResultManagement",
+    modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=wire_harness;i=5044", browseName="ns=machinery_result;Results")),
+        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=wire_harness;i=5044", browseName="ns=machinery_result;Results", modellingRule="Optional")),
         o6.hasComponent(o6.ns["ns=wire_harness;i=7001"]),
     ],
 )
@@ -507,7 +514,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="TypeNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wire_harness;i=7010", browseName="ns=wire_harness;FindPartsByType", inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6033"]))
+o6.call(nodeId="ns=wire_harness;i=7010", browseName="ns=wire_harness;FindPartsByType", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6033"]))
 
 wire_harness_objtypes.PartManagementType(
     nodeId="ns=wire_harness;i=5045", browseName="ns=wire_harness;PartManagement", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=wire_harness;i=7010"])]
@@ -517,21 +524,22 @@ o6.reference(o6.ns["ns=wire_harness;i=5045"], "i=47", o6.ns["ns=wire_harness;i=7
 o6.reference(o6.ns["ns=wire_harness;i=5045"], "i=47", o6.ns["ns=wire_harness;i=7016"])
 
 
-o6.call(nodeId="ns=wire_harness;i=7011", browseName="ns=isa95_jobcontrol_v2;Clear")
+o6.call(nodeId="ns=wire_harness;i=7011", browseName="ns=isa95_jobcontrol_v2;Clear", modellingRule="Mandatory")
 o6.reference(o6.ns["ns=wire_harness;i=7011"], "i=46", "ns=isa95_jobcontrol_v2;i=6067")
 o6.reference(o6.ns["ns=wire_harness;i=7011"], "i=46", "ns=isa95_jobcontrol_v2;i=6068")
 
-o6.call(nodeId="ns=wire_harness;i=7012", browseName="ns=isa95_jobcontrol_v2;Start")
+o6.call(nodeId="ns=wire_harness;i=7012", browseName="ns=isa95_jobcontrol_v2;Start", modellingRule="Mandatory")
 o6.reference(o6.ns["ns=wire_harness;i=7012"], "i=46", "ns=isa95_jobcontrol_v2;i=6053")
 o6.reference(o6.ns["ns=wire_harness;i=7012"], "i=46", "ns=isa95_jobcontrol_v2;i=6054")
 
-o6.call(nodeId="ns=wire_harness;i=7013", browseName="ns=isa95_jobcontrol_v2;Abort")
+o6.call(nodeId="ns=wire_harness;i=7013", browseName="ns=isa95_jobcontrol_v2;Abort", modellingRule="Mandatory")
 o6.reference(o6.ns["ns=wire_harness;i=7013"], "i=46", "ns=isa95_jobcontrol_v2;i=6063")
 o6.reference(o6.ns["ns=wire_harness;i=7013"], "i=46", "ns=isa95_jobcontrol_v2;i=6064")
 
 isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
     nodeId="ns=wire_harness;i=5013",
     browseName="ns=machinery_jobs;JobOrderControl",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(o6.ns["ns=wire_harness;i=7000"]),
         o6.hasComponent(o6.ns["ns=wire_harness;i=7011"]),
@@ -549,7 +557,7 @@ o6.reference(o6.ns["ns=wire_harness;i=5013"], "i=47", "ns=machinery_jobs;i=6007"
 o6.reference(o6.ns["ns=wire_harness;i=5013"], "i=47", "ns=machinery_jobs;i=6008")
 o6.reference(o6.ns["ns=wire_harness;i=5013"], "i=47", "ns=machinery_jobs;i=6009")
 machinery_jobs.objtypes.JobManagementType(
-    nodeId="ns=wire_harness;i=5005", browseName="ns=machinery_jobs;JobManagement", references=[o6.hasComponent(o6.ns["ns=wire_harness;i=5013"])]
+    nodeId="ns=wire_harness;i=5005", browseName="ns=machinery_jobs;JobManagement", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=wire_harness;i=5013"])]
 )
 o6.reference(o6.ns["ns=wire_harness;i=5005"], "i=47", "ns=machinery_jobs;i=5002")
 ns0.objtypes.FolderType(
@@ -560,7 +568,7 @@ ns0.objtypes.FolderType(
         o6.hasAddIn(o6.ns["ns=wire_harness;i=5003"]),
         o6.hasAddIn(o6.ns["ns=wire_harness;i=5004"]),
         o6.hasAddIn(o6.ns["ns=wire_harness;i=5005"]),
-        o6.hasAddIn(machinery.objtypes.MachineryOperationCounterType(nodeId="ns=wire_harness;i=5006", browseName="ns=di;OperationCounters")),
+        o6.hasAddIn(machinery.objtypes.MachineryOperationCounterType(nodeId="ns=wire_harness;i=5006", browseName="ns=di;OperationCounters", modellingRule="Optional")),
         o6.hasAddIn(o6.ns["ns=wire_harness;i=5043"]),
     ],
 )

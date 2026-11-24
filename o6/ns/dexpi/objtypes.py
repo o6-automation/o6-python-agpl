@@ -56,6 +56,7 @@ class DEXPISupplementaryDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1066",
             browseName="ns=dexpi;DEXPISpecificationVersion",
             description="Variable which holds the version of DEXPI specification",
+            modellingRule="Optional",
             dataType=o6.String,
             value="1.2",
             accessLevel=3,
@@ -67,6 +68,7 @@ class DEXPISupplementaryDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1063",
             browseName="ns=dexpi;DEXPIXMIExternalLink",
             description="Variable which holds a link to the XMI file of DEXPI specification as UML",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -74,13 +76,19 @@ class DEXPISupplementaryDataType(BaseDEXPIObjectType):
         )
     )
     dEXPIXMIFile: ns0.objtypes.FileType | None = o6.hasComponent(
-        ns0.objtypes.FileType(nodeId="ns=dexpi;i=1064", browseName="ns=dexpi;DEXPIXMIFile", description="Object that holds the data of the XMI file of DEXPI specification as UML")
+        ns0.objtypes.FileType(
+            nodeId="ns=dexpi;i=1064",
+            browseName="ns=dexpi;DEXPIXMIFile",
+            description="Object that holds the data of the XMI file of DEXPI specification as UML",
+            modellingRule="Optional",
+        )
     )
     proteusSchemaVersion: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=dexpi;i=1067",
             browseName="ns=dexpi;ProteusSchemaVersion",
             description="Variable which holds the version of Proteus schema",
+            modellingRule="Optional",
             dataType=o6.String,
             value="4.0.1",
             accessLevel=3,
@@ -92,6 +100,7 @@ class DEXPISupplementaryDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1062",
             browseName="ns=dexpi;ProteusXMLExternalLink",
             description="Variable which a link to the XML file of the input P&ID model",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -99,7 +108,12 @@ class DEXPISupplementaryDataType(BaseDEXPIObjectType):
         )
     )
     proteusXMLFile: ns0.objtypes.FileType | None = o6.hasComponent(
-        ns0.objtypes.FileType(nodeId="ns=dexpi;i=1065", browseName="ns=dexpi;ProteusXMLFile", description="Object that holds the data of the Proteus XML file of DEXPI P&ID model")
+        ns0.objtypes.FileType(
+            nodeId="ns=dexpi;i=1065",
+            browseName="ns=dexpi;ProteusXMLFile",
+            description="Object that holds the data of the Proteus XML file of DEXPI P&ID model",
+            modellingRule="Optional",
+        )
     )
 
 
@@ -110,6 +124,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1080",
             browseName="ns=dexpi;ApprovalDateRepresentationAssignmentClass",
             description="A representation of the approval date of the drawing.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -121,6 +136,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1081",
             browseName="ns=dexpi;ApprovalDescriptionAssignmentClass",
             description="A description of the approval of the drawing.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -132,6 +148,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1082",
             browseName="ns=dexpi;ApproverNameAssignmentClass",
             description="The name of the approver of the drawing.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -143,6 +160,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1083",
             browseName="ns=dexpi;ArchiveNumberAssignmentClass",
             description="The archive number of the drawing.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -154,6 +172,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1084",
             browseName="ns=dexpi;AreaIsa95NameAssignmentClass",
             description="The name of the related area according to ISA-95.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -165,6 +184,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1085",
             browseName="ns=dexpi;BlockNameAssignmentClass",
             description="The name of the related block.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -176,6 +196,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1086",
             browseName="ns=dexpi;BlockNumberAssignmentClass",
             description="The number of the related block.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -187,6 +208,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1087",
             browseName="ns=dexpi;CheckerNameAssignmentClass",
             description="The name of the checker of the drawing.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -198,6 +220,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1088",
             browseName="ns=dexpi;CompanyNameAssignmentClass",
             description="The name of the company.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -209,6 +232,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1089",
             browseName="ns=dexpi;CompanyNumberAssignmentClass",
             description="The number of the company.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -220,6 +244,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1090",
             browseName="ns=dexpi;ConfidentialitySpecialization",
             description="The confidentiality of the drawing.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.ConfidentialityClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -230,6 +255,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1091",
             browseName="ns=dexpi;CreationDateRepresentationAssignmentClass",
             description="A representation of the creation date of the drawing.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -241,6 +267,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1092",
             browseName="ns=dexpi;CreatorNameAssignmentClass",
             description="The name of the creator of the drawing.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -252,6 +279,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1093",
             browseName="ns=dexpi;DesignerNameAssignmentClass",
             description="The name of the designer of the drawing.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -263,6 +291,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1094",
             browseName="ns=dexpi;DrafterNameAssignmentClass",
             description="The name of the drafter of the drawing.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -274,6 +303,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1096",
             browseName="ns=dexpi;DrawingNameAssignmentClass",
             description="The drawing name.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -285,6 +315,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1095",
             browseName="ns=dexpi;DrawingNumberAssignmentClass",
             description="The drawing number.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -296,6 +327,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1097",
             browseName="ns=dexpi;DrawingSubTitleAssignmentClass",
             description="The sub-title of the drawing.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -307,6 +339,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1098",
             browseName="ns=dexpi;FileNameAssignmentClass",
             description="The name of the drawing file.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -318,6 +351,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1099",
             browseName="ns=dexpi;LocationNameAssignmentClass",
             description="The location name.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -329,6 +363,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1100",
             browseName="ns=dexpi;ModificationDataRepresentationAssignmentClass",
             description="A representation of the last modification date of the drawing.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -340,6 +375,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1101",
             browseName="ns=dexpi;ProcessCellIsa95NameAssignmentClass",
             description="The name of the related process cell according to ISA-95.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -351,6 +387,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1102",
             browseName="ns=dexpi;ProcessCellIsa95NumberAssignmentClass",
             description="The number of the related process cell according to ISA-95.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -362,6 +399,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1103",
             browseName="ns=dexpi;ProjectNameAssignmentClass",
             description="The name of the related project.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -373,6 +411,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1104",
             browseName="ns=dexpi;ProjectNumberAssignmentClass",
             description="The number of the related project.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -384,6 +423,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1105",
             browseName="ns=dexpi;ProjectRangeNumberAssignmentClass",
             description="The range number of he related project.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -395,6 +435,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1106",
             browseName="ns=dexpi;ReplacedDrawingAssignmentClass",
             description="The drawing replaced by this drawing.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -406,6 +447,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1107",
             browseName="ns=dexpi;ResponsibleDepartmentNameAssignmentClass",
             description="The name of the department responsible for the drawing.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -417,6 +459,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1108",
             browseName="ns=dexpi;RevisionNumberAssignmentClass",
             description="The revision number of the drawing.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -428,6 +471,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1109",
             browseName="ns=dexpi;SheetFormatAssignmentClass",
             description="The sheet format.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -439,6 +483,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1110",
             browseName="ns=dexpi;SheetNumberAssignmentClass",
             description="The sheet number of the drawing.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -450,6 +495,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1111",
             browseName="ns=dexpi;SiteIsa95NameAssignmentClass",
             description="The name of the related site according to ISA-95.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -461,6 +507,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1112",
             browseName="ns=dexpi;SubProjectNameAssignmentClass",
             description="The name of the related sub-project.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -472,6 +519,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1113",
             browseName="ns=dexpi;SubProjectNumberAssignmentClass",
             description="The number of the related sub-project.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -480,7 +528,13 @@ class MetaDataType(BaseDEXPIObjectType):
     )
     totalNumberOfSheets: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=dexpi;i=1114", browseName="ns=dexpi;TotalNumberOfSheets", description="The total number of sheets.", dataType=o6.Int64, accessLevel=3, userAccessLevel=1
+            nodeId="ns=dexpi;i=1114",
+            browseName="ns=dexpi;TotalNumberOfSheets",
+            description="The total number of sheets.",
+            modellingRule="Optional",
+            dataType=o6.Int64,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     unitIsa95NameAssignmentClass: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -488,6 +542,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1115",
             browseName="ns=dexpi;UnitIsa95NameAssignmentClass",
             description="The name of the related unit according to ISA-95.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -499,6 +554,7 @@ class MetaDataType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1116",
             browseName="ns=dexpi;UnitIsa95NumberAssignmentClass",
             description="The number of the related unit according to ISA-95.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -525,6 +581,7 @@ class PositionerType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1129",
             browseName="ns=dexpi;DeviceTypeNameAssignmentClass",
             description="The device type of the Positioner.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -536,6 +593,7 @@ class PositionerType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1128",
             browseName="ns=dexpi;SubTagNameAssignmentClass",
             description="The sub tag name of the Positioner.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -556,6 +614,7 @@ class SignalLineFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1175",
             browseName="ns=dexpi;PortStatusSpecialization",
             description="A classification indicating the port status of the SignalConveyingFunction.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.PortStatusClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -566,6 +625,7 @@ class SignalLineFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1176",
             browseName="ns=dexpi;SignalConveyingTypeSpecialization",
             description="A classification indicating the signal conveying type of the SignalConveyingFunction.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.SignalConveyingTypeClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -576,6 +636,7 @@ class SignalLineFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1177",
             browseName="ns=dexpi;SignalPointNumberAssignmentClass",
             description="The signal point number of the SignalConveyingFunction. Typical values are 1 to 6.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -587,6 +648,7 @@ class SignalLineFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1178",
             browseName="ns=dexpi;SignalProcessControlFunctionsAssignmentClass",
             description="The process control functions of the SignalConveyingFunction. Values are combinations of characters.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -607,6 +669,7 @@ class MeasuringLineFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1182",
             browseName="ns=dexpi;PortStatusSpecialization",
             description="A classification indicating the port status of the SignalConveyingFunction.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.PortStatusClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -617,6 +680,7 @@ class MeasuringLineFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1183",
             browseName="ns=dexpi;SignalConveyingTypeSpecialization",
             description="A classification indicating the signal conveying type of the SignalConveyingFunction.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.SignalConveyingTypeClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -627,6 +691,7 @@ class MeasuringLineFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1184",
             browseName="ns=dexpi;SignalPointNumberAssignmentClass",
             description="The signal point number of the SignalConveyingFunction. Typical values are 1 to 6.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -638,6 +703,7 @@ class MeasuringLineFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1185",
             browseName="ns=dexpi;SignalProcessControlFunctionsAssignmentClass",
             description="The process control functions of the SignalConveyingFunction. Values are combinations of characters.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -658,6 +724,7 @@ class InstrumentationLoopFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1190",
             browseName="ns=dexpi;InstrumentationLoopFunctionNumberAssignmentClass",
             description="The identification number of the InstrumentationLoopFunction.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -678,6 +745,7 @@ class PrimaryElementType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1196",
             browseName="ns=dexpi;SubTagNameAssignmentClass",
             description="The sub tag name of the PrimaryElement.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -698,6 +766,7 @@ class ShutOffValveReferenceType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1198",
             browseName="ns=dexpi;SubTagNameAssignmentClass",
             description="The sub tag name of the ShutOffValveReference.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -718,6 +787,7 @@ class ProcessSignalGeneratingFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1211",
             browseName="ns=dexpi;ProcessSignalGeneratingFunctionNumberAssignmentClass",
             description="An identifier for the ProcessSignalGeneratingFunction. It usually contains the identifier of the ProcessInstrumentationFunction that includes the ProcessSignalGeneratingFunction (see ProcessInstrumentationFunctionNumberAssignmentClass).",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -729,6 +799,7 @@ class ProcessSignalGeneratingFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1212",
             browseName="ns=dexpi;SensorTypeAssignmentClass",
             description="The sensor type of the ProcessSignalGeneratingFunction.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -760,6 +831,7 @@ class OfflinePrimaryElementType(PrimaryElementType):
             nodeId="ns=dexpi;i=1221",
             browseName="ns=dexpi;ConnectionNominalDiameterNumericalValueRepresentationAssignmentClass",
             description="A readable representation of the numerical value of the nominal diameter at the device connection of the OfflinePrimaryElement. The purpose of this value is to give a textual representation of the nominal diameter to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -771,6 +843,7 @@ class OfflinePrimaryElementType(PrimaryElementType):
             nodeId="ns=dexpi;i=1222",
             browseName="ns=dexpi;ConnectionNominalDiameterRepresentationAssignmentClass",
             description="A readable representation of the nominal diameter at the device connection of the OfflinePrimaryElement. The purpose of this value is to give a textual representation of the nominal diameter to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -782,6 +855,7 @@ class OfflinePrimaryElementType(PrimaryElementType):
             nodeId="ns=dexpi;i=1223",
             browseName="ns=dexpi;ConnectionNominalDiameterStandardSpecialization",
             description="The nominal diameter of the device connection of the OfflinePrimaryElement, given as a reference to a nominal diameter standard and value.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.NominalDiameterStandardClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -792,6 +866,7 @@ class OfflinePrimaryElementType(PrimaryElementType):
             nodeId="ns=dexpi;i=1224",
             browseName="ns=dexpi;ConnectionNominalDiameterTypeRepresentationAssignmentClass",
             description="A readable representation of the type of the nominal diameter at the device connection of the OfflinePrimaryElement. The purpose of this value is to give a textual representation of the nominal diameter to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -803,6 +878,7 @@ class OfflinePrimaryElementType(PrimaryElementType):
             nodeId="ns=dexpi;i=1225",
             browseName="ns=dexpi;FluidCodeAssignmentClass",
             description="The identification code of the fluid related to the OfflinePrimaryElement. So  far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -814,6 +890,7 @@ class OfflinePrimaryElementType(PrimaryElementType):
             nodeId="ns=dexpi;i=1226",
             browseName="ns=dexpi;HeatTracingTypeAssignmentClass",
             description="The heat tracing type related to the OfflinePrimaryElement, represented as a string.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -825,6 +902,7 @@ class OfflinePrimaryElementType(PrimaryElementType):
             nodeId="ns=dexpi;i=1227",
             browseName="ns=dexpi;HeatTracingTypeSpecialization",
             description="A specialization indicating the heat tracing type related to the OfflinePrimaryElement.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.HeatTracingTypeClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -836,6 +914,7 @@ class OfflinePrimaryElementType(PrimaryElementType):
             nodeId="ns=dexpi;i=1231",
             browseName="ns=dexpi;InsulationTypeAssignmentClass",
             description="The identification code for the insulation type related to the OfflinePrimaryElement. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -847,6 +926,7 @@ class OfflinePrimaryElementType(PrimaryElementType):
             nodeId="ns=dexpi;i=1232",
             browseName="ns=dexpi;LocationNominalDiameterNumericalValueRepresentationAssignmentClass",
             description="A readable representation of the numerical value of the nominal diameter at the location of the OfflinePrimaryElement. The purpose of this value is to give a textual representation of the nominal diameter to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -858,6 +938,7 @@ class OfflinePrimaryElementType(PrimaryElementType):
             nodeId="ns=dexpi;i=1233",
             browseName="ns=dexpi;LocationNominalDiameterRepresentationAssignmentClass",
             description="A readable representation of the nominal diameter at the location of the OfflinePrimaryElement. The purpose of this value is to give a textual representation of the nominal diameter to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -869,6 +950,7 @@ class OfflinePrimaryElementType(PrimaryElementType):
             nodeId="ns=dexpi;i=1234",
             browseName="ns=dexpi;LocationNominalDiameterStandardSpecialization",
             description="The nominal diameter of the location of the OfflinePrimaryElement, given as a reference to a nominal diameter standard and value.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.NominalDiameterStandardClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -879,6 +961,7 @@ class OfflinePrimaryElementType(PrimaryElementType):
             nodeId="ns=dexpi;i=1235",
             browseName="ns=dexpi;LocationNominalDiameterTypeRepresentationAssignmentClass",
             description="A readable representation of the type of the nominal diameter at the location of the OfflinePrimaryElement. The purpose of this value is to give a textual representation of the nominal diameter to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -900,6 +983,7 @@ class ActuatingFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1240",
             browseName="ns=dexpi;ActuatingFunctionNumberAssignmentClass",
             description="An identifier for the ActuatingFunction. It usually contains the identifier of the ProcessInstrumentationFunction that includes the ActuatingFunction (see ProcessInstrumentationFunctionNumberAssignmentClass).",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -920,6 +1004,7 @@ class TransmitterType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1249",
             browseName="ns=dexpi;DeviceTypeNameAssignmentClass",
             description="The device type of the Transmitter.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -931,6 +1016,7 @@ class TransmitterType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1248",
             browseName="ns=dexpi;SubTagNameAssignmentClass",
             description="The sub tag name of the Transmitter.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -962,6 +1048,7 @@ class SignalConveyingFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1252",
             browseName="ns=dexpi;PortStatusSpecialization",
             description="A classification indicating the port status of the SignalConveyingFunction.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.PortStatusClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -972,6 +1059,7 @@ class SignalConveyingFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1253",
             browseName="ns=dexpi;SignalConveyingTypeSpecialization",
             description="A classification indicating the signal conveying type of the SignalConveyingFunction.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.SignalConveyingTypeClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -982,6 +1070,7 @@ class SignalConveyingFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1254",
             browseName="ns=dexpi;SignalPointNumberAssignmentClass",
             description="The signal point number of the SignalConveyingFunction. Typical values are 1 to 6.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -993,6 +1082,7 @@ class SignalConveyingFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1255",
             browseName="ns=dexpi;SignalProcessControlFunctionsAssignmentClass",
             description="The process control functions of the SignalConveyingFunction. Values are combinations of characters.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1017,6 +1107,7 @@ class ControlledActuatorType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1260",
             browseName="ns=dexpi;DeviceTypeNameAssignmentClass",
             description="The device type of the ControlledActuator.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1028,6 +1119,7 @@ class ControlledActuatorType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1261",
             browseName="ns=dexpi;FailActionRepresentationAssignmentClass",
             description="A readable representation of the fail action of the ControlledActuator. This attribute should also be referenced in the graphics if applicable.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1039,6 +1131,7 @@ class ControlledActuatorType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1262",
             browseName="ns=dexpi;FailActionSpecialization",
             description="The fail action of the ControlledActuator.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.FailActionClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -1049,6 +1142,7 @@ class ControlledActuatorType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1259",
             browseName="ns=dexpi;SubTagNameAssignmentClass",
             description="The sub tag name of the ControlledActuator.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1079,6 +1173,7 @@ class PlantSectionIso10209_2012Type(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1266",
             browseName="ns=dexpi;PlantSectionIdentificationCodeAssignmentClass",
             description="The identification code of the PlantSectionIso10209-2012.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1090,6 +1185,7 @@ class PlantSectionIso10209_2012Type(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1267",
             browseName="ns=dexpi;PlantSectionNameAssignmentClass",
             description="The name of the PlantSectionIso10209-2012.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1121,6 +1217,7 @@ class IndustrialComplexIso10209_2012Type(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1273",
             browseName="ns=dexpi;IndustrialComplexIdentificationCodeAssignmentClass",
             description="The identification code of the IndustrialComplexIso10209-2012.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1132,6 +1229,7 @@ class IndustrialComplexIso10209_2012Type(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1274",
             browseName="ns=dexpi;IndustrialComplexNameAssignmentClass",
             description="The name of the IndustrialComplexIso10209-2012.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1174,6 +1272,7 @@ class SiteIsa95Type(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1281",
             browseName="ns=dexpi;SiteIdentificationCodeAssignmentClass",
             description="The identification code of the SiteIsa95.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1185,6 +1284,7 @@ class SiteIsa95Type(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1282",
             browseName="ns=dexpi;SiteNameAssignmentClass",
             description="The name of the SiteIsa95.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1222,6 +1322,7 @@ class AreaIsa95Type(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1291",
             browseName="ns=dexpi;AreaIdentificationCodeAssignmentClass",
             description="The identification code of the AreaIsa95.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1233,6 +1334,7 @@ class AreaIsa95Type(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1292",
             browseName="ns=dexpi;AreaNameAssignmentClass",
             description="The name of the AreaIsa95.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1281,6 +1383,7 @@ class PlantSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1298",
             browseName="ns=dexpi;PlantSystemIdentificationCodeAssignmentClass",
             description="The identification code of the PlantSystem.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1292,6 +1395,7 @@ class PlantSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1299",
             browseName="ns=dexpi;PlantSystemNameAssignmentClass",
             description="The name of the PlantSystem.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1312,6 +1416,7 @@ class ProcessPlantType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1301",
             browseName="ns=dexpi;ProcessPlantIdentificationCodeAssignmentClass",
             description="The identification code of the ProcessPlant.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1323,6 +1428,7 @@ class ProcessPlantType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1302",
             browseName="ns=dexpi;ProcessPlantNameAssignmentClass",
             description="The name of the ProcessPlant.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1338,6 +1444,7 @@ class Isa95EnterpriseType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1306",
             browseName="ns=dexpi;EnterpriseIdentificationCodeAssignmentClass",
             description="The identification code of the Isa95Enterprise.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1349,6 +1456,7 @@ class Isa95EnterpriseType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1307",
             browseName="ns=dexpi;EnterpriseNameAssignmentClass",
             description="The name of the Isa95Enterprise.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1375,6 +1483,7 @@ class PlantTrainType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1310",
             browseName="ns=dexpi;PlantTrainIdentificationCodeAssignmentClass",
             description="The identification code of the PlantTrain.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1386,6 +1495,7 @@ class PlantTrainType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1311",
             browseName="ns=dexpi;PlantTrainNameAssignmentClass",
             description="The name of the PlantTrain.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1403,6 +1513,7 @@ class TaggedPlantItemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1338",
             browseName="ns=dexpi;TagNameAssignmentClass",
             description="The tag number of the TaggedPlantItem. See also <owner.TagNamePrefixAssignmentClass>, <owner.TagNameSequenceNumberAssignmentClass>, and <owner.TagNameSuffixAssignmentClass>.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1414,6 +1525,7 @@ class TaggedPlantItemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1339",
             browseName="ns=dexpi;TagNamePrefixAssignmentClass",
             description='The prefix part of the tag number of the TaggedPlantItem. For example, the prefix of the tag number "P4714-A" is "P". The prefix often indicates the type of the equipment item, e.g., "P" can indicate a pump. See also <owner.TagNameAssignmentClass>.',
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1425,6 +1537,7 @@ class TaggedPlantItemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1340",
             browseName="ns=dexpi;TagNameSequenceNumberAssignmentClass",
             description='The sequence number part of the tag number of the TaggedPlantItem. For example, the sequence number of the tag number "P4714-A" is "4714".',
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1436,6 +1549,7 @@ class TaggedPlantItemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1341",
             browseName="ns=dexpi;TagNameSuffixAssignmentClass",
             description='The suffix part of the tag number of an TaggedPlantItem item. For example, the suffix of the tag number "P4714-A" is "A".',
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1452,6 +1566,7 @@ class ColumnPackingsArrangementType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1374",
             browseName="ns=dexpi;MaterialOfConstructionCodeAssignmentClass",
             description="A code that gives the material of construction of the ColumnPackingsArrangement.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1463,6 +1578,7 @@ class ColumnPackingsArrangementType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1375",
             browseName="ns=dexpi;NumberOfPackings",
             description="The number of packings in the ColumnPackingsArrangement.",
+            modellingRule="Optional",
             dataType=o6.Int64,
             accessLevel=3,
             userAccessLevel=1,
@@ -1473,6 +1589,7 @@ class ColumnPackingsArrangementType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1376",
             browseName="ns=dexpi;PackingTypeAssignmentClass",
             description="The type of the packings in the ColumnPackingsArrangement.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1497,6 +1614,7 @@ class FilterUnitType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1470",
             browseName="ns=dexpi;MaterialOfConstructionCodeAssignmentClass",
             description="A code that gives the material of construction of the FilterUnit.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1508,6 +1626,7 @@ class FilterUnitType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1471",
             browseName="ns=dexpi;NumberOfFilterElements",
             description="The number of filter elements in the FilterUnit.",
+            modellingRule="Optional",
             dataType=o6.Int64,
             accessLevel=3,
             userAccessLevel=1,
@@ -1540,6 +1659,7 @@ class HeatExchangerRotorType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1492",
             browseName="ns=dexpi;MaterialOfConstructionCodeAssignmentClass",
             description="A code that gives the material of construction of the HeatExchangerRotor.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1565,6 +1685,7 @@ class ChamberType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1525",
             browseName="ns=dexpi;ChamberDescriptionAssignmentClass",
             description="The description of the Chamber.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1576,6 +1697,7 @@ class ChamberType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1526",
             browseName="ns=dexpi;ChamberFunctionAssignmentClass",
             description="The function of the Chamber.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1587,6 +1709,7 @@ class ChamberType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1527",
             browseName="ns=dexpi;ChamberFunctionSpecialization",
             description="A specialization indicating the function of the Chamber.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.ChamberFunctionClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -1602,6 +1725,7 @@ class ChamberType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1543",
             browseName="ns=dexpi;MaterialOfConstructionCodeAssignmentClass",
             description="A code that gives the material of construction of the Chamber.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1614,6 +1738,7 @@ class ChamberType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1547",
             browseName="ns=dexpi;NominalDiameterTypeRepresentationAssignmentClass",
             description="A readable representation of the type of the nominal diameter of the Chamber. The purpose of this value is to give a textual representation of the nominal diameter to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1625,6 +1750,7 @@ class ChamberType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1524",
             browseName="ns=dexpi;SubTagNameAssignmentClass",
             description="The sub tag name of the Chamber.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1648,6 +1774,7 @@ class MixingElementAssemblyType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1564",
             browseName="ns=dexpi;MaterialOfConstructionCodeAssignmentClass",
             description="A code that gives the material of construction of the MixingElementAssembly.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1659,6 +1786,7 @@ class MixingElementAssemblyType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1565",
             browseName="ns=dexpi;MixingElementAssembly",
             description="The number of mixing elements in the MixingElementAssembly.",
+            modellingRule="Optional",
             dataType=o6.Int64,
             accessLevel=3,
             userAccessLevel=1,
@@ -1675,7 +1803,13 @@ class MixingElementAssemblyType(BaseDEXPIObjectType):
 class TubeBundleType(BaseDEXPIObjectType):
     numberOfTubes: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=dexpi;i=1593", browseName="ns=dexpi;NumberOfTubes", description="The number of tubes of the TubeBundle.", dataType=o6.Int64, accessLevel=3, userAccessLevel=1
+            nodeId="ns=dexpi;i=1593",
+            browseName="ns=dexpi;NumberOfTubes",
+            description="The number of tubes of the TubeBundle.",
+            modellingRule="Optional",
+            dataType=o6.Int64,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     tubeLength: ns0.vartypes.AnalogUnitType | None
@@ -1684,6 +1818,7 @@ class TubeBundleType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1597",
             browseName="ns=dexpi;TubeMaterialOfConstructionCodeAssignmentClass",
             description="A code that gives the material of construction of the tubes of the TubeBundle.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1695,6 +1830,7 @@ class TubeBundleType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1598",
             browseName="ns=dexpi;TubeNominalDiameterNumericalValueRepresentationAssignmentClass",
             description="A readable representation of the numerical value of the nominal diameter of the tubes. The purpose of this value is to give a textual representation of the nominal diameter to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1706,6 +1842,7 @@ class TubeBundleType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1599",
             browseName="ns=dexpi;TubeNominalDiameterRepresentationAssignmentClass",
             description="A readable representation of the nominal diameter of the tubes. The purpose of this value is to give a textual representation of the nominal diameter to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1717,6 +1854,7 @@ class TubeBundleType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1600",
             browseName="ns=dexpi;TubeNominalDiameterStandardSpecialization",
             description="The nominal diameter of the tubes, given as a reference to a nominal diameter standard and value.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.NominalDiameterStandardClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -1727,6 +1865,7 @@ class TubeBundleType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1601",
             browseName="ns=dexpi;TubeNominalDiameterTypeRepresentationAssignmentClass",
             description="A readable representation of the type of the nominal diameter of the tubes. The purpose of this value is to give a textual representation of the nominal diameter to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1742,6 +1881,7 @@ class ColumnTraysArrangementType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1604",
             browseName="ns=dexpi;MaterialOfConstructionCodeAssignmentClass",
             description="A code that gives the material of construction of the ColumnTraysArrangement.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1753,6 +1893,7 @@ class ColumnTraysArrangementType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1605",
             browseName="ns=dexpi;NumberOfTrays",
             description="The number of trays in the ColumnTraysArrangement.",
+            modellingRule="Optional",
             dataType=o6.Int64,
             accessLevel=3,
             userAccessLevel=1,
@@ -1763,6 +1904,7 @@ class ColumnTraysArrangementType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1606",
             browseName="ns=dexpi;TrayTypeAssignmentClass",
             description="The type of the trays in the ColumnTraysArrangement.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1784,6 +1926,7 @@ class ImpellerType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1633",
             browseName="ns=dexpi;MaterialOfConstructionCodeAssignmentClass",
             description="A code that gives the material of construction of the Impeller.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1795,6 +1938,7 @@ class ImpellerType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1634",
             browseName="ns=dexpi;StageIdentifierAssignmentClass",
             description="The stage identfifier of of the Impeller.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1817,6 +1961,7 @@ class DisplacerType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1657",
             browseName="ns=dexpi;MaterialOfConstructionCodeAssignmentClass",
             description="A code that gives the material of construction of the Displacer.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1828,6 +1973,7 @@ class DisplacerType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1658",
             browseName="ns=dexpi;StageIdentifierAssignmentClass",
             description="The stage identfifier of of the Displacer.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1848,6 +1994,7 @@ class AgitatorRotorType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1679",
             browseName="ns=dexpi;MaterialOfConstructionCodeAssignmentClass",
             description="A code that gives the material of construction of the AgitatorRotor.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1859,6 +2006,7 @@ class AgitatorRotorType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1680",
             browseName="ns=dexpi;RotorTypeAssignmentClass",
             description="The rotor type of the AgitatorRotor.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1890,6 +2038,7 @@ class StrainerType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1762",
             browseName="ns=dexpi;HeatTracingTypeAssignmentClass",
             description="The heat tracing type related to the PipeFitting, represented as a string.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1901,6 +2050,7 @@ class StrainerType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1763",
             browseName="ns=dexpi;HeatTracingTypeSpecialization",
             description="A specialization indicating the heat tracing type related to the PipeFitting.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.HeatTracingTypeClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -1912,6 +2062,7 @@ class StrainerType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1767",
             browseName="ns=dexpi;InsulationTypeAssignmentClass",
             description="The identification code for the insulation type related to the PipeFitting. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1924,6 +2075,7 @@ class StrainerType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1768",
             browseName="ns=dexpi;PipingClassCodeAssignmentClass",
             description="The identification code of the piping class of the PipeFitting. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1935,6 +2087,7 @@ class StrainerType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1769",
             browseName="ns=dexpi;PipingComponentNameAssignmentClass",
             description="The piping component name of the PipeFitting.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1946,6 +2099,7 @@ class StrainerType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1758",
             browseName="ns=dexpi;PipingComponentNumberAssignmentClass",
             description="The piping component number of the PipeFitting.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1977,6 +2131,7 @@ class SteamTrapType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1817",
             browseName="ns=dexpi;HeatTracingTypeAssignmentClass",
             description="The heat tracing type related to the PipeFitting, represented as a string.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1988,6 +2143,7 @@ class SteamTrapType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1818",
             browseName="ns=dexpi;HeatTracingTypeSpecialization",
             description="A specialization indicating the heat tracing type related to the PipeFitting.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.HeatTracingTypeClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -1999,6 +2155,7 @@ class SteamTrapType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1822",
             browseName="ns=dexpi;InsulationTypeAssignmentClass",
             description="The identification code for the insulation type related to the PipeFitting. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2011,6 +2168,7 @@ class SteamTrapType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1823",
             browseName="ns=dexpi;PipingClassCodeAssignmentClass",
             description="The identification code of the piping class of the PipeFitting. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2022,6 +2180,7 @@ class SteamTrapType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1824",
             browseName="ns=dexpi;PipingComponentNameAssignmentClass",
             description="The piping component name of the PipeFitting.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2033,6 +2192,7 @@ class SteamTrapType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1813",
             browseName="ns=dexpi;PipingComponentNumberAssignmentClass",
             description="The piping component number of the PipeFitting.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2064,6 +2224,7 @@ class SilencerType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1837",
             browseName="ns=dexpi;HeatTracingTypeAssignmentClass",
             description="The heat tracing type related to the PipeFitting, represented as a string.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2075,6 +2236,7 @@ class SilencerType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1838",
             browseName="ns=dexpi;HeatTracingTypeSpecialization",
             description="A specialization indicating the heat tracing type related to the PipeFitting.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.HeatTracingTypeClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -2086,6 +2248,7 @@ class SilencerType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1842",
             browseName="ns=dexpi;InsulationTypeAssignmentClass",
             description="The identification code for the insulation type related to the PipeFitting. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2098,6 +2261,7 @@ class SilencerType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1843",
             browseName="ns=dexpi;PipingClassCodeAssignmentClass",
             description="The identification code of the piping class of the PipeFitting. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2109,6 +2273,7 @@ class SilencerType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1844",
             browseName="ns=dexpi;PipingComponentNameAssignmentClass",
             description="The piping component name of the PipeFitting.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2120,6 +2285,7 @@ class SilencerType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1833",
             browseName="ns=dexpi;PipingComponentNumberAssignmentClass",
             description="The piping component number of the PipeFitting.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2160,6 +2326,7 @@ class VentilationDeviceType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1963",
             browseName="ns=dexpi;HeatTracingTypeAssignmentClass",
             description="The heat tracing type related to the PipeFitting, represented as a string.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2171,6 +2338,7 @@ class VentilationDeviceType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1964",
             browseName="ns=dexpi;HeatTracingTypeSpecialization",
             description="A specialization indicating the heat tracing type related to the PipeFitting.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.HeatTracingTypeClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -2182,6 +2350,7 @@ class VentilationDeviceType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1968",
             browseName="ns=dexpi;InsulationTypeAssignmentClass",
             description="The identification code for the insulation type related to the PipeFitting. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2194,6 +2363,7 @@ class VentilationDeviceType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1969",
             browseName="ns=dexpi;PipingClassCodeAssignmentClass",
             description="The identification code of the piping class of the PipeFitting. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2205,6 +2375,7 @@ class VentilationDeviceType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1970",
             browseName="ns=dexpi;PipingComponentNameAssignmentClass",
             description="The piping component name of the PipeFitting.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2216,6 +2387,7 @@ class VentilationDeviceType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1959",
             browseName="ns=dexpi;PipingComponentNumberAssignmentClass",
             description="The piping component number of the PipeFitting.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2236,6 +2408,7 @@ class OrificePlateType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1981",
             browseName="ns=dexpi;HeatTracingTypeAssignmentClass",
             description="The heat tracing type related to the PipeFitting, represented as a string.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2247,6 +2420,7 @@ class OrificePlateType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1982",
             browseName="ns=dexpi;HeatTracingTypeSpecialization",
             description="A specialization indicating the heat tracing type related to the PipeFitting.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.HeatTracingTypeClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -2258,6 +2432,7 @@ class OrificePlateType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1986",
             browseName="ns=dexpi;InsulationTypeAssignmentClass",
             description="The identification code for the insulation type related to the PipeFitting. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2270,6 +2445,7 @@ class OrificePlateType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1987",
             browseName="ns=dexpi;PipingClassCodeAssignmentClass",
             description="The identification code of the piping class of the PipeFitting. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2281,6 +2457,7 @@ class OrificePlateType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1988",
             browseName="ns=dexpi;PipingComponentNameAssignmentClass",
             description="The piping component name of the PipeFitting.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2292,6 +2469,7 @@ class OrificePlateType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1977",
             browseName="ns=dexpi;PipingComponentNumberAssignmentClass",
             description="The piping component number of the PipeFitting.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2318,6 +2496,7 @@ class PipingNodeType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=2009",
             browseName="ns=dexpi;NodeFlowSpecialization",
             description="A classification of the flow direction in the PipingNode with respect to its PipingNodeOwner.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.NodeFlowClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -2328,6 +2507,7 @@ class PipingNodeType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=2010",
             browseName="ns=dexpi;NominalDiameterNumericalValueRepresentationAssignmentClass",
             description="A readable representation of the numerical value of the nominal diameter of the PipingNode. The purpose of this value is to give a textual representation of the nominal diameter to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2339,6 +2519,7 @@ class PipingNodeType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=2011",
             browseName="ns=dexpi;NominalDiameterRepresentationAssignmentClass",
             description="A readable representation of the nominal diameter of the PipingNode. The purpose of this value is to give a textual representation of the nominal diameter to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2350,6 +2531,7 @@ class PipingNodeType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=2012",
             browseName="ns=dexpi;NominalDiameterStandardSpecialization",
             description="The nominal diameter of the PipingNode, given as a reference to a nominal  diameter standard and value.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.NominalDiameterStandardClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -2360,6 +2542,7 @@ class PipingNodeType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=2013",
             browseName="ns=dexpi;NominalDiameterTypeRepresentationAssignmentClass",
             description="A readable representation of the type of the nominal diameter of the PipingNode. The purpose of this value is to give a textual representation of the nominal diameter to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2371,37 +2554,51 @@ class PipingNodeType(BaseDEXPIObjectType):
 @o6.objecttype(nodeId="ns=dexpi;i=2014", browseName="ns=dexpi;RotationalSpeedType", displayName="RotationalSpeedType")
 class RotationalSpeedType(BaseDEXPIObjectType):
     unit: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2015", browseName="ns=dexpi;Unit", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2015", browseName="ns=dexpi;Unit", modellingRule="Optional", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+        )
     )
     value: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2017", browseName="ns=dexpi;Value", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2017", browseName="ns=dexpi;Value", modellingRule="Optional", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
 @o6.objecttype(nodeId="ns=dexpi;i=2018", browseName="ns=dexpi;HeatTransferCoefficientType", displayName="HeatTransferCoefficientType")
 class HeatTransferCoefficientType(BaseDEXPIObjectType):
     unit: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2019", browseName="ns=dexpi;Unit", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2019", browseName="ns=dexpi;Unit", modellingRule="Optional", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+        )
     )
     value: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2021", browseName="ns=dexpi;Value", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2021", browseName="ns=dexpi;Value", modellingRule="Optional", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
 @o6.objecttype(nodeId="ns=dexpi;i=2022", browseName="ns=dexpi;TemperatureType", displayName="TemperatureType")
 class TemperatureType(BaseDEXPIObjectType):
     unit: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2023", browseName="ns=dexpi;Unit", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2023", browseName="ns=dexpi;Unit", modellingRule="Optional", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+        )
     )
     value: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2025", browseName="ns=dexpi;Value", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2025", browseName="ns=dexpi;Value", modellingRule="Optional", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
 @o6.objecttype(nodeId="ns=dexpi;i=2026", browseName="ns=dexpi;PhysicalQuantityType", displayName="PhysicalQuantityType", isAbstract=True)
 class PhysicalQuantityType(BaseDEXPIObjectType):
     value: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2028", browseName="ns=dexpi;Value", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2028", browseName="ns=dexpi;Value", modellingRule="Optional", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -2413,10 +2610,14 @@ o6.reference(TemperatureType, "ns=dexpi;i=1059", PhysicalQuantityType)
 @o6.objecttype(nodeId="ns=dexpi;i=2029", browseName="ns=dexpi;AreaType", displayName="AreaType")
 class AreaType(BaseDEXPIObjectType):
     unit: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2030", browseName="ns=dexpi;Unit", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2030", browseName="ns=dexpi;Unit", modellingRule="Optional", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+        )
     )
     value: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2032", browseName="ns=dexpi;Value", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2032", browseName="ns=dexpi;Value", modellingRule="Optional", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -2426,10 +2627,14 @@ o6.reference(AreaType, "ns=dexpi;i=1059", PhysicalQuantityType)
 @o6.objecttype(nodeId="ns=dexpi;i=2033", browseName="ns=dexpi;VolumeFlowRateType", displayName="VolumeFlowRateType")
 class VolumeFlowRateType(BaseDEXPIObjectType):
     unit: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2034", browseName="ns=dexpi;Unit", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2034", browseName="ns=dexpi;Unit", modellingRule="Optional", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+        )
     )
     value: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2036", browseName="ns=dexpi;Value", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2036", browseName="ns=dexpi;Value", modellingRule="Optional", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -2439,10 +2644,14 @@ o6.reference(VolumeFlowRateType, "ns=dexpi;i=1059", PhysicalQuantityType)
 @o6.objecttype(nodeId="ns=dexpi;i=2037", browseName="ns=dexpi;PowerType", displayName="PowerType")
 class PowerType(BaseDEXPIObjectType):
     unit: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2038", browseName="ns=dexpi;Unit", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2038", browseName="ns=dexpi;Unit", modellingRule="Optional", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+        )
     )
     value: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2040", browseName="ns=dexpi;Value", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2040", browseName="ns=dexpi;Value", modellingRule="Optional", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -2452,10 +2661,14 @@ o6.reference(PowerType, "ns=dexpi;i=1059", PhysicalQuantityType)
 @o6.objecttype(nodeId="ns=dexpi;i=2041", browseName="ns=dexpi;LengthType", displayName="LengthType")
 class LengthType(BaseDEXPIObjectType):
     unit: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2042", browseName="ns=dexpi;Unit", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2042", browseName="ns=dexpi;Unit", modellingRule="Optional", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+        )
     )
     value: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2044", browseName="ns=dexpi;Value", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2044", browseName="ns=dexpi;Value", modellingRule="Optional", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -2465,10 +2678,14 @@ o6.reference(LengthType, "ns=dexpi;i=1059", PhysicalQuantityType)
 @o6.objecttype(nodeId="ns=dexpi;i=2045", browseName="ns=dexpi;PercentageType", displayName="PercentageType")
 class PercentageType(BaseDEXPIObjectType):
     unit: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2046", browseName="ns=dexpi;Unit", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2046", browseName="ns=dexpi;Unit", modellingRule="Optional", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+        )
     )
     value: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2048", browseName="ns=dexpi;Value", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2048", browseName="ns=dexpi;Value", modellingRule="Optional", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -2478,10 +2695,14 @@ o6.reference(PercentageType, "ns=dexpi;i=1059", PhysicalQuantityType)
 @o6.objecttype(nodeId="ns=dexpi;i=2049", browseName="ns=dexpi;VolumeType", displayName="VolumeType")
 class VolumeType(BaseDEXPIObjectType):
     unit: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2050", browseName="ns=dexpi;Unit", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2050", browseName="ns=dexpi;Unit", modellingRule="Optional", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+        )
     )
     value: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2052", browseName="ns=dexpi;Value", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2052", browseName="ns=dexpi;Value", modellingRule="Optional", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -2491,10 +2712,14 @@ o6.reference(VolumeType, "ns=dexpi;i=1059", PhysicalQuantityType)
 @o6.objecttype(nodeId="ns=dexpi;i=2053", browseName="ns=dexpi;MassType", displayName="MassType")
 class MassType(BaseDEXPIObjectType):
     unit: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2054", browseName="ns=dexpi;Unit", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2054", browseName="ns=dexpi;Unit", modellingRule="Optional", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+        )
     )
     value: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2056", browseName="ns=dexpi;Value", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2056", browseName="ns=dexpi;Value", modellingRule="Optional", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -2504,10 +2729,14 @@ o6.reference(MassType, "ns=dexpi;i=1059", PhysicalQuantityType)
 @o6.objecttype(nodeId="ns=dexpi;i=2057", browseName="ns=dexpi;PressureType", displayName="PressureType")
 class PressureType(BaseDEXPIObjectType):
     unit: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2058", browseName="ns=dexpi;Unit", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2058", browseName="ns=dexpi;Unit", modellingRule="Optional", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+        )
     )
     value: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2060", browseName="ns=dexpi;Value", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2060", browseName="ns=dexpi;Value", modellingRule="Optional", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -2517,10 +2746,14 @@ o6.reference(PressureType, "ns=dexpi;i=1059", PhysicalQuantityType)
 @o6.objecttype(nodeId="ns=dexpi;i=2061", browseName="ns=dexpi;AngleType", displayName="AngleType")
 class AngleType(BaseDEXPIObjectType):
     unit: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2062", browseName="ns=dexpi;Unit", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2062", browseName="ns=dexpi;Unit", modellingRule="Optional", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+        )
     )
     value: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=dexpi;i=2064", browseName="ns=dexpi;Value", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=dexpi;i=2064", browseName="ns=dexpi;Value", modellingRule="Optional", dataType=o6.Double, value=0.0, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -2544,6 +2777,7 @@ class ProcessSignalGeneratingSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1119",
             browseName="ns=dexpi;ProcessSignalGeneratingSystemNumberAssignmentClass",
             description="The number of the ProcessSignalGeneratingSystem",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2560,6 +2794,7 @@ class ProcessSignalGeneratingSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1120",
             browseName="ns=dexpi;TypicalInformationAssignmentClass",
             description="Typical information about the ProcessSignalGeneratingSystem.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2588,6 +2823,7 @@ class ProcessInstrumentationFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1132",
             browseName="ns=dexpi;DeviceInformationAssignmentClass",
             description="Device information the ProcessInstrumentationFunction, e.g., for a detector.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2599,6 +2835,7 @@ class ProcessInstrumentationFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1133",
             browseName="ns=dexpi;GmpRelevanceSpecialization",
             description="A classification indicating if the ProcessInstrumentationFunction is relevant for GMP (good manufacturing practise).",
+            modellingRule="Optional",
             dataType=dexpi_datypes.GmpRelevanceClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -2609,6 +2846,7 @@ class ProcessInstrumentationFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1134",
             browseName="ns=dexpi;GuaranteedSupplyFunctionSpecialization",
             description="A classification indicating if the ProcessInstrumentationFunction is a guaranteed supply function.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.GuaranteedSupplyFunctionClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -2619,6 +2857,7 @@ class ProcessInstrumentationFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1135",
             browseName="ns=dexpi;LocationSpecialization",
             description="A specialization indicating the location of the ProcessInstrumentationFunction.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.LocationClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -2629,6 +2868,7 @@ class ProcessInstrumentationFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1136",
             browseName="ns=dexpi;PanelIdentificationCodeAssignmentClass",
             description="The panel identification code of the ProcessInstrumentationFunction.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2640,6 +2880,7 @@ class ProcessInstrumentationFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1138",
             browseName="ns=dexpi;ProcessInstrumentationFunctionCategoryAssignmentClass",
             description="The function category of the ProcessInstrumentationFunction. The value is a string, typically one or two letters. Recent standards for PIDs normally enforce a single letter from a fixed list. However, there are no formal DEXPI restrictions for valid strings.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2651,6 +2892,7 @@ class ProcessInstrumentationFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1139",
             browseName="ns=dexpi;ProcessInstrumentationFunctionModifierAssignmentClass",
             description="The modifier of the ProcessInstrumentationFunction. The value is a string, typically a single letter, e.g., D for difference. So far, there are no formal DEXPI restrictions for valid strings.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2662,6 +2904,7 @@ class ProcessInstrumentationFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1131",
             browseName="ns=dexpi;ProcessInstrumentationFunctionNumberAssignmentClass",
             description="A unique identifier for the ProcessInstrumentationFunction. If the ProcessInstrumentationFunction is part of a InstrumentationLoopFunction, the identifier of the ProcessInstrumentationFunction usually contains the identifier of the InstrumentationLoopFunction (see InstrumentationLoopFunctionNumberAssignmentClass).",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2673,6 +2916,7 @@ class ProcessInstrumentationFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1137",
             browseName="ns=dexpi;ProcessInstrumentationFunctionsAssignmentClass",
             description="Additional functions of the ProcessInstrumentationFunction (i.e., in addition to the function category, see  ProcessInstrumentationFunctionCategoryAssignmentClass).",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2692,6 +2936,7 @@ class ProcessInstrumentationFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1140",
             browseName="ns=dexpi;QualityRelevanceSpecialization",
             description="A classification indicating if the ProcessInstrumentationFunction is quality relevant.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.QualityRelevanceClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -2702,6 +2947,7 @@ class ProcessInstrumentationFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1141",
             browseName="ns=dexpi;SafetyRelevanceClassAssignmentClass",
             description="The safety relevance class the ProcessInstrumentationFunction.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2721,6 +2967,7 @@ class ProcessInstrumentationFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1142",
             browseName="ns=dexpi;TypicalInformationAssignmentClass",
             description="Typical information about the ProcessInstrumentationFunction.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2732,6 +2979,7 @@ class ProcessInstrumentationFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1143",
             browseName="ns=dexpi;VendorCompanyNameAssignmentClass",
             description="The vendor company name the ProcessInstrumentationFunction.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2743,6 +2991,7 @@ class ProcessInstrumentationFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1144",
             browseName="ns=dexpi;VotingSystemRepresentationAssignmentClass",
             description="A representation of the voting system of the ProcessInstrumentationFunction.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2771,6 +3020,7 @@ class ProcessControlFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1154",
             browseName="ns=dexpi;DeviceInformationAssignmentClass",
             description="Device information the ProcessInstrumentationFunction, e.g., for a detector.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2782,6 +3032,7 @@ class ProcessControlFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1155",
             browseName="ns=dexpi;GmpRelevanceSpecialization",
             description="A classification indicating if the ProcessInstrumentationFunction is relevant for GMP (good manufacturing practise).",
+            modellingRule="Optional",
             dataType=dexpi_datypes.GmpRelevanceClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -2792,6 +3043,7 @@ class ProcessControlFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1156",
             browseName="ns=dexpi;GuaranteedSupplyFunctionSpecialization",
             description="A classification indicating if the ProcessInstrumentationFunction is a guaranteed supply function.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.GuaranteedSupplyFunctionClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -2802,6 +3054,7 @@ class ProcessControlFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1157",
             browseName="ns=dexpi;LocationSpecialization",
             description="A specialization indicating the location of the ProcessInstrumentationFunction.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.LocationClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -2812,6 +3065,7 @@ class ProcessControlFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1158",
             browseName="ns=dexpi;PanelIdentificationCodeAssignmentClass",
             description="The panel identification code of the ProcessInstrumentationFunction.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2823,6 +3077,7 @@ class ProcessControlFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1160",
             browseName="ns=dexpi;ProcessInstrumentationFunctionCategoryAssignmentClass",
             description="The function category of the ProcessInstrumentationFunction. The value is a string, typically one or two letters. Recent standards for PIDs normally enforce a single letter from a fixed list. However, there are no formal DEXPI restrictions for valid strings.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2834,6 +3089,7 @@ class ProcessControlFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1161",
             browseName="ns=dexpi;ProcessInstrumentationFunctionModifierAssignmentClass",
             description="The modifier of the ProcessInstrumentationFunction. The value is a string, typically a single letter, e.g., D for difference. So far, there are no formal DEXPI restrictions for valid strings.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2845,6 +3101,7 @@ class ProcessControlFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1153",
             browseName="ns=dexpi;ProcessInstrumentationFunctionNumberAssignmentClass",
             description="A unique identifier for the ProcessInstrumentationFunction. If the ProcessInstrumentationFunction is part of a InstrumentationLoopFunction, the identifier of the ProcessInstrumentationFunction usually contains the identifier of the InstrumentationLoopFunction (see InstrumentationLoopFunctionNumberAssignmentClass).",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2856,6 +3113,7 @@ class ProcessControlFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1159",
             browseName="ns=dexpi;ProcessInstrumentationFunctionsAssignmentClass",
             description="Additional functions of the ProcessInstrumentationFunction (i.e., in addition to the function category, see  ProcessInstrumentationFunctionCategoryAssignmentClass).",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2875,6 +3133,7 @@ class ProcessControlFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1162",
             browseName="ns=dexpi;QualityRelevanceSpecialization",
             description="A classification indicating if the ProcessInstrumentationFunction is quality relevant.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.QualityRelevanceClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -2885,6 +3144,7 @@ class ProcessControlFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1163",
             browseName="ns=dexpi;SafetyRelevanceClassAssignmentClass",
             description="The safety relevance class the ProcessInstrumentationFunction.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2904,6 +3164,7 @@ class ProcessControlFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1164",
             browseName="ns=dexpi;TypicalInformationAssignmentClass",
             description="Typical information about the ProcessInstrumentationFunction.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2915,6 +3176,7 @@ class ProcessControlFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1165",
             browseName="ns=dexpi;VendorCompanyNameAssignmentClass",
             description="The vendor company name the ProcessInstrumentationFunction.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2926,6 +3188,7 @@ class ProcessControlFunctionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1166",
             browseName="ns=dexpi;VotingSystemRepresentationAssignmentClass",
             description="A representation of the voting system of the ProcessInstrumentationFunction.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2949,6 +3212,7 @@ class ActuatingSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1201",
             browseName="ns=dexpi;ActuatingSystemNumberAssignmentClass",
             description="The number of the ActuatingSystem",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -2981,6 +3245,7 @@ class ActuatingSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1202",
             browseName="ns=dexpi;TypicalInformationAssignmentClass",
             description="Typical information about the ActuatingSystem.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3004,6 +3269,7 @@ class NozzleType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1363",
             browseName="ns=dexpi;NominalPressureNumericalValueRepresentationAssignmentClass",
             description="A readable representation of the numerical value of the nominal pressure. The purpose of this value is to give a textual representation of the nominal pressure to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3015,6 +3281,7 @@ class NozzleType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1364",
             browseName="ns=dexpi;NominalPressureRepresentationAssignmentClass",
             description="A readable representation of the nominal pressure. The purpose of this value is to give a textual representation of the nominal pressure to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3026,6 +3293,7 @@ class NozzleType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1365",
             browseName="ns=dexpi;NominalPressureStandardSpecialization",
             description="The nominal pressure of the Nozzle, given as a reference to a nominal pressure standard and value.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.NominalPressureStandardClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -3036,6 +3304,7 @@ class NozzleType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1366",
             browseName="ns=dexpi;NominalPressureTypeRepresentationAssignmentClass",
             description="A readable representation of the type of the nominal pressure. The purpose of this value is to give a textual representation of the nominal pressure to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3047,6 +3316,7 @@ class NozzleType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1362",
             browseName="ns=dexpi;SubTagNameAssignmentClass",
             description="The sub tag name of the Nozzle.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3080,6 +3350,7 @@ class SubTaggedColumnSectionType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1400",
             browseName="ns=dexpi;SubTagNameAssignmentClass",
             description="The sub tag name of the SubTaggedColumnSection.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3129,6 +3400,7 @@ class EquipmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1683",
             browseName="ns=dexpi;EquipmentDescriptionAssignmentClass",
             description="A short desciption of the Equipment in natural language. So far, there is no support for descriptions in different languages.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3143,6 +3415,7 @@ class EquipmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1686",
             browseName="ns=dexpi;TagNameAssignmentClass",
             description="The tag number of the TaggedPlantItem. See also <owner.TagNamePrefixAssignmentClass>, <owner.TagNameSequenceNumberAssignmentClass>, and <owner.TagNameSuffixAssignmentClass>.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3154,6 +3427,7 @@ class EquipmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1687",
             browseName="ns=dexpi;TagNamePrefixAssignmentClass",
             description='The prefix part of the tag number of the TaggedPlantItem. For example, the prefix of the tag number "P4714-A" is "P". The prefix often indicates the type of the equipment item, e.g., "P" can indicate a pump. See also <owner.TagNameAssignmentClass>.',
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3165,6 +3439,7 @@ class EquipmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1688",
             browseName="ns=dexpi;TagNameSequenceNumberAssignmentClass",
             description='The sequence number part of the tag number of the TaggedPlantItem. For example, the sequence number of the tag number "P4714-A" is "4714".',
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3176,6 +3451,7 @@ class EquipmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1689",
             browseName="ns=dexpi;TagNameSuffixAssignmentClass",
             description='The suffix part of the tag number of an TaggedPlantItem item. For example, the suffix of the tag number "P4714-A" is "A".',
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3269,6 +3545,7 @@ class SpecialCompressorType(CompressorType):
             nodeId="ns=dexpi;i=1397",
             browseName="ns=dexpi;TypeNameAssignmentClass",
             description="The name of the type of the SpecialCompressor.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3310,6 +3587,7 @@ class SpecialVesselType(VesselType):
             nodeId="ns=dexpi;i=1453",
             browseName="ns=dexpi;TypeNameAssignmentClass",
             description="The name of the type of the SpecialVessel.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3389,6 +3667,7 @@ class TaggedColumnSectionType(EquipmentType):
             nodeId="ns=dexpi;i=1512",
             browseName="ns=dexpi;TagNameAssignmentClass",
             description="The tag number of the TaggedPlantItem. See also <owner.TagNamePrefixAssignmentClass>, <owner.TagNameSequenceNumberAssignmentClass>, and <owner.TagNameSuffixAssignmentClass>.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3400,6 +3679,7 @@ class TaggedColumnSectionType(EquipmentType):
             nodeId="ns=dexpi;i=1513",
             browseName="ns=dexpi;TagNamePrefixAssignmentClass",
             description='The prefix part of the tag number of the TaggedPlantItem. For example, the prefix of the tag number "P4714-A" is "P". The prefix often indicates the type of the equipment item, e.g., "P" can indicate a pump. See also <owner.TagNameAssignmentClass>.',
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3411,6 +3691,7 @@ class TaggedColumnSectionType(EquipmentType):
             nodeId="ns=dexpi;i=1514",
             browseName="ns=dexpi;TagNameSequenceNumberAssignmentClass",
             description='The sequence number part of the tag number of the TaggedPlantItem. For example, the sequence number of the tag number "P4714-A" is "4714".',
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3422,6 +3703,7 @@ class TaggedColumnSectionType(EquipmentType):
             nodeId="ns=dexpi;i=1515",
             browseName="ns=dexpi;TagNameSuffixAssignmentClass",
             description='The suffix part of the tag number of an TaggedPlantItem item. For example, the suffix of the tag number "P4714-A" is "A".',
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3477,6 +3759,7 @@ class PlateAndShellHeatExchangerType(HeatExchangerType):
             nodeId="ns=dexpi;i=1577",
             browseName="ns=dexpi;NumberOfPlates",
             description="The number of plates in the PlateAndShellHeatExchanger.",
+            modellingRule="Optional",
             dataType=o6.Int64,
             accessLevel=3,
             userAccessLevel=1,
@@ -3578,6 +3861,7 @@ class ShellAndTubeHeatExchangerType(HeatExchangerType):
             nodeId="ns=dexpi;i=1654",
             browseName="ns=dexpi;TemaStandardTypeAssignmentClass",
             description="The type of the ShellAndTubeHeatExchanger according to the Tubular Exchanger Manufacturers Association, Inc. (TEMA, http://www.tema.org). This is a three-letter code.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3710,6 +3994,7 @@ class SpecialPumpType(PumpType):
             nodeId="ns=dexpi;i=1608",
             browseName="ns=dexpi;TypeNameAssignmentClass",
             description="The name of the type of the SpecialPump.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3804,6 +4089,7 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1900",
             browseName="ns=dexpi;BasfLineClassAssignmentClass",
             description="The BASF line class of the PipingNetworkSegment, represented as a string. Note: This attribute has been included as an example for a company-specific attribute. It should actually be identified by a company-specific RDL reference. As there is currently no BASF RDL, the DEXPI RDL is used.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3815,6 +4101,7 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1901",
             browseName="ns=dexpi;ColorCodeAssignmentClass",
             description="The color code of the PipingNetworkSegment, represented as a string.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3835,6 +4122,7 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1902",
             browseName="ns=dexpi;FlowDirectionSpecialization",
             description="A specialization indicating if the PipingNetworkSegment enables dual flow or not.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.PipingNetworkSegmentFlowClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -3845,6 +4133,7 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1903",
             browseName="ns=dexpi;FluidCodeAssignmentClass",
             description="The identification code of the fluid related to the PipingNetworkSegment. So  far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3856,6 +4145,7 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1904",
             browseName="ns=dexpi;HeatTracingTypeAssignmentClass",
             description="The heat tracing type related to the PipingNetworkSegment, represented as a string.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3867,6 +4157,7 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1905",
             browseName="ns=dexpi;HeatTracingTypeSpecialization",
             description="A specialization indicating the heat tracing type related to the PipingNetworkSegment.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.HeatTracingTypeClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -3879,6 +4170,7 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1912",
             browseName="ns=dexpi;InsulationTypeAssignmentClass",
             description="The identification code for the insulation type related to the PipingNetworkSegment. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3899,6 +4191,7 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1913",
             browseName="ns=dexpi;JacketedPipeSpecialization",
             description="A specialization indicating whether the PipingNetworkSegment is jacketed.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.JacketedPipeClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -3910,6 +4203,7 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1917",
             browseName="ns=dexpi;NominalDiameterNumericalValueRepresentationAssignmentClass",
             description="A readable representation of the numerical value of the nominal diameter of the PipingNetworkSegment. The purpose of this value is to give a textual representation of the nominal diameter to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3921,6 +4215,7 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1918",
             browseName="ns=dexpi;NominalDiameterRepresentationAssignmentClass",
             description="A readable representation of the nominal diameter of the PipingNetworkSegment. The purpose of this value is to give a textual representation of the nominal diameter to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3932,6 +4227,7 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1919",
             browseName="ns=dexpi;NominalDiameterStandardSpecialization",
             description="The nominal diameter of the PipingNetworkSegment, given as a reference to a nominal  diameter standard and value.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.NominalDiameterStandardClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -3942,6 +4238,7 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1920",
             browseName="ns=dexpi;NominalDiameterTypeRepresentationAssignmentClass",
             description="A readable representation of the type of the nominal diameter of the PipingNetworkSegment. The purpose of this value is to give a textual representation of the nominal diameter to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3953,6 +4250,7 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1921",
             browseName="ns=dexpi;OnHoldSpecialization",
             description="A specialization indicating if the PipingNetworkSegment is on hold or not.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.OnHoldClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -3964,6 +4262,7 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1925",
             browseName="ns=dexpi;PipingClassCodeAssignmentClass",
             description="The identification code of the piping class of the PipingNetworkSegment. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3975,6 +4274,7 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1926",
             browseName="ns=dexpi;PressureTestCircuitNumberAssignmentClass",
             description="The number of the pressure test circuit of the PipingNetworkSegment.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -3986,6 +4286,7 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1927",
             browseName="ns=dexpi;PrimarySecondaryPipingNetworkSegmentSpecialization",
             description="A specialization indicating whether the PipingNetworkSegment is a primary or secondary PipingNetworkSegment.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.PrimarySecondaryPipingNetworkSegmentClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -3996,6 +4297,7 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1899",
             browseName="ns=dexpi;SegmentNumberAssignmentClass",
             description="The segment number of a PipingNetworkSegment. Values are typically (but not  necessarily) string representations of numbers with a prefix.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4007,6 +4309,7 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1928",
             browseName="ns=dexpi;SiphonSpecialization",
             description="A specialization indicating if the PipingNetworkSegment is a siphon or not.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.SiphonClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -4017,6 +4320,7 @@ class PipingNetworkSegmentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1929",
             browseName="ns=dexpi;SlopeSpecialization",
             description="A specialization indicating if the PipingNetworkSegment is sloped or not.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.PipingNetworkSegmentSlopeClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -4033,6 +4337,7 @@ class PropertyBreakType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1939",
             browseName="ns=dexpi;CompositionBreakSpecialization",
             description="A specialization indicating if the PropertyBreak is a composition break or not.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.CompositionBreakClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -4043,6 +4348,7 @@ class PropertyBreakType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1940",
             browseName="ns=dexpi;InsulationBreakSpecialization",
             description="A specialization indicating if the PropertyBreak is an insulation break or not.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.InsulationBreakClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -4056,6 +4362,7 @@ class PropertyBreakType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1941",
             browseName="ns=dexpi;NominalDiameterBreakSpecialization",
             description="A specialization indicating if the PropertyBreak is a nominal diameter break or not.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.NominalDiameterBreakClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -4066,6 +4373,7 @@ class PropertyBreakType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1942",
             browseName="ns=dexpi;PipingClassBreakSpecialization",
             description="A specialization indicating if the PropertyBreak is a composition break or not.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.PipingClassBreakClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -4085,6 +4393,7 @@ class PipingNetworkSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1728",
             browseName="ns=dexpi;FluidCodeAssignmentClass",
             description="The identification code of the fluid related to the PipingNetworkSystem. So  far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4096,6 +4405,7 @@ class PipingNetworkSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1736",
             browseName="ns=dexpi;HeatTracingTypeAssignmentClass",
             description="The heat tracing type related to the PipingNetworkSystem, represented as a string.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4107,6 +4417,7 @@ class PipingNetworkSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1737",
             browseName="ns=dexpi;HeatTracingTypeSpecialization",
             description="A specialization indicating the heat tracing type related to the PipingNetworkSystem.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.HeatTracingTypeClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -4118,6 +4429,7 @@ class PipingNetworkSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1732",
             browseName="ns=dexpi;InsulationTypeAssignmentClass",
             description="The identification code for the insulation type related to the PipingNetworkSystem. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4129,6 +4441,7 @@ class PipingNetworkSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1739",
             browseName="ns=dexpi;JacketLineNumberAssignmentClass",
             description="The line number of the PipingNetworkSystem that is the jacket of this PipingNetworkSystem.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4140,6 +4453,7 @@ class PipingNetworkSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1738",
             browseName="ns=dexpi;JacketedLineNumberAssignmentClass",
             description="The line number of the PipingNetworkSystem for which this PipingNetworkSystem is the jacket.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4151,6 +4465,7 @@ class PipingNetworkSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1740",
             browseName="ns=dexpi;JacketedPipeSpecialization",
             description="A specialization indicating whether the PipingNetworkSystem is jacketed.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.JacketedPipeClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -4161,6 +4476,7 @@ class PipingNetworkSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1727",
             browseName="ns=dexpi;LineNumberAssignmentClassOfPipingNetworkSystem",
             description="The line number of a PipingNetworkSystem. Values are typically (but not necessarily) string representations of numbers.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4173,6 +4489,7 @@ class PipingNetworkSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1742",
             browseName="ns=dexpi;NominalDiameterNumericalValueRepresentationAssignmentClass",
             description="A readable representation of the numerical value of the nominal diameter of the PipingNetworkSystem. The purpose of this value is to give a textual representation of the nominal diameter to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4184,6 +4501,7 @@ class PipingNetworkSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1743",
             browseName="ns=dexpi;NominalDiameterRepresentationAssignmentClass",
             description="A readable representation of the nominal diameter of the PipingNetworkSystem. The purpose of this value is to give a textual representation of the nominal diameter to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4195,6 +4513,7 @@ class PipingNetworkSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1741",
             browseName="ns=dexpi;NominalDiameterStandardSpecialization",
             description="The nominal diameter of the PipingNetworkSystem, given as a reference to a nominal  diameter standard and value.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.NominalDiameterStandardClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -4205,6 +4524,7 @@ class PipingNetworkSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1744",
             browseName="ns=dexpi;NominalDiameterTypeRepresentationAssignmentClass",
             description="A readable representation of the type of the nominal diameter of the PipingNetworkSystem. The purpose of this value is to give a textual representation of the nominal diameter to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4216,6 +4536,7 @@ class PipingNetworkSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1745",
             browseName="ns=dexpi;OnHoldSpecialization",
             description="A specialization indicating if the PipingNetworkSystem is on hold or not.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.OnHoldClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -4226,6 +4547,7 @@ class PipingNetworkSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1746",
             browseName="ns=dexpi;PipingClassCodeAssignmentClass",
             description="The identification code of the piping class of the PipingNetworkSystem. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4237,6 +4559,7 @@ class PipingNetworkSystemType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1747",
             browseName="ns=dexpi;PipingNetworkSystemGroupNumberAssignmentClass",
             description="The number of the piping network system group of the PipingNetworkSystem, represented as a string.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4338,6 +4661,7 @@ class PipingComponentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1996",
             browseName="ns=dexpi;BasfLineClassAssignmentClass",
             description="The BASF line class of the PipingComponent, represented as a string. Note: This attribute has been included as an example for a company-specific attribute. It should actually be identified by a company-specific RDL reference. As there is currently no BASF RDL, the DEXPI RDL is used.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4349,6 +4673,7 @@ class PipingComponentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1997",
             browseName="ns=dexpi;FluidCodeAssignmentClass",
             description="The identification code of the fluid related to the PipingComponent. So  far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4363,6 +4688,7 @@ class PipingComponentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1998",
             browseName="ns=dexpi;NominalDiametersRepresentationAssignmentClass",
             description="A readable representation of the nominal diameters of the ports of the PipingComponent. The purpose of this value is to give a textual representation of the nominal diameters to be used in the graphics of a PID.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4374,6 +4700,7 @@ class PipingComponentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=1999",
             browseName="ns=dexpi;OnHoldSpecialization",
             description="A specialization indicating if the PipingComponent is on hold or not.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.OnHoldClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -4384,6 +4711,7 @@ class PipingComponentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=2000",
             browseName="ns=dexpi;PipingClassArtefactSpecialization",
             description="A specialization indicating if the PipingComponent is an artefact that is         described by a piping class.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.PipingClassArtefactClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -4394,6 +4722,7 @@ class PipingComponentType(BaseDEXPIObjectType):
             nodeId="ns=dexpi;i=2001",
             browseName="ns=dexpi;PressureTestCircuitNumberAssignmentClass",
             description="The number of the pressure test circuit of the PipingComponent.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4414,6 +4743,7 @@ class CheckValveType(PipingComponentType):
             nodeId="ns=dexpi;i=1775",
             browseName="ns=dexpi;HeatTracingTypeAssignmentClass",
             description="The heat tracing type related to the CheckValve, represented as a string.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4425,6 +4755,7 @@ class CheckValveType(PipingComponentType):
             nodeId="ns=dexpi;i=1776",
             browseName="ns=dexpi;HeatTracingTypeSpecialization",
             description="A specialization indicating the heat tracing type related to the CheckValve.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.HeatTracingTypeClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -4436,6 +4767,7 @@ class CheckValveType(PipingComponentType):
             nodeId="ns=dexpi;i=1780",
             browseName="ns=dexpi;InsulationTypeAssignmentClass",
             description="The identification code for the insulation type related to the CheckValve. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4448,6 +4780,7 @@ class CheckValveType(PipingComponentType):
             nodeId="ns=dexpi;i=1784",
             browseName="ns=dexpi;PipingClassCodeAssignmentClass",
             description="The identification code of the piping class of the CheckValve. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4459,6 +4792,7 @@ class CheckValveType(PipingComponentType):
             nodeId="ns=dexpi;i=1785",
             browseName="ns=dexpi;PipingComponentNameAssignmentClass",
             description="The piping component name of the CheckValve.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4470,6 +4804,7 @@ class CheckValveType(PipingComponentType):
             nodeId="ns=dexpi;i=1774",
             browseName="ns=dexpi;PipingComponentNumberAssignmentClass",
             description="The piping component number of the CheckValve.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4485,6 +4820,7 @@ class InlinePrimaryElementType(PipingComponentType):
             nodeId="ns=dexpi;i=1798",
             browseName="ns=dexpi;HeatTracingTypeAssignmentClass",
             description="The heat tracing type related to the InlinePrimaryElement, represented as a string.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4496,6 +4832,7 @@ class InlinePrimaryElementType(PipingComponentType):
             nodeId="ns=dexpi;i=1799",
             browseName="ns=dexpi;HeatTracingTypeSpecialization",
             description="A specialization indicating the heat tracing type related to the InlinePrimaryElement.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.HeatTracingTypeClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -4507,6 +4844,7 @@ class InlinePrimaryElementType(PipingComponentType):
             nodeId="ns=dexpi;i=1803",
             browseName="ns=dexpi;InsulationTypeAssignmentClass",
             description="The identification code for the insulation type related to the InlinePrimaryElement. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4519,6 +4857,7 @@ class InlinePrimaryElementType(PipingComponentType):
             nodeId="ns=dexpi;i=1804",
             browseName="ns=dexpi;PipingComponentNameAssignmentClass",
             description="The piping component name of the InlinePrimaryElement.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4530,6 +4869,7 @@ class InlinePrimaryElementType(PipingComponentType):
             nodeId="ns=dexpi;i=1794",
             browseName="ns=dexpi;PipingComponentNumberAssignmentClass",
             description="The piping component number of the InlinePrimaryElement.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4585,6 +4925,7 @@ class ShutOffValveType(PipingComponentType):
             nodeId="ns=dexpi;i=1847",
             browseName="ns=dexpi;HeatTracingTypeAssignmentClass",
             description="The heat tracing type related to the ShutOffValve, represented as a string.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4596,6 +4937,7 @@ class ShutOffValveType(PipingComponentType):
             nodeId="ns=dexpi;i=1848",
             browseName="ns=dexpi;HeatTracingTypeSpecialization",
             description="A specialization indicating the heat tracing type related to the ShutOffValve.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.HeatTracingTypeClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -4607,6 +4949,7 @@ class ShutOffValveType(PipingComponentType):
             nodeId="ns=dexpi;i=1852",
             browseName="ns=dexpi;InsulationTypeAssignmentClass",
             description="The identification code for the insulation type related to the ShutOffValve. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4619,6 +4962,7 @@ class ShutOffValveType(PipingComponentType):
             nodeId="ns=dexpi;i=1858",
             browseName="ns=dexpi;NumberOfPortsSpecialization",
             description="A specialization indicating the number of ports of the ShutOffValve.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.NumberOfPortsClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -4629,6 +4973,7 @@ class ShutOffValveType(PipingComponentType):
             nodeId="ns=dexpi;i=1859",
             browseName="ns=dexpi;OperationSpecialization",
             description="A specialization indicating the operation of the ShutOffValve.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.OperationClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -4639,6 +4984,7 @@ class ShutOffValveType(PipingComponentType):
             nodeId="ns=dexpi;i=1856",
             browseName="ns=dexpi;PipingClassCodeAssignmentClass",
             description="The identification code of the piping class of the ShutOffValve. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4650,6 +4996,7 @@ class ShutOffValveType(PipingComponentType):
             nodeId="ns=dexpi;i=1857",
             browseName="ns=dexpi;PipingComponentNameAssignmentClass",
             description="The piping component name of the ShutOffValve.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4661,6 +5008,7 @@ class ShutOffValveType(PipingComponentType):
             nodeId="ns=dexpi;i=1846",
             browseName="ns=dexpi;PipingComponentNumberAssignmentClass",
             description="The piping component number of the ShutOffValve.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4766,6 +5114,7 @@ class PipeFittingType(PipingComponentType):
             nodeId="ns=dexpi;i=1882",
             browseName="ns=dexpi;HeatTracingTypeAssignmentClass",
             description="The heat tracing type related to the PipeFitting, represented as a string.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4777,6 +5126,7 @@ class PipeFittingType(PipingComponentType):
             nodeId="ns=dexpi;i=1883",
             browseName="ns=dexpi;HeatTracingTypeSpecialization",
             description="A specialization indicating the heat tracing type related to the PipeFitting.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.HeatTracingTypeClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -4788,6 +5138,7 @@ class PipeFittingType(PipingComponentType):
             nodeId="ns=dexpi;i=1887",
             browseName="ns=dexpi;InsulationTypeAssignmentClass",
             description="The identification code for the insulation type related to the PipeFitting. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4800,6 +5151,7 @@ class PipeFittingType(PipingComponentType):
             nodeId="ns=dexpi;i=1888",
             browseName="ns=dexpi;PipingClassCodeAssignmentClass",
             description="The identification code of the piping class of the PipeFitting. So far, DEXPI does not define restrictions for valid values.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4811,6 +5163,7 @@ class PipeFittingType(PipingComponentType):
             nodeId="ns=dexpi;i=1889",
             browseName="ns=dexpi;PipingComponentNameAssignmentClass",
             description="The piping component name of the PipeFitting.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4822,6 +5175,7 @@ class PipeFittingType(PipingComponentType):
             nodeId="ns=dexpi;i=1878",
             browseName="ns=dexpi;PipingComponentNumberAssignmentClass",
             description="The piping component number of the PipeFitting.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -4994,6 +5348,7 @@ class SafetyValveOrFittingType(PipingComponentType):
             nodeId="ns=dexpi;i=1947",
             browseName="ns=dexpi;FlowInPipingClassCodeAssignmentClass",
             description="The code of the piping class at the flow in side of SafetyValveOrFitting.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -5005,6 +5360,7 @@ class SafetyValveOrFittingType(PipingComponentType):
             nodeId="ns=dexpi;i=1948",
             browseName="ns=dexpi;FlowOutPipingClassCodeAssignmentClass",
             description="The code of the piping class at the flow out side of SafetyValveOrFitting.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -5016,6 +5372,7 @@ class SafetyValveOrFittingType(PipingComponentType):
             nodeId="ns=dexpi;i=1946",
             browseName="ns=dexpi;LocationRegistrationNumberAssignmentClass",
             description="The location registration number of the SafetyValveOrFitting.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -5027,6 +5384,7 @@ class SafetyValveOrFittingType(PipingComponentType):
             nodeId="ns=dexpi;i=1945",
             browseName="ns=dexpi;PositionNumberAssignmentClass",
             description="The position number of the SafetyValveOrFitting.",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -5119,6 +5477,7 @@ class FlameArrestorType(SafetyValveOrFittingType):
             nodeId="ns=dexpi;i=1973",
             browseName="ns=dexpi;DetonationProofArtefactSpecialization",
             description="A specialization indicating if the FlameArrestor is detonation-proof.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.DetonationProofArtefactClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -5129,6 +5488,7 @@ class FlameArrestorType(SafetyValveOrFittingType):
             nodeId="ns=dexpi;i=1974",
             browseName="ns=dexpi;ExplosionProofArtefactSpecialization",
             description="A specialization indicating if the FlameArrestor is explosion-proof.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.ExplosionProofArtefactClassification,
             accessLevel=3,
             userAccessLevel=1,
@@ -5139,6 +5499,7 @@ class FlameArrestorType(SafetyValveOrFittingType):
             nodeId="ns=dexpi;i=1975",
             browseName="ns=dexpi;FireResistantArtefactSpecialization",
             description="A specialization indicating if the FlameArrestor is fire-resistant.",
+            modellingRule="Optional",
             dataType=dexpi_datypes.FireResistantArtefactClassification,
             accessLevel=3,
             userAccessLevel=1,

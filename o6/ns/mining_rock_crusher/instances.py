@@ -45,6 +45,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_rock_crusher;i=6001",
                 browseName="ns=di;DeviceClass",
                 description="Indicates in which domain or for what purpose the MachineryItem is used.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -53,6 +54,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_rock_crusher;i=6002",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -61,6 +63,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_rock_crusher;i=6003",
                 browseName="ns=di;ManufacturerUri",
                 description="A globally unique identifier of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -69,6 +72,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_rock_crusher;i=6004",
                 browseName="ns=di;Model",
                 description="A human-readable, localized name of the model of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -77,6 +81,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_rock_crusher;i=6005",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -85,6 +90,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_rock_crusher;i=6006",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -101,6 +107,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_rock_crusher;i=6007",
                 browseName="ns=di;DeviceClass",
                 description="Indicates in which domain or for what purpose the MachineryItem is used.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -109,6 +116,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_rock_crusher;i=6008",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -117,6 +125,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_rock_crusher;i=6009",
                 browseName="ns=di;ManufacturerUri",
                 description="A globally unique identifier of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -125,6 +134,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_rock_crusher;i=6010",
                 browseName="ns=di;Model",
                 description="A human-readable, localized name of the model of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -133,6 +143,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_rock_crusher;i=6011",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -141,6 +152,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_rock_crusher;i=6012",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -150,20 +162,22 @@ o6.reference(mining_rock_crusher_objtypes.RockCrusherControlType, ns0.reftypes.H
 ns0.vartypes.ThreeDCartesianCoordinatesType(
     nodeId="ns=mining_rock_crusher;i=6014",
     browseName="CartesianCoordinates",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rock_crusher;i=6015", browseName="X", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rock_crusher;i=6016", browseName="Y", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rock_crusher;i=6017", browseName="Z", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rock_crusher;i=6015", browseName="X", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rock_crusher;i=6016", browseName="Y", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rock_crusher;i=6017", browseName="Z", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDCartesianCoordinates,
 )
 ns0.vartypes.ThreeDOrientationType(
     nodeId="ns=mining_rock_crusher;i=6018",
     browseName="Orientation",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rock_crusher;i=6019", browseName="A", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rock_crusher;i=6020", browseName="B", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rock_crusher;i=6021", browseName="C", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rock_crusher;i=6019", browseName="A", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rock_crusher;i=6020", browseName="B", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rock_crusher;i=6021", browseName="C", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDOrientation,
 )
@@ -171,12 +185,13 @@ ns0.vartypes.ThreeDFrameType(
     nodeId="ns=mining_rock_crusher;i=6013",
     browseName="ns=mining_rock_crusher;ExclusionZone",
     description="The ExclusionZone property describes the area that haulage machines, which are to be unloaded, are not allowed to enter when approaching the rock crusher system",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_rock_crusher;i=6024", browseName="Constant", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_rock_crusher;i=6025", browseName="FixedBase", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_rock_crusher;i=6024", browseName="Constant", modellingRule="Optional", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_rock_crusher;i=6025", browseName="FixedBase", modellingRule="Optional", dataType=o6.Boolean)),
         o6.hasComponent(o6.ns["ns=mining_rock_crusher;i=6014"]),
         o6.hasComponent(o6.ns["ns=mining_rock_crusher;i=6018"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rock_crusher;i=6023", browseName="BaseFrame", dataType=o6.NodeId)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rock_crusher;i=6023", browseName="BaseFrame", modellingRule="Optional", dataType=o6.NodeId)),
     ],
     dataType=ns0.datatypes.ThreeDFrame,
     valueRank=1,
@@ -212,7 +227,7 @@ http_opcfoundation_org_UA_Mining_MineralProcessing_RockCrusher_ = ns0.objtypes.N
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[2],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC, ns0.datatypes.IdType.STRING],
             )
         ),
@@ -239,7 +254,12 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RequestUnloadingAcknowledged", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=mining_rock_crusher;i=7001", browseName="ns=mining_rock_crusher;RequestUnloading", outputArgs=o6.hasProperty(o6.ns["ns=mining_rock_crusher;i=6022"]))
+o6.call(
+    nodeId="ns=mining_rock_crusher;i=7001",
+    browseName="ns=mining_rock_crusher;RequestUnloading",
+    modellingRule="Mandatory",
+    outputArgs=o6.hasProperty(o6.ns["ns=mining_rock_crusher;i=6022"]),
+)
 
 ns0.objtypes.BaseObjectType(
     nodeId="ns=mining_rock_crusher;i=5004",

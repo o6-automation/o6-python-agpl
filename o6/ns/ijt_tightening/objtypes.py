@@ -53,7 +53,12 @@ class ITighteningToolParametersType(ns0.objtypes.BaseInterfaceType):
     minTorque: ijt_base.vartypes.JoiningDataVariableType | None
     motorType: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=ijt_tightening;i=6023", browseName="ns=ijt_tightening;MotorType", description="MotorType is the type of motor in the tool.", dataType=o6.String, value=""
+            nodeId="ns=ijt_tightening;i=6023",
+            browseName="ns=ijt_tightening;MotorType",
+            description="MotorType is the type of motor in the tool.",
+            modellingRule="Optional",
+            dataType=o6.String,
+            value="",
         )
     )
     shutOffMethod: ns0.vartypes.MultiStateDiscreteType | None

@@ -68,7 +68,9 @@ class LeaveStepSequenceEventType(ns0.objtypes.BaseEventType):
 class VisionSystemType(ns0.objtypes.BaseObjectType):
     configurationManagement: ConfigurationManagementType | None
     diagnosticLevel: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_vision;i=6048", browseName="ns=machine_vision;DiagnosticLevel", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=machine_vision;i=6048", browseName="ns=machine_vision;DiagnosticLevel", modellingRule="Optional", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1
+        )
     )
     recipeManagement: RecipeManagementType | None
     resultManagement: ResultManagementType | None
@@ -77,6 +79,7 @@ class VisionSystemType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=machine_vision;i=6049",
             browseName="ns=machine_vision;SystemState",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.SystemStateDescriptionDataType,
             value=machine_vision_datypes.SystemStateDescriptionDataType(state=machine_vision_datypes.SystemStateDataType.NST_6),
             accessLevel=3,
@@ -89,10 +92,24 @@ class VisionSystemType(ns0.objtypes.BaseObjectType):
 @o6.objecttype(nodeId="ns=machine_vision;i=1030", browseName="ns=machine_vision;VisionSafetyEventType", displayName="VisionSafetyEventType")
 class VisionSafetyEventType(ns0.objtypes.BaseEventType):
     visionSafetyInformation: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6050", browseName="ns=machine_vision;VisionSafetyInformation", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=machine_vision;i=6050",
+            browseName="ns=machine_vision;VisionSafetyInformation",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            accessLevel=3,
+            userAccessLevel=1,
+        )
     )
     visionSafetyTriggered: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6051", browseName="ns=machine_vision;VisionSafetyTriggered", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=machine_vision;i=6051",
+            browseName="ns=machine_vision;VisionSafetyTriggered",
+            modellingRule="Mandatory",
+            dataType=o6.Boolean,
+            accessLevel=3,
+            userAccessLevel=1,
+        )
     )
 
 
@@ -119,6 +136,7 @@ class JobStartedEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6141",
             browseName="ns=machine_vision;JobId",
+            modellingRule="Mandatory",
             dataType=machine_vision_datypes.JobIdDataType,
             value=machine_vision_datypes.JobIdDataType(id="\n            "),
             accessLevel=3,
@@ -131,18 +149,29 @@ class JobStartedEventType(ns0.objtypes.BaseEventType):
 class RecipePreparedEventType(ns0.objtypes.BaseEventType):
     externalId: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=machine_vision;i=6291", browseName="ns=machine_vision;ExternalId", dataType=machine_vision_datypes.RecipeIdExternalDataType, accessLevel=3, userAccessLevel=1
+            nodeId="ns=machine_vision;i=6291",
+            browseName="ns=machine_vision;ExternalId",
+            modellingRule="Optional",
+            dataType=machine_vision_datypes.RecipeIdExternalDataType,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     internalId: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=machine_vision;i=6140", browseName="ns=machine_vision;InternalId", dataType=machine_vision_datypes.RecipeIdInternalDataType, accessLevel=3, userAccessLevel=1
+            nodeId="ns=machine_vision;i=6140",
+            browseName="ns=machine_vision;InternalId",
+            modellingRule="Mandatory",
+            dataType=machine_vision_datypes.RecipeIdInternalDataType,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     productId: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6292",
             browseName="ns=machine_vision;ProductId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.ProductIdDataType,
             value=machine_vision_datypes.ProductIdDataType(id="\n            "),
             accessLevel=3,
@@ -157,6 +186,7 @@ class ReadyEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6294",
             browseName="ns=machine_vision;JobId",
+            modellingRule="Mandatory",
             dataType=machine_vision_datypes.JobIdDataType,
             value=machine_vision_datypes.JobIdDataType(id="\n            "),
             accessLevel=3,
@@ -168,12 +198,20 @@ class ReadyEventType(ns0.objtypes.BaseEventType):
 @o6.objecttype(nodeId="ns=machine_vision;i=1024", browseName="ns=machine_vision;ResultReadyEventType", displayName="ResultReadyEventType")
 class ResultReadyEventType(ns0.objtypes.BaseEventType):
     creationTime: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6303", browseName="ns=machine_vision;CreationTime", dataType=ns0.datatypes.UtcTime, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=machine_vision;i=6303",
+            browseName="ns=machine_vision;CreationTime",
+            modellingRule="Mandatory",
+            dataType=ns0.datatypes.UtcTime,
+            accessLevel=3,
+            userAccessLevel=1,
+        )
     )
     externalConfigurationId: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6045",
             browseName="ns=machine_vision;ExternalConfigurationId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.ConfigurationIdDataType,
             accessLevel=3,
             userAccessLevel=1,
@@ -183,6 +221,7 @@ class ResultReadyEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6301",
             browseName="ns=machine_vision;ExternalRecipeId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.RecipeIdExternalDataType,
             accessLevel=3,
             userAccessLevel=1,
@@ -192,6 +231,7 @@ class ResultReadyEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6142",
             browseName="ns=machine_vision;InternalConfigurationId",
+            modellingRule="Mandatory",
             dataType=machine_vision_datypes.ConfigurationIdDataType,
             accessLevel=3,
             userAccessLevel=1,
@@ -201,21 +241,27 @@ class ResultReadyEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6302",
             browseName="ns=machine_vision;InternalRecipeId",
+            modellingRule="Mandatory",
             dataType=machine_vision_datypes.RecipeIdInternalDataType,
             accessLevel=3,
             userAccessLevel=1,
         )
     )
     isPartial: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6296", browseName="ns=machine_vision;IsPartial", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=machine_vision;i=6296", browseName="ns=machine_vision;IsPartial", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+        )
     )
     isSimulated: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6297", browseName="ns=machine_vision;IsSimulated", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=machine_vision;i=6297", browseName="ns=machine_vision;IsSimulated", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+        )
     )
     jobId: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6300",
             browseName="ns=machine_vision;JobId",
+            modellingRule="Mandatory",
             dataType=machine_vision_datypes.JobIdDataType,
             value=machine_vision_datypes.JobIdDataType(id="\n            "),
             accessLevel=3,
@@ -226,6 +272,7 @@ class ResultReadyEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6299",
             browseName="ns=machine_vision;MeasId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.MeasIdDataType,
             value=machine_vision_datypes.MeasIdDataType(id="\n            "),
             accessLevel=3,
@@ -236,6 +283,7 @@ class ResultReadyEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6304",
             browseName="ns=machine_vision;PartId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.PartIdDataType,
             value=machine_vision_datypes.PartIdDataType(id="\n            "),
             accessLevel=3,
@@ -246,6 +294,7 @@ class ResultReadyEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6305",
             browseName="ns=machine_vision;ProcessingTimes",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.ProcessingTimesDataType,
             value=machine_vision_datypes.ProcessingTimesDataType(startTime=o6.DateTime("1900-01-01T00:00:00Z"), endTime=o6.DateTime("1900-01-01T00:00:00Z")),
             accessLevel=3,
@@ -256,6 +305,7 @@ class ResultReadyEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6143",
             browseName="ns=machine_vision;ProductId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.ProductIdDataType,
             value=machine_vision_datypes.ProductIdDataType(id="\n            "),
             accessLevel=3,
@@ -264,13 +314,20 @@ class ResultReadyEventType(ns0.objtypes.BaseEventType):
     )
     resultContent: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=machine_vision;i=6306", browseName="ns=machine_vision;ResultContent", valueRank=1, arrayDimensions=[0], accessLevel=3, userAccessLevel=1
+            nodeId="ns=machine_vision;i=6306",
+            browseName="ns=machine_vision;ResultContent",
+            modellingRule="Optional",
+            valueRank=1,
+            arrayDimensions=[0],
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     resultId: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6295",
             browseName="ns=machine_vision;ResultId",
+            modellingRule="Mandatory",
             dataType=machine_vision_datypes.ResultIdDataType,
             value=machine_vision_datypes.ResultIdDataType(id="\n            "),
             accessLevel=3,
@@ -279,7 +336,12 @@ class ResultReadyEventType(ns0.objtypes.BaseEventType):
     )
     resultState: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=machine_vision;i=6298", browseName="ns=machine_vision;ResultState", dataType=machine_vision_datypes.ResultStateDataType, accessLevel=3, userAccessLevel=1
+            nodeId="ns=machine_vision;i=6298",
+            browseName="ns=machine_vision;ResultState",
+            modellingRule="Mandatory",
+            dataType=machine_vision_datypes.ResultStateDataType,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
 
@@ -290,6 +352,7 @@ class AcquisitionDoneEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6308",
             browseName="ns=machine_vision;JobId",
+            modellingRule="Mandatory",
             dataType=machine_vision_datypes.JobIdDataType,
             value=machine_vision_datypes.JobIdDataType(id="\n            "),
             accessLevel=3,
@@ -301,35 +364,48 @@ class AcquisitionDoneEventType(ns0.objtypes.BaseEventType):
 @o6.objecttype(nodeId="ns=machine_vision;i=1027", browseName="ns=machine_vision;EnterStepSequenceEventType", displayName="EnterStepSequenceEventType")
 class EnterStepSequenceEventType(ns0.objtypes.BaseEventType):
     steps: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6322", browseName="ns=machine_vision;Steps", dataType=o6.Int32, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=machine_vision;i=6322", browseName="ns=machine_vision;Steps", modellingRule="Mandatory", dataType=o6.Int32, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
 @o6.objecttype(nodeId="ns=machine_vision;i=1028", browseName="ns=machine_vision;NextStepEventType", displayName="NextStepEventType")
 class NextStepEventType(ns0.objtypes.BaseEventType):
     step: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6324", browseName="ns=machine_vision;Step", dataType=o6.Int32, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=machine_vision;i=6324", browseName="ns=machine_vision;Step", modellingRule="Mandatory", dataType=o6.Int32, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
 @o6.objecttype(nodeId="ns=machine_vision;i=1033", browseName="ns=machine_vision;VisionConditionType", displayName="VisionConditionType", isAbstract=True)
 class VisionConditionType(ns0.objtypes.AcknowledgeableConditionType):
     blockReaction: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6206", browseName="ns=machine_vision;BlockReaction", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=machine_vision;i=6206", browseName="ns=machine_vision;BlockReaction", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+        )
     )
     causePath: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6207", browseName="ns=machine_vision;CausePath", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=machine_vision;i=6207", browseName="ns=machine_vision;CausePath", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
     errorCode: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6208", browseName="ns=machine_vision;ErrorCode", dataType=o6.UInt64, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=machine_vision;i=6208", browseName="ns=machine_vision;ErrorCode", modellingRule="Optional", dataType=o6.UInt64, accessLevel=3, userAccessLevel=1
+        )
     )
     errorString: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6283", browseName="ns=machine_vision;ErrorString", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=machine_vision;i=6283", browseName="ns=machine_vision;ErrorString", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
     externalConfigurationId: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6347",
             browseName="ns=machine_vision;ExternalConfigurationId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.ConfigurationIdDataType,
             accessLevel=3,
             userAccessLevel=1,
@@ -339,6 +415,7 @@ class VisionConditionType(ns0.objtypes.AcknowledgeableConditionType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6346",
             browseName="ns=machine_vision;ExternalRecipeId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.RecipeIdExternalDataType,
             accessLevel=3,
             userAccessLevel=1,
@@ -348,6 +425,7 @@ class VisionConditionType(ns0.objtypes.AcknowledgeableConditionType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6192",
             browseName="ns=machine_vision;InternalConfigurationId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.ConfigurationIdDataType,
             accessLevel=3,
             userAccessLevel=1,
@@ -357,6 +435,7 @@ class VisionConditionType(ns0.objtypes.AcknowledgeableConditionType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6321",
             browseName="ns=machine_vision;InternalRecipeId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.RecipeIdInternalDataType,
             accessLevel=3,
             userAccessLevel=1,
@@ -366,6 +445,7 @@ class VisionConditionType(ns0.objtypes.AcknowledgeableConditionType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6343",
             browseName="ns=machine_vision;JobId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.JobIdDataType,
             value=machine_vision_datypes.JobIdDataType(id="\n            "),
             accessLevel=3,
@@ -376,6 +456,7 @@ class VisionConditionType(ns0.objtypes.AcknowledgeableConditionType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6344",
             browseName="ns=machine_vision;MeasId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.MeasIdDataType,
             value=machine_vision_datypes.MeasIdDataType(id="\n            "),
             accessLevel=3,
@@ -386,6 +467,7 @@ class VisionConditionType(ns0.objtypes.AcknowledgeableConditionType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6307",
             browseName="ns=machine_vision;PartId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.PartIdDataType,
             value=machine_vision_datypes.PartIdDataType(id="\n            "),
             accessLevel=3,
@@ -396,6 +478,7 @@ class VisionConditionType(ns0.objtypes.AcknowledgeableConditionType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6323",
             browseName="ns=machine_vision;ProductId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.ProductIdDataType,
             value=machine_vision_datypes.ProductIdDataType(id="\n            "),
             accessLevel=3,
@@ -406,6 +489,7 @@ class VisionConditionType(ns0.objtypes.AcknowledgeableConditionType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6345",
             browseName="ns=machine_vision;ResultId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.ResultIdDataType,
             value=machine_vision_datypes.ResultIdDataType(id="\n            "),
             accessLevel=3,
@@ -413,7 +497,9 @@ class VisionConditionType(ns0.objtypes.AcknowledgeableConditionType):
         )
     )
     stopReaction: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6293", browseName="ns=machine_vision;StopReaction", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=machine_vision;i=6293", browseName="ns=machine_vision;StopReaction", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -435,12 +521,15 @@ class VisionPersistentErrorConditionType(VisionConditionType):
 @o6.objecttype(nodeId="ns=machine_vision;i=1015", browseName="ns=machine_vision;VisionEventType", displayName="VisionEventType", isAbstract=True)
 class VisionEventType(ns0.objtypes.BaseEventType):
     causePath: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6193", browseName="ns=machine_vision;CausePath", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=machine_vision;i=6193", browseName="ns=machine_vision;CausePath", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
     externalConfigurationId: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6550",
             browseName="ns=machine_vision;ExternalConfigurationId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.ConfigurationIdDataType,
             accessLevel=3,
             userAccessLevel=1,
@@ -450,6 +539,7 @@ class VisionEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6195",
             browseName="ns=machine_vision;ExternalRecipeId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.RecipeIdExternalDataType,
             accessLevel=3,
             userAccessLevel=1,
@@ -459,6 +549,7 @@ class VisionEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6200",
             browseName="ns=machine_vision;InternalConfigurationId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.ConfigurationIdDataType,
             accessLevel=3,
             userAccessLevel=1,
@@ -468,6 +559,7 @@ class VisionEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6198",
             browseName="ns=machine_vision;InternalRecipeId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.RecipeIdInternalDataType,
             accessLevel=3,
             userAccessLevel=1,
@@ -477,6 +569,7 @@ class VisionEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6203",
             browseName="ns=machine_vision;JobId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.JobIdDataType,
             value=machine_vision_datypes.JobIdDataType(id="\n            "),
             accessLevel=3,
@@ -487,6 +580,7 @@ class VisionEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6194",
             browseName="ns=machine_vision;MeasId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.MeasIdDataType,
             value=machine_vision_datypes.MeasIdDataType(id="\n            "),
             accessLevel=3,
@@ -497,6 +591,7 @@ class VisionEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6201",
             browseName="ns=machine_vision;PartId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.PartIdDataType,
             value=machine_vision_datypes.PartIdDataType(id="\n            "),
             accessLevel=3,
@@ -507,6 +602,7 @@ class VisionEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6199",
             browseName="ns=machine_vision;ProductId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.ProductIdDataType,
             value=machine_vision_datypes.ProductIdDataType(id="\n            "),
             accessLevel=3,
@@ -517,6 +613,7 @@ class VisionEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6204",
             browseName="ns=machine_vision;ResultId",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.ResultIdDataType,
             value=machine_vision_datypes.ResultIdDataType(id="\n            "),
             accessLevel=3,
@@ -595,6 +692,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7007",
     browseName="ns=machine_vision;GetResultComponentsById",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6024"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6025"]),
 )
@@ -633,6 +731,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7009",
     browseName="ns=machine_vision;StartContinuous",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6086"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6087"]),
 )
@@ -671,6 +770,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7013",
     browseName="ns=machine_vision;AddRecipe",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6144"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6145"]),
 )
@@ -713,6 +813,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7014",
     browseName="ns=machine_vision;GetRecipeListFiltered",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6156"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6157"]),
 )
@@ -749,6 +850,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7015",
     browseName="ns=machine_vision;PrepareRecipe",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6148"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6149"]),
 )
@@ -783,6 +885,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7025",
     browseName="ns=machine_vision;AddConfiguration",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6096"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6097"]),
 )
@@ -819,6 +922,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7026",
     browseName="ns=machine_vision;GetResultById",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6209"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6210"]),
 )
@@ -855,6 +959,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7041",
     browseName="ns=machine_vision;GetConfigurationById",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6100"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6101"]),
 )
@@ -887,6 +992,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7043",
     browseName="ns=machine_vision;ReportSafetyState",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6222"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6223"]),
 )
@@ -897,12 +1003,22 @@ class SafetyStateManagementType(ns0.objtypes.BaseObjectType):
     reportSafetyState: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=machine_vision;i=7043"])
     visionSafetyInformation: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=machine_vision;i=6042", browseName="ns=machine_vision;VisionSafetyInformation", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            nodeId="ns=machine_vision;i=6042",
+            browseName="ns=machine_vision;VisionSafetyInformation",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     visionSafetyTriggered: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=machine_vision;i=6041", browseName="ns=machine_vision;VisionSafetyTriggered", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            nodeId="ns=machine_vision;i=6041",
+            browseName="ns=machine_vision;VisionSafetyTriggered",
+            modellingRule="Mandatory",
+            dataType=o6.Boolean,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
 
@@ -942,6 +1058,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7045",
     browseName="ns=machine_vision;GetConfigurationList",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6104"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6105"]),
 )
@@ -971,6 +1088,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7046",
     browseName="ns=machine_vision;ReleaseConfigurationHandle",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6108"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6109"]),
 )
@@ -1000,6 +1118,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7047",
     browseName="ns=machine_vision;RemoveConfiguration",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6112"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6113"]),
 )
@@ -1029,6 +1148,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7048",
     browseName="ns=machine_vision;ActivateConfiguration",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6116"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6117"]),
 )
@@ -1041,6 +1161,7 @@ class ConfigurationManagementType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=machine_vision;i=6132",
             browseName="ns=machine_vision;ActiveConfiguration",
+            modellingRule="Mandatory",
             dataType=machine_vision_datypes.ConfigurationDataType,
             value=machine_vision_datypes.ConfigurationDataType(
                 internalId=machine_vision_datypes.ConfigurationIdDataType(id="\n              "), lastModified=o6.DateTime("1900-01-01T00:00:00Z")
@@ -1051,7 +1172,9 @@ class ConfigurationManagementType(ns0.objtypes.BaseObjectType):
     )
     addConfiguration: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=machine_vision;i=7025"])
     configurationTransfer: ConfigurationTransferType | None
-    configurations: ConfigurationFolderType | None = o6.hasComponent(ConfigurationFolderType(nodeId="ns=machine_vision;i=5010", browseName="ns=machine_vision;Configurations"))
+    configurations: ConfigurationFolderType | None = o6.hasComponent(
+        ConfigurationFolderType(nodeId="ns=machine_vision;i=5010", browseName="ns=machine_vision;Configurations", modellingRule="Optional")
+    )
     getConfigurationById: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=machine_vision;i=7041"])
     getConfigurationList: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=machine_vision;i=7045"])
     releaseConfigurationHandle: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=machine_vision;i=7046"])
@@ -1089,6 +1212,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7055",
     browseName="ns=machine_vision;UnprepareRecipe",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6152"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6153"]),
 )
@@ -1118,6 +1242,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7056",
     browseName="ns=machine_vision;ReleaseRecipeHandle",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6160"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6161"]),
 )
@@ -1147,6 +1272,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7057",
     browseName="ns=machine_vision;RemoveRecipe",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6164"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6165"]),
 )
@@ -1180,6 +1306,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7058",
     browseName="GenerateFileForRead",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6169"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6170"]),
 )
@@ -1218,6 +1345,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7059",
     browseName="ns=machine_vision;UnprepareProduct",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6176"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6177"]),
 )
@@ -1250,6 +1378,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7060",
     browseName="ns=machine_vision;PrepareProduct",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6172"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6173"]),
 )
@@ -1282,6 +1411,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7061",
     browseName="ns=machine_vision;UnlinkProduct",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6180"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6181"]),
 )
@@ -1295,7 +1425,7 @@ class RecipeManagementType(ns0.objtypes.BaseObjectType):
     prepareRecipe: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=machine_vision;i=7015"])
     products: ProductFolderType | None
     recipeTransfer: RecipeTransferType | None
-    recipes: RecipeFolderType | None = o6.hasComponent(RecipeFolderType(nodeId="ns=machine_vision;i=5005", browseName="ns=machine_vision;Recipes"))
+    recipes: RecipeFolderType | None = o6.hasComponent(RecipeFolderType(nodeId="ns=machine_vision;i=5005", browseName="ns=machine_vision;Recipes", modellingRule="Optional"))
     releaseRecipeHandle: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=machine_vision;i=7056"])
     removeRecipe: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=machine_vision;i=7057"])
     unlinkProduct: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=machine_vision;i=7061"])
@@ -1328,6 +1458,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7062",
     browseName="ns=machine_vision;LinkProduct",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6190"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6191"]),
 )
@@ -1357,6 +1488,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7063",
     browseName="ns=machine_vision;UnlinkProduct",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6196"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6197"]),
 )
@@ -1375,7 +1507,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=machine_vision;i=7064", browseName="ns=machine_vision;Prepare", outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6202"]))
+o6.call(nodeId="ns=machine_vision;i=7064", browseName="ns=machine_vision;Prepare", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6202"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6205",
@@ -1388,7 +1520,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=machine_vision;i=7065", browseName="ns=machine_vision;Unprepare", outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6205"]))
+o6.call(nodeId="ns=machine_vision;i=7065", browseName="ns=machine_vision;Unprepare", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6205"]))
 
 
 @o6.objecttype(nodeId="ns=machine_vision;i=1002", browseName="ns=machine_vision;RecipeType", displayName="RecipeType")
@@ -1398,6 +1530,7 @@ class RecipeType(ns0.objtypes.BaseObjectType):
             nodeId="ns=machine_vision;i=6023",
             browseName="ns=machine_vision;ExternalId",
             description="Recipe ID for identifying the recipe outside the vision system. The ExternalID is only managed by the host system.",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.RecipeIdExternalDataType,
             accessLevel=3,
             userAccessLevel=1,
@@ -1409,19 +1542,23 @@ class RecipeType(ns0.objtypes.BaseObjectType):
             nodeId="ns=machine_vision;i=6019",
             browseName="ns=machine_vision;InternalId",
             description="System-wide unique ID for identifying a recipe. This ID is assigned by the vision system.",
+            modellingRule="Mandatory",
             dataType=machine_vision_datypes.RecipeIdInternalDataType,
             accessLevel=3,
             userAccessLevel=1,
         )
     )
     isPrepared: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=machine_vision;i=6605", browseName="ns=machine_vision;IsPrepared", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=machine_vision;i=6605", browseName="ns=machine_vision;IsPrepared", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+        )
     )
     lastModified: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6017",
             browseName="ns=machine_vision;LastModified",
             description="The time when this recipe was last modified.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.UtcTime,
             accessLevel=3,
             userAccessLevel=1,
@@ -1432,6 +1569,7 @@ class RecipeType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.PropertyType(
             nodeId="ns=machine_vision;i=6018",
             browseName="ns=machine_vision;LinkedProducts",
+            modellingRule="Optional",
             dataType=machine_vision_datypes.ProductIdDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -1455,7 +1593,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=machine_vision;i=7066", browseName="ns=machine_vision;ConfirmAll", inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6241"]))
+o6.call(nodeId="ns=machine_vision;i=7066", browseName="ns=machine_vision;ConfirmAll", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6241"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_vision;i=6213",
@@ -1501,6 +1639,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7089",
     browseName="ns=machine_vision;GetResultListFiltered",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6213"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6214"]),
 )
@@ -1530,6 +1669,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7090",
     browseName="ns=machine_vision;ReleaseResultHandle",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6217"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6218"]),
 )
@@ -1542,7 +1682,7 @@ class ResultManagementType(ns0.objtypes.BaseObjectType):
     getResultListFiltered: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=machine_vision;i=7089"])
     releaseResultHandle: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=machine_vision;i=7090"])
     resultTransfer: ResultTransferType | None
-    results: ResultFolderType | None = o6.hasComponent(ResultFolderType(nodeId="ns=machine_vision;i=5245", browseName="ns=machine_vision;Results"))
+    results: ResultFolderType | None = o6.hasComponent(ResultFolderType(nodeId="ns=machine_vision;i=5245", browseName="ns=machine_vision;Results", modellingRule="Optional"))
 
 
 ns0.vartypes.PropertyType(
@@ -1573,6 +1713,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7093",
     browseName="ns=machine_vision;Reset",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6256"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6257"]),
 )
@@ -1605,6 +1746,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7094",
     browseName="ns=machine_vision;Halt",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6254"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6255"]),
 )
@@ -1620,7 +1762,9 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Error", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=machine_vision;i=7095", browseName="ns=machine_vision;SelectModeAutomatic", outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6258"]))
+o6.call(
+    nodeId="ns=machine_vision;i=7095", browseName="ns=machine_vision;SelectModeAutomatic", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6258"])
+)
 
 
 @o6.objecttype(nodeId="ns=machine_vision;i=1017", browseName="ns=machine_vision;VisionStateMachineType", displayName="VisionStateMachineType")
@@ -1686,6 +1830,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7096",
     browseName="ns=machine_vision;Stop",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6287"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6288"]),
 )
@@ -1718,6 +1863,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7097",
     browseName="ns=machine_vision;Abort",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6285"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6286"]),
 )
@@ -1756,6 +1902,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7098",
     browseName="ns=machine_vision;StartSingleJob",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6281"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6282"]),
 )
@@ -1789,6 +1936,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7100",
     browseName="ns=machine_vision;SimulationMode",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6289"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6290"]),
 )
@@ -1855,6 +2003,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7101",
     browseName="ns=machine_vision;Sync",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6319"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6320"]),
 )
@@ -1904,6 +2053,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7123",
     browseName="GenerateFileForRead",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6184"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6185"]),
 )
@@ -1936,6 +2086,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7124",
     browseName="GenerateFileForWrite",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6583"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6584"]),
 )
@@ -1976,6 +2127,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7129",
     browseName="GenerateFileForRead",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6617"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6618"]),
 )
@@ -2008,6 +2160,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_vision;i=7130",
     browseName="GenerateFileForWrite",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6121"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_vision;i=6122"]),
 )

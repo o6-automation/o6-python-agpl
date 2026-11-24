@@ -44,12 +44,12 @@ http_opcfoundation_org_UA_Scheduler_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=scheduler;i=5", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=scheduler;i=6", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=scheduler;i=6", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=scheduler;i=7", browseName="StaticNumericNodeIdRange", dataType=ns0.datatypes.NumericRange, valueRank=1, arrayDimensions=[1], value=["1:2147483647"]
+                nodeId="ns=scheduler;i=7", browseName="StaticNumericNodeIdRange", dataType=ns0.datatypes.NumericRange, valueRank=1, arrayDimensions=[0], value=["1:2147483647"]
             )
         ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=scheduler;i=8", browseName="StaticStringNodeIdPattern", dataType=o6.String, value="")),

@@ -53,7 +53,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Applications", dataType=o6.NodeId("ns=gds;i=1"), valueRank=1, arrayDimensions=[0])],
 )
-o6.call(nodeId="ns=gds;i=15", browseName="ns=gds;FindApplications", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=16"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=17"]))
+o6.call(
+    nodeId="ns=gds;i=15",
+    browseName="ns=gds;FindApplications",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=gds;i=16"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gds;i=17"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=19",
@@ -77,7 +83,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=gds;i=18", browseName="ns=gds;RegisterApplication", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=19"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=20"]))
+o6.call(
+    nodeId="ns=gds;i=18",
+    browseName="ns=gds;RegisterApplication",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=gds;i=19"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gds;i=20"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=22",
@@ -90,7 +102,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ApplicationId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=gds;i=21", browseName="ns=gds;UnregisterApplication", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=22"]))
+o6.call(nodeId="ns=gds;i=21", browseName="ns=gds;UnregisterApplication", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=22"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=24",
@@ -124,7 +136,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Servers", dataType=o6.NodeId("i=12189"), valueRank=1, arrayDimensions=[0]),
     ],
 )
-o6.call(nodeId="ns=gds;i=23", browseName="ns=gds;QueryServers", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=24"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=25"]))
+o6.call(
+    nodeId="ns=gds;i=23",
+    browseName="ns=gds;QueryServers",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=gds;i=24"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gds;i=25"]),
+)
 
 
 @o6.objecttype(
@@ -193,7 +211,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="NewRefreshTokenExpiryTime", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="ns=gds;i=64", browseName="ns=gds;RefreshToken", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=65"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=66"]))
+o6.call(
+    nodeId="ns=gds;i=64",
+    browseName="ns=gds;RefreshToken",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=gds;i=65"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gds;i=66"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=77",
@@ -225,7 +249,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RequestId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=gds;i=76", browseName="ns=gds;StartNewKeyPairRequest", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=77"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=78"]))
+o6.call(
+    nodeId="ns=gds;i=76",
+    browseName="ns=gds;StartNewKeyPairRequest",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=gds;i=77"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gds;i=78"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=80",
@@ -254,7 +284,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RequestId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=gds;i=79", browseName="ns=gds;StartSigningRequest", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=80"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=81"]))
+o6.call(
+    nodeId="ns=gds;i=79",
+    browseName="ns=gds;StartSigningRequest",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=gds;i=80"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gds;i=81"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=86",
@@ -285,7 +321,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="IssuerCertificates", dataType=o6.NodeId("i=15"), valueRank=1, arrayDimensions=[0]),
     ],
 )
-o6.call(nodeId="ns=gds;i=85", browseName="ns=gds;FinishRequest", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=86"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=87"]))
+o6.call(
+    nodeId="ns=gds;i=85",
+    browseName="ns=gds;FinishRequest",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=gds;i=86"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gds;i=87"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=90",
@@ -315,7 +357,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Certificates", dataType=o6.NodeId("i=15"), valueRank=1, arrayDimensions=[0]),
     ],
 )
-o6.call(nodeId="ns=gds;i=89", browseName="ns=gds;GetCertificates", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=90"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=108"]))
+o6.call(
+    nodeId="ns=gds;i=89",
+    browseName="ns=gds;GetCertificates",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=gds;i=90"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gds;i=108"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=96",
@@ -346,7 +394,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="RequestId", dataType=o6.NodeId("i=14"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="ns=gds;i=95", browseName="ns=gds;StartRequestToken", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=96"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=97"]))
+o6.call(
+    nodeId="ns=gds;i=95",
+    browseName="ns=gds;StartRequestToken",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=gds;i=96"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gds;i=97"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=99",
@@ -380,7 +434,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="RefreshTokenExpiryTime", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="ns=gds;i=98", browseName="ns=gds;FinishRequestToken", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=99"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=100"]))
+o6.call(
+    nodeId="ns=gds;i=98",
+    browseName="ns=gds;FinishRequestToken",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=gds;i=99"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gds;i=100"]),
+)
 
 
 @o6.objecttype(
@@ -422,7 +482,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="ValidityTime", dataType=o6.NodeId("i=294"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="ns=gds;i=126", browseName="ns=gds;CheckRevocationStatus", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=160"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=161"]))
+o6.call(
+    nodeId="ns=gds;i=126",
+    browseName="ns=gds;CheckRevocationStatus",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=gds;i=160"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gds;i=161"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=189",
@@ -435,7 +501,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Application", dataType=o6.NodeId("ns=gds;i=1"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=gds;i=188", browseName="ns=gds;UpdateApplication", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=189"]))
+o6.call(nodeId="ns=gds;i=188", browseName="ns=gds;UpdateApplication", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=189"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=198",
@@ -462,7 +528,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="TrustListId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=gds;i=197", browseName="ns=gds;GetTrustList", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=198"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=199"]))
+o6.call(
+    nodeId="ns=gds;i=197",
+    browseName="ns=gds;GetTrustList",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=gds;i=198"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gds;i=199"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=211",
@@ -486,7 +558,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Application", dataType=o6.NodeId("ns=gds;i=1"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=gds;i=210", browseName="ns=gds;GetApplication", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=211"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=212"]))
+o6.call(
+    nodeId="ns=gds;i=210",
+    browseName="ns=gds;GetApplication",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=gds;i=211"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gds;i=212"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=223",
@@ -514,7 +592,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="UpdateRequired", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=gds;i=222", browseName="ns=gds;GetCertificateStatus", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=223"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=224"]))
+o6.call(
+    nodeId="ns=gds;i=222",
+    browseName="ns=gds;GetCertificateStatus",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=gds;i=223"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gds;i=224"]),
+)
 
 
 @o6.objecttype(nodeId="ns=gds;i=233", browseName="ns=gds;AuthorizationServicesFolderType", displayName="AuthorizationServicesFolderType")
@@ -544,7 +628,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="CertificateGroupIds", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0])],
 )
-o6.call(nodeId="ns=gds;i=369", browseName="ns=gds;GetCertificateGroups", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=370"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=371"]))
+o6.call(
+    nodeId="ns=gds;i=369",
+    browseName="ns=gds;GetCertificateGroups",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=gds;i=370"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gds;i=371"]),
+)
 
 
 @o6.objecttype(
@@ -558,8 +648,12 @@ o6.call(nodeId="ns=gds;i=369", browseName="ns=gds;GetCertificateGroups", inputAr
     isAbstract=True,
 )
 class CertificateRequestedAuditEventType(ns0.objtypes.AuditUpdateMethodEventType):
-    certificateGroup: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gds;i=717", browseName="ns=gds;CertificateGroup", dataType=o6.NodeId))
-    certificateType: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gds;i=718", browseName="ns=gds;CertificateType", dataType=o6.NodeId))
+    certificateGroup: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=gds;i=717", browseName="ns=gds;CertificateGroup", modellingRule="Mandatory", dataType=o6.NodeId)
+    )
+    certificateType: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=gds;i=718", browseName="ns=gds;CertificateType", modellingRule="Mandatory", dataType=o6.NodeId)
+    )
 
 
 @o6.objecttype(
@@ -573,8 +667,12 @@ class CertificateRequestedAuditEventType(ns0.objtypes.AuditUpdateMethodEventType
     isAbstract=True,
 )
 class CertificateDeliveredAuditEventType(ns0.objtypes.AuditUpdateMethodEventType):
-    certificateGroup: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gds;i=719", browseName="ns=gds;CertificateGroup", dataType=o6.NodeId))
-    certificateType: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gds;i=720", browseName="ns=gds;CertificateType", dataType=o6.NodeId))
+    certificateGroup: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=gds;i=719", browseName="ns=gds;CertificateGroup", modellingRule="Mandatory", dataType=o6.NodeId)
+    )
+    certificateType: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=gds;i=720", browseName="ns=gds;CertificateType", modellingRule="Mandatory", dataType=o6.NodeId)
+    )
 
 
 ns0.vartypes.PropertyType(
@@ -611,12 +709,18 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Applications", dataType=o6.NodeId("i=308"), valueRank=1, arrayDimensions=[0]),
     ],
 )
-o6.call(nodeId="ns=gds;i=868", browseName="ns=gds;QueryApplications", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=869"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=870"]))
+o6.call(
+    nodeId="ns=gds;i=868",
+    browseName="ns=gds;QueryApplications",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=gds;i=869"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gds;i=870"]),
+)
 
 
 @o6.objecttype(nodeId="ns=gds;i=13", browseName="ns=gds;DirectoryType", displayName="DirectoryType")
 class DirectoryType(ns0.objtypes.FolderType):
-    applications: ns0.objtypes.FolderType = o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=gds;i=14", browseName="ns=gds;Applications"))
+    applications: ns0.objtypes.FolderType = o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=gds;i=14", browseName="ns=gds;Applications", modellingRule="Mandatory"))
     findApplications: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=gds;i=15"])
     getApplication: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=gds;i=210"])
     queryApplications: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=gds;i=868"])
@@ -651,7 +755,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="AccessToken", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=gds;i=969", browseName="ns=gds;RequestAccessToken", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=970"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=971"]))
+o6.call(
+    nodeId="ns=gds;i=969",
+    browseName="ns=gds;RequestAccessToken",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=gds;i=970"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gds;i=971"]),
+)
 
 
 @o6.objecttype(
@@ -683,7 +793,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="UserTokenPolicies", dataType=o6.NodeId("i=304"), valueRank=1, arrayDimensions=[0]),
     ],
 )
-o6.call(nodeId="ns=gds;i=1004", browseName="ns=gds;GetServiceDescription", outputArgs=o6.hasProperty(o6.ns["ns=gds;i=1005"]))
+o6.call(nodeId="ns=gds;i=1004", browseName="ns=gds;GetServiceDescription", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=gds;i=1005"]))
 
 
 @o6.objecttype(nodeId="ns=gds;i=966", browseName="ns=gds;AuthorizationServiceType", displayName="AuthorizationServiceType")
@@ -692,14 +802,20 @@ class AuthorizationServiceType(ns0.objtypes.BaseObjectType):
     getServiceDescription: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=gds;i=1004"])
     refreshToken: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=gds;i=64"])
     requestAccessToken: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=gds;i=969"])
-    serviceCertificate: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gds;i=968", browseName="ns=gds;ServiceCertificate", dataType=o6.ByteString))
-    serviceUri: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gds;i=1003", browseName="ns=gds;ServiceUri", dataType=o6.String))
+    serviceCertificate: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=gds;i=968", browseName="ns=gds;ServiceCertificate", modellingRule="Mandatory", dataType=o6.ByteString)
+    )
+    serviceUri: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=gds;i=1003", browseName="ns=gds;ServiceUri", modellingRule="Mandatory", dataType=o6.String)
+    )
     startRequestToken: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=gds;i=95"])
     supportedRoles: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=gds;i=110", browseName="ns=gds;SupportedRoles", dataType=o6.String, valueRank=1, arrayDimensions=[0])
+        ns0.vartypes.PropertyType(nodeId="ns=gds;i=110", browseName="ns=gds;SupportedRoles", modellingRule="Optional", dataType=o6.String, valueRank=1, arrayDimensions=[0])
     )
     userTokenPolicies: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=gds;i=967", browseName="ns=gds;UserTokenPolicies", dataType=ns0.datatypes.UserTokenPolicy, valueRank=1, arrayDimensions=[0])
+        ns0.vartypes.PropertyType(
+            nodeId="ns=gds;i=967", browseName="ns=gds;UserTokenPolicies", modellingRule="Optional", dataType=ns0.datatypes.UserTokenPolicy, valueRank=1, arrayDimensions=[0]
+        )
     )
 
 
@@ -734,7 +850,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RequestId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=gds;i=1023", browseName="ns=gds;StartRequest", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1024"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=1025"]))
+o6.call(
+    nodeId="ns=gds;i=1023",
+    browseName="ns=gds;StartRequest",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1024"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gds;i=1025"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1027",
@@ -767,7 +889,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="GrantedRoles", dataType=o6.NodeId("i=17"), valueRank=1, arrayDimensions=[0]),
     ],
 )
-o6.call(nodeId="ns=gds;i=1026", browseName="ns=gds;FinishRequest", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1027"]), outputArgs=o6.hasProperty(o6.ns["ns=gds;i=1028"]))
+o6.call(
+    nodeId="ns=gds;i=1026",
+    browseName="ns=gds;FinishRequest",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1027"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gds;i=1028"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=gds;i=1030",
@@ -780,19 +908,21 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="CredentialId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=gds;i=1029", browseName="ns=gds;Revoke", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1030"]))
+o6.call(nodeId="ns=gds;i=1029", browseName="ns=gds;Revoke", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=1030"]))
 
 
 @o6.objecttype(nodeId="ns=gds;i=1020", browseName="ns=gds;KeyCredentialServiceType", displayName="KeyCredentialServiceType")
 class KeyCredentialServiceType(ns0.objtypes.BaseObjectType):
     finishRequest: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=gds;i=1026"])
     profileUris: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=gds;i=1022", browseName="ns=gds;ProfileUris", dataType=o6.String, valueRank=1, arrayDimensions=[0])
+        ns0.vartypes.PropertyType(nodeId="ns=gds;i=1022", browseName="ns=gds;ProfileUris", modellingRule="Mandatory", dataType=o6.String, valueRank=1, arrayDimensions=[0])
     )
-    resourceUri: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gds;i=1021", browseName="ns=gds;ResourceUri", dataType=o6.String))
+    resourceUri: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=gds;i=1021", browseName="ns=gds;ResourceUri", modellingRule="Mandatory", dataType=o6.String)
+    )
     revoke: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=gds;i=1029"])
     securityPolicyUris: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=gds;i=495", browseName="ns=gds;SecurityPolicyUris", dataType=o6.String, valueRank=1, arrayDimensions=[0])
+        ns0.vartypes.PropertyType(nodeId="ns=gds;i=495", browseName="ns=gds;SecurityPolicyUris", modellingRule="Optional", dataType=o6.String, valueRank=1, arrayDimensions=[0])
     )
     startRequest: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=gds;i=1023"])
 
@@ -850,7 +980,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Certificate", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="ns=gds;i=15003", browseName="ns=gds;RevokeCertificate", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=15004"]))
+o6.call(nodeId="ns=gds;i=15003", browseName="ns=gds;RevokeCertificate", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=gds;i=15004"]))
 
 
 @o6.objecttype(nodeId="ns=gds;i=63", browseName="ns=gds;CertificateDirectoryType", displayName="CertificateDirectoryType")

@@ -61,6 +61,7 @@ class JoiningDataVariableType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=ijt_base;i=6042",
             browseName="ns=ijt_base;EngineeringUnits",
             description="0:EngineeringUnits defines the engineering unit of the values.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.EUInformation,
             value=ns0.datatypes.EUInformation(namespaceUri="", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
         )
@@ -80,6 +81,7 @@ class JoiningSystemEventContentType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=ijt_base;i=6026",
             browseName="ns=ijt_base;AssociatedEntities",
             description="AssociatedEntities is a list of identifiers of various entities/objects available in the given system. Example: An event maybe associated to Asset, Result, Joint, Error, etc.",
+            modellingRule="Optional",
             dataType=ijt_base_datypes.EntityDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -90,6 +92,7 @@ class JoiningSystemEventContentType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=ijt_base;i=6030",
             browseName="ns=ijt_base;EventCode",
             description="EventCode is a system specific event code associated to the given event.",
+            modellingRule="Optional",
             dataType=o6.Int64,
             value=0,
         )
@@ -99,6 +102,7 @@ class JoiningSystemEventContentType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=ijt_base;i=6029",
             browseName="ns=ijt_base;EventText",
             description="EventText is a human readable text related to the context of the event.",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
             value=o6.LocalizedText(),
         )
@@ -108,6 +112,7 @@ class JoiningSystemEventContentType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=ijt_base;i=6025",
             browseName="ns=ijt_base;JoiningTechnology",
             description="JoiningTechnology is a human readable text to identify the joining technology which has triggered the event. Examples: Tightening, Gluing, Riveting, Flow Drill Fastening, etc.",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
             value=o6.LocalizedText(),
         )
@@ -117,6 +122,7 @@ class JoiningSystemEventContentType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=ijt_base;i=6279",
             browseName="ns=ijt_base;ReportedValues",
             description="ReportedValues is a list of values associated with the given event payload. Example: If it is an over temperature event, then the ReportedValue can be the measured value along with the corresponding limits.",
+            modellingRule="Optional",
             dataType=ijt_base_datypes.ReportedValueDataType,
             valueRank=1,
             arrayDimensions=[0],

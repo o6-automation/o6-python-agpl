@@ -267,7 +267,7 @@ class AccessorySlotStateMachineType(ns0.objtypes.FiniteStateMachineType):
     shutdown: ns0.objtypes.StateType
 
 
-ns0.objtypes.BaseObjectType(nodeId="ns=adi;i=5001", browseName="ns=di;ParameterSet", description="Flat list of Parameters")
+ns0.objtypes.BaseObjectType(nodeId="ns=adi;i=5001", browseName="ns=di;ParameterSet", description="Flat list of Parameters", modellingRule="Optional")
 
 
 @o6.objecttype(nodeId="ns=adi;i=8964", browseName="ns=adi;AnalyserChannelOperatingExecuteStateType", displayName="AnalyserChannelOperatingExecuteStateType")
@@ -275,7 +275,9 @@ class AnalyserChannelOperatingExecuteStateType(ns0.objtypes.StateType):
     pass
 
 
-di.objtypes.FunctionalGroupType(nodeId="ns=adi;i=9386", browseName="ns=di;Identification", description="Used to organize parameters for identification of this TopologyElement")
+di.objtypes.FunctionalGroupType(
+    nodeId="ns=adi;i=9386", browseName="ns=di;Identification", description="Used to organize parameters for identification of this TopologyElement", modellingRule="Mandatory"
+)
 o6.reference(o6.ns["ns=adi;i=9386"], "i=35", "ns=di;i=6001")
 o6.reference(o6.ns["ns=adi;i=9386"], "i=35", "ns=di;i=6003")
 o6.reference(o6.ns["ns=adi;i=9386"], "i=35", "ns=di;i=6004")
@@ -287,7 +289,9 @@ class AnalyserDeviceType(di.objtypes.DeviceType):
     analyserStateMachine: AnalyserDeviceStateMachineType
     channelIdentifier_: AnalyserChannelType | None
     configuration: di.objtypes.FunctionalGroupType
-    factorySettings: di.objtypes.FunctionalGroupType = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=adi;i=9486", browseName="ns=adi;FactorySettings"))
+    factorySettings: di.objtypes.FunctionalGroupType = o6.hasComponent(
+        di.objtypes.FunctionalGroupType(nodeId="ns=adi;i=9486", browseName="ns=adi;FactorySettings", modellingRule="Mandatory")
+    )
     identification: di.objtypes.FunctionalGroupType = o6.hasComponent(o6.ns["ns=adi;i=9386"])
     methodSet: ns0.objtypes.BaseObjectType
     parameterSet: ns0.objtypes.BaseObjectType | None = o6.hasComponent(o6.ns["ns=adi;i=5001"])
@@ -333,7 +337,7 @@ class AnalyserChannelType(di.objtypes.TopologyElementType):
     streamIdentifier_: StreamType | None
 
 
-ns0.objtypes.BaseObjectType(nodeId="ns=adi;i=10317", browseName="ns=di;ParameterSet", description="Flat list of Parameters")
+ns0.objtypes.BaseObjectType(nodeId="ns=adi;i=10317", browseName="ns=di;ParameterSet", description="Flat list of Parameters", modellingRule="Optional")
 
 
 @o6.objecttype(nodeId="ns=adi;i=1010", browseName="ns=adi;StreamType", displayName="StreamType")
@@ -342,7 +346,7 @@ class StreamType(di.objtypes.TopologyElementType):
     acquisitionSettings: di.objtypes.FunctionalGroupType
     acquisitionStatus: di.objtypes.FunctionalGroupType
     chemometricModelSettings: di.objtypes.FunctionalGroupType = o6.hasComponent(
-        di.objtypes.FunctionalGroupType(nodeId="ns=adi;i=10440", browseName="ns=adi;ChemometricModelSettings")
+        di.objtypes.FunctionalGroupType(nodeId="ns=adi;i=10440", browseName="ns=adi;ChemometricModelSettings", modellingRule="Mandatory")
     )
     configuration: di.objtypes.FunctionalGroupType
     context: di.objtypes.FunctionalGroupType
@@ -373,7 +377,7 @@ class MNRDeviceStreamType(StreamType):
     pass
 
 
-ns0.objtypes.BaseObjectType(nodeId="ns=adi;i=10446", browseName="ns=di;ParameterSet", description="Flat list of Parameters")
+ns0.objtypes.BaseObjectType(nodeId="ns=adi;i=10446", browseName="ns=di;ParameterSet", description="Flat list of Parameters", modellingRule="Optional")
 
 
 @o6.objecttype(nodeId="ns=adi;i=1030", browseName="ns=adi;SpectrometerDeviceStreamType", displayName="SpectrometerDeviceStreamType")
@@ -382,11 +386,13 @@ class SpectrometerDeviceStreamType(StreamType):
     acquisitionSettings: di.objtypes.FunctionalGroupType
     acquisitionStatus: di.objtypes.FunctionalGroupType
     configuration: di.objtypes.FunctionalGroupType
-    factorySettings: ns0.objtypes.BaseObjectType = o6.hasComponent(ns0.objtypes.BaseObjectType(nodeId="ns=adi;i=10638", browseName="ns=adi;FactorySettings"))
+    factorySettings: ns0.objtypes.BaseObjectType = o6.hasComponent(
+        ns0.objtypes.BaseObjectType(nodeId="ns=adi;i=10638", browseName="ns=adi;FactorySettings", modellingRule="Mandatory")
+    )
     parameterSet: ns0.objtypes.BaseObjectType | None = o6.hasComponent(o6.ns["ns=adi;i=10446"])
 
 
-ns0.objtypes.BaseObjectType(nodeId="ns=adi;i=10768", browseName="ns=di;ParameterSet", description="Flat list of Parameters")
+ns0.objtypes.BaseObjectType(nodeId="ns=adi;i=10768", browseName="ns=di;ParameterSet", description="Flat list of Parameters", modellingRule="Optional")
 
 
 @o6.objecttype(nodeId="ns=adi;i=1032", browseName="ns=adi;ParticleSizeMonitorDeviceStreamType", displayName="ParticleSizeMonitorDeviceStreamType")
@@ -397,7 +403,9 @@ class ParticleSizeMonitorDeviceStreamType(StreamType):
 
 @o6.objecttype(nodeId="ns=adi;i=1011", browseName="ns=adi;SpectrometerDeviceType", displayName="SpectrometerDeviceType")
 class SpectrometerDeviceType(AnalyserDeviceType):
-    factorySettings: di.objtypes.FunctionalGroupType = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=adi;i=11411", browseName="ns=adi;FactorySettings"))
+    factorySettings: di.objtypes.FunctionalGroupType = o6.hasComponent(
+        di.objtypes.FunctionalGroupType(nodeId="ns=adi;i=11411", browseName="ns=adi;FactorySettings", modellingRule="Mandatory")
+    )
     parameterSet: ns0.objtypes.BaseObjectType | None
 
 
@@ -412,7 +420,11 @@ class AccessorySlotType(di.objtypes.ConfigurableObjectType):
     accessorySlotStateMachine: AccessorySlotStateMachineType
     isEnabled: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=adi;i=12787", browseName="ns=adi;IsEnabled", description="True if this accessory slot is capable of accepting an accessory in it", dataType=o6.Boolean
+            nodeId="ns=adi;i=12787",
+            browseName="ns=adi;IsEnabled",
+            description="True if this accessory slot is capable of accepting an accessory in it",
+            modellingRule="Mandatory",
+            dataType=o6.Boolean,
         )
     )
     isHotSwappable: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -420,6 +432,7 @@ class AccessorySlotType(di.objtypes.ConfigurableObjectType):
             nodeId="ns=adi;i=12786",
             browseName="ns=adi;IsHotSwappable",
             description="True if an accessory can be inserted in the accessory slot while it is powered",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -427,20 +440,27 @@ class AccessorySlotType(di.objtypes.ConfigurableObjectType):
 
 @o6.objecttype(nodeId="ns=adi;i=1019", browseName="ns=adi;AccessoryType", displayName="AccessoryType")
 class AccessoryType(di.objtypes.TopologyElementType):
-    configuration: di.objtypes.FunctionalGroupType = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=adi;i=12898", browseName="ns=adi;Configuration"))
-    factorySettings: di.objtypes.FunctionalGroupType = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=adi;i=12902", browseName="ns=adi;FactorySettings"))
+    configuration: di.objtypes.FunctionalGroupType = o6.hasComponent(
+        di.objtypes.FunctionalGroupType(nodeId="ns=adi;i=12898", browseName="ns=adi;Configuration", modellingRule="Mandatory")
+    )
+    factorySettings: di.objtypes.FunctionalGroupType = o6.hasComponent(
+        di.objtypes.FunctionalGroupType(nodeId="ns=adi;i=12902", browseName="ns=adi;FactorySettings", modellingRule="Mandatory")
+    )
     isHotSwappable: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=adi;i=12904",
             browseName="ns=adi;IsHotSwappable",
             description="True if this accessory can be inserted in the accessory slot while it is powered",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
     isReady: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=adi;i=12905", browseName="ns=adi;IsReady", description="True if this accessory is ready for use", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=adi;i=12905", browseName="ns=adi;IsReady", description="True if this accessory is ready for use", modellingRule="Mandatory", dataType=o6.Boolean
+        )
     )
-    status: di.objtypes.FunctionalGroupType = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=adi;i=12900", browseName="ns=adi;Status"))
+    status: di.objtypes.FunctionalGroupType = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=adi;i=12900", browseName="ns=adi;Status", modellingRule="Mandatory"))
 
 
 @o6.objecttype(nodeId="ns=adi;i=1020", browseName="ns=adi;GcOvenType", displayName="GcOvenType")

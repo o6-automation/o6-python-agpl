@@ -39,18 +39,21 @@ else:
 
 @o6.variabletype(nodeId="ns=scales;i=52", browseName="ns=scales;MeasuredItemType", displayName="MeasuredItemType", valueRank=o6.ValueRank.ANY)
 class MeasuredItemType(ns0.vartypes.DataItemType):
-    eURange: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=scales;i=324", browseName="EURange", dataType=ns0.datatypes.Range))
+    eURange: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=324", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)
+    )
     engineeringUnits: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=190", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=190", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
     )
     instrumentRange: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=133", browseName="ns=scales;InstrumentRange", dataType=ns0.datatypes.Range)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=133", browseName="ns=scales;InstrumentRange", modellingRule="Optional", dataType=ns0.datatypes.Range)
     )
     valuePrecision: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=scales;i=191",
             browseName="ValuePrecision",
             description="The maximum precision that the server can maintain for the item based on restrictions in the target environment.",
+            modellingRule="Optional",
             dataType=o6.Double,
         )
     )
@@ -59,10 +62,17 @@ class MeasuredItemType(ns0.vartypes.DataItemType):
 @o6.variabletype(nodeId="ns=scales;i=51", browseName="ns=scales;TargetItemType", displayName="TargetItemType", dataType=ns0.datatypes.Number, valueRank=o6.ValueRank.ANY)
 class TargetItemType(ns0.vartypes.AnalogItemType):
     allowedEngineeringUnits: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=433", browseName="ns=scales;AllowedEngineeringUnits", dataType=ns0.datatypes.EUInformation, valueRank=1, arrayDimensions=[0])
+        ns0.vartypes.PropertyType(
+            nodeId="ns=scales;i=433",
+            browseName="ns=scales;AllowedEngineeringUnits",
+            modellingRule="Optional",
+            dataType=ns0.datatypes.EUInformation,
+            valueRank=1,
+            arrayDimensions=[0],
+        )
     )
     engineeringUnits: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=168", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=168", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
     )
     minusTolerance: ns0.vartypes.AnalogUnitType | None
     plusTolerance: ns0.vartypes.AnalogUnitType | None
@@ -76,40 +86,57 @@ class TargetItemType(ns0.vartypes.AnalogItemType):
     value=scales_datypes.WeightType(gross=0.0, net=0.0, tare=0.0),
 )
 class WeightItemType(MeasuredItemType):
-    centerOfZero: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=scales;i=192", browseName="ns=scales;CenterOfZero", dataType=o6.Boolean))
+    centerOfZero: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=192", browseName="ns=scales;CenterOfZero", modellingRule="Optional", dataType=o6.Boolean)
+    )
     currentRangeId: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=141", browseName="ns=scales;CurrentRangeId", dataType=o6.UInt16)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=141", browseName="ns=scales;CurrentRangeId", modellingRule="Optional", dataType=o6.UInt16)
     )
     gross: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=60033", browseName="ns=scales;Gross", dataType=o6.Double, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=60033", browseName="ns=scales;Gross", modellingRule="Optional", dataType=o6.Double, accessLevel=3, userAccessLevel=1)
     )
-    grossNegative: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=scales;i=193", browseName="ns=scales;GrossNegative", dataType=o6.Boolean))
+    grossNegative: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=193", browseName="ns=scales;GrossNegative", modellingRule="Optional", dataType=o6.Boolean)
+    )
     highResolutionValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=771", browseName="ns=scales;HighResolutionValue", dataType=scales_datypes.WeightType)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=771", browseName="ns=scales;HighResolutionValue", modellingRule="Optional", dataType=scales_datypes.WeightType)
     )
     insideZero: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=scales;i=144",
             browseName="ns=scales;InsideZero",
             description="Defines if the current measured value is within the valid range for the setting zero procedure. This is a necessary condition to success the setZero() method if available.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
-    legalForTrade: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=scales;i=769", browseName="ns=scales;LegalForTrade", dataType=o6.Boolean))
-    net: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=60034", browseName="ns=scales;Net", dataType=o6.Double, accessLevel=3, userAccessLevel=1)
+    legalForTrade: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=769", browseName="ns=scales;LegalForTrade", modellingRule="Optional", dataType=o6.Boolean)
     )
-    overload: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=scales;i=142", browseName="ns=scales;Overload", dataType=o6.Boolean))
+    net: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=60034", browseName="ns=scales;Net", modellingRule="Optional", dataType=o6.Double, accessLevel=3, userAccessLevel=1)
+    )
+    overload: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=142", browseName="ns=scales;Overload", modellingRule="Mandatory", dataType=o6.Boolean)
+    )
     printableValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=770", browseName="ns=scales;PrintableValue", dataType=scales_datypes.PrintableWeightType)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=770", browseName="ns=scales;PrintableValue", modellingRule="Optional", dataType=scales_datypes.PrintableWeightType)
     )
     tare: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=60055", browseName="ns=scales;Tare", dataType=o6.Double, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=60055", browseName="ns=scales;Tare", modellingRule="Optional", dataType=o6.Double, accessLevel=3, userAccessLevel=1)
     )
-    tareMode: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=scales;i=194", browseName="ns=scales;TareMode", dataType=scales_datypes.TareMode))
-    underload: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=scales;i=143", browseName="ns=scales;Underload", dataType=o6.Boolean))
-    weightId: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=scales;i=196", browseName="ns=scales;WeightId", dataType=o6.String))
-    weightStable: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=scales;i=199", browseName="ns=scales;WeightStable", dataType=o6.Boolean))
+    tareMode: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=194", browseName="ns=scales;TareMode", modellingRule="Mandatory", dataType=scales_datypes.TareMode)
+    )
+    underload: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=143", browseName="ns=scales;Underload", modellingRule="Mandatory", dataType=o6.Boolean)
+    )
+    weightId: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=196", browseName="ns=scales;WeightId", modellingRule="Optional", dataType=o6.String)
+    )
+    weightStable: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=199", browseName="ns=scales;WeightStable", modellingRule="Optional", dataType=o6.Boolean)
+    )
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ia, machinery, ns0, pack_ml, scales_reftypes, scales_datypes

@@ -51,7 +51,9 @@ class Calender_InterfaceType(plastics_extrusion.objtypes.ExtrusionDeviceType):
 @o6.objecttype(nodeId="ns=plastics_extrusion_calender;i=1003", browseName="ns=plastics_extrusion_calender;CouplingProductForcesType", displayName="CouplingProductForcesType")
 class CouplingProductForcesType(ns0.objtypes.BaseObjectType):
     couplingProductForce_Nr_: plastics_rubber.objtypes.MonitoredParameterType | None
-    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_calender;i=6076", browseName="NodeVersion", dataType=o6.String))
+    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_calender;i=6076", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String)
+    )
 
 
 o6.reference(CouplingProductForcesType, "i=41", "i=2133")
@@ -60,7 +62,9 @@ o6.reference(CouplingProductForcesType, "i=41", "i=2133")
 @o6.objecttype(nodeId="ns=plastics_extrusion_calender;i=1004", browseName="ns=plastics_extrusion_calender;CouplingProductTensionsType", displayName="CouplingProductTensionsType")
 class CouplingProductTensionsType(ns0.objtypes.BaseObjectType):
     couplingProductTension_Nr_: plastics_rubber.objtypes.MonitoredParameterType | None
-    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_calender;i=6105", browseName="NodeVersion", dataType=o6.String))
+    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_calender;i=6105", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String)
+    )
 
 
 o6.reference(CouplingProductTensionsType, "i=41", "i=2133")

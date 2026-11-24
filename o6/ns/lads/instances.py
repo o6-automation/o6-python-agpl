@@ -75,7 +75,10 @@ lads_objtypes.FunctionSetType(
 )
 o6.reference(lads_objtypes.MultiSensorFunctionType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5006"])
 machinery.objtypes.MachineryLifetimeCounterType(
-    nodeId="ns=lads;i=5091", browseName="ns=machinery;LifetimeCounters", description="Lifetime Counter provides information about the past and estimated remaining lifetime."
+    nodeId="ns=lads;i=5091",
+    browseName="ns=machinery;LifetimeCounters",
+    description="Lifetime Counter provides information about the past and estimated remaining lifetime.",
+    modellingRule="Optional",
 )
 o6.reference(lads_objtypes.LADSDeviceType, "i=17604", "ns=lads;i=5091")
 ns0.objtypes.FolderType(
@@ -94,7 +97,7 @@ o6.reference(o6.ns["ns=lads;i=5063"], "i=17604", o6.ns["ns=lads;i=5111"])
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5000",
     browseName="ns=lads;OpenedToClosed",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6000", browseName="TransitionNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6000", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5000"])
 o6.reference(o6.ns["ns=lads;i=5000"], "i=53", o6.ns["ns=lads;i=7012"])
@@ -110,6 +113,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=lads;i=6022",
                 browseName="ns=lads;IsEnabled",
                 description="Determnes whteher this function is currently enabled (ready to be utilized).",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 accessLevel=3,
             )
@@ -121,6 +125,7 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=lads;i=6036",
     browseName="ns=lads;CalibrationValues",
     description="CalibrationValues is an array of calibration values for converting the Sensor’s raw value to the process value.",
+    modellingRule="Optional",
     dataType=o6.Double,
     valueRank=1,
     arrayDimensions=[1],
@@ -136,7 +141,12 @@ di.objtypes.FunctionalGroupType(
 )
 o6.reference(lads_objtypes.AnalogSensorFunctionType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5135"])
 ns0.vartypes.PropertyType(
-    nodeId="ns=lads;i=6038", browseName="ns=lads;Damping", description="Damping is a low-pass filter parameter used for signal damping.", dataType=o6.Double, accessLevel=3
+    nodeId="ns=lads;i=6038",
+    browseName="ns=lads;Damping",
+    description="Damping is a low-pass filter parameter used for signal damping.",
+    modellingRule="Optional",
+    dataType=o6.Double,
+    accessLevel=3,
 )
 o6.reference(lads_objtypes.AnalogSensorFunctionType, "i=46", "ns=lads;i=6038")
 di.objtypes.FunctionalGroupType(
@@ -158,6 +168,7 @@ lads_objtypes.ResultSetType(
                 nodeId="ns=lads;i=6041",
                 browseName="NodeVersion",
                 description="NodeVersion and the GeneralModelChangeEventType are mechanisms to notify clients that the content of the set has changed and shall be used as defined in OPC 10000-3.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -169,7 +180,7 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5025",
     browseName="ns=lads;Opened",
     description="Opened is the state of the cover when it is opened.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6043", browseName="StateNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6043", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5025"])
 o6.reference(o6.ns["ns=lads;i=5000"], "i=51", o6.ns["ns=lads;i=5025"])
@@ -177,7 +188,7 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5028",
     browseName="ns=lads;Closed",
     description="Closed is the state of the cover when it is closed.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6044", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6044", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5028"])
 o6.reference(o6.ns["ns=lads;i=5000"], "i=52", o6.ns["ns=lads;i=5028"])
@@ -185,20 +196,20 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5049",
     browseName="ns=lads;Locked",
     description="Locked is the state of the cover when it is closed and locked.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6045", browseName="StateNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6045", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5049"])
 ns0.objtypes.StateType(
     nodeId="ns=lads;i=5050",
     browseName="ns=lads;Error",
     description="Error is the state of the cover when it is in an error state. For example, if the locking did not work properly or there is some kind of malfunction on locking/closing the Device cover.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6046", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6046", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5050"])
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5031",
     browseName="ns=lads;IdleToStarting",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6047", browseName="TransitionNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6047", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5031"])
 o6.reference(o6.ns["ns=lads;i=5031"], "i=53", o6.ns["ns=lads;i=7004"])
@@ -206,14 +217,14 @@ o6.reference(o6.ns["ns=lads;i=5031"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5032",
     browseName="ns=lads;StartingToExecute",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6048", browseName="TransitionNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6048", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5032"])
 o6.reference(o6.ns["ns=lads;i=5032"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5033",
     browseName="ns=lads;ExecuteToCompleting",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6049", browseName="TransitionNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6049", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5033"])
 o6.reference(o6.ns["ns=lads;i=5033"], "i=53", o6.ns["ns=lads;i=7070"])
@@ -221,7 +232,7 @@ o6.reference(o6.ns["ns=lads;i=5033"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5034",
     browseName="ns=lads;CompletingToComplete",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6050", browseName="TransitionNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6050", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5034"])
 o6.reference(o6.ns["ns=lads;i=5034"], "i=54", "i=2311")
@@ -229,12 +240,14 @@ lads_objtypes.ResultSetType(
     nodeId="ns=lads;i=5022",
     browseName="ns=lads;ResultSet",
     description="The ResultSetType is used for organising ResultType objects in an unordered list structure.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=lads;i=6052",
                 browseName="NodeVersion",
                 description="NodeVersion and the GeneralModelChangeEventType are mechanisms to notify clients that the content of the set has changed and shall be used as defined in OPC 10000-3.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -251,7 +264,7 @@ http_opcfoundation_org_UA_LADS_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6056", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=lads;i=6057", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=lads;i=6057", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
@@ -265,7 +278,7 @@ http_opcfoundation_org_UA_LADS_ = ns0.objtypes.NamespaceMetadataType(
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5035",
     browseName="ns=lads;CompleteToResetting",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6060", browseName="TransitionNumber", dataType=o6.UInt32, value=5))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6060", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=5))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5035"])
 o6.reference(o6.ns["ns=lads;i=5035"], "i=53", o6.ns["ns=lads;i=7069"])
@@ -273,14 +286,14 @@ o6.reference(o6.ns["ns=lads;i=5035"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5036",
     browseName="ns=lads;ResettingToIdle",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6061", browseName="TransitionNumber", dataType=o6.UInt32, value=6))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6061", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=6))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5036"])
 o6.reference(o6.ns["ns=lads;i=5036"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5037",
     browseName="ns=lads;ExecuteToSuspending",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6070", browseName="TransitionNumber", dataType=o6.UInt32, value=7))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6070", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=7))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5037"])
 o6.reference(o6.ns["ns=lads;i=5037"], "i=53", o6.ns["ns=lads;i=7073"])
@@ -288,14 +301,14 @@ o6.reference(o6.ns["ns=lads;i=5037"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5039",
     browseName="ns=lads;SuspendingToSuspended",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6071", browseName="TransitionNumber", dataType=o6.UInt32, value=8))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6071", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=8))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5039"])
 o6.reference(o6.ns["ns=lads;i=5039"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5040",
     browseName="ns=lads;SuspendedToUnsuspending",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6072", browseName="TransitionNumber", dataType=o6.UInt32, value=9))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6072", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=9))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5040"])
 o6.reference(o6.ns["ns=lads;i=5040"], "i=53", o6.ns["ns=lads;i=7075"])
@@ -303,14 +316,14 @@ o6.reference(o6.ns["ns=lads;i=5040"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5041",
     browseName="ns=lads;UnsuspendingToExecute",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6073", browseName="TransitionNumber", dataType=o6.UInt32, value=10))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6073", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=10))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5041"])
 o6.reference(o6.ns["ns=lads;i=5041"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5051",
     browseName="ns=lads;ExecuteToHolding",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6076", browseName="TransitionNumber", dataType=o6.UInt32, value=11))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6076", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=11))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5051"])
 o6.reference(o6.ns["ns=lads;i=5051"], "i=53", o6.ns["ns=lads;i=7074"])
@@ -318,14 +331,14 @@ o6.reference(o6.ns["ns=lads;i=5051"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5052",
     browseName="ns=lads;HoldingToHeld",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6077", browseName="TransitionNumber", dataType=o6.UInt32, value=12))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6077", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=12))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5052"])
 o6.reference(o6.ns["ns=lads;i=5052"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5053",
     browseName="ns=lads;HeldToUnholding",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6078", browseName="TransitionNumber", dataType=o6.UInt32, value=13))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6078", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=13))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5053"])
 o6.reference(o6.ns["ns=lads;i=5053"], "i=53", o6.ns["ns=lads;i=7072"])
@@ -333,7 +346,8 @@ o6.reference(o6.ns["ns=lads;i=5053"], "i=54", "i=2311")
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=lads;i=6079",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6042", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6042", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 lads_objtypes.ControlFunctionStateMachineType(
@@ -356,6 +370,7 @@ lads_objtypes.FunctionSetType(
                 nodeId="ns=lads;i=6084",
                 browseName="NodeVersion",
                 description="NodeVersion and the GeneralModelChangeEventType are mechanisms to notify clients that the content of the set has changed and shall be used as defined in OPC 10000-3.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -384,7 +399,7 @@ ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=lads;i=6100",
     browseName="CurrentState",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6101", browseName="EffectiveDisplayName", dataType=o6.LocalizedText))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6101", browseName="EffectiveDisplayName", modellingRule="Optional", dataType=o6.LocalizedText))],
     dataType=o6.LocalizedText,
 )
 o6.reference(lads_objtypes.FunctionalStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=6100"])
@@ -399,6 +414,7 @@ lads_objtypes.FunctionalUnitSetType(
                 nodeId="ns=lads;i=6103",
                 browseName="NodeVersion",
                 description="NodeVersion and the GeneralModelChangeEventType are mechanisms to notify clients that the content of the set has changed and shall be used as defined in OPC 10000-3.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -417,6 +433,7 @@ lads_objtypes.MaintenanceSetType(
                 nodeId="ns=lads;i=6113",
                 browseName="NodeVersion",
                 description="NodeVersion and the GeneralModelChangeEventType are mechanisms to notify clients that the content of the set has changed and shall be used as defined in OPC 10000-3.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="NaN",
                 accessLevel=3,
@@ -428,14 +445,14 @@ o6.reference(lads_objtypes.LADSDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5054",
     browseName="ns=lads;UnholdingToExecute",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6114", browseName="TransitionNumber", dataType=o6.UInt32, value=14))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6114", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=14))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5054"])
 o6.reference(o6.ns["ns=lads;i=5054"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5129",
     browseName="ns=lads;SuspendingToHolding",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6115", browseName="TransitionNumber", dataType=o6.UInt32, value=15))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6115", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=15))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5129"])
 o6.reference(o6.ns["ns=lads;i=5129"], "i=53", o6.ns["ns=lads;i=7074"])
@@ -443,7 +460,7 @@ o6.reference(o6.ns["ns=lads;i=5129"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5131",
     browseName="ns=lads;StartingToHolding",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6116", browseName="TransitionNumber", dataType=o6.UInt32, value=16))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6116", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=16))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5131"])
 o6.reference(o6.ns["ns=lads;i=5131"], "i=53", o6.ns["ns=lads;i=7074"])
@@ -451,7 +468,7 @@ o6.reference(o6.ns["ns=lads;i=5131"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5132",
     browseName="ns=lads;SuspendedToHolding",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6117", browseName="TransitionNumber", dataType=o6.UInt32, value=17))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6117", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=17))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5132"])
 o6.reference(o6.ns["ns=lads;i=5132"], "i=53", o6.ns["ns=lads;i=7074"])
@@ -459,7 +476,7 @@ o6.reference(o6.ns["ns=lads;i=5132"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5133",
     browseName="ns=lads;UnsuspendingToHolding",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6118", browseName="TransitionNumber", dataType=o6.UInt32, value=18))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6118", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=18))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5133"])
 o6.reference(o6.ns["ns=lads;i=5133"], "i=53", o6.ns["ns=lads;i=7074"])
@@ -475,6 +492,7 @@ ns0.vartypes.TwoStateDiscreteType(
                 nodeId="ns=lads;i=6136",
                 browseName="FalseState",
                 description="Human readable identifier of the signals' false state.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText("off"),
             )
@@ -484,6 +502,7 @@ ns0.vartypes.TwoStateDiscreteType(
                 nodeId="ns=lads;i=6137",
                 browseName="TrueState",
                 description="Human readable identifier of the signals' true state.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText("on"),
             )
@@ -503,13 +522,19 @@ ns0.vartypes.TwoStateDiscreteType(
                 nodeId="ns=lads;i=6138",
                 browseName="FalseState",
                 description="Human readable identifier of the value false.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText("off"),
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=lads;i=6140", browseName="TrueState", description="Human readable identifier of the value true.", dataType=o6.LocalizedText, value=o6.LocalizedText("on")
+                nodeId="ns=lads;i=6140",
+                browseName="TrueState",
+                description="Human readable identifier of the value true.",
+                modellingRule="Mandatory",
+                dataType=o6.LocalizedText,
+                value=o6.LocalizedText("on"),
             )
         ),
     ],
@@ -529,6 +554,7 @@ ns0.vartypes.AnalogUnitRangeType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=lads;i=6147",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=4403766, displayName=o6.LocalizedText("ms"), description=o6.LocalizedText("millisecond")
@@ -550,6 +576,7 @@ ns0.vartypes.AnalogUnitRangeType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=lads;i=6148",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=4403766, displayName=o6.LocalizedText("ms"), description=o6.LocalizedText("millisecond")
@@ -572,13 +599,19 @@ ns0.vartypes.TwoStateDiscreteType(
                 nodeId="ns=lads;i=6155",
                 browseName="FalseState",
                 description="Human readable identifier of the value false.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText("off"),
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=lads;i=6156", browseName="TrueState", description="Human readable identifier of the value true.", dataType=o6.LocalizedText, value=o6.LocalizedText("on")
+                nodeId="ns=lads;i=6156",
+                browseName="TrueState",
+                description="Human readable identifier of the value true.",
+                modellingRule="Mandatory",
+                dataType=o6.LocalizedText,
+                value=o6.LocalizedText("on"),
             )
         ),
     ],
@@ -594,7 +627,12 @@ ns0.vartypes.MultiStateDiscreteType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=lads;i=6157", browseName="EnumStrings", description="List of human readable identifiers for the discrete values.", dataType=o6.LocalizedText, valueRank=1
+                nodeId="ns=lads;i=6157",
+                browseName="EnumStrings",
+                description="List of human readable identifiers for the discrete values.",
+                modellingRule="Mandatory",
+                dataType=o6.LocalizedText,
+                valueRank=1,
             )
         )
     ],
@@ -609,7 +647,12 @@ ns0.vartypes.MultiStateDiscreteType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=lads;i=6158", browseName="EnumStrings", description="List of human readable identifiers for the discrete values.", dataType=o6.LocalizedText, valueRank=1
+                nodeId="ns=lads;i=6158",
+                browseName="EnumStrings",
+                description="List of human readable identifiers for the discrete values.",
+                modellingRule="Mandatory",
+                dataType=o6.LocalizedText,
+                valueRank=1,
             )
         )
     ],
@@ -628,6 +671,7 @@ ns0.vartypes.MultiStateDiscreteType(
                 nodeId="ns=lads;i=6160",
                 browseName="EnumStrings",
                 description="List of human readable identifiers for the discrete sensor values.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
             )
@@ -647,6 +691,7 @@ ns0.vartypes.AnalogUnitRangeType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=lads;i=6161",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=4403766, displayName=o6.LocalizedText("ms"), description=o6.LocalizedText("millisecond")
@@ -663,7 +708,7 @@ ns0.vartypes.MultiStateDiscreteType(
     browseName="ns=lads;CurrentMode",
     description="CurrentMode defines the currently selected mode. Its EnumStrings array lists the different defined modes, which shall match the names of the corresponding elements in the ControllerModeSet. Note: The EnumStrings array contains LocalizedText entries. The DisplayName of the ControllerMode is used to map the child node of the ControllerModeSet. The locale should be “en-US” or empty.",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6165", browseName="EnumStrings", dataType=o6.LocalizedText, valueRank=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6165", browseName="EnumStrings", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=1))],
     dataType=o6.UInt32,
     accessLevel=3,
 )
@@ -672,19 +717,22 @@ o6.reference(o6.ns["ns=lads;i=5058"], "i=35", o6.ns["ns=lads;i=6122"])
 ns0.vartypes.TwoStateVariableType(
     nodeId="ns=lads;i=6166",
     browseName="EnabledState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6167", browseName="Id", dataType=o6.Boolean))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6167", browseName="Id", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.TwoStateVariableType(
     nodeId="ns=lads;i=6168",
     browseName="ActiveState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6177", browseName="Id", dataType=o6.Boolean))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6177", browseName="Id", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.TwoStateVariableType(
     nodeId="ns=lads;i=6181",
     browseName="AckedState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6182", browseName="Id", dataType=o6.Boolean))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6182", browseName="Id", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.LocalizedText,
 )
 lads_objtypes.MaintenanceSetType(
@@ -698,6 +746,7 @@ lads_objtypes.MaintenanceSetType(
                 nodeId="ns=lads;i=6189",
                 browseName="NodeVersion",
                 description="NodeVersion and the GeneralModelChangeEventType are mechanisms to notify clients that the content of the set has changed and shall be used as defined in OPC 10000-3.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="NaN",
                 accessLevel=3,
@@ -709,89 +758,103 @@ o6.reference(lads_objtypes.LADSComponentType, ns0.reftypes.HasComponent, o6.ns["
 ns0.vartypes.TwoStateVariableType(
     nodeId="ns=lads;i=6191",
     browseName="ActiveState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6192", browseName="Id", dataType=o6.Boolean))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6192", browseName="Id", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=lads;i=6193",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6194", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6194", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
-ns0.objtypes.ExclusiveLimitStateMachineType(nodeId="ns=lads;i=5070", browseName="LimitState", references=[o6.hasComponent(o6.ns["ns=lads;i=6193"])])
+ns0.objtypes.ExclusiveLimitStateMachineType(nodeId="ns=lads;i=5070", browseName="LimitState", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=lads;i=6193"])])
 ns0.vartypes.TwoStateVariableType(
     nodeId="ns=lads;i=6195",
     browseName="EnabledState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6196", browseName="Id", dataType=o6.Boolean))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6196", browseName="Id", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.TwoStateVariableType(
     nodeId="ns=lads;i=6199",
     browseName="AckedState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6200", browseName="Id", dataType=o6.Boolean))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6200", browseName="Id", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.ConditionVariableType(
     nodeId="ns=lads;i=6205",
     browseName="Comment",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6206", browseName="SourceTimestamp", dataType=ns0.datatypes.UtcTime))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6206", browseName="SourceTimestamp", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.ConditionVariableType(
     nodeId="ns=lads;i=6210",
     browseName="LastSeverity",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6211", browseName="SourceTimestamp", dataType=ns0.datatypes.UtcTime))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6211", browseName="SourceTimestamp", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime))],
     dataType=o6.UInt16,
 )
 ns0.vartypes.ConditionVariableType(
     nodeId="ns=lads;i=6212",
     browseName="Quality",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6213", browseName="SourceTimestamp", dataType=ns0.datatypes.UtcTime))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6213", browseName="SourceTimestamp", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime))],
     dataType=o6.StatusCode,
 )
 ns0.vartypes.TwoStateVariableType(
     nodeId="ns=lads;i=6224",
     browseName="ActiveState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6225", browseName="Id", dataType=o6.Boolean))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6225", browseName="Id", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=lads;i=6226",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6227", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6227", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
-ns0.objtypes.ExclusiveLimitStateMachineType(nodeId="ns=lads;i=5071", browseName="LimitState", references=[o6.hasComponent(o6.ns["ns=lads;i=6226"])])
+ns0.objtypes.ExclusiveLimitStateMachineType(nodeId="ns=lads;i=5071", browseName="LimitState", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=lads;i=6226"])])
 o6.reference(o6.ns["ns=lads;i=6224"], "i=9004", o6.ns["ns=lads;i=5071"])
 ns0.vartypes.TwoStateVariableType(
     nodeId="ns=lads;i=6228",
     browseName="EnabledState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6229", browseName="Id", dataType=o6.Boolean))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6229", browseName="Id", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.LocalizedText,
 )
 o6.reference(o6.ns["ns=lads;i=6228"], "i=9004", o6.ns["ns=lads;i=6224"])
 ns0.vartypes.TwoStateVariableType(
     nodeId="ns=lads;i=6232",
     browseName="AckedState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6233", browseName="Id", dataType=o6.Boolean))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6233", browseName="Id", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.ConditionVariableType(
     nodeId="ns=lads;i=6238",
     browseName="Comment",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6239", browseName="SourceTimestamp", dataType=ns0.datatypes.UtcTime))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6239", browseName="SourceTimestamp", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.ConditionVariableType(
     nodeId="ns=lads;i=6243",
     browseName="LastSeverity",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6244", browseName="SourceTimestamp", dataType=ns0.datatypes.UtcTime))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6244", browseName="SourceTimestamp", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime))],
     dataType=o6.UInt16,
 )
 ns0.vartypes.ConditionVariableType(
     nodeId="ns=lads;i=6245",
     browseName="Quality",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6246", browseName="SourceTimestamp", dataType=ns0.datatypes.UtcTime))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6246", browseName="SourceTimestamp", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime))],
     dataType=o6.StatusCode,
 )
 lads_objtypes.ProgramTemplateSetType(
@@ -805,6 +868,7 @@ lads_objtypes.ProgramTemplateSetType(
                 nodeId="ns=lads;i=6257",
                 browseName="NodeVersion",
                 description="NodeVersion and the GeneralModelChangeEventType are mechanisms to notify clients that the content of the set has changed and shall be used as defined in OPC 10000-3.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         )
@@ -815,12 +879,14 @@ lads_objtypes.ProgramTemplateSetType(
     nodeId="ns=lads;i=5021",
     browseName="ns=lads;ProgramTemplateSet",
     description="The ProgramTemplateSetType is used for organising ProgramTemplateType objects in an unordered list structure.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=lads;i=6258",
                 browseName="NodeVersion",
                 description="NodeVersion and the GeneralModelChangeEventType are mechanisms to notify clients that the content of the set has changed and shall be used as defined in OPC 10000-3.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="NaN",
             )
@@ -841,6 +907,7 @@ lads_objtypes.ProgramManagerType(
                 nodeId="ns=lads;i=5218",
                 browseName="ns=lads;ActiveProgram",
                 description="The ActiveProgram specifies the current state of operation of a FunctionalUnit. It provides context and information about the currently active program on the device. This allows users to follow the progress of a program run in a standardized fashion by organising steps into a flat, linear sequence.",
+                modellingRule="Mandatory",
             )
         ),
     ],
@@ -849,25 +916,28 @@ o6.reference(lads_objtypes.FunctionalUnitType, ns0.reftypes.HasComponent, o6.ns[
 ns0.vartypes.ConditionVariableType(
     nodeId="ns=lads;i=6260",
     browseName="Quality",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6261", browseName="SourceTimestamp", dataType=ns0.datatypes.UtcTime))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6261", browseName="SourceTimestamp", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime))],
     dataType=o6.StatusCode,
 )
 ns0.vartypes.ConditionVariableType(
     nodeId="ns=lads;i=6262",
     browseName="LastSeverity",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6263", browseName="SourceTimestamp", dataType=ns0.datatypes.UtcTime))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6263", browseName="SourceTimestamp", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime))],
     dataType=o6.UInt16,
 )
 ns0.vartypes.ConditionVariableType(
     nodeId="ns=lads;i=6264",
     browseName="Comment",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6265", browseName="SourceTimestamp", dataType=ns0.datatypes.UtcTime))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6265", browseName="SourceTimestamp", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime))],
     dataType=o6.LocalizedText,
 )
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5134",
     browseName="ns=lads;UnholdingToHolding",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6275", browseName="TransitionNumber", dataType=o6.UInt32, value=19))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6275", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=19))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5134"])
 o6.reference(o6.ns["ns=lads;i=5134"], "i=53", o6.ns["ns=lads;i=7074"])
@@ -876,7 +946,7 @@ ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=lads;i=6279",
     browseName="CurrentState",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6280", browseName="EffectiveDisplayName", dataType=o6.LocalizedText))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6280", browseName="EffectiveDisplayName", modellingRule="Mandatory", dataType=o6.LocalizedText))],
     dataType=o6.LocalizedText,
 )
 o6.reference(lads_objtypes.FunctionalUnitStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=6279"])
@@ -901,34 +971,34 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5110",
     browseName="ns=lads;Closing",
     description="Closing is the transitive state of the cover when it is in the process of closing.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6286", browseName="StateNumber", dataType=o6.UInt32, value=5))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6286", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=5))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5110"])
 ns0.objtypes.StateType(
     nodeId="ns=lads;i=5108",
     browseName="ns=lads;Locking",
     description="Locking is the transitive state of the cover when it is in the process of locking.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6287", browseName="StateNumber", dataType=o6.UInt32, value=6))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6287", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=6))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5108"])
 ns0.objtypes.StateType(
     nodeId="ns=lads;i=5109",
     browseName="ns=lads;Opening",
     description="Opening is the transitive state of the cover when it is in the process of opening.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6288", browseName="StateNumber", dataType=o6.UInt32, value=7))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6288", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=7))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5109"])
 ns0.objtypes.StateType(
     nodeId="ns=lads;i=5107",
     browseName="ns=lads;Unlocking",
     description="Unlocking is the transitive state of the cover when it is in the process of unlocking.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6293", browseName="StateNumber", dataType=o6.UInt32, value=8))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6293", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=8))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5107"])
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5139",
     browseName="ns=lads;ClosedToLocking",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6294", browseName="TransitionNumber", dataType=o6.UInt32, value=8))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6294", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=8))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5139"])
 o6.reference(o6.ns["ns=lads;i=5139"], "i=51", o6.ns["ns=lads;i=5028"])
@@ -937,7 +1007,7 @@ o6.reference(o6.ns["ns=lads;i=5139"], "i=53", o6.ns["ns=lads;i=7013"])
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5115",
     browseName="ns=lads;ClosedToOpening",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6295", browseName="TransitionNumber", dataType=o6.UInt32, value=9))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6295", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=9))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5115"])
 o6.reference(o6.ns["ns=lads;i=5115"], "i=51", o6.ns["ns=lads;i=5028"])
@@ -946,7 +1016,7 @@ o6.reference(o6.ns["ns=lads;i=5115"], "i=53", o6.ns["ns=lads;i=7011"])
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5138",
     browseName="ns=lads;ClosingToClosed",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6296", browseName="TransitionNumber", dataType=o6.UInt32, value=10))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6296", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=10))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5138"])
 o6.reference(o6.ns["ns=lads;i=5138"], "i=51", o6.ns["ns=lads;i=5110"])
@@ -954,7 +1024,7 @@ o6.reference(o6.ns["ns=lads;i=5138"], "i=52", o6.ns["ns=lads;i=5028"])
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5098",
     browseName="ns=lads;LockedToUnlocking",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6300", browseName="TransitionNumber", dataType=o6.UInt32, value=11))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6300", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=11))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5098"])
 o6.reference(o6.ns["ns=lads;i=5098"], "i=51", o6.ns["ns=lads;i=5049"])
@@ -963,7 +1033,7 @@ o6.reference(o6.ns["ns=lads;i=5098"], "i=53", o6.ns["ns=lads;i=7014"])
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5140",
     browseName="ns=lads;LockingToLocked",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6301", browseName="TransitionNumber", dataType=o6.UInt32, value=12))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6301", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=12))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5140"])
 o6.reference(o6.ns["ns=lads;i=5140"], "i=51", o6.ns["ns=lads;i=5108"])
@@ -971,7 +1041,7 @@ o6.reference(o6.ns["ns=lads;i=5140"], "i=52", o6.ns["ns=lads;i=5049"])
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5137",
     browseName="ns=lads;OpenedToClosing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6302", browseName="TransitionNumber", dataType=o6.UInt32, value=13))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6302", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=13))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5137"])
 o6.reference(o6.ns["ns=lads;i=5137"], "i=51", o6.ns["ns=lads;i=5025"])
@@ -980,7 +1050,7 @@ o6.reference(o6.ns["ns=lads;i=5137"], "i=53", o6.ns["ns=lads;i=7012"])
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5136",
     browseName="ns=lads;OpeningToOpened",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6303", browseName="TransitionNumber", dataType=o6.UInt32, value=14))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6303", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=14))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5136"])
 o6.reference(o6.ns["ns=lads;i=5136"], "i=51", o6.ns["ns=lads;i=5109"])
@@ -988,7 +1058,7 @@ o6.reference(o6.ns["ns=lads;i=5136"], "i=52", o6.ns["ns=lads;i=5025"])
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5114",
     browseName="ns=lads;UnlockingToClosed",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6304", browseName="TransitionNumber", dataType=o6.UInt32, value=15))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6304", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=15))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5114"])
 o6.reference(o6.ns["ns=lads;i=5114"], "i=51", o6.ns["ns=lads;i=5107"])
@@ -1014,7 +1084,7 @@ typeDictionary_2 = ns0.vartypes.DataTypeDictionaryType(
     value=b'<xs:schema elementFormDefault="qualified" targetNamespace="http://opcfoundation.org/UA/LADS/Types.xsd" xmlns:tns="http://opcfoundation.org/UA/LADS/Types.xsd" xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">\n    <xs:import namespace="http://opcfoundation.org/UA/2008/02/Types.xsd"/>\n    <xs:simpleType name="MaintenanceTaskResultEnum">\n        <xs:restriction base="xs:string">\n            <xs:enumeration value="Success_0"/>\n            <xs:enumeration value="Failure_1"/>\n            <xs:enumeration value="Undetermined_2"/>\n        </xs:restriction>\n    </xs:simpleType>\n    <xs:element type="tns:MaintenanceTaskResultEnum" name="MaintenanceTaskResultEnum"/>\n    <xs:complexType name="ListOfMaintenanceTaskResultEnum">\n        <xs:sequence>\n            <xs:element minOccurs="0" maxOccurs="unbounded" type="tns:MaintenanceTaskResultEnum" name="MaintenanceTaskResultEnum" nillable="true"/>\n        </xs:sequence>\n    </xs:complexType>\n    <xs:element type="tns:ListOfMaintenanceTaskResultEnum" name="ListOfMaintenanceTaskResultEnum" nillable="true"/>\n    <xs:complexType name="KeyValueType">\n        <xs:sequence>\n            <xs:element minOccurs="0" maxOccurs="1" type="xs:string" name="Key"/>\n            <xs:element minOccurs="0" maxOccurs="1" type="xs:string" name="Value"/>\n        </xs:sequence>\n    </xs:complexType>\n    <xs:element type="tns:KeyValueType" name="KeyValueType"/>\n    <xs:complexType name="ListOfKeyValueType">\n        <xs:sequence>\n            <xs:element minOccurs="0" maxOccurs="unbounded" type="tns:KeyValueType" name="KeyValueType" nillable="true"/>\n        </xs:sequence>\n    </xs:complexType>\n    <xs:element type="tns:ListOfKeyValueType" name="ListOfKeyValueType" nillable="true"/>\n    <xs:complexType name="SampleInfoType">\n        <xs:sequence>\n            <xs:element minOccurs="0" maxOccurs="1" type="xs:string" name="ContainerId"/>\n            <xs:element minOccurs="0" maxOccurs="1" type="xs:string" name="SampleId"/>\n            <xs:element minOccurs="0" maxOccurs="1" type="xs:string" name="Position"/>\n            <xs:element minOccurs="0" maxOccurs="1" type="xs:string" name="CustomData"/>\n        </xs:sequence>\n    </xs:complexType>\n    <xs:element type="tns:SampleInfoType" name="SampleInfoType"/>\n    <xs:complexType name="ListOfSampleInfoType">\n        <xs:sequence>\n            <xs:element minOccurs="0" maxOccurs="unbounded" type="tns:SampleInfoType" name="SampleInfoType" nillable="true"/>\n        </xs:sequence>\n    </xs:complexType>\n    <xs:element type="tns:ListOfSampleInfoType" name="ListOfSampleInfoType" nillable="true"/>\n</xs:schema>',
     accessLevel=3,
 )
-ns0.vartypes.FiniteStateVariableType(nodeId="ns=lads;i=6314", browseName="CurrentState", dataType=o6.LocalizedText)
+ns0.vartypes.FiniteStateVariableType(nodeId="ns=lads;i=6314", browseName="CurrentState", modellingRule="Mandatory", dataType=o6.LocalizedText)
 o6.reference(o6.ns["ns=lads;i=5064"], "i=35", o6.ns["ns=lads;i=6314"])
 lads_objtypes.CoverStateMachineType(
     nodeId="ns=lads;i=5055",
@@ -1028,27 +1098,27 @@ ns0.objtypes.InitialStateType(
     nodeId="ns=lads;i=5177",
     browseName="ns=lads;Initialization",
     description="The Device is in its initializing sequence and cannot perform any other task.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6329", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6329", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(lads_objtypes.LADSDeviceStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5177"])
 ns0.objtypes.StateType(
     nodeId="ns=lads;i=5178",
     browseName="ns=lads;Operate",
     description="The Device is in Operating mode. The LADS Client uses this mode for normal operation: configuration, control and data collection.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6330", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6330", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(lads_objtypes.LADSDeviceStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5178"])
 ns0.objtypes.StateType(
     nodeId="ns=lads;i=5180",
     browseName="ns=lads;Shutdown",
     description="The Device is in its power-down sequence and cannot perform any other Task.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6351", browseName="StateNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6351", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(lads_objtypes.LADSDeviceStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5180"])
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5181",
     browseName="ns=lads;InitializationToOperate",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6352", browseName="TransitionNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6352", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(lads_objtypes.LADSDeviceStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5181"])
 o6.reference(o6.ns["ns=lads;i=5181"], "i=51", o6.ns["ns=lads;i=5177"])
@@ -1057,7 +1127,7 @@ o6.reference(o6.ns["ns=lads;i=5181"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5184",
     browseName="ns=lads;OperateToShutdown",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6355", browseName="TransitionNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6355", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(lads_objtypes.LADSDeviceStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5184"])
 o6.reference(o6.ns["ns=lads;i=5184"], "i=51", o6.ns["ns=lads;i=5178"])
@@ -1068,7 +1138,7 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5117",
     browseName="ns=lads;Starting",
     description="In state Starting the unit/device completes all steps necessary to begin execution of the active protocol. Typical steps during this state include but are not limited to inspecting system setup (checking sufficient supplies of resources and consumables), priming of fluids, homing of handling systems, or equilibration of process conditions. A Start command will cause the unit/device to transition from Idle to Starting. The unit/device will transition automatically from Starting to Execute once all required steps have been completed.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6423", browseName="StateNumber", dataType=o6.UInt32, value=8))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6423", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=8))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5117"])
 o6.reference(o6.ns["ns=lads;i=5031"], "i=52", o6.ns["ns=lads;i=5117"])
@@ -1078,7 +1148,7 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5118",
     browseName="ns=lads;Suspending",
     description="The unit/device will transition from Execute to Suspending if conditions external to the unit/device require a pause in processing. Such conditions include faults to upstream or downstream equipment. The decision to Suspend may be made by a human operator supervising the process, an automated supervisory system monitoring the conditions of the overall process line/workflow, or by unit/device Sensors detecting downstream blockages or upstream scarcity of samples, etc.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6424", browseName="StateNumber", dataType=o6.UInt32, value=10))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6424", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=10))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5118"])
 o6.reference(o6.ns["ns=lads;i=5037"], "i=52", o6.ns["ns=lads;i=5118"])
@@ -1088,7 +1158,7 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5119",
     browseName="ns=lads;Resetting",
     description="Resetting: In response to a Reset command, the unit/device will transition to Resetting from either Stopped or Complete. In this state the unit/device attempts to clear any standing errors or stop causes. If successful, the unit/device transitions to Idle. No hazardous motion should occur while in this state.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6425", browseName="StateNumber", dataType=o6.UInt32, value=7))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6425", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=7))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5119"])
 o6.reference(o6.ns["ns=lads;i=5035"], "i=52", o6.ns["ns=lads;i=5119"])
@@ -1097,7 +1167,7 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5120",
     browseName="ns=lads;Idle",
     description="In state Idle the unit/device is in an error-free state, waiting to start. The unit/device transitions automatically to Idle after all steps necessary for Resetting have been completed. All conditions achieved during Resetting are maintained. A Start command will transition the unit/device from Idle to Starting.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6426", browseName="StateNumber", dataType=o6.UInt32, value=6))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6426", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=6))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5120"])
 o6.reference(o6.ns["ns=lads;i=5031"], "i=51", o6.ns["ns=lads;i=5120"])
@@ -1106,7 +1176,7 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5121",
     browseName="ns=lads;Suspended",
     description="In state Suspended the unit/device is paused, waiting for external process conditions to clear. In this state, the unit/device shall not continue processing, but may dry cycle if required (e.g., maintaining process conditions critical for the preservation of the samples or culture, including but not limited to temperature, oxygen or pH levels, etc.). Once external conditions have returned to normal, the unit/device will transition to Unsuspending, with or without operator intervention.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6427", browseName="StateNumber", dataType=o6.UInt32, value=9))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6427", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=9))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5121"])
 o6.reference(o6.ns["ns=lads;i=5039"], "i=52", o6.ns["ns=lads;i=5121"])
@@ -1116,7 +1186,7 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5122",
     browseName="ns=lads;Unsuspending",
     description="Unsuspending: After all external process conditions that caused the unit/device to suspend have cleared, the unit/device completes all steps required to resume execution of the active protocol.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6428", browseName="StateNumber", dataType=o6.UInt32, value=12))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6428", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=12))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5122"])
 o6.reference(o6.ns["ns=lads;i=5040"], "i=52", o6.ns["ns=lads;i=5122"])
@@ -1126,7 +1196,7 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5123",
     browseName="ns=lads;Holding",
     description="In state Holding the unit/device will transition from Execute to Holding if conditions internal to the unit/device require a pause in processing. Examples of such conditions include low levels of materials required for processing (e.g., consumables, reagents, buffers, etc.) or other minor issues requiring operator service. After all steps required to hold the unit/device have been completed, the unit/device will transition automatically to the Held state.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6429", browseName="StateNumber", dataType=o6.UInt32, value=5))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6429", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=5))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5123"])
 o6.reference(o6.ns["ns=lads;i=5051"], "i=52", o6.ns["ns=lads;i=5123"])
@@ -1140,7 +1210,7 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5124",
     browseName="ns=lads;Held",
     description="In state Held the unit/device is paused, waiting for internal process conditions to clear. In this state, the unit/device shall not continue processing, although it may dry cycle if required (e.g., maintaining process conditions critical for the preservation of the samples or culture). A transition to Unholding will occur once internal unit/device conditions have cleared, or if the Unhold command is initiated by an operator.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6430", browseName="StateNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6430", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5124"])
 o6.reference(o6.ns["ns=lads;i=5052"], "i=52", o6.ns["ns=lads;i=5124"])
@@ -1149,7 +1219,7 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5125",
     browseName="ns=lads;Unholding",
     description="Unholding: After all internal process conditions that caused the unit/device to hold have cleared, the unit/device completes all steps required to resume execution of the active protocol. Once all required actions to unhold the unit/device have been completed, the unit/device will transition automatically to the Execute state.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6431", browseName="StateNumber", dataType=o6.UInt32, value=11))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6431", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=11))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5125"])
 o6.reference(o6.ns["ns=lads;i=5053"], "i=52", o6.ns["ns=lads;i=5125"])
@@ -1158,7 +1228,7 @@ o6.reference(o6.ns["ns=lads;i=5134"], "i=51", o6.ns["ns=lads;i=5125"])
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5126",
     browseName="ns=lads;AbortingToAborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6432", browseName="TransitionNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6432", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(lads_objtypes.FunctionalStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5126"])
 o6.reference(o6.ns["ns=lads;i=5126"], "i=54", "i=2311")
@@ -1166,7 +1236,7 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5127",
     browseName="ns=lads;Completing",
     description="Completing: Once the process associated with the current mode has reached a defined threshold (e.g., the required number of samples for the current job have been analysed or the cultivation/fermentation process has reached is final stage in terms of cell count, product yield, cell viability, etc.), the unit/device transitions from Execute to Completing. All steps necessary to shut down the current process are carried out in this state. The unit/device then transitions automatically to the Complete state.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6433", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6433", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5127"])
 o6.reference(o6.ns["ns=lads;i=5033"], "i=52", o6.ns["ns=lads;i=5127"])
@@ -1175,7 +1245,7 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5128",
     browseName="ns=lads;Complete",
     description="Complete indicates that the process associated with the active protocol has come to its defined end. The unit/device will wait in this state until a Reset command is issued (in which case it will transition to Resetting), or until the unit/device is Stopped or Aborted.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6434", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6434", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5128"])
 o6.reference(o6.ns["ns=lads;i=5034"], "i=52", o6.ns["ns=lads;i=5128"])
@@ -1184,13 +1254,13 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5143",
     browseName="ns=lads;Clearing",
     description="Clearing is initiated by a state command to clear faults that may have occurred when Aborting that are present in the Aborted state.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6449", browseName="StateNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6449", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(lads_objtypes.FunctionalStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5143"])
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5074",
     browseName="ns=lads;ClosedToOpened",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6463", browseName="TransitionNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6463", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5074"])
 o6.reference(o6.ns["ns=lads;i=5074"], "i=51", o6.ns["ns=lads;i=5028"])
@@ -1200,7 +1270,7 @@ o6.reference(o6.ns["ns=lads;i=5074"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5075",
     browseName="ns=lads;ClosedToLocked",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6464", browseName="TransitionNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6464", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5075"])
 o6.reference(o6.ns["ns=lads;i=5075"], "i=51", o6.ns["ns=lads;i=5028"])
@@ -1210,7 +1280,7 @@ o6.reference(o6.ns["ns=lads;i=5075"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5077",
     browseName="ns=lads;LockedToClosed",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6465", browseName="TransitionNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6465", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5077"])
 o6.reference(o6.ns["ns=lads;i=5077"], "i=51", o6.ns["ns=lads;i=5049"])
@@ -1220,7 +1290,7 @@ o6.reference(o6.ns["ns=lads;i=5077"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5078",
     browseName="ns=lads;LockedToError",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6466", browseName="TransitionNumber", dataType=o6.UInt32, value=5))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6466", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=5))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5078"])
 o6.reference(o6.ns["ns=lads;i=5078"], "i=51", o6.ns["ns=lads;i=5049"])
@@ -1229,7 +1299,7 @@ o6.reference(o6.ns["ns=lads;i=5078"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5079",
     browseName="ns=lads;ClosedToError",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6467", browseName="TransitionNumber", dataType=o6.UInt32, value=6))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6467", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=6))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5079"])
 o6.reference(o6.ns["ns=lads;i=5079"], "i=51", o6.ns["ns=lads;i=5028"])
@@ -1239,7 +1309,7 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5159",
     browseName="ns=lads;Aborting",
     description="The Aborting state can be entered at any time in response to the Abort command or in the event of a unit/device fault. The aborting logic will bring the unit/device to a rapid safe stop.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6474", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6474", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(lads_objtypes.FunctionalStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5159"])
 o6.reference(o6.ns["ns=lads;i=5126"], "i=51", o6.ns["ns=lads;i=5159"])
@@ -1247,14 +1317,14 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5160",
     browseName="ns=lads;Aborted",
     description="Aborted maintains unit/device status information relevant to the Abort condition. The unit/device can only exit the Aborted state after an explicit Clear command subsequent to intervention to correct and reset the detected unit/device faults.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6475", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6475", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(lads_objtypes.FunctionalStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5160"])
 o6.reference(o6.ns["ns=lads;i=5126"], "i=52", o6.ns["ns=lads;i=5160"])
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5082",
     browseName="ns=lads;ErrorToOpened",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6476", browseName="TransitionNumber", dataType=o6.UInt32, value=7))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6476", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=7))],
 )
 o6.reference(lads_objtypes.CoverStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5082"])
 o6.reference(o6.ns["ns=lads;i=5082"], "i=51", o6.ns["ns=lads;i=5050"])
@@ -1264,7 +1334,7 @@ o6.reference(o6.ns["ns=lads;i=5082"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5083",
     browseName="ns=lads;SleepToOperate",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6482", browseName="TransitionNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6482", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(lads_objtypes.LADSDeviceStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5083"])
 o6.reference(o6.ns["ns=lads;i=5083"], "i=52", o6.ns["ns=lads;i=5178"])
@@ -1273,7 +1343,7 @@ o6.reference(o6.ns["ns=lads;i=5083"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5165",
     browseName="ns=lads;AbortedToClearing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6486", browseName="TransitionNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6486", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(lads_objtypes.FunctionalStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5165"])
 o6.reference(o6.ns["ns=lads;i=5165"], "i=51", o6.ns["ns=lads;i=5160"])
@@ -1284,7 +1354,7 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5168",
     browseName="ns=lads;Execute",
     description="In state Execute the unit/device is actively carrying out the behaviour or activity defined by the selected protocol and its associated processing mode. Examples of a unit/device in processing mode include when the unit/device is performing an analytical run, cultivation/fermentation in the case of a bioreactor, or another defined unit of operation provided by the instrument (e.g., separation in the case of a centrifuge).",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6489", browseName="StateNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6489", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(lads_objtypes.RunningStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5168"])
 o6.reference(o6.ns["ns=lads;i=5032"], "i=52", o6.ns["ns=lads;i=5168"])
@@ -1297,14 +1367,14 @@ ns0.objtypes.InitialStateType(
     nodeId="ns=lads;i=5085",
     browseName="ns=lads;Stopped",
     description="Stopped is the initial state for an ActiveProgram, FunctionalUnit or Function. It is an Idle state which means that the Function, FunctionalUnit or ActiveProgram is stopped and ready for activation.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6508", browseName="StateNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6508", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(lads_objtypes.FunctionalStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5085"])
 ns0.objtypes.StateType(
     nodeId="ns=lads;i=5099",
     browseName="ns=lads;Running",
     description="Running is the state when the Function or FunctionalUnit is currently running/executing.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6509", browseName="StateNumber", dataType=o6.UInt32, value=5))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6509", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=5))],
 )
 o6.reference(lads_objtypes.FunctionalStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5099"])
 o6.reference(o6.ns["ns=lads;i=5099"], "i=117", o6.ns["ns=lads;i=5130"])
@@ -1312,13 +1382,13 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5100",
     browseName="ns=lads;Stopping",
     description="Stopping indicates that the ActiveProgram, FunctionalUnit, or Function is in the process of stopping. This state usually occurs when the program execution is finished or stopped, either because it has ended or has been triggered by the Stop Method.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6511", browseName="StateNumber", dataType=o6.UInt32, value=6))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6511", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=6))],
 )
 o6.reference(lads_objtypes.FunctionalStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5100"])
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5101",
     browseName="ns=lads;StoppingToStopped",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6512", browseName="TransitionNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6512", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(lads_objtypes.FunctionalStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5101"])
 o6.reference(o6.ns["ns=lads;i=5101"], "i=51", o6.ns["ns=lads;i=5100"])
@@ -1327,7 +1397,7 @@ o6.reference(o6.ns["ns=lads;i=5101"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5102",
     browseName="ns=lads;StoppedToRunning",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6513", browseName="TransitionNumber", dataType=o6.UInt32, value=5))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6513", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=5))],
 )
 o6.reference(lads_objtypes.FunctionalStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5102"])
 o6.reference(o6.ns["ns=lads;i=5102"], "i=51", o6.ns["ns=lads;i=5085"])
@@ -1338,14 +1408,14 @@ ns0.objtypes.StateType(
     nodeId="ns=lads;i=5259",
     browseName="ns=lads;Sleep",
     description="The Device is still powered on and its OPC UA Server is still running, but it is not ready to perform any Tasks until it transitions to the Operate state. This state can be used to represent a PowerSave state where a Device may shut down some of its Components, such as the GUI.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6525", browseName="StateNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6525", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(lads_objtypes.LADSDeviceStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5259"])
 o6.reference(o6.ns["ns=lads;i=5083"], "i=51", o6.ns["ns=lads;i=5259"])
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5103",
     browseName="ns=lads;RunningToAborting",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6528", browseName="TransitionNumber", dataType=o6.UInt32, value=6))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6528", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=6))],
 )
 o6.reference(lads_objtypes.FunctionalStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5103"])
 o6.reference(o6.ns["ns=lads;i=5103"], "i=51", o6.ns["ns=lads;i=5099"])
@@ -1355,7 +1425,7 @@ o6.reference(o6.ns["ns=lads;i=5103"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5104",
     browseName="ns=lads;ClearingToStopped",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6529", browseName="TransitionNumber", dataType=o6.UInt32, value=7))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6529", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=7))],
 )
 o6.reference(lads_objtypes.FunctionalStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5104"])
 o6.reference(o6.ns["ns=lads;i=5104"], "i=51", o6.ns["ns=lads;i=5143"])
@@ -1364,7 +1434,7 @@ o6.reference(o6.ns["ns=lads;i=5104"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5105",
     browseName="ns=lads;RunningToStopping",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6534", browseName="TransitionNumber", dataType=o6.UInt32, value=8))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6534", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=8))],
 )
 o6.reference(lads_objtypes.FunctionalStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5105"])
 o6.reference(o6.ns["ns=lads;i=5105"], "i=51", o6.ns["ns=lads;i=5099"])
@@ -1374,7 +1444,7 @@ o6.reference(o6.ns["ns=lads;i=5105"], "i=54", "i=2311")
 ns0.objtypes.TransitionType(
     nodeId="ns=lads;i=5260",
     browseName="ns=lads;OperateToSleep",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6556", browseName="TransitionNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6556", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(lads_objtypes.LADSDeviceStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5260"])
 o6.reference(o6.ns["ns=lads;i=5260"], "i=51", o6.ns["ns=lads;i=5178"])
@@ -1384,7 +1454,8 @@ o6.reference(o6.ns["ns=lads;i=5260"], "i=54", "i=2311")
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=lads;i=6600",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6601", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6601", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 
@@ -1400,7 +1471,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=lads;i=7005", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=lads;i=6013"]))
+o6.call(nodeId="ns=lads;i=7005", browseName="ns=di;BreakLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=lads;i=6013"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=lads;i=6014",
@@ -1413,7 +1484,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=lads;i=7006", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=lads;i=6014"]))
+o6.call(nodeId="ns=lads;i=7006", browseName="ns=di;ExitLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=lads;i=6014"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=lads;i=6015",
@@ -1437,7 +1508,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=lads;i=7007", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6015"]), outputArgs=o6.hasProperty(o6.ns["ns=lads;i=6016"]))
+o6.call(
+    nodeId="ns=lads;i=7007",
+    browseName="ns=di;InitLock",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6015"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=lads;i=6016"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=lads;i=6021",
@@ -1450,7 +1527,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=lads;i=7008", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=lads;i=6021"]))
+o6.call(nodeId="ns=lads;i=7008", browseName="ns=di;RenewLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=lads;i=6021"]))
 
 di.objtypes.LockingServicesType(
     nodeId="ns=lads;i=5004",
@@ -1458,10 +1535,10 @@ di.objtypes.LockingServicesType(
     description="Used to lock the FunctionalUnit.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6017", browseName="ns=di;Locked", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6018", browseName="ns=di;LockingClient", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6019", browseName="ns=di;LockingUser", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6020", browseName="ns=di;RemainingLockTime", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6017", browseName="ns=di;Locked", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6018", browseName="ns=di;LockingClient", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6019", browseName="ns=di;LockingUser", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6020", browseName="ns=di;RemainingLockTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
         o6.hasComponent(o6.ns["ns=lads;i=7005"]),
         o6.hasComponent(o6.ns["ns=lads;i=7006"]),
         o6.hasComponent(o6.ns["ns=lads;i=7007"]),
@@ -1491,7 +1568,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=lads;i=7027", browseName="ns=lads;StartWithTargetValue", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6305"]))
+o6.call(nodeId="ns=lads;i=7027", browseName="ns=lads;StartWithTargetValue", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6305"]))
 
 lads_objtypes.ControlFunctionStateMachineType(
     nodeId="ns=lads;i=5141",
@@ -1506,7 +1583,10 @@ di.objtypes.FunctionalGroupType(
     browseName="ns=lads;Operational",
     description="Operational is a FunctionalGroup that shall organize the CurrentState property of the StateMachine and all its remote invocable Methods. Furthermore, it shall organize at least the CurrentValue and TargetValue variables.",
     modellingRule="Mandatory",
-    references=[o6.organizes(o6.call(nodeId="ns=lads;i=7028", browseName="ns=lads;Stop")), o6.organizes(o6.call(nodeId="ns=lads;i=7029", browseName="ns=lads;Reset"))],
+    references=[
+        o6.organizes(o6.call(nodeId="ns=lads;i=7028", browseName="ns=lads;Stop", modellingRule="Mandatory")),
+        o6.organizes(o6.call(nodeId="ns=lads;i=7029", browseName="ns=lads;Reset", modellingRule="Optional")),
+    ],
 )
 o6.reference(lads_objtypes.BaseControlFunctionType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5046"])
 o6.reference(o6.ns["ns=lads;i=5046"], "i=35", o6.ns["ns=lads;i=6079"])
@@ -1528,7 +1608,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
-o6.call(nodeId="ns=lads;i=7030", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6187"]))
+o6.call(nodeId="ns=lads;i=7030", browseName="Acknowledge", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6187"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=lads;i=6201",
@@ -1546,7 +1626,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
-o6.call(nodeId="ns=lads;i=7038", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6201"]))
+o6.call(nodeId="ns=lads;i=7038", browseName="Acknowledge", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6201"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=lads;i=6202",
@@ -1564,7 +1644,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
-o6.call(nodeId="ns=lads;i=7039", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6202"]))
+o6.call(nodeId="ns=lads;i=7039", browseName="AddComment", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6202"]))
 
 ns0.objtypes.ExclusiveLevelAlarmType(
     nodeId="ns=lads;i=5069",
@@ -1572,22 +1652,22 @@ ns0.objtypes.ExclusiveLevelAlarmType(
     description="AlarmMonitor indicates whether the limit of an analogue Sensor is exceeded. See: 10000-9: Alarms & Conditions | ExclusiveLevelAlarmType.",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6197", browseName="InputNode", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6198", browseName="SuppressedOrShelved", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6203", browseName="BranchId", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6204", browseName="ClientUserId", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6207", browseName="ConditionClassId", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6208", browseName="ConditionClassName", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6209", browseName="ConditionName", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6214", browseName="Retain", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6215", browseName="EventId", dataType=o6.ByteString)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6216", browseName="EventType", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6217", browseName="Message", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6218", browseName="ReceiveTime", dataType=ns0.datatypes.UtcTime)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6219", browseName="Severity", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6220", browseName="SourceName", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6221", browseName="SourceNode", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6222", browseName="Time", dataType=ns0.datatypes.UtcTime)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6197", browseName="InputNode", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6198", browseName="SuppressedOrShelved", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6203", browseName="BranchId", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6204", browseName="ClientUserId", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6207", browseName="ConditionClassId", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6208", browseName="ConditionClassName", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6209", browseName="ConditionName", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6214", browseName="Retain", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6215", browseName="EventId", modellingRule="Mandatory", dataType=o6.ByteString)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6216", browseName="EventType", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6217", browseName="Message", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6218", browseName="ReceiveTime", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6219", browseName="Severity", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6220", browseName="SourceName", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6221", browseName="SourceNode", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6222", browseName="Time", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)),
         o6.hasComponent(o6.ns["ns=lads;i=5070"]),
         o6.hasComponent(o6.ns["ns=lads;i=6191"]),
         o6.hasComponent(o6.ns["ns=lads;i=6195"]),
@@ -1597,8 +1677,8 @@ ns0.objtypes.ExclusiveLevelAlarmType(
         o6.hasComponent(o6.ns["ns=lads;i=6212"]),
         o6.hasComponent(o6.ns["ns=lads;i=7038"]),
         o6.hasComponent(o6.ns["ns=lads;i=7039"]),
-        o6.hasComponent(o6.call(nodeId="ns=lads;i=7040", browseName="Disable")),
-        o6.hasComponent(o6.call(nodeId="ns=lads;i=7041", browseName="Enable")),
+        o6.hasComponent(o6.call(nodeId="ns=lads;i=7040", browseName="Disable", modellingRule="Mandatory")),
+        o6.hasComponent(o6.call(nodeId="ns=lads;i=7041", browseName="Enable", modellingRule="Mandatory")),
     ],
 )
 o6.reference(lads_objtypes.AnalogSensorFunctionType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5069"])
@@ -1620,7 +1700,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
-o6.call(nodeId="ns=lads;i=7042", browseName="Acknowledge", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6234"]))
+o6.call(nodeId="ns=lads;i=7042", browseName="Acknowledge", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6234"]))
 o6.reference(o6.ns["ns=lads;i=7042"], "i=3065", "i=8944")
 
 ns0.vartypes.PropertyType(
@@ -1639,13 +1719,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
-o6.call(nodeId="ns=lads;i=7043", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6235"]))
+o6.call(nodeId="ns=lads;i=7043", browseName="AddComment", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6235"]))
 o6.reference(o6.ns["ns=lads;i=7043"], "i=3065", "i=2829")
 
-o6.call(nodeId="ns=lads;i=7044", browseName="Disable")
+o6.call(nodeId="ns=lads;i=7044", browseName="Disable", modellingRule="Mandatory")
 o6.reference(o6.ns["ns=lads;i=7044"], "i=3065", "i=2803")
 
-o6.call(nodeId="ns=lads;i=7045", browseName="Enable")
+o6.call(nodeId="ns=lads;i=7045", browseName="Enable", modellingRule="Mandatory")
 o6.reference(o6.ns["ns=lads;i=7045"], "i=3065", "i=2803")
 
 ns0.objtypes.ExclusiveDeviationAlarmType(
@@ -1654,27 +1734,27 @@ ns0.objtypes.ExclusiveDeviationAlarmType(
     description="AlarmMonitor indicates whether the deviation from a set point exceeds the limit. See: 10000-9: Alarms & Conditions | ExclusiveDeviationAlarmType.",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6023", browseName="HighHighLimit", dataType=o6.Double)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6024", browseName="HighLimit", dataType=o6.Double)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6025", browseName="LowLimit", dataType=o6.Double)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6026", browseName="LowLowLimit", dataType=o6.Double)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6223", browseName="SetpointNode", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6230", browseName="InputNode", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6231", browseName="SuppressedOrShelved", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6236", browseName="BranchId", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6237", browseName="ClientUserId", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6240", browseName="ConditionClassId", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6241", browseName="ConditionClassName", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6242", browseName="ConditionName", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6247", browseName="Retain", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6248", browseName="EventId", dataType=o6.ByteString)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6249", browseName="EventType", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6250", browseName="Message", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6251", browseName="ReceiveTime", dataType=ns0.datatypes.UtcTime)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6252", browseName="Severity", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6253", browseName="SourceName", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6254", browseName="SourceNode", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6255", browseName="Time", dataType=ns0.datatypes.UtcTime)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6023", browseName="HighHighLimit", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6024", browseName="HighLimit", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6025", browseName="LowLimit", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6026", browseName="LowLowLimit", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6223", browseName="SetpointNode", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6230", browseName="InputNode", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6231", browseName="SuppressedOrShelved", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6236", browseName="BranchId", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6237", browseName="ClientUserId", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6240", browseName="ConditionClassId", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6241", browseName="ConditionClassName", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6242", browseName="ConditionName", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6247", browseName="Retain", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6248", browseName="EventId", modellingRule="Mandatory", dataType=o6.ByteString)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6249", browseName="EventType", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6250", browseName="Message", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6251", browseName="ReceiveTime", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6252", browseName="Severity", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6253", browseName="SourceName", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6254", browseName="SourceNode", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6255", browseName="Time", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)),
         o6.hasComponent(o6.ns["ns=lads;i=5071"]),
         o6.hasComponent(o6.ns["ns=lads;i=6224"]),
         o6.hasComponent(o6.ns["ns=lads;i=6228"]),
@@ -1745,7 +1825,13 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=lads;i=7046", browseName="ns=lads;StartProgram", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6142"]), outputArgs=o6.hasProperty(o6.ns["ns=lads;i=6143"]))
+o6.call(
+    nodeId="ns=lads;i=7046",
+    browseName="ns=lads;StartProgram",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6142"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=lads;i=6143"]),
+)
 
 di.objtypes.FunctionalGroupType(
     nodeId="ns=lads;i=5007",
@@ -1753,10 +1839,10 @@ di.objtypes.FunctionalGroupType(
     description="Parameters and Methods useful for during normal operation, like process data.",
     modellingRule="Optional",
     references=[
-        o6.organizes(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6105", browseName="EffectiveDisplayName", dataType=o6.LocalizedText)),
-        o6.organizes(o6.call(nodeId="ns=lads;i=7019", browseName="ns=lads;Clear")),
-        o6.organizes(o6.call(nodeId="ns=lads;i=7024", browseName="ns=lads;Stop")),
-        o6.organizes(o6.call(nodeId="ns=lads;i=7025", browseName="ns=lads;Abort")),
+        o6.organizes(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6105", browseName="EffectiveDisplayName", modellingRule="Optional", dataType=o6.LocalizedText)),
+        o6.organizes(o6.call(nodeId="ns=lads;i=7019", browseName="ns=lads;Clear", modellingRule="Optional")),
+        o6.organizes(o6.call(nodeId="ns=lads;i=7024", browseName="ns=lads;Stop", modellingRule="Optional")),
+        o6.organizes(o6.call(nodeId="ns=lads;i=7025", browseName="ns=lads;Abort", modellingRule="Optional")),
         o6.organizes(o6.ns["ns=lads;i=7046"]),
     ],
 )
@@ -1779,7 +1865,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Comment", dataType=o6.NodeId("i=21"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("The comment to add to the condition.")),
     ],
 )
-o6.call(nodeId="ns=lads;i=7049", browseName="AddComment", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6267"]))
+o6.call(nodeId="ns=lads;i=7049", browseName="AddComment", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6267"]))
 
 lads_objtypes.MaintenanceTaskType(
     nodeId="ns=lads;i=5017",
@@ -1787,28 +1873,29 @@ lads_objtypes.MaintenanceTaskType(
     description="The MaintenanceTaskType shall be used to implement instances of maintenance tasks applicable at both the Device and Component levels. Maintenance tasks include activities such as periodic maintenance, cleaning, calibration, and validation.",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6164", browseName="NormalState", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6178", browseName="SuppressedOrShelved", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6179", browseName="InputNode", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6188", browseName="Retain", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6190", browseName="ConditionName", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6256", browseName="BranchId", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6266", browseName="ClientUserId", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6268", browseName="ConditionClassId", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6269", browseName="ConditionClassName", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6270", browseName="EventId", dataType=o6.ByteString)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6271", browseName="EventType", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6272", browseName="SourceNode", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6273", browseName="SourceName", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6274", browseName="Time", dataType=ns0.datatypes.UtcTime)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6276", browseName="ReceiveTime", dataType=ns0.datatypes.UtcTime)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6277", browseName="Message", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6278", browseName="Severity", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6164", browseName="NormalState", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6178", browseName="SuppressedOrShelved", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6179", browseName="InputNode", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6188", browseName="Retain", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6190", browseName="ConditionName", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6256", browseName="BranchId", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6266", browseName="ClientUserId", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6268", browseName="ConditionClassId", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6269", browseName="ConditionClassName", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6270", browseName="EventId", modellingRule="Mandatory", dataType=o6.ByteString)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6271", browseName="EventType", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6272", browseName="SourceNode", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6273", browseName="SourceName", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6274", browseName="Time", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6276", browseName="ReceiveTime", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6277", browseName="Message", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=lads;i=6278", browseName="Severity", modellingRule="Mandatory", dataType=o6.UInt16)),
         o6.hasComponent(
             amb.objtypes.MaintenanceEventStateMachineType(
                 nodeId="ns=lads;i=5018",
                 browseName="ns=amb;MaintenanceState",
                 description="The MaintenanceState state-machine provides information, whether a maintenance activity is planned, currently in execution, of has been executed.",
+                modellingRule="Mandatory",
             )
         ),
         o6.hasComponent(o6.ns["ns=lads;i=6166"]),
@@ -1818,8 +1905,8 @@ lads_objtypes.MaintenanceTaskType(
         o6.hasComponent(o6.ns["ns=lads;i=6262"]),
         o6.hasComponent(o6.ns["ns=lads;i=6264"]),
         o6.hasComponent(o6.ns["ns=lads;i=7030"]),
-        o6.hasComponent(o6.call(nodeId="ns=lads;i=7047", browseName="Enable")),
-        o6.hasComponent(o6.call(nodeId="ns=lads;i=7048", browseName="Disable")),
+        o6.hasComponent(o6.call(nodeId="ns=lads;i=7047", browseName="Enable", modellingRule="Mandatory")),
+        o6.hasComponent(o6.call(nodeId="ns=lads;i=7048", browseName="Disable", modellingRule="Mandatory")),
         o6.hasComponent(o6.ns["ns=lads;i=7049"]),
     ],
 )
@@ -1846,7 +1933,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=lads;i=7050", browseName="ns=lads;StartWithTargetValue", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6306"]))
+o6.call(nodeId="ns=lads;i=7050", browseName="ns=lads;StartWithTargetValue", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6306"]))
 
 lads_objtypes.ControlFunctionStateMachineType(
     nodeId="ns=lads;i=5142",
@@ -1878,7 +1965,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=lads;i=7054", browseName="ns=lads;StartWithTargetValue", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6309"]))
+o6.call(nodeId="ns=lads;i=7054", browseName="ns=lads;StartWithTargetValue", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=lads;i=6309"]))
 
 lads_objtypes.ControlFunctionStateMachineType(
     nodeId="ns=lads;i=5144",
@@ -1895,9 +1982,9 @@ lads_objtypes.LADSDeviceStateMachineType(
     modellingRule="Mandatory",
     references=[
         o6.hasComponent(o6.ns["ns=lads;i=6600"]),
-        o6.hasComponent(o6.call(nodeId="ns=lads;i=7124", browseName="ns=lads;GotoOperate")),
-        o6.hasComponent(o6.call(nodeId="ns=lads;i=7125", browseName="ns=lads;GotoShutdown")),
-        o6.hasComponent(o6.call(nodeId="ns=lads;i=7126", browseName="ns=lads;GotoSleep")),
+        o6.hasComponent(o6.call(nodeId="ns=lads;i=7124", browseName="ns=lads;GotoOperate", modellingRule="Optional")),
+        o6.hasComponent(o6.call(nodeId="ns=lads;i=7125", browseName="ns=lads;GotoShutdown", modellingRule="Optional")),
+        o6.hasComponent(o6.call(nodeId="ns=lads;i=7126", browseName="ns=lads;GotoSleep", modellingRule="Optional")),
     ],
 )
 o6.reference(lads_objtypes.LADSDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=lads;i=5191"])

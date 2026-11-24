@@ -45,7 +45,11 @@ else:
 class DisplayAnalogUnitType(ns0.vartypes.AnalogUnitType):
     displayFormat: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=6046", browseName="ns=tmc;DisplayFormat", description="Display format for visualization of the AnalogUnitType.", dataType=o6.String
+            nodeId="ns=tmc;i=6046",
+            browseName="ns=tmc;DisplayFormat",
+            description="Display format for visualization of the AnalogUnitType.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
         )
     )
 
@@ -81,7 +85,9 @@ class BooleanGuardVariableType(ns0.vartypes.GuardVariableType):
 )
 class MaterialQuantityVariableType(DisplayAnalogUnitType):
     eURange: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=tmc;i=13390", browseName="EURange", description="The range for the material quantity value.", dataType=ns0.datatypes.Range)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=tmc;i=13390", browseName="EURange", description="The range for the material quantity value.", modellingRule="Mandatory", dataType=ns0.datatypes.Range
+        )
     )
     valueInBUoM: DisplayAnalogUnitType
 
@@ -96,7 +102,13 @@ class MaterialQuantityVariableType(DisplayAnalogUnitType):
 )
 class MaterialLotVariableType(MaterialQuantityVariableType):
     materialLot: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6668", browseName="ns=tmc;MaterialLot", description="The material definition for the lot.", dataType=tmc_datypes.MaterialLotType)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=tmc;i=6668",
+            browseName="ns=tmc;MaterialLot",
+            description="The material definition for the lot.",
+            modellingRule="Mandatory",
+            dataType=tmc_datypes.MaterialLotType,
+        )
     )
 
 
@@ -123,20 +135,34 @@ class MaterialRateType(MaterialQuantityVariableType):
 class MaterialSublotVariableType(MaterialQuantityVariableType):
     carrierID: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=6057", browseName="ns=tmc;CarrierID", description="The unique identifier of the carrier containing the material sublot.", dataType=o6.String
+            nodeId="ns=tmc;i=6057",
+            browseName="ns=tmc;CarrierID",
+            description="The unique identifier of the carrier containing the material sublot.",
+            modellingRule="Optional",
+            dataType=o6.String,
         )
     )
     iD: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=tmc;i=6308", browseName="ns=tmc;ID", description="The unique identifier for the material sublot.", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=tmc;i=6308", browseName="ns=tmc;ID", description="The unique identifier for the material sublot.", modellingRule="Mandatory", dataType=o6.String
+        )
     )
     mES_ID: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=6054", browseName="ns=tmc;MES_ID", description="The unique identifier for the material sublot for a higher-level system e.g. MES.", dataType=o6.String
+            nodeId="ns=tmc;i=6054",
+            browseName="ns=tmc;MES_ID",
+            description="The unique identifier for the material sublot for a higher-level system e.g. MES.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
         )
     )
     materialLot: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=6060", browseName="ns=tmc;MaterialLot", description="The material lot of the material sublot.", dataType=tmc_datypes.MaterialLotType
+            nodeId="ns=tmc;i=6060",
+            browseName="ns=tmc;MaterialLot",
+            description="The material lot of the material sublot.",
+            modellingRule="Mandatory",
+            dataType=tmc_datypes.MaterialLotType,
         )
     )
     materialStorageLocationID: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -144,12 +170,17 @@ class MaterialSublotVariableType(MaterialQuantityVariableType):
             nodeId="ns=tmc;i=6119",
             browseName="ns=tmc;MaterialStorageLocationID",
             description="The material storage location where the material sublot is located.",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
     parentSublotID: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=tmc;i=6059", browseName="ns=tmc;ParentSublotID", description="The unique identified for the parent sublot, if any.", dataType=o6.String
+            nodeId="ns=tmc;i=6059",
+            browseName="ns=tmc;ParentSublotID",
+            description="The unique identified for the parent sublot, if any.",
+            modellingRule="Optional",
+            dataType=o6.String,
         )
     )
     relativePositionID: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -157,6 +188,7 @@ class MaterialSublotVariableType(MaterialQuantityVariableType):
             nodeId="ns=tmc;i=6309",
             browseName="ns=tmc;RelativePositionID",
             description="The relative position of the sublot within the carrier identified by CarrierID.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -165,6 +197,7 @@ class MaterialSublotVariableType(MaterialQuantityVariableType):
             nodeId="ns=tmc;i=6055",
             browseName="ns=tmc;Sublots",
             description="The sublots contained in the sublot.",
+            modellingRule="Optional",
             dataType=tmc_datypes.MaterialSublotType,
             valueRank=1,
             arrayDimensions=[0],
@@ -175,16 +208,17 @@ class MaterialSublotVariableType(MaterialQuantityVariableType):
 @o6.variabletype(nodeId="ns=tmc;i=2002", browseName="ns=tmc;MaterialPointVariableType", displayName="MaterialPointVariableType", dataType=o6.LocalizedText)
 class MaterialPointVariableType(ns0.vartypes.BaseDataVariableType):
     connectedMaterialPoint: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=tmc;i=19988", browseName="ns=tmc;ConnectedMaterialPoint", dataType=o6.ExpandedNodeId)
+        ns0.vartypes.PropertyType(nodeId="ns=tmc;i=19988", browseName="ns=tmc;ConnectedMaterialPoint", modellingRule="Mandatory", dataType=o6.ExpandedNodeId)
     )
-    iD: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=19986", browseName="ns=tmc;ID", dataType=o6.String))
+    iD: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=tmc;i=19986", browseName="ns=tmc;ID", modellingRule="Mandatory", dataType=o6.String))
     mES_ID: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=tmc;i=19987", browseName="ns=tmc;MES_ID", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=tmc;i=19987", browseName="ns=tmc;MES_ID", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     materialCapability: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=tmc;i=19989",
             browseName="ns=tmc;MaterialCapability",
+            modellingRule="Mandatory",
             dataType=tmc_datypes.MaterialDefinitionType,
             valueRank=1,
             arrayDimensions=[0],

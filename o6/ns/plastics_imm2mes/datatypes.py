@@ -35,7 +35,7 @@ else:
 
 @o6.enumtype(
     nodeId="ns=plastics_imm2mes;i=3004",
-    browseName="IMMMessageClassificationEnumeration",
+    browseName="ns=plastics_imm2mes;IMMMessageClassificationEnumeration",
     description="This Enumeration specifies the values to be used in the Classification property in the MessageConditionType and related logbook events of OPC 40083",
 )
 class IMMMessageClassificationEnumeration(ns0.datatypes.Enumeration):

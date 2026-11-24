@@ -68,6 +68,7 @@ class TemperatureRiseMonitoringType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6003",
             browseName="ns=plastics_hot_runner;ErrorDetected",
             description="Result of the TemperatureRiseMonitoring",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             value=False,
         )
@@ -77,6 +78,7 @@ class TemperatureRiseMonitoringType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6002",
             browseName="ns=plastics_hot_runner;SetValueActive",
             description="On / Off for the TemperatureRiseMonitoring",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -88,6 +90,7 @@ class TemperatureRiseMonitoringType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6004",
             browseName="ns=plastics_hot_runner;SupervisionTime",
             description="Specification of the time within the temperature must have changed",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             value=0.0,
             accessLevel=3,
@@ -111,6 +114,7 @@ class ZoneType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6052",
             browseName="ns=plastics_hot_runner;HighestActiveAlarmSeverity",
             description="Indicates the severity of the highest active alarm related to the current zone",
+            modellingRule="Mandatory",
             dataType=o6.UInt16,
         )
     )
@@ -119,6 +123,7 @@ class ZoneType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6051",
             browseName="ns=plastics_hot_runner;Name",
             description="A user given name of the zone",
+            modellingRule="Optional",
             dataType=o6.String,
             value="\n      ",
             accessLevel=3,
@@ -133,7 +138,7 @@ class ZoneType(ns0.objtypes.BaseObjectType):
 @o6.objecttype(nodeId="ns=plastics_hot_runner;i=1008", browseName="ns=plastics_hot_runner;ZonesType", displayName="ZonesType", description="Container for the zones")
 class ZonesType(ns0.objtypes.BaseObjectType):
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_hot_runner;i=6136", browseName="NodeVersion", dataType=o6.String, value="\n      ")
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_hot_runner;i=6136", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value="\n      ")
     )
     zone_Nr_: ZoneType
 
@@ -155,6 +160,7 @@ class HRDTemperatureType(plastics_rubber.objtypes.ControlledParameterType):
             nodeId="ns=plastics_hot_runner;i=6118",
             browseName="ns=plastics_hot_runner;BoostTime",
             description="Duration of the boost mode after which the set value which was active before boost is becoming active again",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
             userAccessLevel=1,
@@ -167,6 +173,7 @@ class HRDTemperatureType(plastics_rubber.objtypes.ControlledParameterType):
             nodeId="ns=plastics_hot_runner;i=6164",
             browseName="ns=plastics_hot_runner;TimeMethodPIDParameters",
             description="Setting of PID parameters with time method",
+            modellingRule="Optional",
             dataType=plastics_hot_runner_datypes.TimeMethodPIDParametersDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -189,6 +196,7 @@ class HRD_InterfaceType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6240",
             browseName="ns=plastics_hot_runner;DisplayLanguage",
             description="Setting of desired language on the user interface at the HRD",
+            modellingRule="Optional",
             dataType=ns0.datatypes.LocaleId,
             accessLevel=3,
             userAccessLevel=1,
@@ -216,6 +224,7 @@ class HeatUpType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6013",
             browseName="ns=plastics_hot_runner;EvenHeatUpEnabled",
             description="Enables even heat-up process until nominal SetValue of Temperature of ZoneType is reached",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -226,6 +235,7 @@ class HeatUpType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6008",
             browseName="ns=plastics_hot_runner;ManualOutputLimitActive",
             description="Activates heat-up process with pre-defined SetValueManualOutputLimit until SetValueTemperature is reached",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -236,6 +246,7 @@ class HeatUpType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6238",
             browseName="ns=plastics_hot_runner;RelayHeatingGroup",
             description="Number of the heating group for relay heating",
+            modellingRule="Optional",
             dataType=o6.Byte,
             accessLevel=3,
             userAccessLevel=1,
@@ -246,6 +257,7 @@ class HeatUpType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6484",
             browseName="ns=plastics_hot_runner;RelayHeatingTime",
             description="Time for relay heating of the zone. When RelayHeatingTime of all zones of a heating group have expired, the next group starts heating.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
             userAccessLevel=1,
@@ -268,6 +280,7 @@ class ControllerType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6025",
             browseName="ns=plastics_hot_runner;ActualType",
             description="Actual value for the controller type used by the zone",
+            modellingRule="Mandatory",
             dataType=plastics_hot_runner_datypes.ControllerTypeEnumeration,
             value=plastics_hot_runner_datypes.ControllerTypeEnumeration.CLOSED_LOOP_CONTROL,
         )
@@ -277,6 +290,7 @@ class ControllerType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6022",
             browseName="ns=plastics_hot_runner;ActualValueActive",
             description="Indicates the current status of the controller",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             value=False,
         )
@@ -286,6 +300,7 @@ class ControllerType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6500",
             browseName="ns=plastics_hot_runner;AutomaticReferenceZoneSelection",
             description="If true, the HRD selects automatically the reference zone.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -300,6 +315,7 @@ class ControllerType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6030",
             browseName="ns=plastics_hot_runner;OutputTime",
             description="Time basis for operating the actuator",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             value=0.0,
             accessLevel=3,
@@ -311,6 +327,7 @@ class ControllerType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6031",
             browseName="ns=plastics_hot_runner;ReferenceZone",
             description="If zones are to operate parallel to a control zone, the reference relation can be realised with this parameter.",
+            modellingRule="Optional",
             dataType=o6.UInt32,
             value=0,
             accessLevel=3,
@@ -322,6 +339,7 @@ class ControllerType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6021",
             browseName="ns=plastics_hot_runner;SetValueActive",
             description="A control zone is switched on and off with this parameter.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -348,6 +366,7 @@ o6.call(
     nodeId="ns=plastics_hot_runner;i=7019",
     browseName="ns=plastics_hot_runner;ResetErrorById",
     description="Method to reset one error of the device",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_hot_runner;i=6378"]),
 )
 
@@ -366,6 +385,7 @@ o6.call(
     nodeId="ns=plastics_hot_runner;i=7031",
     browseName="ns=plastics_hot_runner;SetReactionOnDisconnect",
     description="Method to set ReactionOnDisconnect and SessionNameForReactionOnDisconnect",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_hot_runner;i=6651"]),
 )
 
@@ -382,6 +402,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6215",
             browseName="ns=plastics_hot_runner;ActiveErrors",
             description="List of the active errors of the device",
+            modellingRule="Mandatory",
             dataType=plastics_rubber.datatypes.ClassifiedActiveErrorDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -393,6 +414,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6214",
             browseName="ns=plastics_hot_runner;DeviceMappingNumber",
             description="Unique identifier/address/number for devices of the same DeviceType within a local network",
+            modellingRule="Mandatory",
             dataType=o6.UInt32,
             accessLevel=3,
             userAccessLevel=1,
@@ -403,6 +425,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6216",
             browseName="ns=plastics_hot_runner;EnablePower",
             description="Global power control switch for all zone controllers",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             value=False,
             accessLevel=3,
@@ -415,6 +438,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6213",
             browseName="ns=plastics_hot_runner;HighestActiveAlarmSeverity",
             description="Indication of the severity of the highest active alarm",
+            modellingRule="Mandatory",
             dataType=o6.UInt16,
         )
     )
@@ -423,11 +447,17 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=7006",
             browseName="ns=plastics_hot_runner;IdentifyDevice",
             description="The peripheral device on which this method is called shows itself by e.g. activation of a LED.",
+            modellingRule="Optional",
         )
     )
     reactionOnDisconnect: ns0.vartypes.MultiStateValueDiscreteType
     resetAllErrors: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_hot_runner;i=7007", browseName="ns=plastics_hot_runner;ResetAllErrors", description="Method to reset all errors of the device")
+        o6.call(
+            nodeId="ns=plastics_hot_runner;i=7007",
+            browseName="ns=plastics_hot_runner;ResetAllErrors",
+            description="Method to reset all errors of the device",
+            modellingRule="Optional",
+        )
     )
     resetErrorById: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=plastics_hot_runner;i=7019"])
     sessionNameForReactionOnDisconnect: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -435,6 +465,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_hot_runner;i=6649",
             browseName="ns=plastics_hot_runner;SessionNameForReactionOnDisconnect",
             description="Contains the sessionName of the connection with the client relevant for ReactionOnDisconnect",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )

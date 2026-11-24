@@ -64,17 +64,24 @@ class RequestCyclicJobListEventType(ns0.objtypes.BaseEventType):
 class MessageConditionType(ns0.objtypes.AlarmConditionType):
     classification: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6001", browseName="ns=plastics_rubber;Classification", description="Classification of the message", dataType=ns0.datatypes.Enumeration
+            nodeId="ns=plastics_rubber;i=6001",
+            browseName="ns=plastics_rubber;Classification",
+            description="Classification of the message",
+            modellingRule="Mandatory",
+            dataType=ns0.datatypes.Enumeration,
         )
     )
     id: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6009", browseName="ns=plastics_rubber;Id", description="Id of the message", dataType=o6.String, value="")
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6009", browseName="ns=plastics_rubber;Id", description="Id of the message", modellingRule="Mandatory", dataType=o6.String, value=""
+        )
     )
     isStandstillMessage: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6015",
             browseName="ns=plastics_rubber;IsStandstillMessage",
             description="Indication if the message has led to a standstill",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             value=False,
         )
@@ -94,6 +101,7 @@ class MouldCycleParametersType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6016",
             browseName="ns=plastics_rubber;Index",
             description="Number of the mould",
+            modellingRule="Mandatory",
             dataType=o6.UInt32,
             value=0,
             accessLevel=5,
@@ -115,6 +123,7 @@ class RequestProductionDatasetWriteEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6025",
             browseName="ns=plastics_rubber;Components",
             description="Array which indicates which parts of the production dataset shall be activated in the machine control after writing",
+            modellingRule="Mandatory",
             dataType=o6.UInt16,
             valueRank=1,
         )
@@ -124,6 +133,7 @@ class RequestProductionDatasetWriteEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6023",
             browseName="ns=plastics_rubber;Name",
             description="Name of the production dataset that should be transferred from the client to the server",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
         )
@@ -133,6 +143,7 @@ class RequestProductionDatasetWriteEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6024",
             browseName="ns=plastics_rubber;Storage",
             description="Indication where the dataset is written to",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.StorageEnumeration,
             value=plastics_rubber_datypes.StorageEnumeration.PRODUCTION,
         )
@@ -141,7 +152,9 @@ class RequestProductionDatasetWriteEventType(ns0.objtypes.BaseEventType):
 
 @o6.objecttype(nodeId="ns=plastics_rubber;i=1048", browseName="ns=plastics_rubber;UsersType", displayName="UsersType", description="Container for objects of UserType")
 class UsersType(ns0.objtypes.BaseObjectType):
-    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6063", browseName="NodeVersion", dataType=o6.String, value=""))
+    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6063", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value="")
+    )
     user_Nr_: UserType | None
 
 
@@ -157,16 +170,20 @@ o6.reference(UsersType, "i=41", "i=2133")
 )
 class RequestCyclicJobWriteEventType(ns0.objtypes.BaseEventType):
     jobName: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6070", browseName="ns=plastics_rubber;JobName", dataType=o6.String, value="")
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6070", browseName="ns=plastics_rubber;JobName", modellingRule="Mandatory", dataType=o6.String, value="")
     )
 
 
 @o6.objecttype(nodeId="ns=plastics_rubber;i=1002", browseName="ns=plastics_rubber;MaterialType", displayName="MaterialType")
 class MaterialType(ns0.objtypes.BaseObjectType):
     density: ns0.vartypes.AnalogUnitType
-    id: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6098", browseName="ns=plastics_rubber;Id", dataType=o6.String, value=""))
+    id: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6098", browseName="ns=plastics_rubber;Id", modellingRule="Mandatory", dataType=o6.String, value="")
+    )
     name: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6097", browseName="ns=plastics_rubber;Name", dataType=o6.LocalizedText, value=o6.LocalizedText())
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6097", browseName="ns=plastics_rubber;Name", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText()
+        )
     )
 
 
@@ -177,7 +194,9 @@ class MaterialType(ns0.objtypes.BaseObjectType):
     description="Container for objects of TemperatureZoneType",
 )
 class TemperatureZonesType(ns0.objtypes.BaseObjectType):
-    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6123", browseName="NodeVersion", dataType=o6.String, value=""))
+    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6123", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value="")
+    )
     temperatureZone_Nr_: TemperatureZoneType | None
 
 
@@ -187,7 +206,9 @@ o6.reference(TemperatureZonesType, "i=41", "i=2133")
 @o6.objecttype(nodeId="ns=plastics_rubber;i=1050", browseName="ns=plastics_rubber;MouldsType", displayName="MouldsType", description="Container for objects of MouldType")
 class MouldsType(ns0.objtypes.BaseObjectType):
     mould_Nr_: MouldType | None
-    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6134", browseName="NodeVersion", dataType=o6.String, value=""))
+    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6134", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value="")
+    )
 
 
 o6.reference(MouldsType, "i=41", "i=2133")
@@ -199,23 +220,38 @@ o6.reference(MouldsType, "i=41", "i=2133")
 class PowerUnitType(ns0.objtypes.BaseObjectType):
     actualTemperature: ns0.vartypes.AnalogItemType | None
     id: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6140", browseName="ns=plastics_rubber;Id", description="Id of the PowerUnit", dataType=o6.String, value="")
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6140", browseName="ns=plastics_rubber;Id", description="Id of the PowerUnit", modellingRule="Mandatory", dataType=o6.String, value=""
+        )
     )
     index: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6137", browseName="ns=plastics_rubber;Index", description="Number of the power unit", dataType=o6.UInt32, value=0)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6137",
+            browseName="ns=plastics_rubber;Index",
+            description="Number of the power unit",
+            modellingRule="Mandatory",
+            dataType=o6.UInt32,
+            value=0,
+        )
     )
     isPresent: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6138",
             browseName="ns=plastics_rubber;IsPresent",
             description="Indication if the power unit is physically present and connected",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             value=False,
         )
     )
     powerOn: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6139", browseName="ns=plastics_rubber;PowerOn", description="Indication if the PowerUnit is switched on", dataType=o6.Boolean, value=False
+            nodeId="ns=plastics_rubber;i=6139",
+            browseName="ns=plastics_rubber;PowerOn",
+            description="Indication if the PowerUnit is switched on",
+            modellingRule="Mandatory",
+            dataType=o6.Boolean,
+            value=False,
         )
     )
 
@@ -238,7 +274,9 @@ class ElectricDriveType(PowerUnitType):
     nodeId="ns=plastics_rubber;i=1049", browseName="ns=plastics_rubber;PowerUnitsType", displayName="PowerUnitsType", description="Container for objects of PowerUnitType"
 )
 class PowerUnitsType(ns0.objtypes.BaseObjectType):
-    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6141", browseName="NodeVersion", dataType=o6.String, value=""))
+    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6141", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value="")
+    )
     powerUnit_Nr_: PowerUnitType | None
 
 
@@ -249,20 +287,30 @@ o6.reference(PowerUnitsType, "i=41", "i=2133")
 class MouldType(ns0.objtypes.BaseObjectType):
     description: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6126", browseName="ns=plastics_rubber;Description", description="Description of the installed mould", dataType=o6.String, value=""
+            nodeId="ns=plastics_rubber;i=6126",
+            browseName="ns=plastics_rubber;Description",
+            description="Description of the installed mould",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            value="",
         )
     )
     id: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6127", browseName="ns=plastics_rubber;Id", description="Id of the installed mould", dataType=o6.String, value="")
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6127", browseName="ns=plastics_rubber;Id", description="Id of the installed mould", modellingRule="Mandatory", dataType=o6.String, value=""
+        )
     )
     index: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6124", browseName="ns=plastics_rubber;Index", description="Number of the mould", dataType=o6.UInt32, value=0)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6124", browseName="ns=plastics_rubber;Index", description="Number of the mould", modellingRule="Mandatory", dataType=o6.UInt32, value=0
+        )
     )
     isPresent: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6142",
             browseName="ns=plastics_rubber;IsPresent",
             description="Indication if the mould is physically present and connected",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             value=False,
         )
@@ -272,6 +320,7 @@ class MouldType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6125",
             browseName="ns=plastics_rubber;MouldStatus",
             description="Current (physical) status of the mould",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.MouldStatusEnumeration,
             value=plastics_rubber_datypes.MouldStatusEnumeration.OTHER,
         )
@@ -286,18 +335,22 @@ class UserType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6057",
             browseName="ns=plastics_rubber;CardUid",
             description="Uid of the identification card used by the operator for logging in to the machine",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
         )
     )
     id: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6058", browseName="ns=plastics_rubber;Id", description="Id of the user", dataType=o6.String, value="")
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6058", browseName="ns=plastics_rubber;Id", description="Id of the user", modellingRule="Mandatory", dataType=o6.String, value=""
+        )
     )
     isPresent: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6156",
             browseName="ns=plastics_rubber;IsPresent",
             description="The machine can have instances for the maximum number of users that can be simultaneously logged in. TRUE if the instance of UserType represents a user that is currently logged in.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             value=False,
         )
@@ -307,18 +360,25 @@ class UserType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6059",
             browseName="ns=plastics_rubber;Language",
             description="Currently selected language on the machine control unit",
+            modellingRule="Optional",
             dataType=ns0.datatypes.LocaleId,
             value="",
         )
     )
     name: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6060", browseName="ns=plastics_rubber;Name", description="Name of the user", dataType=o6.String, value="")
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6060", browseName="ns=plastics_rubber;Name", description="Name of the user", modellingRule="Mandatory", dataType=o6.String, value=""
+        )
     )
     userLevel: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6061", browseName="ns=plastics_rubber;UserLevel", description="Level of the user", dataType=o6.String, value="")
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6061", browseName="ns=plastics_rubber;UserLevel", description="Level of the user", modellingRule="Optional", dataType=o6.String, value=""
+        )
     )
     userRole: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6062", browseName="ns=plastics_rubber;UserRole", description="Role of the user", dataType=o6.String, value="")
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6062", browseName="ns=plastics_rubber;UserRole", description="Role of the user", modellingRule="Optional", dataType=o6.String, value=""
+        )
     )
 
 
@@ -335,6 +395,7 @@ class LogbookEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6165",
             browseName="ns=plastics_rubber;EventOriginator",
             description="Originator of a logbook event",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.EventOriginatorEnumeration,
             value=plastics_rubber_datypes.EventOriginatorEnumeration.OTHER,
         )
@@ -344,6 +405,7 @@ class LogbookEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6039",
             browseName="ns=plastics_rubber;JobCycleCounter",
             description="Current value of JobCycleCounter in the ActiveJobValues Object when the event is fired. Only to be used for cyclic production",
+            modellingRule="Optional",
             dataType=o6.UInt64,
             value=0,
         )
@@ -364,6 +426,7 @@ class RemoteAccessLogType(LogbookEventType):
             nodeId="ns=plastics_rubber;i=6014",
             browseName="ns=plastics_rubber;Origin",
             description="Information about the origin of the remote access",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
         )
@@ -373,6 +436,7 @@ class RemoteAccessLogType(LogbookEventType):
             nodeId="ns=plastics_rubber;i=6012",
             browseName="ns=plastics_rubber;RemoteUserName",
             description="Name of the remote user (e.g. name of the service employee doing remote service)",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
         )
@@ -382,6 +446,7 @@ class RemoteAccessLogType(LogbookEventType):
             nodeId="ns=plastics_rubber;i=6013",
             browseName="ns=plastics_rubber;UserChange",
             description="Information if the user logs in or off",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.UserChangeEnumeration,
             value=plastics_rubber_datypes.UserChangeEnumeration.LOG_ON,
         )
@@ -401,6 +466,7 @@ class ProductionDatasetFrozenLogType(LogbookEventType):
             nodeId="ns=plastics_rubber;i=6056",
             browseName="ns=plastics_rubber;NewValue",
             description="Information if the production dataset is now locked",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             value=False,
         )
@@ -410,6 +476,7 @@ class ProductionDatasetFrozenLogType(LogbookEventType):
             nodeId="ns=plastics_rubber;i=6055",
             browseName="ns=plastics_rubber;OldValue",
             description="Information if the production dataset was locked",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             value=False,
         )
@@ -426,12 +493,22 @@ class ProductionDatasetFrozenLogType(LogbookEventType):
 class ProductionDatasetChangeLogType(LogbookEventType):
     newProductionDatasetName: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6169", browseName="ns=plastics_rubber;NewProductionDatasetName", description="Name of new production dataset", dataType=o6.String, value=""
+            nodeId="ns=plastics_rubber;i=6169",
+            browseName="ns=plastics_rubber;NewProductionDatasetName",
+            description="Name of new production dataset",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            value="",
         )
     )
     oldProductionDatasetName: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6170", browseName="ns=plastics_rubber;OldProductionDatasetName", description="Name of old production dataset", dataType=o6.String, value=""
+            nodeId="ns=plastics_rubber;i=6170",
+            browseName="ns=plastics_rubber;OldProductionDatasetName",
+            description="Name of old production dataset",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            value="",
         )
     )
 
@@ -449,6 +526,7 @@ class ProductionStatusChangeLogType(LogbookEventType):
             nodeId="ns=plastics_rubber;i=6171",
             browseName="ns=plastics_rubber;NewProductionStatus",
             description="New production status",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.ProductionStatusEnumeration,
             value=plastics_rubber_datypes.ProductionStatusEnumeration.OTHER,
         )
@@ -458,6 +536,7 @@ class ProductionStatusChangeLogType(LogbookEventType):
             nodeId="ns=plastics_rubber;i=6172",
             browseName="ns=plastics_rubber;OldProductionStatus",
             description="Old production status",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.ProductionStatusEnumeration,
             value=plastics_rubber_datypes.ProductionStatusEnumeration.OTHER,
         )
@@ -474,7 +553,12 @@ class ProductionStatusChangeLogType(LogbookEventType):
 class StandstillReasonLogType(LogbookEventType):
     standstillReasonId: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6173", browseName="ns=plastics_rubber;StandstillReasonId", description="Id of the standstill reason", dataType=o6.String, value=""
+            nodeId="ns=plastics_rubber;i=6173",
+            browseName="ns=plastics_rubber;StandstillReasonId",
+            description="Id of the standstill reason",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            value="",
         )
     )
 
@@ -492,6 +576,7 @@ class MachineModeChangeLogType(LogbookEventType):
             nodeId="ns=plastics_rubber;i=6175",
             browseName="ns=plastics_rubber;NewMachineMode",
             description="New machine mode",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.MachineModeEnumeration,
             value=plastics_rubber_datypes.MachineModeEnumeration.OTHER,
         )
@@ -501,6 +586,7 @@ class MachineModeChangeLogType(LogbookEventType):
             nodeId="ns=plastics_rubber;i=6176",
             browseName="ns=plastics_rubber;OldMachineMode",
             description="Old machine mode",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.MachineModeEnumeration,
             value=plastics_rubber_datypes.MachineModeEnumeration.OTHER,
         )
@@ -516,13 +602,16 @@ class MachineModeChangeLogType(LogbookEventType):
 )
 class ParameterChangeLogType(LogbookEventType):
     newValue: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6166", browseName="ns=plastics_rubber;NewValue", description="New value of the changed parameter")
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6166", browseName="ns=plastics_rubber;NewValue", description="New value of the changed parameter", modellingRule="Mandatory"
+        )
     )
     newValueUnit: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6177",
             browseName="ns=plastics_rubber;NewValueUnit",
             description="New unit of the changed parameter",
+            modellingRule="Optional",
             dataType=ns0.datatypes.EUInformation,
             value=ns0.datatypes.EUInformation(
                 namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()
@@ -530,13 +619,16 @@ class ParameterChangeLogType(LogbookEventType):
         )
     )
     oldValue: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6167", browseName="ns=plastics_rubber;OldValue", description="Old value of the changed parameter")
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6167", browseName="ns=plastics_rubber;OldValue", description="Old value of the changed parameter", modellingRule="Mandatory"
+        )
     )
     oldValueUnit: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6178",
             browseName="ns=plastics_rubber;OldValueUnit",
             description="Old unit of the changed parameter",
+            modellingRule="Optional",
             dataType=ns0.datatypes.EUInformation,
             value=ns0.datatypes.EUInformation(
                 namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()
@@ -545,7 +637,12 @@ class ParameterChangeLogType(LogbookEventType):
     )
     parameterId: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6168", browseName="ns=plastics_rubber;ParameterId", description="Id of the changed parameter", dataType=o6.String, value=""
+            nodeId="ns=plastics_rubber;i=6168",
+            browseName="ns=plastics_rubber;ParameterId",
+            description="Id of the changed parameter",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            value="",
         )
     )
 
@@ -563,6 +660,7 @@ class UserLogType(LogbookEventType):
             nodeId="ns=plastics_rubber;i=6180",
             browseName="ns=plastics_rubber;UserChange",
             description="Information if the user logs in or off",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.UserChangeEnumeration,
             value=plastics_rubber_datypes.UserChangeEnumeration.LOG_ON,
         )
@@ -582,6 +680,7 @@ class SequenceChangeLogType(LogbookEventType):
             nodeId="ns=plastics_rubber;i=6182",
             browseName="ns=plastics_rubber;SequenceChange",
             description="Classification of production sequence change",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.SequenceChangeEnumeration,
             value=plastics_rubber_datypes.SequenceChangeEnumeration.UPDATE,
         )
@@ -598,17 +697,24 @@ class SequenceChangeLogType(LogbookEventType):
 class MessageLogType(LogbookEventType):
     classification: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6183", browseName="ns=plastics_rubber;Classification", description="Classification of the message", dataType=ns0.datatypes.Enumeration
+            nodeId="ns=plastics_rubber;i=6183",
+            browseName="ns=plastics_rubber;Classification",
+            description="Classification of the message",
+            modellingRule="Mandatory",
+            dataType=ns0.datatypes.Enumeration,
         )
     )
     id: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6184", browseName="ns=plastics_rubber;Id", description="Id of the message", dataType=o6.String, value="")
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6184", browseName="ns=plastics_rubber;Id", description="Id of the message", modellingRule="Mandatory", dataType=o6.String, value=""
+        )
     )
     isStandstillMessage: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6185",
             browseName="ns=plastics_rubber;IsStandstillMessage",
             description="Indication if the message has led to a standstill",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             value=False,
         )
@@ -625,7 +731,11 @@ class MessageLogType(LogbookEventType):
 class UserFeedbackLogType(LogbookEventType):
     classification: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6186", browseName="ns=plastics_rubber;Classification", description="Classification of the message", dataType=ns0.datatypes.Enumeration
+            nodeId="ns=plastics_rubber;i=6186",
+            browseName="ns=plastics_rubber;Classification",
+            description="Classification of the message",
+            modellingRule="Mandatory",
+            dataType=ns0.datatypes.Enumeration,
         )
     )
 
@@ -642,6 +752,7 @@ class MachineMESConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6200",
             browseName="ns=plastics_rubber;MESUrl",
             description="URL to display a webpage generated by the MES in a web browser integrated in the machine",
+            modellingRule="Optional",
             dataType=o6.String,
             value="0",
             accessLevel=3,
@@ -653,6 +764,7 @@ class MachineMESConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6196",
             browseName="ns=plastics_rubber;StandstillReasons",
             description="List of the standstill reasons from which one is selected by the operator in the case of a standstill",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.StandstillReasonType,
             valueRank=1,
             accessLevel=3,
@@ -664,6 +776,7 @@ class MachineMESConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6199",
             browseName="ns=plastics_rubber;StandstillReasonsLockedByMES",
             description="Indication if the list StandstillReasons has been modified by the MES and may not be changed by the machine",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             value=False,
             accessLevel=3,
@@ -681,17 +794,32 @@ class MachineMESConfigurationType(ns0.objtypes.BaseObjectType):
 class StandstillMessageType(ns0.objtypes.BaseObjectType):
     classification: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6206", browseName="ns=plastics_rubber;Classification", description="Classification of the message", dataType=ns0.datatypes.Enumeration
+            nodeId="ns=plastics_rubber;i=6206",
+            browseName="ns=plastics_rubber;Classification",
+            description="Classification of the message",
+            modellingRule="Mandatory",
+            dataType=ns0.datatypes.Enumeration,
         )
     )
     id: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6207", browseName="ns=plastics_rubber;Id", description="Id of the message", dataType=o6.String, value="")
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6207", browseName="ns=plastics_rubber;Id", description="Id of the message", modellingRule="Mandatory", dataType=o6.String, value=""
+        )
     )
     message: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6209", browseName="Message", description="Text of the message", dataType=o6.LocalizedText, value=o6.LocalizedText())
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6209",
+            browseName="Message",
+            description="Text of the message",
+            modellingRule="Mandatory",
+            dataType=o6.LocalizedText,
+            value=o6.LocalizedText(),
+        )
     )
     severity: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6208", browseName="Severity", description="Severity of the message", dataType=o6.UInt16, value=0)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6208", browseName="Severity", description="Severity of the message", modellingRule="Mandatory", dataType=o6.UInt16, value=0
+        )
     )
 
 
@@ -703,13 +831,19 @@ class StandstillMessageType(ns0.objtypes.BaseObjectType):
 )
 class MESMessageType(ns0.objtypes.BaseObjectType):
     id: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6210", browseName="ns=plastics_rubber;Id", description="Id of the message", dataType=o6.String, value="")
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6210", browseName="ns=plastics_rubber;Id", description="Id of the message", modellingRule="Mandatory", dataType=o6.String, value=""
+        )
     )
     message: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6211", browseName="ns=plastics_rubber;Message", description="Text of the message", dataType=o6.String, value="")
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6211", browseName="ns=plastics_rubber;Message", description="Text of the message", modellingRule="Mandatory", dataType=o6.String, value=""
+        )
     )
     severity: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6212", browseName="Severity", description="Severity of the message", dataType=o6.UInt16, value=0)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6212", browseName="Severity", description="Severity of the message", modellingRule="Mandatory", dataType=o6.UInt16, value=0
+        )
     )
 
 
@@ -725,6 +859,7 @@ class CycleParametersEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6249",
             browseName="ns=plastics_rubber;AverageCycleTime",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             value=0.0,
             accessLevel=5,
@@ -737,6 +872,7 @@ class CycleParametersEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6051",
             browseName="ns=plastics_rubber;BoxBadPartsCounter",
             description="Number of bad parts produced in the current box",
+            modellingRule="Optional",
             dataType=o6.UInt64,
             value=0,
             accessLevel=5,
@@ -744,13 +880,16 @@ class CycleParametersEventType(ns0.objtypes.BaseEventType):
         )
     )
     boxCycleCounter: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6049", browseName="ns=plastics_rubber;BoxCycleCounter", dataType=o6.UInt64, accessLevel=5, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6049", browseName="ns=plastics_rubber;BoxCycleCounter", modellingRule="Optional", dataType=o6.UInt64, accessLevel=5, userAccessLevel=1
+        )
     )
     boxGoodPartsCounter: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6050",
             browseName="ns=plastics_rubber;BoxGoodPartsCounter",
             description="Number of good parts produced in the current box",
+            modellingRule="Optional",
             dataType=o6.UInt64,
             value=0,
             accessLevel=5,
@@ -762,6 +901,7 @@ class CycleParametersEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6256",
             browseName="ns=plastics_rubber;BoxId",
             description="Id of the box in which the current production is put in",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=5,
@@ -773,6 +913,7 @@ class CycleParametersEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6271",
             browseName="ns=plastics_rubber;BoxPartsCounter",
             description="Total number of  parts produced in the current box",
+            modellingRule="Optional",
             dataType=o6.UInt64,
             value=0,
             accessLevel=5,
@@ -784,6 +925,7 @@ class CycleParametersEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6102",
             browseName="ns=plastics_rubber;BoxTestSamplesCounter",
             description="Number of test sample parts produced in the current box",
+            modellingRule="Optional",
             dataType=o6.UInt64,
             value=0,
             accessLevel=5,
@@ -795,6 +937,7 @@ class CycleParametersEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6252",
             browseName="ns=plastics_rubber;CavityCycleQuality",
             description="Quality of the cycle for each cavity",
+            modellingRule="Optional",
             dataType=plastics_rubber_datypes.CavityCycleQualityEnumeration,
             valueRank=1,
             accessLevel=5,
@@ -807,6 +950,7 @@ class CycleParametersEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6253",
             browseName="ns=plastics_rubber;CurrentLotName",
             description="Name of the current production lot",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
             accessLevel=5,
@@ -819,6 +963,7 @@ class CycleParametersEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6255",
             browseName="ns=plastics_rubber;CycleQuality",
             description="Quality of the whole cycle",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.CycleQualityEnumeration,
             value=plastics_rubber_datypes.CycleQualityEnumeration.GOOD_CYCLE,
             accessLevel=5,
@@ -830,6 +975,7 @@ class CycleParametersEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6250",
             browseName="ns=plastics_rubber;CycleTime",
             description="Cycle time",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.Duration,
             value=0.0,
             accessLevel=5,
@@ -841,6 +987,7 @@ class CycleParametersEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6269",
             browseName="ns=plastics_rubber;JobBadPartsCounter",
             description="Number of bad parts produced in the current job",
+            modellingRule="Mandatory",
             dataType=o6.UInt64,
             value=0,
             accessLevel=5,
@@ -852,6 +999,7 @@ class CycleParametersEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6254",
             browseName="ns=plastics_rubber;JobCycleCounter",
             description="Number of the cycle in the job",
+            modellingRule="Mandatory",
             dataType=o6.UInt64,
             value=0,
             accessLevel=5,
@@ -863,6 +1011,7 @@ class CycleParametersEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6258",
             browseName="ns=plastics_rubber;JobGoodPartsCounter",
             description="Number of good parts produced in the current job",
+            modellingRule="Mandatory",
             dataType=o6.UInt64,
             value=0,
             accessLevel=5,
@@ -874,6 +1023,7 @@ class CycleParametersEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6259",
             browseName="ns=plastics_rubber;JobName",
             description="Name of the job",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
             accessLevel=5,
@@ -885,6 +1035,7 @@ class CycleParametersEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6257",
             browseName="ns=plastics_rubber;JobPartsCounter",
             description="Total number of parts produced in the current job",
+            modellingRule="Mandatory",
             dataType=o6.UInt64,
             value=0,
             accessLevel=5,
@@ -896,6 +1047,7 @@ class CycleParametersEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6251",
             browseName="ns=plastics_rubber;JobStatus",
             description="Current status of the job",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.JobStatusEnumeration,
             value=plastics_rubber_datypes.JobStatusEnumeration.OTHER,
             accessLevel=5,
@@ -907,6 +1059,7 @@ class CycleParametersEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6270",
             browseName="ns=plastics_rubber;JobTestSamplesCounter",
             description="Number of test sample parts produced in the current job",
+            modellingRule="Mandatory",
             dataType=o6.UInt64,
             value=0,
             accessLevel=5,
@@ -918,6 +1071,7 @@ class CycleParametersEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6260",
             browseName="ns=plastics_rubber;MachineCycleCounter",
             description="Number of finished cycles in the machine life time",
+            modellingRule="Optional",
             dataType=o6.UInt64,
             value=0,
             accessLevel=5,
@@ -929,6 +1083,7 @@ class CycleParametersEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6272",
             browseName="ns=plastics_rubber;PartId",
             description="Id(s) of the parts produced in the cycle",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=1,
             arrayDimensions=[1],
@@ -952,6 +1107,7 @@ class RequestProductionDatasetListEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6040",
             browseName="ns=plastics_rubber;MouldId",
             description="Id of the mould for which the available production datasets are requested",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
         )
@@ -961,6 +1117,7 @@ class RequestProductionDatasetListEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6286",
             browseName="ns=plastics_rubber;NameFilter",
             description="Filtering the list of production datasets by name",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
         )
@@ -980,6 +1137,7 @@ class JobInformationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6261",
             browseName="ns=plastics_rubber;ContinueAtJobEnd",
             description="Indication if the machine continues the production even if the nominal output has been reached",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             value=False,
             accessLevel=3,
@@ -991,23 +1149,32 @@ class JobInformationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6054",
             browseName="ns=plastics_rubber;CustomerName",
             description="Name of the customer for that the job is produced",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
         )
     )
     jobDescription: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6289", browseName="ns=plastics_rubber;JobDescription", description="Description of the job", dataType=o6.String, value=""
+            nodeId="ns=plastics_rubber;i=6289",
+            browseName="ns=plastics_rubber;JobDescription",
+            description="Description of the job",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            value="",
         )
     )
     jobName: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6290", browseName="ns=plastics_rubber;JobName", description="Name of the job", dataType=o6.String, value="")
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6290", browseName="ns=plastics_rubber;JobName", description="Name of the job", modellingRule="Mandatory", dataType=o6.String, value=""
+        )
     )
     material: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6291",
             browseName="ns=plastics_rubber;Material",
             description="Array of material names used for the job",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=1,
             arrayDimensions=[1],
@@ -1019,9 +1186,10 @@ class JobInformationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6295",
             browseName="ns=plastics_rubber;ProductDescription",
             description="Array of descriptions of the products produced by the job",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=1,
-            arrayDimensions=[1],
+            arrayDimensions=[0],
             value=[""],
         )
     )
@@ -1030,9 +1198,10 @@ class JobInformationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6296",
             browseName="ns=plastics_rubber;ProductName",
             description="Array of product names produced by the job",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=1,
-            arrayDimensions=[1],
+            arrayDimensions=[0],
             value=[""],
         )
     )
@@ -1041,6 +1210,7 @@ class JobInformationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6262",
             browseName="ns=plastics_rubber;ProductionDatasetDescription",
             description="Additional description of the production dataset which is needed for the job",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
         )
@@ -1050,6 +1220,7 @@ class JobInformationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6263",
             browseName="ns=plastics_rubber;ProductionDatasetName",
             description="Name of the production dataset which is needed for the job",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
         )
@@ -1068,6 +1239,7 @@ class HelpOffNormalAlarmType(ns0.objtypes.OffNormalAlarmType):
             nodeId="ns=plastics_rubber;i=6309",
             browseName="ns=plastics_rubber;HelpText",
             description="Text with additional information for the operator",
+            modellingRule="Mandatory",
             dataType=o6.LocalizedText,
             value=o6.LocalizedText(),
         )
@@ -1097,6 +1269,7 @@ class RequestProductionDatasetReadEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6022",
             browseName="ns=plastics_rubber;Name",
             description="Name of the production dataset that should be transferred from the server to the client",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
         )
@@ -1106,6 +1279,7 @@ class RequestProductionDatasetReadEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_rubber;i=6317",
             browseName="ns=plastics_rubber;Storage",
             description="Indication from where the dataset is read",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.StorageEnumeration,
             value=plastics_rubber_datypes.StorageEnumeration.PRODUCTION,
         )
@@ -1118,14 +1292,16 @@ class EnergyType(ns0.objtypes.BaseObjectType):
     actualSpecificEnergy: ns0.vartypes.AnalogUnitType | None
     powerConsumption: ns0.vartypes.AnalogUnitType | None
     powerFactor: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_rubber;i=6423", browseName="ns=plastics_rubber;PowerFactor", dataType=o6.Double, value=0.0)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_rubber;i=6423", browseName="ns=plastics_rubber;PowerFactor", modellingRule="Optional", dataType=o6.Double, value=0.0)
     )
 
 
 @o6.objecttype(nodeId="ns=plastics_rubber;i=1065", browseName="ns=plastics_rubber;MeasuringDevicesType", displayName="MeasuringDevicesType")
 class MeasuringDevicesType(ns0.objtypes.BaseObjectType):
     name_Nr_: MeasuringDeviceType | None
-    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6460", browseName="NodeVersion", dataType=o6.String, value=""))
+    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6460", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value="")
+    )
 
 
 o6.reference(MeasuringDevicesType, "i=41", "i=2133")
@@ -1143,22 +1319,34 @@ class IdentificationType(di.objtypes.ComponentType):
             nodeId="ns=plastics_rubber;i=6375",
             browseName="ns=di;DeviceClass",
             description="Indicates in which domain or for what purpose a certain device is used",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
     manufacturer: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6376", browseName="ns=di;Manufacturer", description="Provides the name of the manufacturer of the machine", dataType=o6.LocalizedText
+            nodeId="ns=plastics_rubber;i=6376",
+            browseName="ns=di;Manufacturer",
+            description="Provides the name of the manufacturer of the machine",
+            modellingRule="Mandatory",
+            dataType=o6.LocalizedText,
         )
     )
     model: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6377", browseName="ns=di;Model", description="Represents the name of the machine type", dataType=o6.LocalizedText)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6377",
+            browseName="ns=di;Model",
+            description="Represents the name of the machine type",
+            modellingRule="Mandatory",
+            dataType=o6.LocalizedText,
+        )
     )
     serialNumber: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6379",
             browseName="ns=di;SerialNumber",
             description="Represents the serial number of the machine (unique ID given by the manufacturer)",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -1167,6 +1355,7 @@ class IdentificationType(di.objtypes.ComponentType):
             nodeId="ns=plastics_rubber;i=6495",
             browseName="ns=plastics_rubber;YearOfConstruction",
             description="Represents the year of construction of the machine",
+            modellingRule="Optional",
             dataType=o6.UInt16,
         )
     )
@@ -1178,6 +1367,7 @@ class DiagnosisEndEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6499",
             browseName="ns=plastics_rubber;Status",
+            modellingRule="Optional",
             dataType=plastics_rubber_datypes.DiagnosticsStatusEnumeration,
             value=plastics_rubber_datypes.DiagnosticsStatusEnumeration.OFF,
         )
@@ -1187,17 +1377,21 @@ class DiagnosisEndEventType(ns0.objtypes.BaseEventType):
 @o6.objecttype(nodeId="ns=plastics_rubber;i=1062", browseName="ns=plastics_rubber;DiagnosisStepEndEventType", displayName="DiagnosisStepEndEventType", isAbstract=True)
 class DiagnosisStepEndEventType(ns0.objtypes.BaseEventType):
     inputNode: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6502", browseName="ns=plastics_rubber;InputNode", dataType=o6.NodeId, value=o6.NodeId("i=0"))
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6502", browseName="ns=plastics_rubber;InputNode", modellingRule="Mandatory", dataType=o6.NodeId, value=o6.NodeId("i=0")
+        )
     )
     result: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6501", browseName="ns=plastics_rubber;Result", dataType=o6.Boolean, value=False)
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6501", browseName="ns=plastics_rubber;Result", modellingRule="Mandatory", dataType=o6.Boolean, value=False)
     )
 
 
 @o6.objecttype(nodeId="ns=plastics_rubber;i=1061", browseName="ns=plastics_rubber;RequestAddMaterialEventType", displayName="RequestAddMaterialEventType", isAbstract=True)
 class RequestAddMaterialEventType(ns0.objtypes.BaseEventType):
     id: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6513", browseName="ns=plastics_rubber;Id", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6513", browseName="ns=plastics_rubber;Id", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -1214,6 +1408,7 @@ class TemperatureZoneType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6522",
             browseName="ns=plastics_rubber;Classification",
             description="Type of the temperature zone",
+            modellingRule="Optional",
             dataType=plastics_rubber_datypes.TemperatureZoneClassificationEnumeration,
         )
     )
@@ -1222,6 +1417,7 @@ class TemperatureZoneType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6094",
             browseName="ns=plastics_rubber;ControlMode",
             description="Indication how the temperature is currently controlled",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.ControlModeEnumeration,
             value=plastics_rubber_datypes.ControlModeEnumeration.OTHER,
         )
@@ -1229,13 +1425,16 @@ class TemperatureZoneType(ns0.objtypes.BaseObjectType):
     highDeviationTemperature1: ns0.vartypes.AnalogItemType | None
     highDeviationTemperature2: ns0.vartypes.AnalogItemType | None
     index: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6080", browseName="ns=plastics_rubber;Index", description="Number of the zone", dataType=o6.UInt32, value=0)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6080", browseName="ns=plastics_rubber;Index", description="Number of the zone", modellingRule="Mandatory", dataType=o6.UInt32, value=0
+        )
     )
     isPresent: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6099",
             browseName="ns=plastics_rubber;IsPresent",
             description="Indication if the temperature zone is physically present and connected",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             value=False,
         )
@@ -1243,7 +1442,9 @@ class TemperatureZoneType(ns0.objtypes.BaseObjectType):
     lowDeviationTemperature1: ns0.vartypes.AnalogItemType | None
     lowDeviationTemperature2: ns0.vartypes.AnalogItemType | None
     name: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6087", browseName="ns=plastics_rubber;Name", description="Name of the zone", dataType=o6.String, value="")
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6087", browseName="ns=plastics_rubber;Name", description="Name of the zone", modellingRule="Mandatory", dataType=o6.String, value=""
+        )
     )
     nominalTemperature: ns0.vartypes.AnalogItemType
     standbyTemperature: ns0.vartypes.AnalogItemType | None
@@ -1261,6 +1462,7 @@ class BarrelTemperatureZoneType(TemperatureZoneType):
             nodeId="ns=plastics_rubber;i=6095",
             browseName="ns=plastics_rubber;Position",
             description="Location of the temperature zone on a barrel. Counting starts with 1 beginning from the feeding. The highest position is at the nozzle.",
+            modellingRule="Mandatory",
             dataType=o6.UInt32,
             value=0,
         )
@@ -1290,6 +1492,7 @@ class TemperatureZoneCycleParametersType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6536",
             browseName="ns=plastics_rubber;Classification",
             description="Type of the temperature zone",
+            modellingRule="Optional",
             dataType=plastics_rubber_datypes.TemperatureZoneClassificationEnumeration,
             accessLevel=5,
             userAccessLevel=1,
@@ -1300,6 +1503,7 @@ class TemperatureZoneCycleParametersType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6044",
             browseName="ns=plastics_rubber;Index",
             description="Number of the zone",
+            modellingRule="Mandatory",
             dataType=o6.UInt32,
             value=0,
             accessLevel=5,
@@ -1308,7 +1512,14 @@ class TemperatureZoneCycleParametersType(ns0.objtypes.BaseObjectType):
     )
     name: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6045", browseName="ns=plastics_rubber;Name", description="Name of the zone", dataType=o6.String, value="", accessLevel=5, userAccessLevel=1
+            nodeId="ns=plastics_rubber;i=6045",
+            browseName="ns=plastics_rubber;Name",
+            description="Name of the zone",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            value="",
+            accessLevel=5,
+            userAccessLevel=1,
         )
     )
 
@@ -1316,7 +1527,9 @@ class TemperatureZoneCycleParametersType(ns0.objtypes.BaseObjectType):
 @o6.objecttype(nodeId="ns=plastics_rubber;i=1069", browseName="ns=plastics_rubber;DrivesType", displayName="DrivesType")
 class DrivesType(ns0.objtypes.BaseObjectType):
     name_Nr_: DriveType | None
-    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6563", browseName="NodeVersion", dataType=o6.String))
+    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6563", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String)
+    )
 
 
 o6.reference(DrivesType, "i=41", "i=2133")
@@ -1331,27 +1544,43 @@ o6.reference(DrivesType, "i=41", "i=2133")
 class MachineInformationType(di.objtypes.ComponentType):
     controllerName: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6052", browseName="ns=plastics_rubber;ControllerName", description="Name of the machine controller", dataType=o6.String, value=""
+            nodeId="ns=plastics_rubber;i=6052",
+            browseName="ns=plastics_rubber;ControllerName",
+            description="Name of the machine controller",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            value="",
         )
     )
     deviceClass: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6310", browseName="ns=di;DeviceClass", description="Indicates in which domain or for what purpose a device is used.", dataType=o6.String
+            nodeId="ns=plastics_rubber;i=6310",
+            browseName="ns=di;DeviceClass",
+            description="Indicates in which domain or for what purpose a device is used.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
         )
     )
     manufacturer: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6217", browseName="ns=di;Manufacturer", description="Name of the company that manufactured the device", dataType=o6.LocalizedText
+            nodeId="ns=plastics_rubber;i=6217",
+            browseName="ns=di;Manufacturer",
+            description="Name of the company that manufactured the device",
+            modellingRule="Mandatory",
+            dataType=o6.LocalizedText,
         )
     )
     model: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6500", browseName="ns=di;Model", description="Model name of the device", dataType=o6.LocalizedText)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6500", browseName="ns=di;Model", description="Model name of the device", modellingRule="Mandatory", dataType=o6.LocalizedText
+        )
     )
     serialNumber: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6713",
             browseName="ns=di;SerialNumber",
             description="Identifier that uniquely identifies, within a manufacturer, a device instance",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -1360,6 +1589,7 @@ class MachineInformationType(di.objtypes.ComponentType):
             nodeId="ns=plastics_rubber;i=6152",
             browseName="ns=plastics_rubber;SupportedLogbookEvents",
             description="Information which LogbookEvents are supported by the machine",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.LogbookEventsEnumeration,
             valueRank=1,
         )
@@ -1372,7 +1602,7 @@ class DriveType(ns0.objtypes.BaseObjectType):
     energy: EnergyType | None
     maintenance: MaintenanceType | None
     position: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6721", browseName="ns=plastics_rubber;Position", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6721", browseName="ns=plastics_rubber;Position", modellingRule="Optional", dataType=o6.String)
     )
     speed: MonitoredParameterType | None
     startDrive: StartDeviceType | None
@@ -1408,6 +1638,7 @@ o6.call(
     nodeId="ns=plastics_rubber;i=7001",
     browseName="ns=plastics_rubber;GetProductionDatasetList",
     description="This Method is used to read a list from the server, which production datasets that are available on the machine's file system",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6018"]),
     outputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6019"]),
 )
@@ -1427,6 +1658,7 @@ o6.call(
     nodeId="ns=plastics_rubber;i=7004",
     browseName="ns=plastics_rubber;SendProductionDatasetList",
     description="This Method is used to send a list of production datasets available on the client to the server",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6020"]),
 )
 
@@ -1452,6 +1684,7 @@ class ActiveJobValuesType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6219",
             browseName="ns=plastics_rubber;BoxId",
             description="Id of the box in which the current production is put in",
+            modellingRule="Optional",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1463,6 +1696,7 @@ class ActiveJobValuesType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6239",
             browseName="ns=plastics_rubber;CurrentLotName",
             description="Name of the current production lot",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1474,6 +1708,7 @@ class ActiveJobValuesType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=7009",
             browseName="ns=plastics_rubber;FinishJob",
             description="With this Method the client (e.g. MES) requests the machine to change the JobStatus to JOB_FINISHED_8",
+            modellingRule="Mandatory",
         )
     )
     interruptJob: o6.node.MethodNode = o6.hasComponent(
@@ -1481,6 +1716,7 @@ class ActiveJobValuesType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=7003",
             browseName="ns=plastics_rubber;InterruptJob",
             description="With this Method the client (e.g. MES) requests the machine to change the JobStatus to JOB_INTERRUPTED_7",
+            modellingRule="Mandatory",
         )
     )
     jobStatus: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -1488,6 +1724,7 @@ class ActiveJobValuesType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6243",
             browseName="ns=plastics_rubber;JobStatus",
             description="Current status of the job",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.JobStatusEnumeration,
             value=plastics_rubber_datypes.JobStatusEnumeration.OTHER,
         )
@@ -1497,6 +1734,7 @@ class ActiveJobValuesType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=7002",
             browseName="ns=plastics_rubber;StartJob",
             description="With this Method the client (e.g. MES) requests the machine to change the JobStatus to JOB_IN_PRODUCTION_6",
+            modellingRule="Mandatory",
         )
     )
 
@@ -1516,6 +1754,7 @@ o6.call(
     nodeId="ns=plastics_rubber;i=7016",
     browseName="ns=plastics_rubber;Save",
     description="Stores a production dataset from the control of the machine to the file system of the machine",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6187"]),
 )
 
@@ -1545,6 +1784,7 @@ o6.call(
     nodeId="ns=plastics_rubber;i=7017",
     browseName="ns=plastics_rubber;GetCurrentPage",
     description="Method for retrieving a screenshot of the control system with the currently shown contents",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6191"]),
     outputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6192"]),
 )
@@ -1575,6 +1815,7 @@ o6.call(
     nodeId="ns=plastics_rubber;i=7018",
     browseName="ns=plastics_rubber;GetPage",
     description="Method for retrieving the image of a page of the control system",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6193"]),
     outputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6194"]),
 )
@@ -1597,6 +1838,7 @@ o6.call(
     nodeId="ns=plastics_rubber;i=7019",
     browseName="ns=plastics_rubber;SetMachineTime",
     description="Method for setting the server time together with TimeZoneOffset",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6198"]),
 )
 
@@ -1615,6 +1857,7 @@ class MachineConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6195",
             browseName="ns=plastics_rubber;LocationName",
             description="Description of the location of the machine given by the machine operator or OPC client",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1626,6 +1869,7 @@ class MachineConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6197",
             browseName="ns=plastics_rubber;PageDirectory",
             description="List of the pages that are implemented in the machine control system and are shown on the screen of the machine",
+            modellingRule="Optional",
             dataType=plastics_rubber_datypes.PageEntryDataType,
             valueRank=1,
             arrayDimensions=[1],
@@ -1638,6 +1882,7 @@ class MachineConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6201",
             browseName="ns=plastics_rubber;TimeZoneOffset",
             description="Difference of the local time to Coordinated Universal Time (UTC) given by the machine operator or OPC client",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.TimeZoneDataType,
             value=ns0.datatypes.TimeZoneDataType(offset=0, daylightSavingInOffset=False),
             accessLevel=3,
@@ -1649,6 +1894,7 @@ class MachineConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6202",
             browseName="ns=plastics_rubber;UserMachineName",
             description="Description of the machine given by the machine operator or OPC client",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
             accessLevel=3,
@@ -1665,16 +1911,19 @@ class MachineConfigurationType(ns0.objtypes.BaseObjectType):
 )
 class MachineStatusType(ns0.objtypes.BaseObjectType):
     activateSleepMode: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_rubber;i=7020", browseName="ns=plastics_rubber;ActivateSleepMode", description="Method for activation of sleep mode")
+        o6.call(nodeId="ns=plastics_rubber;i=7020", browseName="ns=plastics_rubber;ActivateSleepMode", description="Method for activation of sleep mode", modellingRule="Optional")
     )
     deactivateSleepMode: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_rubber;i=7021", browseName="ns=plastics_rubber;DeactivateSleepMode", description="Method for deactivation of sleep mode")
+        o6.call(
+            nodeId="ns=plastics_rubber;i=7021", browseName="ns=plastics_rubber;DeactivateSleepMode", description="Method for deactivation of sleep mode", modellingRule="Optional"
+        )
     )
     isPresent: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6203",
             browseName="ns=plastics_rubber;IsPresent",
             description="Indication if the machine is physically present and connected",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             value=False,
         )
@@ -1684,6 +1933,7 @@ class MachineStatusType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6205",
             browseName="ns=plastics_rubber;MachineMode",
             description="Current machine mode (as defined by mode selector on the machine)",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.MachineModeEnumeration,
             value=plastics_rubber_datypes.MachineModeEnumeration.OTHER,
         )
@@ -1721,6 +1971,7 @@ o6.call(
     nodeId="ns=plastics_rubber;i=7025",
     browseName="ns=plastics_rubber;SetCyclicJobData",
     description="Method for setting the data for cyclic jobs",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6268"]),
 )
 
@@ -1737,6 +1988,7 @@ class CyclicJobInformationType(JobInformationType):
             nodeId="ns=plastics_rubber;i=6267",
             browseName="ns=plastics_rubber;ExpectedCycleTime",
             description="Calculated cycle time for the job",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             value=0.0,
             accessLevel=3,
@@ -1745,7 +1997,12 @@ class CyclicJobInformationType(JobInformationType):
     )
     mouldId: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6190", browseName="ns=plastics_rubber;MouldId", description="Id of the Mould used for the job", dataType=o6.String, value=""
+            nodeId="ns=plastics_rubber;i=6190",
+            browseName="ns=plastics_rubber;MouldId",
+            description="Id of the Mould used for the job",
+            modellingRule="Optional",
+            dataType=o6.String,
+            value="",
         )
     )
     nominalBoxParts: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -1753,6 +2010,7 @@ class CyclicJobInformationType(JobInformationType):
             nodeId="ns=plastics_rubber;i=6266",
             browseName="ns=plastics_rubber;NominalBoxParts",
             description="Number of parts that shall be put into one box",
+            modellingRule="Optional",
             dataType=o6.UInt64,
             value=0,
             accessLevel=3,
@@ -1764,6 +2022,7 @@ class CyclicJobInformationType(JobInformationType):
             nodeId="ns=plastics_rubber;i=6265",
             browseName="ns=plastics_rubber;NominalParts",
             description="Total number (sum of all cavities) of parts that shall be produced by the job",
+            modellingRule="Mandatory",
             dataType=o6.UInt64,
             value=0,
             accessLevel=3,
@@ -1775,6 +2034,7 @@ class CyclicJobInformationType(JobInformationType):
             nodeId="ns=plastics_rubber;i=6279",
             browseName="ns=plastics_rubber;NumCavities",
             description="Number of cavities in the Mould used for production",
+            modellingRule="Optional",
             dataType=o6.UInt32,
             value=0,
         )
@@ -1800,6 +2060,7 @@ o6.call(
     nodeId="ns=plastics_rubber;i=7029",
     browseName="ns=plastics_rubber;SetWatchDogTime",
     description="Release of production for a given time",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6222"]),
 )
 
@@ -1812,13 +2073,14 @@ o6.call(
 )
 class ProductionControlType(ns0.objtypes.BaseObjectType):
     automaticRunEnabled: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6218", browseName="ns=plastics_rubber;AutomaticRunEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6218", browseName="ns=plastics_rubber;AutomaticRunEnabled", modellingRule="Mandatory", dataType=o6.Boolean)
     )
     disableAutomaticRun: o6.node.MethodNode = o6.hasComponent(
         o6.call(
             nodeId="ns=plastics_rubber;i=7024",
             browseName="ns=plastics_rubber;DisableAutomaticRun",
             description="Method for disabling the semi-automatic and automatic run of the machine",
+            modellingRule="Mandatory",
         )
     )
     enableAutomaticRun: o6.node.MethodNode = o6.hasComponent(
@@ -1826,14 +2088,27 @@ class ProductionControlType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=7026",
             browseName="ns=plastics_rubber;EnableAutomaticRun",
             description="Method for enabling the semi-automatic and automatic run of the machine",
+            modellingRule="Mandatory",
         )
     )
     productionOnlyWithMES: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6220", browseName="ns=plastics_rubber;ProductionOnlyWithMES", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6220",
+            browseName="ns=plastics_rubber;ProductionOnlyWithMES",
+            modellingRule="Optional",
+            dataType=o6.Boolean,
+            accessLevel=3,
+            userAccessLevel=1,
+        )
     )
     productionReleasedByMES: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_rubber;i=6021", browseName="ns=plastics_rubber;ProductionReleasedByMES", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            nodeId="ns=plastics_rubber;i=6021",
+            browseName="ns=plastics_rubber;ProductionReleasedByMES",
+            modellingRule="Mandatory",
+            dataType=o6.Boolean,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     productionStatus: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -1841,6 +2116,7 @@ class ProductionControlType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6221",
             browseName="ns=plastics_rubber;ProductionStatus",
             description="Production status when the machine is in automatic or semi-automatic mode",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.ProductionStatusEnumeration,
             value=plastics_rubber_datypes.ProductionStatusEnumeration.OTHER,
         )
@@ -1850,6 +2126,7 @@ class ProductionControlType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=7022",
             browseName="ns=plastics_rubber;RequestTestSample",
             description="The machine shall separate a test sample (e.g. for quality check). The size of the test sample depends on the product/machine configuration.",
+            modellingRule="Optional",
         )
     )
     resetWatchDog: o6.node.MethodNode | None = o6.hasComponent(
@@ -1857,6 +2134,7 @@ class ProductionControlType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=7028",
             browseName="ns=plastics_rubber;ResetWatchDog",
             description="Setting the watch dog timer to the value set by the last calling of SetWatchDogTime",
+            modellingRule="Optional",
         )
     )
     setWatchDogTime: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=plastics_rubber;i=7029"])
@@ -1888,6 +2166,7 @@ o6.call(
     nodeId="ns=plastics_rubber;i=7032",
     browseName="ns=plastics_rubber;GetProductionDatasetInformation",
     description="This Method allows reading the description of a production dataset during the file transfer from the server to the client with ProductionDatasetTransfer",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6283"]),
     outputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6284"]),
 )
@@ -1907,6 +2186,7 @@ o6.call(
     nodeId="ns=plastics_rubber;i=7036",
     browseName="ns=plastics_rubber;SendJobList",
     description="Sends a list of jobs available on the client to the server",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6384"]),
 )
 
@@ -1929,6 +2209,7 @@ o6.call(
     nodeId="ns=plastics_rubber;i=7039",
     browseName="ns=plastics_rubber;SetMESMessage",
     description="Method for setting the MESMessage",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6232"]),
 )
 
@@ -1941,7 +2222,7 @@ o6.call(
 )
 class MachineMESStatusType(ns0.objtypes.BaseObjectType):
     clearMESMessage: o6.node.MethodNode = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_rubber;i=7030", browseName="ns=plastics_rubber;ClearMESMessage", description="Method for clearing the MESMessage")
+        o6.call(nodeId="ns=plastics_rubber;i=7030", browseName="ns=plastics_rubber;ClearMESMessage", description="Method for clearing the MESMessage", modellingRule="Mandatory")
     )
     mESMessage: MESMessageType
     productionControl: ProductionControlType
@@ -1952,6 +2233,7 @@ class MachineMESStatusType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6237",
             browseName="ns=plastics_rubber;StandstillReasonId",
             description="Id of the StandstillReason set by the operator after a standstill occurs",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
         )
@@ -1976,6 +2258,7 @@ o6.call(
     nodeId="ns=plastics_rubber;i=7040",
     browseName="ns=plastics_rubber;SendCyclicJobList",
     description="Sends a list of jobs for cyclic processes available on the client to the server",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6389"]),
 )
 
@@ -2007,7 +2290,12 @@ o6.reference(JobsType, "i=41", RequestCyclicJobListEventType)
 class ActiveCyclicJobValuesType(ActiveJobValuesType):
     averageCycleTime: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=plastics_rubber;i=6241", browseName="ns=plastics_rubber;AverageCycleTime", description="Average cycle time", dataType=ns0.datatypes.Duration, value=0.0
+            nodeId="ns=plastics_rubber;i=6241",
+            browseName="ns=plastics_rubber;AverageCycleTime",
+            description="Average cycle time",
+            modellingRule="Optional",
+            dataType=ns0.datatypes.Duration,
+            value=0.0,
         )
     )
     boxBadPartsCounter: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -2015,6 +2303,7 @@ class ActiveCyclicJobValuesType(ActiveJobValuesType):
             nodeId="ns=plastics_rubber;i=6047",
             browseName="ns=plastics_rubber;BoxBadPartsCounter",
             description="Number of bad parts produced in the current box",
+            modellingRule="Optional",
             dataType=o6.UInt64,
             value=0,
         )
@@ -2024,6 +2313,7 @@ class ActiveCyclicJobValuesType(ActiveJobValuesType):
             nodeId="ns=plastics_rubber;i=6046",
             browseName="ns=plastics_rubber;BoxCycleCounter",
             description="Number of finished cycles for the current box",
+            modellingRule="Optional",
             dataType=o6.UInt64,
             value=0,
         )
@@ -2033,6 +2323,7 @@ class ActiveCyclicJobValuesType(ActiveJobValuesType):
             nodeId="ns=plastics_rubber;i=6041",
             browseName="ns=plastics_rubber;BoxGoodPartsCounter",
             description="Number of good parts produced in the current box",
+            modellingRule="Optional",
             dataType=o6.UInt64,
             value=0,
         )
@@ -2042,6 +2333,7 @@ class ActiveCyclicJobValuesType(ActiveJobValuesType):
             nodeId="ns=plastics_rubber;i=6247",
             browseName="ns=plastics_rubber;BoxPartsCounter",
             description="Total number of parts produced in the current box",
+            modellingRule="Optional",
             dataType=o6.UInt64,
             value=0,
         )
@@ -2051,6 +2343,7 @@ class ActiveCyclicJobValuesType(ActiveJobValuesType):
             nodeId="ns=plastics_rubber;i=6048",
             browseName="ns=plastics_rubber;BoxTestSamplesCounter",
             description="Number of test sample parts produced in the current box",
+            modellingRule="Optional",
             dataType=o6.UInt64,
             value=0,
         )
@@ -2060,13 +2353,19 @@ class ActiveCyclicJobValuesType(ActiveJobValuesType):
             nodeId="ns=plastics_rubber;i=6245",
             browseName="ns=plastics_rubber;JobBadPartsCounter",
             description="Number of bad parts produced in the current job",
+            modellingRule="Mandatory",
             dataType=o6.UInt64,
             value=0,
         )
     )
     jobCycleCounter: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=plastics_rubber;i=6228", browseName="ns=plastics_rubber;JobCycleCounter", description="Number of finished cycles in the job", dataType=o6.UInt64, value=0
+            nodeId="ns=plastics_rubber;i=6228",
+            browseName="ns=plastics_rubber;JobCycleCounter",
+            description="Number of finished cycles in the job",
+            modellingRule="Mandatory",
+            dataType=o6.UInt64,
+            value=0,
         )
     )
     jobGoodPartsCounter: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
@@ -2074,6 +2373,7 @@ class ActiveCyclicJobValuesType(ActiveJobValuesType):
             nodeId="ns=plastics_rubber;i=6244",
             browseName="ns=plastics_rubber;JobGoodPartsCounter",
             description="Number of good parts produced in the current job",
+            modellingRule="Mandatory",
             dataType=o6.UInt64,
             value=0,
         )
@@ -2083,6 +2383,7 @@ class ActiveCyclicJobValuesType(ActiveJobValuesType):
             nodeId="ns=plastics_rubber;i=6242",
             browseName="ns=plastics_rubber;JobPartsCounter",
             description="Total number of parts produced in the current job",
+            modellingRule="Mandatory",
             dataType=o6.UInt64,
             value=0,
         )
@@ -2092,6 +2393,7 @@ class ActiveCyclicJobValuesType(ActiveJobValuesType):
             nodeId="ns=plastics_rubber;i=6246",
             browseName="ns=plastics_rubber;JobTestSamplesCounter",
             description="Number of test sample parts produced in the current job",
+            modellingRule="Mandatory",
             dataType=o6.UInt64,
             value=0,
         )
@@ -2101,6 +2403,7 @@ class ActiveCyclicJobValuesType(ActiveJobValuesType):
             nodeId="ns=plastics_rubber;i=6240",
             browseName="ns=plastics_rubber;LastCycleTime",
             description="Time of the recently finished cycle",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.Duration,
             value=0.0,
         )
@@ -2110,6 +2413,7 @@ class ActiveCyclicJobValuesType(ActiveJobValuesType):
             nodeId="ns=plastics_rubber;i=6248",
             browseName="ns=plastics_rubber;LastPartId",
             description="Id(s) of the parts produced in the recently finished cycle",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=1,
             arrayDimensions=[1],
@@ -2121,6 +2425,7 @@ class ActiveCyclicJobValuesType(ActiveJobValuesType):
             nodeId="ns=plastics_rubber;i=6238",
             browseName="ns=plastics_rubber;MachineCycleCounter",
             description="Number of finished cycles in the machine life time",
+            modellingRule="Optional",
             dataType=o6.UInt64,
             value=0,
         )
@@ -2130,16 +2435,32 @@ class ActiveCyclicJobValuesType(ActiveJobValuesType):
             nodeId="ns=plastics_rubber;i=7042",
             browseName="ns=plastics_rubber;ResetAverageCycleTime",
             description="Initiates a new calculation of the average cycle time for the job",
+            modellingRule="Optional",
         )
     )
     resetBoxCounters: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_rubber;i=7041", browseName="ns=plastics_rubber;ResetBoxCounters", description="Setting the cycle and parts counters for the current box to 0")
+        o6.call(
+            nodeId="ns=plastics_rubber;i=7041",
+            browseName="ns=plastics_rubber;ResetBoxCounters",
+            description="Setting the cycle and parts counters for the current box to 0",
+            modellingRule="Optional",
+        )
     )
     resetJobCounters: o6.node.MethodNode = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_rubber;i=7034", browseName="ns=plastics_rubber;ResetJobCounters", description="Setting the cycle and parts counters for the job to 0")
+        o6.call(
+            nodeId="ns=plastics_rubber;i=7034",
+            browseName="ns=plastics_rubber;ResetJobCounters",
+            description="Setting the cycle and parts counters for the job to 0",
+            modellingRule="Mandatory",
+        )
     )
     stopAtCycleEnd: o6.node.MethodNode = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_rubber;i=7031", browseName="ns=plastics_rubber;StopAtCycleEnd", description="Directs the machine to stop at the end of the current cycle")
+        o6.call(
+            nodeId="ns=plastics_rubber;i=7031",
+            browseName="ns=plastics_rubber;StopAtCycleEnd",
+            description="Directs the machine to stop at the end of the current cycle",
+            modellingRule="Mandatory",
+        )
     )
 
 
@@ -2161,6 +2482,7 @@ o6.call(
     nodeId="ns=plastics_rubber;i=7043",
     browseName="ns=plastics_rubber;Load",
     description="Loads a production dataset from the file system of the machine to the control of the machine",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6275"]),
 )
 
@@ -2177,6 +2499,7 @@ class ProductionDatasetStatusType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6135",
             browseName="ns=plastics_rubber;Frozen",
             description="Indication if changes on the machine in the production dataset are allowed",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             value=False,
             accessLevel=3,
@@ -2188,6 +2511,7 @@ class ProductionDatasetStatusType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6104",
             browseName="ns=plastics_rubber;Information",
             description="Set of information on the production dataset",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.ProductionDatasetInformationType,
             value=plastics_rubber_datypes.ProductionDatasetInformationType(
                 name="",
@@ -2216,6 +2540,7 @@ class ProductionDatasetStatusType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6105",
             browseName="ns=plastics_rubber;Modified",
             description="Indication if the production dataset has been changed after the last storage",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             value=False,
         )
@@ -2241,6 +2566,7 @@ o6.call(
     nodeId="ns=plastics_rubber;i=7045",
     browseName="ns=plastics_rubber;SendProductionDatasetInformation",
     description="This Method allows sending of the description of a production dataset during the file transfer from the client to the server with ProductionDatasetTransfer",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6285"]),
 )
 
@@ -2272,19 +2598,26 @@ class MaintenanceType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6514",
             browseName="ns=plastics_rubber;AdditionalInformation",
             description="Additional information on the necessary maintenance. Can be also a link to another document.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
     interval: ns0.vartypes.AnalogItemType | None
     remainingInterval: ns0.vartypes.AnalogItemType | None
     reset: o6.node.MethodNode = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_rubber;i=7046", browseName="ns=plastics_rubber;Reset", description="This Method sets the RemainingInterval to Interval and Status to NOT_DUE_0")
+        o6.call(
+            nodeId="ns=plastics_rubber;i=7046",
+            browseName="ns=plastics_rubber;Reset",
+            description="This Method sets the RemainingInterval to Interval and Status to NOT_DUE_0",
+            modellingRule="Mandatory",
+        )
     )
     status: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6311",
             browseName="ns=plastics_rubber;Status",
             description="Maintenance status of the machine/device/component (represented by the parent element)",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.MaintenanceStatusEnumeration,
             value=plastics_rubber_datypes.MaintenanceStatusEnumeration.NOT_DUE,
         )
@@ -2304,6 +2637,7 @@ class ClosedLoopControlType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6320",
             browseName="ns=plastics_rubber;AutoTuningActive",
             description="Informs if the automatic tuning is currently active",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             value=False,
         )
@@ -2313,16 +2647,20 @@ class ClosedLoopControlType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=7048",
             browseName="ns=plastics_rubber;AutoTuningOff",
             description="Stops an already active self-optimisation process (no control parameters are changed)",
+            modellingRule="Optional",
         )
     )
     autoTuningOn: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_rubber;i=7047", browseName="ns=plastics_rubber;AutoTuningOn", description="Starts the self-optimisation of the controller")
+        o6.call(
+            nodeId="ns=plastics_rubber;i=7047", browseName="ns=plastics_rubber;AutoTuningOn", description="Starts the self-optimisation of the controller", modellingRule="Optional"
+        )
     )
     automaticControllerMode: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6319",
             browseName="ns=plastics_rubber;AutomaticControllerMode",
             description="Determination if PID Parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -2333,9 +2671,10 @@ class ClosedLoopControlType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6318",
             browseName="ns=plastics_rubber;PIDParameters",
             description="PID Parameters as array if several input signals (sensors) are used for the control",
+            modellingRule="Optional",
             dataType=plastics_rubber_datypes.PIDParametersDataType,
             valueRank=1,
-            arrayDimensions=[1],
+            arrayDimensions=[0],
             value=[plastics_rubber_datypes.PIDParametersDataType(p=0.0, i=0.0, d=0.0)],
             accessLevel=3,
             userAccessLevel=1,
@@ -2357,6 +2696,7 @@ class MonitoredParameterType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=6350",
             browseName="ns=plastics_rubber;AutomaticMonitoring",
             description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             value=False,
             accessLevel=3,
@@ -2373,6 +2713,7 @@ class MonitoredParameterType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_rubber;i=7053",
             browseName="ns=plastics_rubber;ResetMonitoring",
             description="With this method the tolerance values are set according to the actual value and the set monitoring sensitivity",
+            modellingRule="Optional",
         )
     )
     setRampDown: ns0.vartypes.AnalogItemType | None
@@ -2401,20 +2742,25 @@ class MeasuringDeviceType(ControlledParameterType):
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6428",
             browseName="ns=plastics_rubber;ControlMode",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.ControlModeEnumeration,
             value=plastics_rubber_datypes.ControlModeEnumeration.OTHER,
         )
     )
-    id: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6424", browseName="ns=plastics_rubber;Id", dataType=o6.String, value=""))
+    id: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6424", browseName="ns=plastics_rubber;Id", modellingRule="Mandatory", dataType=o6.String, value="")
+    )
     isPresent: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6427", browseName="ns=plastics_rubber;IsPresent", dataType=o6.Boolean, value=False)
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6427", browseName="ns=plastics_rubber;IsPresent", modellingRule="Mandatory", dataType=o6.Boolean, value=False)
     )
     maintenance: MaintenanceType | None
     name: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6425", browseName="ns=plastics_rubber;Name", dataType=o6.LocalizedText, value=o6.LocalizedText())
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6425", browseName="ns=plastics_rubber;Name", modellingRule="Optional", dataType=o6.LocalizedText, value=o6.LocalizedText()
+        )
     )
     position: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6426", browseName="ns=plastics_rubber;Position", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6426", browseName="ns=plastics_rubber;Position", modellingRule="Optional", dataType=o6.String)
     )
     startDevice: StartDeviceType | None
 
@@ -2422,18 +2768,26 @@ class MeasuringDeviceType(ControlledParameterType):
 @o6.objecttype(nodeId="ns=plastics_rubber;i=1023", browseName="ns=plastics_rubber;StartDeviceType", displayName="StartDeviceType")
 class StartDeviceType(ns0.objtypes.BaseObjectType):
     startBlockedByClient: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6101", browseName="ns=plastics_rubber;StartBlockedByClient", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6101",
+            browseName="ns=plastics_rubber;StartBlockedByClient",
+            modellingRule="Optional",
+            dataType=o6.Boolean,
+            accessLevel=3,
+            userAccessLevel=1,
+        )
     )
-    startRequest: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7051", browseName="ns=plastics_rubber;StartRequest"))
+    startRequest: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7051", browseName="ns=plastics_rubber;StartRequest", modellingRule="Optional"))
     status: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_rubber;i=6010",
             browseName="ns=plastics_rubber;Status",
+            modellingRule="Mandatory",
             dataType=plastics_rubber_datypes.StartEnumeration,
             value=plastics_rubber_datypes.StartEnumeration.NOT_READY_TO_START,
         )
     )
-    stopRequest: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7056", browseName="ns=plastics_rubber;StopRequest"))
+    stopRequest: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7056", browseName="ns=plastics_rubber;StopRequest", modellingRule="Optional"))
 
 
 ns0.vartypes.PropertyType(
@@ -2451,7 +2805,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Density", dataType=o6.NodeId("i=11"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=plastics_rubber;i=7057", browseName="ns=plastics_rubber;AddMaterial", inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6100"]))
+o6.call(nodeId="ns=plastics_rubber;i=7057", browseName="ns=plastics_rubber;AddMaterial", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6100"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=plastics_rubber;i=6307",
@@ -2464,17 +2818,21 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Id", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=plastics_rubber;i=7058", browseName="ns=plastics_rubber;RemoveMaterialById", inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6307"]))
+o6.call(
+    nodeId="ns=plastics_rubber;i=7058", browseName="ns=plastics_rubber;RemoveMaterialById", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=plastics_rubber;i=6307"])
+)
 
 
 @o6.objecttype(nodeId="ns=plastics_rubber;i=1059", browseName="ns=plastics_rubber;MaterialListType", displayName="MaterialListType")
 class MaterialListType(ns0.objtypes.BaseObjectType):
     addMaterial: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=plastics_rubber;i=7057"])
     densityUnit: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6512", browseName="ns=plastics_rubber;DensityUnit", dataType=ns0.datatypes.EUInformation)
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6512", browseName="ns=plastics_rubber;DensityUnit", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
     )
     material_Nr_: MaterialType | None
-    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6306", browseName="NodeVersion", dataType=o6.String, value=""))
+    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6306", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value="")
+    )
     removeMaterialById: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=plastics_rubber;i=7058"])
 
 
@@ -2484,11 +2842,13 @@ o6.reference(MaterialListType, "i=41", RequestAddMaterialEventType)
 
 @o6.objecttype(nodeId="ns=plastics_rubber;i=1066", browseName="ns=plastics_rubber;DiagnosticsType", displayName="DiagnosticsType")
 class DiagnosticsType(ns0.objtypes.BaseObjectType):
-    runDiagnostics: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7059", browseName="ns=plastics_rubber;RunDiagnostics"))
+    runDiagnostics: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7059", browseName="ns=plastics_rubber;RunDiagnostics", modellingRule="Mandatory"))
     status: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_rubber;i=6503", browseName="ns=plastics_rubber;Status", dataType=plastics_rubber_datypes.DiagnosticsStatusEnumeration)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_rubber;i=6503", browseName="ns=plastics_rubber;Status", modellingRule="Mandatory", dataType=plastics_rubber_datypes.DiagnosticsStatusEnumeration
+        )
     )
-    stopDiagnostics: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7060", browseName="ns=plastics_rubber;StopDiagnostics"))
+    stopDiagnostics: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="ns=plastics_rubber;i=7060", browseName="ns=plastics_rubber;StopDiagnostics", modellingRule="Mandatory"))
 
 
 o6.reference(DiagnosticsType, "i=41", DiagnosisEndEventType)

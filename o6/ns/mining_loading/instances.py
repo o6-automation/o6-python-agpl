@@ -53,7 +53,7 @@ http_opcfoundation_org_UA_Mining_Loading_General_ = ns0.objtypes.NamespaceMetada
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[2],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC, ns0.datatypes.IdType.STRING],
             )
         ),
@@ -70,20 +70,22 @@ http_opcfoundation_org_UA_Mining_Loading_General_ = ns0.objtypes.NamespaceMetada
 ns0.vartypes.ThreeDCartesianCoordinatesType(
     nodeId="ns=mining_loading;i=6009",
     browseName="CartesianCoordinates",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6010", browseName="X", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6011", browseName="Y", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6012", browseName="Z", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6010", browseName="X", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6011", browseName="Y", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6012", browseName="Z", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDCartesianCoordinates,
 )
 ns0.vartypes.ThreeDOrientationType(
     nodeId="ns=mining_loading;i=6013",
     browseName="Orientation",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6014", browseName="A", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6015", browseName="B", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6016", browseName="C", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6014", browseName="A", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6015", browseName="B", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6016", browseName="C", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDOrientation,
 )
@@ -91,12 +93,13 @@ ns0.vartypes.ThreeDFrameType(
     nodeId="ns=mining_loading;i=6001",
     browseName="ns=mining_loading;ExclusionZone",
     description="The ExclusionZone property describes the area that haulage machines, which are to be loaded, are not allowed to enter when approaching the loading machine",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_loading;i=6019", browseName="Constant", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_loading;i=6020", browseName="FixedBase", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_loading;i=6019", browseName="Constant", modellingRule="Optional", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_loading;i=6020", browseName="FixedBase", modellingRule="Optional", dataType=o6.Boolean)),
         o6.hasComponent(o6.ns["ns=mining_loading;i=6009"]),
         o6.hasComponent(o6.ns["ns=mining_loading;i=6013"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6018", browseName="BaseFrame", dataType=o6.NodeId)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6018", browseName="BaseFrame", modellingRule="Optional", dataType=o6.NodeId)),
     ],
     dataType=ns0.datatypes.ThreeDFrame,
     valueRank=1,
@@ -105,20 +108,22 @@ ns0.vartypes.ThreeDFrameType(
 ns0.vartypes.ThreeDCartesianCoordinatesType(
     nodeId="ns=mining_loading;i=6024",
     browseName="CartesianCoordinates",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6025", browseName="X", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6026", browseName="Y", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6027", browseName="Z", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6025", browseName="X", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6026", browseName="Y", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6027", browseName="Z", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDCartesianCoordinates,
 )
 ns0.vartypes.ThreeDOrientationType(
     nodeId="ns=mining_loading;i=6028",
     browseName="Orientation",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6029", browseName="A", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6030", browseName="B", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6031", browseName="C", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6029", browseName="A", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6030", browseName="B", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6031", browseName="C", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDOrientation,
 )
@@ -126,12 +131,13 @@ ns0.vartypes.ThreeDFrameType(
     nodeId="ns=mining_loading;i=6023",
     browseName="ns=mining_loading;MachinePose",
     description="The MachinePose variable describes the pose of the loading machine in terms of location coordinates, orientation and (optional) base frame.",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_loading;i=6033", browseName="Constant", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_loading;i=6034", browseName="FixedBase", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_loading;i=6033", browseName="Constant", modellingRule="Optional", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_loading;i=6034", browseName="FixedBase", modellingRule="Optional", dataType=o6.Boolean)),
         o6.hasComponent(o6.ns["ns=mining_loading;i=6024"]),
         o6.hasComponent(o6.ns["ns=mining_loading;i=6028"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6032", browseName="BaseFrame", dataType=o6.NodeId)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_loading;i=6032", browseName="BaseFrame", modellingRule="Optional", dataType=o6.NodeId)),
     ],
     dataType=ns0.datatypes.ThreeDFrame,
     value=ns0.datatypes.ThreeDFrame(
@@ -171,6 +177,7 @@ o6.call(
     nodeId="ns=mining_loading;i=7001",
     browseName="ns=mining_loading;RequestForLoading",
     description="The RequestForLoading method is called by a partnering machine when they want to start the loading procedure.",
+    modellingRule="Optional",
     outputArgs=o6.hasProperty(o6.ns["ns=mining_loading;i=6021"]),
 )
 
@@ -197,6 +204,7 @@ o6.call(
     nodeId="ns=mining_loading;i=7002",
     browseName="ns=mining_loading;StopLoading",
     description="The StopLoading method is called by a partnering machine when they want to abort the loading procedure",
+    modellingRule="Optional",
     outputArgs=o6.hasProperty(o6.ns["ns=mining_loading;i=6022"]),
 )
 
@@ -223,6 +231,7 @@ o6.call(
     nodeId="ns=mining_loading;i=7003",
     browseName="ns=mining_loading;PositioningComplete",
     description="The PositioningComplete method is called by a partnering machine when they have finished to position themselves in front of the loading machine",
+    modellingRule="Optional",
     outputArgs=o6.hasProperty(o6.ns["ns=mining_loading;i=6035"]),
 )
 

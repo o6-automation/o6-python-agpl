@@ -48,7 +48,7 @@ class SpatialObjectType(ns0.objtypes.BaseObjectType):
         )
     )
     identifier: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=rsl;i=6016", browseName="ns=rsl;Identifier", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=rsl;i=6016", browseName="ns=rsl;Identifier", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     internalFrames: ns0.objtypes.FolderType | None
     positionFrame: rsl_vartypes.SpatialLocationType
@@ -57,10 +57,10 @@ class SpatialObjectType(ns0.objtypes.BaseObjectType):
 @o6.objecttype(nodeId="ns=rsl;i=1003", browseName="ns=rsl;SpatialObjectsListType", displayName="SpatialObjectsListType")
 class SpatialObjectsListType(ns0.objtypes.BaseObjectType):
     identifier: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=rsl;i=6024", browseName="ns=rsl;Identifier", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=rsl;i=6024", browseName="ns=rsl;Identifier", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=rsl;i=6027", browseName="NodeVersion", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=rsl;i=6027", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     spatialObject_: SpatialObjectType | None
     worldFrame: rsl_vartypes.SpatialLocationType

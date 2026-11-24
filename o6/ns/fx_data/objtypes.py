@@ -35,9 +35,11 @@ else:
 @o6.objecttype(nodeId="ns=fx_data;i=1025", browseName="ns=fx_data;AuditUpdateMethodResultEventType", displayName="AuditUpdateMethodResultEventType", isAbstract=True)
 class AuditUpdateMethodResultEventType(ns0.objtypes.AuditUpdateMethodEventType):
     outputArguments: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fx_data;i=6001", browseName="OutputArguments", valueRank=1, arrayDimensions=[0])
+        ns0.vartypes.PropertyType(nodeId="ns=fx_data;i=6001", browseName="OutputArguments", modellingRule="Mandatory", valueRank=1, arrayDimensions=[0])
     )
-    statusCodeId: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_data;i=6002", browseName="StatusCodeId", dataType=o6.StatusCode))
+    statusCodeId: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=fx_data;i=6002", browseName="StatusCodeId", modellingRule="Mandatory", dataType=o6.StatusCode)
+    )
 
 
 del Any, TYPE_CHECKING, uuid, o6, ns0, fx_data_datypes

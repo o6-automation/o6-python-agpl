@@ -50,16 +50,18 @@ static UA_ClientConfig *get_config(PyClientConfig *self) {
     return UA_Client_getConfig(self->py_client->client);
 }
 
-static bool is_client_connected(UA_Client *client) {
-    UA_SecureChannelState channelState;
-    UA_SessionState sessionState;
-    UA_StatusCode connectStatus;
-    UA_Client_getState(client, &channelState, &sessionState, &connectStatus);
-    return (channelState == UA_SECURECHANNELSTATE_OPEN ||
-            sessionState == UA_SESSIONSTATE_ACTIVATED);
+/* Lock-free lifecycle check before the loop-thread guard, with the message
+ * of the checks below: the configuration is read-only while the client is
+ * live, whatever thread writes it. */
+static bool
+config_writable(const PyClientConfig *self, const char *verb, const char *name) {
+    if(!pyClient_isLive(self->py_client))
+        return true;
+    PyErr_Format(PyExc_RuntimeError, "Cannot %s %s while client is connected", verb, name);
+    return false;
 }
 
-// Shared pre-check for all setters: config exists + not connected
+// Shared pre-check for all setters: config exists + client not live
 static UA_ClientConfig *
 setter_precheck(PyClientConfig *self, const char *name) {
     UA_ClientConfig *cfg = get_config(self);
@@ -67,7 +69,7 @@ setter_precheck(PyClientConfig *self, const char *name) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_Client attached");
         return NULL;
     }
-    if (is_client_connected(self->py_client->client)) {
+    if (pyClient_isLive(self->py_client)) {
         PyErr_Format(PyExc_RuntimeError,
                      "Cannot modify %s while client is connected", name);
         return NULL;
@@ -386,6 +388,7 @@ _apply_encryption_if_ready(PyClientConfig *self) {
 /* Python-callable wrapper: applies encryption (once, idempotently) before connect. */
 static PyObject *
 PyClientConfig_finalize_encryption(PyClientConfig *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClientConfig_eventLoop(self), NULL);
     if (_apply_encryption_if_ready(self) < 0)
         return NULL;
     Py_RETURN_NONE;
@@ -395,6 +398,7 @@ PyClientConfig_finalize_encryption(PyClientConfig *self, PyObject *args) {
 
 static PyObject *
 config_generic_get(PyClientConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyClientConfig_eventLoop(self), NULL);
     const ConfigPropDesc *desc = (const ConfigPropDesc *)closure;
     UA_ClientConfig *cfg = get_config(self);
     if (!cfg) {
@@ -444,6 +448,8 @@ config_generic_get(PyClientConfig *self, void *closure) {
 
 static int
 config_generic_set(PyClientConfig *self, PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "modify", ((const ConfigPropDesc *)closure)->name),
+                               pyClientConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -619,6 +625,7 @@ pylist_to_ua_string_array(PyObject *value, size_t *out_size) {
 /* session_locale_ids — getter */
 static PyObject *
 PyClientConfig_get_session_locale_ids(PyClientConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyClientConfig_eventLoop(self), NULL);
     UA_ClientConfig *cfg = get_config(self);
     if (!cfg) { PyErr_SetString(PyExc_RuntimeError, "No UA_Client attached"); return NULL; }
     return ua_string_array_to_pylist(cfg->sessionLocaleIds, cfg->sessionLocaleIdsSize);
@@ -627,6 +634,8 @@ PyClientConfig_get_session_locale_ids(PyClientConfig *self, void *closure) {
 /* session_locale_ids — setter */
 static int
 PyClientConfig_set_session_locale_ids(PyClientConfig *self, PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "modify", "session_locale_ids"),
+                               pyClientConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -645,6 +654,7 @@ PyClientConfig_set_session_locale_ids(PyClientConfig *self, PyObject *value, voi
 /* namespaces — getter */
 static PyObject *
 PyClientConfig_get_namespaces(PyClientConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyClientConfig_eventLoop(self), NULL);
     UA_ClientConfig *cfg = get_config(self);
     if (!cfg) { PyErr_SetString(PyExc_RuntimeError, "No UA_Client attached"); return NULL; }
     return ua_string_array_to_pylist(cfg->namespaces, cfg->namespacesSize);
@@ -653,6 +663,8 @@ PyClientConfig_get_namespaces(PyClientConfig *self, void *closure) {
 /* namespaces — setter */
 static int
 PyClientConfig_set_namespaces(PyClientConfig *self, PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "modify", "namespaces"),
+                               pyClientConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -672,12 +684,15 @@ PyClientConfig_set_namespaces(PyClientConfig *self, PyObject *value, void *closu
 
 static PyObject *
 PyClientConfig_get_send_buffer_size(PyClientConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyClientConfig_eventLoop(self), NULL);
     UA_ClientConfig *cfg = get_config(self);
     if (!cfg) { PyErr_SetString(PyExc_RuntimeError, "No UA_Client attached"); return NULL; }
     return PyLong_FromUnsignedLong(cfg->localConnectionConfig.sendBufferSize);
 }
 static int
 PyClientConfig_set_send_buffer_size(PyClientConfig *self, PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "modify", "send_buffer_size"),
+                               pyClientConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -691,12 +706,15 @@ PyClientConfig_set_send_buffer_size(PyClientConfig *self, PyObject *value, void 
 
 static PyObject *
 PyClientConfig_get_recv_buffer_size(PyClientConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyClientConfig_eventLoop(self), NULL);
     UA_ClientConfig *cfg = get_config(self);
     if (!cfg) { PyErr_SetString(PyExc_RuntimeError, "No UA_Client attached"); return NULL; }
     return PyLong_FromUnsignedLong(cfg->localConnectionConfig.recvBufferSize);
 }
 static int
 PyClientConfig_set_recv_buffer_size(PyClientConfig *self, PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "modify", "recv_buffer_size"),
+                               pyClientConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -710,12 +728,15 @@ PyClientConfig_set_recv_buffer_size(PyClientConfig *self, PyObject *value, void 
 
 static PyObject *
 PyClientConfig_get_local_max_message_size(PyClientConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyClientConfig_eventLoop(self), NULL);
     UA_ClientConfig *cfg = get_config(self);
     if (!cfg) { PyErr_SetString(PyExc_RuntimeError, "No UA_Client attached"); return NULL; }
     return PyLong_FromUnsignedLong(cfg->localConnectionConfig.localMaxMessageSize);
 }
 static int
 PyClientConfig_set_local_max_message_size(PyClientConfig *self, PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "modify", "local_max_message_size"),
+                               pyClientConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -729,12 +750,15 @@ PyClientConfig_set_local_max_message_size(PyClientConfig *self, PyObject *value,
 
 static PyObject *
 PyClientConfig_get_local_max_chunk_count(PyClientConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyClientConfig_eventLoop(self), NULL);
     UA_ClientConfig *cfg = get_config(self);
     if (!cfg) { PyErr_SetString(PyExc_RuntimeError, "No UA_Client attached"); return NULL; }
     return PyLong_FromUnsignedLong(cfg->localConnectionConfig.localMaxChunkCount);
 }
 static int
 PyClientConfig_set_local_max_chunk_count(PyClientConfig *self, PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "modify", "local_max_chunk_count"),
+                               pyClientConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -749,6 +773,8 @@ PyClientConfig_set_local_max_chunk_count(PyClientConfig *self, PyObject *value, 
 // ---- logger (write-only, stays custom) ----------------------------------
 
 static int PyClientConfig_set_logger(PyClientConfig *self, PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "modify", "logger"),
+                               pyClientConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -835,6 +861,7 @@ o6_resolve_security_policy(const char *value) {
 
 static PyObject *
 PyClientConfig_get_security_policy(PyClientConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyClientConfig_eventLoop(self), NULL);
     UA_ClientConfig *cfg = get_config(self);
     if (!cfg) { PyErr_SetString(PyExc_RuntimeError, "No UA_Client attached"); return NULL; }
     if (cfg->securityPolicyUri.length == 0)
@@ -846,6 +873,8 @@ PyClientConfig_get_security_policy(PyClientConfig *self, void *closure) {
 
 static int
 PyClientConfig_set_security_policy(PyClientConfig *self, PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "modify", "security_policy"),
+                               pyClientConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -885,6 +914,7 @@ PyClientConfig_set_security_policy(PyClientConfig *self, PyObject *value, void *
 
 static PyObject *
 PyClientConfig_get_certificate(PyClientConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyClientConfig_eventLoop(self), NULL);
     if (!self->certificate) Py_RETURN_NONE;
     Py_INCREF(self->certificate);
     return self->certificate;
@@ -892,6 +922,8 @@ PyClientConfig_get_certificate(PyClientConfig *self, void *closure) {
 
 static int
 PyClientConfig_set_certificate(PyClientConfig *self, PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "modify", "certificate"),
+                               pyClientConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -912,6 +944,7 @@ PyClientConfig_set_certificate(PyClientConfig *self, PyObject *value, void *clos
 
 static PyObject *
 PyClientConfig_get_private_key(PyClientConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyClientConfig_eventLoop(self), NULL);
     if (!self->private_key) Py_RETURN_NONE;
     Py_INCREF(self->private_key);
     return self->private_key;
@@ -919,6 +952,8 @@ PyClientConfig_get_private_key(PyClientConfig *self, void *closure) {
 
 static int
 PyClientConfig_set_private_key(PyClientConfig *self, PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "modify", "private_key"),
+                               pyClientConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -939,6 +974,7 @@ PyClientConfig_set_private_key(PyClientConfig *self, PyObject *value, void *clos
 
 static PyObject *
 PyClientConfig_get_trust_list(PyClientConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyClientConfig_eventLoop(self), NULL);
     if (!self->trust_list) return PyList_New(0);
     Py_INCREF(self->trust_list);
     return self->trust_list;
@@ -946,6 +982,8 @@ PyClientConfig_get_trust_list(PyClientConfig *self, void *closure) {
 
 static int
 PyClientConfig_set_trust_list(PyClientConfig *self, PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "modify", "trust_list"),
+                               pyClientConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -961,6 +999,7 @@ PyClientConfig_set_trust_list(PyClientConfig *self, PyObject *value, void *closu
 
 static PyObject *
 PyClientConfig_get_revocation_list(PyClientConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyClientConfig_eventLoop(self), NULL);
     if (!self->revocation_list) return PyList_New(0);
     Py_INCREF(self->revocation_list);
     return self->revocation_list;
@@ -968,6 +1007,8 @@ PyClientConfig_get_revocation_list(PyClientConfig *self, void *closure) {
 
 static int
 PyClientConfig_set_revocation_list(PyClientConfig *self, PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "modify", "revocation_list"),
+                               pyClientConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -983,12 +1024,15 @@ PyClientConfig_set_revocation_list(PyClientConfig *self, PyObject *value, void *
 
 static PyObject *
 PyClientConfig_get_accept_all_certificates(PyClientConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyClientConfig_eventLoop(self), NULL);
     return PyBool_FromLong(self->accept_all_certificates);
 }
 
 static int
 PyClientConfig_set_accept_all_certificates(PyClientConfig *self, PyObject *value,
                                            void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "modify", "acceptAllCertificates"),
+                               pyClientConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -1009,7 +1053,8 @@ PyClientConfig_get_load_unknown_data_types(PyClientConfig *self, void *closure) 
 }
 
 /* Read by the Python client before each on-demand DataType lookup, so it can
- * change while connected. */
+ * change while connected, from any thread: an o6 flag, not native client
+ * state, so neither accessor has the loop-thread guard. */
 static int
 PyClientConfig_set_load_unknown_data_types(PyClientConfig *self, PyObject *value,
                                            void *closure) {
@@ -1033,6 +1078,7 @@ PyClientConfig_set_load_unknown_data_types(PyClientConfig *self, PyObject *value
 
 // --- applicationUri (custom: uses clientDescription.applicationUri) ---
 static PyObject *PyClientConfig_get_applicationUri(PyClientConfig *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyClientConfig_eventLoop(self), NULL);
     UA_ClientConfig *cfg = get_config(self);
     if (!cfg) {
         PyErr_SetString(PyExc_RuntimeError, "No UA_Client attached");
@@ -1045,6 +1091,8 @@ static PyObject *PyClientConfig_get_applicationUri(PyClientConfig *self, void *c
         cfg->clientDescription.applicationUri.length);
 }
 static int PyClientConfig_set_applicationUri(PyClientConfig *self, PyObject *value, void *closure) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "modify", "applicationUri"),
+                               pyClientConfig_eventLoop(self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete configuration properties");
         return -1;
@@ -1054,7 +1102,7 @@ static int PyClientConfig_set_applicationUri(PyClientConfig *self, PyObject *val
         PyErr_SetString(PyExc_RuntimeError, "No UA_Client attached");
         return -1;
     }
-    if (is_client_connected(self->py_client->client)) {
+    if (pyClient_isLive(self->py_client)) {
         PyErr_SetString(PyExc_RuntimeError, "Cannot modify applicationUri while client is connected");
         return -1;
     }
@@ -1153,6 +1201,8 @@ static PyGetSetDef PyClientConfig_getset[] = {
 
 static PyObject *
 PyClientConfig_set_username_password(PyClientConfig *self, PyObject *args) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "modify", "set_username_password"),
+                               pyClientConfig_eventLoop(self), NULL);
     const char *username, *password;
     if (!PyArg_ParseTuple(args, "ss", &username, &password))
         return NULL;
@@ -1173,6 +1223,8 @@ PyClientConfig_set_username_password(PyClientConfig *self, PyObject *args) {
 /* --- set_encryption method --- */
 static PyObject *
 PyClientConfig_set_encryption(PyClientConfig *self, PyObject *args, PyObject *kwds) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "configure", "encryption"),
+                               pyClientConfig_eventLoop(self), NULL);
     static char *kwlist[] = {"certificate", "privateKey",
                              "trustList", "revocationList", NULL};
     PyObject *py_cert = NULL, *py_key = NULL;
@@ -1187,7 +1239,7 @@ PyClientConfig_set_encryption(PyClientConfig *self, PyObject *args, PyObject *kw
         PyErr_SetString(PyExc_RuntimeError, "No UA_Client attached");
         return NULL;
     }
-    if (is_client_connected(self->py_client->client)) {
+    if (pyClient_isLive(self->py_client)) {
         PyErr_SetString(PyExc_RuntimeError,
                         "Cannot configure encryption while client is connected");
         return NULL;
@@ -1227,6 +1279,8 @@ PyClientConfig_set_encryption(PyClientConfig *self, PyObject *args, PyObject *kw
 static PyObject *
 PyClientConfig_set_authentication_cert(PyClientConfig *self,
                                        PyObject *args, PyObject *kwds) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "configure", "authentication"),
+                               pyClientConfig_eventLoop(self), NULL);
     static char *kwlist[] = {"certificate", "privateKey", NULL};
     PyObject *py_cert = NULL, *py_key = NULL;
 
@@ -1239,7 +1293,7 @@ PyClientConfig_set_authentication_cert(PyClientConfig *self,
         PyErr_SetString(PyExc_RuntimeError, "No UA_Client attached");
         return NULL;
     }
-    if (is_client_connected(self->py_client->client)) {
+    if (pyClient_isLive(self->py_client)) {
         PyErr_SetString(PyExc_RuntimeError,
                         "Cannot configure authentication while client is connected");
         return NULL;
@@ -1313,6 +1367,8 @@ check_json(PyObject *arg) {
 
 static PyObject *
 PyClientConfig_load_json(PyClientConfig *self, PyObject *args, PyObject *kwds) {
+    O6_REQUIRE_WRITABLE_CONFIG(config_writable(self, "modify", "the configuration"),
+                               pyClientConfig_eventLoop(self), NULL);
     static char *kwlist[] = {"json", "dryRun", NULL};
     PyObject *arg;
     int dry_run = 0;

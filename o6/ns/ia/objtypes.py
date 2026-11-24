@@ -106,13 +106,16 @@ class BasicStacklightType(ns0.objtypes.OrderedListType):
     orderedObject_: StackElementType | None
     stackLevel: StackLevelType | None
     stackRunning: StackRunningType | None = o6.hasComponent(
-        StackRunningType(nodeId="ns=ia;i=5005", browseName="ns=ia;StackRunning", description="Valid if the stacklight is used in “Running_Light” StacklightMode.")
+        StackRunningType(
+            nodeId="ns=ia;i=5005", browseName="ns=ia;StackRunning", description="Valid if the stacklight is used in “Running_Light” StacklightMode.", modellingRule="Optional"
+        )
     )
     stacklightMode: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=ia;i=6009",
             browseName="ns=ia;StacklightMode",
             description="Shows in what way (stack of individual lights, level meter, running light) the stacklight unit is used.",
+            modellingRule="Mandatory",
             dataType=ia_datypes.StacklightOperationMode,
             accessLevel=3,
             userAccessLevel=1,
@@ -132,6 +135,7 @@ class StackLevelType(ns0.objtypes.BaseObjectType):
             nodeId="ns=ia;i=6012",
             browseName="ns=ia;DisplayMode",
             description="Indicates in what way the percentual value is displayed with the stacklight.",
+            modellingRule="Mandatory",
             dataType=ia_datypes.LevelDisplayMode,
             accessLevel=3,
             userAccessLevel=1,
@@ -154,6 +158,7 @@ class StackElementType(ns0.objtypes.BaseObjectType):
             nodeId="ns=ia;i=6014",
             browseName="ns=ia;IsPartOfBase",
             description="Indicates, if the element is contained in the mounting base of the stacklight. All elements contained in the mounting base shall be at the beginning of the list of stack elements.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -164,6 +169,7 @@ class StackElementType(ns0.objtypes.BaseObjectType):
             nodeId="ns=ia;i=6015",
             browseName="NumberInList",
             description="Enumerate the stacklight elements counting upwards beginning from the base of the stacklight.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.UInteger,
         )
     )
@@ -172,6 +178,7 @@ class StackElementType(ns0.objtypes.BaseObjectType):
             nodeId="ns=ia;i=6013",
             browseName="ns=ia;SignalOn",
             description="Indicates if the signal emitted by the stack element is currently switched on or not.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -190,6 +197,7 @@ class StackElementAcousticType(StackElementType):
             nodeId="ns=ia;i=6020",
             browseName="ns=ia;OperationMode",
             description="Indicates what signal of the list of AcousticSignalType nodes is played when the acoustic element is switched on. It shall contain an index into the NumberInList of the respective AcousticSignalType Object of AcousticSignals.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.UInteger,
             accessLevel=3,
             userAccessLevel=1,
@@ -209,6 +217,7 @@ class ControlChannelType(ns0.objtypes.BaseObjectType):
             nodeId="ns=ia;i=6024",
             browseName="ns=ia;ChannelColor",
             description="Indicates in what mode (continuously on, blinking, flashing) the channel operates when switched on.",
+            modellingRule="Mandatory",
             dataType=ia_datypes.SignalColor,
             accessLevel=3,
             userAccessLevel=1,
@@ -220,6 +229,7 @@ class ControlChannelType(ns0.objtypes.BaseObjectType):
             nodeId="ns=ia;i=6025",
             browseName="ns=ia;SignalMode",
             description="Contains a list of audio signals used by this acoustic stacklight element.",
+            modellingRule="Mandatory",
             dataType=ia_datypes.SignalModeLight,
             accessLevel=3,
             userAccessLevel=1,
@@ -227,7 +237,13 @@ class ControlChannelType(ns0.objtypes.BaseObjectType):
     )
     signalOn: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=ia;i=6023", browseName="ns=ia;SignalOn", description="Indicates if the colour is switched on.", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            nodeId="ns=ia;i=6023",
+            browseName="ns=ia;SignalOn",
+            description="Indicates if the colour is switched on.",
+            modellingRule="Mandatory",
+            dataType=o6.Boolean,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
 
@@ -245,6 +261,7 @@ class AcousticSignalType(ns0.objtypes.BaseObjectType):
             nodeId="ns=ia;i=6029",
             browseName="ns=ia;AudioSample",
             description="Contains the audio data, e.g. for devices capable of audio playback.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.AudioDataType,
             accessLevel=3,
             userAccessLevel=1,
@@ -255,6 +272,7 @@ class AcousticSignalType(ns0.objtypes.BaseObjectType):
             nodeId="ns=ia;i=6028",
             browseName="NumberInList",
             description="Enumerate the acoustic signals. Instances of StackElementAcousticType index into this number using the OperationMode Property.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.UInteger,
             accessLevel=3,
             userAccessLevel=1,
@@ -275,6 +293,7 @@ class StacklightType(BasicStacklightType):
             nodeId="ns=ia;i=6038",
             browseName="ns=di;DeviceHealth",
             description="Contains the health status information of the stacklight.",
+            modellingRule="Optional",
             dataType=di.datatypes.DeviceHealthEnumeration,
             accessLevel=3,
             userAccessLevel=1,
@@ -285,6 +304,7 @@ class StacklightType(BasicStacklightType):
             nodeId="ns=ia;i=5007",
             browseName="ns=di;DeviceHealthAlarms",
             description="Contains alarms of the stacklights providing more detailed information on the health of the stacklight.",
+            modellingRule="Optional",
         )
     )
 
@@ -298,6 +318,7 @@ class StackElementLightType(StackElementType):
             nodeId="ns=ia;i=6016",
             browseName="ns=ia;SignalColor",
             description="Indicates the colour the lamp element has when switched on.",
+            modellingRule="Optional",
             dataType=ia_datypes.SignalColor,
             accessLevel=3,
             userAccessLevel=1,
@@ -308,13 +329,16 @@ class StackElementLightType(StackElementType):
             nodeId="ns=ia;i=6017",
             browseName="ns=ia;SignalMode",
             description="Shows in what way the lamp is used (continuous light, flashing, blinking) when switched on.",
+            modellingRule="Optional",
             dataType=ia_datypes.SignalModeLight,
             accessLevel=3,
             userAccessLevel=1,
         )
     )
     signalRGBWValue: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=ia;i=6052", browseName="ns=ia;SignalRGBWValue", dataType=ia_datypes.RGBWDataType, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=ia;i=6052", browseName="ns=ia;SignalRGBWValue", modellingRule="Optional", dataType=ia_datypes.RGBWDataType, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -322,7 +346,11 @@ class StackElementLightType(StackElementType):
 class CalibrationTargetType(ns0.objtypes.BaseObjectType):
     calibrationTargetCategory: BaseCalibrationTargetCategoryType = o6.hasComponent(
         BaseCalibrationTargetCategoryType(
-            nodeId="ns=ia;i=5011", browseName="ns=ia;CalibrationTargetCategory", description="Defines what category the calibration target is of.", _allow_abstract=True
+            nodeId="ns=ia;i=5011",
+            browseName="ns=ia;CalibrationTargetCategory",
+            description="Defines what category the calibration target is of.",
+            modellingRule="Mandatory",
+            _allow_abstract=True,
         )
     )
     calibrationTargetFeatures: ns0.objtypes.FolderType
@@ -331,6 +359,7 @@ class CalibrationTargetType(ns0.objtypes.BaseObjectType):
             nodeId="ns=ia;i=6063",
             browseName="ns=ia;CertificateUri",
             description="Contains the Uri of a certificate of the calibration target, in case the calibration target is certified and the information available. Otherwise, the Property should be omitted.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -342,6 +371,7 @@ class CalibrationTargetType(ns0.objtypes.BaseObjectType):
             nodeId="ns=ia;i=6060",
             browseName="ns=ia;LastValidationDate",
             description="Provides the date, the calibration target was validated the last time. If there is no specific validation date known, the date when the calibration target was bought or created should be used.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.UtcTime,
             accessLevel=3,
             userAccessLevel=1,
@@ -352,6 +382,7 @@ class CalibrationTargetType(ns0.objtypes.BaseObjectType):
             nodeId="ns=ia;i=6061",
             browseName="ns=ia;NextValidationDate",
             description="Provides the date, when the calibration target should be validated the next time. If this date is not known, the Property should be omitted. Note: Potentially the NextValidationDate is in the past, when the next validation did not take place.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.UtcTime,
             accessLevel=3,
             userAccessLevel=1,
@@ -362,6 +393,7 @@ class CalibrationTargetType(ns0.objtypes.BaseObjectType):
             nodeId="ns=ia;i=5012",
             browseName="ns=ia;OperationalConditions",
             description="A folder containing information about operational conditions of the calibration target. For example, it might provide in what ranges of humidity the calibration target can be operated. It might also provide correction information, for example, depending on the temperature the calibration values need to be corrected (in case of a length, the length might increase with high temperatures). If no operational conditions are provided, this folder should be omitted.",
+            modellingRule="Optional",
         )
     )
     quality: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -369,6 +401,7 @@ class CalibrationTargetType(ns0.objtypes.BaseObjectType):
             nodeId="ns=ia;i=6062",
             browseName="ns=ia;Quality",
             description="Provides the quality of the calibration target in percentage, this is, the value shall be between 0 and 100. 100 means the highest quality, 0 the lowest. The semantic of the quality is application-specific.",
+            modellingRule="Optional",
             dataType=o6.Byte,
             accessLevel=3,
             userAccessLevel=1,
@@ -381,13 +414,19 @@ class CalibrationTargetType(ns0.objtypes.BaseObjectType):
 )
 class IStatisticsType(ns0.objtypes.BaseInterfaceType):
     resetStatistics: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=ia;i=7001", browseName="ns=ia;ResetStatistics", description="Restarts all statistical data, including a reset of the StartTime to the current time.")
+        o6.call(
+            nodeId="ns=ia;i=7001",
+            browseName="ns=ia;ResetStatistics",
+            description="Restarts all statistical data, including a reset of the StartTime to the current time.",
+            modellingRule="Optional",
+        )
     )
     startTime: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=ia;i=6046",
             browseName="ns=ia;StartTime",
             description="Indicates the point in time at which the collection of the statistical data has been started.",
+            modellingRule="Optional",
             dataType=o6.DateTime,
             accessLevel=3,
             userAccessLevel=1,
@@ -408,6 +447,7 @@ class IAggregateStatisticsType(IStatisticsType):
             nodeId="ns=ia;i=6047",
             browseName="ns=ia;ResetCondition",
             description="The reason and context for the reset of the statistics, which is done without a trigger from an OPC UA Client, like calling the ResetStatistics Method. ResetCondition is a vendor-specific, human readable string. ResetCondition is non-localized and might contain an expression that can be parsed by certain clients. Examples are: “AFTER 4 HOURS”, “AFTER 1000 ITEMS”, “OPERATOR”. “OPERATOR” means, that an operator resets the statistics on a local HMI.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -428,6 +468,7 @@ class IRollingStatisticsType(IStatisticsType):
             nodeId="ns=ia;i=6048",
             browseName="ns=ia;WindowDuration",
             description="The duration after the statistical data are rolled over. Only the data that were gathered during that duration are considered for the statistical data, even if the time interval between the StartTime and the current time is longer.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
             userAccessLevel=1,
@@ -438,6 +479,7 @@ class IRollingStatisticsType(IStatisticsType):
             nodeId="ns=ia;i=6049",
             browseName="ns=ia;WindowNumberOfValues",
             description="The number of values before the data gets rolled over. For the statistical data, only the data fitting into the number of values is considered, even if more data were gathered since StartTime.",
+            modellingRule="Optional",
             dataType=o6.UInt32,
             accessLevel=3,
             userAccessLevel=1,

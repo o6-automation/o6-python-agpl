@@ -36,23 +36,25 @@ else:
 
 @o6.objecttype(nodeId="ns=auto_id;i=1004", browseName="ns=auto_id;AutoIdScanEventType", displayName="AutoIdScanEventType", isAbstract=True)
 class AutoIdScanEventType(ns0.objtypes.BaseEventType):
-    deviceName: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6049", browseName="ns=auto_id;DeviceName", dataType=o6.String))
+    deviceName: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6049", browseName="ns=auto_id;DeviceName", modellingRule="Mandatory", dataType=o6.String)
+    )
     scanResult: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6024", browseName="ns=auto_id;ScanResult", dataType=auto_id_datypes.ScanResult, valueRank=1)
+        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6024", browseName="ns=auto_id;ScanResult", modellingRule="Mandatory", dataType=auto_id_datypes.ScanResult, valueRank=1)
     )
 
 
 @o6.objecttype(nodeId="ns=auto_id;i=1005", browseName="ns=auto_id;OcrScanEventType", displayName="OcrScanEventType", isAbstract=True)
 class OcrScanEventType(AutoIdScanEventType):
     scanResult: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6041", browseName="ns=auto_id;ScanResult", dataType=auto_id_datypes.OcrScanResult, valueRank=1)
+        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6041", browseName="ns=auto_id;ScanResult", modellingRule="Mandatory", dataType=auto_id_datypes.OcrScanResult, valueRank=1)
     )
 
 
 @o6.objecttype(nodeId="ns=auto_id;i=1006", browseName="ns=auto_id;RfidScanEventType", displayName="RfidScanEventType", isAbstract=True)
 class RfidScanEventType(AutoIdScanEventType):
     scanResult: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6042", browseName="ns=auto_id;ScanResult", dataType=auto_id_datypes.RfidScanResult, valueRank=1)
+        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6042", browseName="ns=auto_id;ScanResult", modellingRule="Mandatory", dataType=auto_id_datypes.RfidScanResult, valueRank=1)
     )
 
 
@@ -61,7 +63,9 @@ class RfidScanEventType(AutoIdScanEventType):
 )
 class AutoIdDiagnosticsEventType(ns0.objtypes.BaseEventType):
     deviceName: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6090", browseName="ns=auto_id;DeviceName", description="Name of the device of the diagnostic data.", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=auto_id;i=6090", browseName="ns=auto_id;DeviceName", description="Name of the device of the diagnostic data.", modellingRule="Mandatory", dataType=o6.String
+        )
     )
 
 
@@ -89,16 +93,19 @@ class AutoIdAccessEventType(AutoIdDiagnosticsEventType):
             nodeId="ns=auto_id;i=6091",
             browseName="ns=auto_id;AccessResult",
             description="Result values of the access.",
+            modellingRule="Mandatory",
             dataType=auto_id_datypes.AccessResult,
             valueRank=1,
             arrayDimensions=[0],
         )
     )
     client: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6092", browseName="ns=auto_id;Client", description="Client which was the originator of the command.", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=auto_id;i=6092", browseName="ns=auto_id;Client", description="Client which was the originator of the command.", modellingRule="Optional", dataType=o6.String
+        )
     )
     command: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6093", browseName="ns=auto_id;Command", description="Access command", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6093", browseName="ns=auto_id;Command", description="Access command", modellingRule="Optional", dataType=o6.String)
     )
 
 
@@ -115,6 +122,7 @@ class RfidAccessEventType(AutoIdAccessEventType):
             nodeId="ns=auto_id;i=6094",
             browseName="ns=auto_id;AccessResult",
             description="Result values of the access.",
+            modellingRule="Mandatory",
             dataType=auto_id_datypes.RfidAccessResult,
             valueRank=1,
             arrayDimensions=[0],
@@ -131,28 +139,36 @@ class RfidAccessEventType(AutoIdAccessEventType):
 )
 class AutoIdPresenceEventType(AutoIdDiagnosticsEventType):
     presence: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6095", browseName="ns=auto_id;Presence", description="Current presence of AutoID Identifier.", dataType=o6.UInt16)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=auto_id;i=6095", browseName="ns=auto_id;Presence", description="Current presence of AutoID Identifier.", modellingRule="Mandatory", dataType=o6.UInt16
+        )
     )
 
 
 @o6.objecttype(nodeId="ns=auto_id;i=1009", browseName="ns=auto_id;OpticalScanEventType", displayName="OpticalScanEventType", isAbstract=True)
 class OpticalScanEventType(AutoIdScanEventType):
     scanResult: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6147", browseName="ns=auto_id;ScanResult", dataType=auto_id_datypes.OpticalScanResult, valueRank=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=auto_id;i=6147", browseName="ns=auto_id;ScanResult", modellingRule="Mandatory", dataType=auto_id_datypes.OpticalScanResult, valueRank=1
+        )
     )
 
 
 @o6.objecttype(nodeId="ns=auto_id;i=1013", browseName="ns=auto_id;OpticalVerifierScanEventType", displayName="OpticalVerifierScanEventType", isAbstract=True)
 class OpticalVerifierScanEventType(OpticalScanEventType):
     scanResult: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6227", browseName="ns=auto_id;ScanResult", dataType=auto_id_datypes.OpticalVerifierScanResult, valueRank=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=auto_id;i=6227", browseName="ns=auto_id;ScanResult", modellingRule="Mandatory", dataType=auto_id_datypes.OpticalVerifierScanResult, valueRank=1
+        )
     )
 
 
 @o6.objecttype(nodeId="ns=auto_id;i=1014", browseName="ns=auto_id;RtlsLocationEventType", displayName="RtlsLocationEventType", isAbstract=True)
 class RtlsLocationEventType(AutoIdScanEventType):
     scanResult: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6228", browseName="ns=auto_id;ScanResult", dataType=auto_id_datypes.RtlsLocationResult, valueRank=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=auto_id;i=6228", browseName="ns=auto_id;ScanResult", modellingRule="Mandatory", dataType=auto_id_datypes.RtlsLocationResult, valueRank=1
+        )
     )
 
 
@@ -181,7 +197,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Settings", dataType=o6.NodeId("ns=auto_id;i=3010"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=auto_id;i=7001", browseName="ns=auto_id;Scan", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6027"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6015"]))
+o6.call(
+    nodeId="ns=auto_id;i=7001",
+    browseName="ns=auto_id;Scan",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6027"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6015"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6001",
@@ -208,7 +230,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Settings", dataType=o6.NodeId("ns=auto_id;i=3010"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=auto_id;i=7008", browseName="ns=auto_id;Scan", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6050"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6001"]))
+o6.call(
+    nodeId="ns=auto_id;i=7008",
+    browseName="ns=auto_id;Scan",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6050"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6001"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6051",
@@ -232,7 +260,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=auto_id;i=7009", browseName="ns=auto_id;ScanStart", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6051"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6208"]))
+o6.call(
+    nodeId="ns=auto_id;i=7009",
+    browseName="ns=auto_id;ScanStart",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6051"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6208"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6043",
@@ -259,7 +293,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Setting", dataType=o6.NodeId("ns=auto_id;i=3010"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=auto_id;i=7013", browseName="ns=auto_id;Scan", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6052"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6043"]))
+o6.call(
+    nodeId="ns=auto_id;i=7013",
+    browseName="ns=auto_id;Scan",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6052"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6043"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6054",
@@ -293,7 +333,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=auto_id;i=7014", browseName="ns=auto_id;ReadTag", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6054"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6056"]))
+o6.call(
+    nodeId="ns=auto_id;i=7014",
+    browseName="ns=auto_id;ReadTag",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6054"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6056"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6057",
@@ -324,7 +370,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=auto_id;i=7015", browseName="ns=auto_id;WriteTag", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6057"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6058"]))
+o6.call(
+    nodeId="ns=auto_id;i=7015",
+    browseName="ns=auto_id;WriteTag",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6057"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6058"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6059",
@@ -355,7 +407,11 @@ ns0.vartypes.PropertyType(
     value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
-    nodeId="ns=auto_id;i=7016", browseName="ns=auto_id;SetTagPassword", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6059"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6060"])
+    nodeId="ns=auto_id;i=7016",
+    browseName="ns=auto_id;SetTagPassword",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6059"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6060"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -384,7 +440,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=auto_id;i=7017", browseName="ns=auto_id;KillTag", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6062"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6063"]))
+o6.call(
+    nodeId="ns=auto_id;i=7017",
+    browseName="ns=auto_id;KillTag",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6062"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6063"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6064",
@@ -416,7 +478,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=auto_id;i=7018", browseName="ns=auto_id;LockTag", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6064"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6065"]))
+o6.call(
+    nodeId="ns=auto_id;i=7018",
+    browseName="ns=auto_id;LockTag",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6064"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6065"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6137",
@@ -447,7 +515,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=auto_id;i=7023", browseName="ns=auto_id;WriteTagID", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6137"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6140"]))
+o6.call(
+    nodeId="ns=auto_id;i=7023",
+    browseName="ns=auto_id;WriteTagID",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6137"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6140"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6129",
@@ -478,6 +552,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=auto_id;i=7042",
     browseName="ns=auto_id;GetDeviceLocation",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6130"]),
     outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6129"]),
 )
@@ -486,19 +561,33 @@ o6.call(
 @o6.objecttype(nodeId="ns=auto_id;i=1001", browseName="ns=auto_id;AutoIdDeviceType", displayName="AutoIdDeviceType", isAbstract=True)
 class AutoIdDeviceType(di.objtypes.DeviceType):
     autoIdModelVersion: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6193", browseName="ns=auto_id;AutoIdModelVersion", dataType=o6.String, value="1.01", accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=auto_id;i=6193", browseName="ns=auto_id;AutoIdModelVersion", modellingRule="Mandatory", dataType=o6.String, value="1.01", accessLevel=3
+        )
     )
     deviceInfo: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6026", browseName="ns=auto_id;DeviceInfo", description="Device status information.", dataType=o6.String, accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=auto_id;i=6026", browseName="ns=auto_id;DeviceInfo", description="Device status information.", modellingRule="Optional", dataType=o6.String, accessLevel=3
+        )
     )
     deviceLocation: auto_id_vartypes.LocationVariableType | None = o6.hasComponent(
         auto_id_vartypes.LocationVariableType(
-            nodeId="ns=auto_id;i=6128", browseName="ns=auto_id;DeviceLocation", description="Union of GPS, UTM, Local.", dataType=auto_id_datypes.Location, accessLevel=3
+            nodeId="ns=auto_id;i=6128",
+            browseName="ns=auto_id;DeviceLocation",
+            description="Union of GPS, UTM, Local.",
+            modellingRule="Optional",
+            dataType=auto_id_datypes.Location,
+            accessLevel=3,
         )
     )
     deviceLocationName: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=auto_id;i=6127", browseName="ns=auto_id;DeviceLocationName", description="Symbolic name of the device location.", dataType=o6.String, accessLevel=3
+            nodeId="ns=auto_id;i=6127",
+            browseName="ns=auto_id;DeviceLocationName",
+            description="Symbolic name of the device location.",
+            modellingRule="Optional",
+            dataType=o6.String,
+            accessLevel=3,
         )
     )
     deviceName: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -506,24 +595,32 @@ class AutoIdDeviceType(di.objtypes.DeviceType):
             nodeId="ns=auto_id;i=6124",
             browseName="ns=auto_id;DeviceName",
             description="Default could be also host name, IP address or MAC. This should be a field that can be configured for a device.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
         )
     )
     deviceStatus: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=auto_id;i=6030", browseName="ns=auto_id;DeviceStatus", dataType=auto_id_datypes.DeviceStatusEnumeration)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=auto_id;i=6030", browseName="ns=auto_id;DeviceStatus", modellingRule="Mandatory", dataType=auto_id_datypes.DeviceStatusEnumeration
+        )
     )
     diagnostics: di.objtypes.FunctionalGroupType | None
     getDeviceLocation: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=auto_id;i=7042"])
-    iOData: di.objtypes.FunctionalGroupType | None = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=auto_id;i=5054", browseName="ns=auto_id;IOData"))
+    iOData: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
+        di.objtypes.FunctionalGroupType(nodeId="ns=auto_id;i=5054", browseName="ns=auto_id;IOData", modellingRule="Optional")
+    )
     lastScanData: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=auto_id;i=6055", browseName="ns=auto_id;LastScanData", description="The last scanned AutoID Identifier.", accessLevel=3)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=auto_id;i=6055", browseName="ns=auto_id;LastScanData", description="The last scanned AutoID Identifier.", modellingRule="Optional", accessLevel=3
+        )
     )
     lastScanTimestamp: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=auto_id;i=6096",
             browseName="ns=auto_id;LastScanTimestamp",
             description="Point of time the last AutoID Identifier was scanned.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.UtcTime,
             accessLevel=3,
         )
@@ -532,11 +629,11 @@ class AutoIdDeviceType(di.objtypes.DeviceType):
     scan: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=auto_id;i=7008"])
     scanActive: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=auto_id;i=6099", browseName="ns=auto_id;ScanActive", description="Triggers the scan process.", dataType=o6.Boolean, accessLevel=3
+            nodeId="ns=auto_id;i=6099", browseName="ns=auto_id;ScanActive", description="Triggers the scan process.", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3
         )
     )
     scanStart: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=auto_id;i=7009"])
-    scanStop: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=auto_id;i=7010", browseName="ns=auto_id;ScanStop"))
+    scanStop: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=auto_id;i=7010", browseName="ns=auto_id;ScanStop", modellingRule="Optional"))
 
 
 o6.reference(AutoIdDeviceType, "i=41", AutoIdScanEventType)
@@ -558,7 +655,9 @@ o6.reference(OcrReaderDeviceType, "i=41", OcrScanEventType)
 @o6.objecttype(nodeId="ns=auto_id;i=1003", browseName="ns=auto_id;RfidReaderDeviceType", displayName="RfidReaderDeviceType")
 class RfidReaderDeviceType(AutoIdDeviceType):
     antennaNames: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6048", browseName="ns=auto_id;AntennaNames", dataType=auto_id_datypes.AntennaNameIdPair, valueRank=1, accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=auto_id;i=6048", browseName="ns=auto_id;AntennaNames", modellingRule="Optional", dataType=auto_id_datypes.AntennaNameIdPair, valueRank=1, accessLevel=3
+        )
     )
     diagnostics: di.objtypes.FunctionalGroupType | None
     killTag: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=auto_id;i=7017"])
@@ -567,6 +666,7 @@ class RfidReaderDeviceType(AutoIdDeviceType):
             nodeId="ns=auto_id;i=6097",
             browseName="ns=auto_id;LastScanAntenna",
             description="ID of the antenna with which the last AutoID Identifier was scanned.",
+            modellingRule="Optional",
             dataType=o6.Int32,
             accessLevel=3,
         )
@@ -576,6 +676,7 @@ class RfidReaderDeviceType(AutoIdDeviceType):
             nodeId="ns=auto_id;i=6098",
             browseName="ns=auto_id;LastScanRSSI",
             description="RSSI Value with which the last AutoID Identifier was scanned.",
+            modellingRule="Optional",
             dataType=o6.Int32,
             accessLevel=3,
         )
@@ -618,7 +719,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=auto_id;i=7043", browseName="ns=auto_id;Scan", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6144"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6145"]))
+o6.call(
+    nodeId="ns=auto_id;i=7043",
+    browseName="ns=auto_id;Scan",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6144"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6145"]),
+)
 
 
 @o6.objecttype(nodeId="ns=auto_id;i=1008", browseName="ns=auto_id;OpticalReaderDeviceType", displayName="OpticalReaderDeviceType")
@@ -656,7 +763,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=auto_id;i=7054", browseName="ns=auto_id;Scan", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6031"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6076"]))
+o6.call(
+    nodeId="ns=auto_id;i=7054",
+    browseName="ns=auto_id;Scan",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6031"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6076"]),
+)
 
 
 @o6.objecttype(nodeId="ns=auto_id;i=1011", browseName="ns=auto_id;OpticalVerifierDeviceType", displayName="OpticalVerifierDeviceType")
@@ -692,7 +805,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("ns=auto_id;i=3013"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=auto_id;i=7055", browseName="ns=auto_id;Scan", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6218"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6219"]))
+o6.call(
+    nodeId="ns=auto_id;i=7055",
+    browseName="ns=auto_id;Scan",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6218"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6219"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6224",
@@ -721,7 +840,11 @@ ns0.vartypes.PropertyType(
     value=[ns0.datatypes.Argument(name="Result", dataType=o6.NodeId("ns=auto_id;i=3028"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
-    nodeId="ns=auto_id;i=7056", browseName="ns=auto_id;GetLocation", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6224"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6225"])
+    nodeId="ns=auto_id;i=7056",
+    browseName="ns=auto_id;GetLocation",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6224"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6225"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -735,26 +858,30 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="SupportedLocationTypes", dataType=o6.NodeId("ns=auto_id;i=3009"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=auto_id;i=7058", browseName="ns=auto_id;GetSupportedLocationTypes", outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6226"]))
+o6.call(nodeId="ns=auto_id;i=7058", browseName="ns=auto_id;GetSupportedLocationTypes", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6226"]))
 
 
 @o6.objecttype(nodeId="ns=auto_id;i=1012", browseName="ns=auto_id;RtlsDeviceType", displayName="RtlsDeviceType")
 class RtlsDeviceType(AutoIdDeviceType):
     geographicalUnit: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6214", browseName="ns=auto_id;GeographicalUnit", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=auto_id;i=6214", browseName="ns=auto_id;GeographicalUnit", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3
+        )
     )
     getLocation: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=auto_id;i=7056"])
     getSupportedLocationTypes: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=auto_id;i=7058"])
-    getUnits: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=auto_id;i=7057", browseName="ns=auto_id;GetUnits"))
+    getUnits: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=auto_id;i=7057", browseName="ns=auto_id;GetUnits", modellingRule="Optional"))
     lengthUnit: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6217", browseName="ns=auto_id;LengthUnit", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6217", browseName="ns=auto_id;LengthUnit", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
     )
     rotationalUnit: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6216", browseName="ns=auto_id;RotationalUnit", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=auto_id;i=6216", browseName="ns=auto_id;RotationalUnit", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3
+        )
     )
     scan: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=auto_id;i=7055"])
     speedUnit: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6215", browseName="ns=auto_id;SpeedUnit", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6215", browseName="ns=auto_id;SpeedUnit", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
     )
 
 

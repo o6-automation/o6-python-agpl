@@ -54,8 +54,14 @@ fx_ac_objtypes.FxAssetType(
     browseName="ns=fx_ac;<Asset>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=200", browseName="ns=di;ManufacturerUri", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=201", browseName="ns=di;ProductCode", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=fx_ac;i=200", browseName="ns=di;ManufacturerUri", modellingRule="Optional", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=201", browseName="ns=di;ProductCode", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
     ],
 )
 o6.reference(o6.ns["ns=fx_ac;i=82"], "i=25261", o6.ns["ns=fx_ac;i=73"])
@@ -65,7 +71,11 @@ fx_ac_objtypes.ClampType(
     nodeId="ns=fx_ac;i=94",
     browseName="ns=fx_ac;<Clamp>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=220", browseName="ns=fx_ac;Name", dataType=o6.String, accessLevel=3, userAccessLevel=1))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=220", browseName="ns=fx_ac;Name", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        )
+    ],
 )
 o6.reference(fx_ac_objtypes.ClampBlockType, ns0.reftypes.HasComponent, o6.ns["ns=fx_ac;i=94"])
 ns0.vartypes.MultiStateValueDiscreteType(
@@ -77,16 +87,17 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=fx_ac;i=1251",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[2],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Screw"), description=o6.LocalizedText("Screw")),
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Thumb"), description=o6.LocalizedText("Thumb")),
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=1252", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=1252", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -97,7 +108,11 @@ fx_ac_objtypes.AssetConnectorType(
     nodeId="ns=fx_ac;i=76",
     browseName="ns=fx_ac;<AssetConnector>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=1253", browseName="ns=fx_ac;Name", dataType=o6.String, accessLevel=3, userAccessLevel=1))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=1253", browseName="ns=fx_ac;Name", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        )
+    ],
     _allow_abstract=True,
 )
 ns0.objtypes.FolderType(nodeId="ns=fx_ac;i=72", browseName="ns=fx_ac;Connectors", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=fx_ac;i=76"])])
@@ -111,16 +126,17 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=fx_ac;i=1254",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[2],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Screw"), description=o6.LocalizedText("Screw")),
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Thumb"), description=o6.LocalizedText("Thumb")),
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=1255", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=1255", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -158,8 +174,8 @@ fx_ac_objtypes.ConfigurationDataFolderType(
     browseName="ns=fx_ac;ConfigurationData",
     modellingRule="Optional",
     references=[
-        o6.organizes(di.objtypes.FunctionalGroupType(nodeId="ns=fx_ac;i=5055", browseName="ns=di;Configuration")),
-        o6.organizes(di.objtypes.FunctionalGroupType(nodeId="ns=fx_ac;i=5056", browseName="ns=di;Tuning")),
+        o6.organizes(di.objtypes.FunctionalGroupType(nodeId="ns=fx_ac;i=5055", browseName="ns=di;Configuration", modellingRule="Optional")),
+        o6.organizes(di.objtypes.FunctionalGroupType(nodeId="ns=fx_ac;i=5056", browseName="ns=di;Tuning", modellingRule="Optional")),
     ],
 )
 o6.reference(fx_ac_objtypes.FunctionalEntityType, ns0.reftypes.HasComponent, o6.ns["ns=fx_ac;i=5031"])
@@ -186,8 +202,8 @@ fx_ac_objtypes.ConfigurationDataFolderType(
     browseName="ns=fx_ac;ConfigurationData",
     modellingRule="Optional",
     references=[
-        o6.organizes(di.objtypes.FunctionalGroupType(nodeId="ns=fx_ac;i=5048", browseName="ns=di;Tuning")),
-        o6.organizes(di.objtypes.FunctionalGroupType(nodeId="ns=fx_ac;i=5049", browseName="ns=di;Configuration")),
+        o6.organizes(di.objtypes.FunctionalGroupType(nodeId="ns=fx_ac;i=5048", browseName="ns=di;Tuning", modellingRule="Optional")),
+        o6.organizes(di.objtypes.FunctionalGroupType(nodeId="ns=fx_ac;i=5049", browseName="ns=di;Configuration", modellingRule="Optional")),
     ],
 )
 o6.reference(fx_ac_objtypes.IFunctionalEntityType, ns0.reftypes.HasComponent, o6.ns["ns=fx_ac;i=5104"])
@@ -201,12 +217,12 @@ http_opcfoundation_org_UA_FX_AC_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6004", browseName="NamespaceVersion", dataType=o6.String, value="1.00.04")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=fx_ac;i=6005", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=fx_ac;i=6005", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=fx_ac;i=6006", browseName="StaticNumericNodeIdRange", dataType=ns0.datatypes.NumericRange, valueRank=1, arrayDimensions=[1], value=["0:15000"]
+                nodeId="ns=fx_ac;i=6006", browseName="StaticNumericNodeIdRange", dataType=ns0.datatypes.NumericRange, valueRank=1, arrayDimensions=[0], value=["0:15000"]
             )
         ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6007", browseName="StaticStringNodeIdPattern", dataType=o6.String, value="")),
@@ -219,8 +235,12 @@ ns0.vartypes.MultiStateValueDiscreteType(
     browseName="ns=fx_ac;Kind",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6009", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6010", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=fx_ac;i=6009", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6010", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -282,12 +302,15 @@ fx_ac_objtypes.PublisherCapabilitiesType(
     modellingRule="Optional",
     references=[
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6030", browseName="ns=fx_ac;PreconfiguredDataSetOnly", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6030", browseName="ns=fx_ac;PreconfiguredDataSetOnly", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6031",
                 browseName="ns=fx_ac;PreconfiguredPublishedDataSets",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -299,6 +322,7 @@ fx_ac_objtypes.PublisherCapabilitiesType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6033",
                 browseName="ns=fx_ac;SupportedPublishingIntervals",
+                modellingRule="Optional",
                 dataType=fx_data.datatypes.IntervalRange,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -310,6 +334,7 @@ fx_ac_objtypes.PublisherCapabilitiesType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6034",
                 browseName="ns=fx_ac;SupportedQos",
+                modellingRule="Optional",
                 dataType=fx_ac_datypes.PublisherQosDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -326,12 +351,15 @@ fx_ac_objtypes.SubscriberCapabilitiesType(
     modellingRule="Optional",
     references=[
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6035", browseName="ns=fx_ac;PreconfiguredDataSetOnly", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6035", browseName="ns=fx_ac;PreconfiguredDataSetOnly", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6037",
                 browseName="ns=fx_ac;PreconfiguredSubscribedDataSets",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -343,6 +371,7 @@ fx_ac_objtypes.SubscriberCapabilitiesType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6038",
                 browseName="ns=fx_ac;SupportedMessageReceiveTimeouts",
+                modellingRule="Optional",
                 dataType=fx_data.datatypes.IntervalRange,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -354,6 +383,7 @@ fx_ac_objtypes.SubscriberCapabilitiesType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6039",
                 browseName="ns=fx_ac;SupportedPublishingIntervals",
+                modellingRule="Optional",
                 dataType=fx_data.datatypes.IntervalRange,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -365,6 +395,7 @@ fx_ac_objtypes.SubscriberCapabilitiesType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6040",
                 browseName="ns=fx_ac;SupportedQos",
+                modellingRule="Optional",
                 dataType=fx_ac_datypes.SubscriberQosDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -381,12 +412,15 @@ fx_ac_objtypes.PublisherCapabilitiesType(
     modellingRule="Optional",
     references=[
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6032", browseName="ns=fx_ac;PreconfiguredDataSetOnly", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6032", browseName="ns=fx_ac;PreconfiguredDataSetOnly", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6041",
                 browseName="ns=fx_ac;PreconfiguredPublishedDataSets",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -398,6 +432,7 @@ fx_ac_objtypes.PublisherCapabilitiesType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6042",
                 browseName="ns=fx_ac;SupportedPublishingIntervals",
+                modellingRule="Optional",
                 dataType=fx_data.datatypes.IntervalRange,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -409,6 +444,7 @@ fx_ac_objtypes.PublisherCapabilitiesType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6043",
                 browseName="ns=fx_ac;SupportedQos",
+                modellingRule="Optional",
                 dataType=fx_ac_datypes.PublisherQosDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -425,12 +461,15 @@ fx_ac_objtypes.SubscriberCapabilitiesType(
     modellingRule="Optional",
     references=[
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6036", browseName="ns=fx_ac;PreconfiguredDataSetOnly", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6036", browseName="ns=fx_ac;PreconfiguredDataSetOnly", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6044",
                 browseName="ns=fx_ac;PreconfiguredSubscribedDataSets",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -442,6 +481,7 @@ fx_ac_objtypes.SubscriberCapabilitiesType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6045",
                 browseName="ns=fx_ac;SupportedMessageReceiveTimeouts",
+                modellingRule="Optional",
                 dataType=fx_data.datatypes.IntervalRange,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -453,6 +493,7 @@ fx_ac_objtypes.SubscriberCapabilitiesType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6046",
                 browseName="ns=fx_ac;SupportedPublishingIntervals",
+                modellingRule="Optional",
                 dataType=fx_data.datatypes.IntervalRange,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -464,6 +505,7 @@ fx_ac_objtypes.SubscriberCapabilitiesType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6047",
                 browseName="ns=fx_ac;SupportedQos",
+                modellingRule="Optional",
                 dataType=fx_ac_datypes.SubscriberQosDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -510,12 +552,15 @@ fx_ac_objtypes.PublisherCapabilitiesType(
     modellingRule="Optional",
     references=[
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6054", browseName="ns=fx_ac;PreconfiguredDataSetOnly", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6054", browseName="ns=fx_ac;PreconfiguredDataSetOnly", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6057",
                 browseName="ns=fx_ac;PreconfiguredPublishedDataSets",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -527,6 +572,7 @@ fx_ac_objtypes.PublisherCapabilitiesType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6058",
                 browseName="ns=fx_ac;SupportedPublishingIntervals",
+                modellingRule="Optional",
                 dataType=fx_data.datatypes.IntervalRange,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -538,6 +584,7 @@ fx_ac_objtypes.PublisherCapabilitiesType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6059",
                 browseName="ns=fx_ac;SupportedQos",
+                modellingRule="Optional",
                 dataType=fx_ac_datypes.PublisherQosDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -554,12 +601,15 @@ fx_ac_objtypes.SubscriberCapabilitiesType(
     modellingRule="Optional",
     references=[
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6055", browseName="ns=fx_ac;PreconfiguredDataSetOnly", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6055", browseName="ns=fx_ac;PreconfiguredDataSetOnly", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6060",
                 browseName="ns=fx_ac;PreconfiguredSubscribedDataSets",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -571,6 +621,7 @@ fx_ac_objtypes.SubscriberCapabilitiesType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6061",
                 browseName="ns=fx_ac;SupportedMessageReceiveTimeouts",
+                modellingRule="Optional",
                 dataType=fx_data.datatypes.IntervalRange,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -582,6 +633,7 @@ fx_ac_objtypes.SubscriberCapabilitiesType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6062",
                 browseName="ns=fx_ac;SupportedPublishingIntervals",
+                modellingRule="Optional",
                 dataType=fx_data.datatypes.IntervalRange,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -593,6 +645,7 @@ fx_ac_objtypes.SubscriberCapabilitiesType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6063",
                 browseName="ns=fx_ac;SupportedQos",
+                modellingRule="Optional",
                 dataType=fx_ac_datypes.SubscriberQosDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -609,12 +662,15 @@ fx_ac_objtypes.SubscriberCapabilitiesType(
     modellingRule="Optional",
     references=[
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6064", browseName="ns=fx_ac;PreconfiguredDataSetOnly", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6064", browseName="ns=fx_ac;PreconfiguredDataSetOnly", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6065",
                 browseName="ns=fx_ac;PreconfiguredSubscribedDataSets",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -626,6 +682,7 @@ fx_ac_objtypes.SubscriberCapabilitiesType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6066",
                 browseName="ns=fx_ac;SupportedMessageReceiveTimeouts",
+                modellingRule="Optional",
                 dataType=fx_data.datatypes.IntervalRange,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -637,6 +694,7 @@ fx_ac_objtypes.SubscriberCapabilitiesType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6067",
                 browseName="ns=fx_ac;SupportedPublishingIntervals",
+                modellingRule="Optional",
                 dataType=fx_data.datatypes.IntervalRange,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -648,6 +706,7 @@ fx_ac_objtypes.SubscriberCapabilitiesType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6068",
                 browseName="ns=fx_ac;SupportedQos",
+                modellingRule="Optional",
                 dataType=fx_ac_datypes.SubscriberQosDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -663,9 +722,15 @@ fx_ac_vartypes.AggregatedHealthType(
     browseName="ns=fx_ac;AggregatedHealth",
     modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6051", browseName="ns=fx_ac;AggregatedDeviceHealth", dataType=fx_ac_datypes.DeviceHealthOptionSet)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6070", browseName="ns=fx_ac;AggregatedOperationalHealth", dataType=fx_ac_datypes.OperationalHealthOptionSet)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6051", browseName="ns=fx_ac;AggregatedDeviceHealth", modellingRule="Mandatory", dataType=fx_ac_datypes.DeviceHealthOptionSet
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6070", browseName="ns=fx_ac;AggregatedOperationalHealth", modellingRule="Mandatory", dataType=fx_ac_datypes.OperationalHealthOptionSet
+            )
         ),
     ],
     dataType=fx_ac_datypes.AggregatedHealthDataType,
@@ -734,14 +799,29 @@ fx_ac_objtypes.ConnectionEndpointType(
     browseName="ns=fx_ac;<ConnectionEndpoint>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=1309", browseName="ns=fx_ac;IsPersistent", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=1331", browseName="ns=fx_ac;Status", dataType=fx_ac_datypes.ConnectionEndpointStatusEnum)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6073", browseName="ns=fx_ac;CleanupTimeout", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=1309", browseName="ns=fx_ac;IsPersistent", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=fx_ac;i=6092", browseName="ns=fx_ac;RelatedEndpoint", dataType=fx_data.datatypes.RelatedEndpointDataType, accessLevel=3, userAccessLevel=1
+                nodeId="ns=fx_ac;i=1331", browseName="ns=fx_ac;Status", modellingRule="Mandatory", dataType=fx_ac_datypes.ConnectionEndpointStatusEnum
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6073", browseName="ns=fx_ac;CleanupTimeout", modellingRule="Mandatory", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6092",
+                browseName="ns=fx_ac;RelatedEndpoint",
+                modellingRule="Mandatory",
+                dataType=fx_data.datatypes.RelatedEndpointDataType,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
     ],
@@ -754,12 +834,15 @@ fx_ac_objtypes.PublisherCapabilitiesType(
     modellingRule="Optional",
     references=[
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6097", browseName="ns=fx_ac;PreconfiguredDataSetOnly", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6097", browseName="ns=fx_ac;PreconfiguredDataSetOnly", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6098",
                 browseName="ns=fx_ac;PreconfiguredPublishedDataSets",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -771,6 +854,7 @@ fx_ac_objtypes.PublisherCapabilitiesType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6099",
                 browseName="ns=fx_ac;SupportedPublishingIntervals",
+                modellingRule="Optional",
                 dataType=fx_data.datatypes.IntervalRange,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -782,6 +866,7 @@ fx_ac_objtypes.PublisherCapabilitiesType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=fx_ac;i=6100",
                 browseName="ns=fx_ac;SupportedQos",
+                modellingRule="Optional",
                 dataType=fx_ac_datypes.PublisherQosDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -798,7 +883,9 @@ fx_ac_objtypes.FunctionalEntityCapabilitiesType(
     modellingRule="Optional",
     references=[
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6121", browseName="ns=fx_ac;FeedbackSignalRequired", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1),
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6121", browseName="ns=fx_ac;FeedbackSignalRequired", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            ),
             "ns=fx_ac;i=4002",
         )
     ],
@@ -810,7 +897,9 @@ fx_ac_objtypes.FunctionalEntityCapabilitiesType(
     modellingRule="Optional",
     references=[
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6122", browseName="ns=fx_ac;FeedbackSignalRequired", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1),
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6122", browseName="ns=fx_ac;FeedbackSignalRequired", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            ),
             "ns=fx_ac;i=4002",
         )
     ],
@@ -822,28 +911,44 @@ di.objtypes.FunctionalGroupType(
     modellingRule="Optional",
     references=[
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6131", browseName="ns=fx_ac;OperationalConnectionCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6131", browseName="ns=fx_ac;OperationalConnectionCount", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6132", browseName="ns=fx_ac;ExistingConnectionCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6132", browseName="ns=fx_ac;ExistingConnectionCount", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6133", browseName="ns=fx_ac;ErrorConnectionCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6133", browseName="ns=fx_ac;ErrorConnectionCount", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6134", browseName="ns=fx_ac;FailedConnectionCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6134", browseName="ns=fx_ac;FailedConnectionCount", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6135", browseName="ns=fx_ac;CleanedUpConnectionCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6135", browseName="ns=fx_ac;CleanedUpConnectionCount", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6136", browseName="ns=fx_ac;TotalEstablishAttemptsCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6136", browseName="ns=fx_ac;TotalEstablishAttemptsCount", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6137", browseName="ns=fx_ac;FailedEstablishAttemptsCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6137", browseName="ns=fx_ac;FailedEstablishAttemptsCount", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6138", browseName="ns=fx_ac;FailedVerificationCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6138", browseName="ns=fx_ac;FailedVerificationCount", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
         ),
     ],
 )
@@ -854,17 +959,29 @@ di.objtypes.FunctionalGroupType(
     modellingRule="Optional",
     references=[
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6139", browseName="ns=fx_ac;UpTime", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6139", browseName="ns=fx_ac;UpTime", modellingRule="Optional", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6140", browseName="ns=fx_ac;CurrentCPUUtilization", dataType=o6.Float, accessLevel=3, userAccessLevel=1)
-        ),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6141", browseName="ns=fx_ac;MaxCPUUtilization", dataType=o6.Float, accessLevel=3, userAccessLevel=1)),
-        o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6142", browseName="ns=fx_ac;CurrentMemoryUtilization", dataType=o6.Float, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6140", browseName="ns=fx_ac;CurrentCPUUtilization", modellingRule="Optional", dataType=o6.Float, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6143", browseName="ns=fx_ac;MaxMemoryUtilization", dataType=o6.Float, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6141", browseName="ns=fx_ac;MaxCPUUtilization", modellingRule="Optional", dataType=o6.Float, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6142", browseName="ns=fx_ac;CurrentMemoryUtilization", modellingRule="Optional", dataType=o6.Float, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6143", browseName="ns=fx_ac;MaxMemoryUtilization", modellingRule="Optional", dataType=o6.Float, accessLevel=3, userAccessLevel=1
+            )
         ),
     ],
 )
@@ -875,28 +992,44 @@ di.objtypes.FunctionalGroupType(
     modellingRule="Optional",
     references=[
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6144", browseName="ns=fx_ac;OperationalConnectionCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6144", browseName="ns=fx_ac;OperationalConnectionCount", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6145", browseName="ns=fx_ac;ExistingConnectionCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6145", browseName="ns=fx_ac;ExistingConnectionCount", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6146", browseName="ns=fx_ac;ErrorConnectionCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6146", browseName="ns=fx_ac;ErrorConnectionCount", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6147", browseName="ns=fx_ac;FailedConnectionCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6147", browseName="ns=fx_ac;FailedConnectionCount", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6148", browseName="ns=fx_ac;CleanedUpConnectionCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6148", browseName="ns=fx_ac;CleanedUpConnectionCount", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6149", browseName="ns=fx_ac;TotalEstablishAttemptsCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6149", browseName="ns=fx_ac;TotalEstablishAttemptsCount", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6150", browseName="ns=fx_ac;FailedEstablishAttemptsCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6150", browseName="ns=fx_ac;FailedEstablishAttemptsCount", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6151", browseName="ns=fx_ac;FailedVerificationCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6151", browseName="ns=fx_ac;FailedVerificationCount", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
         ),
     ],
 )
@@ -906,9 +1039,15 @@ di.objtypes.FunctionalGroupType(
     browseName="ns=di;Diagnostics",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6153", browseName="ns=fx_ac;CreationTime", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6154", browseName="ns=fx_ac;ModificationTime", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6153", browseName="ns=fx_ac;CreationTime", modellingRule="Optional", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6154", browseName="ns=fx_ac;ModificationTime", modellingRule="Optional", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1
+            )
         ),
     ],
 )
@@ -919,17 +1058,29 @@ di.objtypes.FunctionalGroupType(
     modellingRule="Optional",
     references=[
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6155", browseName="ns=fx_ac;UpTime", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6155", browseName="ns=fx_ac;UpTime", modellingRule="Optional", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6156", browseName="ns=fx_ac;CurrentCPUUtilization", dataType=o6.Float, accessLevel=3, userAccessLevel=1)
-        ),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6157", browseName="ns=fx_ac;MaxCPUUtilization", dataType=o6.Float, accessLevel=3, userAccessLevel=1)),
-        o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6158", browseName="ns=fx_ac;CurrentMemoryUtilization", dataType=o6.Float, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6156", browseName="ns=fx_ac;CurrentCPUUtilization", modellingRule="Optional", dataType=o6.Float, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6159", browseName="ns=fx_ac;MaxMemoryUtilization", dataType=o6.Float, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6157", browseName="ns=fx_ac;MaxCPUUtilization", modellingRule="Optional", dataType=o6.Float, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6158", browseName="ns=fx_ac;CurrentMemoryUtilization", modellingRule="Optional", dataType=o6.Float, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6159", browseName="ns=fx_ac;MaxMemoryUtilization", modellingRule="Optional", dataType=o6.Float, accessLevel=3, userAccessLevel=1
+            )
         ),
     ],
 )
@@ -994,14 +1145,24 @@ di.objtypes.FunctionalGroupType(
     modellingRule="Optional",
     references=[
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6123", browseName="ns=fx_ac;EstablishCallCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6123", browseName="ns=fx_ac;EstablishCallCount", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6124", browseName="ns=fx_ac;EstablishCallFailedCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6124", browseName="ns=fx_ac;EstablishCallFailedCount", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
         ),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6125", browseName="ns=fx_ac;CloseCallCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6167", browseName="ns=fx_ac;CloseCallFailedCount", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6125", browseName="ns=fx_ac;CloseCallCount", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6167", browseName="ns=fx_ac;CloseCallFailedCount", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            )
         ),
     ],
 )
@@ -1012,27 +1173,39 @@ fx_ac_objtypes.AutomationComponentCapabilitiesType(
     modellingRule="Mandatory",
     references=[
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6127", browseName="ns=fx_ac;CommandBundleRequired", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1),
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6127", browseName="ns=fx_ac;CommandBundleRequired", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            ),
             "ns=fx_ac;i=4002",
         ),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6128", browseName="ns=fx_ac;MaxConnectionsPerCall", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1),
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6128", browseName="ns=fx_ac;MaxConnectionsPerCall", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            ),
             "ns=fx_ac;i=4002",
         ),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6129", browseName="ns=fx_ac;MaxFunctionalEntities", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1),
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6129", browseName="ns=fx_ac;MaxFunctionalEntities", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            ),
             "ns=fx_ac;i=4002",
         ),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6130", browseName="ns=fx_ac;MinConnections", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1),
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6130", browseName="ns=fx_ac;MinConnections", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            ),
             "ns=fx_ac;i=4002",
         ),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6359", browseName="ns=fx_ac;SupportsPersistence", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1),
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6359", browseName="ns=fx_ac;SupportsPersistence", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            ),
             "ns=fx_ac;i=4002",
         ),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_ac;i=6360", browseName="ns=fx_ac;MaxConnections", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1),
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=fx_ac;i=6360", browseName="ns=fx_ac;MaxConnections", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            ),
             "ns=fx_ac;i=4002",
         ),
     ],
@@ -1048,10 +1221,10 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7001", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6337"]))
+o6.call(nodeId="ns=fx_ac;i=7001", browseName="Close", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6337"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6338",
@@ -1061,7 +1234,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
@@ -1072,10 +1245,16 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7002", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6338"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6339"]))
+o6.call(
+    nodeId="ns=fx_ac;i=7002",
+    browseName="GetPosition",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6338"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6339"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6090",
@@ -1088,7 +1267,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7003", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6090"]))
+o6.call(nodeId="ns=fx_ac;i=7003", browseName="ns=di;BreakLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6090"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6102",
@@ -1101,7 +1280,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7004", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6102"]))
+o6.call(nodeId="ns=fx_ac;i=7004", browseName="ns=di;ExitLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6102"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6103",
@@ -1125,7 +1304,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7005", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6103"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6104"]))
+o6.call(
+    nodeId="ns=fx_ac;i=7005",
+    browseName="ns=di;InitLock",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6103"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6104"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6109",
@@ -1138,23 +1323,24 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7006", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6109"]))
+o6.call(nodeId="ns=fx_ac;i=7006", browseName="ns=di;RenewLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6109"]))
 
 di.objtypes.LockingServicesType(
     nodeId="ns=fx_ac;i=5034",
     browseName="ns=di;Lock",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6105", browseName="ns=di;Locked", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6106", browseName="ns=di;LockingClient", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6107", browseName="ns=di;LockingUser", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6108", browseName="ns=di;RemainingLockTime", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6105", browseName="ns=di;Locked", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6106", browseName="ns=di;LockingClient", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6107", browseName="ns=di;LockingUser", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6108", browseName="ns=di;RemainingLockTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7003"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7004"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7005"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7006"]),
     ],
 )
-fx_ac_objtypes.ControlItemFolderType(nodeId="ns=fx_ac;i=5033", browseName="ns=fx_ac;ListToBlock", references=[o6.hasComponent(o6.ns["ns=fx_ac;i=5034"])])
+fx_ac_objtypes.ControlItemFolderType(nodeId="ns=fx_ac;i=5033", browseName="ns=fx_ac;ListToBlock", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=fx_ac;i=5034"])])
 
 
 ns0.vartypes.PropertyType(
@@ -1165,7 +1351,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
@@ -1176,10 +1362,12 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7007", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6340"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6341"]))
+o6.call(
+    nodeId="ns=fx_ac;i=7007", browseName="Open", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6340"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6341"])
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6343",
@@ -1189,7 +1377,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
         ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
@@ -1203,10 +1391,12 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7008", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6343"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6344"]))
+o6.call(
+    nodeId="ns=fx_ac;i=7008", browseName="Read", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6343"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6344"])
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6345",
@@ -1216,13 +1406,13 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
         ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=fx_ac;i=7009", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6345"]))
+o6.call(nodeId="ns=fx_ac;i=7009", browseName="SetPosition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6345"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6349",
@@ -1232,23 +1422,23 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
         ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=fx_ac;i=7010", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6349"]))
+o6.call(nodeId="ns=fx_ac;i=7010", browseName="Write", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6349"]))
 
 ns0.objtypes.FileType(
     nodeId="ns=fx_ac;i=5072",
     browseName="ns=fx_ac;DescriptorFile",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6342", browseName="OpenCount", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6346", browseName="Size", dataType=o6.UInt64)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6347", browseName="UserWritable", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6348", browseName="Writable", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6342", browseName="OpenCount", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6346", browseName="Size", modellingRule="Mandatory", dataType=o6.UInt64)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6347", browseName="UserWritable", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6348", browseName="Writable", modellingRule="Mandatory", dataType=o6.Boolean)),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7001"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7002"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7007"]),
@@ -1271,7 +1461,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7012", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6091"]))
+o6.call(nodeId="ns=fx_ac;i=7012", browseName="ns=di;BreakLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6091"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6245",
@@ -1284,7 +1474,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7013", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6245"]))
+o6.call(nodeId="ns=fx_ac;i=7013", browseName="ns=di;ExitLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6245"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6246",
@@ -1308,7 +1498,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7014", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6246"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6247"]))
+o6.call(
+    nodeId="ns=fx_ac;i=7014",
+    browseName="ns=di;InitLock",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6246"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6247"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6252",
@@ -1321,17 +1517,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7015", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6252"]))
+o6.call(nodeId="ns=fx_ac;i=7015", browseName="ns=di;RenewLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6252"]))
 
 di.objtypes.LockingServicesType(
     nodeId="ns=fx_ac;i=5051",
     browseName="ns=di;Lock",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6248", browseName="ns=di;Locked", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6249", browseName="ns=di;LockingClient", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6250", browseName="ns=di;LockingUser", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6251", browseName="ns=di;RemainingLockTime", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6248", browseName="ns=di;Locked", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6249", browseName="ns=di;LockingClient", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6250", browseName="ns=di;LockingUser", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6251", browseName="ns=di;RemainingLockTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7012"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7013"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7014"]),
@@ -1352,7 +1548,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7016", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6253"]))
+o6.call(nodeId="ns=fx_ac;i=7016", browseName="ns=di;BreakLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6253"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6264",
@@ -1365,7 +1561,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7017", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6264"]))
+o6.call(nodeId="ns=fx_ac;i=7017", browseName="ns=di;ExitLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6264"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6265",
@@ -1389,7 +1585,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7018", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6265"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6266"]))
+o6.call(
+    nodeId="ns=fx_ac;i=7018",
+    browseName="ns=di;InitLock",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6265"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6266"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6275",
@@ -1402,16 +1604,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7019", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6275"]))
+o6.call(nodeId="ns=fx_ac;i=7019", browseName="ns=di;RenewLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6275"]))
 
 di.objtypes.LockingServicesType(
     nodeId="ns=fx_ac;i=5078",
     browseName="ns=di;Lock",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6271", browseName="ns=di;Locked", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6272", browseName="ns=di;LockingClient", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6273", browseName="ns=di;LockingUser", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6274", browseName="ns=di;RemainingLockTime", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6271", browseName="ns=di;Locked", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6272", browseName="ns=di;LockingClient", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6273", browseName="ns=di;LockingUser", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6274", browseName="ns=di;RemainingLockTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7016"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7017"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7018"]),
@@ -1433,7 +1636,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7020", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6306"]))
+o6.call(nodeId="ns=fx_ac;i=7020", browseName="ns=di;BreakLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6306"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6312",
@@ -1446,7 +1649,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7021", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6312"]))
+o6.call(nodeId="ns=fx_ac;i=7021", browseName="ns=di;ExitLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6312"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6313",
@@ -1470,7 +1673,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7022", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6313"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6314"]))
+o6.call(
+    nodeId="ns=fx_ac;i=7022",
+    browseName="ns=di;InitLock",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6313"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6314"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6371",
@@ -1483,16 +1692,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7023", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6371"]))
+o6.call(nodeId="ns=fx_ac;i=7023", browseName="ns=di;RenewLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6371"]))
 
 di.objtypes.LockingServicesType(
     nodeId="ns=fx_ac;i=5080",
     browseName="ns=di;Lock",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6317", browseName="ns=di;Locked", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6368", browseName="ns=di;LockingClient", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6369", browseName="ns=di;LockingUser", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6370", browseName="ns=di;RemainingLockTime", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6317", browseName="ns=di;Locked", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6368", browseName="ns=di;LockingClient", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6369", browseName="ns=di;LockingUser", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6370", browseName="ns=di;RemainingLockTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7020"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7021"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7022"]),
@@ -1516,7 +1726,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7027", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6110"]))
+o6.call(nodeId="ns=fx_ac;i=7027", browseName="ns=di;BreakLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6110"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6111",
@@ -1529,7 +1739,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7028", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6111"]))
+o6.call(nodeId="ns=fx_ac;i=7028", browseName="ns=di;ExitLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6111"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6112",
@@ -1553,7 +1763,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7029", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6112"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6113"]))
+o6.call(
+    nodeId="ns=fx_ac;i=7029",
+    browseName="ns=di;InitLock",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6112"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6113"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6118",
@@ -1566,30 +1782,37 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7030", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6118"]))
+o6.call(nodeId="ns=fx_ac;i=7030", browseName="ns=di;RenewLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6118"]))
 
 di.objtypes.LockingServicesType(
     nodeId="ns=fx_ac;i=5037",
     browseName="ns=di;Lock",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6114", browseName="ns=di;Locked", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6115", browseName="ns=di;LockingClient", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6116", browseName="ns=di;LockingUser", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6117", browseName="ns=di;RemainingLockTime", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6114", browseName="ns=di;Locked", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6115", browseName="ns=di;LockingClient", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6116", browseName="ns=di;LockingUser", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6117", browseName="ns=di;RemainingLockTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7027"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7028"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7029"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7030"]),
     ],
 )
-fx_ac_objtypes.ControlItemFolderType(nodeId="ns=fx_ac;i=5036", browseName="ns=fx_ac;ListToRestrict", references=[o6.hasComponent(o6.ns["ns=fx_ac;i=5037"])])
+fx_ac_objtypes.ControlItemFolderType(
+    nodeId="ns=fx_ac;i=5036", browseName="ns=fx_ac;ListToRestrict", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=fx_ac;i=5037"])]
+)
 fx_ac_objtypes.ControlGroupType(
     nodeId="ns=fx_ac;i=5018",
     browseName="ns=fx_ac;<ControlGroup>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6089", browseName="ns=fx_ac;IsControlled", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)),
-        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=fx_ac;i=5030", browseName="ns=fx_ac;ListOfRelated")),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=fx_ac;i=6089", browseName="ns=fx_ac;IsControlled", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=fx_ac;i=5030", browseName="ns=fx_ac;ListOfRelated", modellingRule="Mandatory")),
         o6.hasComponent(o6.ns["ns=fx_ac;i=5033"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=5036"]),
     ],
@@ -1629,16 +1852,22 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="ContinuationPointOut", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=fx_ac;i=7031", browseName="GetRecords", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6162"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6163"]))
+o6.call(
+    nodeId="ns=fx_ac;i=7031",
+    browseName="GetRecords",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6162"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6163"]),
+)
 
 ns0.objtypes.LogObjectType(
     nodeId="ns=fx_ac;i=5058",
     browseName="ns=fx_ac;AutomationComponentLog",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6164", browseName="MaxRecords", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6165", browseName="MaxStorageDuration", dataType=ns0.datatypes.Duration)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6166", browseName="MinimumSeverity", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6164", browseName="MaxRecords", modellingRule="Optional", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6165", browseName="MaxStorageDuration", modellingRule="Optional", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6166", browseName="MinimumSeverity", modellingRule="Optional", dataType=o6.UInt16)),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7031"]),
     ],
 )
@@ -1656,7 +1885,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7053", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6457"]))
+o6.call(nodeId="ns=fx_ac;i=7053", browseName="ns=di;BreakLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6457"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6458",
@@ -1669,7 +1898,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7054", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6458"]))
+o6.call(nodeId="ns=fx_ac;i=7054", browseName="ns=di;ExitLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6458"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6459",
@@ -1693,7 +1922,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7055", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6459"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6460"]))
+o6.call(
+    nodeId="ns=fx_ac;i=7055",
+    browseName="ns=di;InitLock",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6459"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6460"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6465",
@@ -1706,23 +1941,24 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7056", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6465"]))
+o6.call(nodeId="ns=fx_ac;i=7056", browseName="ns=di;RenewLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6465"]))
 
 di.objtypes.LockingServicesType(
     nodeId="ns=fx_ac;i=5099",
     browseName="ns=di;Lock",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6461", browseName="ns=di;Locked", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6462", browseName="ns=di;LockingClient", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6463", browseName="ns=di;LockingUser", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6464", browseName="ns=di;RemainingLockTime", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6461", browseName="ns=di;Locked", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6462", browseName="ns=di;LockingClient", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6463", browseName="ns=di;LockingUser", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6464", browseName="ns=di;RemainingLockTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7053"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7054"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7055"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7056"]),
     ],
 )
-fx_ac_objtypes.ControlItemFolderType(nodeId="ns=fx_ac;i=1081", browseName="ns=fx_ac;ListToBlock", references=[o6.hasComponent(o6.ns["ns=fx_ac;i=5099"])])
+fx_ac_objtypes.ControlItemFolderType(nodeId="ns=fx_ac;i=1081", browseName="ns=fx_ac;ListToBlock", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=fx_ac;i=5099"])])
 
 
 ns0.vartypes.PropertyType(
@@ -1736,7 +1972,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7057", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6466"]))
+o6.call(nodeId="ns=fx_ac;i=7057", browseName="ns=di;BreakLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6466"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6467",
@@ -1749,7 +1985,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7058", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6467"]))
+o6.call(nodeId="ns=fx_ac;i=7058", browseName="ns=di;ExitLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6467"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6468",
@@ -1773,7 +2009,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7059", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6468"]), outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6469"]))
+o6.call(
+    nodeId="ns=fx_ac;i=7059",
+    browseName="ns=di;InitLock",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6468"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6469"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fx_ac;i=6474",
@@ -1786,32 +2028,39 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fx_ac;i=7060", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6474"]))
+o6.call(nodeId="ns=fx_ac;i=7060", browseName="ns=di;RenewLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=fx_ac;i=6474"]))
 
 di.objtypes.LockingServicesType(
     nodeId="ns=fx_ac;i=5103",
     browseName="ns=di;Lock",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6470", browseName="ns=di;Locked", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6471", browseName="ns=di;LockingClient", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6472", browseName="ns=di;LockingUser", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6473", browseName="ns=di;RemainingLockTime", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6470", browseName="ns=di;Locked", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6471", browseName="ns=di;LockingClient", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6472", browseName="ns=di;LockingUser", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6473", browseName="ns=di;RemainingLockTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7057"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7058"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7059"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=7060"]),
     ],
 )
-fx_ac_objtypes.ControlItemFolderType(nodeId="ns=fx_ac;i=1082", browseName="ns=fx_ac;ListToRestrict", references=[o6.hasComponent(o6.ns["ns=fx_ac;i=5103"])])
+fx_ac_objtypes.ControlItemFolderType(
+    nodeId="ns=fx_ac;i=1082", browseName="ns=fx_ac;ListToRestrict", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=fx_ac;i=5103"])]
+)
 fx_ac_objtypes.ControlGroupType(
     nodeId="ns=fx_ac;i=1074",
     browseName="ns=fx_ac;<ControlGroup>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fx_ac;i=6365", browseName="ns=fx_ac;IsControlled", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=fx_ac;i=6365", browseName="ns=fx_ac;IsControlled", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
+        ),
         o6.hasComponent(o6.ns["ns=fx_ac;i=1081"]),
         o6.hasComponent(o6.ns["ns=fx_ac;i=1082"]),
-        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=fx_ac;i=5077", browseName="ns=fx_ac;ListOfRelated")),
+        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=fx_ac;i=5077", browseName="ns=fx_ac;ListOfRelated", modellingRule="Mandatory")),
     ],
 )
 o6.reference(fx_ac_objtypes.ControlGroupsFolderType, fx_ac_reftypes.HasControlGroup, o6.ns["ns=fx_ac;i=1074"])

@@ -52,6 +52,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=plastics_lds;i=6072",
     browseName="ns=plastics_lds;ActivateMaterialBalanceSystem",
     description="If the value is true, the material balance system is activated",
+    modellingRule="Optional",
     dataType=o6.Boolean,
     accessLevel=3,
     userAccessLevel=1,
@@ -60,6 +61,7 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=plastics_lds;i=6081",
     browseName="ns=plastics_lds;RemainingMaterialTime",
     description="Remaining time until first material is empty",
+    modellingRule="Optional",
     dataType=ns0.datatypes.Duration,
     value=0.0,
 )
@@ -77,6 +79,7 @@ class LDS_InterfaceType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_lds;i=6206",
             browseName="ns=plastics_lds;DeviceEnabled",
             description="This variable is used to release the drives of the dosing system. If the value is FALSE, the LDS shall not be able to start ist drives.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -87,6 +90,7 @@ class LDS_InterfaceType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_lds;i=6205",
             browseName="ns=plastics_lds;DisplayLanguage",
             description="With this Property the client can set the desired language on the user interface at the LDS",
+            modellingRule="Optional",
             dataType=ns0.datatypes.LocaleId,
             accessLevel=3,
             userAccessLevel=1,
@@ -112,11 +116,17 @@ class LDSCycleParametersEventType(ns0.objtypes.BaseEventType):
     additivesRatioActual: ns0.vartypes.AnalogItemType | None
     additivesRatioTarget: ns0.vartypes.AnalogItemType | None
     cycleNumber: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_lds;i=6450", browseName="ns=plastics_lds;CycleNumber", description="Number of the dosing cycle", dataType=o6.UInt64)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_lds;i=6450", browseName="ns=plastics_lds;CycleNumber", description="Number of the dosing cycle", modellingRule="Mandatory", dataType=o6.UInt64
+        )
     )
     dosingTime: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_lds;i=6451", browseName="ns=plastics_lds;DosingTime", description="Duration of the dosing cycle", dataType=ns0.datatypes.Duration
+            nodeId="ns=plastics_lds;i=6451",
+            browseName="ns=plastics_lds;DosingTime",
+            description="Duration of the dosing cycle",
+            modellingRule="Optional",
+            dataType=ns0.datatypes.Duration,
         )
     )
     filterPressurePrimary: ns0.vartypes.AnalogItemType | None
@@ -146,6 +156,7 @@ class AdditiveType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_lds;i=6008",
             browseName="ns=plastics_lds;ActivateAdditive",
             description="Set value to activate the additive",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -156,6 +167,7 @@ class AdditiveType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_lds;i=6042",
             browseName="ns=plastics_lds;ActivateClosedLoopControl",
             description="Activate the closed loop control of the additive",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -163,7 +175,12 @@ class AdditiveType(ns0.objtypes.BaseObjectType):
     )
     additiveActivated: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_lds;i=6009", browseName="ns=plastics_lds;AdditiveActivated", description="Is true if the additive is activated.", dataType=o6.Boolean, value=False
+            nodeId="ns=plastics_lds;i=6009",
+            browseName="ns=plastics_lds;AdditiveActivated",
+            description="Is true if the additive is activated.",
+            modellingRule="Mandatory",
+            dataType=o6.Boolean,
+            value=False,
         )
     )
     additiveFraction: plastics_rubber.objtypes.ControlledParameterType | None
@@ -173,12 +190,17 @@ class AdditiveType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_lds;i=6449",
             browseName="ns=plastics_lds;ClosedLoopControlActivated",
             description="Is true if the closed loop control of the additive is activated",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
     isPresent: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_lds;i=6636", browseName="ns=plastics_lds;IsPresent", description="Informs the client if the additive is physically present.", dataType=o6.Boolean
+            nodeId="ns=plastics_lds;i=6636",
+            browseName="ns=plastics_lds;IsPresent",
+            description="Informs the client if the additive is physically present.",
+            modellingRule="Mandatory",
+            dataType=o6.Boolean,
         )
     )
     status: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -186,6 +208,7 @@ class AdditiveType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_lds;i=6010",
             browseName="ns=plastics_lds;Status",
             description="Actual status of the additive provides a minimal error handling for devices without event support.",
+            modellingRule="Mandatory",
             dataType=plastics_lds_datypes.AdditiveStatusEnumeration,
             value=plastics_lds_datypes.AdditiveStatusEnumeration.GOOD,
         )
@@ -207,6 +230,7 @@ o6.call(
     nodeId="ns=plastics_lds;i=7006",
     browseName="ns=plastics_lds;SetCycleNumber",
     description="Method to set the cycle number of the LDS to synchronize it with the cycle number of the injection moulding machine",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_lds;i=6039"]),
 )
 
@@ -225,6 +249,7 @@ o6.call(
     nodeId="ns=plastics_lds;i=7010",
     browseName="ns=plastics_lds;ResetErrorById",
     description="Method to reset one error of the device",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_lds;i=6059"]),
 )
 
@@ -243,6 +268,7 @@ o6.call(
     nodeId="ns=plastics_lds;i=7020",
     browseName="ns=plastics_lds;SetSetValueDensity",
     description="This optional method is used to modify SetValueDensity if allowed by the device.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_lds;i=6448"]),
 )
 
@@ -258,6 +284,7 @@ class ComponentType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_lds;i=6049",
             browseName="ns=plastics_lds;AllowsCycles",
             description="Expected number of remaining cycles with the current drum",
+            modellingRule="Optional",
             dataType=o6.Double,
             value=0.0,
         )
@@ -268,6 +295,7 @@ class ComponentType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_lds;i=6048",
             browseName="ns=plastics_lds;RemainingMaterialTime",
             description="Time until the material of the component is empty",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             value=0.0,
         )
@@ -281,6 +309,7 @@ class ComponentType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_lds;i=6050",
             browseName="ns=plastics_lds;Status",
             description="Actual status of the component provides a minimal error handling for devices without event support.",
+            modellingRule="Mandatory",
             dataType=plastics_lds_datypes.ComponentStatusEnumeration,
             value=plastics_lds_datypes.ComponentStatusEnumeration.GOOD,
         )
@@ -301,6 +330,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_lds;i=6506",
             browseName="ns=plastics_lds;ActiveErrors",
             description="List of the active errors of the device",
+            modellingRule="Mandatory",
             dataType=plastics_rubber.datatypes.ClassifiedActiveErrorDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -320,19 +350,21 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_lds;i=6058",
             browseName="ns=plastics_lds;DeviceMappingNumber",
             description="Unique identifier/address/number for devices of the same DeviceType within a local network",
+            modellingRule="Mandatory",
             dataType=o6.UInt32,
             accessLevel=3,
             userAccessLevel=1,
         )
     )
     dosingActive: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_lds;i=6052", browseName="ns=plastics_lds;DosingActive", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_lds;i=6052", browseName="ns=plastics_lds;DosingActive", modellingRule="Optional", dataType=o6.Boolean)
     )
     highestActiveAlarmSeverity: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_lds;i=6057",
             browseName="ns=plastics_lds;HighestActiveAlarmSeverity",
             description="Indication of the severity of the highest active alarm",
+            modellingRule="Mandatory",
             dataType=o6.UInt16,
         )
     )
@@ -341,6 +373,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_lds;i=7002",
             browseName="ns=plastics_lds;IdentifyDevice",
             description="The peripheral device on which this method is called shows itself by e.g. activation of a LED.",
+            modellingRule="Optional",
         )
     )
     materialBalanceSystemType: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -348,6 +381,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_lds;i=6061",
             browseName="ns=plastics_lds;MaterialBalanceSystemType",
             description="Type of the material balance system",
+            modellingRule="Mandatory",
             dataType=plastics_lds_datypes.MaterialBalanceSystemTypeEnumeration,
             value=plastics_lds_datypes.MaterialBalanceSystemTypeEnumeration.NOT_AVAILABLE,
         )
@@ -359,6 +393,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_lds;i=6201",
             browseName="ns=plastics_lds;PurgeCyclicActive",
             description="Difference between purging (true) and waiting (false)",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -367,6 +402,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_lds;i=6200",
             browseName="ns=plastics_lds;PurgeCyclicIdleTime",
             description="Time until the next purge cycle starts",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
             userAccessLevel=1,
@@ -380,6 +416,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_lds;i=6361",
             browseName="ns=plastics_lds;PurgeStatus",
             description="Actual status of the purge function",
+            modellingRule="Optional",
             dataType=plastics_lds_datypes.PurgeStatusEnumeration,
         )
     )
@@ -388,6 +425,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_lds;i=6192",
             browseName="ns=plastics_lds;PurgeTimeout",
             description="Maximum time of the active PurgeMode",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
             userAccessLevel=1,
@@ -396,7 +434,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
     remainingMaterialTime: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(o6.ns["ns=plastics_lds;i=6081"])
     remoteControlActivated: ns0.vartypes.MultiStateValueDiscreteType
     resetAllErrors: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_lds;i=7003", browseName="ns=plastics_lds;ResetAllErrors", description="Method to reset all errors of the device")
+        o6.call(nodeId="ns=plastics_lds;i=7003", browseName="ns=plastics_lds;ResetAllErrors", description="Method to reset all errors of the device", modellingRule="Optional")
     )
     resetErrorById: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=plastics_lds;i=7010"])
     setCycleNumber: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=plastics_lds;i=7006"])
@@ -407,9 +445,10 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_lds;i=7021",
             browseName="ns=plastics_lds;StartDosing",
             description="If RemoteControlActivated = 2, this Method (without arguments) is used to start the dosing",
+            modellingRule="Optional",
         )
     )
-    stopDosing: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=plastics_lds;i=7028", browseName="ns=plastics_lds;StopDosing"))
+    stopDosing: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=plastics_lds;i=7028", browseName="ns=plastics_lds;StopDosing", modellingRule="Optional"))
     targetDeviationMixingRatio: ns0.vartypes.AnalogItemType | None
 
 

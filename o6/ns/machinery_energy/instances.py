@@ -38,25 +38,30 @@ else:
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=machinery_energy;i=6002",
     browseName="ns=ecm;AccuracyClass",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6003", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])
+            ns0.vartypes.PropertyType(
+                nodeId="ns=machinery_energy;i=6003", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6004", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6004", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=machinery_energy;i=6006",
     browseName="ns=ecm;Resource",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_energy;i=6007",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[23],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Not specified"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("Electricity"), description=o6.LocalizedText()),
@@ -84,7 +89,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6008", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6008", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -93,25 +98,30 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=machinery_energy;i=6010",
     browseName="ns=ecm;AccuracyClass",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6011", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])
+            ns0.vartypes.PropertyType(
+                nodeId="ns=machinery_energy;i=6011", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6012", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6012", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=machinery_energy;i=6014",
     browseName="ns=ecm;Resource",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_energy;i=6015",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[23],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Not specified"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("Electricity"), description=o6.LocalizedText()),
@@ -139,7 +149,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6016", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6016", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -150,18 +160,19 @@ ecm.vartypes.EnergyMeasurementValueType(
     browseName="ns=ecm;NeEnergyExportHp",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6013", browseName="ns=ecm;AccuracyDomain", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6013", browseName="ns=ecm;AccuracyDomain", modellingRule="Mandatory", dataType=o6.NodeId)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_energy;i=6017",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5720146, displayName=o6.LocalizedText("W·h"), description=o6.LocalizedText("watt hour")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6018", browseName="ns=ecm;MeasurementID", dataType=o6.UInt16, value=2005)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6018", browseName="ns=ecm;MeasurementID", modellingRule="Optional", dataType=o6.UInt16, value=2005)),
         o6.hasComponent(o6.ns["ns=machinery_energy;i=6010"]),
         o6.hasComponent(o6.ns["ns=machinery_energy;i=6014"]),
     ],
@@ -175,18 +186,19 @@ ecm.vartypes.EnergyMeasurementValueType(
     browseName="ns=ecm;NeEnergyImportHp",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6005", browseName="ns=ecm;AccuracyDomain", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6005", browseName="ns=ecm;AccuracyDomain", modellingRule="Mandatory", dataType=o6.NodeId)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_energy;i=6019",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5720146, displayName=o6.LocalizedText("W·h"), description=o6.LocalizedText("watt hour")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6020", browseName="ns=ecm;MeasurementID", dataType=o6.UInt16, value=2002)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6020", browseName="ns=ecm;MeasurementID", modellingRule="Optional", dataType=o6.UInt16, value=2002)),
         o6.hasComponent(o6.ns["ns=machinery_energy;i=6002"]),
         o6.hasComponent(o6.ns["ns=machinery_energy;i=6006"]),
     ],
@@ -199,25 +211,30 @@ o6.reference(machinery_energy_objtypes.INonElectricalEnergyType, ia.reftypes.Has
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=machinery_energy;i=6022",
     browseName="ns=ecm;AccuracyClass",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6023", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])
+            ns0.vartypes.PropertyType(
+                nodeId="ns=machinery_energy;i=6023", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6024", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6024", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=machinery_energy;i=6026",
     browseName="ns=ecm;Resource",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_energy;i=6027",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[23],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Not specified"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("Electricity"), description=o6.LocalizedText()),
@@ -245,7 +262,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6028", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6028", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -254,25 +271,30 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=machinery_energy;i=6030",
     browseName="ns=ecm;AccuracyClass",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6031", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])
+            ns0.vartypes.PropertyType(
+                nodeId="ns=machinery_energy;i=6031", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6032", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6032", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=machinery_energy;i=6034",
     browseName="ns=ecm;Resource",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_energy;i=6035",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[23],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Not specified"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("Electricity"), description=o6.LocalizedText()),
@@ -300,7 +322,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6036", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6036", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -311,18 +333,21 @@ ecm.vartypes.EnergyMeasurementValueType(
     browseName="ns=ecm;Pressure",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6025", browseName="ns=ecm;AccuracyDomain", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6025", browseName="ns=ecm;AccuracyDomain", modellingRule="Mandatory", dataType=o6.NodeId)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_energy;i=6037",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5259596, displayName=o6.LocalizedText("Pa"), description=o6.LocalizedText("pascal")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6038", browseName="ns=ecm;MeasurementID", dataType=o6.UInt16, value=28683)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6038", browseName="ns=ecm;MeasurementID", modellingRule="Optional", dataType=o6.UInt16, value=28683)
+        ),
         o6.hasComponent(o6.ns["ns=machinery_energy;i=6022"]),
         o6.hasComponent(o6.ns["ns=machinery_energy;i=6026"]),
     ],
@@ -336,12 +361,15 @@ ecm.vartypes.EnergyMeasurementValueType(
     browseName="ns=ecm;Temperature",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6033", browseName="ns=ecm;AccuracyDomain", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6039", browseName="ns=ecm;MeasurementID", dataType=o6.UInt16, value=28684)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6033", browseName="ns=ecm;AccuracyDomain", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6039", browseName="ns=ecm;MeasurementID", modellingRule="Optional", dataType=o6.UInt16, value=28684)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_energy;i=6040",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=4932940, displayName=o6.LocalizedText("K"), description=o6.LocalizedText("kelvin")
@@ -359,25 +387,30 @@ o6.reference(machinery_energy_objtypes.IBaseFlowType, ns0.reftypes.HasComponent,
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=machinery_energy;i=6042",
     browseName="ns=ecm;AccuracyClass",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6043", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])
+            ns0.vartypes.PropertyType(
+                nodeId="ns=machinery_energy;i=6043", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6044", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6044", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=machinery_energy;i=6046",
     browseName="ns=ecm;Resource",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_energy;i=6047",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[23],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Not specified"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("Electricity"), description=o6.LocalizedText()),
@@ -405,7 +438,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6048", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6048", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -414,25 +447,30 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=machinery_energy;i=6050",
     browseName="ns=ecm;AccuracyClass",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6051", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])
+            ns0.vartypes.PropertyType(
+                nodeId="ns=machinery_energy;i=6051", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6052", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6052", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=machinery_energy;i=6054",
     browseName="ns=ecm;Resource",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_energy;i=6055",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[23],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Not specified"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("Electricity"), description=o6.LocalizedText()),
@@ -460,7 +498,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6056", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6056", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -471,18 +509,21 @@ ecm.vartypes.EnergyMeasurementValueType(
     browseName="ns=ecm;Volume",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6045", browseName="ns=ecm;AccuracyDomain", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6045", browseName="ns=ecm;AccuracyDomain", modellingRule="Mandatory", dataType=o6.NodeId)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_energy;i=6057",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067857, displayName=o6.LocalizedText("m³"), description=o6.LocalizedText("cubic metre")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6058", browseName="ns=ecm;MeasurementID", dataType=o6.UInt16, value=28686)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6058", browseName="ns=ecm;MeasurementID", modellingRule="Optional", dataType=o6.UInt16, value=28686)
+        ),
         o6.hasComponent(o6.ns["ns=machinery_energy;i=6042"]),
         o6.hasComponent(o6.ns["ns=machinery_energy;i=6046"]),
     ],
@@ -496,11 +537,12 @@ ecm.vartypes.EnergyMeasurementValueType(
     browseName="ns=ecm;VolumeFlowRate",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6053", browseName="ns=ecm;AccuracyDomain", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6053", browseName="ns=ecm;AccuracyDomain", modellingRule="Mandatory", dataType=o6.NodeId)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_energy;i=6059",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -510,7 +552,7 @@ ecm.vartypes.EnergyMeasurementValueType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6060", browseName="ns=ecm;MeasurementID", dataType=o6.UInt16, value=2100)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6060", browseName="ns=ecm;MeasurementID", modellingRule="Optional", dataType=o6.UInt16, value=2100)),
         o6.hasComponent(o6.ns["ns=machinery_energy;i=6050"]),
         o6.hasComponent(o6.ns["ns=machinery_energy;i=6054"]),
     ],
@@ -522,25 +564,30 @@ o6.reference(machinery_energy_objtypes.IVolumeFlowType, ns0.reftypes.HasComponen
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=machinery_energy;i=6062",
     browseName="ns=ecm;AccuracyClass",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6063", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])
+            ns0.vartypes.PropertyType(
+                nodeId="ns=machinery_energy;i=6063", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6064", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6064", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=machinery_energy;i=6066",
     browseName="ns=ecm;Resource",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_energy;i=6067",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[23],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Not specified"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("Electricity"), description=o6.LocalizedText()),
@@ -568,7 +615,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6068", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6068", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -577,25 +624,30 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=machinery_energy;i=6070",
     browseName="ns=ecm;AccuracyClass",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6071", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])
+            ns0.vartypes.PropertyType(
+                nodeId="ns=machinery_energy;i=6071", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6072", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6072", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=machinery_energy;i=6074",
     browseName="ns=ecm;Resource",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_energy;i=6075",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[23],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Not specified"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("Electricity"), description=o6.LocalizedText()),
@@ -623,7 +675,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6076", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6076", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -634,18 +686,21 @@ ecm.vartypes.EnergyMeasurementValueType(
     browseName="ns=ecm;Mass",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6073", browseName="ns=ecm;AccuracyDomain", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6073", browseName="ns=ecm;AccuracyDomain", modellingRule="Mandatory", dataType=o6.NodeId)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_energy;i=6077",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=4933453, displayName=o6.LocalizedText("kg"), description=o6.LocalizedText("kilogram")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6078", browseName="ns=ecm;MeasurementID", dataType=o6.UInt16, value=28685)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6078", browseName="ns=ecm;MeasurementID", modellingRule="Optional", dataType=o6.UInt16, value=28685)
+        ),
         o6.hasComponent(o6.ns["ns=machinery_energy;i=6070"]),
         o6.hasComponent(o6.ns["ns=machinery_energy;i=6074"]),
     ],
@@ -659,11 +714,12 @@ ecm.vartypes.EnergyMeasurementValueType(
     browseName="ns=ecm;MassFlowRate",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6065", browseName="ns=ecm;AccuracyDomain", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6065", browseName="ns=ecm;AccuracyDomain", modellingRule="Mandatory", dataType=o6.NodeId)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machinery_energy;i=6079",
                 browseName="EngineeringUnits",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -673,7 +729,7 @@ ecm.vartypes.EnergyMeasurementValueType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6080", browseName="ns=ecm;MeasurementID", dataType=o6.UInt16, value=2101)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_energy;i=6080", browseName="ns=ecm;MeasurementID", modellingRule="Optional", dataType=o6.UInt16, value=2101)),
         o6.hasComponent(o6.ns["ns=machinery_energy;i=6062"]),
         o6.hasComponent(o6.ns["ns=machinery_energy;i=6066"]),
     ],
@@ -700,7 +756,7 @@ http_opcfoundation_org_UA_Machinery_Energy_ = ns0.objtypes.NamespaceMetadataType
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),

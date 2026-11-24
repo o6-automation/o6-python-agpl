@@ -218,13 +218,13 @@ o6.ns.di.objtypes.DeviceType        # triggers the load
 o6.ns.di.__dict__["_o6_loaded"]     # True
 ```
 
-This keeps startup fast with over a hundred namespaces registered. Naming anything inside a namespace loads it.
+This keeps startup fast with over a hundred namespaces registered. Naming anything inside a namespace loads it, and so does `import o6.ns.di` or importing one of its modules, such as `from o6.ns.di.objtypes import DeviceType`. The module loads once, also when several threads use it first at the same time.
 
 !!! warning
-    A bare `import o6.ns.di` (or `from o6.ns import di`) does not execute the module, because the placeholder is already in `sys.modules`. Structured DataTypes are registered with the codec when the module loads. A client that never touches a declaration therefore decodes that namespace's structures as opaque `ExtensionObject`s:
+    `from o6.ns import di`, or holding the namespace from `o6.ns.di` or a NodeId's `ns`, does not execute the module. Structured DataTypes are registered with the codec when the module loads. A client that never touches a declaration therefore decodes that namespace's structures as opaque `ExtensionObject`s:
 
     ```python
-    import o6.ns.ia
+    from o6.ns import ia
     client.read(node)          # → o6.ExtensionObject(typeId='ns=ia;i=5009', body=b'...')
 
     o6.ns.ia.datatypes         # force the load

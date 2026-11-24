@@ -37,45 +37,66 @@ else:
 @o6.variabletype(nodeId="ns=fdt;i=2002", browseName="ns=fdt;FdtParameter", displayName="FdtParameter", valueRank=o6.ValueRank.ANY)
 class FdtParameter(ns0.vartypes.DataItemType):
     alarmDataRef: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6013", browseName="ns=fdt;AlarmDataRef", dataType=fdt_datypes.DataRefType, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fdt;i=6013", browseName="ns=fdt;AlarmDataRef", modellingRule="Optional", dataType=fdt_datypes.DataRefType, accessLevel=3, userAccessLevel=1
+        )
     )
     alarmType: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6020", browseName="ns=fdt;AlarmType", dataType=fdt_datypes.AlarmType, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6020", browseName="ns=fdt;AlarmType", modellingRule="Optional", dataType=fdt_datypes.AlarmType, accessLevel=3, userAccessLevel=1)
     )
     applicationId: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6021", browseName="ns=fdt;ApplicationId", dataType=fdt_datypes.ApplicationIdEnumeration, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fdt;i=6021", browseName="ns=fdt;ApplicationId", modellingRule="Optional", dataType=fdt_datypes.ApplicationIdEnumeration, accessLevel=3, userAccessLevel=1
+        )
     )
     dataRef: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6010", browseName="ns=fdt;DataRef", dataType=fdt_datypes.DataRefType, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6010", browseName="ns=fdt;DataRef", modellingRule="Optional", dataType=fdt_datypes.DataRefType, accessLevel=3, userAccessLevel=1)
     )
     displayFormat: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6031", browseName="ns=fdt;DisplayFormat", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6031", browseName="ns=fdt;DisplayFormat", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     eURange: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6034", browseName="ns=fdt;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6034", browseName="ns=fdt;EURange", modellingRule="Optional", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)
     )
     engineeringUnits: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6032", browseName="ns=fdt;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fdt;i=6032", browseName="ns=fdt;EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1
+        )
     )
     enumStrings: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=fdt;i=6033", browseName="ns=fdt;EnumStrings", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[1], accessLevel=3, userAccessLevel=1
+            nodeId="ns=fdt;i=6033",
+            browseName="ns=fdt;EnumStrings",
+            modellingRule="Optional",
+            dataType=o6.LocalizedText,
+            valueRank=1,
+            arrayDimensions=[1],
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     rangeDataRef: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6015", browseName="ns=fdt;RangeDataRef", dataType=fdt_datypes.DataRefType, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fdt;i=6015", browseName="ns=fdt;RangeDataRef", modellingRule="Optional", dataType=fdt_datypes.DataRefType, accessLevel=3, userAccessLevel=1
+        )
     )
     rangeType: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6035", browseName="ns=fdt;RangeType", dataType=fdt_datypes.RangeType, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6035", browseName="ns=fdt;RangeType", modellingRule="Optional", dataType=fdt_datypes.RangeType, accessLevel=3, userAccessLevel=1)
     )
     semanticInfo: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6055", browseName="ns=fdt;SemanticInfo", dataType=fdt_datypes.SemanticInfoType, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fdt;i=6055", browseName="ns=fdt;SemanticInfo", modellingRule="Optional", dataType=fdt_datypes.SemanticInfoType, accessLevel=3, userAccessLevel=1
+        )
     )
     substituteDataRef: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6017", browseName="ns=fdt;SubstituteDataRef", dataType=fdt_datypes.DataRefType, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fdt;i=6017", browseName="ns=fdt;SubstituteDataRef", modellingRule="Optional", dataType=fdt_datypes.DataRefType, accessLevel=3, userAccessLevel=1
+        )
     )
     substitutionType: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6036", browseName="ns=fdt;SubstitutionType", dataType=fdt_datypes.SubstitutionType, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=fdt;i=6036", browseName="ns=fdt;SubstitutionType", modellingRule="Optional", dataType=fdt_datypes.SubstitutionType, accessLevel=3, userAccessLevel=1
+        )
     )
 
 

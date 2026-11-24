@@ -32,7 +32,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=fdi7;i=2048", browseName="EddDataTypeEnum")
+@o6.enumtype(nodeId="ns=fdi7;i=2048", browseName="ns=fdi7;EddDataTypeEnum")
 class EddDataTypeEnum(ns0.datatypes.Enumeration):
     BOOLEAN = o6.enumfield(1, name="BOOLEAN")
     DOUBLE = o6.enumfield(2, name="DOUBLE")
@@ -55,10 +55,10 @@ class EddDataTypeEnum(ns0.datatypes.Enumeration):
     VISIBLE = o6.enumfield(19, name="VISIBLE")
 
 
-@o6.datatype(nodeId="ns=fdi7;i=2050", browseName="EddDataTypeInfo", defaultEncodingId="ns=fdi7;i=2213")
+@o6.datatype(nodeId="ns=fdi7;i=2050", browseName="ns=fdi7;EddDataTypeInfo", defaultEncodingId="ns=fdi7;i=2213")
 class EddDataTypeInfo(ns0.datatypes.Structure):
-    eddDataType: EddDataTypeEnum
-    size: o6.UInt32
+    eddDataType: EddDataTypeEnum = o6.field(name="EddDataType")
+    size: o6.UInt32 = o6.field(name="Size")
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ns0

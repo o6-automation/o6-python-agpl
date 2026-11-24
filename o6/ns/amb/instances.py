@@ -60,25 +60,25 @@ o6.reference(o6.ns["ns=amb;i=5005"], "i=39", o6.ns["ns=amb;i=6014"])
 ns0.objtypes.InitialStateType(
     nodeId="ns=amb;i=5006",
     browseName="ns=amb;Planned",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6021", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6021", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(amb_objtypes.MaintenanceEventStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=amb;i=5006"])
 ns0.objtypes.StateType(
     nodeId="ns=amb;i=5007",
     browseName="ns=amb;Executing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6022", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6022", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(amb_objtypes.MaintenanceEventStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=amb;i=5007"])
 ns0.objtypes.StateType(
     nodeId="ns=amb;i=5008",
     browseName="ns=amb;Finished",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6023", browseName="StateNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6023", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(amb_objtypes.MaintenanceEventStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=amb;i=5008"])
 ns0.objtypes.TransitionType(
     nodeId="ns=amb;i=5009",
     browseName="ns=amb;FromPlannedToExecuting",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6024", browseName="TransitionNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6024", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(amb_objtypes.MaintenanceEventStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=amb;i=5009"])
 o6.reference(o6.ns["ns=amb;i=5009"], "i=51", o6.ns["ns=amb;i=5006"])
@@ -86,7 +86,7 @@ o6.reference(o6.ns["ns=amb;i=5009"], "i=52", o6.ns["ns=amb;i=5007"])
 ns0.objtypes.TransitionType(
     nodeId="ns=amb;i=5010",
     browseName="ns=amb;FromExecutingToFinished",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6025", browseName="TransitionNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6025", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(amb_objtypes.MaintenanceEventStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=amb;i=5010"])
 o6.reference(o6.ns["ns=amb;i=5010"], "i=51", o6.ns["ns=amb;i=5007"])
@@ -94,7 +94,7 @@ o6.reference(o6.ns["ns=amb;i=5010"], "i=52", o6.ns["ns=amb;i=5008"])
 ns0.objtypes.TransitionType(
     nodeId="ns=amb;i=5011",
     browseName="ns=amb;FromFinishedToPlanned",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6026", browseName="TransitionNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6026", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(amb_objtypes.MaintenanceEventStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=amb;i=5011"])
 o6.reference(o6.ns["ns=amb;i=5011"], "i=51", o6.ns["ns=amb;i=5008"])
@@ -147,7 +147,8 @@ ns0.vartypes.PropertyType(
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=amb;i=6033",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6034", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6034", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 amb_objtypes.MaintenanceEventStateMachineType(
@@ -168,7 +169,7 @@ http_opcfoundation_org_UA_AMB_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=amb;i=6046", browseName="NamespaceVersion", dataType=o6.String, value="1.01.1")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=amb;i=6047", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=amb;i=6047", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(

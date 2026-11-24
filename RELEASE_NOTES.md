@@ -1,6 +1,80 @@
 # Release Notes
 
-## (unreleased)
+## 3.1.0
+
+### New Features
+
+- Added `server.config.certificateEkuRule` to configure certificate extended-key-usage validation without changing the default.
+
+- Added optional `HistoryBackend.getHistoryPageRaw`, `validateHistoryPage`, and `onUnregister` callbacks for original IndexRange text, pre-read validation, and node-resource cleanup.
+
+- Added an optional `validFrom` to `createSelfSignedCertificate()`. It sets the start of the validity period, for example an hour ago, so that peers whose clocks run behind accept the certificate. The validity lasts `expiresInDays` from `validFrom`. Without `validFrom`, the validity starts at the creation time, as before.
+
+- Added `o6.license`, an immutable `o6.LicenseInfo` that reports the edition, whether a Credential was accepted (holder, usage scope, identifier, features, validity period), whether Script Mode is running, and why a Credential file was rejected.
+
+### Breaking Changes
+
+- While a client is connected or a server is running, an assignment to `client.config` or `server.config` raises `RuntimeError`. The only exception is `loadUnknownDataTypes`. This rule now also applies to these settings: the server `logger`, `auditingEnabled`, `applicationType`, `registeredServersEnabled` and `serversOnNetworkEnabled`, and the client `logger`.
+
+- `client.config` and `server.config` are now views that you can read from any thread. `isinstance(client.config, o6.ClientConfig)` and `isinstance(server.config, o6.ServerConfig)` are still true. But `type(client.config)` is not `ClientConfig` any more, and `type(server.config)` is not `ServerConfig`.
+
+### Improvements
+
+- `import o6.ns.<name>` now loads a packaged namespace, like importing any other package. `from o6.ns import <name>` and `o6.ns.<name>` still return it without loading it; naming anything inside it loads it.
+
+- A client that runs its own event loop starts its worker thread with the first operation that needs the loop. It does not start the worker in `Client(...)`. Thus a new client that is not connected has no thread.
+
+- When you drop the last reference to a connected client or a running server, o6 gives a `ResourceWarning`: `unclosed Client '<name>'` or `unclosed Server '<name>'`. Python shows it only when warnings are on, for example with `python -X dev`. Do not rely on garbage collection. Close clients and servers with `with`, `async with`, `disconnect()` or `stop()`.
+
+### Bug Fixes
+
+- The o6 package now has the `py.typed` marker. Type checkers such as mypy use the o6 type hints and stubs. Before, they reported `missing library stubs or py.typed marker` and treated all o6 types as `Any`.
+
+- Fixed `client.connect()` waiting forever for a server that accepts the TCP connection but never answers. The connect now fails with `BadTimeout` after `client.config.timeout` milliseconds and closes the channel. Fixed `disconnect()` after a cancelled `connect()` leaving the channel open.
+
+- With `Server.enablePushManagement()`, `UpdateCertificate` checks a new PrivateKey on its own before it compares the key with the certificate. A PrivateKey with altered private components was accepted when its public key still matched; it is now rejected with `BadNotSupported`. A valid PrivateKey of another key pair now returns `BadCertificateInvalid` instead of `BadNotSupported`, as OPC UA Part 12 and the OPC UA certification tests expect.
+
+- Fixed modified-history requests with `returnBounds=True` returning an unsupported-operation error instead of per-node `BadInvalidArgument` when using a custom paged backend.
+
+- Fixed the RSL, GPOS, TMC and PA-DIM companion specifications, and those built on PA-DIM (WMTP, Machinery Process Values, Additive Manufacturing, Metal Forming, PAEFS, Surface Technology), failing to load with `BadTypeMismatch`. The shipped `o6.ns` packages are regenerated with o6-ncc 2.0.0: `o6.ns.ns0` VariableTypes without a ValueRank are now scalar, matching the server's built-in namespace 0, and generated structures carry their specification field names.
+
+- Fixed empty TCP peer addresses in server SecureChannel notifications, including IPv4 and IPv6 connections.
+
+- Fixed custom history paging losing continuation tokens for open-ended and concurrent reads, mishandling unspecified timestamps, and discarding per-sample range errors.
+
+- Fixed custom history token release requiring a read window or data-access permission, and modified reads returning raw samples through paged backends.
+
+- Fixed node settings and polling resources being retained after custom history unregistration.
+
+- Some calls from a different thread ran on the calling thread while the event loop of the client or server ran. These calls raced the loop. They were raw `Client.service*` calls and server operations such as node creation, value writes, `implement()` and child lookup. They now run on the loop thread. Thus a raw `service*` call from an async task on a different event loop now reports request conversion errors when you await the result. On an application-owned loop, keep the loop thread free while other threads use the client or server. If the loop thread waits for such a thread, for example with `Thread.join()` or `Future.result()`, the two threads wait forever. Use `await asyncio.to_thread(...)` instead. See [GIL and event-loop bridging](https://docs.o6-automation.com/o6-python/manual/implementation-details/gil-and-event-loop/).
+
+- A call from a different thread to a private native method raced the event loop while the loop ran. This applies to the native objects behind `Client`, `Server`, their configurations and the server nodes. These calls now raise `RuntimeError`. The public API does not change: it runs these calls on the loop thread.
+
+- These APIs now work from any thread: `client.state`, the `Session` methods, `server.ns.get_default_permissions()` and `set_default_permissions()`, roles, node permissions, and reads of a live `client.config` or `server.config`.
+
+- When you call `Server.stop()` from a different thread while an application-owned loop runs the server, the server now shuts down on the loop thread. `stop()` returns when the shutdown is complete. It does not serve `shutdownDelay`, the same as a call on the loop thread.
+
+- When you drop the last reference to a client or server, the dropping thread does not wait or deadlock any more. The process also does not crash any more when this occurs on a thread other than the loop thread. The teardown runs on the event loop and does not block. A running server completes its shutdown before it releases its native resources.
+
+- A synchronous call from a different thread does not wait forever any more when the o6 worker stops or the event loop closes before the call starts. The call raises `RuntimeError` and does not run. A call that has started still gets its result.
+
+- Fixed `Server.stop()` from a different thread waiting 10 seconds and raising `TimeoutError` when a `stop()` on the loop thread completed the shutdown at the same time. The call now returns when the shutdown is complete.
+
+- Registering namespaces, loading packaged namespaces and registering DataTypes from several threads at once, for example several clients connecting or loading server DataTypes in parallel, no longer hands out duplicate namespace indices, fails with `AttributeError` on a half-loaded namespace, or binds a class to another class's DataType.
+
+- The process does not crash any more when several threads read `DataValue.value` or a structure field at the same time, or when a different thread sets it during the read.
+
+- A structure whose fields you never read does not leak their native memory any more when you drop it.
+
+- The process does not crash any more, and does not read freed memory, when you drop a server node after the node was deleted or the server was cleaned up, and the node's value uses a custom DataType, for example a structure or union from `@o6.datatype`.
+
+- Leaving a `with Client(...)` or `async with Client(...)` block now always disconnects the client, also while it is connecting or reconnecting, for example just after its server stopped. Before, it disconnected only a client with an activated Session; any other client stayed open until garbage collection.
+
+- When several threads create clients, servers or nodes at the same time, they do not get the same automatic names or NodeIds any more. When several threads add and remove notification handlers, the notifications do not stay off any more. A thread can now create node handles while the client clears its cached children, for example on `connect()`, in `invalidateNodeCache()`, or after you add or delete nodes. Before, this failed with `Set changed size during iteration`.
+
+- Synchronous `read`, `write` and `call` on a server that is not started or has stopped do not wait forever any more when another thread does the same on its own server.
+
+- Several threads can now use one server that is not started or has stopped, for example to configure it from a thread pool. Before, their calls ran the same event loop at the same time and failed with `RuntimeError: This event loop is already running`, corrupted the loop, or never completed. Now one thread at a time runs its call and the idle loop, and the others wait. `start()` from a different thread meanwhile now always starts the worker thread.
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>

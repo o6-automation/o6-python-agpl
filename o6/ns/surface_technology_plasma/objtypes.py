@@ -60,7 +60,7 @@ class CirculationSystemType(ns0.objtypes.BaseObjectType):
     coolingCircuitTemperatureOutlet: ns0.vartypes.AnalogUnitType | None
 
 
-ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5010", browseName="ns=machinery;MachineryBuildingBlocks")
+ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5010", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
 
 
 @o6.objecttype(nodeId="ns=surface_technology_plasma;i=1003", browseName="ns=surface_technology_plasma;PlasmaSurfaceMachineType", displayName="PlasmaSurfaceMachineType")
@@ -90,7 +90,7 @@ class AtmosphericPressurePlasmaSurfaceMachineType(PlasmaSurfaceMachineType):
     monitoring: machinery.objtypes.MonitoringType
 
 
-ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5032", browseName="ns=machinery;MachineryBuildingBlocks")
+ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5032", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
 
 
 @o6.objecttype(nodeId="ns=surface_technology_plasma;i=1004", browseName="ns=surface_technology_plasma;PlasmaGeneratorType", displayName="PlasmaGeneratorType")
@@ -100,7 +100,7 @@ class PlasmaGeneratorType(ns0.objtypes.BaseObjectType):
     monitoring: machinery.objtypes.MonitoringType
 
 
-ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5038", browseName="ns=machinery;MachineryBuildingBlocks")
+ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5038", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
 
 
 @o6.objecttype(nodeId="ns=surface_technology_plasma;i=1005", browseName="ns=surface_technology_plasma;PrecursorSystemType", displayName="PrecursorSystemType")
@@ -111,7 +111,7 @@ class PrecursorSystemType(ns0.objtypes.BaseObjectType):
     monitoring: machinery.objtypes.MonitoringType
 
 
-ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5044", browseName="ns=machinery;MachineryBuildingBlocks")
+ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5044", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
 
 
 @o6.objecttype(nodeId="ns=surface_technology_plasma;i=1007", browseName="ns=surface_technology_plasma;GasSystemType", displayName="GasSystemType")
@@ -122,7 +122,7 @@ class GasSystemType(ns0.objtypes.BaseObjectType):
     monitoring: machinery.objtypes.MonitoringType
 
 
-ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5050", browseName="ns=machinery;MachineryBuildingBlocks")
+ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5050", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
 
 
 @o6.objecttype(nodeId="ns=surface_technology_plasma;i=1014", browseName="ns=surface_technology_plasma;PlantCoolingSystemType", displayName="PlantCoolingSystemType")
@@ -133,7 +133,7 @@ class PlantCoolingSystemType(ns0.objtypes.BaseObjectType):
     monitoring: machinery.objtypes.MonitoringType
 
 
-ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5056", browseName="ns=machinery;MachineryBuildingBlocks")
+ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5056", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
 
 
 @o6.objecttype(nodeId="ns=surface_technology_plasma;i=1020", browseName="ns=surface_technology_plasma;ProcessingChamberType", displayName="ProcessingChamberType")
@@ -143,7 +143,7 @@ class ProcessingChamberType(ns0.objtypes.BaseObjectType):
     monitoring: machinery.objtypes.MonitoringType
 
 
-ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5060", browseName="ns=machinery;MachineryBuildingBlocks")
+ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5060", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
 
 
 @o6.objecttype(nodeId="ns=surface_technology_plasma;i=1023", browseName="ns=surface_technology_plasma;HeatingSystemType", displayName="HeatingSystemType")
@@ -153,7 +153,7 @@ class HeatingSystemType(ns0.objtypes.BaseObjectType):
     monitoring: machinery.objtypes.MonitoringType
 
 
-ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5064", browseName="ns=machinery;MachineryBuildingBlocks")
+ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5064", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
 
 
 @o6.objecttype(nodeId="ns=surface_technology_plasma;i=1026", browseName="ns=surface_technology_plasma;WorkpieceMotionDeviceType", displayName="WorkpieceMotionDeviceType")
@@ -163,7 +163,7 @@ class WorkpieceMotionDeviceType(ns0.objtypes.BaseObjectType):
     monitoring: machinery.objtypes.MonitoringType
 
 
-ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5070", browseName="ns=machinery;MachineryBuildingBlocks")
+ns0.objtypes.FolderType(nodeId="ns=surface_technology_plasma;i=5070", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
 
 
 @o6.objecttype(nodeId="ns=surface_technology_plasma;i=1029", browseName="ns=surface_technology_plasma;PlasmaJetType", displayName="PlasmaJetType")
@@ -177,7 +177,12 @@ class PlasmaJetType(ns0.objtypes.BaseObjectType):
 class RegulatorType(ns0.objtypes.BaseObjectType):
     correctionFactor: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=surface_technology_plasma;i=6087", browseName="ns=surface_technology_plasma;CorrectionFactor", dataType=o6.Double, accessLevel=3, userAccessLevel=1
+            nodeId="ns=surface_technology_plasma;i=6087",
+            browseName="ns=surface_technology_plasma;CorrectionFactor",
+            modellingRule="Optional",
+            dataType=o6.Double,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     gasConsumption: ns0.vartypes.AnalogUnitType | None

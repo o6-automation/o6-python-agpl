@@ -295,6 +295,7 @@ class build_open62541(Command):
         if nodeset_dir:
             nodeset_dir = nodeset_dir.replace("\\", "/")
             cmake_args.append(f"-DUA_NODESET_DIR={nodeset_dir}")
+        cmake_env = os.environ.copy()
         if CONFIG.is_windows:
             dependency_dir = CONFIG.windows_dependency_dir
             cmake_args.extend(
@@ -306,7 +307,11 @@ class build_open62541(Command):
                     "-DOPENSSL_USE_STATIC_LIBS=TRUE",
                 ]
             )
-        subprocess.check_call(cmake_args, cwd=src)
+            # The full namespace 0 (namespace0_generated.c) exceeds the COFF
+            # section limit on ARM64 (MSVC C1128). CFLAGS adds /bigobj to
+            # CMake's default MSVC flags, where -DCMAKE_C_FLAGS would replace them.
+            cmake_env["CFLAGS"] = f"{cmake_env.get('CFLAGS', '')} /bigobj".strip()
+        subprocess.check_call(cmake_args, cwd=src, env=cmake_env)
 
         cpu_count = str(os.cpu_count() or 1)
         print(f"[open62541] building ...")
@@ -400,11 +405,13 @@ class build_ext(_build_ext):
 
 setup(
     name="o6",
-    version="3.0.0",
+    version="3.1.0",
     ext_modules=[o6_core],
     cmdclass={
         "build_ext": build_ext,
         "build_open62541": build_open62541,
     },
     packages=find_packages(exclude=["tests*", "build*", "deps*", "tools*"]),
+    # Ship the PEP 561 marker and the namespace stubs with any setuptools
+    package_data={"o6": ["py.typed"], "": ["*.pyi"]},
 )

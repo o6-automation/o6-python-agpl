@@ -35,7 +35,7 @@ else:
 
 @o6.enumtype(
     nodeId="ns=fdt;i=3001",
-    browseName="AlarmType",
+    browseName="ns=fdt;AlarmType",
     description="Identifier for the alarm type to show the association between high- and low alarm and high-high- and low-low-alarm. (Provides mapping for Fdt.Dtm.DataAccess.AlarmType.)",
 )
 class AlarmType(ns0.datatypes.Enumeration):
@@ -45,7 +45,9 @@ class AlarmType(ns0.datatypes.Enumeration):
     LOW_ALARM = o6.enumfield(3, name="LowAlarm")
 
 
-@o6.enumtype(nodeId="ns=fdt;i=3002", browseName="ApplicationIdEnumeration", description="Identifies type of an application or function. (Provides mapping for Fdt.ApplicationId)")
+@o6.enumtype(
+    nodeId="ns=fdt;i=3002", browseName="ns=fdt;ApplicationIdEnumeration", description="Identifies type of an application or function. (Provides mapping for Fdt.ApplicationId)"
+)
 class ApplicationIdEnumeration(ns0.datatypes.Enumeration):
     ADJUST_SET_VALUE = o6.enumfield(0, name="AdjustSetValue")
     ASSET_MANAGEMENT = o6.enumfield(1, name="AssetManagement")
@@ -64,13 +66,13 @@ class ApplicationIdEnumeration(ns0.datatypes.Enumeration):
     NETWORK_MANAGEMENT = o6.enumfield(14, name="NetworkManagement")
 
 
-@o6.enumtype(nodeId="ns=fdt;i=3003", browseName="RangeType", description="Type of a range device data. (Provides mapping to Fdt.Dtm.DataAccess.RangeType)")
+@o6.enumtype(nodeId="ns=fdt;i=3003", browseName="ns=fdt;RangeType", description="Type of a range device data. (Provides mapping to Fdt.Dtm.DataAccess.RangeType)")
 class RangeType(ns0.datatypes.Enumeration):
     LOWER_RANGE = o6.enumfield(0, name="LowerRange")
     UPPER_RANGE = o6.enumfield(1, name="UpperRange")
 
 
-@o6.enumtype(nodeId="ns=fdt;i=3004", browseName="SubstitutionType", description="Type of substitution data. (Provides mapping to Fdt.Dtm.DataAccess.SubstitutionType)")
+@o6.enumtype(nodeId="ns=fdt;i=3004", browseName="ns=fdt;SubstitutionType", description="Type of substitution data. (Provides mapping to Fdt.Dtm.DataAccess.SubstitutionType)")
 class SubstitutionType(ns0.datatypes.Enumeration):
     LAST_VALUE = o6.enumfield(0, name="LastValue")
     LAST_VALID_VALUE = o6.enumfield(1, name="LastValidValue")
@@ -78,7 +80,7 @@ class SubstitutionType(ns0.datatypes.Enumeration):
     LOWER_RANGE = o6.enumfield(3, name="LowerRange")
 
 
-@o6.enumtype(nodeId="ns=fdt;i=3005", browseName="ClassificationDomainId")
+@o6.enumtype(nodeId="ns=fdt;i=3005", browseName="ns=fdt;ClassificationDomainId")
 class ClassificationDomainId(ns0.datatypes.Enumeration):
     POWER_DISTRIBUTION = o6.enumfield(0, name="PowerDistribution")
     MOTION_CONTROL = o6.enumfield(1, name="MotionControl")
@@ -88,7 +90,7 @@ class ClassificationDomainId(ns0.datatypes.Enumeration):
     COMMUNICATION = o6.enumfield(5, name="Communication")
 
 
-@o6.enumtype(nodeId="ns=fdt;i=3007", browseName="IECDatatype")
+@o6.enumtype(nodeId="ns=fdt;i=3007", browseName="ns=fdt;IECDatatype")
 class IECDatatype(ns0.datatypes.Enumeration):
     BOOL = o6.enumfield(0, name="BOOL")
     SINT = o6.enumfield(1, name="SINT")
@@ -115,7 +117,7 @@ class IECDatatype(ns0.datatypes.Enumeration):
 
 @o6.enumtype(
     nodeId="ns=fdt;i=3008",
-    browseName="ClassificationId",
+    browseName="ns=fdt;ClassificationId",
     description="Classification according to device primary function. \n(Provides mapping to Fdt.Dtm.DeviceClassification.ClassificationId)",
 )
 class ClassificationId(ns0.datatypes.Enumeration):
@@ -186,7 +188,7 @@ class ClassificationId(ns0.datatypes.Enumeration):
 
 @o6.enumtype(
     nodeId="ns=fdt;i=3009",
-    browseName="SupportedTransfer",
+    browseName="ns=fdt;SupportedTransfer",
     description="This enumeration provides values to describe the types of transfers provided for a device. (Provides mapping to Fdt.Dtm.SupportedTransfer)",
 )
 class SupportedTransfer(ns0.datatypes.Enumeration):
@@ -196,7 +198,7 @@ class SupportedTransfer(ns0.datatypes.Enumeration):
     BOTH_UPLOAD_AND_DOWNLOAD = o6.enumfield(3, name="BothUploadAndDownload")
 
 
-@o6.enumtype(nodeId="ns=fdt;i=3010", browseName="DocumentClassification", description="Classification of a document. (Provides mapping for Fdt.Dtm.DocumentClassification)")
+@o6.enumtype(nodeId="ns=fdt;i=3010", browseName="ns=fdt;DocumentClassification", description="Classification of a document. (Provides mapping for Fdt.Dtm.DocumentClassification)")
 class DocumentClassification(ns0.datatypes.Enumeration):
     HELP = o6.enumfield(0, name="Help")
     TECHNICAL_DOCUMENTATION = o6.enumfield(1, name="TechnicalDocumentation")
@@ -205,35 +207,35 @@ class DocumentClassification(ns0.datatypes.Enumeration):
     TENDER_SPECIFICATION = o6.enumfield(4, name="TenderSpecification")
 
 
-@o6.datatype(nodeId="ns=fdt;i=3011", browseName="FdtDeviceClassificationType", defaultEncodingId="ns=fdt;i=5007")
+@o6.datatype(nodeId="ns=fdt;i=3011", browseName="ns=fdt;FdtDeviceClassificationType", defaultEncodingId="ns=fdt;i=5007")
 class FdtDeviceClassificationType(ns0.datatypes.Structure):
-    classificationDomain: ClassificationDomainId
-    deviceClassification: ClassificationId
+    classificationDomain: ClassificationDomainId = o6.field(name="ClassificationDomain")
+    deviceClassification: ClassificationId = o6.field(name="DeviceClassification")
 
 
-@o6.enumtype(nodeId="ns=fdt;i=3012", browseName="FunctionExecutionResultState")
+@o6.enumtype(nodeId="ns=fdt;i=3012", browseName="ns=fdt;FunctionExecutionResultState")
 class FunctionExecutionResultState(ns0.datatypes.Enumeration):
     CANCEL = o6.enumfield(0, name="Cancel")
     SUCCESS = o6.enumfield(1, name="Success")
     FAIL = o6.enumfield(2, name="Fail")
 
 
-@o6.enumtype(nodeId="ns=fdt;i=3013", browseName="SignalTypeEnumeration")
+@o6.enumtype(nodeId="ns=fdt;i=3013", browseName="ns=fdt;SignalTypeEnumeration")
 class SignalTypeEnumeration(ns0.datatypes.Enumeration):
     INPUT = o6.enumfield(0, name="Input")
     OUTPUT = o6.enumfield(1, name="Output")
 
 
-@o6.datatype(nodeId="ns=fdt;i=3014", browseName="SemanticInfoType", defaultEncodingId="ns=fdt;i=5005")
+@o6.datatype(nodeId="ns=fdt;i=3014", browseName="ns=fdt;SemanticInfoType", defaultEncodingId="ns=fdt;i=5005")
 class SemanticInfoType(ns0.datatypes.Structure):
-    applicationDomain: o6.String
-    semanticId: o6.String
+    applicationDomain: o6.String = o6.field(name="ApplicationDomain")
+    semanticId: o6.String = o6.field(name="SemanticId")
 
 
-@o6.datatype(nodeId="ns=fdt;i=3015", browseName="DataRefType", description="Reference to a data item", defaultEncodingId="ns=fdt;i=5012")
+@o6.datatype(nodeId="ns=fdt;i=3015", browseName="ns=fdt;DataRefType", description="Reference to a data item", defaultEncodingId="ns=fdt;i=5012")
 class DataRefType(ns0.datatypes.Structure):
-    dataId: o6.String
-    semanticInfo: SemanticInfoType
+    dataId: o6.String = o6.field(name="DataId")
+    semanticInfo: SemanticInfoType = o6.field(name="SemanticInfo")
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ns0, fdt_reftypes

@@ -32,14 +32,14 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=di;i=331", browseName="SoftwareVersionFileType")
+@o6.enumtype(nodeId="ns=di;i=331", browseName="ns=di;SoftwareVersionFileType")
 class SoftwareVersionFileType(ns0.datatypes.Enumeration):
     CURRENT = o6.enumfield(0, name="Current")
     PENDING = o6.enumfield(1, name="Pending")
     FALLBACK = o6.enumfield(2, name="Fallback")
 
 
-@o6.optionsettype(nodeId="ns=di;i=333", browseName="UpdateBehavior", base=o6.UInt32)
+@o6.optionsettype(nodeId="ns=di;i=333", browseName="ns=di;UpdateBehavior", base=o6.UInt32)
 class UpdateBehavior:
     KEEPS_PARAMETERS = o6.bitmask(0x01 << 0, name="KeepsParameters")
     WILL_DISCONNECT = o6.bitmask(0x01 << 1, name="WillDisconnect")
@@ -48,7 +48,7 @@ class UpdateBehavior:
     NEEDS_PREPARATION = o6.bitmask(0x01 << 4, name="NeedsPreparation")
 
 
-@o6.enumtype(nodeId="ns=di;i=408", browseName="SoftwareClass")
+@o6.enumtype(nodeId="ns=di;i=408", browseName="ns=di;SoftwareClass")
 class SoftwareClass(ns0.datatypes.Enumeration):
     FIRMWARE = o6.enumfield(0, name="Firmware")
     APPLICATION = o6.enumfield(1, name="Application")
@@ -56,13 +56,13 @@ class SoftwareClass(ns0.datatypes.Enumeration):
     SOLUTION = o6.enumfield(3, name="Solution")
 
 
-@o6.optionsettype(nodeId="ns=di;i=410", browseName="LocationIndicationType", base=o6.UInt16)
+@o6.optionsettype(nodeId="ns=di;i=410", browseName="ns=di;LocationIndicationType", base=o6.UInt16)
 class LocationIndicationType:
     VISUAL = o6.bitmask(0x01 << 0, name="Visual")
     AUDIBLE = o6.bitmask(0x01 << 1, name="Audible")
 
 
-@o6.enumtype(nodeId="ns=di;i=6244", browseName="DeviceHealthEnumeration")
+@o6.enumtype(nodeId="ns=di;i=6244", browseName="ns=di;DeviceHealthEnumeration")
 class DeviceHealthEnumeration(ns0.datatypes.Enumeration):
     NORMAL = o6.enumfield(0, name="NORMAL")
     FAILURE = o6.enumfield(1, name="FAILURE")
@@ -71,29 +71,29 @@ class DeviceHealthEnumeration(ns0.datatypes.Enumeration):
     MAINTENANCE_REQUIRED = o6.enumfield(4, name="MAINTENANCE_REQUIRED")
 
 
-@o6.datatype(nodeId="ns=di;i=6522", browseName="FetchResultDataType", defaultEncodingId="ns=di;i=6551", isAbstract=True)
+@o6.datatype(nodeId="ns=di;i=6522", browseName="ns=di;FetchResultDataType", defaultEncodingId="ns=di;i=6551", isAbstract=True)
 class FetchResultDataType(ns0.datatypes.Structure):
     pass
 
 
-@o6.datatype(nodeId="ns=di;i=6525", browseName="ParameterResultDataType", defaultEncodingId="ns=di;i=6554")
+@o6.datatype(nodeId="ns=di;i=6525", browseName="ns=di;ParameterResultDataType", defaultEncodingId="ns=di;i=6554")
 class ParameterResultDataType(ns0.datatypes.Structure):
-    nodePath: list[o6.QualifiedName]
-    statusCode: o6.StatusCode
-    diagnostics: o6.DiagnosticInfo
+    nodePath: list[o6.QualifiedName] = o6.field(name="NodePath")
+    statusCode: o6.StatusCode = o6.field(name="StatusCode")
+    diagnostics: o6.DiagnosticInfo = o6.field(name="Diagnostics")
 
 
-@o6.datatype(nodeId="ns=di;i=15888", browseName="TransferResultErrorDataType", defaultEncodingId="ns=di;i=15891")
+@o6.datatype(nodeId="ns=di;i=15888", browseName="ns=di;TransferResultErrorDataType", defaultEncodingId="ns=di;i=15891")
 class TransferResultErrorDataType(FetchResultDataType):
-    status: o6.Int32
-    diagnostics: o6.DiagnosticInfo
+    status: o6.Int32 = o6.field(name="Status")
+    diagnostics: o6.DiagnosticInfo = o6.field(name="Diagnostics")
 
 
-@o6.datatype(nodeId="ns=di;i=15889", browseName="TransferResultDataDataType", defaultEncodingId="ns=di;i=15892")
+@o6.datatype(nodeId="ns=di;i=15889", browseName="ns=di;TransferResultDataDataType", defaultEncodingId="ns=di;i=15892")
 class TransferResultDataDataType(FetchResultDataType):
-    sequenceNumber: o6.Int32
-    endOfResults: o6.Boolean
-    parameterDefs: list[ParameterResultDataType]
+    sequenceNumber: o6.Int32 = o6.field(name="SequenceNumber")
+    endOfResults: o6.Boolean = o6.field(name="EndOfResults")
+    parameterDefs: list[ParameterResultDataType] = o6.field(name="ParameterDefs")
 
 
 del Any, TYPE_CHECKING, uuid, o6, ns0, di_reftypes

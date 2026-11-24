@@ -61,6 +61,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=open_scs;i=7004",
     browseName="ns=open_scs;AggregationUnpackingEvent",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=6011"]),
     outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=6013"]),
 )
@@ -88,12 +89,13 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=open_scs;i=15038",
     browseName="ns=open_scs;SNtoEncoded",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15039"]),
     outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15040"]),
 )
@@ -106,7 +108,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="SNCollection", dataType=o6.NodeId("ns=open_scs;i=15008"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
         ns0.datatypes.Argument(name="PoolSelectionCriteria", dataType=o6.NodeId("ns=open_scs;i=15010"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
@@ -121,12 +123,13 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=open_scs;i=15044",
     browseName="ns=open_scs;SNtoUnallocated",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15045"]),
     outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15046"]),
 )
@@ -139,7 +142,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="SNCollection",
@@ -172,7 +175,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="ReturnStatus",
@@ -186,6 +189,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=open_scs;i=15047",
     browseName="ns=open_scs;SNReturnAllocated",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15048"]),
     outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15049"]),
 )
@@ -198,7 +202,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="SNCollection",
@@ -231,7 +235,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="ReturnStatus",
@@ -245,6 +249,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=open_scs;i=15050",
     browseName="ns=open_scs;SNReturnUnallocated",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15051"]),
     outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15052"]),
 )
@@ -257,7 +262,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[5],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="SNCollectionID",
@@ -300,7 +305,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="ReturnStatus",
@@ -330,6 +335,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=open_scs;i=15053",
     browseName="ns=open_scs;SNRequestAllocated",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15054"]),
     outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15055"]),
 )
@@ -342,7 +348,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[5],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="SNCollectionID",
@@ -385,7 +391,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="ReturnStatus",
@@ -415,6 +421,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=open_scs;i=15056",
     browseName="ns=open_scs;SNRequestUnallocated",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15057"]),
     outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15058"]),
 )
@@ -427,7 +434,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[5],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="SNCollectionID",
@@ -470,7 +477,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="ReturnStatus",
@@ -500,6 +507,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=open_scs;i=15059",
     browseName="ns=open_scs;SNRequestUnassigned",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15060"]),
     outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15061"]),
 )
@@ -512,7 +520,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="LabelCollection",
@@ -545,7 +553,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="ReturnStatus",
@@ -559,6 +567,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=open_scs;i=15064",
     browseName="ns=open_scs;SIDDecommissioningEvent",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15065"]),
     outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15066"]),
 )
@@ -571,7 +580,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="LabelCollection",
@@ -604,7 +613,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="ReturnStatus",
@@ -618,6 +627,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=open_scs;i=15067",
     browseName="ns=open_scs;SIDInspectingEvent",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15068"]),
     outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15069"]),
 )
@@ -630,7 +640,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="LabelCollection",
@@ -663,7 +673,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="ReturnStatus",
@@ -677,6 +687,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=open_scs;i=15070",
     browseName="ns=open_scs;SIDShippingEvent",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15071"]),
     outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15072"]),
 )
@@ -689,7 +700,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="LabelCollection",
@@ -722,7 +733,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="ReturnStatus",
@@ -736,6 +747,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=open_scs;i=15073",
     browseName="ns=open_scs;SIDDestroyingEvent",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15074"]),
     outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15075"]),
 )
@@ -748,7 +760,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="LabelCollection",
@@ -781,7 +793,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="ReturnStatus",
@@ -795,6 +807,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=open_scs;i=15076",
     browseName="ns=open_scs;SIDCommissioningEvent",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15077"]),
     outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15078"]),
 )
@@ -807,7 +820,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="LabelCollection",
@@ -840,7 +853,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="ReturnStatus",
@@ -854,6 +867,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=open_scs;i=15079",
     browseName="ns=open_scs;LabelsSamplingEvent",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15080"]),
     outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15081"]),
 )
@@ -866,7 +880,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="LabelCollection",
@@ -899,7 +913,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="ReturnStatus",
@@ -913,6 +927,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=open_scs;i=15082",
     browseName="ns=open_scs;LabelsInspectingEvent",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15083"]),
     outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15084"]),
 )
@@ -925,7 +940,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="LabelCollection",
@@ -958,7 +973,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="ReturnStatus",
@@ -972,6 +987,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=open_scs;i=15085",
     browseName="ns=open_scs;LabelsScrappingEvent",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15086"]),
     outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15087"]),
 )
@@ -984,7 +1000,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="LabelCollection",
@@ -1017,7 +1033,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="ReturnStatus",
@@ -1031,6 +1047,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=open_scs;i=15088",
     browseName="ns=open_scs;LabelsEncodingEvent",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15089"]),
     outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15090"]),
 )
@@ -1043,7 +1060,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="SNCollection",
@@ -1076,7 +1093,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="ReturnStatus",
@@ -1090,6 +1107,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=open_scs;i=15091",
     browseName="ns=open_scs;SNInvalidatingEvent",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15092"]),
     outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15093"]),
 )
@@ -1103,12 +1121,18 @@ class OPENSCSEventManagerObjectType(ns0.objtypes.BaseObjectType):
     labelsSamplingEvent: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=open_scs;i=15079"])
     labelsScrappingEvent: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=open_scs;i=15085"])
     maxEPCISObjectEventSIDs: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=6009", browseName="ns=open_scs;MaxEPCISObjectEventSIDs", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=open_scs;i=6009", browseName="ns=open_scs;MaxEPCISObjectEventSIDs", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+        )
     )
     maxEPCISaggregationEvents: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=6010", browseName="ns=open_scs;MaxEPCISaggregationEvents", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=open_scs;i=6010", browseName="ns=open_scs;MaxEPCISaggregationEvents", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+        )
     )
-    maxEvents: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15063", browseName="ns=open_scs;MaxEvents", dataType=o6.UInt32))
+    maxEvents: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15063", browseName="ns=open_scs;MaxEvents", modellingRule="Mandatory", dataType=o6.UInt32)
+    )
     sIDCommissioningEvent: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=open_scs;i=15076"])
     sIDDecommissioningEvent: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=open_scs;i=15064"])
     sIDDestroyingEvent: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=open_scs;i=15073"])
@@ -1141,7 +1165,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(
             name="ReturnStatus",
@@ -1155,6 +1179,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=open_scs;i=15099",
     browseName="ns=open_scs;AggregationPackingEvent",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15100"]),
     outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15101"]),
 )
@@ -1170,27 +1195,32 @@ class OPENSCSAggregationManagerObjectType(ns0.objtypes.BaseObjectType):
     aggregationPackingEvent: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=open_scs;i=15099"])
     aggregationUnpackingEvent: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=open_scs;i=7004"])
     maxAggregationEvents: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15095", browseName="ns=open_scs;MaxAggregationEvents", dataType=o6.UInt32)
+        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15095", browseName="ns=open_scs;MaxAggregationEvents", modellingRule="Mandatory", dataType=o6.UInt32)
     )
 
 
 @o6.objecttype(nodeId="ns=open_scs;i=15102", browseName="ns=open_scs;OPENSCSSIDClassObjectType", displayName="OPENSCSSIDClassObjectType")
 class OPENSCSSIDClassObjectType(ns0.objtypes.BaseObjectType):
     allowedCharacterSet: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15105", browseName="ns=open_scs;AllowedCharacterSet", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15105", browseName="ns=open_scs;AllowedCharacterSet", modellingRule="Mandatory", dataType=o6.String)
     )
     intendedUse: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15104", browseName="ns=open_scs;IntendedUse", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15104", browseName="ns=open_scs;IntendedUse", modellingRule="Optional", dataType=o6.String)
     )
     sIDClassDescription: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15107", browseName="ns=open_scs;SIDClassDescription", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15107", browseName="ns=open_scs;SIDClassDescription", modellingRule="Optional", dataType=o6.String)
     )
-    sIDClassID: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15109", browseName="ns=open_scs;SIDClassID", dataType=o6.String))
-    sIDClassOwner: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15108", browseName="ns=open_scs;SIDClassOwner", dataType=o6.String))
+    sIDClassID: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15109", browseName="ns=open_scs;SIDClassID", modellingRule="Mandatory", dataType=o6.String)
+    )
+    sIDClassOwner: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15108", browseName="ns=open_scs;SIDClassOwner", modellingRule="Mandatory", dataType=o6.String)
+    )
     sIDClassProperty: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=open_scs;i=6012",
             browseName="ns=open_scs;SIDClassProperty",
+            modellingRule="Optional",
             dataType=open_scs_datypes.OPENSCSSIDClassPropertyDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -1199,7 +1229,7 @@ class OPENSCSSIDClassObjectType(ns0.objtypes.BaseObjectType):
         )
     )
     syntaxSpecification: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15106", browseName="ns=open_scs;SyntaxSpecification", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15106", browseName="ns=open_scs;SyntaxSpecification", modellingRule="Mandatory", dataType=o6.String)
     )
 
 
@@ -1211,7 +1241,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="SNCollection", dataType=o6.NodeId("ns=open_scs;i=15008"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
         ns0.datatypes.Argument(name="PoolSelectionCriteria", dataType=o6.NodeId("ns=open_scs;i=15010"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText()),
@@ -1226,12 +1256,13 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="ReturnStatus", dataType=o6.NodeId("ns=open_scs;i=15001"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
     nodeId="ns=open_scs;i=15110",
     browseName="ns=open_scs;SNtoAllocated",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15111"]),
     outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=15112"]),
 )
@@ -1239,20 +1270,27 @@ o6.call(
 
 @o6.objecttype(nodeId="ns=open_scs;i=15032", browseName="ns=open_scs;OPENSCSPoolManagerObjectType", displayName="OPENSCSPoolManagerObjectType")
 class OPENSCSPoolManagerObjectType(ns0.objtypes.BaseObjectType):
-    maxSNPushable: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15034", browseName="ns=open_scs;MaxSNPushable", dataType=o6.UInt32))
+    maxSNPushable: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15034", browseName="ns=open_scs;MaxSNPushable", modellingRule="Mandatory", dataType=o6.UInt32)
+    )
     maxSNRequestable: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15036", browseName="ns=open_scs;MaxSNRequestable", dataType=o6.UInt32)
+        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15036", browseName="ns=open_scs;MaxSNRequestable", modellingRule="Mandatory", dataType=o6.UInt32)
     )
     maxSNReturnable: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15035", browseName="ns=open_scs;MaxSNReturnable", dataType=o6.UInt32)
+        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15035", browseName="ns=open_scs;MaxSNReturnable", modellingRule="Mandatory", dataType=o6.UInt32)
     )
     poolSelectionCriteria: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=open_scs;i=15033", browseName="ns=open_scs;PoolSelectionCriteria", dataType=open_scs_datypes.OPENSCSKeyValueDataType, valueRank=1, arrayDimensions=[0]
+            nodeId="ns=open_scs;i=15033",
+            browseName="ns=open_scs;PoolSelectionCriteria",
+            modellingRule="Mandatory",
+            dataType=open_scs_datypes.OPENSCSKeyValueDataType,
+            valueRank=1,
+            arrayDimensions=[0],
         )
     )
     sNFormat: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15037", browseName="ns=open_scs;SNFormat", dataType=o6.String, valueRank=1, arrayDimensions=[0])
+        ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15037", browseName="ns=open_scs;SNFormat", modellingRule="Mandatory", dataType=o6.String, valueRank=1, arrayDimensions=[0])
     )
     sNRequestAllocated: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=open_scs;i=15053"])
     sNRequestUnallocated: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=open_scs;i=15056"])

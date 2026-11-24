@@ -55,7 +55,7 @@ http_opcfoundation_org_UA_Mining_MonitoringSupervisionServices_General_ = ns0.ob
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[2],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC, ns0.datatypes.IdType.STRING],
             )
         ),

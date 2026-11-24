@@ -464,16 +464,16 @@ profinet_objtypes.PnAssetType(
     browseName="ns=profinet;<Assets>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6077", browseName="ns=profinet;Annotation", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6078", browseName="ns=profinet;DeviceId", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6079", browseName="ns=profinet;DeviceSubId", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6080", browseName="ns=profinet;Location", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6081", browseName="ns=profinet;OrderId", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6082", browseName="ns=profinet;Organization", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6083", browseName="ns=profinet;SerialNumber", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6084", browseName="ns=profinet;TypeIdentification", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6085", browseName="ns=profinet;UniqueIdentifier", dataType=o6.Guid)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6086", browseName="ns=profinet;VendorId", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6077", browseName="ns=profinet;Annotation", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6078", browseName="ns=profinet;DeviceId", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6079", browseName="ns=profinet;DeviceSubId", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6080", browseName="ns=profinet;Location", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6081", browseName="ns=profinet;OrderId", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6082", browseName="ns=profinet;Organization", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6083", browseName="ns=profinet;SerialNumber", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6084", browseName="ns=profinet;TypeIdentification", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6085", browseName="ns=profinet;UniqueIdentifier", modellingRule="Mandatory", dataType=o6.Guid)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6086", browseName="ns=profinet;VendorId", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
 )
 o6.reference(profinet_objtypes.PnAssetContainerType, profinet_reftypes.HasPnAsset, o6.ns["ns=profinet;i=5010"])
@@ -482,7 +482,11 @@ profinet_objtypes.EthernetInterfaceType(
     browseName="ns=profinet;EthernetInterface",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=profinet;i=6115", browseName="ns=profinet;MacAddress", dataType=o6.Byte, valueRank=1, arrayDimensions=[6]))
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=profinet;i=6115", browseName="ns=profinet;MacAddress", modellingRule="Mandatory", dataType=o6.Byte, valueRank=1, arrayDimensions=[6]
+            )
+        )
     ],
 )
 o6.reference(profinet_objtypes.IPnInterfaceType, profinet_reftypes.CommLinkTo, o6.ns["ns=profinet;i=5011"])
@@ -498,12 +502,12 @@ http_opcfoundation_org_UA_PROFINET_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6119", browseName="NamespaceVersion", dataType=o6.String, value="1.0.1")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=profinet;i=6120", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=profinet;i=6120", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=profinet;i=6121", browseName="StaticNumericNodeIdRange", dataType=ns0.datatypes.NumericRange, valueRank=1, arrayDimensions=[1], value=["1:2147483647"]
+                nodeId="ns=profinet;i=6121", browseName="StaticNumericNodeIdRange", dataType=ns0.datatypes.NumericRange, valueRank=1, arrayDimensions=[0], value=["1:2147483647"]
             )
         ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6122", browseName="StaticStringNodeIdPattern", dataType=o6.String, value="")),
@@ -516,14 +520,14 @@ profinet_objtypes.PnIdentificationType(
     browseName="ns=profinet;IM",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6135", browseName="ns=profinet;HardwareRevision", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6136", browseName="ns=profinet;OrderId", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6137", browseName="ns=profinet;ProfileId", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6138", browseName="ns=profinet;ProfileSpecificType", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6139", browseName="ns=profinet;SerialNumber", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6140", browseName="ns=profinet;SoftwareRevision", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6141", browseName="ns=profinet;VendorId", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6142", browseName="ns=profinet;Version", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6135", browseName="ns=profinet;HardwareRevision", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6136", browseName="ns=profinet;OrderId", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6137", browseName="ns=profinet;ProfileId", modellingRule="Mandatory", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6138", browseName="ns=profinet;ProfileSpecificType", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6139", browseName="ns=profinet;SerialNumber", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6140", browseName="ns=profinet;SoftwareRevision", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6141", browseName="ns=profinet;VendorId", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6142", browseName="ns=profinet;Version", modellingRule="Mandatory", dataType=o6.String)),
     ],
 )
 o6.reference(profinet_objtypes.IPnRealSubmoduleType, ns0.reftypes.HasComponent, o6.ns["ns=profinet;i=5023"])
@@ -532,14 +536,14 @@ profinet_objtypes.PnIdentificationType(
     browseName="ns=profinet;IM",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6148", browseName="ns=profinet;HardwareRevision", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6149", browseName="ns=profinet;OrderId", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6150", browseName="ns=profinet;ProfileId", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6151", browseName="ns=profinet;ProfileSpecificType", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6152", browseName="ns=profinet;SerialNumber", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6153", browseName="ns=profinet;SoftwareRevision", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6154", browseName="ns=profinet;VendorId", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6155", browseName="ns=profinet;Version", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6148", browseName="ns=profinet;HardwareRevision", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6149", browseName="ns=profinet;OrderId", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6150", browseName="ns=profinet;ProfileId", modellingRule="Mandatory", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6151", browseName="ns=profinet;ProfileSpecificType", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6152", browseName="ns=profinet;SerialNumber", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6153", browseName="ns=profinet;SoftwareRevision", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6154", browseName="ns=profinet;VendorId", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6155", browseName="ns=profinet;Version", modellingRule="Mandatory", dataType=o6.String)),
     ],
 )
 o6.reference(profinet_objtypes.IPnRealModuleType, ns0.reftypes.HasComponent, o6.ns["ns=profinet;i=5029"])
@@ -548,11 +552,18 @@ profinet_objtypes.PnApplicationRelationType(
     browseName="ns=profinet;<ARs>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6164", browseName="ns=profinet;Id", dataType=o6.Guid)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6166", browseName="ns=profinet;Type", dataType=profinet_datypes.PnARTypeEnumeration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6164", browseName="ns=profinet;Id", modellingRule="Mandatory", dataType=o6.Guid)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6166", browseName="ns=profinet;Type", modellingRule="Mandatory", dataType=profinet_datypes.PnARTypeEnumeration)
+        ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=profinet;i=6165", browseName="ns=profinet;State", dataType=profinet_datypes.PnARStateEnumeration, accessLevel=3, userAccessLevel=1
+                nodeId="ns=profinet;i=6165",
+                browseName="ns=profinet;State",
+                modellingRule="Mandatory",
+                dataType=profinet_datypes.PnARStateEnumeration,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
     ],
@@ -563,14 +574,14 @@ profinet_objtypes.PnIdentificationType(
     browseName="ns=profinet;IM",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6167", browseName="ns=profinet;HardwareRevision", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6168", browseName="ns=profinet;OrderId", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6169", browseName="ns=profinet;ProfileId", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6170", browseName="ns=profinet;ProfileSpecificType", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6171", browseName="ns=profinet;SerialNumber", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6172", browseName="ns=profinet;SoftwareRevision", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6173", browseName="ns=profinet;VendorId", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6174", browseName="ns=profinet;Version", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6167", browseName="ns=profinet;HardwareRevision", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6168", browseName="ns=profinet;OrderId", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6169", browseName="ns=profinet;ProfileId", modellingRule="Mandatory", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6170", browseName="ns=profinet;ProfileSpecificType", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6171", browseName="ns=profinet;SerialNumber", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6172", browseName="ns=profinet;SoftwareRevision", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6173", browseName="ns=profinet;VendorId", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6174", browseName="ns=profinet;Version", modellingRule="Mandatory", dataType=o6.String)),
     ],
 )
 o6.reference(profinet_objtypes.IPnEquipmentType, ns0.reftypes.HasComponent, o6.ns["ns=profinet;i=5040"])
@@ -588,29 +599,31 @@ ns0.vartypes.PropertyType(
 profinet_objtypes.PnIdentificationType(
     nodeId="ns=profinet;i=5048",
     browseName="ns=profinet;IM",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6195", browseName="ns=profinet;HardwareRevision", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6196", browseName="ns=profinet;OrderId", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6197", browseName="ns=profinet;ProfileId", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6198", browseName="ns=profinet;ProfileSpecificType", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6199", browseName="ns=profinet;SerialNumber", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6200", browseName="ns=profinet;SoftwareRevision", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6201", browseName="ns=profinet;VendorId", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6202", browseName="ns=profinet;Version", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6195", browseName="ns=profinet;HardwareRevision", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6196", browseName="ns=profinet;OrderId", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6197", browseName="ns=profinet;ProfileId", modellingRule="Mandatory", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6198", browseName="ns=profinet;ProfileSpecificType", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6199", browseName="ns=profinet;SerialNumber", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6200", browseName="ns=profinet;SoftwareRevision", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6201", browseName="ns=profinet;VendorId", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6202", browseName="ns=profinet;Version", modellingRule="Mandatory", dataType=o6.String)),
     ],
 )
 profinet_objtypes.PnIdentificationType(
     nodeId="ns=profinet;i=5051",
     browseName="ns=profinet;IM",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6207", browseName="ns=profinet;HardwareRevision", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6208", browseName="ns=profinet;OrderId", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6209", browseName="ns=profinet;ProfileId", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6210", browseName="ns=profinet;ProfileSpecificType", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6211", browseName="ns=profinet;SerialNumber", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6212", browseName="ns=profinet;SoftwareRevision", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6213", browseName="ns=profinet;VendorId", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6214", browseName="ns=profinet;Version", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6207", browseName="ns=profinet;HardwareRevision", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6208", browseName="ns=profinet;OrderId", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6209", browseName="ns=profinet;ProfileId", modellingRule="Mandatory", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6210", browseName="ns=profinet;ProfileSpecificType", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6211", browseName="ns=profinet;SerialNumber", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6212", browseName="ns=profinet;SoftwareRevision", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6213", browseName="ns=profinet;VendorId", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6214", browseName="ns=profinet;Version", modellingRule="Mandatory", dataType=o6.String)),
     ],
 )
 ns0.objtypes.BaseObjectType(
@@ -618,16 +631,21 @@ ns0.objtypes.BaseObjectType(
     browseName="ns=profinet;<Modules>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6098", browseName="ns=profinet;Slot", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6180", browseName="ns=profinet;IdentNumber", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6205", browseName="ns=profinet;GSDName", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6206", browseName="ns=profinet;GSDDescription", dataType=o6.String)),
-        o6.hasComponent(profinet_objtypes.PnRealSubmoduleContainerType(nodeId="ns=profinet;i=5050", browseName="ns=profinet;Submodules")),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6098", browseName="ns=profinet;Slot", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6180", browseName="ns=profinet;IdentNumber", modellingRule="Mandatory", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6205", browseName="ns=profinet;GSDName", modellingRule="Optional", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6206", browseName="ns=profinet;GSDDescription", modellingRule="Optional", dataType=o6.String)),
+        o6.hasComponent(profinet_objtypes.PnRealSubmoduleContainerType(nodeId="ns=profinet;i=5050", browseName="ns=profinet;Submodules", modellingRule="Optional")),
         o6.hasComponent(o6.ns["ns=profinet;i=5051"]),
-        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=profinet;i=5052", browseName="ns=profinet;Alarms")),
+        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=profinet;i=5052", browseName="ns=profinet;Alarms", modellingRule="Optional")),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=profinet;i=6215", browseName="ns=profinet;Diagnosis", dataType=profinet_datypes.PnDeviceDiagnosisDataType, valueRank=1, arrayDimensions=[0]
+                nodeId="ns=profinet;i=6215",
+                browseName="ns=profinet;Diagnosis",
+                modellingRule="Optional",
+                dataType=profinet_datypes.PnDeviceDiagnosisDataType,
+                valueRank=1,
+                arrayDimensions=[0],
             )
         ),
     ],
@@ -641,12 +659,16 @@ ns0.objtypes.BaseObjectType(
     browseName="ns=profinet;<Modules>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6181", browseName="ns=profinet;Slot", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6182", browseName="ns=profinet;IdentNumber", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6216", browseName="ns=profinet;GSDName", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6217", browseName="ns=profinet;GSDDescription", dataType=o6.String)),
-        o6.hasComponent(profinet_objtypes.PnExpectedSubmoduleContainerType(nodeId="ns=profinet;i=5053", browseName="ns=profinet;Submodules")),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=profinet;i=6183", browseName="ns=profinet;State", dataType=profinet_datypes.PnModuleStateEnumeration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6181", browseName="ns=profinet;Slot", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6182", browseName="ns=profinet;IdentNumber", modellingRule="Mandatory", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6216", browseName="ns=profinet;GSDName", modellingRule="Optional", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6217", browseName="ns=profinet;GSDDescription", modellingRule="Optional", dataType=o6.String)),
+        o6.hasComponent(profinet_objtypes.PnExpectedSubmoduleContainerType(nodeId="ns=profinet;i=5053", browseName="ns=profinet;Submodules", modellingRule="Optional")),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=profinet;i=6183", browseName="ns=profinet;State", modellingRule="Mandatory", dataType=profinet_datypes.PnModuleStateEnumeration
+            )
+        ),
     ],
 )
 o6.reference(profinet_objtypes.PnExpectedModuleContainerType, profinet_reftypes.HasPnExpectedModule, o6.ns["ns=profinet;i=5033"])
@@ -654,15 +676,16 @@ o6.reference(o6.ns["ns=profinet;i=5033"], "i=17603", profinet_objtypes.IPnExpect
 profinet_objtypes.PnIdentificationType(
     nodeId="ns=profinet;i=5054",
     browseName="ns=profinet;IM",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6220", browseName="ns=profinet;HardwareRevision", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6221", browseName="ns=profinet;OrderId", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6222", browseName="ns=profinet;ProfileId", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6223", browseName="ns=profinet;ProfileSpecificType", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6224", browseName="ns=profinet;SerialNumber", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6225", browseName="ns=profinet;SoftwareRevision", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6226", browseName="ns=profinet;VendorId", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6227", browseName="ns=profinet;Version", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6220", browseName="ns=profinet;HardwareRevision", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6221", browseName="ns=profinet;OrderId", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6222", browseName="ns=profinet;ProfileId", modellingRule="Mandatory", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6223", browseName="ns=profinet;ProfileSpecificType", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6224", browseName="ns=profinet;SerialNumber", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6225", browseName="ns=profinet;SoftwareRevision", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6226", browseName="ns=profinet;VendorId", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6227", browseName="ns=profinet;Version", modellingRule="Mandatory", dataType=o6.String)),
     ],
 )
 ns0.objtypes.BaseObjectType(
@@ -670,16 +693,21 @@ ns0.objtypes.BaseObjectType(
     browseName="ns=profinet;<Submodules>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6184", browseName="ns=profinet;API", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6185", browseName="ns=profinet;Subslot", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6186", browseName="ns=profinet;IdentNumber", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6218", browseName="ns=profinet;GSDName", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6219", browseName="ns=profinet;GSDDescription", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6184", browseName="ns=profinet;API", modellingRule="Mandatory", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6185", browseName="ns=profinet;Subslot", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6186", browseName="ns=profinet;IdentNumber", modellingRule="Mandatory", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6218", browseName="ns=profinet;GSDName", modellingRule="Optional", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6219", browseName="ns=profinet;GSDDescription", modellingRule="Optional", dataType=o6.String)),
         o6.hasComponent(o6.ns["ns=profinet;i=5054"]),
-        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=profinet;i=5055", browseName="ns=profinet;Alarms")),
+        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=profinet;i=5055", browseName="ns=profinet;Alarms", modellingRule="Optional")),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=profinet;i=6228", browseName="ns=profinet;Diagnosis", dataType=profinet_datypes.PnDeviceDiagnosisDataType, valueRank=1, arrayDimensions=[0]
+                nodeId="ns=profinet;i=6228",
+                browseName="ns=profinet;Diagnosis",
+                modellingRule="Optional",
+                dataType=profinet_datypes.PnDeviceDiagnosisDataType,
+                valueRank=1,
+                arrayDimensions=[0],
             )
         ),
     ],
@@ -693,12 +721,12 @@ ns0.objtypes.BaseObjectType(
     browseName="ns=profinet;<Submodules>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6187", browseName="ns=profinet;API", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6188", browseName="ns=profinet;Subslot", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6189", browseName="ns=profinet;IdentNumber", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6229", browseName="ns=profinet;GSDName", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6230", browseName="ns=profinet;GSDDescription", dataType=o6.String)),
-        o6.hasComponent(profinet_objtypes.PnSubmoduleStateType(nodeId="ns=profinet;i=5056", browseName="ns=profinet;State")),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6187", browseName="ns=profinet;API", modellingRule="Mandatory", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6188", browseName="ns=profinet;Subslot", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6189", browseName="ns=profinet;IdentNumber", modellingRule="Mandatory", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6229", browseName="ns=profinet;GSDName", modellingRule="Optional", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6230", browseName="ns=profinet;GSDDescription", modellingRule="Optional", dataType=o6.String)),
+        o6.hasComponent(profinet_objtypes.PnSubmoduleStateType(nodeId="ns=profinet;i=5056", browseName="ns=profinet;State", modellingRule="Optional")),
     ],
 )
 o6.reference(profinet_objtypes.PnExpectedSubmoduleContainerType, profinet_reftypes.HasPnExpectedSubmodule, o6.ns["ns=profinet;i=5027"])
@@ -706,8 +734,13 @@ o6.reference(o6.ns["ns=profinet;i=5027"], "i=17603", profinet_objtypes.IPnExpect
 profinet_objtypes.EthernetInterfaceType(
     nodeId="ns=profinet;i=5057",
     browseName="ns=profinet;EthernetInterface",
+    modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=profinet;i=6235", browseName="ns=profinet;MacAddress", dataType=o6.Byte, valueRank=1, arrayDimensions=[6]))
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=profinet;i=6235", browseName="ns=profinet;MacAddress", modellingRule="Mandatory", dataType=o6.Byte, valueRank=1, arrayDimensions=[6]
+            )
+        )
     ],
 )
 ns0.objtypes.BaseObjectType(
@@ -715,18 +748,23 @@ ns0.objtypes.BaseObjectType(
     browseName="ns=profinet;<PnEquipments>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6203", browseName="ns=profinet;Vendor", dataType=o6.String)),
-        o6.hasComponent(profinet_objtypes.PnInterfaceContainerType(nodeId="ns=profinet;i=5044", browseName="ns=profinet;Interfaces")),
-        o6.hasComponent(profinet_objtypes.PnRealModuleContainerType(nodeId="ns=profinet;i=5046", browseName="ns=profinet;Modules")),
-        o6.hasComponent(profinet_objtypes.PnAssetContainerType(nodeId="ns=profinet;i=5047", browseName="ns=profinet;Assets")),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6203", browseName="ns=profinet;Vendor", modellingRule="Optional", dataType=o6.String)),
+        o6.hasComponent(profinet_objtypes.PnInterfaceContainerType(nodeId="ns=profinet;i=5044", browseName="ns=profinet;Interfaces", modellingRule="Mandatory")),
+        o6.hasComponent(profinet_objtypes.PnRealModuleContainerType(nodeId="ns=profinet;i=5046", browseName="ns=profinet;Modules", modellingRule="Optional")),
+        o6.hasComponent(profinet_objtypes.PnAssetContainerType(nodeId="ns=profinet;i=5047", browseName="ns=profinet;Assets", modellingRule="Optional")),
         o6.hasComponent(o6.ns["ns=profinet;i=5048"]),
-        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=profinet;i=5049", browseName="ns=profinet;Alarms")),
+        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=profinet;i=5049", browseName="ns=profinet;Alarms", modellingRule="Optional")),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=profinet;i=6204", browseName="ns=profinet;Diagnosis", dataType=profinet_datypes.PnDeviceDiagnosisDataType, valueRank=1, arrayDimensions=[0]
+                nodeId="ns=profinet;i=6204",
+                browseName="ns=profinet;Diagnosis",
+                modellingRule="Optional",
+                dataType=profinet_datypes.PnDeviceDiagnosisDataType,
+                valueRank=1,
+                arrayDimensions=[0],
             )
         ),
-        o6.hasComponent(o6.call(nodeId="ns=profinet;i=7006", browseName="ns=profinet;ShowLocation")),
+        o6.hasComponent(o6.call(nodeId="ns=profinet;i=7006", browseName="ns=profinet;ShowLocation", modellingRule="Optional")),
     ],
 )
 o6.reference(profinet_objtypes.PnEquipmentContainerType, ns0.reftypes.HasComponent, o6.ns["ns=profinet;i=5042"])
@@ -756,23 +794,25 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=profinet;i=7007", browseName="ns=profinet;SetNameOfStation", inputArgs=o6.hasProperty(o6.ns["ns=profinet;i=6236"]))
+o6.call(nodeId="ns=profinet;i=7007", browseName="ns=profinet;SetNameOfStation", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=profinet;i=6236"]))
 
 ns0.objtypes.BaseObjectType(
     nodeId="ns=profinet;i=5012",
     browseName="ns=profinet;<Interfaces>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6190", browseName="ns=profinet;NameOfStation", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6191", browseName="ns=profinet;DeviceRole", dataType=profinet_datypes.PnDeviceRoleOptionSet)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6192", browseName="ns=profinet;VendorId", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6193", browseName="ns=profinet;DeviceId", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6231", browseName="ns=profinet;DeviceVendor", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6232", browseName="ns=profinet;DeviceInstance", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6233", browseName="ns=profinet;OEMVendorId", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6234", browseName="ns=profinet;OEMDeviceId", dataType=o6.UInt16)),
-        o6.hasComponent(profinet_objtypes.PnPortContainerType(nodeId="ns=profinet;i=5045", browseName="ns=profinet;Ports")),
-        o6.hasComponent(profinet_objtypes.PnPortStatisticType(nodeId="ns=profinet;i=5058", browseName="ns=profinet;Statistic")),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6190", browseName="ns=profinet;NameOfStation", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6191", browseName="ns=profinet;DeviceRole", modellingRule="Mandatory", dataType=profinet_datypes.PnDeviceRoleOptionSet)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6192", browseName="ns=profinet;VendorId", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6193", browseName="ns=profinet;DeviceId", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6231", browseName="ns=profinet;DeviceVendor", modellingRule="Optional", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6232", browseName="ns=profinet;DeviceInstance", modellingRule="Optional", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6233", browseName="ns=profinet;OEMVendorId", modellingRule="Optional", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=profinet;i=6234", browseName="ns=profinet;OEMDeviceId", modellingRule="Optional", dataType=o6.UInt16)),
+        o6.hasComponent(profinet_objtypes.PnPortContainerType(nodeId="ns=profinet;i=5045", browseName="ns=profinet;Ports", modellingRule="Mandatory")),
+        o6.hasComponent(profinet_objtypes.PnPortStatisticType(nodeId="ns=profinet;i=5058", browseName="ns=profinet;Statistic", modellingRule="Optional")),
         o6.hasComponent(o6.ns["ns=profinet;i=7007"]),
         o6.reference(o6.ns["ns=profinet;i=5057"], "ns=profinet;i=4015"),
     ],

@@ -19,6 +19,7 @@
 
 PyObject *
 pyClient_service_call(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_CALLREQUEST],
                             &UA_TYPES[UA_TYPES_CALLRESPONSE]);
@@ -26,6 +27,7 @@ pyClient_service_call(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_service_read(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_READREQUEST],
                             &UA_TYPES[UA_TYPES_READRESPONSE]);
@@ -33,6 +35,7 @@ pyClient_service_read(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_service_write(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_WRITEREQUEST],
                             &UA_TYPES[UA_TYPES_WRITERESPONSE]);
@@ -40,6 +43,7 @@ pyClient_service_write(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_service_browse(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_BROWSEREQUEST],
                             &UA_TYPES[UA_TYPES_BROWSERESPONSE]);
@@ -47,6 +51,7 @@ pyClient_service_browse(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_service_browseNext(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_BROWSENEXTREQUEST],
                             &UA_TYPES[UA_TYPES_BROWSENEXTRESPONSE]);
@@ -54,6 +59,7 @@ pyClient_service_browseNext(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_service_registerNodes(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_REGISTERNODESREQUEST],
                             &UA_TYPES[UA_TYPES_REGISTERNODESRESPONSE]);
@@ -61,6 +67,7 @@ pyClient_service_registerNodes(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_service_unregisterNodes(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_UNREGISTERNODESREQUEST],
                             &UA_TYPES[UA_TYPES_UNREGISTERNODESRESPONSE]);
@@ -68,6 +75,7 @@ pyClient_service_unregisterNodes(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_service_translateBrowsePathsToNodeIds(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_TRANSLATEBROWSEPATHSTONODEIDSREQUEST],
                             &UA_TYPES[UA_TYPES_TRANSLATEBROWSEPATHSTONODEIDSRESPONSE]);
@@ -75,6 +83,7 @@ pyClient_service_translateBrowsePathsToNodeIds(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_service_addNodes(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_ADDNODESREQUEST],
                             &UA_TYPES[UA_TYPES_ADDNODESRESPONSE]);
@@ -82,6 +91,7 @@ pyClient_service_addNodes(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_service_deleteNodes(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_DELETENODESREQUEST],
                             &UA_TYPES[UA_TYPES_DELETENODESRESPONSE]);
@@ -89,6 +99,7 @@ pyClient_service_deleteNodes(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_service_addReferences(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_ADDREFERENCESREQUEST],
                             &UA_TYPES[UA_TYPES_ADDREFERENCESRESPONSE]);
@@ -96,6 +107,7 @@ pyClient_service_addReferences(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_service_deleteReferences(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_DELETEREFERENCESREQUEST],
                             &UA_TYPES[UA_TYPES_DELETEREFERENCESRESPONSE]);
@@ -103,6 +115,7 @@ pyClient_service_deleteReferences(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_service_historyRead(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_HISTORYREADREQUEST],
                             &UA_TYPES[UA_TYPES_HISTORYREADRESPONSE]);
@@ -110,6 +123,7 @@ pyClient_service_historyRead(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_service_historyUpdate(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_HISTORYUPDATEREQUEST],
                             &UA_TYPES[UA_TYPES_HISTORYUPDATERESPONSE]);
@@ -117,6 +131,7 @@ pyClient_service_historyUpdate(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_service_queryFirst(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_QUERYFIRSTREQUEST],
                             &UA_TYPES[UA_TYPES_QUERYFIRSTRESPONSE]);
@@ -124,6 +139,7 @@ pyClient_service_queryFirst(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_service_queryNext(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_QUERYNEXTREQUEST],
                             &UA_TYPES[UA_TYPES_QUERYNEXTRESPONSE]);
@@ -133,6 +149,7 @@ pyClient_service_queryNext(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_get_endpoints(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_GETENDPOINTSREQUEST],
                             &UA_TYPES[UA_TYPES_GETENDPOINTSRESPONSE]);
@@ -140,6 +157,7 @@ pyClient_get_endpoints(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_find_servers(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_FINDSERVERSREQUEST],
                             &UA_TYPES[UA_TYPES_FINDSERVERSRESPONSE]);
@@ -147,6 +165,7 @@ pyClient_find_servers(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_find_servers_on_network(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_FINDSERVERSONNETWORKREQUEST],
                             &UA_TYPES[UA_TYPES_FINDSERVERSONNETWORKRESPONSE]);
@@ -154,6 +173,7 @@ pyClient_find_servers_on_network(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_register_server(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_REGISTERSERVERREQUEST],
                             &UA_TYPES[UA_TYPES_REGISTERSERVERRESPONSE]);
@@ -161,6 +181,7 @@ pyClient_register_server(PyObject *self, PyObject *args) {
 
 PyObject *
 pyClient_register_server2(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyClient_eventLoop((PyClient *)self), NULL);
     return serviceCallAsync(self, args,
                             &UA_TYPES[UA_TYPES_REGISTERSERVER2REQUEST],
                             &UA_TYPES[UA_TYPES_REGISTERSERVER2RESPONSE]);

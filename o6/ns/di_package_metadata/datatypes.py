@@ -31,7 +31,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=di_package_metadata;i=5", browseName="PackageType")
+@o6.enumtype(nodeId="ns=di_package_metadata;i=5", browseName="ns=di_package_metadata;PackageType")
 class PackageType(ns0.datatypes.Enumeration):
     FIRMWARE = o6.enumfield(0, name="Firmware")
     APPLICATION = o6.enumfield(1, name="Application")
@@ -39,7 +39,7 @@ class PackageType(ns0.datatypes.Enumeration):
     SOLUTION = o6.enumfield(3, name="Solution")
 
 
-@o6.enumtype(nodeId="ns=di_package_metadata;i=7", browseName="FileType")
+@o6.enumtype(nodeId="ns=di_package_metadata;i=7", browseName="ns=di_package_metadata;FileType")
 class FileType(ns0.datatypes.Enumeration):
     DEPLOYMENT_ITEM = o6.enumfield(0, name="DeploymentItem")
     RELEASE_NOTES = o6.enumfield(1, name="ReleaseNotes")
@@ -47,15 +47,15 @@ class FileType(ns0.datatypes.Enumeration):
     PRE_INSTALL_NOTE = o6.enumfield(3, name="PreInstallNote")
 
 
-@o6.datatype(nodeId="ns=di_package_metadata;i=2", browseName="FileDescriptor", defaultEncodingId="ns=di_package_metadata;i=15")
+@o6.datatype(nodeId="ns=di_package_metadata;i=2", browseName="ns=di_package_metadata;FileDescriptor", defaultEncodingId="ns=di_package_metadata;i=15")
 class FileDescriptor(ns0.datatypes.Structure):
-    fileType: FileType
-    fileName: o6.String
-    mimeType: o6.String | None
-    language: o6.String | None
+    fileType: FileType = o6.field(name="FileType")
+    fileName: o6.String = o6.field(name="FileName")
+    mimeType: o6.String | None = o6.field(name="MimeType")
+    language: o6.String | None = o6.field(name="Language")
 
 
-@o6.enumtype(nodeId="ns=di_package_metadata;i=9", browseName="ComparisonOperation")
+@o6.enumtype(nodeId="ns=di_package_metadata;i=9", browseName="ns=di_package_metadata;ComparisonOperation")
 class ComparisonOperation(ns0.datatypes.Enumeration):
     EQUAL_TO = o6.enumfield(0, name="EqualTo")
     GREATER_THAN = o6.enumfield(1, name="GreaterThan")
@@ -67,71 +67,71 @@ class ComparisonOperation(ns0.datatypes.Enumeration):
     EXIST = o6.enumfield(7, name="Exist")
 
 
-@o6.datatype(nodeId="ns=di_package_metadata;i=4", browseName="CompatibilityRequirement", defaultEncodingId="ns=di_package_metadata;i=17")
+@o6.datatype(nodeId="ns=di_package_metadata;i=4", browseName="ns=di_package_metadata;CompatibilityRequirement", defaultEncodingId="ns=di_package_metadata;i=17")
 class CompatibilityRequirement(ns0.datatypes.Structure):
-    variable: o6.String
-    values: list[Any]
-    operation: ComparisonOperation
+    variable: o6.String = o6.field(name="Variable")
+    values: list[Any] = o6.field(name="Values")
+    operation: ComparisonOperation = o6.field(name="Operation")
 
 
-@o6.datatype(nodeId="ns=di_package_metadata;i=3", browseName="CompatibilityOption", defaultEncodingId="ns=di_package_metadata;i=16")
+@o6.datatype(nodeId="ns=di_package_metadata;i=3", browseName="ns=di_package_metadata;CompatibilityOption", defaultEncodingId="ns=di_package_metadata;i=16")
 class CompatibilityOption(ns0.datatypes.Structure):
-    compatibilityRequirements: list[CompatibilityRequirement]
+    compatibilityRequirements: list[CompatibilityRequirement] = o6.field(name="CompatibilityRequirements")
 
 
-@o6.datatype(nodeId="ns=di_package_metadata;i=13", browseName="FxPathElement", defaultEncodingId="ns=di_package_metadata;i=20")
+@o6.datatype(nodeId="ns=di_package_metadata;i=13", browseName="ns=di_package_metadata;FxPathElement", defaultEncodingId="ns=di_package_metadata;i=20")
 class FxPathElement(ns0.datatypes.Structure):
-    assetConnectorType: o6.NodeId
-    connectorId: o6.UInt16 | None
-    connectorName: o6.String | None
+    assetConnectorType: o6.NodeId = o6.field(name="AssetConnectorType")
+    connectorId: o6.UInt16 | None = o6.field(name="ConnectorId")
+    connectorName: o6.String | None = o6.field(name="ConnectorName")
 
 
-@o6.datatype(nodeId="ns=di_package_metadata;i=12", browseName="PackageTarget", defaultEncodingId="ns=di_package_metadata;i=19")
+@o6.datatype(nodeId="ns=di_package_metadata;i=12", browseName="ns=di_package_metadata;PackageTarget", defaultEncodingId="ns=di_package_metadata;i=19")
 class PackageTarget(ns0.datatypes.Structure):
-    targetType: o6.NodeId | None
-    targetNode: o6.NodeId | None
-    productInstanceUri: o6.String | None
-    assetId: o6.String | None
-    manufacturerUri: o6.String | None
-    productCode: o6.String | None
-    serialNumber: o6.String | None
-    fxPath: list[FxPathElement] | None
-    fxScope: list[FxPathElement] | None
-    browsePath: list[ns0.datatypes.RelativePathElement] | None
-    targetServer: o6.String | None
+    targetType: o6.NodeId | None = o6.field(name="TargetType")
+    targetNode: o6.NodeId | None = o6.field(name="TargetNode")
+    productInstanceUri: o6.String | None = o6.field(name="ProductInstanceUri")
+    assetId: o6.String | None = o6.field(name="AssetId")
+    manufacturerUri: o6.String | None = o6.field(name="ManufacturerUri")
+    productCode: o6.String | None = o6.field(name="ProductCode")
+    serialNumber: o6.String | None = o6.field(name="SerialNumber")
+    fxPath: list[FxPathElement] | None = o6.field(name="FxPath")
+    fxScope: list[FxPathElement] | None = o6.field(name="FxScope")
+    browsePath: list[ns0.datatypes.RelativePathElement] | None = o6.field(name="BrowsePath")
+    targetServer: o6.String | None = o6.field(name="TargetServer")
 
 
-@o6.datatype(nodeId="ns=di_package_metadata;i=239", browseName="UpdateTarget", defaultEncodingId="ns=di_package_metadata;i=240")
+@o6.datatype(nodeId="ns=di_package_metadata;i=239", browseName="ns=di_package_metadata;UpdateTarget", defaultEncodingId="ns=di_package_metadata;i=240")
 class UpdateTarget(ns0.datatypes.Structure):
-    productCode: o6.String
-    model: o6.String
+    productCode: o6.String = o6.field(name="ProductCode")
+    model: o6.String = o6.field(name="Model")
 
 
-@o6.datatype(nodeId="ns=di_package_metadata;i=255", browseName="Assignment", defaultEncodingId="ns=di_package_metadata;i=256")
+@o6.datatype(nodeId="ns=di_package_metadata;i=255", browseName="ns=di_package_metadata;Assignment", defaultEncodingId="ns=di_package_metadata;i=256")
 class Assignment(ns0.datatypes.Structure):
-    subpackage: o6.String
-    installationOrder: o6.UInt32 | None
-    targets: list[PackageTarget]
+    subpackage: o6.String = o6.field(name="Subpackage")
+    installationOrder: o6.UInt32 | None = o6.field(name="InstallationOrder")
+    targets: list[PackageTarget] = o6.field(name="Targets")
 
 
-@o6.datatype(nodeId="ns=di_package_metadata;i=1", browseName="PackageMetadata", defaultEncodingId="ns=di_package_metadata;i=14")
+@o6.datatype(nodeId="ns=di_package_metadata;i=1", browseName="ns=di_package_metadata;PackageMetadata", defaultEncodingId="ns=di_package_metadata;i=14")
 class PackageMetadata(ns0.datatypes.Structure):
-    name: o6.String
-    description: o6.String | None
-    manufacturerUri: o6.String
-    manufacturer: o6.String
-    packageRevision: o6.String
-    packageType: PackageType
-    softwareSubClass: o6.String | None
-    deployCompletePackage: o6.Boolean | None
-    softwareRevision: o6.String | None
-    releaseDate: o6.DateTime | None
-    targetManufacturerUri: o6.String | None
-    targetManufacturer: o6.String | None
-    updateTargets: list[UpdateTarget] | None
-    files: list[FileDescriptor] | None
-    compatibilities: list[CompatibilityOption] | None
-    assignments: list[Assignment] | None
+    name: o6.String = o6.field(name="Name")
+    description: o6.String | None = o6.field(name="Description")
+    manufacturerUri: o6.String = o6.field(name="ManufacturerUri")
+    manufacturer: o6.String = o6.field(name="Manufacturer")
+    packageRevision: o6.String = o6.field(name="PackageRevision")
+    packageType: PackageType = o6.field(name="PackageType")
+    softwareSubClass: o6.String | None = o6.field(name="SoftwareSubClass")
+    deployCompletePackage: o6.Boolean | None = o6.field(name="DeployCompletePackage")
+    softwareRevision: o6.String | None = o6.field(name="SoftwareRevision")
+    releaseDate: o6.DateTime | None = o6.field(name="ReleaseDate")
+    targetManufacturerUri: o6.String | None = o6.field(name="TargetManufacturerUri")
+    targetManufacturer: o6.String | None = o6.field(name="TargetManufacturer")
+    updateTargets: list[UpdateTarget] | None = o6.field(name="UpdateTargets")
+    files: list[FileDescriptor] | None = o6.field(name="Files")
+    compatibilities: list[CompatibilityOption] | None = o6.field(name="Compatibilities")
+    assignments: list[Assignment] | None = o6.field(name="Assignments")
 
 
 del Any, TYPE_CHECKING, uuid, o6, ns0

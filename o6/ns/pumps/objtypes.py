@@ -976,6 +976,7 @@ class IPumpVendorNameplateType(machinery.objtypes.IMachineVendorNameplateType):
             nodeId="ns=pumps;i=6063",
             browseName="ns=pumps;ArticleNumber",
             description="Alphanumeric character sequence identifying a manufactured, non-configurable product.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -984,6 +985,7 @@ class IPumpVendorNameplateType(machinery.objtypes.IMachineVendorNameplateType):
             nodeId="ns=pumps;i=6080",
             browseName="ns=pumps;CountryOfOrigin",
             description="Country in which the product is manufactured.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -994,6 +996,7 @@ class IPumpVendorNameplateType(machinery.objtypes.IMachineVendorNameplateType):
             nodeId="ns=pumps;i=6064",
             browseName="ns=pumps;DayOfConstruction",
             description="The optional DayOfConstrucition provides the day of the month in which the manufacturing process of the machine has been completed. It shall be a number and never change during the life-cycle of a machine.",
+            modellingRule="Optional",
             dataType=o6.Int32,
         )
     )
@@ -1002,6 +1005,7 @@ class IPumpVendorNameplateType(machinery.objtypes.IMachineVendorNameplateType):
             nodeId="ns=pumps;i=6065",
             browseName="ns=pumps;FabricationNumber",
             description="Alphanumeric character sequence assigned to a fabricated product, which allows the date, time and circumstances of fabrication to be traced.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -1010,6 +1014,7 @@ class IPumpVendorNameplateType(machinery.objtypes.IMachineVendorNameplateType):
             nodeId="ns=pumps;i=6066",
             browseName="ns=pumps;GTINCode",
             description="Bar code number that identifies the device based on the Global Trade Item Number system.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -1018,12 +1023,17 @@ class IPumpVendorNameplateType(machinery.objtypes.IMachineVendorNameplateType):
             nodeId="ns=pumps;i=6067",
             browseName="ns=pumps;NationalStockNumber",
             description="13-digit numeric code, identifying all 'standardized material items of supply' as recognized by the United States Department of Defense.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
     orderProductCode: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=pumps;i=6068", browseName="ns=pumps;OrderProductCode", description="Unique combination of numbers and letters used to order the device.", dataType=o6.String
+            nodeId="ns=pumps;i=6068",
+            browseName="ns=pumps;OrderProductCode",
+            description="Unique combination of numbers and letters used to order the device.",
+            modellingRule="Optional",
+            dataType=o6.String,
         )
     )
     physicalAddress: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -1031,6 +1041,7 @@ class IPumpVendorNameplateType(machinery.objtypes.IMachineVendorNameplateType):
             nodeId="ns=pumps;i=9940",
             browseName="ns=pumps;PhysicalAddress",
             description="Physical address of the manufacturer.",
+            modellingRule="Optional",
             dataType=pumps_datypes.PhysicalAddressDataType,
             value=pumps_datypes.PhysicalAddressDataType(),
             accessLevel=3,
@@ -1038,13 +1049,16 @@ class IPumpVendorNameplateType(machinery.objtypes.IMachineVendorNameplateType):
         )
     )
     supplier: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pumps;i=6069", browseName="ns=pumps;Supplier", description="Name of the supplier or vendor of a device.", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=pumps;i=6069", browseName="ns=pumps;Supplier", description="Name of the supplier or vendor of a device.", modellingRule="Optional", dataType=o6.String
+        )
     )
     typeOfProduct: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=pumps;i=6070",
             browseName="ns=pumps;TypeOfProduct",
             description="Characterization of the device based on its usage, operation principle, and its fabricated form.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -1057,23 +1071,36 @@ class PumpIdentificationType(machinery.objtypes.MachineIdentificationType):
             nodeId="ns=pumps;i=6071",
             browseName="ns=pumps;ArticleNumber",
             description="Alphanumeric character sequence identifying a manufactured, non-configurable product.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
     countryOfOrigin: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pumps;i=6079", browseName="ns=pumps;CountryOfOrigin", description="Country in which the product is manufactured.", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=pumps;i=6079",
+            browseName="ns=pumps;CountryOfOrigin",
+            description="Country in which the product is manufactured.",
+            modellingRule="Optional",
+            dataType=o6.String,
+        )
     )
     dayOfConstruction: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=pumps;i=6072",
             browseName="ns=pumps;DayOfConstruction",
             description="The optional DayOfConstrucition provides the day of the month in which the manufacturing process of the machine has been completed. It shall be a number and never change during the life-cycle of a machine.",
+            modellingRule="Optional",
             dataType=o6.Int32,
         )
     )
     deviceClass: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=pumps;i=12928", browseName="ns=di;DeviceClass", description="Domain or for what purpose this item is used.", dataType=o6.String, value="Pump"
+            nodeId="ns=pumps;i=12928",
+            browseName="ns=di;DeviceClass",
+            description="Domain or for what purpose this item is used.",
+            modellingRule="Optional",
+            dataType=o6.String,
+            value="Pump",
         )
     )
     fabricationNumber: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -1081,6 +1108,7 @@ class PumpIdentificationType(machinery.objtypes.MachineIdentificationType):
             nodeId="ns=pumps;i=6073",
             browseName="ns=pumps;FabricationNumber",
             description="Alphanumeric character sequence assigned to a fabricated product, which allows the date, time and circumstances of fabrication to be traced.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -1089,6 +1117,7 @@ class PumpIdentificationType(machinery.objtypes.MachineIdentificationType):
             nodeId="ns=pumps;i=6074",
             browseName="ns=pumps;GTINCode",
             description="Bar code number that identifies the device based on the Global Trade Item Number system.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -1098,12 +1127,17 @@ class PumpIdentificationType(machinery.objtypes.MachineIdentificationType):
             nodeId="ns=pumps;i=6075",
             browseName="ns=pumps;NationalStockNumber",
             description="13-digit numeric code, identifying all 'standardized material items of supply' as recognized by the United States Department of Defense.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
     orderProductCode: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=pumps;i=6076", browseName="ns=pumps;OrderProductCode", description="Unique combination of numbers and letters used to order the device.", dataType=o6.String
+            nodeId="ns=pumps;i=6076",
+            browseName="ns=pumps;OrderProductCode",
+            description="Unique combination of numbers and letters used to order the device.",
+            modellingRule="Optional",
+            dataType=o6.String,
         )
     )
     physicalAddress: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -1111,18 +1145,22 @@ class PumpIdentificationType(machinery.objtypes.MachineIdentificationType):
             nodeId="ns=pumps;i=6081",
             browseName="ns=pumps;PhysicalAddress",
             description="Physical address of the manufacturer.",
+            modellingRule="Optional",
             dataType=pumps_datypes.PhysicalAddressDataType,
             value=pumps_datypes.PhysicalAddressDataType(),
         )
     )
     supplier: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pumps;i=6077", browseName="ns=pumps;Supplier", description="Name of the supplier or vendor of a device.", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=pumps;i=6077", browseName="ns=pumps;Supplier", description="Name of the supplier or vendor of a device.", modellingRule="Optional", dataType=o6.String
+        )
     )
     typeOfProduct: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=pumps;i=6078",
             browseName="ns=pumps;TypeOfProduct",
             description="Characterisation of the device based on its usage, operation principle, and its fabricated form.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )

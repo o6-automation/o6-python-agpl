@@ -17,6 +17,7 @@
 
 from __future__ import annotations
 
+import threading
 import typing
 from dataclasses import dataclass
 from functools import update_wrapper
@@ -259,22 +260,24 @@ def _live_metaclass(marker: type, node_cls: type) -> type:
     key = marker_meta, node_meta
     combined = _LIVE_METACLASSES.get(key)
     if combined is None:
-        combined = type(
+        created = type(
             f"_{marker_meta.__name__}_{node_meta.__name__}",
             key,
             {},
         )
-        _LIVE_METACLASSES[key] = combined
+        # Atomic: a thread that created one concurrently gets the first published
+        combined = _LIVE_METACLASSES.setdefault(key, created)
     return combined
+
+
+# Publishes a marker's live class once, so concurrent first uses share it. A leaf
+# lock: the class is built outside it, because building runs user hooks.
+_LIVE_CLASS_LOCK = threading.Lock()
 
 
 def _live_class(marker: type, node_cls: type) -> type:
     """Return the node-api-backed runtime subclass for a type marker."""
     live = vars(marker).get(_LIVE_CLASS_ATTR)
-    if live is not None and not issubclass(live, node_cls):
-        raise RuntimeError(
-            f"{marker.__qualname__} already has a live class for an incompatible NodeClass"
-        )
     if live is None:
         bindings = _callback_bindings(marker)
         declaration = getattr(marker, "__o6_declaration__", None)
@@ -286,7 +289,7 @@ def _live_class(marker: type, node_cls: type) -> type:
         ):
             raise TypeError("@o6.read and @o6.write require a VariableType implementation")
         _validate_method_targets(marker, _class_own_method_children(marker))
-        live = _live_metaclass(marker, node_cls)(
+        created = _live_metaclass(marker, node_cls)(
             f"{marker.__name__}__Live",
             (marker, node_cls),
             {
@@ -294,7 +297,15 @@ def _live_class(marker: type, node_cls: type) -> type:
                 "__init__": _live_init_noop,
             },
         )
-        setattr(marker, _LIVE_CLASS_ATTR, live)
+        with _LIVE_CLASS_LOCK:
+            live = vars(marker).get(_LIVE_CLASS_ATTR)
+            if live is None:
+                live = created
+                setattr(marker, _LIVE_CLASS_ATTR, live)
+    if not issubclass(live, node_cls):
+        raise RuntimeError(
+            f"{marker.__qualname__} already has a live class for an incompatible NodeClass"
+        )
     return live
 
 

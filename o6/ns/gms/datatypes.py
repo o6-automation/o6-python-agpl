@@ -38,39 +38,39 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=gms;i=3002", browseName="ToolIsQualifiedStatus")
+@o6.enumtype(nodeId="ns=gms;i=3002", browseName="ns=gms;ToolIsQualifiedStatus")
 class ToolIsQualifiedStatus(ns0.datatypes.Enumeration):
     QUALIFIED = o6.enumfield(0, name="Qualified")
     IMPRECISE = o6.enumfield(1, name="Imprecise")
     NOT_QUALIFIED = o6.enumfield(2, name="NotQualified")
 
 
-@o6.enumtype(nodeId="ns=gms;i=3004", browseName="ToolAlignmentState")
+@o6.enumtype(nodeId="ns=gms;i=3004", browseName="ns=gms;ToolAlignmentState")
 class ToolAlignmentState(ns0.datatypes.Enumeration):
     FIXED = o6.enumfield(0, name="Fixed")
     INDEXED = o6.enumfield(1, name="Indexed")
     CONTINUOUS = o6.enumfield(2, name="Continuous")
 
 
-@o6.datatype(nodeId="ns=gms;i=3006", browseName="WorkspaceType", isAbstract=True)
+@o6.datatype(nodeId="ns=gms;i=3006", browseName="ns=gms;WorkspaceType", isAbstract=True)
 class WorkspaceType(ns0.datatypes.Structure):
     pass
 
 
-@o6.datatype(nodeId="ns=gms;i=3007", browseName="CartesianWorkspaceType", defaultEncodingId="ns=gms;i=5007")
+@o6.datatype(nodeId="ns=gms;i=3007", browseName="ns=gms;CartesianWorkspaceType", defaultEncodingId="ns=gms;i=5007")
 class CartesianWorkspaceType(WorkspaceType):
-    length: o6.Double
-    width: o6.Double
-    height: o6.Double
+    length: o6.Double = o6.field(name="Length")
+    width: o6.Double = o6.field(name="Width")
+    height: o6.Double = o6.field(name="Height")
 
 
-@o6.datatype(nodeId="ns=gms;i=3008", browseName="CylindricalWorkspaceType", defaultEncodingId="ns=gms;i=5013")
+@o6.datatype(nodeId="ns=gms;i=3008", browseName="ns=gms;CylindricalWorkspaceType", defaultEncodingId="ns=gms;i=5013")
 class CylindricalWorkspaceType(WorkspaceType):
-    length: o6.Double
-    radius: o6.Double
+    length: o6.Double = o6.field(name="Length")
+    radius: o6.Double = o6.field(name="Radius")
 
 
-@o6.enumtype(nodeId="ns=gms;i=3009", browseName="MeasurementReasonEnum")
+@o6.enumtype(nodeId="ns=gms;i=3009", browseName="ns=gms;MeasurementReasonEnum")
 class MeasurementReasonEnum(ns0.datatypes.Enumeration):
     CONTINUOUS_MEASUREMENTS = o6.enumfield(0, name="ContinuousMeasurements")
     SPECIAL_MEASUREMENT = o6.enumfield(1, name="SpecialMeasurement")
@@ -80,7 +80,7 @@ class MeasurementReasonEnum(ns0.datatypes.Enumeration):
     MAX_MASTERING = o6.enumfield(5, name="MaxMastering")
 
 
-@o6.enumtype(nodeId="ns=gms;i=3010", browseName="ToleranceLimitEnum")
+@o6.enumtype(nodeId="ns=gms;i=3010", browseName="ns=gms;ToleranceLimitEnum")
 class ToleranceLimitEnum(ns0.datatypes.Enumeration):
     NO_LIMIT = o6.enumfield(0, name="NoLimit")
     LIMIT_VALUE = o6.enumfield(1, name="LimitValue")

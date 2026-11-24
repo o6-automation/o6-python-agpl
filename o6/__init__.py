@@ -19,7 +19,8 @@ from __future__ import annotations
 # Imports
 # =============================================================================
 
-from datetime import datetime
+from dataclasses import dataclass
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import (
     TYPE_CHECKING,
@@ -27,6 +28,7 @@ from typing import (
     Awaitable,
     Generator,
     Iterable,
+    Literal,
     Optional,
     Protocol,
     TypeAlias,
@@ -50,7 +52,7 @@ from .common import (
 # Package metadata
 # =============================================================================
 
-__version__ = "3.0.0"
+__version__ = "3.1.0"
 __author__ = "o6 Automation GmbH"
 __email__ = "contact@o6-automation.com"
 
@@ -866,6 +868,20 @@ if TYPE_CHECKING:
         @serverCapabilities.setter
         def serverCapabilities(self, value: list[str] | tuple[str, ...]) -> None: ...
 
+        certificateEkuRule: Literal["default", "abort", "warn", "accept"]
+        """How to handle client application and user certificate purpose violations.
+
+        `"abort"` rejects invalid extended key usage, `"warn"` logs and accepts,
+        and `"accept"` accepts silently. The native `"default"` currently warns
+        and accepts. RSA application certificates require `clientAuth`; user
+        and ECC application certificates may omit extended key usage, but any
+        extension present must allow `clientAuth`.
+
+        Writable only while fully stopped. Set it after `setEncryption()`,
+        `setDefaultWithFilestore()` or `loadFromFile()`, which reset configuration.
+        Non-string values raise TypeError; unknown strings raise ValueError.
+        """
+
         verifyRequestTimestamp: bool
         """Reject requests that carry no RequestHeader timestamp.
 
@@ -1464,6 +1480,112 @@ if not TYPE_CHECKING:
 
 
 # =============================================================================
+# License status
+# =============================================================================
+
+
+@dataclass(frozen=True, slots=True)
+class LicenseInfo:
+    """The type of [`o6.license`][o6.license], with one field per license detail.
+
+    You don't create instances; o6 creates the one in `o6.license` when it is
+    first imported. Instances are immutable and safe to read from any thread.
+    They never contain the Credential's signature or file contents.
+
+    See [Commercial build](home/commercial-build.md#check-the-active-credential).
+    """
+
+    edition: Literal["commercial", "agpl"]
+    """`"commercial"` for the commercial wheels, `"agpl"` for the AGPL build."""
+
+    licensed: bool
+    """Whether a valid Credential was accepted. Always `False` for the AGPL build."""
+
+    scriptMode: bool
+    """Whether the ten-minute Script Mode timer is running.
+
+    `False` when a Credential was accepted and for the AGPL build.
+    """
+
+    holder: str | None
+    """The accepted Credential's holder, or `None` without one."""
+
+    usageScope: str | None
+    """The accepted Credential's usage scope, such as `"Developer License"`, or
+    `None` without one."""
+
+    licenseId: UUID | None
+    """The accepted Credential's identifier, or `None` without one."""
+
+    features: frozenset[str]
+    """The enabled features: `"client"`, `"server"` and `"pubsub"`.
+
+    Without a Credential, and for the AGPL build, every feature is enabled.
+    """
+
+    validFrom: datetime | None
+    """Start of the accepted Credential's validity period (UTC), or `None` when
+    the Credential is perpetual or none was accepted."""
+
+    validTo: datetime | None
+    """End of the accepted Credential's validity period (UTC), or `None` when
+    the Credential is perpetual or none was accepted."""
+
+    rejectionReason: str | None
+    """Why a Credential file was not accepted, or `None`.
+
+    The reason also appears in the warning o6 prints to standard error, for
+    example `"validity period has ended"` or `"signature verification failed"`.
+    It is `None` when a Credential was accepted, when no file was configured
+    and the default `o6python_license.json` is absent, and for the AGPL build.
+    """
+
+
+def _licenseFromNative(status: dict[str, Any]) -> LicenseInfo:
+    epoch = datetime(1601, 1, 1, tzinfo=timezone.utc)
+
+    def toDatetime(ticks: int | None) -> datetime | None:
+        if ticks is None:
+            return None
+        try:
+            return epoch + timedelta(microseconds=ticks // 10)
+        except OverflowError:
+            # A signed date outside the datetime range; clamp so import succeeds.
+            limit = datetime.max if ticks > 0 else datetime.min
+            return limit.replace(tzinfo=timezone.utc)
+
+    licenseId = status["licenseId"]
+    return LicenseInfo(
+        edition=status["edition"],
+        licensed=status["licensed"],
+        scriptMode=status["scriptMode"],
+        holder=status["holder"],
+        usageScope=status["usageScope"],
+        licenseId=None if licenseId is None else UUID(licenseId),
+        features=frozenset(name for name in ("client", "server", "pubsub") if status[name]),
+        validFrom=toDatetime(status["validFrom"]),
+        validTo=toDatetime(status["validTo"]),
+        rejectionReason=status["rejectionReason"],
+    )
+
+
+license: LicenseInfo = _licenseFromNative(_o6._license)
+"""This process's license status: which edition runs, whether a Credential was
+accepted, and why one was rejected.
+
+o6 sets it once on import and never changes it. For the fields, see
+[`LicenseInfo`][o6.LicenseInfo].
+
+```python
+import o6
+
+if not o6.license.licensed:
+    print("No Credential accepted:", o6.license.rejectionReason)
+```
+"""
+
+
+# =============================================================================
 # Public protocols and type aliases
 # =============================================================================
 
@@ -1747,6 +1869,7 @@ __all__ = [
     "Int16",
     "Int32",
     "Int64",
+    "LicenseInfo",
     "LocalizedText",
     "LocalizedTextLike",
     "MaybeAwaitable",
@@ -1806,6 +1929,7 @@ __all__ = [
     "hasProperty",
     "interfaceOf",
     "isConditionOf",
+    "license",
     "logDebug",
     "logError",
     "logFatal",
@@ -1842,8 +1966,8 @@ __all__ = [
 
 # The native extension is an implementation detail. Public native types have
 # already been installed above.
-del _o6, _types, _ns0, annotations
-del datetime, Path, UUID
+del _o6, _types, _ns0, annotations, _licenseFromNative
+del dataclass, datetime, timedelta, timezone, Path, UUID
 del (
     TYPE_CHECKING,
     Any,

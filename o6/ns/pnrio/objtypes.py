@@ -43,119 +43,153 @@ class PnTelegramType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=pnrio;i=1020", browseName="ns=pnrio;PnIoSignalType", displayName="PnIoSignalType")
 class PnIoSignalType(ns0.objtypes.BaseObjectType):
-    offset: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6207", browseName="ns=pnrio;Offset", dataType=o6.UInt16))
-    signalId: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6206", browseName="ns=pnrio;SignalId", dataType=o6.UInt16))
+    offset: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6207", browseName="ns=pnrio;Offset", modellingRule="Mandatory", dataType=o6.UInt16)
+    )
+    signalId: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6206", browseName="ns=pnrio;SignalId", modellingRule="Optional", dataType=o6.UInt16)
+    )
 
 
 @o6.objecttype(nodeId="ns=pnrio;i=1019", browseName="ns=pnrio;RioChannelDiagnosisEventType", displayName="RioChannelDiagnosisEventType")
 class RioChannelDiagnosisEventType(ns0.objtypes.BaseEventType):
-    applicationTag: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6232", browseName="ns=pnrio;ApplicationTag", dataType=o6.String))
-    helpText: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6234", browseName="ns=pnrio;HelpText", dataType=o6.LocalizedText))
+    applicationTag: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6232", browseName="ns=pnrio;ApplicationTag", modellingRule="Optional", dataType=o6.String)
+    )
+    helpText: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6234", browseName="ns=pnrio;HelpText", modellingRule="Optional", dataType=o6.LocalizedText)
+    )
     manufacturerData: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6233", browseName="ns=pnrio;ManufacturerData", dataType=o6.ByteString)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6233", browseName="ns=pnrio;ManufacturerData", modellingRule="Optional", dataType=o6.ByteString)
     )
     pnChannelNumber: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6228", browseName="ns=pnrio;PnChannelNumber", dataType=o6.UInt32)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6228", browseName="ns=pnrio;PnChannelNumber", modellingRule="Optional", dataType=o6.UInt32)
     )
     reason: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6230", browseName="ns=pnrio;Reason", dataType=pnrio_datypes.RioChannelDiagnosisReasonEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6230", browseName="ns=pnrio;Reason", modellingRule="Mandatory", dataType=pnrio_datypes.RioChannelDiagnosisReasonEnumeration)
     )
-    rioChannelNumber: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6227", browseName="ns=pnrio;RioChannelNumber", dataType=o6.UInt16))
+    rioChannelNumber: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6227", browseName="ns=pnrio;RioChannelNumber", modellingRule="Mandatory", dataType=o6.UInt16)
+    )
     status: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6229", browseName="ns=pnrio;Status", dataType=pnrio_datypes.RioChannelDiagnosisStatusEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6229", browseName="ns=pnrio;Status", modellingRule="Mandatory", dataType=pnrio_datypes.RioChannelDiagnosisStatusEnumeration)
     )
 
 
 @o6.objecttype(nodeId="ns=pnrio;i=1004", browseName="ns=pnrio;RioChannelDiagnosisAlarmType", displayName="RioChannelDiagnosisAlarmType")
 class RioChannelDiagnosisAlarmType(ns0.objtypes.AlarmConditionType):
-    applicationTag: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6109", browseName="ns=pnrio;ApplicationTag", dataType=o6.String))
-    helpText: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6111", browseName="ns=pnrio;HelpText", dataType=o6.LocalizedText))
+    applicationTag: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6109", browseName="ns=pnrio;ApplicationTag", modellingRule="Optional", dataType=o6.String)
+    )
+    helpText: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6111", browseName="ns=pnrio;HelpText", modellingRule="Optional", dataType=o6.LocalizedText)
+    )
     manufacturerData: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6110", browseName="ns=pnrio;ManufacturerData", dataType=o6.ByteString)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6110", browseName="ns=pnrio;ManufacturerData", modellingRule="Optional", dataType=o6.ByteString)
     )
     pnChannelNumber: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6270", browseName="ns=pnrio;PnChannelNumber", dataType=o6.UInt32)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6270", browseName="ns=pnrio;PnChannelNumber", modellingRule="Optional", dataType=o6.UInt32)
     )
     reason: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6108", browseName="ns=pnrio;Reason", dataType=pnrio_datypes.RioChannelDiagnosisReasonEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6108", browseName="ns=pnrio;Reason", modellingRule="Mandatory", dataType=pnrio_datypes.RioChannelDiagnosisReasonEnumeration)
     )
-    rioChannelNumber: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6107", browseName="ns=pnrio;RioChannelNumber", dataType=o6.UInt16))
+    rioChannelNumber: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6107", browseName="ns=pnrio;RioChannelNumber", modellingRule="Mandatory", dataType=o6.UInt16)
+    )
     status: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6271", browseName="ns=pnrio;Status", dataType=pnrio_datypes.RioChannelDiagnosisStatusEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6271", browseName="ns=pnrio;Status", modellingRule="Mandatory", dataType=pnrio_datypes.RioChannelDiagnosisStatusEnumeration)
     )
 
 
 @o6.objecttype(nodeId="ns=pnrio;i=1021", browseName="ns=pnrio;PnIoTelegramType", displayName="PnIoTelegramType")
 class PnIoTelegramType(ns0.objtypes.BaseObjectType):
     consumerStatus: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6279", browseName="ns=pnrio;ConsumerStatus", dataType=pnrio_datypes.PnIoTelegramStatusEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6279", browseName="ns=pnrio;ConsumerStatus", modellingRule="Optional", dataType=pnrio_datypes.PnIoTelegramStatusEnumeration)
     )
     ioTelegramImage: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6276", browseName="ns=pnrio;IoTelegramImage", dataType=o6.ByteString)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6276", browseName="ns=pnrio;IoTelegramImage", modellingRule="Optional", dataType=o6.ByteString)
     )
-    length: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6277", browseName="ns=pnrio;Length", dataType=o6.UInt16))
+    length: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6277", browseName="ns=pnrio;Length", modellingRule="Mandatory", dataType=o6.UInt16)
+    )
     nr_SignalName_: PnIoSignalType
     providerStatus: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6278", browseName="ns=pnrio;ProviderStatus", dataType=pnrio_datypes.PnIoTelegramStatusEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6278", browseName="ns=pnrio;ProviderStatus", modellingRule="Mandatory", dataType=pnrio_datypes.PnIoTelegramStatusEnumeration)
     )
 
 
 @o6.objecttype(nodeId="ns=pnrio;i=1017", browseName="ns=pnrio;RioChannelGroupConfigType", displayName="RioChannelGroupConfigType")
 class RioChannelGroupConfigType(ns0.objtypes.BaseObjectType):
-    damping: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6200", browseName="ns=pnrio;Damping", dataType=o6.Float))
+    damping: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6200", browseName="ns=pnrio;Damping", modellingRule="Optional", dataType=o6.Float)
+    )
     faAnalogSubstituteValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=pnrio;i=6290", browseName="ns=pnrio;FaAnalogSubstituteValue", dataType=pnrio_datypes.RioAnalogDataType, valueRank=1, arrayDimensions=[0]
+            nodeId="ns=pnrio;i=6290",
+            browseName="ns=pnrio;FaAnalogSubstituteValue",
+            modellingRule="Optional",
+            dataType=pnrio_datypes.RioAnalogDataType,
+            valueRank=1,
+            arrayDimensions=[0],
         )
     )
     faDigitalSubstituteValue: pnrio_vartypes.RioBitFieldVariableType | None = o6.hasComponent(
         pnrio_vartypes.RioBitFieldVariableType(
             nodeId="ns=pnrio;i=6204",
             browseName="ns=pnrio;FaDigitalSubstituteValue",
+            modellingRule="Optional",
             dataType=pnrio_datypes.RioBitFieldDataType,
             value=pnrio_datypes.RioBitFieldDataType(bitData=0, bitUsed=0),
         )
     )
     highLimit: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6201", browseName="ns=pnrio;HighLimit", dataType=pnrio_datypes.RioAnalogDataType)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6201", browseName="ns=pnrio;HighLimit", modellingRule="Optional", dataType=pnrio_datypes.RioAnalogDataType)
     )
     inversionEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6192", browseName="ns=pnrio;InversionEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6192", browseName="ns=pnrio;InversionEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
     loadVoltageCheckEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6196", browseName="ns=pnrio;LoadVoltageCheckEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6196", browseName="ns=pnrio;LoadVoltageCheckEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
     lowLimit: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6202", browseName="ns=pnrio;LowLimit", dataType=pnrio_datypes.RioAnalogDataType)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6202", browseName="ns=pnrio;LowLimit", modellingRule="Optional", dataType=pnrio_datypes.RioAnalogDataType)
     )
     paAnalogSubstituteValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=pnrio;i=6289", browseName="ns=pnrio;PaAnalogSubstituteValue", dataType=pnrio_datypes.RioAnalogDataType, valueRank=1, arrayDimensions=[0]
+            nodeId="ns=pnrio;i=6289",
+            browseName="ns=pnrio;PaAnalogSubstituteValue",
+            modellingRule="Optional",
+            dataType=pnrio_datypes.RioAnalogDataType,
+            valueRank=1,
+            arrayDimensions=[0],
         )
     )
     paDigitalSubstituteValue: pnrio_vartypes.RioBitFieldVariableType | None = o6.hasComponent(
         pnrio_vartypes.RioBitFieldVariableType(
             nodeId="ns=pnrio;i=6198",
             browseName="ns=pnrio;PaDigitalSubstituteValue",
+            modellingRule="Optional",
             dataType=pnrio_datypes.RioBitFieldDataType,
             value=pnrio_datypes.RioBitFieldDataType(bitData=0, bitUsed=0),
         )
     )
     shortCircuitCheckEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6193", browseName="ns=pnrio;ShortCircuitCheckEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6193", browseName="ns=pnrio;ShortCircuitCheckEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
     signalType: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6191", browseName="ns=pnrio;SignalType", dataType=pnrio_datypes.RioSignalTypeEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6191", browseName="ns=pnrio;SignalType", modellingRule="Optional", dataType=pnrio_datypes.RioSignalTypeEnumeration)
     )
     substitutePolicy: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6197", browseName="ns=pnrio;SubstitutePolicy", dataType=pnrio_datypes.RioSubstitutePolicyEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6197", browseName="ns=pnrio;SubstitutePolicy", modellingRule="Optional", dataType=pnrio_datypes.RioSubstitutePolicyEnumeration)
     )
-    substituteTime: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6199", browseName="ns=pnrio;SubstituteTime", dataType=o6.Float))
+    substituteTime: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6199", browseName="ns=pnrio;SubstituteTime", modellingRule="Optional", dataType=o6.Float)
+    )
     supplyVoltageCheckEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6195", browseName="ns=pnrio;SupplyVoltageCheckEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6195", browseName="ns=pnrio;SupplyVoltageCheckEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
     wireCheckEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6194", browseName="ns=pnrio;WireCheckEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6194", browseName="ns=pnrio;WireCheckEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
 
 
@@ -170,21 +204,23 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ApplicationTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnrio;i=7001", browseName="ns=pnrio;SetApplicationTag", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6072"]))
+o6.call(nodeId="ns=pnrio;i=7001", browseName="ns=pnrio;SetApplicationTag", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6072"]))
 
 
 @o6.objecttype(nodeId="ns=pnrio;i=1012", browseName="ns=pnrio;RioChannelGroupType", displayName="RioChannelGroupType", isAbstract=True)
 class RioChannelGroupType(ns0.objtypes.BaseObjectType):
-    applicationTag: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6164", browseName="ns=pnrio;ApplicationTag", dataType=o6.String))
+    applicationTag: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6164", browseName="ns=pnrio;ApplicationTag", modellingRule="Optional", dataType=o6.String)
+    )
     channelGroupConfig: RioChannelGroupConfigType | None = o6.reference(
-        RioChannelGroupConfigType(nodeId="ns=pnrio;i=5045", browseName="ns=pnrio;ChannelGroupConfig"), "ns=pnrio;i=4007"
+        RioChannelGroupConfigType(nodeId="ns=pnrio;i=5045", browseName="ns=pnrio;ChannelGroupConfig", modellingRule="Optional"), "ns=pnrio;i=4007"
     )
     lastParameterChange: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6165", browseName="ns=pnrio;LastParameterChange", dataType=o6.DateTime)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6165", browseName="ns=pnrio;LastParameterChange", modellingRule="Optional", dataType=o6.DateTime)
     )
     lock: di.objtypes.LockingServicesType | None
     numberOfChannels: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6226", browseName="ns=pnrio;NumberOfChannels", dataType=o6.UInt16, valueRank=1, arrayDimensions=[5])
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6226", browseName="ns=pnrio;NumberOfChannels", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=1, arrayDimensions=[5])
     )
     rioInputChannel_: RioChannelType | None
     rioOutputChannel_: RioChannelType | None
@@ -201,6 +237,7 @@ class RioFaAnalogChannelGroupType(RioChannelGroupType):
         pnrio_vartypes.RioBitFieldVariableType(
             nodeId="ns=pnrio;i=6174",
             browseName="ns=pnrio;InputImageQualifiers",
+            modellingRule="Optional",
             dataType=pnrio_datypes.RioBitFieldDataType,
             value=pnrio_datypes.RioBitFieldDataType(bitData=0, bitUsed=0),
         ),
@@ -208,7 +245,7 @@ class RioFaAnalogChannelGroupType(RioChannelGroupType):
     )
     inputImageValues: ns0.vartypes.BaseDataVariableType | None = o6.reference(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=pnrio;i=6173", browseName="ns=pnrio;InputImageValues", dataType=pnrio_datypes.RioAnalogDataType, valueRank=1, arrayDimensions=[0]
+            nodeId="ns=pnrio;i=6173", browseName="ns=pnrio;InputImageValues", modellingRule="Optional", dataType=pnrio_datypes.RioAnalogDataType, valueRank=1, arrayDimensions=[0]
         ),
         "ns=pnrio;i=4006",
     )
@@ -216,6 +253,7 @@ class RioFaAnalogChannelGroupType(RioChannelGroupType):
         pnrio_vartypes.RioBitFieldVariableType(
             nodeId="ns=pnrio;i=6175",
             browseName="ns=pnrio;OutputImageQualifiers",
+            modellingRule="Optional",
             dataType=pnrio_datypes.RioBitFieldDataType,
             value=pnrio_datypes.RioBitFieldDataType(bitData=0, bitUsed=0),
         ),
@@ -223,7 +261,7 @@ class RioFaAnalogChannelGroupType(RioChannelGroupType):
     )
     outputImageValues: ns0.vartypes.BaseDataVariableType | None = o6.reference(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=pnrio;i=6176", browseName="ns=pnrio;OutputImageValues", dataType=pnrio_datypes.RioAnalogDataType, valueRank=1, arrayDimensions=[0]
+            nodeId="ns=pnrio;i=6176", browseName="ns=pnrio;OutputImageValues", modellingRule="Optional", dataType=pnrio_datypes.RioAnalogDataType, valueRank=1, arrayDimensions=[0]
         ),
         "ns=pnrio;i=4006",
     )
@@ -233,7 +271,11 @@ class RioFaAnalogChannelGroupType(RioChannelGroupType):
 class RioFaDigitalChannelGroupType(RioChannelGroupType):
     inputImage: pnrio_vartypes.RioBitFieldVariableType | None = o6.reference(
         pnrio_vartypes.RioBitFieldVariableType(
-            nodeId="ns=pnrio;i=6177", browseName="ns=pnrio;InputImage", dataType=pnrio_datypes.RioBitFieldDataType, value=pnrio_datypes.RioBitFieldDataType(bitData=0, bitUsed=0)
+            nodeId="ns=pnrio;i=6177",
+            browseName="ns=pnrio;InputImage",
+            modellingRule="Optional",
+            dataType=pnrio_datypes.RioBitFieldDataType,
+            value=pnrio_datypes.RioBitFieldDataType(bitData=0, bitUsed=0),
         ),
         "ns=pnrio;i=4006",
     )
@@ -241,6 +283,7 @@ class RioFaDigitalChannelGroupType(RioChannelGroupType):
         pnrio_vartypes.RioBitFieldVariableType(
             nodeId="ns=pnrio;i=6178",
             browseName="ns=pnrio;InputImageQualifiers",
+            modellingRule="Optional",
             dataType=pnrio_datypes.RioBitFieldDataType,
             value=pnrio_datypes.RioBitFieldDataType(bitData=0, bitUsed=0),
         ),
@@ -248,7 +291,11 @@ class RioFaDigitalChannelGroupType(RioChannelGroupType):
     )
     outputImage: pnrio_vartypes.RioBitFieldVariableType | None = o6.reference(
         pnrio_vartypes.RioBitFieldVariableType(
-            nodeId="ns=pnrio;i=6183", browseName="ns=pnrio;OutputImage", dataType=pnrio_datypes.RioBitFieldDataType, value=pnrio_datypes.RioBitFieldDataType(bitData=0, bitUsed=0)
+            nodeId="ns=pnrio;i=6183",
+            browseName="ns=pnrio;OutputImage",
+            modellingRule="Optional",
+            dataType=pnrio_datypes.RioBitFieldDataType,
+            value=pnrio_datypes.RioBitFieldDataType(bitData=0, bitUsed=0),
         ),
         "ns=pnrio;i=4006",
     )
@@ -256,6 +303,7 @@ class RioFaDigitalChannelGroupType(RioChannelGroupType):
         pnrio_vartypes.RioBitFieldVariableType(
             nodeId="ns=pnrio;i=6184",
             browseName="ns=pnrio;OutputImageQualifiers",
+            modellingRule="Optional",
             dataType=pnrio_datypes.RioBitFieldDataType,
             value=pnrio_datypes.RioBitFieldDataType(bitData=0, bitUsed=0),
         ),
@@ -274,17 +322,21 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ApplicationTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnrio;i=7002", browseName="ns=pnrio;SetApplicationTag", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6186"]))
+o6.call(nodeId="ns=pnrio;i=7002", browseName="ns=pnrio;SetApplicationTag", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6186"]))
 
 
 @o6.objecttype(nodeId="ns=pnrio;i=1005", browseName="ns=pnrio;RioChannelType", displayName="RioChannelType", isAbstract=True)
 class RioChannelType(ns0.objtypes.BaseObjectType):
-    applicationTag: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6113", browseName="ns=pnrio;ApplicationTag", dataType=o6.String))
+    applicationTag: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6113", browseName="ns=pnrio;ApplicationTag", modellingRule="Mandatory", dataType=o6.String)
+    )
     lastParameterChange: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6274", browseName="ns=pnrio;LastParameterChange", dataType=o6.DateTime)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6274", browseName="ns=pnrio;LastParameterChange", modellingRule="Optional", dataType=o6.DateTime)
     )
     lock: di.objtypes.LockingServicesType | None
-    rioChannelNumber: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6112", browseName="ns=pnrio;RioChannelNumber", dataType=o6.UInt16))
+    rioChannelNumber: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6112", browseName="ns=pnrio;RioChannelNumber", modellingRule="Mandatory", dataType=o6.UInt16)
+    )
     setApplicationTag: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnrio;i=7002"])
 
 
@@ -298,6 +350,7 @@ class RioFaAnalogInputChannelType(RioChannelType):
         pnrio_vartypes.RioFaAnalogInputConfigVariableType(
             nodeId="ns=pnrio;i=6121",
             browseName="ns=pnrio;Config",
+            modellingRule="Mandatory",
             dataType=pnrio_datypes.RioFaAnalogInputConfigDataType,
             value=pnrio_datypes.RioFaAnalogInputConfigDataType(
                 damping=0.0,
@@ -310,7 +363,9 @@ class RioFaAnalogInputChannelType(RioChannelType):
         )
     )
     processValue: pnrio_vartypes.RioFaAnalogProcessValueVariableType
-    signalValue: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6120", browseName="ns=pnrio;SignalValue", dataType=o6.Double))
+    signalValue: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(
+        ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6120", browseName="ns=pnrio;SignalValue", modellingRule="Optional", dataType=o6.Double)
+    )
 
 
 @o6.objecttype(nodeId="ns=pnrio;i=1007", browseName="ns=pnrio;RioFaAnalogOutputChannelType", displayName="RioFaAnalogOutputChannelType")
@@ -319,6 +374,7 @@ class RioFaAnalogOutputChannelType(RioChannelType):
         pnrio_vartypes.RioFaAnalogOutputConfigVariableType(
             nodeId="ns=pnrio;i=6139",
             browseName="ns=pnrio;Config",
+            modellingRule="Mandatory",
             dataType=pnrio_datypes.RioFaAnalogOutputConfigDataType,
             value=pnrio_datypes.RioFaAnalogOutputConfigDataType(
                 signalType=pnrio_datypes.RioSignalTypeEnumeration.CURRENT_4_20_M_A,
@@ -333,9 +389,11 @@ class RioFaAnalogOutputChannelType(RioChannelType):
     )
     processValue: pnrio_vartypes.RioFaAnalogProcessValueVariableType
     processValueReadback: pnrio_vartypes.RioFaAnalogProcessValueVariableType | None
-    signalValue: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6137", browseName="ns=pnrio;SignalValue", dataType=o6.Double))
+    signalValue: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(
+        ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6137", browseName="ns=pnrio;SignalValue", modellingRule="Optional", dataType=o6.Double)
+    )
     signalValueReadback: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(
-        ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6138", browseName="ns=pnrio;SignalValueReadback", dataType=o6.Double)
+        ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6138", browseName="ns=pnrio;SignalValueReadback", modellingRule="Optional", dataType=o6.Double)
     )
 
 
@@ -345,6 +403,7 @@ class RioFaDigitalInputChannelType(RioChannelType):
         pnrio_vartypes.RioFaDigitalInputConfigVariableType(
             nodeId="ns=pnrio;i=6149",
             browseName="ns=pnrio;Config",
+            modellingRule="Mandatory",
             dataType=pnrio_datypes.RioFaDigitalInputConfigDataType,
             value=pnrio_datypes.RioFaDigitalInputConfigDataType(
                 signalType=pnrio_datypes.RioSignalTypeEnumeration.CURRENT_4_20_M_A,
@@ -359,11 +418,14 @@ class RioFaDigitalInputChannelType(RioChannelType):
         pnrio_vartypes.RioFaDigitalProcessValueVariableType(
             nodeId="ns=pnrio;i=6147",
             browseName="ns=pnrio;ProcessValue",
+            modellingRule="Mandatory",
             dataType=pnrio_datypes.RioFaDigitalProcessValueDataType,
             value=pnrio_datypes.RioFaDigitalProcessValueDataType(value=False, qualifier=False, quality=0),
         )
     )
-    signalValue: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6148", browseName="ns=pnrio;SignalValue", dataType=o6.Double))
+    signalValue: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(
+        ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6148", browseName="ns=pnrio;SignalValue", modellingRule="Optional", dataType=o6.Double)
+    )
 
 
 @o6.objecttype(nodeId="ns=pnrio;i=1011", browseName="ns=pnrio;RioFaDigitalOutputChannelType", displayName="RioFaDigitalOutputChannelType")
@@ -372,6 +434,7 @@ class RioFaDigitalOutputChannelType(RioChannelType):
         pnrio_vartypes.RioFaDigitalOutputConfigVariableType(
             nodeId="ns=pnrio;i=6163",
             browseName="ns=pnrio;Config",
+            modellingRule="Mandatory",
             dataType=pnrio_datypes.RioFaDigitalOutputConfigDataType,
             value=pnrio_datypes.RioFaDigitalOutputConfigDataType(
                 signalType=pnrio_datypes.RioSignalTypeEnumeration.CURRENT_4_20_M_A,
@@ -388,6 +451,7 @@ class RioFaDigitalOutputChannelType(RioChannelType):
         pnrio_vartypes.RioFaDigitalProcessValueVariableType(
             nodeId="ns=pnrio;i=6159",
             browseName="ns=pnrio;ProcessValue",
+            modellingRule="Mandatory",
             dataType=pnrio_datypes.RioFaDigitalProcessValueDataType,
             value=pnrio_datypes.RioFaDigitalProcessValueDataType(value=False, qualifier=False, quality=0),
         )
@@ -396,13 +460,16 @@ class RioFaDigitalOutputChannelType(RioChannelType):
         pnrio_vartypes.RioFaDigitalProcessValueVariableType(
             nodeId="ns=pnrio;i=6160",
             browseName="ns=pnrio;ProcessValueReadback",
+            modellingRule="Optional",
             dataType=pnrio_datypes.RioFaDigitalProcessValueDataType,
             value=pnrio_datypes.RioFaDigitalProcessValueDataType(value=False, qualifier=False, quality=0),
         )
     )
-    signalValue: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6161", browseName="ns=pnrio;SignalValue", dataType=o6.Double))
+    signalValue: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(
+        ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6161", browseName="ns=pnrio;SignalValue", modellingRule="Optional", dataType=o6.Double)
+    )
     signalValueReadback: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(
-        ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6162", browseName="ns=pnrio;SignalValueReadback", dataType=o6.Double)
+        ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6162", browseName="ns=pnrio;SignalValueReadback", modellingRule="Optional", dataType=o6.Double)
     )
 
 
@@ -432,7 +499,7 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=pnrio;i=7005", browseName="ns=pnrio;SetSimulation", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6133"]))
+o6.call(nodeId="ns=pnrio;i=7005", browseName="ns=pnrio;SetSimulation", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6133"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnrio;i=6169",
@@ -460,7 +527,7 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=pnrio;i=7006", browseName="ns=pnrio;SetSimulation", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6169"]))
+o6.call(nodeId="ns=pnrio;i=7006", browseName="ns=pnrio;SetSimulation", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6169"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnrio;i=6292",
@@ -495,7 +562,7 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=pnrio;i=7023", browseName="ns=pnrio;SetSimulationValue", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6292"]))
+o6.call(nodeId="ns=pnrio;i=7023", browseName="ns=pnrio;SetSimulationValue", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6292"]))
 
 
 @o6.objecttype(nodeId="ns=pnrio;i=1013", browseName="ns=pnrio;RioPaAnalogChannelGroupType", displayName="RioPaAnalogChannelGroupType")
@@ -504,9 +571,10 @@ class RioPaAnalogChannelGroupType(RioChannelGroupType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=pnrio;i=6170",
             browseName="ns=pnrio;InputValues",
+            modellingRule="Optional",
             dataType=pnrio_datypes.RioPaAnalogValueDataType,
             valueRank=1,
-            arrayDimensions=[1],
+            arrayDimensions=[0],
             value=[pnrio_datypes.RioPaAnalogValueDataType(value=pnrio_datypes.RioAnalogDataType(), qualifier=0)],
         ),
         "ns=pnrio;i=4006",
@@ -515,9 +583,10 @@ class RioPaAnalogChannelGroupType(RioChannelGroupType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=pnrio;i=6171",
             browseName="ns=pnrio;OutputValues",
+            modellingRule="Optional",
             dataType=pnrio_datypes.RioPaAnalogValueDataType,
             valueRank=1,
-            arrayDimensions=[1],
+            arrayDimensions=[0],
             value=[pnrio_datypes.RioPaAnalogValueDataType(value=pnrio_datypes.RioAnalogDataType(), qualifier=0)],
         ),
         "ns=pnrio;i=4006",
@@ -525,15 +594,18 @@ class RioPaAnalogChannelGroupType(RioChannelGroupType):
     setSimulation: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnrio;i=7005"])
     setSimulationValue: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnrio;i=7023"])
     simulationEnabled: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6010", browseName="ns=pnrio;SimulationEnabled", dataType=o6.Boolean, valueRank=1, arrayDimensions=[0])
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=pnrio;i=6010", browseName="ns=pnrio;SimulationEnabled", modellingRule="Optional", dataType=o6.Boolean, valueRank=1, arrayDimensions=[0]
+        )
     )
     simulationValues: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=pnrio;i=6291",
             browseName="ns=pnrio;SimulationValues",
+            modellingRule="Optional",
             dataType=pnrio_datypes.RioPaAnalogValueDataType,
             valueRank=1,
-            arrayDimensions=[1],
+            arrayDimensions=[0],
             value=[pnrio_datypes.RioPaAnalogValueDataType(value=pnrio_datypes.RioAnalogDataType(), qualifier=0)],
         )
     )
@@ -554,7 +626,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=pnrio;i=7024", browseName="ns=pnrio;SetMode", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6293"]))
+o6.call(nodeId="ns=pnrio;i=7024", browseName="ns=pnrio;SetMode", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6293"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnrio;i=6294",
@@ -575,7 +647,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=pnrio;i=7025", browseName="ns=pnrio;SetManualProcessValue", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6294"]))
+o6.call(nodeId="ns=pnrio;i=7025", browseName="ns=pnrio;SetManualProcessValue", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6294"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnrio;i=6295",
@@ -596,7 +668,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=pnrio;i=7026", browseName="ns=pnrio;SetSimulation", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6295"]))
+o6.call(nodeId="ns=pnrio;i=7026", browseName="ns=pnrio;SetSimulation", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6295"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnrio;i=6296",
@@ -624,7 +696,7 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=pnrio;i=7027", browseName="ns=pnrio;SetSimulationValue", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6296"]))
+o6.call(nodeId="ns=pnrio;i=7027", browseName="ns=pnrio;SetSimulationValue", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6296"]))
 
 
 @o6.objecttype(nodeId="ns=pnrio;i=1002", browseName="ns=pnrio;RioPaAnalogInputChannelType", displayName="RioPaAnalogInputChannelType")
@@ -633,6 +705,7 @@ class RioPaAnalogInputChannelType(RioChannelType):
         pnrio_vartypes.RioPaAnalogInputConfigVariableType(
             nodeId="ns=pnrio;i=6116",
             browseName="ns=pnrio;Config",
+            modellingRule="Mandatory",
             dataType=pnrio_datypes.RioPaAnalogInputConfigDataType,
             value=pnrio_datypes.RioPaAnalogInputConfigDataType(
                 damping=0.0,
@@ -646,26 +719,31 @@ class RioPaAnalogInputChannelType(RioChannelType):
         )
     )
     manualProcessValue: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6114", browseName="ns=pnrio;ManualProcessValue", dataType=pnrio_datypes.RioAnalogDataType)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6114", browseName="ns=pnrio;ManualProcessValue", modellingRule="Optional", dataType=pnrio_datypes.RioAnalogDataType)
     )
     mode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6003", browseName="ns=pnrio;Mode", dataType=pnrio_datypes.RioChannelModeEnumeration)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6003", browseName="ns=pnrio;Mode", modellingRule="Mandatory", dataType=pnrio_datypes.RioChannelModeEnumeration)
     )
     processValue: pnrio_vartypes.RioPaAnalogProcessValueVariableType = o6.hasComponent(
-        pnrio_vartypes.RioPaAnalogProcessValueVariableType(nodeId="ns=pnrio;i=6001", browseName="ns=pnrio;ProcessValue", dataType=pnrio_datypes.RioPaAnalogProcessValueDataType)
+        pnrio_vartypes.RioPaAnalogProcessValueVariableType(
+            nodeId="ns=pnrio;i=6001", browseName="ns=pnrio;ProcessValue", modellingRule="Mandatory", dataType=pnrio_datypes.RioPaAnalogProcessValueDataType
+        )
     )
     setManualProcessValue: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnrio;i=7025"])
     setMode: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnrio;i=7024"])
     setSimulation: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnrio;i=7026"])
     setSimulationValue: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnrio;i=7027"])
-    signalValue: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6002", browseName="ns=pnrio;SignalValue", dataType=o6.Double))
+    signalValue: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(
+        ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6002", browseName="ns=pnrio;SignalValue", modellingRule="Optional", dataType=o6.Double)
+    )
     simulationEnabled: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6115", browseName="ns=pnrio;SimulationEnabled", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6115", browseName="ns=pnrio;SimulationEnabled", modellingRule="Mandatory", dataType=o6.Boolean)
     )
     simulationValue: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=pnrio;i=6004",
             browseName="ns=pnrio;SimulationValue",
+            modellingRule="Optional",
             dataType=pnrio_datypes.RioPaAnalogValueDataType,
             value=pnrio_datypes.RioPaAnalogValueDataType(value=pnrio_datypes.RioAnalogDataType(), qualifier=0),
         )
@@ -687,7 +765,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=pnrio;i=7028", browseName="ns=pnrio;SetMode", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6297"]))
+o6.call(nodeId="ns=pnrio;i=7028", browseName="ns=pnrio;SetMode", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6297"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnrio;i=6298",
@@ -708,7 +786,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=pnrio;i=7029", browseName="ns=pnrio;SetManualOutValue", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6298"]))
+o6.call(nodeId="ns=pnrio;i=7029", browseName="ns=pnrio;SetManualOutValue", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6298"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnrio;i=6299",
@@ -729,7 +807,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=pnrio;i=7030", browseName="ns=pnrio;SetSimulation", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6299"]))
+o6.call(nodeId="ns=pnrio;i=7030", browseName="ns=pnrio;SetSimulation", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6299"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnrio;i=6300",
@@ -753,7 +831,7 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=pnrio;i=7031", browseName="ns=pnrio;SetSimulationValue", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6300"]))
+o6.call(nodeId="ns=pnrio;i=7031", browseName="ns=pnrio;SetSimulationValue", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6300"]))
 
 
 @o6.objecttype(nodeId="ns=pnrio;i=1006", browseName="ns=pnrio;RioPaAnalogOutputChannelType", displayName="RioPaAnalogOutputChannelType")
@@ -762,6 +840,7 @@ class RioPaAnalogOutputChannelType(RioChannelType):
         pnrio_vartypes.RioPaAnalogOutputConfigVariableType(
             nodeId="ns=pnrio;i=6130",
             browseName="ns=pnrio;Config",
+            modellingRule="Mandatory",
             dataType=pnrio_datypes.RioPaAnalogOutputConfigDataType,
             value=pnrio_datypes.RioPaAnalogOutputConfigDataType(
                 signalType=pnrio_datypes.RioSignalTypeEnumeration.CURRENT_4_20_M_A,
@@ -773,34 +852,39 @@ class RioPaAnalogOutputChannelType(RioChannelType):
         )
     )
     manualOutValue: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6128", browseName="ns=pnrio;ManualOutValue", dataType=pnrio_datypes.RioAnalogDataType)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6128", browseName="ns=pnrio;ManualOutValue", modellingRule="Optional", dataType=pnrio_datypes.RioAnalogDataType)
     )
     mode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6126", browseName="ns=pnrio;Mode", dataType=pnrio_datypes.RioChannelModeEnumeration)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6126", browseName="ns=pnrio;Mode", modellingRule="Mandatory", dataType=pnrio_datypes.RioChannelModeEnumeration)
     )
     processValue: pnrio_vartypes.RioPaAnalogProcessValueVariableType = o6.hasComponent(
-        pnrio_vartypes.RioPaAnalogProcessValueVariableType(nodeId="ns=pnrio;i=6122", browseName="ns=pnrio;ProcessValue", dataType=pnrio_datypes.RioPaAnalogProcessValueDataType)
+        pnrio_vartypes.RioPaAnalogProcessValueVariableType(
+            nodeId="ns=pnrio;i=6122", browseName="ns=pnrio;ProcessValue", modellingRule="Mandatory", dataType=pnrio_datypes.RioPaAnalogProcessValueDataType
+        )
     )
     processValueReadback: pnrio_vartypes.RioPaAnalogProcessValueVariableType | None = o6.hasComponent(
         pnrio_vartypes.RioPaAnalogProcessValueVariableType(
-            nodeId="ns=pnrio;i=6123", browseName="ns=pnrio;ProcessValueReadback", dataType=pnrio_datypes.RioPaAnalogProcessValueDataType
+            nodeId="ns=pnrio;i=6123", browseName="ns=pnrio;ProcessValueReadback", modellingRule="Optional", dataType=pnrio_datypes.RioPaAnalogProcessValueDataType
         )
     )
     setManualOutValue: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnrio;i=7029"])
     setMode: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnrio;i=7028"])
     setSimulation: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnrio;i=7030"])
     setSimulationValue: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnrio;i=7031"])
-    signalValue: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6124", browseName="ns=pnrio;SignalValue", dataType=o6.Double))
+    signalValue: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(
+        ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6124", browseName="ns=pnrio;SignalValue", modellingRule="Optional", dataType=o6.Double)
+    )
     signalValueReadback: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(
-        ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6125", browseName="ns=pnrio;SignalValueReadback", dataType=o6.Double)
+        ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6125", browseName="ns=pnrio;SignalValueReadback", modellingRule="Optional", dataType=o6.Double)
     )
     simulationEnabled: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6129", browseName="ns=pnrio;SimulationEnabled", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6129", browseName="ns=pnrio;SimulationEnabled", modellingRule="Mandatory", dataType=o6.Boolean)
     )
     simulationValue: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=pnrio;i=6127",
             browseName="ns=pnrio;SimulationValue",
+            modellingRule="Optional",
             dataType=pnrio_datypes.RioPaAnalogValueDataType,
             value=pnrio_datypes.RioPaAnalogValueDataType(value=pnrio_datypes.RioAnalogDataType(), qualifier=0),
         )
@@ -822,7 +906,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=pnrio;i=7032", browseName="ns=pnrio;SetMode", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6301"]))
+o6.call(nodeId="ns=pnrio;i=7032", browseName="ns=pnrio;SetMode", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6301"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnrio;i=6302",
@@ -843,7 +927,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=pnrio;i=7033", browseName="ns=pnrio;SetManualProcessValue", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6302"]))
+o6.call(nodeId="ns=pnrio;i=7033", browseName="ns=pnrio;SetManualProcessValue", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6302"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnrio;i=6303",
@@ -864,7 +948,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=pnrio;i=7034", browseName="ns=pnrio;SetSimulation", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6303"]))
+o6.call(nodeId="ns=pnrio;i=7034", browseName="ns=pnrio;SetSimulation", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6303"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnrio;i=6304",
@@ -892,7 +976,7 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=pnrio;i=7035", browseName="ns=pnrio;SetSimulationValue", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6304"]))
+o6.call(nodeId="ns=pnrio;i=7035", browseName="ns=pnrio;SetSimulationValue", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6304"]))
 
 
 @o6.objecttype(nodeId="ns=pnrio;i=1008", browseName="ns=pnrio;RioPaDigitalInputChannelType", displayName="RioPaDigitalInputChannelType")
@@ -901,6 +985,7 @@ class RioPaDigitalInputChannelType(RioChannelType):
         pnrio_vartypes.RioPaDigitalInputConfigVariableType(
             nodeId="ns=pnrio;i=6146",
             browseName="ns=pnrio;Config",
+            modellingRule="Mandatory",
             dataType=pnrio_datypes.RioPaDigitalInputConfigDataType,
             value=pnrio_datypes.RioPaDigitalInputConfigDataType(
                 signalType=pnrio_datypes.RioSignalTypeEnumeration.CURRENT_4_20_M_A,
@@ -912,15 +997,16 @@ class RioPaDigitalInputChannelType(RioChannelType):
         )
     )
     manualProcessValue: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6144", browseName="ns=pnrio;ManualProcessValue", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6144", browseName="ns=pnrio;ManualProcessValue", modellingRule="Optional", dataType=o6.Boolean)
     )
     mode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6142", browseName="ns=pnrio;Mode", dataType=pnrio_datypes.RioChannelModeEnumeration)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6142", browseName="ns=pnrio;Mode", modellingRule="Mandatory", dataType=pnrio_datypes.RioChannelModeEnumeration)
     )
     processValue: pnrio_vartypes.RioPaDigitalProcessValueVariableType = o6.hasComponent(
         pnrio_vartypes.RioPaDigitalProcessValueVariableType(
             nodeId="ns=pnrio;i=6140",
             browseName="ns=pnrio;ProcessValue",
+            modellingRule="Mandatory",
             dataType=pnrio_datypes.RioPaDigitalProcessValueDataType,
             value=pnrio_datypes.RioPaDigitalProcessValueDataType(value=False, qualifier=0, quality=0, nE_107=0, status_full=0),
         )
@@ -929,12 +1015,16 @@ class RioPaDigitalInputChannelType(RioChannelType):
     setMode: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnrio;i=7032"])
     setSimulation: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnrio;i=7034"])
     setSimulationValue: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnrio;i=7035"])
-    signalValue: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6141", browseName="ns=pnrio;SignalValue", dataType=o6.Double))
+    signalValue: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(
+        ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6141", browseName="ns=pnrio;SignalValue", modellingRule="Optional", dataType=o6.Double)
+    )
     simulationEnabled: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6145", browseName="ns=pnrio;SimulationEnabled", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6145", browseName="ns=pnrio;SimulationEnabled", modellingRule="Mandatory", dataType=o6.Boolean)
     )
     simulationValue: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6143", browseName="ns=pnrio;SimulationValue", dataType=pnrio_datypes.RioPaDigitalValueDataType)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=pnrio;i=6143", browseName="ns=pnrio;SimulationValue", modellingRule="Optional", dataType=pnrio_datypes.RioPaDigitalValueDataType
+        )
     )
 
 
@@ -953,7 +1043,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=pnrio;i=7036", browseName="ns=pnrio;SetMode", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6305"]))
+o6.call(nodeId="ns=pnrio;i=7036", browseName="ns=pnrio;SetMode", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6305"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnrio;i=6306",
@@ -974,7 +1064,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=pnrio;i=7037", browseName="ns=pnrio;SetSimulation", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6306"]))
+o6.call(nodeId="ns=pnrio;i=7037", browseName="ns=pnrio;SetSimulation", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6306"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnrio;i=6307",
@@ -1002,7 +1092,7 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=pnrio;i=7038", browseName="ns=pnrio;SetSimulationValue", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6307"]))
+o6.call(nodeId="ns=pnrio;i=7038", browseName="ns=pnrio;SetSimulationValue", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6307"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnrio;i=6062",
@@ -1033,31 +1123,43 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=pnrio;i=7039", browseName="ns=pnrio;SetSimulationValue", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6062"]))
+o6.call(nodeId="ns=pnrio;i=7039", browseName="ns=pnrio;SetSimulationValue", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6062"]))
 
 
 @o6.objecttype(nodeId="ns=pnrio;i=1015", browseName="ns=pnrio;RioPaDigitalChannelGroupType", displayName="RioPaDigitalChannelGroupType")
 class RioPaDigitalChannelGroupType(RioChannelGroupType):
     inputImage: ns0.vartypes.BaseDataVariableType | None = o6.reference(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=pnrio;i=6180", browseName="ns=pnrio;InputImage", dataType=pnrio_datypes.RioPaDigitalValueDataType, valueRank=1, arrayDimensions=[0]
+            nodeId="ns=pnrio;i=6180", browseName="ns=pnrio;InputImage", modellingRule="Optional", dataType=pnrio_datypes.RioPaDigitalValueDataType, valueRank=1, arrayDimensions=[0]
         ),
         "ns=pnrio;i=4006",
     )
     outputImage: ns0.vartypes.BaseDataVariableType | None = o6.reference(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=pnrio;i=6181", browseName="ns=pnrio;OutputImage", dataType=pnrio_datypes.RioPaDigitalValueDataType, valueRank=1, arrayDimensions=[0]
+            nodeId="ns=pnrio;i=6181",
+            browseName="ns=pnrio;OutputImage",
+            modellingRule="Optional",
+            dataType=pnrio_datypes.RioPaDigitalValueDataType,
+            valueRank=1,
+            arrayDimensions=[0],
         ),
         "ns=pnrio;i=4006",
     )
     setSimulation: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnrio;i=7006"])
     setSimulationValue: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnrio;i=7039"])
     simulationEnabled: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6136", browseName="ns=pnrio;SimulationEnabled", dataType=o6.Boolean, valueRank=1, arrayDimensions=[0])
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=pnrio;i=6136", browseName="ns=pnrio;SimulationEnabled", modellingRule="Optional", dataType=o6.Boolean, valueRank=1, arrayDimensions=[0]
+        )
     )
     simulationValues: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=pnrio;i=6061", browseName="ns=pnrio;SimulationValues", dataType=pnrio_datypes.RioPaDigitalValueDataType, valueRank=1, arrayDimensions=[0]
+            nodeId="ns=pnrio;i=6061",
+            browseName="ns=pnrio;SimulationValues",
+            modellingRule="Optional",
+            dataType=pnrio_datypes.RioPaDigitalValueDataType,
+            valueRank=1,
+            arrayDimensions=[0],
         )
     )
 
@@ -1077,7 +1179,7 @@ ns0.vartypes.PropertyType(
         )
     ],
 )
-o6.call(nodeId="ns=pnrio;i=7040", browseName="ns=pnrio;SetManualOutValue", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6071"]))
+o6.call(nodeId="ns=pnrio;i=7040", browseName="ns=pnrio;SetManualOutValue", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnrio;i=6071"]))
 
 
 @o6.objecttype(nodeId="ns=pnrio;i=1010", browseName="ns=pnrio;RioPaDigitalOutputChannelType", displayName="RioPaDigitalOutputChannelType")
@@ -1086,6 +1188,7 @@ class RioPaDigitalOutputChannelType(RioChannelType):
         pnrio_vartypes.RioPaDigitalOutputConfigVariableType(
             nodeId="ns=pnrio;i=6158",
             browseName="ns=pnrio;Config",
+            modellingRule="Mandatory",
             dataType=pnrio_datypes.RioPaDigitalOutputConfigDataType,
             value=pnrio_datypes.RioPaDigitalOutputConfigDataType(
                 signalType=pnrio_datypes.RioSignalTypeEnumeration.CURRENT_4_20_M_A,
@@ -1098,15 +1201,16 @@ class RioPaDigitalOutputChannelType(RioChannelType):
         )
     )
     manualOutValue: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6156", browseName="ns=pnrio;ManualOutValue", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6156", browseName="ns=pnrio;ManualOutValue", modellingRule="Optional", dataType=o6.Boolean)
     )
     mode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6154", browseName="ns=pnrio;Mode", dataType=pnrio_datypes.RioChannelModeEnumeration)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6154", browseName="ns=pnrio;Mode", modellingRule="Mandatory", dataType=pnrio_datypes.RioChannelModeEnumeration)
     )
     processValue: pnrio_vartypes.RioPaDigitalProcessValueVariableType = o6.hasComponent(
         pnrio_vartypes.RioPaDigitalProcessValueVariableType(
             nodeId="ns=pnrio;i=6150",
             browseName="ns=pnrio;ProcessValue",
+            modellingRule="Mandatory",
             dataType=pnrio_datypes.RioPaDigitalProcessValueDataType,
             value=pnrio_datypes.RioPaDigitalProcessValueDataType(value=False, qualifier=0, quality=0, nE_107=0, status_full=0),
         )
@@ -1115,6 +1219,7 @@ class RioPaDigitalOutputChannelType(RioChannelType):
         pnrio_vartypes.RioPaDigitalProcessValueVariableType(
             nodeId="ns=pnrio;i=6151",
             browseName="ns=pnrio;ProcessValueReadback",
+            modellingRule="Optional",
             dataType=pnrio_datypes.RioPaDigitalProcessValueDataType,
             value=pnrio_datypes.RioPaDigitalProcessValueDataType(value=False, qualifier=0, quality=0, nE_107=0, status_full=0),
         )
@@ -1123,15 +1228,19 @@ class RioPaDigitalOutputChannelType(RioChannelType):
     setMode: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnrio;i=7036"])
     setSimulation: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnrio;i=7037"])
     setSimulationValue: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnrio;i=7038"])
-    signalValue: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6152", browseName="ns=pnrio;SignalValue", dataType=o6.Double))
+    signalValue: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(
+        ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6152", browseName="ns=pnrio;SignalValue", modellingRule="Optional", dataType=o6.Double)
+    )
     signalValueReadback: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(
-        ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6153", browseName="ns=pnrio;SignalValueReadback", dataType=o6.Double)
+        ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6153", browseName="ns=pnrio;SignalValueReadback", modellingRule="Optional", dataType=o6.Double)
     )
     simulationEnabled: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6157", browseName="ns=pnrio;SimulationEnabled", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6157", browseName="ns=pnrio;SimulationEnabled", modellingRule="Mandatory", dataType=o6.Boolean)
     )
     simulationValue: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6155", browseName="ns=pnrio;SimulationValue", dataType=pnrio_datypes.RioPaDigitalValueDataType)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=pnrio;i=6155", browseName="ns=pnrio;SimulationValue", modellingRule="Optional", dataType=pnrio_datypes.RioPaDigitalValueDataType
+        )
     )
 
 

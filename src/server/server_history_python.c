@@ -31,12 +31,16 @@
 #include "server.h"
 #include "server_history.h"
 #include "server_services_util.h"
+#include <limits.h>
 #include "../module.h"
 
 typedef struct {
     PyObject *pyBackend; /* incref'd o6.HistoryBackend instance */
     PyObject *pyServer;  /* incref'd owning PyServer */
     UA_Boolean paged;
+    UA_Boolean validatePage;
+    UA_Boolean unregister;
+    UA_Boolean rawRanges;
 } PyHistoryBackendContext;
 
 /* ==================================================== *
@@ -55,11 +59,11 @@ historyDataValueToPython(PyHistoryBackendContext *ctx, const UA_DataValue *value
     return UA2PY(value, &UA_TYPES[UA_TYPES_DATAVALUE], &pyServer->nsMapPy2UA);
 }
 
-/* A zero UA_DateTime is the OPC UA "unspecified" sentinel - becomes None,
- * not the epoch. Unrelated to _history_read's own INT64_MIN/MAX convention. */
+/* Both the wire sentinel and the default native database sentinel mean
+ * an unspecified callback endpoint. */
 static PyObject *
 historyDateTimeToPython(PyHistoryBackendContext *ctx, UA_DateTime dt) {
-    if(dt == 0)
+    if(dt == 0 || dt == LLONG_MIN)
         Py_RETURN_NONE;
     PyServer *pyServer = (PyServer *)ctx->pyServer;
     return UA2PY(&dt, &UA_TYPES[UA_TYPES_DATETIME], &pyServer->nsMapPy2UA);
@@ -275,7 +279,7 @@ pyHistoryTimestampsToReturnSupported(UA_Server *server, void *hdbContext,
 }
 
 static UA_StatusCode
-pyHistoryGetHistoryData(UA_Server *server, const UA_NodeId *sessionId,
+historyPage(UA_Server *server, const UA_NodeId *sessionId,
                         void *sessionContext, const UA_HistoryDataBackend *backend,
                         const UA_DateTime start, const UA_DateTime end,
                         const UA_NodeId *nodeId, size_t maxSizePerResponse,
@@ -283,7 +287,8 @@ pyHistoryGetHistoryData(UA_Server *server, const UA_NodeId *sessionId,
                         UA_TimestampsToReturn timestampsToReturn,
                         UA_NumericRange range, UA_Boolean releaseContinuationPoints,
                         const UA_ByteString *continuationPoint,
-                        UA_ByteString *outContinuationPoint, UA_HistoryData *result) {
+                        UA_ByteString *outContinuationPoint, UA_HistoryData *result, UA_Boolean validateOnly,
+                        const UA_String *rawRange) {
     (void)server;
     (void)sessionId;
     (void)sessionContext;
@@ -292,11 +297,15 @@ pyHistoryGetHistoryData(UA_Server *server, const UA_NodeId *sessionId,
         UA_ByteString_init(outContinuationPoint);
 
     PyHistoryBackendContext *ctx = (PyHistoryBackendContext *)backend->context;
+    if(validateOnly && !ctx->validatePage)
+        return UA_STATUSCODE_GOOD;
     PyObject *pyNodeId = historyNodeIdToPython(ctx, nodeId);
     PyObject *pyStart = historyDateTimeToPython(ctx, start);
     PyObject *pyEnd = historyDateTimeToPython(ctx, end);
     PyObject *pyTtr = historyTimestampsToReturnToPython(ctx, timestampsToReturn);
-    PyObject *pyRange = historyRangeToPython(&range);
+    PyObject *pyRange = rawRange ?
+        PyUnicode_DecodeUTF8((const char *)rawRange->data, (Py_ssize_t)rawRange->length, "strict") :
+        historyRangeToPython(&range);
     PyObject *args = NULL;
     if(pyNodeId && pyStart && pyEnd && pyTtr && pyRange)
         args = Py_BuildValue("OOOnIOOO", pyNodeId, pyStart, pyEnd,
@@ -325,12 +334,35 @@ pyHistoryGetHistoryData(UA_Server *server, const UA_NodeId *sessionId,
         args = pagedArgs;
         if(!args)
             return historyExceptionStatus(UA_STATUSCODE_BADINTERNALERROR);
-        method = "getHistoryPage";
+        method = ctx->rawRanges ? "getHistoryPageRaw" : "getHistoryPage";
     } else if(continuationPoint->length || releaseContinuationPoints) {
         Py_DECREF(args);
         return continuationPoint->length ? UA_STATUSCODE_BADCONTINUATIONPOINTINVALID : UA_STATUSCODE_GOOD;
     }
 
+    if(validateOnly) {
+        UA_Boolean historizing = false;
+        UA_Byte access = 0;
+        UA_StatusCode histStatus = UA_Server_readHistorizing(server, *nodeId, &historizing);
+        UA_StatusCode accessStatus = UA_Server_readAccessLevel(server, *nodeId, &access);
+        PyObject *pyAccess = accessStatus == UA_STATUSCODE_GOOD ?
+            PyLong_FromUnsignedLong(access) : Py_NewRef(Py_None);
+        PyObject *pyHistorizing = histStatus == UA_STATUSCODE_GOOD ?
+            (historizing ? Py_True : Py_False) : Py_None;
+        PyObject *kwargs = pyAccess ? Py_BuildValue("{s:O,s:O}",
+            "historizing", pyHistorizing, "accessLevel", pyAccess) : NULL;
+        Py_XDECREF(pyAccess);
+        PyObject *callback = kwargs ? PyObject_GetAttrString(ctx->pyBackend,
+                                                            "validateHistoryPage") : NULL;
+        PyObject *result = callback ? pyServer_invoke_sync_callback(callback, args, kwargs) : NULL;
+        Py_XDECREF(callback);
+        Py_XDECREF(kwargs);
+        Py_DECREF(args);
+        if(!result)
+            return historyExceptionStatus(UA_STATUSCODE_BADINTERNALERROR);
+        Py_DECREF(result);
+        return UA_STATUSCODE_GOOD;
+    }
     PyObject *pyResult = historyCall(ctx->pyBackend, method, args);
     if(!pyResult)
         return historyExceptionStatus(UA_STATUSCODE_BADHISTORYOPERATIONUNSUPPORTED);
@@ -387,6 +419,71 @@ pyHistoryGetHistoryData(UA_Server *server, const UA_NodeId *sessionId,
     result->dataValuesSize = (size_t)count;
     result->dataValues = values;
     return UA_STATUSCODE_GOOD;
+}
+
+static UA_StatusCode
+pyHistoryGetHistoryData(UA_Server *server, const UA_NodeId *sessionId, void *sessionContext,
+    const UA_HistoryDataBackend *backend, UA_DateTime start, UA_DateTime end,
+    const UA_NodeId *nodeId, size_t cap, UA_UInt32 count, UA_Boolean bounds,
+    UA_TimestampsToReturn timestamps, UA_NumericRange range, UA_Boolean release,
+    const UA_ByteString *token, UA_ByteString *outToken, UA_HistoryData *result) {
+    return historyPage(server, sessionId, sessionContext, backend, start, end, nodeId,
+        cap, count, bounds, timestamps, range, release, token, outToken, result, false, NULL);
+}
+
+UA_StatusCode
+pyHistoryBackend_validatePage(UA_Server *server, const UA_NodeId *sessionId,
+    void *sessionContext, const UA_HistoryDataBackend *backend,
+    const UA_ReadRawModifiedDetails *details, UA_TimestampsToReturn timestamps,
+    UA_NumericRange range, UA_Boolean release, const UA_HistoryReadValueId *item, size_t cap) {
+    return historyPage(server, sessionId, sessionContext, backend, details->startTime,
+        details->endTime, &item->nodeId, cap, details->numValuesPerNode, details->returnBounds,
+        timestamps, range, release, &item->continuationPoint, NULL, NULL, true,
+        pyHistoryBackend_rawRanges(backend) ? &item->indexRange : NULL);
+}
+
+UA_Boolean
+pyHistoryBackend_paged(const UA_HistoryDataBackend *backend) {
+    return ((PyHistoryBackendContext *)backend->context)->paged;
+}
+
+UA_Boolean
+pyHistoryBackend_extended(const UA_HistoryDataBackend *backend) {
+    PyHistoryBackendContext *ctx = (PyHistoryBackendContext *)backend->context;
+    return ctx->rawRanges || ctx->validatePage;
+}
+
+UA_Boolean
+pyHistoryBackend_rawRanges(const UA_HistoryDataBackend *backend) {
+    return ((PyHistoryBackendContext *)backend->context)->rawRanges;
+}
+
+UA_StatusCode
+pyHistoryBackend_readPage(UA_Server *server, const UA_NodeId *sessionId,
+    void *sessionContext, const UA_HistoryDataBackend *backend,
+    const UA_ReadRawModifiedDetails *details, UA_TimestampsToReturn timestamps,
+    UA_NumericRange range, UA_Boolean release, const UA_HistoryReadValueId *item,
+    size_t cap, UA_ByteString *token, UA_HistoryData *result) {
+    return historyPage(server, sessionId, sessionContext, backend, details->startTime,
+        details->endTime, &item->nodeId, cap, details->numValuesPerNode, details->returnBounds,
+        timestamps, range, release, &item->continuationPoint, token, result, false,
+        pyHistoryBackend_rawRanges(backend) ? &item->indexRange : NULL);
+}
+
+UA_StatusCode
+pyHistoryBackend_unregister(UA_HistoryDataBackend *backend, const UA_NodeId *nodeId) {
+    PyHistoryBackendContext *ctx = (PyHistoryBackendContext *)backend->context;
+    if(!ctx || !ctx->unregister)
+        return UA_STATUSCODE_GOOD;
+    /* User callbacks and value conversion cannot import types after Python
+     * has torn down its import machinery during interpreter shutdown. */
+    PyObject *metaPath = PySys_GetObject("meta_path");
+    if(!metaPath || metaPath == Py_None)
+        return UA_STATUSCODE_GOOD;
+    PyObject *node = historyNodeIdToPython(ctx, nodeId);
+    PyObject *args = node ? PyTuple_Pack(1, node) : NULL;
+    Py_XDECREF(node);
+    return historyCallStatus(ctx->pyBackend, "onUnregister", args, UA_STATUSCODE_BADINTERNALERROR);
 }
 
 /* insertDataValue / replaceDataValue / updateDataValue share one shape:
@@ -474,13 +571,22 @@ pyHistoryBackend_python(void *pyBackendRaw, void *pyServerRaw) {
     }
 
     int hasPage = overriddenContains(overridden, "getHistoryPage");
+    int hasRawPage = overriddenContains(overridden, "getHistoryPageRaw");
+    int hasValidate = overriddenContains(overridden, "validateHistoryPage");
+    int hasUnregister = overriddenContains(overridden, "onUnregister");
     int hasInsert = overriddenContains(overridden, "insertDataValue");
     int hasReplace = overriddenContains(overridden, "replaceDataValue");
     int hasUpdate = overriddenContains(overridden, "updateDataValue");
     int hasRemove = overriddenContains(overridden, "removeDataValue");
     Py_DECREF(overridden);
-    if(hasPage < 0 || hasInsert < 0 || hasReplace < 0 || hasUpdate < 0 || hasRemove < 0)
+    if(hasRawPage < 0 || hasValidate < 0 || hasUnregister < 0 || hasPage < 0 || hasInsert < 0 || hasReplace < 0 || hasUpdate < 0 || hasRemove < 0)
         return backend; /* exception already set */
+
+    if(hasValidate && !hasPage && !hasRawPage) {
+        PyErr_SetString(PyExc_TypeError,
+            "validateHistoryPage requires a paging callback");
+        return backend;
+    }
 
     PyHistoryBackendContext *ctx =
         (PyHistoryBackendContext *)UA_calloc(1, sizeof(PyHistoryBackendContext));
@@ -488,7 +594,10 @@ pyHistoryBackend_python(void *pyBackendRaw, void *pyServerRaw) {
         return backend; /* no exception set - caller maps to BADOUTOFMEMORY */
     Py_INCREF(pyBackend);
     Py_INCREF(pyServer);
-    ctx->paged = hasPage;
+    ctx->paged = hasPage || hasRawPage;
+    ctx->validatePage = hasValidate;
+    ctx->unregister = hasUnregister;
+    ctx->rawRanges = hasRawPage;
     ctx->pyBackend = pyBackend;
     ctx->pyServer = pyServer;
 

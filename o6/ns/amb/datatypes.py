@@ -32,24 +32,24 @@ else:
     _VariableNode = object
 
 
-@o6.datatype(nodeId="ns=amb;i=3002", browseName="RootCauseDataType", description="Root cause of an alarm", defaultEncodingId="ns=amb;i=5001")
+@o6.datatype(nodeId="ns=amb;i=3002", browseName="ns=amb;RootCauseDataType", description="Root cause of an alarm", defaultEncodingId="ns=amb;i=5001")
 class RootCauseDataType(ns0.datatypes.Structure):
-    rootCauseId: o6.NodeId
-    rootCause: o6.LocalizedText
+    rootCauseId: o6.NodeId = o6.field(name="RootCauseId")
+    rootCause: o6.LocalizedText = o6.field(name="RootCause")
 
 
 @o6.datatype(
     nodeId="ns=amb;i=3003",
-    browseName="NameNodeIdDataType",
+    browseName="ns=amb;NameNodeIdDataType",
     description="A human-readable name of something plus optionally the NodeId in case the something is represented in the AddressSpace",
     defaultEncodingId="ns=amb;i=5012",
 )
 class NameNodeIdDataType(ns0.datatypes.Structure):
-    name: o6.LocalizedText
-    nodeId: o6.NodeId
+    name: o6.LocalizedText = o6.field(name="Name")
+    nodeId: o6.NodeId = o6.field(name="NodeId")
 
 
-@o6.enumtype(nodeId="ns=amb;i=3004", browseName="MaintenanceMethodEnum")
+@o6.enumtype(nodeId="ns=amb;i=3004", browseName="ns=amb;MaintenanceMethodEnum")
 class MaintenanceMethodEnum(ns0.datatypes.Enumeration):
     LOCAL = o6.enumfield(0, name="Local")
     REMOTE = o6.enumfield(1, name="Remote")

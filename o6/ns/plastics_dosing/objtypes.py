@@ -65,6 +65,7 @@ class DosingSystemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=6017",
             browseName="ns=plastics_dosing;DeviceMappingNumber",
             description="Unique identifier/address/number for devices of the same DeviceType within a local network.",
+            modellingRule="Mandatory",
             dataType=o6.UInt32,
             accessLevel=3,
             userAccessLevel=1,
@@ -75,6 +76,7 @@ class DosingSystemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=6015",
             browseName="ns=plastics_dosing;DisplayLanguage",
             description="With the DisplayLanguage Property the client can set the desired language on the user interface at the Dosing System.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.LocaleId,
             accessLevel=3,
             userAccessLevel=1,
@@ -87,6 +89,7 @@ class DosingSystemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=6016",
             browseName="ns=plastics_dosing;IsContinuous",
             description="The dosing device can be installed on an extruder (EXT) or an injection moulding machine (IMM). EXT is a continuous process, IMM is a cyclic process. For inline dosing devices, directly mounted on the feed throat of an IMM the IsContinuous flag is false, when installed on an EXT this flag is true.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -112,6 +115,7 @@ class MixingType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=6058",
             browseName="ns=plastics_dosing;IdleMixing",
             description="With idle mixing the mixer of the batch blender rotates once in a while to keep the material in the mixer flowing and material does not get blocked by the mixer blades.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -122,6 +126,7 @@ class MixingType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=6057",
             browseName="ns=plastics_dosing;MixingDuration",
             description="Duration of a mixing process.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
             userAccessLevel=1,
@@ -132,6 +137,7 @@ class MixingType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=6031",
             browseName="ns=plastics_dosing;MixingInterval",
             description="Interval between two mixing processes, in number of shots.",
+            modellingRule="Optional",
             dataType=o6.UInt16,
             accessLevel=3,
             userAccessLevel=1,
@@ -153,6 +159,7 @@ class WeighingProcessType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=6092",
             browseName="ns=plastics_dosing;WeighingTime",
             description="Duration of the weighing process.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
             userAccessLevel=1,
@@ -168,7 +175,9 @@ class WeighingProcessType(ns0.objtypes.BaseObjectType):
 )
 class ComponentsType(ns0.objtypes.BaseObjectType):
     component_Nr_: ComponentType
-    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_dosing;i=6108", browseName="NodeVersion", dataType=o6.String))
+    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_dosing;i=6108", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String)
+    )
 
 
 o6.reference(ComponentsType, "i=41", "i=2133")
@@ -193,6 +202,7 @@ o6.call(
     nodeId="ns=plastics_dosing;i=7013",
     browseName="ns=plastics_dosing;ResetErrorById",
     description="Method to reset one error of the device.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_dosing;i=6142"]),
 )
 
@@ -205,7 +215,12 @@ o6.call(
 )
 class MaterialConsumptionType(ns0.objtypes.BaseObjectType):
     reset: o6.node.MethodNode = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_dosing;i=7015", browseName="ns=plastics_dosing;Reset", description="The Method Reset resets the two counters TotalConsumption and Scrap.")
+        o6.call(
+            nodeId="ns=plastics_dosing;i=7015",
+            browseName="ns=plastics_dosing;Reset",
+            description="The Method Reset resets the two counters TotalConsumption and Scrap.",
+            modellingRule="Mandatory",
+        )
     )
     scrap: ns0.vartypes.AnalogUnitType | None
     totalConsumption: ns0.vartypes.AnalogUnitType
@@ -219,13 +234,14 @@ class MaterialConsumptionType(ns0.objtypes.BaseObjectType):
 )
 class LevelsType(ns0.objtypes.BaseObjectType):
     abortFilling: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_dosing;i=7021", browseName="ns=plastics_dosing;AbortFilling", description="Method to abort filling the Component.")
+        o6.call(nodeId="ns=plastics_dosing;i=7021", browseName="ns=plastics_dosing;AbortFilling", description="Method to abort filling the Component.", modellingRule="Optional")
     )
     filling: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=plastics_dosing;i=6085",
             browseName="ns=plastics_dosing;Filling",
             description="Flag to indicate if the hopper is being filled right now.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -237,6 +253,7 @@ class LevelsType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=7020",
             browseName="ns=plastics_dosing;StartFilling",
             description="Method to fill the Component up to the MaxValue of the MonitoredParameterType in the Level Variable.",
+            modellingRule="Optional",
         )
     )
 
@@ -253,6 +270,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=6050",
             browseName="ns=plastics_dosing;ActiveErrors",
             description="List of the active errors of the device.",
+            modellingRule="Mandatory",
             dataType=plastics_rubber.datatypes.ActiveErrorDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -261,13 +279,19 @@ class OperationType(ns0.objtypes.BaseObjectType):
     batchWeight: plastics_rubber.objtypes.ControlledParameterType | None
     components: ComponentsType
     disableDevice: o6.node.MethodNode = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_dosing;i=7004", browseName="ns=plastics_dosing;DisableDevice", description="Disables the device, for example deactivate motor drives.")
+        o6.call(
+            nodeId="ns=plastics_dosing;i=7004",
+            browseName="ns=plastics_dosing;DisableDevice",
+            description="Disables the device, for example deactivate motor drives.",
+            modellingRule="Mandatory",
+        )
     )
     dosingDuration: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=plastics_dosing;i=6037",
             browseName="ns=plastics_dosing;DosingDuration",
             description="This parameter defines the duration the dosing shall be active after receiving the StartDosingShot signal.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
             userAccessLevel=1,
@@ -279,6 +303,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=7003",
             browseName="ns=plastics_dosing;EnableDevice",
             description="Enables the device, for example activate motor drives. Triggers the transition from MachineryItemState NotAvailable to NotExecuting.",
+            modellingRule="Mandatory",
         )
     )
     enableDosingOpcUa: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
@@ -286,6 +311,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=6102",
             browseName="ns=plastics_dosing;EnableDosingOpcUa",
             description="Variable to set and read the actual state how the dosing signal is transferred from the client to the dosing system in addition to RemoteControlOpcUa.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -296,6 +322,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=7014",
             browseName="ns=plastics_dosing;FirstFilling",
             description="Method to fill the DosingSystem for the first time with the mixture of materials from the current recipe.",
+            modellingRule="Optional",
         )
     )
     highestActiveAlarmSeverity: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -303,6 +330,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=6049",
             browseName="ns=plastics_dosing;HighestActiveAlarmSeverity",
             description="Indication of the severity of the highest active alarm.",
+            modellingRule="Mandatory",
             dataType=o6.UInt16,
         )
     )
@@ -311,6 +339,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=7002",
             browseName="ns=plastics_dosing;IdentifyDevice",
             description="The DosingSystem on which this method is called shows itself by e.g. activation of a LED.",
+            modellingRule="Optional",
         )
     )
     isActive: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -318,6 +347,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=6024",
             browseName="ns=plastics_dosing;IsActive",
             description="The IsActive Property provides information if the dosing unit is active in the current production.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -329,6 +359,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=6028",
             browseName="ns=plastics_dosing;PurgeDuration",
             description="Duration of the purging function of the dosing system.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
             userAccessLevel=1,
@@ -336,11 +367,13 @@ class OperationType(ns0.objtypes.BaseObjectType):
     )
     remoteControlOpcUa: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=plastics_dosing;i=6027", browseName="ns=plastics_dosing;RemoteControlOpcUa", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            nodeId="ns=plastics_dosing;i=6027", browseName="ns=plastics_dosing;RemoteControlOpcUa", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
         )
     )
     resetAllErrors: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_dosing;i=7012", browseName="ns=plastics_dosing;ResetAllErrors", description="Method to reset all errors of the device.")
+        o6.call(
+            nodeId="ns=plastics_dosing;i=7012", browseName="ns=plastics_dosing;ResetAllErrors", description="Method to reset all errors of the device.", modellingRule="Optional"
+        )
     )
     resetErrorById: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=plastics_dosing;i=7013"])
     setActive: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -348,6 +381,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=6025",
             browseName="ns=plastics_dosing;SetActive",
             description="Activates the dosing unit for the current production.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -359,6 +393,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=7060",
             browseName="ns=plastics_dosing;StartDosingContinuous",
             description="If EnableDosingOpcUa is TRUE, this method can be used to start dosing continuously.",
+            modellingRule="Optional",
         )
     )
     startDosingShot: o6.node.MethodNode | None = o6.hasComponent(
@@ -366,19 +401,26 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=7005",
             browseName="ns=plastics_dosing;StartDosingShot",
             description="If EnableDosingOpcUa is TRUE, this method can be used to start dosing for one shot with a defined duration specified by DosingDuration.",
+            modellingRule="Optional",
         )
     )
     startPurge: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_dosing;i=7061", browseName="ns=plastics_dosing;StartPurge", description="Method to start the purging function on the dosing system.")
+        o6.call(
+            nodeId="ns=plastics_dosing;i=7061",
+            browseName="ns=plastics_dosing;StartPurge",
+            description="Method to start the purging function on the dosing system.",
+            modellingRule="Optional",
+        )
     )
     stopDosing: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_dosing;i=7006", browseName="ns=plastics_dosing;StopDosing", description="Method to stop dosing immediately.")
+        o6.call(nodeId="ns=plastics_dosing;i=7006", browseName="ns=plastics_dosing;StopDosing", description="Method to stop dosing immediately.", modellingRule="Optional")
     )
     stopDosingAfterCycle: o6.node.MethodNode | None = o6.hasComponent(
         o6.call(
             nodeId="ns=plastics_dosing;i=7007",
             browseName="ns=plastics_dosing;StopDosingAfterCycle",
             description="Method to stop dosing after the current dosing cycle (e.g. to get a valid batch mix with batch blending).",
+            modellingRule="Optional",
         )
     )
     throughput: plastics_rubber.objtypes.ControlledParameterType | None
@@ -393,10 +435,20 @@ class OperationType(ns0.objtypes.BaseObjectType):
 )
 class ComponentType(ns0.objtypes.BaseObjectType):
     abortCalibration: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_dosing;i=7073", browseName="ns=plastics_dosing;AbortCalibration", description="Abort the current calibration sequence for this component.")
+        o6.call(
+            nodeId="ns=plastics_dosing;i=7073",
+            browseName="ns=plastics_dosing;AbortCalibration",
+            description="Abort the current calibration sequence for this component.",
+            modellingRule="Optional",
+        )
     )
     abortCleaning: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_dosing;i=7019", browseName="ns=plastics_dosing;AbortCleaning", description="Method without arguments to abort the current cleaning sequence.")
+        o6.call(
+            nodeId="ns=plastics_dosing;i=7019",
+            browseName="ns=plastics_dosing;AbortCleaning",
+            description="Method without arguments to abort the current cleaning sequence.",
+            modellingRule="Optional",
+        )
     )
     bulkDensity: ns0.vartypes.AnalogUnitType | None
     dosingMode: ns0.vartypes.MultiStateValueDiscreteType
@@ -406,6 +458,7 @@ class ComponentType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=6068",
             browseName="ns=plastics_dosing;FeedRateScalingFactor",
             description="Material-specific output of the Component per DrivePercentage.",
+            modellingRule="Optional",
             dataType=o6.Double,
             accessLevel=3,
             userAccessLevel=1,
@@ -416,6 +469,7 @@ class ComponentType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=7017",
             browseName="ns=plastics_dosing;IdentifyComponent",
             description="The dosing component on which this method is called shows itself by e.g. activation of a LED.",
+            modellingRule="Optional",
         )
     )
     isActive: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -423,6 +477,7 @@ class ComponentType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=6065",
             browseName="ns=plastics_dosing;IsActive",
             description="Provides information if the dosing component is active in the current production.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -431,6 +486,7 @@ class ComponentType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=6064",
             browseName="ns=plastics_dosing;IsPresent",
             description="Indicates if the hardware of this component is installed.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -442,22 +498,34 @@ class ComponentType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_dosing;i=6066",
             browseName="ns=plastics_dosing;SetActive",
             description="Activates the dosing component for the current production.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
         )
     )
     startCalibration: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_dosing;i=7024", browseName="ns=plastics_dosing;StartCalibration", description="Start the automated calibration sequence for this component.")
+        o6.call(
+            nodeId="ns=plastics_dosing;i=7024",
+            browseName="ns=plastics_dosing;StartCalibration",
+            description="Start the automated calibration sequence for this component.",
+            modellingRule="Optional",
+        )
     )
     startCleaning: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_dosing;i=7018", browseName="ns=plastics_dosing;StartCleaning", description="Start the automated cleaning sequence for this component.")
+        o6.call(
+            nodeId="ns=plastics_dosing;i=7018",
+            browseName="ns=plastics_dosing;StartCleaning",
+            description="Start the automated cleaning sequence for this component.",
+            modellingRule="Optional",
+        )
     )
     state: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=plastics_dosing;i=6067",
             browseName="ns=plastics_dosing;State",
             description="The actual working state of the component.",
+            modellingRule="Mandatory",
             dataType=plastics_dosing_datypes.ComponentStateEnumeration,
         )
     )
@@ -475,10 +543,20 @@ class ContinuousComponentType(ComponentType):
     drivePercentage: plastics_rubber.objtypes.ControlledParameterType | None
     percentage: plastics_rubber.objtypes.ControlledParameterType | None
     startPriming: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_dosing;i=7062", browseName="ns=plastics_dosing;StartPriming", description="Method to start the priming function on the component.")
+        o6.call(
+            nodeId="ns=plastics_dosing;i=7062",
+            browseName="ns=plastics_dosing;StartPriming",
+            description="Method to start the priming function on the component.",
+            modellingRule="Optional",
+        )
     )
     stopPriming: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=plastics_dosing;i=7063", browseName="ns=plastics_dosing;StopPriming", description="Method to stop the priming function on the component.")
+        o6.call(
+            nodeId="ns=plastics_dosing;i=7063",
+            browseName="ns=plastics_dosing;StopPriming",
+            description="Method to stop the priming function on the component.",
+            modellingRule="Optional",
+        )
     )
     weighingProcess: WeighingProcessType | None
 

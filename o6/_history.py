@@ -75,9 +75,12 @@ class HistoryBackend:
     """
 
     _history_hooks = (
+        "validateHistoryPage",
+        "onUnregister",
         "onWrite",
         "getHistoryData",
         "getHistoryPage",
+        "getHistoryPageRaw",
         "insertDataValue",
         "replaceDataValue",
         "updateDataValue",
@@ -133,10 +136,76 @@ class HistoryBackend:
         Respect `maxSize` and `numValues` when nonzero. Bind tokens to the
         requesting session and node, and reject invalid tokens with
         `StatusCodeError(BAD_CONTINUATION_POINT_INVALID)`. On release, free the
-        token and return `([], b"")`. The store must expire abandoned tokens.
+        token and return `([], b"")`. Bound abandoned tokens and clear them on
+        session closure using `Server.onSessionNotification`.
         When overridden, this hook takes precedence over `getHistoryData`.
         """
         raise NotImplementedError
+
+    def getHistoryPageRaw(
+        self,
+        nodeId: Any,
+        start: Any,
+        end: Any,
+        maxSize: int,
+        numValues: int,
+        returnBounds: bool,
+        timestampsToReturn: Any,
+        range: str,
+        continuationPoint: bytes,
+        releaseContinuationPoints: bool,
+        sessionId: Any,
+    ) -> tuple[list, bytes]:
+        """Return a raw page while handling the original IndexRange string.
+
+        This optional alternative to `getHistoryPage` receives the exact range
+        text, including empty or malformed strings. The backend validates its
+        syntax and applies it. All other arguments and return values follow
+        `getHistoryPage`; this hook takes precedence when both are overridden.
+        Existing `getHistoryPage` implementations continue receiving slices.
+        """
+        raise NotImplementedError
+
+    def validateHistoryPage(
+        self,
+        nodeId: Any,
+        start: Any,
+        end: Any,
+        maxSize: int,
+        numValues: int,
+        returnBounds: bool,
+        timestampsToReturn: Any,
+        range: "tuple[slice, ...] | str | None",
+        continuationPoint: bytes,
+        releaseContinuationPoints: bool,
+        sessionId: Any,
+        *,
+        historizing: bool | None = None,
+        accessLevel: int | None = None,
+    ) -> None:
+        """Optionally validate token ownership before node authorization.
+
+        Receives the inputs of the selected paging hook (`getHistoryPage` or
+        `getHistoryPageRaw`). Return None or raise StatusCodeError to reject an operation before node/access checks. This
+        can enforce token ownership or backend-specific availability rules.
+        Do not consume tokens, read samples, or grant access here: SDK
+        authorization still runs before the read callback. Release frees state
+        without reading values and therefore skips data-access checks.
+
+        Keyword arguments `historizing` and `accessLevel` contain detached node
+        attributes, or None when that attribute cannot be read. They are not
+        user permissions. They let the backend inspect availability without
+        calling server services from this synchronous callback.
+        """
+        return None
+
+    def onUnregister(self, nodeId: Any) -> None:
+        """Discard node state when history is disabled or the node is deleted.
+
+        May run for an unregistered node or repeatedly during teardown. Must be
+        idempotent and must not call services on a server being destroyed.
+        """
+        return None
 
     def insertDataValue(self, nodeId: Any, value: Any) -> None:
         """Serve a HistoryUpdate Insert. Unimplemented answers `BadHistoryOperationUnsupported`."""

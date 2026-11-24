@@ -35,7 +35,11 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=mining_armoured_face_conveyor;i=3002", browseName="AFCStateEnum", description="Enum describing the current operation state of the chain conveyor")
+@o6.enumtype(
+    nodeId="ns=mining_armoured_face_conveyor;i=3002",
+    browseName="ns=mining_armoured_face_conveyor;AFCStateEnum",
+    description="Enum describing the current operation state of the chain conveyor",
+)
 class AFCStateEnum(ns0.datatypes.Enumeration):
     UNDEFINED = o6.enumfield(0, name="UNDEFINED")
     STOPPED = o6.enumfield(1, name="STOPPED")
@@ -45,7 +49,7 @@ class AFCStateEnum(ns0.datatypes.Enumeration):
 
 @o6.enumtype(
     nodeId="ns=mining_armoured_face_conveyor;i=3004",
-    browseName="AFCNormalRunningDirectionEnum",
+    browseName="ns=mining_armoured_face_conveyor;AFCNormalRunningDirectionEnum",
     description="Enum describing the direction of the conveyor chain movement during normal operation",
 )
 class AFCNormalRunningDirectionEnum(ns0.datatypes.Enumeration):

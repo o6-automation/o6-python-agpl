@@ -40,10 +40,14 @@ else:
 @o6.objecttype(nodeId="ns=plastics_extrusion_corrugator;i=1003", browseName="ns=plastics_extrusion_corrugator;Corrugator_InterfaceType", displayName="Corrugator_InterfaceType")
 class Corrugator_InterfaceType(plastics_extrusion_haul_off.objtypes.HaulOff_InterfaceType):
     extruderEnabled: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_extrusion_corrugator;i=6002", browseName="ns=plastics_extrusion_corrugator;ExtruderEnabled", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=plastics_extrusion_corrugator;i=6002", browseName="ns=plastics_extrusion_corrugator;ExtruderEnabled", modellingRule="Mandatory", dataType=o6.Boolean
+        )
     )
     mouldId: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_corrugator;i=6001", browseName="ns=plastics_extrusion_corrugator;MouldId", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_corrugator;i=6001", browseName="ns=plastics_extrusion_corrugator;MouldId", modellingRule="Mandatory", dataType=o6.String
+        )
     )
 
 

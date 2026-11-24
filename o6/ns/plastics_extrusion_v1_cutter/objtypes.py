@@ -38,13 +38,19 @@ else:
 @o6.objecttype(nodeId="ns=plastics_extrusion_v1_cutter;i=1002", browseName="ns=plastics_extrusion_v1_cutter;CutEventType", displayName="CutEventType", isAbstract=True)
 class CutEventType(ns0.objtypes.BaseEventType):
     actualOutput: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_cutter;i=6002", browseName="ns=plastics_extrusion_v1_cutter;ActualOutput", dataType=o6.UInt64)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_v1_cutter;i=6002", browseName="ns=plastics_extrusion_v1_cutter;ActualOutput", modellingRule="Mandatory", dataType=o6.UInt64
+        )
     )
     cuttingProductId: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_cutter;i=6001", browseName="ns=plastics_extrusion_v1_cutter;CuttingProductId", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_v1_cutter;i=6001", browseName="ns=plastics_extrusion_v1_cutter;CuttingProductId", modellingRule="Mandatory", dataType=o6.String
+        )
     )
     totalOutput: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_cutter;i=6003", browseName="ns=plastics_extrusion_v1_cutter;TotalOutput", dataType=o6.UInt64)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_v1_cutter;i=6003", browseName="ns=plastics_extrusion_v1_cutter;TotalOutput", modellingRule="Mandatory", dataType=o6.UInt64
+        )
     )
 
 
@@ -54,6 +60,7 @@ class CuttingProductsType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=plastics_extrusion_v1_cutter;i=6029",
             browseName="ns=plastics_extrusion_v1_cutter;ActualCuttingProductId",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -65,27 +72,39 @@ class CuttingProductsType(ns0.objtypes.BaseObjectType):
 @o6.objecttype(nodeId="ns=plastics_extrusion_v1_cutter;i=1003", browseName="ns=plastics_extrusion_v1_cutter;CuttingProductType", displayName="CuttingProductType")
 class CuttingProductType(ns0.objtypes.BaseObjectType):
     actualOutput: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_extrusion_v1_cutter;i=6021", browseName="ns=plastics_extrusion_v1_cutter;ActualOutput", dataType=o6.UInt64)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=plastics_extrusion_v1_cutter;i=6021", browseName="ns=plastics_extrusion_v1_cutter;ActualOutput", modellingRule="Mandatory", dataType=o6.UInt64
+        )
     )
     id: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_cutter;i=6009", browseName="ns=plastics_extrusion_v1_cutter;Id", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_cutter;i=6009", browseName="ns=plastics_extrusion_v1_cutter;Id", modellingRule="Mandatory", dataType=o6.String)
     )
     length: ns0.vartypes.AnalogUnitType
     lengthCorrection: ns0.vartypes.AnalogUnitType | None
-    resetOutput: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_cutter;i=7001", browseName="ns=plastics_extrusion_v1_cutter;ResetOutput"))
+    resetOutput: o6.node.MethodNode | None = o6.hasComponent(
+        o6.call(nodeId="ns=plastics_extrusion_v1_cutter;i=7001", browseName="ns=plastics_extrusion_v1_cutter;ResetOutput", modellingRule="Optional")
+    )
     setOutput: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=plastics_extrusion_v1_cutter;i=6020", browseName="ns=plastics_extrusion_v1_cutter;SetOutput", dataType=o6.UInt64, accessLevel=3, userAccessLevel=1
+            nodeId="ns=plastics_extrusion_v1_cutter;i=6020",
+            browseName="ns=plastics_extrusion_v1_cutter;SetOutput",
+            modellingRule="Mandatory",
+            dataType=o6.UInt64,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     totalOutput: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_extrusion_v1_cutter;i=6022", browseName="ns=plastics_extrusion_v1_cutter;TotalOutput", dataType=o6.UInt64)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=plastics_extrusion_v1_cutter;i=6022", browseName="ns=plastics_extrusion_v1_cutter;TotalOutput", modellingRule="Mandatory", dataType=o6.UInt64
+        )
     )
     wallThickeningLength: ns0.vartypes.AnalogUnitType | None
     wallThickeningPosition: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_extrusion_v1_cutter;i=6019",
             browseName="ns=plastics_extrusion_v1_cutter;WallThickeningPosition",
+            modellingRule="Optional",
             dataType=plastics_extrusion_v1_cutter_datypes.WallThickeningEnumeration,
             accessLevel=3,
             userAccessLevel=1,
@@ -97,18 +116,29 @@ class CuttingProductType(ns0.objtypes.BaseObjectType):
 class Cutter_InterfaceType(plastics_extrusion_v1.objtypes.ExtrusionDeviceType):
     cuttingProducts: CuttingProductsType
     cuttingProgram: plastics_rubber.objtypes.StartDeviceType | None
-    manualCut: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_cutter;i=7002", browseName="ns=plastics_extrusion_v1_cutter;ManualCut"))
+    manualCut: o6.node.MethodNode | None = o6.hasComponent(
+        o6.call(nodeId="ns=plastics_extrusion_v1_cutter;i=7002", browseName="ns=plastics_extrusion_v1_cutter;ManualCut", modellingRule="Optional")
+    )
     productSpeed: plastics_rubber.objtypes.MonitoredParameterType | None
-    sampleCut: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_v1_cutter;i=7003", browseName="ns=plastics_extrusion_v1_cutter;SampleCut"))
+    sampleCut: o6.node.MethodNode | None = o6.hasComponent(
+        o6.call(nodeId="ns=plastics_extrusion_v1_cutter;i=7003", browseName="ns=plastics_extrusion_v1_cutter;SampleCut", modellingRule="Optional")
+    )
     sampleCuttingLength: ns0.vartypes.AnalogUnitType | None
     sideClampClosed: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_extrusion_v1_cutter;i=6039", browseName="ns=plastics_extrusion_v1_cutter;SideClampClosed", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=plastics_extrusion_v1_cutter;i=6039", browseName="ns=plastics_extrusion_v1_cutter;SideClampClosed", modellingRule="Optional", dataType=o6.Boolean
+        )
     )
     totalWasteLength: ns0.vartypes.AnalogUnitType | None
     wasteCuttingLength: ns0.vartypes.AnalogUnitType | None
     wasteIndicator: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=plastics_extrusion_v1_cutter;i=6044", browseName="ns=plastics_extrusion_v1_cutter;WasteIndicator", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            nodeId="ns=plastics_extrusion_v1_cutter;i=6044",
+            browseName="ns=plastics_extrusion_v1_cutter;WasteIndicator",
+            modellingRule="Optional",
+            dataType=o6.Boolean,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
 

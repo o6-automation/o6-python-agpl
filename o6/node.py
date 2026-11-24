@@ -20,6 +20,7 @@ from __future__ import annotations
 import asyncio
 from collections.abc import Iterator, Mapping
 from dataclasses import replace
+from functools import partial
 from typing import TYPE_CHECKING, Any, NoReturn, Optional, cast, overload
 
 import o6
@@ -252,7 +253,7 @@ class Node(_NativeNodeBase, HasNodeId):
             # nodes browse directly from their embedded native UA_Node.
             self._child_cache = None
             if isinstance(backend, _ClientBackend):
-                backend.nodes.add(self)
+                backend.add_node(self)
 
     def __str__(self) -> str:
         return str(self._nodeid)
@@ -371,7 +372,7 @@ class Node(_NativeNodeBase, HasNodeId):
             return await self._backend.node_read(self._nodeid, attr=attribute_id)
 
         try:
-            return self._backend.dispatch(call())
+            return self._backend.dispatch(call)
         except Exception as exc:
             raise _without_traceback(exc) from None
 
@@ -492,13 +493,8 @@ class Node(_NativeNodeBase, HasNodeId):
 
             return sorted({_child_python_name(child) for _, child in _child_items(children)})
 
-        # ``__dir__`` must return synchronously, so resolve the children coroutine to completion here.
-        # if server started post to a running loop and block, else drive the loop inline.
-        loop = self._backend.loop
-        if loop.is_running():
-            fut = asyncio.run_coroutine_threadsafe(_dir(), loop)
-            return fut.result()
-        return loop.run_until_complete(_dir())
+        # ``__dir__`` must return synchronously, so block until the children coroutine completes.
+        return self._backend.dispatch_wait(_dir)
 
     def __getattr__(self, name: str) -> Node | AwaitableNode:
         if name.startswith("_"):
@@ -507,7 +503,7 @@ class Node(_NativeNodeBase, HasNodeId):
             if self._is_native_attached():
                 r = self._backend.dispatch_native(lambda: self._resolve_child_native(name))
             else:
-                r = self._backend.dispatch(self._resolve_child(name))
+                r = self._backend.dispatch(partial(self._resolve_child, name))
         except Exception as exc:
             raise _without_traceback(exc) from None
         if isinstance(r, Node):
@@ -533,7 +529,7 @@ class Node(_NativeNodeBase, HasNodeId):
         """
         _check_attached(self)
         try:
-            return self._backend.dispatch(self._backend.node_resolve_path(self, key))
+            return self._backend.dispatch(partial(self._backend.node_resolve_path, self, key))
         except Exception as exc:
             raise _without_traceback(exc) from None
 
@@ -773,14 +769,11 @@ class MethodNode(Node):
                     "the Object for this Method call is unknown; pass object=<node or NodeId>"
                 )
         try:
+            arguments = [_normalize_nodeids(arg) for arg in args]
             if self._is_native_attached():
-                return self._backend.node_call_native(
-                    object, self._nodeid, [_normalize_nodeids(arg) for arg in args]
-                )
+                return self._backend.node_call_native(object, self._nodeid, arguments)
             return self._backend.dispatch(
-                self._backend.node_call(
-                    object, self._nodeid, [_normalize_nodeids(arg) for arg in args]
-                )
+                partial(self._backend.node_call, object, self._nodeid, arguments)
             )
         except Exception as exc:
             raise _without_traceback(exc) from None

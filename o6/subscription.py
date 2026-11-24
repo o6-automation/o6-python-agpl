@@ -266,7 +266,7 @@ class MonitoredItem:
             item._monitoring_params.samplingInterval = result.revisedSamplingInterval
             item._monitoring_params.queueSize = result.revisedQueueSize
 
-        item._pending_init = subscription._client._maybe_async(_create())
+        item._pending_init = subscription._client._run_on_loop(_create)
         return item
 
     @classmethod
@@ -339,7 +339,7 @@ class MonitoredItem:
             item._monitoring_params.samplingInterval = result.revisedSamplingInterval
             item._monitoring_params.queueSize = result.revisedQueueSize
 
-        item._pending_init = subscription._client._maybe_async(_create())
+        item._pending_init = subscription._client._run_on_loop(_create)
         return item
 
     def __await__(self) -> Generator[Any, None, MonitoredItem]:
@@ -419,8 +419,8 @@ class MonitoredItem:
             server = self._server_ref()
             if server is None:
                 raise RuntimeError("Server has been garbage-collected")
-            return server._maybe_async(_delete())
-        return self._subscription._client._maybe_async(_delete())
+            return server._run_on_loop(_delete)
+        return self._subscription._client._run_on_loop(_delete)
 
     def modify(
         self,
@@ -517,7 +517,7 @@ class MonitoredItem:
             params.queueSize = result.revisedQueueSize
             self._monitoring_params = copy.deepcopy(params)
 
-        return self._subscription._client._maybe_async(_modify())
+        return self._subscription._client._run_on_loop(_modify)
 
     def setMonitoringMode(self, mode: ns0.datatypes.MonitoringMode) -> MaybeAwaitable[None]:
         """Set whether this item samples and reports.
@@ -551,7 +551,7 @@ class MonitoredItem:
             result.check(message="Set monitoring mode result")
             self._monitoring_mode = mode
 
-        return self._subscription._client._maybe_async(_set_mode())
+        return self._subscription._client._run_on_loop(_set_mode)
 
     def setTriggering(
         self,
@@ -612,7 +612,7 @@ class MonitoredItem:
             for i, result in enumerate(response.removeResults):
                 result.check(message=f"Set triggering remove link [{i}]")
 
-        return self._subscription._client._maybe_async(_set_triggering())
+        return self._subscription._client._run_on_loop(_set_triggering)
 
     def _require_client_operation(self, operation: str) -> None:
         if self._server_ref is not None:
@@ -849,7 +849,7 @@ class Subscription:
             self._lifetime_count = response.revisedLifetimeCount
             self._max_keepalive_count = response.revisedMaxKeepAliveCount
 
-        self._pending_init = client._maybe_async(_create_subscription())
+        self._pending_init = client._run_on_loop(_create_subscription)
 
     def __await__(self) -> Generator[Any, None, Subscription]:
         """Wait for the server to create this subscription, then return it."""
@@ -916,7 +916,7 @@ class Subscription:
             self._monitored_items[monitored_item.id] = monitored_item
             return monitored_item
 
-        return self._client._maybe_async(_monitor_async())
+        return self._client._run_on_loop(_monitor_async)
 
     def _monitor_event(
         self,
@@ -948,7 +948,7 @@ class Subscription:
             self._monitored_items[monitored_item.id] = monitored_item
             return monitored_item
 
-        return self._client._maybe_async(_monitor_event_async())
+        return self._client._run_on_loop(_monitor_event_async)
 
     def delete(self) -> MaybeAwaitable[None]:
         """Delete this subscription and every item in it.
@@ -981,7 +981,7 @@ class Subscription:
             _check_single_result(response.results, "Subscription deletion")
             self._invalidate(subscription_id)
 
-        return self._client._maybe_async(_delete())
+        return self._client._run_on_loop(_delete)
 
     def _invalidate(self, subscription_id: int) -> None:
         self._subscription_id = None
@@ -1063,7 +1063,7 @@ class Subscription:
                 _check_single_result(spm_response.results, "Set publishing mode")
                 self._publishing_enabled = publishingEnabled
 
-        return self._client._maybe_async(_modify())
+        return self._client._run_on_loop(_modify)
 
     # Properties
 

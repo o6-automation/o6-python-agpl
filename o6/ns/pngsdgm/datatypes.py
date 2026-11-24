@@ -33,26 +33,26 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=pngsdgm;i=3002", browseName="GsdGenIoConsistencyEnumeration")
+@o6.enumtype(nodeId="ns=pngsdgm;i=3002", browseName="ns=pngsdgm;GsdGenIoConsistencyEnumeration")
 class GsdGenIoConsistencyEnumeration(ns0.datatypes.Enumeration):
     ITEM_CONSISTENCY = o6.enumfield(0, name="ITEM_CONSISTENCY")
     ALL_ITEMS_CONSISTENCY = o6.enumfield(1, name="ALL_ITEMS_CONSISTENCY")
 
 
-@o6.enumtype(nodeId="ns=pngsdgm;i=3003", browseName="GsdGenIoQualityFormatEnumeration")
+@o6.enumtype(nodeId="ns=pngsdgm;i=3003", browseName="ns=pngsdgm;GsdGenIoQualityFormatEnumeration")
 class GsdGenIoQualityFormatEnumeration(ns0.datatypes.Enumeration):
     QUALIFIER = o6.enumfield(0, name="QUALIFIER")
     EMBEDDED_STATUS = o6.enumfield(1, name="EMBEDDED_STATUS")
     STATUS = o6.enumfield(2, name="STATUS")
 
 
-@o6.enumtype(nodeId="ns=pngsdgm;i=3004", browseName="GsdGenChannelAccumulativeEnumeration")
+@o6.enumtype(nodeId="ns=pngsdgm;i=3004", browseName="ns=pngsdgm;GsdGenChannelAccumulativeEnumeration")
 class GsdGenChannelAccumulativeEnumeration(ns0.datatypes.Enumeration):
     SINGLE = o6.enumfield(0, name="SINGLE")
     ACCUMULATIVE = o6.enumfield(256, name="ACCUMULATIVE")
 
 
-@o6.enumtype(nodeId="ns=pngsdgm;i=3005", browseName="GsdGenChannelMaintenanceEnumeration")
+@o6.enumtype(nodeId="ns=pngsdgm;i=3005", browseName="ns=pngsdgm;GsdGenChannelMaintenanceEnumeration")
 class GsdGenChannelMaintenanceEnumeration(ns0.datatypes.Enumeration):
     FAULT = o6.enumfield(0, name="FAULT")
     MAINTENANCE_REQUIRED = o6.enumfield(512, name="MAINTENANCE_REQUIRED")
@@ -60,7 +60,7 @@ class GsdGenChannelMaintenanceEnumeration(ns0.datatypes.Enumeration):
     USE_QUALIFIED_CHANNEL_QUALIFIER = o6.enumfield(1536, name="USE_QUALIFIED_CHANNEL_QUALIFIER")
 
 
-@o6.enumtype(nodeId="ns=pngsdgm;i=3006", browseName="GsdGenChannelSpecifierEnumeration")
+@o6.enumtype(nodeId="ns=pngsdgm;i=3006", browseName="ns=pngsdgm;GsdGenChannelSpecifierEnumeration")
 class GsdGenChannelSpecifierEnumeration(ns0.datatypes.Enumeration):
     ALL_DISAPPEARS = o6.enumfield(0, name="ALL_DISAPPEARS")
     APPEARS = o6.enumfield(2048, name="APPEARS")
@@ -68,7 +68,7 @@ class GsdGenChannelSpecifierEnumeration(ns0.datatypes.Enumeration):
     DISAPPEARS_OTHER_REMAIN = o6.enumfield(6144, name="DISAPPEARS_OTHER_REMAIN")
 
 
-@o6.enumtype(nodeId="ns=pngsdgm;i=3007", browseName="GsdGenChannelDirectionEnumeration")
+@o6.enumtype(nodeId="ns=pngsdgm;i=3007", browseName="ns=pngsdgm;GsdGenChannelDirectionEnumeration")
 class GsdGenChannelDirectionEnumeration(ns0.datatypes.Enumeration):
     MANUFACTURER_SPECIFIC = o6.enumfield(0, name="MANUFACTURER_SPECIFIC")
     INPUT_CHANNEL = o6.enumfield(8192, name="INPUT_CHANNEL")
@@ -76,26 +76,26 @@ class GsdGenChannelDirectionEnumeration(ns0.datatypes.Enumeration):
     BIDIRECTIONAL_CHANNEL = o6.enumfield(24576, name="BIDIRECTIONAL_CHANNEL")
 
 
-@o6.datatype(nodeId="ns=pngsdgm;i=3008", browseName="GsdGenIoTimeStampDataType", defaultEncodingId="ns=pngsdgm;i=5001")
+@o6.datatype(nodeId="ns=pngsdgm;i=3008", browseName="ns=pngsdgm;GsdGenIoTimeStampDataType", defaultEncodingId="ns=pngsdgm;i=5001")
 class GsdGenIoTimeStampDataType(ns0.datatypes.Structure):
-    status: o6.UInt16
-    seconds: o6.UInt64
-    nanoseconds: o6.UInt32
+    status: o6.UInt16 = o6.field(name="Status")
+    seconds: o6.UInt64 = o6.field(name="Seconds")
+    nanoseconds: o6.UInt32 = o6.field(name="Nanoseconds")
 
 
-@o6.datatype(nodeId="ns=pngsdgm;i=3009", browseName="GsdGenIoTimeDataType", defaultEncodingId="ns=pngsdgm;i=5004")
+@o6.datatype(nodeId="ns=pngsdgm;i=3009", browseName="ns=pngsdgm;GsdGenIoTimeDataType", defaultEncodingId="ns=pngsdgm;i=5004")
 class GsdGenIoTimeDataType(ns0.datatypes.Structure):
-    numberOfMilliseconds: o6.UInt32
-    numberOfDays: o6.UInt16
+    numberOfMilliseconds: o6.UInt32 = o6.field(name="NumberOfMilliseconds")
+    numberOfDays: o6.UInt16 = o6.field(name="NumberOfDays")
 
 
-@o6.enumtype(nodeId="ns=pngsdgm;i=3012", browseName="GsdGenIoCommunicationStatusEnumeration")
+@o6.enumtype(nodeId="ns=pngsdgm;i=3012", browseName="ns=pngsdgm;GsdGenIoCommunicationStatusEnumeration")
 class GsdGenIoCommunicationStatusEnumeration(ns0.datatypes.Enumeration):
     INDATA = o6.enumfield(0, name="INDATA")
     OFFLINE = o6.enumfield(1, name="OFFLINE")
 
 
-@o6.enumtype(nodeId="ns=pngsdgm;i=3015", browseName="GsdGenIoConfigurationStatusEnumeration")
+@o6.enumtype(nodeId="ns=pngsdgm;i=3015", browseName="ns=pngsdgm;GsdGenIoConfigurationStatusEnumeration")
 class GsdGenIoConfigurationStatusEnumeration(ns0.datatypes.Enumeration):
     OK = o6.enumfield(0, name="OK")
     SUBSTITUTE = o6.enumfield(1, name="SUBSTITUTE")

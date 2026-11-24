@@ -31,7 +31,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=open_scs;i=3006", browseName="JobOrderCommandEnum", description="Describes the possible job order commands.")
+@o6.enumtype(nodeId="ns=open_scs;i=3006", browseName="ns=open_scs;JobOrderCommandEnum", description="Describes the possible job order commands.")
 class JobOrderCommandEnum(ns0.datatypes.Enumeration):
     UNDEFINED_0 = o6.enumfield(0, name="Undefined_0")
     STORE_1 = o6.enumfield(1, name="Store_1")
@@ -43,7 +43,7 @@ class JobOrderCommandEnum(ns0.datatypes.Enumeration):
     CLEAR_7 = o6.enumfield(7, name="Clear_7")
 
 
-@o6.enumtype(nodeId="ns=open_scs;i=3009", browseName="JobOrderStateEnum", description="Describes the possible serial number statesjob order states.")
+@o6.enumtype(nodeId="ns=open_scs;i=3009", browseName="ns=open_scs;JobOrderStateEnum", description="Describes the possible serial number statesjob order states.")
 class JobOrderStateEnum(ns0.datatypes.Enumeration):
     UNDEFINED_0 = o6.enumfield(0, name="Undefined_0")
     WAITING_1 = o6.enumfield(1, name="Waiting_1")
@@ -57,7 +57,7 @@ class JobOrderStateEnum(ns0.datatypes.Enumeration):
     CLOSED_9 = o6.enumfield(9, name="Closed_9")
 
 
-@o6.enumtype(nodeId="ns=open_scs;i=15001", browseName="OPENSCSReturnEnum")
+@o6.enumtype(nodeId="ns=open_scs;i=15001", browseName="ns=open_scs;OPENSCSReturnEnum")
 class OPENSCSReturnEnum(ns0.datatypes.Enumeration):
     UNDEFINED0 = o6.enumfield(0, name="Undefined0")
     NO_ERROR1 = o6.enumfield(1, name="NoError1")
@@ -73,52 +73,52 @@ class OPENSCSReturnEnum(ns0.datatypes.Enumeration):
     INSUFFICIENT_PRIVILEGE_TO_EXECUTE11 = o6.enumfield(11, name="InsufficientPrivilegeToExecute11")
 
 
-@o6.datatype(nodeId="ns=open_scs;i=15007", browseName="OPENSCSLabelPropertyDataType", defaultEncodingId="ns=open_scs;i=15190")
+@o6.datatype(nodeId="ns=open_scs;i=15007", browseName="ns=open_scs;OPENSCSLabelPropertyDataType", defaultEncodingId="ns=open_scs;i=15190")
 class OPENSCSLabelPropertyDataType(ns0.datatypes.Structure):
-    propertyID: o6.String
-    propertyDescription: o6.String
-    propertyValue: o6.String
+    propertyID: o6.String = o6.field(name="PropertyID")
+    propertyDescription: o6.String = o6.field(name="PropertyDescription")
+    propertyValue: o6.String = o6.field(name="PropertyValue")
 
 
-@o6.datatype(nodeId="ns=open_scs;i=15009", browseName="OPENSCSSIDClassPropertyDataType", defaultEncodingId="ns=open_scs;i=15192")
+@o6.datatype(nodeId="ns=open_scs;i=15009", browseName="ns=open_scs;OPENSCSSIDClassPropertyDataType", defaultEncodingId="ns=open_scs;i=15192")
 class OPENSCSSIDClassPropertyDataType(ns0.datatypes.Structure):
-    propertyID: o6.String
-    propertyDescription: o6.String
-    propertyValue: o6.String
-    labelProperty: list[OPENSCSLabelPropertyDataType] = o6.field(arrayDimensions=[0])
+    propertyID: o6.String = o6.field(name="PropertyID")
+    propertyDescription: o6.String = o6.field(name="PropertyDescription")
+    propertyValue: o6.String = o6.field(name="PropertyValue")
+    labelProperty: list[OPENSCSLabelPropertyDataType] = o6.field(name="LabelProperty", arrayDimensions=[0])
 
 
-@o6.datatype(nodeId="ns=open_scs;i=15010", browseName="OPENSCSKeyValueDataType", defaultEncodingId="ns=open_scs;i=15193")
+@o6.datatype(nodeId="ns=open_scs;i=15010", browseName="ns=open_scs;OPENSCSKeyValueDataType", defaultEncodingId="ns=open_scs;i=15193")
 class OPENSCSKeyValueDataType(ns0.datatypes.Structure):
-    key: o6.String
-    value: o6.String
+    key: o6.String = o6.field(name="Key")
+    value: o6.String = o6.field(name="Value")
 
 
 @o6.datatype(
     nodeId="ns=open_scs;i=3003",
-    browseName="OPENSCSLabelDataType",
+    browseName="ns=open_scs;OPENSCSLabelDataType",
     description="Defines a single serial number and label, which may be associated with an SID, and collection of properties in the form of OPENSCSKeyValueDataType.",
     defaultEncodingId="ns=open_scs;i=5005",
 )
 class OPENSCSLabelDataType(ns0.datatypes.Structure):
-    iD: o6.String
-    labelProperties: list[OPENSCSKeyValueDataType] = o6.field(arrayDimensions=[0])
+    iD: o6.String = o6.field(name="ID")
+    labelProperties: list[OPENSCSKeyValueDataType] = o6.field(name="LabelProperties", arrayDimensions=[0])
 
 
 @o6.datatype(
     nodeId="ns=open_scs;i=3005",
-    browseName="OPENSCSEventStreamArgumentDataType",
+    browseName="ns=open_scs;OPENSCSEventStreamArgumentDataType",
     description="Defines the generateOptions argument for an EPCISStream GenerateFileForWrite method. It defines the serial number format information for object events and for aggregation events, and event context information.",
     defaultEncodingId="ns=open_scs;i=5008",
 )
 class OPENSCSEventStreamArgumentDataType(ns0.datatypes.Structure):
-    sNFormat: o6.String
-    parentSNFormat: o6.String
-    packedElementSNFormat: o6.String
-    eventContext: list[OPENSCSKeyValueDataType] = o6.field(arrayDimensions=[0])
+    sNFormat: o6.String = o6.field(name="SNFormat")
+    parentSNFormat: o6.String = o6.field(name="ParentSNFormat")
+    packedElementSNFormat: o6.String = o6.field(name="PackedElementSNFormat")
+    eventContext: list[OPENSCSKeyValueDataType] = o6.field(name="EventContext", arrayDimensions=[0])
 
 
-@o6.enumtype(nodeId="ns=open_scs;i=15143", browseName="OPENSCSSerialNumberStateEnum")
+@o6.enumtype(nodeId="ns=open_scs;i=15143", browseName="ns=open_scs;OPENSCSSerialNumberStateEnum")
 class OPENSCSSerialNumberStateEnum(ns0.datatypes.Enumeration):
     UNASSIGNED0 = o6.enumfield(0, name="Unassigned0")
     UNALLOCATED1 = o6.enumfield(1, name="Unallocated1")
@@ -134,38 +134,38 @@ class OPENSCSSerialNumberStateEnum(ns0.datatypes.Enumeration):
     RELEASED11 = o6.enumfield(11, name="Released11")
 
 
-@o6.datatype(nodeId="ns=open_scs;i=15005", browseName="OPENSCSCollectionDataType", defaultEncodingId="ns=open_scs;i=15188", isAbstract=True)
+@o6.datatype(nodeId="ns=open_scs;i=15005", browseName="ns=open_scs;OPENSCSCollectionDataType", defaultEncodingId="ns=open_scs;i=15188", isAbstract=True)
 class OPENSCSCollectionDataType(ns0.datatypes.Structure):
-    iD: o6.String
-    description: o6.String
-    state: OPENSCSSerialNumberStateEnum
-    associatedPoolID: o6.String
-    serialNumbers: list[o6.String] = o6.field(arrayDimensions=[0])
+    iD: o6.String = o6.field(name="ID")
+    description: o6.String = o6.field(name="Description")
+    state: OPENSCSSerialNumberStateEnum = o6.field(name="State")
+    associatedPoolID: o6.String = o6.field(name="AssociatedPoolID")
+    serialNumbers: list[o6.String] = o6.field(name="SerialNumbers", arrayDimensions=[0])
 
 
-@o6.datatype(nodeId="ns=open_scs;i=15006", browseName="OPENSCSLabelCollectionDataType", defaultEncodingId="ns=open_scs;i=15189")
+@o6.datatype(nodeId="ns=open_scs;i=15006", browseName="ns=open_scs;OPENSCSLabelCollectionDataType", defaultEncodingId="ns=open_scs;i=15189")
 class OPENSCSLabelCollectionDataType(OPENSCSCollectionDataType):
-    iD: o6.String
-    description: o6.String
-    state: OPENSCSSerialNumberStateEnum
-    associatedPoolID: o6.String
-    serialNumbers: list[o6.String] = o6.field(arrayDimensions=[0])
-    labelCollection: list[OPENSCSLabelDataType] = o6.field(arrayDimensions=[0])
-    labelCollectionProperties: list[OPENSCSKeyValueDataType] | None = o6.field(arrayDimensions=[0])
+    iD: o6.String = o6.field(name="ID")
+    description: o6.String = o6.field(name="Description")
+    state: OPENSCSSerialNumberStateEnum = o6.field(name="State")
+    associatedPoolID: o6.String = o6.field(name="AssociatedPoolID")
+    serialNumbers: list[o6.String] = o6.field(name="SerialNumbers", arrayDimensions=[0])
+    labelCollection: list[OPENSCSLabelDataType] = o6.field(name="LabelCollection", arrayDimensions=[0])
+    labelCollectionProperties: list[OPENSCSKeyValueDataType] | None = o6.field(name="LabelCollectionProperties", arrayDimensions=[0])
 
 
 @o6.datatype(
     nodeId="ns=open_scs;i=3002",
-    browseName="OPENSCSAggregationDataType",
+    browseName="ns=open_scs;OPENSCSAggregationDataType",
     description="Iidentifies a parent element and a collection of packed elements. This is used in the aggregation packing and unpacking methods.",
     defaultEncodingId="ns=open_scs;i=5002",
 )
 class OPENSCSAggregationDataType(ns0.datatypes.Structure):
-    parentElement: OPENSCSLabelDataType
-    parentElementCollection: OPENSCSLabelCollectionDataType
+    parentElement: OPENSCSLabelDataType = o6.field(name="ParentElement")
+    parentElementCollection: OPENSCSLabelCollectionDataType = o6.field(name="ParentElementCollection")
 
 
-@o6.datatype(nodeId="ns=open_scs;i=15008", browseName="OPENSCSSNCollectionDataType", defaultEncodingId="ns=open_scs;i=15191", parent="ns=open_scs;i=15005")
+@o6.datatype(nodeId="ns=open_scs;i=15008", browseName="ns=open_scs;OPENSCSSNCollectionDataType", defaultEncodingId="ns=open_scs;i=15191", parent="ns=open_scs;i=15005")
 class OPENSCSSNCollectionDataType:
     pass
 

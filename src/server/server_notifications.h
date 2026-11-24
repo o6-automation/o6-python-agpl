@@ -27,12 +27,4 @@
 PyObject *
 server_notifications_set_global_trampoline(PyServer *self, int enabled);
 
-/* Expose the raw UA_APPLICATIONNOTIFICATIONTYPE_LIFECYCLE_* values on *mod*
- * as private (leading-underscore) int constants, so a test can cross-check
- * o6.server.NotificationType's Python-side literals against the values the
- * compiled open62541 actually uses. Returns -1 with a Python exception set
- * on failure, 0 on success. */
-int
-server_notifications_add_constants(PyObject *mod);
-
 #endif /* PYO6_SERVER_NOTIFICATIONS_H_ */

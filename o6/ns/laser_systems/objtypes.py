@@ -60,7 +60,7 @@ class LaserSystemStatusType(ns0.objtypes.BaseObjectType):
     operationCounters: LaserSystemOperationCounterType
 
 
-ns0.objtypes.FolderType(nodeId="ns=laser_systems;i=5103", browseName="ns=machinery;MachineryBuildingBlocks")
+ns0.objtypes.FolderType(nodeId="ns=laser_systems;i=5103", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
 
 
 @o6.objecttype(nodeId="ns=laser_systems;i=1005", browseName="ns=laser_systems;LaserSystemType", displayName="LaserSystemType")
@@ -69,19 +69,25 @@ class LaserSystemType(ns0.objtypes.BaseObjectType):
     machineryBuildingBlocks: ns0.objtypes.FolderType = o6.hasComponent(o6.ns["ns=laser_systems;i=5103"])
     monitoring: LaserSystemMonitoringType
     notification: machine_tool.objtypes.NotificationType = o6.hasComponent(
-        machine_tool.objtypes.NotificationType(nodeId="ns=laser_systems;i=5011", browseName="ns=machine_tool;Notification")
+        machine_tool.objtypes.NotificationType(nodeId="ns=laser_systems;i=5011", browseName="ns=machine_tool;Notification", modellingRule="Mandatory")
     )
-    production: LaserSystemProductionType = o6.hasComponent(LaserSystemProductionType(nodeId="ns=laser_systems;i=5012", browseName="ns=laser_systems;Production"))
+    production: LaserSystemProductionType = o6.hasComponent(
+        LaserSystemProductionType(nodeId="ns=laser_systems;i=5012", browseName="ns=laser_systems;Production", modellingRule="Mandatory")
+    )
 
 
 @o6.objecttype(nodeId="ns=laser_systems;i=1004", browseName="ns=laser_systems;ConsumptionDataMonitoringType", displayName="ConsumptionDataMonitoringType")
 class ConsumptionDataMonitoringType(machine_tool.objtypes.ElementMonitoringType):
     consumableIdentifier: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6001", browseName="ns=laser_systems;ConsumableIdentifier", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6001", browseName="ns=laser_systems;ConsumableIdentifier", modellingRule="Mandatory", dataType=o6.String)
     )
     description: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=laser_systems;i=6002", browseName="ns=laser_systems;Description", dataType=o6.LocalizedText, value=o6.LocalizedText("Description of consumption data", "en")
+            nodeId="ns=laser_systems;i=6002",
+            browseName="ns=laser_systems;Description",
+            modellingRule="Optional",
+            dataType=o6.LocalizedText,
+            value=o6.LocalizedText("Description of consumption data", "en"),
         )
     )
     value: ns0.vartypes.AnalogUnitType
@@ -106,10 +112,10 @@ class LaserSystemOperationCounterType(machinery.objtypes.MachineryOperationCount
         )
     )
     operationDuration: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6042", browseName="ns=di;OperationDuration", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6042", browseName="ns=di;OperationDuration", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
     )
     powerOnDuration: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6041", browseName="ns=di;PowerOnDuration", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6041", browseName="ns=di;PowerOnDuration", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
     )
 
 
@@ -123,12 +129,18 @@ class ActivityDataMonitoringType(machine_tool.objtypes.ElementMonitoringType):
     currentValue: ns0.vartypes.AnalogUnitType
     description: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=laser_systems;i=6062", browseName="ns=laser_systems;Description", dataType=o6.LocalizedText, value=o6.LocalizedText("Description of activity data", "en")
+            nodeId="ns=laser_systems;i=6062",
+            browseName="ns=laser_systems;Description",
+            modellingRule="Optional",
+            dataType=o6.LocalizedText,
+            value=o6.LocalizedText("Description of activity data", "en"),
         )
     )
-    numberInList: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6024", browseName="NumberInList", dataType=o6.UInt16))
+    numberInList: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6024", browseName="NumberInList", modellingRule="Mandatory", dataType=o6.UInt16)
+    )
     parameterIdentifier: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6009", browseName="ns=laser_systems;ParameterIdentifier", dataType=o6.String, value="ID987")
+        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6009", browseName="ns=laser_systems;ParameterIdentifier", modellingRule="Mandatory", dataType=o6.String, value="ID987")
     )
     previousValue: ns0.vartypes.AnalogUnitType | None
 
@@ -136,12 +148,15 @@ class ActivityDataMonitoringType(machine_tool.objtypes.ElementMonitoringType):
 @o6.objecttype(nodeId="ns=laser_systems;i=1006", browseName="ns=laser_systems;ConditionDataMonitoringType", displayName="ConditionDataMonitoringType")
 class ConditionDataMonitoringType(machine_tool.objtypes.ElementMonitoringType):
     conditionParameterIdentifier: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6005", browseName="ns=laser_systems;ConditionParameterIdentifier", dataType=o6.String, value="ID123")
+        ns0.vartypes.PropertyType(
+            nodeId="ns=laser_systems;i=6005", browseName="ns=laser_systems;ConditionParameterIdentifier", modellingRule="Mandatory", dataType=o6.String, value="ID123"
+        )
     )
     description: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=laser_systems;i=6070",
             browseName="ns=laser_systems;Description",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
             value=o6.LocalizedText("Description of Condition Parameter", "en"),
         )
@@ -156,44 +171,48 @@ class ConditionDataMonitoringType(machine_tool.objtypes.ElementMonitoringType):
 @o6.objecttype(nodeId="ns=laser_systems;i=1007", browseName="ns=laser_systems;RecipeSettingsAndOverviewType", displayName="RecipeSettingsAndOverviewType")
 class RecipeSettingsAndOverviewType(ns0.objtypes.BaseObjectType):
     creationDate: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6074", browseName="ns=laser_systems;CreationDate", dataType=ns0.datatypes.UtcTime)
+        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6074", browseName="ns=laser_systems;CreationDate", modellingRule="Optional", dataType=ns0.datatypes.UtcTime)
     )
     description: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=laser_systems;i=6075", browseName="ns=laser_systems;Description", dataType=o6.LocalizedText)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=laser_systems;i=6075", browseName="ns=laser_systems;Description", modellingRule="Optional", dataType=o6.LocalizedText)
     )
     lastModification: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6073", browseName="ns=laser_systems;LastModification", dataType=ns0.datatypes.UtcTime)
+        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6073", browseName="ns=laser_systems;LastModification", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)
     )
     lastUsage: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6014", browseName="ns=laser_systems;LastUsage", dataType=ns0.datatypes.UtcTime)
+        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6014", browseName="ns=laser_systems;LastUsage", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)
     )
     recipeIdentifier: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6072", browseName="ns=laser_systems;RecipeIdentifier", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6072", browseName="ns=laser_systems;RecipeIdentifier", modellingRule="Mandatory", dataType=o6.String)
     )
     recipeName: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6071", browseName="ns=laser_systems;RecipeName", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6071", browseName="ns=laser_systems;RecipeName", modellingRule="Optional", dataType=o6.String)
     )
     recipeRevision: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6016", browseName="ns=laser_systems;RecipeRevision", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6016", browseName="ns=laser_systems;RecipeRevision", modellingRule="Optional", dataType=o6.String)
     )
     runsCompleted: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=laser_systems;i=6015", browseName="ns=laser_systems;RunsCompleted", dataType=o6.UInt64)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=laser_systems;i=6015", browseName="ns=laser_systems;RunsCompleted", modellingRule="Mandatory", dataType=o6.UInt64)
     )
 
 
 @o6.objecttype(nodeId="ns=laser_systems;i=1013", browseName="ns=laser_systems;LaserSystemMaintenancePrognosisType", displayName="LaserSystemMaintenancePrognosisType")
 class LaserSystemMaintenancePrognosisType(machine_tool.objtypes.MaintenancePrognosisType):
-    code: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6077", browseName="ns=laser_systems;Code", dataType=o6.String))
+    code: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6077", browseName="ns=laser_systems;Code", modellingRule="Optional", dataType=o6.String)
+    )
     description: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=laser_systems;i=6076", browseName="ns=laser_systems;Description", dataType=o6.LocalizedText)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=laser_systems;i=6076", browseName="ns=laser_systems;Description", modellingRule="Mandatory", dataType=o6.LocalizedText)
     )
 
 
 @o6.objecttype(nodeId="ns=laser_systems;i=1014", browseName="ns=laser_systems;LaserSystemUtilityChangePrognosisType", displayName="LaserSystemUtilityChangePrognosisType")
 class LaserSystemUtilityChangePrognosisType(machine_tool.objtypes.UtilityChangePrognosisType):
-    code: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6079", browseName="ns=laser_systems;Code", dataType=o6.String))
+    code: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=laser_systems;i=6079", browseName="ns=laser_systems;Code", modellingRule="Optional", dataType=o6.String)
+    )
     description: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=laser_systems;i=6078", browseName="ns=laser_systems;Description", dataType=o6.LocalizedText)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=laser_systems;i=6078", browseName="ns=laser_systems;Description", modellingRule="Mandatory", dataType=o6.LocalizedText)
     )
 
 

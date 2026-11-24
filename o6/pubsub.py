@@ -131,7 +131,9 @@ def setStateMachine(
     if callback is not None and not callable(callback):
         raise TypeError("state machine must be callable or None")
     server = _server(component)
-    server._on_event_loop(lambda: component._set_pubsub_state_machine(callback))
+    server._run_on_loop(
+        lambda: component._set_pubsub_state_machine(callback), sync_result=True, wait=True
+    )
 
 
 def offsetTable(component: ObjectNode) -> OffsetTable:
@@ -152,7 +154,9 @@ def offsetTable(component: ObjectNode) -> OffsetTable:
 
     _requireEnabled()
     server = _server(component)
-    message, native_offsets = server._on_event_loop(component._pubsub_offset_table)
+    message, native_offsets = server._run_on_loop(
+        component._pubsub_offset_table, sync_result=True, wait=True
+    )
     offsets = tuple(
         Offset(OffsetType(type_value), byte_offset, component_id)
         for type_value, byte_offset, component_id in native_offsets
@@ -170,7 +174,7 @@ def _configuration(component: ObjectNode) -> dict[str, object]:
 
     _requireEnabled()
     server = _server(component)
-    return server._on_event_loop(component._pubsub_configuration)
+    return server._run_on_loop(component._pubsub_configuration, sync_result=True, wait=True)
 
 
 def _fieldSource(component: ObjectNode, field: o6.NodeId) -> o6.NodeId:
@@ -178,7 +182,9 @@ def _fieldSource(component: ObjectNode, field: o6.NodeId) -> o6.NodeId:
 
     _requireEnabled()
     server = _server(component)
-    return server._on_event_loop(lambda: component._pubsub_field_source(field))
+    return server._run_on_loop(
+        lambda: component._pubsub_field_source(field), sync_result=True, wait=True
+    )
 
 
 def publish(writerGroup: ObjectNode) -> None:
@@ -195,7 +201,7 @@ def publish(writerGroup: ObjectNode) -> None:
 
     _requireEnabled()
     server = _server(writerGroup)
-    server._on_event_loop(writerGroup._pubsub_publish)
+    server._run_on_loop(writerGroup._pubsub_publish, sync_result=True, wait=True)
 
 
 __all__ = [

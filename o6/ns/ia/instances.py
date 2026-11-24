@@ -122,7 +122,7 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=ia;LevelPercent",
     description="Shows the percentual value the stacklight is representing. The mandatory EURange Property of the Variable indicates the lowest and highest value and thereby allows to calculate the percentage represented by the value. The lowest value is interpreted as 0 percent, the highest is interpreted as 100 percent.",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6011", browseName="EURange", dataType=ns0.datatypes.Range))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6011", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range))],
     dataType=o6.Float,
     accessLevel=3,
     userAccessLevel=1,
@@ -133,7 +133,7 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=ia;Intensity",
     description="Intensity of the lamp, thus its brightness. The mandatory EURange Property of the Variable indicates the lowest and highest value and thereby allows to calculate the percentage represented by the value. The lowest value is interpreted as 0 percent, the highest is interpreted as 100 percent.",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6019", browseName="EURange", dataType=ns0.datatypes.Range))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6019", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range))],
     dataType=o6.Float,
     accessLevel=3,
     userAccessLevel=1,
@@ -144,7 +144,7 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=ia;Intensity",
     description="Indicates the sound pressure level of the acoustic signal when switched on. This value shall only have positive values. The mandatory EURange Property of the Variable indicates the lowest and highest value and thereby allows to calculate the percentage represented by the value. The lowest value is interpreted as 0 percent, the highest is interpreted as 100 percent.",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6022", browseName="EURange", dataType=ns0.datatypes.Range))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6022", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range))],
     dataType=o6.Float,
     accessLevel=3,
     userAccessLevel=1,
@@ -155,7 +155,7 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=ia;Intensity",
     description="Shows the channel’s intensity, thus its brightness. The mandatory EURange Property of the Variable indicates the lowest and highest value and thereby allows to calculate the percentage represented by the value. The lowest value is interpreted as 0 percent, the highest is interpreted as 100 percent.",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6027", browseName="EURange", dataType=ns0.datatypes.Range))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6027", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range))],
     dataType=o6.Float,
     accessLevel=3,
     userAccessLevel=1,
@@ -172,6 +172,7 @@ ia_objtypes.AcousticSignalType(
                 nodeId="ns=ia;i=6030",
                 browseName="NumberInList",
                 description="Enumerate the acoustic signals. Instances of StackElementAcousticType index into this number using the OperationMode Property.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.UInteger,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -195,7 +196,13 @@ ia_objtypes.ControlChannelType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=ia;i=6033", browseName="ns=ia;SignalOn", description="Indicates if the colour is switched on.", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+                nodeId="ns=ia;i=6033",
+                browseName="ns=ia;SignalOn",
+                description="Indicates if the colour is switched on.",
+                modellingRule="Mandatory",
+                dataType=o6.Boolean,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(
@@ -203,6 +210,7 @@ ia_objtypes.ControlChannelType(
                 nodeId="ns=ia;i=6031",
                 browseName="ns=ia;ChannelColor",
                 description="Indicates in what mode (continuously on, blinking, flashing) the channel operates when switched on.",
+                modellingRule="Mandatory",
                 dataType=ia_datypes.SignalColor,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -213,6 +221,7 @@ ia_objtypes.ControlChannelType(
                 nodeId="ns=ia;i=6032",
                 browseName="ns=ia;SignalMode",
                 description="Contains a list of audio signals used by this acoustic stacklight element.",
+                modellingRule="Mandatory",
                 dataType=ia_datypes.SignalModeLight,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -225,7 +234,8 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=ia;i=6035",
     browseName="ns=ia;LevelPercent",
     description="Shows the percentual value the stacklight is representing. The mandatory EURange Property of the Variable indicates the lowest and highest value and thereby allows to calculate the percentage represented by the value. The lowest value is interpreted as 0 percent, the highest is interpreted as 100 percent.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6036", browseName="EURange", dataType=ns0.datatypes.Range))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6036", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range))],
     dataType=o6.Float,
     accessLevel=3,
     userAccessLevel=1,
@@ -241,6 +251,7 @@ ia_objtypes.StackLevelType(
                 nodeId="ns=ia;i=6034",
                 browseName="ns=ia;DisplayMode",
                 description="Indicates in what way the percentual value is displayed with the stacklight.",
+                modellingRule="Mandatory",
                 dataType=ia_datypes.LevelDisplayMode,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -261,6 +272,7 @@ ia_objtypes.StackElementType(
                 nodeId="ns=ia;i=6037",
                 browseName="NumberInList",
                 description="Enumerate the stacklight elements counting upwards beginning from the base of the stacklight.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.UInteger,
             )
         )
@@ -278,7 +290,7 @@ http_opcfoundation_org_UA_IA_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6042", browseName="NamespaceVersion", dataType=o6.String, value="1.01.4")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=ia;i=6043", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=ia;i=6043", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
@@ -343,7 +355,11 @@ ia_vartypes.CalibrationValueType(
     description="A calibration value indicates the value the calibration target provides for calibration and includes its quantity and engineering unit.",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6065", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1))
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=ia;i=6065", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1
+            )
+        )
     ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
@@ -355,8 +371,14 @@ ia_vartypes.CapacityRangeType(
     description="A capacity range indicates a range (low and high value) as well as a resolution, and thus defines a number of values the calibration target provides for calibration and includes the quantity and engineering unit.",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6067", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6068", browseName="ns=ia;Resolution", dataType=o6.Double, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=ia;i=6067", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=ia;i=6068", browseName="ns=ia;Resolution", modellingRule="Mandatory", dataType=o6.Double, accessLevel=3, userAccessLevel=1)
+        ),
     ],
     dataType=ns0.datatypes.Range,
     accessLevel=3,
@@ -376,20 +398,50 @@ di.objtypes.FunctionalGroupType(
     description="Provides identification information.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6069", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6070", browseName="ns=di;ManufacturerUri", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6071", browseName="ns=di;Model", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6072", browseName="ns=di;ProductCode", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6073", browseName="ns=di;HardwareRevision", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6074", browseName="ns=di;SoftwareRevision", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6075", browseName="ns=di;DeviceRevision", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6076", browseName="ns=di;DeviceClass", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6077", browseName="ns=di;SerialNumber", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6078", browseName="ns=di;ProductInstanceUri", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6079", browseName="ns=di;RevisionCounter", dataType=o6.Int32, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6080", browseName="ns=di;AssetId", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6081", browseName="ns=di;ComponentName", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ia;i=6082", browseName="ns=di;DeviceManual", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=ia;i=6069", browseName="ns=di;Manufacturer", modellingRule="Optional", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=ia;i=6070", browseName="ns=di;ManufacturerUri", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=ia;i=6071", browseName="ns=di;Model", modellingRule="Optional", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=ia;i=6072", browseName="ns=di;ProductCode", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=ia;i=6073", browseName="ns=di;HardwareRevision", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=ia;i=6074", browseName="ns=di;SoftwareRevision", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=ia;i=6075", browseName="ns=di;DeviceRevision", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=ia;i=6076", browseName="ns=di;DeviceClass", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=ia;i=6077", browseName="ns=di;SerialNumber", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=ia;i=6078", browseName="ns=di;ProductInstanceUri", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=ia;i=6079", browseName="ns=di;RevisionCounter", modellingRule="Optional", dataType=o6.Int32, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=ia;i=6080", browseName="ns=di;AssetId", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=ia;i=6081", browseName="ns=di;ComponentName", modellingRule="Optional", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=ia;i=6082", browseName="ns=di;DeviceManual", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
     ],
 )
 o6.reference(ia_objtypes.CalibrationTargetType, ns0.reftypes.HasComponent, o6.ns["ns=ia;i=5010"])

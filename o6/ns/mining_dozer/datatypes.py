@@ -35,7 +35,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=mining_dozer;i=3002", browseName="DozerJobMissionEnum")
+@o6.enumtype(nodeId="ns=mining_dozer;i=3002", browseName="ns=mining_dozer;DozerJobMissionEnum")
 class DozerJobMissionEnum(ns0.datatypes.Enumeration):
     CLEANUP_OPERATIONS = o6.enumfield(0, name="CleanupOperations")
     RIPPING_OPERATIONS = o6.enumfield(1, name="RippingOperations")

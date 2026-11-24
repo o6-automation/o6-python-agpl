@@ -53,7 +53,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="AssetId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=wot;i=26", browseName="ns=wot;CreateAsset", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=27"]), outputArgs=o6.hasProperty(o6.ns["ns=wot;i=28"]))
+o6.call(
+    nodeId="ns=wot;i=26",
+    browseName="ns=wot;CreateAsset",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=wot;i=27"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=wot;i=28"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wot;i=30",
@@ -66,7 +72,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="AssetId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=wot;i=29", browseName="ns=wot;DeleteAsset", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=30"]))
+o6.call(nodeId="ns=wot;i=29", browseName="ns=wot;DeleteAsset", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=30"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wot;i=48",
@@ -79,7 +85,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="AssetEndpoints", dataType=o6.NodeId("i=12"), valueRank=1, arrayDimensions=[0])],
 )
-o6.call(nodeId="ns=wot;i=41", browseName="ns=wot;DiscoverAssets", outputArgs=o6.hasProperty(o6.ns["ns=wot;i=48"]))
+o6.call(nodeId="ns=wot;i=41", browseName="ns=wot;DiscoverAssets", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=wot;i=48"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wot;i=50",
@@ -106,7 +112,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="AssetId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=wot;i=49", browseName="ns=wot;CreateAssetForEndpoint", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=50"]), outputArgs=o6.hasProperty(o6.ns["ns=wot;i=170"]))
+o6.call(
+    nodeId="ns=wot;i=49",
+    browseName="ns=wot;CreateAssetForEndpoint",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=wot;i=50"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=wot;i=170"]),
+)
 
 ns0.vartypes.BaseDataVariableType(nodeId="ns=wot;i=66", browseName="ns=wot;<WoTPropertyName>", modellingRule="OptionalPlaceholder")
 
@@ -136,12 +148,20 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="ns=wot;i=75", browseName="ns=wot;ConnectionTest", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=76"]), outputArgs=o6.hasProperty(o6.ns["ns=wot;i=77"]))
+o6.call(
+    nodeId="ns=wot;i=75",
+    browseName="ns=wot;ConnectionTest",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=wot;i=76"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=wot;i=77"]),
+)
 
 
 @o6.objecttype(nodeId="ns=wot;i=105", browseName="ns=wot;WoTAssetConfigurationType", displayName="WoTAssetConfigurationType")
 class WoTAssetConfigurationType(ns0.objtypes.BaseInterfaceType):
-    license: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=109", browseName="ns=wot;License", dataType=o6.String))
+    license: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=wot;i=109", browseName="ns=wot;License", modellingRule="Optional", dataType=o6.String)
+    )
     woTConfigurationParameterName_: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=wot;i=108", browseName="ns=wot;<WoTConfigurationParameterName>", modellingRule="OptionalPlaceholder")
     )
@@ -149,14 +169,16 @@ class WoTAssetConfigurationType(ns0.objtypes.BaseInterfaceType):
 
 @o6.objecttype(nodeId="ns=wot;i=1", browseName="ns=wot;WoTAssetConnectionManagementType", displayName="WoTAssetConnectionManagementType")
 class WoTAssetConnectionManagementType(ns0.objtypes.BaseObjectType):
-    configuration: WoTAssetConfigurationType | None = o6.hasComponent(WoTAssetConfigurationType(nodeId="ns=wot;i=78", browseName="ns=wot;Configuration"))
+    configuration: WoTAssetConfigurationType | None = o6.hasComponent(WoTAssetConfigurationType(nodeId="ns=wot;i=78", browseName="ns=wot;Configuration", modellingRule="Optional"))
     connectionTest: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=wot;i=75"])
     createAsset: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=wot;i=26"])
     createAssetForEndpoint: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=wot;i=49"])
     deleteAsset: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=wot;i=29"])
     discoverAssets: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=wot;i=41"])
     supportedWoTBindings: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=wot;i=40", browseName="ns=wot;SupportedWoTBindings", dataType=ns0.datatypes.UriString, valueRank=1, arrayDimensions=[0])
+        ns0.vartypes.PropertyType(
+            nodeId="ns=wot;i=40", browseName="ns=wot;SupportedWoTBindings", modellingRule="Optional", dataType=ns0.datatypes.UriString, valueRank=1, arrayDimensions=[0]
+        )
     )
     woTAssetName_: ns0.objtypes.BaseObjectType | None
 
@@ -172,7 +194,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=wot;i=111", browseName="ns=wot;CloseAndUpdate", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=112"]))
+o6.call(nodeId="ns=wot;i=111", browseName="ns=wot;CloseAndUpdate", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=112"]))
 
 
 @o6.objecttype(nodeId="ns=wot;i=110", browseName="ns=wot;WoTAssetFileType", displayName="WoTAssetFileType")
@@ -182,7 +204,9 @@ class WoTAssetFileType(ns0.objtypes.FileType):
 
 @o6.objecttype(nodeId="ns=wot;i=42", browseName="ns=wot;IWoTAssetType", displayName="IWoTAssetType", isAbstract=True)
 class IWoTAssetType(ns0.objtypes.BaseInterfaceType):
-    assetEndpoint: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=122", browseName="ns=wot;AssetEndpoint", dataType=o6.String))
+    assetEndpoint: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=wot;i=122", browseName="ns=wot;AssetEndpoint", modellingRule="Optional", dataType=o6.String)
+    )
     woTFile: WoTAssetFileType
     woTPropertyName_: ns0.vartypes.BaseDataVariableType | None = o6.reference(o6.ns["ns=wot;i=66"], "ns=wot;i=142")
 

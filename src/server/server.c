@@ -35,9 +35,19 @@
 
 static void pyServer_do_cleanup(PyServer *self);
 
+static void
+pyHistoryNodeDeleted(UA_Server *server, const UA_NodeId *sessionId,
+                     void *sessionContext, const UA_NodeId *nodeId, void *nodeContext) {
+    PyServer *owner = (PyServer *)UA_Server_getConfig(server)->context;
+    if(owner && owner->history.customBackend &&
+       pyHistory_registered(&owner->history, server, nodeId))
+        pyHistory_unregister(&owner->history, server, nodeId);
+}
+
 static UA_GlobalNodeLifecycle pyGlobalNodeLifecycle = {
     .earlyConstructor = pyGlobalNodeEarlyConstructor,
     .constructor = pyGlobalNodeConstructor,
+    .destructor = pyHistoryNodeDeleted,
 };
 
 static int
@@ -374,12 +384,14 @@ pyServer_clear(PyServer *self) {
  * so tp_dealloc just calls tp_free. */
 static PyObject *
 pyServer_cleanup(PyServer *self, PyObject *Py_UNUSED(ignored)) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop(self), NULL);
     pyServer_do_cleanup(self);
     Py_RETURN_NONE;
 }
 
 static PyObject *
 pyServer_set_notification_trampoline(PyServer *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop(self), NULL);
     int enabled;
     if (!PyArg_ParseTuple(args, "p", &enabled))
         return NULL;
@@ -400,8 +412,25 @@ pyServer_repr(PyServer *self) {
 /* PushManagement     */
 /**********************/
 
+/* Lock-free part of the lifecycle check below, ahead of the loop-thread guard,
+ * so that enabling on a live server reports BadInvalidState from any thread.
+ * Builds without PushManagement report NotImplementedError first. */
+static bool
+pushManagementConfigurable(const PyServer *self) {
+#if defined(__APPLE__) || !defined(UA_ENABLE_DRIVER_GDS_RECEIVER)
+    (void)self;
+    return true;
+#else
+    if(!self->configLocked && !self->running)
+        return true;
+    PyErr_StatusCode(UA_STATUSCODE_BADINVALIDSTATE);
+    return false;
+#endif
+}
+
 static PyObject *
 pyServer_enable_push_management(PyServer *self, PyObject *Py_UNUSED(args)) {
+    O6_REQUIRE_WRITABLE_CONFIG(pushManagementConfigurable(self), pyServer_eventLoop(self), NULL);
 #ifdef __APPLE__
     PyErr_SetString(PyExc_NotImplementedError,
                     "GDS PushManagement is not supported on macOS yet");
@@ -463,6 +492,7 @@ pyServer_enable_push_management(PyServer *self, PyObject *Py_UNUSED(args)) {
 
 static PyObject *
 pyServer_run_startup(PyServer *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop(self), NULL);
     if (!self->server) {
         PyErr_SetString(PyExc_RuntimeError, "Server not initialized");
         return NULL;
@@ -492,6 +522,7 @@ pyServer_run_startup(PyServer *self, PyObject *args) {
 
 static PyObject *
 pyServer_run_shutdown_py(PyServer *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop(self), NULL);
     if (!self->server) {
         PyErr_SetString(PyExc_RuntimeError, "Server not initialized");
         return NULL;
@@ -520,6 +551,7 @@ pyServer_run_shutdown_py(PyServer *self, PyObject *args) {
  * serving, or 0.0 if there is none or it has already been started. */
 static PyObject *
 pyServer_begin_shutdown_delay(PyServer *self, PyObject *Py_UNUSED(ignored)) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop(self), NULL);
     if(!self->server || !self->running)
         return PyFloat_FromDouble(0.0);
     UA_ServerConfig *config = UA_Server_getConfig(self->server);
@@ -554,6 +586,7 @@ pyServer_has_local_monitored_item(PyServer *self, PyObject *id) {
 
 static PyObject *
 pyServer_get_fully_stopped(PyServer *self, void *closure) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop(self), NULL);
     if (!self->server)
         Py_RETURN_TRUE;
     return PyBool_FromLong(
@@ -595,6 +628,7 @@ reverseConnectStateCallback(UA_Server *server, UA_UInt64 handle,
 
 static PyObject *
 pyServer_add_reverse_connect(PyServer *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop(self), NULL);
     const char *url;
     PyObject *pyCallback = Py_None;
 
@@ -640,6 +674,7 @@ pyServer_add_reverse_connect(PyServer *self, PyObject *args) {
 
 static PyObject *
 pyServer_remove_reverse_connect(PyServer *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop(self), NULL);
     unsigned long long handle;
     if (!PyArg_ParseTuple(args, "K", &handle))
         return NULL;
@@ -663,6 +698,7 @@ pyServer_remove_reverse_connect(PyServer *self, PyObject *args) {
 
 static PyObject *
 pyServer_add_namespace(PyServer *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop(self), NULL);
     const char *uri;
     unsigned short python_idx;
     if(!PyArg_ParseTuple(args, "sH", &uri, &python_idx))
@@ -699,6 +735,7 @@ pyServer_add_namespace(PyServer *self, PyObject *args) {
 
 static PyObject *
 pyServer_get_namespace_index(PyServer *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop(self), NULL);
     const char *uri;
     if(!PyArg_ParseTuple(args, "s", &uri))
         return NULL;
@@ -718,6 +755,7 @@ pyServer_get_namespace_index(PyServer *self, PyObject *args) {
 
 static PyObject *
 pyServer_get_namespace_uri(PyServer *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop(self), NULL);
     unsigned short index;
     if(!PyArg_ParseTuple(args, "H", &index))
         return NULL;
@@ -760,6 +798,7 @@ pyServer_getConfig(PyServer *self, void *closure) {
 
 static PyObject *
 pyServer_stop_event_loop(PyServer *self, PyObject *Py_UNUSED(ignored)) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop(self), NULL);
     if (!self->server)
         Py_RETURN_NONE;
     UA_ServerConfig *config = UA_Server_getConfig(self->server);
@@ -794,8 +833,6 @@ static PyMethodDef pyServer_methods[] = {
     {"_has_local_monitored_item", (PyCFunction)pyServer_has_local_monitored_item,
      METH_O, "Return whether a local monitored item still belongs to this server."},
     {"_set_mdns", (PyCFunction)pyServer_set_mdns, METH_O, "Configure server-owned mDNS."},
-    {"_advance_registration_time", (PyCFunction)pyServer_advance_registration_time, METH_O,
-     "Test-only: age native registrations by seconds and run native expiry."},
     {"_enable_push_management", (PyCFunction)pyServer_enable_push_management, METH_NOARGS,
      "Attach the SDK GDS receiver before startup."},
     {"_run_startup", (PyCFunction)pyServer_run_startup, METH_VARARGS,
@@ -951,15 +988,9 @@ static PyMethodDef pyServer_methods[] = {
      {"_deregister_discovery", (PyCFunction)pyServer_deregister_discovery, METH_VARARGS,
       "Deregister this server from a Discovery Server (LDS).\n\n"
       "_deregister_discovery(url, [securityMode, securityPolicy]) -> None"},
-     {"_register_server", (PyCFunction)pyServer_register_server, METH_VARARGS,
-      "Local API for the RegisterServer2 service.\n\n"
-      "_register_server(registeredServer) -> None"},
-     {"_deregister_server", (PyCFunction)pyServer_deregister_server, METH_VARARGS,
-      "Remove a locally- or remotely-registered server record.\n\n"
-      "_deregister_server(serverUri, discoveryUrls=()) -> None"},
      {"_register_server_on_network", (PyCFunction)pyServer_register_server_on_network, METH_VARARGS,
       "Local API to add/update a ServerOnNetwork entry.\n\n"
-      "_register_server_on_network(serverOnNetwork, remoteAddress=None, ttl=None) -> None"},
+      "_register_server_on_network(serverOnNetwork) -> None"},
      {"_deregister_server_on_network", (PyCFunction)pyServer_deregister_server_on_network, METH_VARARGS,
       "Remove a ServerOnNetwork entry by server name.\n\n"
       "_deregister_server_on_network(serverName) -> None"},

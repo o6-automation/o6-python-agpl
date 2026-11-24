@@ -1345,6 +1345,116 @@ pyHistoryGathering_stopPolls(UA_HistoryDataGathering *gathering,
     return result;
 }
 
+/* Keep one upstream gathering per registered node. Its public API has no remove
+ * operation, so whole-entry disposal both reclaims settings and keeps polling
+ * contexts stable when other nodes are registered. No storage/query logic lives
+ * here. The owner survives database.clear until server deletion finishes. */
+typedef struct PyHistoryGatheringEntry {
+    struct PyHistoryGatheringEntry *next;
+    UA_NodeId nodeId;
+    UA_HistoryDataGathering gathering;
+} PyHistoryGatheringEntry;
+
+static PyHistoryGatheringEntry *
+customGatheringFind(PyServerHistory *history, const UA_NodeId *nodeId) {
+    for(PyHistoryGatheringEntry *entry = history->customNodes; entry; entry = entry->next)
+        if(UA_NodeId_equal(&entry->nodeId, nodeId))
+            return entry;
+    return NULL;
+}
+
+static void
+customGatheringRemove(PyServerHistory *history, const UA_NodeId *nodeId) {
+    PyHistoryGatheringEntry **link = &history->customNodes;
+    while(*link && !UA_NodeId_equal(&(*link)->nodeId, nodeId))
+        link = &(*link)->next;
+    if(!*link)
+        return;
+    PyHistoryGatheringEntry *entry = *link;
+    *link = entry->next;
+    entry->gathering.deleteMembers(&entry->gathering);
+    UA_NodeId_clear(&entry->nodeId);
+    UA_free(entry);
+}
+
+static UA_StatusCode
+customGatheringRegister(UA_Server *server, void *context, const UA_NodeId *nodeId,
+                        UA_HistorizingNodeIdSettings setting) {
+    PyServerHistory *history = (PyServerHistory *)context;
+    if(customGatheringFind(history, nodeId))
+        return UA_STATUSCODE_BADNODEIDEXISTS;
+    PyHistoryGatheringEntry *entry = (PyHistoryGatheringEntry *)UA_calloc(1, sizeof(*entry));
+    if(!entry)
+        return UA_STATUSCODE_BADOUTOFMEMORY;
+    UA_StatusCode status = UA_NodeId_copy(nodeId, &entry->nodeId);
+    if(status == UA_STATUSCODE_GOOD) {
+        entry->gathering = UA_HistoryDataGathering_Default(1);
+        if(!entry->gathering.context)
+            status = UA_STATUSCODE_BADOUTOFMEMORY;
+    }
+    if(status == UA_STATUSCODE_GOOD)
+        status = entry->gathering.registerNodeId(server, entry->gathering.context, nodeId, setting);
+    if(status != UA_STATUSCODE_GOOD) {
+        if(entry->gathering.deleteMembers)
+            entry->gathering.deleteMembers(&entry->gathering);
+        UA_NodeId_clear(&entry->nodeId);
+        UA_free(entry);
+        return status;
+    }
+    entry->next = history->customNodes;
+    history->customNodes = entry;
+    return UA_STATUSCODE_GOOD;
+}
+
+static const UA_HistorizingNodeIdSettings *
+customGatheringSetting(UA_Server *server, void *context, const UA_NodeId *nodeId) {
+    PyHistoryGatheringEntry *entry = customGatheringFind((PyServerHistory *)context, nodeId);
+    return entry ? entry->gathering.getHistorizingSetting(server, entry->gathering.context, nodeId) : NULL;
+}
+
+static UA_StatusCode
+customGatheringStart(UA_Server *server, void *context, const UA_NodeId *nodeId) {
+    PyHistoryGatheringEntry *entry = customGatheringFind((PyServerHistory *)context, nodeId);
+    return entry ? entry->gathering.startPoll(server, entry->gathering.context, nodeId) :
+        UA_STATUSCODE_BADNODEIDUNKNOWN;
+}
+
+static UA_StatusCode
+customGatheringStop(UA_Server *server, void *context, const UA_NodeId *nodeId) {
+    PyHistoryGatheringEntry *entry = customGatheringFind((PyServerHistory *)context, nodeId);
+    return entry ? entry->gathering.stopPoll(server, entry->gathering.context, nodeId) :
+        UA_STATUSCODE_BADNODEIDUNKNOWN;
+}
+
+static void
+customGatheringSet(UA_Server *server, void *context, const UA_NodeId *sessionId,
+                   void *sessionContext, const UA_NodeId *nodeId, UA_Boolean historizing,
+                   const UA_DataValue *value) {
+    PyHistoryGatheringEntry *entry = customGatheringFind((PyServerHistory *)context, nodeId);
+    if(entry)
+        entry->gathering.setValue(server, entry->gathering.context, sessionId, sessionContext,
+                                  nodeId, historizing, value);
+}
+
+static void
+customGatheringDelete(UA_HistoryDataGathering *gathering) {
+    (void)gathering; /* pyHistory_clear owns disposal after all node destructors. */
+}
+
+static UA_HistoryDataGathering
+customGathering(PyServerHistory *history) {
+    UA_HistoryDataGathering gathering;
+    memset(&gathering, 0, sizeof(gathering));
+    gathering.context = history;
+    gathering.deleteMembers = customGatheringDelete;
+    gathering.registerNodeId = customGatheringRegister;
+    gathering.getHistorizingSetting = customGatheringSetting;
+    gathering.startPoll = customGatheringStart;
+    gathering.stopPoll = customGatheringStop;
+    gathering.setValue = customGatheringSet;
+    return gathering;
+}
+
 /* ==================================================== *
  *          HistoryRead/HistoryUpdate fixups             *
  * ==================================================== */
@@ -1438,6 +1548,7 @@ cpTrack_clear(PyHistoryCpTrack *track) {
 typedef struct {
     UA_HistoryDatabase inner;
     PyHistoryCpTrack cpTrack;
+    PyServerHistory *customHistory; /* borrowed until server teardown */
 } PyHistoryDatabaseFixup;
 
 static void
@@ -1517,6 +1628,94 @@ historyWindowExhausted(const UA_HistoryData *hd, UA_Boolean descending,
     return descending ? last->sourceTimestamp <= windowLo : last->sourceTimestamp >= windowHi;
 }
 
+/* Paged custom backends own their tokens and values. Only service validation,
+ * authorization and public value conversion run outside the backend. */
+static UA_StatusCode
+historyCustomMayRead(UA_Server *server, const UA_NodeId *sessionId,
+                     void *sessionContext, const UA_NodeId *nodeId) {
+    UA_Byte access = 0;
+    UA_StatusCode status = UA_Server_readAccessLevel(server, *nodeId, &access);
+    if(status != UA_STATUSCODE_GOOD)
+        return status;
+    if(!(access & UA_ACCESSLEVELMASK_HISTORYREAD))
+        return UA_STATUSCODE_BADNOTREADABLE;
+    UA_Boolean historizing = false;
+    status = UA_Server_readHistorizing(server, *nodeId, &historizing);
+    if(status != UA_STATUSCODE_GOOD)
+        return status;
+    if(!historizing)
+        return UA_STATUSCODE_BADHISTORYOPERATIONINVALID;
+    void *nodeContext = NULL;
+    status = UA_Server_getNodeContext(server, *nodeId, &nodeContext);
+    if(status != UA_STATUSCODE_GOOD)
+        return status;
+    UA_ServerConfig *config = UA_Server_getConfig(server);
+    if(config->accessControl.getUserAccessLevel)
+        access &= config->accessControl.getUserAccessLevel(server, &config->accessControl,
+            sessionId, sessionContext, nodeId, nodeContext);
+    return (access & UA_ACCESSLEVELMASK_HISTORYREAD) ? UA_STATUSCODE_GOOD :
+        UA_STATUSCODE_BADUSERACCESSDENIED;
+}
+
+static void
+historyCustomReadRaw(UA_Server *server, PyServerHistory *history,
+                     const UA_NodeId *sessionId, void *sessionContext,
+                     const UA_ReadRawModifiedDetails *details,
+                     UA_TimestampsToReturn timestamps, UA_Boolean release,
+                     size_t count, const UA_HistoryReadValueId *items,
+                     UA_HistoryReadResponse *response,
+                     UA_HistoryData * const * const data) {
+    UA_HistoryDataBackend *backend = &history->backend;
+    for(size_t i = 0; i < count; ++i) {
+        UA_NumericRange range = {0, NULL};
+        UA_StatusCode status = UA_STATUSCODE_GOOD;
+        if(items[i].indexRange.length && !pyHistoryBackend_rawRanges(backend))
+            status = UA_NumericRange_parse(&range, items[i].indexRange);
+        const UA_HistorizingNodeIdSettings *setting =
+            history->gathering.getHistorizingSetting(server, history->gathering.context,
+                                                    &items[i].nodeId);
+        size_t cap = setting ? setting->maxHistoryDataResponseSize : history->defaultResponseSize;
+        if(status == UA_STATUSCODE_GOOD)
+            status = pyHistoryBackend_validatePage(server, sessionId, sessionContext,
+                backend, details, timestamps, range, release, &items[i], cap);
+        if(status == UA_STATUSCODE_GOOD && !release)
+            status = historyCustomMayRead(server, sessionId, sessionContext, &items[i].nodeId);
+        if(status == UA_STATUSCODE_GOOD && !release && !setting)
+            status = UA_STATUSCODE_BADHISTORYOPERATIONINVALID;
+        if(status == UA_STATUSCODE_GOOD && !release &&
+           !backend->timestampsToReturnSupported(server, backend->context, sessionId,
+               sessionContext, &items[i].nodeId, timestamps))
+            status = UA_STATUSCODE_BADTIMESTAMPNOTSUPPORTED;
+        if(status == UA_STATUSCODE_GOOD && !release && details->returnBounds &&
+           !backend->boundSupported(server, backend->context, sessionId, sessionContext,
+                                    &items[i].nodeId))
+            status = UA_STATUSCODE_BADBOUNDNOTSUPPORTED;
+        if(status == UA_STATUSCODE_GOOD)
+            status = pyHistoryBackend_readPage(server, sessionId, sessionContext, backend,
+                details, timestamps, range, release, &items[i], cap,
+                &response->results[i].continuationPoint, data[i]);
+        if(release) {
+            UA_HistoryData_clear(data[i]);
+            UA_ByteString_clear(&response->results[i].continuationPoint);
+        } else if(status == UA_STATUSCODE_GOOD && data[i]->dataValuesSize == 0) {
+            status = UA_STATUSCODE_GOODNODATA;
+        }
+        response->results[i].statusCode = status;
+        /* Preserve the public timestamp projection for existing custom stores.
+         * Never select, truncate or reinterpret their values/statuses/tokens. */
+        for(size_t j = 0; j < data[i]->dataValuesSize; ++j) {
+            if(timestamps == UA_TIMESTAMPSTORETURN_SOURCE) {
+                data[i]->dataValues[j].hasServerTimestamp = false;
+                data[i]->dataValues[j].hasServerPicoseconds = false;
+            } else if(timestamps == UA_TIMESTAMPSTORETURN_SERVER) {
+                data[i]->dataValues[j].hasSourceTimestamp = false;
+                data[i]->dataValues[j].hasSourcePicoseconds = false;
+            }
+        }
+        UA_free(range.dimensions);
+    }
+}
+
 static void
 pyHistoryFixup_readRaw(UA_Server *server, void *context, const UA_NodeId *sessionId,
                        void *sessionContext, const UA_RequestHeader *requestHeader,
@@ -1527,6 +1726,8 @@ pyHistoryFixup_readRaw(UA_Server *server, void *context, const UA_NodeId *sessio
                        UA_HistoryReadResponse *response,
                        UA_HistoryData * const * const historyData) {
     PyHistoryDatabaseFixup *fixup = (PyHistoryDatabaseFixup *)context;
+    UA_Boolean paged = fixup->customHistory &&
+        pyHistoryBackend_paged(&fixup->customHistory->backend);
 
     if(timestampsToReturn != UA_TIMESTAMPSTORETURN_SOURCE &&
        timestampsToReturn != UA_TIMESTAMPSTORETURN_SERVER &&
@@ -1539,8 +1740,18 @@ pyHistoryFixup_readRaw(UA_Server *server, void *context, const UA_NodeId *sessio
     int paramsSet = (historyReadDetails->startTime != 0) +
                     (historyReadDetails->endTime != 0) +
                     (historyReadDetails->numValuesPerNode != 0);
-    if(paramsSet < 2) {
+    if(paramsSet < 2 && !(paged && releaseContinuationPoints)) {
         historyReadRequestFail(response, UA_STATUSCODE_BADHISTORYOPERATIONINVALID);
+        return;
+    }
+
+    /* Release uses the same dispatch for all paged stores: validate the token
+     * without reading data or requiring a query window. */
+    if(paged && (releaseContinuationPoints ||
+                 pyHistoryBackend_extended(&fixup->customHistory->backend))) {
+        historyCustomReadRaw(server, fixup->customHistory, sessionId, sessionContext,
+            historyReadDetails, timestampsToReturn, releaseContinuationPoints,
+            nodesToReadSize, nodesToRead, response, historyData);
         return;
     }
 
@@ -1580,7 +1791,7 @@ pyHistoryFixup_readRaw(UA_Server *server, void *context, const UA_NodeId *sessio
             if(!historizing)
                 nodeStatus[i] = UA_STATUSCODE_BADHISTORYOPERATIONINVALID;
         }
-        if(nodeStatus[i] == UA_STATUSCODE_GOOD)
+        if(nodeStatus[i] == UA_STATUSCODE_GOOD && !paged)
             nodeStatus[i] = historyCheckContinuationPoint(&fixup->cpTrack, sessionId,
                                                           &nodesToRead[i].nodeId,
                                                           &nodesToRead[i].continuationPoint);
@@ -1606,12 +1817,12 @@ pyHistoryFixup_readRaw(UA_Server *server, void *context, const UA_NodeId *sessio
 
     UA_Boolean dropOutOfWindow = bothBoundsGiven && !historyReadDetails->returnBounds;
     for(size_t i = 0; i < nodesToReadSize; i++) {
-        if(response->results[i].statusCode == UA_STATUSCODE_GOOD)
+        if(!paged && response->results[i].statusCode == UA_STATUSCODE_GOOD)
             historyFilterOutOfWindow(historyData[i], dropOutOfWindow, windowLo, windowHi);
     }
 
     for(size_t i = 0; i < nodesToReadSize; i++) {
-        if(nodeStatus[i] != UA_STATUSCODE_GOOD)
+        if(paged || nodeStatus[i] != UA_STATUSCODE_GOOD)
             continue;
         UA_Boolean forget = releaseContinuationPoints || !bothBoundsGiven ||
                            response->results[i].continuationPoint.length == 0 ||
@@ -1648,7 +1859,8 @@ pyHistoryFixup_readRaw(UA_Server *server, void *context, const UA_NodeId *sessio
                 allIndexRangeNoData = false;
         }
 
-        if(allIndexRangeNoData) {
+        /* A custom store owns each returned sample, including range misses. */
+        if(allIndexRangeNoData && !fixup->customHistory) {
             response->results[i].statusCode = UA_STATUSCODE_BADINDEXRANGENODATA;
             UA_Array_delete(values, count, &UA_TYPES[UA_TYPES_DATAVALUE]);
             historyData[i]->dataValues = NULL;
@@ -1666,6 +1878,24 @@ pyHistoryFixup_readModified(UA_Server *server, void *context, const UA_NodeId *s
                             const UA_HistoryReadValueId *nodesToRead,
                             UA_HistoryReadResponse *response,
                             UA_HistoryModifiedData * const * const historyData) {
+    PyHistoryDatabaseFixup *fixup = (PyHistoryDatabaseFixup *)context;
+    if(fixup->customHistory && pyHistoryBackend_paged(&fixup->customHistory->backend)) {
+        UA_StatusCode status = UA_STATUSCODE_BADHISTORYOPERATIONUNSUPPORTED;
+        int paramsSet = (historyReadDetails->startTime != 0) +
+            (historyReadDetails->endTime != 0) + (historyReadDetails->numValuesPerNode != 0);
+        if(paramsSet < 2 && !releaseContinuationPoints)
+            status = UA_STATUSCODE_BADHISTORYOPERATIONINVALID;
+        if(timestampsToReturn != UA_TIMESTAMPSTORETURN_SOURCE &&
+           timestampsToReturn != UA_TIMESTAMPSTORETURN_SERVER &&
+           timestampsToReturn != UA_TIMESTAMPSTORETURN_BOTH)
+            status = UA_STATUSCODE_BADTIMESTAMPSTORETURNINVALID;
+        /* Invalid bounds use the per-node validation below, even for unsupported reads. */
+        if(status != UA_STATUSCODE_BADHISTORYOPERATIONUNSUPPORTED ||
+           !historyReadDetails->returnBounds) {
+            historyReadRequestFail(response, status);
+            return;
+        }
+    }
     if(historyReadDetails->returnBounds) {
         for(size_t i = 0; i < nodesToReadSize; i++)
             response->results[i].statusCode = UA_STATUSCODE_BADINVALIDARGUMENT;
@@ -1733,8 +1963,29 @@ pyHistoryFixup_deleteRawModified(UA_Server *server, void *context, const UA_Node
         result->statusCode = nodeStatus;
 }
 
+static void
+historyCustomUnsupported(UA_HistoryReadResponse *response, UA_TimestampsToReturn timestamps) {
+    historyReadRequestFail(response,
+        timestamps == UA_TIMESTAMPSTORETURN_SOURCE || timestamps == UA_TIMESTAMPSTORETURN_SERVER ||
+        timestamps == UA_TIMESTAMPSTORETURN_BOTH ? UA_STATUSCODE_BADHISTORYOPERATIONUNSUPPORTED :
+        UA_STATUSCODE_BADTIMESTAMPSTORETURNINVALID);
+}
+
+#define CUSTOM_UNSUPPORTED(NAME, DETAILS, DATA) \
+static void NAME(UA_Server *server, void *context, const UA_NodeId *sessionId, \
+    void *sessionContext, const UA_RequestHeader *header, const DETAILS *details, \
+    UA_TimestampsToReturn timestamps, UA_Boolean release, size_t count, \
+    const UA_HistoryReadValueId *items, UA_HistoryReadResponse *response, \
+    DATA * const * const data) { \
+    historyCustomUnsupported(response, timestamps); \
+}
+CUSTOM_UNSUPPORTED(historyCustomProcessed, UA_ReadProcessedDetails, UA_HistoryData)
+CUSTOM_UNSUPPORTED(historyCustomEvent, UA_ReadEventDetails, UA_HistoryEvent)
+CUSTOM_UNSUPPORTED(historyCustomAtTime, UA_ReadAtTimeDetails, UA_HistoryData)
+#undef CUSTOM_UNSUPPORTED
+
 static UA_HistoryDatabase
-pyHistoryDatabase_fixupNodeIdOrder(UA_HistoryDatabase inner) {
+pyHistoryDatabase_fixupNodeIdOrder(UA_HistoryDatabase inner, PyServerHistory *customHistory) {
     if(!inner.context)
         return inner;
 
@@ -1745,6 +1996,7 @@ pyHistoryDatabase_fixupNodeIdOrder(UA_HistoryDatabase inner) {
         return inner;
     }
     fixup->inner = inner;
+    fixup->customHistory = customHistory;
 
     UA_HistoryDatabase wrapped;
     memset(&wrapped, 0, sizeof(wrapped));
@@ -1753,6 +2005,11 @@ pyHistoryDatabase_fixupNodeIdOrder(UA_HistoryDatabase inner) {
     wrapped.setValue = inner.setValue ? pyHistoryFixup_setValue : NULL;
     wrapped.readRaw = inner.readRaw ? pyHistoryFixup_readRaw : NULL;
     wrapped.readModified = inner.readRaw ? pyHistoryFixup_readModified : NULL;
+    if(customHistory) {
+        wrapped.readProcessed = historyCustomProcessed;
+        wrapped.readEvent = historyCustomEvent;
+        wrapped.readAtTime = historyCustomAtTime;
+    }
     wrapped.updateData = inner.updateData ? pyHistoryFixup_updateData : NULL;
     wrapped.deleteRawModified =
         inner.deleteRawModified ? pyHistoryFixup_deleteRawModified : NULL;
@@ -1848,7 +2105,7 @@ pyHistory_enable(PyServerHistory *history, UA_Server *server,
 
     UA_HistoryDatabase database = UA_HistoryDatabase_default(gathering);
     //Check if valid NodeId
-    database = pyHistoryDatabase_fixupNodeIdOrder(database);
+    database = pyHistoryDatabase_fixupNodeIdOrder(database, NULL);
     if(!database.context) {
         pyHistoryBackend_clear(&backend);
         return UA_STATUSCODE_BADOUTOFMEMORY;
@@ -1887,16 +2144,11 @@ pyHistory_enableCustom(PyServerHistory *history, UA_Server *server,
     if(!backend.context)
         return UA_STATUSCODE_BADINTERNALERROR;
 
-    /* Upstream's own generic gathering */
-    UA_HistoryDataGathering gathering = UA_HistoryDataGathering_Default(initialNodes);
-    if(!gathering.context) {
-        backend.deleteMembers(&backend);
-        return UA_STATUSCODE_BADOUTOFMEMORY;
-    }
+    UA_HistoryDataGathering gathering = customGathering(history);
 
     UA_HistoryDatabase database = UA_HistoryDatabase_default(gathering);
     //Check if valid NodeId
-    database = pyHistoryDatabase_fixupNodeIdOrder(database);
+    database = pyHistoryDatabase_fixupNodeIdOrder(database, history);
     if(!database.context) {
         gathering.deleteMembers(&gathering);
         backend.deleteMembers(&backend);
@@ -1917,45 +2169,6 @@ pyHistory_enableCustom(PyServerHistory *history, UA_Server *server,
     config->accessHistoryDataCapability = true;
     config->maxReturnDataValues = (UA_UInt32)defaultResponseSize;
     return UA_STATUSCODE_GOOD;
-}
-
-/* customBackend mode only: upstream's UA_HistoryDataGathering_Default has no
- * "enumerate registered nodes" primitive, so this is the side-list
- * pyHistory_stopPolls walks at shutdown. Doubling growth, same idiom as
- * ring_addNode. Does nothing on OOM other than fail the caller - a poll that
- * cannot be tracked is rolled back by the caller the same as any other
- * registration failure. */
-static UA_StatusCode
-historyPolledNodes_add(PyServerHistory *history, const UA_NodeId *nodeId) {
-    if(history->polledNodesSize >= history->polledNodesCapacity) {
-        size_t grown = history->polledNodesCapacity ? history->polledNodesCapacity * 2 : 8;
-        UA_NodeId *grownArray = (UA_NodeId *)UA_realloc(
-            history->polledNodes, grown * sizeof(UA_NodeId));
-        if(!grownArray)
-            return UA_STATUSCODE_BADOUTOFMEMORY;
-        history->polledNodes = grownArray;
-        history->polledNodesCapacity = grown;
-    }
-    UA_StatusCode status = UA_NodeId_copy(
-        nodeId, &history->polledNodes[history->polledNodesSize]);
-    if(status != UA_STATUSCODE_GOOD)
-        return status;
-    ++history->polledNodesSize;
-    return UA_STATUSCODE_GOOD;
-}
-
-static void
-historyPolledNodes_remove(PyServerHistory *history, const UA_NodeId *nodeId) {
-    for(size_t i = 0; i < history->polledNodesSize; ++i) {
-        if(!UA_NodeId_equal(&history->polledNodes[i], nodeId))
-            continue;
-        UA_NodeId_clear(&history->polledNodes[i]);
-        /* Keep the array dense by moving the last entry into the hole. */
-        --history->polledNodesSize;
-        if(i != history->polledNodesSize)
-            history->polledNodes[i] = history->polledNodes[history->polledNodesSize];
-        return;
-    }
 }
 
 UA_StatusCode
@@ -2008,16 +2221,9 @@ pyHistory_register(PyServerHistory *history, UA_Server *server,
     }
 
     if(strategy == UA_HISTORIZINGUPDATESTRATEGY_POLL) {
-        if(history->customBackend) {
-            status = historyPolledNodes_add(history, nodeId);
-            if(status != UA_STATUSCODE_GOOD)
-                return status;
-        }
         status = history->gathering.startPoll(server, history->gathering.context,
                                               nodeId);
         if(status != UA_STATUSCODE_GOOD) {
-            if(history->customBackend)
-                historyPolledNodes_remove(history, nodeId);
             pyHistory_unregister(history, server, nodeId);
             return status;
         }
@@ -2041,8 +2247,8 @@ pyHistory_unregister(PyServerHistory *history, UA_Server *server,
         history->gathering.stopPoll(server, history->gathering.context, nodeId);
 
     if(history->customBackend) {
-        historyPolledNodes_remove(history, nodeId);
-        return UA_STATUSCODE_GOOD;
+        customGatheringRemove(history, nodeId);
+        return pyHistoryBackend_unregister(&history->backend, nodeId);
     }
 
     return pyHistoryBackend_removeNode(&history->backend, nodeId);
@@ -2067,11 +2273,10 @@ pyHistory_setPaused(PyServerHistory *history, UA_Server *server,
     if(!history->enabled)
         return UA_STATUSCODE_BADINVALIDSTATE;
     if(history->customBackend) {
-        if(!history->gathering.getHistorizingSetting ||
-           !history->gathering.getHistorizingSetting(server, history->gathering.context,
-                                                      nodeId))
+        PyHistoryGatheringEntry *entry = customGatheringFind(history, nodeId);
+        if(!entry)
             return UA_STATUSCODE_BADNODEIDUNKNOWN;
-        gathering_default_pauseRecording(&history->gathering, nodeId, paused);
+        gathering_default_pauseRecording(&entry->gathering, nodeId, paused);
         return UA_STATUSCODE_GOOD;
     }
     return pyHistoryGathering_setPaused(&history->gathering, nodeId, paused);
@@ -2136,9 +2341,13 @@ pyHistory_stopPolls(PyServerHistory *history, UA_Server *server) {
         if(!server || !history->gathering.stopPoll)
             return UA_STATUSCODE_GOOD;
         UA_StatusCode result = UA_STATUSCODE_GOOD;
-        for(size_t i = 0; i < history->polledNodesSize; ++i) {
-            UA_StatusCode status = history->gathering.stopPoll(
-                server, history->gathering.context, &history->polledNodes[i]);
+        for(PyHistoryGatheringEntry *entry = history->customNodes; entry; entry = entry->next) {
+            UA_HistoryDataGathering *gathering = &entry->gathering;
+            const UA_HistorizingNodeIdSettings *setting =
+                gathering->getHistorizingSetting(server, gathering->context, &entry->nodeId);
+            if(setting->historizingUpdateStrategy != UA_HISTORIZINGUPDATESTRATEGY_POLL)
+                continue;
+            UA_StatusCode status = gathering->stopPoll(server, gathering->context, &entry->nodeId);
             if(status != UA_STATUSCODE_GOOD && result == UA_STATUSCODE_GOOD)
                 result = status;
         }
@@ -2153,11 +2362,14 @@ pyHistory_clear(PyServerHistory *history, UA_Server *server) {
         return;
     pyHistory_stopPolls(history, server);
     if(history->customBackend) {
+        /* Server deletion may clear nodes without invoking global destructors.
+         * Notify any registrations still owned by the history facade. */
+        while(history->customNodes) {
+            pyHistoryBackend_unregister(&history->backend, &history->customNodes->nodeId);
+            customGatheringRemove(history, &history->customNodes->nodeId);
+        }
         if(history->backend.deleteMembers)
             history->backend.deleteMembers(&history->backend);
-        for(size_t i = 0; i < history->polledNodesSize; ++i)
-            UA_NodeId_clear(&history->polledNodes[i]);
-        UA_free(history->polledNodes);
     } else {
         pyHistoryBackend_clear(&history->backend);
     }

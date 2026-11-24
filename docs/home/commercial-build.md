@@ -51,3 +51,27 @@ standard error and falls back to Script Mode.
 `O6PYTHON_SKIP_GREET` suppresses the startup banner and routine
 valid-Credential information. It does not suppress these warnings, the Script
 Mode notice or the expiry message; they always appear on standard error.
+
+## Check the active Credential
+
+[`o6.license`](../api_reference/license.md) reports what o6 decided on import:
+the edition, whether a Credential was accepted, its details and the enabled
+features. Use it for deployment health checks and support diagnostics.
+
+```python
+import o6
+
+info = o6.license
+if info.licensed:
+    print(f"{info.usageScope} for {info.holder}, valid to {info.validTo}")
+elif info.rejectionReason:
+    print("Credential rejected:", info.rejectionReason)
+else:
+    print("No Credential; Script Mode:", info.scriptMode)
+```
+
+[`LicenseInfo`](../api_reference/licenseinfo.md) describes each field.
+
+The values never change after import. `o6.license` never contains the
+Credential's signature or file contents. The AGPL build reports
+`edition="agpl"`, `licensed=False`, `scriptMode=False` and every feature.

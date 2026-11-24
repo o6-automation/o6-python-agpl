@@ -38,6 +38,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=plastics_imm2mes;i=6003",
     browseName="ns=plastics_rubber;NominalParts",
     description="Total number (sum of all cavities) of parts that shall be produced by the job",
+    modellingRule="Mandatory",
     dataType=o6.UInt64,
     value=0,
     accessLevel=3,
@@ -48,7 +49,10 @@ plastics_rubber.objtypes.UsersType(
     nodeId="ns=plastics_imm2mes;i=5010",
     browseName="ns=plastics_rubber;Users",
     description="Container for the user(s) of the machine",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6009", browseName="NodeVersion", dataType=o6.String, value="\n      "))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6009", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value="\n      "))
+    ],
 )
 oPC40077 = ns0.vartypes.DataTypeDictionaryType(
     nodeId="ns=plastics_imm2mes;i=6012",
@@ -74,18 +78,33 @@ plastics_rubber.objtypes.MESMessageType(
     nodeId="ns=plastics_imm2mes;i=5012",
     browseName="ns=plastics_rubber;MESMessage",
     description="Text message sent from the MES to be shown on the machine",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_imm2mes;i=6010", browseName="ns=plastics_rubber;Id", description="Id of the message", dataType=o6.String, value="\n      "
+                nodeId="ns=plastics_imm2mes;i=6010",
+                browseName="ns=plastics_rubber;Id",
+                description="Id of the message",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="\n      ",
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_imm2mes;i=6011", browseName="ns=plastics_rubber;Message", description="Text of the message", dataType=o6.String, value="\n      "
+                nodeId="ns=plastics_imm2mes;i=6011",
+                browseName="ns=plastics_rubber;Message",
+                description="Text of the message",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="\n      ",
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6014", browseName="Severity", description="Severity of the message", dataType=o6.UInt16, value=0)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_imm2mes;i=6014", browseName="Severity", description="Severity of the message", modellingRule="Mandatory", dataType=o6.UInt16, value=0
+            )
+        ),
     ],
 )
 o6.reference(o6.ns["ns=plastics_imm2mes;i=5012"], "i=41", "ns=plastics_rubber;i=1004")
@@ -163,23 +182,42 @@ oPC40077_2 = ns0.vartypes.DataTypeDictionaryType(
 plastics_rubber.objtypes.StandstillMessageType(
     nodeId="ns=plastics_imm2mes;i=5016",
     browseName="ns=plastics_rubber;StandstillMessage",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_imm2mes;i=6052", browseName="ns=plastics_rubber;Classification", description="Classification of the message", dataType=ns0.datatypes.Enumeration
+                nodeId="ns=plastics_imm2mes;i=6052",
+                browseName="ns=plastics_rubber;Classification",
+                description="Classification of the message",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.Enumeration,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_imm2mes;i=6053", browseName="ns=plastics_rubber;Id", description="Id of the message", dataType=o6.String, value="\n      "
+                nodeId="ns=plastics_imm2mes;i=6053",
+                browseName="ns=plastics_rubber;Id",
+                description="Id of the message",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="\n      ",
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_imm2mes;i=6054", browseName="Message", description="Text of the message", dataType=o6.LocalizedText, value=o6.LocalizedText()
+                nodeId="ns=plastics_imm2mes;i=6054",
+                browseName="Message",
+                description="Text of the message",
+                modellingRule="Mandatory",
+                dataType=o6.LocalizedText,
+                value=o6.LocalizedText(),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6055", browseName="Severity", description="Severity of the message", dataType=o6.UInt16, value=0)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_imm2mes;i=6055", browseName="Severity", description="Severity of the message", modellingRule="Mandatory", dataType=o6.UInt16, value=0
+            )
+        ),
     ],
 )
 o6.reference(o6.ns["ns=plastics_imm2mes;i=5016"], "i=41", "ns=plastics_rubber;i=1004")
@@ -188,7 +226,9 @@ plastics_imm2mes_objtypes.InjectionUnitsType(
     browseName="ns=plastics_imm2mes;InjectionUnits",
     description="Container for the injection units",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6056", browseName="NodeVersion", dataType=o6.String, value="\n      "))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6056", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value="\n      "))
+    ],
 )
 o6.reference(plastics_imm2mes_objtypes.IMM_MES_InterfaceType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_imm2mes;i=5029"])
 plastics_rubber.objtypes.TemperatureZonesType(
@@ -196,14 +236,19 @@ plastics_rubber.objtypes.TemperatureZonesType(
     browseName="ns=plastics_imm2mes;TemperatureZones",
     description="container for the barrel temperature zones of the injection unit",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6057", browseName="NodeVersion", dataType=o6.String, value="\n      "))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6057", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value="\n      "))
+    ],
 )
 o6.reference(plastics_imm2mes_objtypes.InjectionUnitType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_imm2mes;i=5017"])
 plastics_rubber.objtypes.TemperatureZonesType(
     nodeId="ns=plastics_imm2mes;i=5018",
     browseName="ns=plastics_imm2mes;TemperatureZones",
     description="container for the barrel temperature zones of the injection unit",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6058", browseName="NodeVersion", dataType=o6.String, value="\n      "))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6058", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value="\n      "))
+    ],
 )
 ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_imm2mes;i=6061",
@@ -211,8 +256,10 @@ ns0.vartypes.AnalogItemType(
     description="Maximum injection speed (e.g. mm/s)",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6032", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6062", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6032", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6062", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -224,8 +271,10 @@ ns0.vartypes.AnalogItemType(
     description="Average injection speed (e.g. mm/s)",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6016", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6066", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6016", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6066", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -235,6 +284,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=plastics_imm2mes;i=6073",
     browseName="ns=plastics_rubber;StandstillReasonId",
     description="Id of the StandstillReason set by the operator after a standstill occurs",
+    modellingRule="Mandatory",
     dataType=o6.String,
     value="\n      ",
 )
@@ -244,7 +294,9 @@ plastics_rubber.objtypes.MouldsType(
     browseName="ns=plastics_imm2mes;Moulds",
     description="Container for the moulds",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6074", browseName="NodeVersion", dataType=o6.String, value="\n      "))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6074", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value="\n      "))
+    ],
 )
 o6.reference(plastics_imm2mes_objtypes.IMM_MES_InterfaceType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_imm2mes;i=5035"])
 ns0.vartypes.AnalogItemType(
@@ -253,8 +305,10 @@ ns0.vartypes.AnalogItemType(
     description="Average plastification pressure in front of the screw tip",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6068", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6081", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6068", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6081", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -266,8 +320,10 @@ ns0.vartypes.AnalogItemType(
     description="Maximum plastification pressure in front of the screw tip",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6070", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6082", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6070", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6082", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -279,8 +335,10 @@ ns0.vartypes.AnalogItemType(
     description="Switch-over point to the holding pressure via stroke",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6072", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6083", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6072", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6083", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -297,6 +355,7 @@ plastics_rubber.objtypes.MachineMESConfigurationType(
                 nodeId="ns=plastics_imm2mes;i=6043",
                 browseName="ns=plastics_rubber;StandstillReasons",
                 description="List of the standstill reasons from which one is selected by the operator in the case of a standstill",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber.datatypes.StandstillReasonType,
                 valueRank=1,
                 accessLevel=3,
@@ -308,6 +367,7 @@ plastics_rubber.objtypes.MachineMESConfigurationType(
                 nodeId="ns=plastics_imm2mes;i=6044",
                 browseName="ns=plastics_rubber;StandstillReasonsLockedByMES",
                 description="Indication if the list StandstillReasons has been modified by the MES and may not be changed by the machine",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -319,6 +379,7 @@ plastics_rubber.objtypes.MachineMESConfigurationType(
                 nodeId="ns=plastics_imm2mes;i=6085",
                 browseName="ns=plastics_rubber;MESUrl",
                 description="URL to display a webpage generated by the MES in a web browser integrated in the machine",
+                modellingRule="Optional",
                 dataType=o6.String,
                 value="0",
                 accessLevel=3,
@@ -333,13 +394,16 @@ plastics_rubber.objtypes.PowerUnitsType(
     browseName="ns=plastics_imm2mes;PowerUnits",
     description="Container for the power units",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6086", browseName="NodeVersion", dataType=o6.String, value="\n      "))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6086", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value="\n      "))
+    ],
 )
 o6.reference(plastics_imm2mes_objtypes.IMM_MES_InterfaceType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_imm2mes;i=5054"])
 ns0.vartypes.PropertyType(
     nodeId="ns=plastics_imm2mes;i=6094",
     browseName="ns=plastics_rubber;NominalParts",
     description="Total number (sum of all cavities) of parts that shall be produced by the job",
+    modellingRule="Mandatory",
     dataType=o6.UInt64,
     value=0,
     accessLevel=3,
@@ -352,11 +416,12 @@ ns0.vartypes.AnalogItemType(
     description="Back pressure is the melt-pressure against the screw movement during dosage",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6119", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6119", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6120",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -372,8 +437,10 @@ ns0.vartypes.AnalogItemType(
     description="Stroke position at cushion",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6121", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6122", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6121", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6122", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -399,7 +466,7 @@ http_opcfoundation_org_UA_PlasticsRubber_IMM2MES_ = ns0.objtypes.NamespaceMetada
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),
@@ -419,8 +486,10 @@ ns0.vartypes.AnalogItemType(
     description="Flow index",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6163", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6168", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6163", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6168", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -432,8 +501,10 @@ ns0.vartypes.AnalogItemType(
     description="Start position of the injection",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6165", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6169", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6165", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6169", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -445,8 +516,10 @@ ns0.vartypes.AnalogItemType(
     description="Screw position at switching between injection (V) and holding pressure (P)",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6167", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6170", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6167", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6170", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -463,6 +536,7 @@ plastics_rubber.objtypes.MachineInformationType(
                 nodeId="ns=plastics_imm2mes;i=6001",
                 browseName="ns=plastics_rubber;ControllerName",
                 description="Name of the machine controller",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="\n      ",
             )
@@ -472,20 +546,30 @@ plastics_rubber.objtypes.MachineInformationType(
                 nodeId="ns=plastics_imm2mes;i=6002",
                 browseName="ns=di;DeviceClass",
                 description="Indicates in which domain or for what purpose a device is used.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_imm2mes;i=6004", browseName="ns=di;Manufacturer", description="Name of the company that manufactured the device", dataType=o6.LocalizedText
+                nodeId="ns=plastics_imm2mes;i=6004",
+                browseName="ns=di;Manufacturer",
+                description="Name of the company that manufactured the device",
+                modellingRule="Mandatory",
+                dataType=o6.LocalizedText,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6005", browseName="ns=di;Model", description="Model name of the device", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_imm2mes;i=6005", browseName="ns=di;Model", description="Model name of the device", modellingRule="Mandatory", dataType=o6.LocalizedText
+            )
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6017",
                 browseName="ns=di;SerialNumber",
                 description="Identifier that uniquely identifies, within a manufacturer, a device instance",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -494,20 +578,21 @@ plastics_rubber.objtypes.MachineInformationType(
                 nodeId="ns=plastics_imm2mes;i=6021",
                 browseName="ns=plastics_rubber;SupportedLogbookEvents",
                 description="Information which LogbookEvents are supported by the machine",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber.datatypes.LogbookEventsEnumeration,
                 valueRank=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6022", browseName="ns=di;AssetId", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6023", browseName="ns=di;ComponentName", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6024", browseName="ns=di;DeviceManual", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6025", browseName="ns=di;DeviceRevision", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6084", browseName="ns=di;HardwareRevision", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6161", browseName="ns=di;ManufacturerUri", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6171", browseName="ns=di;ProductCode", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6172", browseName="ns=di;ProductInstanceUri", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6173", browseName="ns=di;RevisionCounter", dataType=o6.Int32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6174", browseName="ns=di;SoftwareRevision", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6022", browseName="ns=di;AssetId", modellingRule="Optional", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6023", browseName="ns=di;ComponentName", modellingRule="Optional", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6024", browseName="ns=di;DeviceManual", modellingRule="Optional", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6025", browseName="ns=di;DeviceRevision", modellingRule="Optional", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6084", browseName="ns=di;HardwareRevision", modellingRule="Optional", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6161", browseName="ns=di;ManufacturerUri", modellingRule="Optional", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6171", browseName="ns=di;ProductCode", modellingRule="Optional", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6172", browseName="ns=di;ProductInstanceUri", modellingRule="Optional", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6173", browseName="ns=di;RevisionCounter", modellingRule="Optional", dataType=o6.Int32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6174", browseName="ns=di;SoftwareRevision", modellingRule="Optional", dataType=o6.String)),
     ],
 )
 o6.reference(plastics_imm2mes_objtypes.IMM_MES_InterfaceType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_imm2mes;i=5001"])
@@ -515,9 +600,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_imm2mes;i=6180",
     browseName="ns=plastics_imm2mes;MaxScrewStroke",
     description="maximum stroke of the screw installed in the injection unit",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6181", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6182", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6181", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6182", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -526,16 +614,18 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_imm2mes;i=6186",
     browseName="ns=plastics_imm2mes;ScrewVolume",
     description="volume of the screw installed in the injection unit",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6031",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6187", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6187", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -546,8 +636,10 @@ ns0.vartypes.AnalogItemType(
     description="Average plastification pressure in cylinder",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6080", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6195", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6080", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6195", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -559,11 +651,12 @@ ns0.vartypes.AnalogItemType(
     description="volume of the screw installed in the injection unit",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6105", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6105", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6251",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -577,12 +670,14 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_imm2mes;i=6183",
     browseName="ns=plastics_imm2mes;ScrewDiameter",
     description="diameter of the screw installed in the injection unit",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6184", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6184", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6252",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -601,13 +696,19 @@ plastics_imm2mes_objtypes.InjectionUnitType(
                 nodeId="ns=plastics_imm2mes;i=6018",
                 browseName="ns=plastics_imm2mes;BarrelId",
                 description="Id (e.g. serial number) of the barrel",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="\n      ",
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_imm2mes;i=6157", browseName="ns=plastics_imm2mes;Index", description="Number of the injection unit", dataType=o6.UInt32, value=0
+                nodeId="ns=plastics_imm2mes;i=6157",
+                browseName="ns=plastics_imm2mes;Index",
+                description="Number of the injection unit",
+                modellingRule="Mandatory",
+                dataType=o6.UInt32,
+                value=0,
             )
         ),
         o6.hasProperty(
@@ -615,6 +716,7 @@ plastics_imm2mes_objtypes.InjectionUnitType(
                 nodeId="ns=plastics_imm2mes;i=6178",
                 browseName="ns=plastics_imm2mes;InProduction",
                 description="information if the injection unit is used in the current running production",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=True,
             )
@@ -624,6 +726,7 @@ plastics_imm2mes_objtypes.InjectionUnitType(
                 nodeId="ns=plastics_imm2mes;i=6179",
                 browseName="ns=plastics_imm2mes;IsPresent",
                 description="Information if the injection unit is physically installed on the injection machines",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=True,
             )
@@ -633,6 +736,7 @@ plastics_imm2mes_objtypes.InjectionUnitType(
                 nodeId="ns=plastics_imm2mes;i=6185",
                 browseName="ns=plastics_imm2mes;ScrewId",
                 description="Id of the screw installed in the injection unit",
+                modellingRule="Optional",
                 dataType=o6.String,
                 value="\n      ",
             )
@@ -650,11 +754,12 @@ ns0.vartypes.AnalogItemType(
     description="Cavity pressure in the mould during switch-over to the holding pressure",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6128", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6128", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6428",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -670,11 +775,12 @@ ns0.vartypes.AnalogItemType(
     description="Maximum pressure during the injection process in the cavity or mould",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6130", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6130", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6448",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -690,11 +796,12 @@ ns0.vartypes.AnalogItemType(
     description="Decompression after plastification is the movement of the screw in the opposite direction to injection",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6132", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6132", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6449",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -710,11 +817,12 @@ ns0.vartypes.AnalogItemType(
     description="Decompression before plastification is the movement of the screw in the opposite direction to injection",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6136", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6136", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6450",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -730,11 +838,12 @@ ns0.vartypes.AnalogItemType(
     description="Average holding pressure in the hydraulic cylinder",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6147", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6147", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6454",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -750,11 +859,12 @@ ns0.vartypes.AnalogItemType(
     description="Maximum holding pressure in the hydraulic cylinder",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6149", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6149", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6455",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -770,11 +880,12 @@ ns0.vartypes.AnalogItemType(
     description="Average holding pressure in front of the screw",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6151", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6151", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6456",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -790,11 +901,12 @@ ns0.vartypes.AnalogItemType(
     description="Maximum holding pressure in front of the screw",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6153", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6153", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6457",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -810,11 +922,12 @@ ns0.vartypes.AnalogItemType(
     description="Hydraulic pressure in the cylinder during switch-over to the holding pressure",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6162", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6162", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6458",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -830,11 +943,12 @@ ns0.vartypes.AnalogItemType(
     description="Maximum pressure in the hydraulic cylinder",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6191", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6191", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6459",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -850,11 +964,12 @@ ns0.vartypes.AnalogItemType(
     description="Maximum plastification pressure in cylinder",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6206", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6206", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6471",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -870,11 +985,12 @@ ns0.vartypes.AnalogItemType(
     description="Average screw circumferential speed for plastification (e.g. mm/s)",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6210", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6210", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6472",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -890,11 +1006,12 @@ ns0.vartypes.AnalogItemType(
     description="Maximum screw circumferential speed for plastification (e.g. mm/s)",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6214", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6214", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6473",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -910,11 +1027,12 @@ ns0.vartypes.AnalogItemType(
     description="Average plastification speed of the injection unit (RPM)",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6224", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6224", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6474",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -930,8 +1048,10 @@ ns0.vartypes.AnalogItemType(
     description="Material volume remained in front of the screw after injection and holding pressure",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6442", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6475", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6442", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6475", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -943,11 +1063,12 @@ ns0.vartypes.AnalogItemType(
     description="Maximum plastification speed of the injection unit (RPM)",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6226", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6226", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6476",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -963,11 +1084,12 @@ ns0.vartypes.AnalogItemType(
     description="Volume dosed by the machine for the next injection shot",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6227", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6227", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6477",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -983,11 +1105,12 @@ ns0.vartypes.AnalogItemType(
     description="Pressure in front of the screw tip during switch-over to the holding pressure",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6246", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6246", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6478",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -1003,11 +1126,12 @@ ns0.vartypes.AnalogItemType(
     description="Pressure in front of the screw tip",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6248", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6248", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6479",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -1023,11 +1147,12 @@ ns0.vartypes.AnalogItemType(
     description="Switch-over point to the holding pressure via volume",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6427", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6427", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6481",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -1043,8 +1168,10 @@ ns0.vartypes.AnalogItemType(
     description="maximum stroke of the screw installed in the injection unit",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6103", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6689", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6103", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6689", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -1056,11 +1183,12 @@ ns0.vartypes.AnalogItemType(
     description="diameter of the screw installed in the injection unit",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6101", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6101", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6691",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(namespaceUri="\n            ", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()),
             )
@@ -1097,6 +1225,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=plastics_imm2mes;i=7001",
     browseName="CloseAndCommit",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6027"]),
     outputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6028"]),
 )
@@ -1130,6 +1259,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=plastics_imm2mes;i=7002",
     browseName="GenerateFileForRead",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6041"]),
     outputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6042"]),
 )
@@ -1162,6 +1292,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=plastics_imm2mes;i=7003",
     browseName="GenerateFileForWrite",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6116"]),
     outputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6123"]),
 )
@@ -1170,8 +1301,11 @@ ns0.objtypes.TemporaryFileTransferType(
     nodeId="ns=plastics_imm2mes;i=5008",
     browseName="ns=plastics_rubber;ProductionDatasetTransfer",
     description="Transfer of production datasets between server and client",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6026", browseName="ClientProcessingTimeout", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6026", browseName="ClientProcessingTimeout", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
+        ),
         o6.hasComponent(o6.ns["ns=plastics_imm2mes;i=7001"]),
         o6.hasComponent(o6.ns["ns=plastics_imm2mes;i=7002"]),
         o6.hasComponent(o6.ns["ns=plastics_imm2mes;i=7003"]),
@@ -1209,6 +1343,7 @@ o6.call(
     nodeId="ns=plastics_imm2mes;i=7004",
     browseName="ns=plastics_rubber;GetProductionDatasetInformation",
     description="This Method allows reading the description of a production dataset during the file transfer from the server to the client with ProductionDatasetTransfer",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6124"]),
     outputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6125"]),
 )
@@ -1231,6 +1366,7 @@ o6.call(
     nodeId="ns=plastics_imm2mes;i=7005",
     browseName="ns=plastics_rubber;SetMachineTime",
     description="Method for setting the server time together with TimeZoneOffset",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6030"]),
 )
 
@@ -1253,6 +1389,7 @@ o6.call(
     nodeId="ns=plastics_imm2mes;i=7009",
     browseName="ns=plastics_rubber;SetMESMessage",
     description="Method for setting the MESMessage",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6048"]),
 )
 
@@ -1267,6 +1404,7 @@ plastics_rubber.objtypes.MachineStatusType(
                 nodeId="ns=plastics_imm2mes;i=6007",
                 browseName="ns=plastics_rubber;IsPresent",
                 description="Indication if the machine is physically present and connected",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
             )
@@ -1276,13 +1414,25 @@ plastics_rubber.objtypes.MachineStatusType(
                 nodeId="ns=plastics_imm2mes;i=6008",
                 browseName="ns=plastics_rubber;MachineMode",
                 description="Current machine mode (as defined by mode selector on the machine)",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber.datatypes.MachineModeEnumeration,
                 value=plastics_rubber.datatypes.MachineModeEnumeration.OTHER,
             )
         ),
         o6.hasComponent(o6.ns["ns=plastics_imm2mes;i=5010"]),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_imm2mes;i=7010", browseName="ns=plastics_rubber;ActivateSleepMode", description="Method for activation of sleep mode")),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_imm2mes;i=7011", browseName="ns=plastics_rubber;DeactivateSleepMode", description="Method for deactivation of sleep mode")),
+        o6.hasComponent(
+            o6.call(
+                nodeId="ns=plastics_imm2mes;i=7010", browseName="ns=plastics_rubber;ActivateSleepMode", description="Method for activation of sleep mode", modellingRule="Optional"
+            )
+        ),
+        o6.hasComponent(
+            o6.call(
+                nodeId="ns=plastics_imm2mes;i=7011",
+                browseName="ns=plastics_rubber;DeactivateSleepMode",
+                description="Method for deactivation of sleep mode",
+                modellingRule="Optional",
+            )
+        ),
     ],
 )
 o6.reference(plastics_imm2mes_objtypes.IMM_MES_InterfaceType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_imm2mes;i=5006"])
@@ -1316,6 +1466,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=plastics_imm2mes;i=7012",
     browseName="ns=plastics_rubber;GetProductionDatasetList",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6137"]),
     outputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6138"]),
 )
@@ -1331,12 +1482,18 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ProductionDatasetList", dataType=o6.NodeId("ns=plastics_rubber;i=3006"), valueRank=1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=plastics_imm2mes;i=7013", browseName="ns=plastics_rubber;SendProductionDatasetList", inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6139"]))
+o6.call(
+    nodeId="ns=plastics_imm2mes;i=7013",
+    browseName="ns=plastics_rubber;SendProductionDatasetList",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6139"]),
+)
 
 plastics_rubber.objtypes.ProductionDatasetListsType(
     nodeId="ns=plastics_imm2mes;i=5020",
     browseName="ns=plastics_rubber;ProductionDatasetLists",
     description="Functions for exchanging information on the available production datasets on client and server",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=plastics_imm2mes;i=7012"]), o6.hasComponent(o6.ns["ns=plastics_imm2mes;i=7013"])],
     eventNotifier=1,
 )
@@ -1358,6 +1515,7 @@ o6.call(
     nodeId="ns=plastics_imm2mes;i=7017",
     browseName="ns=plastics_rubber;SendCyclicJobList",
     description="Sends a list of jobs for cyclic processes available on the client to the server",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6114"]),
 )
 
@@ -1379,6 +1537,7 @@ o6.call(
     nodeId="ns=plastics_imm2mes;i=7018",
     browseName="ns=plastics_rubber;SendProductionDatasetInformation",
     description="This Method allows sending of the description of a production dataset during the file transfer from the client to the server with ProductionDatasetTransfer",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6140"]),
 )
 
@@ -1412,6 +1571,7 @@ o6.call(
     nodeId="ns=plastics_imm2mes;i=7019",
     browseName="ns=plastics_rubber;SetCyclicJobData",
     description="Method for setting the data for cyclic jobs",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6019"]),
 )
 
@@ -1419,6 +1579,7 @@ plastics_rubber.objtypes.CyclicJobInformationType(
     nodeId="ns=plastics_imm2mes;i=5002",
     browseName="ns=plastics_rubber;ActiveJob",
     description="Job that is currently active on the machine",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6003"]),
         o6.hasProperty(
@@ -1426,6 +1587,7 @@ plastics_rubber.objtypes.CyclicJobInformationType(
                 nodeId="ns=plastics_imm2mes;i=6035",
                 browseName="ns=plastics_rubber;ContinueAtJobEnd",
                 description="Indication if the machine continues the production even if the nominal output has been reached",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -1437,18 +1599,29 @@ plastics_rubber.objtypes.CyclicJobInformationType(
                 nodeId="ns=plastics_imm2mes;i=6036",
                 browseName="ns=plastics_rubber;CustomerName",
                 description="Name of the cumstomer for that the job is produced",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="\n      ",
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_imm2mes;i=6037", browseName="ns=plastics_rubber;JobDescription", description="Description of the job", dataType=o6.String, value="\n      "
+                nodeId="ns=plastics_imm2mes;i=6037",
+                browseName="ns=plastics_rubber;JobDescription",
+                description="Description of the job",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="\n      ",
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_imm2mes;i=6038", browseName="ns=plastics_rubber;JobName", description="Name of the job", dataType=o6.String, value="\n      "
+                nodeId="ns=plastics_imm2mes;i=6038",
+                browseName="ns=plastics_rubber;JobName",
+                description="Name of the job",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="\n      ",
             )
         ),
         o6.hasProperty(
@@ -1456,6 +1629,7 @@ plastics_rubber.objtypes.CyclicJobInformationType(
                 nodeId="ns=plastics_imm2mes;i=6039",
                 browseName="ns=plastics_rubber;Material",
                 description="Array of material names used for the job",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[1],
@@ -1467,9 +1641,10 @@ plastics_rubber.objtypes.CyclicJobInformationType(
                 nodeId="ns=plastics_imm2mes;i=6040",
                 browseName="ns=plastics_rubber;ProductDescription",
                 description="Array of descriptions of the products produced by the job",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=["\n        "],
             )
         ),
@@ -1478,6 +1653,7 @@ plastics_rubber.objtypes.CyclicJobInformationType(
                 nodeId="ns=plastics_imm2mes;i=6045",
                 browseName="ns=plastics_rubber;ProductionDatasetDescription",
                 description="Additional description of the production dataset which is needed for the job",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="\n      ",
             )
@@ -1487,6 +1663,7 @@ plastics_rubber.objtypes.CyclicJobInformationType(
                 nodeId="ns=plastics_imm2mes;i=6087",
                 browseName="ns=plastics_rubber;ProductionDatasetName",
                 description="Name of the production dataset which is needed for the job",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="\n      ",
             )
@@ -1496,9 +1673,10 @@ plastics_rubber.objtypes.CyclicJobInformationType(
                 nodeId="ns=plastics_imm2mes;i=6088",
                 browseName="ns=plastics_rubber;ProductName",
                 description="Array of product names produced by the job",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=["\n        "],
             )
         ),
@@ -1507,6 +1685,7 @@ plastics_rubber.objtypes.CyclicJobInformationType(
                 nodeId="ns=plastics_imm2mes;i=6175",
                 browseName="ns=plastics_rubber;ExpectedCycleTime",
                 description="Calculated cycle time for the job",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.Duration,
                 value=0.0,
                 accessLevel=3,
@@ -1515,7 +1694,12 @@ plastics_rubber.objtypes.CyclicJobInformationType(
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_imm2mes;i=6176", browseName="ns=plastics_rubber;MouldId", description="Id of the Mould used for the job", dataType=o6.String, value="\n      "
+                nodeId="ns=plastics_imm2mes;i=6176",
+                browseName="ns=plastics_rubber;MouldId",
+                description="Id of the Mould used for the job",
+                modellingRule="Optional",
+                dataType=o6.String,
+                value="\n      ",
             )
         ),
         o6.hasProperty(
@@ -1523,6 +1707,7 @@ plastics_rubber.objtypes.CyclicJobInformationType(
                 nodeId="ns=plastics_imm2mes;i=6177",
                 browseName="ns=plastics_rubber;NominalBoxParts",
                 description="Number of parts that shall be put into one box",
+                modellingRule="Optional",
                 dataType=o6.UInt64,
                 value=0,
                 accessLevel=3,
@@ -1534,6 +1719,7 @@ plastics_rubber.objtypes.CyclicJobInformationType(
                 nodeId="ns=plastics_imm2mes;i=6189",
                 browseName="ns=plastics_rubber;NumCavities",
                 description="Number of cavities in the Mould used for production",
+                modellingRule="Optional",
                 dataType=o6.UInt32,
                 value=0,
             )
@@ -1546,12 +1732,14 @@ plastics_rubber.objtypes.ActiveCyclicJobValuesType(
     nodeId="ns=plastics_imm2mes;i=5013",
     browseName="ns=plastics_rubber;ActiveJobValues",
     description="Status of the job",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6133",
                 browseName="ns=plastics_rubber;CurrentLotName",
                 description="Name of the current production lot",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="\n      ",
                 accessLevel=3,
@@ -1563,6 +1751,7 @@ plastics_rubber.objtypes.ActiveCyclicJobValuesType(
                 nodeId="ns=plastics_imm2mes;i=6134",
                 browseName="ns=plastics_rubber;JobStatus",
                 description="Current status of the job",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber.datatypes.JobStatusEnumeration,
                 value=plastics_rubber.datatypes.JobStatusEnumeration.OTHER,
             )
@@ -1572,6 +1761,7 @@ plastics_rubber.objtypes.ActiveCyclicJobValuesType(
                 nodeId="ns=plastics_imm2mes;i=6196",
                 browseName="ns=plastics_rubber;BoxId",
                 description="Id of the box in which the current production is put in",
+                modellingRule="Optional",
                 dataType=o6.String,
                 value="\n      ",
                 accessLevel=3,
@@ -1583,6 +1773,7 @@ plastics_rubber.objtypes.ActiveCyclicJobValuesType(
                 nodeId="ns=plastics_imm2mes;i=6089",
                 browseName="ns=plastics_rubber;JobBadPartsCounter",
                 description="Number of bad parts produced in the current job",
+                modellingRule="Mandatory",
                 dataType=o6.UInt64,
                 value=0,
             )
@@ -1592,6 +1783,7 @@ plastics_rubber.objtypes.ActiveCyclicJobValuesType(
                 nodeId="ns=plastics_imm2mes;i=6090",
                 browseName="ns=plastics_rubber;JobCycleCounter",
                 description="Number of finished cycles in the job",
+                modellingRule="Mandatory",
                 dataType=o6.UInt64,
                 value=0,
             )
@@ -1601,6 +1793,7 @@ plastics_rubber.objtypes.ActiveCyclicJobValuesType(
                 nodeId="ns=plastics_imm2mes;i=6091",
                 browseName="ns=plastics_rubber;JobGoodPartsCounter",
                 description="Number of good parts produced in the current job",
+                modellingRule="Mandatory",
                 dataType=o6.UInt64,
                 value=0,
             )
@@ -1610,6 +1803,7 @@ plastics_rubber.objtypes.ActiveCyclicJobValuesType(
                 nodeId="ns=plastics_imm2mes;i=6092",
                 browseName="ns=plastics_rubber;JobPartsCounter",
                 description="Total number of parts produced in the current job",
+                modellingRule="Mandatory",
                 dataType=o6.UInt64,
                 value=0,
             )
@@ -1619,6 +1813,7 @@ plastics_rubber.objtypes.ActiveCyclicJobValuesType(
                 nodeId="ns=plastics_imm2mes;i=6115",
                 browseName="ns=plastics_rubber;JobTestSamplesCounter",
                 description="Number of test sample parts produced in the current job",
+                modellingRule="Mandatory",
                 dataType=o6.UInt64,
                 value=0,
             )
@@ -1628,13 +1823,19 @@ plastics_rubber.objtypes.ActiveCyclicJobValuesType(
                 nodeId="ns=plastics_imm2mes;i=6127",
                 browseName="ns=plastics_rubber;LastCycleTime",
                 description="Time of the recently finished cycle",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Duration,
                 value=0.0,
             )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=plastics_imm2mes;i=6135", browseName="ns=plastics_rubber;AverageCycleTime", description="Average cycle time", dataType=ns0.datatypes.Duration, value=0.0
+                nodeId="ns=plastics_imm2mes;i=6135",
+                browseName="ns=plastics_rubber;AverageCycleTime",
+                description="Average cycle time",
+                modellingRule="Optional",
+                dataType=ns0.datatypes.Duration,
+                value=0.0,
             )
         ),
         o6.hasComponent(
@@ -1642,6 +1843,7 @@ plastics_rubber.objtypes.ActiveCyclicJobValuesType(
                 nodeId="ns=plastics_imm2mes;i=6190",
                 browseName="ns=plastics_rubber;BoxBadPartsCounter",
                 description="Number of bad parts produced in the current box",
+                modellingRule="Optional",
                 dataType=o6.UInt64,
                 value=0,
             )
@@ -1651,6 +1853,7 @@ plastics_rubber.objtypes.ActiveCyclicJobValuesType(
                 nodeId="ns=plastics_imm2mes;i=6192",
                 browseName="ns=plastics_rubber;BoxCycleCounter",
                 description="Number of finished cycles for the current box",
+                modellingRule="Optional",
                 dataType=o6.UInt64,
                 value=0,
             )
@@ -1660,6 +1863,7 @@ plastics_rubber.objtypes.ActiveCyclicJobValuesType(
                 nodeId="ns=plastics_imm2mes;i=6193",
                 browseName="ns=plastics_rubber;BoxGoodPartsCounter",
                 description="Number of good parts produced in the current box",
+                modellingRule="Optional",
                 dataType=o6.UInt64,
                 value=0,
             )
@@ -1669,6 +1873,7 @@ plastics_rubber.objtypes.ActiveCyclicJobValuesType(
                 nodeId="ns=plastics_imm2mes;i=6198",
                 browseName="ns=plastics_rubber;BoxPartsCounter",
                 description="Total number of parts produced in the current box",
+                modellingRule="Optional",
                 dataType=o6.UInt64,
                 value=0,
             )
@@ -1678,6 +1883,7 @@ plastics_rubber.objtypes.ActiveCyclicJobValuesType(
                 nodeId="ns=plastics_imm2mes;i=6199",
                 browseName="ns=plastics_rubber;BoxTestSamplesCounter",
                 description="Number of test sample parts produced in the current box",
+                modellingRule="Optional",
                 dataType=o6.UInt64,
                 value=0,
             )
@@ -1687,6 +1893,7 @@ plastics_rubber.objtypes.ActiveCyclicJobValuesType(
                 nodeId="ns=plastics_imm2mes;i=6200",
                 browseName="ns=plastics_rubber;LastPartId",
                 description="Id(s) of the parts produced in the recently finished cycle",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[1],
@@ -1698,21 +1905,33 @@ plastics_rubber.objtypes.ActiveCyclicJobValuesType(
                 nodeId="ns=plastics_imm2mes;i=6201",
                 browseName="ns=plastics_rubber;MachineCycleCounter",
                 description="Number of finished cycles in the machine life time",
+                modellingRule="Optional",
                 dataType=o6.UInt64,
                 value=0,
             )
         ),
         o6.hasComponent(
-            o6.call(nodeId="ns=plastics_imm2mes;i=7014", browseName="ns=plastics_rubber;ResetJobCounters", description="Setting the cycle and parts counters for the job to 0")
+            o6.call(
+                nodeId="ns=plastics_imm2mes;i=7014",
+                browseName="ns=plastics_rubber;ResetJobCounters",
+                description="Setting the cycle and parts counters for the job to 0",
+                modellingRule="Mandatory",
+            )
         ),
         o6.hasComponent(
-            o6.call(nodeId="ns=plastics_imm2mes;i=7015", browseName="ns=plastics_rubber;StopAtCycleEnd", description="Directs the machine to stop at the end of the current cycle")
+            o6.call(
+                nodeId="ns=plastics_imm2mes;i=7015",
+                browseName="ns=plastics_rubber;StopAtCycleEnd",
+                description="Directs the machine to stop at the end of the current cycle",
+                modellingRule="Mandatory",
+            )
         ),
         o6.hasComponent(
             o6.call(
                 nodeId="ns=plastics_imm2mes;i=7016",
                 browseName="ns=plastics_rubber;FinishJob",
                 description="With this Method the client (e.g. MES) requests the machine to change the JobStatus to JOB_FINISHED_8",
+                modellingRule="Mandatory",
             )
         ),
         o6.hasComponent(
@@ -1720,6 +1939,7 @@ plastics_rubber.objtypes.ActiveCyclicJobValuesType(
                 nodeId="ns=plastics_imm2mes;i=7020",
                 browseName="ns=plastics_rubber;InterruptJob",
                 description="With this Method the client (e.g. MES) requests the machine to change the JobStatus to JOB_INTERRUPTED_7",
+                modellingRule="Mandatory",
             )
         ),
         o6.hasComponent(
@@ -1727,6 +1947,7 @@ plastics_rubber.objtypes.ActiveCyclicJobValuesType(
                 nodeId="ns=plastics_imm2mes;i=7021",
                 browseName="ns=plastics_rubber;StartJob",
                 description="With this Method the client (e.g. MES) request the machine to change the JobStatus to JOB_IN_PRODUCTION_6",
+                modellingRule="Mandatory",
             )
         ),
         o6.hasComponent(
@@ -1734,11 +1955,15 @@ plastics_rubber.objtypes.ActiveCyclicJobValuesType(
                 nodeId="ns=plastics_imm2mes;i=7022",
                 browseName="ns=plastics_rubber;ResetAverageCycleTime",
                 description="Initiates a new calculation of the average cycle time for the job",
+                modellingRule="Optional",
             )
         ),
         o6.hasComponent(
             o6.call(
-                nodeId="ns=plastics_imm2mes;i=7023", browseName="ns=plastics_rubber;ResetBoxCounters", description="Setting the cycle and parts counters for the current box to 0"
+                nodeId="ns=plastics_imm2mes;i=7023",
+                browseName="ns=plastics_rubber;ResetBoxCounters",
+                description="Setting the cycle and parts counters for the current box to 0",
+                modellingRule="Optional",
             )
         ),
     ],
@@ -1775,6 +2000,7 @@ o6.call(
     nodeId="ns=plastics_imm2mes;i=7026",
     browseName="ns=plastics_rubber;SetCyclicJobData",
     description="Method for setting the data for cyclic jobs",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6095"]),
 )
 
@@ -1782,6 +2008,7 @@ plastics_rubber.objtypes.CyclicJobInformationType(
     nodeId="ns=plastics_imm2mes;i=5019",
     browseName="ns=plastics_rubber;JobInPreparation",
     description="Job in a preparation layer of the machine",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6094"]),
         o6.hasProperty(
@@ -1789,6 +2016,7 @@ plastics_rubber.objtypes.CyclicJobInformationType(
                 nodeId="ns=plastics_imm2mes;i=6096",
                 browseName="ns=plastics_rubber;ContinueAtJobEnd",
                 description="Indication if the machine continues the production even if the nominal output has been reached",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -1800,18 +2028,29 @@ plastics_rubber.objtypes.CyclicJobInformationType(
                 nodeId="ns=plastics_imm2mes;i=6108",
                 browseName="ns=plastics_rubber;CustomerName",
                 description="Name of the cumstomer for that the job is produced",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="\n      ",
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_imm2mes;i=6109", browseName="ns=plastics_rubber;JobDescription", description="Description of the job", dataType=o6.String, value="\n      "
+                nodeId="ns=plastics_imm2mes;i=6109",
+                browseName="ns=plastics_rubber;JobDescription",
+                description="Description of the job",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="\n      ",
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_imm2mes;i=6110", browseName="ns=plastics_rubber;JobName", description="Name of the job", dataType=o6.String, value="\n      "
+                nodeId="ns=plastics_imm2mes;i=6110",
+                browseName="ns=plastics_rubber;JobName",
+                description="Name of the job",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="\n      ",
             )
         ),
         o6.hasProperty(
@@ -1819,6 +2058,7 @@ plastics_rubber.objtypes.CyclicJobInformationType(
                 nodeId="ns=plastics_imm2mes;i=6111",
                 browseName="ns=plastics_rubber;Material",
                 description="Array of material names used for the job",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[1],
@@ -1830,9 +2070,10 @@ plastics_rubber.objtypes.CyclicJobInformationType(
                 nodeId="ns=plastics_imm2mes;i=6112",
                 browseName="ns=plastics_rubber;ProductDescription",
                 description="Array of descriptions of the products produced by the job",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=["\n        "],
             )
         ),
@@ -1841,6 +2082,7 @@ plastics_rubber.objtypes.CyclicJobInformationType(
                 nodeId="ns=plastics_imm2mes;i=6113",
                 browseName="ns=plastics_rubber;ProductionDatasetDescription",
                 description="Additional description of the production dataset which is needed for the job",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="\n      ",
             )
@@ -1850,6 +2092,7 @@ plastics_rubber.objtypes.CyclicJobInformationType(
                 nodeId="ns=plastics_imm2mes;i=6144",
                 browseName="ns=plastics_rubber;ProductionDatasetName",
                 description="Name of the production dataset which is needed for the job",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="\n      ",
             )
@@ -1859,9 +2102,10 @@ plastics_rubber.objtypes.CyclicJobInformationType(
                 nodeId="ns=plastics_imm2mes;i=6145",
                 browseName="ns=plastics_rubber;ProductName",
                 description="Array of product names produced by the job",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=["\n        "],
             )
         ),
@@ -1870,6 +2114,7 @@ plastics_rubber.objtypes.CyclicJobInformationType(
                 nodeId="ns=plastics_imm2mes;i=6202",
                 browseName="ns=plastics_rubber;ExpectedCycleTime",
                 description="Calculated cycle time for the job",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.Duration,
                 value=0.0,
                 accessLevel=3,
@@ -1878,7 +2123,12 @@ plastics_rubber.objtypes.CyclicJobInformationType(
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_imm2mes;i=6203", browseName="ns=plastics_rubber;MouldId", description="Id of the Mould used for the job", dataType=o6.String, value="\n      "
+                nodeId="ns=plastics_imm2mes;i=6203",
+                browseName="ns=plastics_rubber;MouldId",
+                description="Id of the Mould used for the job",
+                modellingRule="Optional",
+                dataType=o6.String,
+                value="\n      ",
             )
         ),
         o6.hasProperty(
@@ -1886,6 +2136,7 @@ plastics_rubber.objtypes.CyclicJobInformationType(
                 nodeId="ns=plastics_imm2mes;i=6204",
                 browseName="ns=plastics_rubber;NominalBoxParts",
                 description="Number of parts that shall be put into one box",
+                modellingRule="Optional",
                 dataType=o6.UInt64,
                 value=0,
                 accessLevel=3,
@@ -1897,6 +2148,7 @@ plastics_rubber.objtypes.CyclicJobInformationType(
                 nodeId="ns=plastics_imm2mes;i=6205",
                 browseName="ns=plastics_rubber;NumCavities",
                 description="Number of cavities in the Mould used for production",
+                modellingRule="Optional",
                 dataType=o6.UInt32,
                 value=0,
             )
@@ -1937,6 +2189,7 @@ o6.call(
     nodeId="ns=plastics_imm2mes;i=7027",
     browseName="ns=plastics_rubber;SetWatchDogTime",
     description="Release of production for a given time",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6209"]),
 )
 
@@ -1944,12 +2197,14 @@ plastics_rubber.objtypes.ProductionControlType(
     nodeId="ns=plastics_imm2mes;i=5015",
     browseName="ns=plastics_rubber;ProductionControl",
     description="Control of the production of the machine by MES",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6015",
                 browseName="ns=plastics_rubber;AutomaticRunEnabled",
                 description="Indication if semi-automatic and automatic run of the machine is allowed by MES",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
             )
@@ -1959,6 +2214,7 @@ plastics_rubber.objtypes.ProductionControlType(
                 nodeId="ns=plastics_imm2mes;i=6046",
                 browseName="ns=plastics_rubber;ProductionReleasedByMES",
                 description="Indication if ProductionStatus may have the value PRODUCTION_4",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -1970,6 +2226,7 @@ plastics_rubber.objtypes.ProductionControlType(
                 nodeId="ns=plastics_imm2mes;i=6047",
                 browseName="ns=plastics_rubber;ProductionStatus",
                 description="Production status when the machine is in automatic or semi-automatic mode",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber.datatypes.ProductionStatusEnumeration,
                 value=plastics_rubber.datatypes.ProductionStatusEnumeration.OTHER,
             )
@@ -1979,6 +2236,7 @@ plastics_rubber.objtypes.ProductionControlType(
                 nodeId="ns=plastics_imm2mes;i=6207",
                 browseName="ns=plastics_rubber;ProductionOnlyWithMES",
                 description="Indication if production with the machine is only allowed when the MES is active",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -1990,6 +2248,7 @@ plastics_rubber.objtypes.ProductionControlType(
                 nodeId="ns=plastics_imm2mes;i=7007",
                 browseName="ns=plastics_rubber;DisableAutomaticRun",
                 description="Method for disabling the semi-automatic and automatic run of the machine",
+                modellingRule="Mandatory",
             )
         ),
         o6.hasComponent(
@@ -1997,6 +2256,7 @@ plastics_rubber.objtypes.ProductionControlType(
                 nodeId="ns=plastics_imm2mes;i=7008",
                 browseName="ns=plastics_rubber;EnableAutomaticRun",
                 description="Method for enabling the semi-automatic and automatic run of the machine",
+                modellingRule="Mandatory",
             )
         ),
         o6.hasComponent(
@@ -2004,6 +2264,7 @@ plastics_rubber.objtypes.ProductionControlType(
                 nodeId="ns=plastics_imm2mes;i=7024",
                 browseName="ns=plastics_rubber;RequestTestSample",
                 description="The machine shall separate a test sample (e.g. for quality check). The size of the test sample depends on the product/machine configuration.",
+                modellingRule="Optional",
             )
         ),
         o6.hasComponent(
@@ -2011,6 +2272,7 @@ plastics_rubber.objtypes.ProductionControlType(
                 nodeId="ns=plastics_imm2mes;i=7025",
                 browseName="ns=plastics_rubber;ResetWatchDog",
                 description="Setting the watch dog timer to the value set by the last calling of SetWatchDogTime",
+                modellingRule="Optional",
             )
         ),
         o6.hasComponent(o6.ns["ns=plastics_imm2mes;i=7027"]),
@@ -2027,7 +2289,11 @@ plastics_rubber.objtypes.MachineMESStatusType(
         o6.hasComponent(o6.ns["ns=plastics_imm2mes;i=5012"]),
         o6.hasComponent(o6.ns["ns=plastics_imm2mes;i=5015"]),
         o6.hasComponent(o6.ns["ns=plastics_imm2mes;i=5016"]),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_imm2mes;i=7006", browseName="ns=plastics_rubber;ClearMESMessage", description="Method for clearing the MESMessage")),
+        o6.hasComponent(
+            o6.call(
+                nodeId="ns=plastics_imm2mes;i=7006", browseName="ns=plastics_rubber;ClearMESMessage", description="Method for clearing the MESMessage", modellingRule="Mandatory"
+            )
+        ),
         o6.hasComponent(o6.ns["ns=plastics_imm2mes;i=7009"]),
     ],
     eventNotifier=1,
@@ -2054,6 +2320,7 @@ o6.call(
     nodeId="ns=plastics_imm2mes;i=7028",
     browseName="ns=plastics_rubber;Load",
     description="Loads a production dataset from the file system of the machine to the control of the machine",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6213"]),
 )
 
@@ -2083,6 +2350,7 @@ o6.call(
     nodeId="ns=plastics_imm2mes;i=7029",
     browseName="ns=plastics_rubber;GetCurrentPage",
     description="Method for retrieving a screenshot of the control system with the currently shown contents",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6075"]),
     outputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6076"]),
 )
@@ -2113,6 +2381,7 @@ o6.call(
     nodeId="ns=plastics_imm2mes;i=7030",
     browseName="ns=plastics_rubber;GetPage",
     description="Method for retrieving the image of a page of the control system",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6077"]),
     outputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6078"]),
 )
@@ -2128,6 +2397,7 @@ plastics_rubber.objtypes.MachineConfigurationType(
                 nodeId="ns=plastics_imm2mes;i=6029",
                 browseName="ns=plastics_rubber;LocationName",
                 description="Description of the location of the machine given by the machine operator or OPC client",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="\n      ",
                 accessLevel=3,
@@ -2139,6 +2409,7 @@ plastics_rubber.objtypes.MachineConfigurationType(
                 nodeId="ns=plastics_imm2mes;i=6033",
                 browseName="ns=plastics_rubber;TimeZoneOffset",
                 description="Difference of the local time to Coordinated Universal Time (UTC) given by the machine operator or OPC client",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.TimeZoneDataType,
                 value=ns0.datatypes.TimeZoneDataType(offset=0, daylightSavingInOffset=False),
                 accessLevel=3,
@@ -2150,6 +2421,7 @@ plastics_rubber.objtypes.MachineConfigurationType(
                 nodeId="ns=plastics_imm2mes;i=6034",
                 browseName="ns=plastics_rubber;UserMachineName",
                 description="Description of the machine given by the machine operator or OPC client",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="\n      ",
                 accessLevel=3,
@@ -2161,6 +2433,7 @@ plastics_rubber.objtypes.MachineConfigurationType(
                 nodeId="ns=plastics_imm2mes;i=6079",
                 browseName="ns=plastics_rubber;PageDirectory",
                 description="List of the pages that are implemented in the machine control system and are shown on the screen of the machine",
+                modellingRule="Optional",
                 dataType=plastics_rubber.datatypes.PageEntryDataType,
                 valueRank=1,
             )
@@ -2188,6 +2461,7 @@ o6.call(
     nodeId="ns=plastics_imm2mes;i=7031",
     browseName="ns=plastics_rubber;Save",
     description="Stores a production dataset from the control of the machine to the file system of the machine",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6216"]),
 )
 
@@ -2195,12 +2469,14 @@ plastics_rubber.objtypes.ProductionDatasetStatusType(
     nodeId="ns=plastics_imm2mes;i=5007",
     browseName="ns=plastics_rubber;ActiveProductionDatasetStatus",
     description="Status of the active production dataset",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6020",
                 browseName="ns=plastics_rubber;Information",
                 description="Set of information on the production dataset",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber.datatypes.ProductionDatasetInformationType,
                 value=plastics_rubber.datatypes.ProductionDatasetInformationType(
                     name="\n            ",
@@ -2228,6 +2504,7 @@ plastics_rubber.objtypes.ProductionDatasetStatusType(
                 nodeId="ns=plastics_imm2mes;i=6212",
                 browseName="ns=plastics_rubber;Frozen",
                 description="Indication if changes on the machine in the production dataset are allowed",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -2239,6 +2516,7 @@ plastics_rubber.objtypes.ProductionDatasetStatusType(
                 nodeId="ns=plastics_imm2mes;i=6215",
                 browseName="ns=plastics_rubber;Modified",
                 description="Indication if the production dataset has been changed after the last storage",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
             )
@@ -2267,6 +2545,7 @@ o6.call(
     nodeId="ns=plastics_imm2mes;i=7032",
     browseName="ns=plastics_rubber;Load",
     description="Loads a production dataset from the file system of the machine to the control of the machine",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6218"]),
 )
 
@@ -2285,6 +2564,7 @@ o6.call(
     nodeId="ns=plastics_imm2mes;i=7033",
     browseName="ns=plastics_rubber;Save",
     description="Stores a production dataset from the control of the machine to the file system of the machine",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=plastics_imm2mes;i=6220"]),
 )
 
@@ -2292,12 +2572,14 @@ plastics_rubber.objtypes.ProductionDatasetStatusType(
     nodeId="ns=plastics_imm2mes;i=5014",
     browseName="ns=plastics_rubber;ProductionDatasetInPreparationStatus",
     description="Status of the production dataset in the preparation layer",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_imm2mes;i=6126",
                 browseName="ns=plastics_rubber;Information",
                 description="Set of information on the production dataset",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber.datatypes.ProductionDatasetInformationType,
                 value=plastics_rubber.datatypes.ProductionDatasetInformationType(
                     name="\n            ",
@@ -2325,6 +2607,7 @@ plastics_rubber.objtypes.ProductionDatasetStatusType(
                 nodeId="ns=plastics_imm2mes;i=6217",
                 browseName="ns=plastics_rubber;Frozen",
                 description="Indication if changes on the machine in the production dataset are allowed",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -2336,6 +2619,7 @@ plastics_rubber.objtypes.ProductionDatasetStatusType(
                 nodeId="ns=plastics_imm2mes;i=6219",
                 browseName="ns=plastics_rubber;Modified",
                 description="Indication if the production dataset has been changed after the last storage",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
             )

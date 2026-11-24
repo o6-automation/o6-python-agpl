@@ -259,15 +259,26 @@ di.objtypes.FunctionalGroupType(
     nodeId="ns=auto_id;i=5032",
     browseName="ns=auto_id;Logbook",
     description="Values of the logbook.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=auto_id;i=6101", browseName="ns=auto_id;LogColumns", description="Last Entry of the Loogbook.", dataType=o6.String, accessLevel=3
+                nodeId="ns=auto_id;i=6101",
+                browseName="ns=auto_id;LogColumns",
+                description="Last Entry of the Loogbook.",
+                modellingRule="Optional",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=auto_id;i=6102", browseName="ns=auto_id;LastLogEntry", description="Column headings of the Loogbook.", dataType=o6.String, accessLevel=3
+                nodeId="ns=auto_id;i=6102",
+                browseName="ns=auto_id;LastLogEntry",
+                description="Column headings of the Loogbook.",
+                modellingRule="Optional",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
     ],
@@ -276,20 +287,29 @@ di.objtypes.FunctionalGroupType(
     nodeId="ns=auto_id;i=5027",
     browseName="ns=auto_id;LastAccess",
     description="Values of the last AutoID Identifier access.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=auto_id;i=6103", browseName="ns=auto_id;Client", description="Client which was the originator of the command.", dataType=o6.String, accessLevel=3
+                nodeId="ns=auto_id;i=6103",
+                browseName="ns=auto_id;Client",
+                description="Client which was the originator of the command.",
+                modellingRule="Optional",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=auto_id;i=6104", browseName="ns=auto_id;Command", description="Access command", dataType=o6.String, accessLevel=3)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=auto_id;i=6104", browseName="ns=auto_id;Command", description="Access command", modellingRule="Optional", dataType=o6.String, accessLevel=3
+            )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=auto_id;i=6105",
                 browseName="ns=auto_id;Identifier",
                 description="The AutoID Identifier (e.g. a code or a transponder) which was accessed by a command.",
+                modellingRule="Optional",
                 accessLevel=3,
             )
         ),
@@ -298,6 +318,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=auto_id;i=6106",
                 browseName="ns=auto_id;Timestamp",
                 description="The point of time the AutoID Identifier was accessed by the command.",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.UtcTime,
                 accessLevel=3,
             )
@@ -317,6 +338,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=auto_id;i=6100",
                 browseName="ns=auto_id;Presence",
                 description="Current presence of AutoID Identifier (e.g. a code or a transponder).",
+                modellingRule="Optional",
                 dataType=o6.UInt16,
                 accessLevel=3,
             )
@@ -328,7 +350,12 @@ ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=auto_id;i=6107",
     browseName="ns=auto_id;CodeTypes",
     description="Supported CodeTypes and selected CodeType for the ScanData.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6108", browseName="EnumStrings", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0]))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6108", browseName="EnumStrings", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0])
+        )
+    ],
     dataType=o6.UInt32,
     valueRank=1,
     arrayDimensions=[0],
@@ -338,12 +365,14 @@ di.objtypes.FunctionalGroupType(
     nodeId="ns=auto_id;i=5033",
     browseName="ns=auto_id;ScanSettings",
     description="Scan settings used together with ScanActive Variable.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=auto_id;i=6109",
                 browseName="ns=auto_id;CodeType",
                 description="The format of LastScanData Variable as string.",
+                modellingRule="Optional",
                 dataType=auto_id_datypes.CodeTypeDataType,
                 accessLevel=3,
             )
@@ -353,13 +382,19 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=auto_id;i=6110",
                 browseName="ns=auto_id;DataAvailable",
                 description="Finish scan operation as soon as scan data is available.",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 accessLevel=3,
             )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=auto_id;i=6111", browseName="ns=auto_id;Cycles", description="Duration of the scan operation in number of scan cycles.", dataType=o6.Int32, accessLevel=3
+                nodeId="ns=auto_id;i=6111",
+                browseName="ns=auto_id;Cycles",
+                description="Duration of the scan operation in number of scan cycles.",
+                modellingRule="Optional",
+                dataType=o6.Int32,
+                accessLevel=3,
             )
         ),
         o6.hasComponent(
@@ -367,6 +402,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=auto_id;i=6112",
                 browseName="ns=auto_id;Duration",
                 description="Duration of the scan operation in milliseconds.",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.Duration,
                 accessLevel=3,
             )
@@ -384,12 +420,14 @@ di.objtypes.FunctionalGroupType(
     nodeId="ns=auto_id;i=5039",
     browseName="ns=auto_id;LastAccess",
     description="Values of the last AutoID Identifier access.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=auto_id;i=6113",
                 browseName="ns=auto_id;RWData",
                 description="The user data which was written to / was read from the Rfid Transponder by the command.",
+                modellingRule="Optional",
                 accessLevel=3,
             )
         ),
@@ -398,6 +436,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=auto_id;i=6114",
                 browseName="ns=auto_id;Antenna",
                 description="The antenna by which the transponder was accessed by the command.",
+                modellingRule="Optional",
                 dataType=o6.Int32,
                 accessLevel=3,
             )
@@ -407,6 +446,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=auto_id;i=6115",
                 browseName="ns=auto_id;CurrentPowerLevel",
                 description="The power level with which the transponder was accessed by the command.",
+                modellingRule="Optional",
                 dataType=o6.Int32,
                 accessLevel=3,
             )
@@ -416,6 +456,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=auto_id;i=6116",
                 browseName="ns=auto_id;PC",
                 description="The Protocol Control Word of the transponder accessed by the command.",
+                modellingRule="Optional",
                 dataType=o6.UInt16,
                 accessLevel=3,
             )
@@ -425,6 +466,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=auto_id;i=6117",
                 browseName="ns=auto_id;Polarization",
                 description="The polarization with which the last transponder was accessed by the command.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 accessLevel=3,
             )
@@ -434,6 +476,7 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=auto_id;i=6118",
                 browseName="ns=auto_id;Strength",
                 description="The Rssi value with which the transponder was accessed by the command.",
+                modellingRule="Optional",
                 dataType=o6.Int32,
                 accessLevel=3,
             )
@@ -452,23 +495,35 @@ ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=auto_id;i=6119",
     browseName="ns=auto_id;CodeTypesRWData",
     description="Supported CodeTypes and selected CodeType for the diagnostics value RWData.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6120", browseName="EnumStrings", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0]))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6120", browseName="EnumStrings", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0])
+        )
+    ],
     dataType=o6.UInt32,
     valueRank=1,
     arrayDimensions=[0],
     accessLevel=3,
 )
-ns0.vartypes.DataTypeDescriptionType(nodeId="ns=auto_id;i=6122", browseName="ns=auto_id;LocalCoordinate", dataType=o6.String, value="LocalCoordinate", historizing=True)
+ns0.vartypes.DataTypeDescriptionType(
+    nodeId="ns=auto_id;i=6122", browseName="ns=auto_id;LocalCoordinate", dataType=o6.String, value="LocalCoordinate", accessLevel=1, historizing=True
+)
 o6.reference(o6.ns["ns=auto_id;i=5028"], "i=39", o6.ns["ns=auto_id;i=6122"])
 ns0.vartypes.DataTypeDescriptionType(
-    nodeId="ns=auto_id;i=6123", browseName="ns=auto_id;LocalCoordinate", dataType=o6.String, value="//xs:element[@name='LocalCoordinate']", historizing=True
+    nodeId="ns=auto_id;i=6123", browseName="ns=auto_id;LocalCoordinate", dataType=o6.String, value="//xs:element[@name='LocalCoordinate']", accessLevel=1, historizing=True
 )
 o6.reference(o6.ns["ns=auto_id;i=5029"], "i=39", o6.ns["ns=auto_id;i=6123"])
 ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=auto_id;i=6121",
     browseName="ns=auto_id;TagTypes",
     description="Expected tags in a multi-type environment.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6125", browseName="EnumStrings", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0]))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6125", browseName="EnumStrings", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0])
+        )
+    ],
     dataType=o6.UInt32,
     valueRank=1,
     arrayDimensions=[0],
@@ -488,13 +543,19 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=auto_id;i=6133",
                 browseName="ns=auto_id;TemplateName",
                 description="Activate template which defines a specific identification task.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 accessLevel=3,
             )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=auto_id;i=6134", browseName="ns=auto_id;MatchCode", description="Target value for 2D or OCR decoding.", dataType=o6.String, accessLevel=3
+                nodeId="ns=auto_id;i=6134",
+                browseName="ns=auto_id;MatchCode",
+                description="Target value for 2D or OCR decoding.",
+                modellingRule="Optional",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
     ],
@@ -510,13 +571,19 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=auto_id;i=6135",
                 browseName="ns=auto_id;TemplateName",
                 description="Activate template which defines a specific identification task.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 accessLevel=3,
             )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=auto_id;i=6136", browseName="ns=auto_id;MatchCode", description="Target value for 2D or OCR decoding.", dataType=o6.String, accessLevel=3
+                nodeId="ns=auto_id;i=6136",
+                browseName="ns=auto_id;MatchCode",
+                description="Target value for 2D or OCR decoding.",
+                modellingRule="Optional",
+                dataType=o6.String,
+                accessLevel=3,
             )
         ),
     ],
@@ -542,18 +609,24 @@ di.objtypes.FunctionalGroupType(
                 nodeId="ns=auto_id;i=6126",
                 browseName="ns=auto_id;EnableAntennas",
                 description="Antennas that shall be used by the device for its operation.",
+                modellingRule="Optional",
                 dataType=o6.UInt32,
                 accessLevel=3,
             )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=auto_id;i=6141", browseName="ns=auto_id;RfPower", description="Radio transmission power of the antenna.", dataType=o6.SByte, accessLevel=3
+                nodeId="ns=auto_id;i=6141",
+                browseName="ns=auto_id;RfPower",
+                description="Radio transmission power of the antenna.",
+                modellingRule="Optional",
+                dataType=o6.SByte,
+                accessLevel=3,
             )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=auto_id;i=6146", browseName="ns=auto_id;MinRssi", description="Lowest acceptable RSSI value.", dataType=o6.Int32, accessLevel=3
+                nodeId="ns=auto_id;i=6146", browseName="ns=auto_id;MinRssi", description="Lowest acceptable RSSI value.", modellingRule="Optional", dataType=o6.Int32, accessLevel=3
             )
         ),
     ],
@@ -728,7 +801,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=auto_id;i=7002", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6002"]))
+o6.call(nodeId="ns=auto_id;i=7002", browseName="Close", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6002"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6003",
@@ -752,7 +825,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=auto_id;i=7003", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6003"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6004"]))
+o6.call(
+    nodeId="ns=auto_id;i=7003",
+    browseName="GetPosition",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6003"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6004"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6005",
@@ -776,7 +855,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=auto_id;i=7004", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6005"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6006"]))
+o6.call(
+    nodeId="ns=auto_id;i=7004",
+    browseName="Open",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6005"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6006"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6008",
@@ -803,7 +888,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=auto_id;i=7005", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6008"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6009"]))
+o6.call(
+    nodeId="ns=auto_id;i=7005",
+    browseName="Read",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6008"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6009"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6010",
@@ -819,7 +910,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=auto_id;i=7006", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6010"]))
+o6.call(nodeId="ns=auto_id;i=7006", browseName="SetPosition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6010"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6014",
@@ -835,19 +926,35 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=auto_id;i=7007", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6014"]))
+o6.call(nodeId="ns=auto_id;i=7007", browseName="Write", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6014"]))
 
 ns0.objtypes.FileType(
     nodeId="ns=auto_id;i=5020",
     browseName="ns=auto_id;<ImageName>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6007", browseName="OpenCount", description="The current number of open file handles.", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6011", browseName="Size", description="The size of the file in bytes.", dataType=o6.UInt64)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6012", browseName="UserWritable", description="Whether the file is writable by the current user.", dataType=o6.Boolean)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=auto_id;i=6007", browseName="OpenCount", description="The current number of open file handles.", modellingRule="Mandatory", dataType=o6.UInt16
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6013", browseName="Writable", description="Whether the file is writable.", dataType=o6.Boolean)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6011", browseName="Size", description="The size of the file in bytes.", modellingRule="Mandatory", dataType=o6.UInt64)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=auto_id;i=6012",
+                browseName="UserWritable",
+                description="Whether the file is writable by the current user.",
+                modellingRule="Mandatory",
+                dataType=o6.Boolean,
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=auto_id;i=6013", browseName="Writable", description="Whether the file is writable.", modellingRule="Mandatory", dataType=o6.Boolean
+            )
+        ),
         o6.hasComponent(o6.ns["ns=auto_id;i=7002"]),
         o6.hasComponent(o6.ns["ns=auto_id;i=7003"]),
         o6.hasComponent(o6.ns["ns=auto_id;i=7004"]),
@@ -871,7 +978,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=auto_id;i=7011", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6072"]))
+o6.call(nodeId="ns=auto_id;i=7011", browseName="Close", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6072"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6073",
@@ -895,7 +1002,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=auto_id;i=7012", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6073"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6074"]))
+o6.call(
+    nodeId="ns=auto_id;i=7012",
+    browseName="GetPosition",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6073"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6074"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6075",
@@ -919,7 +1032,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=auto_id;i=7019", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6075"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6077"]))
+o6.call(
+    nodeId="ns=auto_id;i=7019",
+    browseName="Open",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6075"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6077"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6079",
@@ -946,7 +1065,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=auto_id;i=7020", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6079"]), outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6080"]))
+o6.call(
+    nodeId="ns=auto_id;i=7020",
+    browseName="Read",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6079"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6080"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6081",
@@ -962,7 +1087,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=auto_id;i=7021", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6081"]))
+o6.call(nodeId="ns=auto_id;i=7021", browseName="SetPosition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6081"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=auto_id;i=6085",
@@ -978,19 +1103,35 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=auto_id;i=7022", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6085"]))
+o6.call(nodeId="ns=auto_id;i=7022", browseName="Write", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=auto_id;i=6085"]))
 
 ns0.objtypes.FileType(
     nodeId="ns=auto_id;i=5021",
     browseName="ns=auto_id;<ImageName>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6078", browseName="OpenCount", description="The current number of open file handles.", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6082", browseName="Size", description="The size of the file in bytes.", dataType=o6.UInt64)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6083", browseName="UserWritable", description="Whether the file is writable by the current user.", dataType=o6.Boolean)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=auto_id;i=6078", browseName="OpenCount", description="The current number of open file handles.", modellingRule="Mandatory", dataType=o6.UInt16
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6084", browseName="Writable", description="Whether the file is writable.", dataType=o6.Boolean)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6082", browseName="Size", description="The size of the file in bytes.", modellingRule="Mandatory", dataType=o6.UInt64)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=auto_id;i=6083",
+                browseName="UserWritable",
+                description="Whether the file is writable by the current user.",
+                modellingRule="Mandatory",
+                dataType=o6.Boolean,
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=auto_id;i=6084", browseName="Writable", description="Whether the file is writable.", modellingRule="Mandatory", dataType=o6.Boolean
+            )
+        ),
         o6.hasComponent(o6.ns["ns=auto_id;i=7011"]),
         o6.hasComponent(o6.ns["ns=auto_id;i=7012"]),
         o6.hasComponent(o6.ns["ns=auto_id;i=7019"]),

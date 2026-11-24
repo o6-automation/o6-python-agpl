@@ -87,7 +87,11 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_cutter;i=6010",
     browseName="ns=plastics_extrusion_cutter;Length",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6011", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6011", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -97,7 +101,11 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_cutter;i=6012",
     browseName="ns=plastics_extrusion_cutter;LengthCorrection",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6013", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6013", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -107,7 +115,11 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_cutter;i=6016",
     browseName="ns=plastics_extrusion_cutter;WallThickeningLength",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6017", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6017", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -116,7 +128,12 @@ o6.reference(plastics_extrusion_cutter_objtypes.CuttingProductType, ns0.reftypes
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_cutter;i=6014",
     browseName="ns=plastics_extrusion_cutter;Length",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6025", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6025", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -124,7 +141,12 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_cutter;i=6026",
     browseName="ns=plastics_extrusion_cutter;Length",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6035", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6035", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -132,7 +154,12 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_cutter;i=6015",
     browseName="ns=plastics_extrusion_cutter;LengthCorrection",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6036", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6036", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -141,7 +168,11 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_cutter;i=6041",
     browseName="ns=plastics_extrusion_cutter;SampleCuttingLength",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6042", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6042", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -151,7 +182,11 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_cutter;i=6045",
     browseName="ns=plastics_extrusion_cutter;WasteCuttingLength",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6046", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6046", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -160,7 +195,12 @@ o6.reference(plastics_extrusion_cutter_objtypes.Cutter_InterfaceType, ns0.reftyp
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_cutter;i=6018",
     browseName="ns=plastics_extrusion_cutter;WallThickeningLength",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6047", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6047", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -169,7 +209,11 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_cutter;i=6048",
     browseName="ns=plastics_extrusion_cutter;TotalWasteLength",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6043", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6043", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
 )
 o6.reference(plastics_extrusion_cutter_objtypes.Cutter_InterfaceType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_extrusion_cutter;i=6048"])
@@ -177,9 +221,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_cutter;i=6030",
     browseName="ns=plastics_rubber;ActualValue",
     description="Actual value of the monitored parameter",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6031", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6051", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6031", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6051", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -188,9 +235,14 @@ ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_extrusion_cutter;i=6052",
     browseName="ns=plastics_rubber;AlarmSuppression",
     description="The start-up alarm suppression deactivates alarms of a monitored parameter during start up or a setpoint jump",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6053", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6054", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_cutter;i=6053", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6054", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -201,9 +253,14 @@ ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=plastics_extrusion_cutter;i=6064",
     browseName="ns=plastics_rubber;MonitoringSensitivity",
     description="Defines how closely the tolerances are set during the automatic limit setting",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6065", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6066", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=plastics_extrusion_cutter;i=6065", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6066", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -212,9 +269,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_cutter;i=6056",
     browseName="ns=plastics_rubber;LowerTolerance",
     description="Lower relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6057", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6077", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6057", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6077", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -225,9 +285,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_cutter;i=6058",
     browseName="ns=plastics_rubber;LowerTolerance2",
     description="Second lower relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6059", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6078", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6059", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6078", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -238,9 +301,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_cutter;i=6060",
     browseName="ns=plastics_rubber;MaxValue",
     description="Maximum absolute value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6061", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6079", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6061", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6079", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -251,9 +317,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_cutter;i=6062",
     browseName="ns=plastics_rubber;MinValue",
     description="Minimum absolute value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6063", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6080", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6063", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6080", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -264,9 +333,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_cutter;i=6067",
     browseName="ns=plastics_rubber;SetRampDown",
     description="Indication if SetValue that is lower than the actual value shall be reached as fast as possible (SetRampDown = 0) or within a given value change per time",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6068", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6081", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6068", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6081", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -275,9 +347,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_cutter;i=6069",
     browseName="ns=plastics_rubber;SetRampUp",
     description="Indication if a SetValue that is higher than the actual value shall be reached as fast as possible (SetRampUp = 0) or within a given value change per time",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6070", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6082", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6070", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6082", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -286,9 +361,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_cutter;i=6071",
     browseName="ns=plastics_rubber;SetValue",
     description="Set/nominal/target value of the monitored parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6072", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6083", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6072", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6083", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -299,9 +377,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_cutter;i=6073",
     browseName="ns=plastics_rubber;UpperTolerance",
     description="Upper relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6074", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6084", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6074", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6084", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -312,9 +393,12 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=plastics_extrusion_cutter;i=6075",
     browseName="ns=plastics_rubber;UpperTolerance2",
     description="Second upper relative tolerance value of the process parameter",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6076", browseName="EURange", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6085", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6076", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6085", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -343,7 +427,7 @@ http_opcfoundation_org_UA_PlasticsRubber_Extrusion_v2_Cutter_ = ns0.objtypes.Nam
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),
@@ -360,7 +444,12 @@ http_opcfoundation_org_UA_PlasticsRubber_Extrusion_v2_Cutter_ = ns0.objtypes.Nam
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_cutter;i=6092",
     browseName="ns=plastics_extrusion_cutter;LengthCorrection",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6093", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6093", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -368,7 +457,12 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=plastics_extrusion_cutter;i=6094",
     browseName="ns=plastics_extrusion_cutter;WallThickeningLength",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6095", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6095", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -383,6 +477,7 @@ plastics_rubber.objtypes.MonitoredParameterType(
                 nodeId="ns=plastics_extrusion_cutter;i=6055",
                 browseName="ns=plastics_rubber;AutomaticMonitoring",
                 description="Determination if monitoring tolerance parameters are determined by auto-tuning itself (TRUE) or can be manually adjusted (FALSE)",
+                modellingRule="Optional",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -406,6 +501,7 @@ plastics_rubber.objtypes.MonitoredParameterType(
                 nodeId="ns=plastics_extrusion_cutter;i=7004",
                 browseName="ns=plastics_rubber;ResetMonitoring",
                 description="With this method the tolerance values are set according to the actual value and the set monitoring sensitivity",
+                modellingRule="Optional",
             )
         ),
     ],
@@ -420,17 +516,23 @@ plastics_rubber.objtypes.StartDeviceType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_cutter;i=6040",
                 browseName="ns=plastics_rubber;Status",
+                modellingRule="Mandatory",
                 dataType=plastics_rubber.datatypes.StartEnumeration,
                 value=plastics_rubber.datatypes.StartEnumeration.NOT_READY_TO_START,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=plastics_extrusion_cutter;i=6097", browseName="ns=plastics_rubber;StartBlockedByClient", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+                nodeId="ns=plastics_extrusion_cutter;i=6097",
+                browseName="ns=plastics_rubber;StartBlockedByClient",
+                modellingRule="Optional",
+                dataType=o6.Boolean,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_cutter;i=7005", browseName="ns=plastics_rubber;StartRequest")),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_cutter;i=7006", browseName="ns=plastics_rubber;StopRequest")),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_cutter;i=7005", browseName="ns=plastics_rubber;StartRequest", modellingRule="Optional")),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_cutter;i=7006", browseName="ns=plastics_rubber;StopRequest", modellingRule="Optional")),
     ],
 )
 o6.reference(plastics_extrusion_cutter_objtypes.Cutter_InterfaceType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_extrusion_cutter;i=5005"])
@@ -439,11 +541,14 @@ plastics_extrusion_cutter_objtypes.CuttingProductType(
     browseName="ns=plastics_extrusion_cutter;CuttingProduct_<Nr>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6024", browseName="ns=plastics_extrusion_cutter;Id", dataType=o6.String)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6024", browseName="ns=plastics_extrusion_cutter;Id", modellingRule="Mandatory", dataType=o6.String)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_cutter;i=6091",
                 browseName="ns=plastics_extrusion_cutter;WallThickeningPosition",
+                modellingRule="Optional",
                 dataType=plastics_extrusion_cutter_datypes.WallThickeningEnumeration,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -453,15 +558,26 @@ plastics_extrusion_cutter_objtypes.CuttingProductType(
         o6.hasComponent(o6.ns["ns=plastics_extrusion_cutter;i=6015"]),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_cutter;i=6018"]),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_extrusion_cutter;i=6023", browseName="ns=plastics_extrusion_cutter;ActualOutput", dataType=o6.UInt64)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=plastics_extrusion_cutter;i=6023", browseName="ns=plastics_extrusion_cutter;ActualOutput", modellingRule="Mandatory", dataType=o6.UInt64
+            )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=plastics_extrusion_cutter;i=6027", browseName="ns=plastics_extrusion_cutter;SetOutput", dataType=o6.UInt64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=plastics_extrusion_cutter;i=6027",
+                browseName="ns=plastics_extrusion_cutter;SetOutput",
+                modellingRule="Mandatory",
+                dataType=o6.UInt64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_extrusion_cutter;i=6028", browseName="ns=plastics_extrusion_cutter;TotalOutput", dataType=o6.UInt64)),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_cutter;i=7007", browseName="ns=plastics_extrusion_cutter;ResetOutput")),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=plastics_extrusion_cutter;i=6028", browseName="ns=plastics_extrusion_cutter;TotalOutput", modellingRule="Mandatory", dataType=o6.UInt64
+            )
+        ),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_cutter;i=7007", browseName="ns=plastics_extrusion_cutter;ResetOutput", modellingRule="Optional")),
     ],
 )
 o6.reference(plastics_extrusion_cutter_objtypes.CuttingProductsType, ns0.reftypes.HasComponent, o6.ns["ns=plastics_extrusion_cutter;i=5001"])
@@ -470,11 +586,14 @@ plastics_extrusion_cutter_objtypes.CuttingProductType(
     browseName="ns=plastics_extrusion_cutter;CuttingProduct_<Nr>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6034", browseName="ns=plastics_extrusion_cutter;Id", dataType=o6.String)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_cutter;i=6034", browseName="ns=plastics_extrusion_cutter;Id", modellingRule="Mandatory", dataType=o6.String)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=plastics_extrusion_cutter;i=6096",
                 browseName="ns=plastics_extrusion_cutter;WallThickeningPosition",
+                modellingRule="Optional",
                 dataType=plastics_extrusion_cutter_datypes.WallThickeningEnumeration,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -482,17 +601,28 @@ plastics_extrusion_cutter_objtypes.CuttingProductType(
         ),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_cutter;i=6026"]),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_extrusion_cutter;i=6033", browseName="ns=plastics_extrusion_cutter;ActualOutput", dataType=o6.UInt64)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=plastics_extrusion_cutter;i=6033", browseName="ns=plastics_extrusion_cutter;ActualOutput", modellingRule="Mandatory", dataType=o6.UInt64
+            )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=plastics_extrusion_cutter;i=6037", browseName="ns=plastics_extrusion_cutter;SetOutput", dataType=o6.UInt64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=plastics_extrusion_cutter;i=6037",
+                browseName="ns=plastics_extrusion_cutter;SetOutput",
+                modellingRule="Mandatory",
+                dataType=o6.UInt64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_extrusion_cutter;i=6038", browseName="ns=plastics_extrusion_cutter;TotalOutput", dataType=o6.UInt64)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=plastics_extrusion_cutter;i=6038", browseName="ns=plastics_extrusion_cutter;TotalOutput", modellingRule="Mandatory", dataType=o6.UInt64
+            )
+        ),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_cutter;i=6092"]),
         o6.hasComponent(o6.ns["ns=plastics_extrusion_cutter;i=6094"]),
-        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_cutter;i=7008", browseName="ns=plastics_extrusion_cutter;ResetOutput")),
+        o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_cutter;i=7008", browseName="ns=plastics_extrusion_cutter;ResetOutput", modellingRule="Optional")),
     ],
 )
 plastics_extrusion_cutter_objtypes.CuttingProductsType(
@@ -503,7 +633,12 @@ plastics_extrusion_cutter_objtypes.CuttingProductsType(
         o6.hasComponent(o6.ns["ns=plastics_extrusion_cutter;i=5004"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=plastics_extrusion_cutter;i=6032", browseName="ns=plastics_extrusion_cutter;ActualCuttingProductId", dataType=o6.String, accessLevel=3, userAccessLevel=1
+                nodeId="ns=plastics_extrusion_cutter;i=6032",
+                browseName="ns=plastics_extrusion_cutter;ActualCuttingProductId",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
     ],

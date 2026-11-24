@@ -45,11 +45,12 @@ ns0.vartypes.AnalogItemType(
     description="Feedrate actual value.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6006", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6006", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6010",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -71,11 +72,12 @@ ns0.vartypes.AnalogItemType(
     description="Axis override actual value.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6002", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6002", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6011",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -94,11 +96,12 @@ ns0.vartypes.AnalogItemType(
     description="Feedrate setpoint value.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6008", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6008", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6012",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -120,11 +123,12 @@ ns0.vartypes.AnalogItemType(
     description="Override setpoint value.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6004", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6004", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6013",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -147,6 +151,7 @@ ns0.vartypes.AnalogItemType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6014",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -156,7 +161,7 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6025", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6025", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -203,13 +208,14 @@ ns0.vartypes.AnalogItemType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6015",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6061", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6061", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -226,13 +232,14 @@ ns0.vartypes.AnalogItemType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6018",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5723220, displayName=o6.LocalizedText("W"), description=o6.LocalizedText("watt")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6063", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6063", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -249,13 +256,14 @@ ns0.vartypes.AnalogItemType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6021",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20053, displayName=o6.LocalizedText("N·m"), description=o6.LocalizedText("newton metre")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6065", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6065", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -272,13 +280,18 @@ ns0.vartypes.AnalogItemType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6036",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20053, displayName=o6.LocalizedText("N·m"), description=o6.LocalizedText("newton metre")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6067", browseName="EURange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=cnc;i=6067", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -289,11 +302,13 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6077",
     browseName="ns=cnc;ActSpeed",
     description="Speed actual value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6078",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -303,7 +318,7 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6079", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6079", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -315,16 +330,24 @@ cnc_vartypes.CncPositionVariableType(
     description="Spindle angular position values in case of interpolated (position controlled) spindle movement. Returns zeros in case of regular spindle operation (velocity controlled).",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6083", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6084", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6083", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6084", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6073", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6073", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6074", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6074", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6085", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6085", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -379,11 +402,13 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6096",
     browseName="ns=cnc;CmdSpeed",
     description="Speed setpoint value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6097",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -393,7 +418,7 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6103", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6103", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -403,18 +428,20 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6105",
     browseName="ns=cnc;ActLoad",
     description="Drive load actual value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6106",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6107", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6107", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -424,18 +451,20 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6108",
     browseName="ns=cnc;ActPower",
     description="Drive power actual value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6109",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5723220, displayName=o6.LocalizedText("W"), description=o6.LocalizedText("watt")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6110", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6110", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -445,18 +474,20 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6111",
     browseName="ns=cnc;ActTorque",
     description="Drive torque actual value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6112",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20053, displayName=o6.LocalizedText("N·m"), description=o6.LocalizedText("newton metre")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6113", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6113", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -466,18 +497,24 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6114",
     browseName="ns=cnc;CmdTorque",
     description="Drive torque setpoint value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6115",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20053, displayName=o6.LocalizedText("N·m"), description=o6.LocalizedText("newton metre")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6116", browseName="EURange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=cnc;i=6116", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -487,11 +524,13 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6119",
     browseName="ns=cnc;ActFeedrate",
     description="Feedrate actual value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6129",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -501,7 +540,7 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6131", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6131", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -511,18 +550,20 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6139",
     browseName="ns=cnc;ActJogIncrement",
     description="Active JOG increment.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6142",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5066068, displayName=o6.LocalizedText("mm"), description=o6.LocalizedText("millimetre")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6145", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6145", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -547,18 +588,20 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6151",
     browseName="ns=cnc;ActOverride",
     description="Axis override actual value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6152",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6153", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6153", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -570,11 +613,12 @@ ns0.vartypes.AnalogItemType(
     description="Active axis zero offset.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6101", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6101", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6154",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5066068, displayName=o6.LocalizedText("mm"), description=o6.LocalizedText("millimetre")
@@ -593,11 +637,12 @@ ns0.vartypes.AnalogItemType(
     description="Active JOG increment.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6027", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6027", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6155",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5066068, displayName=o6.LocalizedText("mm"), description=o6.LocalizedText("millimetre")
@@ -616,11 +661,12 @@ ns0.vartypes.AnalogItemType(
     description="Speed actual value.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6121", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6121", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6161",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -640,17 +686,26 @@ cnc_vartypes.CncPositionVariableType(
     nodeId="ns=cnc;i=6124",
     browseName="ns=cnc;AnglePos",
     description="Spindle angular position values in case of interpolated (position controlled) spindle movement. Returns zeros in case of regular spindle operation (velocity controlled).",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6127", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6157", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6127", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6157", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6125", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6125", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6126", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6126", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6165", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6165", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -663,11 +718,12 @@ ns0.vartypes.AnalogItemType(
     description="Speed setpoint value.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6123", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6123", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6169",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -689,16 +745,24 @@ cnc_vartypes.CncPositionVariableType(
     description="Position actual value referring to axis' indirect measurement system.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6204", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6213", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6204", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6213", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6086", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6086", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6087", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6087", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6218", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6218", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -761,16 +825,24 @@ cnc_vartypes.CncPositionVariableType(
     description="Position actual value referring to axis' direct measurement system.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6226", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6227", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6226", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6227", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6088", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6088", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6089", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6089", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6228", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6228", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -1652,11 +1724,13 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6444",
     browseName="ns=cnc;CmdFeedrate",
     description="Feedrate setpoint value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6445",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -1666,7 +1740,7 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6453", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6453", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2330,18 +2404,20 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6596",
     browseName="ns=cnc;CmdOverride",
     description="Override setpoint value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6597",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6622", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6622", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2351,11 +2427,13 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6623",
     browseName="ns=cnc;DryRunFeed",
     description="Test feedrate.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6624",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2365,7 +2443,7 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6625", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6625", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2469,18 +2547,20 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6651",
     browseName="ns=cnc;ZeroOffset",
     description="Active axis zero offset.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6652",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5066068, displayName=o6.LocalizedText("mm"), description=o6.LocalizedText("millimetre")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6653", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6653", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2490,18 +2570,20 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6655",
     browseName="ns=cnc;ActLoad",
     description="Drive load actual value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6656",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6657", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6657", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2511,18 +2593,20 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6658",
     browseName="ns=cnc;ActPower",
     description="Drive power actual value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6659",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5723220, displayName=o6.LocalizedText("W"), description=o6.LocalizedText("watt")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6660", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6660", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2532,18 +2616,20 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6661",
     browseName="ns=cnc;ActTorque",
     description="Drive torque actual value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6662",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20053, displayName=o6.LocalizedText("N·m"), description=o6.LocalizedText("newton metre")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6664", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6664", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2553,18 +2639,24 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6665",
     browseName="ns=cnc;CmdTorque",
     description="Drive torque setpoint value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6666",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20053, displayName=o6.LocalizedText("N·m"), description=o6.LocalizedText("newton metre")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6667", browseName="EURange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=cnc;i=6667", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2576,8 +2668,8 @@ ns0.vartypes.AnalogItemType(
     description="Override actual value.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6045", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6701", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6045", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6701", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2589,7 +2681,7 @@ ns0.vartypes.AnalogItemType(
     browseName="ns=cnc;CmdOverride",
     description="Override setpoint value.",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6706", browseName="EURange", dataType=ns0.datatypes.Range))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6706", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range))],
     dataType=o6.Double,
     value=0.0,
     accessLevel=3,
@@ -2599,9 +2691,10 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6707",
     browseName="ns=cnc;ActOverride",
     description="Override actual value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6051", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6708", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6051", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6708", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2611,7 +2704,8 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6710",
     browseName="ns=cnc;CmdOverride",
     description="Override setpoint value.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6711", browseName="EURange", dataType=ns0.datatypes.Range))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6711", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range))],
     dataType=o6.Double,
     value=0.0,
     accessLevel=3,
@@ -2620,11 +2714,13 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6712",
     browseName="ns=cnc;ActFeedrate",
     description="Feedrate actual value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6713",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -2634,7 +2730,7 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6714", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6714", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2643,18 +2739,20 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6721",
     browseName="ns=cnc;ActJogIncrement",
     description="Active JOG increment.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6722",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5066068, displayName=o6.LocalizedText("mm"), description=o6.LocalizedText("millimetre")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6723", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6723", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -2770,16 +2868,24 @@ cnc_vartypes.CncPositionVariableType(
     description="Actual position of the tool center point in machine’s Cartesian base coordinate system.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6830", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6882", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6830", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6882", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6052", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6052", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6053", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6053", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6054", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6054", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -2791,17 +2897,26 @@ cnc_vartypes.CncPositionVariableType(
     nodeId="ns=cnc;i=6058",
     browseName="ns=cnc;PosTcpBcsA",
     description="Actual position of the tool center point in machine’s Cartesian base coordinate system.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6831", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6883", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6831", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6883", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6068", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6068", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6069", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6069", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6070", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6070", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -2814,16 +2929,24 @@ cnc_vartypes.CncPositionVariableType(
     description="Actual position of the tool center point in machine’s Cartesian workpiece coordinate system.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6832", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6884", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6832", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6884", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6160", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6160", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6171", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6171", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6209", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6209", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -2837,16 +2960,24 @@ cnc_vartypes.CncPositionVariableType(
     description="Actual position of the tool center point in machine’s Cartesian base coordinate system.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6833", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6885", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6833", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6885", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6162", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6162", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6163", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6163", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6164", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6164", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -2860,16 +2991,24 @@ cnc_vartypes.CncPositionVariableType(
     description="Actual position of the tool center point in machine’s Cartesian base coordinate system.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6834", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6886", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6834", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6886", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6167", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6167", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6178", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6178", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6184", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6184", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -2883,16 +3022,24 @@ cnc_vartypes.CncPositionVariableType(
     description="Actual position of the tool center point in machine’s Cartesian base coordinate system.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6835", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6887", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6835", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6887", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6170", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6170", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6192", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6192", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6193", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6193", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -2906,16 +3053,24 @@ cnc_vartypes.CncPositionVariableType(
     description="Actual position of the tool center point in machine’s Cartesian base coordinate system.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6836", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6888", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6836", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6888", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6181", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6181", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6203", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6203", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6229", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6229", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -2929,16 +3084,24 @@ cnc_vartypes.CncPositionVariableType(
     description="Actual position of the tool center point in machine’s Cartesian workpiece coordinate system.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6837", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6889", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6837", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6889", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6210", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6210", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6212", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6212", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6217", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6217", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -2952,16 +3115,24 @@ cnc_vartypes.CncPositionVariableType(
     description="Actual position of the tool center point in machine’s Cartesian workpiece coordinate system.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6838", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6890", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6838", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6890", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6221", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6221", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6222", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6222", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6272", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6272", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -2975,16 +3146,24 @@ cnc_vartypes.CncPositionVariableType(
     description="Actual position of the tool center point in machine’s Cartesian workpiece coordinate system.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6839", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6891", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6839", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6891", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6190", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6190", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6191", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6191", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6239", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6239", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -2998,16 +3177,24 @@ cnc_vartypes.CncPositionVariableType(
     description="Actual position of the tool center point in machine’s Cartesian workpiece coordinate system.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6840", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6892", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6840", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6892", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6198", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6198", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6199", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6199", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6240", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6240", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -3021,16 +3208,24 @@ cnc_vartypes.CncPositionVariableType(
     description="Actual position of the tool center point in machine’s Cartesian base coordinate system.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6841", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6893", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6841", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6893", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6188", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6188", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6230", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6230", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6231", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6231", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -3044,16 +3239,24 @@ cnc_vartypes.CncPositionVariableType(
     description="Actual position of the tool center point in machine’s Cartesian workpiece coordinate system.",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6842", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6894", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6842", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6894", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6202", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6202", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6241", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6241", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6271", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6271", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -3065,17 +3268,26 @@ cnc_vartypes.CncPositionVariableType(
     nodeId="ns=cnc;i=6273",
     browseName="ns=cnc;PosTcpBcsB",
     description="Actual position of the tool center point in machine’s Cartesian base coordinate system.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6843", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6895", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6843", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6895", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6313", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6313", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6314", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6314", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6315", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6315", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -3086,17 +3298,26 @@ cnc_vartypes.CncPositionVariableType(
     nodeId="ns=cnc;i=6323",
     browseName="ns=cnc;PosTcpBcsC",
     description="Actual position of the tool center point in machine’s Cartesian base coordinate system.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6844", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6896", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6844", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6896", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6324", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6324", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6325", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6325", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6355", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6355", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -3107,17 +3328,26 @@ cnc_vartypes.CncPositionVariableType(
     nodeId="ns=cnc;i=6356",
     browseName="ns=cnc;PosTcpBcsX",
     description="Actual position of the tool center point in machine’s Cartesian base coordinate system.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6845", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6897", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6845", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6897", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6357", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6357", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6397", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6397", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6398", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6398", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -3128,17 +3358,26 @@ cnc_vartypes.CncPositionVariableType(
     nodeId="ns=cnc;i=6405",
     browseName="ns=cnc;PosTcpBcsY",
     description="Actual position of the tool center point in machine’s Cartesian base coordinate system.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6846", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6898", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6846", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6898", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6406", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6406", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6407", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6407", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6415", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6415", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -3149,17 +3388,26 @@ cnc_vartypes.CncPositionVariableType(
     nodeId="ns=cnc;i=6416",
     browseName="ns=cnc;PosTcpBcsZ",
     description="Actual position of the tool center point in machine’s Cartesian base coordinate system.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6847", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6899", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6847", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6899", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6417", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6417", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6443", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6443", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6454", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6454", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -3170,17 +3418,26 @@ cnc_vartypes.CncPositionVariableType(
     nodeId="ns=cnc;i=6455",
     browseName="ns=cnc;PosTcpWcsA",
     description="Actual position of the tool center point in machine’s Cartesian workpiece coordinate system.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6848", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6900", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6848", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6900", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6481", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6481", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6482", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6482", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6483", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6483", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -3191,17 +3448,26 @@ cnc_vartypes.CncPositionVariableType(
     nodeId="ns=cnc;i=6491",
     browseName="ns=cnc;PosTcpWcsB",
     description="Actual position of the tool center point in machine’s Cartesian workpiece coordinate system.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6849", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6901", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6849", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6901", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6492", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6492", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6493", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6493", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6516", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6516", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -3212,17 +3478,26 @@ cnc_vartypes.CncPositionVariableType(
     nodeId="ns=cnc;i=6544",
     browseName="ns=cnc;PosTcpWcsC",
     description="Actual position of the tool center point in machine’s Cartesian workpiece coordinate system.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6850", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6902", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6850", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6902", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6577", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6577", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6587", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6587", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6595", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6595", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -3233,17 +3508,26 @@ cnc_vartypes.CncPositionVariableType(
     nodeId="ns=cnc;i=6619",
     browseName="ns=cnc;PosTcpWcsX",
     description="Actual position of the tool center point in machine’s Cartesian workpiece coordinate system.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6851", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6903", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6851", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6903", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6628", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6628", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6638", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6638", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6639", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6639", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -3254,17 +3538,26 @@ cnc_vartypes.CncPositionVariableType(
     nodeId="ns=cnc;i=6640",
     browseName="ns=cnc;PosTcpWcsY",
     description="Actual position of the tool center point in machine’s Cartesian workpiece coordinate system.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6852", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6904", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6852", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6904", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6670", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6670", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6671", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6671", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6672", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6672", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -3275,17 +3568,26 @@ cnc_vartypes.CncPositionVariableType(
     nodeId="ns=cnc;i=6673",
     browseName="ns=cnc;PosTcpWcsZ",
     description="Actual position of the tool center point in machine’s Cartesian workpiece coordinate system.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6853", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6905", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6853", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6905", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6674", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6674", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6675", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6675", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6676", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6676", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -3299,7 +3601,15 @@ cnc_objtypes.CncChannelType(
     modellingRule="OptionalPlaceholder",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6017", browseName="ns=cnc;Id", description="Unique numeric channel identifier.", dataType=o6.UInt32, value=0, accessLevel=3)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=cnc;i=6017",
+                browseName="ns=cnc;Id",
+                description="Unique numeric channel identifier.",
+                modellingRule="Mandatory",
+                dataType=o6.UInt32,
+                value=0,
+                accessLevel=3,
+            )
         ),
         o6.hasComponent(o6.ns["ns=cnc;i=6058"]),
         o6.hasComponent(o6.ns["ns=cnc;i=6119"]),
@@ -3308,6 +3618,7 @@ cnc_objtypes.CncChannelType(
                 nodeId="ns=cnc;i=6133",
                 browseName="ns=cnc;ActProgramName",
                 description="Name of active CNC program (main or subprogram).",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="\n      ",
                 accessLevel=3,
@@ -3318,6 +3629,7 @@ cnc_objtypes.CncChannelType(
                 nodeId="ns=cnc;i=6137",
                 browseName="ns=cnc;ActProgramFileOffset",
                 description="File offset of active CNC program file (main or subprogram).",
+                modellingRule="Optional",
                 dataType=o6.UInt32,
                 value=0,
                 accessLevel=3,
@@ -3328,6 +3640,7 @@ cnc_objtypes.CncChannelType(
                 nodeId="ns=cnc;i=6138",
                 browseName="ns=cnc;ActGFunctions",
                 description="Array of active G functions; there can be several G functions active at a time (modal and non-modal G functions).",
+                modellingRule="Mandatory",
                 dataType=o6.UInt32,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -3338,7 +3651,13 @@ cnc_objtypes.CncChannelType(
         o6.hasComponent(o6.ns["ns=cnc;i=6139"]),
         o6.hasComponent(
             ns0.vartypes.DataItemType(
-                nodeId="ns=cnc;i=6148", browseName="ns=cnc;ActMainProgramName", description="Name of active CNC main program.", dataType=o6.String, value="\n      ", accessLevel=3
+                nodeId="ns=cnc;i=6148",
+                browseName="ns=cnc;ActMainProgramName",
+                description="Name of active CNC main program.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="\n      ",
+                accessLevel=3,
             )
         ),
         o6.hasComponent(
@@ -3346,6 +3665,7 @@ cnc_objtypes.CncChannelType(
                 nodeId="ns=cnc;i=6149",
                 browseName="ns=cnc;ActMFunctions",
                 description="Array of active M functions: there can be several M functions active at a time (modal and non-modal M functions).",
+                modellingRule="Mandatory",
                 dataType=o6.UInt32,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -3355,7 +3675,13 @@ cnc_objtypes.CncChannelType(
         ),
         o6.hasComponent(
             ns0.vartypes.DataItemType(
-                nodeId="ns=cnc;i=6150", browseName="ns=cnc;ActModalOffsetFunction", description="Active zero offset function.", dataType=o6.UInt32, value=0, accessLevel=3
+                nodeId="ns=cnc;i=6150",
+                browseName="ns=cnc;ActModalOffsetFunction",
+                description="Active zero offset function.",
+                modellingRule="Mandatory",
+                dataType=o6.UInt32,
+                value=0,
+                accessLevel=3,
             )
         ),
         o6.hasComponent(o6.ns["ns=cnc;i=6151"]),
@@ -3365,9 +3691,10 @@ cnc_objtypes.CncChannelType(
                 nodeId="ns=cnc;i=6281",
                 browseName="ns=cnc;ActProgramBlock",
                 description="Block of lines containing the previous, actual and subsequent lines of a CNC part program.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
-                arrayDimensions=[0],
+                arrayDimensions=[3],
                 value=[],
                 accessLevel=3,
             )
@@ -3377,6 +3704,7 @@ cnc_objtypes.CncChannelType(
                 nodeId="ns=cnc;i=6282",
                 browseName="ns=cnc;ActProgramLine",
                 description="Line number of active CNC program (main or subprogram).",
+                modellingRule="Optional",
                 dataType=o6.String,
                 value="\n      ",
                 accessLevel=3,
@@ -3387,6 +3715,7 @@ cnc_objtypes.CncChannelType(
                 nodeId="ns=cnc;i=6283",
                 browseName="ns=cnc;ActProgramFile",
                 description="Path of active CNC program file (main or subprogram).",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="\n      ",
                 accessLevel=3,
@@ -3399,6 +3728,7 @@ cnc_objtypes.CncChannelType(
                 nodeId="ns=cnc;i=6365",
                 browseName="ns=cnc;ActProgramStatus",
                 description="Active channel program status",
+                modellingRule="Mandatory",
                 dataType=cnc_datypes.CncChannelProgramStatus,
                 value=cnc_datypes.CncChannelProgramStatus.RUNNING,
                 accessLevel=3,
@@ -3409,6 +3739,7 @@ cnc_objtypes.CncChannelType(
                 nodeId="ns=cnc;i=6366",
                 browseName="ns=cnc;ActStatus",
                 description="Active status of channel.",
+                modellingRule="Mandatory",
                 dataType=cnc_datypes.CncChannelStatus,
                 value=cnc_datypes.CncChannelStatus.RESET,
                 accessLevel=3,
@@ -3419,6 +3750,7 @@ cnc_objtypes.CncChannelType(
                 nodeId="ns=cnc;i=6367",
                 browseName="ns=cnc;BlockMode",
                 description="Block mode status (true in case of block mode is active, else false).",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -3438,6 +3770,7 @@ cnc_objtypes.CncChannelType(
                 nodeId="ns=cnc;i=6626",
                 browseName="ns=cnc;FeedHold",
                 description="Feed status (true in case of feed hold active, else false).",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -3445,14 +3778,26 @@ cnc_objtypes.CncChannelType(
         ),
         o6.hasComponent(
             ns0.vartypes.DataItemType(
-                nodeId="ns=cnc;i=6629", browseName="ns=cnc;ToolId", description="ID of active tool; returns zero if no tool is present.", dataType=o6.UInt32, value=0, accessLevel=3
+                nodeId="ns=cnc;i=6629",
+                browseName="ns=cnc;ToolId",
+                description="ID of active tool; returns zero if no tool is present.",
+                modellingRule="Mandatory",
+                dataType=o6.UInt32,
+                value=0,
+                accessLevel=3,
             )
         ),
         o6.hasComponent(o6.ns["ns=cnc;i=6640"]),
         o6.hasComponent(o6.ns["ns=cnc;i=6673"]),
         o6.hasComponent(
             ns0.vartypes.DataItemType(
-                nodeId="ns=cnc;i=6683", browseName="ns=cnc;ActMainProgramFile", description="Path of active CNC main program.", dataType=o6.String, value="\n      ", accessLevel=3
+                nodeId="ns=cnc;i=6683",
+                browseName="ns=cnc;ActMainProgramFile",
+                description="Path of active CNC main program.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="\n      ",
+                accessLevel=3,
             )
         ),
         o6.hasComponent(
@@ -3460,6 +3805,7 @@ cnc_objtypes.CncChannelType(
                 nodeId="ns=cnc;i=6689",
                 browseName="ns=cnc;ActMainProgramLine",
                 description="Line number of active CNC main program.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 value="\n      ",
                 accessLevel=3,
@@ -3470,6 +3816,7 @@ cnc_objtypes.CncChannelType(
                 nodeId="ns=cnc;i=6695",
                 browseName="ns=cnc;ActMainProgramFileOffset",
                 description="File offset of active CNC main program file.",
+                modellingRule="Optional",
                 dataType=o6.UInt32,
                 value=0,
                 accessLevel=3,
@@ -3480,6 +3827,7 @@ cnc_objtypes.CncChannelType(
                 nodeId="ns=cnc;i=6782",
                 browseName="ns=cnc;ActOperationMode",
                 description="Channel's active mode of operation.",
+                modellingRule="Mandatory",
                 dataType=cnc_datypes.CncOperationMode,
                 value=cnc_datypes.CncOperationMode.MANUAL,
                 accessLevel=3,
@@ -3490,6 +3838,7 @@ cnc_objtypes.CncChannelType(
                 nodeId="ns=cnc;i=6816",
                 browseName="ns=cnc;CmdOperationMode",
                 description="Channel’s mode of operation setpoint value.",
+                modellingRule="Mandatory",
                 dataType=cnc_datypes.CncOperationMode,
                 value=cnc_datypes.CncOperationMode.MANUAL,
                 accessLevel=3,
@@ -4123,11 +4472,13 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6948",
     browseName="ns=cnc;CmdFeedrate",
     description="feedrate setpoint value",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6949",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4137,7 +4488,7 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6950", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6950", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -4146,11 +4497,13 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=6951",
     browseName="ns=cnc;DryRunFeed",
     description="test feedrate",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=6952",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -4160,7 +4513,7 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6953", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6953", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -4169,17 +4522,26 @@ cnc_vartypes.CncPositionVariableType(
     nodeId="ns=cnc;i=6938",
     browseName="ns=cnc;PosDirect",
     description="Position actual value referring to axis' direct measurement system.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6941", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6942", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6941", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6942", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6939", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6939", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6940", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6940", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6955", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6955", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -4193,7 +4555,9 @@ cnc_objtypes.CncSpindleType(
     modellingRule="OptionalPlaceholder",
     references=[
         o6.hasComponent(
-            ns0.vartypes.DataItemType(nodeId="ns=cnc;i=6076", browseName="ns=cnc;ActGear", description="Gear stage actual value.", dataType=o6.UInt32, value=0, accessLevel=3)
+            ns0.vartypes.DataItemType(
+                nodeId="ns=cnc;i=6076", browseName="ns=cnc;ActGear", description="Gear stage actual value.", modellingRule="Mandatory", dataType=o6.UInt32, value=0, accessLevel=3
+            )
         ),
         o6.hasComponent(o6.ns["ns=cnc;i=6077"]),
         o6.hasComponent(
@@ -4201,6 +4565,7 @@ cnc_objtypes.CncSpindleType(
                 nodeId="ns=cnc;i=6081",
                 browseName="ns=cnc;ActStatus",
                 description="Actual spindle state.",
+                modellingRule="Mandatory",
                 dataType=cnc_datypes.CncSpindleStatus,
                 value=cnc_datypes.CncSpindleStatus.STOPPED,
                 accessLevel=3,
@@ -4211,13 +4576,16 @@ cnc_objtypes.CncSpindleType(
                 nodeId="ns=cnc;i=6082",
                 browseName="ns=cnc;ActTurnDirection",
                 description="Turn direction actual value.",
+                modellingRule="Mandatory",
                 dataType=cnc_datypes.CncSpindleTurnDirection,
                 value=cnc_datypes.CncSpindleTurnDirection.NONE,
                 accessLevel=3,
             )
         ),
         o6.hasComponent(
-            ns0.vartypes.DataItemType(nodeId="ns=cnc;i=6091", browseName="ns=cnc;CmdGear", description="Gear stage setpoint value.", dataType=o6.UInt32, value=0, accessLevel=3)
+            ns0.vartypes.DataItemType(
+                nodeId="ns=cnc;i=6091", browseName="ns=cnc;CmdGear", description="Gear stage setpoint value.", modellingRule="Mandatory", dataType=o6.UInt32, value=0, accessLevel=3
+            )
         ),
         o6.hasComponent(o6.ns["ns=cnc;i=6096"]),
         o6.hasComponent(
@@ -4225,6 +4593,7 @@ cnc_objtypes.CncSpindleType(
                 nodeId="ns=cnc;i=6104",
                 browseName="ns=cnc;ActChannel",
                 description="NodeId of the channel object (CncChannelType) that administrates this drive to expose drive’s channel affiliation.",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 value=o6.NodeId("i=0"),
                 accessLevel=3,
@@ -4239,6 +4608,7 @@ cnc_objtypes.CncSpindleType(
                 nodeId="ns=cnc;i=6117",
                 browseName="ns=cnc;IsInactive",
                 description="Drive inactive state (true in case of inactive drive, else false).",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -4249,35 +4619,61 @@ cnc_objtypes.CncSpindleType(
                 nodeId="ns=cnc;i=6118",
                 browseName="ns=cnc;IsVirtual",
                 description="Virtual axis (no hardware present; true in case of virtual axis, else fals).",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
             )
         ),
         o6.hasComponent(o6.ns["ns=cnc;i=6124"]),
-        o6.hasComponent(ns0.vartypes.DataItemType(nodeId="ns=cnc;i=6576", browseName="ns=cnc;ActOperationMode", dataType=cnc_datypes.CncOperationMode, accessLevel=3)),
-        o6.hasComponent(ns0.vartypes.DataItemType(nodeId="ns=cnc;i=6627", browseName="ns=cnc;CmdOperationMode", dataType=cnc_datypes.CncOperationMode, accessLevel=3)),
+        o6.hasComponent(
+            ns0.vartypes.DataItemType(nodeId="ns=cnc;i=6576", browseName="ns=cnc;ActOperationMode", modellingRule="Mandatory", dataType=cnc_datypes.CncOperationMode, accessLevel=3)
+        ),
+        o6.hasComponent(
+            ns0.vartypes.DataItemType(nodeId="ns=cnc;i=6627", browseName="ns=cnc;CmdOperationMode", modellingRule="Mandatory", dataType=cnc_datypes.CncOperationMode, accessLevel=3)
+        ),
         o6.hasComponent(o6.ns["ns=cnc;i=6707"]),
         o6.hasComponent(o6.ns["ns=cnc;i=6710"]),
         o6.hasComponent(o6.ns["ns=cnc;i=6712"]),
         o6.hasComponent(
             ns0.vartypes.DataItemType(
-                nodeId="ns=cnc;i=6715", browseName="ns=cnc;ActMainProgramFile", description="Path of active CNC main program.", dataType=o6.String, value="\n      ", accessLevel=3
+                nodeId="ns=cnc;i=6715",
+                browseName="ns=cnc;ActMainProgramFile",
+                description="Path of active CNC main program.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="\n      ",
+                accessLevel=3,
             )
         ),
         o6.hasComponent(
             ns0.vartypes.DataItemType(
-                nodeId="ns=cnc;i=6716", browseName="ns=cnc;ActMainProgramFileOffset", description="File offset of active CNC main program file.", dataType=o6.UInt32, value=0
+                nodeId="ns=cnc;i=6716",
+                browseName="ns=cnc;ActMainProgramFileOffset",
+                description="File offset of active CNC main program file.",
+                modellingRule="Mandatory",
+                dataType=o6.UInt32,
+                value=0,
             )
         ),
         o6.hasComponent(
             ns0.vartypes.DataItemType(
-                nodeId="ns=cnc;i=6717", browseName="ns=cnc;ActMainProgramLine", description="Line number of active CNC main program.", dataType=o6.String, value="\n      "
+                nodeId="ns=cnc;i=6717",
+                browseName="ns=cnc;ActMainProgramLine",
+                description="Line number of active CNC main program.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="\n      ",
             )
         ),
         o6.hasComponent(
             ns0.vartypes.DataItemType(
-                nodeId="ns=cnc;i=6718", browseName="ns=cnc;ActProgramName", description="Name of active CNC program (main or subprogram).", dataType=o6.String, value="\n      "
+                nodeId="ns=cnc;i=6718",
+                browseName="ns=cnc;ActProgramName",
+                description="Name of active CNC program (main or subprogram).",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="\n      ",
             )
         ),
         o6.hasComponent(
@@ -4285,37 +4681,65 @@ cnc_objtypes.CncSpindleType(
                 nodeId="ns=cnc;i=6719",
                 browseName="ns=cnc;ActProgramFileOffset",
                 description="File offset of active CNC program file (main or subprogram).",
+                modellingRule="Mandatory",
                 dataType=o6.UInt32,
                 value=0,
             )
         ),
         o6.hasComponent(
             ns0.vartypes.DataItemType(
-                nodeId="ns=cnc;i=6720", browseName="ns=cnc;ActGFunctions", description="Active G function.", dataType=o6.UInt32, valueRank=1, arrayDimensions=[0], value=[]
+                nodeId="ns=cnc;i=6720",
+                browseName="ns=cnc;ActGFunctions",
+                description="Active G function.",
+                modellingRule="Mandatory",
+                dataType=o6.UInt32,
+                valueRank=1,
+                arrayDimensions=[0],
+                value=[],
             )
         ),
         o6.hasComponent(o6.ns["ns=cnc;i=6721"]),
         o6.hasComponent(
             ns0.vartypes.DataItemType(
-                nodeId="ns=cnc;i=6724", browseName="ns=cnc;ActMainProgramName", description="Name of active CNC main program.", dataType=o6.String, value="\n      "
+                nodeId="ns=cnc;i=6724",
+                browseName="ns=cnc;ActMainProgramName",
+                description="Name of active CNC main program.",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="\n      ",
             )
         ),
         o6.hasComponent(
             ns0.vartypes.DataItemType(
-                nodeId="ns=cnc;i=6725", browseName="ns=cnc;ActMFunctions", description="Active M function.", dataType=o6.UInt32, valueRank=1, arrayDimensions=[0], value=[]
+                nodeId="ns=cnc;i=6725",
+                browseName="ns=cnc;ActMFunctions",
+                description="Active M function.",
+                modellingRule="Mandatory",
+                dataType=o6.UInt32,
+                valueRank=1,
+                arrayDimensions=[0],
+                value=[],
             )
         ),
         o6.hasComponent(
-            ns0.vartypes.DataItemType(nodeId="ns=cnc;i=6726", browseName="ns=cnc;ActModalOffsetFunction", description="active zero offset function", dataType=o6.UInt32, value=0)
+            ns0.vartypes.DataItemType(
+                nodeId="ns=cnc;i=6726",
+                browseName="ns=cnc;ActModalOffsetFunction",
+                description="active zero offset function",
+                modellingRule="Mandatory",
+                dataType=o6.UInt32,
+                value=0,
+            )
         ),
         o6.hasComponent(
             ns0.vartypes.DataItemType(
                 nodeId="ns=cnc;i=6943",
                 browseName="ns=cnc;ActProgramBlock",
                 description="previous, actual and subsequent CNC program lines",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
-                arrayDimensions=[0],
+                arrayDimensions=[3],
                 value=[],
             )
         ),
@@ -4324,6 +4748,7 @@ cnc_objtypes.CncSpindleType(
                 nodeId="ns=cnc;i=6944",
                 browseName="ns=cnc;ActProgramLine",
                 description="Line number of active CNC program (main or subprogram).",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="\n      ",
             )
@@ -4333,6 +4758,7 @@ cnc_objtypes.CncSpindleType(
                 nodeId="ns=cnc;i=6945",
                 browseName="ns=cnc;ActProgramFile",
                 description="Path of active CNC program file (main or subprogram).",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="\n      ",
             )
@@ -4343,16 +4769,27 @@ cnc_objtypes.CncSpindleType(
                 browseName="ns=cnc;ActProgramStatus",
                 description="Active channel program status",
                 displayName="ActProgStatus",
+                modellingRule="Mandatory",
                 dataType=cnc_datypes.CncChannelProgramStatus,
                 value=cnc_datypes.CncChannelProgramStatus.RUNNING,
                 accessLevel=3,
             )
         ),
-        o6.hasComponent(ns0.vartypes.DataItemType(nodeId="ns=cnc;i=6947", browseName="ns=cnc;BlockMode", description="block mode active", dataType=o6.Boolean, value=False)),
+        o6.hasComponent(
+            ns0.vartypes.DataItemType(
+                nodeId="ns=cnc;i=6947", browseName="ns=cnc;BlockMode", description="block mode active", modellingRule="Mandatory", dataType=o6.Boolean, value=False
+            )
+        ),
         o6.hasComponent(o6.ns["ns=cnc;i=6948"]),
         o6.hasComponent(o6.ns["ns=cnc;i=6951"]),
-        o6.hasComponent(ns0.vartypes.DataItemType(nodeId="ns=cnc;i=6954", browseName="ns=cnc;FeedHold", description="feed hold active", dataType=o6.Boolean, value=False)),
-        o6.hasComponent(ns0.vartypes.DataItemType(nodeId="ns=cnc;i=6957", browseName="ns=cnc;ToolId", description="active tool ID", dataType=o6.UInt32, value=0)),
+        o6.hasComponent(
+            ns0.vartypes.DataItemType(
+                nodeId="ns=cnc;i=6954", browseName="ns=cnc;FeedHold", description="feed hold active", modellingRule="Mandatory", dataType=o6.Boolean, value=False
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.DataItemType(nodeId="ns=cnc;i=6957", browseName="ns=cnc;ToolId", description="active tool ID", modellingRule="Mandatory", dataType=o6.UInt32, value=0)
+        ),
     ],
 )
 o6.reference(cnc_objtypes.CncSpindleListType, ns0.reftypes.HasComponent, o6.ns["ns=cnc;i=5002"])
@@ -4360,17 +4797,26 @@ cnc_vartypes.CncPositionVariableType(
     nodeId="ns=cnc;i=6956",
     browseName="ns=cnc;PosIndirect",
     description="Position actual value referring to axis' indirect measurement system.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6960", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6961", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6960", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6961", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6958", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6958", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6959", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6959", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=6962", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=6962", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -4388,6 +4834,7 @@ cnc_objtypes.CncAxisType(
                 nodeId="ns=cnc;i=6636",
                 browseName="ns=cnc;ActStatus",
                 description="Actual axis state.",
+                modellingRule="Mandatory",
                 dataType=cnc_datypes.CncAxisStatus,
                 value=cnc_datypes.CncAxisStatus.IN_POSITION,
                 accessLevel=3,
@@ -4398,6 +4845,7 @@ cnc_objtypes.CncAxisType(
                 nodeId="ns=cnc;i=6649",
                 browseName="ns=cnc;IsReferenced",
                 description="Axis reference state (true in case of successfully refereneced axis, else false).",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -4408,6 +4856,7 @@ cnc_objtypes.CncAxisType(
                 nodeId="ns=cnc;i=6650",
                 browseName="ns=cnc;IsRotational",
                 description="Axis type (true in case of rotational axis, in case of linear type or other false).",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -4419,6 +4868,7 @@ cnc_objtypes.CncAxisType(
                 nodeId="ns=cnc;i=6654",
                 browseName="ns=cnc;ActChannel",
                 description="NodeId of the channel object (CncChannelType) that administrates this drive to expose drive’s channel affiliation.",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 value=o6.NodeId("i=0"),
                 accessLevel=3,
@@ -4433,6 +4883,7 @@ cnc_objtypes.CncAxisType(
                 nodeId="ns=cnc;i=6668",
                 browseName="ns=cnc;IsInactive",
                 description="Drive inactive state (true in case of inactive drive, else false).",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -4443,6 +4894,7 @@ cnc_objtypes.CncAxisType(
                 nodeId="ns=cnc;i=6669",
                 browseName="ns=cnc;IsVirtual",
                 description="Virtual axis (no hardware present; true in case of virtual axis, else fals).",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -4820,17 +5272,26 @@ cnc_vartypes.CncPositionVariableType(
     nodeId="ns=cnc;i=7000",
     browseName="ns=cnc;PosDirect",
     description="Position actual value referring to axis' direct measurement system.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7003", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7004", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7003", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7004", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=7001", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=7001", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=7002", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=7002", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=7005", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=7005", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -4841,17 +5302,26 @@ cnc_vartypes.CncPositionVariableType(
     nodeId="ns=cnc;i=7006",
     browseName="ns=cnc;PosIndirect",
     description="Position actual value referring to axis' indirect measurement system.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7009", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7010", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7009", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7010", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=7007", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=7007", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=7008", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=7008", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=7011", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=7011", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -4862,17 +5332,26 @@ cnc_vartypes.CncPositionVariableType(
     nodeId="ns=cnc;i=7012",
     browseName="ns=cnc;AnglePos",
     description="Spindle angular position values in case of interpolated (position controlled) spindle movement. Returns zeros in case of regular spindle operation (velocity controlled).",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7015", browseName="ns=cnc;EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7016", browseName="ns=cnc;EURange", dataType=ns0.datatypes.Range, accessLevel=3)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7015", browseName="ns=cnc;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7016", browseName="ns=cnc;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, accessLevel=3)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=7013", browseName="ns=cnc;ActPos", description="Position current value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=7013", browseName="ns=cnc;ActPos", description="Position current value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=7014", browseName="ns=cnc;CmdPos", description="Position setpoint value.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=7014", browseName="ns=cnc;CmdPos", description="Position setpoint value.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=cnc;i=7017", browseName="ns=cnc;RemDist", description="Remaining distance to go.", dataType=o6.Double, value=0.0)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=cnc;i=7017", browseName="ns=cnc;RemDist", description="Remaining distance to go.", modellingRule="Mandatory", dataType=o6.Double, value=0.0
+            )
         ),
     ],
     dataType=cnc_datypes.CncPositionDataType,
@@ -5051,7 +5530,7 @@ channel_1 = cnc_objtypes.CncChannelType(
                 description="Block of lines containing the previous, actual and subsequent lines of a CNC part program.",
                 dataType=o6.String,
                 valueRank=1,
-                arrayDimensions=[0],
+                arrayDimensions=[3],
                 value=[],
                 accessLevel=3,
             )
@@ -5256,7 +5735,7 @@ channel_2 = cnc_objtypes.CncChannelType(
                 description="Block of lines containing the previous, actual and subsequent lines of a CNC part program.",
                 dataType=o6.String,
                 valueRank=1,
-                arrayDimensions=[0],
+                arrayDimensions=[3],
                 value=[],
                 accessLevel=3,
             )
@@ -5457,18 +5936,20 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=7144",
     browseName="ns=cnc;ZeroOffset",
     description="Active axis zero offset.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=7145",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5066068, displayName=o6.LocalizedText("mm"), description=o6.LocalizedText("millimetre")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7146", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7146", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -5478,18 +5959,20 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=7148",
     browseName="ns=cnc;ActLoad",
     description="Drive load actual value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=7149",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7150", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7150", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -5499,18 +5982,20 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=7151",
     browseName="ns=cnc;ActPower",
     description="Drive power actual value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=7152",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5723220, displayName=o6.LocalizedText("W"), description=o6.LocalizedText("watt")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7153", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7153", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -5520,18 +6005,20 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=7154",
     browseName="ns=cnc;ActTorque",
     description="Drive torque actual value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=7155",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20053, displayName=o6.LocalizedText("N·m"), description=o6.LocalizedText("newton metre")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7156", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7156", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -5541,18 +6028,24 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=7157",
     browseName="ns=cnc;CmdTorque",
     description="Drive torque setpoint value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=7158",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20053, displayName=o6.LocalizedText("N·m"), description=o6.LocalizedText("newton metre")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7159", browseName="EURange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=cnc;i=7159", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -5571,6 +6064,7 @@ cnc_objtypes.CncAxisType(
                 nodeId="ns=cnc;i=7132",
                 browseName="ns=cnc;ActStatus",
                 description="Actual axis state.",
+                modellingRule="Mandatory",
                 dataType=cnc_datypes.CncAxisStatus,
                 value=cnc_datypes.CncAxisStatus.IN_POSITION,
                 accessLevel=3,
@@ -5581,6 +6075,7 @@ cnc_objtypes.CncAxisType(
                 nodeId="ns=cnc;i=7142",
                 browseName="ns=cnc;IsReferenced",
                 description="Axis reference state (true in case of successfully refereneced axis, else false).",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -5591,6 +6086,7 @@ cnc_objtypes.CncAxisType(
                 nodeId="ns=cnc;i=7143",
                 browseName="ns=cnc;IsRotational",
                 description="Axis type (true in case of rotational axis, in case of linear type or other false).",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -5602,6 +6098,7 @@ cnc_objtypes.CncAxisType(
                 nodeId="ns=cnc;i=7147",
                 browseName="ns=cnc;ActChannel",
                 description="NodeId of the channel object (CncChannelType) that administrates this drive to expose drive’s channel affiliation.",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 value=o6.NodeId("i=0"),
                 accessLevel=3,
@@ -5616,6 +6113,7 @@ cnc_objtypes.CncAxisType(
                 nodeId="ns=cnc;i=7160",
                 browseName="ns=cnc;IsInactive",
                 description="Drive inactive state (true in case of inactive drive, else false).",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -5626,6 +6124,7 @@ cnc_objtypes.CncAxisType(
                 nodeId="ns=cnc;i=7161",
                 browseName="ns=cnc;IsVirtual",
                 description="Virtual axis (no hardware present; true in case of virtual axis, else fals).",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -5659,9 +6158,10 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=7167",
     browseName="ns=cnc;ActOverride",
     description="Override actual value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6057", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7168", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=6057", browseName="EngineeringUnits", modellingRule="Optional", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7168", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -5671,11 +6171,13 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=7169",
     browseName="ns=cnc;ActSpeed",
     description="Speed actual value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=7170",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -5685,7 +6187,7 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7171", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7171", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -5737,7 +6239,8 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=7179",
     browseName="ns=cnc;CmdOverride",
     description="Override setpoint value.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7180", browseName="EURange", dataType=ns0.datatypes.Range))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7180", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range))],
     dataType=o6.Double,
     value=0.0,
     accessLevel=3,
@@ -5746,11 +6249,13 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=7181",
     browseName="ns=cnc;CmdSpeed",
     description="Speed setpoint value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=7182",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -5760,7 +6265,7 @@ ns0.vartypes.AnalogItemType(
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7183", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7183", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -5770,18 +6275,20 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=7185",
     browseName="ns=cnc;ActLoad",
     description="Drive load actual value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=7186",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7187", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7187", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -5791,18 +6298,20 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=7188",
     browseName="ns=cnc;ActPower",
     description="Drive power actual value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=7189",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5723220, displayName=o6.LocalizedText("W"), description=o6.LocalizedText("watt")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7190", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7190", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -5812,18 +6321,20 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=7191",
     browseName="ns=cnc;ActTorque",
     description="Drive torque actual value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=7192",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20053, displayName=o6.LocalizedText("N·m"), description=o6.LocalizedText("newton metre")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7193", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7193", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -5833,18 +6344,24 @@ ns0.vartypes.AnalogItemType(
     nodeId="ns=cnc;i=7194",
     browseName="ns=cnc;CmdTorque",
     description="Drive torque setpoint value.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cnc;i=7195",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20053, displayName=o6.LocalizedText("N·m"), description=o6.LocalizedText("newton metre")
                 ),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cnc;i=7196", browseName="EURange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=cnc;i=7196", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
+            )
+        ),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -5858,7 +6375,9 @@ cnc_objtypes.CncSpindleType(
     references=[
         o6.hasComponent(o6.ns["ns=cnc;i=7012"]),
         o6.hasComponent(
-            ns0.vartypes.DataItemType(nodeId="ns=cnc;i=7166", browseName="ns=cnc;ActGear", description="Gear stage actual value.", dataType=o6.UInt32, value=0, accessLevel=3)
+            ns0.vartypes.DataItemType(
+                nodeId="ns=cnc;i=7166", browseName="ns=cnc;ActGear", description="Gear stage actual value.", modellingRule="Mandatory", dataType=o6.UInt32, value=0, accessLevel=3
+            )
         ),
         o6.hasComponent(o6.ns["ns=cnc;i=7167"]),
         o6.hasComponent(o6.ns["ns=cnc;i=7169"]),
@@ -5867,6 +6386,7 @@ cnc_objtypes.CncSpindleType(
                 nodeId="ns=cnc;i=7173",
                 browseName="ns=cnc;ActStatus",
                 description="Actual spindle state.",
+                modellingRule="Mandatory",
                 dataType=cnc_datypes.CncSpindleStatus,
                 value=cnc_datypes.CncSpindleStatus.STOPPED,
                 accessLevel=3,
@@ -5877,13 +6397,16 @@ cnc_objtypes.CncSpindleType(
                 nodeId="ns=cnc;i=7174",
                 browseName="ns=cnc;ActTurnDirection",
                 description="Turn direction actual value.",
+                modellingRule="Mandatory",
                 dataType=cnc_datypes.CncSpindleTurnDirection,
                 value=cnc_datypes.CncSpindleTurnDirection.NONE,
                 accessLevel=3,
             )
         ),
         o6.hasComponent(
-            ns0.vartypes.DataItemType(nodeId="ns=cnc;i=7178", browseName="ns=cnc;CmdGear", description="Gear stage setpoint value.", dataType=o6.UInt32, value=0, accessLevel=3)
+            ns0.vartypes.DataItemType(
+                nodeId="ns=cnc;i=7178", browseName="ns=cnc;CmdGear", description="Gear stage setpoint value.", modellingRule="Mandatory", dataType=o6.UInt32, value=0, accessLevel=3
+            )
         ),
         o6.hasComponent(o6.ns["ns=cnc;i=7179"]),
         o6.hasComponent(o6.ns["ns=cnc;i=7181"]),
@@ -5892,6 +6415,7 @@ cnc_objtypes.CncSpindleType(
                 nodeId="ns=cnc;i=7184",
                 browseName="ns=cnc;ActChannel",
                 description="NodeId of the channel object (CncChannelType) that administrates this drive to expose drive’s channel affiliation.",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 value=o6.NodeId("i=0"),
                 accessLevel=3,
@@ -5906,6 +6430,7 @@ cnc_objtypes.CncSpindleType(
                 nodeId="ns=cnc;i=7197",
                 browseName="ns=cnc;IsInactive",
                 description="Drive inactive state (true in case of inactive drive, else false).",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,
@@ -5916,6 +6441,7 @@ cnc_objtypes.CncSpindleType(
                 nodeId="ns=cnc;i=7198",
                 browseName="ns=cnc;IsVirtual",
                 description="Virtual axis (no hardware present; true in case of virtual axis, else fals).",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
                 value=False,
                 accessLevel=3,

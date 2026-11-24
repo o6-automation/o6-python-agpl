@@ -73,14 +73,16 @@ Client(url, name="hmi")         # ValueError: not unique
 ### Everything else goes on `client.config`
 
 `client.config` is the live `ClientConfig` behind the native client. Assign to
-it before `connect()`:
+it before `connect()`. While the client is connected, the configuration can be
+read from any thread, but assignments raise `RuntimeError`, except for
+`loadUnknownDataTypes`:
 
 ```python
 client = Client("opc.tcp://localhost:4840")
 client.config.sessionName = "recipe-controller"
 client.config.requestedSessionTimeout = 60_000       # ms
 client.config.sessionLocaleIds = ["en-US", "de-DE"]
-client.config.timeout = 5_000                        # per-request timeout, ms
+client.config.timeout = 5_000                        # request and connect timeout, ms
 client.connect()
 ```
 
@@ -99,7 +101,7 @@ Common settings:
 | `applicationUri` | URI advertised in the `ApplicationDescription`, `urn:o6-Python.unconfigured.application` by default. Must match the URI inside the client certificate on secured channels. |
 | `applicationDescription` | The whole description, if you want to shape it in detail. |
 | `sessionName`, `requestedSessionTimeout`, `sessionLocaleIds` | Session identity, lifetime, and preferred locales. |
-| `timeout`, `secureChannelLifeTime`, `connectivityCheckInterval` | Request timeout, channel renewal interval, and keepalive period, all in ms. |
+| `timeout`, `secureChannelLifeTime`, `connectivityCheckInterval` | Request timeout, channel renewal interval, and keepalive period, all in ms. `timeout` also limits `connect()`, which fails with `BadTimeout` when the channel and Session are not open in time. |
 | `sendBufferSize`, `recvBufferSize`, `localMaxMessageSize`, `localMaxChunkCount` | Transport limits. Relevant when moving large arrays. |
 | `outstandingPublishRequests` | How many Publish requests are kept in flight for subscriptions. |
 | `maxAsyncServiceCalls` | Ceiling on concurrent service calls; the call that exceeds it fails with `BadTooManyOperations`. Defaults to `32`; `0` disables the limit. See [Too many concurrent calls](raw-services.md#concurrency-and-backpressure). |
@@ -409,8 +411,10 @@ handles for deleted or replaced nodes. See
 
 - The client owns native resources and, in a synchronous script, a worker
   thread. `disconnect()` releases the session and channel and stops that worker.
-  Dropping the last reference triggers a best-effort cleanup in `__del__`. Do not rely on the garbage
-  collector; use the context manager or call `disconnect()`.
+  Dropping the last reference triggers a best-effort cleanup in `__del__`: it
+  closes the channel and releases the client on its event loop, without
+  waiting. A connected client also emits a `ResourceWarning`. Do not rely on the
+  garbage collector; use the context manager or call `disconnect()`.
 - Client names, and therefore namespace scopes, are never reused within a
   process. Creating and discarding thousands of clients grows the namespace
   table. In a service, reconnect an existing client instead of constructing new

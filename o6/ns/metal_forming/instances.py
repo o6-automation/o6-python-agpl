@@ -66,7 +66,7 @@ http_opcfoundation_org_UA_MetalForming_ = ns0.objtypes.NamespaceMetadataType(
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),
@@ -84,16 +84,19 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=metal_forming;i=6009",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6010", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6011", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6010", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6011", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6012", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=metal_forming;i=6012", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+)
 o6.reference(o6.ns["ns=metal_forming;i=6012"], "i=17597", "ns=irdi_v1_00;s=0112/2///61987#ABB271#007")
 metal_forming_objtypes.CyclicProcessValueType(
     nodeId="ns=metal_forming;i=5012",
@@ -105,6 +108,7 @@ metal_forming_objtypes.CyclicProcessValueType(
             metal_forming_vartypes.CyclicProcessValueVariableType(
                 nodeId="ns=metal_forming;i=6008",
                 browseName="ns=metal_forming;CyclicProcessValue",
+                modellingRule="Mandatory",
                 dataType=metal_forming_datypes.CyclicProcessValueDataType,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -117,31 +121,39 @@ o6.reference(metal_forming_objtypes.FormingPositionsType, ns0.reftypes.HasCompon
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=metal_forming;i=6014",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6015", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6015", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
     nodeId="ns=metal_forming;i=5007", browseName="ns=metal_forming;MachineryItemState", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=metal_forming;i=6014"])]
 )
 o6.reference(metal_forming_objtypes.ProcessWorkingUnitType, ns0.reftypes.HasComponent, o6.ns["ns=metal_forming;i=5007"])
-ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6019", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=metal_forming;i=6019", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+)
 o6.reference(o6.ns["ns=metal_forming;i=6019"], "i=17597", "ns=irdi_v1_00;s=0112/2///61987#ABB271#007")
-ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6025", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=metal_forming;i=6025", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+)
 o6.reference(o6.ns["ns=metal_forming;i=6025"], "i=17597", "ns=irdi_v1_00;s=0112/2///61987#ABB271#007")
 padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=metal_forming;i=6027",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6028", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6029", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6028", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6029", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6030", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=metal_forming;i=6030", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+)
 o6.reference(o6.ns["ns=metal_forming;i=6030"], "i=17597", "ns=irdi_v1_00;s=0112/2///61987#ABB271#007")
 metal_forming_objtypes.CyclicProcessValueType(
     nodeId="ns=metal_forming;i=5013",
@@ -153,6 +165,7 @@ metal_forming_objtypes.CyclicProcessValueType(
             metal_forming_vartypes.CyclicProcessValueVariableType(
                 nodeId="ns=metal_forming;i=6013",
                 browseName="ns=metal_forming;CyclicProcessValue",
+                modellingRule="Mandatory",
                 dataType=metal_forming_datypes.CyclicProcessValueDataType,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -166,16 +179,19 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=metal_forming;i=6032",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6033", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6034", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6033", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6034", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6035", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=metal_forming;i=6035", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+)
 o6.reference(o6.ns["ns=metal_forming;i=6035"], "i=17597", "ns=irdi_v1_00;s=0112/2///61987#ABB271#007")
 metal_forming_objtypes.CyclicProcessValueType(
     nodeId="ns=metal_forming;i=5014",
@@ -187,6 +203,7 @@ metal_forming_objtypes.CyclicProcessValueType(
             metal_forming_vartypes.CyclicProcessValueVariableType(
                 nodeId="ns=metal_forming;i=6031",
                 browseName="ns=metal_forming;CyclicProcessValue",
+                modellingRule="Mandatory",
                 dataType=metal_forming_datypes.CyclicProcessValueDataType,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -200,16 +217,19 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=metal_forming;i=6037",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6038", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6039", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6038", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6039", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6040", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=metal_forming;i=6040", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+)
 o6.reference(o6.ns["ns=metal_forming;i=6040"], "i=17597", "ns=irdi_v1_00;s=0112/2///61987#ABB271#007")
 metal_forming_objtypes.CyclicProcessValueType(
     nodeId="ns=metal_forming;i=5015",
@@ -221,6 +241,7 @@ metal_forming_objtypes.CyclicProcessValueType(
             metal_forming_vartypes.CyclicProcessValueVariableType(
                 nodeId="ns=metal_forming;i=6036",
                 browseName="ns=metal_forming;CyclicProcessValue",
+                modellingRule="Mandatory",
                 dataType=metal_forming_datypes.CyclicProcessValueDataType,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -234,16 +255,19 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=metal_forming;i=6042",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6043", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6044", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6043", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6044", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6045", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=metal_forming;i=6045", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+)
 o6.reference(o6.ns["ns=metal_forming;i=6045"], "i=17597", "ns=irdi_v1_00;s=0112/2///61987#ABB271#007")
 metal_forming_objtypes.CyclicProcessValueType(
     nodeId="ns=metal_forming;i=5016",
@@ -255,6 +279,7 @@ metal_forming_objtypes.CyclicProcessValueType(
             metal_forming_vartypes.CyclicProcessValueVariableType(
                 nodeId="ns=metal_forming;i=6041",
                 browseName="ns=metal_forming;CyclicProcessValue",
+                modellingRule="Mandatory",
                 dataType=metal_forming_datypes.CyclicProcessValueDataType,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -267,9 +292,10 @@ o6.reference(metal_forming_objtypes.FormingPositionsType, ns0.reftypes.HasCompon
 ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=metal_forming;i=6048",
     browseName="ns=metal_forming;Position",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6049", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6050", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6049", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6050", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     accessLevel=3,
@@ -279,16 +305,19 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=metal_forming;i=6051",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6052", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6053", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6052", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6053", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6054", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=metal_forming;i=6054", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+)
 o6.reference(o6.ns["ns=metal_forming;i=6054"], "i=17597", "ns=irdi_v1_00;s=0112/2///61987#ABB271#007")
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=metal_forming;i=5019",
@@ -301,7 +330,10 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=metal_forming;i=6057",
     browseName="ns=machinery_processvalues;HighHighLimit",
     description="Defines the absolute high high limit",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6058", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6058", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -310,7 +342,10 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=metal_forming;i=6059",
     browseName="ns=machinery_processvalues;HighLimit",
     description="Defines the absolute high limit",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6060", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6060", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -319,7 +354,10 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=metal_forming;i=6061",
     browseName="ns=machinery_processvalues;LowLimit",
     description="Defines the absolute low limit",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6062", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6062", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -328,7 +366,10 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=metal_forming;i=6063",
     browseName="ns=machinery_processvalues;LowLowLimit",
     description="Defines the absolute low low limit",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6064", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6064", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -337,11 +378,13 @@ ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=metal_forming;i=6065",
     browseName="ns=machinery_processvalues;PercentageValue",
     description="Provides the process value in percentage.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=metal_forming;i=6066",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -349,7 +392,9 @@ ns0.vartypes.AnalogUnitRangeType(
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6067", browseName="EURange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=100.0))
+            ns0.vartypes.PropertyType(
+                nodeId="ns=metal_forming;i=6067", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=100.0)
+            )
         ),
     ],
     dataType=o6.Double,
@@ -360,9 +405,10 @@ machinery_processvalues.vartypes.ProcessValueVariableType(
     nodeId="ns=metal_forming;i=6016",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6017", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6018", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6017", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6018", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasComponent(o6.ns["ns=metal_forming;i=6057"]),
         o6.hasComponent(o6.ns["ns=metal_forming;i=6059"]),
         o6.hasComponent(o6.ns["ns=metal_forming;i=6061"]),
@@ -378,9 +424,10 @@ machinery_processvalues.vartypes.ProcessValueSetpointVariableType(
     nodeId="ns=metal_forming;i=6068",
     browseName="ns=machinery_processvalues;ProcessValueSetpoint",
     description="The desired value, may or may not be controlled by the server.",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6069", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6070", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6069", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6070", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -398,7 +445,10 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=metal_forming;i=6071",
     browseName="ns=machinery_processvalues;HighHighLimit",
     description="Defines the absolute high high limit",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6072", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6072", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -407,7 +457,10 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=metal_forming;i=6073",
     browseName="ns=machinery_processvalues;HighLimit",
     description="Defines the absolute high limit",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6074", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6074", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -416,7 +469,10 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=metal_forming;i=6075",
     browseName="ns=machinery_processvalues;LowLimit",
     description="Defines the absolute low limit",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6076", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6076", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -425,7 +481,10 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=metal_forming;i=6077",
     browseName="ns=machinery_processvalues;LowLowLimit",
     description="Defines the absolute low low limit",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6078", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6078", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -434,11 +493,13 @@ ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=metal_forming;i=6079",
     browseName="ns=machinery_processvalues;PercentageValue",
     description="Provides the process value in percentage.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=metal_forming;i=6080",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -446,7 +507,9 @@ ns0.vartypes.AnalogUnitRangeType(
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6081", browseName="EURange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=100.0))
+            ns0.vartypes.PropertyType(
+                nodeId="ns=metal_forming;i=6081", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=100.0)
+            )
         ),
     ],
     dataType=o6.Double,
@@ -457,9 +520,10 @@ machinery_processvalues.vartypes.ProcessValueVariableType(
     nodeId="ns=metal_forming;i=6022",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6023", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6024", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6023", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6024", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
         o6.hasComponent(o6.ns["ns=metal_forming;i=6071"]),
         o6.hasComponent(o6.ns["ns=metal_forming;i=6073"]),
         o6.hasComponent(o6.ns["ns=metal_forming;i=6075"]),
@@ -475,9 +539,10 @@ machinery_processvalues.vartypes.ProcessValueSetpointVariableType(
     nodeId="ns=metal_forming;i=6082",
     browseName="ns=machinery_processvalues;ProcessValueSetpoint",
     description="The desired value, may or may not be controlled by the server.",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6083", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6084", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6083", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6084", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -494,6 +559,7 @@ metal_forming_objtypes.CyclicProcessValueType(
             metal_forming_vartypes.CyclicProcessValueVariableType(
                 nodeId="ns=metal_forming;i=6021",
                 browseName="ns=metal_forming;CyclicProcessValue",
+                modellingRule="Mandatory",
                 dataType=metal_forming_datypes.CyclicProcessValueDataType,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -508,20 +574,24 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=metal_forming;i=6026",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6087", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6088", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6087", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6088", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6090", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=metal_forming;i=6090", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+)
 o6.reference(o6.ns["ns=metal_forming;i=6090"], "i=17597", "ns=irdi_v1_00;s=0112/2///61987#ABB271#007")
 metal_forming_objtypes.CyclicProcessValueType(
     nodeId="ns=metal_forming;i=5021",
     browseName="ns=metal_forming;BDC",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(o6.ns["ns=metal_forming;i=6090"]),
         o6.hasComponent(o6.ns["ns=metal_forming;i=6026"]),
@@ -529,6 +599,7 @@ metal_forming_objtypes.CyclicProcessValueType(
             metal_forming_vartypes.CyclicProcessValueVariableType(
                 nodeId="ns=metal_forming;i=6089",
                 browseName="ns=metal_forming;CyclicProcessValue",
+                modellingRule="Mandatory",
                 dataType=metal_forming_datypes.CyclicProcessValueDataType,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -540,20 +611,24 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=metal_forming;i=6091",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6092", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6093", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6092", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6093", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6095", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=metal_forming;i=6095", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+)
 o6.reference(o6.ns["ns=metal_forming;i=6095"], "i=17597", "ns=irdi_v1_00;s=0112/2///61987#ABB271#007")
 metal_forming_objtypes.CyclicProcessValueType(
     nodeId="ns=metal_forming;i=5022",
     browseName="ns=metal_forming;Retract",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(o6.ns["ns=metal_forming;i=6095"]),
         o6.hasComponent(o6.ns["ns=metal_forming;i=6091"]),
@@ -561,6 +636,7 @@ metal_forming_objtypes.CyclicProcessValueType(
             metal_forming_vartypes.CyclicProcessValueVariableType(
                 nodeId="ns=metal_forming;i=6094",
                 browseName="ns=metal_forming;CyclicProcessValue",
+                modellingRule="Mandatory",
                 dataType=metal_forming_datypes.CyclicProcessValueDataType,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -572,20 +648,24 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=metal_forming;i=6096",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6097", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6098", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6097", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6098", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6100", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=metal_forming;i=6100", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+)
 o6.reference(o6.ns["ns=metal_forming;i=6100"], "i=17597", "ns=irdi_v1_00;s=0112/2///61987#ABB271#007")
 metal_forming_objtypes.CyclicProcessValueType(
     nodeId="ns=metal_forming;i=5023",
     browseName="ns=metal_forming;Start",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(o6.ns["ns=metal_forming;i=6100"]),
         o6.hasComponent(o6.ns["ns=metal_forming;i=6096"]),
@@ -593,6 +673,7 @@ metal_forming_objtypes.CyclicProcessValueType(
             metal_forming_vartypes.CyclicProcessValueVariableType(
                 nodeId="ns=metal_forming;i=6099",
                 browseName="ns=metal_forming;CyclicProcessValue",
+                modellingRule="Mandatory",
                 dataType=metal_forming_datypes.CyclicProcessValueDataType,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -604,20 +685,24 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=metal_forming;i=6101",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6102", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6103", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6102", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6103", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6105", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=metal_forming;i=6105", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+)
 o6.reference(o6.ns["ns=metal_forming;i=6105"], "i=17597", "ns=irdi_v1_00;s=0112/2///61987#ABB271#007")
 metal_forming_objtypes.CyclicProcessValueType(
     nodeId="ns=metal_forming;i=5024",
     browseName="ns=metal_forming;TDC",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(o6.ns["ns=metal_forming;i=6105"]),
         o6.hasComponent(o6.ns["ns=metal_forming;i=6101"]),
@@ -625,6 +710,7 @@ metal_forming_objtypes.CyclicProcessValueType(
             metal_forming_vartypes.CyclicProcessValueVariableType(
                 nodeId="ns=metal_forming;i=6104",
                 browseName="ns=metal_forming;CyclicProcessValue",
+                modellingRule="Mandatory",
                 dataType=metal_forming_datypes.CyclicProcessValueDataType,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -636,20 +722,24 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=metal_forming;i=6106",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6107", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6108", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6107", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6108", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6110", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=metal_forming;i=6110", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+)
 o6.reference(o6.ns["ns=metal_forming;i=6110"], "i=17597", "ns=irdi_v1_00;s=0112/2///61987#ABB271#007")
 metal_forming_objtypes.CyclicProcessValueType(
     nodeId="ns=metal_forming;i=5025",
     browseName="ns=metal_forming;Touch",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(o6.ns["ns=metal_forming;i=6110"]),
         o6.hasComponent(o6.ns["ns=metal_forming;i=6106"]),
@@ -657,6 +747,7 @@ metal_forming_objtypes.CyclicProcessValueType(
             metal_forming_vartypes.CyclicProcessValueVariableType(
                 nodeId="ns=metal_forming;i=6109",
                 browseName="ns=metal_forming;CyclicProcessValue",
+                modellingRule="Mandatory",
                 dataType=metal_forming_datypes.CyclicProcessValueDataType,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -683,11 +774,25 @@ ns0.objtypes.BaseObjectType(
     modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6046", browseName="ns=metal_forming;Orientation", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=metal_forming;i=6046", browseName="ns=metal_forming;Orientation", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6047", browseName="ns=metal_forming;Stage", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6111", browseName="ns=machine_tool;Name", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6112", browseName="ns=machine_tool;PlaceNumber", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=metal_forming;i=6047", browseName="ns=metal_forming;Stage", modellingRule="Optional", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=metal_forming;i=6111", browseName="ns=machine_tool;Name", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=metal_forming;i=6112", browseName="ns=machine_tool;PlaceNumber", modellingRule="Mandatory", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1
+            )
+        ),
         o6.hasComponent(o6.ns["ns=metal_forming;i=6048"]),
     ],
 )
@@ -695,9 +800,18 @@ o6.reference(metal_forming_objtypes.FormingToolType, ns0.reftypes.HasComponent, 
 ns0.objtypes.BaseObjectType(
     nodeId="ns=metal_forming;i=5020",
     browseName="ns=machine_tool;Location",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6113", browseName="ns=machine_tool;Name", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6114", browseName="ns=machine_tool;PlaceNumber", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=metal_forming;i=6113", browseName="ns=machine_tool;Name", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=metal_forming;i=6114", browseName="ns=machine_tool;PlaceNumber", modellingRule="Mandatory", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
 )
 metal_forming_objtypes.FormingToolType(
@@ -705,8 +819,10 @@ metal_forming_objtypes.FormingToolType(
     browseName="ns=metal_forming;<FormingTool>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6085", browseName="ns=machine_tool;Identifier", dataType=o6.String, value="")),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6086", browseName="ns=machine_tool;Name", dataType=o6.String)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6085", browseName="ns=machine_tool;Identifier", modellingRule="Optional", dataType=o6.String, value="")
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=metal_forming;i=6086", browseName="ns=machine_tool;Name", modellingRule="Optional", dataType=o6.String)),
         o6.hasComponent(o6.ns["ns=metal_forming;i=5020"]),
     ],
 )

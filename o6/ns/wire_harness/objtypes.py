@@ -43,7 +43,7 @@ else:
 class WireHarnessMachineType(ns0.objtypes.BaseObjectType):
     articleSpecManagement: ArticleSpecManagementType | None
     components: machinery.objtypes.MachineComponentsType | None = o6.hasAddIn(
-        machinery.objtypes.MachineComponentsType(nodeId="ns=wire_harness;i=5036", browseName="ns=machinery;Components")
+        machinery.objtypes.MachineComponentsType(nodeId="ns=wire_harness;i=5036", browseName="ns=machinery;Components", modellingRule="Optional")
     )
     identification: WireHarnessMachineIdentificationType
     machineryBuildingBlocks: ns0.objtypes.FolderType
@@ -57,6 +57,7 @@ class WireHarnessMachineIdentificationType(machinery.objtypes.MachineIdentificat
             nodeId="ns=wire_harness;i=6008",
             browseName="ns=di;AssetId",
             description="To be used by end users to store a unique identification in the context of their overall application. Servers shall support at least 40 Unicode characters for the clients writing this value, this means clients can expect to be able to write strings with a length of 40 Unicode characters into that field.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -67,48 +68,76 @@ class WireHarnessMachineIdentificationType(machinery.objtypes.MachineIdentificat
 @o6.objecttype(nodeId="ns=wire_harness;i=1008", browseName="ns=wire_harness;RunCompleteEventType", displayName="RunCompleteEventType", isAbstract=True)
 class RunCompleteEventType(ns0.objtypes.BaseEventType):
     endTime: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=wire_harness;i=6056", browseName="ns=wire_harness;EndTime", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=wire_harness;i=6056", browseName="ns=wire_harness;EndTime", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1
+        )
     )
     goodQuantity: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=wire_harness;i=6061", browseName="ns=wire_harness;GoodQuantity", dataType=o6.Double, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=wire_harness;i=6061", browseName="ns=wire_harness;GoodQuantity", modellingRule="Mandatory", dataType=o6.Double, accessLevel=3, userAccessLevel=1
+        )
     )
     jobOrderID: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=wire_harness;i=6036", browseName="ns=wire_harness;JobOrderID", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=wire_harness;i=6036", browseName="ns=wire_harness;JobOrderID", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
     producedQuantity: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=wire_harness;i=6059", browseName="ns=wire_harness;ProducedQuantity", dataType=o6.Double, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=wire_harness;i=6059", browseName="ns=wire_harness;ProducedQuantity", modellingRule="Mandatory", dataType=o6.Double, accessLevel=3, userAccessLevel=1
+        )
     )
     productIDs: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=wire_harness;i=6062", browseName="ns=wire_harness;ProductIDs", dataType=o6.String, valueRank=1, arrayDimensions=[0], accessLevel=3, userAccessLevel=1
+            nodeId="ns=wire_harness;i=6062",
+            browseName="ns=wire_harness;ProductIDs",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            valueRank=1,
+            arrayDimensions=[0],
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     run: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=wire_harness;i=6052", browseName="ns=wire_harness;Run", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=wire_harness;i=6052", browseName="ns=wire_harness;Run", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+        )
     )
     startTime: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=wire_harness;i=6053", browseName="ns=wire_harness;StartTime", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=wire_harness;i=6053", browseName="ns=wire_harness;StartTime", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
 @o6.objecttype(nodeId="ns=wire_harness;i=1005", browseName="ns=wire_harness;ProductFinishedEventType", displayName="ProductFinishedEventType", isAbstract=True)
 class ProductFinishedEventType(ns0.objtypes.BaseEventType):
     endTime: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=wire_harness;i=6078", browseName="ns=wire_harness;EndTime", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=wire_harness;i=6078", browseName="ns=wire_harness;EndTime", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1
+        )
     )
     jobOrderID: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=wire_harness;i=6066", browseName="ns=wire_harness;JobOrderID", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=wire_harness;i=6066", browseName="ns=wire_harness;JobOrderID", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
     materialDefinitionID: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=wire_harness;i=6067", browseName="ns=wire_harness;MaterialDefinitionID", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=wire_harness;i=6067", browseName="ns=wire_harness;MaterialDefinitionID", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
     productID: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=wire_harness;i=6076", browseName="ns=wire_harness;ProductID", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=wire_harness;i=6076", browseName="ns=wire_harness;ProductID", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
     resultIDs: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=wire_harness;i=6079",
             browseName="ns=wire_harness;ResultIDs",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.TrimmedString,
             valueRank=1,
             arrayDimensions=[0],
@@ -117,14 +146,23 @@ class ProductFinishedEventType(ns0.objtypes.BaseEventType):
         )
     )
     run: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=wire_harness;i=6075", browseName="ns=wire_harness;Run", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=wire_harness;i=6075", browseName="ns=wire_harness;Run", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+        )
     )
     startTime: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=wire_harness;i=6077", browseName="ns=wire_harness;StartTime", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=wire_harness;i=6077", browseName="ns=wire_harness;StartTime", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1
+        )
     )
     state: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=wire_harness;i=6080", browseName="ns=wire_harness;State", dataType=machinery_jobs.datatypes.JobResult, accessLevel=3, userAccessLevel=1
+            nodeId="ns=wire_harness;i=6080",
+            browseName="ns=wire_harness;State",
+            modellingRule="Mandatory",
+            dataType=machinery_jobs.datatypes.JobResult,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
 
@@ -177,6 +215,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=wire_harness;i=7002",
     browseName="ns=isa95_jobcontrol_v2;Cancel",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6018"]),
     outputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6020"]),
 )
@@ -229,6 +268,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=wire_harness;i=7003",
     browseName="ns=isa95_jobcontrol_v2;Abort",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6021"]),
     outputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6024"]),
 )
@@ -281,6 +321,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=wire_harness;i=7004",
     browseName="ns=isa95_jobcontrol_v2;Start",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6025"]),
     outputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6100"]),
 )
@@ -333,6 +374,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=wire_harness;i=7005",
     browseName="ns=isa95_jobcontrol_v2;Clear",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6101"]),
     outputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6102"]),
 )
@@ -385,6 +427,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=wire_harness;i=7006",
     browseName="ns=isa95_jobcontrol_v2;Pause",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6103"]),
     outputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6104"]),
 )
@@ -437,6 +480,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=wire_harness;i=7007",
     browseName="ns=isa95_jobcontrol_v2;Stop",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6105"]),
     outputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6106"]),
 )
@@ -489,6 +533,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=wire_harness;i=7008",
     browseName="ns=isa95_jobcontrol_v2;Store",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6107"]),
     outputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6108"]),
 )
@@ -530,6 +575,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=wire_harness;i=7009",
     browseName="ns=wire_harness;FindPartsByType",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6028"]),
     outputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6034"]),
 )
@@ -545,7 +591,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Part", dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3010"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wire_harness;i=7015", browseName="ns=wire_harness;StorePart", inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6054"]))
+o6.call(nodeId="ns=wire_harness;i=7015", browseName="ns=wire_harness;StorePart", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6054"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wire_harness;i=6055",
@@ -558,7 +604,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Part", dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3010"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wire_harness;i=7016", browseName="ns=wire_harness;ClearPart", inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6055"]))
+o6.call(nodeId="ns=wire_harness;i=7016", browseName="ns=wire_harness;ClearPart", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6055"]))
 
 
 @o6.objecttype(nodeId="ns=wire_harness;i=1004", browseName="ns=wire_harness;PartManagementType", displayName="PartManagementType")
@@ -569,6 +615,7 @@ class PartManagementType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=wire_harness;i=6022",
             browseName="ns=wire_harness;Seals",
+            modellingRule="Optional",
             dataType=isa95_jobcontrol_v2.datatypes.ISA95MaterialDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -580,6 +627,7 @@ class PartManagementType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=wire_harness;i=6026",
             browseName="ns=wire_harness;Sleeves",
+            modellingRule="Optional",
             dataType=isa95_jobcontrol_v2.datatypes.ISA95MaterialDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -592,6 +640,7 @@ class PartManagementType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=wire_harness;i=6017",
             browseName="ns=wire_harness;Terminals",
+            modellingRule="Optional",
             dataType=isa95_jobcontrol_v2.datatypes.ISA95MaterialDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -603,6 +652,7 @@ class PartManagementType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=wire_harness;i=6027",
             browseName="ns=wire_harness;Wires",
+            modellingRule="Optional",
             dataType=isa95_jobcontrol_v2.datatypes.ISA95MaterialDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -623,7 +673,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ArticleSpec", dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3010"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wire_harness;i=7017", browseName="ns=wire_harness;StoreArticleSpec", inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6057"]))
+o6.call(nodeId="ns=wire_harness;i=7017", browseName="ns=wire_harness;StoreArticleSpec", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6057"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wire_harness;i=6058",
@@ -636,7 +686,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ArticleSpec", dataType=o6.NodeId("ns=isa95_jobcontrol_v2;i=3010"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wire_harness;i=7018", browseName="ns=wire_harness;ClearArticleSpec", inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6058"]))
+o6.call(nodeId="ns=wire_harness;i=7018", browseName="ns=wire_harness;ClearArticleSpec", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wire_harness;i=6058"]))
 
 
 @o6.objecttype(nodeId="ns=wire_harness;i=1007", browseName="ns=wire_harness;ArticleSpecManagementType", displayName="ArticleSpecManagementType")
@@ -645,6 +695,7 @@ class ArticleSpecManagementType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=wire_harness;i=6023",
             browseName="ns=wire_harness;ArticleSpecList",
+            modellingRule="Mandatory",
             dataType=isa95_jobcontrol_v2.datatypes.ISA95MaterialDataType,
             valueRank=1,
             arrayDimensions=[0],

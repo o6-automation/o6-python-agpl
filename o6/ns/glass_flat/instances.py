@@ -38,88 +38,88 @@ else:
 ns0.objtypes.TransitionType(
     nodeId="ns=glass_flat;i=1000",
     browseName="ns=glass_flat;InitializingToRunning",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1048", browseName="TransitionNumber", dataType=o6.UInt32, value=0))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1048", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=0))],
 )
 o6.reference(glass_flat_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=1000"])
 ns0.objtypes.TransitionType(
     nodeId="ns=glass_flat;i=1001",
     browseName="ns=glass_flat;RunningToInterrupted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1049", browseName="TransitionNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1049", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(glass_flat_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=1001"])
 ns0.objtypes.TransitionType(
     nodeId="ns=glass_flat;i=1012",
     browseName="ns=glass_flat;InterruptedToRunning",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1050", browseName="TransitionNumber", dataType=o6.UInt32, value=5))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1050", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=5))],
 )
 o6.reference(glass_flat_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=1012"])
 ns0.objtypes.TransitionType(
     nodeId="ns=glass_flat;i=1013",
     browseName="ns=glass_flat;RunningToAborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1051", browseName="TransitionNumber", dataType=o6.UInt32, value=6))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1051", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=6))],
 )
 o6.reference(glass_flat_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=1013"])
 ns0.objtypes.TransitionType(
     nodeId="ns=glass_flat;i=1014",
     browseName="ns=glass_flat;RunningToEnded",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1052", browseName="TransitionNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1052", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(glass_flat_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=1014"])
 ns0.objtypes.TransitionType(
     nodeId="ns=glass_flat;i=1042",
     browseName="ns=glass_flat;EndedToInitializing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1054", browseName="TransitionNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1054", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(glass_flat_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=1042"])
 ns0.objtypes.TransitionType(
     nodeId="ns=glass_flat;i=1043",
     browseName="ns=glass_flat;InterruptedToAborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1055", browseName="TransitionNumber", dataType=o6.UInt32, value=7))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1055", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=7))],
 )
 o6.reference(glass_flat_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=1043"])
 ns0.objtypes.TransitionType(
     nodeId="ns=glass_flat;i=1044",
     browseName="ns=glass_flat;IdleToQueued",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1056", browseName="TransitionNumber", dataType=o6.UInt32, value=0))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1056", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=0))],
 )
 o6.reference(glass_flat_objtypes.InitializingSubStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=1044"])
 o6.reference(o6.ns["ns=glass_flat;i=1044"], "i=53", o6.ns["ns=glass_flat;i=7021"])
 ns0.objtypes.TransitionType(
     nodeId="ns=glass_flat;i=1045",
     browseName="ns=glass_flat;QueuedToIdle",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1057", browseName="TransitionNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1057", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(glass_flat_objtypes.InitializingSubStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=1045"])
 ns0.objtypes.TransitionType(
     nodeId="ns=glass_flat;i=1046",
     browseName="ns=glass_flat;QueuedToReleased",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1058", browseName="TransitionNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1058", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(glass_flat_objtypes.InitializingSubStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=1046"])
 o6.reference(o6.ns["ns=glass_flat;i=1046"], "i=53", o6.ns["ns=glass_flat;i=7003"])
 ns0.objtypes.TransitionType(
     nodeId="ns=glass_flat;i=1047",
     browseName="ns=glass_flat;ReleasedToQueued",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1059", browseName="TransitionNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1059", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(glass_flat_objtypes.InitializingSubStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=1047"])
 o6.reference(o6.ns["ns=glass_flat;i=1047"], "i=53", o6.ns["ns=glass_flat;i=7004"])
 ns0.objtypes.TransitionType(
     nodeId="ns=glass_flat;i=1022",
     browseName="ns=glass_flat;RunningToRunning",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1060", browseName="TransitionNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1060", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(glass_flat_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=1022"])
 ns0.objtypes.TransitionType(
     nodeId="ns=glass_flat;i=1028",
     browseName="ns=glass_flat;AbortedToInitializing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1061", browseName="TransitionNumber", dataType=o6.UInt32, value=8))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1061", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=8))],
 )
 o6.reference(glass_flat_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=1028"])
 ns0.objtypes.TransitionType(
     nodeId="ns=glass_flat;i=1053",
     browseName="ns=glass_flat;InitializingToAborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1062", browseName="TransitionNumber", dataType=o6.UInt32, value=9))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=1062", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=9))],
 )
 o6.reference(glass_flat_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=1053"])
 ns0.objtypes.DataTypeEncodingType(nodeId="ns=glass_flat;i=5037", browseName="Default Binary")
@@ -136,7 +136,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6021",
     browseName="ns=glass_flat;Weight",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6022", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6022", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -145,7 +147,7 @@ o6.reference(glass_flat_objtypes.BaseMaterialType, ns0.reftypes.HasComponent, o6
 ns0.objtypes.InitialStateType(
     nodeId="ns=glass_flat;i=5032",
     browseName="ns=glass_flat;Initializing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6024", browseName="StateNumber", dataType=o6.UInt32, value=0))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6024", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=0))],
 )
 o6.reference(glass_flat_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=5032"])
 o6.reference(o6.ns["ns=glass_flat;i=1000"], "i=51", o6.ns["ns=glass_flat;i=5032"])
@@ -159,17 +161,32 @@ glass_flat_objtypes.BaseMaterialType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6023", browseName="ns=glass_flat;Identifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6023",
+                browseName="ns=glass_flat;Identifier",
+                modellingRule="Optional",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6025", browseName="ns=glass_flat;Location", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6025",
+                browseName="ns=glass_flat;Location",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6026", browseName="ns=glass_flat;MaterialIdentifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6026",
+                browseName="ns=glass_flat;MaterialIdentifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
     ],
@@ -182,7 +199,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6018",
     browseName="ns=glass_flat;Y",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6028", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6028", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -192,7 +211,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6019",
     browseName="ns=glass_flat;X",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6029", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6029", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -202,7 +223,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6020",
     browseName="ns=glass_flat;Z",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6030", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6030", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -215,22 +238,39 @@ glass_flat_objtypes.BaseMaterialType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6027", browseName="ns=glass_flat;Identifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6027",
+                browseName="ns=glass_flat;Identifier",
+                modellingRule="Optional",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6031", browseName="ns=glass_flat;Location", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6031",
+                browseName="ns=glass_flat;Location",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6032", browseName="ns=glass_flat;MaterialIdentifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6032",
+                browseName="ns=glass_flat;MaterialIdentifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
     ],
 )
-ns0.objtypes.FolderType(nodeId="ns=glass_flat;i=5022", browseName="ns=glass_flat;InputMaterials", references=[o6.hasComponent(o6.ns["ns=glass_flat;i=5006"])])
+ns0.objtypes.FolderType(
+    nodeId="ns=glass_flat;i=5022", browseName="ns=glass_flat;InputMaterials", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=glass_flat;i=5006"])]
+)
 glass_flat_objtypes.BaseMaterialType(
     nodeId="ns=glass_flat;i=5027",
     browseName="ns=glass_flat;<OutputMaterial>",
@@ -238,17 +278,32 @@ glass_flat_objtypes.BaseMaterialType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6033", browseName="ns=glass_flat;Identifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6033",
+                browseName="ns=glass_flat;Identifier",
+                modellingRule="Optional",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6034", browseName="ns=glass_flat;Location", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6034",
+                browseName="ns=glass_flat;Location",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6035", browseName="ns=glass_flat;MaterialIdentifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6035",
+                browseName="ns=glass_flat;MaterialIdentifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
     ],
@@ -264,7 +319,12 @@ glass_flat_objtypes.GlassMachineIdentificationType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6057", browseName="ns=glass_flat;LoggedInProfiles", dataType=glass_flat_datypes.UserProfileType, valueRank=1, arrayDimensions=[0]
+                nodeId="ns=glass_flat;i=6057",
+                browseName="ns=glass_flat;LoggedInProfiles",
+                modellingRule="Optional",
+                dataType=glass_flat_datypes.UserProfileType,
+                valueRank=1,
+                arrayDimensions=[0],
             )
         ),
         o6.hasProperty(
@@ -272,6 +332,7 @@ glass_flat_objtypes.GlassMachineIdentificationType(
                 nodeId="ns=glass_flat;i=6058",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -280,6 +341,7 @@ glass_flat_objtypes.GlassMachineIdentificationType(
                 nodeId="ns=glass_flat;i=6061",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -288,6 +350,7 @@ glass_flat_objtypes.GlassMachineIdentificationType(
                 nodeId="ns=glass_flat;i=6062",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -301,22 +364,39 @@ glass_flat_objtypes.BaseMaterialType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6036", browseName="ns=glass_flat;Identifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6036",
+                browseName="ns=glass_flat;Identifier",
+                modellingRule="Optional",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6065", browseName="ns=glass_flat;Location", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6065",
+                browseName="ns=glass_flat;Location",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6066", browseName="ns=glass_flat;MaterialIdentifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6066",
+                browseName="ns=glass_flat;MaterialIdentifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
     ],
 )
-ns0.objtypes.FolderType(nodeId="ns=glass_flat;i=5026", browseName="ns=glass_flat;OutputMaterials", references=[o6.hasComponent(o6.ns["ns=glass_flat;i=5028"])])
+ns0.objtypes.FolderType(
+    nodeId="ns=glass_flat;i=5026", browseName="ns=glass_flat;OutputMaterials", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=glass_flat;i=5028"])]
+)
 glass_flat_objtypes.ConfigurationRulesType(
     nodeId="ns=glass_flat;i=5029",
     browseName="ns=glass_flat;ConfigurationRules",
@@ -326,6 +406,7 @@ glass_flat_objtypes.ConfigurationRulesType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=glass_flat;i=6067",
                 browseName="ns=glass_flat;MachineProcessingCoordinateSystem",
+                modellingRule="Mandatory",
                 dataType=glass_flat_datypes.CoordinateSystemEnumeration,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -341,17 +422,30 @@ glass_flat_objtypes.ProductionJobType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6056", browseName="ns=glass_flat;Identifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6056",
+                browseName="ns=glass_flat;Identifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6073", browseName="ns=glass_flat;NumberInList", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=glass_flat;i=6073", browseName="ns=glass_flat;NumberInList", modellingRule="Mandatory", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1
+            )
+        ),
         o6.hasComponent(o6.ns["ns=glass_flat;i=5022"]),
         o6.hasComponent(o6.ns["ns=glass_flat;i=5026"]),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=glass_flat;i=6052", browseName="ns=glass_flat;EndTime", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=glass_flat;i=6052", browseName="ns=glass_flat;EndTime", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=glass_flat;i=6074", browseName="ns=glass_flat;StartTime", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=glass_flat;i=6074", browseName="ns=glass_flat;StartTime", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1
+            )
         ),
     ],
 )
@@ -362,12 +456,15 @@ glass_flat_objtypes.ProductionType(
     modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6063", browseName="ns=glass_flat;JobListIsRecommendation", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=glass_flat;i=6063", browseName="ns=glass_flat;JobListIsRecommendation", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=glass_flat;i=6080",
                 browseName="ns=glass_flat;SupportedMaterialTypes",
+                modellingRule="Optional",
                 dataType=o6.NodeId,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -375,14 +472,17 @@ glass_flat_objtypes.ProductionType(
                 userAccessLevel=1,
             )
         ),
-        o6.hasComponent(glass_flat_objtypes.ProductionPlanType(nodeId="ns=glass_flat;i=5016", browseName="ns=glass_flat;ProductionPlan")),
+        o6.hasComponent(glass_flat_objtypes.ProductionPlanType(nodeId="ns=glass_flat;i=5016", browseName="ns=glass_flat;ProductionPlan", modellingRule="Mandatory")),
     ],
 )
 o6.reference(glass_flat_objtypes.GlassMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=5015"])
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6094",
     browseName="ns=glass_flat;Weight",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6095", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6095", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -390,7 +490,10 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6105",
     browseName="ns=glass_flat;Weight",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6106", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6106", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -398,7 +501,10 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6114",
     browseName="ns=glass_flat;Weight",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6115", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6115", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -409,12 +515,15 @@ ns0.vartypes.AnalogUnitType(
     modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6059", browseName="EURange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=100.0))
+            ns0.vartypes.PropertyType(
+                nodeId="ns=glass_flat;i=6059", browseName="EURange", modellingRule="Optional", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=100.0)
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=glass_flat;i=6117",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -433,12 +542,15 @@ ns0.vartypes.AnalogUnitType(
     modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6060", browseName="EURange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=100.0))
+            ns0.vartypes.PropertyType(
+                nodeId="ns=glass_flat;i=6060", browseName="EURange", modellingRule="Optional", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=100.0)
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=glass_flat;i=6119",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -454,7 +566,10 @@ o6.reference(glass_flat_objtypes.GasMixType, ns0.reftypes.HasComponent, o6.ns["n
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6120",
     browseName="ns=glass_flat;X",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6121", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6121", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -466,17 +581,32 @@ glass_flat_objtypes.AssemblyType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6125", browseName="ns=glass_flat;Identifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6125",
+                browseName="ns=glass_flat;Identifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6126", browseName="ns=glass_flat;Location", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6126",
+                browseName="ns=glass_flat;Location",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6127", browseName="ns=glass_flat;MaterialIdentifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6127",
+                browseName="ns=glass_flat;MaterialIdentifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
     ],
@@ -485,7 +615,10 @@ o6.reference(glass_flat_objtypes.AssemblyJobType, ns0.reftypes.HasComponent, o6.
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6122",
     browseName="ns=glass_flat;Y",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6129", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6129", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -493,7 +626,10 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6130",
     browseName="ns=glass_flat;Z",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6131", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6131", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -505,21 +641,38 @@ glass_flat_objtypes.BaseMaterialType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6071", browseName="ns=glass_flat;Location", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6071",
+                browseName="ns=glass_flat;Location",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6072", browseName="ns=glass_flat;Identifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6072",
+                browseName="ns=glass_flat;Identifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6089", browseName="ns=glass_flat;MaterialIdentifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6089",
+                browseName="ns=glass_flat;MaterialIdentifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6090", browseName="ns=glass_flat;Description", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=glass_flat;i=6090", browseName="ns=glass_flat;Description", modellingRule="Optional", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=glass_flat;i=6094"]),
         o6.hasComponent(o6.ns["ns=glass_flat;i=6120"]),
@@ -531,7 +684,10 @@ o6.reference(glass_flat_objtypes.CuttingJobType, ns0.reftypes.HasComponent, o6.n
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6138",
     browseName="ns=glass_flat;X",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6141", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6141", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -539,7 +695,10 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6143",
     browseName="ns=glass_flat;Weight",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6144", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6144", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -547,7 +706,10 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6142",
     browseName="ns=glass_flat;Y",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6151", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6151", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -555,7 +717,10 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6154",
     browseName="ns=glass_flat;Z",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6155", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6155", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -563,7 +728,7 @@ ns0.vartypes.AnalogUnitType(
 ns0.objtypes.StateType(
     nodeId="ns=glass_flat;i=5033",
     browseName="ns=glass_flat;Aborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6159", browseName="StateNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6159", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(glass_flat_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=5033"])
 o6.reference(o6.ns["ns=glass_flat;i=1013"], "i=52", o6.ns["ns=glass_flat;i=5033"])
@@ -573,7 +738,7 @@ o6.reference(o6.ns["ns=glass_flat;i=1053"], "i=52", o6.ns["ns=glass_flat;i=5033"
 ns0.objtypes.StateType(
     nodeId="ns=glass_flat;i=5034",
     browseName="ns=glass_flat;Ended",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6160", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6160", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(glass_flat_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=5034"])
 o6.reference(o6.ns["ns=glass_flat;i=1014"], "i=52", o6.ns["ns=glass_flat;i=5034"])
@@ -581,7 +746,7 @@ o6.reference(o6.ns["ns=glass_flat;i=1042"], "i=51", o6.ns["ns=glass_flat;i=5034"
 ns0.objtypes.StateType(
     nodeId="ns=glass_flat;i=5035",
     browseName="ns=glass_flat;Interrupted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6161", browseName="StateNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6161", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(glass_flat_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=5035"])
 o6.reference(o6.ns["ns=glass_flat;i=1001"], "i=52", o6.ns["ns=glass_flat;i=5035"])
@@ -602,7 +767,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6166",
     browseName="ns=glass_flat;SealantDepth",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6167", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6167", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -617,6 +784,7 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=glass_flat;i=6068",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -632,7 +800,7 @@ o6.reference(glass_flat_objtypes.SealingMaterialType, ns0.reftypes.HasComponent,
 ns0.objtypes.StateType(
     nodeId="ns=glass_flat;i=5036",
     browseName="ns=glass_flat;Running",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6171", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6171", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(glass_flat_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=5036"])
 o6.reference(o6.ns["ns=glass_flat;i=1000"], "i=52", o6.ns["ns=glass_flat;i=5036"])
@@ -646,7 +814,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6182",
     browseName="ns=glass_flat;ElectricalConductivity",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6183", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6183", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -685,7 +855,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6203",
     browseName="ns=glass_flat;X",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6204", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6204", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -695,7 +867,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6205",
     browseName="ns=glass_flat;Y",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6206", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6206", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -705,7 +879,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6207",
     browseName="ns=glass_flat;Absorption",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6208", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6208", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -715,7 +891,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6209",
     browseName="ns=glass_flat;Reflection",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6210", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6210", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -725,7 +903,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6211",
     browseName="ns=glass_flat;CoatingEmessivity",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6212", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6212", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -735,7 +915,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6213",
     browseName="ns=glass_flat;Transmission",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6214", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6214", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
     userAccessLevel=1,
@@ -744,7 +926,10 @@ o6.reference(glass_flat_objtypes.GlassType, ns0.reftypes.HasComponent, o6.ns["ns
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6215",
     browseName="ns=glass_flat;Weight",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6216", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6216", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -768,7 +953,10 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6221",
     browseName="ns=glass_flat;X",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6222", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6222", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -796,21 +984,38 @@ glass_flat_objtypes.GlassType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6096", browseName="ns=glass_flat;Location", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6096",
+                browseName="ns=glass_flat;Location",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6099", browseName="ns=glass_flat;Identifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6099",
+                browseName="ns=glass_flat;Identifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6100", browseName="ns=glass_flat;MaterialIdentifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6100",
+                browseName="ns=glass_flat;MaterialIdentifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6101", browseName="ns=glass_flat;Description", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=glass_flat;i=6101", browseName="ns=glass_flat;Description", modellingRule="Optional", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6133", browseName="ns=glass_flat;Orientation", dataType=ns0.datatypes.Number, accessLevel=3, userAccessLevel=1)
@@ -874,7 +1079,7 @@ http_opcfoundation_org_UA_Glass_Flat_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6265", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6266", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=glass_flat;i=6266", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
@@ -888,7 +1093,8 @@ http_opcfoundation_org_UA_Glass_Flat_ = ns0.objtypes.NamespaceMetadataType(
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=glass_flat;i=6282",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6283", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6283", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 glass_flat_objtypes.InitializingSubStateMachineType(
@@ -899,11 +1105,12 @@ o6.reference(o6.ns["ns=glass_flat;i=5059"], "i=117", glass_flat_objtypes.Initial
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=glass_flat;i=6286",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6287", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6287", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 glass_flat_objtypes.InitializingSubStateMachineType(
-    nodeId="ns=glass_flat;i=5061", browseName="ns=glass_flat;InitializedState", references=[o6.hasComponent(o6.ns["ns=glass_flat;i=6286"])]
+    nodeId="ns=glass_flat;i=5061", browseName="ns=glass_flat;InitializedState", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=glass_flat;i=6286"])]
 )
 o6.reference(o6.ns["ns=glass_flat;i=5061"], "i=117", glass_flat_objtypes.InitializingSubStateMachineType)
 glass_flat_objtypes.ProductionStateMachineType(
@@ -919,7 +1126,7 @@ o6.reference(glass_flat_objtypes.ProductionJobType, ns0.reftypes.HasComponent, o
 ns0.objtypes.InitialStateType(
     nodeId="ns=glass_flat;i=5067",
     browseName="ns=glass_flat;Idle",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6298", browseName="StateNumber", dataType=o6.UInt32, value=0))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6298", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=0))],
 )
 o6.reference(glass_flat_objtypes.InitializingSubStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=5067"])
 o6.reference(o6.ns["ns=glass_flat;i=1044"], "i=51", o6.ns["ns=glass_flat;i=5067"])
@@ -927,7 +1134,7 @@ o6.reference(o6.ns["ns=glass_flat;i=1045"], "i=52", o6.ns["ns=glass_flat;i=5067"
 ns0.objtypes.StateType(
     nodeId="ns=glass_flat;i=5076",
     browseName="ns=glass_flat;Queued",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6307", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6307", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(glass_flat_objtypes.InitializingSubStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=5076"])
 o6.reference(o6.ns["ns=glass_flat;i=1044"], "i=52", o6.ns["ns=glass_flat;i=5076"])
@@ -937,7 +1144,7 @@ o6.reference(o6.ns["ns=glass_flat;i=1047"], "i=52", o6.ns["ns=glass_flat;i=5076"
 ns0.objtypes.StateType(
     nodeId="ns=glass_flat;i=5077",
     browseName="ns=glass_flat;Released",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6308", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6308", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(glass_flat_objtypes.InitializingSubStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=glass_flat;i=5077"])
 o6.reference(o6.ns["ns=glass_flat;i=1046"], "i=52", o6.ns["ns=glass_flat;i=5077"])
@@ -945,7 +1152,10 @@ o6.reference(o6.ns["ns=glass_flat;i=1047"], "i=51", o6.ns["ns=glass_flat;i=5077"
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6313",
     browseName="ns=glass_flat;Y",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6326", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6326", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -953,7 +1163,10 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6327",
     browseName="ns=glass_flat;Z",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6328", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6328", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -965,21 +1178,38 @@ glass_flat_objtypes.BaseMaterialType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6107", browseName="ns=glass_flat;Location", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6107",
+                browseName="ns=glass_flat;Location",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6108", browseName="ns=glass_flat;Identifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6108",
+                browseName="ns=glass_flat;Identifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6109", browseName="ns=glass_flat;MaterialIdentifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6109",
+                browseName="ns=glass_flat;MaterialIdentifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6110", browseName="ns=glass_flat;Description", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=glass_flat;i=6110", browseName="ns=glass_flat;Description", modellingRule="Optional", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=glass_flat;i=6114"]),
         o6.hasComponent(o6.ns["ns=glass_flat;i=6221"]),
@@ -991,7 +1221,10 @@ o6.reference(glass_flat_objtypes.AssemblyJobType, ns0.reftypes.HasComponent, o6.
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6343",
     browseName="ns=glass_flat;X",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6344", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6344", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -999,7 +1232,10 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6345",
     browseName="ns=glass_flat;Y",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6346", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6346", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -1007,7 +1243,10 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6347",
     browseName="ns=glass_flat;Z",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6348", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6348", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -1019,21 +1258,38 @@ glass_flat_objtypes.BaseMaterialType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6134", browseName="ns=glass_flat;Location", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6134",
+                browseName="ns=glass_flat;Location",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6135", browseName="ns=glass_flat;Identifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6135",
+                browseName="ns=glass_flat;Identifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6136", browseName="ns=glass_flat;MaterialIdentifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6136",
+                browseName="ns=glass_flat;MaterialIdentifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6137", browseName="ns=glass_flat;Description", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=glass_flat;i=6137", browseName="ns=glass_flat;Description", modellingRule="Optional", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=glass_flat;i=6143"]),
         o6.hasComponent(o6.ns["ns=glass_flat;i=6343"]),
@@ -1045,7 +1301,10 @@ o6.reference(glass_flat_objtypes.ProcessingJobType, ns0.reftypes.HasComponent, o
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6349",
     browseName="ns=glass_flat;X",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6350", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6350", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -1053,7 +1312,10 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6351",
     browseName="ns=glass_flat;Y",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6352", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6352", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -1061,7 +1323,10 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6353",
     browseName="ns=glass_flat;Z",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6354", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6354", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -1073,21 +1338,38 @@ glass_flat_objtypes.BaseMaterialType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6145", browseName="ns=glass_flat;Location", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6145",
+                browseName="ns=glass_flat;Location",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6146", browseName="ns=glass_flat;Identifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6146",
+                browseName="ns=glass_flat;Identifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6147", browseName="ns=glass_flat;MaterialIdentifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6147",
+                browseName="ns=glass_flat;MaterialIdentifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6150", browseName="ns=glass_flat;Description", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=glass_flat;i=6150", browseName="ns=glass_flat;Description", modellingRule="Optional", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=glass_flat;i=6215"]),
         o6.hasComponent(o6.ns["ns=glass_flat;i=6349"]),
@@ -1121,7 +1403,10 @@ ns0.vartypes.PropertyType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6168",
     browseName="ns=glass_flat;FillLevel",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6381", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6381", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -1143,17 +1428,32 @@ glass_flat_objtypes.BaseMaterialType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6169", browseName="ns=glass_flat;Location", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6169",
+                browseName="ns=glass_flat;Location",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6382", browseName="ns=glass_flat;MaterialIdentifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6382",
+                browseName="ns=glass_flat;MaterialIdentifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6383", browseName="ns=glass_flat;Identifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6383",
+                browseName="ns=glass_flat;Identifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
     ],
@@ -1166,17 +1466,32 @@ glass_flat_objtypes.BaseMaterialType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6384", browseName="ns=glass_flat;Location", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6384",
+                browseName="ns=glass_flat;Location",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6385", browseName="ns=glass_flat;MaterialIdentifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6385",
+                browseName="ns=glass_flat;MaterialIdentifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6386", browseName="ns=glass_flat;Identifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6386",
+                browseName="ns=glass_flat;Identifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
     ],
@@ -1189,17 +1504,32 @@ glass_flat_objtypes.BaseMaterialType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6392", browseName="ns=glass_flat;Location", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6392",
+                browseName="ns=glass_flat;Location",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6393", browseName="ns=glass_flat;MaterialIdentifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6393",
+                browseName="ns=glass_flat;MaterialIdentifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6394", browseName="ns=glass_flat;Identifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6394",
+                browseName="ns=glass_flat;Identifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
     ],
@@ -1212,17 +1542,32 @@ glass_flat_objtypes.BaseMaterialType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6395", browseName="ns=glass_flat;Location", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6395",
+                browseName="ns=glass_flat;Location",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6396", browseName="ns=glass_flat;MaterialIdentifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6396",
+                browseName="ns=glass_flat;MaterialIdentifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6397", browseName="ns=glass_flat;Identifier", dataType=glass_flat_datypes.LimitedString64, accessLevel=3, userAccessLevel=1
+                nodeId="ns=glass_flat;i=6397",
+                browseName="ns=glass_flat;Identifier",
+                modellingRule="Mandatory",
+                dataType=glass_flat_datypes.LimitedString64,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
     ],
@@ -1232,7 +1577,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=glass_flat;i=6401",
     browseName="ns=glass_flat;Z",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6402", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6402", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -1248,10 +1595,10 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=glass_flat;i=7001", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6081"]))
+o6.call(nodeId="ns=glass_flat;i=7001", browseName="Close", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6081"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=glass_flat;i=6082",
@@ -1261,7 +1608,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
@@ -1272,10 +1619,16 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=glass_flat;i=7002", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6082"]), outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6083"]))
+o6.call(
+    nodeId="ns=glass_flat;i=7002",
+    browseName="GetPosition",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6082"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6083"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=glass_flat;i=6084",
@@ -1285,7 +1638,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="Mode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
@@ -1296,10 +1649,16 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=glass_flat;i=7005", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6084"]), outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6085"]))
+o6.call(
+    nodeId="ns=glass_flat;i=7005",
+    browseName="Open",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6084"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6085"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=glass_flat;i=6004",
@@ -1312,7 +1671,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=glass_flat;i=7006", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6004"]))
+o6.call(nodeId="ns=glass_flat;i=7006", browseName="Close", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6004"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=glass_flat;i=6005",
@@ -1336,7 +1695,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=glass_flat;i=7007", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6005"]), outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6006"]))
+o6.call(
+    nodeId="ns=glass_flat;i=7007",
+    browseName="GetPosition",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6005"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6006"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=glass_flat;i=6007",
@@ -1360,7 +1725,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=glass_flat;i=7008", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6007"]), outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6008"]))
+o6.call(
+    nodeId="ns=glass_flat;i=7008",
+    browseName="Open",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6007"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6008"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=glass_flat;i=6010",
@@ -1387,7 +1758,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=glass_flat;i=7009", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6010"]), outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6011"]))
+o6.call(
+    nodeId="ns=glass_flat;i=7009",
+    browseName="Read",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6010"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6011"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=glass_flat;i=6012",
@@ -1403,7 +1780,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=glass_flat;i=7010", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6012"]))
+o6.call(nodeId="ns=glass_flat;i=7010", browseName="SetPosition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6012"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=glass_flat;i=6016",
@@ -1419,7 +1796,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=glass_flat;i=7011", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6016"]))
+o6.call(nodeId="ns=glass_flat;i=7011", browseName="Write", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6016"]))
 
 ns0.objtypes.FileType(
     nodeId="ns=glass_flat;i=5008",
@@ -1427,15 +1804,27 @@ ns0.objtypes.FileType(
     modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6009", browseName="OpenCount", description="The current number of open file handles.", dataType=o6.UInt16)
-        ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6013", browseName="Size", description="The size of the file in bytes.", dataType=o6.UInt64)),
-        o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6014", browseName="UserWritable", description="Whether the file is writable by the current user.", dataType=o6.Boolean
+                nodeId="ns=glass_flat;i=6009", browseName="OpenCount", description="The current number of open file handles.", modellingRule="Mandatory", dataType=o6.UInt16
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6015", browseName="Writable", description="Whether the file is writable.", dataType=o6.Boolean)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6013", browseName="Size", description="The size of the file in bytes.", modellingRule="Mandatory", dataType=o6.UInt64)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=glass_flat;i=6014",
+                browseName="UserWritable",
+                description="Whether the file is writable by the current user.",
+                modellingRule="Mandatory",
+                dataType=o6.Boolean,
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=glass_flat;i=6015", browseName="Writable", description="Whether the file is writable.", modellingRule="Mandatory", dataType=o6.Boolean
+            )
+        ),
         o6.hasComponent(o6.ns["ns=glass_flat;i=7006"]),
         o6.hasComponent(o6.ns["ns=glass_flat;i=7007"]),
         o6.hasComponent(o6.ns["ns=glass_flat;i=7008"]),
@@ -1455,7 +1844,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
         ns0.datatypes.Argument(name="Length", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
@@ -1469,10 +1858,16 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=glass_flat;i=7012", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6124"]), outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6139"]))
+o6.call(
+    nodeId="ns=glass_flat;i=7012",
+    browseName="Read",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6124"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6139"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=glass_flat;i=6140",
@@ -1482,13 +1877,13 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
         ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=glass_flat;i=7013", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6140"]))
+o6.call(nodeId="ns=glass_flat;i=7013", browseName="SetPosition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6140"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=glass_flat;i=6175",
@@ -1498,23 +1893,23 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
         ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=glass_flat;i=7014", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6175"]))
+o6.call(nodeId="ns=glass_flat;i=7014", browseName="Write", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6175"]))
 
 ns0.objtypes.FileType(
     nodeId="ns=glass_flat;i=5017",
     browseName="ns=glass_flat;<LocalManuals>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6086", browseName="OpenCount", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6157", browseName="Size", dataType=o6.UInt64)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6158", browseName="UserWritable", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6172", browseName="Writable", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6086", browseName="OpenCount", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6157", browseName="Size", modellingRule="Mandatory", dataType=o6.UInt64)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6158", browseName="UserWritable", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6172", browseName="Writable", modellingRule="Mandatory", dataType=o6.Boolean)),
         o6.hasComponent(o6.ns["ns=glass_flat;i=7001"]),
         o6.hasComponent(o6.ns["ns=glass_flat;i=7002"]),
         o6.hasComponent(o6.ns["ns=glass_flat;i=7005"]),
@@ -1537,7 +1932,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=glass_flat;i=7015", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6037"]))
+o6.call(nodeId="ns=glass_flat;i=7015", browseName="Close", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6037"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=glass_flat;i=6038",
@@ -1561,7 +1956,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=glass_flat;i=7016", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6038"]), outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6039"]))
+o6.call(
+    nodeId="ns=glass_flat;i=7016",
+    browseName="GetPosition",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6038"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6039"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=glass_flat;i=6040",
@@ -1585,7 +1986,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=glass_flat;i=7017", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6040"]), outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6041"]))
+o6.call(
+    nodeId="ns=glass_flat;i=7017",
+    browseName="Open",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6040"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6041"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=glass_flat;i=6043",
@@ -1612,7 +2019,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=glass_flat;i=7018", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6043"]), outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6044"]))
+o6.call(
+    nodeId="ns=glass_flat;i=7018",
+    browseName="Read",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6043"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6044"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=glass_flat;i=6045",
@@ -1628,7 +2041,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=glass_flat;i=7019", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6045"]))
+o6.call(nodeId="ns=glass_flat;i=7019", browseName="SetPosition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6045"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=glass_flat;i=6049",
@@ -1644,22 +2057,35 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=glass_flat;i=7020", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6049"]))
+o6.call(nodeId="ns=glass_flat;i=7020", browseName="Write", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6049"]))
 
 ns0.objtypes.FileType(
     nodeId="ns=glass_flat;i=5012",
     browseName="ns=glass_flat;Plan",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6042", browseName="OpenCount", description="The current number of open file handles.", dataType=o6.UInt16)
-        ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6046", browseName="Size", description="The size of the file in bytes.", dataType=o6.UInt64)),
-        o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=glass_flat;i=6047", browseName="UserWritable", description="Whether the file is writable by the current user.", dataType=o6.Boolean
+                nodeId="ns=glass_flat;i=6042", browseName="OpenCount", description="The current number of open file handles.", modellingRule="Mandatory", dataType=o6.UInt16
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6048", browseName="Writable", description="Whether the file is writable.", dataType=o6.Boolean)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6046", browseName="Size", description="The size of the file in bytes.", modellingRule="Mandatory", dataType=o6.UInt64)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=glass_flat;i=6047",
+                browseName="UserWritable",
+                description="Whether the file is writable by the current user.",
+                modellingRule="Mandatory",
+                dataType=o6.Boolean,
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=glass_flat;i=6048", browseName="Writable", description="Whether the file is writable.", modellingRule="Mandatory", dataType=o6.Boolean
+            )
+        ),
         o6.hasComponent(o6.ns["ns=glass_flat;i=7015"]),
         o6.hasComponent(o6.ns["ns=glass_flat;i=7016"]),
         o6.hasComponent(o6.ns["ns=glass_flat;i=7017"]),
@@ -1677,6 +2103,7 @@ glass_flat_objtypes.InstructionType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=glass_flat;i=6274",
                 browseName="ns=glass_flat;PlanFileFormat",
+                modellingRule="Mandatory",
                 dataType=glass_flat_datypes.FileFormatType,
                 value=glass_flat_datypes.FileFormatType(name="\n            ", fileExtension="\n            ", version="\n            "),
                 accessLevel=3,
@@ -1700,7 +2127,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="BreakLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=glass_flat;i=7027", browseName="ns=di;BreakLock", outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6191"]))
+o6.call(nodeId="ns=glass_flat;i=7027", browseName="ns=di;BreakLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6191"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=glass_flat;i=6192",
@@ -1713,7 +2140,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ExitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=glass_flat;i=7028", browseName="ns=di;ExitLock", outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6192"]))
+o6.call(nodeId="ns=glass_flat;i=7028", browseName="ns=di;ExitLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6192"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=glass_flat;i=6193",
@@ -1738,7 +2165,11 @@ ns0.vartypes.PropertyType(
     value=[ns0.datatypes.Argument(name="InitLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
-    nodeId="ns=glass_flat;i=7029", browseName="ns=di;InitLock", inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6193"]), outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6194"])
+    nodeId="ns=glass_flat;i=7029",
+    browseName="ns=di;InitLock",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6193"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6194"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -1752,17 +2183,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RenewLockStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=glass_flat;i=7030", browseName="ns=di;RenewLock", outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6199"]))
+o6.call(nodeId="ns=glass_flat;i=7030", browseName="ns=di;RenewLock", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=glass_flat;i=6199"]))
 
 di.objtypes.LockingServicesType(
     nodeId="ns=glass_flat;i=5004",
     browseName="ns=glass_flat;Lock",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6195", browseName="ns=di;Locked", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6196", browseName="ns=di;LockingClient", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6197", browseName="ns=di;LockingUser", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6198", browseName="ns=di;RemainingLockTime", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6195", browseName="ns=di;Locked", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6196", browseName="ns=di;LockingClient", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6197", browseName="ns=di;LockingUser", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=glass_flat;i=6198", browseName="ns=di;RemainingLockTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
         o6.hasComponent(o6.ns["ns=glass_flat;i=7027"]),
         o6.hasComponent(o6.ns["ns=glass_flat;i=7028"]),
         o6.hasComponent(o6.ns["ns=glass_flat;i=7029"]),

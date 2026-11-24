@@ -99,6 +99,7 @@ class IWwUnitOverviewType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=130",
             browseName="ns=woodworking;CurrentMode",
             description="The CurrentMode Variable provides the generalized mode of the component.",
+            modellingRule="Mandatory",
             dataType=woodworking_datypes.WwUnitModeEnumeration,
         )
     )
@@ -107,6 +108,7 @@ class IWwUnitOverviewType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=129",
             browseName="ns=woodworking;CurrentState",
             description="The CurrentState Variable provides the generalized state of the component.",
+            modellingRule="Mandatory",
             dataType=woodworking_datypes.WwUnitStateEnumeration,
             value=woodworking_datypes.WwUnitStateEnumeration.OFFLINE,
         )
@@ -163,7 +165,9 @@ class IWwUnitValuesType(ns0.objtypes.BaseInterfaceType):
 )
 class WwMachineType(ns0.objtypes.BaseObjectType):
     events: WwEventsDispatcherType | None = o6.hasComponent(
-        WwEventsDispatcherType(nodeId="ns=woodworking;i=5008", browseName="ns=woodworking;Events", description="The Event Object provides events.", eventNotifier=1)
+        WwEventsDispatcherType(
+            nodeId="ns=woodworking;i=5008", browseName="ns=woodworking;Events", description="The Event Object provides events.", modellingRule="Optional", eventNotifier=1
+        )
     )
     identification: machinery.objtypes.MachineIdentificationType
     jobManagement: machinery_jobs.objtypes.JobManagementType | None
@@ -185,17 +189,26 @@ class IWwUnitFlagsType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=88",
             browseName="ns=woodworking;AirPresent",
             description="The AirPresent Variable is true if the air pressure is present in the machine.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
     alarm: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=woodworking;i=97", browseName="ns=woodworking;Alarm", description="The Alarm Variable is true if at least one alarm exists.", dataType=o6.Boolean
+            nodeId="ns=woodworking;i=97",
+            browseName="ns=woodworking;Alarm",
+            description="The Alarm Variable is true if at least one alarm exists.",
+            modellingRule="Mandatory",
+            dataType=o6.Boolean,
         )
     )
     calibrated: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=woodworking;i=92", browseName="ns=woodworking;Calibrated", description="The Calibrated Variable is true if all devices are calibrated.", dataType=o6.Boolean
+            nodeId="ns=woodworking;i=92",
+            browseName="ns=woodworking;Calibrated",
+            description="The Calibrated Variable is true if all devices are calibrated.",
+            modellingRule="Mandatory",
+            dataType=o6.Boolean,
         )
     )
     dustChipSuction: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -203,6 +216,7 @@ class IWwUnitFlagsType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=89",
             browseName="ns=woodworking;DustChipSuction",
             description="The DustChipSuction Variable is true if the dust and chip suction is ready.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -211,6 +225,7 @@ class IWwUnitFlagsType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=90",
             browseName="ns=woodworking;Emergency",
             description="The Emergency Variable is true if at least one emergency button is pressed.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -219,6 +234,7 @@ class IWwUnitFlagsType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=108",
             browseName="ns=woodworking;EnergySaving",
             description="The EnergySaving Variable is true if energy saving is activated on the machine.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -227,6 +243,7 @@ class IWwUnitFlagsType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=96",
             browseName="ns=woodworking;Error",
             description="The Error Variable is true if at least one reason exists which prevents the machine from working.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -235,6 +252,7 @@ class IWwUnitFlagsType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=109",
             browseName="ns=woodworking;ExternalEmergency",
             description="The ExternalEmergency Variable is true if there is an emergency from the line controller.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -243,6 +261,7 @@ class IWwUnitFlagsType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=111",
             browseName="ns=woodworking;FeedRuns",
             description="The FeedRuns Variable is true if the feed is running on a throughfeed machine.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -251,17 +270,19 @@ class IWwUnitFlagsType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=99",
             browseName="ns=woodworking;Hold",
             description="The Hold Variable is true if the movements are paused by the operator.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
     loadingEnabled: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=woodworking;i=6033", browseName="ns=woodworking;LoadingEnabled", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=woodworking;i=6033", browseName="ns=woodworking;LoadingEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
     machineInitialized: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=woodworking;i=86",
             browseName="ns=woodworking;MachineInitialized",
             description="The MachineInitialized Variable is true if the MachineOn is true, the PLC and the control processes are running. The machine is ready for usage for the operator.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -270,6 +291,7 @@ class IWwUnitFlagsType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=85",
             browseName="ns=woodworking;MachineOn",
             description="The MachineOn Variable is true if the machine is switched on. If the OPC UA Server runs on the machine this value is always true.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -278,6 +300,7 @@ class IWwUnitFlagsType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=110",
             browseName="ns=woodworking;MaintenanceRequired",
             description="The MaintenanceRequired Variable is true if maintenance is required.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -286,12 +309,17 @@ class IWwUnitFlagsType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=103",
             browseName="ns=woodworking;ManualActivityRequired",
             description="The ManualActivityRequired Variable is true if a manual activity by the operator is required. The RecipeInRun is not affected.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
     moving: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=woodworking;i=95", browseName="ns=woodworking;Moving", description="The Moving Variable is true if at least one axis is moving.", dataType=o6.Boolean
+            nodeId="ns=woodworking;i=95",
+            browseName="ns=woodworking;Moving",
+            description="The Moving Variable is true if at least one axis is moving.",
+            modellingRule="Optional",
+            dataType=o6.Boolean,
         )
     )
     powerPresent: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
@@ -299,6 +327,7 @@ class IWwUnitFlagsType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=87",
             browseName="ns=woodworking;PowerPresent",
             description="The PowerPresent Variable is true if 400V are present (the drives are ready to move).",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -307,6 +336,7 @@ class IWwUnitFlagsType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=102",
             browseName="ns=woodworking;RecipeInHold",
             description="The RecipeInHold Variable is true if the machine is paused by the program. This is only possible if the RecipeInRun Variable is also true.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -315,6 +345,7 @@ class IWwUnitFlagsType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=100",
             browseName="ns=woodworking;RecipeInRun",
             description="The RecipeInRun Variable is true if the machine runs its program. This is only possible if the Error Variable is false. However, if the machine is paused by the program, the machine is considered to still be running its program, i.e. while the RecipeInHold Variable is true, the RecipeInRun cannot be false.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -323,6 +354,7 @@ class IWwUnitFlagsType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=101",
             browseName="ns=woodworking;RecipeInSetup",
             description="The RecipeInSetup Variable is true if the RecipeInRun is true and the machine is in the setup phase (example: automatic tool change).",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -331,6 +363,7 @@ class IWwUnitFlagsType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=93",
             browseName="ns=woodworking;Remote",
             description="The Remote Variable is true if the machine is working with programs sent by the supervisor or other external application.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -339,6 +372,7 @@ class IWwUnitFlagsType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=91",
             browseName="ns=woodworking;Safety",
             description="The Safety Variable is true if at least one safety device (light curtain, safety mat, …) has intervened.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -347,6 +381,7 @@ class IWwUnitFlagsType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=107",
             browseName="ns=woodworking;WaitLoad",
             description="The WaitLoad Variable is true if the machine is waiting for pieces.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -355,12 +390,17 @@ class IWwUnitFlagsType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=106",
             browseName="ns=woodworking;WaitUnload",
             description="The WaitUnload Variable is true if the machine is waiting to unload pieces.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
     warning: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=woodworking;i=98", browseName="ns=woodworking;Warning", description="The Warning Variable is true if at least one warning exists.", dataType=o6.Boolean
+            nodeId="ns=woodworking;i=98",
+            browseName="ns=woodworking;Warning",
+            description="The Warning Variable is true if at least one warning exists.",
+            modellingRule="Mandatory",
+            dataType=o6.Boolean,
         )
     )
     workpiecePresent: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
@@ -368,6 +408,7 @@ class IWwUnitFlagsType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=94",
             browseName="ns=woodworking;WorkpiecePresent",
             description="The WorkpiecePresent Variable is true if at least one piece is inside the machine.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
         )
     )
@@ -386,6 +427,7 @@ class IWwEventMessageType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=6222",
             browseName="ns=woodworking;Arguments",
             description="The Arguments Variable is an argument value array of one dimension that can be used to parameterize the message. The number of the indexing in the array corresponds to the placeholder number in the message text. This ensures that the formatting functions of the implementations enable the localized message texts to be created.",
+            modellingRule="Optional",
             dataType=woodworking_datypes.WwMessageArgumentDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -396,6 +438,7 @@ class IWwEventMessageType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=6169",
             browseName="ns=woodworking;EventCategory",
             description="The EventCategory Variable provides the category of the event.",
+            modellingRule="Mandatory",
             dataType=woodworking_datypes.WwEventCategoryEnumeration,
         )
     )
@@ -404,6 +447,7 @@ class IWwEventMessageType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=6220",
             browseName="ns=woodworking;Group",
             description="The Group Variable specifies the class or group of the Message like “safety”, “emergency”, “consumable”.  See chapter “Categorizing and grouping the messages, events, alarms and conditions”.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -412,6 +456,7 @@ class IWwEventMessageType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=6221",
             browseName="ns=woodworking;LocalizedMessages",
             description="The LocalizedMessages Variable contains an array of localized messages corresponding to the installed server languages.",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
             valueRank=1,
             arrayDimensions=[0],
@@ -422,6 +467,7 @@ class IWwEventMessageType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=6217",
             browseName="ns=woodworking;MessageId",
             description="The MessageId Variable is a unique Identifier like a number or name of the message in the cause path (PathParts) determined Module. Example: “A4711” or “1”",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -430,6 +476,7 @@ class IWwEventMessageType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=6218",
             browseName="ns=woodworking;MessageName",
             description="The MessageName Variable is a short name like a number or title to reference a translation of the general message text. Example: “ID_MSG_EmergencyAlarm”.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -438,6 +485,7 @@ class IWwEventMessageType(ns0.objtypes.BaseInterfaceType):
             nodeId="ns=woodworking;i=6219",
             browseName="ns=woodworking;PathParts",
             description="The PathParts Variable is an array of Path information strings based on a server independent hierarchical structure of modules or an application specific expansion of that. It is an additional location information beside the SourceName. Example:  “Machine”, “FixedSide”, “Sizing”, “Milling1”",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=1,
             arrayDimensions=[0],
@@ -458,6 +506,7 @@ class WwConditionType(ns0.objtypes.ConditionType):
             nodeId="ns=woodworking;i=6009",
             browseName="ns=woodworking;Arguments",
             description="The Arguments Variable is an argument value array of one dimension that can be used to parameterize the message. The number of the indexing in the array corresponds to the placeholder number in the message text. This ensures that the formatting functions of the implementations enable the localized message texts to be created.",
+            modellingRule="Optional",
             dataType=woodworking_datypes.WwMessageArgumentDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -468,6 +517,7 @@ class WwConditionType(ns0.objtypes.ConditionType):
             nodeId="ns=woodworking;i=6010",
             browseName="ns=woodworking;EventCategory",
             description="The EventCategory Variable provides the category of the event.",
+            modellingRule="Mandatory",
             dataType=woodworking_datypes.WwEventCategoryEnumeration,
         )
     )
@@ -476,6 +526,7 @@ class WwConditionType(ns0.objtypes.ConditionType):
             nodeId="ns=woodworking;i=6011",
             browseName="ns=woodworking;Group",
             description="The Group Variable specifies the class or group of the Message like “safety”, “emergency”, “consumable”.  See chapter “Categorizing and grouping the messages, events, alarms and conditions”.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -484,6 +535,7 @@ class WwConditionType(ns0.objtypes.ConditionType):
             nodeId="ns=woodworking;i=6012",
             browseName="ns=woodworking;LocalizedMessages",
             description="The LocalizedMessages Variable contains an array of localized messages corresponding to the installed server languages.",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
             valueRank=1,
             arrayDimensions=[0],
@@ -494,6 +546,7 @@ class WwConditionType(ns0.objtypes.ConditionType):
             nodeId="ns=woodworking;i=6013",
             browseName="ns=woodworking;MessageId",
             description="The MessageId Variable is a unique Identifier like a number or name of the message in the cause path (PathParts) determined Module. Example: “A4711” or “1”",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -502,6 +555,7 @@ class WwConditionType(ns0.objtypes.ConditionType):
             nodeId="ns=woodworking;i=6135",
             browseName="ns=woodworking;MessageName",
             description="The MessageName Variable is a short name like a number or title to reference a translation of the general message text. Example: “ID_MSG_EmergencyAlarm”.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -510,6 +564,7 @@ class WwConditionType(ns0.objtypes.ConditionType):
             nodeId="ns=woodworking;i=6136",
             browseName="ns=woodworking;PathParts",
             description="The PathParts Variable is an array of Path information strings based on a server independent hierarchical structure of modules or an application specific expansion of that. It is an additional location information beside the SourceName. Example:  “Machine”, “FixedSide”, “Sizing”, “Milling1”",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=1,
             arrayDimensions=[0],
@@ -533,6 +588,7 @@ class WwBaseEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=woodworking;i=6232",
             browseName="ns=woodworking;Arguments",
             description="The Arguments Variable is an argument value array of one dimension that can be used to parameterize the message. The number of the indexing in the array corresponds to the placeholder number in the message text. This ensures that the formatting functions of the implementations enable the localized message texts to be created.",
+            modellingRule="Optional",
             dataType=woodworking_datypes.WwMessageArgumentDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -543,6 +599,7 @@ class WwBaseEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=woodworking;i=6056",
             browseName="ns=woodworking;EventCategory",
             description="The EventCategory Variable provides the category of the event.",
+            modellingRule="Mandatory",
             dataType=woodworking_datypes.WwEventCategoryEnumeration,
         )
     )
@@ -551,6 +608,7 @@ class WwBaseEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=woodworking;i=259",
             browseName="ns=woodworking;Group",
             description="The Group Variable specifies the class or group of the Message like “safety”, “emergency”, “consumable”.  See chapter “Categorizing and grouping the messages, events, alarms and conditions”.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -559,6 +617,7 @@ class WwBaseEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=woodworking;i=260",
             browseName="ns=woodworking;LocalizedMessages",
             description="The LocalizedMessages Variable contains an array of localized messages corresponding to the installed server languages.",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
             valueRank=1,
             arrayDimensions=[0],
@@ -569,6 +628,7 @@ class WwBaseEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=woodworking;i=256",
             browseName="ns=woodworking;MessageId",
             description="The MessageId Variable is a unique Identifier like a number or name of the message in the cause path (PathParts) determined Module. Example: “A4711” or “1”",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -577,6 +637,7 @@ class WwBaseEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=woodworking;i=257",
             browseName="ns=woodworking;MessageName",
             description="The MessageName Variable is a short name like a number or title to reference a translation of the general message text. Example: “ID_MSG_EmergencyAlarm”.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -585,6 +646,7 @@ class WwBaseEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=woodworking;i=258",
             browseName="ns=woodworking;PathParts",
             description="The PathParts Variable is an array of Path information strings based on a server independent hierarchical structure of modules or an application specific expansion of that. It is an additional location information beside the SourceName.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=1,
             arrayDimensions=[0],
@@ -608,6 +670,7 @@ class WwAcknowledgeableConditionType(ns0.objtypes.AcknowledgeableConditionType):
             nodeId="ns=woodworking;i=6182",
             browseName="ns=woodworking;Arguments",
             description="The Arguments Variable is an argument value array of one dimension that can be used to parameterize the message. The number of the indexing in the array corresponds to the placeholder number in the message text. This ensures that the formatting functions of the implementations enable the localized message texts to be created.",
+            modellingRule="Optional",
             dataType=woodworking_datypes.WwMessageArgumentDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -618,6 +681,7 @@ class WwAcknowledgeableConditionType(ns0.objtypes.AcknowledgeableConditionType):
             nodeId="ns=woodworking;i=6183",
             browseName="ns=woodworking;EventCategory",
             description="The EventCategory Variable provides the category of the event.",
+            modellingRule="Mandatory",
             dataType=woodworking_datypes.WwEventCategoryEnumeration,
         )
     )
@@ -626,6 +690,7 @@ class WwAcknowledgeableConditionType(ns0.objtypes.AcknowledgeableConditionType):
             nodeId="ns=woodworking;i=6203",
             browseName="ns=woodworking;Group",
             description="The Group Variable specifies the class or group of the Message like “safety”, “emergency”, “consumable”.  See chapter “Categorizing and grouping the messages, events, alarms and conditions”.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -634,6 +699,7 @@ class WwAcknowledgeableConditionType(ns0.objtypes.AcknowledgeableConditionType):
             nodeId="ns=woodworking;i=6204",
             browseName="ns=woodworking;LocalizedMessages",
             description="The LocalizedMessages Variable contains an array of localized messages corresponding to the installed server languages.",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
             valueRank=1,
             arrayDimensions=[0],
@@ -644,6 +710,7 @@ class WwAcknowledgeableConditionType(ns0.objtypes.AcknowledgeableConditionType):
             nodeId="ns=woodworking;i=6205",
             browseName="ns=woodworking;MessageId",
             description="The MessageId Variable is a unique Identifier like a number or name of the message in the cause path (PathParts) determined Module. Example: “A4711” or “1”",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -652,6 +719,7 @@ class WwAcknowledgeableConditionType(ns0.objtypes.AcknowledgeableConditionType):
             nodeId="ns=woodworking;i=6206",
             browseName="ns=woodworking;MessageName",
             description="The MessageName Variable is a short name like a number or title to reference a translation of the general message text. Example: “ID_MSG_EmergencyAlarm”.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -660,6 +728,7 @@ class WwAcknowledgeableConditionType(ns0.objtypes.AcknowledgeableConditionType):
             nodeId="ns=woodworking;i=6242",
             browseName="ns=woodworking;PathParts",
             description="The PathParts Variable is an array of Path information strings based on a server independent hierarchical structure of modules or an application specific expansion of that. It is an additional location information beside the SourceName. Example:  “Machine”, “FixedSide”, “Sizing”, “Milling1”",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=1,
             arrayDimensions=[0],
@@ -683,6 +752,7 @@ class WwAlarmConditionType(ns0.objtypes.AlarmConditionType):
             nodeId="ns=woodworking;i=6243",
             browseName="ns=woodworking;Arguments",
             description="The Arguments Variable is an argument value array of one dimension that can be used to parameterize the message. The number of the indexing in the array corresponds to the placeholder number in the message text. This ensures that the formatting functions of the implementations enable the localized message texts to be created.",
+            modellingRule="Optional",
             dataType=woodworking_datypes.WwMessageArgumentDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -693,6 +763,7 @@ class WwAlarmConditionType(ns0.objtypes.AlarmConditionType):
             nodeId="ns=woodworking;i=6244",
             browseName="ns=woodworking;EventCategory",
             description="The EventCategory Variable provides the category of the event.",
+            modellingRule="Mandatory",
             dataType=woodworking_datypes.WwEventCategoryEnumeration,
         )
     )
@@ -701,6 +772,7 @@ class WwAlarmConditionType(ns0.objtypes.AlarmConditionType):
             nodeId="ns=woodworking;i=6245",
             browseName="ns=woodworking;Group",
             description="The Group Variable specifies the class or group of the Message like “safety”, “emergency”, “consumable”.  See chapter “Categorizing and grouping the messages, events, alarms and conditions”.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -709,6 +781,7 @@ class WwAlarmConditionType(ns0.objtypes.AlarmConditionType):
             nodeId="ns=woodworking;i=6246",
             browseName="ns=woodworking;LocalizedMessages",
             description="The LocalizedMessages Variable contains an array of localized messages corresponding to the installed server languages.",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
             valueRank=1,
             arrayDimensions=[0],
@@ -719,6 +792,7 @@ class WwAlarmConditionType(ns0.objtypes.AlarmConditionType):
             nodeId="ns=woodworking;i=6247",
             browseName="ns=woodworking;MessageId",
             description="The MessageId Variable is a unique Identifier like a number or name of the message in the cause path (PathParts) determined Module. Example: “A4711” or “1”",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -727,6 +801,7 @@ class WwAlarmConditionType(ns0.objtypes.AlarmConditionType):
             nodeId="ns=woodworking;i=6394",
             browseName="ns=woodworking;MessageName",
             description="The MessageName Variable is a short name like a number or title to reference a translation of the general message text. Example: “ID_MSG_EmergencyAlarm”.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
@@ -735,6 +810,7 @@ class WwAlarmConditionType(ns0.objtypes.AlarmConditionType):
             nodeId="ns=woodworking;i=6395",
             browseName="ns=woodworking;PathParts",
             description="The PathParts Variable is an array of Path information strings based on a server independent hierarchical structure of modules or an application specific expansion of that. It is an additional location information beside the SourceName. Example:  “Machine”, “FixedSide”, “Sizing”, “Milling1”",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=1,
             arrayDimensions=[0],

@@ -32,14 +32,14 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3002", browseName="EnergySourceEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3002", browseName="ns=commercial_kitchen;EnergySourceEnumeration")
 class EnergySourceEnumeration(ns0.datatypes.Enumeration):
     ELECTRIC = o6.enumfield(0, name="Electric")
     GAS = o6.enumfield(1, name="Gas")
     STEAM = o6.enumfield(2, name="Steam")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3003", browseName="FryerModeEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3003", browseName="ns=commercial_kitchen;FryerModeEnumeration")
 class FryerModeEnumeration(ns0.datatypes.Enumeration):
     OFF = o6.enumfield(0, name="Off")
     PREHEAT = o6.enumfield(1, name="Preheat")
@@ -50,14 +50,14 @@ class FryerModeEnumeration(ns0.datatypes.Enumeration):
     ERROR = o6.enumfield(6, name="Error")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3004", browseName="SignalModeEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3004", browseName="ns=commercial_kitchen;SignalModeEnumeration")
 class SignalModeEnumeration(ns0.datatypes.Enumeration):
     SIGNAL_OFF = o6.enumfield(0, name="SignalOff")
     SIGNAL_ON = o6.enumfield(1, name="SignalOn")
     SIGNAL_ACK = o6.enumfield(2, name="SignalAck")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3005", browseName="FryingPanModeEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3005", browseName="ns=commercial_kitchen;FryingPanModeEnumeration")
 class FryingPanModeEnumeration(ns0.datatypes.Enumeration):
     OFF = o6.enumfield(0, name="Off")
     PREHEAT = o6.enumfield(1, name="Preheat")
@@ -71,7 +71,7 @@ class FryingPanModeEnumeration(ns0.datatypes.Enumeration):
     ERROR = o6.enumfield(9, name="Error")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3006", browseName="CombiSteamerModeEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3006", browseName="ns=commercial_kitchen;CombiSteamerModeEnumeration")
 class CombiSteamerModeEnumeration(ns0.datatypes.Enumeration):
     OFF = o6.enumfield(0, name="Off")
     ON = o6.enumfield(1, name="On")
@@ -86,7 +86,7 @@ class CombiSteamerModeEnumeration(ns0.datatypes.Enumeration):
     ERROR = o6.enumfield(10, name="Error")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3007", browseName="SpecialCookingModeEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3007", browseName="ns=commercial_kitchen;SpecialCookingModeEnumeration")
 class SpecialCookingModeEnumeration(ns0.datatypes.Enumeration):
     NO_SPECIAL_MODE = o6.enumfield(0, name="NoSpecialMode")
     BAKING = o6.enumfield(1, name="Baking")
@@ -100,7 +100,7 @@ class SpecialCookingModeEnumeration(ns0.datatypes.Enumeration):
     DELTA_T_STEAMING = o6.enumfield(9, name="DeltaTSteaming")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3008", browseName="ChamberModeEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3008", browseName="ns=commercial_kitchen;ChamberModeEnumeration")
 class ChamberModeEnumeration(ns0.datatypes.Enumeration):
     NO_SPECIAL_MODE = o6.enumfield(0, name="NoSpecialMode")
     OFF = o6.enumfield(1, name="Off")
@@ -123,7 +123,7 @@ class ChamberModeEnumeration(ns0.datatypes.Enumeration):
     STEAMING = o6.enumfield(18, name="Steaming")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3009", browseName="PressureCookingKettleModeEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3009", browseName="ns=commercial_kitchen;PressureCookingKettleModeEnumeration")
 class PressureCookingKettleModeEnumeration(ns0.datatypes.Enumeration):
     OFF = o6.enumfield(0, name="Off")
     PREHEAT = o6.enumfield(1, name="Preheat")
@@ -136,7 +136,7 @@ class PressureCookingKettleModeEnumeration(ns0.datatypes.Enumeration):
     ERROR = o6.enumfield(8, name="Error")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3010", browseName="CookingKettleModeEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3010", browseName="ns=commercial_kitchen;CookingKettleModeEnumeration")
 class CookingKettleModeEnumeration(ns0.datatypes.Enumeration):
     OFF = o6.enumfield(0, name="Off")
     PREHEAT = o6.enumfield(1, name="Preheat")
@@ -149,7 +149,7 @@ class CookingKettleModeEnumeration(ns0.datatypes.Enumeration):
     ERROR = o6.enumfield(8, name="Error")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3011", browseName="MultiFunctionPanModeEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3011", browseName="ns=commercial_kitchen;MultiFunctionPanModeEnumeration")
 class MultiFunctionPanModeEnumeration(ns0.datatypes.Enumeration):
     OFF = o6.enumfield(0, name="Off")
     ON = o6.enumfield(1, name="On")
@@ -169,7 +169,7 @@ class MultiFunctionPanModeEnumeration(ns0.datatypes.Enumeration):
     ERROR = o6.enumfield(15, name="Error")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3012", browseName="SpecialFunctionModeEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3012", browseName="ns=commercial_kitchen;SpecialFunctionModeEnumeration")
 class SpecialFunctionModeEnumeration(ns0.datatypes.Enumeration):
     LID_UP_DOWN = o6.enumfield(0, name="LidUpDown")
     PAN_TILT = o6.enumfield(1, name="PanTilt")
@@ -177,7 +177,7 @@ class SpecialFunctionModeEnumeration(ns0.datatypes.Enumeration):
     DRAIN_ON_OFF = o6.enumfield(3, name="DrainOnOff")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3013", browseName="PastaCookerModeEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3013", browseName="ns=commercial_kitchen;PastaCookerModeEnumeration")
 class PastaCookerModeEnumeration(ns0.datatypes.Enumeration):
     OFF = o6.enumfield(0, name="Off")
     PREHEAT = o6.enumfield(1, name="Preheat")
@@ -189,7 +189,7 @@ class PastaCookerModeEnumeration(ns0.datatypes.Enumeration):
     ERROR = o6.enumfield(7, name="Error")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3014", browseName="BeverageSMLEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3014", browseName="ns=commercial_kitchen;BeverageSMLEnumeration")
 class BeverageSMLEnumeration(ns0.datatypes.Enumeration):
     INACTIVE = o6.enumfield(0, name="Inactive")
     SMALL = o6.enumfield(1, name="Small")
@@ -197,7 +197,7 @@ class BeverageSMLEnumeration(ns0.datatypes.Enumeration):
     EXTRA_LARGE = o6.enumfield(3, name="ExtraLarge")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3015", browseName="CoffeeMachineModeEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3015", browseName="ns=commercial_kitchen;CoffeeMachineModeEnumeration")
 class CoffeeMachineModeEnumeration(ns0.datatypes.Enumeration):
     OFF = o6.enumfield(0, name="Off")
     STANDBY = o6.enumfield(1, name="Standby")
@@ -205,7 +205,7 @@ class CoffeeMachineModeEnumeration(ns0.datatypes.Enumeration):
     CLEANING = o6.enumfield(3, name="Cleaning")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3016", browseName="ProgramModeEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3016", browseName="ns=commercial_kitchen;ProgramModeEnumeration")
 class ProgramModeEnumeration(ns0.datatypes.Enumeration):
     OPERATION_OFF = o6.enumfield(0, name="OperationOFF")
     PRE_WASH = o6.enumfield(1, name="PreWash")
@@ -219,7 +219,7 @@ class ProgramModeEnumeration(ns0.datatypes.Enumeration):
     HEAT_RECOVERY = o6.enumfield(9, name="HeatRecovery")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3017", browseName="HygieneModeEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3017", browseName="ns=commercial_kitchen;HygieneModeEnumeration")
 class HygieneModeEnumeration(ns0.datatypes.Enumeration):
     HYGIENE_OPERATION_OFF = o6.enumfield(0, name="HygieneOperationOFF")
     HYGIENE_A0 = o6.enumfield(1, name="HygieneA0")
@@ -229,7 +229,7 @@ class HygieneModeEnumeration(ns0.datatypes.Enumeration):
     HYGIENE_A0_TD = o6.enumfield(5, name="HygieneA0_TD")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3018", browseName="OperationModeEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3018", browseName="ns=commercial_kitchen;OperationModeEnumeration")
 class OperationModeEnumeration(ns0.datatypes.Enumeration):
     INIT = o6.enumfield(0, name="Init")
     MACHINE_OFF = o6.enumfield(1, name="MachineOff")
@@ -249,7 +249,7 @@ class OperationModeEnumeration(ns0.datatypes.Enumeration):
     ERROR = o6.enumfield(15, name="Error")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3019", browseName="TrayModeEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3019", browseName="ns=commercial_kitchen;TrayModeEnumeration")
 class TrayModeEnumeration(ns0.datatypes.Enumeration):
     OFF = o6.enumfield(0, name="Off")
     PRE_HEAT = o6.enumfield(1, name="PreHeat")
@@ -259,7 +259,7 @@ class TrayModeEnumeration(ns0.datatypes.Enumeration):
     REGENERATING = o6.enumfield(5, name="Regenerating")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3020", browseName="TrayTypeEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3020", browseName="ns=commercial_kitchen;TrayTypeEnumeration")
 class TrayTypeEnumeration(ns0.datatypes.Enumeration):
     GENERIC = o6.enumfield(0, name="Generic")
     HEATER_PLATE = o6.enumfield(1, name="HeaterPlate")
@@ -273,7 +273,7 @@ class TrayTypeEnumeration(ns0.datatypes.Enumeration):
     REGEN_CABINET = o6.enumfield(9, name="RegenCabinet")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3021", browseName="CurrentStateEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3021", browseName="ns=commercial_kitchen;CurrentStateEnumeration")
 class CurrentStateEnumeration(ns0.datatypes.Enumeration):
     OFF = o6.enumfield(0, name="Off")
     STANDBY = o6.enumfield(1, name="Standby")
@@ -281,7 +281,7 @@ class CurrentStateEnumeration(ns0.datatypes.Enumeration):
     POT_DETECTION = o6.enumfield(3, name="PotDetection")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3022", browseName="PlatenPositionStateEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3022", browseName="ns=commercial_kitchen;PlatenPositionStateEnumeration")
 class PlatenPositionStateEnumeration(ns0.datatypes.Enumeration):
     HOME = o6.enumfield(0, name="Home")
     COOKING = o6.enumfield(1, name="Cooking")
@@ -289,7 +289,7 @@ class PlatenPositionStateEnumeration(ns0.datatypes.Enumeration):
     OPEN = o6.enumfield(3, name="Open")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3023", browseName="OperatingModeEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3023", browseName="ns=commercial_kitchen;OperatingModeEnumeration")
 class OperatingModeEnumeration(ns0.datatypes.Enumeration):
     PREHEAT = o6.enumfield(0, name="Preheat")
     COOL_DOWN = o6.enumfield(1, name="CoolDown")
@@ -302,7 +302,7 @@ class OperatingModeEnumeration(ns0.datatypes.Enumeration):
     ERROR = o6.enumfield(8, name="Error")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3024", browseName="StatusEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3024", browseName="ns=commercial_kitchen;StatusEnumeration")
 class StatusEnumeration(ns0.datatypes.Enumeration):
     INIT = o6.enumfield(0, name="INIT")
     WATER_PURGE = o6.enumfield(1, name="WATER_PURGE")
@@ -325,7 +325,7 @@ class StatusEnumeration(ns0.datatypes.Enumeration):
     SAFE_MODE_FULL_BIN = o6.enumfield(18, name="SAFE_MODE_FULL_BIN")
 
 
-@o6.enumtype(nodeId="ns=commercial_kitchen;i=3025", browseName="GrillingZoneStateEnumeration")
+@o6.enumtype(nodeId="ns=commercial_kitchen;i=3025", browseName="ns=commercial_kitchen;GrillingZoneStateEnumeration")
 class GrillingZoneStateEnumeration(ns0.datatypes.Enumeration):
     OFF = o6.enumfield(0, name="Off")
     STANDBY = o6.enumfield(1, name="Standby")

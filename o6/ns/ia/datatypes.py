@@ -33,7 +33,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=ia;i=3002", browseName="StacklightOperationMode", description="Contains the values used to indicate how a stacklight (as a whole unit) is used.")
+@o6.enumtype(nodeId="ns=ia;i=3002", browseName="ns=ia;StacklightOperationMode", description="Contains the values used to indicate how a stacklight (as a whole unit) is used.")
 class StacklightOperationMode(ns0.datatypes.Enumeration):
     SEGMENTED = o6.enumfield(0, name="Segmented")
     LEVELMETER = o6.enumfield(1, name="Levelmeter")
@@ -43,7 +43,7 @@ class StacklightOperationMode(ns0.datatypes.Enumeration):
 
 @o6.enumtype(
     nodeId="ns=ia;i=3003",
-    browseName="LevelDisplayMode",
+    browseName="ns=ia;LevelDisplayMode",
     description="Contains the values used to indicate how a percentual value is displayed if the stacklight unit works in Levelmeter mode.",
 )
 class LevelDisplayMode(ns0.datatypes.Enumeration):
@@ -52,7 +52,7 @@ class LevelDisplayMode(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(2, name="Other")
 
 
-@o6.enumtype(nodeId="ns=ia;i=3004", browseName="SignalColor", description="Holds the possible colour values for stacklight lamps.")
+@o6.enumtype(nodeId="ns=ia;i=3004", browseName="ns=ia;SignalColor", description="Holds the possible colour values for stacklight lamps.")
 class SignalColor(ns0.datatypes.Enumeration):
     OFF = o6.enumfield(0, name="Off")
     RED = o6.enumfield(1, name="Red")
@@ -64,7 +64,7 @@ class SignalColor(ns0.datatypes.Enumeration):
     WHITE = o6.enumfield(7, name="White")
 
 
-@o6.enumtype(nodeId="ns=ia;i=3005", browseName="SignalModeLight", description="Contains the values used to indicate in what way a lamp behaves when switched on.")
+@o6.enumtype(nodeId="ns=ia;i=3005", browseName="ns=ia;SignalModeLight", description="Contains the values used to indicate in what way a lamp behaves when switched on.")
 class SignalModeLight(ns0.datatypes.Enumeration):
     CONTINUOUS = o6.enumfield(0, name="Continuous")
     BLINKING = o6.enumfield(1, name="Blinking")
@@ -72,12 +72,12 @@ class SignalModeLight(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(3, name="Other")
 
 
-@o6.datatype(nodeId="ns=ia;i=3007", browseName="RGBWDataType", defaultEncodingId="ns=ia;i=5009")
+@o6.datatype(nodeId="ns=ia;i=3007", browseName="ns=ia;RGBWDataType", defaultEncodingId="ns=ia;i=5009")
 class RGBWDataType(ns0.datatypes.Structure):
-    red: o6.Byte
-    green: o6.Byte
-    blue: o6.Byte
-    white: o6.Byte | None
+    red: o6.Byte = o6.field(name="Red")
+    green: o6.Byte = o6.field(name="Green")
+    blue: o6.Byte = o6.field(name="Blue")
+    white: o6.Byte | None = o6.field(name="White")
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ns0, ia_reftypes

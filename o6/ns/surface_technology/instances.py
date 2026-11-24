@@ -40,6 +40,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology;i=5008",
     browseName="ns=machinery;Status",
     description="Entry point for status information of the MachineryItem. If this Object is provided, and the MachineryItemState is provided, it shall be referenced. If this Object is provided and the MachineryOperationMode is provided, it shall be referenced.",
+    modellingRule="Optional",
 )
 machinery.objtypes.MonitoringType(
     nodeId="ns=surface_technology;i=5004", browseName="ns=machinery;Monitoring", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=surface_technology;i=5008"])]
@@ -49,6 +50,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology;i=5020",
     browseName="ns=machinery;Status",
     description="Entry point for status information of the MachineryItem. If this Object is provided, and the MachineryItemState is provided, it shall be referenced. If this Object is provided and the MachineryOperationMode is provided, it shall be referenced.",
+    modellingRule="Optional",
 )
 machinery.objtypes.MonitoringType(
     nodeId="ns=surface_technology;i=5014",
@@ -57,15 +59,26 @@ machinery.objtypes.MonitoringType(
     references=[
         o6.hasComponent(
             ns0.objtypes.FolderType(
-                nodeId="ns=surface_technology;i=5017", browseName="ns=machinery;Consumption", description="Entry point for consumption information of the MachineryItem."
+                nodeId="ns=surface_technology;i=5017",
+                browseName="ns=machinery;Consumption",
+                description="Entry point for consumption information of the MachineryItem.",
+                modellingRule="Optional",
             )
         ),
         o6.hasComponent(
-            ns0.objtypes.FolderType(nodeId="ns=surface_technology;i=5018", browseName="ns=machinery;Health", description="Entry point of health information of the MachineryItem.")
+            ns0.objtypes.FolderType(
+                nodeId="ns=surface_technology;i=5018",
+                browseName="ns=machinery;Health",
+                description="Entry point of health information of the MachineryItem.",
+                modellingRule="Optional",
+            )
         ),
         o6.hasComponent(
             ns0.objtypes.FolderType(
-                nodeId="ns=surface_technology;i=5019", browseName="ns=machinery;Process", description="Entry point for process information of the MachineryItem."
+                nodeId="ns=surface_technology;i=5019",
+                browseName="ns=machinery;Process",
+                description="Entry point for process information of the MachineryItem.",
+                modellingRule="Optional",
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology;i=5020"]),
@@ -92,7 +105,7 @@ http_opcfoundation_org_UA_SurfaceTechnology_GeneralTypes_ = ns0.objtypes.Namespa
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),
@@ -116,6 +129,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=surface_technology;i=6008",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -124,6 +138,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=surface_technology;i=6009",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -132,6 +147,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=surface_technology;i=6010",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -141,36 +157,45 @@ o6.reference(surface_technology_objtypes.STSysType, ns0.reftypes.HasAddIn, o6.ns
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=surface_technology;i=6011",
     browseName="CurrentState",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6012", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6023", browseName="EffectiveDisplayName", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6024", browseName="Name", dataType=o6.QualifiedName)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6025", browseName="Number", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6012", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6023", browseName="EffectiveDisplayName", modellingRule="Optional", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6024", browseName="Name", modellingRule="Optional", dataType=o6.QualifiedName)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6025", browseName="Number", modellingRule="Optional", dataType=o6.UInt32)),
     ],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteTransitionVariableType(
     nodeId="ns=surface_technology;i=6017",
     browseName="LastTransition",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6018", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6026", browseName="EffectiveTransitionTime", dataType=ns0.datatypes.UtcTime)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6027", browseName="Name", dataType=o6.QualifiedName)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6028", browseName="Number", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6029", browseName="TransitionTime", dataType=ns0.datatypes.UtcTime)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6018", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6026", browseName="EffectiveTransitionTime", modellingRule="Optional", dataType=ns0.datatypes.UtcTime)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6027", browseName="Name", modellingRule="Optional", dataType=o6.QualifiedName)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6028", browseName="Number", modellingRule="Optional", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6029", browseName="TransitionTime", modellingRule="Optional", dataType=ns0.datatypes.UtcTime)),
     ],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
     nodeId="ns=surface_technology;i=5009",
     browseName="ns=machinery;MachineryItemState",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=surface_technology;i=6011"]),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=surface_technology;i=6015", browseName="AvailableStates", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=surface_technology;i=6015", browseName="AvailableStates", modellingRule="Optional", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=surface_technology;i=6016", browseName="AvailableTransitions", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=surface_technology;i=6016", browseName="AvailableTransitions", modellingRule="Optional", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]
+            )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology;i=6017"]),
     ],
@@ -179,36 +204,45 @@ o6.reference(o6.ns["ns=surface_technology;i=5008"], "i=47", o6.ns["ns=surface_te
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=surface_technology;i=6013",
     browseName="CurrentState",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6014", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6030", browseName="EffectiveDisplayName", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6031", browseName="Name", dataType=o6.QualifiedName)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6032", browseName="Number", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6014", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6030", browseName="EffectiveDisplayName", modellingRule="Optional", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6031", browseName="Name", modellingRule="Optional", dataType=o6.QualifiedName)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6032", browseName="Number", modellingRule="Optional", dataType=o6.UInt32)),
     ],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteTransitionVariableType(
     nodeId="ns=surface_technology;i=6021",
     browseName="LastTransition",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6022", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6033", browseName="EffectiveTransitionTime", dataType=ns0.datatypes.UtcTime)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6034", browseName="Name", dataType=o6.QualifiedName)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6035", browseName="Number", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6036", browseName="TransitionTime", dataType=ns0.datatypes.UtcTime)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6022", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6033", browseName="EffectiveTransitionTime", modellingRule="Optional", dataType=ns0.datatypes.UtcTime)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6034", browseName="Name", modellingRule="Optional", dataType=o6.QualifiedName)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6035", browseName="Number", modellingRule="Optional", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6036", browseName="TransitionTime", modellingRule="Optional", dataType=ns0.datatypes.UtcTime)),
     ],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryOperationModeStateMachineType(
     nodeId="ns=surface_technology;i=5010",
     browseName="ns=machinery;MachineryOperationMode",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=surface_technology;i=6013"]),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=surface_technology;i=6019", browseName="AvailableStates", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=surface_technology;i=6019", browseName="AvailableStates", modellingRule="Optional", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=surface_technology;i=6020", browseName="AvailableTransitions", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=surface_technology;i=6020", browseName="AvailableTransitions", modellingRule="Optional", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]
+            )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology;i=6021"]),
     ],
@@ -219,7 +253,7 @@ ns0.objtypes.FolderType(
     browseName="ns=machinery;MachineryBuildingBlocks",
     modellingRule="Mandatory",
     references=[
-        o6.hasAddIn(machinery.objtypes.MachineryOperationCounterType(nodeId="ns=surface_technology;i=5007", browseName="ns=di;OperationCounters")),
+        o6.hasAddIn(machinery.objtypes.MachineryOperationCounterType(nodeId="ns=surface_technology;i=5007", browseName="ns=di;OperationCounters", modellingRule="Optional")),
         o6.hasAddIn(o6.ns["ns=surface_technology;i=5009"]),
         o6.hasAddIn(o6.ns["ns=surface_technology;i=5010"]),
     ],
@@ -238,6 +272,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=surface_technology;i=6037",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -246,6 +281,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=surface_technology;i=6038",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -255,36 +291,45 @@ o6.reference(surface_technology_objtypes.STCompType, ns0.reftypes.HasAddIn, o6.n
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=surface_technology;i=6039",
     browseName="CurrentState",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6040", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6051", browseName="EffectiveDisplayName", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6052", browseName="Name", dataType=o6.QualifiedName)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6053", browseName="Number", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6040", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6051", browseName="EffectiveDisplayName", modellingRule="Optional", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6052", browseName="Name", modellingRule="Optional", dataType=o6.QualifiedName)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6053", browseName="Number", modellingRule="Optional", dataType=o6.UInt32)),
     ],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteTransitionVariableType(
     nodeId="ns=surface_technology;i=6045",
     browseName="LastTransition",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6046", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6054", browseName="EffectiveTransitionTime", dataType=ns0.datatypes.UtcTime)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6055", browseName="Name", dataType=o6.QualifiedName)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6056", browseName="Number", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6057", browseName="TransitionTime", dataType=ns0.datatypes.UtcTime)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6046", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6054", browseName="EffectiveTransitionTime", modellingRule="Optional", dataType=ns0.datatypes.UtcTime)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6055", browseName="Name", modellingRule="Optional", dataType=o6.QualifiedName)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6056", browseName="Number", modellingRule="Optional", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6057", browseName="TransitionTime", modellingRule="Optional", dataType=ns0.datatypes.UtcTime)),
     ],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
     nodeId="ns=surface_technology;i=5021",
     browseName="ns=machinery;MachineryItemState",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=surface_technology;i=6039"]),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=surface_technology;i=6043", browseName="AvailableStates", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=surface_technology;i=6043", browseName="AvailableStates", modellingRule="Optional", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=surface_technology;i=6044", browseName="AvailableTransitions", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=surface_technology;i=6044", browseName="AvailableTransitions", modellingRule="Optional", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]
+            )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology;i=6045"]),
     ],
@@ -293,36 +338,45 @@ o6.reference(o6.ns["ns=surface_technology;i=5020"], "i=47", o6.ns["ns=surface_te
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=surface_technology;i=6041",
     browseName="CurrentState",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6042", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6058", browseName="EffectiveDisplayName", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6059", browseName="Name", dataType=o6.QualifiedName)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6060", browseName="Number", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6042", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6058", browseName="EffectiveDisplayName", modellingRule="Optional", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6059", browseName="Name", modellingRule="Optional", dataType=o6.QualifiedName)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6060", browseName="Number", modellingRule="Optional", dataType=o6.UInt32)),
     ],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteTransitionVariableType(
     nodeId="ns=surface_technology;i=6049",
     browseName="LastTransition",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6050", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6061", browseName="EffectiveTransitionTime", dataType=ns0.datatypes.UtcTime)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6062", browseName="Name", dataType=o6.QualifiedName)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6063", browseName="Number", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6064", browseName="TransitionTime", dataType=ns0.datatypes.UtcTime)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6050", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6061", browseName="EffectiveTransitionTime", modellingRule="Optional", dataType=ns0.datatypes.UtcTime)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6062", browseName="Name", modellingRule="Optional", dataType=o6.QualifiedName)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6063", browseName="Number", modellingRule="Optional", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6064", browseName="TransitionTime", modellingRule="Optional", dataType=ns0.datatypes.UtcTime)),
     ],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryOperationModeStateMachineType(
     nodeId="ns=surface_technology;i=5011",
     browseName="ns=machinery;MachineryOperationMode",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=surface_technology;i=6041"]),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=surface_technology;i=6047", browseName="AvailableStates", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=surface_technology;i=6047", browseName="AvailableStates", modellingRule="Optional", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]
+            )
         ),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=surface_technology;i=6048", browseName="AvailableTransitions", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0])
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=surface_technology;i=6048", browseName="AvailableTransitions", modellingRule="Optional", dataType=o6.NodeId, valueRank=1, arrayDimensions=[0]
+            )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology;i=6049"]),
     ],
@@ -335,7 +389,7 @@ ns0.objtypes.FolderType(
     references=[
         o6.hasAddIn(o6.ns["ns=surface_technology;i=5011"]),
         o6.hasAddIn(o6.ns["ns=surface_technology;i=5021"]),
-        o6.hasAddIn(machinery.objtypes.MachineryOperationCounterType(nodeId="ns=surface_technology;i=5024", browseName="ns=di;OperationCounters")),
+        o6.hasAddIn(machinery.objtypes.MachineryOperationCounterType(nodeId="ns=surface_technology;i=5024", browseName="ns=di;OperationCounters", modellingRule="Optional")),
     ],
 )
 o6.reference(surface_technology_objtypes.STCompType, ns0.reftypes.HasComponent, o6.ns["ns=surface_technology;i=5015"])
@@ -344,21 +398,29 @@ o6.reference(o6.ns["ns=surface_technology;i=5015"], "i=17604", o6.ns["ns=surface
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=surface_technology;i=6065",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6066", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6066", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
-    nodeId="ns=surface_technology;i=5027", browseName="ns=machinery;MachineryItemState", references=[o6.hasComponent(o6.ns["ns=surface_technology;i=6065"])]
+    nodeId="ns=surface_technology;i=5027",
+    browseName="ns=machinery;MachineryItemState",
+    modellingRule="Optional",
+    references=[o6.hasComponent(o6.ns["ns=surface_technology;i=6065"])],
 )
 o6.reference(o6.ns["ns=surface_technology;i=5026"], "i=17604", o6.ns["ns=surface_technology;i=5027"])
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=surface_technology;i=6067",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6068", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6068", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryOperationModeStateMachineType(
-    nodeId="ns=surface_technology;i=5012", browseName="ns=machinery;MachineryOperationMode", references=[o6.hasComponent(o6.ns["ns=surface_technology;i=6067"])]
+    nodeId="ns=surface_technology;i=5012",
+    browseName="ns=machinery;MachineryOperationMode",
+    modellingRule="Optional",
+    references=[o6.hasComponent(o6.ns["ns=surface_technology;i=6067"])],
 )
 o6.reference(o6.ns["ns=surface_technology;i=5026"], "i=17604", o6.ns["ns=surface_technology;i=5012"])
 ns0.objtypes.FolderType(
@@ -371,19 +433,21 @@ o6.reference(surface_technology_objtypes.STSystemControllerType, ns0.reftypes.Ha
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=surface_technology;i=6070",
     browseName="CurrentState",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6071", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6072", browseName="Number", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6071", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6072", browseName="Number", modellingRule="Mandatory", dataType=o6.UInt32)),
     ],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteTransitionVariableType(
     nodeId="ns=surface_technology;i=6074",
     browseName="LastTransition",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6075", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6076", browseName="Number", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6077", browseName="TransitionTime", dataType=ns0.datatypes.UtcTime)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6075", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6076", browseName="Number", modellingRule="Mandatory", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6077", browseName="TransitionTime", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)),
     ],
     dataType=o6.LocalizedText,
 )
@@ -392,9 +456,9 @@ ns0.objtypes.ProgramStateMachineType(
     browseName="ns=surface_technology;StartUp",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6069", browseName="AutoDelete", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6073", browseName="Deletable", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6078", browseName="RecycleCount", dataType=o6.Int32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6069", browseName="AutoDelete", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6073", browseName="Deletable", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6078", browseName="RecycleCount", modellingRule="Mandatory", dataType=o6.Int32)),
         o6.hasComponent(o6.ns["ns=surface_technology;i=6070"]),
         o6.hasComponent(o6.ns["ns=surface_technology;i=6074"]),
     ],
@@ -403,19 +467,21 @@ o6.reference(surface_technology_objtypes.STBaseControllerType, ns0.reftypes.HasC
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=surface_technology;i=6080",
     browseName="CurrentState",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6081", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6082", browseName="Number", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6081", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6082", browseName="Number", modellingRule="Mandatory", dataType=o6.UInt32)),
     ],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteTransitionVariableType(
     nodeId="ns=surface_technology;i=6084",
     browseName="LastTransition",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6085", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6086", browseName="Number", dataType=o6.UInt32)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6087", browseName="TransitionTime", dataType=ns0.datatypes.UtcTime)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6085", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6086", browseName="Number", modellingRule="Mandatory", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6087", browseName="TransitionTime", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime)),
     ],
     dataType=o6.LocalizedText,
 )
@@ -424,9 +490,9 @@ ns0.objtypes.ProgramStateMachineType(
     browseName="ns=surface_technology;ShutDown",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6079", browseName="AutoDelete", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6083", browseName="Deletable", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6088", browseName="RecycleCount", dataType=o6.Int32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6079", browseName="AutoDelete", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6083", browseName="Deletable", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology;i=6088", browseName="RecycleCount", modellingRule="Mandatory", dataType=o6.Int32)),
         o6.hasComponent(o6.ns["ns=surface_technology;i=6080"]),
         o6.hasComponent(o6.ns["ns=surface_technology;i=6084"]),
     ],
@@ -462,6 +528,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=surface_technology;i=7001",
     browseName="FindAlias",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=surface_technology;i=6089"]),
     outputArgs=o6.hasProperty(o6.ns["ns=surface_technology;i=6090"]),
 )

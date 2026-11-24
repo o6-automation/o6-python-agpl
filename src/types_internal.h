@@ -83,9 +83,10 @@ PyTypeObject *findCustomEnumPyType(const UA_DataType *uaType);
 /* py_description_to_eo converts a Python StructureDescription /
  * EnumDescription into a freshly-allocated UA_ExtensionObject for
  * UA_DataType_fromDescription().
- * createCustomPyTypeBound builds the Python class for a freshly
- * constructed UA_DataType (``layoutType``) and registers it bound to
- * ``bindType`` in the UA_DataType* -> PyTypeObject index.
+ * createCustomPyType builds the Python class for a freshly constructed
+ * UA_DataType (``layoutType``) and writes its qualified name to ``nameBuf``.
+ * It runs Python code (the enum factory, ``__init_subclass__``, metaclasses)
+ * and does not bind the class to any UA_DataType.
  * ``enumFactory`` is the callable the authoring layer chose to realize the
  * members with — ``IntEnum`` for an enumeration, ``IntFlag`` for an OptionSet —
  * and its presence is what decides between an enum class and a struct, not
@@ -93,14 +94,21 @@ PyTypeObject *findCustomEnumPyType(const UA_DataType *uaType);
  * ``enumOverrideMembers``, when not NULL, is used as the enum class's
  * ``{name: value}`` dict instead of one built from ``layoutType->members`` —
  * see ``register_enumeration_type`` in ``datatypes.c`` for why an oversized
- * enum's own member array can't carry it. */
+ * enum's own member array can't carry it.
+ * bindCustomPyType binds that class to ``bindType`` and registers it in the
+ * UA_DataType* -> PyTypeObject index under ``name``.  It runs no Python code,
+ * so ``build_one_type`` can bind and publish a chain slot in one step.
+ * ``fromEnumFactory`` is whether the class came from an enum factory.
+ * Returns 0 on success, -1 with a Python exception set. */
 UA_StatusCode py_description_to_eo(PyObject *py_descr, UA_ExtensionObject *eo);
-PyObject *createCustomPyTypeBound(const UA_DataType *layoutType,
-                                  const UA_DataType *bindType,
-                                  const char *namespaceName,
-                                  PyObject *bases,
-                                  PyObject *enumFactory,
-                                  PyObject *enumOverrideMembers);
+PyObject *createCustomPyType(const UA_DataType *layoutType,
+                             const char *namespaceName,
+                             PyObject *bases,
+                             PyObject *enumFactory,
+                             PyObject *enumOverrideMembers,
+                             char *nameBuf, size_t nameBufSize);
+int bindCustomPyType(PyObject *pyType, const UA_DataType *bindType,
+                     const char *name, bool fromEnumFactory);
 
 /* UA_TYPES[i] -> PyTypeObject* table (builtins by typeKind, plus the six
  * NS0 bootstrap struct types populated by create_bootstrap_struct_types). */
@@ -148,11 +156,15 @@ static inline void lcFirst(const char *name, char *out) {
 // The Python attribute name of member `index`
 void memberPyName(PyTypeObject *pyType, const UA_DataType *uaType, size_t index, char *out);
 
-// The first value access copies into a cached PyObject and clears the native Variant.
+// The first value access converts the native Variant into a cached PyObject
+// and then clears the Variant. `converting` counts the reads converting it
+// right now: the Variant is cleared only once no read converts it any more
+// (see types_datavalue.c).
 typedef struct {
     PyObject_HEAD
     UA_DataValue dv;
     PyObject *value;
+    size_t converting;
 } PyUADataValue;
 
 // DiagnosticInfo is a struct-like builtin; members are exposed via getset
@@ -162,7 +174,9 @@ typedef struct {
     UA_DiagnosticInfo di;
 } PyUADiagnosticInfo;
 
-// Structures keep dynamic data in a dict and numerical members directly
+// Structures keep converted or assigned members in a dict and the members
+// still in native form in `data`. The first read of a member converts it
+// into the dict and then releases it from `data` (see types_struct.c).
 typedef struct {
     // define PyObject_HEAD
     // Py_ssize_t ob_refcnt;

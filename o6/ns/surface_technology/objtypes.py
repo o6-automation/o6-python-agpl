@@ -35,13 +35,15 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-machinery.objtypes.MachineComponentsType(nodeId="ns=surface_technology;i=5003", browseName="ns=machinery;Components")
+machinery.objtypes.MachineComponentsType(nodeId="ns=surface_technology;i=5003", browseName="ns=machinery;Components", modellingRule="Optional")
 
 
 @o6.objecttype(nodeId="ns=surface_technology;i=1003", browseName="ns=surface_technology;STSysType", displayName="STSysType", isAbstract=True)
 class STSysType(ns0.objtypes.BaseObjectType):
     components: machinery.objtypes.MachineComponentsType | None = o6.hasAddIn(o6.ns["ns=surface_technology;i=5003"])
-    description: ns0.objtypes.FolderType | None = o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology;i=5006", browseName="ns=surface_technology;Description"))
+    description: ns0.objtypes.FolderType | None = o6.hasComponent(
+        ns0.objtypes.FolderType(nodeId="ns=surface_technology;i=5006", browseName="ns=surface_technology;Description", modellingRule="Optional")
+    )
     identification: machinery.objtypes.MachineIdentificationType | None
     machineryBuildingBlocks: ns0.objtypes.FolderType
     monitoring: machinery.objtypes.MonitoringType | None
@@ -49,13 +51,15 @@ class STSysType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=surface_technology;i=1006", browseName="ns=surface_technology;STCompType", displayName="STCompType", isAbstract=True)
 class STCompType(ns0.objtypes.BaseObjectType):
-    description: ns0.objtypes.FolderType | None = o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology;i=5016", browseName="ns=surface_technology;Description"))
+    description: ns0.objtypes.FolderType | None = o6.hasComponent(
+        ns0.objtypes.FolderType(nodeId="ns=surface_technology;i=5016", browseName="ns=surface_technology;Description", modellingRule="Optional")
+    )
     identification: machinery.objtypes.MachineryComponentIdentificationType | None
     machineryBuildingBlocks: ns0.objtypes.FolderType
     monitoring: machinery.objtypes.MonitoringType | None
 
 
-ns0.objtypes.FolderType(nodeId="ns=surface_technology;i=5026", browseName="ns=machinery;MachineryBuildingBlocks")
+ns0.objtypes.FolderType(nodeId="ns=surface_technology;i=5026", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
 
 
 @o6.objecttype(nodeId="ns=surface_technology;i=1009", browseName="ns=surface_technology;STSystemControllerType", displayName="STSystemControllerType", isAbstract=True)
@@ -113,6 +117,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=surface_technology;i=7002",
     browseName="ns=surface_technology;AddAlias",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=surface_technology;i=6091"]),
     outputArgs=o6.hasProperty(o6.ns["ns=surface_technology;i=6092"]),
 )
@@ -133,7 +138,9 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=surface_technology;i=7003", browseName="ns=surface_technology;RemoveAlias", inputArgs=o6.hasProperty(o6.ns["ns=surface_technology;i=6093"]))
+o6.call(
+    nodeId="ns=surface_technology;i=7003", browseName="ns=surface_technology;RemoveAlias", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=surface_technology;i=6093"])
+)
 
 
 @o6.objecttype(nodeId="ns=surface_technology;i=1008", browseName="ns=surface_technology;STJobManagementType", displayName="STJobManagementType")

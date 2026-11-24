@@ -19,7 +19,9 @@ from __future__ import annotations
 
 import asyncio
 import inspect
+import threading
 import weakref
+from collections.abc import Coroutine
 from typing import TYPE_CHECKING, Any, Callable, cast
 
 import o6
@@ -112,7 +114,14 @@ def _make_browse_path(node: Node, path: Any) -> Any:
 class _ClientBackend:
     def __init__(self, client: Client) -> None:
         self._client = client
-        self.nodes: weakref.WeakSet[Node] = weakref.WeakSet()
+        # Caller threads add nodes while the loop thread iterates them, and a
+        # WeakSet raises if it grows during iteration.
+        self._nodes: weakref.WeakSet[Node] = weakref.WeakSet()
+        self._nodes_lock = threading.Lock()
+
+    def add_node(self, node: Node) -> None:
+        with self._nodes_lock:
+            self._nodes.add(node)
 
     def _cache_key(self, nodeid: Any) -> tuple[int, Any]:
         # `ns=1` is an input alias of the registration that the client made
@@ -125,7 +134,9 @@ class _ClientBackend:
 
     def invalidate_children(self, target: Any = None) -> None:
         key = self._cache_key(o6.NodeId(target)) if target is not None else None
-        for node in self.nodes:
+        with self._nodes_lock:
+            nodes = list(self._nodes)
+        for node in nodes:
             if key is None or self._cache_key(node._nodeid) == key:
                 node._child_cache = None
 
@@ -133,8 +144,12 @@ class _ClientBackend:
     def loop(self) -> asyncio.AbstractEventLoop:
         return self._client._loop
 
-    def dispatch(self, coro: Any) -> o6.MaybeAwaitable:
-        return self._client._maybe_async(coro)
+    def dispatch(self, operation: Callable[[], Coroutine[Any, Any, Any]]) -> o6.MaybeAwaitable:
+        return self._client._run_on_loop(operation)
+
+    def dispatch_wait(self, operation: Callable[[], Coroutine[Any, Any, Any]]) -> Any:
+        """Return the result of `operation`, blocking also a task on another loop."""
+        return self._client._run_on_loop(operation, sync_result=True, wait=True)
 
     async def browse_children(self, nodeid: Any) -> list:
         result = self._client.browse(
@@ -192,28 +207,21 @@ class _ServerBackend:
     def loop(self) -> asyncio.AbstractEventLoop:
         return self._server._loop
 
-    def dispatch(self, coro: Any) -> o6.MaybeAwaitable:
-        loop = self._server._loop
-        try:
-            running = asyncio.get_running_loop()
-        except RuntimeError:
-            running = None
-        if running is loop:
-            return loop.create_task(coro)
-        return self._server._maybe_async_coro(coro)
+    def dispatch(self, operation: Callable[[], Coroutine[Any, Any, Any]]) -> o6.MaybeAwaitable:
+        server = self._server
+        loop = server._loop
+        if asyncio._get_running_loop() is loop:
+            # On the loop the operation starts at once, like a native call.
+            return loop.create_task(operation())
+        return server._run_on_loop(operation)
+
+    def dispatch_wait(self, operation: Callable[[], Coroutine[Any, Any, Any]]) -> Any:
+        """Return the result of `operation`, blocking also a task on another loop."""
+        return self._server._run_on_loop(operation, sync_result=True, wait=True)
 
     @public_result
     def dispatch_native(self, operation: Callable[[], Any]) -> Any:
-        result = self._server._on_event_loop(operation)
-        if inspect.isawaitable(result):
-            try:
-                running = asyncio.get_running_loop()
-            except RuntimeError:
-                running = None
-            if asyncio.isfuture(result) and result.get_loop() is running:
-                return result
-            return self._server._maybe_async(result)
-        return result
+        return self._server._run_on_loop(operation, sync_result=True)
 
     def node_call_native(self, obj_id: Any, method_id: Any, args: Any) -> Any:
         return self.dispatch_native(
@@ -233,7 +241,7 @@ class _ServerBackend:
             includeSubtypes=True,
             resultMask=_child_browse_result_mask(),
         )
-        return self._server._browse_references(node, description)
+        return self._server._call_native(lambda: self._server._browse_references(node, description))
 
     async def node_call(self, obj_id: Any, method_id: Any, args: Any) -> tuple:
         result = self._server.call(o6.NodeId(obj_id), o6.NodeId(method_id), args)
@@ -251,6 +259,10 @@ class _ServerBackend:
         return self.node_get_native(nodeid, node_type)
 
     def node_get_native(self, nodeid: Any, node_type: type[Node] | None = None) -> Node:
+        """Return the canonical node object, from any thread."""
+        return self._server._call_native(lambda: self._node_get_on_loop(nodeid, node_type))
+
+    def _node_get_on_loop(self, nodeid: Any, node_type: type[Node] | None) -> Node:
         from o6.node import VariableNode, _nodeclass2type
         from o6.ns import ns0
 
@@ -266,4 +278,7 @@ class _ServerBackend:
 
 def _server_node(server: Server, node_id: Any, node_type: type[Node]) -> Node:
     """Return the server-owned Python wrapper for an existing native node."""
-    return cast(Any, server._get_node(o6.NodeId(node_id), node_type, server._node_backend))
+    node_id = o6.NodeId(node_id)
+    return cast(
+        Any, server._call_native(lambda: server._get_node(node_id, node_type, server._node_backend))
+    )

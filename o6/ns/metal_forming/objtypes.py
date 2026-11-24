@@ -142,6 +142,7 @@ class CyclicProcessValueType(machinery_processvalues.objtypes.ProcessValueType):
         metal_forming_vartypes.CyclicProcessValueVariableType(
             nodeId="ns=metal_forming;i=6020",
             browseName="ns=metal_forming;CyclicProcessValue",
+            modellingRule="Mandatory",
             dataType=metal_forming_datypes.CyclicProcessValueDataType,
             accessLevel=3,
             userAccessLevel=1,
@@ -154,11 +155,13 @@ class CyclicEventType(ns0.objtypes.BaseEventType):
     currentProcessValue: machinery_processvalues.objtypes.ProcessValueType
     cycleCount: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=metal_forming;i=6055", browseName="ns=metal_forming;CycleCount", dataType=ns0.datatypes.Counter, accessLevel=3, userAccessLevel=1
+            nodeId="ns=metal_forming;i=6055", browseName="ns=metal_forming;CycleCount", modellingRule="Mandatory", dataType=ns0.datatypes.Counter, accessLevel=3, userAccessLevel=1
         )
     )
     partId: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=metal_forming;i=6056", browseName="ns=metal_forming;PartId", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=metal_forming;i=6056", browseName="ns=metal_forming;PartId", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
 
 

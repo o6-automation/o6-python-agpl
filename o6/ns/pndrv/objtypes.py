@@ -33,7 +33,7 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-di.objtypes.LockingServicesType(nodeId="ns=pndrv;i=5002", browseName="ns=pndrv;Lock")
+di.objtypes.LockingServicesType(nodeId="ns=pndrv;i=5002", browseName="ns=pndrv;Lock", modellingRule="Optional")
 o6.reference(o6.ns["ns=pndrv;i=5002"], "i=46", "ns=di;i=6390")
 o6.reference(o6.ns["ns=pndrv;i=5002"], "i=46", "ns=di;i=6391")
 o6.reference(o6.ns["ns=pndrv;i=5002"], "i=46", "ns=di;i=6392")
@@ -42,11 +42,11 @@ o6.reference(o6.ns["ns=pndrv;i=5002"], "i=47", "ns=di;i=6393")
 o6.reference(o6.ns["ns=pndrv;i=5002"], "i=47", "ns=di;i=6396")
 o6.reference(o6.ns["ns=pndrv;i=5002"], "i=47", "ns=di;i=6398")
 o6.reference(o6.ns["ns=pndrv;i=5002"], "i=47", "ns=di;i=6400")
-pnenc.objtypes.LogbookType(nodeId="ns=pndrv;i=5007", browseName="ns=pndrv;Logbook")
+pnenc.objtypes.LogbookType(nodeId="ns=pndrv;i=5007", browseName="ns=pndrv;Logbook", modellingRule="Optional")
 o6.reference(o6.ns["ns=pndrv;i=5007"], "i=41", "ns=pnenc;i=1003")
 o6.reference(o6.ns["ns=pndrv;i=5007"], "i=46", "ns=pnenc;i=6069")
 o6.reference(o6.ns["ns=pndrv;i=5007"], "i=47", "ns=pnenc;i=6068")
-ns0.objtypes.FileType(nodeId="ns=pndrv;i=5027", browseName="ns=pndrv;MotionProgram")
+ns0.objtypes.FileType(nodeId="ns=pndrv;i=5027", browseName="ns=pndrv;MotionProgram", modellingRule="Optional")
 o6.reference(o6.ns["ns=pndrv;i=5027"], "i=46", "i=11576")
 o6.reference(o6.ns["ns=pndrv;i=5027"], "i=46", "i=11579")
 o6.reference(o6.ns["ns=pndrv;i=5027"], "i=46", "i=12686")
@@ -57,30 +57,30 @@ o6.reference(o6.ns["ns=pndrv;i=5027"], "i=47", "i=11585")
 o6.reference(o6.ns["ns=pndrv;i=5027"], "i=47", "i=11588")
 o6.reference(o6.ns["ns=pndrv;i=5027"], "i=47", "i=11590")
 o6.reference(o6.ns["ns=pndrv;i=5027"], "i=47", "i=11593")
-pnenc.objtypes.EncoderChannelType(nodeId="ns=pndrv;i=5031", browseName="ns=pndrv;EncoderChannelMotor")
+pnenc.objtypes.EncoderChannelType(nodeId="ns=pndrv;i=5031", browseName="ns=pndrv;EncoderChannelMotor", modellingRule="Mandatory")
 o6.reference(o6.ns["ns=pndrv;i=5031"], "i=41", "ns=pnenc;i=1006")
 o6.reference(o6.ns["ns=pndrv;i=5031"], "i=47", "ns=pnenc;i=5011")
 pnenc.objtypes.EncoderChannelType(nodeId="ns=pndrv;i=5033", browseName="ns=pndrv;<EncoderChannelAuxiliary>", modellingRule="OptionalPlaceholder")
 o6.reference(o6.ns["ns=pndrv;i=5033"], "i=41", "ns=pnenc;i=1006")
 o6.reference(o6.ns["ns=pndrv;i=5033"], "i=47", "ns=pnenc;i=5011")
-ns0.objtypes.FolderType(nodeId="ns=pndrv;i=5035", browseName="ns=pndrv;CharacteristicsConverter")
+ns0.objtypes.FolderType(nodeId="ns=pndrv;i=5035", browseName="ns=pndrv;CharacteristicsConverter", modellingRule="Mandatory")
 
 
 @o6.objecttype(nodeId="ns=pndrv;i=1012", browseName="ns=pndrv;DiagnosisAlarmType", displayName="DiagnosisAlarmType")
 class DiagnosisAlarmType(ns0.objtypes.AlarmConditionType):
     logEntry: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6026", browseName="ns=pndrv;LogEntry", dataType=pnenc.datatypes.LogEntryDataType)
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6026", browseName="ns=pndrv;LogEntry", modellingRule="Mandatory", dataType=pnenc.datatypes.LogEntryDataType)
     )
 
 
-ns0.vartypes.BaseDataVariableType(nodeId="ns=pndrv;i=6092", browseName="ns=pndrv;TraversingTaskNumber", dataType=o6.Int32)
-ns0.vartypes.AnalogUnitType(nodeId="ns=pndrv;i=6093", browseName="ns=pndrv;TargetPosition", dataType=o6.Float)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=pndrv;i=6092", browseName="ns=pndrv;TraversingTaskNumber", modellingRule="Mandatory", dataType=o6.Int32)
+ns0.vartypes.AnalogUnitType(nodeId="ns=pndrv;i=6093", browseName="ns=pndrv;TargetPosition", modellingRule="Optional", dataType=o6.Float)
 o6.reference(o6.ns["ns=pndrv;i=6093"], "i=46", "i=17502")
-ns0.vartypes.AnalogUnitType(nodeId="ns=pndrv;i=6094", browseName="ns=pndrv;Velocity", dataType=o6.Float)
+ns0.vartypes.AnalogUnitType(nodeId="ns=pndrv;i=6094", browseName="ns=pndrv;Velocity", modellingRule="Optional", dataType=o6.Float)
 o6.reference(o6.ns["ns=pndrv;i=6094"], "i=46", "i=17502")
-ns0.vartypes.AnalogUnitType(nodeId="ns=pndrv;i=6095", browseName="ns=pndrv;Acceleration", dataType=o6.Float)
+ns0.vartypes.AnalogUnitType(nodeId="ns=pndrv;i=6095", browseName="ns=pndrv;Acceleration", modellingRule="Optional", dataType=o6.Float)
 o6.reference(o6.ns["ns=pndrv;i=6095"], "i=46", "i=17502")
-ns0.vartypes.AnalogUnitType(nodeId="ns=pndrv;i=6096", browseName="ns=pndrv;Deceleration", dataType=o6.Float)
+ns0.vartypes.AnalogUnitType(nodeId="ns=pndrv;i=6096", browseName="ns=pndrv;Deceleration", modellingRule="Optional", dataType=o6.Float)
 o6.reference(o6.ns["ns=pndrv;i=6096"], "i=46", "i=17502")
 
 
@@ -94,25 +94,27 @@ class TraversingTaskType(ns0.objtypes.BaseObjectType):
     velocity: ns0.vartypes.AnalogUnitType | None = o6.hasComponent(o6.ns["ns=pndrv;i=6094"])
 
 
-pndrv_vartypes.AxisTypeVariableType(nodeId="ns=pndrv;i=6153", browseName="ns=pndrv;AxisType", dataType=o6.Byte)
+pndrv_vartypes.AxisTypeVariableType(nodeId="ns=pndrv;i=6153", browseName="ns=pndrv;AxisType", modellingRule="Mandatory", dataType=o6.Byte)
 o6.reference(o6.ns["ns=pndrv;i=6153"], "i=46", o6.ns["ns=pndrv;i=6152"])
 
 
 @o6.objecttype(nodeId="ns=pndrv;i=1018", browseName="ns=pndrv;SafetyFunctionType", displayName="SafetyFunctionType")
 class SafetyFunctionType(ns0.objtypes.BaseObjectType):
     activationState: ns0.vartypes.MultiStateDiscreteType
-    limit: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6155", browseName="ns=pndrv;Limit", dataType=o6.Float))
+    limit: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6155", browseName="ns=pndrv;Limit", modellingRule="Optional", dataType=o6.Float)
+    )
     selectionState: ns0.vartypes.MultiStateDiscreteType
 
 
-SafetyFunctionType(nodeId="ns=pndrv;i=5046", browseName="ns=pndrv;STO")
-SafetyFunctionType(nodeId="ns=pndrv;i=5047", browseName="ns=pndrv;SS1")
-SafetyFunctionType(nodeId="ns=pndrv;i=5048", browseName="ns=pndrv;SS2")
-SafetyFunctionType(nodeId="ns=pndrv;i=5049", browseName="ns=pndrv;SOS")
-SafetyFunctionType(nodeId="ns=pndrv;i=5050", browseName="ns=pndrv;SLS")
-SafetyFunctionType(nodeId="ns=pndrv;i=5051", browseName="ns=pndrv;SDI")
-SafetyFunctionType(nodeId="ns=pndrv;i=5052", browseName="ns=pndrv;SLA")
-SafetyFunctionType(nodeId="ns=pndrv;i=5053", browseName="ns=pndrv;SLP")
+SafetyFunctionType(nodeId="ns=pndrv;i=5046", browseName="ns=pndrv;STO", modellingRule="Mandatory")
+SafetyFunctionType(nodeId="ns=pndrv;i=5047", browseName="ns=pndrv;SS1", modellingRule="Optional")
+SafetyFunctionType(nodeId="ns=pndrv;i=5048", browseName="ns=pndrv;SS2", modellingRule="Optional")
+SafetyFunctionType(nodeId="ns=pndrv;i=5049", browseName="ns=pndrv;SOS", modellingRule="Optional")
+SafetyFunctionType(nodeId="ns=pndrv;i=5050", browseName="ns=pndrv;SLS", modellingRule="Optional")
+SafetyFunctionType(nodeId="ns=pndrv;i=5051", browseName="ns=pndrv;SDI", modellingRule="Optional")
+SafetyFunctionType(nodeId="ns=pndrv;i=5052", browseName="ns=pndrv;SLA", modellingRule="Optional")
+SafetyFunctionType(nodeId="ns=pndrv;i=5053", browseName="ns=pndrv;SLP", modellingRule="Optional")
 
 
 @o6.objecttype(nodeId="ns=pndrv;i=1015", browseName="ns=pndrv;SafetyType", displayName="SafetyType")
@@ -127,71 +129,101 @@ class SafetyType(ns0.objtypes.BaseObjectType):
     sTO: SafetyFunctionType = o6.hasComponent(o6.ns["ns=pndrv;i=5046"])
 
 
-SafetyType(nodeId="ns=pndrv;i=5045", browseName="ns=pndrv;Safety")
+SafetyType(nodeId="ns=pndrv;i=5045", browseName="ns=pndrv;Safety", modellingRule="Optional")
 o6.reference(o6.ns["ns=pndrv;i=5045"], "i=47", o6.ns["ns=pndrv;i=5046"])
 
 
 @o6.objecttype(nodeId="ns=pndrv;i=1001", browseName="ns=pndrv;AxisEventType", displayName="AxisEventType", isAbstract=True)
 class AxisEventType(ns0.objtypes.BaseEventType):
-    axisState: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6136", browseName="ns=pndrv;AxisState", dataType=o6.UInt16))
+    axisState: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6136", browseName="ns=pndrv;AxisState", modellingRule="Mandatory", dataType=o6.UInt16)
+    )
     brakeResistorTemperature: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6269", browseName="ns=pndrv;BrakeResistorTemperature", dataType=o6.Float)
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6269", browseName="ns=pndrv;BrakeResistorTemperature", modellingRule="Optional", dataType=o6.Float)
     )
-    controlMode: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6263", browseName="ns=pndrv;ControlMode", dataType=o6.UInt16))
-    controlPriority: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6150", browseName="ns=pndrv;ControlPriority", dataType=o6.UInt16))
+    controlMode: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6263", browseName="ns=pndrv;ControlMode", modellingRule="Optional", dataType=o6.UInt16)
+    )
+    controlPriority: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6150", browseName="ns=pndrv;ControlPriority", modellingRule="Mandatory", dataType=o6.UInt16)
+    )
     converterTemperature: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6190", browseName="ns=pndrv;ConverterTemperature", dataType=o6.Float)
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6190", browseName="ns=pndrv;ConverterTemperature", modellingRule="Optional", dataType=o6.Float)
     )
-    dcBusVoltage: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6214", browseName="ns=pndrv;DcBusVoltage", dataType=o6.Float))
+    dcBusVoltage: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6214", browseName="ns=pndrv;DcBusVoltage", modellingRule="Optional", dataType=o6.Float)
+    )
     deviceTemperature: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6191", browseName="ns=pndrv;DeviceTemperature", dataType=o6.Float)
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6191", browseName="ns=pndrv;DeviceTemperature", modellingRule="Optional", dataType=o6.Float)
     )
     feedbackSensor1_3Temperature_: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6268", browseName="ns=pndrv;<FeedbackSensor1..3Temperature>", modellingRule="OptionalPlaceholder", dataType=o6.Float)
     )
-    force: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6172", browseName="ns=pndrv;Force", dataType=o6.Float))
+    force: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6172", browseName="ns=pndrv;Force", modellingRule="Optional", dataType=o6.Float)
+    )
     motorTemperature: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6179", browseName="ns=pndrv;MotorTemperature", dataType=o6.Float)
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6179", browseName="ns=pndrv;MotorTemperature", modellingRule="Optional", dataType=o6.Float)
     )
-    outputCurrent: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6167", browseName="ns=pndrv;OutputCurrent", dataType=o6.Float))
+    outputCurrent: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6167", browseName="ns=pndrv;OutputCurrent", modellingRule="Optional", dataType=o6.Float)
+    )
     positionFollowingError: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6227", browseName="ns=pndrv;PositionFollowingError", dataType=o6.Float)
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6227", browseName="ns=pndrv;PositionFollowingError", modellingRule="Optional", dataType=o6.Float)
     )
-    power: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6178", browseName="ns=pndrv;Power", dataType=o6.Float))
-    torque: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6171", browseName="ns=pndrv;Torque", dataType=o6.Float))
+    power: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6178", browseName="ns=pndrv;Power", modellingRule="Optional", dataType=o6.Float)
+    )
+    torque: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6171", browseName="ns=pndrv;Torque", modellingRule="Optional", dataType=o6.Float)
+    )
     velocityFollowingError: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6261", browseName="ns=pndrv;VelocityFollowingError", dataType=o6.Float)
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6261", browseName="ns=pndrv;VelocityFollowingError", modellingRule="Optional", dataType=o6.Float)
     )
 
 
 @o6.objecttype(nodeId="ns=pndrv;i=1013", browseName="ns=pndrv;AxisSwOvertravelEventType", displayName="AxisSwOvertravelEventType")
 class AxisSwOvertravelEventType(AxisEventType):
-    isUpperSwLimit: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6147", browseName="ns=pndrv;IsUpperSwLimit", dataType=o6.Boolean))
+    isUpperSwLimit: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6147", browseName="ns=pndrv;IsUpperSwLimit", modellingRule="Mandatory", dataType=o6.Boolean)
+    )
 
 
 @o6.objecttype(nodeId="ns=pndrv;i=1014", browseName="ns=pndrv;AxisHwOvertravelEventType", displayName="AxisHwOvertravelEventType")
 class AxisHwOvertravelEventType(AxisEventType):
-    isUpperHwLimit: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6148", browseName="ns=pndrv;IsUpperHwLimit", dataType=o6.Boolean))
+    isUpperHwLimit: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6148", browseName="ns=pndrv;IsUpperHwLimit", modellingRule="Mandatory", dataType=o6.Boolean)
+    )
 
 
 @o6.objecttype(nodeId="ns=pndrv;i=1016", browseName="ns=pndrv;TorqueLimitEventType", displayName="TorqueLimitEventType")
 class TorqueLimitEventType(AxisEventType):
-    torque: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6271", browseName="ns=pndrv;Torque", dataType=o6.Float))
-    torqueLimit: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6270", browseName="ns=pndrv;TorqueLimit", dataType=o6.Float))
+    torque: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6271", browseName="ns=pndrv;Torque", modellingRule="Mandatory", dataType=o6.Float)
+    )
+    torqueLimit: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6270", browseName="ns=pndrv;TorqueLimit", modellingRule="Mandatory", dataType=o6.Float)
+    )
 
 
 @o6.objecttype(nodeId="ns=pndrv;i=1019", browseName="ns=pndrv;ForceLimitEventType", displayName="ForceLimitEventType")
 class ForceLimitEventType(AxisEventType):
-    force: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6272", browseName="ns=pndrv;Force", dataType=o6.Float))
-    forceLimit: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6201", browseName="ns=pndrv;ForceLimit", dataType=o6.Float))
+    force: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6272", browseName="ns=pndrv;Force", modellingRule="Mandatory", dataType=o6.Float)
+    )
+    forceLimit: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6201", browseName="ns=pndrv;ForceLimit", modellingRule="Mandatory", dataType=o6.Float)
+    )
 
 
 @o6.objecttype(nodeId="ns=pndrv;i=1017", browseName="ns=pndrv;MotorCurrentLimitEventType", displayName="MotorCurrentLimitEventType")
 class MotorCurrentLimitEventType(AxisEventType):
     motorCurrentLimitHigh: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6164", browseName="ns=pndrv;MotorCurrentLimitHigh", dataType=o6.Float)
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6164", browseName="ns=pndrv;MotorCurrentLimitHigh", modellingRule="Mandatory", dataType=o6.Float)
     )
-    outputCurrent: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6273", browseName="ns=pndrv;OutputCurrent", dataType=o6.Float))
+    outputCurrent: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6273", browseName="ns=pndrv;OutputCurrent", modellingRule="Mandatory", dataType=o6.Float)
+    )
 
 
 ns0.vartypes.PropertyType(
@@ -206,16 +238,20 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ApplicationTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pndrv;i=7000", browseName="ns=pndrv;SetApplicationTag", inputArgs=o6.hasProperty(o6.ns["ns=pndrv;i=6038"]))
+o6.call(nodeId="ns=pndrv;i=7000", browseName="ns=pndrv;SetApplicationTag", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pndrv;i=6038"]))
 
 
 @o6.objecttype(nodeId="ns=pndrv;i=1000", browseName="ns=pndrv;DriveAxisType", displayName="DriveAxisType", isAbstract=True)
 class DriveAxisType(ns0.objtypes.BaseObjectType):
-    applicationTag: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6020", browseName="ns=pndrv;ApplicationTag", dataType=o6.String))
+    applicationTag: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pndrv;i=6020", browseName="ns=pndrv;ApplicationTag", modellingRule="Optional", dataType=o6.String)
+    )
     axisType: pndrv_vartypes.AxisTypeVariableType = o6.hasProperty(o6.ns["ns=pndrv;i=6153"])
     characteristicsConverter: ns0.objtypes.FolderType
     characteristicsMotorAndControl: ns0.objtypes.FolderType | None
-    limitSupervision: ns0.objtypes.FolderType | None = o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=pndrv;i=5006", browseName="ns=pndrv;LimitSupervision"))
+    limitSupervision: ns0.objtypes.FolderType | None = o6.hasComponent(
+        ns0.objtypes.FolderType(nodeId="ns=pndrv;i=5006", browseName="ns=pndrv;LimitSupervision", modellingRule="Optional")
+    )
     lock: di.objtypes.LockingServicesType | None = o6.hasComponent(o6.ns["ns=pndrv;i=5002"])
     logbook: pnenc.objtypes.LogbookType | None = o6.hasComponent(o6.ns["ns=pndrv;i=5007"])
     maintenance: ns0.objtypes.FolderType

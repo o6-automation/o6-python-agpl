@@ -38,7 +38,7 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-ns0.objtypes.FolderType(nodeId="ns=wmtp;i=5008", browseName="ns=machinery;MachineryBuildingBlocks")
+ns0.objtypes.FolderType(nodeId="ns=wmtp;i=5008", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
 
 
 @o6.objecttype(nodeId="ns=wmtp;i=1003", browseName="ns=wmtp;WirelessMachineToolPeripheralType", displayName="WirelessMachineToolPeripheralType")
@@ -64,7 +64,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="DeleteAllStoredRecordsSuccessfull", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7005", browseName="ns=wmtp;DeleteAllStoredRecords", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6165"]))
+o6.call(nodeId="ns=wmtp;i=7005", browseName="ns=wmtp;DeleteAllStoredRecords", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6165"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6168",
@@ -80,7 +80,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="ToTimestamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=wmtp;i=7006", browseName="ns=wmtp;DeleteStoredRecordsTime", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6168"]))
+o6.call(nodeId="ns=wmtp;i=7006", browseName="ns=wmtp;DeleteStoredRecordsTime", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6168"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6172",
@@ -96,7 +96,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="ToIndex", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=wmtp;i=7007", browseName="ns=wmtp;DeleteStoredRecordsIndex", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6172"]))
+o6.call(nodeId="ns=wmtp;i=7007", browseName="ns=wmtp;DeleteStoredRecordsIndex", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6172"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6176",
@@ -109,7 +109,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="NumberOfStoredRecords", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7009", browseName="ns=wmtp;ReportNumberOfStoredRecords", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6176"]))
+o6.call(nodeId="ns=wmtp;i=7009", browseName="ns=wmtp;ReportNumberOfStoredRecords", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6176"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6180",
@@ -139,6 +139,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=wmtp;i=7010",
     browseName="ns=wmtp;ReportNumberOfStoredRecordsTime",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6180"]),
     outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6181"]),
 )
@@ -154,7 +155,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-2, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7011", browseName="ns=wmtp;CombinedReportAll", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6233"]))
+o6.call(nodeId="ns=wmtp;i=7011", browseName="ns=wmtp;CombinedReportAll", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6233"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6235",
@@ -181,7 +182,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-2, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7012", browseName="ns=wmtp;CombinedReportIndex", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6235"]), outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6236"]))
+o6.call(
+    nodeId="ns=wmtp;i=7012",
+    browseName="ns=wmtp;CombinedReportIndex",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6235"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6236"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6237",
@@ -208,7 +215,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-2, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7013", browseName="ns=wmtp;CombinedReportTime", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6237"]), outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6238"]))
+o6.call(
+    nodeId="ns=wmtp;i=7013",
+    browseName="ns=wmtp;CombinedReportTime",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6237"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6238"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6241",
@@ -221,7 +234,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7015", browseName="ns=wmtp;CombinedReportAll", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6241"]))
+o6.call(nodeId="ns=wmtp;i=7015", browseName="ns=wmtp;CombinedReportAll", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6241"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6243",
@@ -248,7 +261,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7016", browseName="ns=wmtp;CombinedReportIndex", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6243"]), outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6244"]))
+o6.call(
+    nodeId="ns=wmtp;i=7016",
+    browseName="ns=wmtp;CombinedReportIndex",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6243"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6244"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6247",
@@ -275,7 +294,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7017", browseName="ns=wmtp;CombinedReportTime", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6247"]), outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6248"]))
+o6.call(
+    nodeId="ns=wmtp;i=7017",
+    browseName="ns=wmtp;CombinedReportTime",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6247"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6248"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6164",
@@ -288,7 +313,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="DeleteAllStoredRecordsSuccessfull", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7018", browseName="ns=wmtp;DeleteAllStoredRecords", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6164"]))
+o6.call(nodeId="ns=wmtp;i=7018", browseName="ns=wmtp;DeleteAllStoredRecords", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6164"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6170",
@@ -304,7 +329,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="ToIndex", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=wmtp;i=7019", browseName="ns=wmtp;DeleteStoredRecordsIndex", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6170"]))
+o6.call(nodeId="ns=wmtp;i=7019", browseName="ns=wmtp;DeleteStoredRecordsIndex", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6170"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6166",
@@ -320,7 +345,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="ToTimestamp", dataType=o6.NodeId("i=13"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=wmtp;i=7020", browseName="ns=wmtp;DeleteStoredRecordsTime", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6166"]))
+o6.call(nodeId="ns=wmtp;i=7020", browseName="ns=wmtp;DeleteStoredRecordsTime", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6166"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6174",
@@ -333,7 +358,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="NumberOfStoredRecords", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7021", browseName="ns=wmtp;ReportNumberOfStoredRecords", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6174"]))
+o6.call(nodeId="ns=wmtp;i=7021", browseName="ns=wmtp;ReportNumberOfStoredRecords", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6174"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6178",
@@ -363,6 +388,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=wmtp;i=7022",
     browseName="ns=wmtp;ReportNumberOfStoredRecordsTime",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6178"]),
     outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6179"]),
 )
@@ -378,7 +404,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7029", browseName="ns=wmtp;SetTriggerSettings", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6182"]))
+o6.call(nodeId="ns=wmtp;i=7029", browseName="ns=wmtp;SetTriggerSettings", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6182"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6200",
@@ -391,7 +417,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="DeltaValue", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7030", browseName="ns=wmtp;SetDeltaCondition", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6200"]))
+o6.call(nodeId="ns=wmtp;i=7030", browseName="ns=wmtp;SetDeltaCondition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6200"]))
 
 
 @o6.objecttype(nodeId="ns=wmtp;i=1005", browseName="ns=wmtp;WMTPMeasurementType", displayName="WMTPMeasurementType")
@@ -399,21 +425,25 @@ class WMTPMeasurementType(machinery_processvalues.objtypes.ProcessValueType):
     absoluteUncertainty: ns0.vartypes.AnalogUnitType | None
     deltaCondition: ns0.vartypes.AnalogUnitType
     index: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6048", browseName="ns=wmtp;Index", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6048", browseName="ns=wmtp;Index", modellingRule="Optional", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
     )
     internalUpdateInterval: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6050", browseName="ns=wmtp;InternalUpdateInterval", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=wmtp;i=6050", browseName="ns=wmtp;InternalUpdateInterval", modellingRule="Optional", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1
+        )
     )
     limitCounters: machinery.objtypes.MachineryOperationCounterType | None
     measurementPeriod: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6049", browseName="ns=wmtp;MeasurementPeriod", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=wmtp;i=6049", browseName="ns=wmtp;MeasurementPeriod", modellingRule="Optional", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1
+        )
     )
     relativeUncertainty: ns0.vartypes.AnalogUnitType | None
     setDeltaCondition: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=wmtp;i=7030"])
     setTriggerSettings: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=wmtp;i=7029"])
     status: ns0.vartypes.MultiStateValueDiscreteType | None
     timestamp: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6047", browseName="ns=wmtp;Timestamp", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6047", browseName="ns=wmtp;Timestamp", modellingRule="Optional", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1)
     )
     triggerSettings: ns0.vartypes.AnalogUnitType
     typeOfMeasurement: ns0.vartypes.MultiStateValueDiscreteType
@@ -431,7 +461,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7047", browseName="ns=wmtp;CombinedReportLastValue", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6245"]))
+o6.call(nodeId="ns=wmtp;i=7047", browseName="ns=wmtp;CombinedReportLastValue", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6245"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6239",
@@ -444,7 +474,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7048", browseName="ns=wmtp;CombinedReportLastValue", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6239"]))
+o6.call(nodeId="ns=wmtp;i=7048", browseName="ns=wmtp;CombinedReportLastValue", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6239"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6240",
@@ -457,12 +487,12 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7049", browseName="ns=wmtp;CombinedReportFirstValue", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6240"]))
+o6.call(nodeId="ns=wmtp;i=7049", browseName="ns=wmtp;CombinedReportFirstValue", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6240"]))
 
 
 @o6.objecttype(nodeId="ns=wmtp;i=1004", browseName="ns=wmtp;WMTPWorkCycleDataType", displayName="WMTPWorkCycleDataType")
 class WMTPWorkCycleDataType(ns0.objtypes.BaseObjectType):
-    abortOperation: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="ns=wmtp;i=7008", browseName="ns=wmtp;AbortOperation"))
+    abortOperation: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="ns=wmtp;i=7008", browseName="ns=wmtp;AbortOperation", modellingRule="Mandatory"))
     combinedReportAll: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=wmtp;i=7011"])
     combinedReportFirstValue: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=wmtp;i=7049"])
     combinedReportIndex: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=wmtp;i=7012"])
@@ -486,12 +516,12 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7050", browseName="ns=wmtp;CombinedReportFirstValue", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6246"]))
+o6.call(nodeId="ns=wmtp;i=7050", browseName="ns=wmtp;CombinedReportFirstValue", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6246"]))
 
 
 @o6.objecttype(nodeId="ns=wmtp;i=1007", browseName="ns=wmtp;WMTPServiceCycleDataType", displayName="WMTPServiceCycleDataType")
 class WMTPServiceCycleDataType(ns0.objtypes.BaseObjectType):
-    abortOperation: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="ns=wmtp;i=7014", browseName="ns=wmtp;AbortOperation"))
+    abortOperation: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="ns=wmtp;i=7014", browseName="ns=wmtp;AbortOperation", modellingRule="Mandatory"))
     combinedReportAll: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=wmtp;i=7015"])
     combinedReportFirstValue: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=wmtp;i=7050"])
     combinedReportIndex: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=wmtp;i=7016"])

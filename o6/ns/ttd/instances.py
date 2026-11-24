@@ -98,20 +98,25 @@ o6.hasEncoding(ttd_datypes.TestProcedureIdDataType, o6.ns["ns=ttd;i=5034"])
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=ttd;i=6002",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6003", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6003", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
     nodeId="ns=ttd;i=5036",
     browseName="ns=machinery_jobs;JobOrderControl",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6008", browseName="ns=isa95_jobcontrol_v2;MaxDownloadableJobOrders", dataType=o6.UInt16)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6008", browseName="ns=isa95_jobcontrol_v2;MaxDownloadableJobOrders", modellingRule="Mandatory", dataType=o6.UInt16)
+        ),
         o6.hasComponent(o6.ns["ns=ttd;i=6002"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=ttd;i=6004",
                 browseName="ns=isa95_jobcontrol_v2;EquipmentID",
                 description="Defines a read-only set of Equipment Class IDs and Equipment IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -122,6 +127,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=ttd;i=6005",
                 browseName="ns=isa95_jobcontrol_v2;JobOrderList",
                 description="Defines a read-only list of job order information available from the server.",
+                modellingRule="Mandatory",
                 dataType=isa95_jobcontrol_v2.datatypes.ISA95JobOrderAndStateDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -132,6 +138,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=ttd;i=6006",
                 browseName="ns=isa95_jobcontrol_v2;MaterialClassID",
                 description="Defines a read-only set of Material Classes IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -142,6 +149,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=ttd;i=6007",
                 browseName="ns=isa95_jobcontrol_v2;MaterialDefinitionID",
                 description="Defines a read-only set of Material Classes IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -152,6 +160,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=ttd;i=6009",
                 browseName="ns=isa95_jobcontrol_v2;PersonnelID",
                 description="Defines a read-only set of Personnel IDs and Person IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -162,6 +171,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=ttd;i=6010",
                 browseName="ns=isa95_jobcontrol_v2;PhysicalAssetID",
                 description="Defines a read-only set of Physical Asset Class IDs and Physical Asset IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -172,6 +182,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=ttd;i=6011",
                 browseName="ns=isa95_jobcontrol_v2;WorkMaster",
                 description="Defines a read-only set of work master IDs that may be specified in a job order, and the read-only set of parameters that may be specified for a specific work master.",
+                modellingRule="Mandatory",
                 dataType=isa95_jobcontrol_v2.datatypes.ISA95WorkMasterDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -182,11 +193,12 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=ttd;i=6001",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6027", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6027", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryOperationModeStateMachineType(
-    nodeId="ns=ttd;i=5001", browseName="ns=machinery;MachineryOperationMode", references=[o6.hasComponent(o6.ns["ns=ttd;i=6001"])]
+    nodeId="ns=ttd;i=5001", browseName="ns=machinery;MachineryOperationMode", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=ttd;i=6001"])]
 )
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=ttd;i=6028",
@@ -195,31 +207,60 @@ ns0.vartypes.BaseDataVariableType(
     references=[
         o6.reference(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=ttd;i=6029", browseName="ns=machinery_result;HasTransferableDataOnFile", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+                nodeId="ns=ttd;i=6029", browseName="ns=machinery_result;HasTransferableDataOnFile", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
             ),
             "i=24136",
         ),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6030", browseName="ns=machinery_result;IsPartial", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1), "i=24136"
-        ),
-        o6.reference(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=ttd;i=6031", browseName="ns=machinery_result;CreationTime", dataType=ns0.datatypes.UtcTime, accessLevel=3, userAccessLevel=1
+                nodeId="ns=ttd;i=6030", browseName="ns=machinery_result;IsPartial", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
             ),
             "i=24136",
         ),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6032", browseName="ns=ttd;ProductInstanceUri", dataType=o6.String, accessLevel=3, userAccessLevel=1), "i=24136"
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ttd;i=6031", browseName="ns=machinery_result;CreationTime", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime, accessLevel=3, userAccessLevel=1
+            ),
+            "i=24136",
         ),
-        o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6033", browseName="ns=ttd;TesterSampleResultId", dataType=o6.String, accessLevel=3, userAccessLevel=1), "i=24136"
-        ),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6034", browseName="ns=ttd;SampleId", dataType=o6.String, accessLevel=3, userAccessLevel=1), "i=24136"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6035", browseName="ns=ttd;TesterJobId", dataType=o6.String, accessLevel=3, userAccessLevel=1), "i=24136"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6036", browseName="ns=ttd;CanBeDeleted", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1), "i=24136"),
         o6.reference(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=ttd;i=6037", browseName="ns=ttd;JobOrder", dataType=isa95_jobcontrol_v2.datatypes.ISA95JobOrderDataType, accessLevel=3, userAccessLevel=1
+                nodeId="ns=ttd;i=6032", browseName="ns=ttd;ProductInstanceUri", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            ),
+            "i=24136",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ttd;i=6033", browseName="ns=ttd;TesterSampleResultId", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            ),
+            "i=24136",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ttd;i=6034", browseName="ns=ttd;SampleId", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            ),
+            "i=24136",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ttd;i=6035", browseName="ns=ttd;TesterJobId", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            ),
+            "i=24136",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ttd;i=6036", browseName="ns=ttd;CanBeDeleted", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            ),
+            "i=24136",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ttd;i=6037",
+                browseName="ns=ttd;JobOrder",
+                modellingRule="Mandatory",
+                dataType=isa95_jobcontrol_v2.datatypes.ISA95JobOrderDataType,
+                accessLevel=3,
+                userAccessLevel=1,
             ),
             "i=24136",
         ),
@@ -231,36 +272,66 @@ o6.reference(ttd_vartypes.TTDResultType, ns0.reftypes.HasStructuredComponent, o6
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=ttd;i=6039",
     browseName="ns=machinery_result;ResultMetaData",
+    modellingRule="Mandatory",
     references=[
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6040", browseName="ns=ttd;CanBeDeleted", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1), "i=24136"),
         o6.reference(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=ttd;i=6041", browseName="ns=machinery_result;CreationTime", dataType=ns0.datatypes.UtcTime, accessLevel=3, userAccessLevel=1
+                nodeId="ns=ttd;i=6040", browseName="ns=ttd;CanBeDeleted", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
             ),
             "i=24136",
         ),
         o6.reference(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=ttd;i=6042", browseName="ns=machinery_result;HasTransferableDataOnFile", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+                nodeId="ns=ttd;i=6041", browseName="ns=machinery_result;CreationTime", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime, accessLevel=3, userAccessLevel=1
             ),
             "i=24136",
-        ),
-        o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6043", browseName="ns=machinery_result;IsPartial", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1), "i=24136"
         ),
         o6.reference(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=ttd;i=6044", browseName="ns=ttd;JobOrder", dataType=isa95_jobcontrol_v2.datatypes.ISA95JobOrderDataType, accessLevel=3, userAccessLevel=1
+                nodeId="ns=ttd;i=6042", browseName="ns=machinery_result;HasTransferableDataOnFile", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
             ),
             "i=24136",
         ),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6045", browseName="ns=ttd;ProductInstanceUri", dataType=o6.String, accessLevel=3, userAccessLevel=1), "i=24136"
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ttd;i=6043", browseName="ns=machinery_result;IsPartial", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            ),
+            "i=24136",
         ),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6046", browseName="ns=ttd;SampleId", dataType=o6.String, accessLevel=3, userAccessLevel=1), "i=24136"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6047", browseName="ns=ttd;TesterJobId", dataType=o6.String, accessLevel=3, userAccessLevel=1), "i=24136"),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6048", browseName="ns=ttd;TesterSampleResultId", dataType=o6.String, accessLevel=3, userAccessLevel=1), "i=24136"
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ttd;i=6044",
+                browseName="ns=ttd;JobOrder",
+                modellingRule="Mandatory",
+                dataType=isa95_jobcontrol_v2.datatypes.ISA95JobOrderDataType,
+                accessLevel=3,
+                userAccessLevel=1,
+            ),
+            "i=24136",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ttd;i=6045", browseName="ns=ttd;ProductInstanceUri", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            ),
+            "i=24136",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ttd;i=6046", browseName="ns=ttd;SampleId", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            ),
+            "i=24136",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ttd;i=6047", browseName="ns=ttd;TesterJobId", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            ),
+            "i=24136",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ttd;i=6048", browseName="ns=ttd;TesterSampleResultId", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            ),
+            "i=24136",
         ),
     ],
     dataType=machinery_result.datatypes.ResultMetaDataType,
@@ -378,34 +449,61 @@ typeDictionary_2 = ns0.vartypes.DataTypeDictionaryType(
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=ttd;i=6121",
     browseName="ns=machinery_result;ResultMetaData",
+    modellingRule="Mandatory",
     references=[
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6122", browseName="ns=ttd;CanBeDeleted", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1), "i=24136"),
         o6.reference(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=ttd;i=6123", browseName="ns=machinery_result;CreationTime", dataType=ns0.datatypes.UtcTime, accessLevel=3, userAccessLevel=1
+                nodeId="ns=ttd;i=6122", browseName="ns=ttd;CanBeDeleted", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
             ),
             "i=24136",
         ),
         o6.reference(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=ttd;i=6124", browseName="ns=machinery_result;HasTransferableDataOnFile", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+                nodeId="ns=ttd;i=6123", browseName="ns=machinery_result;CreationTime", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime, accessLevel=3, userAccessLevel=1
             ),
             "i=24136",
         ),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6125", browseName="ns=machinery_result;IsPartial", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1), "i=24136"
-        ),
-        o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6126", browseName="ns=ttd;JobOrder", dataType=ttd_datypes.JobOrderDataType, accessLevel=3, userAccessLevel=1),
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ttd;i=6124", browseName="ns=machinery_result;HasTransferableDataOnFile", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            ),
             "i=24136",
         ),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6127", browseName="ns=ttd;ProductInstanceUri", dataType=o6.String, accessLevel=3, userAccessLevel=1), "i=24136"
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ttd;i=6125", browseName="ns=machinery_result;IsPartial", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            ),
+            "i=24136",
         ),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6128", browseName="ns=ttd;SampleId", dataType=o6.String, accessLevel=3, userAccessLevel=1), "i=24136"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6129", browseName="ns=ttd;TesterJobId", dataType=o6.String, accessLevel=3, userAccessLevel=1), "i=24136"),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6130", browseName="ns=ttd;TesterSampleResultId", dataType=o6.String, accessLevel=3, userAccessLevel=1), "i=24136"
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ttd;i=6126", browseName="ns=ttd;JobOrder", modellingRule="Mandatory", dataType=ttd_datypes.JobOrderDataType, accessLevel=3, userAccessLevel=1
+            ),
+            "i=24136",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ttd;i=6127", browseName="ns=ttd;ProductInstanceUri", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            ),
+            "i=24136",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ttd;i=6128", browseName="ns=ttd;SampleId", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            ),
+            "i=24136",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ttd;i=6129", browseName="ns=ttd;TesterJobId", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            ),
+            "i=24136",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=ttd;i=6130", browseName="ns=ttd;TesterSampleResultId", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            ),
+            "i=24136",
         ),
     ],
     dataType=machinery_result.datatypes.ResultMetaDataType,
@@ -433,6 +531,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=ttd;i=6132",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -441,6 +540,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=ttd;i=6133",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -449,6 +549,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=ttd;i=6134",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -458,19 +559,34 @@ o6.reference(ttd_objtypes.TextileTestingDeviceType, ns0.reftypes.HasAddIn, o6.ns
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=ttd;i=6136",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6137", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6137", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
-machinery.objtypes.MachineryItemState_StateMachineType(nodeId="ns=ttd;i=5055", browseName="ns=machinery;MachineryItemState", references=[o6.hasComponent(o6.ns["ns=ttd;i=6136"])])
+machinery.objtypes.MachineryItemState_StateMachineType(
+    nodeId="ns=ttd;i=5055", browseName="ns=machinery;MachineryItemState", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=ttd;i=6136"])]
+)
 ttd_objtypes.MachineStatisticsType(
     nodeId="ns=ttd;i=5049",
     browseName="ns=ttd;MachineStatistics",
     modellingRule="Mandatory",
     references=[
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6141", browseName="ns=ttd;TotalExecutingTime", dataType=ns0.datatypes.Duration), "ns=ia;i=4002"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6142", browseName="ns=ttd;TotalNotAvailableTime", dataType=ns0.datatypes.Duration), "ns=ia;i=4002"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6143", browseName="ns=ttd;TotalNotExecutingTime", dataType=ns0.datatypes.Duration), "ns=ia;i=4002"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6144", browseName="ns=ttd;TotalOutOfServiceTime", dataType=ns0.datatypes.Duration), "ns=ia;i=4002"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6141", browseName="ns=ttd;TotalExecutingTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration),
+            "ns=ia;i=4002",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6142", browseName="ns=ttd;TotalNotAvailableTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration),
+            "ns=ia;i=4002",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6143", browseName="ns=ttd;TotalNotExecutingTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration),
+            "ns=ia;i=4002",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=ttd;i=6144", browseName="ns=ttd;TotalOutOfServiceTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration),
+            "ns=ia;i=4002",
+        ),
     ],
 )
 o6.reference(ttd_objtypes.TextileTestingDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=ttd;i=5049"])
@@ -484,7 +600,7 @@ http_opcfoundation_org_UA_TTD_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6150", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=ttd;i=6151", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=ttd;i=6151", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
@@ -543,6 +659,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=ttd;i=7008",
     browseName="ns=isa95_jobcontrol_v2;RequestJobResponseByJobOrderID",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6012"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6013"]),
 )
@@ -595,7 +712,13 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=ttd;i=7010", browseName="GenerateFileForRead", inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6113"]), outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6114"]))
+o6.call(
+    nodeId="ns=ttd;i=7010",
+    browseName="GenerateFileForRead",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6113"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6114"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=ttd;i=6116",
@@ -619,7 +742,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=ttd;i=7011", browseName="CloseAndCommit", inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6116"]), outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6117"]))
+o6.call(
+    nodeId="ns=ttd;i=7011",
+    browseName="CloseAndCommit",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6116"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6117"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=ttd;i=6118",
@@ -646,14 +775,20 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=ttd;i=7012", browseName="GenerateFileForWrite", inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6118"]), outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6119"]))
+o6.call(
+    nodeId="ns=ttd;i=7012",
+    browseName="GenerateFileForWrite",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6118"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6119"]),
+)
 
 machinery_result.objtypes.ResultTransferType(
     nodeId="ns=ttd;i=5043",
     browseName="ns=machinery_result;ResultTransfer",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6115", browseName="ClientProcessingTimeout", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6115", browseName="ClientProcessingTimeout", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
         o6.hasComponent(o6.ns["ns=ttd;i=7010"]),
         o6.hasComponent(o6.ns["ns=ttd;i=7011"]),
         o6.hasComponent(o6.ns["ns=ttd;i=7012"]),
@@ -710,15 +845,22 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=ttd;i=7013",
     browseName="ns=isa95_jobcontrol_v2;RequestJobResponseByJobOrderState",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6014"]),
     outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6015"]),
 )
 
 isa95_jobcontrol_v2.objtypes.ISA95JobResponseProviderObjectType(
-    nodeId="ns=ttd;i=5037", browseName="ns=machinery_jobs;JobOrderResults", references=[o6.hasComponent(o6.ns["ns=ttd;i=7008"]), o6.hasComponent(o6.ns["ns=ttd;i=7013"])]
+    nodeId="ns=ttd;i=5037",
+    browseName="ns=machinery_jobs;JobOrderResults",
+    modellingRule="Mandatory",
+    references=[o6.hasComponent(o6.ns["ns=ttd;i=7008"]), o6.hasComponent(o6.ns["ns=ttd;i=7013"])],
 )
 machinery_jobs.objtypes.JobManagementType(
-    nodeId="ns=ttd;i=5035", browseName="ns=machinery_jobs;JobManagement", references=[o6.hasComponent(o6.ns["ns=ttd;i=5036"]), o6.hasComponent(o6.ns["ns=ttd;i=5037"])]
+    nodeId="ns=ttd;i=5035",
+    browseName="ns=machinery_jobs;JobManagement",
+    modellingRule="Mandatory",
+    references=[o6.hasComponent(o6.ns["ns=ttd;i=5036"]), o6.hasComponent(o6.ns["ns=ttd;i=5037"])],
 )
 
 
@@ -733,7 +875,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RecipeIds", dataType=o6.NodeId("ns=ttd;i=3003"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=ttd;i=7014", browseName="ns=ttd;GetRecipeIds", outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6145"]))
+o6.call(nodeId="ns=ttd;i=7014", browseName="ns=ttd;GetRecipeIds", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6145"]))
 
 ttd_objtypes.RecipeManagementType(
     nodeId="ns=ttd;i=5051",
@@ -742,7 +884,14 @@ ttd_objtypes.RecipeManagementType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=ttd;i=6017", browseName="ns=ttd;RecipeIds", dataType=ttd_datypes.RecipeIdDataType, valueRank=1, arrayDimensions=[0], accessLevel=3, userAccessLevel=1
+                nodeId="ns=ttd;i=6017",
+                browseName="ns=ttd;RecipeIds",
+                modellingRule="Mandatory",
+                dataType=ttd_datypes.RecipeIdDataType,
+                valueRank=1,
+                arrayDimensions=[0],
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=ttd;i=7014"]),
@@ -812,7 +961,13 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=ttd;i=7019", browseName="ns=machinery_result;GetResultById", inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6095"]), outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6096"]))
+o6.call(
+    nodeId="ns=ttd;i=7019",
+    browseName="ns=machinery_result;GetResultById",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6095"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6096"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=ttd;i=6098",
@@ -836,7 +991,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=ttd;i=7020", browseName="CloseAndCommit", inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6098"]), outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6099"]))
+o6.call(
+    nodeId="ns=ttd;i=7020",
+    browseName="CloseAndCommit",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6098"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6099"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=ttd;i=6100",
@@ -886,7 +1047,13 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=ttd;i=7021", browseName="GenerateFileForRead", inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6100"]), outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6101"]))
+o6.call(
+    nodeId="ns=ttd;i=7021",
+    browseName="GenerateFileForRead",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6100"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6101"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=ttd;i=6102",
@@ -913,13 +1080,20 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=ttd;i=7022", browseName="GenerateFileForWrite", inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6102"]), outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6103"]))
+o6.call(
+    nodeId="ns=ttd;i=7022",
+    browseName="GenerateFileForWrite",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6102"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=ttd;i=6103"]),
+)
 
 machinery_result.objtypes.ResultTransferType(
     nodeId="ns=ttd;i=5047",
     browseName="ns=machinery_result;ResultTransfer",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6097", browseName="ClientProcessingTimeout", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ttd;i=6097", browseName="ClientProcessingTimeout", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
         o6.hasComponent(o6.ns["ns=ttd;i=7020"]),
         o6.hasComponent(o6.ns["ns=ttd;i=7021"]),
         o6.hasComponent(o6.ns["ns=ttd;i=7022"]),
@@ -928,8 +1102,9 @@ machinery_result.objtypes.ResultTransferType(
 ttd_objtypes.TTDResultManagementType(
     nodeId="ns=ttd;i=5041",
     browseName="ns=machinery_result;ResultManagement",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=ttd;i=5046", browseName="ns=machinery_result;Results")),
+        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=ttd;i=5046", browseName="ns=machinery_result;Results", modellingRule="Mandatory")),
         o6.hasComponent(o6.ns["ns=ttd;i=5047"]),
         o6.hasComponent(o6.ns["ns=ttd;i=7019"]),
     ],

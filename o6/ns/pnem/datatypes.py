@@ -33,57 +33,57 @@ else:
     _VariableNode = object
 
 
-@o6.datatype(nodeId="ns=pnem;i=3002", browseName="StandbyModeTransitionDataType", defaultEncodingId="ns=pnem;i=5001")
+@o6.datatype(nodeId="ns=pnem;i=3002", browseName="ns=pnem;StandbyModeTransitionDataType", defaultEncodingId="ns=pnem;i=5001")
 class StandbyModeTransitionDataType(ns0.datatypes.Structure):
-    iDDestination: o6.Byte
-    currentTimeToDestination: o6.Double
-    currentTimeToOperate: o6.Double
-    energyConsumptionToDestination: o6.Float
+    iDDestination: o6.Byte = o6.field(name="IDDestination")
+    currentTimeToDestination: o6.Double = o6.field(name="CurrentTimeToDestination")
+    currentTimeToOperate: o6.Double = o6.field(name="CurrentTimeToOperate")
+    energyConsumptionToDestination: o6.Float = o6.field(name="EnergyConsumptionToDestination")
 
 
-@o6.datatype(nodeId="ns=pnem;i=3003", browseName="EnergyStateInformationDataType", defaultEncodingId="ns=pnem;i=5004")
+@o6.datatype(nodeId="ns=pnem;i=3003", browseName="ns=pnem;EnergyStateInformationDataType", defaultEncodingId="ns=pnem;i=5004")
 class EnergyStateInformationDataType(ns0.datatypes.Structure):
-    iDSource: o6.Byte
-    iDDestination: o6.Byte
-    regularTimeToOperate: o6.Double
-    modePowerConsumption: o6.Float
+    iDSource: o6.Byte = o6.field(name="IDSource")
+    iDDestination: o6.Byte = o6.field(name="IDDestination")
+    regularTimeToOperate: o6.Double = o6.field(name="RegularTimeToOperate")
+    modePowerConsumption: o6.Float = o6.field(name="ModePowerConsumption")
 
 
-@o6.datatype(nodeId="ns=pnem;i=3004", browseName="PeVersionDataType", defaultEncodingId="ns=pnem;i=5007")
+@o6.datatype(nodeId="ns=pnem;i=3004", browseName="ns=pnem;PeVersionDataType", defaultEncodingId="ns=pnem;i=5007")
 class PeVersionDataType(ns0.datatypes.Structure):
-    majorVersion: o6.Byte
-    minorVersion: o6.Byte
-    revision: o6.Byte
+    majorVersion: o6.Byte = o6.field(name="MajorVersion")
+    minorVersion: o6.Byte = o6.field(name="MinorVersion")
+    revision: o6.Byte = o6.field(name="Revision")
 
 
-@o6.datatype(nodeId="ns=pnem;i=3005", browseName="AcPeDataType", defaultEncodingId="ns=pnem;i=5010")
+@o6.datatype(nodeId="ns=pnem;i=3005", browseName="ns=pnem;AcPeDataType", defaultEncodingId="ns=pnem;i=5010")
 class AcPeDataType(ns0.datatypes.Structure):
-    a: o6.Float
-    b: o6.Float
-    c: o6.Float
+    a: o6.Float = o6.field(name="A")
+    b: o6.Float = o6.field(name="B")
+    c: o6.Float = o6.field(name="C")
 
 
-@o6.datatype(nodeId="ns=pnem;i=3006", browseName="AcPpDataType", defaultEncodingId="ns=pnem;i=5013")
+@o6.datatype(nodeId="ns=pnem;i=3006", browseName="ns=pnem;AcPpDataType", defaultEncodingId="ns=pnem;i=5013")
 class AcPpDataType(ns0.datatypes.Structure):
-    a_b: o6.Float
-    b_c: o6.Float
-    c_a: o6.Float
+    a_b: o6.Float = o6.field(name="A_b")
+    b_c: o6.Float = o6.field(name="B_c")
+    c_a: o6.Float = o6.field(name="C_a")
 
 
-@o6.enumtype(nodeId="ns=pnem;i=3007", browseName="PeClassEnumeration")
+@o6.enumtype(nodeId="ns=pnem;i=3007", browseName="ns=pnem;PeClassEnumeration")
 class PeClassEnumeration(ns0.datatypes.Enumeration):
     PE_CLASS1 = o6.enumfield(0, name="PE_CLASS1")
     PE_CLASS2 = o6.enumfield(1, name="PE_CLASS2")
     PE_CLASS3 = o6.enumfield(2, name="PE_CLASS3")
 
 
-@o6.enumtype(nodeId="ns=pnem;i=3008", browseName="PeSubclassEnumeration")
+@o6.enumtype(nodeId="ns=pnem;i=3008", browseName="ns=pnem;PeSubclassEnumeration")
 class PeSubclassEnumeration(ns0.datatypes.Enumeration):
     PE_SUBCLASS1 = o6.enumfield(0, name="PE_SUBCLASS1")
     PE_SUBCLASS2 = o6.enumfield(1, name="PE_SUBCLASS2")
 
 
-@o6.enumtype(nodeId="ns=pnem;i=3009", browseName="AccuracyClassEnumeration")
+@o6.enumtype(nodeId="ns=pnem;i=3009", browseName="ns=pnem;AccuracyClassEnumeration")
 class AccuracyClassEnumeration(ns0.datatypes.Enumeration):
     ACCURACY_CLASS_0 = o6.enumfield(0, name="ACCURACY_CLASS_0")
     ACCURACY_CLASS_1 = o6.enumfield(1, name="ACCURACY_CLASS_1")
@@ -103,7 +103,7 @@ class AccuracyClassEnumeration(ns0.datatypes.Enumeration):
     ACCURACY_CLASS_15 = o6.enumfield(15, name="ACCURACY_CLASS_15")
 
 
-@o6.enumtype(nodeId="ns=pnem;i=3010", browseName="AccuracyDomainEnumeration")
+@o6.enumtype(nodeId="ns=pnem;i=3010", browseName="ns=pnem;AccuracyDomainEnumeration")
 class AccuracyDomainEnumeration(ns0.datatypes.Enumeration):
     ACCURACY_DOMAIN_RESERVED = o6.enumfield(0, name="ACCURACY_DOMAIN_RESERVED")
     ACCURACY_DOMAIN_PERCENT_FULL_SCALE = o6.enumfield(1, name="ACCURACY_DOMAIN_PERCENT_FULL_SCALE")

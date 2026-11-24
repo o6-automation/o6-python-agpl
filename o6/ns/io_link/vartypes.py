@@ -37,10 +37,10 @@ else:
 @o6.variabletype(nodeId="ns=io_link;i=2002", browseName="ns=io_link;ProcessDataVariableType", displayName="ProcessDataVariableType", valueRank=o6.ValueRank.ARRAY_1D)
 class ProcessDataVariableType(ns0.vartypes.BaseDataVariableType):
     pDDescriptor: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6146", browseName="ns=io_link;PDDescriptor", dataType=o6.Byte, valueRank=2)
+        ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6146", browseName="ns=io_link;PDDescriptor", modellingRule="Optional", dataType=o6.Byte, valueRank=2)
     )
     processDataLength: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6147", browseName="ns=io_link;ProcessDataLength", dataType=o6.Byte, value=0)
+        ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6147", browseName="ns=io_link;ProcessDataLength", modellingRule="Mandatory", dataType=o6.Byte, value=0)
     )
 
 

@@ -41,7 +41,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="Message", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
 logAuditTrailMessage = o6.call(nodeId="ns=fdi;i=92", browseName="ns=fdi;LogAuditTrailMessage", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=93"]))
@@ -94,7 +94,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="ActionName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
         ns0.datatypes.Argument(name="MethodArguments", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
@@ -107,7 +107,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="ActionNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
         ns0.datatypes.Argument(name="InvokeActionError", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
@@ -122,7 +122,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="ActionNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
         ns0.datatypes.Argument(name="Response", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
@@ -135,7 +135,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="RespondActionError", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi;i=187", browseName="ns=fdi;RespondAction", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=188"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=189"]))
@@ -147,7 +147,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="ActionNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
@@ -157,7 +157,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="AbortActionError", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
 o6.call(nodeId="ns=fdi;i=190", browseName="ns=fdi;AbortAction", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=191"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=192"]))
@@ -175,7 +175,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.EnumValueType,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("ModalWindow", "\n                ")),
         ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("NonModalWindow", "\n                ")),
@@ -190,7 +190,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.EnumValueType,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("Window", "\n                ")),
         ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("Dialog", "\n                ")),
@@ -260,12 +260,12 @@ http_fdi_cooperation_com_OPCUA_FDI5_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi;i=15005", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=fdi;i=15006", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=fdi;i=15006", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=fdi;i=15007", browseName="StaticNumericNodeIdRange", dataType=ns0.datatypes.NumericRange, valueRank=1, arrayDimensions=[1], value=["1:65535"]
+                nodeId="ns=fdi;i=15007", browseName="StaticNumericNodeIdRange", dataType=ns0.datatypes.NumericRange, valueRank=1, arrayDimensions=[0], value=["1:65535"]
             )
         ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdi;i=15008", browseName="StaticStringNodeIdPattern", dataType=o6.String, value="\n      ")),

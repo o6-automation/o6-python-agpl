@@ -33,31 +33,31 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=padim;i=1156", browseName="ResetModeEnum")
+@o6.enumtype(nodeId="ns=padim;i=1156", browseName="ns=padim;ResetModeEnum")
 class ResetModeEnum(ns0.datatypes.Enumeration):
     APPLICATION = o6.enumfield(1, name="Application")
     COMMUNICATION = o6.enumfield(2712, name="Communication")
     FACTORY = o6.enumfield(2713, name="Factory")
 
 
-@o6.enumtype(nodeId="ns=padim;i=1158", browseName="ExecutionModeEnum")
+@o6.enumtype(nodeId="ns=padim;i=1158", browseName="ns=padim;ExecutionModeEnum")
 class ExecutionModeEnum(ns0.datatypes.Enumeration):
     START = o6.enumfield(2, name="Start")
     ABORT = o6.enumfield(255, name="Abort")
 
 
-@o6.enumtype(nodeId="ns=padim;i=1276", browseName="PatDictionaryEnum")
+@o6.enumtype(nodeId="ns=padim;i=1276", browseName="ns=padim;PatDictionaryEnum")
 class PatDictionaryEnum(ns0.datatypes.Enumeration):
     CAS = o6.enumfield(0, name="CAS")
     PAT = o6.enumfield(1, name="PAT")
     USER_DEFINED = o6.enumfield(2, name="User-defined")
 
 
-@o6.datatype(nodeId="ns=padim;i=1275", browseName="ChemicalSubstanceDataType", defaultEncodingId="ns=padim;i=1277")
+@o6.datatype(nodeId="ns=padim;i=1275", browseName="ns=padim;ChemicalSubstanceDataType", defaultEncodingId="ns=padim;i=1277")
 class ChemicalSubstanceDataType(ns0.datatypes.Structure):
-    patDictionary: PatDictionaryEnum
-    label: o6.LocalizedText
-    id: o6.LocalizedText
+    patDictionary: PatDictionaryEnum = o6.field(name="PatDictionary")
+    label: o6.LocalizedText = o6.field(name="Label")
+    id: o6.LocalizedText = o6.field(name="Id")
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, irdi, ns0

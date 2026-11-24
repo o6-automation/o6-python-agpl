@@ -36,13 +36,13 @@ else:
 
 @o6.datatype(
     nodeId="ns=mining;i=3002",
-    browseName="LongwallShieldOffsetDataType",
+    browseName="ns=mining;LongwallShieldOffsetDataType",
     description="The LongwallShieldOffsetDataType describes a tuple containing a roof support shield number and its corresponding offset",
     defaultEncodingId="ns=mining;i=5001",
 )
 class LongwallShieldOffsetDataType(ns0.datatypes.Structure):
-    shieldNumber: o6.UInt16
-    shieldOffset: o6.Double
+    shieldNumber: o6.UInt16 = o6.field(name="ShieldNumber")
+    shieldOffset: o6.Double = o6.field(name="ShieldOffset")
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ia, machinery, ns0

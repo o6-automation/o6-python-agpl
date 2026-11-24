@@ -60,8 +60,8 @@ class FiltrationType(ns0.objtypes.BaseObjectType):
     monitoring: ns0.objtypes.FolderType
 
 
-ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5008", browseName="ns=machinery;MachineryBuildingBlocks")
-ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5011", browseName="ns=machinery;MachineryBuildingBlocks")
+ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5008", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
+ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5011", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
 
 
 @o6.objecttype(nodeId="ns=shotblasting;i=1008", browseName="ns=shotblasting;BlasterType", displayName="BlasterType")
@@ -71,7 +71,7 @@ class BlasterType(ns0.objtypes.BaseObjectType):
     monitoring: ns0.objtypes.FolderType
 
 
-ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5020", browseName="ns=machinery;MachineryBuildingBlocks")
+ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5020", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
 
 
 @o6.objecttype(nodeId="ns=shotblasting;i=1017", browseName="ns=shotblasting;PressurisedBoilerType", displayName="PressurisedBoilerType")
@@ -81,7 +81,7 @@ class PressurisedBoilerType(ns0.objtypes.BaseObjectType):
     monitoring: ns0.objtypes.FolderType
 
 
-ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5023", browseName="ns=machinery;MachineryBuildingBlocks")
+ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5023", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
 
 
 @o6.objecttype(nodeId="ns=shotblasting;i=1005", browseName="ns=shotblasting;ConveyorType", displayName="ConveyorType")
@@ -96,7 +96,9 @@ class ShotBlastChamberType(ns0.objtypes.BaseObjectType):
     components: machinery.objtypes.MachineComponentsType
     identification: machinery.objtypes.MachineIdentificationType
     loadingState: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6014", browseName="ns=shotblasting;LoadingState", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=shotblasting;i=6014", browseName="ns=shotblasting;LoadingState", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+        )
     )
     machineryBuildingBlocks: ns0.objtypes.FolderType = o6.hasComponent(o6.ns["ns=shotblasting;i=5008"])
 
@@ -105,29 +107,45 @@ class ShotBlastChamberType(ns0.objtypes.BaseObjectType):
 class ShotBlastMediaType(ns0.objtypes.BaseObjectType):
     actualParticleSizeRange: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=shotblasting;i=6096", browseName="ns=shotblasting;ActualParticleSizeRange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            nodeId="ns=shotblasting;i=6096",
+            browseName="ns=shotblasting;ActualParticleSizeRange",
+            modellingRule="Optional",
+            dataType=ns0.datatypes.Range,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     nominalParticleSizeAverage: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=shotblasting;i=6009", browseName="ns=shotblasting;NominalParticleSizeAverage", dataType=o6.Double, accessLevel=3, userAccessLevel=1
+            nodeId="ns=shotblasting;i=6009", browseName="ns=shotblasting;NominalParticleSizeAverage", modellingRule="Optional", dataType=o6.Double, accessLevel=3, userAccessLevel=1
         )
     )
     nominalParticleSizeRange: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=shotblasting;i=6095", browseName="ns=shotblasting;NominalParticleSizeRange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+            nodeId="ns=shotblasting;i=6095",
+            browseName="ns=shotblasting;NominalParticleSizeRange",
+            modellingRule="Optional",
+            dataType=ns0.datatypes.Range,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     shotBlastMediaBatch: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6134", browseName="ns=shotblasting;ShotBlastMediaBatch", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=shotblasting;i=6134", browseName="ns=shotblasting;ShotBlastMediaBatch", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
     shotBlastMediaHardnessAverage: ns0.vartypes.BaseDataVariableType | None
     shotBlastMediaHardnessRange: ns0.vartypes.BaseDataVariableType | None
     shotBlastMediaManufacturer: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6008", browseName="ns=shotblasting;ShotBlastMediaManufacturer", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=shotblasting;i=6008", browseName="ns=shotblasting;ShotBlastMediaManufacturer", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
     shotBlastMediaName: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6007", browseName="ns=shotblasting;ShotBlastMediaName", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=shotblasting;i=6007", browseName="ns=shotblasting;ShotBlastMediaName", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -137,7 +155,9 @@ class ShotBlastMachineType(ns0.objtypes.BaseObjectType):
     identification: machinery.objtypes.MachineIdentificationType
     machineryBuildingBlocks: ns0.objtypes.FolderType
     monitoring: ns0.objtypes.FolderType | None
-    shotBlastMedia: ShotBlastMediaType | None = o6.hasComponent(ShotBlastMediaType(nodeId="ns=shotblasting;i=5003", browseName="ns=shotblasting;ShotBlastMedia"))
+    shotBlastMedia: ShotBlastMediaType | None = o6.hasComponent(
+        ShotBlastMediaType(nodeId="ns=shotblasting;i=5003", browseName="ns=shotblasting;ShotBlastMedia", modellingRule="Optional")
+    )
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ia, isa95_jobcontrol_v2, machinery, machinery_jobs, ns0

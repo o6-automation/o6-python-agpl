@@ -33,7 +33,7 @@ else:
 
 @o6.enumtype(
     nodeId="ns=scheduler;i=74",
-    browseName="Month",
+    browseName="ns=scheduler;Month",
     description='This enumeration indicates either a specific Gregorian calendar month, or a relative relationship ("odd", "even", and "unspecified").',
 )
 class Month(ns0.datatypes.Enumeration):
@@ -56,7 +56,7 @@ class Month(ns0.datatypes.Enumeration):
 
 @o6.enumtype(
     nodeId="ns=scheduler;i=76",
-    browseName="DayOfMonth",
+    browseName="ns=scheduler;DayOfMonth",
     description='This enumeration indicates specific days of the month by specific date ("1", "22", and so on) or by relative position ("last day of month", "even day of month", and so on).',
 )
 class DayOfMonth(ns0.datatypes.Enumeration):
@@ -97,7 +97,7 @@ class DayOfMonth(ns0.datatypes.Enumeration):
     EVEN_DAY_OF_MONTH = o6.enumfield(34, name="EvenDayOfMonth")
 
 
-@o6.enumtype(nodeId="ns=scheduler;i=78", browseName="DayOfWeek", description='This enumeration indicates each of the seven days of the week, or "unspecified".')
+@o6.enumtype(nodeId="ns=scheduler;i=78", browseName="ns=scheduler;DayOfWeek", description='This enumeration indicates each of the seven days of the week, or "unspecified".')
 class DayOfWeek(ns0.datatypes.Enumeration):
     UNSPECIFIED = o6.enumfield(0, name="Unspecified")
     MONDAY = o6.enumfield(1, name="Monday")
@@ -111,120 +111,127 @@ class DayOfWeek(ns0.datatypes.Enumeration):
 
 @o6.datatype(
     nodeId="ns=scheduler;i=73",
-    browseName="DateType",
+    browseName="ns=scheduler;DateType",
     description="This structure defines a calendar date. It allows to define a concrete date, e.g. 2022-02-12. By using wildcards, it also allows to define repeating dates, like every Wednesday, every odd day of a month, every 24th of December, every last day of a month in 2023, etc.",
     defaultEncodingId="ns=scheduler;i=90",
 )
 class DateType(ns0.datatypes.Structure):
-    year: o6.UInt16
-    month: Month
-    dayOfMonth: DayOfMonth
-    dayOfWeek: DayOfWeek
+    year: o6.UInt16 = o6.field(name="Year")
+    month: Month = o6.field(name="Month")
+    dayOfMonth: DayOfMonth = o6.field(name="DayOfMonth")
+    dayOfWeek: DayOfWeek = o6.field(name="DayOfWeek")
 
 
 @o6.datatype(
     nodeId="ns=scheduler;i=80",
-    browseName="DateRangeType",
+    browseName="ns=scheduler;DateRangeType",
     description='This structure defines a time span, with absolute start and end dates. The StartDate and EndDate are limited to specific values, i.e., wild cards like odd months are not allowed. The Year field shall not be 0; the Month field shall be a value between 1 to 12; the DayOfMonth field shall be between 1 to 31 and the DayOfMonth field shall be "unspecified".',
     defaultEncodingId="ns=scheduler;i=91",
 )
 class DateRangeType(ns0.datatypes.Structure):
-    startDate: DateType
-    endDate: DateType
+    startDate: DateType = o6.field(name="StartDate")
+    endDate: DateType = o6.field(name="EndDate")
 
 
-@o6.datatype(nodeId="ns=scheduler;i=72", browseName="CalendarEntryType", description="This union that defines various calendar date values", defaultEncodingId="ns=scheduler;i=89")
+@o6.datatype(
+    nodeId="ns=scheduler;i=72",
+    browseName="ns=scheduler;CalendarEntryType",
+    description="This union that defines various calendar date values",
+    defaultEncodingId="ns=scheduler;i=89",
+)
 class CalendarEntryType(ns0.datatypes.Union):
-    date: DateType
-    dateRange: DateRangeType
+    date: DateType = o6.field(name="Date")
+    dateRange: DateRangeType = o6.field(name="DateRange")
 
 
 @o6.datatype(
     nodeId="ns=scheduler;i=71",
-    browseName="SpecialEventPeriodType",
+    browseName="ns=scheduler;SpecialEventPeriodType",
     description="This union contains a calendar entry or a reference to a calendar object",
     defaultEncodingId="ns=scheduler;i=88",
 )
 class SpecialEventPeriodType(ns0.datatypes.Union):
-    calendarEntry: CalendarEntryType
-    calendarReference: o6.NodeId
+    calendarEntry: CalendarEntryType = o6.field(name="CalendarEntry")
+    calendarReference: o6.NodeId = o6.field(name="CalendarReference")
 
 
 @o6.datatype(
     nodeId="ns=scheduler;i=82",
-    browseName="BaseActionType",
+    browseName="ns=scheduler;BaseActionType",
     description="This abstract structure defines the base of an action. The base only contains information, if the last execution of the action was successful.",
     defaultEncodingId="ns=scheduler;i=93",
     isAbstract=True,
 )
 class BaseActionType(ns0.datatypes.Structure):
-    lastActionResult: o6.StatusCode
+    lastActionResult: o6.StatusCode = o6.field(name="LastActionResult")
 
 
 @o6.datatype(
     nodeId="ns=scheduler;i=83",
-    browseName="WriteLocalVariableActionType",
+    browseName="ns=scheduler;WriteLocalVariableActionType",
     description="This structure defines an action to write the value of a Variable managed in the same Server where the action is used.",
     defaultEncodingId="ns=scheduler;i=94",
 )
 class WriteLocalVariableActionType(BaseActionType):
-    lastActionResult: o6.StatusCode
-    variable: o6.NodeId
-    value: Any
+    lastActionResult: o6.StatusCode = o6.field(name="LastActionResult")
+    variable: o6.NodeId = o6.field(name="Variable")
+    value: Any = o6.field(name="Value")
 
 
 @o6.datatype(
     nodeId="ns=scheduler;i=84",
-    browseName="CallLocalMethodActionType",
+    browseName="ns=scheduler;CallLocalMethodActionType",
     description="This structure defines an action to call a Method of an Object managed in the same Server where the action is used.",
     defaultEncodingId="ns=scheduler;i=95",
 )
 class CallLocalMethodActionType(BaseActionType):
-    lastActionResult: o6.StatusCode
-    objectId: o6.NodeId
-    methodId: o6.NodeId
-    inputValues: list[Any]
-    lastOutputValues: list[Any]
+    lastActionResult: o6.StatusCode = o6.field(name="LastActionResult")
+    objectId: o6.NodeId = o6.field(name="ObjectId")
+    methodId: o6.NodeId = o6.field(name="MethodId")
+    inputValues: list[Any] = o6.field(name="InputValues")
+    lastOutputValues: list[Any] = o6.field(name="LastOutputValues")
 
 
-@o6.datatype(nodeId="ns=scheduler;i=85", browseName="TimeType", description="This structure that represents a point in time during a day", defaultEncodingId="ns=scheduler;i=96")
+@o6.datatype(
+    nodeId="ns=scheduler;i=85", browseName="ns=scheduler;TimeType", description="This structure that represents a point in time during a day", defaultEncodingId="ns=scheduler;i=96"
+)
 class TimeType(ns0.datatypes.Structure):
-    hour: o6.Byte
-    minute: o6.Byte
-    second: o6.Byte
+    hour: o6.Byte = o6.field(name="Hour")
+    minute: o6.Byte = o6.field(name="Minute")
+    second: o6.Byte = o6.field(name="Second")
 
 
 @o6.datatype(
     nodeId="ns=scheduler;i=81",
-    browseName="TimeActionsType",
+    browseName="ns=scheduler;TimeActionsType",
     description="This structure contains a time and an array of actions. It is used to define actions to be executed at a specific point in time.",
     defaultEncodingId="ns=scheduler;i=92",
 )
 class TimeActionsType(ns0.datatypes.Structure):
-    time: TimeType
-    actions: list[BaseActionType]
+    time: TimeType = o6.field(name="Time")
+    actions: list[BaseActionType] = o6.field(name="Actions")
 
 
 @o6.datatype(
     nodeId="ns=scheduler;i=70",
-    browseName="SpecialEventType",
+    browseName="ns=scheduler;SpecialEventType",
     description="This structure contains a period, a list of time values, and a priority. It is a means to identify moments in time over one or more days.",
     defaultEncodingId="ns=scheduler;i=87",
 )
 class SpecialEventType(ns0.datatypes.Structure):
-    period: SpecialEventPeriodType
-    listOfTimeActions: list[TimeActionsType]
-    eventPriority: o6.Byte
+    period: SpecialEventPeriodType = o6.field(name="Period")
+    listOfTimeActions: list[TimeActionsType] = o6.field(name="ListOfTimeActions")
+    eventPriority: o6.Byte = o6.field(name="EventPriority")
 
 
 @o6.datatype(
     nodeId="ns=scheduler;i=86",
-    browseName="DailyScheduleType",
+    browseName="ns=scheduler;DailyScheduleType",
     description="This structure defines a sequence of TimeActionsType structures. Each element in the sequence defines a time/actions pair that describes the actions to be executed at a given point in the day.",
     defaultEncodingId="ns=scheduler;i=97",
 )
 class DailyScheduleType(ns0.datatypes.Structure):
-    daySchedule: list[TimeActionsType]
+    daySchedule: list[TimeActionsType] = o6.field(name="DaySchedule")
 
 
 del Any, TYPE_CHECKING, uuid, o6, ns0

@@ -32,37 +32,37 @@ else:
     _VariableNode = object
 
 
-@o6.datatype(nodeId="ns=gpos;i=3003", browseName="3DGeographicCoordinateDataType", description="Represents a geographic coordinate", defaultEncodingId="ns=gpos;i=5014")
+@o6.datatype(nodeId="ns=gpos;i=3003", browseName="ns=gpos;3DGeographicCoordinateDataType", description="Represents a geographic coordinate", defaultEncodingId="ns=gpos;i=5014")
 class ThreeDGeographicCoordinateDataType(ns0.datatypes.Structure):
-    longitude: o6.Double
-    latitude: o6.Double
-    elevation: o6.Double | None
+    longitude: o6.Double = o6.field(name="Longitude")
+    latitude: o6.Double = o6.field(name="Latitude")
+    elevation: o6.Double | None = o6.field(name="Elevation")
 
 
 @o6.datatype(
     nodeId="ns=gpos;i=3005",
-    browseName="GroundControlPointDataType",
+    browseName="ns=gpos;GroundControlPointDataType",
     description="Defines a pair of coordinates - local and global - to allow geo-references from local coordinate to a global coordinate system",
     defaultEncodingId="ns=gpos;i=5008",
 )
 class GroundControlPointDataType(ns0.datatypes.Structure):
-    globalPosition: ThreeDGeographicCoordinateDataType
-    localPosition: ns0.datatypes.ThreeDCartesianCoordinates
+    globalPosition: ThreeDGeographicCoordinateDataType = o6.field(name="GlobalPosition")
+    localPosition: ns0.datatypes.ThreeDCartesianCoordinates = o6.field(name="LocalPosition")
 
 
-@o6.datatype(nodeId="ns=gpos;i=3006", browseName="GlobalPositionDataType", description="Represents a global position", defaultEncodingId="ns=gpos;i=5001")
+@o6.datatype(nodeId="ns=gpos;i=3006", browseName="ns=gpos;GlobalPositionDataType", description="Represents a global position", defaultEncodingId="ns=gpos;i=5001")
 class GlobalPositionDataType(ThreeDGeographicCoordinateDataType):
-    longitude: o6.Double
-    latitude: o6.Double
-    elevation: o6.Double | None
-    accuracy: o6.Double | None
-    floor: o6.Float | None
+    longitude: o6.Double = o6.field(name="Longitude")
+    latitude: o6.Double = o6.field(name="Latitude")
+    elevation: o6.Double | None = o6.field(name="Elevation")
+    accuracy: o6.Double | None = o6.field(name="Accuracy")
+    floor: o6.Float | None = o6.field(name="Floor")
 
 
-@o6.datatype(nodeId="ns=gpos;i=3004", browseName="GlobalLocationDataType", description="Represents a global location", defaultEncodingId="ns=gpos;i=5004")
+@o6.datatype(nodeId="ns=gpos;i=3004", browseName="ns=gpos;GlobalLocationDataType", description="Represents a global location", defaultEncodingId="ns=gpos;i=5004")
 class GlobalLocationDataType(ns0.datatypes.Structure):
-    position: GlobalPositionDataType
-    orientation: ns0.datatypes.ThreeDOrientation | None
+    position: GlobalPositionDataType = o6.field(name="Position")
+    orientation: ns0.datatypes.ThreeDOrientation | None = o6.field(name="Orientation")
 
 
 del Any, TYPE_CHECKING, uuid, o6, ns0, rsl

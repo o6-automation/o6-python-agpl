@@ -32,48 +32,48 @@ else:
     _VariableNode = object
 
 
-@o6.datatype(nodeId="ns=fdi;i=37", browseName="RegistrationParameters", defaultEncodingId="ns=fdi;i=118")
+@o6.datatype(nodeId="ns=fdi;i=37", browseName="ns=fdi;RegistrationParameters", defaultEncodingId="ns=fdi;i=118")
 class RegistrationParameters(ns0.datatypes.Structure):
-    path: ns0.datatypes.RelativePath
-    selectionFlags: o6.UInt32
+    path: ns0.datatypes.RelativePath = o6.field(name="Path")
+    selectionFlags: o6.UInt32 = o6.field(name="SelectionFlags")
 
 
-@o6.datatype(nodeId="ns=fdi;i=38", browseName="RegisteredNode", defaultEncodingId="ns=fdi;i=119")
+@o6.datatype(nodeId="ns=fdi;i=38", browseName="ns=fdi;RegisteredNode", defaultEncodingId="ns=fdi;i=119")
 class RegisteredNode(ns0.datatypes.Structure):
-    nodeStatus: o6.Int32
-    onlineContextNodeId: o6.NodeId
-    onlineDeviceNodeId: o6.NodeId
-    offlineContextNodeId: o6.NodeId
-    offlineDeviceNodeId: o6.NodeId
+    nodeStatus: o6.Int32 = o6.field(name="NodeStatus")
+    onlineContextNodeId: o6.NodeId = o6.field(name="OnlineContextNodeId")
+    onlineDeviceNodeId: o6.NodeId = o6.field(name="OnlineDeviceNodeId")
+    offlineContextNodeId: o6.NodeId = o6.field(name="OfflineContextNodeId")
+    offlineDeviceNodeId: o6.NodeId = o6.field(name="OfflineDeviceNodeId")
 
 
-@o6.datatype(nodeId="ns=fdi;i=39", browseName="RegisterNodesResult", defaultEncodingId="ns=fdi;i=120")
+@o6.datatype(nodeId="ns=fdi;i=39", browseName="ns=fdi;RegisterNodesResult", defaultEncodingId="ns=fdi;i=120")
 class RegisterNodesResult(ns0.datatypes.Structure):
-    status: o6.Int32
-    registeredNodes: list[RegisteredNode]
+    status: o6.Int32 = o6.field(name="Status")
+    registeredNodes: list[RegisteredNode] = o6.field(name="RegisteredNodes")
 
 
-@o6.datatype(nodeId="ns=fdi;i=43", browseName="TransferIncident", defaultEncodingId="ns=fdi;i=121")
+@o6.datatype(nodeId="ns=fdi;i=43", browseName="ns=fdi;TransferIncident", defaultEncodingId="ns=fdi;i=121")
 class TransferIncident(ns0.datatypes.Structure):
-    contextNodeId: o6.NodeId
-    statusCode: o6.StatusCode
-    diagnostics: o6.DiagnosticInfo
+    contextNodeId: o6.NodeId = o6.field(name="ContextNodeId")
+    statusCode: o6.StatusCode = o6.field(name="StatusCode")
+    diagnostics: o6.DiagnosticInfo = o6.field(name="Diagnostics")
 
 
-@o6.datatype(nodeId="ns=fdi;i=44", browseName="ApplyResult", defaultEncodingId="ns=fdi;i=122")
+@o6.datatype(nodeId="ns=fdi;i=44", browseName="ns=fdi;ApplyResult", defaultEncodingId="ns=fdi;i=122")
 class ApplyResult(ns0.datatypes.Structure):
-    status: o6.Int32
-    transferIncidents: list[TransferIncident]
+    status: o6.Int32 = o6.field(name="Status")
+    transferIncidents: list[TransferIncident] = o6.field(name="TransferIncidents")
 
 
-@o6.enumtype(nodeId="ns=fdi;i=194", browseName="WindowModeType")
+@o6.enumtype(nodeId="ns=fdi;i=194", browseName="ns=fdi;WindowModeType")
 class WindowModeType(ns0.datatypes.Enumeration):
     MODAL_WINDOW = o6.enumfield(1, name="ModalWindow")
     NON_MODAL_WINDOW = o6.enumfield(2, name="NonModalWindow")
     UIP = o6.enumfield(3, name="UIP")
 
 
-@o6.enumtype(nodeId="ns=fdi;i=196", browseName="StyleType")
+@o6.enumtype(nodeId="ns=fdi;i=196", browseName="ns=fdi;StyleType")
 class StyleType(ns0.datatypes.Enumeration):
     WINDOW = o6.enumfield(1, name="Window")
     DIALOG = o6.enumfield(2, name="Dialog")

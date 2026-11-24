@@ -45,12 +45,17 @@ else:
 class ZeroPointAdjustmentEventType(ns0.objtypes.BaseEventType):
     zeroPointAdjustmentResult: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=machinery_processvalues;i=6032", browseName="ns=machinery_processvalues;ZeroPointAdjustmentResult", dataType=o6.StatusCode, accessLevel=3, userAccessLevel=1
+            nodeId="ns=machinery_processvalues;i=6032",
+            browseName="ns=machinery_processvalues;ZeroPointAdjustmentResult",
+            modellingRule="Mandatory",
+            dataType=o6.StatusCode,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
 
 
-o6.call(nodeId="ns=machinery_processvalues;i=7001", browseName="ns=padim;ZeroPointAdjustment", displayName="Zero point adjustment")
+o6.call(nodeId="ns=machinery_processvalues;i=7001", browseName="ns=padim;ZeroPointAdjustment", displayName="Zero point adjustment", modellingRule="Optional")
 o6.reference(o6.ns["ns=machinery_processvalues;i=7001"], "i=41", ZeroPointAdjustmentEventType)
 
 

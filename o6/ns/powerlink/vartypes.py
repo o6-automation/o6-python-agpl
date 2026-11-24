@@ -45,12 +45,22 @@ else:
 class PowerlinkRecordType(ns0.vartypes.BaseDataVariableType):
     index: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=85", browseName="ns=powerlink;Index", description="Index of the object in the POWERLINK Object Dictionary", dataType=o6.UInt16, value=0
+            nodeId="ns=powerlink;i=85",
+            browseName="ns=powerlink;Index",
+            description="Index of the object in the POWERLINK Object Dictionary",
+            modellingRule="Mandatory",
+            dataType=o6.UInt16,
+            value=0,
         )
     )
     numberOfEntries: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=86", browseName="ns=powerlink;NumberOfEntries", description="SubIndex 0 of the POWERLINK Object", dataType=o6.Byte, value=0
+            nodeId="ns=powerlink;i=86",
+            browseName="ns=powerlink;NumberOfEntries",
+            description="SubIndex 0 of the POWERLINK Object",
+            modellingRule="Mandatory",
+            dataType=o6.Byte,
+            value=0,
         )
     )
 
@@ -73,11 +83,16 @@ class NMT_ParameterStorage_Type(PowerlinkRecordType):
 )
 class PowerlinkVariableType(ns0.vartypes.BaseDataVariableType):
     defaultValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=powerlink;i=280", browseName="ns=powerlink;DefaultValue", description="Default value of POWERLINK Object")
+        ns0.vartypes.PropertyType(nodeId="ns=powerlink;i=280", browseName="ns=powerlink;DefaultValue", description="Default value of POWERLINK Object", modellingRule="Optional")
     )
     index: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=277", browseName="ns=powerlink;Index", description="Index of the object in the POWERLINK Object Dictionary", dataType=o6.UInt16, value=0
+            nodeId="ns=powerlink;i=277",
+            browseName="ns=powerlink;Index",
+            description="Index of the object in the POWERLINK Object Dictionary",
+            modellingRule="Mandatory",
+            dataType=o6.UInt16,
+            value=0,
         )
     )
     powerlinkAttributes: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -85,6 +100,7 @@ class PowerlinkVariableType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=powerlink;i=93",
             browseName="ns=powerlink;PowerlinkAttributes",
             description="provides the information of the XML-Attribute ‘accessType’ from the POWERLINK XML Device Description",
+            modellingRule="Mandatory",
             dataType=powerlink_datypes.PowerlinkAttribute,
             value=powerlink_datypes.PowerlinkAttribute(value=b"\x00\x00", validBits=b"\x80\x03"),
         )
@@ -94,13 +110,19 @@ class PowerlinkVariableType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=powerlink;i=279",
             browseName="ns=powerlink;Range",
             description="Value range of the POWERLINK Object",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Range,
             value=ns0.datatypes.Range(low=0.0, high=0.0),
         )
     )
     subIndex: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=278", browseName="ns=powerlink;SubIndex", description="SubIndex of the object in the POWERLINK Object Dictionary", dataType=o6.Byte, value=0
+            nodeId="ns=powerlink;i=278",
+            browseName="ns=powerlink;SubIndex",
+            description="SubIndex of the object in the POWERLINK Object Dictionary",
+            modellingRule="Mandatory",
+            dataType=o6.Byte,
+            value=0,
         )
     )
 
@@ -120,12 +142,22 @@ class DIA_ERRStatistics_Type(PowerlinkRecordType):
     historyEntryWrite_U32: PowerlinkVariableType | None
     index: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=2494", browseName="ns=powerlink;Index", description="Index of the object in the POWERLINK Object Dictionary", dataType=o6.UInt16, value=4354
+            nodeId="ns=powerlink;i=2494",
+            browseName="ns=powerlink;Index",
+            description="Index of the object in the POWERLINK Object Dictionary",
+            modellingRule="Mandatory",
+            dataType=o6.UInt16,
+            value=4354,
         )
     )
     numberOfEntries: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=2495", browseName="ns=powerlink;NumberOfEntries", description="SubIndex 0 of the POWERLINK Object", dataType=o6.Byte, value=7
+            nodeId="ns=powerlink;i=2495",
+            browseName="ns=powerlink;NumberOfEntries",
+            description="SubIndex 0 of the POWERLINK Object",
+            modellingRule="Mandatory",
+            dataType=o6.Byte,
+            value=7,
         )
     )
     staticErrorBitFieldChanged_U32: PowerlinkVariableType | None
@@ -144,7 +176,12 @@ class DIA_NMTTelegrCount_Type(PowerlinkRecordType):
     asyncTx_U32: PowerlinkVariableType | None
     index: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=2496", browseName="ns=powerlink;Index", description="Index of the object in the POWERLINK Object Dictionary", dataType=o6.UInt16, value=4353
+            nodeId="ns=powerlink;i=2496",
+            browseName="ns=powerlink;Index",
+            description="Index of the object in the POWERLINK Object Dictionary",
+            modellingRule="Mandatory",
+            dataType=o6.UInt16,
+            value=4353,
         )
     )
     isochrCyc_U32: PowerlinkVariableType
@@ -152,7 +189,12 @@ class DIA_NMTTelegrCount_Type(PowerlinkRecordType):
     isochrTx_U32: PowerlinkVariableType | None
     numberOfEntries: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=2497", browseName="ns=powerlink;NumberOfEntries", description="SubIndex 0 of the POWERLINK Object", dataType=o6.Byte, value=8
+            nodeId="ns=powerlink;i=2497",
+            browseName="ns=powerlink;NumberOfEntries",
+            description="SubIndex 0 of the POWERLINK Object",
+            modellingRule="Mandatory",
+            dataType=o6.Byte,
+            value=8,
         )
     )
     sdoRx_U32: PowerlinkVariableType | None
@@ -171,7 +213,12 @@ class DLL_ErrorCntRec_Type(PowerlinkRecordType):
     cumulativeCnt_U32: PowerlinkVariableType
     numberOfEntries: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=2512", browseName="ns=powerlink;NumberOfEntries", description="SubIndex 0 of the POWERLINK Object", dataType=o6.Byte, value=3
+            nodeId="ns=powerlink;i=2512",
+            browseName="ns=powerlink;NumberOfEntries",
+            description="SubIndex 0 of the POWERLINK Object",
+            modellingRule="Mandatory",
+            dataType=o6.Byte,
+            value=3,
         )
     )
     thresholdCnt_U32: PowerlinkVariableType | None
@@ -189,12 +236,22 @@ class DLL_ErrorCntRec_Type(PowerlinkRecordType):
 class IDENTITY_Type(PowerlinkRecordType):
     index: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=2586", browseName="ns=powerlink;Index", description="Index of the object in the POWERLINK Object Dictionary", dataType=o6.UInt16, value=4120
+            nodeId="ns=powerlink;i=2586",
+            browseName="ns=powerlink;Index",
+            description="Index of the object in the POWERLINK Object Dictionary",
+            modellingRule="Mandatory",
+            dataType=o6.UInt16,
+            value=4120,
         )
     )
     numberOfEntries: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=2587", browseName="ns=powerlink;NumberOfEntries", description="SubIndex 0 of the POWERLINK Object", dataType=o6.Byte, value=4
+            nodeId="ns=powerlink;i=2587",
+            browseName="ns=powerlink;NumberOfEntries",
+            description="SubIndex 0 of the POWERLINK Object",
+            modellingRule="Mandatory",
+            dataType=o6.Byte,
+            value=4,
         )
     )
     productCode_U32: PowerlinkVariableType | None
@@ -213,12 +270,22 @@ class IDENTITY_Type(PowerlinkRecordType):
 class INP_ProcessImage_Type(PowerlinkRecordType):
     index: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=2624", browseName="ns=powerlink;Index", description="Index of the object in the POWERLINK Object Dictionary", dataType=o6.UInt16, value=8048
+            nodeId="ns=powerlink;i=2624",
+            browseName="ns=powerlink;Index",
+            description="Index of the object in the POWERLINK Object Dictionary",
+            modellingRule="Mandatory",
+            dataType=o6.UInt16,
+            value=8048,
         )
     )
     numberOfEntries: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=2625", browseName="ns=powerlink;NumberOfEntries", description="SubIndex 0 of the POWERLINK Object", dataType=o6.Byte, value=2
+            nodeId="ns=powerlink;i=2625",
+            browseName="ns=powerlink;NumberOfEntries",
+            description="SubIndex 0 of the POWERLINK Object",
+            modellingRule="Mandatory",
+            dataType=o6.Byte,
+            value=2,
         )
     )
     processImageDomain_DOM: PowerlinkVariableType
@@ -235,7 +302,12 @@ class INP_ProcessImage_Type(PowerlinkRecordType):
 class NMT_BootTime_Type(PowerlinkRecordType):
     index: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=2630", browseName="ns=powerlink;Index", description="Index of the object in the POWERLINK Object Dictionary", dataType=o6.UInt16, value=8073
+            nodeId="ns=powerlink;i=2630",
+            browseName="ns=powerlink;Index",
+            description="Index of the object in the POWERLINK Object Dictionary",
+            modellingRule="Mandatory",
+            dataType=o6.UInt16,
+            value=8073,
         )
     )
     mNConfigurationTimeout_U32: PowerlinkVariableType | None
@@ -252,7 +324,12 @@ class NMT_BootTime_Type(PowerlinkRecordType):
     mNWaitPreOp1_U32: PowerlinkVariableType | None
     numberOfEntries: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=2631", browseName="ns=powerlink;NumberOfEntries", description="SubIndex 0 of the POWERLINK Object", dataType=o6.Byte, value=12
+            nodeId="ns=powerlink;i=2631",
+            browseName="ns=powerlink;NumberOfEntries",
+            description="SubIndex 0 of the POWERLINK Object",
+            modellingRule="Mandatory",
+            dataType=o6.Byte,
+            value=12,
         )
     )
 
@@ -266,16 +343,27 @@ class NMT_BootTime_Type(PowerlinkRecordType):
 )
 class PowerlinkArrayType(ns0.vartypes.BaseDataVariableType):
     defaultValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=powerlink;i=2725", browseName="ns=powerlink;DefaultValue", description="Default value of array elements")
+        ns0.vartypes.PropertyType(nodeId="ns=powerlink;i=2725", browseName="ns=powerlink;DefaultValue", description="Default value of array elements", modellingRule="Optional")
     )
     index: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=99", browseName="ns=powerlink;Index", description="Index of the object in the POWERLINK Object Dictionary", dataType=o6.UInt16, value=0
+            nodeId="ns=powerlink;i=99",
+            browseName="ns=powerlink;Index",
+            description="Index of the object in the POWERLINK Object Dictionary",
+            modellingRule="Mandatory",
+            dataType=o6.UInt16,
+            value=0,
         )
     )
     numberOfEntries: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=100", browseName="ns=powerlink;NumberOfEntries", description="SubIndex 0 of the POWERLINK Object", dataType=o6.Byte, value=0, accessLevel=3
+            nodeId="ns=powerlink;i=100",
+            browseName="ns=powerlink;NumberOfEntries",
+            description="SubIndex 0 of the POWERLINK Object",
+            modellingRule="Mandatory",
+            dataType=o6.Byte,
+            value=0,
+            accessLevel=3,
         )
     )
     powerlinkAttributes: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -283,6 +371,7 @@ class PowerlinkArrayType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=powerlink;i=101",
             browseName="ns=powerlink;PowerlinkAttributes",
             description="provides the information of the XML-Attribute ‘accessType’ from the POWERLINK XML Device Description",
+            modellingRule="Mandatory",
             dataType=powerlink_datypes.PowerlinkAttribute,
             value=powerlink_datypes.PowerlinkAttribute(value=b"\x00\x00", validBits=b"\x80\x03"),
         )
@@ -292,6 +381,7 @@ class PowerlinkArrayType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=powerlink;i=2726",
             browseName="ns=powerlink;Range",
             description="Value range of the array elements",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Range,
             value=ns0.datatypes.Range(low=0.0, high=0.0),
             accessLevel=3,
@@ -311,7 +401,12 @@ class NMT_CycleTiming_Type(PowerlinkRecordType):
     asyncMTU_U16: PowerlinkVariableType
     index: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=2732", browseName="ns=powerlink;Index", description="Index of the object in the POWERLINK Object Dictionary", dataType=o6.UInt16, value=8088
+            nodeId="ns=powerlink;i=2732",
+            browseName="ns=powerlink;Index",
+            description="Index of the object in the POWERLINK Object Dictionary",
+            modellingRule="Mandatory",
+            dataType=o6.UInt16,
+            value=8088,
         )
     )
     isochrRxMaxPayload_U16: PowerlinkVariableType
@@ -320,7 +415,12 @@ class NMT_CycleTiming_Type(PowerlinkRecordType):
     multiplCycleCnt_U8: PowerlinkVariableType
     numberOfEntries: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=2733", browseName="ns=powerlink;NumberOfEntries", description="SubIndex 0 of the POWERLINK Object", dataType=o6.Byte, value=15
+            nodeId="ns=powerlink;i=2733",
+            browseName="ns=powerlink;NumberOfEntries",
+            description="SubIndex 0 of the POWERLINK Object",
+            modellingRule="Mandatory",
+            dataType=o6.Byte,
+            value=15,
         )
     )
     pReqActPayloadLimit_U16: PowerlinkVariableType | None
@@ -344,14 +444,24 @@ class NMT_CycleTiming_Type(PowerlinkRecordType):
 class NMT_EPLNodeID_Type(PowerlinkRecordType):
     index: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=2898", browseName="ns=powerlink;Index", description="Index of the object in the POWERLINK Object Dictionary", dataType=o6.UInt16, value=8083
+            nodeId="ns=powerlink;i=2898",
+            browseName="ns=powerlink;Index",
+            description="Index of the object in the POWERLINK Object Dictionary",
+            modellingRule="Mandatory",
+            dataType=o6.UInt16,
+            value=8083,
         )
     )
     nodeIDByHW_BOOL: PowerlinkVariableType
     nodeID_U8: PowerlinkVariableType
     numberOfEntries: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=2899", browseName="ns=powerlink;NumberOfEntries", description="SubIndex 0 of the POWERLINK Object", dataType=o6.Byte, value=3
+            nodeId="ns=powerlink;i=2899",
+            browseName="ns=powerlink;NumberOfEntries",
+            description="SubIndex 0 of the POWERLINK Object",
+            modellingRule="Mandatory",
+            dataType=o6.Byte,
+            value=3,
         )
     )
     sWNodeID_U8: PowerlinkVariableType | None
@@ -371,7 +481,12 @@ class NWL_IpAddrTable_Type(PowerlinkRecordType):
     netMask_IPAD: PowerlinkVariableType
     numberOfEntries: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=2963", browseName="ns=powerlink;NumberOfEntries", description="SubIndex 0 of the POWERLINK Object", dataType=o6.Byte, value=5
+            nodeId="ns=powerlink;i=2963",
+            browseName="ns=powerlink;NumberOfEntries",
+            description="SubIndex 0 of the POWERLINK Object",
+            modellingRule="Mandatory",
+            dataType=o6.Byte,
+            value=5,
         )
     )
     reasmMaxSize_U16: PowerlinkVariableType
@@ -389,7 +504,12 @@ class PDO_CommParamRecord_Type(PowerlinkRecordType):
     nodeID_U8: PowerlinkVariableType
     numberOfEntries: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=2970", browseName="ns=powerlink;NumberOfEntries", description="SubIndex 0 of the POWERLINK Object", dataType=o6.Byte, value=2
+            nodeId="ns=powerlink;i=2970",
+            browseName="ns=powerlink;NumberOfEntries",
+            description="SubIndex 0 of the POWERLINK Object",
+            modellingRule="Mandatory",
+            dataType=o6.Byte,
+            value=2,
         )
     )
 
@@ -407,12 +527,22 @@ class NMT_RequestCmd_Type(PowerlinkRecordType):
     cmdTarget_U8: PowerlinkVariableType
     index: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=3069", browseName="ns=powerlink;Index", description="Index of the object in the POWERLINK Object Dictionary", dataType=o6.UInt16, value=8095
+            nodeId="ns=powerlink;i=3069",
+            browseName="ns=powerlink;Index",
+            description="Index of the object in the POWERLINK Object Dictionary",
+            modellingRule="Mandatory",
+            dataType=o6.UInt16,
+            value=8095,
         )
     )
     numberOfEntries: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=3070", browseName="ns=powerlink;NumberOfEntries", description="SubIndex 0 of the POWERLINK Object", dataType=o6.Byte, value=4
+            nodeId="ns=powerlink;i=3070",
+            browseName="ns=powerlink;NumberOfEntries",
+            description="SubIndex 0 of the POWERLINK Object",
+            modellingRule="Mandatory",
+            dataType=o6.Byte,
+            value=4,
         )
     )
     release_BOOL: PowerlinkVariableType
@@ -429,7 +559,12 @@ class NMT_RequestCmd_Type(PowerlinkRecordType):
 class NMT_InterfaceGroup_Type(PowerlinkRecordType):
     index: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=3180", browseName="ns=powerlink;Index", description="Index of the object in the POWERLINK Object Dictionary", dataType=o6.UInt16, value=4144
+            nodeId="ns=powerlink;i=3180",
+            browseName="ns=powerlink;Index",
+            description="Index of the object in the POWERLINK Object Dictionary",
+            modellingRule="Mandatory",
+            dataType=o6.UInt16,
+            value=4144,
         )
     )
     interfaceAdminState_U8: PowerlinkVariableType
@@ -442,7 +577,12 @@ class NMT_InterfaceGroup_Type(PowerlinkRecordType):
     interfaceType_U8: PowerlinkVariableType
     numberOfEntries: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=2916", browseName="ns=powerlink;NumberOfEntries", description="SubIndex 0 of the POWERLINK Object", dataType=o6.Byte, value=10
+            nodeId="ns=powerlink;i=2916",
+            browseName="ns=powerlink;NumberOfEntries",
+            description="SubIndex 0 of the POWERLINK Object",
+            modellingRule="Mandatory",
+            dataType=o6.Byte,
+            value=10,
         )
     )
     portEnableMask_U64: PowerlinkVariableType | None
@@ -461,13 +601,23 @@ class NMT_MNCycleTiming_Type(PowerlinkRecordType):
     asyncSlotTimeout_U32: PowerlinkVariableType | None
     index: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=3209", browseName="ns=powerlink;Index", description="Index of the object in the POWERLINK Object Dictionary", dataType=o6.UInt16, value=8074
+            nodeId="ns=powerlink;i=3209",
+            browseName="ns=powerlink;Index",
+            description="Index of the object in the POWERLINK Object Dictionary",
+            modellingRule="Mandatory",
+            dataType=o6.UInt16,
+            value=8074,
         )
     )
     minRedCycleTime_U32: PowerlinkVariableType | None
     numberOfEntries: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=powerlink;i=3210", browseName="ns=powerlink;NumberOfEntries", description="SubIndex 0 of the POWERLINK Object", dataType=o6.Byte, value=4
+            nodeId="ns=powerlink;i=3210",
+            browseName="ns=powerlink;NumberOfEntries",
+            description="SubIndex 0 of the POWERLINK Object",
+            modellingRule="Mandatory",
+            dataType=o6.Byte,
+            value=4,
         )
     )
     waitSoCPReq_U32: PowerlinkVariableType

@@ -40,12 +40,15 @@ else:
 )
 class StructuredArrayItemType(ns0.vartypes.DataItemType):
     eURange: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=mining;i=6007", browseName="ns=mining;EURange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=mining;i=6007", browseName="ns=mining;EURange", modellingRule="Optional", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+        )
     )
     engineeringUnits: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=mining;i=6008",
             browseName="ns=mining;EngineeringUnits",
+            modellingRule="Optional",
             dataType=ns0.datatypes.EUInformation,
             value=ns0.datatypes.EUInformation(
                 namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=-1, displayName=o6.LocalizedText(), description=o6.LocalizedText()
@@ -55,7 +58,9 @@ class StructuredArrayItemType(ns0.vartypes.DataItemType):
         )
     )
     instrumentRange: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=mining;i=6018", browseName="ns=mining;InstrumentRange", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=mining;i=6018", browseName="ns=mining;InstrumentRange", modellingRule="Optional", dataType=ns0.datatypes.Range, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -72,6 +77,7 @@ class LongwallShieldOffsetArrayItemType(StructuredArrayItemType):
         ns0.vartypes.PropertyType(
             nodeId="ns=mining;i=6017",
             browseName="ns=mining;EURange",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.Range,
             value=ns0.datatypes.Range(low=-25.0, high=25.0),
             accessLevel=3,
@@ -82,6 +88,7 @@ class LongwallShieldOffsetArrayItemType(StructuredArrayItemType):
         ns0.vartypes.PropertyType(
             nodeId="ns=mining;i=6016",
             browseName="ns=mining;EngineeringUnits",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.EUInformation,
             value=ns0.datatypes.EUInformation(
                 namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067858, displayName=o6.LocalizedText("m"), description=o6.LocalizedText("metre")

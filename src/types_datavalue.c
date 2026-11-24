@@ -21,6 +21,18 @@
 #include <numpy/arrayobject.h>
 #include <numpy/arrayscalars.h>
 
+/* Release the native Variant once no read converts it any more.
+ *
+ * A read converts the Variant in place, and the conversion can run Python
+ * code, so another thread can read or assign the value meanwhile. The
+ * Variant is cleared only when no conversion is in progress and it is no
+ * longer needed: a Python value is published, or the value was removed. */
+static void
+pyUADataValue_releaseVariant(PyUADataValue *dv) {
+    if(dv->converting == 0 && (dv->value || !dv->dv.hasValue))
+        UA_Variant_clear(&dv->dv.value);
+}
+
 static PyObject *
 pyUADataValue_get_value(PyObject *self, void *closure) {
     PyUADataValue *dv = (PyUADataValue*)self;
@@ -31,13 +43,23 @@ pyUADataValue_get_value(PyObject *self, void *closure) {
     if(!dv->dv.hasValue || !dv->dv.value.type) {
         Py_RETURN_NONE;
     }
-    
-    dv->value = UA2PY(&dv->dv.value, &UA_TYPES[UA_TYPES_VARIANT], NULL);
-    if(!dv->value)
-        return NULL;
-    UA_Variant_clear(&dv->dv.value);
-    Py_INCREF(dv->value);
-    return dv->value;
+
+    dv->converting++;
+    PyObject *value = UA2PY(&dv->dv.value, &UA_TYPES[UA_TYPES_VARIANT], NULL);
+    dv->converting--;
+
+    /* Another read may have published its conversion meanwhile, or an
+     * assignment replaced or removed the value. Then that state stands and
+     * this conversion is a read from before it. */
+    if(value && dv->value) {
+        Py_INCREF(dv->value);
+        Py_SETREF(value, dv->value);
+    } else if(value && dv->dv.hasValue) {
+        Py_INCREF(value);
+        dv->value = value;
+    }
+    pyUADataValue_releaseVariant(dv);
+    return value;
 }
 
 static int
@@ -46,13 +68,9 @@ pyUADataValue_set_value(PyObject *self, PyObject *value, void *closure) {
 
     // If none, remove any preexisting value
     if(!value || value == Py_None) {
-        if(dv->value) {
-            Py_DECREF(dv->value);
-            dv->value = NULL;
-        } else {
-            UA_Variant_clear(&dv->dv.value);
-        }
         dv->dv.hasValue = false;
+        pyUADataValue_releaseVariant(dv);
+        Py_CLEAR(dv->value);
         return 0;
     }
 
@@ -63,14 +81,14 @@ pyUADataValue_set_value(PyObject *self, PyObject *value, void *closure) {
         return -1;
     }
 
-    // Set a new value
-    if(dv->value)
-        Py_DECREF(dv->value);
-    else
-        UA_Variant_clear(&dv->dv.value);
-    dv->value = value;
+    // Set a new value. The previous one is released last, as releasing it
+    // can run Python code that reads this DataValue.
+    PyObject *previous = dv->value;
     Py_INCREF(value);
+    dv->value = value;
     dv->dv.hasValue = true;
+    pyUADataValue_releaseVariant(dv);
+    Py_XDECREF(previous);
     return 0;
 }
 
@@ -296,9 +314,13 @@ int
 pyUADataValue_init(PyObject *self, PyObject *args, PyObject *kwds) {
     // Initialize
     PyUADataValue *dv = (PyUADataValue*)self;
-    Py_XDECREF(dv->value);
+    UA_Variant variant = dv->dv.value;
+    UA_DataValue_init(&dv->dv);
+    dv->dv.value = variant;
+    PyObject *previous = dv->value;
     dv->value = NULL;
-    UA_DataValue_clear(&dv->dv);
+    pyUADataValue_releaseVariant(dv);
+    Py_XDECREF(previous);
     
     // Parse arguments
     static char *kwlist[] = {"value", "status", "sourceTimestamp", "serverTimestamp",
@@ -349,9 +371,17 @@ PY2UA_datavalue(PyObject *obj, UA_DataValue *datavalue, const UA_NamespaceMappin
 
     PyObject *out = NULL;
     PyUADataValue *dv = (PyUADataValue*)obj;
-    if(dv->value) {
+    PyObject *value = dv->value;
+    if(value) {
+        /* The native Variant can still be in place while a read converts
+         * it, so it must not leak into the copy. The conversion can run
+         * Python code that assigns a new value, so it holds its own
+         * reference. */
         UA_DataValue tmp = dv->dv;
-        out = PY2UA_variant(dv->value, &tmp.value);
+        UA_Variant_init(&tmp.value);
+        Py_INCREF(value);
+        out = PY2UA_variant(value, &tmp.value);
+        Py_DECREF(value);
         if(!out)
             return NULL;
         tmp.hasValue = true;

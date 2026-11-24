@@ -58,7 +58,7 @@ http_opcfoundation_org_UA_Mining_TransportDumping_RearDumpTruck_ = ns0.objtypes.
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[2],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC, ns0.datatypes.IdType.STRING],
             )
         ),
@@ -76,12 +76,14 @@ ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=mining_rear_dump_truck;i=6025",
     browseName="ns=mining_transport_dumping;AsymmetryLoad",
     description="The AsymmetryLoad variable describes the asymmetry of the load on the truck-bed.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_rear_dump_truck;i=6026",
                 browseName="EngineeringUnits",
                 description="This is the EngineeringUnit of the asymmetric load indicator.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -93,6 +95,7 @@ ns0.vartypes.AnalogUnitRangeType(
                 nodeId="ns=mining_rear_dump_truck;i=6027",
                 browseName="EURange",
                 description="This is the EURange of the asymmetric load indicator.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Range,
                 value=ns0.datatypes.Range(low=0.0, high=100.0),
             )
@@ -105,12 +108,14 @@ ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=mining_rear_dump_truck;i=6028",
     browseName="ns=mining_transport_dumping;CurrentPayload",
     description="The CurrentPayload variable describes the current payload of the hauling machine.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_rear_dump_truck;i=6029",
                 browseName="EngineeringUnits",
                 description="This is the EngineeringUnit of the current payload.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -125,6 +130,7 @@ ns0.vartypes.AnalogUnitRangeType(
                 nodeId="ns=mining_rear_dump_truck;i=6030",
                 browseName="EURange",
                 description="This is the EURange of the current payload.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Range,
                 value=ns0.datatypes.Range(low=0.0, high=200.0),
             )
@@ -136,20 +142,22 @@ ns0.vartypes.AnalogUnitRangeType(
 ns0.vartypes.ThreeDCartesianCoordinatesType(
     nodeId="ns=mining_rear_dump_truck;i=6032",
     browseName="CartesianCoordinates",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6033", browseName="X", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6034", browseName="Y", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6035", browseName="Z", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6033", browseName="X", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6034", browseName="Y", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6035", browseName="Z", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDCartesianCoordinates,
 )
 ns0.vartypes.ThreeDOrientationType(
     nodeId="ns=mining_rear_dump_truck;i=6036",
     browseName="Orientation",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6037", browseName="A", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6038", browseName="B", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6039", browseName="C", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6037", browseName="A", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6038", browseName="B", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6039", browseName="C", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDOrientation,
 )
@@ -157,11 +165,13 @@ ns0.vartypes.ThreeDCartesianCoordinatesType(
     nodeId="ns=mining_rear_dump_truck;i=6040",
     browseName="ns=mining_transport_dumping;MachineShape",
     description="The MachineShape variable describes the hauling machine’s shape in terms of width, height and length. As this variable is an array, it can contain multiple shapes such as a shape for the truck-bed or for the cabin.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_rear_dump_truck;i=6041",
                 browseName="LengthUnit",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -171,9 +181,9 @@ ns0.vartypes.ThreeDCartesianCoordinatesType(
                 ),
             )
         ),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6042", browseName="X", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6043", browseName="Y", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6044", browseName="Z", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6042", browseName="X", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6043", browseName="Y", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6044", browseName="Z", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDCartesianCoordinates,
     valueRank=1,
@@ -182,11 +192,13 @@ ns0.vartypes.ThreeDCartesianCoordinatesType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=mining_rear_dump_truck;i=6046",
     browseName="ns=mining;Speed",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_rear_dump_truck;i=6047",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -205,11 +217,12 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=mining_rear_dump_truck;i=6045",
     browseName="ns=mining_transport_dumping;MachineVelocity",
     description="The MachineVelocity variable describes the hauling machine’s velocity in terms of magnitude and direction.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=mining_rear_dump_truck;i=6046"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6048", browseName="X", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6049", browseName="Y", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6050", browseName="Z", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6048", browseName="X", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6049", browseName="Y", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6050", browseName="Z", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDVector,
     value=ns0.datatypes.ThreeDVector(x=0.0, y=0.0, z=0.0),
@@ -218,12 +231,14 @@ ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=mining_rear_dump_truck;i=6051",
     browseName="ns=mining_transport_dumping;PayloadCapacity",
     description="The PayloadCapacity variable describes the payload capacity of the hauling machine.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_rear_dump_truck;i=6052",
                 browseName="EngineeringUnits",
                 description="This is the EngineeringUnit of the payload capacity.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -238,6 +253,7 @@ ns0.vartypes.AnalogUnitRangeType(
                 nodeId="ns=mining_rear_dump_truck;i=6053",
                 browseName="EURange",
                 description="This is the EURange of the payload capacity.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Range,
                 value=ns0.datatypes.Range(low=0.0, high=200.0),
             )
@@ -249,20 +265,22 @@ ns0.vartypes.AnalogUnitRangeType(
 ns0.vartypes.ThreeDCartesianCoordinatesType(
     nodeId="ns=mining_rear_dump_truck;i=6055",
     browseName="CartesianCoordinates",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6056", browseName="X", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6057", browseName="Y", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6058", browseName="Z", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6056", browseName="X", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6057", browseName="Y", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6058", browseName="Z", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDCartesianCoordinates,
 )
 ns0.vartypes.ThreeDOrientationType(
     nodeId="ns=mining_rear_dump_truck;i=6059",
     browseName="Orientation",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6060", browseName="A", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6061", browseName="B", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6062", browseName="C", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6060", browseName="A", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6061", browseName="B", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6062", browseName="C", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDOrientation,
 )
@@ -270,6 +288,7 @@ ns0.vartypes.ThreeDFrameType(
     nodeId="ns=mining_rear_dump_truck;i=6054",
     browseName="ns=mining_transport_dumping;TailHeight",
     description="The TailHeight variable measures the tail height of the hauling machine.",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=mining_rear_dump_truck;i=6055"]), o6.hasComponent(o6.ns["ns=mining_rear_dump_truck;i=6059"])],
     dataType=ns0.datatypes.ThreeDFrame,
     value=ns0.datatypes.ThreeDFrame(
@@ -280,12 +299,13 @@ ns0.vartypes.ThreeDFrameType(
     nodeId="ns=mining_rear_dump_truck;i=6031",
     browseName="ns=mining_transport_dumping;MachinePose",
     description="The MachinePose variable describes the pose of the hauling machine in terms of location coordinates, orientation and (optional) base frame.",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_rear_dump_truck;i=6064", browseName="Constant", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_rear_dump_truck;i=6065", browseName="FixedBase", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_rear_dump_truck;i=6064", browseName="Constant", modellingRule="Optional", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_rear_dump_truck;i=6065", browseName="FixedBase", modellingRule="Optional", dataType=o6.Boolean)),
         o6.hasComponent(o6.ns["ns=mining_rear_dump_truck;i=6032"]),
         o6.hasComponent(o6.ns["ns=mining_rear_dump_truck;i=6036"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6063", browseName="BaseFrame", dataType=o6.NodeId)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_rear_dump_truck;i=6063", browseName="BaseFrame", modellingRule="Optional", dataType=o6.NodeId)),
     ],
     dataType=ns0.datatypes.ThreeDFrame,
     value=ns0.datatypes.ThreeDFrame(
@@ -296,6 +316,7 @@ ns0.objtypes.BaseObjectType(
     nodeId="ns=mining_rear_dump_truck;i=5005",
     browseName="ns=di;ParameterSet",
     description="Flat list of Parameters",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=mining_rear_dump_truck;i=6025"]),
         o6.hasComponent(o6.ns["ns=mining_rear_dump_truck;i=6028"]),
@@ -316,6 +337,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_rear_dump_truck;i=6008",
                 browseName="ns=di;DeviceClass",
                 description="Indicates in which domain or for what purpose the MachineryItem is used.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -324,6 +346,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_rear_dump_truck;i=6009",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -332,6 +355,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_rear_dump_truck;i=6010",
                 browseName="ns=di;ManufacturerUri",
                 description="A globally unique identifier of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -340,6 +364,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_rear_dump_truck;i=6011",
                 browseName="ns=di;Model",
                 description="A human-readable, localized name of the model of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -348,6 +373,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_rear_dump_truck;i=6012",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -356,6 +382,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_rear_dump_truck;i=6013",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -364,6 +391,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_rear_dump_truck;i=6068",
                 browseName="ns=di;AssetId",
                 description="To be used by end users to store a unique identification in the context of their overall application. Servers shall support at least 40 Unicode characters for the clients writing this value, this means clients can expect to be able to write strings with a length of 40 Unicode characters into that field.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
             )
@@ -388,6 +416,7 @@ o6.call(
     nodeId="ns=mining_rear_dump_truck;i=7001",
     browseName="ns=mining_transport_dumping;ClearSpot",
     description="The ClearSpot method call indicates the clearing of the spot within the queue.",
+    modellingRule="Optional",
     outputArgs=o6.hasProperty(o6.ns["ns=mining_rear_dump_truck;i=6014"]),
 )
 
@@ -417,6 +446,7 @@ o6.call(
     nodeId="ns=mining_rear_dump_truck;i=7002",
     browseName="ns=mining_transport_dumping;JoinQueue",
     description="The JoinQueue method call indicates the joining of the waiting/spotting queue of the hauling machine.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=mining_rear_dump_truck;i=6015"]),
     outputArgs=o6.hasProperty(o6.ns["ns=mining_rear_dump_truck;i=6016"]),
 )
@@ -436,6 +466,7 @@ o6.call(
     nodeId="ns=mining_rear_dump_truck;i=7003",
     browseName="ns=mining_transport_dumping;LoadingComplete",
     description="The LoadingComplete method call indicates the completion of the loading process.",
+    modellingRule="Optional",
     outputArgs=o6.hasProperty(o6.ns["ns=mining_rear_dump_truck;i=6017"]),
 )
 
@@ -473,6 +504,7 @@ o6.call(
     nodeId="ns=mining_rear_dump_truck;i=7004",
     browseName="ns=mining_transport_dumping;SetQueuePriority",
     description="The SetQueuePriority method call sets the queue priority of the hauling machine.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=mining_rear_dump_truck;i=6018"]),
     outputArgs=o6.hasProperty(o6.ns["ns=mining_rear_dump_truck;i=6019"]),
 )
@@ -513,6 +545,7 @@ o6.call(
     nodeId="ns=mining_rear_dump_truck;i=7005",
     browseName="ns=mining_transport_dumping;StartPositioning",
     description="The StartPositioning method call indicates the start of the positioning process.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=mining_rear_dump_truck;i=6020"]),
     outputArgs=o6.hasProperty(o6.ns["ns=mining_rear_dump_truck;i=6021"]),
 )
@@ -532,6 +565,7 @@ o6.call(
     nodeId="ns=mining_rear_dump_truck;i=7006",
     browseName="ns=mining_transport_dumping;StartUnloading",
     description="The StartUnloading method call indicates the start of the unloading process.",
+    modellingRule="Optional",
     outputArgs=o6.hasProperty(o6.ns["ns=mining_rear_dump_truck;i=6022"]),
 )
 
@@ -550,6 +584,7 @@ o6.call(
     nodeId="ns=mining_rear_dump_truck;i=7007",
     browseName="ns=mining_transport_dumping;StopPositioning",
     description="The StopPositioning method call indicates the end of the positioning process.",
+    modellingRule="Optional",
     outputArgs=o6.hasProperty(o6.ns["ns=mining_rear_dump_truck;i=6023"]),
 )
 
@@ -568,6 +603,7 @@ o6.call(
     nodeId="ns=mining_rear_dump_truck;i=7008",
     browseName="ns=mining_transport_dumping;StopUnloading",
     description="The StopUnloading method call indicates the end of the unloading process.",
+    modellingRule="Optional",
     outputArgs=o6.hasProperty(o6.ns["ns=mining_rear_dump_truck;i=6024"]),
 )
 
@@ -575,6 +611,7 @@ ns0.objtypes.BaseObjectType(
     nodeId="ns=mining_rear_dump_truck;i=5004",
     browseName="ns=di;MethodSet",
     description="Flat list of Methods",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=mining_rear_dump_truck;i=7001"]),
         o6.hasComponent(o6.ns["ns=mining_rear_dump_truck;i=7002"]),

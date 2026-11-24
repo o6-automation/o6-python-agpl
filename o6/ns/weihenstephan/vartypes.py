@@ -39,14 +39,16 @@ else:
 @o6.variabletype(nodeId="ns=weihenstephan;i=2001", browseName="ns=weihenstephan;WSBaseDataVariableType", displayName="WSBaseDataVariableType")
 class WSBaseDataVariableType(ns0.vartypes.BaseDataVariableType):
     wSTagNumber: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6022", browseName="ns=weihenstephan;WSTagNumber", dataType=o6.UInt16, valueRank=-2, accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=weihenstephan;i=6022", browseName="ns=weihenstephan;WSTagNumber", modellingRule="Optional", dataType=o6.UInt16, valueRank=-2, accessLevel=3
+        )
     )
 
 
 @o6.variabletype(nodeId="ns=weihenstephan;i=2000", browseName="ns=weihenstephan;WSAnalogUnitType", displayName="WSAnalogUnitType")
 class WSAnalogUnitType(ns0.vartypes.AnalogUnitType):
     wSTagNumber: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6027", browseName="ns=weihenstephan;WSTagNumber", dataType=o6.UInt16, accessLevel=3)
+        ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6027", browseName="ns=weihenstephan;WSTagNumber", modellingRule="Optional", dataType=o6.UInt16, accessLevel=3)
     )
 
 

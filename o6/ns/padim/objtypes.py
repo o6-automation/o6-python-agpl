@@ -34,25 +34,25 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1010", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText, value=o6.LocalizedText(""))
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1010", browseName="ns=di;Manufacturer", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText(""))
 o6.reference(o6.ns["ns=padim;i=1010"], "i=17597", "ns=irdi;s=0112/2///61360_7#CBA031#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1011", browseName="ns=di;ManufacturerUri", displayName="URI manufacturer", dataType=o6.String, value="")
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1011", browseName="ns=di;ManufacturerUri", displayName="URI manufacturer", modellingRule="Mandatory", dataType=o6.String, value="")
 o6.reference(o6.ns["ns=padim;i=1011"], "i=17597", "ns=irdi;s=0112/2///61360_7#CBA032#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1012", browseName="ns=di;Model", dataType=o6.LocalizedText, value=o6.LocalizedText(""))
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1012", browseName="ns=di;Model", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText(""))
 o6.reference(o6.ns["ns=padim;i=1012"], "i=17597", "ns=irdi;s=0112/2///61360_7#CBA039#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1013", browseName="ns=di;SerialNumber", displayName="Serial number", dataType=o6.String, value="")
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1013", browseName="ns=di;SerialNumber", displayName="Serial number", modellingRule="Mandatory", dataType=o6.String, value="")
 o6.reference(o6.ns["ns=padim;i=1013"], "i=17597", "ns=irdi;s=0112/2///61360_7#CBA050#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1014", browseName="ns=di;SoftwareRevision", displayName="Software revision", dataType=o6.String, value="")
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1014", browseName="ns=di;SoftwareRevision", displayName="Software revision", modellingRule="Mandatory", dataType=o6.String, value="")
 o6.reference(o6.ns["ns=padim;i=1014"], "i=17597", "ns=irdi;s=0112/2///61360_7#CBA046#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1015", browseName="ns=di;HardwareRevision", displayName="Hardware revision", dataType=o6.String, value="")
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1015", browseName="ns=di;HardwareRevision", displayName="Hardware revision", modellingRule="Mandatory", dataType=o6.String, value="")
 o6.reference(o6.ns["ns=padim;i=1015"], "i=17597", "ns=irdi;s=0112/2///61360_7#CBA047#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1016", browseName="ns=di;ProductCode", displayName="Product code", dataType=o6.String, value="")
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1016", browseName="ns=di;ProductCode", displayName="Product code", modellingRule="Mandatory", dataType=o6.String, value="")
 o6.reference(o6.ns["ns=padim;i=1016"], "i=17597", "ns=irdi;s=0112/2///61360_7#CBA040#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1017", browseName="ns=di;RevisionCounter", displayName="Revision counter", dataType=o6.Int32, value=0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1017", browseName="ns=di;RevisionCounter", displayName="Revision counter", modellingRule="Mandatory", dataType=o6.Int32, value=0)
 o6.reference(o6.ns["ns=padim;i=1017"], "i=17597", "ns=irdi;s=0112/2///61987#ABN603#002")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1019", browseName="ns=di;AssetId", displayName="Asset ID", dataType=o6.String, value="", accessLevel=3)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1019", browseName="ns=di;AssetId", displayName="Asset ID", modellingRule="Mandatory", dataType=o6.String, value="", accessLevel=3)
 o6.reference(o6.ns["ns=padim;i=1019"], "i=17597", "ns=irdi;s=0112/2///61987#ABA038#004")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1020", browseName="ns=di;ProductInstanceUri", displayName="URI product inst.", dataType=o6.String, value="")
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1020", browseName="ns=di;ProductInstanceUri", displayName="URI product inst.", modellingRule="Mandatory", dataType=o6.String, value="")
 o6.reference(o6.ns["ns=padim;i=1020"], "i=17597", "ns=irdi;s=0112/2///61360_7#CBA055#001")
 
 
@@ -73,26 +73,38 @@ ns0.vartypes.PropertyType(
     value=[ns0.datatypes.Argument(name="ResetMode", dataType=o6.NodeId("ns=padim;i=1156"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
     accessLevel=3,
 )
-o6.call(nodeId="ns=padim;i=1028", browseName="ns=padim;FactoryReset", displayName="Reset", inputArgs=o6.hasProperty(o6.ns["ns=padim;i=1030"]))
+o6.call(nodeId="ns=padim;i=1028", browseName="ns=padim;FactoryReset", displayName="Reset", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=padim;i=1030"]))
 o6.reference(o6.ns["ns=padim;i=1028"], "i=17597", "ns=irdi;s=0112/2///61987#ABN609#002")
 
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=padim;i=1029",
     browseName="ns=di;DeviceHealth",
     displayName="Device diagnostic status",
+    modellingRule="Mandatory",
     dataType=di.datatypes.DeviceHealthEnumeration,
     value=di.datatypes.DeviceHealthEnumeration.NORMAL,
 )
 o6.reference(o6.ns["ns=padim;i=1029"], "i=17597", "ns=irdi;s=0112/2///61987#ABN972#002")
 ns0.vartypes.BaseDataVariableType(
-    nodeId="ns=padim;i=1032", browseName="ns=padim;DateOfLastChange", displayName="Date last change", dataType=o6.DateTime, value=o6.DateTime("1601-01-01T00:00:00Z")
+    nodeId="ns=padim;i=1032",
+    browseName="ns=padim;DateOfLastChange",
+    displayName="Date last change",
+    modellingRule="Optional",
+    dataType=o6.DateTime,
+    value=o6.DateTime("1601-01-01T00:00:00Z"),
 )
 o6.reference(o6.ns["ns=padim;i=1032"], "i=17597", "ns=irdi;s=0112/2///61987#ABN604#001")
 ns0.vartypes.BaseDataVariableType(
-    nodeId="ns=padim;i=1033", browseName="ns=padim;DisplayLanguage", displayName="Display language", dataType=ns0.datatypes.LocaleId, value="en", accessLevel=3
+    nodeId="ns=padim;i=1033",
+    browseName="ns=padim;DisplayLanguage",
+    displayName="Display language",
+    modellingRule="Optional",
+    dataType=ns0.datatypes.LocaleId,
+    value="en",
+    accessLevel=3,
 )
 o6.reference(o6.ns["ns=padim;i=1033"], "i=17597", "ns=irdi;s=0112/2///61987#ABN597#004")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1035", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1035", browseName="ns=padim;SignalTag", displayName="Tag", modellingRule="Mandatory", dataType=o6.String, value="", accessLevel=3)
 o6.reference(o6.ns["ns=padim;i=1035"], "i=17597", "ns=irdi;s=0112/2///61987#ABB271#009")
 
 
@@ -111,7 +123,9 @@ class MultiStateDiscreteSignalType(SignalType):
     multiStateDiscreteSignal: padim_vartypes.MultiStateDiscreteSignalVariableType
 
 
-padim_vartypes.DiscreteSignalVariableType(nodeId="ns=padim;i=1039", browseName="ns=padim;DiscreteSignal", displayName="Value", valueRank=-2, accessLevel=3)
+padim_vartypes.DiscreteSignalVariableType(
+    nodeId="ns=padim;i=1039", browseName="ns=padim;DiscreteSignal", displayName="Value", modellingRule="Mandatory", valueRank=-2, accessLevel=3
+)
 o6.reference(o6.ns["ns=padim;i=1039"], "i=17597", "ns=irdi;s=0112/2///61987#ABN634#001")
 
 
@@ -158,11 +172,22 @@ class IThermalConductivitySignalConditionSetType(ns0.objtypes.BaseInterfaceType)
 
 
 ns0.vartypes.BaseDataVariableType(
-    nodeId="ns=padim;i=1068", browseName="ns=padim;DisplayLanguage", displayName="Display language", dataType=ns0.datatypes.LocaleId, value="en", accessLevel=3
+    nodeId="ns=padim;i=1068",
+    browseName="ns=padim;DisplayLanguage",
+    displayName="Display language",
+    modellingRule="Optional",
+    dataType=ns0.datatypes.LocaleId,
+    value="en",
+    accessLevel=3,
 )
 o6.reference(o6.ns["ns=padim;i=1068"], "i=17597", "ns=irdi;s=0112/2///61987#ABN597#004")
 ns0.vartypes.BaseDataVariableType(
-    nodeId="ns=padim;i=1070", browseName="ns=padim;DateOfLastChange", displayName="Date last change", dataType=o6.DateTime, value=o6.DateTime("1601-01-01T00:00:00Z")
+    nodeId="ns=padim;i=1070",
+    browseName="ns=padim;DateOfLastChange",
+    displayName="Date last change",
+    modellingRule="Optional",
+    dataType=o6.DateTime,
+    value=o6.DateTime("1601-01-01T00:00:00Z"),
 )
 o6.reference(o6.ns["ns=padim;i=1070"], "i=17597", "ns=irdi;s=0112/2///61987#ABN604#001")
 
@@ -179,7 +204,7 @@ ns0.vartypes.PropertyType(
     value=[ns0.datatypes.Argument(name="ResetMode", dataType=o6.NodeId("ns=padim;i=1156"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
     accessLevel=3,
 )
-o6.call(nodeId="ns=padim;i=1072", browseName="ns=padim;FactoryReset", displayName="Reset", inputArgs=o6.hasProperty(o6.ns["ns=padim;i=1080"]))
+o6.call(nodeId="ns=padim;i=1072", browseName="ns=padim;FactoryReset", displayName="Reset", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=padim;i=1080"]))
 o6.reference(o6.ns["ns=padim;i=1072"], "i=17597", "ns=irdi;s=0112/2///61987#ABN609#002")
 
 
@@ -192,10 +217,10 @@ class IAdministrationType(ns0.objtypes.BaseInterfaceType):
 
 @o6.objecttype(nodeId="ns=padim;i=1052", browseName="ns=padim;ISignalSetType", displayName="ISignalSetType", isAbstract=True)
 class ISignalSetType(ns0.objtypes.BaseInterfaceType):
-    signalSet: SignalSetType | None = o6.hasComponent(SignalSetType(nodeId="ns=padim;i=1074", browseName="ns=padim;SignalSet"))
+    signalSet: SignalSetType | None = o6.hasComponent(SignalSetType(nodeId="ns=padim;i=1074", browseName="ns=padim;SignalSet", modellingRule="Optional"))
 
 
-o6.call(nodeId="ns=padim;i=1109", browseName="ns=padim;ZeroPointAdjustment", displayName="Set zero point")
+o6.call(nodeId="ns=padim;i=1109", browseName="ns=padim;ZeroPointAdjustment", displayName="Set zero point", modellingRule="Optional")
 o6.reference(o6.ns["ns=padim;i=1109"], "i=17597", "ns=irdi;s=0112/2///61987#ABN614#002")
 
 ns0.vartypes.PropertyType(
@@ -210,7 +235,9 @@ ns0.vartypes.PropertyType(
     value=[ns0.datatypes.Argument(name="ExecutionMode", dataType=o6.NodeId("ns=padim;i=1158"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
     accessLevel=3,
 )
-o6.call(nodeId="ns=padim;i=1116", browseName="ns=padim;AutoAdjustPositioner", displayName="Autoadjust", inputArgs=o6.hasProperty(o6.ns["ns=padim;i=1119"]))
+o6.call(
+    nodeId="ns=padim;i=1116", browseName="ns=padim;AutoAdjustPositioner", displayName="Autoadjust", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=padim;i=1119"])
+)
 o6.reference(o6.ns["ns=padim;i=1116"], "i=17597", "ns=irdi;s=0112/2///61987#ABN726#002")
 
 
@@ -220,7 +247,14 @@ class ControlSignalType(SignalType):
     controlSignal: padim_vartypes.ControlVariableType
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1208", browseName="ns=di;DeviceRevision", displayName="Device revision", dataType=ns0.datatypes.SemanticVersionString, value="1.0.0")
+ns0.vartypes.PropertyType(
+    nodeId="ns=padim;i=1208",
+    browseName="ns=di;DeviceRevision",
+    displayName="Device revision",
+    modellingRule="Optional",
+    dataType=ns0.datatypes.SemanticVersionString,
+    value="1.0.0",
+)
 o6.reference(o6.ns["ns=padim;i=1208"], "i=17597", "ns=irdi;s=0112/2///61987#ABP643#002")
 
 
@@ -235,7 +269,9 @@ class PADIMType(di.objtypes.ComponentType):
     )
     deviceConditionSet: ns0.objtypes.BaseObjectType | None
     deviceHealth: ns0.vartypes.BaseDataVariableType = o6.hasComponent(o6.ns["ns=padim;i=1029"])
-    deviceHealthAlarms: ns0.objtypes.FolderType | None = o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=padim;i=1018", browseName="ns=di;DeviceHealthAlarms"))
+    deviceHealthAlarms: ns0.objtypes.FolderType | None = o6.hasComponent(
+        ns0.objtypes.FolderType(nodeId="ns=padim;i=1018", browseName="ns=di;DeviceHealthAlarms", modellingRule="Optional")
+    )
     deviceRevision: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=1208"])
     displayLanguage: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(o6.ns["ns=padim;i=1033"])
     factoryReset: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=padim;i=1028"])
@@ -247,7 +283,7 @@ class PADIMType(di.objtypes.ComponentType):
     productInstanceUri: ns0.vartypes.PropertyType = o6.hasProperty(o6.ns["ns=padim;i=1020"])
     revisionCounter: ns0.vartypes.PropertyType = o6.hasProperty(o6.ns["ns=padim;i=1017"])
     serialNumber: ns0.vartypes.PropertyType = o6.hasProperty(o6.ns["ns=padim;i=1013"])
-    signalSet: SignalSetType | None = o6.hasComponent(SignalSetType(nodeId="ns=padim;i=1034", browseName="ns=padim;SignalSet"))
+    signalSet: SignalSetType | None = o6.hasComponent(SignalSetType(nodeId="ns=padim;i=1034", browseName="ns=padim;SignalSet", modellingRule="Optional"))
     softwareRevision: ns0.vartypes.PropertyType = o6.hasProperty(o6.ns["ns=padim;i=1014"])
     subDevices: di.objtypes.ConfigurableObjectType | None
 
@@ -397,7 +433,9 @@ class MultiStateDiscreteControlSignalType(SignalType):
 class AnalogSignalType(SignalType):
     analogSignal: padim_vartypes.AnalogSignalVariableType
     signalCalibrationIdentifier_: ns0.objtypes.BaseObjectType | None
-    signalConditionSet: ns0.objtypes.BaseObjectType | None = o6.hasComponent(ns0.objtypes.BaseObjectType(nodeId="ns=padim;i=1290", browseName="ns=padim;SignalConditionSet"))
+    signalConditionSet: ns0.objtypes.BaseObjectType | None = o6.hasComponent(
+        ns0.objtypes.BaseObjectType(nodeId="ns=padim;i=1290", browseName="ns=padim;SignalConditionSet", modellingRule="Optional")
+    )
     zeroPointAdjustment: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=padim;i=1109"])
 
 
@@ -491,6 +529,7 @@ ns0.vartypes.PropertyType(
     nodeId="ns=padim;i=1307",
     browseName="ns=padim;CalibrationTimestamp",
     displayName="Timestamp of calibration",
+    modellingRule="Optional",
     dataType=o6.DateTime,
     value=o6.DateTime("1601-01-01T00:00:00Z"),
     accessLevel=3,
@@ -501,6 +540,7 @@ ns0.vartypes.PropertyType(
     browseName="ns=di;OperationCycleCounter",
     description="Operation cycle counter is counting the times the Device switches from not performing an activity to performing an activity. For example, each time a valve starts moving, is counted. This value shall only increase during the lifetime of the Device and shall not be reset when the Device is restarted.",
     displayName="Operation cycle counter",
+    modellingRule="Optional",
     dataType=ns0.datatypes.UInteger,
 )
 o6.reference(o6.ns["ns=padim;i=1316"], "i=17597", "ns=irdi;s=0112/2///61987#ABP545#001")
@@ -509,6 +549,7 @@ ns0.vartypes.PropertyType(
     browseName="ns=di;OperationDuration",
     description="Operation duration is the duration the Device has been powered and performing an activity. This counter is intended for Devices where a distinction is made between switched on and in operation. For example, a drive might be powered on but not operating. It is not intended for Devices always performing an activity like sensors always measuring data. This value shall only increase during the lifetime of the Device and shall not be reset when the Device is restarted. The OperationDuration is provided as Duration, i.e., in milliseconds or even fractions of a millisecond. However, the Server is not expected to update the value in such a high frequency, but maybe once a minute or once an hour, depending on the application.",
     displayName="Operation duration",
+    modellingRule="Optional",
     dataType=ns0.datatypes.Duration,
     value=0.0,
 )
@@ -518,12 +559,18 @@ ns0.vartypes.PropertyType(
     browseName="ns=di;PowerOnDuration",
     description="Power on duration is the duration the Device has been powered. The main purpose is to determine the time in which degradation of the Device occurred. The details, when the time is counted, is implementation-specific. Companion specifications might define specific rules. Typically, when the Device has supply voltage and the main CPU is running, the time is counted. This may include any kind of sleep mode, but may not include pure Wake on LAN. This value shall only increase during the lifetime of the Device and shall not be reset when the Device is restarted. The PowerOnDuration is provided as Duration, i.e., in milliseconds or even fractions of a millisecond. However, the Server is not expected to update the value in such a high frequency, but maybe once a minute or once an hour, depending on the application.",
     displayName="Power on duration",
+    modellingRule="Optional",
     dataType=ns0.datatypes.Duration,
     value=0.0,
 )
 o6.reference(o6.ns["ns=padim;i=1318"], "i=17597", "ns=irdi;s=0112/2///61987#ABP550#001")
 ns0.vartypes.PropertyType(
-    nodeId="ns=padim;i=1323", browseName="ns=padim;SourceResidualLife", displayName="Residual operational life of radiation source", dataType=o6.Float, value=1.0
+    nodeId="ns=padim;i=1323",
+    browseName="ns=padim;SourceResidualLife",
+    displayName="Residual operational life of radiation source",
+    modellingRule="Optional",
+    dataType=o6.Float,
+    value=1.0,
 )
 o6.reference(o6.ns["ns=padim;i=1323"], "i=17597", "ns=irdi;s=0112/2///61987#ABP552#001")
 
@@ -538,11 +585,17 @@ class INonDispersiveInfraredSignalConditionSetType(ns0.objtypes.BaseInterfaceTyp
     sourceResidualLife: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=1323"])
 
 
-ns0.vartypes.DataItemType(nodeId="ns=padim;i=1347", browseName="ns=padim;TransmissionRatio", displayName="Transmission ratio", dataType=o6.Float, value=0.0)
+ns0.vartypes.DataItemType(
+    nodeId="ns=padim;i=1347", browseName="ns=padim;TransmissionRatio", displayName="Transmission ratio", modellingRule="Optional", dataType=o6.Float, value=0.0
+)
 o6.reference(o6.ns["ns=padim;i=1347"], "i=17597", "ns=irdi;s=0112/2///61987#ABP582#001")
-ns0.vartypes.DataItemType(nodeId="ns=padim;i=1348", browseName="ns=padim;SignalNoiseRatio", displayName="Signal/noise ratio", dataType=o6.Float, value=0.0)
+ns0.vartypes.DataItemType(
+    nodeId="ns=padim;i=1348", browseName="ns=padim;SignalNoiseRatio", displayName="Signal/noise ratio", modellingRule="Optional", dataType=o6.Float, value=0.0
+)
 o6.reference(o6.ns["ns=padim;i=1348"], "i=17597", "ns=irdi;s=0112/2///61987#ABP581#001")
-ns0.vartypes.DataItemType(nodeId="ns=padim;i=1349", browseName="ns=padim;SignalFitQuality", displayName="Signal fit quality", dataType=o6.Float, value=0.0, accessLevel=3)
+ns0.vartypes.DataItemType(
+    nodeId="ns=padim;i=1349", browseName="ns=padim;SignalFitQuality", displayName="Signal fit quality", modellingRule="Optional", dataType=o6.Float, value=0.0, accessLevel=3
+)
 o6.reference(o6.ns["ns=padim;i=1349"], "i=17597", "ns=irdi;s=0112/2///61987#ABP580#001")
 
 
@@ -556,9 +609,11 @@ class ITunableDiodeLaserSignalConditionSetType(ns0.objtypes.BaseInterfaceType):
     transmissionRatio: ns0.vartypes.DataItemType | None = o6.hasComponent(o6.ns["ns=padim;i=1347"])
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1360", browseName="ns=padim;SensorCleaningsCounter", displayName="CIP counter", dataType=o6.UInt32, value=0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1360", browseName="ns=padim;SensorCleaningsCounter", displayName="CIP counter", modellingRule="Optional", dataType=o6.UInt32, value=0)
 o6.reference(o6.ns["ns=padim;i=1360"], "i=17597", "ns=irdi;s=0112/2///61987#ABP546#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1361", browseName="ns=padim;SensorSterilisationsCounter", displayName="SIP counter", dataType=o6.UInt32, value=0)
+ns0.vartypes.PropertyType(
+    nodeId="ns=padim;i=1361", browseName="ns=padim;SensorSterilisationsCounter", displayName="SIP counter", modellingRule="Optional", dataType=o6.UInt32, value=0
+)
 o6.reference(o6.ns["ns=padim;i=1361"], "i=17597", "ns=irdi;s=0112/2///61987#ABP547#001")
 
 
@@ -573,9 +628,11 @@ class IPhSignalConditionSetType(ns0.objtypes.BaseInterfaceType):
     sensorSterilisationsCounter: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=1361"])
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1369", browseName="ns=padim;SensorCleaningsCounter", displayName="CIP counter", dataType=o6.UInt32, value=0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1369", browseName="ns=padim;SensorCleaningsCounter", displayName="CIP counter", modellingRule="Optional", dataType=o6.UInt32, value=0)
 o6.reference(o6.ns["ns=padim;i=1369"], "i=17597", "ns=irdi;s=0112/2///61987#ABP546#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1370", browseName="ns=padim;SensorSterilisationsCounter", displayName="SIP counter", dataType=o6.UInt32, value=0)
+ns0.vartypes.PropertyType(
+    nodeId="ns=padim;i=1370", browseName="ns=padim;SensorSterilisationsCounter", displayName="SIP counter", modellingRule="Optional", dataType=o6.UInt32, value=0
+)
 o6.reference(o6.ns["ns=padim;i=1370"], "i=17597", "ns=irdi;s=0112/2///61987#ABP547#001")
 
 
@@ -588,9 +645,11 @@ class IConductivitySignalConditionSetType(ns0.objtypes.BaseInterfaceType):
     temperatureCompensationStyle: ns0.vartypes.MultiStateDictionaryEntryDiscreteType | None
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1376", browseName="ns=padim;SensorCleaningsCounter", displayName="CIP counter", dataType=o6.UInt32, value=0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1376", browseName="ns=padim;SensorCleaningsCounter", displayName="CIP counter", modellingRule="Optional", dataType=o6.UInt32, value=0)
 o6.reference(o6.ns["ns=padim;i=1376"], "i=17597", "ns=irdi;s=0112/2///61987#ABP546#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1377", browseName="ns=padim;SensorSterilisationsCounter", displayName="SIP counter", dataType=o6.UInt32, value=0)
+ns0.vartypes.PropertyType(
+    nodeId="ns=padim;i=1377", browseName="ns=padim;SensorSterilisationsCounter", displayName="SIP counter", modellingRule="Optional", dataType=o6.UInt32, value=0
+)
 o6.reference(o6.ns["ns=padim;i=1377"], "i=17597", "ns=irdi;s=0112/2///61987#ABP547#001")
 
 
@@ -603,7 +662,12 @@ class IAmperometricSignalConditionSetType(ns0.objtypes.BaseInterfaceType):
 
 
 ns0.vartypes.PropertyType(
-    nodeId="ns=padim;i=1384", browseName="ns=padim;SourceResidualLife", displayName="Residual operational life of radiation source", dataType=o6.Float, value=1.0
+    nodeId="ns=padim;i=1384",
+    browseName="ns=padim;SourceResidualLife",
+    displayName="Residual operational life of radiation source",
+    modellingRule="Optional",
+    dataType=o6.Float,
+    value=1.0,
 )
 o6.reference(o6.ns["ns=padim;i=1384"], "i=17597", "ns=irdi;s=0112/2///61987#ABP552#001")
 
@@ -619,7 +683,9 @@ class ITocSignalConditionSetType(ns0.objtypes.BaseInterfaceType):
     sourceResidualLife: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=1384"])
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1425", browseName="ns=padim;SensorT90", displayName="Settling time t90 at calibration", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(
+    nodeId="ns=padim;i=1425", browseName="ns=padim;SensorT90", displayName="Settling time t90 at calibration", modellingRule="Optional", dataType=o6.Float, value=0.0
+)
 o6.reference(o6.ns["ns=padim;i=1425"], "i=17597", "ns=irdi;s=0112/2///61987#ABP569#001")
 
 
@@ -630,7 +696,9 @@ class IPhCalibrationType(ns0.objtypes.BaseInterfaceType):
     sensorT90: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=1425"])
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1510", browseName="ns=padim;SensorT90", displayName="Settling time t90 at calibration", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(
+    nodeId="ns=padim;i=1510", browseName="ns=padim;SensorT90", displayName="Settling time t90 at calibration", modellingRule="Optional", dataType=o6.Float, value=0.0
+)
 o6.reference(o6.ns["ns=padim;i=1510"], "i=17597", "ns=irdi;s=0112/2///61987#ABP569#001")
 
 
@@ -642,9 +710,9 @@ class IAmperometricCalibrationType(ns0.objtypes.BaseInterfaceType):
     sensorT90: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=1510"])
 
 
-ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1512", browseName="ns=padim;CalibrationSetpoint", dataType=o6.Float, valueRank=-2)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1512", browseName="ns=padim;CalibrationSetpoint", modellingRule="Optional", dataType=o6.Float, valueRank=-2)
 o6.reference(o6.ns["ns=padim;i=1512"], "i=17597", "ns=irdi;s=<DictionaryEntryName>")
-ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1513", browseName="ns=padim;CalibrationActualValue", dataType=o6.Float, valueRank=-2)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=padim;i=1513", browseName="ns=padim;CalibrationActualValue", modellingRule="Optional", dataType=o6.Float, valueRank=-2)
 o6.reference(o6.ns["ns=padim;i=1513"], "i=17597", "ns=irdi;s=<DictionaryEntryName>")
 
 
@@ -663,12 +731,16 @@ class CalibrationPointSetType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=padim;i=1045", browseName="ns=padim;ICalibrationType", displayName="ICalibrationType", isAbstract=True)
 class ICalibrationType(ns0.objtypes.BaseInterfaceType):
-    calibrationPointSet: CalibrationPointSetType | None = o6.hasComponent(CalibrationPointSetType(nodeId="ns=padim;i=1283", browseName="ns=padim;CalibrationPointSet"))
+    calibrationPointSet: CalibrationPointSetType | None = o6.hasComponent(
+        CalibrationPointSetType(nodeId="ns=padim;i=1283", browseName="ns=padim;CalibrationPointSet", modellingRule="Optional")
+    )
     calibrationTimestamp: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=1307"])
     typeOfCalibration: ns0.vartypes.MultiStateDictionaryEntryDiscreteType | None
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1519", browseName="ns=padim;SensorT90", displayName="Settling time t90 at calibration", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(
+    nodeId="ns=padim;i=1519", browseName="ns=padim;SensorT90", displayName="Settling time t90 at calibration", modellingRule="Optional", dataType=o6.Float, value=0.0
+)
 o6.reference(o6.ns["ns=padim;i=1519"], "i=17597", "ns=irdi;s=0112/2///61987#ABP569#001")
 
 
@@ -682,9 +754,11 @@ class IOpticalFluorescenseQuenchingCalibrationType(ns0.objtypes.BaseInterfaceTyp
     sensorT90: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=1519"])
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1520", browseName="ns=padim;SensorCleaningsCounter", displayName="CIP counter", dataType=o6.UInt32, value=0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=1520", browseName="ns=padim;SensorCleaningsCounter", displayName="CIP counter", modellingRule="Optional", dataType=o6.UInt32, value=0)
 o6.reference(o6.ns["ns=padim;i=1520"], "i=17597", "ns=irdi;s=0112/2///61987#ABP546#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1522", browseName="ns=padim;SensorSterilisationsCounter", displayName="SIP counter", dataType=o6.UInt32, value=0)
+ns0.vartypes.PropertyType(
+    nodeId="ns=padim;i=1522", browseName="ns=padim;SensorSterilisationsCounter", displayName="SIP counter", modellingRule="Optional", dataType=o6.UInt32, value=0
+)
 o6.reference(o6.ns["ns=padim;i=1522"], "i=17597", "ns=irdi;s=0112/2///61987#ABP547#001")
 
 
@@ -701,7 +775,9 @@ class IOpticalFluorescenseQuenchingSignalConditionSetType(ns0.objtypes.BaseInter
     sensorSterilisationsCounter: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=1522"])
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=1529", browseName="ns=padim;ResidualLife", displayName="Residual operational life", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(
+    nodeId="ns=padim;i=1529", browseName="ns=padim;ResidualLife", displayName="Residual operational life", modellingRule="Optional", dataType=o6.Float, value=1.0
+)
 o6.reference(o6.ns["ns=padim;i=1529"], "i=17597", "ns=irdi;s=0112/2///61987#ABP595#001")
 
 
@@ -720,13 +796,15 @@ class GeneralDeviceConditionSetType(ns0.objtypes.BaseObjectType):
 class IGeneralDeviceConditionSetType(ns0.objtypes.BaseInterfaceType):
     deviceComponentConditions: ns0.objtypes.BaseObjectType | None
     generalDeviceConditions: GeneralDeviceConditionSetType | None = o6.hasComponent(
-        GeneralDeviceConditionSetType(nodeId="ns=padim;i=1279", browseName="ns=padim;GeneralDeviceConditions")
+        GeneralDeviceConditionSetType(nodeId="ns=padim;i=1279", browseName="ns=padim;GeneralDeviceConditions", modellingRule="Optional")
     )
 
 
 @o6.objecttype(nodeId="ns=padim;i=1097", browseName="ns=padim;InfraredSensorType", displayName="Infrared Sensor")
 class InfraredSensorType(ProcessAnalyserType):
-    deviceConditionSet: ns0.objtypes.BaseObjectType | None = o6.hasComponent(ns0.objtypes.BaseObjectType(nodeId="ns=padim;i=5010", browseName="ns=padim;DeviceConditionSet"))
+    deviceConditionSet: ns0.objtypes.BaseObjectType | None = o6.hasComponent(
+        ns0.objtypes.BaseObjectType(nodeId="ns=padim;i=5010", browseName="ns=padim;DeviceConditionSet", modellingRule="Optional")
+    )
 
 
 o6.reference(InfraredSensorType, "i=17597", "ns=irdi;s=0112/2///61987#ABP413#002")
@@ -734,7 +812,9 @@ o6.reference(InfraredSensorType, "i=17597", "ns=irdi;s=0112/2///61987#ABP413#002
 
 @o6.objecttype(nodeId="ns=padim;i=1098", browseName="ns=padim;AmperometricGasDetectorType", displayName="Amperometric Gas Detector")
 class AmperometricGasDetectorType(ProcessAnalyserType):
-    deviceConditionSet: ns0.objtypes.BaseObjectType | None = o6.hasComponent(ns0.objtypes.BaseObjectType(nodeId="ns=padim;i=5020", browseName="ns=padim;DeviceConditionSet"))
+    deviceConditionSet: ns0.objtypes.BaseObjectType | None = o6.hasComponent(
+        ns0.objtypes.BaseObjectType(nodeId="ns=padim;i=5020", browseName="ns=padim;DeviceConditionSet", modellingRule="Optional")
+    )
 
 
 o6.reference(AmperometricGasDetectorType, "i=17597", "ns=irdi;s=0112/2///61987#ABP415#002")
@@ -742,7 +822,9 @@ o6.reference(AmperometricGasDetectorType, "i=17597", "ns=irdi;s=0112/2///61987#A
 
 @o6.objecttype(nodeId="ns=padim;i=1099", browseName="ns=padim;CatalyticBeadSensorType", displayName="Catalytic Bead Sensor")
 class CatalyticBeadSensorType(ProcessAnalyserType):
-    deviceConditionSet: ns0.objtypes.BaseObjectType | None = o6.hasComponent(ns0.objtypes.BaseObjectType(nodeId="ns=padim;i=5030", browseName="ns=padim;DeviceConditionSet"))
+    deviceConditionSet: ns0.objtypes.BaseObjectType | None = o6.hasComponent(
+        ns0.objtypes.BaseObjectType(nodeId="ns=padim;i=5030", browseName="ns=padim;DeviceConditionSet", modellingRule="Optional")
+    )
 
 
 o6.reference(CatalyticBeadSensorType, "i=17597", "ns=irdi;s=0112/2///61987#ABP412#002")
@@ -778,11 +860,11 @@ class RamanSignalType(AnalyticalSignalType):
     signalConditionSet: ns0.objtypes.BaseObjectType | None
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6000", browseName="ns=padim;CalibrationRange1ResponseFactor", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6000", browseName="ns=padim;CalibrationRange1ResponseFactor", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6000"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ024#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6005", browseName="ns=padim;CalibrationRange2ResponseFactor", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6005", browseName="ns=padim;CalibrationRange2ResponseFactor", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6005"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ027#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6010", browseName="ns=padim;CalibrationRange3ResponseFactor", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6010", browseName="ns=padim;CalibrationRange3ResponseFactor", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6010"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ030#001")
 
 
@@ -799,11 +881,13 @@ class IGasChromatographCalibrationType(ns0.objtypes.BaseInterfaceType):
     calibrationRange3UpperRangeValue: ns0.vartypes.AnalogUnitType | None
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6015", browseName="ns=padim;ValveName", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0])
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6015", browseName="ns=padim;ValveName", modellingRule="Optional", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0])
 o6.reference(o6.ns["ns=padim;i=6015"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ046#001")
 # WARNING: The source NodeSet value does not match the declared DataType.
 # It is intentionally omitted; the server supplies a typed default.
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6016", browseName="ns=padim;ValveSwitchingCyclesCounter", dataType=o6.UInt32, valueRank=1, arrayDimensions=[0])
+ns0.vartypes.PropertyType(
+    nodeId="ns=padim;i=6016", browseName="ns=padim;ValveSwitchingCyclesCounter", modellingRule="Optional", dataType=o6.UInt32, valueRank=1, arrayDimensions=[0]
+)
 o6.reference(o6.ns["ns=padim;i=6016"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ007#001")
 
 
@@ -815,9 +899,9 @@ class IGasChromatographDeviceConditionSetType(ns0.objtypes.BaseInterfaceType):
     valveSwitchingCyclesCounter: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=6016"])
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6040", browseName="ns=padim;Watchdog", dataType=o6.Boolean, value=False)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6040", browseName="ns=padim;Watchdog", modellingRule="Optional", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=padim;i=6040"], "i=17597", "ns=irdi;s=0112/2///61987#ABP996#002")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6041", browseName="ns=padim;RemainingDataStorageCapacity", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6041", browseName="ns=padim;RemainingDataStorageCapacity", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6041"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ039#001")
 
 
@@ -827,9 +911,9 @@ class IFtnirOrFtirDeviceConditionSetType(ns0.objtypes.BaseInterfaceType):
     watchdog: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=6040"])
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6042", browseName="ns=padim;Watchdog", dataType=o6.Boolean, value=False)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6042", browseName="ns=padim;Watchdog", modellingRule="Optional", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=padim;i=6042"], "i=17597", "ns=irdi;s=0112/2///61987#ABP996#002")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6043", browseName="ns=padim;RemainingDataStorageCapacity", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6043", browseName="ns=padim;RemainingDataStorageCapacity", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6043"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ039#001")
 
 
@@ -839,9 +923,9 @@ class IDiodeArrayDeviceConditionSetType(ns0.objtypes.BaseInterfaceType):
     watchdog: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=6042"])
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6052", browseName="ns=padim;Watchdog", dataType=o6.Boolean, value=False)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6052", browseName="ns=padim;Watchdog", modellingRule="Optional", dataType=o6.Boolean, value=False)
 o6.reference(o6.ns["ns=padim;i=6052"], "i=17597", "ns=irdi;s=0112/2///61987#ABP996#002")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6053", browseName="ns=padim;RemainingDataStorageCapacity", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6053", browseName="ns=padim;RemainingDataStorageCapacity", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6053"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ039#001")
 
 
@@ -851,23 +935,23 @@ class IRamanDeviceConditionSetType(ns0.objtypes.BaseInterfaceType):
     watchdog: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=6052"])
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6074", browseName="ns=padim;SensorNextCalibrationFixed", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6074", browseName="ns=padim;SensorNextCalibrationFixed", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6074"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ016#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6075", browseName="ns=padim;SensorNextCalibrationDynamic", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6075", browseName="ns=padim;SensorNextCalibrationDynamic", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6075"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ017#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6076", browseName="ns=padim;PowerOnDurationSensor", dataType=ns0.datatypes.Duration, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6076", browseName="ns=padim;PowerOnDurationSensor", modellingRule="Optional", dataType=ns0.datatypes.Duration, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6076"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ010#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6077", browseName="ns=padim;SensingElementResidualLife", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6077", browseName="ns=padim;SensingElementResidualLife", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6077"], "i=17597", "ns=irdi;s=0112/2///61987#ABP584#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6078", browseName="ns=padim;RelativeGasFlowRate", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6078", browseName="ns=padim;RelativeGasFlowRate", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6078"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ011#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6079", browseName="ns=padim;ConsumedSensorCapacity", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6079", browseName="ns=padim;ConsumedSensorCapacity", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6079"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ018#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6080", browseName="ns=padim;RangeExceedancePeakValue", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6080", browseName="ns=padim;RangeExceedancePeakValue", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6080"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ019#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6081", browseName="ns=padim;RangeExceedanceDuration", dataType=ns0.datatypes.Duration, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6081", browseName="ns=padim;RangeExceedanceDuration", modellingRule="Optional", dataType=ns0.datatypes.Duration, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6081"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ020#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6082", browseName="ns=padim;SensingElementResidualSensitivity", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6082", browseName="ns=padim;SensingElementResidualSensitivity", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6082"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ040#001")
 
 
@@ -887,11 +971,11 @@ class IAmperometricGasDetectorSignalConditionSetType(ns0.objtypes.BaseInterfaceT
     sensorNextCalibrationFixed: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=6074"])
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6125", browseName="ns=padim;TailingFactor", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6125", browseName="ns=padim;TailingFactor", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6125"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ033#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6130", browseName="ns=padim;InjectionTime", dataType=o6.DateTime, value=o6.DateTime("1601-01-01T00:00:00Z"))
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6130", browseName="ns=padim;InjectionTime", modellingRule="Optional", dataType=o6.DateTime, value=o6.DateTime("1601-01-01T00:00:00Z"))
 o6.reference(o6.ns["ns=padim;i=6130"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ006#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6131", browseName="ns=padim;ComponentName", dataType=o6.String)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6131", browseName="ns=padim;ComponentName", modellingRule="Optional", dataType=o6.String)
 o6.reference(o6.ns["ns=padim;i=6131"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ045#001")
 
 
@@ -907,15 +991,15 @@ class IGasChromatographSignalConditionSetType(ns0.objtypes.BaseInterfaceType):
     tailingFactor: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=6125"])
 
 
-ns0.vartypes.DataItemType(nodeId="ns=padim;i=6168", browseName="ns=padim;TransmissionRatio", dataType=o6.Float, value=0.0)
+ns0.vartypes.DataItemType(nodeId="ns=padim;i=6168", browseName="ns=padim;TransmissionRatio", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6168"], "i=17597", "ns=irdi;s=0112/2///61987#ABP582#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6171", browseName="ns=padim;MahalanobisDistance", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6171", browseName="ns=padim;MahalanobisDistance", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6171"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ037#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6172", browseName="ns=padim;SpectralResidual", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6172", browseName="ns=padim;SpectralResidual", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6172"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ038#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6173", browseName="ns=padim;ElectronicsReadNoise", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6173", browseName="ns=padim;ElectronicsReadNoise", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6173"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ057#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6174", browseName="ns=padim;LaserResidualLife", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6174", browseName="ns=padim;LaserResidualLife", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6174"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ044#001")
 
 
@@ -929,13 +1013,13 @@ class IFtnirOrFtirSignalConditionSetType(ns0.objtypes.BaseInterfaceType):
     transmissionRatio: ns0.vartypes.DataItemType | None = o6.hasComponent(o6.ns["ns=padim;i=6168"])
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6187", browseName="ns=padim;SourceResidualLife", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6187", browseName="ns=padim;SourceResidualLife", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6187"], "i=17597", "ns=irdi;s=0112/2///61987#ABP552#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6190", browseName="ns=padim;MahalanobisDistance", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6190", browseName="ns=padim;MahalanobisDistance", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6190"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ037#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6191", browseName="ns=padim;SpectralResidual", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6191", browseName="ns=padim;SpectralResidual", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6191"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ038#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6192", browseName="ns=padim;ElectronicsReadNoise", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6192", browseName="ns=padim;ElectronicsReadNoise", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6192"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ057#001")
 
 
@@ -948,13 +1032,13 @@ class IDiodeArraySignalConditionSetType(ns0.objtypes.BaseInterfaceType):
     spectralResidual: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=6191"])
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6206", browseName="ns=padim;SourceResidualLife", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6206", browseName="ns=padim;SourceResidualLife", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6206"], "i=17597", "ns=irdi;s=0112/2///61987#ABP552#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6209", browseName="ns=padim;MahalanobisDistance", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6209", browseName="ns=padim;MahalanobisDistance", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6209"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ037#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6210", browseName="ns=padim;SpectralResidual", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6210", browseName="ns=padim;SpectralResidual", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6210"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ038#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6211", browseName="ns=padim;ElectronicsReadNoise", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6211", browseName="ns=padim;ElectronicsReadNoise", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6211"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ057#001")
 
 
@@ -967,21 +1051,21 @@ class IRamanSignalConditionSetType(ns0.objtypes.BaseInterfaceType):
     spectralResidual: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=6210"])
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6228", browseName="ns=padim;SourceResidualLife", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6228", browseName="ns=padim;SourceResidualLife", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6228"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ041#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6229", browseName="ns=padim;TransmissionRatio", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6229", browseName="ns=padim;TransmissionRatio", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6229"], "i=17597", "ns=irdi;s=0112/2///61987#ABP582#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6230", browseName="ns=padim;SensorNextCalibrationFixed", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6230", browseName="ns=padim;SensorNextCalibrationFixed", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6230"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ016#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6231", browseName="ns=padim;SensorNextCalibrationDynamic", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6231", browseName="ns=padim;SensorNextCalibrationDynamic", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6231"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ017#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6232", browseName="ns=padim;PowerOnDurationSensor", dataType=ns0.datatypes.Duration, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6232", browseName="ns=padim;PowerOnDurationSensor", modellingRule="Optional", dataType=ns0.datatypes.Duration, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6232"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ010#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6233", browseName="ns=padim;SensingElementResidualLife", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6233", browseName="ns=padim;SensingElementResidualLife", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6233"], "i=17597", "ns=irdi;s=0112/2///61987#ABP584#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6234", browseName="ns=padim;RelativeGasFlowRate", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6234", browseName="ns=padim;RelativeGasFlowRate", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6234"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ011#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6235", browseName="ns=padim;SensingElementResidualSensitivity", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6235", browseName="ns=padim;SensingElementResidualSensitivity", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6235"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ040#001")
 
 
@@ -998,7 +1082,7 @@ class IInfraredSignalConditionSetType(ns0.objtypes.BaseInterfaceType):
     transmissionRatio: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=padim;i=6229"])
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6250", browseName="ns=padim;SensingElementResidualLife", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6250", browseName="ns=padim;SensingElementResidualLife", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6250"], "i=17597", "ns=irdi;s=0112/2///61987#ABP584#001")
 
 
@@ -1011,17 +1095,17 @@ class IZirconiumDioxideSignalConditionSetType(ns0.objtypes.BaseInterfaceType):
     sensingElementTemperature: ns0.vartypes.AnalogUnitType | None
 
 
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6255", browseName="ns=padim;SensorNextCalibrationFixed", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6255", browseName="ns=padim;SensorNextCalibrationFixed", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6255"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ016#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6256", browseName="ns=padim;SensorNextCalibrationDynamic", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6256", browseName="ns=padim;SensorNextCalibrationDynamic", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6256"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ017#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6257", browseName="ns=padim;PowerOnDurationSensor", dataType=ns0.datatypes.Duration, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6257", browseName="ns=padim;PowerOnDurationSensor", modellingRule="Optional", dataType=ns0.datatypes.Duration, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6257"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ010#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6258", browseName="ns=padim;SensingElementResidualLife", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6258", browseName="ns=padim;SensingElementResidualLife", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6258"], "i=17597", "ns=irdi;s=0112/2///61987#ABP584#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6259", browseName="ns=padim;RelativeGasFlowRate", dataType=o6.Float, value=0.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6259", browseName="ns=padim;RelativeGasFlowRate", modellingRule="Optional", dataType=o6.Float, value=0.0)
 o6.reference(o6.ns["ns=padim;i=6259"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ011#001")
-ns0.vartypes.PropertyType(nodeId="ns=padim;i=6262", browseName="ns=padim;SensingElementResidualSensitivity", dataType=o6.Float, value=1.0)
+ns0.vartypes.PropertyType(nodeId="ns=padim;i=6262", browseName="ns=padim;SensingElementResidualSensitivity", modellingRule="Optional", dataType=o6.Float, value=1.0)
 o6.reference(o6.ns["ns=padim;i=6262"], "i=17597", "ns=irdi;s=0112/2///61987#ABQ040#001")
 
 

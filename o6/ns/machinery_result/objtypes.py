@@ -104,6 +104,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machinery_result;i=7001",
     browseName="GenerateFileForRead",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machinery_result;i=6035"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machinery_result;i=6036"]),
 )
@@ -181,6 +182,7 @@ o6.call(
     nodeId="ns=machinery_result;i=7005",
     browseName="ns=machinery_result;GetResultById",
     description="The server shall return to each client requesting result data a system-wide unique handle identifying the result set / client combination. This handle should be used by the client to indicate to the server that the result data is no longer needed, allowing the server to optimize its resource handling.\nIf the instance of ResultManagementType does not support the ReleaseResultHandle Method, the resultHandle should always be set to 0.\nIf the error is set to a value other than 0, the resultHandle may be set to 0.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machinery_result;i=6048"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machinery_result;i=6049"]),
 )
@@ -267,6 +269,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machinery_result;i=7006",
     browseName="ns=machinery_result;GetResultIdListFiltered",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machinery_result;i=6050"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machinery_result;i=6051"]),
 )
@@ -314,6 +317,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machinery_result;i=7007",
     browseName="ns=machinery_result;ReleaseResultHandle",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machinery_result;i=6052"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machinery_result;i=6053"]),
 )
@@ -375,6 +379,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machinery_result;i=7008",
     browseName="ns=machinery_result;GetLatestResult",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machinery_result;i=6054"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machinery_result;i=6055"]),
 )
@@ -428,6 +433,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machinery_result;i=7009",
     browseName="ns=machinery_result;AcknowledgeResults",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=machinery_result;i=6089"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machinery_result;i=6090"]),
 )

@@ -36,7 +36,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=scales;i=54", browseName="TareMode")
+@o6.enumtype(nodeId="ns=scales;i=54", browseName="ns=scales;TareMode")
 class TareMode(ns0.datatypes.Enumeration):
     NONE_0 = o6.enumfield(0, name="None_0")
     MEASURED_TARE_1 = o6.enumfield(1, name="MeasuredTare_1")
@@ -44,27 +44,27 @@ class TareMode(ns0.datatypes.Enumeration):
     PROPORTIONAL_TARE_3 = o6.enumfield(3, name="ProportionalTare_3")
 
 
-@o6.datatype(nodeId="ns=scales;i=57", browseName="RecipeThresholdType", defaultEncodingId="ns=scales;i=100")
+@o6.datatype(nodeId="ns=scales;i=57", browseName="ns=scales;RecipeThresholdType", defaultEncodingId="ns=scales;i=100")
 class RecipeThresholdType(ns0.datatypes.Structure):
-    thresholdId: o6.UInt32
-    thresholdNodeId: o6.NodeId | None
-    thresholdName: o6.LocalizedText
+    thresholdId: o6.UInt32 = o6.field(name="ThresholdId")
+    thresholdNodeId: o6.NodeId | None = o6.field(name="ThresholdNodeId")
+    thresholdName: o6.LocalizedText = o6.field(name="ThresholdName")
 
 
-@o6.datatype(nodeId="ns=scales;i=58", browseName="RecipeTargetValueType", defaultEncodingId="ns=scales;i=103")
+@o6.datatype(nodeId="ns=scales;i=58", browseName="ns=scales;RecipeTargetValueType", defaultEncodingId="ns=scales;i=103")
 class RecipeTargetValueType(ns0.datatypes.Structure):
-    targetValueId: o6.UInt32
-    targetValueNodeId: o6.NodeId | None
-    targetValueName: o6.LocalizedText
+    targetValueId: o6.UInt32 = o6.field(name="TargetValueId")
+    targetValueNodeId: o6.NodeId | None = o6.field(name="TargetValueNodeId")
+    targetValueName: o6.LocalizedText = o6.field(name="TargetValueName")
 
 
-@o6.datatype(nodeId="ns=scales;i=59", browseName="RecipeReportElementType", defaultEncodingId="ns=scales;i=106")
+@o6.datatype(nodeId="ns=scales;i=59", browseName="ns=scales;RecipeReportElementType", defaultEncodingId="ns=scales;i=106")
 class RecipeReportElementType(ns0.datatypes.Structure):
-    reportMessage: o6.LocalizedText
-    timestamp: o6.DateTime
+    reportMessage: o6.LocalizedText = o6.field(name="ReportMessage")
+    timestamp: o6.DateTime = o6.field(name="Timestamp")
 
 
-@o6.enumtype(nodeId="ns=scales;i=60", browseName="ToleranceState")
+@o6.enumtype(nodeId="ns=scales;i=60", browseName="ns=scales;ToleranceState")
 class ToleranceState(ns0.datatypes.Enumeration):
     IN_0 = o6.enumfield(0, name="In_0")
     UNDER_1 = o6.enumfield(1, name="Under_1")
@@ -72,7 +72,9 @@ class ToleranceState(ns0.datatypes.Enumeration):
     UNDER_OR_OVER_3 = o6.enumfield(3, name="UnderOrOver_3")
 
 
-@o6.enumtype(nodeId="ns=scales;i=61", browseName="EqualityAndRelationalOperator", description="This enumeration describes the different condition modes for an analog condition.")
+@o6.enumtype(
+    nodeId="ns=scales;i=61", browseName="ns=scales;EqualityAndRelationalOperator", description="This enumeration describes the different condition modes for an analog condition."
+)
 class EqualityAndRelationalOperator(ns0.datatypes.Enumeration):
     EQUAL_0 = o6.enumfield(0, name="Equal_0")
     NOT_EQUAL_1 = o6.enumfield(1, name="NotEqual_1")
@@ -82,32 +84,32 @@ class EqualityAndRelationalOperator(ns0.datatypes.Enumeration):
     GREATER_THAN_5 = o6.enumfield(5, name="GreaterThan_5")
 
 
-@o6.enumtype(nodeId="ns=scales;i=62", browseName="EdgeOperator")
+@o6.enumtype(nodeId="ns=scales;i=62", browseName="ns=scales;EdgeOperator")
 class EdgeOperator(ns0.datatypes.Enumeration):
     RISING_0 = o6.enumfield(0, name="Rising_0")
     FALLING_1 = o6.enumfield(1, name="Falling_1")
 
 
-@o6.datatype(nodeId="ns=scales;i=63", browseName="AbstractWeightType", defaultEncodingId="ns=scales;i=109", isAbstract=True)
+@o6.datatype(nodeId="ns=scales;i=63", browseName="ns=scales;AbstractWeightType", defaultEncodingId="ns=scales;i=109", isAbstract=True)
 class AbstractWeightType(ns0.datatypes.Structure):
     pass
 
 
-@o6.datatype(nodeId="ns=scales;i=55", browseName="WeightType", defaultEncodingId="ns=scales;i=88")
+@o6.datatype(nodeId="ns=scales;i=55", browseName="ns=scales;WeightType", defaultEncodingId="ns=scales;i=88")
 class WeightType(AbstractWeightType):
-    gross: o6.Double
-    net: o6.Double
-    tare: o6.Double
+    gross: o6.Double = o6.field(name="Gross")
+    net: o6.Double = o6.field(name="Net")
+    tare: o6.Double = o6.field(name="Tare")
 
 
-@o6.datatype(nodeId="ns=scales;i=56", browseName="PrintableWeightType", defaultEncodingId="ns=scales;i=97")
+@o6.datatype(nodeId="ns=scales;i=56", browseName="ns=scales;PrintableWeightType", defaultEncodingId="ns=scales;i=97")
 class PrintableWeightType(AbstractWeightType):
-    gross: o6.String
-    net: o6.String
-    tare: o6.String
+    gross: o6.String = o6.field(name="Gross")
+    net: o6.String = o6.field(name="Net")
+    tare: o6.String = o6.field(name="Tare")
 
 
-@o6.enumtype(nodeId="ns=scales;i=65", browseName="DraftShieldType")
+@o6.enumtype(nodeId="ns=scales;i=65", browseName="ns=scales;DraftShieldType")
 class DraftShieldType(ns0.datatypes.Enumeration):
     RIGHT_0 = o6.enumfield(0, name="Right_0")
     LEFT_1 = o6.enumfield(1, name="Left_1")
@@ -115,7 +117,7 @@ class DraftShieldType(ns0.datatypes.Enumeration):
     ALL_3 = o6.enumfield(3, name="All_3")
 
 
-@o6.enumtype(nodeId="ns=scales;i=30003", browseName="RateControlMode")
+@o6.enumtype(nodeId="ns=scales;i=30003", browseName="ns=scales;RateControlMode")
 class RateControlMode(ns0.datatypes.Enumeration):
     GRAVIMETRIC_0 = o6.enumfield(0, name="Gravimetric_0")
     VOLUMETRIC_1 = o6.enumfield(1, name="Volumetric_1")

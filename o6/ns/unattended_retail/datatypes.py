@@ -32,16 +32,16 @@ else:
     _VariableNode = object
 
 
-@o6.datatype(nodeId="ns=unattended_retail;i=3003", browseName="OptionDescriptionDataType", defaultEncodingId="ns=unattended_retail;i=5009")
+@o6.datatype(nodeId="ns=unattended_retail;i=3003", browseName="ns=unattended_retail;OptionDescriptionDataType", defaultEncodingId="ns=unattended_retail;i=5009")
 class OptionDescriptionDataType(ns0.datatypes.Structure):
-    optionId: o6.String
-    range: ns0.datatypes.Range
-    step: o6.Double
-    default: o6.Double
-    engineeringUnit: ns0.datatypes.EUInformation
+    optionId: o6.String = o6.field(name="OptionId")
+    range: ns0.datatypes.Range = o6.field(name="Range")
+    step: o6.Double = o6.field(name="Step")
+    default: o6.Double = o6.field(name="Default")
+    engineeringUnit: ns0.datatypes.EUInformation = o6.field(name="EngineeringUnit")
 
 
-@o6.enumtype(nodeId="ns=unattended_retail;i=3004", browseName="AvailabilityEnum")
+@o6.enumtype(nodeId="ns=unattended_retail;i=3004", browseName="ns=unattended_retail;AvailabilityEnum")
 class AvailabilityEnum(ns0.datatypes.Enumeration):
     AVAILABLE = o6.enumfield(0, name="Available")
     OUT_OF_ORDER = o6.enumfield(1, name="OutOfOrder")
@@ -49,19 +49,19 @@ class AvailabilityEnum(ns0.datatypes.Enumeration):
     EMPTY = o6.enumfield(3, name="Empty")
 
 
-@o6.datatype(nodeId="ns=unattended_retail;i=3005", browseName="PriceDataType", defaultEncodingId="ns=unattended_retail;i=5017")
+@o6.datatype(nodeId="ns=unattended_retail;i=3005", browseName="ns=unattended_retail;PriceDataType", defaultEncodingId="ns=unattended_retail;i=5017")
 class PriceDataType(ns0.datatypes.Structure):
-    amount: o6.UInt32
-    currency: ns0.datatypes.CurrencyUnitType
+    amount: o6.UInt32 = o6.field(name="Amount")
+    currency: ns0.datatypes.CurrencyUnitType = o6.field(name="Currency")
 
 
-@o6.datatype(nodeId="ns=unattended_retail;i=3006", browseName="OptionSelectionDataType", defaultEncodingId="ns=unattended_retail;i=5023")
+@o6.datatype(nodeId="ns=unattended_retail;i=3006", browseName="ns=unattended_retail;OptionSelectionDataType", defaultEncodingId="ns=unattended_retail;i=5023")
 class OptionSelectionDataType(ns0.datatypes.Structure):
-    optionId: o6.String
-    value: o6.Double
+    optionId: o6.String = o6.field(name="OptionId")
+    value: o6.Double = o6.field(name="Value")
 
 
-@o6.enumtype(nodeId="ns=unattended_retail;i=3007", browseName="AssetConfigurationEnum")
+@o6.enumtype(nodeId="ns=unattended_retail;i=3007", browseName="ns=unattended_retail;AssetConfigurationEnum")
 class AssetConfigurationEnum(ns0.datatypes.Enumeration):
     ACCEPT_TO_CASHBOX_OR_STACKER = o6.enumfield(0, name="AcceptToCashboxOrStacker")
     ACCEPT_TO_RECYCLER_OR_TUBE = o6.enumfield(1, name="AcceptToRecyclerOrTube")
@@ -70,21 +70,21 @@ class AssetConfigurationEnum(ns0.datatypes.Enumeration):
     REJECT = o6.enumfield(4, name="Reject")
 
 
-@o6.datatype(nodeId="ns=unattended_retail;i=3008", browseName="SelectionDescriptionDataType", defaultEncodingId="ns=unattended_retail;i=5012")
+@o6.datatype(nodeId="ns=unattended_retail;i=3008", browseName="ns=unattended_retail;SelectionDescriptionDataType", defaultEncodingId="ns=unattended_retail;i=5012")
 class SelectionDescriptionDataType(ns0.datatypes.Structure):
-    selectionId: o6.String
-    availableOptionIds: list[o6.String] = o6.field(arrayDimensions=[0])
-    isStoppable: o6.Boolean
+    selectionId: o6.String = o6.field(name="SelectionId")
+    availableOptionIds: list[o6.String] = o6.field(name="AvailableOptionIds", arrayDimensions=[0])
+    isStoppable: o6.Boolean = o6.field(name="IsStoppable")
 
 
-@o6.datatype(nodeId="ns=unattended_retail;i=3009", browseName="DeliveryRequestDataType", defaultEncodingId="ns=unattended_retail;i=5020")
+@o6.datatype(nodeId="ns=unattended_retail;i=3009", browseName="ns=unattended_retail;DeliveryRequestDataType", defaultEncodingId="ns=unattended_retail;i=5020")
 class DeliveryRequestDataType(ns0.datatypes.Structure):
-    transactionId: o6.UInt64
-    selectionId: o6.String
-    options: list[OptionSelectionDataType] = o6.field(arrayDimensions=[0])
+    transactionId: o6.UInt64 = o6.field(name="TransactionId")
+    selectionId: o6.String = o6.field(name="SelectionId")
+    options: list[OptionSelectionDataType] = o6.field(name="Options", arrayDimensions=[0])
 
 
-@o6.enumtype(nodeId="ns=unattended_retail;i=3010", browseName="MachineEngineWorkingStatusEnum")
+@o6.enumtype(nodeId="ns=unattended_retail;i=3010", browseName="ns=unattended_retail;MachineEngineWorkingStatusEnum")
 class MachineEngineWorkingStatusEnum(ns0.datatypes.Enumeration):
     INITIALIZING = o6.enumfield(0, name="Initializing")
     WAITING_FOR_TEMPERATURE = o6.enumfield(1, name="WaitingForTemperature")
@@ -96,7 +96,7 @@ class MachineEngineWorkingStatusEnum(ns0.datatypes.Enumeration):
     ENERGY_SAVING_MODE = o6.enumfield(7, name="EnergySavingMode")
 
 
-@o6.enumtype(nodeId="ns=unattended_retail;i=3012", browseName="OutputStatusEnum")
+@o6.enumtype(nodeId="ns=unattended_retail;i=3012", browseName="ns=unattended_retail;OutputStatusEnum")
 class OutputStatusEnum(ns0.datatypes.Enumeration):
     FREE = o6.enumfield(0, name="Free")
     PRODUCT_NOT_TAKEN = o6.enumfield(1, name="ProductNotTaken")
@@ -106,16 +106,16 @@ class OutputStatusEnum(ns0.datatypes.Enumeration):
     VENDOR_SPECIFIC = o6.enumfield(5, name="VendorSpecific")
 
 
-@o6.datatype(nodeId="ns=unattended_retail;i=3014", browseName="PriceAndContextDataType", defaultEncodingId="ns=unattended_retail;i=5065")
+@o6.datatype(nodeId="ns=unattended_retail;i=3014", browseName="ns=unattended_retail;PriceAndContextDataType", defaultEncodingId="ns=unattended_retail;i=5065")
 class PriceAndContextDataType(PriceDataType):
-    amount: o6.UInt32
-    currency: ns0.datatypes.CurrencyUnitType
-    priceListId: o6.String
-    tax: o6.Double
-    discountSurcharge: o6.Int32
+    amount: o6.UInt32 = o6.field(name="Amount")
+    currency: ns0.datatypes.CurrencyUnitType = o6.field(name="Currency")
+    priceListId: o6.String = o6.field(name="PriceListId")
+    tax: o6.Double = o6.field(name="Tax")
+    discountSurcharge: o6.Int32 = o6.field(name="DiscountSurcharge")
 
 
-@o6.enumtype(nodeId="ns=unattended_retail;i=3015", browseName="DeliveryStatusEnum")
+@o6.enumtype(nodeId="ns=unattended_retail;i=3015", browseName="ns=unattended_retail;DeliveryStatusEnum")
 class DeliveryStatusEnum(ns0.datatypes.Enumeration):
     READY_TO_DELIVER = o6.enumfield(0, name="ReadyToDeliver")
     DELIVERY_STARTED = o6.enumfield(1, name="DeliveryStarted")
@@ -124,48 +124,48 @@ class DeliveryStatusEnum(ns0.datatypes.Enumeration):
     DELIVERY_CANNOT_START = o6.enumfield(4, name="DeliveryCannotStart")
 
 
-@o6.datatype(nodeId="ns=unattended_retail;i=3011", browseName="OutputDeliveryStatusDataType", defaultEncodingId="ns=unattended_retail;i=5031")
+@o6.datatype(nodeId="ns=unattended_retail;i=3011", browseName="ns=unattended_retail;OutputDeliveryStatusDataType", defaultEncodingId="ns=unattended_retail;i=5031")
 class OutputDeliveryStatusDataType(ns0.datatypes.Structure):
-    status: DeliveryStatusEnum
-    outputId: o6.UInt16
+    status: DeliveryStatusEnum = o6.field(name="Status")
+    outputId: o6.UInt16 = o6.field(name="OutputId")
 
 
-@o6.datatype(nodeId="ns=unattended_retail;i=3013", browseName="DeliveryProgressDataType", defaultEncodingId="ns=unattended_retail;i=5026")
+@o6.datatype(nodeId="ns=unattended_retail;i=3013", browseName="ns=unattended_retail;DeliveryProgressDataType", defaultEncodingId="ns=unattended_retail;i=5026")
 class DeliveryProgressDataType(ns0.datatypes.Structure):
-    progressInPercent: o6.Byte
-    status: list[OutputDeliveryStatusDataType] = o6.field(arrayDimensions=[0])
-    transactionId: o6.UInt64
+    progressInPercent: o6.Byte = o6.field(name="ProgressInPercent")
+    status: list[OutputDeliveryStatusDataType] = o6.field(name="Status", arrayDimensions=[0])
+    transactionId: o6.UInt64 = o6.field(name="TransactionId")
 
 
-@o6.datatype(nodeId="ns=unattended_retail;i=3017", browseName="OutputStatusDataType", defaultEncodingId="ns=unattended_retail;i=5034")
+@o6.datatype(nodeId="ns=unattended_retail;i=3017", browseName="ns=unattended_retail;OutputStatusDataType", defaultEncodingId="ns=unattended_retail;i=5034")
 class OutputStatusDataType(ns0.datatypes.Structure):
-    outputId: o6.UInt16
-    status: OutputStatusEnum
-    vendorStatus: o6.Int32
+    outputId: o6.UInt16 = o6.field(name="OutputId")
+    status: OutputStatusEnum = o6.field(name="Status")
+    vendorStatus: o6.Int32 = o6.field(name="VendorStatus")
 
 
-@o6.datatype(nodeId="ns=unattended_retail;i=3020", browseName="AvailabilityStatusDataType", defaultEncodingId="ns=unattended_retail;i=5037")
+@o6.datatype(nodeId="ns=unattended_retail;i=3020", browseName="ns=unattended_retail;AvailabilityStatusDataType", defaultEncodingId="ns=unattended_retail;i=5037")
 class AvailabilityStatusDataType(ns0.datatypes.Structure):
-    id: o6.String
-    status: AvailabilityEnum
-    estimatedRemainingStock: o6.UInt32
+    id: o6.String = o6.field(name="Id")
+    status: AvailabilityEnum = o6.field(name="Status")
+    estimatedRemainingStock: o6.UInt32 = o6.field(name="EstimatedRemainingStock")
 
 
-@o6.datatype(nodeId="ns=unattended_retail;i=3021", browseName="SlotConfigurationDataType", defaultEncodingId="ns=unattended_retail;i=5082")
+@o6.datatype(nodeId="ns=unattended_retail;i=3021", browseName="ns=unattended_retail;SlotConfigurationDataType", defaultEncodingId="ns=unattended_retail;i=5082")
 class SlotConfigurationDataType(ns0.datatypes.Structure):
-    slotIndex: o6.Int32
-    supportedAssetListIndex: o6.UInt32
+    slotIndex: o6.Int32 = o6.field(name="SlotIndex")
+    supportedAssetListIndex: o6.UInt32 = o6.field(name="SupportedAssetListIndex")
 
 
-@o6.datatype(nodeId="ns=unattended_retail;i=3025", browseName="ActualPaymentDataType", defaultEncodingId="ns=unattended_retail;i=5071")
+@o6.datatype(nodeId="ns=unattended_retail;i=3025", browseName="ns=unattended_retail;ActualPaymentDataType", defaultEncodingId="ns=unattended_retail;i=5071")
 class ActualPaymentDataType(ns0.datatypes.Structure):
-    paymentMode: o6.String
-    paymentDevice: o6.String
-    userId: o6.String
-    monetaryValue: PriceDataType
+    paymentMode: o6.String = o6.field(name="PaymentMode")
+    paymentDevice: o6.String = o6.field(name="PaymentDevice")
+    userId: o6.String = o6.field(name="UserId")
+    monetaryValue: PriceDataType = o6.field(name="MonetaryValue")
 
 
-@o6.enumtype(nodeId="ns=unattended_retail;i=3026", browseName="DeliveryAndPaymentStatusEnum")
+@o6.enumtype(nodeId="ns=unattended_retail;i=3026", browseName="ns=unattended_retail;DeliveryAndPaymentStatusEnum")
 class DeliveryAndPaymentStatusEnum(ns0.datatypes.Enumeration):
     DELIVERY_REQUEST_RECEIVED = o6.enumfield(0, name="DeliveryRequestReceived")
     PAYMENT_IN_EXECUTION = o6.enumfield(1, name="PaymentInExecution")
@@ -186,35 +186,35 @@ class DeliveryAndPaymentStatusEnum(ns0.datatypes.Enumeration):
     CANCELLED_BY_USER_REFUND_FAILED = o6.enumfield(16, name="CancelledByUserRefundFailed")
 
 
-@o6.datatype(nodeId="ns=unattended_retail;i=3022", browseName="TransactionProgressDataType", defaultEncodingId="ns=unattended_retail;i=5068")
+@o6.datatype(nodeId="ns=unattended_retail;i=3022", browseName="ns=unattended_retail;TransactionProgressDataType", defaultEncodingId="ns=unattended_retail;i=5068")
 class TransactionProgressDataType(ns0.datatypes.Structure):
-    transactionId: o6.UInt64
-    status: DeliveryAndPaymentStatusEnum
-    transactionFinished: o6.Boolean
-    paymentMode: o6.String
-    userId: o6.String
-    usedPrice: PriceAndContextDataType
+    transactionId: o6.UInt64 = o6.field(name="TransactionId")
+    status: DeliveryAndPaymentStatusEnum = o6.field(name="Status")
+    transactionFinished: o6.Boolean = o6.field(name="TransactionFinished")
+    paymentMode: o6.String = o6.field(name="PaymentMode")
+    userId: o6.String = o6.field(name="UserId")
+    usedPrice: PriceAndContextDataType = o6.field(name="UsedPrice")
 
 
-@o6.datatype(nodeId="ns=unattended_retail;i=3024", browseName="BasketProgressDataType", defaultEncodingId="ns=unattended_retail;i=5043")
+@o6.datatype(nodeId="ns=unattended_retail;i=3024", browseName="ns=unattended_retail;BasketProgressDataType", defaultEncodingId="ns=unattended_retail;i=5043")
 class BasketProgressDataType(ns0.datatypes.Structure):
-    basketId: o6.UInt64
-    transactionIds: list[o6.UInt64] = o6.field(arrayDimensions=[0])
-    status: DeliveryAndPaymentStatusEnum
-    basketFinished: o6.Boolean
-    paymentMode: o6.String
-    userId: o6.String
-    usedPrice: PriceAndContextDataType
+    basketId: o6.UInt64 = o6.field(name="BasketId")
+    transactionIds: list[o6.UInt64] = o6.field(name="TransactionIds", arrayDimensions=[0])
+    status: DeliveryAndPaymentStatusEnum = o6.field(name="Status")
+    basketFinished: o6.Boolean = o6.field(name="BasketFinished")
+    paymentMode: o6.String = o6.field(name="PaymentMode")
+    userId: o6.String = o6.field(name="UserId")
+    usedPrice: PriceAndContextDataType = o6.field(name="UsedPrice")
 
 
-@o6.datatype(nodeId="ns=unattended_retail;i=3027", browseName="SelectionPriceDataType", defaultEncodingId="ns=unattended_retail;i=5046")
+@o6.datatype(nodeId="ns=unattended_retail;i=3027", browseName="ns=unattended_retail;SelectionPriceDataType", defaultEncodingId="ns=unattended_retail;i=5046")
 class SelectionPriceDataType(ns0.datatypes.Structure):
-    selectionId: o6.String
-    price: PriceAndContextDataType
-    optionsThatMayAffectThePrice: list[o6.String] = o6.field(arrayDimensions=[0])
+    selectionId: o6.String = o6.field(name="SelectionId")
+    price: PriceAndContextDataType = o6.field(name="Price")
+    optionsThatMayAffectThePrice: list[o6.String] = o6.field(name="OptionsThatMayAffectThePrice", arrayDimensions=[0])
 
 
-@o6.enumtype(nodeId="ns=unattended_retail;i=3029", browseName="PayoutStatusEnum")
+@o6.enumtype(nodeId="ns=unattended_retail;i=3029", browseName="ns=unattended_retail;PayoutStatusEnum")
 class PayoutStatusEnum(ns0.datatypes.Enumeration):
     IDLE = o6.enumfield(0, name="Idle")
     ONGOING = o6.enumfield(1, name="Ongoing")
@@ -222,7 +222,7 @@ class PayoutStatusEnum(ns0.datatypes.Enumeration):
     FAILED = o6.enumfield(3, name="Failed")
 
 
-@o6.enumtype(nodeId="ns=unattended_retail;i=3032", browseName="OperationStatusEnum")
+@o6.enumtype(nodeId="ns=unattended_retail;i=3032", browseName="ns=unattended_retail;OperationStatusEnum")
 class OperationStatusEnum(ns0.datatypes.Enumeration):
     IDLE = o6.enumfield(0, name="Idle")
     ONGOING = o6.enumfield(1, name="Ongoing")
@@ -232,22 +232,22 @@ class OperationStatusEnum(ns0.datatypes.Enumeration):
     FAILED_NOT_ENOUGH_CREDIT = o6.enumfield(5, name="Failed_NotEnoughCredit")
 
 
-@o6.datatype(nodeId="ns=unattended_retail;i=3033", browseName="SelectionDataType", defaultEncodingId="ns=unattended_retail;i=5052")
+@o6.datatype(nodeId="ns=unattended_retail;i=3033", browseName="ns=unattended_retail;SelectionDataType", defaultEncodingId="ns=unattended_retail;i=5052")
 class SelectionDataType(ns0.datatypes.Structure):
-    machineEngineProductInstanceUri: o6.String
-    selectionListVersion: o6.String
-    selectionId: o6.String
-    options: list[OptionSelectionDataType] = o6.field(arrayDimensions=[0])
+    machineEngineProductInstanceUri: o6.String = o6.field(name="MachineEngineProductInstanceUri")
+    selectionListVersion: o6.String = o6.field(name="SelectionListVersion")
+    selectionId: o6.String = o6.field(name="SelectionId")
+    options: list[OptionSelectionDataType] = o6.field(name="Options", arrayDimensions=[0])
 
 
-@o6.enumtype(nodeId="ns=unattended_retail;i=3036", browseName="PaymentModeOrDeviceStatusEnum")
+@o6.enumtype(nodeId="ns=unattended_retail;i=3036", browseName="ns=unattended_retail;PaymentModeOrDeviceStatusEnum")
 class PaymentModeOrDeviceStatusEnum(ns0.datatypes.Enumeration):
     AVAILABLE = o6.enumfield(0, name="Available")
     OFFLINE = o6.enumfield(1, name="Offline")
     OUT_OF_ORDER = o6.enumfield(2, name="OutOfOrder")
 
 
-@o6.enumtype(nodeId="ns=unattended_retail;i=3039", browseName="PaymentServiceStatusEnum")
+@o6.enumtype(nodeId="ns=unattended_retail;i=3039", browseName="ns=unattended_retail;PaymentServiceStatusEnum")
 class PaymentServiceStatusEnum(ns0.datatypes.Enumeration):
     AVAILABLE = o6.enumfield(0, name="Available")
     OFFLINE = o6.enumfield(1, name="Offline")

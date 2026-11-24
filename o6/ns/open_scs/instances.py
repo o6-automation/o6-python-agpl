@@ -293,7 +293,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
@@ -304,10 +304,16 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=open_scs;i=7001", browseName="CloseAndCommit", inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=6002"]), outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=6003"]))
+o6.call(
+    nodeId="ns=open_scs;i=7001",
+    browseName="CloseAndCommit",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=6002"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=6003"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=open_scs;i=6004",
@@ -317,7 +323,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("i=24"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
@@ -328,7 +334,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[3],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
         ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
@@ -336,7 +342,11 @@ ns0.vartypes.PropertyType(
     ],
 )
 o6.call(
-    nodeId="ns=open_scs;i=7002", browseName="GenerateFileForRead", inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=6004"]), outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=6005"])
+    nodeId="ns=open_scs;i=7002",
+    browseName="GenerateFileForRead",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=6004"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=6005"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -347,7 +357,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="GenerateOptions", dataType=o6.NodeId("i=24"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 ns0.vartypes.PropertyType(
@@ -358,14 +368,18 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="FileNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
         ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
 o6.call(
-    nodeId="ns=open_scs;i=7003", browseName="GenerateFileForWrite", inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=6006"]), outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=6007"])
+    nodeId="ns=open_scs;i=7003",
+    browseName="GenerateFileForWrite",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=6006"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=open_scs;i=6007"]),
 )
 
 ns0.objtypes.TemporaryFileTransferType(
@@ -373,7 +387,7 @@ ns0.objtypes.TemporaryFileTransferType(
     browseName="ns=open_scs;EPCISStream",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=6001", browseName="ClientProcessingTimeout", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=6001", browseName="ClientProcessingTimeout", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
         o6.hasComponent(o6.ns["ns=open_scs;i=7001"]),
         o6.hasComponent(o6.ns["ns=open_scs;i=7002"]),
         o6.hasComponent(o6.ns["ns=open_scs;i=7003"]),
@@ -392,12 +406,12 @@ http_opcfoundation_org_UA_OPENSCS_SER_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15015", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=True)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=open_scs;i=15016", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=open_scs;i=15016", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=open_scs;i=15017", browseName="StaticNumericNodeIdRange", dataType=ns0.datatypes.NumericRange, valueRank=1, arrayDimensions=[1], value=["1:65535"]
+                nodeId="ns=open_scs;i=15017", browseName="StaticNumericNodeIdRange", dataType=ns0.datatypes.NumericRange, valueRank=1, arrayDimensions=[0], value=["1:65535"]
             )
         ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=open_scs;i=15018", browseName="StaticStringNodeIdPattern", dataType=o6.String, value="")),

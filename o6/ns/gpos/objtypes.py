@@ -42,16 +42,27 @@ else:
 )
 class ZoneType(ns0.objtypes.BaseObjectType):
     building: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=gpos;i=6010", browseName="ns=gpos;Building", description="Name of the building", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=gpos;i=6010",
+            browseName="ns=gpos;Building",
+            description="Name of the building",
+            modellingRule="Optional",
+            dataType=o6.String,
+            accessLevel=3,
+            userAccessLevel=1,
+        )
     )
     floor: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=gpos;i=6011", browseName="ns=gpos;Floor", description="Name of the floor", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=gpos;i=6011", browseName="ns=gpos;Floor", description="Name of the floor", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
     groundControlPoints: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=gpos;i=6047",
             browseName="ns=gpos;GroundControlPoints",
             description="Points defining the extent of the zone",
+            modellingRule="Optional",
             dataType=gpos_datypes.GroundControlPointDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -64,6 +75,7 @@ class ZoneType(ns0.objtypes.BaseObjectType):
             nodeId="ns=gpos;i=6013",
             browseName="ns=gpos;IncompleteConfiguration",
             description="Indicates if the configuration is complete. FALSE if configuration is complete.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -74,6 +86,7 @@ class ZoneType(ns0.objtypes.BaseObjectType):
             nodeId="ns=gpos;i=6045",
             browseName="ns=gpos;Position",
             description="Describes a point (i.e. a position) in 2 or 3 dimensions.",
+            modellingRule="Optional",
             dataType=gpos_datypes.ThreeDGeographicCoordinateDataType,
             accessLevel=3,
             userAccessLevel=1,
@@ -84,17 +97,26 @@ class ZoneType(ns0.objtypes.BaseObjectType):
             nodeId="ns=gpos;i=6046",
             browseName="ns=gpos;Radius",
             description="For proximity-based systems. Describes the zone as a circular region with a given radius in meters around the position.",
+            modellingRule="Optional",
             dataType=o6.Double,
             accessLevel=3,
             userAccessLevel=1,
         )
     )
     site: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=gpos;i=6026", browseName="ns=gpos;Site", description="Name of the site", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=gpos;i=6026", browseName="ns=gpos;Site", description="Name of the site", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
     zoneId: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=gpos;i=6043", browseName="ns=gpos;ZoneId", description="A unique identifier of the zone (e.g. a GUID).", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            nodeId="ns=gpos;i=6043",
+            browseName="ns=gpos;ZoneId",
+            description="A unique identifier of the zone (e.g. a GUID).",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
 

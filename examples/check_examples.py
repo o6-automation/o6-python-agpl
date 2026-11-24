@@ -108,17 +108,21 @@ def _wait_for_server(
 
 
 def _stop_server(proc: subprocess.Popen) -> None:
-    if proc.poll() is not None:
-        return
     try:
-        proc.send_signal(signal.SIGINT)
-    except ProcessLookupError:
-        return
-    try:
-        proc.wait(timeout=5.0)
-    except subprocess.TimeoutExpired:
-        proc.kill()
-        proc.wait(timeout=5.0)
+        if proc.poll() is not None:
+            return
+        try:
+            proc.send_signal(signal.SIGINT)
+        except ProcessLookupError:
+            return
+        try:
+            proc.wait(timeout=5.0)
+        except subprocess.TimeoutExpired:
+            proc.kill()
+            proc.wait(timeout=5.0)
+    finally:
+        if proc.stdin is not None:
+            proc.stdin.close()
 
 
 def run_and_check(example_id: str, spec: ExampleSpec, log_dir: Path | None = None) -> bool:

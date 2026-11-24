@@ -58,7 +58,9 @@ class BaseComponentsType(ns0.objtypes.FolderType):
 @o6.objecttype(nodeId="ns=unattended_retail;i=1003", browseName="ns=unattended_retail;MachineEngineType", displayName="MachineEngineType")
 class MachineEngineType(ns0.objtypes.BaseObjectType):
     capabilities: MachineEngineCapabilitiesType
-    components: BaseComponentsType | None = o6.hasComponent(BaseComponentsType(nodeId="ns=unattended_retail;i=5041", browseName="ns=unattended_retail;Components"))
+    components: BaseComponentsType | None = o6.hasComponent(
+        BaseComponentsType(nodeId="ns=unattended_retail;i=5041", browseName="ns=unattended_retail;Components", modellingRule="Optional")
+    )
     configuration: BaseConfigurationType
     delivery: MachineEngineDeliveryType
     identification: IdentificationType
@@ -70,7 +72,9 @@ o6.reference(MachineEngineType, "i=41", ConfigurationChangedEventType)
 
 @o6.objecttype(nodeId="ns=unattended_retail;i=1005", browseName="ns=unattended_retail;PaymentServiceType", displayName="PaymentServiceType")
 class PaymentServiceType(ns0.objtypes.BaseObjectType):
-    components: BaseComponentsType | None = o6.hasComponent(BaseComponentsType(nodeId="ns=unattended_retail;i=5074", browseName="ns=unattended_retail;Components"))
+    components: BaseComponentsType | None = o6.hasComponent(
+        BaseComponentsType(nodeId="ns=unattended_retail;i=5074", browseName="ns=unattended_retail;Components", modellingRule="Optional")
+    )
     configuration: BaseConfigurationType
     delivery: PaymentServiceDeliveryType
     identification: IdentificationType
@@ -85,7 +89,9 @@ o6.reference(PaymentServiceType, "i=41", ConfigurationChangedEventType)
 
 @o6.objecttype(nodeId="ns=unattended_retail;i=1004", browseName="ns=unattended_retail;UIType", displayName="UIType")
 class UIType(ns0.objtypes.BaseObjectType):
-    components: BaseComponentsType | None = o6.hasComponent(BaseComponentsType(nodeId="ns=unattended_retail;i=5080", browseName="ns=unattended_retail;Components"))
+    components: BaseComponentsType | None = o6.hasComponent(
+        BaseComponentsType(nodeId="ns=unattended_retail;i=5080", browseName="ns=unattended_retail;Components", modellingRule="Optional")
+    )
     configuration: BaseConfigurationType
     identification: IdentificationType
 
@@ -99,25 +105,31 @@ class MachineEngineCapabilitiesType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.PropertyType(
             nodeId="ns=unattended_retail;i=6045",
             browseName="ns=unattended_retail;Options",
+            modellingRule="Mandatory",
             dataType=unattended_retail_datypes.OptionDescriptionDataType,
             valueRank=1,
             arrayDimensions=[0],
         )
     )
     outputIds: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6002", browseName="ns=unattended_retail;OutputIds", dataType=o6.UInt16, valueRank=1, arrayDimensions=[0])
+        ns0.vartypes.PropertyType(
+            nodeId="ns=unattended_retail;i=6002", browseName="ns=unattended_retail;OutputIds", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=1, arrayDimensions=[0]
+        )
     )
     selectionList: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=unattended_retail;i=6017",
             browseName="ns=unattended_retail;SelectionList",
+            modellingRule="Mandatory",
             dataType=unattended_retail_datypes.SelectionDescriptionDataType,
             valueRank=1,
             arrayDimensions=[0],
         )
     )
     selectionListVersion: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6049", browseName="ns=unattended_retail;SelectionListVersion", dataType=ns0.datatypes.SemanticVersionString)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=unattended_retail;i=6049", browseName="ns=unattended_retail;SelectionListVersion", modellingRule="Mandatory", dataType=ns0.datatypes.SemanticVersionString
+        )
     )
 
 
@@ -126,49 +138,57 @@ class MachineEngineCapabilitiesType(ns0.objtypes.BaseObjectType):
 )
 class IdentificationType(di.objtypes.FunctionalGroupType):
     deviceClass: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6011", browseName="ns=di;DeviceClass", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6011", browseName="ns=di;DeviceClass", modellingRule="Optional", dataType=o6.String)
     )
     deviceManual: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6010", browseName="ns=di;DeviceManual", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6010", browseName="ns=di;DeviceManual", modellingRule="Optional", dataType=o6.String)
     )
     deviceRevision: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6009", browseName="ns=di;DeviceRevision", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6009", browseName="ns=di;DeviceRevision", modellingRule="Optional", dataType=o6.String)
     )
     hardwareRevision: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6007", browseName="ns=di;HardwareRevision", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6007", browseName="ns=di;HardwareRevision", modellingRule="Optional", dataType=o6.String)
     )
     manufacturer: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6001", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6001", browseName="ns=di;Manufacturer", modellingRule="Mandatory", dataType=o6.LocalizedText)
     )
     manufacturerUri: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6003", browseName="ns=di;ManufacturerUri", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6003", browseName="ns=di;ManufacturerUri", modellingRule="Optional", dataType=o6.String)
     )
-    model: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6005", browseName="ns=di;Model", dataType=o6.LocalizedText))
+    model: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6005", browseName="ns=di;Model", modellingRule="Optional", dataType=o6.LocalizedText)
+    )
     patchIdentifiers: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6098", browseName="ns=di;PatchIdentifiers", dataType=o6.String, valueRank=1, arrayDimensions=[0])
+        ns0.vartypes.PropertyType(
+            nodeId="ns=unattended_retail;i=6098", browseName="ns=di;PatchIdentifiers", modellingRule="Optional", dataType=o6.String, valueRank=1, arrayDimensions=[0]
+        )
     )
-    productCode: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6006", browseName="ns=di;ProductCode", dataType=o6.String))
+    productCode: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6006", browseName="ns=di;ProductCode", modellingRule="Mandatory", dataType=o6.String)
+    )
     productInstanceUri: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6013", browseName="ns=di;ProductInstanceUri", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6013", browseName="ns=di;ProductInstanceUri", modellingRule="Mandatory", dataType=o6.String)
     )
     revisionCounter: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6014", browseName="ns=di;RevisionCounter", dataType=o6.Int32)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6014", browseName="ns=di;RevisionCounter", modellingRule="Optional", dataType=o6.Int32)
     )
     serialNumber: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6012", browseName="ns=di;SerialNumber", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6012", browseName="ns=di;SerialNumber", modellingRule="Optional", dataType=o6.String)
     )
     softwareReleaseDate: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6097", browseName="ns=di;SoftwareReleaseDate", dataType=o6.DateTime)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6097", browseName="ns=di;SoftwareReleaseDate", modellingRule="Optional", dataType=o6.DateTime)
     )
     softwareRevision: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6008", browseName="ns=di;SoftwareRevision", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6008", browseName="ns=di;SoftwareRevision", modellingRule="Mandatory", dataType=o6.String)
     )
 
 
 @o6.objecttype(nodeId="ns=unattended_retail;i=1014", browseName="ns=unattended_retail;PriceChangeEventType", displayName="PriceChangeEventType", isAbstract=True)
 class PriceChangeEventType(ns0.objtypes.BaseEventType):
     machineEngineProductInstanceUri: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6106", browseName="ns=unattended_retail;MachineEngineProductInstanceUri", dataType=ns0.datatypes.UriString)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=unattended_retail;i=6106", browseName="ns=unattended_retail;MachineEngineProductInstanceUri", modellingRule="Mandatory", dataType=ns0.datatypes.UriString
+        )
     )
 
 
@@ -176,7 +196,12 @@ class PriceChangeEventType(ns0.objtypes.BaseEventType):
 class MachineEngineStatusType(ns0.objtypes.BaseObjectType):
     activeEVADTSStatusCodes: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=unattended_retail;i=6158", browseName="ns=unattended_retail;ActiveEVADTSStatusCodes", dataType=o6.String, valueRank=1, arrayDimensions=[0]
+            nodeId="ns=unattended_retail;i=6158",
+            browseName="ns=unattended_retail;ActiveEVADTSStatusCodes",
+            modellingRule="Optional",
+            dataType=o6.String,
+            valueRank=1,
+            arrayDimensions=[0],
         )
     )
     mainColdTemperature: ns0.vartypes.AnalogUnitType | None
@@ -185,6 +210,7 @@ class MachineEngineStatusType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=unattended_retail;i=6115",
             browseName="ns=unattended_retail;OptionIdStatus",
+            modellingRule="Mandatory",
             dataType=unattended_retail_datypes.AvailabilityStatusDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -194,6 +220,7 @@ class MachineEngineStatusType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=unattended_retail;i=6004",
             browseName="ns=unattended_retail;OutputStatus",
+            modellingRule="Mandatory",
             dataType=unattended_retail_datypes.OutputStatusDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -203,6 +230,7 @@ class MachineEngineStatusType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=unattended_retail;i=6032",
             browseName="ns=unattended_retail;SelectionIdStatus",
+            modellingRule="Mandatory",
             dataType=unattended_retail_datypes.AvailabilityStatusDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -211,7 +239,10 @@ class MachineEngineStatusType(ns0.objtypes.BaseObjectType):
     sensorData_: ns0.vartypes.AnalogUnitType | None
     workingStatus: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=unattended_retail;i=6033", browseName="ns=unattended_retail;WorkingStatus", dataType=unattended_retail_datypes.MachineEngineWorkingStatusEnum
+            nodeId="ns=unattended_retail;i=6033",
+            browseName="ns=unattended_retail;WorkingStatus",
+            modellingRule="Mandatory",
+            dataType=unattended_retail_datypes.MachineEngineWorkingStatusEnum,
         )
     )
 
@@ -219,17 +250,23 @@ class MachineEngineStatusType(ns0.objtypes.BaseObjectType):
 @o6.objecttype(nodeId="ns=unattended_retail;i=1006", browseName="ns=unattended_retail;BaseConfigurationType", displayName="BaseConfigurationType")
 class BaseConfigurationType(ns0.objtypes.BaseObjectType):
     defaultCurrency: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6199", browseName="ns=unattended_retail;DefaultCurrency", dataType=ns0.datatypes.CurrencyUnitType)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=unattended_retail;i=6199", browseName="ns=unattended_retail;DefaultCurrency", modellingRule="Optional", dataType=ns0.datatypes.CurrencyUnitType
+        )
     )
     localTime: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6015", browseName="LocalTime", dataType=ns0.datatypes.TimeZoneDataType)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6015", browseName="LocalTime", modellingRule="Optional", dataType=ns0.datatypes.TimeZoneDataType)
     )
 
 
 @o6.objecttype(nodeId="ns=unattended_retail;i=1011", browseName="ns=unattended_retail;PriceServiceType", displayName="PriceServiceType")
 class PriceServiceType(ns0.objtypes.BaseObjectType):
-    components: BaseComponentsType | None = o6.hasComponent(BaseComponentsType(nodeId="ns=unattended_retail;i=5081", browseName="ns=unattended_retail;Components"))
-    configuration: BaseConfigurationType = o6.hasComponent(BaseConfigurationType(nodeId="ns=unattended_retail;i=5059", browseName="ns=unattended_retail;Configuration"))
+    components: BaseComponentsType | None = o6.hasComponent(
+        BaseComponentsType(nodeId="ns=unattended_retail;i=5081", browseName="ns=unattended_retail;Components", modellingRule="Optional")
+    )
+    configuration: BaseConfigurationType = o6.hasComponent(
+        BaseConfigurationType(nodeId="ns=unattended_retail;i=5059", browseName="ns=unattended_retail;Configuration", modellingRule="Mandatory")
+    )
     identification: IdentificationType
     priceInformation: PriceInformationType
 
@@ -241,12 +278,15 @@ o6.reference(PriceServiceType, "i=41", ConfigurationChangedEventType)
 class PaymentDeviceType(ns0.objtypes.BaseObjectType):
     identification: IdentificationType
     isEmulated: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6200", browseName="ns=unattended_retail;IsEmulated", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=unattended_retail;i=6200", browseName="ns=unattended_retail;IsEmulated", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+        )
     )
     slotConfigurationList: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=unattended_retail;i=6170",
             browseName="ns=unattended_retail;SlotConfigurationList",
+            modellingRule="Optional",
             dataType=unattended_retail_datypes.SlotConfigurationDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -256,6 +296,7 @@ class PaymentDeviceType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=unattended_retail;i=6208",
             browseName="ns=unattended_retail;Status",
+            modellingRule="Mandatory",
             dataType=unattended_retail_datypes.PaymentModeOrDeviceStatusEnum,
             accessLevel=3,
             userAccessLevel=1,
@@ -265,20 +306,30 @@ class PaymentDeviceType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.PropertyType(
             nodeId="ns=unattended_retail;i=6167",
             browseName="ns=unattended_retail;SupportedAssetList",
+            modellingRule="Optional",
             dataType=unattended_retail_datypes.PriceDataType,
             valueRank=1,
             arrayDimensions=[0],
         )
     )
     supportedAssetListVersion: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6168", browseName="ns=unattended_retail;SupportedAssetListVersion", dataType=ns0.datatypes.SemanticVersionString)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=unattended_retail;i=6168",
+            browseName="ns=unattended_retail;SupportedAssetListVersion",
+            modellingRule="Optional",
+            dataType=ns0.datatypes.SemanticVersionString,
+        )
     )
 
 
 @o6.objecttype(nodeId="ns=unattended_retail;i=1023", browseName="ns=unattended_retail;StandalonePaymentDeviceType", displayName="StandalonePaymentDeviceType", isAbstract=True)
 class StandalonePaymentDeviceType(PaymentDeviceType):
-    components: BaseComponentsType | None = o6.hasComponent(BaseComponentsType(nodeId="ns=unattended_retail;i=5086", browseName="ns=unattended_retail;Components"))
-    configuration: BaseConfigurationType = o6.hasComponent(BaseConfigurationType(nodeId="ns=unattended_retail;i=5085", browseName="ns=unattended_retail;Configuration"))
+    components: BaseComponentsType | None = o6.hasComponent(
+        BaseComponentsType(nodeId="ns=unattended_retail;i=5086", browseName="ns=unattended_retail;Components", modellingRule="Optional")
+    )
+    configuration: BaseConfigurationType = o6.hasComponent(
+        BaseConfigurationType(nodeId="ns=unattended_retail;i=5085", browseName="ns=unattended_retail;Configuration", modellingRule="Mandatory")
+    )
 
 
 o6.reference(StandalonePaymentDeviceType, "i=41", ConfigurationChangedEventType)
@@ -286,12 +337,21 @@ o6.reference(StandalonePaymentDeviceType, "i=41", ConfigurationChangedEventType)
 
 @o6.objecttype(nodeId="ns=unattended_retail;i=1002", browseName="ns=unattended_retail;AuditCollectType", displayName="AuditCollectType")
 class AuditCollectType(ns0.objtypes.BaseObjectType):
-    components: BaseComponentsType | None = o6.hasComponent(BaseComponentsType(nodeId="ns=unattended_retail;i=5007", browseName="ns=unattended_retail;Components"))
-    configuration: BaseConfigurationType = o6.hasComponent(BaseConfigurationType(nodeId="ns=unattended_retail;i=5006", browseName="ns=unattended_retail;Configuration"))
+    components: BaseComponentsType | None = o6.hasComponent(
+        BaseComponentsType(nodeId="ns=unattended_retail;i=5007", browseName="ns=unattended_retail;Components", modellingRule="Optional")
+    )
+    configuration: BaseConfigurationType = o6.hasComponent(
+        BaseConfigurationType(nodeId="ns=unattended_retail;i=5006", browseName="ns=unattended_retail;Configuration", modellingRule="Mandatory")
+    )
     identification: IdentificationType
     isCollectingAudit: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=unattended_retail;i=6245", browseName="ns=unattended_retail;IsCollectingAudit", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            nodeId="ns=unattended_retail;i=6245",
+            browseName="ns=unattended_retail;IsCollectingAudit",
+            modellingRule="Mandatory",
+            dataType=o6.Boolean,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
 
@@ -302,16 +362,16 @@ o6.reference(AuditCollectType, "i=41", ConfigurationChangedEventType)
 @o6.objecttype(nodeId="ns=unattended_retail;i=1013", browseName="ns=unattended_retail;VendingBaseAuditEventType", displayName="VendingBaseAuditEventType", isAbstract=True)
 class VendingBaseAuditEventType(ns0.objtypes.BaseEventType):
     category: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6031", browseName="ns=unattended_retail;Category", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6031", browseName="ns=unattended_retail;Category", modellingRule="Mandatory", dataType=o6.String)
     )
     eVADTSStatusCode: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6250", browseName="ns=unattended_retail;EVADTSStatusCode", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6250", browseName="ns=unattended_retail;EVADTSStatusCode", modellingRule="Optional", dataType=o6.String)
     )
     eVADTSStatusIsActive: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6251", browseName="ns=unattended_retail;EVADTSStatusIsActive", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6251", browseName="ns=unattended_retail;EVADTSStatusIsActive", modellingRule="Optional", dataType=o6.Boolean)
     )
     inMaintenanceMode: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6085", browseName="ns=unattended_retail;InMaintenanceMode", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6085", browseName="ns=unattended_retail;InMaintenanceMode", modellingRule="Mandatory", dataType=o6.Boolean)
     )
 
 
@@ -322,49 +382,63 @@ o6.reference(UIType, "i=41", VendingBaseAuditEventType)
 @o6.objecttype(nodeId="ns=unattended_retail;i=1020", browseName="ns=unattended_retail;VendingAuditEventType", displayName="VendingAuditEventType", isAbstract=True)
 class VendingAuditEventType(VendingBaseAuditEventType):
     counter: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6084", browseName="ns=unattended_retail;Counter", dataType=o6.UInt32)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6084", browseName="ns=unattended_retail;Counter", modellingRule="Optional", dataType=o6.UInt32)
     )
     failStatus: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=unattended_retail;i=6144", browseName="ns=unattended_retail;FailStatus", dataType=unattended_retail_datypes.DeliveryAndPaymentStatusEnum
+            nodeId="ns=unattended_retail;i=6144",
+            browseName="ns=unattended_retail;FailStatus",
+            modellingRule="Optional",
+            dataType=unattended_retail_datypes.DeliveryAndPaymentStatusEnum,
         )
     )
     monetaryValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6146", browseName="ns=unattended_retail;MonetaryValue", dataType=unattended_retail_datypes.PriceDataType)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=unattended_retail;i=6146", browseName="ns=unattended_retail;MonetaryValue", modellingRule="Optional", dataType=unattended_retail_datypes.PriceDataType
+        )
     )
     monetaryValueWithContext: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=unattended_retail;i=6086", browseName="ns=unattended_retail;MonetaryValueWithContext", dataType=unattended_retail_datypes.PriceAndContextDataType
+            nodeId="ns=unattended_retail;i=6086",
+            browseName="ns=unattended_retail;MonetaryValueWithContext",
+            modellingRule="Optional",
+            dataType=unattended_retail_datypes.PriceAndContextDataType,
         )
     )
     newSlotContent: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6147", browseName="ns=unattended_retail;NewSlotContent", dataType=o6.UInt32)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6147", browseName="ns=unattended_retail;NewSlotContent", modellingRule="Optional", dataType=o6.UInt32)
     )
     nonRefundedValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=unattended_retail;i=6246", browseName="ns=unattended_retail;NonRefundedValue", dataType=unattended_retail_datypes.PriceAndContextDataType
+            nodeId="ns=unattended_retail;i=6246",
+            browseName="ns=unattended_retail;NonRefundedValue",
+            modellingRule="Optional",
+            dataType=unattended_retail_datypes.PriceAndContextDataType,
         )
     )
     paymentDetails: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=unattended_retail;i=6148",
             browseName="ns=unattended_retail;PaymentDetails",
+            modellingRule="Optional",
             dataType=unattended_retail_datypes.ActualPaymentDataType,
             valueRank=1,
             arrayDimensions=[0],
         )
     )
     paymentMode: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6145", browseName="ns=unattended_retail;PaymentMode", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6145", browseName="ns=unattended_retail;PaymentMode", modellingRule="Optional", dataType=o6.String)
     )
     selection: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6149", browseName="ns=unattended_retail;Selection", dataType=unattended_retail_datypes.SelectionDataType)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=unattended_retail;i=6149", browseName="ns=unattended_retail;Selection", modellingRule="Optional", dataType=unattended_retail_datypes.SelectionDataType
+        )
     )
     slotIndex: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6150", browseName="ns=unattended_retail;SlotIndex", dataType=o6.Int32)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6150", browseName="ns=unattended_retail;SlotIndex", modellingRule="Optional", dataType=o6.Int32)
     )
     userId: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6151", browseName="ns=unattended_retail;UserId", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6151", browseName="ns=unattended_retail;UserId", modellingRule="Optional", dataType=o6.String)
     )
 
 
@@ -378,6 +452,7 @@ class VendingBasketAuditEventType(VendingAuditEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=unattended_retail;i=6247",
             browseName="ns=unattended_retail;BasketContent",
+            modellingRule="Optional",
             dataType=unattended_retail_datypes.SelectionDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -387,13 +462,21 @@ class VendingBasketAuditEventType(VendingAuditEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=unattended_retail;i=6248",
             browseName="ns=unattended_retail;MonetaryValuePerBasketContent",
+            modellingRule="Optional",
             dataType=unattended_retail_datypes.PriceAndContextDataType,
             valueRank=1,
             arrayDimensions=[0],
         )
     )
     partialSuccessful: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6249", browseName="ns=unattended_retail;PartialSuccessful", dataType=o6.Boolean, valueRank=1, arrayDimensions=[0])
+        ns0.vartypes.PropertyType(
+            nodeId="ns=unattended_retail;i=6249",
+            browseName="ns=unattended_retail;PartialSuccessful",
+            modellingRule="Optional",
+            dataType=o6.Boolean,
+            valueRank=1,
+            arrayDimensions=[0],
+        )
     )
 
 
@@ -426,6 +509,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7001",
     browseName="ns=unattended_retail;Deliver",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6019"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6152"]),
 )
@@ -463,6 +547,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7003",
     browseName="ns=unattended_retail;DeliverRequest",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6020"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6057"]),
 )
@@ -500,6 +585,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7005",
     browseName="ns=unattended_retail;GetPriceForSelections",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6075"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6101"]),
 )
@@ -536,6 +622,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7006",
     browseName="ns=unattended_retail;GetPriceForOneSelection",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6102"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6103"]),
 )
@@ -573,6 +660,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7007",
     browseName="ns=unattended_retail;GetPriceForBasket",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6104"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6105"]),
 )
@@ -591,18 +679,25 @@ o6.reference(PriceInformationType, "i=41", PriceChangeEventType)
 @o6.objecttype(nodeId="ns=unattended_retail;i=1018", browseName="ns=unattended_retail;PaymentModeType", displayName="PaymentModeType")
 class PaymentModeType(ns0.objtypes.BaseObjectType):
     availableCredit: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=unattended_retail;i=6110", browseName="ns=unattended_retail;AvailableCredit", dataType=unattended_retail_datypes.PriceDataType)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=unattended_retail;i=6110", browseName="ns=unattended_retail;AvailableCredit", modellingRule="Mandatory", dataType=unattended_retail_datypes.PriceDataType
+        )
     )
     currentlyUsedUserId: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=unattended_retail;i=6109", browseName="ns=unattended_retail;CurrentlyUsedUserId", dataType=o6.String)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=unattended_retail;i=6109", browseName="ns=unattended_retail;CurrentlyUsedUserId", modellingRule="Optional", dataType=o6.String)
     )
-    escrowRefund: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=unattended_retail;i=7008", browseName="ns=unattended_retail;EscrowRefund"))
+    escrowRefund: o6.node.MethodNode | None = o6.hasComponent(
+        o6.call(nodeId="ns=unattended_retail;i=7008", browseName="ns=unattended_retail;EscrowRefund", modellingRule="Optional")
+    )
     paymentModeId: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=unattended_retail;i=6108", browseName="ns=unattended_retail;PaymentModeId", dataType=o6.String)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=unattended_retail;i=6108", browseName="ns=unattended_retail;PaymentModeId", modellingRule="Mandatory", dataType=o6.String)
     )
     status: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=unattended_retail;i=6107", browseName="ns=unattended_retail;Status", dataType=unattended_retail_datypes.PaymentModeOrDeviceStatusEnum
+            nodeId="ns=unattended_retail;i=6107",
+            browseName="ns=unattended_retail;Status",
+            modellingRule="Mandatory",
+            dataType=unattended_retail_datypes.PaymentModeOrDeviceStatusEnum,
         )
     )
 
@@ -618,7 +713,12 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RequestedState", dataType=o6.NodeId("ns=unattended_retail;i=3039"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=unattended_retail;i=7009", browseName="ns=unattended_retail;RequestStatusChange", inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6114"]))
+o6.call(
+    nodeId="ns=unattended_retail;i=7009",
+    browseName="ns=unattended_retail;RequestStatusChange",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6114"]),
+)
 
 
 @o6.objecttype(nodeId="ns=unattended_retail;i=1024", browseName="ns=unattended_retail;PaymentServiceStatusType", displayName="PaymentServiceStatusType")
@@ -626,7 +726,7 @@ class PaymentServiceStatusType(ns0.objtypes.BaseObjectType):
     requestStatusChange: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=unattended_retail;i=7009"])
     status: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=unattended_retail;i=6113", browseName="ns=unattended_retail;Status", dataType=unattended_retail_datypes.PaymentServiceStatusEnum
+            nodeId="ns=unattended_retail;i=6113", browseName="ns=unattended_retail;Status", modellingRule="Mandatory", dataType=unattended_retail_datypes.PaymentServiceStatusEnum
         )
     )
 
@@ -665,6 +765,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7015",
     browseName="ns=unattended_retail;DeliverBasketRequest",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6131"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6132"]),
 )
@@ -694,6 +795,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7016",
     browseName="ns=unattended_retail;StopDelivery",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6154"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6156"]),
 )
@@ -706,6 +808,7 @@ class MachineEngineDeliveryType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=unattended_retail;i=6037",
             browseName="ns=unattended_retail;DeliveryProgress",
+            modellingRule="Mandatory",
             dataType=unattended_retail_datypes.DeliveryProgressDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -715,6 +818,7 @@ class MachineEngineDeliveryType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=unattended_retail;i=6064",
             browseName="ns=unattended_retail;DeliveryRequests",
+            modellingRule="Mandatory",
             dataType=unattended_retail_datypes.DeliveryRequestDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -748,6 +852,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7018",
     browseName="ns=unattended_retail;CancelDeliverRequest",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6160"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6161"]),
 )
@@ -761,6 +866,7 @@ class PaymentServiceDeliveryType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=unattended_retail;i=6062",
             browseName="ns=unattended_retail;TransactionProgress",
+            modellingRule="Mandatory",
             dataType=unattended_retail_datypes.TransactionProgressDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -793,6 +899,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7020",
     browseName="ns=unattended_retail;CancelDeliverBasketRequest",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6164"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6165"]),
 )
@@ -804,6 +911,7 @@ class PaymentServiceBasketDeliveryType(PaymentServiceDeliveryType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=unattended_retail;i=6130",
             browseName="ns=unattended_retail;BasketProgress",
+            modellingRule="Mandatory",
             dataType=unattended_retail_datypes.BasketProgressDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -842,6 +950,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7021",
     browseName="ns=unattended_retail;ChangeAssetConfigurationList",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6218"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6219"]),
 )
@@ -871,6 +980,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7022",
     browseName="ns=unattended_retail;PayoutByValue",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6220"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6221"]),
 )
@@ -900,6 +1010,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7023",
     browseName="ns=unattended_retail;PayoutBySupportedAssetList",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6222"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6223"]),
 )
@@ -929,6 +1040,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7024",
     browseName="ns=unattended_retail;ConsumeAvailableValue",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6224"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6225"]),
 )
@@ -940,6 +1052,7 @@ class PaymentCashDeviceType(StandalonePaymentDeviceType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=unattended_retail;i=6215",
             browseName="ns=unattended_retail;AssetConfigurationList",
+            modellingRule="Mandatory",
             dataType=unattended_retail_datypes.AssetConfigurationEnum,
             valueRank=1,
             arrayDimensions=[0],
@@ -953,6 +1066,7 @@ class PaymentCashDeviceType(StandalonePaymentDeviceType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=unattended_retail;i=6217",
             browseName="ns=unattended_retail;CurrentAvailableValue",
+            modellingRule="Mandatory",
             dataType=unattended_retail_datypes.PriceDataType,
             accessLevel=3,
             userAccessLevel=1,
@@ -962,6 +1076,7 @@ class PaymentCashDeviceType(StandalonePaymentDeviceType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=unattended_retail;i=6214",
             browseName="ns=unattended_retail;CurrentSlotContentList",
+            modellingRule="Optional",
             dataType=o6.UInt32,
             valueRank=1,
             arrayDimensions=[0],
@@ -975,6 +1090,7 @@ class PaymentCashDeviceType(StandalonePaymentDeviceType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=unattended_retail;i=6216",
             browseName="ns=unattended_retail;PayoutStatus",
+            modellingRule="Optional",
             dataType=unattended_retail_datypes.PayoutStatusEnum,
             accessLevel=3,
             userAccessLevel=1,
@@ -984,6 +1100,7 @@ class PaymentCashDeviceType(StandalonePaymentDeviceType):
         ns0.vartypes.PropertyType(
             nodeId="ns=unattended_retail;i=6211",
             browseName="ns=unattended_retail;SlotConfigurationList",
+            modellingRule="Mandatory",
             dataType=unattended_retail_datypes.SlotConfigurationDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -993,13 +1110,19 @@ class PaymentCashDeviceType(StandalonePaymentDeviceType):
         ns0.vartypes.PropertyType(
             nodeId="ns=unattended_retail;i=6212",
             browseName="ns=unattended_retail;SupportedAssetList",
+            modellingRule="Mandatory",
             dataType=unattended_retail_datypes.PriceDataType,
             valueRank=1,
             arrayDimensions=[0],
         )
     )
     supportedAssetListVersion: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6213", browseName="ns=unattended_retail;SupportedAssetListVersion", dataType=ns0.datatypes.SemanticVersionString)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=unattended_retail;i=6213",
+            browseName="ns=unattended_retail;SupportedAssetListVersion",
+            modellingRule="Mandatory",
+            dataType=ns0.datatypes.SemanticVersionString,
+        )
     )
 
 
@@ -1019,7 +1142,9 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=unattended_retail;i=7025", browseName="ns=unattended_retail;CancelPayout", outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6227"]))
+o6.call(
+    nodeId="ns=unattended_retail;i=7025", browseName="ns=unattended_retail;CancelPayout", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6227"])
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=unattended_retail;i=6228",
@@ -1046,6 +1171,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7026",
     browseName="ns=unattended_retail;HandleBillFromEscrow",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6228"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6229"]),
 )
@@ -1056,7 +1182,12 @@ class PaymentBillDeviceType(PaymentCashDeviceType):
     cancelPayout: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=unattended_retail;i=7025"])
     currentValueInEscrow: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=unattended_retail;i=6226", browseName="ns=unattended_retail;CurrentValueInEscrow", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+            nodeId="ns=unattended_retail;i=6226",
+            browseName="ns=unattended_retail;CurrentValueInEscrow",
+            modellingRule="Mandatory",
+            dataType=o6.UInt32,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     handleBillFromEscrow: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=unattended_retail;i=7026"])
@@ -1091,6 +1222,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7027",
     browseName="ns=unattended_retail;Approve",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6237"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6238"]),
 )
@@ -1106,7 +1238,12 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=unattended_retail;i=7028", browseName="ns=unattended_retail;CancelApproval", outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6239"]))
+o6.call(
+    nodeId="ns=unattended_retail;i=7028",
+    browseName="ns=unattended_retail;CancelApproval",
+    modellingRule="Mandatory",
+    outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6239"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=unattended_retail;i=6240",
@@ -1136,6 +1273,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7029",
     browseName="ns=unattended_retail;Recharge",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6240"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6241"]),
 )
@@ -1165,6 +1303,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7030",
     browseName="ns=unattended_retail;EnableOrDisable",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6243"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6244"]),
 )
@@ -1180,7 +1319,9 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=unattended_retail;i=7031", browseName="ns=unattended_retail;RefundLast", outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6242"]))
+o6.call(
+    nodeId="ns=unattended_retail;i=7031", browseName="ns=unattended_retail;RefundLast", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6242"])
+)
 
 
 @o6.objecttype(nodeId="ns=unattended_retail;i=1037", browseName="ns=unattended_retail;PaymentCashlessDeviceType", displayName="PaymentCashlessDeviceType")
@@ -1190,6 +1331,7 @@ class PaymentCashlessDeviceType(StandalonePaymentDeviceType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=unattended_retail;i=6233",
             browseName="ns=unattended_retail;ApproveStatus",
+            modellingRule="Mandatory",
             dataType=unattended_retail_datypes.OperationStatusEnum,
             accessLevel=3,
             userAccessLevel=1,
@@ -1200,6 +1342,7 @@ class PaymentCashlessDeviceType(StandalonePaymentDeviceType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=unattended_retail;i=6232",
             browseName="ns=unattended_retail;CurrentContentOnCard",
+            modellingRule="Mandatory",
             dataType=unattended_retail_datypes.PriceDataType,
             accessLevel=3,
             userAccessLevel=1,
@@ -1207,11 +1350,18 @@ class PaymentCashlessDeviceType(StandalonePaymentDeviceType):
     )
     enableOrDisable: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=unattended_retail;i=7030"])
     isEnabled: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=unattended_retail;i=6236", browseName="ns=unattended_retail;IsEnabled", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=unattended_retail;i=6236", browseName="ns=unattended_retail;IsEnabled", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+        )
     )
     maxRecharge: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=unattended_retail;i=6231", browseName="ns=unattended_retail;MaxRecharge", dataType=unattended_retail_datypes.PriceDataType, accessLevel=3, userAccessLevel=1
+            nodeId="ns=unattended_retail;i=6231",
+            browseName="ns=unattended_retail;MaxRecharge",
+            modellingRule="Mandatory",
+            dataType=unattended_retail_datypes.PriceDataType,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     recharge: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=unattended_retail;i=7029"])
@@ -1219,6 +1369,7 @@ class PaymentCashlessDeviceType(StandalonePaymentDeviceType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=unattended_retail;i=6234",
             browseName="ns=unattended_retail;RechargeStatus",
+            modellingRule="Optional",
             dataType=unattended_retail_datypes.OperationStatusEnum,
             accessLevel=3,
             userAccessLevel=1,
@@ -1229,13 +1380,16 @@ class PaymentCashlessDeviceType(StandalonePaymentDeviceType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=unattended_retail;i=6235",
             browseName="ns=unattended_retail;RefundLastStatus",
+            modellingRule="Mandatory",
             dataType=unattended_retail_datypes.OperationStatusEnum,
             accessLevel=3,
             userAccessLevel=1,
         )
     )
     userId: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=unattended_retail;i=6230", browseName="ns=unattended_retail;UserId", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=unattended_retail;i=6230", browseName="ns=unattended_retail;UserId", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
 
 

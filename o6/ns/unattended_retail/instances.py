@@ -117,7 +117,9 @@ unattended_retail_objtypes.BaseConfigurationType(
     nodeId="ns=unattended_retail;i=5002",
     browseName="ns=unattended_retail;Configuration",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6016", browseName="LocalTime", dataType=ns0.datatypes.TimeZoneDataType))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6016", browseName="LocalTime", modellingRule="Optional", dataType=ns0.datatypes.TimeZoneDataType))
+    ],
 )
 o6.reference(unattended_retail_objtypes.MachineEngineType, ns0.reftypes.HasComponent, o6.ns["ns=unattended_retail;i=5002"])
 ns0.vartypes.PropertyType(
@@ -153,7 +155,11 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=unattended_retail;i=6035",
     browseName="ns=unattended_retail;<SensorData>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6036", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6036", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=ns0.datatypes.Number,
 )
 o6.reference(unattended_retail_objtypes.MachineEngineStatusType, ns0.reftypes.HasComponent, o6.ns["ns=unattended_retail;i=6035"])
@@ -185,6 +191,7 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=unattended_retail;i=6052",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -207,6 +214,7 @@ ns0.vartypes.AnalogUnitType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=unattended_retail;i=6054",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -270,7 +278,9 @@ unattended_retail_objtypes.BaseConfigurationType(
     nodeId="ns=unattended_retail;i=5030",
     browseName="ns=unattended_retail;Configuration",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6076", browseName="LocalTime", dataType=ns0.datatypes.TimeZoneDataType))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6076", browseName="LocalTime", modellingRule="Optional", dataType=ns0.datatypes.TimeZoneDataType))
+    ],
 )
 o6.reference(unattended_retail_objtypes.PaymentServiceType, ns0.reftypes.HasComponent, o6.ns["ns=unattended_retail;i=5030"])
 ns0.vartypes.DataTypeDescriptionType(
@@ -349,7 +359,7 @@ http_opcfoundation_org_UA_UnattendedRetail_ = ns0.objtypes.NamespaceMetadataType
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),
@@ -399,6 +409,7 @@ unattended_retail_objtypes.MachineEngineCapabilitiesType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=unattended_retail;i=6018",
                 browseName="ns=unattended_retail;Options",
+                modellingRule="Mandatory",
                 dataType=unattended_retail_datypes.OptionDescriptionDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -408,16 +419,24 @@ unattended_retail_objtypes.MachineEngineCapabilitiesType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=unattended_retail;i=6046",
                 browseName="ns=unattended_retail;SelectionList",
+                modellingRule="Mandatory",
                 dataType=unattended_retail_datypes.SelectionDescriptionDataType,
                 valueRank=1,
                 arrayDimensions=[0],
             )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6050", browseName="ns=unattended_retail;SelectionListVersion", dataType=ns0.datatypes.SemanticVersionString)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=unattended_retail;i=6050",
+                browseName="ns=unattended_retail;SelectionListVersion",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.SemanticVersionString,
+            )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6099", browseName="ns=unattended_retail;OutputIds", dataType=o6.UInt16, valueRank=1, arrayDimensions=[0])
+            ns0.vartypes.PropertyType(
+                nodeId="ns=unattended_retail;i=6099", browseName="ns=unattended_retail;OutputIds", modellingRule="Mandatory", dataType=o6.UInt16, valueRank=1, arrayDimensions=[0]
+            )
         ),
     ],
 )
@@ -426,7 +445,9 @@ unattended_retail_objtypes.BaseConfigurationType(
     nodeId="ns=unattended_retail;i=5057",
     browseName="ns=unattended_retail;Configuration",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6116", browseName="LocalTime", dataType=ns0.datatypes.TimeZoneDataType))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6116", browseName="LocalTime", modellingRule="Optional", dataType=ns0.datatypes.TimeZoneDataType))
+    ],
 )
 o6.reference(unattended_retail_objtypes.UIType, ns0.reftypes.HasComponent, o6.ns["ns=unattended_retail;i=5057"])
 ns0.vartypes.DataTypeDescriptionType(
@@ -491,13 +512,17 @@ unattended_retail_objtypes.MachineEngineStatusType(
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=unattended_retail;i=6041", browseName="ns=unattended_retail;WorkingStatus", dataType=unattended_retail_datypes.MachineEngineWorkingStatusEnum
+                nodeId="ns=unattended_retail;i=6041",
+                browseName="ns=unattended_retail;WorkingStatus",
+                modellingRule="Mandatory",
+                dataType=unattended_retail_datypes.MachineEngineWorkingStatusEnum,
             )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=unattended_retail;i=6042",
                 browseName="ns=unattended_retail;SelectionIdStatus",
+                modellingRule="Mandatory",
                 dataType=unattended_retail_datypes.AvailabilityStatusDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -507,6 +532,7 @@ unattended_retail_objtypes.MachineEngineStatusType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=unattended_retail;i=6100",
                 browseName="ns=unattended_retail;OutputStatus",
+                modellingRule="Mandatory",
                 dataType=unattended_retail_datypes.OutputStatusDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -516,6 +542,7 @@ unattended_retail_objtypes.MachineEngineStatusType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=unattended_retail;i=6117",
                 browseName="ns=unattended_retail;OptionIdStatus",
+                modellingRule="Mandatory",
                 dataType=unattended_retail_datypes.AvailabilityStatusDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -523,7 +550,12 @@ unattended_retail_objtypes.MachineEngineStatusType(
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=unattended_retail;i=6159", browseName="ns=unattended_retail;ActiveEVADTSStatusCodes", dataType=o6.String, valueRank=1, arrayDimensions=[0]
+                nodeId="ns=unattended_retail;i=6159",
+                browseName="ns=unattended_retail;ActiveEVADTSStatusCodes",
+                modellingRule="Optional",
+                dataType=o6.String,
+                valueRank=1,
+                arrayDimensions=[0],
             )
         ),
     ],
@@ -534,10 +566,10 @@ unattended_retail_objtypes.IdentificationType(
     browseName="ns=di;Identification",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6133", browseName="ns=di;ProductInstanceUri", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6173", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6181", browseName="ns=di;ProductCode", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6189", browseName="ns=di;SoftwareRevision", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6133", browseName="ns=di;ProductInstanceUri", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6173", browseName="ns=di;Manufacturer", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6181", browseName="ns=di;ProductCode", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6189", browseName="ns=di;SoftwareRevision", modellingRule="Mandatory", dataType=o6.String)),
     ],
 )
 o6.reference(unattended_retail_objtypes.MachineEngineType, ns0.reftypes.HasComponent, o6.ns["ns=unattended_retail;i=5001"])
@@ -546,10 +578,10 @@ unattended_retail_objtypes.IdentificationType(
     browseName="ns=di;Identification",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6030", browseName="ns=di;ProductInstanceUri", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6174", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6182", browseName="ns=di;ProductCode", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6190", browseName="ns=di;SoftwareRevision", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6030", browseName="ns=di;ProductInstanceUri", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6174", browseName="ns=di;Manufacturer", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6182", browseName="ns=di;ProductCode", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6190", browseName="ns=di;SoftwareRevision", modellingRule="Mandatory", dataType=o6.String)),
     ],
 )
 o6.reference(unattended_retail_objtypes.AuditCollectType, ns0.reftypes.HasComponent, o6.ns["ns=unattended_retail;i=5005"])
@@ -558,10 +590,10 @@ unattended_retail_objtypes.IdentificationType(
     browseName="ns=di;Identification",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6134", browseName="ns=di;ProductInstanceUri", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6175", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6183", browseName="ns=di;ProductCode", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6191", browseName="ns=di;SoftwareRevision", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6134", browseName="ns=di;ProductInstanceUri", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6175", browseName="ns=di;Manufacturer", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6183", browseName="ns=di;ProductCode", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6191", browseName="ns=di;SoftwareRevision", modellingRule="Mandatory", dataType=o6.String)),
     ],
 )
 o6.reference(unattended_retail_objtypes.UIType, ns0.reftypes.HasComponent, o6.ns["ns=unattended_retail;i=5015"])
@@ -570,10 +602,10 @@ unattended_retail_objtypes.IdentificationType(
     browseName="ns=di;Identification",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6135", browseName="ns=di;ProductInstanceUri", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6176", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6184", browseName="ns=di;ProductCode", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6192", browseName="ns=di;SoftwareRevision", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6135", browseName="ns=di;ProductInstanceUri", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6176", browseName="ns=di;Manufacturer", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6184", browseName="ns=di;ProductCode", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6192", browseName="ns=di;SoftwareRevision", modellingRule="Mandatory", dataType=o6.String)),
     ],
 )
 o6.reference(unattended_retail_objtypes.PaymentServiceType, ns0.reftypes.HasComponent, o6.ns["ns=unattended_retail;i=5055"])
@@ -582,10 +614,10 @@ unattended_retail_objtypes.IdentificationType(
     browseName="ns=di;Identification",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6136", browseName="ns=di;ProductInstanceUri", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6177", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6185", browseName="ns=di;ProductCode", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6193", browseName="ns=di;SoftwareRevision", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6136", browseName="ns=di;ProductInstanceUri", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6177", browseName="ns=di;Manufacturer", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6185", browseName="ns=di;ProductCode", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6193", browseName="ns=di;SoftwareRevision", modellingRule="Mandatory", dataType=o6.String)),
     ],
 )
 o6.reference(unattended_retail_objtypes.PriceServiceType, ns0.reftypes.HasComponent, o6.ns["ns=unattended_retail;i=5058"])
@@ -594,31 +626,33 @@ unattended_retail_objtypes.IdentificationType(
     browseName="ns=di;Identification",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6166", browseName="ns=di;ProductInstanceUri", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6178", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6186", browseName="ns=di;ProductCode", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6194", browseName="ns=di;SoftwareRevision", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6166", browseName="ns=di;ProductInstanceUri", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6178", browseName="ns=di;Manufacturer", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6186", browseName="ns=di;ProductCode", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6194", browseName="ns=di;SoftwareRevision", modellingRule="Mandatory", dataType=o6.String)),
     ],
 )
 o6.reference(unattended_retail_objtypes.PaymentDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=unattended_retail;i=5076"])
 unattended_retail_objtypes.IdentificationType(
     nodeId="ns=unattended_retail;i=5077",
     browseName="ns=di;Identification",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6171", browseName="ns=di;ProductInstanceUri", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6179", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6187", browseName="ns=di;ProductCode", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6195", browseName="ns=di;SoftwareRevision", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6171", browseName="ns=di;ProductInstanceUri", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6179", browseName="ns=di;Manufacturer", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6187", browseName="ns=di;ProductCode", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6195", browseName="ns=di;SoftwareRevision", modellingRule="Mandatory", dataType=o6.String)),
     ],
 )
 unattended_retail_objtypes.IdentificationType(
     nodeId="ns=unattended_retail;i=5079",
     browseName="ns=di;Identification",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6172", browseName="ns=di;ProductInstanceUri", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6180", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6188", browseName="ns=di;ProductCode", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6196", browseName="ns=di;SoftwareRevision", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6172", browseName="ns=di;ProductInstanceUri", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6180", browseName="ns=di;Manufacturer", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6188", browseName="ns=di;ProductCode", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6196", browseName="ns=di;SoftwareRevision", modellingRule="Mandatory", dataType=o6.String)),
     ],
 )
 unattended_retail_objtypes.PaymentModeType(
@@ -626,15 +660,20 @@ unattended_retail_objtypes.PaymentModeType(
     browseName="ns=unattended_retail;<PaymentMode>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=unattended_retail;i=6111", browseName="ns=unattended_retail;PaymentModeId", dataType=o6.String)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=unattended_retail;i=6111", browseName="ns=unattended_retail;PaymentModeId", modellingRule="Mandatory", dataType=o6.String)
+        ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=unattended_retail;i=6112", browseName="ns=unattended_retail;Status", dataType=unattended_retail_datypes.PaymentModeOrDeviceStatusEnum
+                nodeId="ns=unattended_retail;i=6112",
+                browseName="ns=unattended_retail;Status",
+                modellingRule="Mandatory",
+                dataType=unattended_retail_datypes.PaymentModeOrDeviceStatusEnum,
             )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=unattended_retail;i=6197", browseName="ns=unattended_retail;AvailableCredit", dataType=unattended_retail_datypes.PriceDataType
+                nodeId="ns=unattended_retail;i=6197", browseName="ns=unattended_retail;AvailableCredit", modellingRule="Mandatory", dataType=unattended_retail_datypes.PriceDataType
             )
         ),
     ],
@@ -645,15 +684,20 @@ unattended_retail_objtypes.PaymentModeType(
     browseName="ns=unattended_retail;PaymentMode",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=unattended_retail;i=6126", browseName="ns=unattended_retail;PaymentModeId", dataType=o6.String)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=unattended_retail;i=6126", browseName="ns=unattended_retail;PaymentModeId", modellingRule="Mandatory", dataType=o6.String)
+        ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=unattended_retail;i=6127", browseName="ns=unattended_retail;Status", dataType=unattended_retail_datypes.PaymentModeOrDeviceStatusEnum
+                nodeId="ns=unattended_retail;i=6127",
+                browseName="ns=unattended_retail;Status",
+                modellingRule="Mandatory",
+                dataType=unattended_retail_datypes.PaymentModeOrDeviceStatusEnum,
             )
         ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=unattended_retail;i=6198", browseName="ns=unattended_retail;AvailableCredit", dataType=unattended_retail_datypes.PriceDataType
+                nodeId="ns=unattended_retail;i=6198", browseName="ns=unattended_retail;AvailableCredit", modellingRule="Mandatory", dataType=unattended_retail_datypes.PriceDataType
             )
         ),
     ],
@@ -802,13 +846,16 @@ unattended_retail_objtypes.PaymentDeviceType(
     modellingRule="MandatoryPlaceholder",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6201", browseName="ns=unattended_retail;IsEmulated", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=unattended_retail;i=6201", browseName="ns=unattended_retail;IsEmulated", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=unattended_retail;i=5077"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=unattended_retail;i=6209",
                 browseName="ns=unattended_retail;Status",
+                modellingRule="Mandatory",
                 dataType=unattended_retail_datypes.PaymentModeOrDeviceStatusEnum,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -823,13 +870,16 @@ unattended_retail_objtypes.PaymentDeviceType(
     modellingRule="MandatoryPlaceholder",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=unattended_retail;i=6202", browseName="ns=unattended_retail;IsEmulated", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=unattended_retail;i=6202", browseName="ns=unattended_retail;IsEmulated", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=unattended_retail;i=5079"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=unattended_retail;i=6210",
                 browseName="ns=unattended_retail;Status",
+                modellingRule="Mandatory",
                 dataType=unattended_retail_datypes.PaymentModeOrDeviceStatusEnum,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -875,6 +925,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7002",
     browseName="ns=unattended_retail;Deliver",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6021"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6153"]),
 )
@@ -912,6 +963,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7004",
     browseName="ns=unattended_retail;DeliverRequest",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6022"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6058"]),
 )
@@ -948,6 +1000,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7010",
     browseName="ns=unattended_retail;GetPriceForOneSelection",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6118"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6119"]),
 )
@@ -985,6 +1038,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7011",
     browseName="ns=unattended_retail;GetPriceForSelections",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6120"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6121"]),
 )
@@ -1030,6 +1084,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7012",
     browseName="ns=unattended_retail;GetPriceForOneSelection",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6122"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6123"]),
 )
@@ -1067,6 +1122,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7013",
     browseName="ns=unattended_retail;GetPriceForSelections",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6124"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6125"]),
 )
@@ -1091,7 +1147,12 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RequestedState", dataType=o6.NodeId("ns=unattended_retail;i=3039"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=unattended_retail;i=7014", browseName="ns=unattended_retail;RequestStatusChange", inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6128"]))
+o6.call(
+    nodeId="ns=unattended_retail;i=7014",
+    browseName="ns=unattended_retail;RequestStatusChange",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6128"]),
+)
 
 unattended_retail_objtypes.PaymentServiceStatusType(
     nodeId="ns=unattended_retail;i=5064",
@@ -1100,7 +1161,10 @@ unattended_retail_objtypes.PaymentServiceStatusType(
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=unattended_retail;i=6129", browseName="ns=unattended_retail;Status", dataType=unattended_retail_datypes.PaymentServiceStatusEnum
+                nodeId="ns=unattended_retail;i=6129",
+                browseName="ns=unattended_retail;Status",
+                modellingRule="Mandatory",
+                dataType=unattended_retail_datypes.PaymentServiceStatusEnum,
             )
         ),
         o6.hasComponent(o6.ns["ns=unattended_retail;i=7014"]),
@@ -1134,6 +1198,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7017",
     browseName="ns=unattended_retail;StopDelivery",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6155"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6157"]),
 )
@@ -1147,6 +1212,7 @@ unattended_retail_objtypes.MachineEngineDeliveryType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=unattended_retail;i=6038",
                 browseName="ns=unattended_retail;DeliveryProgress",
+                modellingRule="Mandatory",
                 dataType=unattended_retail_datypes.DeliveryProgressDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -1156,6 +1222,7 @@ unattended_retail_objtypes.MachineEngineDeliveryType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=unattended_retail;i=6065",
                 browseName="ns=unattended_retail;DeliveryRequests",
+                modellingRule="Mandatory",
                 dataType=unattended_retail_datypes.DeliveryRequestDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -1193,6 +1260,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=unattended_retail;i=7019",
     browseName="ns=unattended_retail;CancelDeliverRequest",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6162"]),
     outputArgs=o6.hasProperty(o6.ns["ns=unattended_retail;i=6163"]),
 )
@@ -1206,6 +1274,7 @@ unattended_retail_objtypes.PaymentServiceDeliveryType(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=unattended_retail;i=6063",
                 browseName="ns=unattended_retail;TransactionProgress",
+                modellingRule="Mandatory",
                 dataType=unattended_retail_datypes.TransactionProgressDataType,
                 valueRank=1,
                 arrayDimensions=[0],

@@ -34,7 +34,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=plastics_extrusion_v1_cutter;i=3002", browseName="WallThickeningEnumeration")
+@o6.enumtype(nodeId="ns=plastics_extrusion_v1_cutter;i=3002", browseName="ns=plastics_extrusion_v1_cutter;WallThickeningEnumeration")
 class WallThickeningEnumeration(ns0.datatypes.Enumeration):
     NO = o6.enumfield(0, name="NO")
     FRONT = o6.enumfield(1, name="FRONT")

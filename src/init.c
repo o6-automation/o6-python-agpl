@@ -36,5 +36,23 @@ bool o6_check_greet() {
     return true;
 }
 
+/* The AGPL edition has no Credentials: every compiled feature is enabled and
+ * no Script Mode timer runs. */
+PyObject *o6_license_status(void) {
+    return Py_BuildValue("{s:s,s:O,s:O,s:O,s:O,s:O,s:O,s:O,s:O,s:O,s:O,s:O}",
+                         "edition", "agpl",
+                         "licensed", Py_False,
+                         "scriptMode", Py_False,
+                         "holder", Py_None,
+                         "usageScope", Py_None,
+                         "licenseId", Py_None,
+                         "client", Py_True,
+                         "server", Py_True,
+                         "pubsub", Py_True,
+                         "validFrom", Py_None,
+                         "validTo", Py_None,
+                         "rejectionReason", Py_None);
+}
+
 void o6_clean_shutdown(void) {
 }

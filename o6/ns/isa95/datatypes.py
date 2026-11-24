@@ -32,151 +32,151 @@ else:
     _VariableNode = object
 
 
-@o6.datatype(nodeId="ns=isa95;i=927", browseName="Decimal", parent="i=15")
+@o6.datatype(nodeId="ns=isa95;i=927", browseName="ns=isa95;Decimal", parent="i=15")
 class Decimal:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4772", browseName="DecimalString", parent="i=12")
+@o6.datatype(nodeId="ns=isa95;i=4772", browseName="ns=isa95;DecimalString", parent="i=12")
 class DecimalString:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4773", browseName="DateString", parent="i=12")
+@o6.datatype(nodeId="ns=isa95;i=4773", browseName="ns=isa95;DateString", parent="i=12")
 class DateString:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4774", browseName="TimeString", parent="i=12")
+@o6.datatype(nodeId="ns=isa95;i=4774", browseName="ns=isa95;TimeString", parent="i=12")
 class TimeString:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4775", browseName="DurationString", parent="i=12")
+@o6.datatype(nodeId="ns=isa95;i=4775", browseName="ns=isa95;DurationString", parent="i=12")
 class DurationString:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4776", browseName="CurrencyCode", defaultEncodingId="ns=isa95;i=4788")
+@o6.datatype(nodeId="ns=isa95;i=4776", browseName="ns=isa95;CurrencyCode", defaultEncodingId="ns=isa95;i=4788")
 class CurrencyCode(ns0.datatypes.Structure):
     namespaceUri: o6.String
     unitId: o6.Int32
     charId: list[o6.Byte]
     displayName: o6.LocalizedText
-    description: o6.LocalizedText
+    description: o6.LocalizedText = o6.field(name="Description")
 
 
-@o6.datatype(nodeId="ns=isa95;i=4777", browseName="CDTIdentifier", parent="i=12")
+@o6.datatype(nodeId="ns=isa95;i=4777", browseName="ns=isa95;CDTIdentifier", parent="i=12")
 class CDTIdentifier:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4792", browseName="CDTCode", parent="i=12")
+@o6.datatype(nodeId="ns=isa95;i=4792", browseName="ns=isa95;CDTCode", parent="i=12")
 class CDTCode:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4796", browseName="CDTAmountDecimal", parent="ns=isa95;i=927")
+@o6.datatype(nodeId="ns=isa95;i=4796", browseName="ns=isa95;CDTAmountDecimal", parent="ns=isa95;i=927")
 class CDTAmountDecimal:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4798", browseName="CDTBinaryObject", parent="i=15")
+@o6.datatype(nodeId="ns=isa95;i=4798", browseName="ns=isa95;CDTBinaryObject", parent="i=15")
 class CDTBinaryObject:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4803", browseName="CDTDateTime", parent="i=294")
+@o6.datatype(nodeId="ns=isa95;i=4803", browseName="ns=isa95;CDTDateTime", parent="i=294")
 class CDTDateTime:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4806", browseName="CDTGraphic", parent="i=15")
+@o6.datatype(nodeId="ns=isa95;i=4806", browseName="ns=isa95;CDTGraphic", parent="i=15")
 class CDTGraphic:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4809", browseName="CDTMeasureDecimal", parent="ns=isa95;i=927")
+@o6.datatype(nodeId="ns=isa95;i=4809", browseName="ns=isa95;CDTMeasureDecimal", parent="ns=isa95;i=927")
 class CDTMeasureDecimal:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4811", browseName="CDTMeasureDouble", parent="i=11")
+@o6.datatype(nodeId="ns=isa95;i=4811", browseName="ns=isa95;CDTMeasureDouble", parent="i=11")
 class CDTMeasureDouble:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4813", browseName="CDTMeasureFloat", parent="i=10")
+@o6.datatype(nodeId="ns=isa95;i=4813", browseName="ns=isa95;CDTMeasureFloat", parent="i=10")
 class CDTMeasureFloat:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4815", browseName="CDTMeasureInt16", parent="i=4")
+@o6.datatype(nodeId="ns=isa95;i=4815", browseName="ns=isa95;CDTMeasureInt16", parent="i=4")
 class CDTMeasureInt16:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4817", browseName="CDTMeasureInt32", parent="i=6")
+@o6.datatype(nodeId="ns=isa95;i=4817", browseName="ns=isa95;CDTMeasureInt32", parent="i=6")
 class CDTMeasureInt32:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4819", browseName="CDTMeasureInt64", parent="i=8")
+@o6.datatype(nodeId="ns=isa95;i=4819", browseName="ns=isa95;CDTMeasureInt64", parent="i=8")
 class CDTMeasureInt64:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4821", browseName="CDTOrdinal", parent="i=6")
+@o6.datatype(nodeId="ns=isa95;i=4821", browseName="ns=isa95;CDTOrdinal", parent="i=6")
 class CDTOrdinal:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4822", browseName="CDTPicture", parent="i=30")
+@o6.datatype(nodeId="ns=isa95;i=4822", browseName="ns=isa95;CDTPicture", parent="i=30")
 class CDTPicture:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4825", browseName="CDTRateDecimal", parent="ns=isa95;i=927")
+@o6.datatype(nodeId="ns=isa95;i=4825", browseName="ns=isa95;CDTRateDecimal", parent="ns=isa95;i=927")
 class CDTRateDecimal:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4832", browseName="CDTRateDouble", parent="i=11")
+@o6.datatype(nodeId="ns=isa95;i=4832", browseName="ns=isa95;CDTRateDouble", parent="i=11")
 class CDTRateDouble:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4839", browseName="CDTRateFloat", parent="i=10")
+@o6.datatype(nodeId="ns=isa95;i=4839", browseName="ns=isa95;CDTRateFloat", parent="i=10")
 class CDTRateFloat:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4846", browseName="CDTRateInt32", parent="i=6")
+@o6.datatype(nodeId="ns=isa95;i=4846", browseName="ns=isa95;CDTRateInt32", parent="i=6")
 class CDTRateInt32:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4853", browseName="CDTSound", parent="i=15")
+@o6.datatype(nodeId="ns=isa95;i=4853", browseName="ns=isa95;CDTSound", parent="i=15")
 class CDTSound:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4856", browseName="CDTVideo", parent="i=15")
+@o6.datatype(nodeId="ns=isa95;i=4856", browseName="ns=isa95;CDTVideo", parent="i=15")
 class CDTVideo:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4862", browseName="ISA95TestResultMeasurementDataType", defaultEncodingId="ns=isa95;i=4867")
+@o6.datatype(nodeId="ns=isa95;i=4862", browseName="ns=isa95;ISA95TestResultMeasurementDataType", defaultEncodingId="ns=isa95;i=4867")
 class ISA95TestResultMeasurementDataType(ns0.datatypes.Structure):
-    id: o6.NodeId
-    testResultDescription: o6.LocalizedText
-    date: o6.DateTime
-    result: Any
-    resultUnitOfMeasure: ns0.datatypes.EUInformation
-    expiration: o6.DateTime
+    id: o6.NodeId = o6.field(name="Id")
+    testResultDescription: o6.LocalizedText = o6.field(name="TestResultDescription")
+    date: o6.DateTime = o6.field(name="Date")
+    result: Any = o6.field(name="Result")
+    resultUnitOfMeasure: ns0.datatypes.EUInformation = o6.field(name="ResultUnitOfMeasure")
+    expiration: o6.DateTime = o6.field(name="Expiration")
 
 
-@o6.enumtype(nodeId="ns=isa95;i=4871", browseName="ISA95EquipmentElementLevelEnum")
+@o6.enumtype(nodeId="ns=isa95;i=4871", browseName="ns=isa95;ISA95EquipmentElementLevelEnum")
 class ISA95EquipmentElementLevelEnum(ns0.datatypes.Enumeration):
     ENTERPRISE = o6.enumfield(0, name="Enterprise")
     SITE = o6.enumfield(1, name="Site")
@@ -195,27 +195,27 @@ class ISA95EquipmentElementLevelEnum(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(14, name="Other")
 
 
-@o6.datatype(nodeId="ns=isa95;i=4873", browseName="ISA95TestResultDataType", defaultEncodingId="ns=isa95;i=4902")
+@o6.datatype(nodeId="ns=isa95;i=4873", browseName="ns=isa95;ISA95TestResultDataType", defaultEncodingId="ns=isa95;i=4902")
 class ISA95TestResultDataType(ns0.datatypes.Structure):
-    id: o6.NodeId
-    testResultDescription: o6.LocalizedText
-    date: o6.DateTime
-    result: Any
-    resultUnitOfMeasure: o6.String
-    expiration: o6.DateTime
+    id: o6.NodeId = o6.field(name="Id")
+    testResultDescription: o6.LocalizedText = o6.field(name="TestResultDescription")
+    date: o6.DateTime = o6.field(name="Date")
+    result: Any = o6.field(name="Result")
+    resultUnitOfMeasure: o6.String = o6.field(name="ResultUnitOfMeasure")
+    expiration: o6.DateTime = o6.field(name="Expiration")
 
 
-@o6.datatype(nodeId="ns=isa95;i=4929", browseName="NormalizedString", parent="i=12")
+@o6.datatype(nodeId="ns=isa95;i=4929", browseName="ns=isa95;NormalizedString", parent="i=12")
 class NormalizedString:
     pass
 
 
-@o6.datatype(nodeId="ns=isa95;i=4956", browseName="ISA95AssetAssignmentDataType", defaultEncodingId="ns=isa95;i=4973")
+@o6.datatype(nodeId="ns=isa95;i=4956", browseName="ns=isa95;ISA95AssetAssignmentDataType", defaultEncodingId="ns=isa95;i=4973")
 class ISA95AssetAssignmentDataType(ns0.datatypes.Structure):
-    id: o6.NodeId
-    assinmentDescription: o6.LocalizedText
-    startTime: o6.DateTime
-    endTime: o6.DateTime
+    id: o6.NodeId = o6.field(name="Id")
+    assinmentDescription: o6.LocalizedText = o6.field(name="AssinmentDescription")
+    startTime: o6.DateTime = o6.field(name="StartTime")
+    endTime: o6.DateTime = o6.field(name="EndTime")
 
 
 del Any, TYPE_CHECKING, uuid, o6, ns0, isa95_reftypes

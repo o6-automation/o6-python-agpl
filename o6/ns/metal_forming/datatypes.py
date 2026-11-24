@@ -40,18 +40,18 @@ else:
     _VariableNode = object
 
 
-@o6.datatype(nodeId="ns=metal_forming;i=3003", browseName="CyclicProcessValueDataType", defaultEncodingId="ns=metal_forming;i=5001")
+@o6.datatype(nodeId="ns=metal_forming;i=3003", browseName="ns=metal_forming;CyclicProcessValueDataType", defaultEncodingId="ns=metal_forming;i=5001")
 class CyclicProcessValueDataType(ns0.datatypes.Structure):
-    analogSignal: Any
-    setpoint: Any
-    cycleCount: o6.UInt32
-    isActive: o6.Boolean
+    analogSignal: Any = o6.field(name="AnalogSignal")
+    setpoint: Any = o6.field(name="Setpoint")
+    cycleCount: o6.UInt32 = o6.field(name="CycleCount")
+    isActive: o6.Boolean = o6.field(name="IsActive")
 
 
-@o6.datatype(nodeId="ns=metal_forming;i=3004", browseName="CyclicPartInformationDataType", defaultEncodingId="ns=metal_forming;i=5006")
+@o6.datatype(nodeId="ns=metal_forming;i=3004", browseName="ns=metal_forming;CyclicPartInformationDataType", defaultEncodingId="ns=metal_forming;i=5006")
 class CyclicPartInformationDataType(ns0.datatypes.Structure):
-    cycleCount: o6.UInt32
-    partId: o6.String | None
+    cycleCount: o6.UInt32 = o6.field(name="CycleCount")
+    partId: o6.String | None = o6.field(name="PartId")
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ia, irdi_v1_00, isa95_jobcontrol_v2, machine_tool, machinery, machinery_jobs, machinery_processvalues, ns0, padim

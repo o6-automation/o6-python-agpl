@@ -110,4 +110,8 @@ UA_UInt16 pyNodeStore_accessRestrictions(PyServer *server,
  * server node. The returned pointer is borrowed from the Python object. */
 UA_Node *pyNodeStore_attachedNode(PyObject *node, PyServer **server);
 
+/* The event loop of the server a node is attached to, or NULL for a detached
+ * node; for O6_REQUIRE_LOOP_THREAD. */
+UA_EventLoop *pyNode_eventLoop(PyObject *node);
+
 #endif /* PYO6_PYTHON_NODESTORE_H_ */

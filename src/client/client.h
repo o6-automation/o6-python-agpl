@@ -32,6 +32,8 @@ typedef struct {
     int owns_loop; // Whether the client owns the Python asyncio loop
     PyObject *connectFuture; // While a connect is ongoing
     UA_UInt64 connectPollId; // Timer that completes a noSession connect, or 0
+    UA_UInt64 connectTimeoutId; // Timer that ends a connect after config.timeout, or 0
+    bool connectTimedOut; // The connect timed out; fail it once the channel is closed
     PyObject *disconnectFuture; // While a disconnect is ongoing
     PyObject *callbackDict; // {callbackId: pyCallable} for timed/repeated callbacks
     PyObject *globalNotificationCallback;     // optional Python callable for all notifications
@@ -60,6 +62,23 @@ typedef struct {
     int load_unknown_data_types; // load a DataType from the server when a value needs it
 } PyClientConfig;
 extern PyTypeObject PyClientConfigType;
+
+/* The event loop of a client, or NULL before configuration or after
+ * teardown; for O6_REQUIRE_LOOP_THREAD. */
+static inline UA_EventLoop *
+pyClient_eventLoop(const PyClient *self) {
+    return self && self->client ? UA_Client_getConfig(self->client)->eventLoop : NULL;
+}
+
+/* Whether the client is connected or connecting. Lock-free, so finalizers
+ * and repr can ask from any thread; its configuration is read-only while
+ * this holds. */
+bool pyClient_isLive(const PyClient *self);
+
+static inline UA_EventLoop *
+pyClientConfig_eventLoop(const PyClientConfig *self) {
+    return pyClient_eventLoop(self->py_client);
+}
 
 // Factory to create a PyClientConfig for a given PyClient*
 PyObject *PyClientConfig_New(PyClient *py_client);

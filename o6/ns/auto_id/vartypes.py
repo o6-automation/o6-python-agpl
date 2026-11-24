@@ -36,16 +36,18 @@ else:
 @o6.variabletype(nodeId="ns=auto_id;i=2002", browseName="ns=auto_id;LocationVariableType", displayName="LocationVariableType", dataType=auto_id_datypes.Location)
 class LocationVariableType(ns0.vartypes.BaseDataVariableType):
     geographicalUnit: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6199", browseName="ns=auto_id;GeographicalUnit", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=auto_id;i=6199", browseName="ns=auto_id;GeographicalUnit", modellingRule="Optional", dataType=ns0.datatypes.EUInformation, accessLevel=3
+        )
     )
     lengthUnit: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6197", browseName="ns=auto_id;LengthUnit", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6197", browseName="ns=auto_id;LengthUnit", modellingRule="Optional", dataType=ns0.datatypes.EUInformation, accessLevel=3)
     )
     rotationalUnit: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6198", browseName="ns=auto_id;RotationalUnit", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6198", browseName="ns=auto_id;RotationalUnit", modellingRule="Optional", dataType=ns0.datatypes.EUInformation, accessLevel=3)
     )
     speedUnit: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6200", browseName="ns=auto_id;SpeedUnit", dataType=ns0.datatypes.EUInformation, accessLevel=3)
+        ns0.vartypes.PropertyType(nodeId="ns=auto_id;i=6200", browseName="ns=auto_id;SpeedUnit", modellingRule="Optional", dataType=ns0.datatypes.EUInformation, accessLevel=3)
     )
 
 

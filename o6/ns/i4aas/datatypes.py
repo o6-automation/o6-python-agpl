@@ -32,7 +32,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=i4aas;i=3002", browseName="AASKeyTypeDataType")
+@o6.enumtype(nodeId="ns=i4aas;i=3002", browseName="ns=i4aas;AASKeyTypeDataType")
 class AASKeyTypeDataType(ns0.datatypes.Enumeration):
     ID_SHORT = o6.enumfield(0, name="IdShort")
     FRAGMENT_ID = o6.enumfield(1, name="FragmentId")
@@ -41,13 +41,13 @@ class AASKeyTypeDataType(ns0.datatypes.Enumeration):
     IRI = o6.enumfield(4, name="IRI")
 
 
-@o6.enumtype(nodeId="ns=i4aas;i=3003", browseName="AASAssetKindDataType")
+@o6.enumtype(nodeId="ns=i4aas;i=3003", browseName="ns=i4aas;AASAssetKindDataType")
 class AASAssetKindDataType(ns0.datatypes.Enumeration):
     TYPE = o6.enumfield(0, name="Type")
     INSTANCE = o6.enumfield(1, name="Instance")
 
 
-@o6.enumtype(nodeId="ns=i4aas;i=3004", browseName="AASValueTypeDataType")
+@o6.enumtype(nodeId="ns=i4aas;i=3004", browseName="ns=i4aas;AASValueTypeDataType")
 class AASValueTypeDataType(ns0.datatypes.Enumeration):
     BOOLEAN = o6.enumfield(0, name="Boolean")
     S_BYTE = o6.enumfield(1, name="SByte")
@@ -67,18 +67,18 @@ class AASValueTypeDataType(ns0.datatypes.Enumeration):
     UTC_TIME = o6.enumfield(15, name="UtcTime")
 
 
-@o6.datatype(nodeId="ns=i4aas;i=3005", browseName="AASPathDataType", parent="i=12")
+@o6.datatype(nodeId="ns=i4aas;i=3005", browseName="ns=i4aas;AASPathDataType", parent="i=12")
 class AASPathDataType:
     pass
 
 
-@o6.enumtype(nodeId="ns=i4aas;i=3006", browseName="AASEntityTypeDataType")
+@o6.enumtype(nodeId="ns=i4aas;i=3006", browseName="ns=i4aas;AASEntityTypeDataType")
 class AASEntityTypeDataType(ns0.datatypes.Enumeration):
     CO_MANAGED_ENTITY = o6.enumfield(0, name="CoManagedEntity")
     SELF_MANAGED_ENTITY = o6.enumfield(1, name="SelfManagedEntity")
 
 
-@o6.enumtype(nodeId="ns=i4aas;i=3007", browseName="AASCategoryDataType")
+@o6.enumtype(nodeId="ns=i4aas;i=3007", browseName="ns=i4aas;AASCategoryDataType")
 class AASCategoryDataType(ns0.datatypes.Enumeration):
     CONSTANT = o6.enumfield(0, name="CONSTANT")
     PARAMETER = o6.enumfield(1, name="PARAMETER")
@@ -86,7 +86,7 @@ class AASCategoryDataType(ns0.datatypes.Enumeration):
     RELATIONSHIP = o6.enumfield(3, name="RELATIONSHIP")
 
 
-@o6.enumtype(nodeId="ns=i4aas;i=3008", browseName="AASDataTypeIEC61360DataType")
+@o6.enumtype(nodeId="ns=i4aas;i=3008", browseName="ns=i4aas;AASDataTypeIEC61360DataType")
 class AASDataTypeIEC61360DataType(ns0.datatypes.Enumeration):
     BOOLEAN = o6.enumfield(0, name="BOOLEAN")
     DATE = o6.enumfield(1, name="DATE")
@@ -105,7 +105,7 @@ class AASDataTypeIEC61360DataType(ns0.datatypes.Enumeration):
     INTEGER_CURRENCY = o6.enumfield(14, name="INTEGER_CURRENCY")
 
 
-@o6.enumtype(nodeId="ns=i4aas;i=3009", browseName="AASLevelTypeDataType")
+@o6.enumtype(nodeId="ns=i4aas;i=3009", browseName="ns=i4aas;AASLevelTypeDataType")
 class AASLevelTypeDataType(ns0.datatypes.Enumeration):
     MIN = o6.enumfield(0, name="Min")
     MAX = o6.enumfield(1, name="Max")
@@ -113,14 +113,14 @@ class AASLevelTypeDataType(ns0.datatypes.Enumeration):
     TYPE = o6.enumfield(3, name="Type")
 
 
-@o6.enumtype(nodeId="ns=i4aas;i=3010", browseName="AASIdentifierTypeDataType")
+@o6.enumtype(nodeId="ns=i4aas;i=3010", browseName="ns=i4aas;AASIdentifierTypeDataType")
 class AASIdentifierTypeDataType(ns0.datatypes.Enumeration):
     IRDI = o6.enumfield(0, name="IRDI")
     IRI = o6.enumfield(1, name="IRI")
     CUSTOM = o6.enumfield(2, name="Custom")
 
 
-@o6.enumtype(nodeId="ns=i4aas;i=3012", browseName="AASKeyElementsDataType")
+@o6.enumtype(nodeId="ns=i4aas;i=3012", browseName="ns=i4aas;AASKeyElementsDataType")
 class AASKeyElementsDataType(ns0.datatypes.Enumeration):
     ACCESS_PERMISSION_RULE = o6.enumfield(0, name="AccessPermissionRule")
     ANNOTATED_RELATIONSHIP_ELEMENT = o6.enumfield(1, name="AnnotatedRelationshipElement")
@@ -148,31 +148,31 @@ class AASKeyElementsDataType(ns0.datatypes.Enumeration):
     VIEW = o6.enumfield(23, name="View")
 
 
-@o6.datatype(nodeId="ns=i4aas;i=3011", browseName="AASKeyDataType", defaultEncodingId="ns=i4aas;i=5038")
+@o6.datatype(nodeId="ns=i4aas;i=3011", browseName="ns=i4aas;AASKeyDataType", defaultEncodingId="ns=i4aas;i=5038")
 class AASKeyDataType(ns0.datatypes.Structure):
-    type: AASKeyElementsDataType
-    local: o6.Boolean
-    value: o6.String
-    idType: AASKeyTypeDataType
+    type: AASKeyElementsDataType = o6.field(name="Type")
+    local: o6.Boolean = o6.field(name="Local")
+    value: o6.String = o6.field(name="Value")
+    idType: AASKeyTypeDataType = o6.field(name="IdType")
 
 
-@o6.datatype(nodeId="ns=i4aas;i=3013", browseName="AASQualifierDataType", parent="i=12")
+@o6.datatype(nodeId="ns=i4aas;i=3013", browseName="ns=i4aas;AASQualifierDataType", parent="i=12")
 class AASQualifierDataType:
     pass
 
 
-@o6.datatype(nodeId="ns=i4aas;i=3014", browseName="AASPropertyValueDataType", parent="i=12")
+@o6.datatype(nodeId="ns=i4aas;i=3014", browseName="ns=i4aas;AASPropertyValueDataType", parent="i=12")
 class AASPropertyValueDataType:
     pass
 
 
-@o6.enumtype(nodeId="ns=i4aas;i=3015", browseName="AASModelingKindDataType")
+@o6.enumtype(nodeId="ns=i4aas;i=3015", browseName="ns=i4aas;AASModelingKindDataType")
 class AASModelingKindDataType(ns0.datatypes.Enumeration):
     TEMPLATE = o6.enumfield(0, name="Template")
     INSTANCE = o6.enumfield(1, name="Instance")
 
 
-@o6.datatype(nodeId="ns=i4aas;i=3016", browseName="AASMimeDataType", parent="i=12")
+@o6.datatype(nodeId="ns=i4aas;i=3016", browseName="ns=i4aas;AASMimeDataType", parent="i=12")
 class AASMimeDataType:
     pass
 

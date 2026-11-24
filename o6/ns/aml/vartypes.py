@@ -34,23 +34,25 @@ else:
 
 @o6.variabletype(nodeId="ns=aml;i=3001", browseName="ns=aml;AMLBaseVariableType", displayName="AMLBaseVariableType")
 class AMLBaseVariableType(ns0.vartypes.BaseVariableType):
-    iD: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml;i=1010", browseName="ns=aml;ID", dataType=o6.String))
-    version: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml;i=1011", browseName="ns=aml;Version", dataType=o6.String))
+    iD: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=aml;i=1010", browseName="ns=aml;ID", modellingRule="Optional", dataType=o6.String))
+    version: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=aml;i=1011", browseName="ns=aml;Version", modellingRule="Optional", dataType=o6.String)
+    )
 
 
 @o6.variabletype(nodeId="ns=aml;i=3002", browseName="ns=aml;AMLOpcUaConnectionType", displayName="AMLOpcUaConnectionType")
 class AMLOpcUaConnectionType(AMLBaseVariableType):
     serverAddress: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=aml;i=1014", browseName="ns=aml;ServerAddress", dataType=o6.String)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=aml;i=1014", browseName="ns=aml;ServerAddress", modellingRule="Mandatory", dataType=o6.String)
     )
     serverAlias: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=aml;i=1015", browseName="ns=aml;ServerAlias", dataType=o6.String)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=aml;i=1015", browseName="ns=aml;ServerAlias", modellingRule="Optional", dataType=o6.String)
     )
     variableName: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=aml;i=1013", browseName="ns=aml;VariableName", dataType=o6.String)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=aml;i=1013", browseName="ns=aml;VariableName", modellingRule="Optional", dataType=o6.String)
     )
     variableNodeId: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=aml;i=1012", browseName="ns=aml;VariableNodeId", dataType=o6.String)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=aml;i=1012", browseName="ns=aml;VariableNodeId", modellingRule="Mandatory", dataType=o6.String)
     )
 
 

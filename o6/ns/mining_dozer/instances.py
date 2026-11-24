@@ -39,20 +39,22 @@ else:
 ns0.vartypes.ThreeDCartesianCoordinatesType(
     nodeId="ns=mining_dozer;i=6014",
     browseName="CartesianCoordinates",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6015", browseName="X", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6016", browseName="Y", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6017", browseName="Z", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6015", browseName="X", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6016", browseName="Y", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6017", browseName="Z", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDCartesianCoordinates,
 )
 ns0.vartypes.ThreeDOrientationType(
     nodeId="ns=mining_dozer;i=6018",
     browseName="Orientation",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6019", browseName="A", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6020", browseName="B", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6021", browseName="C", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6019", browseName="A", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6020", browseName="B", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6021", browseName="C", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDOrientation,
 )
@@ -76,7 +78,7 @@ http_opcfoundation_org_UA_Mining_DevelopmentSupport_Dozer_ = ns0.objtypes.Namesp
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[2],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC, ns0.datatypes.IdType.STRING],
             )
         ),
@@ -91,12 +93,13 @@ http_opcfoundation_org_UA_Mining_DevelopmentSupport_Dozer_ = ns0.objtypes.Namesp
 ns0.vartypes.ThreeDFrameType(
     nodeId="ns=mining_dozer;i=6013",
     browseName="ns=mining_dozer;ExclusionZone",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_dozer;i=6030", browseName="Constant", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_dozer;i=6031", browseName="FixedBase", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_dozer;i=6030", browseName="Constant", modellingRule="Optional", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_dozer;i=6031", browseName="FixedBase", modellingRule="Optional", dataType=o6.Boolean)),
         o6.hasComponent(o6.ns["ns=mining_dozer;i=6014"]),
         o6.hasComponent(o6.ns["ns=mining_dozer;i=6018"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6029", browseName="BaseFrame", dataType=o6.NodeId)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6029", browseName="BaseFrame", modellingRule="Optional", dataType=o6.NodeId)),
     ],
     dataType=ns0.datatypes.ThreeDFrame,
     valueRank=1,
@@ -188,6 +191,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_dozer;i=6001",
                 browseName="ns=di;AssetId",
                 description="To be used by end users to store a unique identification in the context of their overall application. Servers shall support at least 40 Unicode characters for the clients writing this value, this means clients can expect to be able to write strings with a length of 40 Unicode characters into that field.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
                 accessLevel=3,
@@ -199,6 +203,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_dozer;i=6003",
                 browseName="ns=di;DeviceClass",
                 description="Indicates in which domain or for what purpose the MachineryItem is used.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -207,6 +212,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_dozer;i=6004",
                 browseName="ns=di;ManufacturerUri",
                 description="A globally unique identifier of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -215,6 +221,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_dozer;i=6005",
                 browseName="ns=di;Model",
                 description="A human-readable, localized name of the model of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -223,6 +230,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_dozer;i=6006",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -231,6 +239,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_dozer;i=6032",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -239,6 +248,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_dozer;i=6038",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -248,32 +258,35 @@ o6.reference(mining_dozer_objtypes.DozerType, ns0.reftypes.HasAddIn, o6.ns["ns=m
 ns0.vartypes.ThreeDCartesianCoordinatesType(
     nodeId="ns=mining_dozer;i=6040",
     browseName="CartesianCoordinates",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6041", browseName="X", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6042", browseName="Y", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6043", browseName="Z", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6041", browseName="X", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6042", browseName="Y", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6043", browseName="Z", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDCartesianCoordinates,
 )
 ns0.vartypes.ThreeDOrientationType(
     nodeId="ns=mining_dozer;i=6044",
     browseName="Orientation",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6045", browseName="A", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6046", browseName="B", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6047", browseName="C", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6045", browseName="A", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6046", browseName="B", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6047", browseName="C", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDOrientation,
 )
 ns0.vartypes.ThreeDFrameType(
     nodeId="ns=mining_dozer;i=6039",
     browseName="ns=mining_dozer;MachinePose",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_dozer;i=6049", browseName="Constant", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_dozer;i=6050", browseName="FixedBase", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_dozer;i=6049", browseName="Constant", modellingRule="Optional", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=mining_dozer;i=6050", browseName="FixedBase", modellingRule="Optional", dataType=o6.Boolean)),
         o6.hasComponent(o6.ns["ns=mining_dozer;i=6040"]),
         o6.hasComponent(o6.ns["ns=mining_dozer;i=6044"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6048", browseName="BaseFrame", dataType=o6.NodeId)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=mining_dozer;i=6048", browseName="BaseFrame", modellingRule="Optional", dataType=o6.NodeId)),
     ],
     dataType=ns0.datatypes.ThreeDFrame,
     value=ns0.datatypes.ThreeDFrame(
@@ -319,6 +332,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=mining_dozer;i=7001",
     browseName="ns=mining_dozer;SetWorkJob",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=mining_dozer;i=6007"]),
     outputArgs=o6.hasProperty(o6.ns["ns=mining_dozer;i=6008"]),
 )
@@ -367,6 +381,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=mining_dozer;i=7002",
     browseName="ns=mining_dozer;Clearway",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=mining_dozer;i=6009"]),
     outputArgs=o6.hasProperty(o6.ns["ns=mining_dozer;i=6010"]),
 )
@@ -382,7 +397,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RequestResult", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=mining_dozer;i=7003", browseName="ns=mining_dozer;RequestResumeOperation", outputArgs=o6.hasProperty(o6.ns["ns=mining_dozer;i=6011"]))
+o6.call(nodeId="ns=mining_dozer;i=7003", browseName="ns=mining_dozer;RequestResumeOperation", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=mining_dozer;i=6011"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=mining_dozer;i=6012",
@@ -395,7 +410,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RequestResult", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=mining_dozer;i=7004", browseName="ns=mining_dozer;RequestStopOperation", outputArgs=o6.hasProperty(o6.ns["ns=mining_dozer;i=6012"]))
+o6.call(nodeId="ns=mining_dozer;i=7004", browseName="ns=mining_dozer;RequestStopOperation", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=mining_dozer;i=6012"]))
 
 ns0.objtypes.BaseObjectType(
     nodeId="ns=mining_dozer;i=5002",

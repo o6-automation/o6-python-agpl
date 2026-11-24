@@ -77,12 +77,14 @@ mining.vartypes.LongwallShieldOffsetArrayItemType(
     nodeId="ns=mining_face_alignment;i=6001",
     browseName="ns=mining_face_alignment;Offsets",
     description="The Offsets variable describes the offsets calculated by the FAS which have to be considered by the RSS for optimal shield alignment in areal view.",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_face_alignment;i=6002",
                 browseName="ns=mining;EngineeringUnits",
                 description="This is the EngineeringUnit of the offsets.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067858, displayName=o6.LocalizedText("m"), description=o6.LocalizedText("metre")
@@ -94,6 +96,7 @@ mining.vartypes.LongwallShieldOffsetArrayItemType(
                 nodeId="ns=mining_face_alignment;i=6007",
                 browseName="ns=mining;EURange",
                 description="This is the EURange of the offsets.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Range,
                 value=ns0.datatypes.Range(low=-20.0, high=20.0),
             )
@@ -115,6 +118,7 @@ ns0.objtypes.BaseObjectType(
                 nodeId="ns=mining_face_alignment;i=6009",
                 browseName="ns=mining_face_alignment;CurrentSequenceNumber",
                 description="The CurrentSequenceNumber variable describes the current sequence number on which the offset values are applicable. It is being increased when offset values change",
+                modellingRule="Mandatory",
                 dataType=o6.UInt16,
                 value=0,
             )
@@ -132,6 +136,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_face_alignment;i=6008",
                 browseName="ns=di;DeviceClass",
                 description="Indicates in which domain or for what purpose the MachineryItem is used.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -140,6 +145,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_face_alignment;i=6010",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -148,6 +154,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_face_alignment;i=6011",
                 browseName="ns=di;ManufacturerUri",
                 description="A globally unique identifier of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -156,6 +163,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_face_alignment;i=6012",
                 browseName="ns=di;Model",
                 description="A human-readable, localized name of the model of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -164,6 +172,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_face_alignment;i=6013",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -172,6 +181,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_face_alignment;i=6014",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -203,7 +213,7 @@ http_opcfoundation_org_UA_Mining_PELOServices_FaceAlignmentSystem_ = ns0.objtype
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[2],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC, ns0.datatypes.IdType.STRING],
             )
         ),

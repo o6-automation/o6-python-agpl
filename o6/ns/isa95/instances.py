@@ -797,14 +797,24 @@ testSpecification_ = isa95_objtypes.QualificationTestSpecificationType(
     nodeId="ns=isa95;i=4981",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=4982", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
+    references=[
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=4982", browseName="ns=isa95;Version", modellingRule="Mandatory", dataType=o6.String, accessLevel=3),
+            "ns=isa95;i=4713",
+        )
+    ],
 )
 o6.reference(isa95_vartypes.PersonnelClassPropertyType, "ns=isa95;i=4918", "ns=isa95;i=4981")
 testSpecification__2 = isa95_objtypes.QualificationTestSpecificationType(
     nodeId="ns=isa95;i=4999",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5000", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
+    references=[
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5000", browseName="ns=isa95;Version", modellingRule="Mandatory", dataType=o6.String, accessLevel=3),
+            "ns=isa95;i=4713",
+        )
+    ],
 )
 o6.reference(isa95_objtypes.PersonnelClassType, "ns=isa95;i=4918", "ns=isa95;i=4999")
 isa95_vartypes.EquipmentClassPropertyType(nodeId="ns=isa95;i=5019", browseName="ns=isa95;<PropertyName>", modellingRule="OptionalPlaceholder")
@@ -813,7 +823,12 @@ testSpecification__3 = isa95_objtypes.EquipmentCapabilityTestSpecificationType(
     nodeId="ns=isa95;i=5021",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5022", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
+    references=[
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5022", browseName="ns=isa95;Version", modellingRule="Mandatory", dataType=o6.String, accessLevel=3),
+            "ns=isa95;i=4713",
+        )
+    ],
 )
 o6.reference(isa95_vartypes.EquipmentClassPropertyType, "ns=isa95;i=4920", "ns=isa95;i=5021")
 isa95_vartypes.EquipmentPropertyType(nodeId="ns=isa95;i=5023", browseName="ns=isa95;<PropertyName>", modellingRule="OptionalPlaceholder")
@@ -822,7 +837,12 @@ testSpecification__4 = isa95_objtypes.EquipmentCapabilityTestSpecificationType(
     nodeId="ns=isa95;i=5025",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5026", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
+    references=[
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5026", browseName="ns=isa95;Version", modellingRule="Mandatory", dataType=o6.String, accessLevel=3),
+            "ns=isa95;i=4713",
+        )
+    ],
 )
 o6.reference(isa95_vartypes.EquipmentPropertyType, "ns=isa95;i=4920", "ns=isa95;i=5025")
 isa95_vartypes.EquipmentCapabilityTestResultType(
@@ -830,14 +850,27 @@ isa95_vartypes.EquipmentCapabilityTestResultType(
     browseName="ns=isa95;<TestResult>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5028", browseName="ns=isa95;Id", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5029", browseName="ns=isa95;ResultDescription", dataType=o6.LocalizedText, accessLevel=3), "ns=isa95;i=4713"
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5028", browseName="ns=isa95;Id", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"
         ),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5030", browseName="ns=isa95;TestDate", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5031", browseName="ns=isa95;Result", accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5032", browseName="ns=isa95;ResultUnitOfMeasure", accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5033", browseName="ns=isa95;Expiration", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=isa95;i=5029", browseName="ns=isa95;ResultDescription", modellingRule="Mandatory", dataType=o6.LocalizedText, accessLevel=3
+            ),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5030", browseName="ns=isa95;TestDate", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5031", browseName="ns=isa95;Result", modellingRule="Mandatory", accessLevel=3), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5032", browseName="ns=isa95;ResultUnitOfMeasure", modellingRule="Mandatory", accessLevel=3), "ns=isa95;i=4713"
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5033", browseName="ns=isa95;Expiration", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
     ],
     dataType=ns0.datatypes.Structure,
 )
@@ -846,7 +879,12 @@ testSpecification__5 = isa95_objtypes.EquipmentCapabilityTestSpecificationType(
     nodeId="ns=isa95;i=5037",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5038", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
+    references=[
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5038", browseName="ns=isa95;Version", modellingRule="Mandatory", dataType=o6.String, accessLevel=3),
+            "ns=isa95;i=4713",
+        )
+    ],
 )
 o6.reference(isa95_objtypes.EquipmentClassType, "ns=isa95;i=4920", "ns=isa95;i=5037")
 equipmentClass_ = isa95_objtypes.EquipmentClassType(nodeId="ns=isa95;i=5043", browseName="ns=isa95;<EquipmentClass>", modellingRule="OptionalPlaceholder")
@@ -855,7 +893,12 @@ testSpecification__6 = isa95_objtypes.EquipmentCapabilityTestSpecificationType(
     nodeId="ns=isa95;i=5045",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5046", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
+    references=[
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5046", browseName="ns=isa95;Version", modellingRule="Mandatory", dataType=o6.String, accessLevel=3),
+            "ns=isa95;i=4713",
+        )
+    ],
 )
 o6.reference(isa95_objtypes.EquipmentType, "ns=isa95;i=4920", "ns=isa95;i=5045")
 isa95_vartypes.PhysicalAssetClassPropertyType(nodeId="ns=isa95;i=5061", browseName="ns=isa95;<PropertyName>", modellingRule="OptionalPlaceholder")
@@ -864,7 +907,12 @@ testSpecification__7 = isa95_objtypes.PhysicalAssetCapabilityTestSpecificationTy
     nodeId="ns=isa95;i=5063",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5064", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
+    references=[
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5064", browseName="ns=isa95;Version", modellingRule="Mandatory", dataType=o6.String, accessLevel=3),
+            "ns=isa95;i=4713",
+        )
+    ],
 )
 o6.reference(isa95_vartypes.PhysicalAssetClassPropertyType, "ns=isa95;i=4922", "ns=isa95;i=5063")
 isa95_vartypes.PhysicalAssetPropertyType(nodeId="ns=isa95;i=5067", browseName="ns=isa95;<PropertyName>", modellingRule="OptionalPlaceholder")
@@ -873,7 +921,12 @@ testSpecification__8 = isa95_objtypes.PhysicalAssetCapabilityTestSpecificationTy
     nodeId="ns=isa95;i=5069",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5070", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
+    references=[
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5070", browseName="ns=isa95;Version", modellingRule="Mandatory", dataType=o6.String, accessLevel=3),
+            "ns=isa95;i=4713",
+        )
+    ],
 )
 o6.reference(isa95_vartypes.PhysicalAssetPropertyType, "ns=isa95;i=4922", "ns=isa95;i=5069")
 isa95_vartypes.PhysicalAssetCapabilityTestResultType(
@@ -881,14 +934,27 @@ isa95_vartypes.PhysicalAssetCapabilityTestResultType(
     browseName="ns=isa95;<TestResult>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5072", browseName="ns=isa95;Id", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5073", browseName="ns=isa95;ResultDescription", dataType=o6.LocalizedText, accessLevel=3), "ns=isa95;i=4713"
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5072", browseName="ns=isa95;Id", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"
         ),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5074", browseName="ns=isa95;TestDate", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5075", browseName="ns=isa95;Result", accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5076", browseName="ns=isa95;ResultUnitOfMeasure", accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5077", browseName="ns=isa95;Expiration", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=isa95;i=5073", browseName="ns=isa95;ResultDescription", modellingRule="Mandatory", dataType=o6.LocalizedText, accessLevel=3
+            ),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5074", browseName="ns=isa95;TestDate", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5075", browseName="ns=isa95;Result", modellingRule="Mandatory", accessLevel=3), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5076", browseName="ns=isa95;ResultUnitOfMeasure", modellingRule="Mandatory", accessLevel=3), "ns=isa95;i=4713"
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5077", browseName="ns=isa95;Expiration", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
     ],
     dataType=ns0.datatypes.Structure,
 )
@@ -897,7 +963,12 @@ testSpecification__9 = isa95_objtypes.PhysicalAssetCapabilityTestSpecificationTy
     nodeId="ns=isa95;i=5081",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5082", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
+    references=[
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5082", browseName="ns=isa95;Version", modellingRule="Mandatory", dataType=o6.String, accessLevel=3),
+            "ns=isa95;i=4713",
+        )
+    ],
 )
 o6.reference(isa95_objtypes.PhysicalAssetClassType, "ns=isa95;i=4922", "ns=isa95;i=5081")
 physicalAssetClass = isa95_objtypes.PhysicalAssetClassType(nodeId="ns=isa95;i=5088", browseName="ns=isa95;PhysicalAssetClass", modellingRule="Optional")
@@ -906,7 +977,12 @@ testSpecification__10 = isa95_objtypes.PhysicalAssetCapabilityTestSpecificationT
     nodeId="ns=isa95;i=5091",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5092", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
+    references=[
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5092", browseName="ns=isa95;Version", modellingRule="Mandatory", dataType=o6.String, accessLevel=3),
+            "ns=isa95;i=4713",
+        )
+    ],
 )
 o6.reference(isa95_objtypes.PhysicalAssetType, "ns=isa95;i=4922", "ns=isa95;i=5091")
 physicalAsset_ = isa95_objtypes.PhysicalAssetType(nodeId="ns=isa95;i=5093", browseName="ns=isa95;<PhysicalAsset>", modellingRule="Optional")
@@ -917,7 +993,12 @@ testSpecification__11 = isa95_objtypes.QualificationTestSpecificationType(
     nodeId="ns=isa95;i=5122",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5123", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
+    references=[
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5123", browseName="ns=isa95;Version", modellingRule="Mandatory", dataType=o6.String, accessLevel=3),
+            "ns=isa95;i=4713",
+        )
+    ],
 )
 o6.reference(isa95_vartypes.PersonPropertyType, "ns=isa95;i=4918", "ns=isa95;i=5122")
 isa95_vartypes.QualificationTestResultType(
@@ -925,14 +1006,27 @@ isa95_vartypes.QualificationTestResultType(
     browseName="ns=isa95;<TestResult>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5125", browseName="ns=isa95;Id", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5126", browseName="ns=isa95;ResultDescription", dataType=o6.LocalizedText, accessLevel=3), "ns=isa95;i=4713"
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5125", browseName="ns=isa95;Id", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"
         ),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5127", browseName="ns=isa95;TestDate", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5128", browseName="ns=isa95;Result", accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5129", browseName="ns=isa95;ResultUnitOfMeasure", accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5130", browseName="ns=isa95;Expiration", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=isa95;i=5126", browseName="ns=isa95;ResultDescription", modellingRule="Mandatory", dataType=o6.LocalizedText, accessLevel=3
+            ),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5127", browseName="ns=isa95;TestDate", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5128", browseName="ns=isa95;Result", modellingRule="Mandatory", accessLevel=3), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5129", browseName="ns=isa95;ResultUnitOfMeasure", modellingRule="Mandatory", accessLevel=3), "ns=isa95;i=4713"
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5130", browseName="ns=isa95;Expiration", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
     ],
     dataType=ns0.datatypes.Structure,
 )
@@ -941,7 +1035,12 @@ testSpecification__12 = isa95_objtypes.QualificationTestSpecificationType(
     nodeId="ns=isa95;i=5134",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5135", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
+    references=[
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5135", browseName="ns=isa95;Version", modellingRule="Mandatory", dataType=o6.String, accessLevel=3),
+            "ns=isa95;i=4713",
+        )
+    ],
 )
 o6.reference(isa95_objtypes.PersonType, "ns=isa95;i=4918", "ns=isa95;i=5134")
 physicalAsset__2 = isa95_objtypes.PhysicalAssetType(nodeId="ns=isa95;i=5146", browseName="ns=isa95;<PhysicalAsset>", modellingRule="Optional")
@@ -952,7 +1051,12 @@ testSpecification__13 = isa95_objtypes.MaterialTestSpecificationType(
     nodeId="ns=isa95;i=5178",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5179", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
+    references=[
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5179", browseName="ns=isa95;Version", modellingRule="Mandatory", dataType=o6.String, accessLevel=3),
+            "ns=isa95;i=4713",
+        )
+    ],
 )
 o6.reference(isa95_vartypes.MaterialDefinitionPropertyType, "ns=isa95;i=4924", "ns=isa95;i=5178")
 isa95_vartypes.MaterialClassPropertyType(nodeId="ns=isa95;i=5182", browseName="ns=isa95;<PropertyName>", modellingRule="OptionalPlaceholder")
@@ -961,7 +1065,12 @@ testSpecification__14 = isa95_objtypes.MaterialTestSpecificationType(
     nodeId="ns=isa95;i=5184",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5185", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
+    references=[
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5185", browseName="ns=isa95;Version", modellingRule="Mandatory", dataType=o6.String, accessLevel=3),
+            "ns=isa95;i=4713",
+        )
+    ],
 )
 o6.reference(isa95_vartypes.MaterialClassPropertyType, "ns=isa95;i=4924", "ns=isa95;i=5184")
 isa95_vartypes.MaterialLotPropertyType(
@@ -969,14 +1078,27 @@ isa95_vartypes.MaterialLotPropertyType(
     browseName="ns=isa95;<TestResult>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5194", browseName="ns=isa95;Id", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5195", browseName="ns=isa95;ResultDescription", dataType=o6.LocalizedText, accessLevel=3), "ns=isa95;i=4713"
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5194", browseName="ns=isa95;Id", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"
         ),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5196", browseName="ns=isa95;TestDate", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5197", browseName="ns=isa95;Result", accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5198", browseName="ns=isa95;ResultUnitOfMeasure", accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5199", browseName="ns=isa95;Expiration", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=isa95;i=5195", browseName="ns=isa95;ResultDescription", modellingRule="Mandatory", dataType=o6.LocalizedText, accessLevel=3
+            ),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5196", browseName="ns=isa95;TestDate", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5197", browseName="ns=isa95;Result", modellingRule="Mandatory", accessLevel=3), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5198", browseName="ns=isa95;ResultUnitOfMeasure", modellingRule="Mandatory", accessLevel=3), "ns=isa95;i=4713"
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5199", browseName="ns=isa95;Expiration", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
     ],
     dataType=ns0.datatypes.Structure,
 )
@@ -986,14 +1108,27 @@ isa95_vartypes.MaterialLotPropertyType(
     browseName="ns=isa95;<PropertyName>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5201", browseName="ns=isa95;Id", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5202", browseName="ns=isa95;ResultDescription", dataType=o6.LocalizedText, accessLevel=3), "ns=isa95;i=4713"
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5201", browseName="ns=isa95;Id", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"
         ),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5203", browseName="ns=isa95;TestDate", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5204", browseName="ns=isa95;Result", accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5205", browseName="ns=isa95;ResultUnitOfMeasure", accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5206", browseName="ns=isa95;Expiration", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=isa95;i=5202", browseName="ns=isa95;ResultDescription", modellingRule="Mandatory", dataType=o6.LocalizedText, accessLevel=3
+            ),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5203", browseName="ns=isa95;TestDate", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5204", browseName="ns=isa95;Result", modellingRule="Mandatory", accessLevel=3), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5205", browseName="ns=isa95;ResultUnitOfMeasure", modellingRule="Mandatory", accessLevel=3), "ns=isa95;i=4713"
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5206", browseName="ns=isa95;Expiration", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
     ],
     dataType=ns0.datatypes.Structure,
 )
@@ -1002,14 +1137,24 @@ testSpecification__15 = isa95_objtypes.MaterialTestSpecificationType(
     nodeId="ns=isa95;i=5207",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5208", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
+    references=[
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5208", browseName="ns=isa95;Version", modellingRule="Mandatory", dataType=o6.String, accessLevel=3),
+            "ns=isa95;i=4713",
+        )
+    ],
 )
 o6.reference(isa95_vartypes.MaterialLotPropertyType, "ns=isa95;i=4924", "ns=isa95;i=5207")
 testSpecification__16 = isa95_objtypes.MaterialTestSpecificationType(
     nodeId="ns=isa95;i=5212",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5213", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
+    references=[
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5213", browseName="ns=isa95;Version", modellingRule="Mandatory", dataType=o6.String, accessLevel=3),
+            "ns=isa95;i=4713",
+        )
+    ],
 )
 o6.reference(isa95_objtypes.MaterialClassType, "ns=isa95;i=4924", "ns=isa95;i=5212")
 isa95_objtypes.MaterialClassType(
@@ -1017,8 +1162,8 @@ isa95_objtypes.MaterialClassType(
     browseName="ns=isa95;<AssemblyClass>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5215", browseName="ns=isa95;AssemblyType"), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5216", browseName="ns=isa95;AssemblyRelationship"), "ns=isa95;i=4713"),
+        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5215", browseName="ns=isa95;AssemblyType", modellingRule="Optional"), "ns=isa95;i=4713"),
+        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5216", browseName="ns=isa95;AssemblyRelationship", modellingRule="Optional"), "ns=isa95;i=4713"),
     ],
 )
 o6.reference(isa95_objtypes.MaterialClassType, isa95_reftypes.AssembledFromClass, o6.ns["ns=isa95;i=5214"])
@@ -1026,7 +1171,12 @@ testSpecification__17 = isa95_objtypes.MaterialTestSpecificationType(
     nodeId="ns=isa95;i=5222",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5223", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
+    references=[
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5223", browseName="ns=isa95;Version", modellingRule="Mandatory", dataType=o6.String, accessLevel=3),
+            "ns=isa95;i=4713",
+        )
+    ],
 )
 o6.reference(isa95_objtypes.MaterialDefinitionType, "ns=isa95;i=4924", "ns=isa95;i=5222")
 materialClass_ = isa95_objtypes.MaterialClassType(nodeId="ns=isa95;i=5224", browseName="ns=isa95;<MaterialClass>", modellingRule="OptionalPlaceholder")
@@ -1035,8 +1185,8 @@ isa95_objtypes.MaterialDefinitionType(
     browseName="ns=isa95;<AssemblyClass>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5228", browseName="ns=isa95;AssemblyType"), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5229", browseName="ns=isa95;AssemblyRelationship"), "ns=isa95;i=4713"),
+        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5228", browseName="ns=isa95;AssemblyType", modellingRule="Optional"), "ns=isa95;i=4713"),
+        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5229", browseName="ns=isa95;AssemblyRelationship", modellingRule="Optional"), "ns=isa95;i=4713"),
     ],
 )
 o6.reference(isa95_objtypes.MaterialDefinitionType, isa95_reftypes.AssembledFromDefinition, o6.ns["ns=isa95;i=5227"])
@@ -1045,14 +1195,27 @@ isa95_vartypes.MaterialLotPropertyType(
     browseName="ns=isa95;<PropertyName>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5234", browseName="ns=isa95;Id", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5235", browseName="ns=isa95;ResultDescription", dataType=o6.LocalizedText, accessLevel=3), "ns=isa95;i=4713"
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5234", browseName="ns=isa95;Id", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"
         ),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5236", browseName="ns=isa95;TestDate", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5237", browseName="ns=isa95;Result", accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5238", browseName="ns=isa95;ResultUnitOfMeasure", accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5239", browseName="ns=isa95;Expiration", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=isa95;i=5235", browseName="ns=isa95;ResultDescription", modellingRule="Mandatory", dataType=o6.LocalizedText, accessLevel=3
+            ),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5236", browseName="ns=isa95;TestDate", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5237", browseName="ns=isa95;Result", modellingRule="Mandatory", accessLevel=3), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5238", browseName="ns=isa95;ResultUnitOfMeasure", modellingRule="Mandatory", accessLevel=3), "ns=isa95;i=4713"
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5239", browseName="ns=isa95;Expiration", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
     ],
     dataType=ns0.datatypes.Structure,
 )
@@ -1061,7 +1224,12 @@ testSpecification__18 = isa95_objtypes.MaterialTestSpecificationType(
     nodeId="ns=isa95;i=5240",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5241", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
+    references=[
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5241", browseName="ns=isa95;Version", modellingRule="Mandatory", dataType=o6.String, accessLevel=3),
+            "ns=isa95;i=4713",
+        )
+    ],
 )
 o6.reference(isa95_objtypes.MaterialLotType, "ns=isa95;i=4924", "ns=isa95;i=5240")
 materialDefinition_ = isa95_objtypes.MaterialDefinitionType(nodeId="ns=isa95;i=5242", browseName="ns=isa95;<MaterialDefinition>", modellingRule="Optional")
@@ -1072,11 +1240,17 @@ isa95_objtypes.MaterialLotType(
     browseName="ns=isa95;<AssemblyLot>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5249", browseName="ns=isa95;AssemblyType"), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5250", browseName="ns=isa95;AssemblyRelationship"), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5251", browseName="ns=isa95;Status", dataType=isa95_datypes.CDTIdentifier), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5252", browseName="ns=isa95;StorageLocation", dataType=isa95_datypes.CDTIdentifier), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5253", browseName="ns=isa95;Quantity"), "ns=isa95;i=4713"),
+        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5249", browseName="ns=isa95;AssemblyType", modellingRule="Optional"), "ns=isa95;i=4713"),
+        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5250", browseName="ns=isa95;AssemblyRelationship", modellingRule="Optional"), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5251", browseName="ns=isa95;Status", modellingRule="Optional", dataType=isa95_datypes.CDTIdentifier),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5252", browseName="ns=isa95;StorageLocation", modellingRule="Optional", dataType=isa95_datypes.CDTIdentifier),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5253", browseName="ns=isa95;Quantity", modellingRule="Optional"), "ns=isa95;i=4713"),
     ],
 )
 o6.reference(isa95_objtypes.MaterialLotType, isa95_reftypes.AssembledFromLot, o6.ns["ns=isa95;i=5245"])
@@ -1086,14 +1260,27 @@ isa95_vartypes.MaterialLotPropertyType(
     browseName="ns=isa95;<PropertyName>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5261", browseName="ns=isa95;Id", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5262", browseName="ns=isa95;ResultDescription", dataType=o6.LocalizedText, accessLevel=3), "ns=isa95;i=4713"
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5261", browseName="ns=isa95;Id", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"
         ),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5263", browseName="ns=isa95;TestDate", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5264", browseName="ns=isa95;Result", accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5265", browseName="ns=isa95;ResultUnitOfMeasure", accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5266", browseName="ns=isa95;Expiration", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=isa95;i=5262", browseName="ns=isa95;ResultDescription", modellingRule="Mandatory", dataType=o6.LocalizedText, accessLevel=3
+            ),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5263", browseName="ns=isa95;TestDate", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5264", browseName="ns=isa95;Result", modellingRule="Mandatory", accessLevel=3), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5265", browseName="ns=isa95;ResultUnitOfMeasure", modellingRule="Mandatory", accessLevel=3), "ns=isa95;i=4713"
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5266", browseName="ns=isa95;Expiration", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
     ],
     dataType=ns0.datatypes.Structure,
 )
@@ -1102,7 +1289,12 @@ testSpecification__19 = isa95_objtypes.MaterialTestSpecificationType(
     nodeId="ns=isa95;i=5267",
     browseName="ns=isa95;<TestSpecification>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5268", browseName="ns=isa95;Version", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713")],
+    references=[
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5268", browseName="ns=isa95;Version", modellingRule="Mandatory", dataType=o6.String, accessLevel=3),
+            "ns=isa95;i=4713",
+        )
+    ],
 )
 o6.reference(isa95_objtypes.MaterialSublotType, "ns=isa95;i=4924", "ns=isa95;i=5267")
 assemblySublot_ = isa95_objtypes.MaterialSublotType(
@@ -1110,11 +1302,17 @@ assemblySublot_ = isa95_objtypes.MaterialSublotType(
     browseName="ns=isa95;<AssemblySublot>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5279", browseName="ns=isa95;AssemblyType"), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5280", browseName="ns=isa95;AssemblyRelationship"), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5281", browseName="ns=isa95;Status", dataType=isa95_datypes.CDTIdentifier), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5282", browseName="ns=isa95;StorageLocation", dataType=isa95_datypes.CDTIdentifier), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5283", browseName="ns=isa95;Quantity"), "ns=isa95;i=4713"),
+        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5279", browseName="ns=isa95;AssemblyType", modellingRule="Optional"), "ns=isa95;i=4713"),
+        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5280", browseName="ns=isa95;AssemblyRelationship", modellingRule="Optional"), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5281", browseName="ns=isa95;Status", modellingRule="Optional", dataType=isa95_datypes.CDTIdentifier),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5282", browseName="ns=isa95;StorageLocation", modellingRule="Optional", dataType=isa95_datypes.CDTIdentifier),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5283", browseName="ns=isa95;Quantity", modellingRule="Optional"), "ns=isa95;i=4713"),
     ],
 )
 isa95_objtypes.MaterialSublotType(
@@ -1122,11 +1320,17 @@ isa95_objtypes.MaterialSublotType(
     browseName="ns=isa95;<Sublot>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5287", browseName="ns=isa95;AssemblyType"), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5288", browseName="ns=isa95;AssemblyRelationship"), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5289", browseName="ns=isa95;Status", dataType=isa95_datypes.CDTIdentifier), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5290", browseName="ns=isa95;StorageLocation", dataType=isa95_datypes.CDTIdentifier), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5291", browseName="ns=isa95;Quantity"), "ns=isa95;i=4713"),
+        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5287", browseName="ns=isa95;AssemblyType", modellingRule="Optional"), "ns=isa95;i=4713"),
+        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5288", browseName="ns=isa95;AssemblyRelationship", modellingRule="Optional"), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5289", browseName="ns=isa95;Status", modellingRule="Optional", dataType=isa95_datypes.CDTIdentifier),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5290", browseName="ns=isa95;StorageLocation", modellingRule="Optional", dataType=isa95_datypes.CDTIdentifier),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5291", browseName="ns=isa95;Quantity", modellingRule="Optional"), "ns=isa95;i=4713"),
     ],
 )
 o6.reference(isa95_objtypes.MaterialSublotType, isa95_reftypes.MadeUpOfMaterialSublot, o6.ns["ns=isa95;i=5286"])
@@ -1136,13 +1340,25 @@ o6.reference(isa95_objtypes.PersonType, "ns=isa95;i=4917", "ns=isa95;i=5302")
 isa95_vartypes.ISA95AssetAssignmentType(
     nodeId="ns=isa95;i=5303",
     browseName="ns=isa95;AssetAssignment",
+    modellingRule="Optional",
     references=[
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5304", browseName="ns=isa95;Id", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5305", browseName="ns=isa95;AssignmentDescription", dataType=o6.LocalizedText, accessLevel=3), "ns=isa95;i=4713"
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5304", browseName="ns=isa95;Id", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"
         ),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5306", browseName="ns=isa95;StartTime", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5307", browseName="ns=isa95;StopTime", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=isa95;i=5305", browseName="ns=isa95;AssignmentDescription", modellingRule="Mandatory", dataType=o6.LocalizedText, accessLevel=3
+            ),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5306", browseName="ns=isa95;StartTime", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5307", browseName="ns=isa95;StopTime", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
     ],
 )
 isa95_objtypes.PhysicalAssetType(
@@ -1151,9 +1367,14 @@ isa95_objtypes.PhysicalAssetType(
     modellingRule="OptionalPlaceholder",
     references=[
         o6.hasComponent(o6.ns["ns=isa95;i=5303"]),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5151", browseName="ns=isa95;FixedAssetId", dataType=isa95_datypes.CDTIdentifier), "ns=isa95;i=4713"),
-        o6.reference(isa95_vartypes.CompanyType(nodeId="ns=isa95;i=5152", browseName="ns=isa95;VendorId"), "ns=isa95;i=4713"),
-        o6.reference(isa95_vartypes.GeoSpatialLocationType(nodeId="ns=isa95;i=5137", browseName="ns=isa95;PhysicalLocation", dataType=o6.String), "ns=isa95;i=5114"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5151", browseName="ns=isa95;FixedAssetId", modellingRule="Optional", dataType=isa95_datypes.CDTIdentifier),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(isa95_vartypes.CompanyType(nodeId="ns=isa95;i=5152", browseName="ns=isa95;VendorId", modellingRule="Optional"), "ns=isa95;i=4713"),
+        o6.reference(
+            isa95_vartypes.GeoSpatialLocationType(nodeId="ns=isa95;i=5137", browseName="ns=isa95;PhysicalLocation", modellingRule="Optional", dataType=o6.String), "ns=isa95;i=5114"
+        ),
     ],
 )
 o6.reference(isa95_objtypes.PhysicalAssetType, isa95_reftypes.HasISA95Property, o6.ns["ns=isa95;i=5136"])
@@ -1163,25 +1384,48 @@ isa95_vartypes.ISA95AssetAssignmentType(
     browseName="ns=isa95;AssetAssignment",
     modellingRule="Optional",
     references=[
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5309", browseName="ns=isa95;Id", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5310", browseName="ns=isa95;AssignmentDescription", dataType=o6.LocalizedText, accessLevel=3), "ns=isa95;i=4713"
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5309", browseName="ns=isa95;Id", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"
         ),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5311", browseName="ns=isa95;StartTime", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5312", browseName="ns=isa95;StopTime", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=isa95;i=5310", browseName="ns=isa95;AssignmentDescription", modellingRule="Mandatory", dataType=o6.LocalizedText, accessLevel=3
+            ),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5311", browseName="ns=isa95;StartTime", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5312", browseName="ns=isa95;StopTime", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
     ],
 )
 o6.reference(isa95_objtypes.PhysicalAssetType, ns0.reftypes.HasComponent, o6.ns["ns=isa95;i=5308"])
 isa95_vartypes.ISA95AssetAssignmentType(
     nodeId="ns=isa95;i=5318",
     browseName="ns=isa95;AssetAssignment",
+    modellingRule="Optional",
     references=[
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5319", browseName="ns=isa95;Id", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5320", browseName="ns=isa95;AssignmentDescription", dataType=o6.LocalizedText, accessLevel=3), "ns=isa95;i=4713"
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5319", browseName="ns=isa95;Id", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"
         ),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5321", browseName="ns=isa95;StartTime", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5322", browseName="ns=isa95;StopTime", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=isa95;i=5320", browseName="ns=isa95;AssignmentDescription", modellingRule="Mandatory", dataType=o6.LocalizedText, accessLevel=3
+            ),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5321", browseName="ns=isa95;StartTime", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5322", browseName="ns=isa95;StopTime", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
     ],
 )
 isa95_objtypes.EquipmentType(
@@ -1191,7 +1435,10 @@ isa95_objtypes.EquipmentType(
     references=[
         o6.hasComponent(o6.ns["ns=isa95;i=5318"]),
         o6.reference(
-            ns0.vartypes.PropertyType(nodeId="ns=isa95;i=5145", browseName="ns=isa95;EquipmentLevel", dataType=isa95_datypes.ISA95EquipmentElementLevelEnum), "ns=isa95;i=4713"
+            ns0.vartypes.PropertyType(
+                nodeId="ns=isa95;i=5145", browseName="ns=isa95;EquipmentLevel", modellingRule="Optional", dataType=isa95_datypes.ISA95EquipmentElementLevelEnum
+            ),
+            "ns=isa95;i=4713",
         ),
     ],
 )
@@ -1202,12 +1449,23 @@ isa95_vartypes.ISA95AssetAssignmentType(
     browseName="ns=isa95;AssetAssignment",
     modellingRule="Optional",
     references=[
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5329", browseName="ns=isa95;Id", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"),
         o6.reference(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5330", browseName="ns=isa95;AssignmentDescription", dataType=o6.LocalizedText, accessLevel=3), "ns=isa95;i=4713"
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5329", browseName="ns=isa95;Id", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"
         ),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5331", browseName="ns=isa95;StartTime", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
-        o6.reference(ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5332", browseName="ns=isa95;StopTime", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=isa95;i=5330", browseName="ns=isa95;AssignmentDescription", modellingRule="Mandatory", dataType=o6.LocalizedText, accessLevel=3
+            ),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5331", browseName="ns=isa95;StartTime", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
+        o6.reference(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5332", browseName="ns=isa95;StopTime", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+            "ns=isa95;i=4713",
+        ),
     ],
 )
 o6.reference(isa95_objtypes.EquipmentType, ns0.reftypes.HasComponent, o6.ns["ns=isa95;i=5328"])

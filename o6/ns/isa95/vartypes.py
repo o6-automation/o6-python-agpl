@@ -36,22 +36,25 @@ else:
 @o6.variabletype(nodeId="ns=isa95;i=4878", browseName="ns=isa95;ISA95TestResultType", displayName="ISA95TestResultType", valueRank=o6.ValueRank.ANY)
 class ISA95TestResultType(ns0.vartypes.BaseDataVariableType):
     expiration: ns0.vartypes.BaseDataVariableType = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=4884", browseName="ns=isa95;Expiration", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=4884", browseName="ns=isa95;Expiration", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+        "ns=isa95;i=4713",
     )
     id: ns0.vartypes.BaseDataVariableType = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=4879", browseName="ns=isa95;Id", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=4879", browseName="ns=isa95;Id", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"
     )
     result: ns0.vartypes.BaseDataVariableType = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=4882", browseName="ns=isa95;Result", accessLevel=3), "ns=isa95;i=4713"
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=4882", browseName="ns=isa95;Result", modellingRule="Mandatory", accessLevel=3), "ns=isa95;i=4713"
     )
     resultDescription: ns0.vartypes.BaseDataVariableType = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=4880", browseName="ns=isa95;ResultDescription", dataType=o6.LocalizedText, accessLevel=3), "ns=isa95;i=4713"
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=4880", browseName="ns=isa95;ResultDescription", modellingRule="Mandatory", dataType=o6.LocalizedText, accessLevel=3),
+        "ns=isa95;i=4713",
     )
     resultUnitOfMeasure: ns0.vartypes.BaseDataVariableType = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=4883", browseName="ns=isa95;ResultUnitOfMeasure", accessLevel=3), "ns=isa95;i=4713"
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=4883", browseName="ns=isa95;ResultUnitOfMeasure", modellingRule="Mandatory", accessLevel=3), "ns=isa95;i=4713"
     )
     testDate: ns0.vartypes.BaseDataVariableType = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=4881", browseName="ns=isa95;TestDate", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=4881", browseName="ns=isa95;TestDate", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+        "ns=isa95;i=4713",
     )
 
 
@@ -65,7 +68,8 @@ class ISA95TestResultType(ns0.vartypes.BaseDataVariableType):
 )
 class ISA95ClassPropertyType(ns0.vartypes.BaseDataVariableType):
     key: ns0.vartypes.BaseDataVariableType | None = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=4886", browseName="ns=isa95;Key", dataType=isa95_datypes.CDTIdentifier, accessLevel=3), "ns=isa95;i=4713"
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=4886", browseName="ns=isa95;Key", modellingRule="Optional", dataType=isa95_datypes.CDTIdentifier, accessLevel=3),
+        "ns=isa95;i=4713",
     )
 
 
@@ -89,7 +93,8 @@ class PersonnelClassPropertyType(ISA95ClassPropertyType):
 )
 class ISA95PropertyType(ns0.vartypes.BaseDataVariableType):
     key: ns0.vartypes.BaseDataVariableType | None = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=4887", browseName="ns=isa95;Key", dataType=isa95_datypes.CDTIdentifier, accessLevel=3), "ns=isa95;i=4713"
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=4887", browseName="ns=isa95;Key", modellingRule="Optional", dataType=isa95_datypes.CDTIdentifier, accessLevel=3),
+        "ns=isa95;i=4713",
     )
 
 
@@ -191,7 +196,8 @@ class PhysicalAssetPropertyType(ISA95ClassPropertyType):
 )
 class ISA95TestResultNonEUType(ISA95TestResultType):
     resultUnitOfMeasure: ns0.vartypes.BaseDataVariableType = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5099", browseName="ns=isa95;ResultUnitOfMeasure", dataType=o6.String, accessLevel=3), "ns=isa95;i=4713"
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5099", browseName="ns=isa95;ResultUnitOfMeasure", modellingRule="Mandatory", dataType=o6.String, accessLevel=3),
+        "ns=isa95;i=4713",
     )
 
 
@@ -204,7 +210,9 @@ class ISA95TestResultNonEUType(ISA95TestResultType):
 )
 class ISA95TestResultEUType(ISA95TestResultType):
     resultUnitOfMeasure: ns0.vartypes.BaseDataVariableType = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5106", browseName="ns=isa95;ResultUnitOfMeasure", dataType=ns0.datatypes.EUInformation, accessLevel=3),
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=isa95;i=5106", browseName="ns=isa95;ResultUnitOfMeasure", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3
+        ),
         "ns=isa95;i=4713",
     )
 
@@ -212,16 +220,21 @@ class ISA95TestResultEUType(ISA95TestResultType):
 @o6.variabletype(nodeId="ns=isa95;i=5108", browseName="ns=isa95;ISA95AssetAssignmentType", displayName="ISA95AssetAssignmentType", valueRank=o6.ValueRank.ANY)
 class ISA95AssetAssignmentType(ns0.vartypes.BaseDataVariableType):
     assignmentDescription: ns0.vartypes.BaseDataVariableType = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5110", browseName="ns=isa95;AssignmentDescription", dataType=o6.LocalizedText, accessLevel=3), "ns=isa95;i=4713"
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=isa95;i=5110", browseName="ns=isa95;AssignmentDescription", modellingRule="Mandatory", dataType=o6.LocalizedText, accessLevel=3
+        ),
+        "ns=isa95;i=4713",
     )
     id: ns0.vartypes.BaseDataVariableType = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5109", browseName="ns=isa95;Id", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5109", browseName="ns=isa95;Id", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3), "ns=isa95;i=4713"
     )
     startTime: ns0.vartypes.BaseDataVariableType = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5111", browseName="ns=isa95;StartTime", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5111", browseName="ns=isa95;StartTime", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+        "ns=isa95;i=4713",
     )
     stopTime: ns0.vartypes.BaseDataVariableType = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5112", browseName="ns=isa95;StopTime", dataType=o6.DateTime, accessLevel=3), "ns=isa95;i=4713"
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=isa95;i=5112", browseName="ns=isa95;StopTime", modellingRule="Mandatory", dataType=o6.DateTime, accessLevel=3),
+        "ns=isa95;i=4713",
     )
 
 

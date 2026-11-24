@@ -348,6 +348,7 @@ matchConstructionOwner(void *context, UA_ReferenceTarget *target) {
 static int
 pyNode_setConstructionOwner(PyNode *self, PyObject *value,
                             void *Py_UNUSED(closure)) {
+    O6_REQUIRE_LOOP_THREAD(pyNode_eventLoop((PyObject *)self), -1);
     if(!value) {
         PyErr_SetString(PyExc_AttributeError, "Cannot delete a node's construction owner");
         return -1;
@@ -528,6 +529,11 @@ releaseRemovedEntry(PyNode *entry) {
         freeNativeEntry(entry);
         return;
     }
+    /* A tombstone can outlive the server. Its value may use the server's
+     * custom DataTypes, which UA_Server_delete frees, so clear the payload
+     * now. Nothing reads it once detached, and UA_Node_clear keeps the
+     * nodeClass that pyNode_traverse and pyNode_clear need. */
+    UA_Node_clear(&entry->node);
     /* Release the single nodestore pin. pyNode_dealloc runs immediately if
      * Python has no other reference; otherwise the allocation is a tombstone. */
     unlinkPromotedNode(entry);
@@ -1214,6 +1220,7 @@ getNode(PyServer *server, PyObject *args) {
 
 PyObject *
 pyNodeStore_getNode(PyServer *server, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop(server), NULL);
     return getNode(server, args);
 }
 
@@ -1237,4 +1244,11 @@ pyNodeStore_attachedNode(PyObject *node, PyServer **server) {
     if(server)
         *server = entry->server;
     return &entry->node;
+}
+
+UA_EventLoop *
+pyNode_eventLoop(PyObject *node) {
+    if(!PyObject_TypeCheck(node, &PyNodeBaseType))
+        return NULL;
+    return pyServer_eventLoop(((PyNode *)node)->server);
 }

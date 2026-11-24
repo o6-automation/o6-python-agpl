@@ -39,7 +39,7 @@ else:
 class FeedersType(ns0.objtypes.BaseObjectType):
     feeder_Nr_: FeederType | None
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_extruder;i=6041", browseName="NodeVersion", dataType=o6.String, value="\n      ")
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_extruder;i=6041", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value="\n      ")
     )
 
 
@@ -49,14 +49,20 @@ o6.reference(FeedersType, "i=41", "i=2133")
 @o6.objecttype(nodeId="ns=plastics_extrusion_v1_extruder;i=1003", browseName="ns=plastics_extrusion_v1_extruder;HopperType", displayName="HopperType")
 class HopperType(ns0.objtypes.BaseObjectType):
     id: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_extruder;i=6070", browseName="ns=plastics_extrusion_v1_extruder;Id", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_v1_extruder;i=6070", browseName="ns=plastics_extrusion_v1_extruder;Id", modellingRule="Mandatory", dataType=o6.String
+        )
     )
     material: plastics_rubber.objtypes.MaterialType
     materialLevel: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_extrusion_v1_extruder;i=6080", browseName="ns=plastics_extrusion_v1_extruder;MaterialLevel", dataType=o6.Double)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=plastics_extrusion_v1_extruder;i=6080", browseName="ns=plastics_extrusion_v1_extruder;MaterialLevel", modellingRule="Optional", dataType=o6.Double
+        )
     )
     materialLot: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_extruder;i=6077", browseName="ns=plastics_extrusion_v1_extruder;MaterialLot", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_v1_extruder;i=6077", browseName="ns=plastics_extrusion_v1_extruder;MaterialLot", modellingRule="Optional", dataType=o6.String
+        )
     )
     materialTemperature: plastics_rubber.objtypes.MonitoredParameterType | None
     weight: ns0.vartypes.AnalogUnitType | None
@@ -66,28 +72,41 @@ class HopperType(ns0.objtypes.BaseObjectType):
 class FeederType(plastics_rubber.objtypes.DriveType):
     hopper: HopperType | None
     id: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_extruder;i=6083", browseName="ns=plastics_extrusion_v1_extruder;Id", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_v1_extruder;i=6083", browseName="ns=plastics_extrusion_v1_extruder;Id", modellingRule="Mandatory", dataType=o6.String
+        )
     )
     isControlled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_extruder;i=6005", browseName="ns=plastics_extrusion_v1_extruder;IsControlled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_v1_extruder;i=6005", browseName="ns=plastics_extrusion_v1_extruder;IsControlled", modellingRule="Optional", dataType=o6.Boolean
+        )
     )
     isPresent: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_extruder;i=6004", browseName="ns=plastics_extrusion_v1_extruder;IsPresent", dataType=o6.Boolean, value=False)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_v1_extruder;i=6004", browseName="ns=plastics_extrusion_v1_extruder;IsPresent", modellingRule="Mandatory", dataType=o6.Boolean, value=False
+        )
     )
     mode: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_extrusion_v1_extruder;i=6040",
             browseName="ns=plastics_extrusion_v1_extruder;Mode",
+            modellingRule="Mandatory",
             dataType=plastics_extrusion_v1_extruder_datypes.FeedingModeEnumeration,
         )
     )
     name: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_extrusion_v1_extruder;i=6002", browseName="ns=plastics_extrusion_v1_extruder;Name", dataType=o6.LocalizedText, value=o6.LocalizedText()
+            nodeId="ns=plastics_extrusion_v1_extruder;i=6002",
+            browseName="ns=plastics_extrusion_v1_extruder;Name",
+            modellingRule="Mandatory",
+            dataType=o6.LocalizedText,
+            value=o6.LocalizedText(),
         )
     )
     target: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_extruder;i=6085", browseName="ns=plastics_extrusion_v1_extruder;Target", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_v1_extruder;i=6085", browseName="ns=plastics_extrusion_v1_extruder;Target", modellingRule="Mandatory", dataType=o6.String
+        )
     )
     throughput: plastics_rubber.objtypes.MonitoredParameterType | None
 
@@ -96,14 +115,22 @@ class FeederType(plastics_rubber.objtypes.DriveType):
 class Extruder_InterfaceType(plastics_extrusion_v1.objtypes.ExtrusionDeviceType):
     additionalDrives: plastics_rubber.objtypes.DrivesType | None
     barrelId: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_extruder;i=6521", browseName="ns=plastics_extrusion_v1_extruder;BarrelId", dataType=o6.String, value="\n      ")
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_v1_extruder;i=6521",
+            browseName="ns=plastics_extrusion_v1_extruder;BarrelId",
+            modellingRule="Optional",
+            dataType=o6.String,
+            value="\n      ",
+        )
     )
     feeders: FeedersType | None
     mainDrive: plastics_rubber.objtypes.DriveType | None
     meltPressureZones: plastics_rubber.objtypes.MeasuringDevicesType | None
     meltTemperatureZones: plastics_rubber.objtypes.MeasuringDevicesType | None
     screwId: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_extruder;i=6001", browseName="ns=plastics_extrusion_v1_extruder;ScrewId", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_v1_extruder;i=6001", browseName="ns=plastics_extrusion_v1_extruder;ScrewId", modellingRule="Optional", dataType=o6.String
+        )
     )
     screwTemperatures: plastics_extrusion_v1.objtypes.ExtrusionTemperatureZonesType | None
     specificOutput: ns0.vartypes.AnalogUnitType | None

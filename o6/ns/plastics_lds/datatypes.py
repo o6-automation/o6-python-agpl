@@ -35,7 +35,7 @@ else:
 
 @o6.enumtype(
     nodeId="ns=plastics_lds;i=3002",
-    browseName="AdditiveStatusEnumeration",
+    browseName="ns=plastics_lds;AdditiveStatusEnumeration",
     description="Actual status of the additive provides a minimal error handling for devices without event support.",
 )
 class AdditiveStatusEnumeration(ns0.datatypes.Enumeration):
@@ -48,7 +48,7 @@ class AdditiveStatusEnumeration(ns0.datatypes.Enumeration):
 
 @o6.enumtype(
     nodeId="ns=plastics_lds;i=3003",
-    browseName="ComponentStatusEnumeration",
+    browseName="ns=plastics_lds;ComponentStatusEnumeration",
     description="Actual status of the component provides a minimal error handling for devices without event support.",
 )
 class ComponentStatusEnumeration(ns0.datatypes.Enumeration):
@@ -61,7 +61,7 @@ class ComponentStatusEnumeration(ns0.datatypes.Enumeration):
     ERROR = o6.enumfield(6, name="ERROR")
 
 
-@o6.enumtype(nodeId="ns=plastics_lds;i=3004", browseName="PurgeStatusEnumeration")
+@o6.enumtype(nodeId="ns=plastics_lds;i=3004", browseName="ns=plastics_lds;PurgeStatusEnumeration")
 class PurgeStatusEnumeration(ns0.datatypes.Enumeration):
     OFF = o6.enumfield(0, name="OFF")
     COMPONENT_A = o6.enumfield(1, name="COMPONENT_A")
@@ -70,7 +70,7 @@ class PurgeStatusEnumeration(ns0.datatypes.Enumeration):
     COMPONENT_A_AND_B_CYCLIC = o6.enumfield(4, name="COMPONENT_A_AND_B_CYCLIC")
 
 
-@o6.enumtype(nodeId="ns=plastics_lds;i=3005", browseName="MaterialBalanceSystemTypeEnumeration")
+@o6.enumtype(nodeId="ns=plastics_lds;i=3005", browseName="ns=plastics_lds;MaterialBalanceSystemTypeEnumeration")
 class MaterialBalanceSystemTypeEnumeration(ns0.datatypes.Enumeration):
     NOT_AVAILABLE = o6.enumfield(0, name="NOT_AVAILABLE")
     ALWAYS_ACTIVE = o6.enumfield(1, name="ALWAYS_ACTIVE")

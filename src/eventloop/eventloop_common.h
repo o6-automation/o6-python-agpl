@@ -17,21 +17,8 @@
 
 _UA_BEGIN_DECLS
 
-/* Typing restrictions for key-value parameters */
-typedef struct {
-    UA_QualifiedName name;
-    const UA_DataType *type;
-    UA_Boolean required;
-    UA_Boolean scalar;
-    UA_Boolean array;
-} UA_KeyValueRestriction;
-
-UA_StatusCode
-UA_KeyValueRestriction_validate(const UA_Logger *logger,
-                                const char *logprefix,
-                                const UA_KeyValueRestriction *restrictions,
-                                size_t restrictionsSize,
-                                const UA_KeyValueMap *map);
+/* UA_KeyValueRestriction and UA_KeyValueMap_validate are public in
+ * <open62541/util.h>. */
 
 _UA_END_DECLS
 

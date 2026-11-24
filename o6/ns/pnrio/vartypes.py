@@ -37,20 +37,20 @@ else:
 @o6.variabletype(nodeId="ns=pnrio;i=2002", browseName="ns=pnrio;RioPaProcessValueQualifierVariableType", displayName="RioPaProcessValueQualifierVariableType", dataType=o6.Byte)
 class RioPaProcessValueQualifierVariableType(ns0.vartypes.BaseDataVariableType):
     nE_107: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6048", browseName="ns=pnrio;NE_107", dataType=pnrio_datypes.RioSpecifierEnumeration)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6048", browseName="ns=pnrio;NE_107", modellingRule="Optional", dataType=pnrio_datypes.RioSpecifierEnumeration)
     )
     quality: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6047", browseName="ns=pnrio;Quality", dataType=pnrio_datypes.RioQualityEnumeration)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6047", browseName="ns=pnrio;Quality", modellingRule="Optional", dataType=pnrio_datypes.RioQualityEnumeration)
     )
     status_full: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6049", browseName="ns=pnrio;Status_full", dataType=pnrio_datypes.RioQualifierEnumeration)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6049", browseName="ns=pnrio;Status_full", modellingRule="Optional", dataType=pnrio_datypes.RioQualifierEnumeration)
     )
 
 
 @o6.variabletype(nodeId="ns=pnrio;i=2003", browseName="ns=pnrio;RioFaProcessValueQualifierVariableType", displayName="RioFaProcessValueQualifierVariableType", dataType=o6.Boolean)
 class RioFaProcessValueQualifierVariableType(ns0.vartypes.BaseDataVariableType):
     quality: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6050", browseName="ns=pnrio;Quality", dataType=pnrio_datypes.RioQualityEnumeration)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6050", browseName="ns=pnrio;Quality", modellingRule="Optional", dataType=pnrio_datypes.RioQualityEnumeration)
     )
 
 
@@ -63,10 +63,10 @@ class RioFaProcessValueQualifierVariableType(ns0.vartypes.BaseDataVariableType):
 )
 class RioPaDigitalProcessValueVariableType(ns0.vartypes.BaseDataVariableType):
     dataValue: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6051", browseName="ns=pnrio;DataValue", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6051", browseName="ns=pnrio;DataValue", modellingRule="Optional", dataType=o6.Boolean)
     )
     qualifierValue: RioPaProcessValueQualifierVariableType | None = o6.hasComponent(
-        RioPaProcessValueQualifierVariableType(nodeId="ns=pnrio;i=6052", browseName="ns=pnrio;QualifierValue", dataType=o6.Byte)
+        RioPaProcessValueQualifierVariableType(nodeId="ns=pnrio;i=6052", browseName="ns=pnrio;QualifierValue", modellingRule="Optional", dataType=o6.Byte)
     )
 
 
@@ -79,10 +79,10 @@ class RioPaDigitalProcessValueVariableType(ns0.vartypes.BaseDataVariableType):
 )
 class RioFaDigitalProcessValueVariableType(ns0.vartypes.BaseDataVariableType):
     dataValue: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6053", browseName="ns=pnrio;DataValue", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnrio;i=6053", browseName="ns=pnrio;DataValue", modellingRule="Optional", dataType=o6.Boolean)
     )
     qualifierValue: RioFaProcessValueQualifierVariableType | None = o6.hasComponent(
-        RioFaProcessValueQualifierVariableType(nodeId="ns=pnrio;i=6054", browseName="ns=pnrio;QualifierValue", dataType=o6.Boolean)
+        RioFaProcessValueQualifierVariableType(nodeId="ns=pnrio;i=6054", browseName="ns=pnrio;QualifierValue", modellingRule="Optional", dataType=o6.Boolean)
     )
 
 
@@ -94,10 +94,10 @@ class RioFaDigitalProcessValueVariableType(ns0.vartypes.BaseDataVariableType):
 )
 class RioPaAnalogProcessValueVariableType(ns0.vartypes.BaseDataVariableType):
     dataValue: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(
-        ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6035", browseName="ns=pnrio;DataValue", dataType=ns0.datatypes.Number)
+        ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6035", browseName="ns=pnrio;DataValue", modellingRule="Optional", dataType=ns0.datatypes.Number)
     )
     qualifierValue: RioPaProcessValueQualifierVariableType | None = o6.hasComponent(
-        RioPaProcessValueQualifierVariableType(nodeId="ns=pnrio;i=6056", browseName="ns=pnrio;QualifierValue", dataType=o6.Byte)
+        RioPaProcessValueQualifierVariableType(nodeId="ns=pnrio;i=6056", browseName="ns=pnrio;QualifierValue", modellingRule="Optional", dataType=o6.Byte)
     )
 
 
@@ -109,10 +109,10 @@ class RioPaAnalogProcessValueVariableType(ns0.vartypes.BaseDataVariableType):
 )
 class RioFaAnalogProcessValueVariableType(ns0.vartypes.BaseDataVariableType):
     dataValue: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(
-        ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6036", browseName="ns=pnrio;DataValue", dataType=ns0.datatypes.Number)
+        ns0.vartypes.BaseAnalogType(nodeId="ns=pnrio;i=6036", browseName="ns=pnrio;DataValue", modellingRule="Optional", dataType=ns0.datatypes.Number)
     )
     qualifierValue: RioFaProcessValueQualifierVariableType | None = o6.hasComponent(
-        RioFaProcessValueQualifierVariableType(nodeId="ns=pnrio;i=6058", browseName="ns=pnrio;QualifierValue", dataType=o6.Boolean)
+        RioFaProcessValueQualifierVariableType(nodeId="ns=pnrio;i=6058", browseName="ns=pnrio;QualifierValue", modellingRule="Optional", dataType=o6.Boolean)
     )
 
 
@@ -132,24 +132,26 @@ class RioFaAnalogProcessValueVariableType(ns0.vartypes.BaseDataVariableType):
     ),
 )
 class RioPaAnalogInputConfigVariableType(ns0.vartypes.BaseDataVariableType):
-    damping: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6081", browseName="ns=pnrio;Damping", dataType=o6.Float))
+    damping: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6081", browseName="ns=pnrio;Damping", modellingRule="Optional", dataType=o6.Float)
+    )
     highLimit: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6088", browseName="ns=pnrio;HighLimit", dataType=pnrio_datypes.RioAnalogDataType)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6088", browseName="ns=pnrio;HighLimit", modellingRule="Optional", dataType=pnrio_datypes.RioAnalogDataType)
     )
     lowLimit: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6089", browseName="ns=pnrio;LowLimit", dataType=pnrio_datypes.RioAnalogDataType)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6089", browseName="ns=pnrio;LowLimit", modellingRule="Optional", dataType=pnrio_datypes.RioAnalogDataType)
     )
     signalType: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6082", browseName="ns=pnrio;SignalType", dataType=pnrio_datypes.RioSignalTypeEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6082", browseName="ns=pnrio;SignalType", modellingRule="Optional", dataType=pnrio_datypes.RioSignalTypeEnumeration)
     )
     substitutePolicy: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6086", browseName="ns=pnrio;SubstitutePolicy", dataType=pnrio_datypes.RioSubstitutePolicyEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6086", browseName="ns=pnrio;SubstitutePolicy", modellingRule="Optional", dataType=pnrio_datypes.RioSubstitutePolicyEnumeration)
     )
     substituteValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6087", browseName="ns=pnrio;SubstituteValue", dataType=pnrio_datypes.RioAnalogDataType)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6087", browseName="ns=pnrio;SubstituteValue", modellingRule="Optional", dataType=pnrio_datypes.RioAnalogDataType)
     )
     wireCheckEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6083", browseName="ns=pnrio;WireCheckEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6083", browseName="ns=pnrio;WireCheckEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
 
 
@@ -168,17 +170,19 @@ class RioPaAnalogInputConfigVariableType(ns0.vartypes.BaseDataVariableType):
 )
 class RioPaAnalogOutputConfigVariableType(ns0.vartypes.BaseDataVariableType):
     signalType: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6095", browseName="ns=pnrio;SignalType", dataType=pnrio_datypes.RioSignalTypeEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6095", browseName="ns=pnrio;SignalType", modellingRule="Optional", dataType=pnrio_datypes.RioSignalTypeEnumeration)
     )
     substitutePolicy: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6099", browseName="ns=pnrio;SubstitutePolicy", dataType=pnrio_datypes.RioSubstitutePolicyEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6099", browseName="ns=pnrio;SubstitutePolicy", modellingRule="Optional", dataType=pnrio_datypes.RioSubstitutePolicyEnumeration)
     )
-    substituteTime: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6101", browseName="ns=pnrio;SubstituteTime", dataType=o6.Float))
+    substituteTime: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6101", browseName="ns=pnrio;SubstituteTime", modellingRule="Optional", dataType=o6.Float)
+    )
     substituteValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6100", browseName="ns=pnrio;SubstituteValue", dataType=pnrio_datypes.RioAnalogDataType)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6100", browseName="ns=pnrio;SubstituteValue", modellingRule="Optional", dataType=pnrio_datypes.RioAnalogDataType)
     )
     wireCheckEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6096", browseName="ns=pnrio;WireCheckEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6096", browseName="ns=pnrio;WireCheckEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
 
 
@@ -190,7 +194,9 @@ class RioPaAnalogOutputConfigVariableType(ns0.vartypes.BaseDataVariableType):
     value=pnrio_datypes.RioBitFieldDataType(bitData=0, bitUsed=0),
 )
 class RioBitFieldVariableType(ns0.vartypes.BaseDataVariableType):
-    offset: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6185", browseName="ns=pnrio;Offset", dataType=o6.UInt16))
+    offset: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6185", browseName="ns=pnrio;Offset", modellingRule="Optional", dataType=o6.UInt16)
+    )
 
 
 @o6.variabletype(
@@ -208,19 +214,19 @@ class RioBitFieldVariableType(ns0.vartypes.BaseDataVariableType):
 )
 class RioPaDigitalInputConfigVariableType(ns0.vartypes.BaseDataVariableType):
     inversionEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6280", browseName="ns=pnrio;InversionEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6280", browseName="ns=pnrio;InversionEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
     signalType: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6059", browseName="ns=pnrio;SignalType", dataType=pnrio_datypes.RioSignalTypeEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6059", browseName="ns=pnrio;SignalType", modellingRule="Optional", dataType=pnrio_datypes.RioSignalTypeEnumeration)
     )
     substitutePolicy: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6063", browseName="ns=pnrio;SubstitutePolicy", dataType=pnrio_datypes.RioSubstitutePolicyEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6063", browseName="ns=pnrio;SubstitutePolicy", modellingRule="Optional", dataType=pnrio_datypes.RioSubstitutePolicyEnumeration)
     )
     substituteValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6064", browseName="ns=pnrio;SubstituteValue", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6064", browseName="ns=pnrio;SubstituteValue", modellingRule="Optional", dataType=o6.Boolean)
     )
     wireCheckEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6060", browseName="ns=pnrio;WireCheckEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6060", browseName="ns=pnrio;WireCheckEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
 
 
@@ -239,19 +245,19 @@ class RioPaDigitalInputConfigVariableType(ns0.vartypes.BaseDataVariableType):
 )
 class RioFaDigitalInputConfigVariableType(ns0.vartypes.BaseDataVariableType):
     signalType: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6065", browseName="ns=pnrio;SignalType", dataType=pnrio_datypes.RioSignalTypeEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6065", browseName="ns=pnrio;SignalType", modellingRule="Optional", dataType=pnrio_datypes.RioSignalTypeEnumeration)
     )
     substitutePolicy: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6067", browseName="ns=pnrio;SubstitutePolicy", dataType=pnrio_datypes.RioSubstitutePolicyEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6067", browseName="ns=pnrio;SubstitutePolicy", modellingRule="Optional", dataType=pnrio_datypes.RioSubstitutePolicyEnumeration)
     )
     substituteValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6068", browseName="ns=pnrio;SubstituteValue", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6068", browseName="ns=pnrio;SubstituteValue", modellingRule="Optional", dataType=o6.Boolean)
     )
     supplyVoltageCheckEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6281", browseName="ns=pnrio;SupplyVoltageCheckEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6281", browseName="ns=pnrio;SupplyVoltageCheckEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
     wireCheckEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6066", browseName="ns=pnrio;WireCheckEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6066", browseName="ns=pnrio;WireCheckEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
 
 
@@ -271,20 +277,22 @@ class RioFaDigitalInputConfigVariableType(ns0.vartypes.BaseDataVariableType):
 )
 class RioPaDigitalOutputConfigVariableType(ns0.vartypes.BaseDataVariableType):
     inversionEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6282", browseName="ns=pnrio;InversionEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6282", browseName="ns=pnrio;InversionEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
     signalType: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6069", browseName="ns=pnrio;SignalType", dataType=pnrio_datypes.RioSignalTypeEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6069", browseName="ns=pnrio;SignalType", modellingRule="Optional", dataType=pnrio_datypes.RioSignalTypeEnumeration)
     )
     substitutePolicy: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6073", browseName="ns=pnrio;SubstitutePolicy", dataType=pnrio_datypes.RioSubstitutePolicyEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6073", browseName="ns=pnrio;SubstitutePolicy", modellingRule="Optional", dataType=pnrio_datypes.RioSubstitutePolicyEnumeration)
     )
-    substituteTime: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6075", browseName="ns=pnrio;SubstituteTime", dataType=o6.Float))
+    substituteTime: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6075", browseName="ns=pnrio;SubstituteTime", modellingRule="Optional", dataType=o6.Float)
+    )
     substituteValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6074", browseName="ns=pnrio;SubstituteValue", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6074", browseName="ns=pnrio;SubstituteValue", modellingRule="Optional", dataType=o6.Boolean)
     )
     wireCheckEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6070", browseName="ns=pnrio;WireCheckEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6070", browseName="ns=pnrio;WireCheckEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
 
 
@@ -305,23 +313,25 @@ class RioPaDigitalOutputConfigVariableType(ns0.vartypes.BaseDataVariableType):
 )
 class RioFaDigitalOutputConfigVariableType(ns0.vartypes.BaseDataVariableType):
     loadVoltageCheckEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6284", browseName="ns=pnrio;LoadVoltageCheckEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6284", browseName="ns=pnrio;LoadVoltageCheckEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
     signalType: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6076", browseName="ns=pnrio;SignalType", dataType=pnrio_datypes.RioSignalTypeEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6076", browseName="ns=pnrio;SignalType", modellingRule="Optional", dataType=pnrio_datypes.RioSignalTypeEnumeration)
     )
     substitutePolicy: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6078", browseName="ns=pnrio;SubstitutePolicy", dataType=pnrio_datypes.RioSubstitutePolicyEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6078", browseName="ns=pnrio;SubstitutePolicy", modellingRule="Optional", dataType=pnrio_datypes.RioSubstitutePolicyEnumeration)
     )
-    substituteTime: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6080", browseName="ns=pnrio;SubstituteTime", dataType=o6.Float))
+    substituteTime: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6080", browseName="ns=pnrio;SubstituteTime", modellingRule="Optional", dataType=o6.Float)
+    )
     substituteValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6079", browseName="ns=pnrio;SubstituteValue", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6079", browseName="ns=pnrio;SubstituteValue", modellingRule="Optional", dataType=o6.Boolean)
     )
     supplyVoltageCheckEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6283", browseName="ns=pnrio;SupplyVoltageCheckEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6283", browseName="ns=pnrio;SupplyVoltageCheckEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
     wireCheckEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6077", browseName="ns=pnrio;WireCheckEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6077", browseName="ns=pnrio;WireCheckEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
 
 
@@ -340,21 +350,23 @@ class RioFaDigitalOutputConfigVariableType(ns0.vartypes.BaseDataVariableType):
     ),
 )
 class RioFaAnalogInputConfigVariableType(ns0.vartypes.BaseDataVariableType):
-    damping: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6090", browseName="ns=pnrio;Damping", dataType=o6.Float))
+    damping: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6090", browseName="ns=pnrio;Damping", modellingRule="Optional", dataType=o6.Float)
+    )
     signalType: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6091", browseName="ns=pnrio;SignalType", dataType=pnrio_datypes.RioSignalTypeEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6091", browseName="ns=pnrio;SignalType", modellingRule="Optional", dataType=pnrio_datypes.RioSignalTypeEnumeration)
     )
     substitutePolicy: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6093", browseName="ns=pnrio;SubstitutePolicy", dataType=pnrio_datypes.RioSubstitutePolicyEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6093", browseName="ns=pnrio;SubstitutePolicy", modellingRule="Optional", dataType=pnrio_datypes.RioSubstitutePolicyEnumeration)
     )
     substituteValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6094", browseName="ns=pnrio;SubstituteValue", dataType=pnrio_datypes.RioAnalogDataType)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6094", browseName="ns=pnrio;SubstituteValue", modellingRule="Optional", dataType=pnrio_datypes.RioAnalogDataType)
     )
     supplyVoltageCheckEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6285", browseName="ns=pnrio;SupplyVoltageCheckEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6285", browseName="ns=pnrio;SupplyVoltageCheckEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
     wireCheckEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6092", browseName="ns=pnrio;WireCheckEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6092", browseName="ns=pnrio;WireCheckEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
 
 
@@ -375,23 +387,25 @@ class RioFaAnalogInputConfigVariableType(ns0.vartypes.BaseDataVariableType):
 )
 class RioFaAnalogOutputConfigVariableType(ns0.vartypes.BaseDataVariableType):
     loadVoltageCheckEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6287", browseName="ns=pnrio;LoadVoltageCheckEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6287", browseName="ns=pnrio;LoadVoltageCheckEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
     signalType: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6102", browseName="ns=pnrio;SignalType", dataType=pnrio_datypes.RioSignalTypeEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6102", browseName="ns=pnrio;SignalType", modellingRule="Optional", dataType=pnrio_datypes.RioSignalTypeEnumeration)
     )
     substitutePolicy: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6104", browseName="ns=pnrio;SubstitutePolicy", dataType=pnrio_datypes.RioSubstitutePolicyEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6104", browseName="ns=pnrio;SubstitutePolicy", modellingRule="Optional", dataType=pnrio_datypes.RioSubstitutePolicyEnumeration)
     )
-    substituteTime: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6106", browseName="ns=pnrio;SubstituteTime", dataType=o6.Float))
+    substituteTime: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6106", browseName="ns=pnrio;SubstituteTime", modellingRule="Optional", dataType=o6.Float)
+    )
     substituteValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6105", browseName="ns=pnrio;SubstituteValue", dataType=pnrio_datypes.RioAnalogDataType)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6105", browseName="ns=pnrio;SubstituteValue", modellingRule="Optional", dataType=pnrio_datypes.RioAnalogDataType)
     )
     supplyVoltageCheckEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6286", browseName="ns=pnrio;SupplyVoltageCheckEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6286", browseName="ns=pnrio;SupplyVoltageCheckEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
     wireCheckEnabled: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6103", browseName="ns=pnrio;WireCheckEnabled", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnrio;i=6103", browseName="ns=pnrio;WireCheckEnabled", modellingRule="Optional", dataType=o6.Boolean)
     )
 
 

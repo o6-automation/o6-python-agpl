@@ -37,23 +37,23 @@ else:
     _VariableNode = object
 
 
-@o6.datatype(nodeId="ns=wmtp;i=3003", browseName="WMTPOutputDataType", defaultEncodingId="ns=wmtp;i=5020")
+@o6.datatype(nodeId="ns=wmtp;i=3003", browseName="ns=wmtp;WMTPOutputDataType", defaultEncodingId="ns=wmtp;i=5020")
 class WMTPOutputDataType(ns0.datatypes.Structure):
-    engineeringUnits: ns0.datatypes.EUInformation
-    actualValue: o6.Double
-    typeOfMeasurement: o6.UInt32
-    typeOfSample: o6.UInt32
-    instrumentRange: ns0.datatypes.Range
-    eURange: ns0.datatypes.Range
-    valuePrecision: o6.Double
-    definition: o6.String
-    signalTag: o6.String
-    relativeUncertainty: o6.Double
-    absoluteUncertainty: o6.Double
-    timestamp: o6.DateTime
-    index: o6.UInt32
-    measurementPeriod: o6.Double
-    internalUpdateInterval: o6.Double
+    engineeringUnits: ns0.datatypes.EUInformation = o6.field(name="EngineeringUnits")
+    actualValue: o6.Double = o6.field(name="ActualValue")
+    typeOfMeasurement: o6.UInt32 = o6.field(name="TypeOfMeasurement")
+    typeOfSample: o6.UInt32 = o6.field(name="TypeOfSample")
+    instrumentRange: ns0.datatypes.Range = o6.field(name="InstrumentRange")
+    eURange: ns0.datatypes.Range = o6.field(name="EURange")
+    valuePrecision: o6.Double = o6.field(name="ValuePrecision")
+    definition: o6.String = o6.field(name="Definition")
+    signalTag: o6.String = o6.field(name="SignalTag")
+    relativeUncertainty: o6.Double = o6.field(name="RelativeUncertainty")
+    absoluteUncertainty: o6.Double = o6.field(name="AbsoluteUncertainty")
+    timestamp: o6.DateTime = o6.field(name="Timestamp")
+    index: o6.UInt32 = o6.field(name="Index")
+    measurementPeriod: o6.Double = o6.field(name="MeasurementPeriod")
+    internalUpdateInterval: o6.Double = o6.field(name="InternalUpdateInterval")
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ia, irdi, machinery, machinery_processvalues, ns0, padim

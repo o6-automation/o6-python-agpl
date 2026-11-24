@@ -35,14 +35,14 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=mining_shearer_loader;i=3002", browseName="ShearerDirectionEnum")
+@o6.enumtype(nodeId="ns=mining_shearer_loader;i=3002", browseName="ns=mining_shearer_loader;ShearerDirectionEnum")
 class ShearerDirectionEnum(ns0.datatypes.Enumeration):
     STOP = o6.enumfield(0, name="STOP")
     LEFT = o6.enumfield(1, name="LEFT")
     RIGHT = o6.enumfield(2, name="RIGHT")
 
 
-@o6.enumtype(nodeId="ns=mining_shearer_loader;i=3004", browseName="ShearerDrumMountingPositionEnum")
+@o6.enumtype(nodeId="ns=mining_shearer_loader;i=3004", browseName="ns=mining_shearer_loader;ShearerDrumMountingPositionEnum")
 class ShearerDrumMountingPositionEnum(ns0.datatypes.Enumeration):
     MOUNTING_POSITION_LEFT = o6.enumfield(0, name="MountingPositionLeft")
     MOUNTING_POSITION_RIGHT = o6.enumfield(1, name="MountingPositionRight")

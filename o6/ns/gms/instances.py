@@ -54,26 +54,30 @@ gms_objtypes.GMSEquipmentType(
     nodeId="ns=gms;i=5010",
     browseName="ns=machine_tool;Equipment",
     modellingRule="Mandatory",
-    references=[o6.hasComponent(machine_tool.objtypes.ToolListType(nodeId="ns=gms;i=5022", browseName="ns=machine_tool;Tools"))],
+    references=[o6.hasComponent(machine_tool.objtypes.ToolListType(nodeId="ns=gms;i=5022", browseName="ns=machine_tool;Tools", modellingRule="Optional"))],
 )
 o6.reference(gms_objtypes.GMSType, ns0.reftypes.HasComponent, o6.ns["ns=gms;i=5010"])
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=gms;i=6006",
     browseName="CurrentState",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6007", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6008", browseName="Number", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6007", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6008", browseName="Number", modellingRule="Mandatory", dataType=o6.UInt32)),
     ],
     dataType=o6.LocalizedText,
     value=o6.LocalizedText(),
 )
-machine_tool.objtypes.ProductionProgramStateMachineType(nodeId="ns=gms;i=5006", browseName="ns=machine_tool;State", references=[o6.hasComponent(o6.ns["ns=gms;i=6006"])])
+machine_tool.objtypes.ProductionProgramStateMachineType(
+    nodeId="ns=gms;i=5006", browseName="ns=machine_tool;State", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=gms;i=6006"])]
+)
 machine_tool.objtypes.ProductionActiveProgramType(
     nodeId="ns=gms;i=5005",
     browseName="ns=machine_tool;ActiveProgram",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6004", browseName="ns=machine_tool;Name", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6005", browseName="NumberInList", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6004", browseName="ns=machine_tool;Name", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6005", browseName="NumberInList", modellingRule="Mandatory", dataType=o6.UInt16)),
         o6.hasComponent(o6.ns["ns=gms;i=5006"]),
     ],
 )
@@ -84,8 +88,13 @@ o6.reference(gms_objtypes.GMSType, ns0.reftypes.HasComponent, o6.ns["ns=gms;i=50
 machine_tool.objtypes.MachineOperationMonitoringType(
     nodeId="ns=gms;i=5027",
     browseName="ns=machine_tool;MachineTool",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=gms;i=6017", browseName="ns=machine_tool;OperationMode", dataType=machine_tool.datatypes.MachineOperationMode))
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=gms;i=6017", browseName="ns=machine_tool;OperationMode", modellingRule="Mandatory", dataType=machine_tool.datatypes.MachineOperationMode
+            )
+        )
     ],
 )
 gms_objtypes.GMSMonitoringType(nodeId="ns=gms;i=5026", browseName="ns=machine_tool;Monitoring", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=gms;i=5027"])])
@@ -104,7 +113,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=gms;i=6044",
     browseName="ns=gms;Nominal",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6045", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6045", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -113,14 +122,16 @@ o6.reference(gms_objtypes.CharacteristicType, ns0.reftypes.HasComponent, o6.ns["
 ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=gms;i=6048",
     browseName="ns=gms;Class",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=gms;i=6049",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[12],
+                arrayDimensions=[0],
                 value=[
                     o6.LocalizedText("Other", "0"),
                     o6.LocalizedText("NoTool", "1"),
@@ -145,7 +156,12 @@ ns0.vartypes.MultiStateDiscreteType(
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=gms;i=6054",
     browseName="ns=machine_tool;Locked",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6055", browseName="ns=machine_tool;ReasonForLocking", dataType=machine_tool.datatypes.ToolLocked))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6055", browseName="ns=machine_tool;ReasonForLocking", modellingRule="Mandatory", dataType=machine_tool.datatypes.ToolLocked)
+        )
+    ],
     dataType=o6.Boolean,
     value=False,
 )
@@ -154,11 +170,13 @@ gms_objtypes.SensorType(
     browseName="ns=gms;<Tool>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasComponent(ns0.objtypes.BaseObjectType(nodeId="ns=gms;i=5045", browseName="ns=machine_tool;ToolLife")),
+        o6.hasComponent(ns0.objtypes.BaseObjectType(nodeId="ns=gms;i=5045", browseName="ns=machine_tool;ToolLife", modellingRule="Mandatory")),
         o6.hasComponent(o6.ns["ns=gms;i=6048"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=gms;i=6052", browseName="ns=machine_tool;ControlIdentifier1", dataType=o6.UInt32)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=gms;i=6052", browseName="ns=machine_tool;ControlIdentifier1", modellingRule="Mandatory", dataType=o6.UInt32)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=gms;i=6053", browseName="ns=machine_tool;ControlIdentifierInterpretation", dataType=machine_tool.datatypes.ToolManagement)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=gms;i=6053", browseName="ns=machine_tool;ControlIdentifierInterpretation", modellingRule="Mandatory", dataType=machine_tool.datatypes.ToolManagement
+            )
         ),
         o6.hasComponent(o6.ns["ns=gms;i=6054"]),
     ],
@@ -173,9 +191,10 @@ ns0.vartypes.MultiStateDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=gms;i=6057",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[12],
+                arrayDimensions=[0],
                 value=[
                     o6.LocalizedText("Other", "0"),
                     o6.LocalizedText("NoTool", "1"),
@@ -202,7 +221,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=gms;i=6039",
     browseName="ns=gms;ResultValue",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6059", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6059", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -250,7 +269,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=gms;i=6010",
     browseName="ns=gms;CorrectionValueRelative",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6072", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6072", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -260,7 +279,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=gms;i=6074",
     browseName="ns=gms;CorrectionValueAbsolute",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6075", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6075", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -270,7 +289,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=gms;i=6076",
     browseName="ns=gms;UpperControlLimit",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6077", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6077", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -280,7 +299,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=gms;i=6080",
     browseName="ns=gms;LowerControlLimit",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6081", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6081", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -295,9 +314,10 @@ ns0.vartypes.MultiStateDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=gms;i=6083",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[6],
+                arrayDimensions=[0],
                 value=[
                     o6.LocalizedText("Other"),
                     o6.LocalizedText("PtMeas"),
@@ -352,9 +372,10 @@ ns0.vartypes.MultiStateDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=gms;i=6104",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
-                arrayDimensions=[4],
+                arrayDimensions=[0],
                 value=[o6.LocalizedText("Other"), o6.LocalizedText("Temperature"), o6.LocalizedText("Vibration"), o6.LocalizedText("Humidity")],
             )
         )
@@ -367,7 +388,14 @@ o6.reference(gms_vartypes.AdditionalSensorType, ns0.reftypes.HasComponent, o6.ns
 ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=gms;i=6088",
     browseName="ns=gms;Class",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6105", browseName="EnumStrings", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0], value=[]))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=gms;i=6105", browseName="EnumStrings", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0], value=[]
+            )
+        )
+    ],
     dataType=ns0.datatypes.UInteger,
     accessLevel=3,
     userAccessLevel=1,
@@ -377,9 +405,11 @@ gms_vartypes.AdditionalSensorType(
     browseName="ns=gms;<AdditionalSensor>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6089", browseName="ns=gms;Identifier", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6090", browseName="ns=gms;Name", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6091", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6089", browseName="ns=gms;Identifier", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6090", browseName="ns=gms;Name", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6091", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
         o6.hasComponent(o6.ns["ns=gms;i=6088"]),
     ],
     dataType=ns0.datatypes.Number,
@@ -392,32 +422,58 @@ gms_objtypes.ToolMonitoringType(
     nodeId="ns=gms;i=5032",
     browseName="ns=gms;ToolMonitoring",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6106", browseName="ns=machine_tool;Name", dataType=o6.String))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6106", browseName="ns=machine_tool;Name", modellingRule="Mandatory", dataType=o6.String))],
 )
 o6.reference(gms_objtypes.GMSMonitoringType, ns0.reftypes.HasComponent, o6.ns["ns=gms;i=5032"])
 gms_objtypes.CalibrationPrognosisType(
     nodeId="ns=gms;i=5001",
     browseName="ns=gms;Calibration",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6003", browseName="ns=gms;Calibrated", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6011", browseName="ns=gms;CalibrationPreptime", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1)
-        ),
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6013", browseName="ns=gms;CalibrationInterval", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1)
-        ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6014", browseName="ns=gms;DateOfCalibration", dataType=ns0.datatypes.UtcTime, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6015", browseName="ns=machine_tool;PredictedTime", dataType=ns0.datatypes.UtcTime, value=o6.DateTime("2000-01-01T00:00:00Z"))
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6003", browseName="ns=gms;Calibrated", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=gms;i=6110", browseName="ns=gms;CalibrationCertificate", dataType=o6.String, valueRank=1, arrayDimensions=[0], accessLevel=3, userAccessLevel=1
+                nodeId="ns=gms;i=6011", browseName="ns=gms;CalibrationPreptime", modellingRule="Optional", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=gms;i=6013", browseName="ns=gms;CalibrationInterval", modellingRule="Optional", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=gms;i=6014", browseName="ns=gms;DateOfCalibration", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=gms;i=6015",
+                browseName="ns=machine_tool;PredictedTime",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.UtcTime,
+                value=o6.DateTime("2000-01-01T00:00:00Z"),
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=gms;i=6110",
+                browseName="ns=gms;CalibrationCertificate",
+                modellingRule="Optional",
+                dataType=o6.String,
+                valueRank=1,
+                arrayDimensions=[0],
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
     ],
 )
-machine_tool.objtypes.PrognosisListType(nodeId="ns=gms;i=5030", browseName="ns=machine_tool;Prognoses", references=[o6.hasComponent(o6.ns["ns=gms;i=5001"])])
+machine_tool.objtypes.PrognosisListType(
+    nodeId="ns=gms;i=5030", browseName="ns=machine_tool;Prognoses", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=gms;i=5001"])]
+)
 machine_tool.objtypes.NotificationType(
     nodeId="ns=gms;i=5029", browseName="ns=machine_tool;Notification", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=gms;i=5030"])]
 )
@@ -431,6 +487,7 @@ ns0.vartypes.MultiStateDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=gms;i=6112",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
                 arrayDimensions=[4],
@@ -446,11 +503,13 @@ o6.reference(gms_objtypes.LoadingMonitoringType, ns0.reftypes.HasComponent, o6.n
 ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=gms;i=6113",
     browseName="ns=gms;LoadStatus",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=gms;i=6115",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
                 arrayDimensions=[4],
@@ -466,7 +525,10 @@ gms_objtypes.LoadingMonitoringType(
     nodeId="ns=gms;i=5031",
     browseName="ns=gms;LoadingMonitoring",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6070", browseName="ns=machine_tool;Name", dataType=o6.String)), o6.hasComponent(o6.ns["ns=gms;i=6113"])],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6070", browseName="ns=machine_tool;Name", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasComponent(o6.ns["ns=gms;i=6113"]),
+    ],
 )
 o6.reference(gms_objtypes.GMSMonitoringType, ns0.reftypes.HasComponent, o6.ns["ns=gms;i=5031"])
 ns0.vartypes.TwoStateDiscreteType(
@@ -474,8 +536,8 @@ ns0.vartypes.TwoStateDiscreteType(
     browseName="ns=gms;IsInLoadingPosition",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6116", browseName="FalseState", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6117", browseName="TrueState", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6116", browseName="FalseState", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6117", browseName="TrueState", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.Boolean,
     accessLevel=3,
@@ -487,8 +549,14 @@ gms_objtypes.CorrectionType(
     browseName="ns=gms;<Corrections>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6036", browseName="ns=gms;Identifier", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6118", browseName="ns=gms;CharacteristicIdentifier", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6036", browseName="ns=gms;Identifier", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=gms;i=6118", browseName="ns=gms;CharacteristicIdentifier", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
 )
 gms_objtypes.CorrectionType(
@@ -496,11 +564,17 @@ gms_objtypes.CorrectionType(
     browseName="ns=gms;<Corrections>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6051", browseName="ns=gms;Identifier", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6120", browseName="ns=gms;CharacteristicIdentifier", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6051", browseName="ns=gms;Identifier", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=gms;i=6120", browseName="ns=gms;CharacteristicIdentifier", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
+        ),
     ],
 )
-ns0.objtypes.FolderType(nodeId="ns=gms;i=5021", browseName="ns=gms;CorrectionsFolder", references=[o6.hasComponent(o6.ns["ns=gms;i=5028"])])
+ns0.objtypes.FolderType(nodeId="ns=gms;i=5021", browseName="ns=gms;CorrectionsFolder", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=gms;i=5028"])])
 machinery.objtypes.MachineryItemIdentificationType(
     nodeId="ns=gms;i=5036",
     browseName="ns=di;Identification",
@@ -511,6 +585,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=gms;i=6128",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -519,6 +594,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=gms;i=6129",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -529,12 +605,14 @@ o6.reference(gms_objtypes.RotaryTableType, ns0.reftypes.HasAddIn, o6.ns["ns=gms;
 machinery.objtypes.MachineryItemIdentificationType(
     nodeId="ns=gms;i=5037",
     browseName="ns=di;Identification",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=gms;i=6130",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -543,6 +621,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=gms;i=6131",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -554,8 +633,12 @@ gms_objtypes.RotaryTableType(
     browseName="ns=gms;<RotaryTable>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6108", browseName="ns=gms;IsIntegrated", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6109", browseName="ns=gms;NumberOfAxes", dataType=o6.Byte, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6108", browseName="ns=gms;IsIntegrated", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6109", browseName="ns=gms;NumberOfAxes", modellingRule="Mandatory", dataType=o6.Byte, accessLevel=3, userAccessLevel=1)
+        ),
         o6.hasAddIn(o6.ns["ns=gms;i=5037"]),
     ],
 )
@@ -569,6 +652,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=gms;i=6132",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -577,6 +661,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=gms;i=6133",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -594,6 +679,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=gms;i=6135",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -602,6 +688,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=gms;i=6136",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -612,12 +699,14 @@ o6.reference(gms_objtypes.TipExchangeRackType, ns0.reftypes.HasAddIn, o6.ns["ns=
 machinery.objtypes.MachineryItemIdentificationType(
     nodeId="ns=gms;i=5041",
     browseName="ns=di;Identification",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=gms;i=6138",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -626,6 +715,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=gms;i=6139",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -637,19 +727,23 @@ gms_objtypes.SensorExchangeRackType(
     browseName="ns=gms;<SensorExchangeRack>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6140", browseName="ns=gms;IsAvailable", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6140", browseName="ns=gms;IsAvailable", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ),
         o6.hasAddIn(o6.ns["ns=gms;i=5041"]),
     ],
 )
 machinery.objtypes.MachineryItemIdentificationType(
     nodeId="ns=gms;i=5043",
     browseName="ns=di;Identification",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=gms;i=6141",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -658,6 +752,7 @@ machinery.objtypes.MachineryItemIdentificationType(
                 nodeId="ns=gms;i=6142",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -669,7 +764,9 @@ gms_objtypes.TipExchangeRackType(
     browseName="ns=gms;<TipExchangeRack>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6143", browseName="ns=gms;IsAvailable", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6143", browseName="ns=gms;IsAvailable", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ),
         o6.hasAddIn(o6.ns["ns=gms;i=5043"]),
     ],
 )
@@ -687,7 +784,9 @@ ns0.objtypes.FolderType(
     references=[
         o6.hasComponent(o6.ns["ns=gms;i=5018"]),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=gms;i=6144", browseName="ns=gms;CorrectionCount", dataType=ns0.datatypes.Integer, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=gms;i=6144", browseName="ns=gms;CorrectionCount", modellingRule="Optional", dataType=ns0.datatypes.Integer, accessLevel=3, userAccessLevel=1
+            )
         ),
     ],
 )
@@ -697,9 +796,11 @@ ns0.vartypes.AnalogUnitType(
     browseName="ns=gms;LowerToleranceLimit",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6043", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6043", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6145", browseName="ns=gms;ToleranceForm", dataType=gms_datypes.ToleranceLimitEnum, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=gms;i=6145", browseName="ns=gms;ToleranceForm", modellingRule="Mandatory", dataType=gms_datypes.ToleranceLimitEnum, accessLevel=3, userAccessLevel=1
+            )
         ),
     ],
     dataType=o6.Double,
@@ -715,7 +816,12 @@ machinery_result.vartypes.ResultType(
     references=[
         o6.reference(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=gms;i=6146", browseName="ns=machinery_result;ResultMetaData", dataType=machinery_result.datatypes.ResultMetaDataType, accessLevel=3, userAccessLevel=1
+                nodeId="ns=gms;i=6146",
+                browseName="ns=machinery_result;ResultMetaData",
+                modellingRule="Mandatory",
+                dataType=machinery_result.datatypes.ResultMetaDataType,
+                accessLevel=3,
+                userAccessLevel=1,
             ),
             "i=24136",
         )
@@ -725,7 +831,7 @@ machinery_result.vartypes.ResultType(
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.objtypes.FolderType(nodeId="ns=gms;i=5025", browseName="ns=machinery_result;Results", references=[o6.hasComponent(o6.ns["ns=gms;i=6058"])])
+ns0.objtypes.FolderType(nodeId="ns=gms;i=5025", browseName="ns=machinery_result;Results", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=gms;i=6058"])])
 gms_objtypes.GMSIdentificationType(
     nodeId="ns=gms;i=5044",
     browseName="ns=di;Identification",
@@ -736,6 +842,7 @@ gms_objtypes.GMSIdentificationType(
                 nodeId="ns=gms;i=6147",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -744,6 +851,7 @@ gms_objtypes.GMSIdentificationType(
                 nodeId="ns=gms;i=6148",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -752,6 +860,7 @@ gms_objtypes.GMSIdentificationType(
                 nodeId="ns=gms;i=6149",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -763,9 +872,11 @@ ns0.vartypes.AnalogUnitType(
     browseName="ns=gms;UpperToleranceLimit",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6041", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6041", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6150", browseName="ns=gms;ToleranceForm", dataType=gms_datypes.ToleranceLimitEnum, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=gms;i=6150", browseName="ns=gms;ToleranceForm", modellingRule="Mandatory", dataType=gms_datypes.ToleranceLimitEnum, accessLevel=3, userAccessLevel=1
+            )
         ),
     ],
     dataType=o6.Double,
@@ -784,7 +895,7 @@ http_opcfoundation_org_UA_GMS_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6296", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=gms;i=6297", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=gms;i=6297", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
@@ -810,10 +921,18 @@ gms_vartypes.CatalogType(
     browseName="ns=gms;NestIdentifier",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6317", browseName="ns=gms;CatalogEntry", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6318", browseName="ns=gms;CatalogName", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6319", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6320", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6317", browseName="ns=gms;CatalogEntry", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6318", browseName="ns=gms;CatalogName", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=gms;i=6319", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6320", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
@@ -825,10 +944,18 @@ gms_vartypes.CatalogType(
     browseName="ns=gms;Operator",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6322", browseName="ns=gms;CatalogEntry", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6323", browseName="ns=gms;CatalogName", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6324", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6325", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6322", browseName="ns=gms;CatalogEntry", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6323", browseName="ns=gms;CatalogName", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=gms;i=6324", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6325", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
@@ -840,10 +967,18 @@ gms_vartypes.CatalogType(
     browseName="ns=gms;ProcessParameter",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6327", browseName="ns=gms;CatalogEntry", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6328", browseName="ns=gms;CatalogName", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6329", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6330", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6327", browseName="ns=gms;CatalogEntry", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6328", browseName="ns=gms;CatalogName", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=gms;i=6329", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6330", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=1,
@@ -857,10 +992,18 @@ gms_vartypes.CatalogType(
     browseName="ns=gms;PartCarrierIdentifier",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6332", browseName="ns=gms;CatalogEntry", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6333", browseName="ns=gms;CatalogName", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6334", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6335", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6332", browseName="ns=gms;CatalogEntry", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6333", browseName="ns=gms;CatalogName", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=gms;i=6334", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6335", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
@@ -872,10 +1015,18 @@ gms_vartypes.CatalogType(
     browseName="ns=gms;ProcessingMachineIdentifier",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6337", browseName="ns=gms;CatalogEntry", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6338", browseName="ns=gms;CatalogName", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6339", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6340", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6337", browseName="ns=gms;CatalogEntry", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6338", browseName="ns=gms;CatalogName", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=gms;i=6339", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6340", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
@@ -885,20 +1036,24 @@ o6.reference(gms_objtypes.GMSPartType, ns0.reftypes.HasComponent, o6.ns["ns=gms;
 machine_tool.vartypes.ToolLifeType(
     nodeId="ns=gms;i=6341",
     browseName="ns=gms;Qualified",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6342", browseName="ns=machine_tool;EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=gms;i=6342", browseName="ns=machine_tool;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=gms;i=6343",
                 browseName="ns=machine_tool;Indication",
+                modellingRule="Mandatory",
                 dataType=machine_tool.datatypes.ToolLifeIndication,
                 value=machine_tool.datatypes.ToolLifeIndication.TIME,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6344", browseName="ns=machine_tool;IsCountingUp", dataType=o6.Boolean, value=True)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6345", browseName="ns=machine_tool;LimitValue", dataType=ns0.datatypes.Number)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6346", browseName="ns=machine_tool;StartValue", dataType=ns0.datatypes.Number)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6347", browseName="ns=machine_tool;WarningValue", dataType=ns0.datatypes.Number)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6344", browseName="ns=machine_tool;IsCountingUp", modellingRule="Mandatory", dataType=o6.Boolean, value=True)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6345", browseName="ns=machine_tool;LimitValue", modellingRule="Optional", dataType=ns0.datatypes.Number)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6346", browseName="ns=machine_tool;StartValue", modellingRule="Optional", dataType=ns0.datatypes.Number)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6347", browseName="ns=machine_tool;WarningValue", modellingRule="Optional", dataType=ns0.datatypes.Number)),
     ],
     dataType=o6.Double,
     accessLevel=3,
@@ -963,7 +1118,11 @@ ns0.vartypes.PropertyType(
     ],
 )
 o6.call(
-    nodeId="ns=gms;i=7001", browseName="ns=machinery_result;GetLatestResult", inputArgs=o6.hasProperty(o6.ns["ns=gms;i=6032"]), outputArgs=o6.hasProperty(o6.ns["ns=gms;i=6033"])
+    nodeId="ns=gms;i=7001",
+    browseName="ns=machinery_result;GetLatestResult",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=gms;i=6032"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gms;i=6033"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -1031,6 +1190,7 @@ o6.call(
     nodeId="ns=gms;i=7002",
     browseName="ns=machinery_result;GetResultById",
     description="The server shall return to each client requesting result data a system-wide unique handle identifying the result set / client combination. This handle should be used by the client to indicate to the server that the result data is no longer needed, allowing the server to optimize its resource handling.\nIf the instance of ResultManagementType does not support the ReleaseResultHandle Method, the resultHandle should always be set to 0.\nIf the error is set to a value other than 0, the resultHandle may be set to 0.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=gms;i=6034"]),
     outputArgs=o6.hasProperty(o6.ns["ns=gms;i=6037"]),
 )
@@ -1117,6 +1277,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=gms;i=7003",
     browseName="ns=machinery_result;GetResultIdListFiltered",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=gms;i=6092"]),
     outputArgs=o6.hasProperty(o6.ns["ns=gms;i=6093"]),
 )
@@ -1164,6 +1325,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=gms;i=7004",
     browseName="ns=machinery_result;ReleaseResultHandle",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=gms;i=6094"]),
     outputArgs=o6.hasProperty(o6.ns["ns=gms;i=6095"]),
 )
@@ -1190,7 +1352,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="CompletionStateMachine", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=gms;i=7005", browseName="CloseAndCommit", inputArgs=o6.hasProperty(o6.ns["ns=gms;i=6097"]), outputArgs=o6.hasProperty(o6.ns["ns=gms;i=6098"]))
+o6.call(
+    nodeId="ns=gms;i=7005",
+    browseName="CloseAndCommit",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=gms;i=6097"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gms;i=6098"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=gms;i=6099",
@@ -1240,7 +1408,13 @@ ns0.vartypes.PropertyType(
         ),
     ],
 )
-o6.call(nodeId="ns=gms;i=7006", browseName="GenerateFileForRead", inputArgs=o6.hasProperty(o6.ns["ns=gms;i=6099"]), outputArgs=o6.hasProperty(o6.ns["ns=gms;i=6100"]))
+o6.call(
+    nodeId="ns=gms;i=7006",
+    browseName="GenerateFileForRead",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=gms;i=6099"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gms;i=6100"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=gms;i=6101",
@@ -1267,13 +1441,20 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=gms;i=7007", browseName="GenerateFileForWrite", inputArgs=o6.hasProperty(o6.ns["ns=gms;i=6101"]), outputArgs=o6.hasProperty(o6.ns["ns=gms;i=6102"]))
+o6.call(
+    nodeId="ns=gms;i=7007",
+    browseName="GenerateFileForWrite",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=gms;i=6101"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=gms;i=6102"]),
+)
 
 machinery_result.objtypes.ResultTransferType(
     nodeId="ns=gms;i=5024",
     browseName="ns=machinery_result;ResultTransfer",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6096", browseName="ClientProcessingTimeout", dataType=ns0.datatypes.Duration)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gms;i=6096", browseName="ClientProcessingTimeout", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)),
         o6.hasComponent(o6.ns["ns=gms;i=7005"]),
         o6.hasComponent(o6.ns["ns=gms;i=7006"]),
         o6.hasComponent(o6.ns["ns=gms;i=7007"]),

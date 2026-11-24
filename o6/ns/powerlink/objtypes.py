@@ -50,13 +50,15 @@ class PowerlinkProtocolType(di.objtypes.ProtocolType):
     pass
 
 
-di.objtypes.FunctionalGroupType(nodeId="ns=powerlink;i=57", browseName="ns=di;NetworkAddress", description="The address of the device on this network.")
-di.objtypes.FunctionalGroupType(nodeId="ns=powerlink;i=58", browseName="ns=di;Identification", description="Used to organize parameters for identification of this TopologyElement")
-di.objtypes.FunctionalGroupType(nodeId="ns=powerlink;i=60", browseName="ns=powerlink;Diagnostics")
-di.objtypes.FunctionalGroupType(nodeId="ns=powerlink;i=63", browseName="ns=powerlink;Configuration")
-di.objtypes.FunctionalGroupType(nodeId="ns=powerlink;i=64", browseName="ns=powerlink;Status")
-di.objtypes.FunctionalGroupType(nodeId="ns=powerlink;i=65", browseName="ns=powerlink;Control")
-di.objtypes.FunctionalGroupType(nodeId="ns=powerlink;i=66", browseName="ns=powerlink;SdoServices")
+di.objtypes.FunctionalGroupType(nodeId="ns=powerlink;i=57", browseName="ns=di;NetworkAddress", description="The address of the device on this network.", modellingRule="Mandatory")
+di.objtypes.FunctionalGroupType(
+    nodeId="ns=powerlink;i=58", browseName="ns=di;Identification", description="Used to organize parameters for identification of this TopologyElement", modellingRule="Mandatory"
+)
+di.objtypes.FunctionalGroupType(nodeId="ns=powerlink;i=60", browseName="ns=powerlink;Diagnostics", modellingRule="Mandatory")
+di.objtypes.FunctionalGroupType(nodeId="ns=powerlink;i=63", browseName="ns=powerlink;Configuration", modellingRule="Mandatory")
+di.objtypes.FunctionalGroupType(nodeId="ns=powerlink;i=64", browseName="ns=powerlink;Status", modellingRule="Mandatory")
+di.objtypes.FunctionalGroupType(nodeId="ns=powerlink;i=65", browseName="ns=powerlink;Control", modellingRule="Mandatory")
+di.objtypes.FunctionalGroupType(nodeId="ns=powerlink;i=66", browseName="ns=powerlink;SdoServices", modellingRule="Mandatory")
 
 
 @o6.objecttype(
@@ -97,10 +99,10 @@ class PowerlinkMnConnectionPointType(PowerlinkConnectionPointType):
 @o6.objecttype(nodeId="ns=powerlink;i=1", browseName="ns=powerlink;PowerlinkDeviceProfileType", displayName="PowerlinkDeviceProfileType")
 class PowerlinkDeviceProfileType(di.objtypes.TopologyElementType):
     indexRangeSize: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=powerlink;i=444", browseName="ns=powerlink;IndexRangeSize", dataType=o6.UInt16, value=0)
+        ns0.vartypes.PropertyType(nodeId="ns=powerlink;i=444", browseName="ns=powerlink;IndexRangeSize", modellingRule="Mandatory", dataType=o6.UInt16, value=0)
     )
     indexRangeStart: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=powerlink;i=443", browseName="ns=powerlink;IndexRangeStart", dataType=o6.UInt16, value=0)
+        ns0.vartypes.PropertyType(nodeId="ns=powerlink;i=443", browseName="ns=powerlink;IndexRangeStart", modellingRule="Mandatory", dataType=o6.UInt16, value=0)
     )
 
 

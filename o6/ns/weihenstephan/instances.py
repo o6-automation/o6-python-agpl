@@ -55,7 +55,7 @@ http_opcfoundation_org_UA_Weihenstephan_ = ns0.objtypes.NamespaceMetadataType(
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),
@@ -65,7 +65,7 @@ http_opcfoundation_org_UA_Weihenstephan_ = ns0.objtypes.NamespaceMetadataType(
                 browseName="StaticNumericNodeIdRange",
                 dataType=ns0.datatypes.NumericRange,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=["1:2147483647"],
             )
         ),
@@ -79,9 +79,9 @@ machinery.objtypes.MachineIdentificationType(
     browseName="ns=di;Identification",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6012", browseName="ns=di;SerialNumber", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6013", browseName="ns=di;ProductInstanceUri", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6014", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6012", browseName="ns=di;SerialNumber", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6013", browseName="ns=di;ProductInstanceUri", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6014", browseName="ns=di;Manufacturer", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
 )
 o6.reference(weihenstephan_objtypes.WSMachineType, ns0.reftypes.HasAddIn, o6.ns["ns=weihenstephan;i=5001"])

@@ -33,37 +33,37 @@ else:
     _VariableNode = object
 
 
-@o6.datatype(nodeId="ns=ecm;i=3002", browseName="StandbyModeTransitionDataType", defaultEncodingId="ns=ecm;i=5001")
+@o6.datatype(nodeId="ns=ecm;i=3002", browseName="ns=ecm;StandbyModeTransitionDataType", defaultEncodingId="ns=ecm;i=5001")
 class StandbyModeTransitionDataType(ns0.datatypes.Structure):
-    iDDestination: o6.Byte
-    currentTimeToDestination: o6.Double
-    currentTimeToOperate: o6.Double
-    energyConsumptionToDestination: o6.Float
+    iDDestination: o6.Byte = o6.field(name="IDDestination")
+    currentTimeToDestination: o6.Double = o6.field(name="CurrentTimeToDestination")
+    currentTimeToOperate: o6.Double = o6.field(name="CurrentTimeToOperate")
+    energyConsumptionToDestination: o6.Float = o6.field(name="EnergyConsumptionToDestination")
 
 
-@o6.datatype(nodeId="ns=ecm;i=3003", browseName="EnergyStateInformationDataType", defaultEncodingId="ns=ecm;i=5004")
+@o6.datatype(nodeId="ns=ecm;i=3003", browseName="ns=ecm;EnergyStateInformationDataType", defaultEncodingId="ns=ecm;i=5004")
 class EnergyStateInformationDataType(ns0.datatypes.Structure):
-    iDSource: o6.Byte
-    iDDestination: o6.Byte
-    regularTimeToOperate: o6.Double
-    modePowerConsumption: o6.Float
+    iDSource: o6.Byte = o6.field(name="IDSource")
+    iDDestination: o6.Byte = o6.field(name="IDDestination")
+    regularTimeToOperate: o6.Double = o6.field(name="RegularTimeToOperate")
+    modePowerConsumption: o6.Float = o6.field(name="ModePowerConsumption")
 
 
-@o6.datatype(nodeId="ns=ecm;i=3005", browseName="AcPeDataType", defaultEncodingId="ns=ecm;i=5010")
+@o6.datatype(nodeId="ns=ecm;i=3005", browseName="ns=ecm;AcPeDataType", defaultEncodingId="ns=ecm;i=5010")
 class AcPeDataType(ns0.datatypes.Structure):
-    l1: o6.Float
-    l2: o6.Float
-    l3: o6.Float
+    l1: o6.Float = o6.field(name="L1")
+    l2: o6.Float = o6.field(name="L2")
+    l3: o6.Float = o6.field(name="L3")
 
 
-@o6.datatype(nodeId="ns=ecm;i=3006", browseName="AcPpDataType", defaultEncodingId="ns=ecm;i=5013")
+@o6.datatype(nodeId="ns=ecm;i=3006", browseName="ns=ecm;AcPpDataType", defaultEncodingId="ns=ecm;i=5013")
 class AcPpDataType(ns0.datatypes.Structure):
-    l1L2: o6.Float
-    l2L3: o6.Float
-    l3L1: o6.Float
+    l1L2: o6.Float = o6.field(name="L1L2")
+    l2L3: o6.Float = o6.field(name="L2L3")
+    l3L1: o6.Float = o6.field(name="L3L1")
 
 
-@o6.enumtype(nodeId="ns=ecm;i=3010", browseName="MeasurementPeriodEnum")
+@o6.enumtype(nodeId="ns=ecm;i=3010", browseName="ns=ecm;MeasurementPeriodEnum")
 class MeasurementPeriodEnum(ns0.datatypes.Enumeration):
     SLIDING_DEMAND = o6.enumfield(0, name="SlidingDemand")
     FIXED_BLOCK_COMPLETED = o6.enumfield(1, name="FixedBlockCompleted")
@@ -71,10 +71,10 @@ class MeasurementPeriodEnum(ns0.datatypes.Enumeration):
     FIXED_BLOCK_PREDICTED = o6.enumfield(3, name="FixedBlockPredicted")
 
 
-@o6.datatype(nodeId="ns=ecm;i=3007", browseName="MeasurementPeriodDataType", defaultEncodingId="ns=ecm;i=5008")
+@o6.datatype(nodeId="ns=ecm;i=3007", browseName="ns=ecm;MeasurementPeriodDataType", defaultEncodingId="ns=ecm;i=5008")
 class MeasurementPeriodDataType(ns0.datatypes.Structure):
-    duration: o6.Double
-    definition: MeasurementPeriodEnum
+    duration: o6.Double = o6.field(name="Duration")
+    definition: MeasurementPeriodEnum = o6.field(name="Definition")
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ia, ns0

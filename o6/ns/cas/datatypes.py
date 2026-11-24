@@ -34,7 +34,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=cas;i=3003", browseName="HealthStateEnum")
+@o6.enumtype(nodeId="ns=cas;i=3003", browseName="ns=cas;HealthStateEnum")
 class HealthStateEnum(ns0.datatypes.Enumeration):
     OK = o6.enumfield(0, name="OK")
     WARNING = o6.enumfield(1, name="Warning")
@@ -42,14 +42,14 @@ class HealthStateEnum(ns0.datatypes.Enumeration):
     CRITICAL = o6.enumfield(3, name="Critical")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3004", browseName="ReceiverTypeEnum", description="possible receiver types")
+@o6.enumtype(nodeId="ns=cas;i=3004", browseName="ns=cas;ReceiverTypeEnum", description="possible receiver types")
 class ReceiverTypeEnum(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="Other")
     DRY_RECEIVER = o6.enumfield(1, name="DryReceiver")
     WET_RECEIVER = o6.enumfield(2, name="WetReceiver")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3005", browseName="FilterTypeEnum", description="possible filter types")
+@o6.enumtype(nodeId="ns=cas;i=3005", browseName="ns=cas;FilterTypeEnum", description="possible filter types")
 class FilterTypeEnum(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="Other")
     ACTIVATED_CARBON_FILTER = o6.enumfield(1, name="ActivatedCarbonFilter")
@@ -60,7 +60,7 @@ class FilterTypeEnum(ns0.datatypes.Enumeration):
     STERILE_FILTER = o6.enumfield(6, name="SterileFilter")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3006", browseName="FluidTypeEnum", description="possible process fluid types")
+@o6.enumtype(nodeId="ns=cas;i=3006", browseName="ns=cas;FluidTypeEnum", description="possible process fluid types")
 class FluidTypeEnum(ns0.datatypes.Enumeration):
     AIR = o6.enumfield(0, name="Air")
     CONDENSATE = o6.enumfield(1, name="Condensate")
@@ -68,7 +68,7 @@ class FluidTypeEnum(ns0.datatypes.Enumeration):
     WATER = o6.enumfield(3, name="Water")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3008", browseName="FilterClassEnum", description="possible filter classes according to ISO 8573-1")
+@o6.enumtype(nodeId="ns=cas;i=3008", browseName="ns=cas;FilterClassEnum", description="possible filter classes according to ISO 8573-1")
 class FilterClassEnum(ns0.datatypes.Enumeration):
     _0 = o6.enumfield(0, name="0")
     _1 = o6.enumfield(1, name="1")
@@ -85,27 +85,29 @@ class FilterClassEnum(ns0.datatypes.Enumeration):
 
 @o6.datatype(
     nodeId="ns=cas;i=3007",
-    browseName="FilterClassDataType",
+    browseName="ns=cas;FilterClassDataType",
     description="information about the used filter class according to ISO 8573-1 of a filter",
     defaultEncodingId="ns=cas;i=5042",
 )
 class FilterClassDataType(ns0.datatypes.Structure):
-    a: FilterClassEnum
-    b: FilterClassEnum
-    c: FilterClassEnum
+    a: FilterClassEnum = o6.field(name="A")
+    b: FilterClassEnum = o6.field(name="B")
+    c: FilterClassEnum = o6.field(name="C")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3009", browseName="IntegratedStateEnum")
+@o6.enumtype(nodeId="ns=cas;i=3009", browseName="ns=cas;IntegratedStateEnum")
 class IntegratedStateEnum(ns0.datatypes.Enumeration):
     FULLY_INTEGRATED = o6.enumfield(0, name="FullyIntegrated")
     PARTIALLY_INTEGRATED = o6.enumfield(1, name="PartiallyIntegrated")
     FULLY_ISOLATED = o6.enumfield(2, name="FullyIsolated")
 
 
-@o6.datatype(nodeId="ns=cas;i=3010", browseName="SensorTechnologyOptionSet", description="flags for the used sensor technologies for a sensor", defaultEncodingId="ns=cas;i=5175")
+@o6.datatype(
+    nodeId="ns=cas;i=3010", browseName="ns=cas;SensorTechnologyOptionSet", description="flags for the used sensor technologies for a sensor", defaultEncodingId="ns=cas;i=5175"
+)
 class SensorTechnologyOptionSet(ns0.datatypes.OptionSet):
-    value: o6.ByteString
-    validBits: o6.ByteString
+    value: o6.ByteString = o6.field(name="Value")
+    validBits: o6.ByteString = o6.field(name="ValidBits")
     capacitiveSensor = o6.optionsetbit(0, name="CapacitiveSensor")
     electronTube = o6.optionsetbit(1, name="ElectronTube")
     inductiveSensor = o6.optionsetbit(2, name="InductiveSensor")
@@ -120,7 +122,7 @@ class SensorTechnologyOptionSet(ns0.datatypes.OptionSet):
     ultrasoundSensor = o6.optionsetbit(11, name="UltrasoundSensor")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3011", browseName="ValveTypeEnum", description="possible valve types")
+@o6.enumtype(nodeId="ns=cas;i=3011", browseName="ns=cas;ValveTypeEnum", description="possible valve types")
 class ValveTypeEnum(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="Other")
     CHECK_VALVE = o6.enumfield(1, name="CheckValve")
@@ -130,7 +132,7 @@ class ValveTypeEnum(ns0.datatypes.Enumeration):
     SWITCHING_VALVE = o6.enumfield(5, name="SwitchingValve")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3012", browseName="DrainTypeEnum", description="possible condensate drain types")
+@o6.enumtype(nodeId="ns=cas;i=3012", browseName="ns=cas;DrainTypeEnum", description="possible condensate drain types")
 class DrainTypeEnum(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="Other")
     CAPACITIVE_DRAIN = o6.enumfield(1, name="CapacitiveDrain")
@@ -138,7 +140,7 @@ class DrainTypeEnum(ns0.datatypes.Enumeration):
     TIMED_DRAIN = o6.enumfield(3, name="TimedDrain")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3013", browseName="SeparatorTypeEnum", description="possible condensate separator types")
+@o6.enumtype(nodeId="ns=cas;i=3013", browseName="ns=cas;SeparatorTypeEnum", description="possible condensate separator types")
 class SeparatorTypeEnum(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="Other")
     CENTRIFUGAL_OILY_WATER_SEPARATOR = o6.enumfield(1, name="CentrifugalOilyWaterSeparator")
@@ -148,7 +150,7 @@ class SeparatorTypeEnum(ns0.datatypes.Enumeration):
     HYDROCYCLONE_OILY_WATER_SEPARATOR = o6.enumfield(5, name="HydrocycloneOilyWaterSeparator")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3014", browseName="OperatingStateEnum")
+@o6.enumtype(nodeId="ns=cas;i=3014", browseName="ns=cas;OperatingStateEnum")
 class OperatingStateEnum(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="Other")
     STOPPED = o6.enumfield(1, name="Stopped")
@@ -157,19 +159,19 @@ class OperatingStateEnum(ns0.datatypes.Enumeration):
     OPERATIONAL = o6.enumfield(4, name="Operational")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3015", browseName="ConverterTypeEnum", description="possible converter types")
+@o6.enumtype(nodeId="ns=cas;i=3015", browseName="ns=cas;ConverterTypeEnum", description="possible converter types")
 class ConverterTypeEnum(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="Other")
     CATALYTIC_HC_CONVERTER = o6.enumfield(1, name="CatalyticHCConverter")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3016", browseName="IpVersionEnum")
+@o6.enumtype(nodeId="ns=cas;i=3016", browseName="ns=cas;IpVersionEnum")
 class IpVersionEnum(ns0.datatypes.Enumeration):
     I_PV4 = o6.enumfield(0, name="IPv4")
     I_PV6 = o6.enumfield(1, name="IPv6")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3017", browseName="DryerTypeEnum", description="possible dryer types")
+@o6.enumtype(nodeId="ns=cas;i=3017", browseName="ns=cas;DryerTypeEnum", description="possible dryer types")
 class DryerTypeEnum(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="Other")
     ABSORPTION_DRYER = o6.enumfield(1, name="AbsorptionDryer")
@@ -178,7 +180,7 @@ class DryerTypeEnum(ns0.datatypes.Enumeration):
     REFRIGERATION_DRYER = o6.enumfield(4, name="RefrigerationDryer")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3018", browseName="CompressorTypeEnum", description="possible compressor types")
+@o6.enumtype(nodeId="ns=cas;i=3018", browseName="ns=cas;CompressorTypeEnum", description="possible compressor types")
 class CompressorTypeEnum(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="Other")
     AXIAL_TURBO_COMPRESSOR = o6.enumfield(1, name="AxialTurboCompressor")
@@ -195,20 +197,20 @@ class CompressorTypeEnum(ns0.datatypes.Enumeration):
     VANE_COMPRESSOR = o6.enumfield(12, name="VaneCompressor")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3019", browseName="LubricationTypeEnum", description="possible lubrication types for the compression process of a compressor")
+@o6.enumtype(nodeId="ns=cas;i=3019", browseName="ns=cas;LubricationTypeEnum", description="possible lubrication types for the compression process of a compressor")
 class LubricationTypeEnum(ns0.datatypes.Enumeration):
     NO_LUBRICATION = o6.enumfield(0, name="NoLubrication")
     OIL_LUBRICATED = o6.enumfield(1, name="OilLubricated")
     WATER_LUBRICATED = o6.enumfield(2, name="WaterLubricated")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3020", browseName="DisplacementTypeEnum", description="possible displacement types for a compressor")
+@o6.enumtype(nodeId="ns=cas;i=3020", browseName="ns=cas;DisplacementTypeEnum", description="possible displacement types for a compressor")
 class DisplacementTypeEnum(ns0.datatypes.Enumeration):
     POSITIVE_DISPLACEMENT = o6.enumfield(0, name="PositiveDisplacement")
     DYNAMIC_DISPLACEMENT = o6.enumfield(1, name="DynamicDisplacement")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3021", browseName="SensorTypeEnum", description="possible sensor types")
+@o6.enumtype(nodeId="ns=cas;i=3021", browseName="ns=cas;SensorTypeEnum", description="possible sensor types")
 class SensorTypeEnum(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="Other")
     AMMETER = o6.enumfield(1, name="Ammeter")
@@ -225,7 +227,7 @@ class SensorTypeEnum(ns0.datatypes.Enumeration):
     WATTMETER = o6.enumfield(12, name="Wattmeter")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3022", browseName="AirnetHealthStateEnum")
+@o6.enumtype(nodeId="ns=cas;i=3022", browseName="ns=cas;AirnetHealthStateEnum")
 class AirnetHealthStateEnum(ns0.datatypes.Enumeration):
     OK = o6.enumfield(0, name="OK")
     WARNING = o6.enumfield(1, name="Warning")
@@ -233,14 +235,14 @@ class AirnetHealthStateEnum(ns0.datatypes.Enumeration):
     CRITICAL = o6.enumfield(3, name="Critical")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3023", browseName="AirnetIntegratedStateEnum")
+@o6.enumtype(nodeId="ns=cas;i=3023", browseName="ns=cas;AirnetIntegratedStateEnum")
 class AirnetIntegratedStateEnum(ns0.datatypes.Enumeration):
     FULLY_INTEGRATED = o6.enumfield(0, name="FullyIntegrated")
     PARTIALLY_INTEGRATED = o6.enumfield(1, name="PartiallyIntegrated")
     FULLY_ISOLATED = o6.enumfield(2, name="FullyIsolated")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3024", browseName="AirnetOperatingStateEnum")
+@o6.enumtype(nodeId="ns=cas;i=3024", browseName="ns=cas;AirnetOperatingStateEnum")
 class AirnetOperatingStateEnum(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="Other")
     STOPPED = o6.enumfield(1, name="Stopped")
@@ -249,7 +251,7 @@ class AirnetOperatingStateEnum(ns0.datatypes.Enumeration):
     OPERATIONAL = o6.enumfield(4, name="Operational")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3025", browseName="CompressorOperatingStateEnum")
+@o6.enumtype(nodeId="ns=cas;i=3025", browseName="ns=cas;CompressorOperatingStateEnum")
 class CompressorOperatingStateEnum(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="Other")
     STOPPED = o6.enumfield(1, name="Stopped")
@@ -261,7 +263,7 @@ class CompressorOperatingStateEnum(ns0.datatypes.Enumeration):
     LOADED = o6.enumfield(7, name="Loaded")
 
 
-@o6.enumtype(nodeId="ns=cas;i=3026", browseName="DryerOperatingStateEnum")
+@o6.enumtype(nodeId="ns=cas;i=3026", browseName="ns=cas;DryerOperatingStateEnum")
 class DryerOperatingStateEnum(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="Other")
     STOPPED = o6.enumfield(1, name="Stopped")

@@ -32,7 +32,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=plastics_rubber;i=3001", browseName="ControlModeEnumeration", description="Indication how the parameter is currently controlled")
+@o6.enumtype(nodeId="ns=plastics_rubber;i=3001", browseName="ns=plastics_rubber;ControlModeEnumeration", description="Indication how the parameter is currently controlled")
 class ControlModeEnumeration(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="OTHER")
     OFF = o6.enumfield(1, name="OFF")
@@ -45,7 +45,7 @@ class ControlModeEnumeration(ns0.datatypes.Enumeration):
 
 @o6.enumtype(
     nodeId="ns=plastics_rubber;i=3005",
-    browseName="StorageEnumeration",
+    browseName="ns=plastics_rubber;StorageEnumeration",
     description="Indication which parts of the production dataset shall be activated in the machine control after writing",
 )
 class StorageEnumeration(ns0.datatypes.Enumeration):
@@ -56,54 +56,54 @@ class StorageEnumeration(ns0.datatypes.Enumeration):
 
 @o6.datatype(
     nodeId="ns=plastics_rubber;i=3004",
-    browseName="ProductionDatasetWriteOptionsType",
+    browseName="ns=plastics_rubber;ProductionDatasetWriteOptionsType",
     description="Used as GenerateOptions in the Method GenerateFileForWrite in ProductionDatasetTransfer",
     defaultEncodingId="ns=plastics_rubber;i=5005",
 )
 class ProductionDatasetWriteOptionsType(ns0.datatypes.Structure):
-    storage: StorageEnumeration
-    name: o6.String
-    components: list[o6.UInt16] = o6.field(arrayDimensions=[0])
+    storage: StorageEnumeration = o6.field(name="Storage")
+    name: o6.String = o6.field(name="Name")
+    components: list[o6.UInt16] = o6.field(name="Components", arrayDimensions=[0])
 
 
 @o6.datatype(
     nodeId="ns=plastics_rubber;i=3006",
-    browseName="ProductionDatasetInformationType",
+    browseName="ns=plastics_rubber;ProductionDatasetInformationType",
     description="Information on a production dataset",
     defaultEncodingId="ns=plastics_rubber;i=5004",
 )
 class ProductionDatasetInformationType(ns0.datatypes.Structure):
-    name: o6.String
-    description: o6.String
-    mESId: o6.String
-    creationTimestamp: o6.DateTime
-    lastModificationTimestamp: o6.DateTime
-    lastSaveTimestamp: o6.DateTime
-    userName: o6.String
-    components: list[o6.UInt16] = o6.field(arrayDimensions=[0])
-    manufacturer: o6.String
-    serialNumber: o6.String
-    model: o6.String
-    controllerName: o6.String
-    userMachineName: o6.String
-    locationName: o6.String
-    productName: list[o6.String] = o6.field(arrayDimensions=[0])
-    mouldId: o6.String
-    numCavities: o6.UInt32
+    name: o6.String = o6.field(name="Name")
+    description: o6.String = o6.field(name="Description")
+    mESId: o6.String = o6.field(name="MESId")
+    creationTimestamp: o6.DateTime = o6.field(name="CreationTimestamp")
+    lastModificationTimestamp: o6.DateTime = o6.field(name="LastModificationTimestamp")
+    lastSaveTimestamp: o6.DateTime = o6.field(name="LastSaveTimestamp")
+    userName: o6.String = o6.field(name="UserName")
+    components: list[o6.UInt16] = o6.field(name="Components", arrayDimensions=[0])
+    manufacturer: o6.String = o6.field(name="Manufacturer")
+    serialNumber: o6.String = o6.field(name="SerialNumber")
+    model: o6.String = o6.field(name="Model")
+    controllerName: o6.String = o6.field(name="ControllerName")
+    userMachineName: o6.String = o6.field(name="UserMachineName")
+    locationName: o6.String = o6.field(name="LocationName")
+    productName: list[o6.String] = o6.field(name="ProductName", arrayDimensions=[0])
+    mouldId: o6.String = o6.field(name="MouldId")
+    numCavities: o6.UInt32 = o6.field(name="NumCavities")
 
 
 @o6.datatype(
     nodeId="ns=plastics_rubber;i=3007",
-    browseName="ProductionDatasetReadOptionsType",
+    browseName="ns=plastics_rubber;ProductionDatasetReadOptionsType",
     description="Used as GenerateOptions in the Method GenerateFileForRead in ProductionDatasetTransfer",
     defaultEncodingId="ns=plastics_rubber;i=5012",
 )
 class ProductionDatasetReadOptionsType(ns0.datatypes.Structure):
-    storage: StorageEnumeration
-    name: o6.String
+    storage: StorageEnumeration = o6.field(name="Storage")
+    name: o6.String = o6.field(name="Name")
 
 
-@o6.enumtype(nodeId="ns=plastics_rubber;i=3008", browseName="MouldStatusEnumeration", description="Current (physical) status of the mould")
+@o6.enumtype(nodeId="ns=plastics_rubber;i=3008", browseName="ns=plastics_rubber;MouldStatusEnumeration", description="Current (physical) status of the mould")
 class MouldStatusEnumeration(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="OTHER")
     MOULD_NOT_INSTALLED = o6.enumfield(1, name="MOULD_NOT_INSTALLED")
@@ -111,7 +111,9 @@ class MouldStatusEnumeration(ns0.datatypes.Enumeration):
     MOULD_INSTALLED = o6.enumfield(3, name="MOULD_INSTALLED")
 
 
-@o6.enumtype(nodeId="ns=plastics_rubber;i=3009", browseName="LogbookEventsEnumeration", description="Information which LogbookEvents are supported by the machine")
+@o6.enumtype(
+    nodeId="ns=plastics_rubber;i=3009", browseName="ns=plastics_rubber;LogbookEventsEnumeration", description="Information which LogbookEvents are supported by the machine"
+)
 class LogbookEventsEnumeration(ns0.datatypes.Enumeration):
     PARAMETER_CHANGE = o6.enumfield(0, name="PARAMETER_CHANGE")
     USER = o6.enumfield(1, name="USER")
@@ -126,13 +128,15 @@ class LogbookEventsEnumeration(ns0.datatypes.Enumeration):
     USER_FEEDBACK = o6.enumfield(10, name="USER_FEEDBACK")
 
 
-@o6.enumtype(nodeId="ns=plastics_rubber;i=3010", browseName="UserChangeEnumeration", description="Information if a user logs in or off")
+@o6.enumtype(nodeId="ns=plastics_rubber;i=3010", browseName="ns=plastics_rubber;UserChangeEnumeration", description="Information if a user logs in or off")
 class UserChangeEnumeration(ns0.datatypes.Enumeration):
     LOG_ON = o6.enumfield(0, name="LOG_ON")
     LOG_OFF = o6.enumfield(1, name="LOG_OFF")
 
 
-@o6.enumtype(nodeId="ns=plastics_rubber;i=3011", browseName="MachineModeEnumeration", description="Current machine mode (as defined by mode selector on the machine)")
+@o6.enumtype(
+    nodeId="ns=plastics_rubber;i=3011", browseName="ns=plastics_rubber;MachineModeEnumeration", description="Current machine mode (as defined by mode selector on the machine)"
+)
 class MachineModeEnumeration(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="OTHER")
     AUTOMATIC = o6.enumfield(1, name="AUTOMATIC")
@@ -142,7 +146,7 @@ class MachineModeEnumeration(ns0.datatypes.Enumeration):
     SLEEP = o6.enumfield(5, name="SLEEP")
 
 
-@o6.enumtype(nodeId="ns=plastics_rubber;i=3012", browseName="SequenceChangeEnumeration", description="Classification of production sequence change")
+@o6.enumtype(nodeId="ns=plastics_rubber;i=3012", browseName="ns=plastics_rubber;SequenceChangeEnumeration", description="Classification of production sequence change")
 class SequenceChangeEnumeration(ns0.datatypes.Enumeration):
     UPDATE = o6.enumfield(0, name="UPDATE")
     ADD = o6.enumfield(1, name="ADD")
@@ -151,7 +155,7 @@ class SequenceChangeEnumeration(ns0.datatypes.Enumeration):
     DELETE = o6.enumfield(4, name="DELETE")
 
 
-@o6.enumtype(nodeId="ns=plastics_rubber;i=3013", browseName="MaintenanceStatusEnumeration", description="Maintenance status of a machine/device/component")
+@o6.enumtype(nodeId="ns=plastics_rubber;i=3013", browseName="ns=plastics_rubber;MaintenanceStatusEnumeration", description="Maintenance status of a machine/device/component")
 class MaintenanceStatusEnumeration(ns0.datatypes.Enumeration):
     NOT_DUE = o6.enumfield(0, name="NOT_DUE")
     WARNING = o6.enumfield(1, name="WARNING")
@@ -160,23 +164,28 @@ class MaintenanceStatusEnumeration(ns0.datatypes.Enumeration):
 
 @o6.datatype(
     nodeId="ns=plastics_rubber;i=3014",
-    browseName="PageEntryDataType",
+    browseName="ns=plastics_rubber;PageEntryDataType",
     description="Information on a page that is implemented in the machine control system and shown on the screen of the machine",
     defaultEncodingId="ns=plastics_rubber;i=5024",
 )
 class PageEntryDataType(ns0.datatypes.Structure):
-    id: o6.String
-    title: o6.LocalizedText
+    id: o6.String = o6.field(name="Id")
+    title: o6.LocalizedText = o6.field(name="Title")
 
 
-@o6.datatype(nodeId="ns=plastics_rubber;i=3015", browseName="StandstillReasonType", description="Description of a standstill reason", defaultEncodingId="ns=plastics_rubber;i=5026")
+@o6.datatype(
+    nodeId="ns=plastics_rubber;i=3015",
+    browseName="ns=plastics_rubber;StandstillReasonType",
+    description="Description of a standstill reason",
+    defaultEncodingId="ns=plastics_rubber;i=5026",
+)
 class StandstillReasonType(ns0.datatypes.Structure):
-    id: o6.String
-    text: o6.LocalizedText
-    lockedByMES: o6.Boolean
+    id: o6.String = o6.field(name="Id")
+    text: o6.LocalizedText = o6.field(name="Text")
+    lockedByMES: o6.Boolean = o6.field(name="LockedByMES")
 
 
-@o6.enumtype(nodeId="ns=plastics_rubber;i=3016", browseName="ProductionStatusEnumeration", description="Production status of the machine")
+@o6.enumtype(nodeId="ns=plastics_rubber;i=3016", browseName="ns=plastics_rubber;ProductionStatusEnumeration", description="Production status of the machine")
 class ProductionStatusEnumeration(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="OTHER")
     NO_PRODUCTION = o6.enumfield(1, name="NO_PRODUCTION")
@@ -186,7 +195,7 @@ class ProductionStatusEnumeration(ns0.datatypes.Enumeration):
     DRY_RUN = o6.enumfield(5, name="DRY_RUN")
 
 
-@o6.enumtype(nodeId="ns=plastics_rubber;i=3017", browseName="JobStatusEnumeration", description="Current status of the job")
+@o6.enumtype(nodeId="ns=plastics_rubber;i=3017", browseName="ns=plastics_rubber;JobStatusEnumeration", description="Current status of the job")
 class JobStatusEnumeration(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="OTHER")
     TRANSFERRED_ASSIGNED = o6.enumfield(1, name="TRANSFERRED_ASSIGNED")
@@ -202,7 +211,7 @@ class JobStatusEnumeration(ns0.datatypes.Enumeration):
     TEAR_DOWN_FINISHED = o6.enumfield(11, name="TEAR_DOWN_FINISHED")
 
 
-@o6.enumtype(nodeId="ns=plastics_rubber;i=3018", browseName="EventOriginatorEnumeration", description="Originator of an event")
+@o6.enumtype(nodeId="ns=plastics_rubber;i=3018", browseName="ns=plastics_rubber;EventOriginatorEnumeration", description="Originator of an event")
 class EventOriginatorEnumeration(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="OTHER")
     MACHINE = o6.enumfield(1, name="MACHINE")
@@ -211,7 +220,7 @@ class EventOriginatorEnumeration(ns0.datatypes.Enumeration):
     PERIPHERAL_DEVICE = o6.enumfield(4, name="PERIPHERAL_DEVICE")
 
 
-@o6.enumtype(nodeId="ns=plastics_rubber;i=3019", browseName="CycleQualityEnumeration", description="Quality of the whole cycle")
+@o6.enumtype(nodeId="ns=plastics_rubber;i=3019", browseName="ns=plastics_rubber;CycleQualityEnumeration", description="Quality of the whole cycle")
 class CycleQualityEnumeration(ns0.datatypes.Enumeration):
     GOOD_CYCLE = o6.enumfield(0, name="GOOD_CYCLE")
     BAD_CYCLE = o6.enumfield(1, name="BAD_CYCLE")
@@ -219,7 +228,7 @@ class CycleQualityEnumeration(ns0.datatypes.Enumeration):
     FAILED_CYCLE = o6.enumfield(3, name="FAILED_CYCLE")
 
 
-@o6.enumtype(nodeId="ns=plastics_rubber;i=3020", browseName="CavityCycleQualityEnumeration", description="Quality of the cycle for each cavity")
+@o6.enumtype(nodeId="ns=plastics_rubber;i=3020", browseName="ns=plastics_rubber;CavityCycleQualityEnumeration", description="Quality of the cycle for each cavity")
 class CavityCycleQualityEnumeration(ns0.datatypes.Enumeration):
     NO_PART = o6.enumfield(0, name="NO_PART")
     GOOD_PART = o6.enumfield(1, name="GOOD_PART")
@@ -227,71 +236,76 @@ class CavityCycleQualityEnumeration(ns0.datatypes.Enumeration):
     REWORK = o6.enumfield(3, name="REWORK")
 
 
-@o6.datatype(nodeId="ns=plastics_rubber;i=3021", browseName="JobListElementType", description="Description of a job in a job list", defaultEncodingId="ns=plastics_rubber;i=5036")
+@o6.datatype(
+    nodeId="ns=plastics_rubber;i=3021",
+    browseName="ns=plastics_rubber;JobListElementType",
+    description="Description of a job in a job list",
+    defaultEncodingId="ns=plastics_rubber;i=5036",
+)
 class JobListElementType(ns0.datatypes.Structure):
-    jobName: o6.String
-    jobDescription: o6.String
-    jobClassification: o6.String
-    customerName: o6.String
-    productionDatasetName: o6.String
-    productionDatasetDescription: o6.String
-    material: list[o6.String] = o6.field(arrayDimensions=[0])
-    productName: list[o6.String] = o6.field(arrayDimensions=[0])
-    productDescription: list[o6.String] = o6.field(arrayDimensions=[0])
-    jobPriority: o6.String
-    plannedStart: o6.DateTime
-    plannedProductionTime: o6.Double
-    latestEnd: o6.DateTime
+    jobName: o6.String = o6.field(name="JobName")
+    jobDescription: o6.String = o6.field(name="JobDescription")
+    jobClassification: o6.String = o6.field(name="JobClassification")
+    customerName: o6.String = o6.field(name="CustomerName")
+    productionDatasetName: o6.String = o6.field(name="ProductionDatasetName")
+    productionDatasetDescription: o6.String = o6.field(name="ProductionDatasetDescription")
+    material: list[o6.String] = o6.field(name="Material", arrayDimensions=[0])
+    productName: list[o6.String] = o6.field(name="ProductName", arrayDimensions=[0])
+    productDescription: list[o6.String] = o6.field(name="ProductDescription", arrayDimensions=[0])
+    jobPriority: o6.String = o6.field(name="JobPriority")
+    plannedStart: o6.DateTime = o6.field(name="PlannedStart")
+    plannedProductionTime: o6.Double = o6.field(name="PlannedProductionTime")
+    latestEnd: o6.DateTime = o6.field(name="LatestEnd")
 
 
 @o6.datatype(
     nodeId="ns=plastics_rubber;i=3022",
-    browseName="CyclicJobListElementType",
+    browseName="ns=plastics_rubber;CyclicJobListElementType",
     description="Description of a job in a cyclic job list",
     defaultEncodingId="ns=plastics_rubber;i=5041",
 )
 class CyclicJobListElementType(JobListElementType):
-    jobName: o6.String
-    jobDescription: o6.String
-    jobClassification: o6.String
-    customerName: o6.String
-    productionDatasetName: o6.String
-    productionDatasetDescription: o6.String
-    material: list[o6.String] = o6.field(arrayDimensions=[0])
-    productName: list[o6.String] = o6.field(arrayDimensions=[0])
-    productDescription: list[o6.String] = o6.field(arrayDimensions=[0])
-    jobPriority: o6.String
-    plannedStart: o6.DateTime
-    plannedProductionTime: o6.Double
-    latestEnd: o6.DateTime
-    nominalParts: o6.UInt64
-    nominalBoxParts: o6.UInt64
-    expectedCycleTime: o6.Double
-    mouldId: o6.String
-    numCavities: o6.UInt32
+    jobName: o6.String = o6.field(name="JobName")
+    jobDescription: o6.String = o6.field(name="JobDescription")
+    jobClassification: o6.String = o6.field(name="JobClassification")
+    customerName: o6.String = o6.field(name="CustomerName")
+    productionDatasetName: o6.String = o6.field(name="ProductionDatasetName")
+    productionDatasetDescription: o6.String = o6.field(name="ProductionDatasetDescription")
+    material: list[o6.String] = o6.field(name="Material", arrayDimensions=[0])
+    productName: list[o6.String] = o6.field(name="ProductName", arrayDimensions=[0])
+    productDescription: list[o6.String] = o6.field(name="ProductDescription", arrayDimensions=[0])
+    jobPriority: o6.String = o6.field(name="JobPriority")
+    plannedStart: o6.DateTime = o6.field(name="PlannedStart")
+    plannedProductionTime: o6.Double = o6.field(name="PlannedProductionTime")
+    latestEnd: o6.DateTime = o6.field(name="LatestEnd")
+    nominalParts: o6.UInt64 = o6.field(name="NominalParts")
+    nominalBoxParts: o6.UInt64 = o6.field(name="NominalBoxParts")
+    expectedCycleTime: o6.Double = o6.field(name="ExpectedCycleTime")
+    mouldId: o6.String = o6.field(name="MouldId")
+    numCavities: o6.UInt32 = o6.field(name="NumCavities")
 
 
 @o6.datatype(
     nodeId="ns=plastics_rubber;i=3023",
-    browseName="PIDParametersDataType",
+    browseName="ns=plastics_rubber;PIDParametersDataType",
     description="Structure for storing the parameters of a PID controller",
     defaultEncodingId="ns=plastics_rubber;i=5017",
 )
 class PIDParametersDataType(ns0.datatypes.Structure):
-    p: o6.Double
-    i: o6.Double
-    d: o6.Double
+    p: o6.Double = o6.field(name="P")
+    i: o6.Double = o6.field(name="I")
+    d: o6.Double = o6.field(name="D")
 
 
-@o6.datatype(nodeId="ns=plastics_rubber;i=3024", browseName="ConfigurationParameterType", defaultEncodingId="ns=plastics_rubber;i=5003")
+@o6.datatype(nodeId="ns=plastics_rubber;i=3024", browseName="ns=plastics_rubber;ConfigurationParameterType", defaultEncodingId="ns=plastics_rubber;i=5003")
 class ConfigurationParameterType(ns0.datatypes.Structure):
-    id: o6.UInt32
-    description: o6.LocalizedText
-    defaultValue: Any
-    unit: ns0.datatypes.EUInformation
+    id: o6.UInt32 = o6.field(name="Id")
+    description: o6.LocalizedText = o6.field(name="Description")
+    defaultValue: Any = o6.field(name="DefaultValue")
+    unit: ns0.datatypes.EUInformation = o6.field(name="Unit")
 
 
-@o6.enumtype(nodeId="ns=plastics_rubber;i=3025", browseName="StartEnumeration")
+@o6.enumtype(nodeId="ns=plastics_rubber;i=3025", browseName="ns=plastics_rubber;StartEnumeration")
 class StartEnumeration(ns0.datatypes.Enumeration):
     NOT_READY_TO_START = o6.enumfield(0, name="NOT_READY_TO_START")
     START_BLOCKED_BY_CLIENT = o6.enumfield(1, name="START_BLOCKED_BY_CLIENT")
@@ -301,13 +315,13 @@ class StartEnumeration(ns0.datatypes.Enumeration):
     STOP_REQUESTED = o6.enumfield(5, name="STOP_REQUESTED")
 
 
-@o6.datatype(nodeId="ns=plastics_rubber;i=3026", browseName="ParameterSettingType", defaultEncodingId="ns=plastics_rubber;i=5015")
+@o6.datatype(nodeId="ns=plastics_rubber;i=3026", browseName="ns=plastics_rubber;ParameterSettingType", defaultEncodingId="ns=plastics_rubber;i=5015")
 class ParameterSettingType(ns0.datatypes.Structure):
-    id: o6.UInt32
-    value: Any
+    id: o6.UInt32 = o6.field(name="Id")
+    value: Any = o6.field(name="Value")
 
 
-@o6.enumtype(nodeId="ns=plastics_rubber;i=3027", browseName="DiagnosticsStatusEnumeration")
+@o6.enumtype(nodeId="ns=plastics_rubber;i=3027", browseName="ns=plastics_rubber;DiagnosticsStatusEnumeration")
 class DiagnosticsStatusEnumeration(ns0.datatypes.Enumeration):
     OFF = o6.enumfield(0, name="OFF")
     ACTIVE_OK = o6.enumfield(1, name="ACTIVE_OK")
@@ -318,31 +332,31 @@ class DiagnosticsStatusEnumeration(ns0.datatypes.Enumeration):
 
 @o6.datatype(
     nodeId="ns=plastics_rubber;i=3028",
-    browseName="ActiveErrorDataType",
+    browseName="ns=plastics_rubber;ActiveErrorDataType",
     description="Iinformation about an active error in a device",
     defaultEncodingId="ns=plastics_rubber;i=5048",
 )
 class ActiveErrorDataType(ns0.datatypes.Structure):
-    id: o6.String
-    severity: o6.UInt16
-    message: o6.LocalizedText
+    id: o6.String = o6.field(name="Id")
+    severity: o6.UInt16 = o6.field(name="Severity")
+    message: o6.LocalizedText = o6.field(name="Message")
 
 
 @o6.datatype(
     nodeId="ns=plastics_rubber;i=3003",
-    browseName="ClassifiedActiveErrorDataType",
+    browseName="ns=plastics_rubber;ClassifiedActiveErrorDataType",
     description="Iinformation about an active error in a device including the SoureNodes and a Classification",
     defaultEncodingId="ns=plastics_rubber;i=5065",
 )
 class ClassifiedActiveErrorDataType(ActiveErrorDataType):
-    id: o6.String
-    severity: o6.UInt16
-    message: o6.LocalizedText
-    sourceNodes: list[o6.NodeId] = o6.field(arrayDimensions=[0])
-    classification: o6.UInt16
+    id: o6.String = o6.field(name="Id")
+    severity: o6.UInt16 = o6.field(name="Severity")
+    message: o6.LocalizedText = o6.field(name="Message")
+    sourceNodes: list[o6.NodeId] = o6.field(name="SourceNodes", arrayDimensions=[0])
+    classification: o6.UInt16 = o6.field(name="Classification")
 
 
-@o6.enumtype(nodeId="ns=plastics_rubber;i=3029", browseName="TemperatureZoneClassificationEnumeration", description="Type of the temperature zone")
+@o6.enumtype(nodeId="ns=plastics_rubber;i=3029", browseName="ns=plastics_rubber;TemperatureZoneClassificationEnumeration", description="Type of the temperature zone")
 class TemperatureZoneClassificationEnumeration(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="OTHER")
     HEATING = o6.enumfield(1, name="HEATING")

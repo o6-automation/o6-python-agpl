@@ -81,6 +81,7 @@ class FoamCuttingCycleInformationEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_foam_cutting;i=6018",
             browseName="ns=plastics_foam_cutting;CycleTime",
             description="Duration of the cycle.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
             userAccessLevel=1,
@@ -91,6 +92,7 @@ class FoamCuttingCycleInformationEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_foam_cutting;i=6017",
             browseName="ns=plastics_foam_cutting;FinishedParts",
             description="Number of finished parts in the period under review.",
+            modellingRule="Optional",
             dataType=o6.UInt32,
             accessLevel=3,
             userAccessLevel=1,
@@ -101,6 +103,7 @@ class FoamCuttingCycleInformationEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_foam_cutting;i=6016",
             browseName="ns=plastics_foam_cutting;JobName",
             description="Provides the name of the job.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -111,6 +114,7 @@ class FoamCuttingCycleInformationEventType(ns0.objtypes.BaseEventType):
             nodeId="ns=plastics_foam_cutting;i=6019",
             browseName="ns=plastics_foam_cutting;StartTime",
             description="Start time of the cycle.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.UtcTime,
             accessLevel=3,
             userAccessLevel=1,
@@ -133,6 +137,7 @@ class ErrorHandlingType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_foam_cutting;i=6020",
             browseName="ns=plastics_foam_cutting;ActiveErrors",
             description="List of the active errors of the device.",
+            modellingRule="Mandatory",
             dataType=plastics_rubber.datatypes.ActiveErrorDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -143,6 +148,7 @@ class ErrorHandlingType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_foam_cutting;i=6021",
             browseName="ns=plastics_foam_cutting;HighestActiveAlarmSeverity",
             description="Indication of the severity of the highest active alarm.",
+            modellingRule="Optional",
             dataType=o6.UInt16,
         )
     )
@@ -161,6 +167,7 @@ class MaterialSupportType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_foam_cutting;i=6785",
             browseName="ns=plastics_foam_cutting;MaterialSupportCategory",
             description="This Property provides information about the category of the material support system.",
+            modellingRule="Mandatory",
             dataType=plastics_foam_cutting_datypes.MaterialSupportCategoryEnumeration,
         )
     )
@@ -170,6 +177,7 @@ class MaterialSupportType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_foam_cutting;i=6786",
             browseName="ns=plastics_foam_cutting;VacuumUnitsQuantity",
             description="This Property provides information about the total number of vacuum units on the material support system.",
+            modellingRule="Mandatory",
             dataType=o6.UInt16,
         )
     )
@@ -188,6 +196,7 @@ class MachineConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_foam_cutting;i=6840",
             browseName="ns=plastics_foam_cutting;GrindingUnit",
             description="A property with 0:Boolean data type. Its value is 1 if a grinding unit is physically present in a foam cutting machine.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -196,6 +205,7 @@ class MachineConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_foam_cutting;i=6839",
             browseName="ns=plastics_foam_cutting;Knife",
             description="A property with 0:Boolean data type. Its value is 1 if is physically present in a foam cutting machine and is used for its normal operation.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -214,6 +224,7 @@ class OperationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_foam_cutting;i=6023",
             browseName="ns=plastics_foam_cutting;ControlVoltageSwitch",
             description="Provides information, if the control voltage switch is switched on or off. The drives can only be operated with active control voltage.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -221,7 +232,10 @@ class OperationType(ns0.objtypes.BaseObjectType):
     peripheralDevices: ns0.objtypes.FolderType
     processingMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=plastics_foam_cutting;i=6947", browseName="ns=plastics_foam_cutting;ProcessingMode", dataType=plastics_foam_cutting_datypes.ProcessingModeEnumeration
+            nodeId="ns=plastics_foam_cutting;i=6947",
+            browseName="ns=plastics_foam_cutting;ProcessingMode",
+            modellingRule="Mandatory",
+            dataType=plastics_foam_cutting_datypes.ProcessingModeEnumeration,
         )
     )
 
@@ -235,7 +249,11 @@ class OperationType(ns0.objtypes.BaseObjectType):
 class ConveyorProcessMonitoringType(ns0.objtypes.BaseObjectType):
     active: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=plastics_foam_cutting;i=6032", browseName="ns=plastics_foam_cutting;Active", description="Indicates if the conveyor is active.", dataType=o6.Boolean
+            nodeId="ns=plastics_foam_cutting;i=6032",
+            browseName="ns=plastics_foam_cutting;Active",
+            description="Indicates if the conveyor is active.",
+            modellingRule="Mandatory",
+            dataType=o6.Boolean,
         )
     )
     description: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -243,6 +261,7 @@ class ConveyorProcessMonitoringType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_foam_cutting;i=7598",
             browseName="ns=plastics_foam_cutting;Description",
             description="Provides a user-defined textual description or identifier to distinguish and locate the conveyor within the machine or system.",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -251,6 +270,7 @@ class ConveyorProcessMonitoringType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_foam_cutting;i=6029",
             browseName="ns=plastics_foam_cutting;Direction",
             description="Provides information about the current transportation direction of the conveyor.",
+            modellingRule="Mandatory",
             dataType=plastics_foam_cutting_datypes.DirectionEnumeration,
         )
     )
@@ -270,6 +290,7 @@ class ConveyorConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_foam_cutting;i=6815",
             browseName="ns=plastics_foam_cutting;ConveyorCategory",
             description="This property provides information, if this conveyor is used for unloading, loading or transportation of material.",
+            modellingRule="Mandatory",
             dataType=plastics_foam_cutting_datypes.ConveyorCategoryEnumeration,
         )
     )
@@ -279,6 +300,7 @@ class ConveyorConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_foam_cutting;i=6816",
             browseName="ns=plastics_foam_cutting;ConveyorSubCategory",
             description="This property provides information on what type of conveyor this instance is.",
+            modellingRule="Mandatory",
             dataType=plastics_foam_cutting_datypes.ConveyorSubCategoryEnumeration,
         )
     )
@@ -287,6 +309,7 @@ class ConveyorConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_foam_cutting;i=7601",
             browseName="ns=plastics_foam_cutting;Description",
             description="Provides a user-defined textual description or identifier to distinguish and locate the conveyor within the machine or system.",
+            modellingRule="Mandatory",
             dataType=o6.String,
         )
     )
@@ -295,6 +318,7 @@ class ConveyorConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_foam_cutting;i=6817",
             browseName="ns=plastics_foam_cutting;FixedSpeedConveyor",
             description="This Property provides information, if the conveyor has a fixed speed.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -303,6 +327,7 @@ class ConveyorConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_foam_cutting;i=6814",
             browseName="ns=plastics_foam_cutting;IsPresent",
             description="The IsPresent Property provides information, if an instance of the conveyor is present in the current configuration of the machine.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )
@@ -312,6 +337,7 @@ class ConveyorConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_foam_cutting;i=6826",
             browseName="ns=plastics_foam_cutting;LightBarriers",
             description="Provides information about the positions of light barriers on this instance of conveyor.\nEach array entry represents one light barrier.",
+            modellingRule="Mandatory",
             dataType=plastics_foam_cutting_datypes.LightBarrierEnumeration,
             valueRank=1,
             arrayDimensions=[0],
@@ -322,6 +348,7 @@ class ConveyorConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_foam_cutting;i=6825",
             browseName="ns=plastics_foam_cutting;NumberOfBelts",
             description="Provides the number of individual belts on the conveyor.",
+            modellingRule="Mandatory",
             dataType=o6.UInt16,
         )
     )
@@ -330,6 +357,7 @@ class ConveyorConfigurationType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_foam_cutting;i=6827",
             browseName="ns=plastics_foam_cutting;PossibleDirection",
             description="Provides information about the possible working directions of the conveyor.",
+            modellingRule="Mandatory",
             dataType=plastics_foam_cutting_datypes.PossibleDirectionEnumeration,
         )
     )
@@ -346,6 +374,7 @@ class KnifeType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_foam_cutting;i=7610",
             browseName="ns=plastics_foam_cutting;GrindingUnitState",
             description="Provides information about the current state of the grinding unit.",
+            modellingRule="Optional",
             dataType=plastics_foam_cutting_datypes.GrindingUnitStateEnumeration,
         )
     )
@@ -355,6 +384,7 @@ class KnifeType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_foam_cutting;i=7604",
             browseName="ns=plastics_foam_cutting;KnifeRunning",
             description="Indicates if the knife is switched on (true) or off (false).",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
         )
     )

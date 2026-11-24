@@ -91,13 +91,16 @@ ns0.objtypes.StateType(
     nodeId="ns=isa95_jobcontrol_v2;i=5000",
     browseName="ns=isa95_jobcontrol_v2;Waiting",
     description="The necessary pre-conditions have not been met and the job order is not ready to run.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6000", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6000", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95PrepareStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5000"])
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=isa95_jobcontrol_v2;i=6001",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6002", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6002", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 isa95_jobcontrol_v2_objtypes.ISA95PrepareStateMachineType(
@@ -111,7 +114,8 @@ o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=isa95_jobcontrol_v2;i=6003",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6004", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6004", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 isa95_jobcontrol_v2_objtypes.ISA95PrepareStateMachineType(
@@ -125,7 +129,8 @@ o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=isa95_jobcontrol_v2;i=6005",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6006", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6006", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 isa95_jobcontrol_v2_objtypes.ISA95EndedStateMachineType(
@@ -139,7 +144,8 @@ o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=isa95_jobcontrol_v2;i=6007",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6008", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6008", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 isa95_jobcontrol_v2_objtypes.ISA95InterruptedStateMachineType(
@@ -154,7 +160,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5084",
     browseName="ns=isa95_jobcontrol_v2;FromNotAllowedToStartToAborted",
     description="This transition is triggered when Abort Method is called.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6009", browseName="TransitionNumber", dataType=o6.UInt32, value=12))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6009", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=12))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverObjectType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5084"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5084"], "i=53", o6.ns["ns=isa95_jobcontrol_v2;i=7010"])
@@ -163,7 +171,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5085",
     browseName="ns=isa95_jobcontrol_v2;FromAllowedToStartToAborted",
     description="This transition is triggered when Abort Method is called.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6010", browseName="TransitionNumber", dataType=o6.UInt32, value=13))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6010", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=13))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverObjectType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5085"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5085"], "i=53", o6.ns["ns=isa95_jobcontrol_v2;i=7010"])
@@ -172,7 +182,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5086",
     browseName="ns=isa95_jobcontrol_v2;FromAllowedToStartToAborted",
     description="This transition is triggered when Abort Method is called.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6011", browseName="TransitionNumber", dataType=o6.UInt32, value=13))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6011", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=13))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5086"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5086"], "i=53", o6.ns["ns=isa95_jobcontrol_v2;i=7010"])
@@ -181,7 +193,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5087",
     browseName="ns=isa95_jobcontrol_v2;FromNotAllowedToStartToAborted",
     description="This transition is triggered when Abort Method is called.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6012", browseName="TransitionNumber", dataType=o6.UInt32, value=12))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6012", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=12))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5087"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5087"], "i=53", o6.ns["ns=isa95_jobcontrol_v2;i=7010"])
@@ -190,7 +204,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5088",
     browseName="ns=isa95_jobcontrol_v2;FromReadyToWaiting",
     description="This transition is triggered when the system is not ready to start the execution of the job order anymore.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6013", browseName="TransitionNumber", dataType=o6.UInt32, value=3))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6013", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95PrepareStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5088"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5088"], "i=52", o6.ns["ns=isa95_jobcontrol_v2;i=5000"])
@@ -198,14 +214,18 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5089",
     browseName="ns=isa95_jobcontrol_v2;FromLoadedToReady",
     description="This transition is triggered when the program or configuration to execute the job order is unloaded.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6014", browseName="TransitionNumber", dataType=o6.UInt32, value=4))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6014", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95PrepareStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5089"])
 ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5090",
     browseName="ns=isa95_jobcontrol_v2;FromLoadedToWaiting",
     description="This transition is triggered when the system is not ready to start the execution of the job order anymore.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6015", browseName="TransitionNumber", dataType=o6.UInt32, value=5))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6015", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=5))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95PrepareStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5090"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5090"], "i=52", o6.ns["ns=isa95_jobcontrol_v2;i=5000"])
@@ -235,7 +255,7 @@ http_opcfoundation_org_UA_ISA95_JOBCONTROL_V2_ = ns0.objtypes.NamespaceMetadataT
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),
@@ -245,7 +265,7 @@ http_opcfoundation_org_UA_ISA95_JOBCONTROL_V2_ = ns0.objtypes.NamespaceMetadataT
                 browseName="StaticNumericNodeIdRange",
                 dataType=ns0.datatypes.NumericRange,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=["1:2147483647"],
             )
         ),
@@ -277,7 +297,9 @@ ns0.objtypes.StateType(
     nodeId="ns=isa95_jobcontrol_v2;i=5035",
     browseName="ns=isa95_jobcontrol_v2;NotAllowedToStart",
     description="The job order is stored but may not be executed.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6071", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6071", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverObjectType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5035"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5084"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5035"])
@@ -285,7 +307,9 @@ ns0.objtypes.StateType(
     nodeId="ns=isa95_jobcontrol_v2;i=5036",
     browseName="ns=isa95_jobcontrol_v2;AllowedToStart",
     description="The job order is stored and may be executed.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6072", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6072", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverObjectType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5036"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5085"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5036"])
@@ -293,28 +317,36 @@ ns0.objtypes.StateType(
     nodeId="ns=isa95_jobcontrol_v2;i=5037",
     browseName="ns=isa95_jobcontrol_v2;Running",
     description="The job order is executing.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6073", browseName="StateNumber", dataType=o6.UInt32, value=3))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6073", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverObjectType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5037"])
 ns0.objtypes.StateType(
     nodeId="ns=isa95_jobcontrol_v2;i=5038",
     browseName="ns=isa95_jobcontrol_v2;Interrupted",
     description="The job order has been temporarily stopped.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6074", browseName="StateNumber", dataType=o6.UInt32, value=4))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6074", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverObjectType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5038"])
 ns0.objtypes.StateType(
     nodeId="ns=isa95_jobcontrol_v2;i=5039",
     browseName="ns=isa95_jobcontrol_v2;Ended",
     description="The job order has been completed and is no longer in execution.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6075", browseName="StateNumber", dataType=o6.UInt32, value=5))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6075", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=5))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverObjectType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5039"])
 ns0.objtypes.StateType(
     nodeId="ns=isa95_jobcontrol_v2;i=5040",
     browseName="ns=isa95_jobcontrol_v2;Aborted",
     description="The job order is aborted.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6076", browseName="StateNumber", dataType=o6.UInt32, value=6))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6076", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=6))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverObjectType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5040"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5084"], "i=52", o6.ns["ns=isa95_jobcontrol_v2;i=5040"])
@@ -323,7 +355,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5041",
     browseName="ns=isa95_jobcontrol_v2;FromNotAllowedToStartToNotAllowedToStart",
     description="This transition is triggered when the Update Method is called and the job order is modified.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6077", browseName="TransitionNumber", dataType=o6.UInt32, value=1))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6077", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverObjectType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5041"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5041"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5035"])
@@ -334,7 +368,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5042",
     browseName="ns=isa95_jobcontrol_v2;FromNotAllowedToStartToAllowedToStart",
     description="This transition is triggered when the Start Method is called.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6078", browseName="TransitionNumber", dataType=o6.UInt32, value=2))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6078", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverObjectType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5042"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5042"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5035"])
@@ -345,7 +381,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5043",
     browseName="ns=isa95_jobcontrol_v2;FromAllowedToStartToNotAllowedToStart",
     description="This transition is triggered when the RevokeStart Method is called.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6079", browseName="TransitionNumber", dataType=o6.UInt32, value=3))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6079", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverObjectType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5043"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5043"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5036"])
@@ -356,7 +394,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5044",
     browseName="ns=isa95_jobcontrol_v2;FromAllowedToStartToAllowedToStart",
     description="This transition is triggered when the Update Method is called and the job order is modified.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6080", browseName="TransitionNumber", dataType=o6.UInt32, value=4))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6080", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverObjectType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5044"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5044"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5036"])
@@ -367,7 +407,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5045",
     browseName="ns=isa95_jobcontrol_v2;FromAllowedToStartToRunning",
     description="This transition is triggered when a job order is started to be executed.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6081", browseName="TransitionNumber", dataType=o6.UInt32, value=5))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6081", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=5))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverObjectType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5045"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5045"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5036"])
@@ -377,7 +419,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5046",
     browseName="ns=isa95_jobcontrol_v2;FromRunningToInterrupted",
     description="This transition is triggered when an executing job order gets interrupted, either internally or by the Pause Method.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6082", browseName="TransitionNumber", dataType=o6.UInt32, value=6))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6082", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=6))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverObjectType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5046"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5046"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5037"])
@@ -388,7 +432,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5047",
     browseName="ns=isa95_jobcontrol_v2;FromRunningToEnded",
     description="This transition is triggered when the execution of a job order has finished, either internally or by the Stop Method.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6083", browseName="TransitionNumber", dataType=o6.UInt32, value=7))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6083", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=7))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverObjectType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5047"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5047"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5037"])
@@ -399,7 +445,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5048",
     browseName="ns=isa95_jobcontrol_v2;FromRunningToAborted",
     description="This transition is triggered when Abort Method is called.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6084", browseName="TransitionNumber", dataType=o6.UInt32, value=8))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6084", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=8))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverObjectType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5048"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5048"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5037"])
@@ -410,7 +458,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5049",
     browseName="ns=isa95_jobcontrol_v2;FromInterruptedToAborted",
     description="This transition is triggered when Abort Method is called.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6085", browseName="TransitionNumber", dataType=o6.UInt32, value=9))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6085", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=9))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverObjectType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5049"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5049"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5038"])
@@ -421,7 +471,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5050",
     browseName="ns=isa95_jobcontrol_v2;FromInterruptedToRunning",
     description="This transition is triggered when Resume Method is called.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6086", browseName="TransitionNumber", dataType=o6.UInt32, value=10))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6086", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=10))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverObjectType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5050"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5050"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5038"])
@@ -432,7 +484,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5051",
     browseName="ns=isa95_jobcontrol_v2;FromInterruptedToEnded",
     description="This transition is triggered when Stop Method is called.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6087", browseName="TransitionNumber", dataType=o6.UInt32, value=11))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6087", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=11))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverObjectType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5051"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5051"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5038"])
@@ -443,7 +497,9 @@ ns0.objtypes.StateType(
     nodeId="ns=isa95_jobcontrol_v2;i=5052",
     browseName="ns=isa95_jobcontrol_v2;Ready",
     description="The necessary pre-conditions have been met and the job order is ready to run, awaiting a Start command.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6089", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6089", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95PrepareStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5052"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5088"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5052"])
@@ -452,7 +508,9 @@ ns0.objtypes.StateType(
     nodeId="ns=isa95_jobcontrol_v2;i=5053",
     browseName="ns=isa95_jobcontrol_v2;Loaded",
     description="In situations where only one job may be in active memory and is able to be run, then the job is loaded in active memory, the necessary pre-conditions have been met, and the job order is ready to run, awaiting a Start command.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6090", browseName="StateNumber", dataType=o6.UInt32, value=3))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6090", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95PrepareStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5053"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5089"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5053"])
@@ -461,7 +519,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5054",
     browseName="ns=isa95_jobcontrol_v2;FromWaitingToReady",
     description="This transition is triggered when the system is ready to start the execution of the job order.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6091", browseName="TransitionNumber", dataType=o6.UInt32, value=1))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6091", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95PrepareStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5054"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5054"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5000"])
@@ -470,7 +530,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5055",
     browseName="ns=isa95_jobcontrol_v2;FromReadyToLoaded",
     description="This transition is triggered when the program or configuration to execute the job order is loaded.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6092", browseName="TransitionNumber", dataType=o6.UInt32, value=2))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6092", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95PrepareStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5055"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5055"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5052"])
@@ -479,21 +541,27 @@ ns0.objtypes.StateType(
     nodeId="ns=isa95_jobcontrol_v2;i=5056",
     browseName="ns=isa95_jobcontrol_v2;Completed",
     description="The job order has been completed and is no longer in execution.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6093", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6093", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95EndedStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5056"])
 ns0.objtypes.StateType(
     nodeId="ns=isa95_jobcontrol_v2;i=5057",
     browseName="ns=isa95_jobcontrol_v2;Closed",
     description="The job order has been completed and no further post processing is performed.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6094", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6094", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95EndedStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5057"])
 ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5058",
     browseName="ns=isa95_jobcontrol_v2;FromCompletedToClosed",
     description="This transition is triggered when the system has finalized post processing of a ended job order.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6095", browseName="TransitionNumber", dataType=o6.UInt32, value=1))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6095", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95EndedStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5058"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5058"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5056"])
@@ -502,21 +570,27 @@ ns0.objtypes.StateType(
     nodeId="ns=isa95_jobcontrol_v2;i=5059",
     browseName="ns=isa95_jobcontrol_v2;Held",
     description="The job order has been temporarily stopped due to a constraint of some form.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6096", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6096", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95InterruptedStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5059"])
 ns0.objtypes.StateType(
     nodeId="ns=isa95_jobcontrol_v2;i=5060",
     browseName="ns=isa95_jobcontrol_v2;Suspended",
     description="The job order has been temporarily stopped due to a deliberate decision within the execution system.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6097", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6097", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95InterruptedStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5060"])
 ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5061",
     browseName="ns=isa95_jobcontrol_v2;FromHeldToSuspended",
     description="This transition is triggered when the system has switched the job order from internally held to externally suspended, for example by a call of the Pause Method.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6098", browseName="TransitionNumber", dataType=o6.UInt32, value=1))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6098", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95InterruptedStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5061"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5061"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5059"])
@@ -525,7 +599,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5062",
     browseName="ns=isa95_jobcontrol_v2;FromSuspendedToHeld",
     description="This transition is triggered when the system has switched the job order from externally suspended to an internal held, for example by a call of the Resume Method.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6099", browseName="TransitionNumber", dataType=o6.UInt32, value=2))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6099", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95InterruptedStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5062"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5062"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5060"])
@@ -534,7 +610,9 @@ ns0.objtypes.StateType(
     nodeId="ns=isa95_jobcontrol_v2;i=5063",
     browseName="ns=isa95_jobcontrol_v2;NotAllowedToStart",
     description="The job order is stored but may not be executed.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6100", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6100", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5063"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5063"], "i=117", o6.ns["ns=isa95_jobcontrol_v2;i=5080"])
@@ -543,7 +621,9 @@ ns0.objtypes.StateType(
     nodeId="ns=isa95_jobcontrol_v2;i=5064",
     browseName="ns=isa95_jobcontrol_v2;AllowedToStart",
     description="The job order is stored and may be executed.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6101", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6101", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5064"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5064"], "i=117", o6.ns["ns=isa95_jobcontrol_v2;i=5081"])
@@ -552,14 +632,18 @@ ns0.objtypes.StateType(
     nodeId="ns=isa95_jobcontrol_v2;i=5065",
     browseName="ns=isa95_jobcontrol_v2;Running",
     description="The job order is executing.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6102", browseName="StateNumber", dataType=o6.UInt32, value=3))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6102", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5065"])
 ns0.objtypes.StateType(
     nodeId="ns=isa95_jobcontrol_v2;i=5066",
     browseName="ns=isa95_jobcontrol_v2;Interrupted",
     description="The job order has been temporarily stopped.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6103", browseName="StateNumber", dataType=o6.UInt32, value=4))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6103", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5066"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5066"], "i=117", o6.ns["ns=isa95_jobcontrol_v2;i=5083"])
@@ -567,7 +651,9 @@ ns0.objtypes.StateType(
     nodeId="ns=isa95_jobcontrol_v2;i=5067",
     browseName="ns=isa95_jobcontrol_v2;Ended",
     description="The job order has been completed and is no longer in execution.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6104", browseName="StateNumber", dataType=o6.UInt32, value=5))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6104", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=5))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5067"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5067"], "i=117", o6.ns["ns=isa95_jobcontrol_v2;i=5082"])
@@ -575,7 +661,9 @@ ns0.objtypes.StateType(
     nodeId="ns=isa95_jobcontrol_v2;i=5068",
     browseName="ns=isa95_jobcontrol_v2;Aborted",
     description="The job order is aborted.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6105", browseName="StateNumber", dataType=o6.UInt32, value=6))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6105", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=6))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5068"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5086"], "i=52", o6.ns["ns=isa95_jobcontrol_v2;i=5068"])
@@ -584,7 +672,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5069",
     browseName="ns=isa95_jobcontrol_v2;FromNotAllowedToStartToNotAllowedToStart",
     description="This transition is triggered when the Update Method is called and the job order is modified.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6106", browseName="TransitionNumber", dataType=o6.UInt32, value=1))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6106", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5069"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5069"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5063"])
@@ -595,7 +685,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5070",
     browseName="ns=isa95_jobcontrol_v2;FromNotAllowedToStartToAllowedToStart",
     description="This transition is triggered when the Start Method is called.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6107", browseName="TransitionNumber", dataType=o6.UInt32, value=2))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6107", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5070"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5070"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5063"])
@@ -606,7 +698,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5071",
     browseName="ns=isa95_jobcontrol_v2;FromAllowedToStartToNotAllowedToStart",
     description="This transition is triggered when the RevokeStart Method is called.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6108", browseName="TransitionNumber", dataType=o6.UInt32, value=3))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6108", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5071"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5071"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5064"])
@@ -617,7 +711,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5072",
     browseName="ns=isa95_jobcontrol_v2;FromAllowedToStartToAllowedToStart",
     description="This transition is triggered when the Update Method is called and the job order is modified.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6109", browseName="TransitionNumber", dataType=o6.UInt32, value=4))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6109", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5072"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5072"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5064"])
@@ -628,7 +724,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5073",
     browseName="ns=isa95_jobcontrol_v2;FromAllowedToStartToRunning",
     description="This transition is triggered when a job order is started to be executed.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6110", browseName="TransitionNumber", dataType=o6.UInt32, value=5))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6110", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=5))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5073"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5073"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5064"])
@@ -638,7 +736,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5074",
     browseName="ns=isa95_jobcontrol_v2;FromRunningToInterrupted",
     description="This transition is triggered when an executing job order gets interrupted, either internally or by the Pause Method.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6111", browseName="TransitionNumber", dataType=o6.UInt32, value=6))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6111", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=6))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5074"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5074"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5065"])
@@ -649,7 +749,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5075",
     browseName="ns=isa95_jobcontrol_v2;FromRunningToEnded",
     description="This transition is triggered when the execution of a job order has finished, either internally or by the Stop Method.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6112", browseName="TransitionNumber", dataType=o6.UInt32, value=7))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6112", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=7))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5075"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5075"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5065"])
@@ -660,7 +762,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5076",
     browseName="ns=isa95_jobcontrol_v2;FromRunningToAborted",
     description="This transition is triggered when Abort Method is called.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6113", browseName="TransitionNumber", dataType=o6.UInt32, value=8))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6113", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=8))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5076"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5076"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5065"])
@@ -671,7 +775,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5077",
     browseName="ns=isa95_jobcontrol_v2;FromInterruptedToAborted",
     description="This transition is triggered when Abort Method is called.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6114", browseName="TransitionNumber", dataType=o6.UInt32, value=9))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6114", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=9))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5077"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5077"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5066"])
@@ -682,7 +788,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5078",
     browseName="ns=isa95_jobcontrol_v2;FromInterruptedToRunning",
     description="This transition is triggered when Resume Method is called.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6115", browseName="TransitionNumber", dataType=o6.UInt32, value=10))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6115", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=10))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5078"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5078"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5066"])
@@ -693,7 +801,9 @@ ns0.objtypes.TransitionType(
     nodeId="ns=isa95_jobcontrol_v2;i=5079",
     browseName="ns=isa95_jobcontrol_v2;FromInterruptedToEnded",
     description="This transition is triggered when Stop Method is called.",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6116", browseName="TransitionNumber", dataType=o6.UInt32, value=11))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6116", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=11))
+    ],
 )
 o6.reference(isa95_jobcontrol_v2_objtypes.ISA95JobOrderReceiverSubStatesType, ns0.reftypes.HasComponent, o6.ns["ns=isa95_jobcontrol_v2;i=5079"])
 o6.reference(o6.ns["ns=isa95_jobcontrol_v2;i=5079"], "i=51", o6.ns["ns=isa95_jobcontrol_v2;i=5066"])

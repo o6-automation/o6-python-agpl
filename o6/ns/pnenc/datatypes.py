@@ -32,7 +32,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=pnenc;i=3002", browseName="EncoderChannelStateEnumeration")
+@o6.enumtype(nodeId="ns=pnenc;i=3002", browseName="ns=pnenc;EncoderChannelStateEnumeration")
 class EncoderChannelStateEnumeration(ns0.datatypes.Enumeration):
     NORMAL_OPERATION = o6.enumfield(0, name="NORMAL_OPERATION")
     ERROR_ACKNOWLEDGEMENT = o6.enumfield(1, name="ERROR_ACKNOWLEDGEMENT")
@@ -47,44 +47,44 @@ class EncoderChannelStateEnumeration(ns0.datatypes.Enumeration):
     PARKING_ERROR_ACK = o6.enumfield(10, name="PARKING_ERROR_ACK")
 
 
-@o6.enumtype(nodeId="ns=pnenc;i=3003", browseName="EventTypeEnumeration")
+@o6.enumtype(nodeId="ns=pnenc;i=3003", browseName="ns=pnenc;EventTypeEnumeration")
 class EventTypeEnumeration(ns0.datatypes.Enumeration):
     FAULT = o6.enumfield(0, name="FAULT")
     WARNING = o6.enumfield(1, name="WARNING")
     UNSPECIFIED = o6.enumfield(255, name="UNSPECIFIED")
 
 
-@o6.enumtype(nodeId="ns=pnenc;i=3004", browseName="EncoderAxisTypeEnumeration")
+@o6.enumtype(nodeId="ns=pnenc;i=3004", browseName="ns=pnenc;EncoderAxisTypeEnumeration")
 class EncoderAxisTypeEnumeration(ns0.datatypes.Enumeration):
     ROTARY = o6.enumfield(0, name="ROTARY")
     LINEAR = o6.enumfield(1, name="LINEAR")
 
 
-@o6.enumtype(nodeId="ns=pnenc;i=3005", browseName="EncoderCodeSequenceEnumeration")
+@o6.enumtype(nodeId="ns=pnenc;i=3005", browseName="ns=pnenc;EncoderCodeSequenceEnumeration")
 class EncoderCodeSequenceEnumeration(ns0.datatypes.Enumeration):
     INCREASING_CLOCKWISE = o6.enumfield(0, name="INCREASING_CLOCKWISE")
     INCREASING_COUNTERCLOCKWISE = o6.enumfield(1, name="INCREASING_COUNTERCLOCKWISE")
 
 
-@o6.enumtype(nodeId="ns=pnenc;i=3006", browseName="EncoderAlarmChannelControlEnumeration")
+@o6.enumtype(nodeId="ns=pnenc;i=3006", browseName="ns=pnenc;EncoderAlarmChannelControlEnumeration")
 class EncoderAlarmChannelControlEnumeration(ns0.datatypes.Enumeration):
     ALARM_CHANNEL_DISABLED = o6.enumfield(0, name="ALARM_CHANNEL_DISABLED")
     ALARM_CHANNEL_ENABLED = o6.enumfield(1, name="ALARM_CHANNEL_ENABLED")
 
 
-@o6.enumtype(nodeId="ns=pnenc;i=3007", browseName="EncoderPresetControlEnumeration")
+@o6.enumtype(nodeId="ns=pnenc;i=3007", browseName="ns=pnenc;EncoderPresetControlEnumeration")
 class EncoderPresetControlEnumeration(ns0.datatypes.Enumeration):
     ENABLE_PRESET_CONTROL = o6.enumfield(0, name="ENABLE_PRESET_CONTROL")
     DISABLE_PRESET_CONTROL = o6.enumfield(1, name="DISABLE_PRESET_CONTROL")
 
 
-@o6.enumtype(nodeId="ns=pnenc;i=3008", browseName="EncoderSensorAbsoluteTypeEnumeration")
+@o6.enumtype(nodeId="ns=pnenc;i=3008", browseName="ns=pnenc;EncoderSensorAbsoluteTypeEnumeration")
 class EncoderSensorAbsoluteTypeEnumeration(ns0.datatypes.Enumeration):
     SINGLETURN = o6.enumfield(0, name="SINGLETURN")
     MULTITURN = o6.enumfield(1, name="MULTITURN")
 
 
-@o6.enumtype(nodeId="ns=pnenc;i=3009", browseName="EncoderSignalTypeEnumeration")
+@o6.enumtype(nodeId="ns=pnenc;i=3009", browseName="ns=pnenc;EncoderSignalTypeEnumeration")
 class EncoderSignalTypeEnumeration(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="OTHER")
     BISS_C = o6.enumfield(1, name="BISS_C")
@@ -113,20 +113,20 @@ class EncoderSignalTypeEnumeration(ns0.datatypes.Enumeration):
     RS485_TTL = o6.enumfield(24, name="RS485_TTL")
 
 
-@o6.enumtype(nodeId="ns=pnenc;i=3010", browseName="EncoderConfigParameterResultEnumeration")
+@o6.enumtype(nodeId="ns=pnenc;i=3010", browseName="ns=pnenc;EncoderConfigParameterResultEnumeration")
 class EncoderConfigParameterResultEnumeration(ns0.datatypes.Enumeration):
     INVALID = o6.enumfield(0, name="INVALID")
     NOT_SUPPORTED = o6.enumfield(1, name="NOT_SUPPORTED")
     READ_ONLY = o6.enumfield(2, name="READ_ONLY")
 
 
-@o6.enumtype(nodeId="ns=pnenc;i=3011", browseName="EncoderConfigTypeEnumeration")
+@o6.enumtype(nodeId="ns=pnenc;i=3011", browseName="ns=pnenc;EncoderConfigTypeEnumeration")
 class EncoderConfigTypeEnumeration(ns0.datatypes.Enumeration):
     STATIC = o6.enumfield(0, name="STATIC")
     DYNAMIC = o6.enumfield(1, name="DYNAMIC")
 
 
-@o6.enumtype(nodeId="ns=pnenc;i=3012", browseName="EncoderDiagnosisReasonEnumeration")
+@o6.enumtype(nodeId="ns=pnenc;i=3012", browseName="ns=pnenc;EncoderDiagnosisReasonEnumeration")
 class EncoderDiagnosisReasonEnumeration(ns0.datatypes.Enumeration):
     ALL_DISAPPEARS = o6.enumfield(0, name="ALL_DISAPPEARS")
     APPEARS = o6.enumfield(1, name="APPEARS")
@@ -134,16 +134,16 @@ class EncoderDiagnosisReasonEnumeration(ns0.datatypes.Enumeration):
     DISAPPEARS_OTHER_REMAIN = o6.enumfield(3, name="DISAPPEARS_OTHER_REMAIN")
 
 
-@o6.datatype(nodeId="ns=pnenc;i=3013", browseName="LogEntryDataType", defaultEncodingId="ns=pnenc;i=5002")
+@o6.datatype(nodeId="ns=pnenc;i=3013", browseName="ns=pnenc;LogEntryDataType", defaultEncodingId="ns=pnenc;i=5002")
 class LogEntryDataType(ns0.datatypes.Structure):
-    faultSituationNumber: o6.Byte
-    eventNumber: o6.UInt32
-    eventType: EventTypeEnumeration
-    eventCode: o6.Int32
-    eventText: o6.LocalizedText
-    eventComing: o6.DateTime
-    eventGoing: o6.DateTime
-    eventAcknowledged: o6.DateTime
+    faultSituationNumber: o6.Byte = o6.field(name="FaultSituationNumber")
+    eventNumber: o6.UInt32 = o6.field(name="EventNumber")
+    eventType: EventTypeEnumeration = o6.field(name="EventType")
+    eventCode: o6.Int32 = o6.field(name="EventCode")
+    eventText: o6.LocalizedText = o6.field(name="EventText")
+    eventComing: o6.DateTime = o6.field(name="EventComing")
+    eventGoing: o6.DateTime = o6.field(name="EventGoing")
+    eventAcknowledged: o6.DateTime = o6.field(name="EventAcknowledged")
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ns0

@@ -67,6 +67,7 @@ class ISA95JobOrderStatusEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=isa95_jobcontrol_v2;i=6047",
             browseName="ns=isa95_jobcontrol_v2;JobOrder",
+            modellingRule="Mandatory",
             dataType=isa95_jobcontrol_v2_datypes.ISA95JobOrderDataType,
             accessLevel=3,
             userAccessLevel=1,
@@ -76,6 +77,7 @@ class ISA95JobOrderStatusEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=isa95_jobcontrol_v2;i=6049",
             browseName="ns=isa95_jobcontrol_v2;JobResponse",
+            modellingRule="Mandatory",
             dataType=isa95_jobcontrol_v2_datypes.ISA95JobResponseDataType,
             accessLevel=3,
             userAccessLevel=1,
@@ -85,6 +87,7 @@ class ISA95JobOrderStatusEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=isa95_jobcontrol_v2;i=6048",
             browseName="ns=isa95_jobcontrol_v2;JobState",
+            modellingRule="Mandatory",
             dataType=isa95_jobcontrol_v2_datypes.ISA95StateDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -142,6 +145,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=isa95_jobcontrol_v2;i=7001",
     browseName="ns=isa95_jobcontrol_v2;Store",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6040"]),
     outputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6041"]),
 )
@@ -192,6 +196,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=isa95_jobcontrol_v2;i=7002",
     browseName="ns=isa95_jobcontrol_v2;RequestJobResponseByJobOrderID",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6042"]),
     outputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6043"]),
 )
@@ -235,6 +240,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=isa95_jobcontrol_v2;i=7003",
     browseName="ns=isa95_jobcontrol_v2;ReceiveJobResponse",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6044"]),
     outputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6045"]),
 )
@@ -298,6 +304,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=isa95_jobcontrol_v2;i=7004",
     browseName="ns=isa95_jobcontrol_v2;StoreAndStart",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6051"]),
     outputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6052"]),
 )
@@ -350,6 +357,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=isa95_jobcontrol_v2;i=7005",
     browseName="ns=isa95_jobcontrol_v2;Start",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6053"]),
     outputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6054"]),
 )
@@ -402,6 +410,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=isa95_jobcontrol_v2;i=7006",
     browseName="ns=isa95_jobcontrol_v2;Stop",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6055"]),
     outputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6056"]),
 )
@@ -454,6 +463,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=isa95_jobcontrol_v2;i=7007",
     browseName="ns=isa95_jobcontrol_v2;Pause",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6057"]),
     outputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6058"]),
 )
@@ -506,6 +516,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=isa95_jobcontrol_v2;i=7008",
     browseName="ns=isa95_jobcontrol_v2;Resume",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6059"]),
     outputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6060"]),
 )
@@ -558,6 +569,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=isa95_jobcontrol_v2;i=7009",
     browseName="ns=isa95_jobcontrol_v2;Update",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6061"]),
     outputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6062"]),
 )
@@ -610,6 +622,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=isa95_jobcontrol_v2;i=7010",
     browseName="ns=isa95_jobcontrol_v2;Abort",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6063"]),
     outputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6064"]),
 )
@@ -662,6 +675,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=isa95_jobcontrol_v2;i=7011",
     browseName="ns=isa95_jobcontrol_v2;Cancel",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6065"]),
     outputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6066"]),
 )
@@ -714,6 +728,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=isa95_jobcontrol_v2;i=7012",
     browseName="ns=isa95_jobcontrol_v2;Clear",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6067"]),
     outputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6068"]),
 )
@@ -766,6 +781,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=isa95_jobcontrol_v2;i=7013",
     browseName="ns=isa95_jobcontrol_v2;RevokeStart",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6069"]),
     outputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6070"]),
 )
@@ -789,6 +805,7 @@ class ISA95JobOrderReceiverObjectType(ns0.objtypes.FiniteStateMachineType):
             nodeId="ns=isa95_jobcontrol_v2;i=6037",
             browseName="ns=isa95_jobcontrol_v2;EquipmentID",
             description="Defines a read-only set of Equipment Class IDs and Equipment IDs that may be specified in a job order.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=1,
             arrayDimensions=[0],
@@ -813,6 +830,7 @@ class ISA95JobOrderReceiverObjectType(ns0.objtypes.FiniteStateMachineType):
             nodeId="ns=isa95_jobcontrol_v2;i=6033",
             browseName="ns=isa95_jobcontrol_v2;JobOrderList",
             description="Defines a read-only list of job order information available from the server.",
+            modellingRule="Mandatory",
             dataType=isa95_jobcontrol_v2_datypes.ISA95JobOrderAndStateDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -823,6 +841,7 @@ class ISA95JobOrderReceiverObjectType(ns0.objtypes.FiniteStateMachineType):
             nodeId="ns=isa95_jobcontrol_v2;i=6035",
             browseName="ns=isa95_jobcontrol_v2;MaterialClassID",
             description="Defines a read-only set of Material Classes IDs that may be specified in a job order.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=1,
             arrayDimensions=[0],
@@ -833,13 +852,16 @@ class ISA95JobOrderReceiverObjectType(ns0.objtypes.FiniteStateMachineType):
             nodeId="ns=isa95_jobcontrol_v2;i=6036",
             browseName="ns=isa95_jobcontrol_v2;MaterialDefinitionID",
             description="Defines a read-only set of Material Classes IDs that may be specified in a job order.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=1,
             arrayDimensions=[0],
         )
     )
     maxDownloadableJobOrders: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=isa95_jobcontrol_v2;i=6088", browseName="ns=isa95_jobcontrol_v2;MaxDownloadableJobOrders", dataType=o6.UInt16)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=isa95_jobcontrol_v2;i=6088", browseName="ns=isa95_jobcontrol_v2;MaxDownloadableJobOrders", modellingRule="Mandatory", dataType=o6.UInt16
+        )
     )
     notAllowedToStart: ns0.objtypes.StateType
     pause: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=isa95_jobcontrol_v2;i=7007"])
@@ -848,6 +870,7 @@ class ISA95JobOrderReceiverObjectType(ns0.objtypes.FiniteStateMachineType):
             nodeId="ns=isa95_jobcontrol_v2;i=6039",
             browseName="ns=isa95_jobcontrol_v2;PersonnelID",
             description="Defines a read-only set of Personnel IDs and Person IDs that may be specified in a job order.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=1,
             arrayDimensions=[0],
@@ -858,6 +881,7 @@ class ISA95JobOrderReceiverObjectType(ns0.objtypes.FiniteStateMachineType):
             nodeId="ns=isa95_jobcontrol_v2;i=6038",
             browseName="ns=isa95_jobcontrol_v2;PhysicalAssetID",
             description="Defines a read-only set of Physical Asset Class IDs and Physical Asset IDs that may be specified in a job order.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=1,
             arrayDimensions=[0],
@@ -876,6 +900,7 @@ class ISA95JobOrderReceiverObjectType(ns0.objtypes.FiniteStateMachineType):
             nodeId="ns=isa95_jobcontrol_v2;i=6034",
             browseName="ns=isa95_jobcontrol_v2;WorkMaster",
             description="Defines a read-only set of work master IDs that may be specified in a job order, and the read-only set of parameters that may be specified for a specific work master.",
+            modellingRule="Mandatory",
             dataType=isa95_jobcontrol_v2_datypes.ISA95WorkMasterDataType,
             valueRank=1,
             arrayDimensions=[0],
@@ -958,6 +983,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=isa95_jobcontrol_v2;i=7014",
     browseName="ns=isa95_jobcontrol_v2;RequestJobResponseByJobOrderState",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6016"]),
     outputArgs=o6.hasProperty(o6.ns["ns=isa95_jobcontrol_v2;i=6017"]),
 )
@@ -974,6 +1000,7 @@ class ISA95JobResponseProviderObjectType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=isa95_jobcontrol_v2;i=6050",
             browseName="ns=isa95_jobcontrol_v2;JobOrderResponseList",
+            modellingRule="Optional",
             dataType=isa95_jobcontrol_v2_datypes.ISA95JobResponseDataType,
             valueRank=1,
             arrayDimensions=[0],

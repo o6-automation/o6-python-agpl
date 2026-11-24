@@ -33,11 +33,13 @@ else:
     _VariableNode = object
 
 
-@o6.datatype(nodeId="ns=plastics_extrusion_v1_line;i=3003", browseName="MaterialMappingType", defaultEncodingId="ns=plastics_extrusion_v1_line;i=5007")
+@o6.datatype(
+    nodeId="ns=plastics_extrusion_v1_line;i=3003", browseName="ns=plastics_extrusion_v1_line;MaterialMappingType", defaultEncodingId="ns=plastics_extrusion_v1_line;i=5007"
+)
 class MaterialMappingType(ns0.datatypes.Structure):
-    materialId: o6.String
-    materialLot: o6.String
-    hopperId: o6.String
+    materialId: o6.String = o6.field(name="MaterialId")
+    materialLot: o6.String = o6.field(name="MaterialLot")
+    hopperId: o6.String = o6.field(name="HopperId")
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ns0, plastics_rubber

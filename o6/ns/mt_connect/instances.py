@@ -45,6 +45,7 @@ mt_connect_objtypes.MTDescriptionType(
                 nodeId="ns=mt_connect;i=2737",
                 browseName="ns=mt_connect;Station",
                 description="An MTConnect Component Description. See the DescriptionType in the\n      type-specifications. An XML element that can contain any descriptive\n      content.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=-1,
             )
@@ -54,6 +55,7 @@ mt_connect_objtypes.MTDescriptionType(
                 nodeId="ns=mt_connect;i=2738",
                 browseName="ns=mt_connect;SerialNumber",
                 description="An MTConnect Component Description. See the DescriptionType in the\n      type-specifications. An XML element that can contain any descriptive\n      content.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=-1,
             )
@@ -63,6 +65,7 @@ mt_connect_objtypes.MTDescriptionType(
                 nodeId="ns=mt_connect;i=2739",
                 browseName="ns=mt_connect;Manufacturer",
                 description="An MTConnect Component Description. See the DescriptionType in the\n      type-specifications. An XML element that can contain any descriptive\n      content.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=-1,
             )
@@ -72,6 +75,7 @@ mt_connect_objtypes.MTDescriptionType(
                 nodeId="ns=mt_connect;i=2740",
                 browseName="ns=mt_connect;Data",
                 description="An MTConnect Component Description. See the DescriptionType in the\n      type-specifications. An XML element that can contain any descriptive\n      content.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=-1,
             )
@@ -134,6 +138,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2761",
                 browseName="ns=mt_connect;Values",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=1,
             )
@@ -143,6 +148,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2762",
                 browseName="ns=mt_connect;Minimum",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -152,6 +158,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2763",
                 browseName="ns=mt_connect;Maximum",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -161,6 +168,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2764",
                 browseName="ns=mt_connect;Nominal",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -203,6 +211,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2781",
                 browseName="ns=mt_connect;Values",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=1,
             )
@@ -212,6 +221,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2782",
                 browseName="ns=mt_connect;Minimum",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -221,6 +231,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2783",
                 browseName="ns=mt_connect;Maximum",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -230,6 +241,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2784",
                 browseName="ns=mt_connect;Nominal",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -274,6 +286,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2801",
                 browseName="ns=mt_connect;Values",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=1,
             )
@@ -283,6 +296,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2802",
                 browseName="ns=mt_connect;Minimum",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -292,6 +306,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2803",
                 browseName="ns=mt_connect;Maximum",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -301,6 +316,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2804",
                 browseName="ns=mt_connect;Nominal",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -319,6 +335,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2815",
                 browseName="ns=mt_connect;Values",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=1,
             )
@@ -328,6 +345,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2816",
                 browseName="ns=mt_connect;Minimum",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -337,6 +355,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2817",
                 browseName="ns=mt_connect;Maximum",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -346,6 +365,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2818",
                 browseName="ns=mt_connect;Nominal",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -424,6 +444,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2849",
                 browseName="ns=mt_connect;Values",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=1,
             )
@@ -433,6 +454,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2850",
                 browseName="ns=mt_connect;Minimum",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -442,6 +464,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2851",
                 browseName="ns=mt_connect;Maximum",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -451,6 +474,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2852",
                 browseName="ns=mt_connect;Nominal",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -493,6 +517,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2877",
                 browseName="ns=mt_connect;Values",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=1,
             )
@@ -502,6 +527,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2878",
                 browseName="ns=mt_connect;Minimum",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -511,6 +537,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2879",
                 browseName="ns=mt_connect;Maximum",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -520,6 +547,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2880",
                 browseName="ns=mt_connect;Nominal",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -538,6 +566,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2891",
                 browseName="ns=mt_connect;Values",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=1,
             )
@@ -547,6 +576,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2892",
                 browseName="ns=mt_connect;Minimum",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -556,6 +586,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2893",
                 browseName="ns=mt_connect;Maximum",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -565,6 +596,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2894",
                 browseName="ns=mt_connect;Nominal",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -668,6 +700,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2925",
                 browseName="ns=mt_connect;Values",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 valueRank=1,
             )
@@ -677,6 +710,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2926",
                 browseName="ns=mt_connect;Minimum",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -686,6 +720,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2927",
                 browseName="ns=mt_connect;Maximum",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )
@@ -695,6 +730,7 @@ mt_connect_objtypes.MTConstraintType(
                 nodeId="ns=mt_connect;i=2928",
                 browseName="ns=mt_connect;Nominal",
                 description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+                modellingRule="Optional",
                 dataType=o6.Float,
                 valueRank=-1,
             )

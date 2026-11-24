@@ -48,7 +48,8 @@ o6.hasEncoding(machinery_jobs_datypes.OutputPerformanceInfoDataType, o6.ns["ns=m
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machinery_jobs;i=6009",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_jobs;i=6010", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_jobs;i=6010", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
@@ -56,12 +57,17 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
     browseName="ns=machinery_jobs;JobOrderControl",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machinery_jobs;i=6005", browseName="ns=isa95_jobcontrol_v2;MaxDownloadableJobOrders", dataType=o6.UInt16)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=machinery_jobs;i=6005", browseName="ns=isa95_jobcontrol_v2;MaxDownloadableJobOrders", modellingRule="Mandatory", dataType=o6.UInt16
+            )
+        ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=machinery_jobs;i=6001",
                 browseName="ns=isa95_jobcontrol_v2;EquipmentID",
                 description="Defines a read-only set of Equipment Class IDs and Equipment IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -72,6 +78,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=machinery_jobs;i=6002",
                 browseName="ns=isa95_jobcontrol_v2;JobOrderList",
                 description="Defines a read-only list of job order information available from the server.",
+                modellingRule="Mandatory",
                 dataType=isa95_jobcontrol_v2.datatypes.ISA95JobOrderAndStateDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -82,6 +89,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=machinery_jobs;i=6003",
                 browseName="ns=isa95_jobcontrol_v2;MaterialClassID",
                 description="Defines a read-only set of Material Classes IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -92,6 +100,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=machinery_jobs;i=6004",
                 browseName="ns=isa95_jobcontrol_v2;MaterialDefinitionID",
                 description="Defines a read-only set of Material Classes IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -102,6 +111,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=machinery_jobs;i=6006",
                 browseName="ns=isa95_jobcontrol_v2;PersonnelID",
                 description="Defines a read-only set of Personnel IDs and Person IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -112,6 +122,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=machinery_jobs;i=6007",
                 browseName="ns=isa95_jobcontrol_v2;PhysicalAssetID",
                 description="Defines a read-only set of Physical Asset Class IDs and Physical Asset IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -122,6 +133,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=machinery_jobs;i=6008",
                 browseName="ns=isa95_jobcontrol_v2;WorkMaster",
                 description="Defines a read-only set of work master IDs that may be specified in a job order, and the read-only set of parameters that may be specified for a specific work master.",
+                modellingRule="Mandatory",
                 dataType=isa95_jobcontrol_v2.datatypes.ISA95WorkMasterDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -262,7 +274,7 @@ http_opcfoundation_org_UA_Machinery_Jobs_ = ns0.objtypes.NamespaceMetadataType(
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),
@@ -345,6 +357,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machinery_jobs;i=7001",
     browseName="ns=isa95_jobcontrol_v2;RequestJobResponseByJobOrderID",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machinery_jobs;i=6011"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machinery_jobs;i=6012"]),
 )
@@ -397,6 +410,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machinery_jobs;i=7002",
     browseName="ns=isa95_jobcontrol_v2;RequestJobResponseByJobOrderState",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machinery_jobs;i=6037"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machinery_jobs;i=6038"]),
 )

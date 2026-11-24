@@ -56,11 +56,15 @@ class EngineeringValueType(ns0.vartypes.DataItemType):
     valueRank=o6.ValueRank.ANY,
 )
 class ChemometricModelType(ns0.vartypes.BaseDataVariableType):
-    creationDate: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=adi;i=13034", browseName="ns=adi;CreationDate", dataType=o6.DateTime))
-    modelDescription: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=adi;i=13035", browseName="ns=adi;ModelDescription", dataType=o6.LocalizedText)
+    creationDate: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=adi;i=13034", browseName="ns=adi;CreationDate", modellingRule="Mandatory", dataType=o6.DateTime)
     )
-    name: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=adi;i=13033", browseName="ns=adi;Name", dataType=o6.LocalizedText))
+    modelDescription: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=adi;i=13035", browseName="ns=adi;ModelDescription", modellingRule="Mandatory", dataType=o6.LocalizedText)
+    )
+    name: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=adi;i=13033", browseName="ns=adi;Name", modellingRule="Mandatory", dataType=o6.LocalizedText)
+    )
     user_defined_Input_: ns0.vartypes.BaseVariableType = o6.reference(
         ns0.vartypes.BaseVariableType(
             nodeId="ns=adi;i=13036",
@@ -108,7 +112,9 @@ class ProcessVariableType(ns0.vartypes.DataItemType):
     valueRank=o6.ValueRank.ANY,
 )
 class MVAModelType(ChemometricModelType):
-    mainDataIndex: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=adi;i=13046", browseName="ns=adi;MainDataIndex", dataType=o6.Int32))
+    mainDataIndex: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=adi;i=13046", browseName="ns=adi;MainDataIndex", modellingRule="Mandatory", dataType=o6.Int32)
+    )
     user_defined_Output_: MVAOutputParameterType | None
 
 
@@ -121,17 +127,17 @@ class MVAModelType(ChemometricModelType):
 )
 class MVAOutputParameterType(ns0.vartypes.BaseDataVariableType):
     alarmLimits: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=adi;i=13055", browseName="ns=adi;AlarmLimits", dataType=ns0.datatypes.Range)
+        ns0.vartypes.PropertyType(nodeId="ns=adi;i=13055", browseName="ns=adi;AlarmLimits", modellingRule="Optional", dataType=ns0.datatypes.Range)
     )
     alarmState: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=adi;i=13056", browseName="ns=adi;AlarmState", dataType=adi_datypes.AlarmStateEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=adi;i=13056", browseName="ns=adi;AlarmState", modellingRule="Mandatory", dataType=adi_datypes.AlarmStateEnumeration)
     )
     statistics: MVAOutputParameterType | None
     vendorSpecificError: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=adi;i=13057", browseName="ns=adi;VendorSpecificError", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=adi;i=13057", browseName="ns=adi;VendorSpecificError", modellingRule="Optional", dataType=o6.String)
     )
     warningLimits: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=adi;i=13054", browseName="ns=adi;WarningLimits", dataType=ns0.datatypes.Range)
+        ns0.vartypes.PropertyType(nodeId="ns=adi;i=13054", browseName="ns=adi;WarningLimits", modellingRule="Optional", dataType=ns0.datatypes.Range)
     )
 
 

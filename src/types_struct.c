@@ -180,6 +180,104 @@ getStructMember(PyTypeObject *pyType,
     return true;
 }
 
+/* Lazy member conversion
+ *
+ * A member decoded from the wire stays native in `data` until its first read
+ * converts it into the dict and releases the native value. The conversion can
+ * run Python code, so other threads can read or assign members of the same
+ * struct meanwhile and release the native value. A read therefore converts a
+ * private copy of the member. Copying and releasing run no Python code, so
+ * they cannot interleave. A slot only ever changes from its decoded value to
+ * zero. */
+
+typedef enum {
+    MEMBER_SCALAR,   /* the value itself */
+    MEMBER_ARRAY,    /* size_t length, then a pointer to the elements */
+    MEMBER_OPTIONAL  /* a pointer to the value, or NULL */
+} MemberKind;
+
+/* Holds one member slot, aligned for any member type */
+typedef union {
+    char bytes[sizeof(((PyUAStruct*)NULL)->data)];
+    void *p;
+    double d;
+    UA_UInt64 u;
+} MemberSlot;
+
+static MemberKind
+memberKind(UA_Boolean isArray, UA_Boolean isOptional) {
+    if(isArray)
+        return MEMBER_ARRAY;
+    return isOptional ? MEMBER_OPTIONAL : MEMBER_SCALAR;
+}
+
+static size_t
+slotSize(MemberKind kind, const UA_DataType *type) {
+    switch(kind) {
+    case MEMBER_ARRAY: return sizeof(size_t) + sizeof(void*);
+    case MEMBER_OPTIONAL: return sizeof(void*);
+    default: return type->memSize;
+    }
+}
+
+/* Deep-copy a slot into an empty one */
+static UA_StatusCode
+copySlot(const void *src, void *dst, MemberKind kind, const UA_DataType *type) {
+    switch(kind) {
+    case MEMBER_ARRAY: {
+        size_t size = *(const size_t*)src;
+        const void *elements = *(void *const*)((const char*)src + sizeof(size_t));
+        UA_StatusCode res = UA_Array_copy(elements, size,
+                                          (void**)((char*)dst + sizeof(size_t)), type);
+        if(res == UA_STATUSCODE_GOOD)
+            *(size_t*)dst = size;
+        return res;
+    }
+    case MEMBER_OPTIONAL: {
+        const void *value = *(void *const*)src;
+        if(!value)
+            return UA_STATUSCODE_GOOD;
+        void *copy = UA_new(type);
+        if(!copy)
+            return UA_STATUSCODE_BADOUTOFMEMORY;
+        UA_StatusCode res = UA_copy(value, copy, type);
+        if(res != UA_STATUSCODE_GOOD) {
+            UA_free(copy);
+            return res;
+        }
+        *(void**)dst = copy;
+        return UA_STATUSCODE_GOOD;
+    }
+    default:
+        return UA_copy(src, dst, type);
+    }
+}
+
+/* Free the native value in a slot and zero the slot */
+static void
+releaseSlot(void *slot, MemberKind kind, const UA_DataType *type) {
+    switch(kind) {
+    case MEMBER_ARRAY: {
+        size_t *size = (size_t*)slot;
+        void **elements = (void**)((char*)slot + sizeof(size_t));
+        UA_Array_delete(*elements, *size, type);
+        *size = 0;
+        *elements = NULL;
+        break;
+    }
+    case MEMBER_OPTIONAL: {
+        void **value = (void**)slot;
+        if(*value)
+            UA_delete(*value, type);
+        *value = NULL;
+        break;
+    }
+    default:
+        UA_clear(slot, type);
+        break;
+    }
+}
+
 int
 pyUAStruct_traverse(PyObject *self, visitproc visit, void *arg) {
     PyUAStruct *data = (PyUAStruct*)self;
@@ -296,6 +394,14 @@ pyUAStruct_dealloc(PyObject *self) {
     PyObject_GC_UnTrack(self);
     Py_XDECREF(struct_self->dict);
     struct_self->dict = NULL;
+
+    /* Free the members that were never read */
+    PyObject *type, *value, *traceback;
+    PyErr_Fetch(&type, &value, &traceback);
+    const UA_DataType *uaType = PY2UAType(Py_TYPE(self));
+    PyErr_Restore(type, value, traceback);
+    if(uaType)
+        UA_clear(struct_self->data, uaType);
     Py_TYPE(self)->tp_free(self);
 }
 
@@ -398,7 +504,6 @@ pyUAStruct_setattro(PyObject *self, PyObject *name, PyObject *value) {
     }
     if(uaType->typeKind == UA_DATATYPEKIND_UNION) {
         UA_clear(s->data, uaType);
-        memset(s->data, 0, uaType->memSize);
         if(s->dict)
             PyDict_Clear(s->dict);
         *(UA_UInt32*)s->data = (UA_UInt32)(memberIndex + 1);
@@ -504,25 +609,9 @@ pyUAStruct_setattro(PyObject *self, PyObject *name, PyObject *value) {
             return res;
     }
 
-    // Clean up the entry in the C structure and convert from Python
-    // Use the dict entry instead of the C structure entry
+    // Release the entry in the C structure; the dict entry replaces it
     array_cleanup:
-    if(isArray) {
-        size_t size = *(size_t*)&s->data[outOffset];
-        void **arr = (void**)&s->data[outOffset + sizeof(size_t)];
-        UA_Array_delete(*arr, size, memberType);
-        *(size_t*)&s->data[outOffset] = 0;
-        *arr = NULL;
-    } else if(isOptional) {
-        void **ptr = (void**)&s->data[outOffset];
-        if(*ptr) {
-            UA_clear(*ptr, memberType);
-            UA_free(*ptr);
-            *ptr = NULL;
-        }
-    } else {
-        UA_clear((void*)&s->data[outOffset], memberType);
-    }
+    releaseSlot(&s->data[outOffset], memberKind(isArray, isOptional), memberType);
     return 0;
 }
 
@@ -629,55 +718,60 @@ pyUAStruct_getattro(PyObject *self, PyObject *name) {
         return res;
     }
 
-    // PyDict_GetItem does not set exceptions
-    // PyErr_Clear();
-    
-    if(isArray) {
-        res = UA2PY_array(&s->data[outOffset], memberType);
-        if(!res)
+    MemberKind kind = memberKind(isArray, isOptional);
+    void *slot = &s->data[outOffset];
+    size_t size = slotSize(kind, memberType);
+    if(kind == MEMBER_OPTIONAL && !*(void**)slot) {
+        if(PyDict_SetItem(s->dict, name, Py_None) < 0)
             return NULL;
-        if(PyDict_SetItem(s->dict, name, res) < 0) {
-            Py_DECREF(res);
-            return NULL;
-        }
-
-        // Clean up the entry in the C structure
-        size_t *arrSize = (size_t*)&s->data[outOffset];
-        void **arr = (void**)&s->data[outOffset + sizeof(size_t)];
-        UA_Array_delete(*arr, *arrSize, memberType);
-        *arrSize = 0;
-        *arr = NULL;
-    } else if(isOptional) {
-        void *ptr = *(void**)&s->data[outOffset];
-        if(!ptr) {
-            Py_INCREF(Py_None);
-            res = Py_None;
-        } else {
-            res = UA2PY(ptr, memberType, NULL);
-            if(!res)
-                return NULL;
-            // Clean up the pointed-to value
-            UA_clear(ptr, memberType);
-            UA_free(ptr);
-            *(void**)&s->data[outOffset] = NULL;
-        }
-        if(PyDict_SetItem(s->dict, name, res) < 0) {
-            Py_DECREF(res);
-            return NULL;
-        }
-    } else {
-        res = UA2PY(&s->data[outOffset], memberType, NULL);
-        if(!res)
-            return NULL;
-        if(PyDict_SetItem(s->dict, name, res) < 0) {
-            Py_DECREF(res);
-            return NULL;
-        }
-
-        // Clean up the entry in the C structure
-        UA_clear((void*)&s->data[outOffset], memberType);
+        Py_RETURN_NONE;
     }
 
+    /* Convert a private copy, and remember the slot's bytes to see whether
+     * the member changed meanwhile */
+    MemberSlot before, copy;
+    if(size > sizeof(before.bytes)) {
+        PyErr_Format(PyExc_TypeError, "Member '%s' is too large", snakeName);
+        return NULL;
+    }
+    memcpy(before.bytes, slot, size);
+    memset(copy.bytes, 0, size);
+    UA_StatusCode status = copySlot(slot, copy.bytes, kind, memberType);
+    if(status != UA_STATUSCODE_GOOD)
+        return PyErr_StatusCode(status);
+    if(kind == MEMBER_ARRAY)
+        res = UA2PY_array(copy.bytes, memberType);
+    else if(kind == MEMBER_OPTIONAL)
+        res = UA2PY(copy.p, memberType, NULL);
+    else
+        res = UA2PY(copy.bytes, memberType, NULL);
+    releaseSlot(copy.bytes, kind, memberType);
+    if(!res)
+        return NULL;
+
+    /* Publish the conversion only if the member is unchanged. Otherwise the
+     * state that changed it stands, and this conversion is a read from
+     * before it: another read published the member, an assignment replaced
+     * or released it, or a union selected another member. */
+    PyObject *published = PyDict_GetItemWithError(s->dict, name);
+    if(published) {
+        Py_INCREF(published);
+        Py_SETREF(res, published);
+        return res;
+    }
+    if(PyErr_Occurred()) {
+        Py_DECREF(res);
+        return NULL;
+    }
+    if(memcmp(slot, before.bytes, size) != 0 ||
+       (uaType->typeKind == UA_DATATYPEKIND_UNION &&
+        *(UA_UInt32*)s->data != memberIndex + 1))
+        return res;
+    if(PyDict_SetItem(s->dict, name, res) < 0) {
+        Py_DECREF(res);
+        return NULL;
+    }
+    releaseSlot(slot, kind, memberType);
     return res;
 }
 

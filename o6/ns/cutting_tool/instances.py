@@ -48,26 +48,32 @@ o6.hasEncoding(cutting_tool_datypes.FileFormatDataType, o6.ns["ns=cutting_tool;i
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=cutting_tool;i=6015",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cutting_tool;i=6016", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cutting_tool;i=6016", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=cutting_tool;i=6035",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cutting_tool;i=6039", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cutting_tool;i=6039", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
     nodeId="ns=cutting_tool;i=5003",
     browseName="ns=machinery_jobs;JobOrderControl",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cutting_tool;i=6044", browseName="ns=isa95_jobcontrol_v2;MaxDownloadableJobOrders", dataType=o6.UInt16)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cutting_tool;i=6044", browseName="ns=isa95_jobcontrol_v2;MaxDownloadableJobOrders", modellingRule="Mandatory", dataType=o6.UInt16)
+        ),
         o6.hasComponent(o6.ns["ns=cutting_tool;i=6035"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=cutting_tool;i=6040",
                 browseName="ns=isa95_jobcontrol_v2;EquipmentID",
                 description="Defines a read-only set of Equipment Class IDs and Equipment IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -78,6 +84,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=cutting_tool;i=6041",
                 browseName="ns=isa95_jobcontrol_v2;JobOrderList",
                 description="Defines a read-only list of job order information available from the server.",
+                modellingRule="Mandatory",
                 dataType=isa95_jobcontrol_v2.datatypes.ISA95JobOrderAndStateDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -88,6 +95,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=cutting_tool;i=6042",
                 browseName="ns=isa95_jobcontrol_v2;MaterialClassID",
                 description="Defines a read-only set of Material Classes IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -98,6 +106,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=cutting_tool;i=6043",
                 browseName="ns=isa95_jobcontrol_v2;MaterialDefinitionID",
                 description="Defines a read-only set of Material Classes IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -108,6 +117,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=cutting_tool;i=6045",
                 browseName="ns=isa95_jobcontrol_v2;PersonnelID",
                 description="Defines a read-only set of Personnel IDs and Person IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -118,6 +128,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=cutting_tool;i=6046",
                 browseName="ns=isa95_jobcontrol_v2;PhysicalAssetID",
                 description="Defines a read-only set of Physical Asset Class IDs and Physical Asset IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -128,6 +139,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=cutting_tool;i=6047",
                 browseName="ns=isa95_jobcontrol_v2;WorkMaster",
                 description="Defines a read-only set of work master IDs that may be specified in a job order, and the read-only set of parameters that may be specified for a specific work master.",
+                modellingRule="Mandatory",
                 dataType=isa95_jobcontrol_v2.datatypes.ISA95WorkMasterDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -138,14 +150,18 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
 isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
     nodeId="ns=cutting_tool;i=5008",
     browseName="ns=machinery_jobs;JobOrderControl",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cutting_tool;i=6021", browseName="ns=isa95_jobcontrol_v2;MaxDownloadableJobOrders", dataType=o6.UInt16)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=cutting_tool;i=6021", browseName="ns=isa95_jobcontrol_v2;MaxDownloadableJobOrders", modellingRule="Mandatory", dataType=o6.UInt16)
+        ),
         o6.hasComponent(o6.ns["ns=cutting_tool;i=6015"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=cutting_tool;i=6017",
                 browseName="ns=isa95_jobcontrol_v2;EquipmentID",
                 description="Defines a read-only set of Equipment Class IDs and Equipment IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -156,6 +172,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=cutting_tool;i=6018",
                 browseName="ns=isa95_jobcontrol_v2;JobOrderList",
                 description="Defines a read-only list of job order information available from the server.",
+                modellingRule="Mandatory",
                 dataType=isa95_jobcontrol_v2.datatypes.ISA95JobOrderAndStateDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -166,6 +183,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=cutting_tool;i=6019",
                 browseName="ns=isa95_jobcontrol_v2;MaterialClassID",
                 description="Defines a read-only set of Material Classes IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -176,6 +194,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=cutting_tool;i=6020",
                 browseName="ns=isa95_jobcontrol_v2;MaterialDefinitionID",
                 description="Defines a read-only set of Material Classes IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -186,6 +205,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=cutting_tool;i=6022",
                 browseName="ns=isa95_jobcontrol_v2;PersonnelID",
                 description="Defines a read-only set of Personnel IDs and Person IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -196,6 +216,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=cutting_tool;i=6023",
                 browseName="ns=isa95_jobcontrol_v2;PhysicalAssetID",
                 description="Defines a read-only set of Physical Asset Class IDs and Physical Asset IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -206,6 +227,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=cutting_tool;i=6051",
                 browseName="ns=isa95_jobcontrol_v2;WorkMaster",
                 description="Defines a read-only set of work master IDs that may be specified in a job order, and the read-only set of parameters that may be specified for a specific work master.",
+                modellingRule="Mandatory",
                 dataType=isa95_jobcontrol_v2.datatypes.ISA95WorkMasterDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -229,7 +251,7 @@ http_opcfoundation_org_UA_CuttingTool_ = ns0.objtypes.NamespaceMetadataType(
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),
@@ -302,6 +324,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=cutting_tool;i=7001",
     browseName="CreateDirectory",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6001"]),
     outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6002"]),
 )
@@ -335,7 +358,11 @@ ns0.vartypes.PropertyType(
     ],
 )
 o6.call(
-    nodeId="ns=cutting_tool;i=7002", browseName="CreateFile", inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6003"]), outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6004"])
+    nodeId="ns=cutting_tool;i=7002",
+    browseName="CreateFile",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6003"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6004"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -349,7 +376,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ObjectToDelete", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=cutting_tool;i=7003", browseName="Delete", inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6005"]))
+o6.call(nodeId="ns=cutting_tool;i=7003", browseName="Delete", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6005"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=cutting_tool;i=6006",
@@ -379,7 +406,11 @@ ns0.vartypes.PropertyType(
     value=[ns0.datatypes.Argument(name="NewNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
-    nodeId="ns=cutting_tool;i=7004", browseName="MoveOrCopy", inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6006"]), outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6007"])
+    nodeId="ns=cutting_tool;i=7004",
+    browseName="MoveOrCopy",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6006"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6007"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -407,6 +438,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=cutting_tool;i=7005",
     browseName="CreateDirectory",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6008"]),
     outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6009"]),
 )
@@ -440,7 +472,11 @@ ns0.vartypes.PropertyType(
     ],
 )
 o6.call(
-    nodeId="ns=cutting_tool;i=7006", browseName="CreateFile", inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6010"]), outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6011"])
+    nodeId="ns=cutting_tool;i=7006",
+    browseName="CreateFile",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6010"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6011"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -454,7 +490,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ObjectToDelete", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=cutting_tool;i=7007", browseName="Delete", inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6012"]))
+o6.call(nodeId="ns=cutting_tool;i=7007", browseName="Delete", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6012"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=cutting_tool;i=6013",
@@ -484,12 +520,17 @@ ns0.vartypes.PropertyType(
     value=[ns0.datatypes.Argument(name="NewNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
-    nodeId="ns=cutting_tool;i=7008", browseName="MoveOrCopy", inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6013"]), outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6014"])
+    nodeId="ns=cutting_tool;i=7008",
+    browseName="MoveOrCopy",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6013"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6014"]),
 )
 
 ns0.objtypes.FileDirectoryType(
     nodeId="ns=cutting_tool;i=5005",
     browseName="ns=machine_tool;WorkMasters",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=cutting_tool;i=7005"]),
         o6.hasComponent(o6.ns["ns=cutting_tool;i=7006"]),
@@ -524,6 +565,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=cutting_tool;i=7009",
     browseName="CreateDirectory",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6024"]),
     outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6025"]),
 )
@@ -557,7 +599,11 @@ ns0.vartypes.PropertyType(
     ],
 )
 o6.call(
-    nodeId="ns=cutting_tool;i=7010", browseName="CreateFile", inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6026"]), outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6027"])
+    nodeId="ns=cutting_tool;i=7010",
+    browseName="CreateFile",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6026"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6027"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -571,7 +617,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ObjectToDelete", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=cutting_tool;i=7011", browseName="Delete", inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6028"]))
+o6.call(nodeId="ns=cutting_tool;i=7011", browseName="Delete", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6028"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=cutting_tool;i=6029",
@@ -601,7 +647,11 @@ ns0.vartypes.PropertyType(
     value=[ns0.datatypes.Argument(name="NewNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
-    nodeId="ns=cutting_tool;i=7012", browseName="MoveOrCopy", inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6029"]), outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6030"])
+    nodeId="ns=cutting_tool;i=7012",
+    browseName="MoveOrCopy",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6029"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6030"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -629,6 +679,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=cutting_tool;i=7013",
     browseName="CreateDirectory",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6031"]),
     outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6032"]),
 )
@@ -664,7 +715,11 @@ ns0.vartypes.PropertyType(
     ],
 )
 o6.call(
-    nodeId="ns=cutting_tool;i=7014", browseName="CreateFile", inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6033"]), outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6034"])
+    nodeId="ns=cutting_tool;i=7014",
+    browseName="CreateFile",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6033"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6034"]),
 )
 o6.reference(o6.ns["ns=cutting_tool;i=7014"], "i=46", o6.ns["ns=cutting_tool;i=6026"])
 o6.reference(o6.ns["ns=cutting_tool;i=7014"], "i=46", o6.ns["ns=cutting_tool;i=6027"])
@@ -680,7 +735,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ObjectToDelete", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=cutting_tool;i=7015", browseName="Delete", inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6036"]))
+o6.call(nodeId="ns=cutting_tool;i=7015", browseName="Delete", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6036"]))
 o6.reference(o6.ns["ns=cutting_tool;i=7015"], "i=46", o6.ns["ns=cutting_tool;i=6028"])
 
 ns0.vartypes.PropertyType(
@@ -711,7 +766,11 @@ ns0.vartypes.PropertyType(
     value=[ns0.datatypes.Argument(name="NewNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
-    nodeId="ns=cutting_tool;i=7016", browseName="MoveOrCopy", inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6037"]), outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6038"])
+    nodeId="ns=cutting_tool;i=7016",
+    browseName="MoveOrCopy",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6037"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6038"]),
 )
 o6.reference(o6.ns["ns=cutting_tool;i=7016"], "i=46", o6.ns["ns=cutting_tool;i=6029"])
 o6.reference(o6.ns["ns=cutting_tool;i=7016"], "i=46", o6.ns["ns=cutting_tool;i=6030"])
@@ -719,6 +778,7 @@ o6.reference(o6.ns["ns=cutting_tool;i=7016"], "i=46", o6.ns["ns=cutting_tool;i=6
 ns0.objtypes.FileDirectoryType(
     nodeId="ns=cutting_tool;i=5018",
     browseName="ns=machine_tool;WorkMasters",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=cutting_tool;i=7013"]),
         o6.hasComponent(o6.ns["ns=cutting_tool;i=7014"]),
@@ -787,6 +847,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=cutting_tool;i=7017",
     browseName="ns=isa95_jobcontrol_v2;RequestJobResponseByJobOrderID",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6048"]),
     outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6049"]),
 )
@@ -837,6 +898,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=cutting_tool;i=7018",
     browseName="ns=isa95_jobcontrol_v2;RequestJobResponseByJobOrderID",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6052"]),
     outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6053"]),
 )
@@ -889,6 +951,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=cutting_tool;i=7019",
     browseName="ns=isa95_jobcontrol_v2;RequestJobResponseByJobOrderState",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6054"]),
     outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6055"]),
 )
@@ -896,11 +959,13 @@ o6.call(
 isa95_jobcontrol_v2.objtypes.ISA95JobResponseProviderObjectType(
     nodeId="ns=cutting_tool;i=5009",
     browseName="ns=machinery_jobs;JobOrderResults",
+    modellingRule="Mandatory",
     references=[o6.hasComponent(o6.ns["ns=cutting_tool;i=7018"]), o6.hasComponent(o6.ns["ns=cutting_tool;i=7019"])],
 )
 machinery_jobs.objtypes.JobManagementType(
     nodeId="ns=cutting_tool;i=5007",
     browseName="ns=machinery_jobs;JobManagement",
+    modellingRule="Mandatory",
     references=[o6.hasComponent(o6.ns["ns=cutting_tool;i=5008"]), o6.hasComponent(o6.ns["ns=cutting_tool;i=5009"])],
 )
 ns0.objtypes.FolderType(
@@ -957,6 +1022,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=cutting_tool;i=7020",
     browseName="ns=isa95_jobcontrol_v2;RequestJobResponseByJobOrderState",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6050"]),
     outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6056"]),
 )
@@ -964,11 +1030,13 @@ o6.call(
 isa95_jobcontrol_v2.objtypes.ISA95JobResponseProviderObjectType(
     nodeId="ns=cutting_tool;i=5004",
     browseName="ns=machinery_jobs;JobOrderResults",
+    modellingRule="Mandatory",
     references=[o6.hasComponent(o6.ns["ns=cutting_tool;i=7017"]), o6.hasComponent(o6.ns["ns=cutting_tool;i=7020"])],
 )
 machinery_jobs.objtypes.JobManagementType(
     nodeId="ns=cutting_tool;i=5002",
     browseName="ns=machinery_jobs;JobManagement",
+    modellingRule="Mandatory",
     references=[o6.hasComponent(o6.ns["ns=cutting_tool;i=5003"]), o6.hasComponent(o6.ns["ns=cutting_tool;i=5004"])],
 )
 ns0.objtypes.FolderType(
@@ -1002,6 +1070,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=cutting_tool;i=7022",
     browseName="CreateDirectory",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6074"]),
     outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6075"]),
 )
@@ -1037,7 +1106,11 @@ ns0.vartypes.PropertyType(
     ],
 )
 o6.call(
-    nodeId="ns=cutting_tool;i=7023", browseName="CreateFile", inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6076"]), outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6077"])
+    nodeId="ns=cutting_tool;i=7023",
+    browseName="CreateFile",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6076"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6077"]),
 )
 o6.reference(o6.ns["ns=cutting_tool;i=7023"], "i=46", o6.ns["ns=cutting_tool;i=6003"])
 o6.reference(o6.ns["ns=cutting_tool;i=7023"], "i=46", o6.ns["ns=cutting_tool;i=6004"])
@@ -1053,7 +1126,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ObjectToDelete", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=cutting_tool;i=7024", browseName="Delete", inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6080"]))
+o6.call(nodeId="ns=cutting_tool;i=7024", browseName="Delete", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6080"]))
 o6.reference(o6.ns["ns=cutting_tool;i=7024"], "i=46", o6.ns["ns=cutting_tool;i=6005"])
 
 ns0.vartypes.PropertyType(
@@ -1084,7 +1157,11 @@ ns0.vartypes.PropertyType(
     value=[ns0.datatypes.Argument(name="NewNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
-    nodeId="ns=cutting_tool;i=7025", browseName="MoveOrCopy", inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6081"]), outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6082"])
+    nodeId="ns=cutting_tool;i=7025",
+    browseName="MoveOrCopy",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6081"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=cutting_tool;i=6082"]),
 )
 o6.reference(o6.ns["ns=cutting_tool;i=7025"], "i=46", o6.ns["ns=cutting_tool;i=6006"])
 o6.reference(o6.ns["ns=cutting_tool;i=7025"], "i=46", o6.ns["ns=cutting_tool;i=6007"])
@@ -1092,6 +1169,7 @@ o6.reference(o6.ns["ns=cutting_tool;i=7025"], "i=46", o6.ns["ns=cutting_tool;i=6
 ns0.objtypes.FileDirectoryType(
     nodeId="ns=cutting_tool;i=5015",
     browseName="ns=cutting_tool;Results",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=cutting_tool;i=7022"]),
         o6.hasComponent(o6.ns["ns=cutting_tool;i=7023"]),

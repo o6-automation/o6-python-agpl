@@ -188,6 +188,7 @@ clear_server_repeat_callbacks(UA_Server *server) {
 
 PyObject *
 pyServer_create_data_change_monitored_item(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyServer *srv = (PyServer *)self;
 
     PyObject *mir_obj, *timestamps_obj, *context_obj, *callback_obj;
@@ -248,6 +249,7 @@ pyServer_create_data_change_monitored_item(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_delete_monitored_item(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyServer *srv = (PyServer *)self;
 
     PyObject *id;
@@ -288,6 +290,7 @@ pyServer_delete_monitored_item(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_create_event_monitored_item(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyServer *srv = (PyServer *)self;
 
     PyObject *mir_obj, *context_obj, *callback_obj;
@@ -354,6 +357,7 @@ pyServer_create_event_monitored_item(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_add_repeated_callback(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyServer *srv = (PyServer *)self;
 
     PyObject *callback;
@@ -396,6 +400,7 @@ pyServer_add_repeated_callback(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_change_repeated_callback_interval(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyServer *srv = (PyServer *)self;
 
     unsigned long long callbackId;
@@ -412,6 +417,7 @@ pyServer_change_repeated_callback_interval(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_remove_callback(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyServer *srv = (PyServer *)self;
 
     unsigned long long callbackId;

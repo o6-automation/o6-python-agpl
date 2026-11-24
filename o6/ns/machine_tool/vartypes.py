@@ -40,22 +40,24 @@ else:
 @o6.variabletype(nodeId="ns=machine_tool;i=61", browseName="ns=machine_tool;ToolLifeType", displayName="ToolLifeType", dataType=ns0.datatypes.Number)
 class ToolLifeType(ns0.vartypes.BaseDataVariableType):
     engineeringUnits: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=285", browseName="ns=machine_tool;EngineeringUnits", dataType=ns0.datatypes.EUInformation)
+        ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=285", browseName="ns=machine_tool;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
     )
     indication: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=286", browseName="ns=machine_tool;Indication", dataType=machine_tool_datypes.ToolLifeIndication)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=machine_tool;i=286", browseName="ns=machine_tool;Indication", modellingRule="Mandatory", dataType=machine_tool_datypes.ToolLifeIndication
+        )
     )
     isCountingUp: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=411", browseName="ns=machine_tool;IsCountingUp", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=411", browseName="ns=machine_tool;IsCountingUp", modellingRule="Mandatory", dataType=o6.Boolean)
     )
     limitValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=305", browseName="ns=machine_tool;LimitValue", dataType=ns0.datatypes.Number)
+        ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=305", browseName="ns=machine_tool;LimitValue", modellingRule="Optional", dataType=ns0.datatypes.Number)
     )
     startValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=304", browseName="ns=machine_tool;StartValue", dataType=ns0.datatypes.Number)
+        ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=304", browseName="ns=machine_tool;StartValue", modellingRule="Optional", dataType=ns0.datatypes.Number)
     )
     warningValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=306", browseName="ns=machine_tool;WarningValue", dataType=ns0.datatypes.Number)
+        ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=306", browseName="ns=machine_tool;WarningValue", modellingRule="Optional", dataType=ns0.datatypes.Number)
     )
 
 

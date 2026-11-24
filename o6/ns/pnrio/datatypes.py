@@ -33,7 +33,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=pnrio;i=3002", browseName="PnIoTelegramStatusEnumeration")
+@o6.enumtype(nodeId="ns=pnrio;i=3002", browseName="ns=pnrio;PnIoTelegramStatusEnumeration")
 class PnIoTelegramStatusEnumeration(ns0.datatypes.Enumeration):
     GOOD = o6.enumfield(0, name="GOOD")
     BAD_BY_SUBSLOT = o6.enumfield(1, name="BAD_BY_SUBSLOT")
@@ -42,19 +42,19 @@ class PnIoTelegramStatusEnumeration(ns0.datatypes.Enumeration):
     BAD_BY_CONTROLLER = o6.enumfield(4, name="BAD_BY_CONTROLLER")
 
 
-@o6.datatype(nodeId="ns=pnrio;i=3003", browseName="RioPaDigitalValueDataType", defaultEncodingId="ns=pnrio;i=5055")
+@o6.datatype(nodeId="ns=pnrio;i=3003", browseName="ns=pnrio;RioPaDigitalValueDataType", defaultEncodingId="ns=pnrio;i=5055")
 class RioPaDigitalValueDataType(ns0.datatypes.Structure):
-    value: o6.Boolean
-    qualifier: o6.Byte
+    value: o6.Boolean = o6.field(name="Value")
+    qualifier: o6.Byte = o6.field(name="Qualifier")
 
 
-@o6.datatype(nodeId="ns=pnrio;i=3004", browseName="RioFaDigitalValueDataType", defaultEncodingId="ns=pnrio;i=5058")
+@o6.datatype(nodeId="ns=pnrio;i=3004", browseName="ns=pnrio;RioFaDigitalValueDataType", defaultEncodingId="ns=pnrio;i=5058")
 class RioFaDigitalValueDataType(ns0.datatypes.Structure):
-    value: o6.Boolean
-    qualifier: o6.Boolean
+    value: o6.Boolean = o6.field(name="Value")
+    qualifier: o6.Boolean = o6.field(name="Qualifier")
 
 
-@o6.enumtype(nodeId="ns=pnrio;i=3005", browseName="RioSignalTypeEnumeration")
+@o6.enumtype(nodeId="ns=pnrio;i=3005", browseName="ns=pnrio;RioSignalTypeEnumeration")
 class RioSignalTypeEnumeration(ns0.datatypes.Enumeration):
     CURRENT_4_20_M_A = o6.enumfield(0, name="CURRENT-4-20_mA")
     CURRENT_0_20_M_A = o6.enumfield(1, name="CURRENT-0-20_mA")
@@ -66,7 +66,7 @@ class RioSignalTypeEnumeration(ns0.datatypes.Enumeration):
     MANUFACTURER_SPECIFIC = o6.enumfield(7, name="MANUFACTURER_SPECIFIC")
 
 
-@o6.enumtype(nodeId="ns=pnrio;i=3006", browseName="RioSubstitutePolicyEnumeration")
+@o6.enumtype(nodeId="ns=pnrio;i=3006", browseName="ns=pnrio;RioSubstitutePolicyEnumeration")
 class RioSubstitutePolicyEnumeration(ns0.datatypes.Enumeration):
     USE_SUBSTITUTE_VALUE = o6.enumfield(0, name="USE_SUBSTITUTE_VALUE")
     USE_LAST_VALID_VALUE = o6.enumfield(1, name="USE_LAST_VALID_VALUE")
@@ -74,14 +74,14 @@ class RioSubstitutePolicyEnumeration(ns0.datatypes.Enumeration):
     UNSPECIFIED = o6.enumfield(255, name="Unspecified")
 
 
-@o6.enumtype(nodeId="ns=pnrio;i=3007", browseName="RioChannelModeEnumeration")
+@o6.enumtype(nodeId="ns=pnrio;i=3007", browseName="ns=pnrio;RioChannelModeEnumeration")
 class RioChannelModeEnumeration(ns0.datatypes.Enumeration):
     AUTO = o6.enumfield(0, name="AUTO")
     MANUAL = o6.enumfield(1, name="MANUAL")
     OUT_OF_SERVICE = o6.enumfield(2, name="OUT_OF_SERVICE")
 
 
-@o6.enumtype(nodeId="ns=pnrio;i=3008", browseName="RioQualityEnumeration")
+@o6.enumtype(nodeId="ns=pnrio;i=3008", browseName="ns=pnrio;RioQualityEnumeration")
 class RioQualityEnumeration(ns0.datatypes.Enumeration):
     GOOD = o6.enumfield(0, name="GOOD")
     UNCERTAIN = o6.enumfield(1, name="UNCERTAIN")
@@ -89,7 +89,7 @@ class RioQualityEnumeration(ns0.datatypes.Enumeration):
     UNSPECIFIED = o6.enumfield(255, name="UNSPECIFIED")
 
 
-@o6.enumtype(nodeId="ns=pnrio;i=3009", browseName="RioSpecifierEnumeration")
+@o6.enumtype(nodeId="ns=pnrio;i=3009", browseName="ns=pnrio;RioSpecifierEnumeration")
 class RioSpecifierEnumeration(ns0.datatypes.Enumeration):
     NORMAL = o6.enumfield(0, name="NORMAL")
     FAILURE = o6.enumfield(1, name="FAILURE")
@@ -99,7 +99,7 @@ class RioSpecifierEnumeration(ns0.datatypes.Enumeration):
     UNSPECIFIED = o6.enumfield(255, name="UNSPECIFIED")
 
 
-@o6.enumtype(nodeId="ns=pnrio;i=3010", browseName="RioQualifierEnumeration")
+@o6.enumtype(nodeId="ns=pnrio;i=3010", browseName="ns=pnrio;RioQualifierEnumeration")
 class RioQualifierEnumeration(ns0.datatypes.Enumeration):
     BAD_NOT_SPECIFIC = o6.enumfield(0, name="BAD_NOT_SPECIFIC")
     BAD_NOT_CONNECTED = o6.enumfield(8, name="BAD_NOT_CONNECTED")
@@ -135,7 +135,7 @@ class RioQualifierEnumeration(ns0.datatypes.Enumeration):
     UNSPECIFIED = o6.enumfield(255, name="UNSPECIFIED")
 
 
-@o6.enumtype(nodeId="ns=pnrio;i=3011", browseName="RioChannelDiagnosisStatusEnumeration")
+@o6.enumtype(nodeId="ns=pnrio;i=3011", browseName="ns=pnrio;RioChannelDiagnosisStatusEnumeration")
 class RioChannelDiagnosisStatusEnumeration(ns0.datatypes.Enumeration):
     HI_LIM_EXCEEDED = o6.enumfield(0, name="HI_LIM_EXCEEDED")
     LO_LIM_EXCEEDED = o6.enumfield(1, name="LO_LIM_EXCEEDED")
@@ -146,118 +146,118 @@ class RioChannelDiagnosisStatusEnumeration(ns0.datatypes.Enumeration):
     OUT_OF_SERVICE = o6.enumfield(6, name="OUT_OF_SERVICE")
 
 
-@o6.datatype(nodeId="ns=pnrio;i=3012", browseName="RioPaDigitalInputConfigDataType", defaultEncodingId="ns=pnrio;i=5001")
+@o6.datatype(nodeId="ns=pnrio;i=3012", browseName="ns=pnrio;RioPaDigitalInputConfigDataType", defaultEncodingId="ns=pnrio;i=5001")
 class RioPaDigitalInputConfigDataType(ns0.datatypes.Structure):
-    signalType: RioSignalTypeEnumeration
-    wireCheckEnabled: o6.Boolean
-    inversionEnabled: o6.Boolean
-    substitutePolicy: RioSubstitutePolicyEnumeration
-    substituteValue: o6.Boolean
+    signalType: RioSignalTypeEnumeration = o6.field(name="SignalType")
+    wireCheckEnabled: o6.Boolean = o6.field(name="WireCheckEnabled")
+    inversionEnabled: o6.Boolean = o6.field(name="InversionEnabled")
+    substitutePolicy: RioSubstitutePolicyEnumeration = o6.field(name="SubstitutePolicy")
+    substituteValue: o6.Boolean = o6.field(name="SubstituteValue")
 
 
-@o6.datatype(nodeId="ns=pnrio;i=3013", browseName="RioFaDigitalInputConfigDataType", defaultEncodingId="ns=pnrio;i=5004")
+@o6.datatype(nodeId="ns=pnrio;i=3013", browseName="ns=pnrio;RioFaDigitalInputConfigDataType", defaultEncodingId="ns=pnrio;i=5004")
 class RioFaDigitalInputConfigDataType(ns0.datatypes.Structure):
-    signalType: RioSignalTypeEnumeration
-    wireCheckEnabled: o6.Boolean
-    supplyVoltageCheckEnabled: o6.Boolean
-    substitutePolicy: RioSubstitutePolicyEnumeration
-    substituteValue: o6.Boolean
+    signalType: RioSignalTypeEnumeration = o6.field(name="SignalType")
+    wireCheckEnabled: o6.Boolean = o6.field(name="WireCheckEnabled")
+    supplyVoltageCheckEnabled: o6.Boolean = o6.field(name="SupplyVoltageCheckEnabled")
+    substitutePolicy: RioSubstitutePolicyEnumeration = o6.field(name="SubstitutePolicy")
+    substituteValue: o6.Boolean = o6.field(name="SubstituteValue")
 
 
-@o6.datatype(nodeId="ns=pnrio;i=3014", browseName="RioPaDigitalOutputConfigDataType", defaultEncodingId="ns=pnrio;i=5007")
+@o6.datatype(nodeId="ns=pnrio;i=3014", browseName="ns=pnrio;RioPaDigitalOutputConfigDataType", defaultEncodingId="ns=pnrio;i=5007")
 class RioPaDigitalOutputConfigDataType(ns0.datatypes.Structure):
-    signalType: RioSignalTypeEnumeration
-    wireCheckEnabled: o6.Boolean
-    inversionEnabled: o6.Boolean
-    substitutePolicy: RioSubstitutePolicyEnumeration
-    substituteValue: o6.Boolean
-    substituteTime: o6.Float
+    signalType: RioSignalTypeEnumeration = o6.field(name="SignalType")
+    wireCheckEnabled: o6.Boolean = o6.field(name="WireCheckEnabled")
+    inversionEnabled: o6.Boolean = o6.field(name="InversionEnabled")
+    substitutePolicy: RioSubstitutePolicyEnumeration = o6.field(name="SubstitutePolicy")
+    substituteValue: o6.Boolean = o6.field(name="SubstituteValue")
+    substituteTime: o6.Float = o6.field(name="SubstituteTime")
 
 
-@o6.datatype(nodeId="ns=pnrio;i=3015", browseName="RioFaDigitalOutputConfigDataType", defaultEncodingId="ns=pnrio;i=5010")
+@o6.datatype(nodeId="ns=pnrio;i=3015", browseName="ns=pnrio;RioFaDigitalOutputConfigDataType", defaultEncodingId="ns=pnrio;i=5010")
 class RioFaDigitalOutputConfigDataType(ns0.datatypes.Structure):
-    signalType: RioSignalTypeEnumeration
-    wireCheckEnabled: o6.Boolean
-    supplyVoltageCheckEnabled: o6.Boolean
-    loadVoltageCheckEnabled: o6.Boolean
-    substitutePolicy: RioSubstitutePolicyEnumeration
-    substituteValue: o6.Boolean
-    substituteTime: o6.Float
+    signalType: RioSignalTypeEnumeration = o6.field(name="SignalType")
+    wireCheckEnabled: o6.Boolean = o6.field(name="WireCheckEnabled")
+    supplyVoltageCheckEnabled: o6.Boolean = o6.field(name="SupplyVoltageCheckEnabled")
+    loadVoltageCheckEnabled: o6.Boolean = o6.field(name="LoadVoltageCheckEnabled")
+    substitutePolicy: RioSubstitutePolicyEnumeration = o6.field(name="SubstitutePolicy")
+    substituteValue: o6.Boolean = o6.field(name="SubstituteValue")
+    substituteTime: o6.Float = o6.field(name="SubstituteTime")
 
 
-@o6.datatype(nodeId="ns=pnrio;i=3020", browseName="RioAnalogDataType", defaultEncodingId="ns=pnrio;i=5026")
+@o6.datatype(nodeId="ns=pnrio;i=3020", browseName="ns=pnrio;RioAnalogDataType", defaultEncodingId="ns=pnrio;i=5026")
 class RioAnalogDataType(ns0.datatypes.Union):
-    float_32: o6.Float
-    int_16: o6.Int16
-    int_32: o6.Int32
-    uInt_16: o6.UInt16
-    uInt_32: o6.UInt32
+    float_32: o6.Float = o6.field(name="Float_32")
+    int_16: o6.Int16 = o6.field(name="Int_16")
+    int_32: o6.Int32 = o6.field(name="Int_32")
+    uInt_16: o6.UInt16 = o6.field(name="UInt_16")
+    uInt_32: o6.UInt32 = o6.field(name="UInt_32")
 
 
-@o6.datatype(nodeId="ns=pnrio;i=3016", browseName="RioPaAnalogInputConfigDataType", defaultEncodingId="ns=pnrio;i=5013")
+@o6.datatype(nodeId="ns=pnrio;i=3016", browseName="ns=pnrio;RioPaAnalogInputConfigDataType", defaultEncodingId="ns=pnrio;i=5013")
 class RioPaAnalogInputConfigDataType(ns0.datatypes.Structure):
-    damping: o6.Float
-    signalType: RioSignalTypeEnumeration
-    wireCheckEnabled: o6.Boolean
-    substitutePolicy: RioSubstitutePolicyEnumeration
-    substituteValue: RioAnalogDataType
-    highLimit: RioAnalogDataType
-    lowLimit: RioAnalogDataType
+    damping: o6.Float = o6.field(name="Damping")
+    signalType: RioSignalTypeEnumeration = o6.field(name="SignalType")
+    wireCheckEnabled: o6.Boolean = o6.field(name="WireCheckEnabled")
+    substitutePolicy: RioSubstitutePolicyEnumeration = o6.field(name="SubstitutePolicy")
+    substituteValue: RioAnalogDataType = o6.field(name="SubstituteValue")
+    highLimit: RioAnalogDataType = o6.field(name="HighLimit")
+    lowLimit: RioAnalogDataType = o6.field(name="LowLimit")
 
 
-@o6.datatype(nodeId="ns=pnrio;i=3017", browseName="RioFaAnalogInputConfigDataType", defaultEncodingId="ns=pnrio;i=5016")
+@o6.datatype(nodeId="ns=pnrio;i=3017", browseName="ns=pnrio;RioFaAnalogInputConfigDataType", defaultEncodingId="ns=pnrio;i=5016")
 class RioFaAnalogInputConfigDataType(ns0.datatypes.Structure):
-    damping: o6.Float
-    signalType: RioSignalTypeEnumeration
-    wireCheckEnabled: o6.Boolean
-    supplyVoltageCheckEnabled: o6.Boolean
-    substitutePolicy: RioSubstitutePolicyEnumeration
-    substituteValue: RioAnalogDataType
+    damping: o6.Float = o6.field(name="Damping")
+    signalType: RioSignalTypeEnumeration = o6.field(name="SignalType")
+    wireCheckEnabled: o6.Boolean = o6.field(name="WireCheckEnabled")
+    supplyVoltageCheckEnabled: o6.Boolean = o6.field(name="SupplyVoltageCheckEnabled")
+    substitutePolicy: RioSubstitutePolicyEnumeration = o6.field(name="SubstitutePolicy")
+    substituteValue: RioAnalogDataType = o6.field(name="SubstituteValue")
 
 
-@o6.datatype(nodeId="ns=pnrio;i=3018", browseName="RioPaAnalogOutputConfigDataType", defaultEncodingId="ns=pnrio;i=5019")
+@o6.datatype(nodeId="ns=pnrio;i=3018", browseName="ns=pnrio;RioPaAnalogOutputConfigDataType", defaultEncodingId="ns=pnrio;i=5019")
 class RioPaAnalogOutputConfigDataType(ns0.datatypes.Structure):
-    signalType: RioSignalTypeEnumeration
-    wireCheckEnabled: o6.Boolean
-    substitutePolicy: RioSubstitutePolicyEnumeration
-    substituteValue: RioAnalogDataType
-    substituteTime: o6.Float
+    signalType: RioSignalTypeEnumeration = o6.field(name="SignalType")
+    wireCheckEnabled: o6.Boolean = o6.field(name="WireCheckEnabled")
+    substitutePolicy: RioSubstitutePolicyEnumeration = o6.field(name="SubstitutePolicy")
+    substituteValue: RioAnalogDataType = o6.field(name="SubstituteValue")
+    substituteTime: o6.Float = o6.field(name="SubstituteTime")
 
 
-@o6.datatype(nodeId="ns=pnrio;i=3019", browseName="RioFaAnalogOutputConfigDataType", defaultEncodingId="ns=pnrio;i=5022")
+@o6.datatype(nodeId="ns=pnrio;i=3019", browseName="ns=pnrio;RioFaAnalogOutputConfigDataType", defaultEncodingId="ns=pnrio;i=5022")
 class RioFaAnalogOutputConfigDataType(ns0.datatypes.Structure):
-    signalType: RioSignalTypeEnumeration
-    wireCheckEnabled: o6.Boolean
-    supplyVoltageCheckEnabled: o6.Boolean
-    loadVoltageCheckEnabled: o6.Boolean
-    substitutePolicy: RioSubstitutePolicyEnumeration
-    substituteValue: RioAnalogDataType
-    substituteTime: o6.Float
+    signalType: RioSignalTypeEnumeration = o6.field(name="SignalType")
+    wireCheckEnabled: o6.Boolean = o6.field(name="WireCheckEnabled")
+    supplyVoltageCheckEnabled: o6.Boolean = o6.field(name="SupplyVoltageCheckEnabled")
+    loadVoltageCheckEnabled: o6.Boolean = o6.field(name="LoadVoltageCheckEnabled")
+    substitutePolicy: RioSubstitutePolicyEnumeration = o6.field(name="SubstitutePolicy")
+    substituteValue: RioAnalogDataType = o6.field(name="SubstituteValue")
+    substituteTime: o6.Float = o6.field(name="SubstituteTime")
 
 
-@o6.datatype(nodeId="ns=pnrio;i=3021", browseName="RioPaDigitalProcessValueDataType", defaultEncodingId="ns=pnrio;i=5028")
+@o6.datatype(nodeId="ns=pnrio;i=3021", browseName="ns=pnrio;RioPaDigitalProcessValueDataType", defaultEncodingId="ns=pnrio;i=5028")
 class RioPaDigitalProcessValueDataType(RioPaDigitalValueDataType):
-    value: o6.Boolean
-    qualifier: o6.Byte
-    quality: o6.Byte
-    nE_107: o6.Byte
-    status_full: o6.Byte
+    value: o6.Boolean = o6.field(name="Value")
+    qualifier: o6.Byte = o6.field(name="Qualifier")
+    quality: o6.Byte = o6.field(name="Quality")
+    nE_107: o6.Byte = o6.field(name="NE_107")
+    status_full: o6.Byte = o6.field(name="Status_full")
 
 
-@o6.datatype(nodeId="ns=pnrio;i=3022", browseName="RioFaDigitalProcessValueDataType", defaultEncodingId="ns=pnrio;i=5031")
+@o6.datatype(nodeId="ns=pnrio;i=3022", browseName="ns=pnrio;RioFaDigitalProcessValueDataType", defaultEncodingId="ns=pnrio;i=5031")
 class RioFaDigitalProcessValueDataType(RioFaDigitalValueDataType):
-    value: o6.Boolean
-    qualifier: o6.Boolean
-    quality: o6.Byte
+    value: o6.Boolean = o6.field(name="Value")
+    qualifier: o6.Boolean = o6.field(name="Qualifier")
+    quality: o6.Byte = o6.field(name="Quality")
 
 
-@o6.datatype(nodeId="ns=pnrio;i=3023", browseName="RioBitFieldDataType", defaultEncodingId="ns=pnrio;i=5035")
+@o6.datatype(nodeId="ns=pnrio;i=3023", browseName="ns=pnrio;RioBitFieldDataType", defaultEncodingId="ns=pnrio;i=5035")
 class RioBitFieldDataType(ns0.datatypes.Structure):
-    bitData: o6.UInt32
-    bitUsed: o6.UInt32
+    bitData: o6.UInt32 = o6.field(name="BitData")
+    bitUsed: o6.UInt32 = o6.field(name="BitUsed")
 
 
-@o6.enumtype(nodeId="ns=pnrio;i=3026", browseName="RioChannelDiagnosisReasonEnumeration")
+@o6.enumtype(nodeId="ns=pnrio;i=3026", browseName="ns=pnrio;RioChannelDiagnosisReasonEnumeration")
 class RioChannelDiagnosisReasonEnumeration(ns0.datatypes.Enumeration):
     ALL_DISAPPEARS = o6.enumfield(0, name="ALL_DISAPPEARS")
     APPEARS = o6.enumfield(1, name="APPEARS")
@@ -265,32 +265,32 @@ class RioChannelDiagnosisReasonEnumeration(ns0.datatypes.Enumeration):
     DISAPPEARS_OTHER_REMAIN = o6.enumfield(3, name="DISAPPEARS_OTHER_REMAIN")
 
 
-@o6.datatype(nodeId="ns=pnrio;i=3027", browseName="RioPaAnalogValueDataType", defaultEncodingId="ns=pnrio;i=5061")
+@o6.datatype(nodeId="ns=pnrio;i=3027", browseName="ns=pnrio;RioPaAnalogValueDataType", defaultEncodingId="ns=pnrio;i=5061")
 class RioPaAnalogValueDataType(ns0.datatypes.Structure):
-    value: RioAnalogDataType
-    qualifier: o6.Byte
+    value: RioAnalogDataType = o6.field(name="Value")
+    qualifier: o6.Byte = o6.field(name="Qualifier")
 
 
-@o6.datatype(nodeId="ns=pnrio;i=3024", browseName="RioPaAnalogProcessValueDataType", defaultEncodingId="ns=pnrio;i=5037")
+@o6.datatype(nodeId="ns=pnrio;i=3024", browseName="ns=pnrio;RioPaAnalogProcessValueDataType", defaultEncodingId="ns=pnrio;i=5037")
 class RioPaAnalogProcessValueDataType(RioPaAnalogValueDataType):
-    value: RioAnalogDataType
-    qualifier: o6.Byte
-    quality: o6.Byte
-    nE_107: o6.Byte
-    status_full: o6.Byte
+    value: RioAnalogDataType = o6.field(name="Value")
+    qualifier: o6.Byte = o6.field(name="Qualifier")
+    quality: o6.Byte = o6.field(name="Quality")
+    nE_107: o6.Byte = o6.field(name="NE_107")
+    status_full: o6.Byte = o6.field(name="Status_full")
 
 
-@o6.datatype(nodeId="ns=pnrio;i=3028", browseName="RioFaAnalogValueDataType", defaultEncodingId="ns=pnrio;i=5064")
+@o6.datatype(nodeId="ns=pnrio;i=3028", browseName="ns=pnrio;RioFaAnalogValueDataType", defaultEncodingId="ns=pnrio;i=5064")
 class RioFaAnalogValueDataType(ns0.datatypes.Structure):
-    value: RioAnalogDataType
-    qualifier: o6.Boolean
+    value: RioAnalogDataType = o6.field(name="Value")
+    qualifier: o6.Boolean = o6.field(name="Qualifier")
 
 
-@o6.datatype(nodeId="ns=pnrio;i=3025", browseName="RioFaAnalogProcessValueDataType", defaultEncodingId="ns=pnrio;i=5040")
+@o6.datatype(nodeId="ns=pnrio;i=3025", browseName="ns=pnrio;RioFaAnalogProcessValueDataType", defaultEncodingId="ns=pnrio;i=5040")
 class RioFaAnalogProcessValueDataType(RioFaAnalogValueDataType):
-    value: RioAnalogDataType
-    qualifier: o6.Boolean
-    quality: o6.Byte
+    value: RioAnalogDataType = o6.field(name="Value")
+    qualifier: o6.Boolean = o6.field(name="Qualifier")
+    quality: o6.Byte = o6.field(name="Quality")
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ns0, pnrio_reftypes

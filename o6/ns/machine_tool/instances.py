@@ -42,7 +42,7 @@ machine_tool_objtypes.EquipmentType(
     nodeId="ns=machine_tool;i=131",
     browseName="ns=machine_tool;Equipment",
     modellingRule="Mandatory",
-    references=[o6.hasComponent(machine_tool_objtypes.ToolListType(nodeId="ns=machine_tool;i=146", browseName="ns=machine_tool;Tools"))],
+    references=[o6.hasComponent(machine_tool_objtypes.ToolListType(nodeId="ns=machine_tool;i=146", browseName="ns=machine_tool;Tools", modellingRule="Optional"))],
 )
 o6.reference(machine_tool_objtypes.MachineToolType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=131"])
 ns0.vartypes.PropertyType(
@@ -70,7 +70,7 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=machine_tool;i=192",
     browseName="ns=machine_tool;RunsPlanned",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=188", browseName="ns=machine_tool;IsValid", dataType=o6.Boolean))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=188", browseName="ns=machine_tool;IsValid", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.UInt32,
 )
 o6.reference(machine_tool_objtypes.ProductionJobType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=192"])
@@ -79,8 +79,10 @@ machine_tool_objtypes.SoftwareIdentificationType(
     browseName="ns=machine_tool;<SoftwareItem>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=187", browseName="ns=di;SoftwareRevision", dataType=o6.String, value="0")),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=205", browseName="ns=machine_tool;Identifier", dataType=o6.String, value="0")),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=187", browseName="ns=di;SoftwareRevision", modellingRule="Mandatory", dataType=o6.String, value="0")),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=205", browseName="ns=machine_tool;Identifier", modellingRule="Mandatory", dataType=o6.String, value="0")
+        ),
     ],
 )
 ns0.objtypes.BaseObjectType(
@@ -144,9 +146,13 @@ machine_tool_objtypes.ProductionPartSetType(
     browseName="ns=machine_tool;<PartSet>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=217", browseName="ns=machine_tool;ContainsMixedParts", dataType=o6.Boolean)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=228", browseName="ns=machine_tool;PartsCompletedPerRun", dataType=o6.UInt32)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=229", browseName="ns=machine_tool;PartsPlannedPerRun", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=217", browseName="ns=machine_tool;ContainsMixedParts", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=228", browseName="ns=machine_tool;PartsCompletedPerRun", modellingRule="Mandatory", dataType=o6.UInt32)
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=229", browseName="ns=machine_tool;PartsPlannedPerRun", modellingRule="Mandatory", dataType=o6.UInt32)
+        ),
     ],
 )
 ns0.objtypes.BaseObjectType(
@@ -157,7 +163,11 @@ machine_tool_objtypes.ProductionStatisticsType(
     nodeId="ns=machine_tool;i=134",
     browseName="ns=machine_tool;Statistics",
     modellingRule="Optional",
-    references=[o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=236", browseName="ns=machine_tool;PartsProducedInLifetime", dataType=o6.UInt32))],
+    references=[
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=236", browseName="ns=machine_tool;PartsProducedInLifetime", modellingRule="Optional", dataType=o6.UInt32)
+        )
+    ],
 )
 o6.reference(machine_tool_objtypes.ProductionType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=134"])
 machine_tool_objtypes.PrognosisType(
@@ -167,7 +177,11 @@ machine_tool_objtypes.PrognosisType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=machine_tool;i=240", browseName="ns=machine_tool;PredictedTime", dataType=ns0.datatypes.UtcTime, value=o6.DateTime("2000-01-01T00:00:00Z")
+                nodeId="ns=machine_tool;i=240",
+                browseName="ns=machine_tool;PredictedTime",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.UtcTime,
+                value=o6.DateTime("2000-01-01T00:00:00Z"),
             )
         )
     ],
@@ -179,8 +193,8 @@ machine_tool_objtypes.ProductionProgramType(
     browseName="<OrderedObject>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=197", browseName="ns=machine_tool;Name", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=242", browseName="NumberInList", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=197", browseName="ns=machine_tool;Name", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=242", browseName="NumberInList", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
 )
 ns0.objtypes.OrderedListType(
@@ -192,8 +206,8 @@ ns0.vartypes.AnalogUnitRangeType(
     browseName="ns=machine_tool;FeedOverride",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=237", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=252", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=237", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=252", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
 )
@@ -201,7 +215,8 @@ o6.reference(machine_tool_objtypes.MachineOperationMonitoringType, ns0.reftypes.
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=machine_tool;i=245",
     browseName="ns=machine_tool;RunsPlanned",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=253", browseName="ns=machine_tool;IsValid", dataType=o6.Boolean))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=253", browseName="ns=machine_tool;IsValid", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.UInt32,
 )
 machine_tool_objtypes.ProductionProgramType(
@@ -209,20 +224,28 @@ machine_tool_objtypes.ProductionProgramType(
     browseName="<OrderedObject>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=214", browseName="ns=machine_tool;Name", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=255", browseName="NumberInList", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=214", browseName="ns=machine_tool;Name", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=255", browseName="NumberInList", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
 )
-ns0.objtypes.OrderedListType(nodeId="ns=machine_tool;i=76", browseName="ns=machine_tool;ProductionPrograms", references=[o6.hasOrderedComponent(o6.ns["ns=machine_tool;i=93"])])
+ns0.objtypes.OrderedListType(
+    nodeId="ns=machine_tool;i=76", browseName="ns=machine_tool;ProductionPrograms", modellingRule="Mandatory", references=[o6.hasOrderedComponent(o6.ns["ns=machine_tool;i=93"])]
+)
 machine_tool_objtypes.ProductionPartType(
     nodeId="ns=machine_tool;i=112",
     browseName="ns=machine_tool;<Part>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=164", browseName="ns=machine_tool;Name", dataType=o6.String)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=168", browseName="ns=machine_tool;PartQuality", dataType=machine_tool_datypes.PartQuality)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=164", browseName="ns=machine_tool;Name", modellingRule="Mandatory", dataType=o6.String)),
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=257", browseName="ns=machine_tool;ProcessIrregularity", dataType=machine_tool_datypes.ProcessIrregularity)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=machine_tool;i=168", browseName="ns=machine_tool;PartQuality", modellingRule="Mandatory", dataType=machine_tool_datypes.PartQuality
+            )
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=machine_tool;i=257", browseName="ns=machine_tool;ProcessIrregularity", modellingRule="Mandatory", dataType=machine_tool_datypes.ProcessIrregularity
+            )
         ),
     ],
 )
@@ -235,18 +258,19 @@ machine_tool_objtypes.MachineToolIdentificationType(
     browseName="ns=di;Identification",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=182", browseName="ns=di;Manufacturer", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=258", browseName="ns=di;ProductInstanceUri", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=259", browseName="ns=di;SerialNumber", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=182", browseName="ns=di;Manufacturer", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=258", browseName="ns=di;ProductInstanceUri", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=259", browseName="ns=di;SerialNumber", modellingRule="Mandatory", dataType=o6.String)),
     ],
 )
 o6.reference(machine_tool_objtypes.MachineToolType, ns0.reftypes.HasAddIn, o6.ns["ns=machine_tool;i=83"])
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_tool;i=239",
     browseName="CurrentState",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=256", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=260", browseName="Number", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=256", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=260", browseName="Number", modellingRule="Mandatory", dataType=o6.UInt32)),
     ],
     dataType=o6.LocalizedText,
 )
@@ -301,8 +325,8 @@ ns0.vartypes.FiniteStateVariableType(
     browseName="CurrentState",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=271", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=274", browseName="Number", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=271", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=274", browseName="Number", modellingRule="Mandatory", dataType=o6.UInt32)),
     ],
     dataType=o6.LocalizedText,
     value=o6.LocalizedText(),
@@ -313,8 +337,8 @@ ns0.vartypes.AnalogUnitRangeType(
     browseName="ns=machine_tool;Override",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=246", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=275", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=246", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=275", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -323,7 +347,14 @@ o6.reference(machine_tool_objtypes.SpindleMonitoringType, ns0.reftypes.HasCompon
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=machine_tool;i=179",
     browseName="ns=machine_tool;Locked",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=277", browseName="ns=machine_tool;ReasonForLocking", dataType=machine_tool_datypes.ToolLocked))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=machine_tool;i=277", browseName="ns=machine_tool;ReasonForLocking", modellingRule="Mandatory", dataType=machine_tool_datypes.ToolLocked
+            )
+        )
+    ],
     dataType=o6.Boolean,
     value=False,
 )
@@ -332,8 +363,8 @@ ns0.vartypes.FiniteTransitionVariableType(
     browseName="LastTransition",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=273", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=278", browseName="Number", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=273", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=278", browseName="Number", modellingRule="Mandatory", dataType=o6.UInt32)),
     ],
     dataType=o6.LocalizedText,
     value=o6.LocalizedText(),
@@ -343,7 +374,7 @@ machine_tool_objtypes.ElementMonitoringType(
     nodeId="ns=machine_tool;i=126",
     browseName="ns=machine_tool;<MonitoredElement>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=284", browseName="ns=machine_tool;Name", dataType=o6.String))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=284", browseName="ns=machine_tool;Name", modellingRule="Mandatory", dataType=o6.String))],
     _allow_abstract=True,
 )
 o6.reference(machine_tool_objtypes.MonitoringType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=126"])
@@ -421,21 +452,21 @@ ns0.vartypes.PropertyType(
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=91",
     browseName="ns=machine_tool;InitializingToRunning",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=291", browseName="TransitionNumber", dataType=o6.UInt32, value=0))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=291", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=0))],
 )
 o6.reference(machine_tool_objtypes.ProductionProgramStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=91"])
 o6.reference(o6.ns["ns=machine_tool;i=91"], "i=54", machine_tool_objtypes.ProductionProgramTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=92",
     browseName="ns=machine_tool;RunningToEnded",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=292", browseName="TransitionNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=292", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(machine_tool_objtypes.ProductionProgramStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=92"])
 o6.reference(o6.ns["ns=machine_tool;i=92"], "i=54", machine_tool_objtypes.ProductionProgramTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=95",
     browseName="ns=machine_tool;InterruptedToRunning",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=294", browseName="TransitionNumber", dataType=o6.UInt32, value=5))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=294", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=5))],
 )
 o6.reference(machine_tool_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=95"])
 ns0.vartypes.PropertyType(
@@ -512,10 +543,15 @@ machine_tool_objtypes.ToolType(
     modellingRule="OptionalPlaceholder",
     references=[
         o6.hasComponent(o6.ns["ns=machine_tool;i=179"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=293", browseName="ns=machine_tool;ControlIdentifier1", dataType=o6.UInt32)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=293", browseName="ns=machine_tool;ControlIdentifier1", modellingRule="Mandatory", dataType=o6.UInt32)
+        ),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=machine_tool;i=297", browseName="ns=machine_tool;ControlIdentifierInterpretation", dataType=machine_tool_datypes.ToolManagement
+                nodeId="ns=machine_tool;i=297",
+                browseName="ns=machine_tool;ControlIdentifierInterpretation",
+                modellingRule="Mandatory",
+                dataType=machine_tool_datypes.ToolManagement,
             )
         ),
     ],
@@ -524,13 +560,13 @@ o6.reference(machine_tool_objtypes.MultiToolType, ns0.reftypes.HasComponent, o6.
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=97",
     browseName="ns=machine_tool;InterruptedToAborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=298", browseName="TransitionNumber", dataType=o6.UInt32, value=7))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=298", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=7))],
 )
 o6.reference(machine_tool_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=97"])
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=99",
     browseName="ns=machine_tool;EndedToInitializing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=299", browseName="TransitionNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=299", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(machine_tool_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=99"])
 ns0.vartypes.PropertyType(
@@ -601,6 +637,7 @@ ia.objtypes.StackElementLightType(
                 nodeId="ns=machine_tool;i=226",
                 browseName="NumberInList",
                 description="Enumerate the stacklight elements counting upwards beginning from the base of the stacklight.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.UInteger,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -611,6 +648,7 @@ ia.objtypes.StackElementLightType(
                 nodeId="ns=machine_tool;i=310",
                 browseName="ns=ia;SignalOn",
                 description="Indicates if the signal emitted by the stack element is currently switched on or not.",
+                modellingRule="Mandatory",
                 dataType=o6.Boolean,
             )
         ),
@@ -619,6 +657,7 @@ ia.objtypes.StackElementLightType(
                 nodeId="ns=machine_tool;i=290",
                 browseName="ns=ia;SignalColor",
                 description="Indicates the colour the lamp element has when switched on.",
+                modellingRule="Mandatory",
                 dataType=ia.datatypes.SignalColor,
             )
         ),
@@ -627,6 +666,7 @@ ia.objtypes.StackElementLightType(
                 nodeId="ns=machine_tool;i=303",
                 browseName="ns=ia;SignalMode",
                 description="Shows in what way the lamp is used (continuous light, flashing, blinking) when switched on.",
+                modellingRule="Mandatory",
                 dataType=ia.datatypes.SignalModeLight,
             )
         ),
@@ -635,28 +675,28 @@ ia.objtypes.StackElementLightType(
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=102",
     browseName="ns=machine_tool;AbortedToInitializing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=311", browseName="TransitionNumber", dataType=o6.UInt32, value=8))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=311", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=8))],
 )
 o6.reference(machine_tool_objtypes.ProductionProgramStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=102"])
 o6.reference(o6.ns["ns=machine_tool;i=102"], "i=54", machine_tool_objtypes.ProductionProgramTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=104",
     browseName="ns=machine_tool;InitializingToAborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=313", browseName="TransitionNumber", dataType=o6.UInt32, value=9))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=313", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=9))],
 )
 o6.reference(machine_tool_objtypes.ProductionProgramStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=104"])
 o6.reference(o6.ns["ns=machine_tool;i=104"], "i=54", machine_tool_objtypes.ProductionProgramTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=105",
     browseName="ns=machine_tool;InterruptedToAborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=314", browseName="TransitionNumber", dataType=o6.UInt32, value=7))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=314", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=7))],
 )
 o6.reference(machine_tool_objtypes.ProductionProgramStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=105"])
 o6.reference(o6.ns["ns=machine_tool;i=105"], "i=54", machine_tool_objtypes.ProductionProgramTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=106",
     browseName="ns=machine_tool;EndedToInitializing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=315", browseName="TransitionNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=315", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(machine_tool_objtypes.ProductionProgramStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=106"])
 o6.reference(o6.ns["ns=machine_tool;i=106"], "i=54", machine_tool_objtypes.ProductionProgramTransitionEventType)
@@ -665,8 +705,8 @@ ns0.objtypes.BaseObjectType(
     browseName="ns=machine_tool;Location",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=312", browseName="ns=machine_tool;Name", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=318", browseName="ns=machine_tool;PlaceNumber", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=312", browseName="ns=machine_tool;Name", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=318", browseName="ns=machine_tool;PlaceNumber", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
 )
 o6.reference(machine_tool_objtypes.BaseToolType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=118"])
@@ -729,7 +769,13 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=machine_tool;i=321",
     browseName="ns=machine_tool;Locked",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=269", browseName="ns=machine_tool;ReasonForLocking", dataType=machine_tool_datypes.ToolLocked))],
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=machine_tool;i=269", browseName="ns=machine_tool;ReasonForLocking", modellingRule="Mandatory", dataType=machine_tool_datypes.ToolLocked
+            )
+        )
+    ],
     dataType=o6.Boolean,
     value=False,
 )
@@ -737,49 +783,49 @@ o6.reference(machine_tool_objtypes.ToolType, ns0.reftypes.HasComponent, o6.ns["n
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=107",
     browseName="ns=machine_tool;InterruptedToRunning",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=327", browseName="TransitionNumber", dataType=o6.UInt32, value=5))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=327", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=5))],
 )
 o6.reference(machine_tool_objtypes.ProductionProgramStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=107"])
 o6.reference(o6.ns["ns=machine_tool;i=107"], "i=54", machine_tool_objtypes.ProductionProgramTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=108",
     browseName="ns=machine_tool;RunningToAborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=328", browseName="TransitionNumber", dataType=o6.UInt32, value=6))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=328", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=6))],
 )
 o6.reference(machine_tool_objtypes.ProductionProgramStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=108"])
 o6.reference(o6.ns["ns=machine_tool;i=108"], "i=54", machine_tool_objtypes.ProductionProgramTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=114",
     browseName="ns=machine_tool;AbortedToInitializing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=329", browseName="TransitionNumber", dataType=o6.UInt32, value=8))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=329", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=8))],
 )
 o6.reference(machine_tool_objtypes.ProductionPartStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=114"])
 o6.reference(o6.ns["ns=machine_tool;i=114"], "i=54", machine_tool_objtypes.ProductionPartTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=115",
     browseName="ns=machine_tool;EndedToInitializing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=330", browseName="TransitionNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=330", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(machine_tool_objtypes.ProductionPartStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=115"])
 o6.reference(o6.ns["ns=machine_tool;i=115"], "i=54", machine_tool_objtypes.ProductionPartTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=124",
     browseName="ns=machine_tool;InterruptedToAborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=331", browseName="TransitionNumber", dataType=o6.UInt32, value=7))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=331", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=7))],
 )
 o6.reference(machine_tool_objtypes.ProductionPartStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=124"])
 o6.reference(o6.ns["ns=machine_tool;i=124"], "i=54", machine_tool_objtypes.ProductionPartTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=125",
     browseName="ns=machine_tool;InterruptedToRunning",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=333", browseName="TransitionNumber", dataType=o6.UInt32, value=5))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=333", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=5))],
 )
 o6.reference(machine_tool_objtypes.ProductionPartStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=125"])
 o6.reference(o6.ns["ns=machine_tool;i=125"], "i=54", machine_tool_objtypes.ProductionPartTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=136",
     browseName="ns=machine_tool;AbortedToInitializing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=334", browseName="TransitionNumber", dataType=o6.UInt32, value=8))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=334", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=8))],
 )
 o6.reference(machine_tool_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=136"])
 ns0.vartypes.AnalogUnitRangeType(
@@ -787,8 +833,8 @@ ns0.vartypes.AnalogUnitRangeType(
     browseName="ns=machine_tool;FeedOverride",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=335", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=336", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=335", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=336", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -797,14 +843,14 @@ o6.reference(machine_tool_objtypes.ChannelMonitoringType, ns0.reftypes.HasCompon
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=127",
     browseName="ns=machine_tool;RunningToInterrupted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=337", browseName="TransitionNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=337", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(machine_tool_objtypes.ProductionPartStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=127"])
 o6.reference(o6.ns["ns=machine_tool;i=127"], "i=54", machine_tool_objtypes.ProductionPartTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=109",
     browseName="ns=machine_tool;RunningToInterrupted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=339", browseName="TransitionNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=339", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(machine_tool_objtypes.ProductionProgramStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=109"])
 o6.reference(o6.ns["ns=machine_tool;i=109"], "i=54", machine_tool_objtypes.ProductionProgramTransitionEventType)
@@ -813,8 +859,8 @@ ns0.vartypes.AnalogUnitRangeType(
     browseName="ns=machine_tool;RapidOverride",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=342", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=343", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=342", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=343", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
     value=0.0,
@@ -823,7 +869,7 @@ o6.reference(machine_tool_objtypes.ChannelMonitoringType, ns0.reftypes.HasCompon
 ns0.objtypes.InitialStateType(
     nodeId="ns=machine_tool;i=135",
     browseName="ns=machine_tool;Initializing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=345", browseName="StateNumber", dataType=o6.UInt32, value=0))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=345", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=0))],
 )
 o6.reference(machine_tool_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=135"])
 o6.reference(o6.ns["ns=machine_tool;i=99"], "i=52", o6.ns["ns=machine_tool;i=135"])
@@ -831,14 +877,14 @@ o6.reference(o6.ns["ns=machine_tool;i=136"], "i=52", o6.ns["ns=machine_tool;i=13
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=138",
     browseName="ns=machine_tool;Running",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=346", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=346", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(machine_tool_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=138"])
 o6.reference(o6.ns["ns=machine_tool;i=95"], "i=52", o6.ns["ns=machine_tool;i=138"])
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=139",
     browseName="ns=machine_tool;Interrupted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=347", browseName="StateNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=347", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(machine_tool_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=139"])
 o6.reference(o6.ns["ns=machine_tool;i=95"], "i=51", o6.ns["ns=machine_tool;i=139"])
@@ -846,14 +892,14 @@ o6.reference(o6.ns["ns=machine_tool;i=97"], "i=51", o6.ns["ns=machine_tool;i=139
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=140",
     browseName="ns=machine_tool;Ended",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=349", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=349", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(machine_tool_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=140"])
 o6.reference(o6.ns["ns=machine_tool;i=99"], "i=51", o6.ns["ns=machine_tool;i=140"])
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=141",
     browseName="ns=machine_tool;Aborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=350", browseName="StateNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=350", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(machine_tool_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=141"])
 o6.reference(o6.ns["ns=machine_tool;i=97"], "i=52", o6.ns["ns=machine_tool;i=141"])
@@ -861,49 +907,49 @@ o6.reference(o6.ns["ns=machine_tool;i=136"], "i=51", o6.ns["ns=machine_tool;i=14
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=142",
     browseName="ns=machine_tool;InitializingToRunning",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=352", browseName="TransitionNumber", dataType=o6.UInt32, value=0))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=352", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=0))],
 )
 o6.reference(machine_tool_objtypes.ProductionJobStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=142"])
 o6.reference(o6.ns["ns=machine_tool;i=142"], "i=54", machine_tool_objtypes.ProductionJobTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=143",
     browseName="ns=machine_tool;RunningToEnded",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=353", browseName="TransitionNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=353", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(machine_tool_objtypes.ProductionJobStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=143"])
 o6.reference(o6.ns["ns=machine_tool;i=143"], "i=54", machine_tool_objtypes.ProductionJobTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=144",
     browseName="ns=machine_tool;RunningToAborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=354", browseName="TransitionNumber", dataType=o6.UInt32, value=6))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=354", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=6))],
 )
 o6.reference(machine_tool_objtypes.ProductionJobStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=144"])
 o6.reference(o6.ns["ns=machine_tool;i=144"], "i=54", machine_tool_objtypes.ProductionJobTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=145",
     browseName="ns=machine_tool;RunningToInterrupted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=355", browseName="TransitionNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=355", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(machine_tool_objtypes.ProductionJobStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=145"])
 o6.reference(o6.ns["ns=machine_tool;i=145"], "i=54", machine_tool_objtypes.ProductionJobTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=147",
     browseName="ns=machine_tool;InterruptedToRunning",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=356", browseName="TransitionNumber", dataType=o6.UInt32, value=5))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=356", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=5))],
 )
 o6.reference(machine_tool_objtypes.ProductionJobStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=147"])
 o6.reference(o6.ns["ns=machine_tool;i=147"], "i=54", machine_tool_objtypes.ProductionJobTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=148",
     browseName="ns=machine_tool;InterruptedToAborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=357", browseName="TransitionNumber", dataType=o6.UInt32, value=7))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=357", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=7))],
 )
 o6.reference(machine_tool_objtypes.ProductionJobStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=148"])
 o6.reference(o6.ns["ns=machine_tool;i=148"], "i=54", machine_tool_objtypes.ProductionJobTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=137",
     browseName="ns=machine_tool;RunningToRunning",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=358", browseName="TransitionNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=358", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(machine_tool_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=137"])
 o6.reference(o6.ns["ns=machine_tool;i=137"], "i=51", o6.ns["ns=machine_tool;i=138"])
@@ -911,28 +957,28 @@ o6.reference(o6.ns["ns=machine_tool;i=137"], "i=52", o6.ns["ns=machine_tool;i=13
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=133",
     browseName="ns=machine_tool;RunningToRunning",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=359", browseName="TransitionNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=359", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(machine_tool_objtypes.ProductionProgramStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=133"])
 o6.reference(o6.ns["ns=machine_tool;i=133"], "i=54", machine_tool_objtypes.ProductionProgramTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=149",
     browseName="ns=machine_tool;EndedToInitializing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=360", browseName="TransitionNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=360", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(machine_tool_objtypes.ProductionJobStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=149"])
 o6.reference(o6.ns["ns=machine_tool;i=149"], "i=54", machine_tool_objtypes.ProductionJobTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=151",
     browseName="ns=machine_tool;RunningToRunning",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=372", browseName="TransitionNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=372", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(machine_tool_objtypes.ProductionJobStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=151"])
 o6.reference(o6.ns["ns=machine_tool;i=151"], "i=54", machine_tool_objtypes.ProductionJobTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=152",
     browseName="ns=machine_tool;InitializingToAborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=373", browseName="TransitionNumber", dataType=o6.UInt32, value=9))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=373", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=9))],
 )
 o6.reference(machine_tool_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=152"])
 o6.reference(o6.ns["ns=machine_tool;i=152"], "i=51", o6.ns["ns=machine_tool;i=135"])
@@ -940,14 +986,14 @@ o6.reference(o6.ns["ns=machine_tool;i=152"], "i=52", o6.ns["ns=machine_tool;i=14
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=157",
     browseName="ns=machine_tool;RunningToEnded",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=374", browseName="TransitionNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=374", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(machine_tool_objtypes.ProductionPartStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=157"])
 o6.reference(o6.ns["ns=machine_tool;i=157"], "i=54", machine_tool_objtypes.ProductionPartTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=153",
     browseName="ns=machine_tool;InitializingToRunning",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=375", browseName="TransitionNumber", dataType=o6.UInt32, value=0))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=375", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=0))],
 )
 o6.reference(machine_tool_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=153"])
 o6.reference(o6.ns["ns=machine_tool;i=153"], "i=51", o6.ns["ns=machine_tool;i=135"])
@@ -955,21 +1001,21 @@ o6.reference(o6.ns["ns=machine_tool;i=153"], "i=52", o6.ns["ns=machine_tool;i=13
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=150",
     browseName="ns=machine_tool;AbortedToInitializing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=376", browseName="TransitionNumber", dataType=o6.UInt32, value=8))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=376", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=8))],
 )
 o6.reference(machine_tool_objtypes.ProductionJobStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=150"])
 o6.reference(o6.ns["ns=machine_tool;i=150"], "i=54", machine_tool_objtypes.ProductionJobTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=158",
     browseName="ns=machine_tool;InitializingToRunning",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=377", browseName="TransitionNumber", dataType=o6.UInt32, value=0))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=377", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=0))],
 )
 o6.reference(machine_tool_objtypes.ProductionPartStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=158"])
 o6.reference(o6.ns["ns=machine_tool;i=158"], "i=54", machine_tool_objtypes.ProductionPartTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=154",
     browseName="ns=machine_tool;RunningToAborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=378", browseName="TransitionNumber", dataType=o6.UInt32, value=6))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=378", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=6))],
 )
 o6.reference(machine_tool_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=154"])
 o6.reference(o6.ns["ns=machine_tool;i=154"], "i=51", o6.ns["ns=machine_tool;i=138"])
@@ -977,21 +1023,21 @@ o6.reference(o6.ns["ns=machine_tool;i=154"], "i=52", o6.ns["ns=machine_tool;i=14
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=159",
     browseName="ns=machine_tool;InitializingToAborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=379", browseName="TransitionNumber", dataType=o6.UInt32, value=9))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=379", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=9))],
 )
 o6.reference(machine_tool_objtypes.ProductionPartStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=159"])
 o6.reference(o6.ns["ns=machine_tool;i=159"], "i=54", machine_tool_objtypes.ProductionPartTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=160",
     browseName="ns=machine_tool;RunningToAborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=380", browseName="TransitionNumber", dataType=o6.UInt32, value=6))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=380", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=6))],
 )
 o6.reference(machine_tool_objtypes.ProductionPartStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=160"])
 o6.reference(o6.ns["ns=machine_tool;i=160"], "i=54", machine_tool_objtypes.ProductionPartTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=155",
     browseName="ns=machine_tool;RunningToEnded",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=381", browseName="TransitionNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=381", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(machine_tool_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=155"])
 o6.reference(o6.ns["ns=machine_tool;i=155"], "i=51", o6.ns["ns=machine_tool;i=138"])
@@ -1001,25 +1047,27 @@ machine_tool_objtypes.ChannelModifierType(
     browseName="ns=machine_tool;ChannelModifiers",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=361", browseName="ns=machine_tool;DryRun", dataType=o6.Boolean)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=364", browseName="ns=machine_tool;OptionalStop", dataType=o6.Boolean)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=366", browseName="ns=machine_tool;TestMode", dataType=o6.Boolean)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=367", browseName="ns=machine_tool;SingleStep", dataType=o6.Boolean)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=383", browseName="ns=machine_tool;BlockSkip", dataType=o6.Boolean)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=361", browseName="ns=machine_tool;DryRun", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=364", browseName="ns=machine_tool;OptionalStop", modellingRule="Mandatory", dataType=o6.Boolean)
+        ),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=366", browseName="ns=machine_tool;TestMode", modellingRule="Optional", dataType=o6.Boolean)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=367", browseName="ns=machine_tool;SingleStep", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=383", browseName="ns=machine_tool;BlockSkip", modellingRule="Optional", dataType=o6.Boolean)),
     ],
 )
 o6.reference(machine_tool_objtypes.ChannelMonitoringType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=113"])
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=132",
     browseName="ns=machine_tool;InitializingToAborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=385", browseName="TransitionNumber", dataType=o6.UInt32, value=9))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=385", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=9))],
 )
 o6.reference(machine_tool_objtypes.ProductionJobStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=132"])
 o6.reference(o6.ns["ns=machine_tool;i=132"], "i=54", machine_tool_objtypes.ProductionJobTransitionEventType)
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=156",
     browseName="ns=machine_tool;RunningToInterrupted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=386", browseName="TransitionNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=386", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(machine_tool_objtypes.ProductionStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=156"])
 o6.reference(o6.ns["ns=machine_tool;i=156"], "i=51", o6.ns["ns=machine_tool;i=138"])
@@ -1027,7 +1075,7 @@ o6.reference(o6.ns["ns=machine_tool;i=156"], "i=52", o6.ns["ns=machine_tool;i=13
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=161",
     browseName="ns=machine_tool;RunningToRunning",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=410", browseName="TransitionNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=410", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(machine_tool_objtypes.ProductionPartStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=161"])
 o6.reference(o6.ns["ns=machine_tool;i=161"], "i=54", machine_tool_objtypes.ProductionPartTransitionEventType)
@@ -1036,9 +1084,17 @@ machine_tool_vartypes.ToolLifeType(
     browseName="ns=machine_tool;<ToolLifeEntry>",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=307", browseName="ns=machine_tool;EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=388", browseName="ns=machine_tool;Indication", dataType=machine_tool_datypes.ToolLifeIndication)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=413", browseName="ns=machine_tool;IsCountingUp", dataType=o6.Boolean)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=machine_tool;i=307", browseName="ns=machine_tool;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=machine_tool;i=388", browseName="ns=machine_tool;Indication", modellingRule="Mandatory", dataType=machine_tool_datypes.ToolLifeIndication
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=413", browseName="ns=machine_tool;IsCountingUp", modellingRule="Mandatory", dataType=o6.Boolean)),
     ],
     dataType=ns0.datatypes.Number,
 )
@@ -1056,6 +1112,7 @@ ia.objtypes.BasicStacklightType(
                 nodeId="ns=machine_tool;i=415",
                 browseName="ns=ia;StacklightMode",
                 description="Shows in what way (stack of individual lights, level meter, running light) the stacklight unit is used.",
+                modellingRule="Mandatory",
                 dataType=ia.datatypes.StacklightOperationMode,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -1069,11 +1126,11 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=machine_tool;i=419",
     browseName="ns=machine_tool;RunsPlanned",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=392", browseName="ns=machine_tool;IsValid", dataType=o6.Boolean))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=392", browseName="ns=machine_tool;IsValid", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.UInt32,
 )
 o6.reference(machine_tool_objtypes.ProductionJobTransitionEventType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=419"])
-machine_tool_objtypes.MessagesType(nodeId="ns=machine_tool;i=5001", browseName="ns=machine_tool;Messages", eventNotifier=1)
+machine_tool_objtypes.MessagesType(nodeId="ns=machine_tool;i=5001", browseName="ns=machine_tool;Messages", modellingRule="Optional", eventNotifier=1)
 o6.reference(o6.ns["ns=machine_tool;i=5001"], "i=41", machine_tool_objtypes.NotificationEventType)
 o6.reference(o6.ns["ns=machine_tool;i=5001"], "i=41", machine_tool_objtypes.AlertType)
 machine_tool_objtypes.NotificationType(
@@ -1081,7 +1138,7 @@ machine_tool_objtypes.NotificationType(
     browseName="ns=machine_tool;Notification",
     modellingRule="Mandatory",
     references=[
-        o6.hasComponent(machine_tool_objtypes.PrognosisListType(nodeId="ns=machine_tool;i=130", browseName="ns=machine_tool;Prognoses")),
+        o6.hasComponent(machine_tool_objtypes.PrognosisListType(nodeId="ns=machine_tool;i=130", browseName="ns=machine_tool;Prognoses", modellingRule="Optional")),
         o6.hasComponent(o6.ns["ns=machine_tool;i=5001"]),
     ],
 )
@@ -1128,7 +1185,7 @@ http_opcfoundation_org_UA_MachineTool_ = ns0.objtypes.NamespaceMetadataType(
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),
@@ -1144,9 +1201,10 @@ http_opcfoundation_org_UA_MachineTool_ = ns0.objtypes.NamespaceMetadataType(
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_tool;i=6001",
     browseName="CurrentState",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6002", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6003", browseName="Number", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6002", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6003", browseName="Number", modellingRule="Mandatory", dataType=o6.UInt32)),
     ],
     dataType=o6.LocalizedText,
 )
@@ -1157,24 +1215,27 @@ o6.reference(machine_tool_objtypes.ProductionJobType, ns0.reftypes.HasComponent,
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_tool;i=6004",
     browseName="CurrentState",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6005", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6006", browseName="Number", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6005", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6006", browseName="Number", modellingRule="Mandatory", dataType=o6.UInt32)),
     ],
     dataType=o6.LocalizedText,
 )
 machine_tool_objtypes.ProductionJobStateMachineType(
-    nodeId="ns=machine_tool;i=5003", browseName="ns=machine_tool;State", references=[o6.hasComponent(o6.ns["ns=machine_tool;i=6004"])]
+    nodeId="ns=machine_tool;i=5003", browseName="ns=machine_tool;State", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=machine_tool;i=6004"])]
 )
 machine_tool_objtypes.ProductionJobType(
     nodeId="ns=machine_tool;i=74",
     browseName="<OrderedObject>",
     modellingRule="OptionalPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=195", browseName="ns=machine_tool;Identifier", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=215", browseName="NumberInList", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=195", browseName="ns=machine_tool;Identifier", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=215", browseName="NumberInList", modellingRule="Mandatory", dataType=o6.UInt16)),
         o6.hasComponent(o6.ns["ns=machine_tool;i=76"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=206", browseName="ns=machine_tool;RunsCompleted", dataType=o6.UInt32)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=206", browseName="ns=machine_tool;RunsCompleted", modellingRule="Mandatory", dataType=o6.UInt32)
+        ),
         o6.hasComponent(o6.ns["ns=machine_tool;i=245"]),
         o6.hasComponent(o6.ns["ns=machine_tool;i=5003"]),
     ],
@@ -1183,7 +1244,8 @@ o6.reference(machine_tool_objtypes.ProductionJobListType, ns0.reftypes.HasOrdere
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_tool;i=6007",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6008", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6008", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
@@ -1193,7 +1255,8 @@ o6.reference(machine_tool_objtypes.MachineOperationMonitoringType, ns0.reftypes.
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_tool;i=6009",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6010", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6010", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machine_tool_objtypes.MachineOperationModeStateMachineType(
@@ -1205,37 +1268,47 @@ machine_tool_objtypes.ObligationType(
     browseName="ns=machine_tool;Obligation",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=6013", browseName="ns=machine_tool;EndUserObligated", dataType=o6.Boolean)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=6014", browseName="ns=machine_tool;MachineBuilderObligated", dataType=o6.Boolean)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=6013", browseName="ns=machine_tool;EndUserObligated", modellingRule="Mandatory", dataType=o6.Boolean)
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=6014", browseName="ns=machine_tool;MachineBuilderObligated", modellingRule="Mandatory", dataType=o6.Boolean)
+        ),
     ],
 )
 o6.reference(machine_tool_objtypes.MachineOperationMonitoringType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5008"])
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_tool;i=6017",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6019", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6019", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
-    nodeId="ns=machine_tool;i=5009", browseName="ns=machinery;MachineryItemState", references=[o6.hasComponent(o6.ns["ns=machine_tool;i=6017"])]
+    nodeId="ns=machine_tool;i=5009", browseName="ns=machinery;MachineryItemState", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=machine_tool;i=6017"])]
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_tool;i=6018",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6021", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6021", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
     nodeId="ns=machine_tool;i=5023",
     browseName="ns=machinery_jobs;JobOrderControl",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6026", browseName="ns=isa95_jobcontrol_v2;MaxDownloadableJobOrders", dataType=o6.UInt16)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6026", browseName="ns=isa95_jobcontrol_v2;MaxDownloadableJobOrders", modellingRule="Mandatory", dataType=o6.UInt16)
+        ),
         o6.hasComponent(o6.ns["ns=machine_tool;i=6018"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=machine_tool;i=6022",
                 browseName="ns=isa95_jobcontrol_v2;EquipmentID",
                 description="Defines a read-only set of Equipment Class IDs and Equipment IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -1246,6 +1319,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=machine_tool;i=6023",
                 browseName="ns=isa95_jobcontrol_v2;JobOrderList",
                 description="Defines a read-only list of job order information available from the server.",
+                modellingRule="Mandatory",
                 dataType=isa95_jobcontrol_v2.datatypes.ISA95JobOrderAndStateDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -1256,6 +1330,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=machine_tool;i=6024",
                 browseName="ns=isa95_jobcontrol_v2;MaterialClassID",
                 description="Defines a read-only set of Material Classes IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -1266,6 +1341,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=machine_tool;i=6025",
                 browseName="ns=isa95_jobcontrol_v2;MaterialDefinitionID",
                 description="Defines a read-only set of Material Classes IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -1276,6 +1352,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=machine_tool;i=6027",
                 browseName="ns=isa95_jobcontrol_v2;PersonnelID",
                 description="Defines a read-only set of Personnel IDs and Person IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -1286,6 +1363,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=machine_tool;i=6028",
                 browseName="ns=isa95_jobcontrol_v2;PhysicalAssetID",
                 description="Defines a read-only set of Physical Asset Class IDs and Physical Asset IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -1296,6 +1374,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=machine_tool;i=6029",
                 browseName="ns=isa95_jobcontrol_v2;WorkMaster",
                 description="Defines a read-only set of work master IDs that may be specified in a job order, and the read-only set of parameters that may be specified for a specific work master.",
+                modellingRule="Mandatory",
                 dataType=isa95_jobcontrol_v2.datatypes.ISA95WorkMasterDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -1306,9 +1385,10 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_tool;i=6032",
     browseName="CurrentState",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6033", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6034", browseName="Number", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6033", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6034", browseName="Number", modellingRule="Mandatory", dataType=o6.UInt32)),
     ],
     dataType=o6.LocalizedText,
     value=o6.LocalizedText(),
@@ -1320,22 +1400,24 @@ o6.reference(machine_tool_objtypes.ProductionActiveProgramType, ns0.reftypes.Has
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_tool;i=6036",
     browseName="CurrentState",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6037", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6038", browseName="Number", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6037", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6038", browseName="Number", modellingRule="Mandatory", dataType=o6.UInt32)),
     ],
     dataType=o6.LocalizedText,
     value=o6.LocalizedText(),
 )
 machine_tool_objtypes.ProductionProgramStateMachineType(
-    nodeId="ns=machine_tool;i=5034", browseName="ns=machine_tool;State", references=[o6.hasComponent(o6.ns["ns=machine_tool;i=6036"])]
+    nodeId="ns=machine_tool;i=5034", browseName="ns=machine_tool;State", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=machine_tool;i=6036"])]
 )
 machine_tool_objtypes.ProductionActiveProgramType(
     nodeId="ns=machine_tool;i=84",
     browseName="ns=machine_tool;ActiveProgram",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=174", browseName="ns=machine_tool;Name", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=175", browseName="NumberInList", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=174", browseName="ns=machine_tool;Name", modellingRule="Mandatory", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=175", browseName="NumberInList", modellingRule="Mandatory", dataType=o6.UInt16)),
         o6.hasComponent(o6.ns["ns=machine_tool;i=5034"]),
     ],
 )
@@ -1347,9 +1429,10 @@ o6.reference(o6.ns["ns=machine_tool;i=82"], "i=23562", o6.ns["ns=machine_tool;i=
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_tool;i=6031",
     browseName="CurrentState",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6035", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6039", browseName="Number", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6035", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6039", browseName="Number", modellingRule="Mandatory", dataType=o6.UInt32)),
     ],
     dataType=o6.LocalizedText,
 )
@@ -1360,23 +1443,24 @@ o6.reference(machine_tool_objtypes.ProductionProgramType, ns0.reftypes.HasCompon
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_tool;i=6040",
     browseName="CurrentState",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6041", browseName="Id", dataType=o6.NodeId)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6042", browseName="Number", dataType=o6.UInt32)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6041", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6042", browseName="Number", modellingRule="Mandatory", dataType=o6.UInt32)),
     ],
     dataType=o6.LocalizedText,
     value=o6.LocalizedText(),
 )
 machine_tool_objtypes.ProductionProgramStateMachineType(
-    nodeId="ns=machine_tool;i=5035", browseName="ns=machine_tool;State", references=[o6.hasComponent(o6.ns["ns=machine_tool;i=6040"])]
+    nodeId="ns=machine_tool;i=5035", browseName="ns=machine_tool;State", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=machine_tool;i=6040"])]
 )
 machine_tool_objtypes.ProductionActiveProgramType(
     nodeId="ns=machine_tool;i=87",
     browseName="ns=machine_tool;ActiveProgram",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=250", browseName="NumberInList", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=326", browseName="ns=machine_tool;Name", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=250", browseName="NumberInList", modellingRule="Mandatory", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=326", browseName="ns=machine_tool;Name", modellingRule="Mandatory", dataType=o6.String)),
         o6.hasComponent(o6.ns["ns=machine_tool;i=5035"]),
     ],
 )
@@ -1385,34 +1469,37 @@ o6.reference(o6.ns["ns=machine_tool;i=87"], "i=23562", o6.ns["ns=machine_tool;i=
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_tool;i=6020",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6043", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6043", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machine_tool_objtypes.MachineOperationModeStateMachineType(
-    nodeId="ns=machine_tool;i=5010", browseName="ns=machinery;MachineryOperationMode", references=[o6.hasComponent(o6.ns["ns=machine_tool;i=6020"])]
+    nodeId="ns=machine_tool;i=5010", browseName="ns=machinery;MachineryOperationMode", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=machine_tool;i=6020"])]
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_tool;i=6044",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6045", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6045", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
-    nodeId="ns=machine_tool;i=5011", browseName="ns=machinery;MachineryItemState", references=[o6.hasComponent(o6.ns["ns=machine_tool;i=6044"])]
+    nodeId="ns=machine_tool;i=5011", browseName="ns=machinery;MachineryItemState", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=machine_tool;i=6044"])]
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_tool;i=6046",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6047", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6047", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machine_tool_objtypes.MachineOperationModeStateMachineType(
-    nodeId="ns=machine_tool;i=5012", browseName="ns=machinery;MachineryOperationMode", references=[o6.hasComponent(o6.ns["ns=machine_tool;i=6046"])]
+    nodeId="ns=machine_tool;i=5012", browseName="ns=machinery;MachineryOperationMode", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=machine_tool;i=6046"])]
 )
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5013",
     browseName="ns=machine_tool;Aborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6048", browseName="StateNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6048", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(machine_tool_objtypes.ProductionJobStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5013"])
 o6.reference(o6.ns["ns=machine_tool;i=132"], "i=52", o6.ns["ns=machine_tool;i=5013"])
@@ -1422,7 +1509,7 @@ o6.reference(o6.ns["ns=machine_tool;i=150"], "i=51", o6.ns["ns=machine_tool;i=50
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5014",
     browseName="ns=machine_tool;Ended",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6049", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6049", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(machine_tool_objtypes.ProductionJobStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5014"])
 o6.reference(o6.ns["ns=machine_tool;i=143"], "i=52", o6.ns["ns=machine_tool;i=5014"])
@@ -1430,7 +1517,7 @@ o6.reference(o6.ns["ns=machine_tool;i=149"], "i=51", o6.ns["ns=machine_tool;i=50
 ns0.objtypes.InitialStateType(
     nodeId="ns=machine_tool;i=5015",
     browseName="ns=machine_tool;Initializing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6050", browseName="StateNumber", dataType=o6.UInt32, value=0))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6050", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=0))],
 )
 o6.reference(machine_tool_objtypes.ProductionJobStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5015"])
 o6.reference(o6.ns["ns=machine_tool;i=132"], "i=51", o6.ns["ns=machine_tool;i=5015"])
@@ -1440,7 +1527,7 @@ o6.reference(o6.ns["ns=machine_tool;i=150"], "i=52", o6.ns["ns=machine_tool;i=50
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5016",
     browseName="ns=machine_tool;Interrupted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6051", browseName="StateNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6051", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(machine_tool_objtypes.ProductionJobStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5016"])
 o6.reference(o6.ns["ns=machine_tool;i=145"], "i=52", o6.ns["ns=machine_tool;i=5016"])
@@ -1449,7 +1536,7 @@ o6.reference(o6.ns["ns=machine_tool;i=148"], "i=51", o6.ns["ns=machine_tool;i=50
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5017",
     browseName="ns=machine_tool;Running",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6052", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6052", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(machine_tool_objtypes.ProductionJobStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5017"])
 o6.reference(o6.ns["ns=machine_tool;i=142"], "i=52", o6.ns["ns=machine_tool;i=5017"])
@@ -1462,7 +1549,7 @@ o6.reference(o6.ns["ns=machine_tool;i=151"], "i=52", o6.ns["ns=machine_tool;i=50
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5018",
     browseName="ns=machine_tool;Aborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6053", browseName="StateNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6053", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(machine_tool_objtypes.ProductionPartStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5018"])
 o6.reference(o6.ns["ns=machine_tool;i=114"], "i=51", o6.ns["ns=machine_tool;i=5018"])
@@ -1472,7 +1559,7 @@ o6.reference(o6.ns["ns=machine_tool;i=160"], "i=52", o6.ns["ns=machine_tool;i=50
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5019",
     browseName="ns=machine_tool;Ended",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6054", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6054", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(machine_tool_objtypes.ProductionPartStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5019"])
 o6.reference(o6.ns["ns=machine_tool;i=115"], "i=51", o6.ns["ns=machine_tool;i=5019"])
@@ -1480,7 +1567,7 @@ o6.reference(o6.ns["ns=machine_tool;i=157"], "i=52", o6.ns["ns=machine_tool;i=50
 ns0.objtypes.InitialStateType(
     nodeId="ns=machine_tool;i=5020",
     browseName="ns=machine_tool;Initializing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6055", browseName="StateNumber", dataType=o6.UInt32, value=0))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6055", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=0))],
 )
 o6.reference(machine_tool_objtypes.ProductionPartStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5020"])
 o6.reference(o6.ns["ns=machine_tool;i=114"], "i=52", o6.ns["ns=machine_tool;i=5020"])
@@ -1490,7 +1577,7 @@ o6.reference(o6.ns["ns=machine_tool;i=159"], "i=51", o6.ns["ns=machine_tool;i=50
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5021",
     browseName="ns=machine_tool;Interrupted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6056", browseName="StateNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6056", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(machine_tool_objtypes.ProductionPartStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5021"])
 o6.reference(o6.ns["ns=machine_tool;i=124"], "i=51", o6.ns["ns=machine_tool;i=5021"])
@@ -1499,7 +1586,7 @@ o6.reference(o6.ns["ns=machine_tool;i=127"], "i=52", o6.ns["ns=machine_tool;i=50
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5036",
     browseName="ns=machine_tool;Running",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6057", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6057", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(machine_tool_objtypes.ProductionPartStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5036"])
 o6.reference(o6.ns["ns=machine_tool;i=125"], "i=52", o6.ns["ns=machine_tool;i=5036"])
@@ -1512,7 +1599,7 @@ o6.reference(o6.ns["ns=machine_tool;i=161"], "i=52", o6.ns["ns=machine_tool;i=50
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5037",
     browseName="ns=machine_tool;Aborted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6058", browseName="StateNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6058", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(machine_tool_objtypes.ProductionProgramStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5037"])
 o6.reference(o6.ns["ns=machine_tool;i=102"], "i=51", o6.ns["ns=machine_tool;i=5037"])
@@ -1522,7 +1609,7 @@ o6.reference(o6.ns["ns=machine_tool;i=108"], "i=52", o6.ns["ns=machine_tool;i=50
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5038",
     browseName="ns=machine_tool;Ended",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6059", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6059", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(machine_tool_objtypes.ProductionProgramStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5038"])
 o6.reference(o6.ns["ns=machine_tool;i=92"], "i=52", o6.ns["ns=machine_tool;i=5038"])
@@ -1530,7 +1617,7 @@ o6.reference(o6.ns["ns=machine_tool;i=106"], "i=51", o6.ns["ns=machine_tool;i=50
 ns0.objtypes.InitialStateType(
     nodeId="ns=machine_tool;i=5039",
     browseName="ns=machine_tool;Initializing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6060", browseName="StateNumber", dataType=o6.UInt32, value=0))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6060", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=0))],
 )
 o6.reference(machine_tool_objtypes.ProductionProgramStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5039"])
 o6.reference(o6.ns["ns=machine_tool;i=91"], "i=51", o6.ns["ns=machine_tool;i=5039"])
@@ -1540,7 +1627,7 @@ o6.reference(o6.ns["ns=machine_tool;i=106"], "i=52", o6.ns["ns=machine_tool;i=50
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5040",
     browseName="ns=machine_tool;Interrupted",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6061", browseName="StateNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6061", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(machine_tool_objtypes.ProductionProgramStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5040"])
 o6.reference(o6.ns["ns=machine_tool;i=105"], "i=51", o6.ns["ns=machine_tool;i=5040"])
@@ -1549,7 +1636,7 @@ o6.reference(o6.ns["ns=machine_tool;i=109"], "i=52", o6.ns["ns=machine_tool;i=50
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5041",
     browseName="ns=machine_tool;Running",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6062", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6062", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(machine_tool_objtypes.ProductionProgramStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5041"])
 o6.reference(o6.ns["ns=machine_tool;i=91"], "i=52", o6.ns["ns=machine_tool;i=5041"])
@@ -1563,119 +1650,119 @@ ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=5042",
     browseName="ns=machinery;FromMaintenanceToMaintenance",
     description="Transition from state Maintenance to state Maintenance",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6064", browseName="TransitionNumber", dataType=o6.UInt32, value=13))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6064", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=13))],
 )
 o6.reference(machine_tool_objtypes.MachineOperationModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5042"])
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=5043",
     browseName="ns=machinery;FromMaintenanceToNone",
     description="Transition from state Maintenance to state None",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6065", browseName="TransitionNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6065", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(machine_tool_objtypes.MachineOperationModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5043"])
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=5044",
     browseName="ns=machinery;FromMaintenanceToProcessing",
     description="Transition from state Maintenance to state Processing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6066", browseName="TransitionNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6066", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(machine_tool_objtypes.MachineOperationModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5044"])
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=5045",
     browseName="ns=machinery;FromMaintenanceToSetup",
     description="Transition from state Maintenance to state Setup",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6067", browseName="TransitionNumber", dataType=o6.UInt32, value=5))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6067", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=5))],
 )
 o6.reference(machine_tool_objtypes.MachineOperationModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5045"])
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=5046",
     browseName="ns=machinery;FromNoneToMaintenance",
     description="Transition from state None to state Maintenance",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6068", browseName="TransitionNumber", dataType=o6.UInt32, value=0))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6068", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=0))],
 )
 o6.reference(machine_tool_objtypes.MachineOperationModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5046"])
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=5047",
     browseName="ns=machinery;FromNoneToNone",
     description="Transition from state None to state None",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6069", browseName="TransitionNumber", dataType=o6.UInt32, value=12))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6069", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=12))],
 )
 o6.reference(machine_tool_objtypes.MachineOperationModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5047"])
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=5048",
     browseName="ns=machinery;FromNoneToProcessing",
     description="Transition from state None to state Processing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6070", browseName="TransitionNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6070", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(machine_tool_objtypes.MachineOperationModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5048"])
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=5049",
     browseName="ns=machinery;FromNoneToSetup",
     description="Transition from state None to state Setup",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6071", browseName="TransitionNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6071", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(machine_tool_objtypes.MachineOperationModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5049"])
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=5050",
     browseName="ns=machinery;FromProcessingToMaintenance",
     description="Transition from state Processing to state Maintenance",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6072", browseName="TransitionNumber", dataType=o6.UInt32, value=7))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6072", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=7))],
 )
 o6.reference(machine_tool_objtypes.MachineOperationModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5050"])
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=5051",
     browseName="ns=machinery;FromProcessingToNone",
     description="Transition from state Processing to state None",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6073", browseName="TransitionNumber", dataType=o6.UInt32, value=6))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6073", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=6))],
 )
 o6.reference(machine_tool_objtypes.MachineOperationModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5051"])
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=5052",
     browseName="ns=machinery;FromProcessingToProcessing",
     description="Transition from state Processing to state Processing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6074", browseName="TransitionNumber", dataType=o6.UInt32, value=14))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6074", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=14))],
 )
 o6.reference(machine_tool_objtypes.MachineOperationModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5052"])
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=5053",
     browseName="ns=machinery;FromProcessingToSetup",
     description="Transition from state Processing to state Setup",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6075", browseName="TransitionNumber", dataType=o6.UInt32, value=8))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6075", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=8))],
 )
 o6.reference(machine_tool_objtypes.MachineOperationModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5053"])
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=5054",
     browseName="ns=machinery;FromSetupToMaintenance",
     description="Transition from state Setup to state Maintenance",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6076", browseName="TransitionNumber", dataType=o6.UInt32, value=10))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6076", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=10))],
 )
 o6.reference(machine_tool_objtypes.MachineOperationModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5054"])
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=5055",
     browseName="ns=machinery;FromSetupToNone",
     description="Transition from state Setup to state None",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6077", browseName="TransitionNumber", dataType=o6.UInt32, value=9))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6077", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=9))],
 )
 o6.reference(machine_tool_objtypes.MachineOperationModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5055"])
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=5056",
     browseName="ns=machinery;FromSetupToProcessing",
     description="Transition from state Setup to state Processing",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6078", browseName="TransitionNumber", dataType=o6.UInt32, value=11))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6078", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=11))],
 )
 o6.reference(machine_tool_objtypes.MachineOperationModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5056"])
 ns0.objtypes.TransitionType(
     nodeId="ns=machine_tool;i=5057",
     browseName="ns=machinery;FromSetupToSetup",
     description="Transition from state Setup to state Setup",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6079", browseName="TransitionNumber", dataType=o6.UInt32, value=15))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6079", browseName="TransitionNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=15))],
 )
 o6.reference(machine_tool_objtypes.MachineOperationModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5057"])
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5058",
     browseName="ns=machinery;Maintenance",
     description="MachineryItem is set into maintenance mode with the intention to carry out maintenance or servicing activities",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6080", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6080", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(machine_tool_objtypes.MachineOperationModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5058"])
 o6.reference(o6.ns["ns=machine_tool;i=5042"], "i=51", o6.ns["ns=machine_tool;i=5058"])
@@ -1690,7 +1777,7 @@ ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5059",
     browseName="ns=machinery;None",
     description="There is currently no operation mode available",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6081", browseName="StateNumber", dataType=o6.UInt32, value=0))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6081", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=0))],
 )
 o6.reference(machine_tool_objtypes.MachineOperationModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5059"])
 o6.reference(o6.ns["ns=machine_tool;i=5043"], "i=52", o6.ns["ns=machine_tool;i=5059"])
@@ -1705,7 +1792,7 @@ ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5060",
     browseName="ns=machinery;Processing",
     description="MachineryItem is set into processing mode with the intention to carry out the value adding activities",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6082", browseName="StateNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6082", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(machine_tool_objtypes.MachineOperationModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5060"])
 o6.reference(o6.ns["ns=machine_tool;i=5044"], "i=52", o6.ns["ns=machine_tool;i=5060"])
@@ -1720,7 +1807,7 @@ ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5061",
     browseName="ns=machinery;Setup",
     description="MachineryItem is set into setup mode with the intention to carry out setup, preparation or postprocessing activities of a production process",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6083", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6083", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(machine_tool_objtypes.MachineOperationModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5061"])
 o6.reference(o6.ns["ns=machine_tool;i=5045"], "i=52", o6.ns["ns=machine_tool;i=5061"])
@@ -1734,37 +1821,38 @@ o6.reference(o6.ns["ns=machine_tool;i=5057"], "i=52", o6.ns["ns=machine_tool;i=5
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5062",
     browseName="ns=machine_tool;Service",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6084", browseName="StateNumber", dataType=o6.UInt32, value=0))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6084", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=0))],
 )
 o6.reference(machine_tool_objtypes.MaintenanceModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5062"])
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5063",
     browseName="ns=machine_tool;Inspection",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6085", browseName="StateNumber", dataType=o6.UInt32, value=1))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6085", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=1))],
 )
 o6.reference(machine_tool_objtypes.MaintenanceModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5063"])
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5064",
     browseName="ns=machine_tool;Repair",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6086", browseName="StateNumber", dataType=o6.UInt32, value=2))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6086", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=2))],
 )
 o6.reference(machine_tool_objtypes.MaintenanceModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5064"])
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5065",
     browseName="ns=machine_tool;Upgrade",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6087", browseName="StateNumber", dataType=o6.UInt32, value=3))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6087", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=3))],
 )
 o6.reference(machine_tool_objtypes.MaintenanceModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5065"])
 ns0.objtypes.StateType(
     nodeId="ns=machine_tool;i=5066",
     browseName="ns=machine_tool;Other",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6088", browseName="StateNumber", dataType=o6.UInt32, value=4))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6088", browseName="StateNumber", modellingRule="Mandatory", dataType=o6.UInt32, value=4))],
 )
 o6.reference(machine_tool_objtypes.MaintenanceModeStateMachineType, ns0.reftypes.HasComponent, o6.ns["ns=machine_tool;i=5066"])
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=machine_tool;i=6089",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6090", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6090", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machine_tool_objtypes.MaintenanceModeStateMachineType(
@@ -1775,12 +1863,14 @@ o6.reference(o6.ns["ns=machine_tool;i=5058"], "i=117", o6.ns["ns=machine_tool;i=
 machinery.objtypes.MachineryOperationCounterType(
     nodeId="ns=machine_tool;i=5072",
     browseName="ns=di;OperationCounters",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machine_tool;i=6094",
                 browseName="ns=di;PowerOnDuration",
                 description="PowerOnDuration is the duration the MachineryItem has been powered. The main purpose is to determine the time in which degradation of the MachineryItem occurred. The details, when the time is counted, is implementation-specific. Companion specifications might define specific rules. Typically, when the MachineryItem has supply voltage and the main CPU is running, the time is counted. This may include any kind of sleep mode, but may not include pure Wake on LAN. This value shall only increase during the lifetime of the MachineryItem and shall not be reset when it is restarted. The PowerOnDuration is provided as Duration, i.e., in milliseconds or even fractions of a millisecond. However, the Server is not expected to update the value in such a high frequency, but maybe once a minute or once an hour, depending on the application.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Duration,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -1791,12 +1881,14 @@ machinery.objtypes.MachineryOperationCounterType(
 machinery.objtypes.MachineryOperationCounterType(
     nodeId="ns=machine_tool;i=5069",
     browseName="ns=di;OperationCounters",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=machine_tool;i=6095",
                 browseName="ns=di;PowerOnDuration",
                 description="PowerOnDuration is the duration the MachineryItem has been powered. The main purpose is to determine the time in which degradation of the MachineryItem occurred. The details, when the time is counted, is implementation-specific. Companion specifications might define specific rules. Typically, when the MachineryItem has supply voltage and the main CPU is running, the time is counted. This may include any kind of sleep mode, but may not include pure Wake on LAN. This value shall only increase during the lifetime of the MachineryItem and shall not be reset when it is restarted. The PowerOnDuration is provided as Duration, i.e., in milliseconds or even fractions of a millisecond. However, the Server is not expected to update the value in such a high frequency, but maybe once a minute or once an hour, depending on the application.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Duration,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -1807,9 +1899,12 @@ machinery.objtypes.MachineryOperationCounterType(
 machine_tool_objtypes.MachineOperationMonitoringType(
     nodeId="ns=machine_tool;i=122",
     browseName="ns=machine_tool;MachineTool",
+    modellingRule="Mandatory",
     references=[
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=263", browseName="ns=machine_tool;OperationMode", dataType=machine_tool_datypes.MachineOperationMode)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=machine_tool;i=263", browseName="ns=machine_tool;OperationMode", modellingRule="Mandatory", dataType=machine_tool_datypes.MachineOperationMode
+            )
         ),
         o6.hasAddIn(o6.ns["ns=machine_tool;i=5011"]),
         o6.hasAddIn(o6.ns["ns=machine_tool;i=5012"]),
@@ -1823,18 +1918,24 @@ o6.reference(machine_tool_objtypes.MachineToolType, ns0.reftypes.HasComponent, o
 ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=machine_tool;i=6097",
     browseName="ns=machine_tool;FeedOverride",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6098", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6099", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6098", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=machine_tool;i=6099", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=o6.Double,
 )
 machine_tool_objtypes.ObligationType(
     nodeId="ns=machine_tool;i=5068",
     browseName="ns=machine_tool;Obligation",
+    modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=6109", browseName="ns=machine_tool;EndUserObligated", dataType=o6.Boolean)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=6110", browseName="ns=machine_tool;MachineBuilderObligated", dataType=o6.Boolean)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=6109", browseName="ns=machine_tool;EndUserObligated", modellingRule="Mandatory", dataType=o6.Boolean)
+        ),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=6110", browseName="ns=machine_tool;MachineBuilderObligated", modellingRule="Mandatory", dataType=o6.Boolean)
+        ),
     ],
 )
 machine_tool_objtypes.MachineOperationMonitoringType(
@@ -1843,12 +1944,16 @@ machine_tool_objtypes.MachineOperationMonitoringType(
     modellingRule="Mandatory",
     references=[
         o6.hasComponent(
-            ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=254", browseName="ns=machine_tool;OperationMode", dataType=machine_tool_datypes.MachineOperationMode)
+            ns0.vartypes.BaseDataVariableType(
+                nodeId="ns=machine_tool;i=254", browseName="ns=machine_tool;OperationMode", modellingRule="Mandatory", dataType=machine_tool_datypes.MachineOperationMode
+            )
         ),
         o6.hasComponent(o6.ns["ns=machine_tool;i=5068"]),
         o6.hasComponent(o6.ns["ns=machine_tool;i=6097"]),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=6106", browseName="ns=machine_tool;IsWarmUp", dataType=o6.Boolean)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=6115", browseName="ns=machine_tool;PowerOnDuration", dataType=o6.UInt32)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=6106", browseName="ns=machine_tool;IsWarmUp", modellingRule="Optional", dataType=o6.Boolean)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=6115", browseName="ns=machine_tool;PowerOnDuration", modellingRule="Optional", dataType=o6.UInt32)
+        ),
         o6.hasAddIn(o6.ns["ns=machine_tool;i=5009"]),
         o6.hasAddIn(o6.ns["ns=machine_tool;i=5010"]),
         o6.hasAddIn(o6.ns["ns=machine_tool;i=5072"]),
@@ -1865,12 +1970,15 @@ machinery.objtypes.MachineryOperationCounterType(
                 nodeId="ns=machine_tool;i=6091",
                 browseName="ns=di;PowerOnDuration",
                 description="PowerOnDuration is the duration the MachineryItem has been powered. The main purpose is to determine the time in which degradation of the MachineryItem occurred. The details, when the time is counted, is implementation-specific. Companion specifications might define specific rules. Typically, when the MachineryItem has supply voltage and the main CPU is running, the time is counted. This may include any kind of sleep mode, but may not include pure Wake on LAN. This value shall only increase during the lifetime of the MachineryItem and shall not be reset when it is restarted. The PowerOnDuration is provided as Duration, i.e., in milliseconds or even fractions of a millisecond. However, the Server is not expected to update the value in such a high frequency, but maybe once a minute or once an hour, depending on the application.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Duration,
                 accessLevel=3,
                 userAccessLevel=1,
             )
         ),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=6118", browseName="ns=machine_tool;PartsProducedInLifetime", dataType=o6.UInt64)),
+        o6.hasComponent(
+            ns0.vartypes.BaseDataVariableType(nodeId="ns=machine_tool;i=6118", browseName="ns=machine_tool;PartsProducedInLifetime", modellingRule="Optional", dataType=o6.UInt64)
+        ),
     ],
 )
 o6.reference(machine_tool_objtypes.MachineOperationMonitoringType, ns0.reftypes.HasAddIn, o6.ns["ns=machine_tool;i=5078"])
@@ -1922,6 +2030,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_tool;i=7001",
     browseName="ns=isa95_jobcontrol_v2;RequestJobResponseByJobOrderID",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6030"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6092"]),
 )
@@ -1974,6 +2083,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_tool;i=7002",
     browseName="ns=isa95_jobcontrol_v2;RequestJobResponseByJobOrderState",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6093"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6096"]),
 )
@@ -1981,11 +2091,13 @@ o6.call(
 isa95_jobcontrol_v2.objtypes.ISA95JobResponseProviderObjectType(
     nodeId="ns=machine_tool;i=5024",
     browseName="ns=machinery_jobs;JobOrderResults",
+    modellingRule="Mandatory",
     references=[o6.hasComponent(o6.ns["ns=machine_tool;i=7001"]), o6.hasComponent(o6.ns["ns=machine_tool;i=7002"])],
 )
 machinery_jobs.objtypes.JobManagementType(
     nodeId="ns=machine_tool;i=5022",
     browseName="ns=machinery_jobs;JobManagement",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=machine_tool;i=5023"]), o6.hasComponent(o6.ns["ns=machine_tool;i=5024"])],
 )
 ns0.objtypes.FolderType(
@@ -2022,6 +2134,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_tool;i=7003",
     browseName="CreateDirectory",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6100"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6101"]),
 )
@@ -2055,7 +2168,11 @@ ns0.vartypes.PropertyType(
     ],
 )
 o6.call(
-    nodeId="ns=machine_tool;i=7004", browseName="CreateFile", inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6102"]), outputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6103"])
+    nodeId="ns=machine_tool;i=7004",
+    browseName="CreateFile",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6102"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6103"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -2069,7 +2186,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ObjectToDelete", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=machine_tool;i=7005", browseName="Delete", inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6104"]))
+o6.call(nodeId="ns=machine_tool;i=7005", browseName="Delete", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6104"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_tool;i=6105",
@@ -2099,7 +2216,11 @@ ns0.vartypes.PropertyType(
     value=[ns0.datatypes.Argument(name="NewNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
-    nodeId="ns=machine_tool;i=7006", browseName="MoveOrCopy", inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6105"]), outputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6107"])
+    nodeId="ns=machine_tool;i=7006",
+    browseName="MoveOrCopy",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6105"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6107"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -2127,6 +2248,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=machine_tool;i=7007",
     browseName="CreateDirectory",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6108"]),
     outputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6111"]),
 )
@@ -2160,7 +2282,11 @@ ns0.vartypes.PropertyType(
     ],
 )
 o6.call(
-    nodeId="ns=machine_tool;i=7008", browseName="CreateFile", inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6112"]), outputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6113"])
+    nodeId="ns=machine_tool;i=7008",
+    browseName="CreateFile",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6112"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6113"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -2174,7 +2300,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ObjectToDelete", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=machine_tool;i=7009", browseName="Delete", inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6114"]))
+o6.call(nodeId="ns=machine_tool;i=7009", browseName="Delete", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6114"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=machine_tool;i=6116",
@@ -2204,12 +2330,17 @@ ns0.vartypes.PropertyType(
     value=[ns0.datatypes.Argument(name="NewNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
-    nodeId="ns=machine_tool;i=7010", browseName="MoveOrCopy", inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6116"]), outputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6117"])
+    nodeId="ns=machine_tool;i=7010",
+    browseName="MoveOrCopy",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6116"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=machine_tool;i=6117"]),
 )
 
 ns0.objtypes.FileDirectoryType(
     nodeId="ns=machine_tool;i=5026",
     browseName="ns=machine_tool;WorkMasters",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=machine_tool;i=7007"]),
         o6.hasComponent(o6.ns["ns=machine_tool;i=7008"]),

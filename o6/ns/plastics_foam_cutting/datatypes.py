@@ -35,7 +35,11 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=plastics_foam_cutting;i=3003", browseName="GrindingUnitStateEnumeration", description="Provides information about the current state of the grinding unit.")
+@o6.enumtype(
+    nodeId="ns=plastics_foam_cutting;i=3003",
+    browseName="ns=plastics_foam_cutting;GrindingUnitStateEnumeration",
+    description="Provides information about the current state of the grinding unit.",
+)
 class GrindingUnitStateEnumeration(ns0.datatypes.Enumeration):
     OFF = o6.enumfield(0, name="Off")
     STANDBY = o6.enumfield(1, name="Standby")
@@ -44,18 +48,18 @@ class GrindingUnitStateEnumeration(ns0.datatypes.Enumeration):
 
 @o6.datatype(
     nodeId="ns=plastics_foam_cutting;i=3004",
-    browseName="ActiveVacuumUnitsDataType",
+    browseName="ns=plastics_foam_cutting;ActiveVacuumUnitsDataType",
     description="Provides information about the position of a vacuum unit and the current vacuum power, given as a float value between 0 (off) and 1 (full power).",
     defaultEncodingId="ns=plastics_foam_cutting;i=5073",
 )
 class ActiveVacuumUnitsDataType(ns0.datatypes.Structure):
-    position: o6.String
-    vacuumPower: o6.Float
+    position: o6.String = o6.field(name="Position")
+    vacuumPower: o6.Float = o6.field(name="VacuumPower")
 
 
 @o6.enumtype(
     nodeId="ns=plastics_foam_cutting;i=3005",
-    browseName="ProcessingModeEnumeration",
+    browseName="ns=plastics_foam_cutting;ProcessingModeEnumeration",
     description="Provides information about the current processing mode as addition to the MachineOperationMode state Processing.",
 )
 class ProcessingModeEnumeration(ns0.datatypes.Enumeration):
@@ -65,7 +69,9 @@ class ProcessingModeEnumeration(ns0.datatypes.Enumeration):
 
 
 @o6.enumtype(
-    nodeId="ns=plastics_foam_cutting;i=3006", browseName="BottomFixtureEnumeration", description="Provides information about the type of material fixture for the material bottom."
+    nodeId="ns=plastics_foam_cutting;i=3006",
+    browseName="ns=plastics_foam_cutting;BottomFixtureEnumeration",
+    description="Provides information about the type of material fixture for the material bottom.",
 )
 class BottomFixtureEnumeration(ns0.datatypes.Enumeration):
     NONE = o6.enumfield(0, name="None")
@@ -74,7 +80,9 @@ class BottomFixtureEnumeration(ns0.datatypes.Enumeration):
 
 
 @o6.enumtype(
-    nodeId="ns=plastics_foam_cutting;i=3009", browseName="SideFixtureEnumeration", description="Provides information about the type of material fixture for the material side."
+    nodeId="ns=plastics_foam_cutting;i=3009",
+    browseName="ns=plastics_foam_cutting;SideFixtureEnumeration",
+    description="Provides information about the type of material fixture for the material side.",
 )
 class SideFixtureEnumeration(ns0.datatypes.Enumeration):
     NONE = o6.enumfield(0, name="None")
@@ -84,7 +92,9 @@ class SideFixtureEnumeration(ns0.datatypes.Enumeration):
 
 
 @o6.enumtype(
-    nodeId="ns=plastics_foam_cutting;i=3012", browseName="TopFixtureEnumeration", description="Provides information about the type of material fixture for the material top."
+    nodeId="ns=plastics_foam_cutting;i=3012",
+    browseName="ns=plastics_foam_cutting;TopFixtureEnumeration",
+    description="Provides information about the type of material fixture for the material top.",
 )
 class TopFixtureEnumeration(ns0.datatypes.Enumeration):
     NONE = o6.enumfield(0, name="None")
@@ -94,7 +104,7 @@ class TopFixtureEnumeration(ns0.datatypes.Enumeration):
 
 @o6.enumtype(
     nodeId="ns=plastics_foam_cutting;i=3015",
-    browseName="MaterialSupportCategoryEnumeration",
+    browseName="ns=plastics_foam_cutting;MaterialSupportCategoryEnumeration",
     description="This Property provides information about the category of the material support system.",
 )
 class MaterialSupportCategoryEnumeration(ns0.datatypes.Enumeration):
@@ -107,7 +117,9 @@ class MaterialSupportCategoryEnumeration(ns0.datatypes.Enumeration):
 
 
 @o6.enumtype(
-    nodeId="ns=plastics_foam_cutting;i=3018", browseName="PossibleDirectionEnumeration", description="Provides information about the possible working directions of the conveyor."
+    nodeId="ns=plastics_foam_cutting;i=3018",
+    browseName="ns=plastics_foam_cutting;PossibleDirectionEnumeration",
+    description="Provides information about the possible working directions of the conveyor.",
 )
 class PossibleDirectionEnumeration(ns0.datatypes.Enumeration):
     FORWARDS = o6.enumfield(0, name="Forwards")
@@ -119,7 +131,7 @@ class PossibleDirectionEnumeration(ns0.datatypes.Enumeration):
 
 @o6.enumtype(
     nodeId="ns=plastics_foam_cutting;i=3021",
-    browseName="LightBarrierEnumeration",
+    browseName="ns=plastics_foam_cutting;LightBarrierEnumeration",
     description="Provides information about the positions of light barriers on this instance of conveyor.",
 )
 class LightBarrierEnumeration(ns0.datatypes.Enumeration):
@@ -132,7 +144,7 @@ class LightBarrierEnumeration(ns0.datatypes.Enumeration):
 
 @o6.enumtype(
     nodeId="ns=plastics_foam_cutting;i=3024",
-    browseName="ConveyorSubCategoryEnumeration",
+    browseName="ns=plastics_foam_cutting;ConveyorSubCategoryEnumeration",
     description="This property provides information on what type of conveyor this instance is.",
 )
 class ConveyorSubCategoryEnumeration(ns0.datatypes.Enumeration):
@@ -149,7 +161,7 @@ class ConveyorSubCategoryEnumeration(ns0.datatypes.Enumeration):
 
 @o6.enumtype(
     nodeId="ns=plastics_foam_cutting;i=3027",
-    browseName="ConveyorCategoryEnumeration",
+    browseName="ns=plastics_foam_cutting;ConveyorCategoryEnumeration",
     description="This property provides information, if this conveyor is used for unloading, loading or transportation of material.",
 )
 class ConveyorCategoryEnumeration(ns0.datatypes.Enumeration):
@@ -159,7 +171,9 @@ class ConveyorCategoryEnumeration(ns0.datatypes.Enumeration):
 
 
 @o6.enumtype(
-    nodeId="ns=plastics_foam_cutting;i=3030", browseName="DirectionEnumeration", description="Provides information about the current transportation direction of the conveyor."
+    nodeId="ns=plastics_foam_cutting;i=3030",
+    browseName="ns=plastics_foam_cutting;DirectionEnumeration",
+    description="Provides information about the current transportation direction of the conveyor.",
 )
 class DirectionEnumeration(ns0.datatypes.Enumeration):
     FORWARD = o6.enumfield(0, name="Forward")

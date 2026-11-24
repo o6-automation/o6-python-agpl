@@ -30,6 +30,7 @@
 
 PyObject *
 pyServer_browse(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_desc = NULL;
     PyObject *py_node = NULL;
     unsigned int max_refs = 0;
@@ -98,6 +99,7 @@ pyServer_browse(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_browse_next(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_release;
     PyObject *py_cp;
     if (!PyArg_ParseTuple(args, "OO", &py_release, &py_cp))
@@ -201,6 +203,7 @@ pyServer_browse_next(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_browse_recursive(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_desc;
     if (!PyArg_ParseTuple(args, "O", &py_desc))
         return NULL;
@@ -259,6 +262,7 @@ pyServer_browse_recursive(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_translate_browse_paths_to_nodeids(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_browse_path;
     PyObject *py_node = NULL;
     if (!PyArg_ParseTuple(args, "O|O", &py_browse_path, &py_node))
@@ -306,6 +310,7 @@ pyServer_translate_browse_paths_to_nodeids(PyObject *self, PyObject *args) {
 
 PyObject *
 pyServer_browse_simplified_browse_paths(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_origin;
     PyObject *py_qn_list;
     if (!PyArg_ParseTuple(args, "OO", &py_origin, &py_qn_list))
@@ -425,6 +430,7 @@ pyNodeIteratorCallback(UA_NodeId childId, UA_Boolean isInverse,
 
 PyObject *
 pyServer_for_each_child_node(PyObject *self, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyObject *py_nodeid, *py_callback;
     if (!PyArg_ParseTuple(args, "OO", &py_nodeid, &py_callback))
         return NULL;

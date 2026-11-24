@@ -41,24 +41,42 @@ class SFCType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=plcopen;i=1001", browseName="ns=plcopen;CtrlConfigurationType", displayName="CtrlConfigurationType")
 class CtrlConfigurationType(di.objtypes.TopologyElementType):
-    accessVars: di.objtypes.FunctionalGroupType | None = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=plcopen;i=5007", browseName="ns=plcopen;AccessVars"))
-    configVars: di.objtypes.FunctionalGroupType | None = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=plcopen;i=5008", browseName="ns=plcopen;ConfigVars"))
-    configuration: di.objtypes.FunctionalGroupType | None = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=plcopen;i=5009", browseName="ns=plcopen;Configuration"))
-    globalVars: di.objtypes.FunctionalGroupType | None = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=plcopen;i=5006", browseName="ns=plcopen;GlobalVars"))
-    identification: di.objtypes.FunctionalGroupType | None = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=plcopen;i=5003", browseName="ns=di;Identification"))
+    accessVars: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
+        di.objtypes.FunctionalGroupType(nodeId="ns=plcopen;i=5007", browseName="ns=plcopen;AccessVars", modellingRule="Optional")
+    )
+    configVars: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
+        di.objtypes.FunctionalGroupType(nodeId="ns=plcopen;i=5008", browseName="ns=plcopen;ConfigVars", modellingRule="Optional")
+    )
+    configuration: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
+        di.objtypes.FunctionalGroupType(nodeId="ns=plcopen;i=5009", browseName="ns=plcopen;Configuration", modellingRule="Optional")
+    )
+    globalVars: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
+        di.objtypes.FunctionalGroupType(nodeId="ns=plcopen;i=5006", browseName="ns=plcopen;GlobalVars", modellingRule="Optional")
+    )
+    identification: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
+        di.objtypes.FunctionalGroupType(nodeId="ns=plcopen;i=5003", browseName="ns=di;Identification", modellingRule="Optional")
+    )
     methodSet: ns0.objtypes.BaseObjectType | None
     parameterSet: ns0.objtypes.BaseObjectType | None
     resources: di.objtypes.ConfigurableObjectType
-    status: di.objtypes.FunctionalGroupType | None = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=plcopen;i=5010", browseName="ns=plcopen;Status"))
+    status: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
+        di.objtypes.FunctionalGroupType(nodeId="ns=plcopen;i=5010", browseName="ns=plcopen;Status", modellingRule="Optional")
+    )
 
 
 @o6.objecttype(nodeId="ns=plcopen;i=1002", browseName="ns=plcopen;CtrlResourceType", displayName="CtrlResourceType")
 class CtrlResourceType(di.objtypes.DeviceType):
-    configuration: di.objtypes.FunctionalGroupType | None = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=plcopen;i=5019", browseName="ns=plcopen;Configuration"))
-    globalVars: di.objtypes.FunctionalGroupType | None = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=plcopen;i=5018", browseName="ns=plcopen;GlobalVars"))
+    configuration: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
+        di.objtypes.FunctionalGroupType(nodeId="ns=plcopen;i=5019", browseName="ns=plcopen;Configuration", modellingRule="Optional")
+    )
+    globalVars: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
+        di.objtypes.FunctionalGroupType(nodeId="ns=plcopen;i=5018", browseName="ns=plcopen;GlobalVars", modellingRule="Optional")
+    )
     methodSet: ns0.objtypes.BaseObjectType | None
     programs: di.objtypes.ConfigurableObjectType
-    status: di.objtypes.FunctionalGroupType | None = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=plcopen;i=5020", browseName="ns=plcopen;Status"))
+    status: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
+        di.objtypes.FunctionalGroupType(nodeId="ns=plcopen;i=5020", browseName="ns=plcopen;Status", modellingRule="Optional")
+    )
     tasks: di.objtypes.ConfigurableObjectType
 
 
@@ -66,7 +84,7 @@ class CtrlResourceType(di.objtypes.DeviceType):
 class CtrlProgramOrganizationUnitType(di.objtypes.BlockType):
     blockName_: CtrlFunctionBlockType | None
     body: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=plcopen;i=6001", browseName="ns=plcopen;Body", dataType=o6.XmlElement)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=plcopen;i=6001", browseName="ns=plcopen;Body", modellingRule="Optional", dataType=o6.XmlElement)
     )
     sFCName_: SFCType | None
     varExternalName_: ns0.vartypes.BaseDataVariableType | None = o6.reference(
@@ -94,13 +112,15 @@ class CtrlProgramOrganizationUnitType(di.objtypes.BlockType):
 @o6.objecttype(nodeId="ns=plcopen;i=1004", browseName="ns=plcopen;CtrlProgramType", displayName="CtrlProgramType", isAbstract=True)
 class CtrlProgramType(CtrlProgramOrganizationUnitType):
     program: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=plcopen;i=6002", browseName="ns=plcopen;Program", dataType=ns0.datatypes.Structure)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=plcopen;i=6002", browseName="ns=plcopen;Program", modellingRule="Optional", dataType=ns0.datatypes.Structure)
     )
 
 
 @o6.objecttype(nodeId="ns=plcopen;i=1005", browseName="ns=plcopen;CtrlFunctionBlockType", displayName="CtrlFunctionBlockType", isAbstract=True)
 class CtrlFunctionBlockType(CtrlProgramOrganizationUnitType):
-    functionBlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=plcopen;i=6003", browseName="ns=plcopen;FunctionBlock"))
+    functionBlock: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=plcopen;i=6003", browseName="ns=plcopen;FunctionBlock", modellingRule="Optional")
+    )
     functionBlockInOutName_: CtrlFunctionBlockType | None
     functionBlockInputName_: CtrlFunctionBlockType | None
     functionBlockOutputName_: CtrlFunctionBlockType | None
@@ -108,9 +128,15 @@ class CtrlFunctionBlockType(CtrlProgramOrganizationUnitType):
 
 @o6.objecttype(nodeId="ns=plcopen;i=1006", browseName="ns=plcopen;CtrlTaskType", displayName="CtrlTaskType")
 class CtrlTaskType(ns0.objtypes.BaseObjectType):
-    interval: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plcopen;i=6005", browseName="ns=plcopen;Interval", dataType=o6.String))
-    priority: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plcopen;i=6004", browseName="ns=plcopen;Priority", dataType=o6.UInt32))
-    single: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plcopen;i=6006", browseName="ns=plcopen;Single", dataType=o6.String))
+    interval: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plcopen;i=6005", browseName="ns=plcopen;Interval", modellingRule="Optional", dataType=o6.String)
+    )
+    priority: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plcopen;i=6004", browseName="ns=plcopen;Priority", modellingRule="Mandatory", dataType=o6.UInt32)
+    )
+    single: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plcopen;i=6006", browseName="ns=plcopen;Single", modellingRule="Optional", dataType=o6.String)
+    )
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ns0, plcopen_reftypes, plcopen_datypes

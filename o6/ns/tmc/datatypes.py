@@ -34,31 +34,37 @@ else:
     _VariableNode = object
 
 
-@o6.datatype(nodeId="ns=tmc;i=3002", browseName="MessageType", description="The MessageType provides a uniquely identified localised text.", defaultEncodingId="ns=tmc;i=5036")
+@o6.datatype(
+    nodeId="ns=tmc;i=3002", browseName="ns=tmc;MessageType", description="The MessageType provides a uniquely identified localised text.", defaultEncodingId="ns=tmc;i=5036"
+)
 class MessageType(ns0.datatypes.Structure):
-    iD: o6.String
-    localText: o6.LocalizedText
+    iD: o6.String = o6.field(name="ID")
+    localText: o6.LocalizedText = o6.field(name="LocalText")
 
 
 @o6.datatype(
     nodeId="ns=tmc;i=3004",
-    browseName="DataSetEntryType",
+    browseName="ns=tmc;DataSetEntryType",
     description="The DataSetEntryType structure contains the value of a single parameter, or data value.",
     defaultEncodingId="ns=tmc;i=5003",
 )
 class DataSetEntryType(ns0.datatypes.Structure):
-    iD: o6.String
-    value: Any
+    iD: o6.String = o6.field(name="ID")
+    value: Any = o6.field(name="Value")
 
 
-@o6.enumtype(nodeId="ns=tmc;i=3005", browseName="ParameterDependencyEnumeration", description="The ParameterDependencyEnumeration contains what a parameter is depending upon.")
+@o6.enumtype(
+    nodeId="ns=tmc;i=3005", browseName="ns=tmc;ParameterDependencyEnumeration", description="The ParameterDependencyEnumeration contains what a parameter is depending upon."
+)
 class ParameterDependencyEnumeration(ns0.datatypes.Enumeration):
     MACHINE = o6.enumfield(0, name="Machine")
     BRAND = o6.enumfield(1, name="Brand")
     MACHINE_AND_BRAND = o6.enumfield(2, name="Machine and Brand")
 
 
-@o6.enumtype(nodeId="ns=tmc;i=3007", browseName="CommandEnumeration", description="The CommandEnumeration provides standardized commands that can be sent to a state machine.")
+@o6.enumtype(
+    nodeId="ns=tmc;i=3007", browseName="ns=tmc;CommandEnumeration", description="The CommandEnumeration provides standardized commands that can be sent to a state machine."
+)
 class CommandEnumeration(ns0.datatypes.Enumeration):
     ABORT = o6.enumfield(0, name="Abort")
     START = o6.enumfield(1, name="Start")
@@ -71,7 +77,7 @@ class CommandEnumeration(ns0.datatypes.Enumeration):
     UNSUSPEND = o6.enumfield(8, name="Unsuspend")
 
 
-@o6.enumtype(nodeId="ns=tmc;i=3008", browseName="StateEnumeration", description="The StateEnumeration contains the PackML states for a machine.")
+@o6.enumtype(nodeId="ns=tmc;i=3008", browseName="ns=tmc;StateEnumeration", description="The StateEnumeration contains the PackML states for a machine.")
 class StateEnumeration(ns0.datatypes.Enumeration):
     STOPPED = o6.enumfield(0, name="Stopped")
     RESETTING = o6.enumfield(1, name="Resetting")
@@ -94,17 +100,19 @@ class StateEnumeration(ns0.datatypes.Enumeration):
 
 @o6.datatype(
     nodeId="ns=tmc;i=3009",
-    browseName="MethodExecutionFeedbackType",
+    browseName="ns=tmc;MethodExecutionFeedbackType",
     description="The MethodExecutionFeedbackType provides suitable feedback, both positive and negative, to an OPC UA client invoking a method.",
     defaultEncodingId="ns=tmc;i=5052",
 )
 class MethodExecutionFeedbackType(ns0.datatypes.Structure):
-    success: o6.Boolean
-    message: list[MessageType] = o6.field(arrayDimensions=[0])
+    success: o6.Boolean = o6.field(name="Success")
+    message: list[MessageType] = o6.field(name="Message", arrayDimensions=[0])
 
 
 @o6.enumtype(
-    nodeId="ns=tmc;i=3015", browseName="StorageLogicEnumeration", description="The StorageLogicEnumeration describes standard loading and unloading material \nconfigurations."
+    nodeId="ns=tmc;i=3015",
+    browseName="ns=tmc;StorageLogicEnumeration",
+    description="The StorageLogicEnumeration describes standard loading and unloading material \nconfigurations.",
 )
 class StorageLogicEnumeration(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="Other")
@@ -113,7 +121,9 @@ class StorageLogicEnumeration(ns0.datatypes.Enumeration):
     FEFO = o6.enumfield(3, name="FEFO")
 
 
-@o6.enumtype(nodeId="ns=tmc;i=3017", browseName="ProductionStatusEnumeration", description="The ProductionStatusEnumeration contains the production state of a machine module.")
+@o6.enumtype(
+    nodeId="ns=tmc;i=3017", browseName="ns=tmc;ProductionStatusEnumeration", description="The ProductionStatusEnumeration contains the production state of a machine module."
+)
 class ProductionStatusEnumeration(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="Other")
     BRAND_CHANGE = o6.enumfield(1, name="BrandChange")
@@ -121,107 +131,107 @@ class ProductionStatusEnumeration(ns0.datatypes.Enumeration):
     NO_PRODUCTION = o6.enumfield(3, name="NoProduction")
 
 
-@o6.datatype(nodeId="ns=tmc;i=3018", browseName="DataSetType", description="The DataSetType structure contains a set of data values.", defaultEncodingId="ns=tmc;i=5045")
+@o6.datatype(nodeId="ns=tmc;i=3018", browseName="ns=tmc;DataSetType", description="The DataSetType structure contains a set of data values.", defaultEncodingId="ns=tmc;i=5045")
 class DataSetType(ns0.datatypes.Structure):
-    iD: o6.String
-    description: o6.LocalizedText
-    values: list[DataSetEntryType] = o6.field(arrayDimensions=[0])
+    iD: o6.String = o6.field(name="ID")
+    description: o6.LocalizedText = o6.field(name="Description")
+    values: list[DataSetEntryType] = o6.field(name="Values", arrayDimensions=[0])
 
 
 @o6.datatype(
     nodeId="ns=tmc;i=3019",
-    browseName="DataDescriptionType",
+    browseName="ns=tmc;DataDescriptionType",
     description="The DataDescriptionType structure contains a metadata, i.e. a description.",
     defaultEncodingId="ns=tmc;i=5024",
 )
 class DataDescriptionType(ns0.datatypes.Structure):
-    iD: o6.String
-    mES_ID: o6.String
-    description: o6.LocalizedText
+    iD: o6.String = o6.field(name="ID")
+    mES_ID: o6.String = o6.field(name="MES_ID")
+    description: o6.LocalizedText = o6.field(name="Description")
 
 
 @o6.datatype(
     nodeId="ns=tmc;i=3003",
-    browseName="DataDefinitionType",
+    browseName="ns=tmc;DataDefinitionType",
     description="The DataDefinitionType structure contains the metadata that describes a parameter.",
     defaultEncodingId="ns=tmc;i=5001",
 )
 class DataDefinitionType(DataDescriptionType):
-    iD: o6.String
-    mES_ID: o6.String
-    description: o6.LocalizedText
-    engineeringUnits: ns0.datatypes.EUInformation
-    displayFormat: o6.String
-    dependency: ParameterDependencyEnumeration
-    dataType: o6.String
-    userSubset: o6.Boolean
-    controlRange: ns0.datatypes.Range
-    alarmRange: ns0.datatypes.Range
+    iD: o6.String = o6.field(name="ID")
+    mES_ID: o6.String = o6.field(name="MES_ID")
+    description: o6.LocalizedText = o6.field(name="Description")
+    engineeringUnits: ns0.datatypes.EUInformation = o6.field(name="EngineeringUnits")
+    displayFormat: o6.String = o6.field(name="DisplayFormat")
+    dependency: ParameterDependencyEnumeration = o6.field(name="Dependency")
+    dataType: o6.String = o6.field(name="DataType")
+    userSubset: o6.Boolean = o6.field(name="UserSubset")
+    controlRange: ns0.datatypes.Range = o6.field(name="ControlRange")
+    alarmRange: ns0.datatypes.Range = o6.field(name="AlarmRange")
 
 
-@o6.datatype(nodeId="ns=tmc;i=3011", browseName="DataValueType", description="The DataValueType structure contains a data value.", defaultEncodingId="ns=tmc;i=5005")
+@o6.datatype(nodeId="ns=tmc;i=3011", browseName="ns=tmc;DataValueType", description="The DataValueType structure contains a data value.", defaultEncodingId="ns=tmc;i=5005")
 class DataValueType(DataDescriptionType):
-    iD: o6.String
-    mES_ID: o6.String
-    description: o6.LocalizedText
-    value: Any
-    engineeringUnits: ns0.datatypes.EUInformation
+    iD: o6.String = o6.field(name="ID")
+    mES_ID: o6.String = o6.field(name="MES_ID")
+    description: o6.LocalizedText = o6.field(name="Description")
+    value: Any = o6.field(name="Value")
+    engineeringUnits: ns0.datatypes.EUInformation = o6.field(name="EngineeringUnits")
 
 
 @o6.datatype(
     nodeId="ns=tmc;i=3010",
-    browseName="MaterialDefinitionType",
+    browseName="ns=tmc;MaterialDefinitionType",
     description="The MaterialDefinitionType structure contains the definition of a material. It is harmonised with \nISA 95 Material Definition.",
     defaultEncodingId="ns=tmc;i=5007",
 )
 class MaterialDefinitionType(ns0.datatypes.Structure):
-    iD: o6.String
-    mES_ID: o6.String
-    description: o6.LocalizedText
-    baseUnitOfMeasure: ns0.datatypes.EUInformation
-    batchManaged: o6.Boolean
-    groupID: o6.String | None
-    parentGroupID: o6.String | None
-    shelfLife: o6.UInt32 | None
-    properties: list[DataValueType] | None = o6.field(arrayDimensions=[0])
+    iD: o6.String = o6.field(name="ID")
+    mES_ID: o6.String = o6.field(name="MES_ID")
+    description: o6.LocalizedText = o6.field(name="Description")
+    baseUnitOfMeasure: ns0.datatypes.EUInformation = o6.field(name="BaseUnitOfMeasure")
+    batchManaged: o6.Boolean = o6.field(name="BatchManaged")
+    groupID: o6.String | None = o6.field(name="GroupID")
+    parentGroupID: o6.String | None = o6.field(name="ParentGroupID")
+    shelfLife: o6.UInt32 | None = o6.field(name="ShelfLife")
+    properties: list[DataValueType] | None = o6.field(name="Properties", arrayDimensions=[0])
 
 
 @o6.datatype(
     nodeId="ns=tmc;i=3013",
-    browseName="MaterialPointType",
+    browseName="ns=tmc;MaterialPointType",
     description="The MaterialPointType structure provides the description of the capability of a load or\nunload point.",
     defaultEncodingId="ns=tmc;i=5039",
 )
 class MaterialPointType(ns0.datatypes.Structure):
-    iD: o6.String
-    description: o6.LocalizedText
-    materialCapability: list[MaterialDefinitionType] = o6.field(arrayDimensions=[0])
-    connectedMaterialPoint: o6.ExpandedNodeId
-    propagatesProductionOrder: o6.Boolean
+    iD: o6.String = o6.field(name="ID")
+    description: o6.LocalizedText = o6.field(name="Description")
+    materialCapability: list[MaterialDefinitionType] = o6.field(name="MaterialCapability", arrayDimensions=[0])
+    connectedMaterialPoint: o6.ExpandedNodeId = o6.field(name="ConnectedMaterialPoint")
+    propagatesProductionOrder: o6.Boolean = o6.field(name="PropagatesProductionOrder")
 
 
 @o6.datatype(
     nodeId="ns=tmc;i=3016",
-    browseName="ProductionOrderHeaderType",
+    browseName="ns=tmc;ProductionOrderHeaderType",
     description="The ProductionOrderHeaderType structure contains the header information for a production \norder.",
     defaultEncodingId="ns=tmc;i=5043",
 )
 class ProductionOrderHeaderType(ns0.datatypes.Structure):
-    number: o6.String
-    producedMaterial: MaterialDefinitionType
-    targetQuantity: o6.Double
-    continueAtJobEnd: o6.Boolean
-    targetStartTime: o6.DateTime
-    targetEndTime: o6.DateTime
-    dataSetID: o6.String
-    dataSetDescription: o6.LocalizedText
-    materialListID: o6.String
-    materialListDescription: o6.LocalizedText
+    number: o6.String = o6.field(name="Number")
+    producedMaterial: MaterialDefinitionType = o6.field(name="ProducedMaterial")
+    targetQuantity: o6.Double = o6.field(name="TargetQuantity")
+    continueAtJobEnd: o6.Boolean = o6.field(name="ContinueAtJobEnd")
+    targetStartTime: o6.DateTime = o6.field(name="TargetStartTime")
+    targetEndTime: o6.DateTime = o6.field(name="TargetEndTime")
+    dataSetID: o6.String = o6.field(name="DataSetID")
+    dataSetDescription: o6.LocalizedText = o6.field(name="DataSetDescription")
+    materialListID: o6.String = o6.field(name="MaterialListID")
+    materialListDescription: o6.LocalizedText = o6.field(name="MaterialListDescription")
 
 
 @o6.enumtype(
     nodeId="ns=tmc;i=3020",
-    browseName="MaterialIntegrityAgentEnumeration",
+    browseName="ns=tmc;MaterialIntegrityAgentEnumeration",
     description="The MaterialIntegrityAgentEnumeration identifies the possible agents responsible for material integrity checking.",
 )
 class MaterialIntegrityAgentEnumeration(ns0.datatypes.Enumeration):
@@ -232,17 +242,17 @@ class MaterialIntegrityAgentEnumeration(ns0.datatypes.Enumeration):
 
 @o6.datatype(
     nodeId="ns=tmc;i=3021",
-    browseName="DataSetDefinitionType",
+    browseName="ns=tmc;DataSetDefinitionType",
     description="The DataSetDefinition structure contains the description and other necessary metadata of the \ncomplete set of machine settings required for production.",
     defaultEncodingId="ns=tmc;i=5064",
 )
 class DataSetDefinitionType(ns0.datatypes.Structure):
-    iD: o6.String
-    description: o6.LocalizedText
-    definitions: list[DataDefinitionType] = o6.field(arrayDimensions=[0])
+    iD: o6.String = o6.field(name="ID")
+    description: o6.LocalizedText = o6.field(name="Description")
+    definitions: list[DataDefinitionType] = o6.field(name="Definitions", arrayDimensions=[0])
 
 
-@o6.enumtype(nodeId="ns=tmc;i=3023", browseName="ControlModeEnumeration", description="The ControlModeEnumeration contains the PackML modes of operation of a machine.")
+@o6.enumtype(nodeId="ns=tmc;i=3023", browseName="ns=tmc;ControlModeEnumeration", description="The ControlModeEnumeration contains the PackML modes of operation of a machine.")
 class ControlModeEnumeration(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="OTHER")
     PRODUCTION = o6.enumfield(1, name="PRODUCTION")
@@ -255,7 +265,7 @@ class ControlModeEnumeration(ns0.datatypes.Enumeration):
     REMOTE_SERVICE = o6.enumfield(8, name="REMOTE SERVICE")
 
 
-@o6.enumtype(nodeId="ns=tmc;i=3026", browseName="MotorDirectionEnumeration", description="The MotorDirectionEnumeration provides the rotation direction of a motor.")
+@o6.enumtype(nodeId="ns=tmc;i=3026", browseName="ns=tmc;MotorDirectionEnumeration", description="The MotorDirectionEnumeration provides the rotation direction of a motor.")
 class MotorDirectionEnumeration(ns0.datatypes.Enumeration):
     CLOCKWISE = o6.enumfield(0, name="Clockwise")
     COUNTER_CLOCKWISE = o6.enumfield(1, name="CounterClockwise")
@@ -263,31 +273,31 @@ class MotorDirectionEnumeration(ns0.datatypes.Enumeration):
 
 @o6.datatype(
     nodeId="ns=tmc;i=3029",
-    browseName="RootCauseMessageType",
+    browseName="ns=tmc;RootCauseMessageType",
     description="The RootCauseMessageType structure contains a root cause message and its group identifier.",
     defaultEncodingId="ns=tmc;i=5144",
 )
 class RootCauseMessageType(MessageType):
-    iD: o6.String
-    localText: o6.LocalizedText
-    groupID: o6.String
+    iD: o6.String = o6.field(name="ID")
+    localText: o6.LocalizedText = o6.field(name="LocalText")
+    groupID: o6.String = o6.field(name="GroupID")
 
 
 @o6.datatype(
     nodeId="ns=tmc;i=3030",
-    browseName="RootCauseGroupType",
+    browseName="ns=tmc;RootCauseGroupType",
     description="The RootCauseGroupType structure contains a root cause message and its group identifier.",
     defaultEncodingId="ns=tmc;i=5146",
 )
 class RootCauseGroupType(ns0.datatypes.Structure):
-    iD: o6.String
-    parentID: o6.String
-    description: o6.LocalizedText
+    iD: o6.String = o6.field(name="ID")
+    parentID: o6.String = o6.field(name="ParentID")
+    description: o6.LocalizedText = o6.field(name="Description")
 
 
 @o6.enumtype(
     nodeId="ns=tmc;i=3035",
-    browseName="StorageMixingLogicEnumeration",
+    browseName="ns=tmc;StorageMixingLogicEnumeration",
     description="The StorageMixingLogicEnumeration describes standard ways of mixing material in a material \nstorage buffer.",
 )
 class StorageMixingLogicEnumeration(ns0.datatypes.Enumeration):
@@ -298,20 +308,22 @@ class StorageMixingLogicEnumeration(ns0.datatypes.Enumeration):
 
 @o6.datatype(
     nodeId="ns=tmc;i=3014",
-    browseName="MaterialStorageBufferDataType",
+    browseName="ns=tmc;MaterialStorageBufferDataType",
     description="The MaterialStorageBufferDataType structure provides the description of the capability of a \nmaterial storage buffer.",
     defaultEncodingId="ns=tmc;i=5041",
 )
 class MaterialStorageBufferDataType(ns0.datatypes.Structure):
-    iD: o6.String
-    storedMaterial: MaterialDefinitionType
-    engineeringUnits: ns0.datatypes.EUInformation
-    totalStorageCapacity: o6.Double
-    storageLogic: StorageLogicEnumeration
-    mixingLogic: StorageMixingLogicEnumeration
+    iD: o6.String = o6.field(name="ID")
+    storedMaterial: MaterialDefinitionType = o6.field(name="StoredMaterial")
+    engineeringUnits: ns0.datatypes.EUInformation = o6.field(name="EngineeringUnits")
+    totalStorageCapacity: o6.Double = o6.field(name="TotalStorageCapacity")
+    storageLogic: StorageLogicEnumeration = o6.field(name="StorageLogic")
+    mixingLogic: StorageMixingLogicEnumeration = o6.field(name="MixingLogic")
 
 
-@o6.enumtype(nodeId="ns=tmc;i=3039", browseName="MaterialStockStatusEnumeration", description="The MaterialStockStatusEnumeration provides the stock status for a material lot.")
+@o6.enumtype(
+    nodeId="ns=tmc;i=3039", browseName="ns=tmc;MaterialStockStatusEnumeration", description="The MaterialStockStatusEnumeration provides the stock status for a material lot."
+)
 class MaterialStockStatusEnumeration(ns0.datatypes.Enumeration):
     UNRESTRICTED = o6.enumfield(0, name="Unrestricted")
     QUALITY_INSPECTION = o6.enumfield(1, name="QualityInspection")
@@ -320,91 +332,94 @@ class MaterialStockStatusEnumeration(ns0.datatypes.Enumeration):
 
 @o6.datatype(
     nodeId="ns=tmc;i=3012",
-    browseName="MaterialLotType",
+    browseName="ns=tmc;MaterialLotType",
     description="The MaterialLotType structure contains the material lot information. It is harmonised with ISA \n95 Material Lot.",
     defaultEncodingId="ns=tmc;i=5010",
 )
 class MaterialLotType(ns0.datatypes.Structure):
-    iD: o6.String
-    mES_ID: o6.String
-    description: o6.LocalizedText
-    materialDefinition: MaterialDefinitionType
-    status: MaterialStockStatusEnumeration
-    productionDate: o6.DateTime
-    bestUsedBeforeDate: o6.DateTime | None
-    properties: list[DataValueType] | None = o6.field(arrayDimensions=[0])
+    iD: o6.String = o6.field(name="ID")
+    mES_ID: o6.String = o6.field(name="MES_ID")
+    description: o6.LocalizedText = o6.field(name="Description")
+    materialDefinition: MaterialDefinitionType = o6.field(name="MaterialDefinition")
+    status: MaterialStockStatusEnumeration = o6.field(name="Status")
+    productionDate: o6.DateTime = o6.field(name="ProductionDate")
+    bestUsedBeforeDate: o6.DateTime | None = o6.field(name="BestUsedBeforeDate")
+    properties: list[DataValueType] | None = o6.field(name="Properties", arrayDimensions=[0])
 
 
 @o6.datatype(
     nodeId="ns=tmc;i=3025",
-    browseName="MaterialSublotType",
+    browseName="ns=tmc;MaterialSublotType",
     description="The MaterialSublotType structure contains the material sublot information. It is harmonised with \nISA 95 Material Sublot.",
     defaultEncodingId="ns=tmc;i=5013",
 )
 class MaterialSublotType(ns0.datatypes.Structure):
-    iD: o6.String
-    mES_ID: o6.String
-    materialLot: MaterialLotType
-    materialStorageLocationID: o6.String
-    quantity: o6.Double
-    carrierID: o6.String | None
-    relativePositionID: o6.String | None
-    parentSublotID: o6.String | None
-    sublots: list[MaterialSublotType] | None = o6.field(arrayDimensions=[0])
+    iD: o6.String = o6.field(name="ID")
+    mES_ID: o6.String = o6.field(name="MES_ID")
+    materialLot: MaterialLotType = o6.field(name="MaterialLot")
+    materialStorageLocationID: o6.String = o6.field(name="MaterialStorageLocationID")
+    quantity: o6.Double = o6.field(name="Quantity")
+    carrierID: o6.String | None = o6.field(name="CarrierID")
+    relativePositionID: o6.String | None = o6.field(name="RelativePositionID")
+    parentSublotID: o6.String | None = o6.field(name="ParentSublotID")
+    sublots: list[MaterialSublotType] | None = o6.field(name="Sublots", arrayDimensions=[0])
 
 
 @o6.datatype(
     nodeId="ns=tmc;i=3036",
-    browseName="MaterialListItemType",
+    browseName="ns=tmc;MaterialListItemType",
     description="The MaterialListItemType structure contains a single material to be processed.",
     defaultEncodingId="ns=tmc;i=5307",
 )
 class MaterialListItemType(ns0.datatypes.Structure):
-    assemblyID: o6.String
-    materialPointID: o6.String
-    materialPointMES_ID: o6.String
-    materialSublot: MaterialSublotType
-    materialStockStatus: MaterialStockStatusEnumeration
-    followUpMaterials: list[MaterialSublotType] = o6.field(arrayDimensions=[0])
+    assemblyID: o6.String = o6.field(name="AssemblyID")
+    materialPointID: o6.String = o6.field(name="MaterialPointID")
+    materialPointMES_ID: o6.String = o6.field(name="MaterialPointMES_ID")
+    materialSublot: MaterialSublotType = o6.field(name="MaterialSublot")
+    materialStockStatus: MaterialStockStatusEnumeration = o6.field(name="MaterialStockStatus")
+    followUpMaterials: list[MaterialSublotType] = o6.field(name="FollowUpMaterials", arrayDimensions=[0])
 
 
 @o6.datatype(
-    nodeId="ns=tmc;i=3037", browseName="MaterialListType", description="The MaterialListType structure contains a set of material list items.", defaultEncodingId="ns=tmc;i=5309"
+    nodeId="ns=tmc;i=3037",
+    browseName="ns=tmc;MaterialListType",
+    description="The MaterialListType structure contains a set of material list items.",
+    defaultEncodingId="ns=tmc;i=5309",
 )
 class MaterialListType(ns0.datatypes.Structure):
-    iD: o6.String
-    description: o6.LocalizedText
-    items: list[MaterialListItemType] = o6.field(arrayDimensions=[0])
+    iD: o6.String = o6.field(name="ID")
+    description: o6.LocalizedText = o6.field(name="Description")
+    items: list[MaterialListItemType] = o6.field(name="Items", arrayDimensions=[0])
 
 
 @o6.datatype(
     nodeId="ns=tmc;i=3038",
-    browseName="ProductionOrderType",
+    browseName="ns=tmc;ProductionOrderType",
     description="The ProductionOrderType structure contains the complete production order information.",
     defaultEncodingId="ns=tmc;i=5311",
 )
 class ProductionOrderType(ns0.datatypes.Structure):
-    header: ProductionOrderHeaderType
-    materialList: MaterialListType
-    dataSet: DataSetType
+    header: ProductionOrderHeaderType = o6.field(name="Header")
+    materialList: MaterialListType = o6.field(name="MaterialList")
+    dataSet: DataSetType = o6.field(name="DataSet")
 
 
 @o6.datatype(
     nodeId="ns=tmc;i=3006",
-    browseName="OrchestrationProductionOrderType",
+    browseName="ns=tmc;OrchestrationProductionOrderType",
     description="The OrchestrationProductionOrderType structure contains the complete production order \ninformation used by the Production Order Orchestration Layer.",
     defaultEncodingId="ns=tmc;i=9261",
 )
 class OrchestrationProductionOrderType(ProductionOrderType):
-    header: ProductionOrderHeaderType
-    materialList: MaterialListType
-    dataSet: DataSetType
-    activeMachineModules: list[o6.String] = o6.field(arrayDimensions=[0])
+    header: ProductionOrderHeaderType = o6.field(name="Header")
+    materialList: MaterialListType = o6.field(name="MaterialList")
+    dataSet: DataSetType = o6.field(name="DataSet")
+    activeMachineModules: list[o6.String] = o6.field(name="ActiveMachineModules", arrayDimensions=[0])
 
 
 @o6.enumtype(
     nodeId="ns=tmc;i=3040",
-    browseName="MaterialValidationStatusEnumeration",
+    browseName="ns=tmc;MaterialValidationStatusEnumeration",
     description="The MaterialValidationStatusEnumeration describes the status of the material validation \nprocess.",
 )
 class MaterialValidationStatusEnumeration(ns0.datatypes.Enumeration):

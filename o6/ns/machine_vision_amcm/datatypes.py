@@ -35,18 +35,18 @@ else:
     _VariableNode = object
 
 
-@o6.datatype(nodeId="ns=machine_vision_amcm;i=3002", browseName="SEMI_E10SystemStateDataType", defaultEncodingId="ns=machine_vision_amcm;i=5215")
+@o6.datatype(nodeId="ns=machine_vision_amcm;i=3002", browseName="ns=machine_vision_amcm;SEMI_E10SystemStateDataType", defaultEncodingId="ns=machine_vision_amcm;i=5215")
 class SEMI_E10SystemStateDataType(ns0.datatypes.Structure):
-    id: o6.UInt32
-    priority: o6.UInt32
+    id: o6.UInt32 = o6.field(name="Id")
+    priority: o6.UInt32 = o6.field(name="Priority")
 
 
-@o6.datatype(nodeId="ns=machine_vision_amcm;i=3003", browseName="SEMI_E10SystemStateInfoDataType", defaultEncodingId="ns=machine_vision_amcm;i=5218")
+@o6.datatype(nodeId="ns=machine_vision_amcm;i=3003", browseName="ns=machine_vision_amcm;SEMI_E10SystemStateInfoDataType", defaultEncodingId="ns=machine_vision_amcm;i=5218")
 class SEMI_E10SystemStateInfoDataType(ns0.datatypes.Structure):
-    id: o6.UInt32
-    name: o6.LocalizedText
-    parentStateId: o6.UInt32
-    description: o6.LocalizedText
+    id: o6.UInt32 = o6.field(name="Id")
+    name: o6.LocalizedText = o6.field(name="Name")
+    parentStateId: o6.UInt32 = o6.field(name="ParentStateId")
+    description: o6.LocalizedText = o6.field(name="Description")
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ia, machinery, ns0, machine_vision_amcm_reftypes

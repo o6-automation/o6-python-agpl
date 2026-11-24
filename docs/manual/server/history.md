@@ -112,5 +112,37 @@ For results that need paging, override `getHistoryPage` instead. It returns
 `(dataValues, nextToken)` and receives the incoming token, a release flag, and
 the session identity. Bind tokens to the session and node, reject invalid
 tokens, and return `([], b"")` after release. An empty output token ends the
-read. Expire abandoned tokens too: a disconnected client may be unable to
-release them.
+read. Bound abandoned tokens too: a disconnected client may be unable to
+release them. Use `Server.onSessionNotification` to discard tokens when their
+session closes.
+
+
+### Optional backend hooks
+
+Existing `getHistoryData` and `getHistoryPage` callbacks keep their signatures
+and receive IndexRange as a tuple of slices. Override `getHistoryPageRaw` when
+an external store or history service needs the original range text. It receives
+all the paging arguments, with `range` as the original string, including empty
+or malformed input. The backend owns range validation in this mode. This hook
+takes precedence over `getHistoryPage` when both are implemented.
+
+Override `validateHistoryPage` to reject an operation before node and access
+checks. It receives the same arguments as the selected paging callback and
+returns `None` or raises `StatusCodeError`. Keyword arguments `historizing`
+and `accessLevel` supply detached node attributes (or `None` when unavailable),
+so the callback can inspect availability without calling asynchronous services.
+These attributes do not grant user permission. Use the hook for checks such as cursor
+ownership and backend availability. It must not consume the cursor or read
+samples. Returning successfully does not grant access: the SDK still checks
+the node and the requesting user's permissions before calling the read hook.
+Release requests only free state; they never return samples and do not require
+permission to read data.
+
+Override `onUnregister(nodeId)` to discard node-specific resources when history
+is disabled, a node is deleted, or the server is destroyed. Make cleanup
+idempotent. During destruction, the hook must not call server services. Stores
+that do not need this notification require no changes.
+
+These hooks do not select a storage engine, define retention or cursor policy,
+or change the built-in historian. Backend implementations remain responsible
+for their own storage and queries.

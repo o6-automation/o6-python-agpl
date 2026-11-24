@@ -109,12 +109,13 @@ def _with_node_type_meta(klass: type[_T]) -> type[_T]:
     original_meta = type(klass)
     node_meta = _NODE_TYPE_METAS.get(original_meta)
     if node_meta is None:
-        node_meta = type(
+        created = type(
             f"_NodeTypeMeta_{original_meta.__name__}",
             (_NodeTypeMeta, original_meta),
             {},
         )
-        _NODE_TYPE_METAS[original_meta] = node_meta
+        # Atomic: a thread that created one concurrently gets the first published
+        node_meta = _NODE_TYPE_METAS.setdefault(original_meta, created)
 
     body = {
         name: value
@@ -272,7 +273,8 @@ class InstanceDeclaration:
 class _NamespaceBackend:
     """Resolve generated namespace nodes entirely from declaration metadata."""
 
-    def dispatch(self, coro: Any) -> Any:
+    def dispatch(self, operation: Callable[[], Any]) -> Any:
+        coro = operation()
         try:
             coro.send(None)
         except StopIteration as exc:

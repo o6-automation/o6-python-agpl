@@ -90,12 +90,15 @@ class IEnergyProfileD1Type(ns0.objtypes.BaseInterfaceType):
 @o6.objecttype(nodeId="ns=ecm;i=1002", browseName="ns=ecm;EnergySavingModeStatusType", displayName="EnergySavingModeStatusType")
 class EnergySavingModeStatusType(ns0.objtypes.BaseObjectType):
     currentTransitionData: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=ecm;i=6023", browseName="ns=ecm;CurrentTransitionData", dataType=ecm_datypes.StandbyModeTransitionDataType)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=ecm;i=6023", browseName="ns=ecm;CurrentTransitionData", modellingRule="Optional", dataType=ecm_datypes.StandbyModeTransitionDataType
+        )
     )
     stateInformation: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=ecm;i=6024",
             browseName="ns=ecm;StateInformation",
+            modellingRule="Mandatory",
             dataType=ecm_datypes.EnergyStateInformationDataType,
             value=ecm_datypes.EnergyStateInformationDataType(iDSource=0, iDDestination=0, regularTimeToOperate=0.0, modePowerConsumption=0.0),
         )
@@ -104,25 +107,27 @@ class EnergySavingModeStatusType(ns0.objtypes.BaseObjectType):
 
 @o6.objecttype(nodeId="ns=ecm;i=1003", browseName="ns=ecm;EnergySavingModeType", displayName="EnergySavingModeType")
 class EnergySavingModeType(ns0.objtypes.BaseObjectType):
-    dynamicData: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6026", browseName="ns=ecm;DynamicData", dataType=o6.Boolean))
+    dynamicData: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6026", browseName="ns=ecm;DynamicData", modellingRule="Mandatory", dataType=o6.Boolean)
+    )
     energyConsumptionToOperate: ns0.vartypes.AnalogUnitType
     energyConsumptionToPause: ns0.vartypes.AnalogUnitType
-    iD: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6025", browseName="ns=ecm;ID", dataType=o6.Byte))
+    iD: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6025", browseName="ns=ecm;ID", modellingRule="Mandatory", dataType=o6.Byte))
     modePowerConsumption: ns0.vartypes.AnalogUnitType
     regularTimeToOperate: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=ecm;i=6031", browseName="ns=ecm;RegularTimeToOperate", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=ecm;i=6031", browseName="ns=ecm;RegularTimeToOperate", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
     )
     timeMaxLengthOfStay: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=ecm;i=6030", browseName="ns=ecm;TimeMaxLengthOfStay", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=ecm;i=6030", browseName="ns=ecm;TimeMaxLengthOfStay", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
     )
     timeMinLengthOfStay: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=ecm;i=6029", browseName="ns=ecm;TimeMinLengthOfStay", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=ecm;i=6029", browseName="ns=ecm;TimeMinLengthOfStay", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
     )
     timeMinPause: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=ecm;i=6027", browseName="ns=ecm;TimeMinPause", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=ecm;i=6027", browseName="ns=ecm;TimeMinPause", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
     )
     timeToPause: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=ecm;i=6028", browseName="ns=ecm;TimeToPause", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=ecm;i=6028", browseName="ns=ecm;TimeToPause", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
     )
 
 
@@ -130,7 +135,14 @@ class EnergySavingModeType(ns0.objtypes.BaseObjectType):
 class AccuracyDomainType(ns0.objtypes.BaseObjectType):
     enumValues: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=ecm;i=6201", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0], accessLevel=3, userAccessLevel=1
+            nodeId="ns=ecm;i=6201",
+            browseName="EnumValues",
+            modellingRule="Mandatory",
+            dataType=ns0.datatypes.EnumValueType,
+            valueRank=1,
+            arrayDimensions=[0],
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
 
@@ -189,7 +201,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="ReturnCode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Return code.")),
     ],
 )
-o6.call(nodeId="ns=ecm;i=7005", browseName="ns=ecm;StartPause", inputArgs=o6.hasProperty(o6.ns["ns=ecm;i=6050"]), outputArgs=o6.hasProperty(o6.ns["ns=ecm;i=6051"]))
+o6.call(
+    nodeId="ns=ecm;i=7005",
+    browseName="ns=ecm;StartPause",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=ecm;i=6050"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=ecm;i=6051"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=ecm;i=6054",
@@ -211,7 +229,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="ReturnCode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Return code.")),
     ],
 )
-o6.call(nodeId="ns=ecm;i=7006", browseName="ns=ecm;EndPause", outputArgs=o6.hasProperty(o6.ns["ns=ecm;i=6054"]))
+o6.call(nodeId="ns=ecm;i=7006", browseName="ns=ecm;EndPause", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=ecm;i=6054"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=ecm;i=6052",
@@ -269,7 +287,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="ReturnCode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Return code.")),
     ],
 )
-o6.call(nodeId="ns=ecm;i=7007", browseName="ns=ecm;SwitchToEnergySavingMode", inputArgs=o6.hasProperty(o6.ns["ns=ecm;i=6052"]), outputArgs=o6.hasProperty(o6.ns["ns=ecm;i=6053"]))
+o6.call(
+    nodeId="ns=ecm;i=7007",
+    browseName="ns=ecm;SwitchToEnergySavingMode",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=ecm;i=6052"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=ecm;i=6053"]),
+)
 
 
 @o6.objecttype(nodeId="ns=ecm;i=1005", browseName="ns=ecm;EnergyStandbyManagementType", displayName="EnergyStandbyManagementType")
@@ -279,7 +303,9 @@ class EnergyStandbyManagementType(ns0.objtypes.BaseObjectType):
     energySavingModes: EnergySavingModesContainerType | None
     lock: di.objtypes.LockingServicesType | None
     pauseTime: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=ecm;i=6040", browseName="ns=ecm;PauseTime", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=ecm;i=6040", browseName="ns=ecm;PauseTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1
+        )
     )
     standbyManagementStatus: ns0.vartypes.MultiStateDiscreteType
     startPause: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=ecm;i=7005"])
@@ -289,12 +315,12 @@ class EnergyStandbyManagementType(ns0.objtypes.BaseObjectType):
 @o6.objecttype(nodeId="ns=ecm;i=1006", browseName="ns=ecm;EnergyMeasurementType", displayName="EnergyMeasurementType", interfaces=[ia.objtypes.IStatisticsType])
 class EnergyMeasurementType(ns0.objtypes.BaseObjectType):
     applicationTag: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6055", browseName="ns=ecm;ApplicationTag", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6055", browseName="ns=ecm;ApplicationTag", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     measurementValue_: ecm_vartypes.EnergyMeasurementValueType
-    resetStatistics: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=ecm;i=7008", browseName="ns=ia;ResetStatistics"))
+    resetStatistics: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=ecm;i=7008", browseName="ns=ia;ResetStatistics", modellingRule="Optional"))
     startTime: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6009", browseName="ns=ia;StartTime", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6009", browseName="ns=ia;StartTime", modellingRule="Optional", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1)
     )
 
 
@@ -341,22 +367,24 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="ReturnCode", dataType=o6.NodeId("i=3"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText("Return code.")),
     ],
 )
-o6.call(nodeId="ns=ecm;i=7009", browseName="ns=ecm;SwitchOffWOL", outputArgs=o6.hasProperty(o6.ns["ns=ecm;i=6110"]))
+o6.call(nodeId="ns=ecm;i=7009", browseName="ns=ecm;SwitchOffWOL", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=ecm;i=6110"]))
 
 
 @o6.objecttype(nodeId="ns=ecm;i=1012", browseName="ns=ecm;EnergyDevicePowerOffType", displayName="EnergyDevicePowerOffType")
 class EnergyDevicePowerOffType(ns0.objtypes.BaseObjectType):
     modePowerConsumption: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=ecm;i=6108", browseName="ns=ecm;ModePowerConsumption", dataType=o6.UInt32)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=ecm;i=6108", browseName="ns=ecm;ModePowerConsumption", modellingRule="Mandatory", dataType=o6.UInt32)
     )
     regularTimeToOperate: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=ecm;i=6106", browseName="ns=ecm;RegularTimeToOperate", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=ecm;i=6106", browseName="ns=ecm;RegularTimeToOperate", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
     )
     switchOffWOL: o6.node.MethodNode = o6.hasComponent(o6.ns["ns=ecm;i=7009"])
     timeMinPause: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=ecm;i=6107", browseName="ns=ecm;TimeMinPause", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=ecm;i=6107", browseName="ns=ecm;TimeMinPause", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
     )
-    wOLMagicPacket: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6109", browseName="ns=ecm;WOLMagicPacket", dataType=o6.ByteString))
+    wOLMagicPacket: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=ecm;i=6109", browseName="ns=ecm;WOLMagicPacket", modellingRule="Mandatory", dataType=o6.ByteString)
+    )
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ia, ns0, ecm_datypes, ecm_vartypes

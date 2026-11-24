@@ -35,7 +35,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=plastics_extrusion;i=3001", browseName="ExtrusionMessageClassificationEnumeration")
+@o6.enumtype(nodeId="ns=plastics_extrusion;i=3001", browseName="ns=plastics_extrusion;ExtrusionMessageClassificationEnumeration")
 class ExtrusionMessageClassificationEnumeration(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="OTHER")
     LINE_CONTROL = o6.enumfield(1, name="LINE_CONTROL")

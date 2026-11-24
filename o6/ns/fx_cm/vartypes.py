@@ -61,7 +61,9 @@ class SecurityKeyServerAddressType(ns0.vartypes.BaseDataVariableType):
     securityPolicyUri: ns0.vartypes.SelectionListType
     serverUri: ns0.vartypes.SelectionListType
     usePushModel: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=fx_cm;i=6065", browseName="ns=fx_cm;UsePushModel", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=fx_cm;i=6065", browseName="ns=fx_cm;UsePushModel", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+        )
     )
 
 

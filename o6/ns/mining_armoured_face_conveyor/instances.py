@@ -62,7 +62,7 @@ http_opcfoundation_org_UA_Mining_TransportDumping_ArmouredFaceConveyor_ = ns0.ob
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[2],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC, ns0.datatypes.IdType.STRING],
             )
         ),
@@ -154,6 +154,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_armoured_face_conveyor;i=6001",
                 browseName="ns=di;DeviceClass",
                 description="Indicates in which domain or for what purpose the MachineryItem is used.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
             )
@@ -163,6 +164,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_armoured_face_conveyor;i=6002",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -171,6 +173,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_armoured_face_conveyor;i=6003",
                 browseName="ns=di;ManufacturerUri",
                 description="A globally unique identifier of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
             )
@@ -180,6 +183,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_armoured_face_conveyor;i=6016",
                 browseName="ns=di;Model",
                 description="A human-readable, localized name of the model of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText(),
             )
@@ -189,6 +193,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_armoured_face_conveyor;i=6017",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -197,6 +202,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_armoured_face_conveyor;i=6018",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -205,6 +211,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_armoured_face_conveyor;i=6022",
                 browseName="ns=di;AssetId",
                 description="To be used by end users to store a unique identification in the context of their overall application. Servers shall support at least 40 Unicode characters for the clients writing this value, this means clients can expect to be able to write strings with a length of 40 Unicode characters into that field.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
             )
@@ -216,12 +223,14 @@ mining_armoured_face_conveyor_vartypes.AFCStateType(
     nodeId="ns=mining_armoured_face_conveyor;i=6025",
     browseName="ns=mining_armoured_face_conveyor;AFCState",
     description="The AFCState Variable describes the current state of the AFC",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_armoured_face_conveyor;i=6027",
                 browseName="ns=mining_armoured_face_conveyor;AFCNormalRunningDirection",
                 description="Direction of the normal AFC operation",
+                modellingRule="Mandatory",
                 dataType=mining_armoured_face_conveyor_datypes.AFCNormalRunningDirectionEnum,
                 value=mining_armoured_face_conveyor_datypes.AFCNormalRunningDirectionEnum.LEFT,
             )
@@ -234,12 +243,14 @@ ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=mining_armoured_face_conveyor;i=6026",
     browseName="ns=mining_armoured_face_conveyor;Load",
     description="The Load variable describes the current load of the conveyor motor",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_armoured_face_conveyor;i=6028",
                 browseName="EngineeringUnits",
                 description="This is the EngineeringUnit of the conveyor load.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=20529, displayName=o6.LocalizedText("%"), description=o6.LocalizedText("percent")
@@ -251,6 +262,7 @@ ns0.vartypes.AnalogUnitRangeType(
                 nodeId="ns=mining_armoured_face_conveyor;i=6029",
                 browseName="EURange",
                 description="This is the EURange of the conveyor load.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Range,
                 value=ns0.datatypes.Range(low=0.0, high=200.0),
             )

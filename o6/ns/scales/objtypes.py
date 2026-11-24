@@ -73,6 +73,7 @@ class UserInstructionType(RecipeElementType):
             nodeId="ns=scales;i=292",
             browseName="ns=scales;DisplayText",
             description="Defines instructions for this RecipeElement that will be displayed to the user.",
+            modellingRule="Mandatory",
             dataType=o6.LocalizedText,
             accessLevel=3,
             userAccessLevel=1,
@@ -83,6 +84,7 @@ class UserInstructionType(RecipeElementType):
             nodeId="ns=scales;i=293",
             browseName="ns=scales;InstructionId",
             description="Defines a unique Id used to identify the instruction that is displayed via DisplayText.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.UInteger,
             accessLevel=3,
             userAccessLevel=1,
@@ -104,6 +106,7 @@ class WeighingType(RecipeElementType):
             nodeId="ns=scales;i=297",
             browseName="ns=scales;WeighingModuleNodeId",
             description="Defines the Id of the load cell which is used for weighing the product.",
+            modellingRule="Mandatory",
             dataType=o6.NodeId,
             accessLevel=3,
             userAccessLevel=1,
@@ -123,6 +126,7 @@ class TimerType(RecipeElementType):
             nodeId="ns=scales;i=298",
             browseName="ns=scales;Duration",
             description="Defines the period of time the processing needs to wait before processing the next RecipeElement.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
             userAccessLevel=1,
@@ -138,13 +142,16 @@ class ActivationType(RecipeElementType):
             nodeId="ns=scales;i=306",
             browseName="ns=scales;TargetValueId",
             description="Defines a unique Id of the aggregate that is being activated. A list of all possible TargetValueIds is defined in RecipeScaleDeviceType.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
         )
     )
     targetValueNodeId: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=307", browseName="ns=scales;TargetValueNodeId", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=scales;i=307", browseName="ns=scales;TargetValueNodeId", modellingRule="Optional", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -155,6 +162,7 @@ class MaterialType(ns0.objtypes.BaseObjectType):
             nodeId="ns=scales;i=309",
             browseName="ns=scales;MaterialId",
             description="Defines a unique identifier for the material.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -165,6 +173,7 @@ class MaterialType(ns0.objtypes.BaseObjectType):
             nodeId="ns=scales;i=308",
             browseName="ns=scales;MaterialName",
             description="Defines a user-readable name of the material.",
+            modellingRule="Mandatory",
             dataType=o6.LocalizedText,
             accessLevel=3,
             userAccessLevel=1,
@@ -190,6 +199,7 @@ class ZoneType(ns0.objtypes.BaseObjectType):
             nodeId="ns=scales;i=311",
             browseName="ns=scales;Name",
             description="Defines the user-readable name of the zone.",
+            modellingRule="Mandatory",
             dataType=o6.LocalizedText,
             accessLevel=3,
             userAccessLevel=1,
@@ -211,6 +221,7 @@ class StatisticCounterType(ns0.objtypes.BaseObjectType):
             nodeId="ns=scales;i=317",
             browseName="ns=scales;ItemCount",
             description="Totalized count of measurements within the scope of this statistic.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.UInteger,
             accessLevel=3,
             userAccessLevel=1,
@@ -228,6 +239,7 @@ class StatisticCounterType(ns0.objtypes.BaseObjectType):
             nodeId="ns=scales;i=162",
             browseName="ns=scales;Weighed",
             description="This flag indicates that the element is considered in the weighed statistic.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -242,6 +254,7 @@ class TotalizerType(ns0.objtypes.BaseObjectType):
             nodeId="ns=scales;i=451",
             browseName="ns=scales;ResetTotalizer",
             description="Resets the TotalizedValue of this totalizer object. Only useful if reset is not related to a period of time.",
+            modellingRule="Optional",
         )
     )
     totalizedValue: scales_vartypes.MeasuredItemType
@@ -265,6 +278,7 @@ o6.call(
     nodeId="ns=scales;i=453",
     browseName="ns=scales;SetFeederSpeed",
     description="Allows to set a new value for the speed of the feeder system. The OPC UA server must check if the value is between the minimal and maximum allowed speed and if the unit is allowed.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=scales;i=337"]),
 )
 
@@ -297,6 +311,7 @@ o6.call(
     nodeId="ns=scales;i=456",
     browseName="ns=scales;AddRecipe",
     description="Method to add an additional recipe of RecipeType.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=scales;i=181"]),
     outputArgs=o6.hasProperty(o6.ns["ns=scales;i=182"]),
 )
@@ -312,7 +327,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RecipeNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=scales;i=458", browseName="ns=scales;StartRecipe", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=373"]))
+o6.call(nodeId="ns=scales;i=458", browseName="ns=scales;StartRecipe", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=373"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=scales;i=180",
@@ -325,7 +340,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RecipeId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=scales;i=459", browseName="ns=scales;RemoveRecipe", description="Method to remove a recipe of RecipeType.", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=180"]))
+o6.call(
+    nodeId="ns=scales;i=459",
+    browseName="ns=scales;RemoveRecipe",
+    description="Method to remove a recipe of RecipeType.",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=scales;i=180"]),
+)
 
 
 @o6.objecttype(
@@ -351,7 +372,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="TargetItemCount", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=scales;i=460", browseName="ns=scales;SetTargetItemCount", description="Set the number of TargetItemCount.", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=398"]))
+o6.call(
+    nodeId="ns=scales;i=460",
+    browseName="ns=scales;SetTargetItemCount",
+    description="Set the number of TargetItemCount.",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=scales;i=398"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=scales;i=175",
@@ -364,7 +391,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=scales;i=464", browseName="ns=scales;SelectProduct", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=175"]))
+o6.call(nodeId="ns=scales;i=464", browseName="ns=scales;SelectProduct", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=175"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=scales;i=437",
@@ -392,7 +419,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ElementNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=scales;i=465", browseName="ns=scales;AddRecipeElement", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=437"]), outputArgs=o6.hasProperty(o6.ns["ns=scales;i=438"]))
+o6.call(
+    nodeId="ns=scales;i=465",
+    browseName="ns=scales;AddRecipeElement",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=scales;i=437"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=scales;i=438"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=scales;i=439",
@@ -405,7 +438,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RecipeElementNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=scales;i=466", browseName="ns=scales;RemoveRecipeElement", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=439"]))
+o6.call(nodeId="ns=scales;i=466", browseName="ns=scales;RemoveRecipeElement", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=439"]))
 
 
 @o6.objecttype(
@@ -418,7 +451,10 @@ class RecipeType(ns0.objtypes.BaseObjectType):
     addRecipeElement: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=scales;i=465"])
     recipeElements: ns0.objtypes.FolderType | None = o6.hasComponent(
         ns0.objtypes.FolderType(
-            nodeId="ns=scales;i=82", browseName="ns=scales;RecipeElements", description="Defines a Placeholder for all RecipeElements that are part of the Recipe."
+            nodeId="ns=scales;i=82",
+            browseName="ns=scales;RecipeElements",
+            description="Defines a Placeholder for all RecipeElements that are part of the Recipe.",
+            modellingRule="Optional",
         )
     )
     recipeFile: ns0.objtypes.FileType | None
@@ -427,6 +463,7 @@ class RecipeType(ns0.objtypes.BaseObjectType):
             nodeId="ns=scales;i=288",
             browseName="ns=scales;RecipeId",
             description="RecipeId defines a unique identifier of a recipe.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -437,6 +474,7 @@ class RecipeType(ns0.objtypes.BaseObjectType):
             nodeId="ns=scales;i=287",
             browseName="ns=scales;RecipeName",
             description="Defines a user-readable name of the recipe.",
+            modellingRule="Mandatory",
             dataType=o6.LocalizedText,
             accessLevel=3,
             userAccessLevel=1,
@@ -476,6 +514,7 @@ o6.call(
     nodeId="ns=scales;i=525",
     browseName="ns=scales;AddZone",
     description="Adds a zone to the zone array.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=scales;i=145"]),
     outputArgs=o6.hasProperty(o6.ns["ns=scales;i=146"]),
 )
@@ -491,7 +530,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ZoneNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=scales;i=526", browseName="ns=scales;RemoveZone", description="Removes a zone from the zone array.", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=147"]))
+o6.call(
+    nodeId="ns=scales;i=526",
+    browseName="ns=scales;RemoveZone",
+    description="Removes a zone from the zone array.",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=scales;i=147"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=scales;i=176",
@@ -504,7 +549,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=scales;i=576", browseName="ns=scales;DeselectProduct", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=176"]))
+o6.call(nodeId="ns=scales;i=576", browseName="ns=scales;DeselectProduct", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=176"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=scales;i=184",
@@ -525,6 +570,7 @@ o6.call(
     nodeId="ns=scales;i=577",
     browseName="ns=scales;SetTargetPieceCount",
     description="Sets the value of TargetPieceCount. See TargetPieceCount.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=scales;i=184"]),
 )
 
@@ -540,7 +586,11 @@ ns0.vartypes.PropertyType(
     value=[ns0.datatypes.Argument(name="NumberOfReferencePieces", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
 o6.call(
-    nodeId="ns=scales;i=602", browseName="ns=scales;StartReference", description="Triggers the reference weighing process.", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1013"])
+    nodeId="ns=scales;i=602",
+    browseName="ns=scales;StartReference",
+    description="Triggers the reference weighing process.",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1013"]),
 )
 
 ns0.vartypes.PropertyType(
@@ -561,6 +611,7 @@ o6.call(
     nodeId="ns=scales;i=603",
     browseName="ns=scales;SetReferencePieceWeight",
     description="Sets the value for the ReferencePieceWeight (product-specific data).",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=scales;i=604"]),
 )
 
@@ -594,6 +645,7 @@ o6.call(
     nodeId="ns=scales;i=638",
     browseName="ns=scales;AddProduct",
     description="Creates an object with the JobType from the address space.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=scales;i=246"]),
     outputArgs=o6.hasProperty(o6.ns["ns=scales;i=177"]),
 )
@@ -613,6 +665,7 @@ o6.call(
     nodeId="ns=scales;i=646",
     browseName="ns=scales;RemoveProduct",
     description="Removes an object with the JobType from the address space.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=scales;i=647"]),
 )
 
@@ -631,6 +684,7 @@ o6.call(
     nodeId="ns=scales;i=758",
     browseName="ns=scales;OpenDraftShields",
     description="Method to open a certain or all draft shields.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=scales;i=759"]),
 )
 
@@ -649,6 +703,7 @@ o6.call(
     nodeId="ns=scales;i=761",
     browseName="ns=scales;CloseDraftShields",
     description="Method to close a certain or all draft shields.",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=scales;i=762"]),
 )
 
@@ -663,7 +718,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RecipeNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=scales;i=783", browseName="ns=scales;StopRecipe", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1014"]))
+o6.call(nodeId="ns=scales;i=783", browseName="ns=scales;StopRecipe", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1014"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=scales;i=1015",
@@ -676,7 +731,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RecipeNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=scales;i=784", browseName="ns=scales;ContinueRecipe", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1015"]))
+o6.call(nodeId="ns=scales;i=784", browseName="ns=scales;ContinueRecipe", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1015"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=scales;i=1016",
@@ -689,7 +744,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RecipeNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=scales;i=785", browseName="ns=scales;SkipCurrentRecipeElement", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1016"]))
+o6.call(nodeId="ns=scales;i=785", browseName="ns=scales;SkipCurrentRecipeElement", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1016"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=scales;i=1017",
@@ -702,23 +757,32 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="RecipeNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=scales;i=786", browseName="ns=scales;AbortRecipe", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1017"]))
+o6.call(nodeId="ns=scales;i=786", browseName="ns=scales;AbortRecipe", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1017"]))
 
 
 @o6.objecttype(nodeId="ns=scales;i=13", browseName="ns=scales;ScaleEventType", displayName="ScaleEventType")
 class ScaleEventType(ns0.objtypes.BaseEventType):
     auxParameters: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=scales;i=312", browseName="ns=scales;AuxParameters", dataType=o6.String, valueRank=1, arrayDimensions=[1], accessLevel=3, userAccessLevel=1
+            nodeId="ns=scales;i=312",
+            browseName="ns=scales;AuxParameters",
+            modellingRule="Optional",
+            dataType=o6.String,
+            valueRank=1,
+            arrayDimensions=[1],
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     helpSource: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=319", browseName="ns=scales;HelpSource", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=319", browseName="ns=scales;HelpSource", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     notificationCategory: ns0.vartypes.MultiStateValueDiscreteType
     notificationId: ns0.vartypes.MultiStateValueDiscreteType
     vendorNotificationId: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=scales;i=948", browseName="ns=scales;VendorNotificationId", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=scales;i=948", browseName="ns=scales;VendorNotificationId", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -726,29 +790,59 @@ class ScaleEventType(ns0.objtypes.BaseEventType):
 class ProductType(ns0.objtypes.BaseObjectType):
     batchId: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=scales;i=648", browseName="ns=scales;BatchId", description="Defines a unique Id of this Batch.", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            nodeId="ns=scales;i=648",
+            browseName="ns=scales;BatchId",
+            description="Defines a unique Id of this Batch.",
+            modellingRule="Optional",
+            dataType=o6.String,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     batchName: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=scales;i=649", browseName="ns=scales;BatchName", description="Defines the name of this Batch.", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1
+            nodeId="ns=scales;i=649",
+            browseName="ns=scales;BatchName",
+            description="Defines the name of this Batch.",
+            modellingRule="Optional",
+            dataType=o6.LocalizedText,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     jobId: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=scales;i=185", browseName="ns=scales;JobId", description="Defines a unique Id of this job.", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            nodeId="ns=scales;i=185",
+            browseName="ns=scales;JobId",
+            description="Defines a unique Id of this job.",
+            modellingRule="Optional",
+            dataType=o6.String,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     jobName: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=scales;i=310", browseName="ns=scales;JobName", description="Defines the name of this job.", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1
+            nodeId="ns=scales;i=310",
+            browseName="ns=scales;JobName",
+            description="Defines the name of this job.",
+            modellingRule="Optional",
+            dataType=o6.LocalizedText,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     lock: di.objtypes.LockingServicesType | None
     presetTare: ns0.vartypes.AnalogUnitType | None
     productId: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=scales;i=963", browseName="ns=scales;ProductId", description="Defines a unique Id of this product.", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            nodeId="ns=scales;i=963",
+            browseName="ns=scales;ProductId",
+            description="Defines a unique Id of this product.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     productMode: ns0.vartypes.TwoStateDiscreteType | None
@@ -757,6 +851,7 @@ class ProductType(ns0.objtypes.BaseObjectType):
             nodeId="ns=scales;i=166",
             browseName="ns=scales;ProductName",
             description="Defines the name of this product.",
+            modellingRule="Mandatory",
             dataType=o6.LocalizedText,
             accessLevel=3,
             userAccessLevel=1,
@@ -774,6 +869,7 @@ class PieceCountingProductType(ProductType):
             nodeId="ns=scales;i=261",
             browseName="ns=scales;CurrentItemCount",
             description="Defines the current number of items that are captured by the scale.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.UInteger,
             accessLevel=3,
             userAccessLevel=1,
@@ -784,6 +880,7 @@ class PieceCountingProductType(ProductType):
             nodeId="ns=scales;i=597",
             browseName="ns=scales;FeedRateMeasuringInterval",
             description="Defines the measurement interval for evaluating the current flowrate.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
             userAccessLevel=1,
@@ -794,19 +891,23 @@ class PieceCountingProductType(ProductType):
             nodeId="ns=scales;i=274",
             browseName="ns=scales;FillingTime",
             description="Defines the interval during which the filling has to be completed.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
             userAccessLevel=1,
         )
     )
     fineFeedCount: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=scales;i=376", browseName="ns=scales;FineFeedCount", dataType=ns0.datatypes.UInteger, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=scales;i=376", browseName="ns=scales;FineFeedCount", modellingRule="Optional", dataType=ns0.datatypes.UInteger, accessLevel=3, userAccessLevel=1
+        )
     )
     inFlightCount: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=scales;i=578",
             browseName="ns=scales;InFlightCount",
             description="Defines the number of items that is behind valve / in flight after feeding is stopped.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.UInteger,
             accessLevel=3,
             userAccessLevel=1,
@@ -817,6 +918,7 @@ class PieceCountingProductType(ProductType):
             nodeId="ns=scales;i=589",
             browseName="ns=scales;JogFeed",
             description="Defines if an additional dosage is necessary.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -828,6 +930,7 @@ class PieceCountingProductType(ProductType):
             nodeId="ns=scales;i=167",
             browseName="ns=scales;NumberOfReferencePieces",
             description="Defines the number of pieces that need to be used for reference process.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.UInteger,
             accessLevel=3,
             userAccessLevel=1,
@@ -839,6 +942,7 @@ class PieceCountingProductType(ProductType):
             nodeId="ns=scales;i=579",
             browseName="ns=scales;RegisteredPieceCount",
             description="Defines the number of pieces that were actually counted related to the ReferencePieceWeight.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.UInteger,
             accessLevel=3,
             userAccessLevel=1,
@@ -851,6 +955,7 @@ class PieceCountingProductType(ProductType):
             nodeId="ns=scales;i=580",
             browseName="ns=scales;SettlingTime",
             description="Defines the time that needs to be passed before measurement process can be triggered.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
             userAccessLevel=1,
@@ -861,6 +966,7 @@ class PieceCountingProductType(ProductType):
             nodeId="ns=scales;i=592",
             browseName="ns=scales;TareId",
             description="Defines the Id of tare value for the current product or item.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -871,6 +977,7 @@ class PieceCountingProductType(ProductType):
             nodeId="ns=scales;i=587",
             browseName="ns=scales;TargetItemCount",
             description="Defines the number of items that are supposed to be counted during the measurement process.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.UInteger,
             accessLevel=3,
             userAccessLevel=1,
@@ -882,6 +989,7 @@ class PieceCountingProductType(ProductType):
             nodeId="ns=scales;i=581",
             browseName="ns=scales;TotalizedItemCount",
             description="Defines the summed up number of items. Will be reset either triggered by the user or a different product selection.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.UInteger,
             accessLevel=3,
             userAccessLevel=1,
@@ -902,6 +1010,7 @@ class AutomaticFillingProductType(ProductType):
             nodeId="ns=scales;i=552",
             browseName="ns=scales;FeedRateMeasuringInterval",
             description="Defines the measuring interval for evaluating the current flowrate.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
             userAccessLevel=1,
@@ -912,6 +1021,7 @@ class AutomaticFillingProductType(ProductType):
             nodeId="ns=scales;i=551",
             browseName="ns=scales;FillingTime",
             description="Defines the maximal duration for the filling process to take place. Needs to be completed during this period.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
             userAccessLevel=1,
@@ -924,6 +1034,7 @@ class AutomaticFillingProductType(ProductType):
             nodeId="ns=scales;i=549",
             browseName="ns=scales;JogFeed",
             description="Defines if an additional dosage is necessary.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -935,6 +1046,7 @@ class AutomaticFillingProductType(ProductType):
             nodeId="ns=scales;i=547",
             browseName="ns=scales;SettlingTime",
             description="Defines the time that needs to be passed before measurement process can be triggered.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
             userAccessLevel=1,
@@ -945,6 +1057,7 @@ class AutomaticFillingProductType(ProductType):
             nodeId="ns=scales;i=555",
             browseName="ns=scales;TareId",
             description="Defines an Id of tare value for the current product or item.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -983,6 +1096,7 @@ class RecipeProductType(ProductType):
             nodeId="ns=scales;i=633",
             browseName="ns=scales;RecipeNodeId",
             description="Defines the NodeId of the recipe that is being produced.",
+            modellingRule="Mandatory",
             dataType=o6.NodeId,
             accessLevel=3,
             userAccessLevel=1,
@@ -993,6 +1107,7 @@ class RecipeProductType(ProductType):
             nodeId="ns=scales;i=632",
             browseName="ns=scales;Report",
             description="Defines an array with the various messages from the recipe. Each RecipeElement generates its own report message.",
+            modellingRule="Mandatory",
             dataType=scales_datypes.RecipeReportElementType,
             valueRank=1,
             arrayDimensions=[1],
@@ -1015,6 +1130,7 @@ class TotalizingHopperProductType(ProductType):
             nodeId="ns=scales;i=637",
             browseName="ns=scales;TipCounter",
             description="Defines the number of fillings (downpour, bulk produce)",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.UInteger,
             accessLevel=3,
             userAccessLevel=1,
@@ -1058,6 +1174,7 @@ class StatisticType(ns0.objtypes.BaseObjectType):
             nodeId="ns=scales;i=986",
             browseName="ns=ia;ResetCondition",
             description="The reason and context for the reset of the statistics, which is done without a trigger from an OPC UA Client, like calling the ResetStatistics Method. ResetCondition is a vendor-specific, human readable string. ResetCondition is non-localized and might contain an expression that can be parsed by certain clients. Examples are: “AFTER 4 HOURS”, “AFTER 1000 ITEMS”, “OPERATOR”. “OPERATOR” means, that an operator resets the statistics on a local HMI.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -1068,6 +1185,7 @@ class StatisticType(ns0.objtypes.BaseObjectType):
             nodeId="ns=scales;i=283",
             browseName="ns=ia;StartTime",
             description="Indicates the point in time at which the collection of the statistical data has been started.",
+            modellingRule="Optional",
             dataType=o6.DateTime,
         )
     )
@@ -1099,7 +1217,7 @@ class CheckweigherStatisticType(StatisticType):
 @o6.objecttype(nodeId="ns=scales;i=20", browseName="ns=scales;SimpleProductType", displayName="SimpleProductType", description="Represents a product of a simple scale.")
 class SimpleProductType(ProductType):
     containerId: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=1012", browseName="ns=scales;ContainerId", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=1012", browseName="ns=scales;ContainerId", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     unitPrice: ns0.vartypes.BaseDataVariableType | None
 
@@ -1108,16 +1226,25 @@ class SimpleProductType(ProductType):
 class ScaleAlarmType(ns0.objtypes.AlarmConditionType):
     auxParameters: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=scales;i=763", browseName="ns=scales;AuxParameters", dataType=o6.String, valueRank=1, arrayDimensions=[1], accessLevel=3, userAccessLevel=1
+            nodeId="ns=scales;i=763",
+            browseName="ns=scales;AuxParameters",
+            modellingRule="Optional",
+            dataType=o6.String,
+            valueRank=1,
+            arrayDimensions=[1],
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     helpSource: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=764", browseName="ns=scales;HelpSource", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=764", browseName="ns=scales;HelpSource", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     notificationCategory: ns0.vartypes.MultiStateValueDiscreteType
     notificationId: ns0.vartypes.MultiStateValueDiscreteType
     vendorNotificationId: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=scales;i=1020", browseName="ns=scales;VendorNotificationId", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=scales;i=1020", browseName="ns=scales;VendorNotificationId", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -1132,7 +1259,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ProductId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=scales;i=1021", browseName="ns=scales;SwitchProduct", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=988"]))
+o6.call(nodeId="ns=scales;i=1021", browseName="ns=scales;SwitchProduct", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=988"]))
 
 
 @o6.objecttype(
@@ -1142,7 +1269,14 @@ class ProductionPresetType(ns0.objtypes.BaseObjectType):
     addProduct: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=scales;i=638"])
     currentProducts: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=scales;i=436", browseName="ns=scales;CurrentProducts", dataType=o6.String, valueRank=1, arrayDimensions=[0], accessLevel=3, userAccessLevel=1
+            nodeId="ns=scales;i=436",
+            browseName="ns=scales;CurrentProducts",
+            modellingRule="Optional",
+            dataType=o6.String,
+            valueRank=1,
+            arrayDimensions=[0],
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     deselectProduct: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=scales;i=576"])
@@ -1163,7 +1297,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="VehicleId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=scales;i=1022", browseName="ns=scales;InboundWeighing", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=946"]))
+o6.call(nodeId="ns=scales;i=1022", browseName="ns=scales;InboundWeighing", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=946"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=scales;i=947",
@@ -1176,7 +1310,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="VehicleId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=scales;i=1023", browseName="ns=scales;OutboundWeighing", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=947"]))
+o6.call(nodeId="ns=scales;i=1023", browseName="ns=scales;OutboundWeighing", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=947"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=scales;i=949",
@@ -1189,7 +1323,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="VehicleId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=scales;i=1024", browseName="ns=scales;OnePassWeighing", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=949"]))
+o6.call(nodeId="ns=scales;i=1024", browseName="ns=scales;OnePassWeighing", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=949"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=scales;i=990",
@@ -1202,7 +1336,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="NumberOfReferencePieces", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=scales;i=1026", browseName="ns=scales;SetNumberOfReferencePieces", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=990"]))
+o6.call(nodeId="ns=scales;i=1026", browseName="ns=scales;SetNumberOfReferencePieces", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=990"]))
 
 
 @o6.objecttype(nodeId="ns=scales;i=1027", browseName="ns=scales;AcceptedStatisticCounterType", displayName="AcceptedStatisticCounterType")
@@ -1222,6 +1356,7 @@ class WeighingItemType(ns0.objtypes.BaseObjectType):
             nodeId="ns=scales;i=248",
             browseName="ns=scales;ItemId",
             description="Defines a unique number that is assigned to an item.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -1233,7 +1368,7 @@ class WeighingItemType(ns0.objtypes.BaseObjectType):
     measuredWeight: scales_vartypes.WeightItemType
     measuredWidth: ns0.vartypes.AnalogUnitType | None
     zoneName: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=1029", browseName="ns=scales;ZoneName", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=1029", browseName="ns=scales;ZoneName", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
 
 
@@ -1253,60 +1388,72 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="VehicleId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=scales;i=1396", browseName="ns=scales;GetVehicleInformation", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1208"]))
+o6.call(nodeId="ns=scales;i=1396", browseName="ns=scales;GetVehicleInformation", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1208"]))
 
 
 @o6.objecttype(nodeId="ns=scales;i=832", browseName="ns=scales;VehicleProductType", displayName="VehicleProductType")
 class VehicleProductType(ProductType):
     carrierDisplayName: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=858", browseName="ns=scales;CarrierDisplayName", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=scales;i=858", browseName="ns=scales;CarrierDisplayName", modellingRule="Optional", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1
+        )
     )
     carrierId: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=859", browseName="ns=scales;CarrierId", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=859", browseName="ns=scales;CarrierId", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     customer: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=860", browseName="ns=scales;Customer", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=860", browseName="ns=scales;Customer", modellingRule="Optional", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1)
     )
     deltaWeight: scales_vartypes.WeightItemType
     destination: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=870", browseName="ns=scales;Destination", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=scales;i=870", browseName="ns=scales;Destination", modellingRule="Optional", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1
+        )
     )
     driverDisplayName: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=871", browseName="ns=scales;DriverDisplayName", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=scales;i=871", browseName="ns=scales;DriverDisplayName", modellingRule="Optional", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1
+        )
     )
     driverId: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=872", browseName="ns=scales;DriverId", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=872", browseName="ns=scales;DriverId", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     getVehicleInformation: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=scales;i=1396"])
     inboundScale: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=874", browseName="ns=scales;InboundScale", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=874", browseName="ns=scales;InboundScale", modellingRule="Optional", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1)
     )
     inboundWeight: scales_vartypes.WeightItemType | None
     material: MaterialType | None
     outboundScale: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=877", browseName="ns=scales;OutboundScale", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=877", browseName="ns=scales;OutboundScale", modellingRule="Optional", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1)
     )
     outboundWeight: scales_vartypes.WeightItemType
     scaleOperatorId: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=896", browseName="ns=scales;ScaleOperatorId", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=896", browseName="ns=scales;ScaleOperatorId", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     supplier: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=897", browseName="ns=scales;Supplier", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=897", browseName="ns=scales;Supplier", modellingRule="Optional", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1)
     )
     tare: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=1117", browseName="ns=scales;Tare", dataType=ns0.datatypes.Number, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=1117", browseName="ns=scales;Tare", modellingRule="Optional", dataType=ns0.datatypes.Number, accessLevel=3, userAccessLevel=1)
     )
     tareExpirationDate: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=898", browseName="ns=scales;TareExpirationDate", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=scales;i=898", browseName="ns=scales;TareExpirationDate", modellingRule="Optional", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1
+        )
     )
     totalWeight: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=1210", browseName="ns=scales;TotalWeight", dataType=scales_datypes.WeightType, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=scales;i=1210", browseName="ns=scales;TotalWeight", modellingRule="Optional", dataType=scales_datypes.WeightType, accessLevel=3, userAccessLevel=1
+        )
     )
     totalWeightResetDate: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=873", browseName="ns=scales;TotalWeightResetDate", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=scales;i=873", browseName="ns=scales;TotalWeightResetDate", modellingRule="Optional", dataType=o6.DateTime, accessLevel=3, userAccessLevel=1
+        )
     )
     vehicleId: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=900", browseName="ns=scales;VehicleId", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=900", browseName="ns=scales;VehicleId", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
 
 
@@ -1324,9 +1471,9 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="EngineeringUnits", dataType=o6.NodeId("i=887"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=scales;i=1407", browseName="ns=scales;SetPresetTare", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1353"]))
+o6.call(nodeId="ns=scales;i=1407", browseName="ns=scales;SetPresetTare", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=scales;i=1353"]))
 
-ns0.objtypes.FolderType(nodeId="ns=scales;i=50019", browseName="ns=machinery;MachineryBuildingBlocks")
+ns0.objtypes.FolderType(nodeId="ns=scales;i=50019", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Optional")
 
 
 @o6.objecttype(
@@ -1338,7 +1485,13 @@ ns0.objtypes.FolderType(nodeId="ns=scales;i=50019", browseName="ns=machinery;Mac
 class FeederModuleType(di.objtypes.ComponentType):
     feederLoad: scales_vartypes.MeasuredItemType | None
     feederRunning: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=925", browseName="ns=scales;FeederRunning", description="Indicates that the feeder system is running.", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=scales;i=925",
+            browseName="ns=scales;FeederRunning",
+            description="Indicates that the feeder system is running.",
+            modellingRule="Optional",
+            dataType=o6.Boolean,
+        )
     )
     feederSpeed: scales_vartypes.TargetItemType | None
     identification: machinery.objtypes.MachineryItemIdentificationType
@@ -1350,7 +1503,7 @@ class FeederModuleType(di.objtypes.ComponentType):
     setFeederSpeed: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=scales;i=453"])
 
 
-ns0.objtypes.FolderType(nodeId="ns=scales;i=50020", browseName="ns=machinery;MachineryBuildingBlocks")
+ns0.objtypes.FolderType(nodeId="ns=scales;i=50020", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Optional")
 
 
 @o6.objecttype(
@@ -1365,7 +1518,7 @@ class PrinterModuleType(di.objtypes.ComponentType):
     labelStock: ns0.vartypes.AnalogItemType | None
     labelTypeId: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=scales;i=351", browseName="ns=scales;LabelTypeId", description="Defines the Id of the label to be printed.", dataType=o6.String
+            nodeId="ns=scales;i=351", browseName="ns=scales;LabelTypeId", description="Defines the Id of the label to be printed.", modellingRule="Optional", dataType=o6.String
         )
     )
     labelWidth: ns0.vartypes.AnalogUnitType | None
@@ -1375,8 +1528,8 @@ class PrinterModuleType(di.objtypes.ComponentType):
     printMediaStock: ns0.vartypes.AnalogItemType | None
 
 
-ns0.objtypes.FolderType(nodeId="ns=scales;i=50021", browseName="ns=machinery;MachineryBuildingBlocks")
-ns0.objtypes.FolderType(nodeId="ns=scales;i=50022", browseName="ns=machinery;MachineryBuildingBlocks")
+ns0.objtypes.FolderType(nodeId="ns=scales;i=50021", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Optional")
+ns0.objtypes.FolderType(nodeId="ns=scales;i=50022", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Optional")
 
 
 @o6.objecttype(
@@ -1392,6 +1545,7 @@ class ScaleSystemType(di.objtypes.ComponentType):
             nodeId="ns=scales;i=140",
             browseName="ns=scales;Policy",
             description="Defines the legal guidelines that apply for the scale or need to be complied by the scale.",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
             valueRank=1,
             arrayDimensions=[0],
@@ -1402,6 +1556,7 @@ class ScaleSystemType(di.objtypes.ComponentType):
             nodeId="ns=scales;i=356",
             browseName="ns=scales;ProcessStateId",
             description="Contains an relating identification for the occurring ProcessStateMessage.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -1412,16 +1567,17 @@ class ScaleSystemType(di.objtypes.ComponentType):
             nodeId="ns=scales;i=357",
             browseName="ns=scales;ProcessStateMessage",
             description="Contains the message of the current overall state of the scale.",
+            modellingRule="Mandatory",
             dataType=o6.LocalizedText,
             accessLevel=3,
             userAccessLevel=1,
         )
     )
-    productionOutput: StatisticType | None = o6.hasComponent(StatisticType(nodeId="ns=scales;i=79", browseName="ns=scales;ProductionOutput"))
+    productionOutput: StatisticType | None = o6.hasComponent(StatisticType(nodeId="ns=scales;i=79", browseName="ns=scales;ProductionOutput", modellingRule="Optional"))
     productionPreset: ProductionPresetType | None = o6.hasComponent(
-        ProductionPresetType(nodeId="ns=scales;i=70", browseName="ns=scales;ProductionPreset", description="Contains the productions presets.")
+        ProductionPresetType(nodeId="ns=scales;i=70", browseName="ns=scales;ProductionPreset", description="Contains the productions presets.", modellingRule="Optional")
     )
-    resetGlobalStatistics: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=scales;i=1025", browseName="ns=scales;ResetGlobalStatistics"))
+    resetGlobalStatistics: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=scales;i=1025", browseName="ns=scales;ResetGlobalStatistics", modellingRule="Optional"))
     subDevices: di.objtypes.ConfigurableObjectType | None
     systemState: pack_ml.objtypes.PackMLBaseStateMachineType | None
 
@@ -1432,6 +1588,7 @@ class ScaleDeviceType(di.objtypes.ComponentType):
         ns0.vartypes.PropertyType(
             nodeId="ns=scales;i=989",
             browseName="ns=scales;AllowedEngineeringUnits",
+            modellingRule="Optional",
             dataType=ns0.datatypes.EUInformation,
             valueRank=1,
             arrayDimensions=[0],
@@ -1439,7 +1596,7 @@ class ScaleDeviceType(di.objtypes.ComponentType):
             userAccessLevel=1,
         )
     )
-    clearTare: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=scales;i=1406", browseName="ns=scales;ClearTare"))
+    clearTare: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=scales;i=1406", browseName="ns=scales;ClearTare", modellingRule="Optional"))
     currentWeight: scales_vartypes.WeightItemType
     identification: machinery.objtypes.MachineIdentificationType
     listOfWeighingRanges_: WeighingRangeElementType
@@ -1451,6 +1608,7 @@ class ScaleDeviceType(di.objtypes.ComponentType):
             nodeId="ns=scales;i=234",
             browseName="ns=scales;MaterialClass",
             description="Defines the allowed material the scale may measure. Only relevant for certain scales (e.g. totalizing hopper scale or continuous scale)",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
             accessLevel=3,
             userAccessLevel=1,
@@ -1459,7 +1617,14 @@ class ScaleDeviceType(di.objtypes.ComponentType):
     minimalWeight: ns0.vartypes.AnalogUnitType | None
     policy: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=scales;i=60048", browseName="ns=scales;Policy", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[0], accessLevel=3, userAccessLevel=1
+            nodeId="ns=scales;i=60048",
+            browseName="ns=scales;Policy",
+            modellingRule="Optional",
+            dataType=o6.LocalizedText,
+            valueRank=1,
+            arrayDimensions=[0],
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     processStateId: ns0.vartypes.PropertyType | None = o6.hasProperty(
@@ -1467,6 +1632,7 @@ class ScaleDeviceType(di.objtypes.ComponentType):
             nodeId="ns=scales;i=229",
             browseName="ns=scales;ProcessStateId",
             description="Contains an relating identification for the occurring ProcessStateMessage.",
+            modellingRule="Optional",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -1477,20 +1643,21 @@ class ScaleDeviceType(di.objtypes.ComponentType):
             nodeId="ns=scales;i=161",
             browseName="ns=scales;ProcessStateMessage",
             description="Contains the message of the current overall state of the scale.",
+            modellingRule="Optional",
             dataType=o6.LocalizedText,
             accessLevel=3,
             userAccessLevel=1,
         )
     )
-    productionOutput: StatisticType | None = o6.hasComponent(StatisticType(nodeId="ns=scales;i=50031", browseName="ns=scales;ProductionOutput"))
+    productionOutput: StatisticType | None = o6.hasComponent(StatisticType(nodeId="ns=scales;i=50031", browseName="ns=scales;ProductionOutput", modellingRule="Optional"))
     productionPreset: ProductionPresetType | None = o6.hasComponent(
-        ProductionPresetType(nodeId="ns=scales;i=85", browseName="ns=scales;ProductionPreset", description="Contains the productions presets.")
+        ProductionPresetType(nodeId="ns=scales;i=85", browseName="ns=scales;ProductionPreset", description="Contains the productions presets.", modellingRule="Optional")
     )
-    registerWeight: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=scales;i=471", browseName="ns=scales;RegisterWeight"))
+    registerWeight: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=scales;i=471", browseName="ns=scales;RegisterWeight", modellingRule="Optional"))
     registeredWeight: scales_vartypes.WeightItemType | None
     setPresetTare: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=scales;i=1407"])
-    setTare: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=scales;i=1409", browseName="ns=scales;SetTare"))
-    setZero: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=scales;i=1408", browseName="ns=scales;SetZero"))
+    setTare: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=scales;i=1409", browseName="ns=scales;SetTare", modellingRule="Optional"))
+    setZero: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=scales;i=1408", browseName="ns=scales;SetZero", modellingRule="Optional"))
     state: pack_ml.objtypes.PackMLBaseStateMachineType | None
     subDevices: di.objtypes.ConfigurableObjectType | None
 
@@ -1526,6 +1693,7 @@ class AutomaticFillingScaleType(ScaleDeviceType):
             nodeId="ns=scales;i=543",
             browseName="ns=scales;ToleranceState",
             description="Describes the state of the tolerance deviation. The option under and over needs to be determined via TargetItemType information of TargetWeight.",
+            modellingRule="Optional",
             dataType=scales_datypes.ToleranceState,
             accessLevel=3,
             userAccessLevel=1,
@@ -1558,6 +1726,7 @@ class RecipeScaleType(ScaleDeviceType):
             nodeId="ns=scales;i=612",
             browseName="ns=scales;SupportedTargetValues",
             description="Defines a list of values that may be set via the recipe.",
+            modellingRule="Optional",
             dataType=scales_datypes.RecipeTargetValueType,
             valueRank=1,
             arrayDimensions=[0],
@@ -1570,6 +1739,7 @@ class RecipeScaleType(ScaleDeviceType):
             nodeId="ns=scales;i=611",
             browseName="ns=scales;SupportedThresholdValues",
             description="Defines a list of threshold values that may be used within one recipe.",
+            modellingRule="Optional",
             dataType=scales_datypes.RecipeThresholdType,
             valueRank=1,
             arrayDimensions=[0],
@@ -1595,6 +1765,7 @@ class HopperScaleType(SimpleScaleType):
             nodeId="ns=scales;i=388",
             browseName="ns=scales;LimitMax",
             description="The current fill level exceeds the allowed maximum level.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -1605,6 +1776,7 @@ class HopperScaleType(SimpleScaleType):
             nodeId="ns=scales;i=389",
             browseName="ns=scales;LimitMin",
             description="The current fill level falls below the allowed minimum level.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -1630,6 +1802,7 @@ class LaboratoryScaleType(SimpleScaleType):
             nodeId="ns=scales;i=265",
             browseName="ns=scales;CalibrationNeeded",
             description="Defines if a calibration procedure is needed and the current process should be paused.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -1640,6 +1813,7 @@ class LaboratoryScaleType(SimpleScaleType):
             nodeId="ns=scales;i=264",
             browseName="ns=scales;CalibrationRunning",
             description="Defines if a calibration procedure is running.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -1651,6 +1825,7 @@ class LaboratoryScaleType(SimpleScaleType):
             nodeId="ns=scales;i=238",
             browseName="ns=scales;DraftShieldLeftClosed",
             description="Defines if the left draft shield is closed.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -1661,6 +1836,7 @@ class LaboratoryScaleType(SimpleScaleType):
             nodeId="ns=scales;i=239",
             browseName="ns=scales;DraftShieldRightClosed",
             description="Defines if the right draft shield is closed.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -1671,19 +1847,23 @@ class LaboratoryScaleType(SimpleScaleType):
             nodeId="ns=scales;i=240",
             browseName="ns=scales;DraftShieldTopClosed",
             description="Defines if the top draft shield is closed.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
         )
     )
     ionisatorRunning: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=1207", browseName="ns=scales;IonisatorRunning", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=scales;i=1207", browseName="ns=scales;IonisatorRunning", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+        )
     )
     levelingRunning: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=scales;i=263",
             browseName="ns=scales;LevelingRunning",
             description="Defines if a levelling process is running.",
+            modellingRule="Optional",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -1691,16 +1871,18 @@ class LaboratoryScaleType(SimpleScaleType):
     )
     openDraftShields: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=scales;i=758"])
     startCalibration: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=scales;i=455", browseName="ns=scales;StartCalibration", description="Method to start the automatic calibration procedure.")
+        o6.call(nodeId="ns=scales;i=455", browseName="ns=scales;StartCalibration", description="Method to start the automatic calibration procedure.", modellingRule="Optional")
     )
     startIonisator: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=scales;i=457", browseName="ns=scales;StartIonisator", description="Method to start the ionization process.")
+        o6.call(nodeId="ns=scales;i=457", browseName="ns=scales;StartIonisator", description="Method to start the ionization process.", modellingRule="Optional")
     )
     startLeveling: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=scales;i=454", browseName="ns=scales;StartLeveling", description="Method to start the automatic leveling procedure of the scale.")
+        o6.call(
+            nodeId="ns=scales;i=454", browseName="ns=scales;StartLeveling", description="Method to start the automatic leveling procedure of the scale.", modellingRule="Optional"
+        )
     )
     stopIonisator: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=scales;i=463", browseName="ns=scales;StopIonisator", description="Method to stop the ionization process.")
+        o6.call(nodeId="ns=scales;i=463", browseName="ns=scales;StopIonisator", description="Method to stop the ionization process.", modellingRule="Optional")
     )
 
 
@@ -1712,6 +1894,7 @@ class CheckweigherType(CatchweigherType):
             nodeId="ns=scales;i=447",
             browseName="ns=scales;TU1Percent",
             description="Permitted percentage of items with weight less than TU1",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Number,
             accessLevel=3,
             userAccessLevel=1,
@@ -1746,7 +1929,9 @@ class VehicleScaleType(ScaleDeviceType):
 )
 class FloatingStatisticType(StatisticType):
     windowNumberOfValues: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=60063", browseName="ns=ia;WindowNumberOfValues", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=scales;i=60063", browseName="ns=ia;WindowNumberOfValues", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3, userAccessLevel=1
+        )
     )
 
 
@@ -1761,7 +1946,7 @@ class ContinuousScaleType(ScaleDeviceType):
     productionPreset: ProductionPresetType | None
     rateControlMode: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=scales;i=60152", browseName="ns=scales;RateControlMode", dataType=scales_datypes.RateControlMode, accessLevel=3, userAccessLevel=1
+            nodeId="ns=scales;i=60152", browseName="ns=scales;RateControlMode", modellingRule="Optional", dataType=scales_datypes.RateControlMode, accessLevel=3, userAccessLevel=1
         )
     )
     speed: ns0.vartypes.AnalogUnitType | None
@@ -1772,13 +1957,18 @@ class ContinuousScaleType(ScaleDeviceType):
 @o6.objecttype(nodeId="ns=scales;i=50", browseName="ns=scales;LossInWeightScaleType", displayName="LossInWeightScaleType", description="Represents a loss in weight scale.")
 class LossInWeightScaleType(ContinuousScaleType):
     binWeight: scales_vartypes.MeasuredItemType | None
-    dischargeStart: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="ns=scales;i=539", browseName="ns=scales;DischargeStart", description="Starts a discharging process."))
-    dischargeStop: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="ns=scales;i=540", browseName="ns=scales;DischargeStop", description="Stops a discharging process."))
+    dischargeStart: o6.node.MethodNode = o6.hasComponent(
+        o6.call(nodeId="ns=scales;i=539", browseName="ns=scales;DischargeStart", description="Starts a discharging process.", modellingRule="Mandatory")
+    )
+    dischargeStop: o6.node.MethodNode = o6.hasComponent(
+        o6.call(nodeId="ns=scales;i=540", browseName="ns=scales;DischargeStop", description="Stops a discharging process.", modellingRule="Mandatory")
+    )
     discharging: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=scales;i=916",
             browseName="ns=scales;Discharging",
             description="Indicates that a discharging process is taking place.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,
@@ -1786,10 +1976,14 @@ class LossInWeightScaleType(ContinuousScaleType):
     )
     hopperFillLevel: ns0.vartypes.AnalogUnitType
     hopperWeight: scales_vartypes.MeasuredItemType
-    refillStart: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="ns=scales;i=537", browseName="ns=scales;RefillStart", description="Starts a refilling process."))
-    refillStop: o6.node.MethodNode = o6.hasComponent(o6.call(nodeId="ns=scales;i=538", browseName="ns=scales;RefillStop", description="Stops a refilling process."))
+    refillStart: o6.node.MethodNode = o6.hasComponent(
+        o6.call(nodeId="ns=scales;i=537", browseName="ns=scales;RefillStart", description="Starts a refilling process.", modellingRule="Mandatory")
+    )
+    refillStop: o6.node.MethodNode = o6.hasComponent(
+        o6.call(nodeId="ns=scales;i=538", browseName="ns=scales;RefillStop", description="Stops a refilling process.", modellingRule="Mandatory")
+    )
     refilling: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=scales;i=917", browseName="ns=scales;Refilling", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=scales;i=917", browseName="ns=scales;Refilling", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
     )
 
 
@@ -1806,6 +2000,7 @@ class ConditionSleepType(RecipeElementType):
             nodeId="ns=scales;i=299",
             browseName="ns=scales;TargetThresholdValue",
             description="The target value with which the threshold value is compared.",
+            modellingRule="Mandatory",
             accessLevel=3,
             userAccessLevel=1,
         )
@@ -1815,6 +2010,7 @@ class ConditionSleepType(RecipeElementType):
             nodeId="ns=scales;i=943",
             browseName="ns=scales;ThresholdValueId",
             description="Defines an Id of process value that needs to be monitored and is element of the SupportedThresholdValues in the RecipeScale.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             accessLevel=3,
             userAccessLevel=1,
@@ -1825,6 +2021,7 @@ class ConditionSleepType(RecipeElementType):
             nodeId="ns=scales;i=60240",
             browseName="ns=scales;ThresholdValueNodeId",
             description="The NodeId of process value that needs to be monitored and is element of the SupportedThresholdValues in the RecipeScale. This variable should be used if the value is part of the address space.",
+            modellingRule="Optional",
             dataType=o6.NodeId,
             accessLevel=3,
             userAccessLevel=1,
@@ -1835,6 +2032,7 @@ class ConditionSleepType(RecipeElementType):
             nodeId="ns=scales;i=945",
             browseName="ns=scales;Timeout",
             description="Timeout specifies the duration within the TargetThresholdValue needs to be reached. If Timeout is exceeded and operator intervention is necessary.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             accessLevel=3,
             userAccessLevel=1,
@@ -1851,6 +2049,7 @@ class AnalogConditionSleepType(ConditionSleepType):
             nodeId="ns=scales;i=302",
             browseName="ns=scales;ConditionMode",
             description="Defines the type of condition operator that is used.",
+            modellingRule="Mandatory",
             dataType=scales_datypes.EqualityAndRelationalOperator,
             accessLevel=3,
             userAccessLevel=1,
@@ -1868,6 +2067,7 @@ class EdgeTriggeredSleepType(ConditionSleepType):
             nodeId="ns=scales;i=303",
             browseName="ns=scales;ConditionMode",
             description="Defines the type of condition operator that is used.",
+            modellingRule="Mandatory",
             dataType=scales_datypes.EdgeOperator,
             accessLevel=3,
             userAccessLevel=1,
@@ -1878,6 +2078,7 @@ class EdgeTriggeredSleepType(ConditionSleepType):
             nodeId="ns=scales;i=301",
             browseName="ns=scales;TargetThresholdValue",
             description="The target value with which the threshold value is compared.",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             accessLevel=3,
             userAccessLevel=1,

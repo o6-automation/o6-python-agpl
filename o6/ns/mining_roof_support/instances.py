@@ -99,7 +99,7 @@ http_opcfoundation_org_UA_Mining_DevelopmentSupport_RoofSupportSystem_ = ns0.obj
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[2],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC, ns0.datatypes.IdType.STRING],
             )
         ),
@@ -123,6 +123,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_roof_support;i=6001",
                 browseName="ns=di;DeviceClass",
                 description="Indicates in which domain or for what purpose the MachineryItem is used.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -131,6 +132,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_roof_support;i=6002",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -139,6 +141,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_roof_support;i=6003",
                 browseName="ns=di;ManufacturerUri",
                 description="A globally unique identifier of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -147,6 +150,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_roof_support;i=6004",
                 browseName="ns=di;Model",
                 description="A human-readable, localized name of the model of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -155,6 +159,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_roof_support;i=6010",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -163,6 +168,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_roof_support;i=6018",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -190,12 +196,14 @@ ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=mining_roof_support;i=6025",
     browseName="ns=mining_roof_support;ClearanceLeft",
     description="The ClearanceLeft Variable describes the length of the safe zone on the left side of the shearer. There is no risk of collision between the shearer and the RSS in that zone",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_roof_support;i=6029",
                 browseName="EngineeringUnits",
                 description="This is the EngineeringUnit of the left clearance.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067858, displayName=o6.LocalizedText("m"), description=o6.LocalizedText("metre")
@@ -207,6 +215,7 @@ ns0.vartypes.AnalogUnitRangeType(
                 nodeId="ns=mining_roof_support;i=6030",
                 browseName="EURange",
                 description="This is the EURange of the left clearance.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Range,
                 value=ns0.datatypes.Range(low=-10.0, high=500.0),
             )
@@ -219,12 +228,14 @@ ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=mining_roof_support;i=6026",
     browseName="ns=mining_roof_support;ClearanceRight",
     description="The ClearanceRight Variable describes the length of the safe zone on the right side of the shearer. There is no risk of collision between the shearer and the RSS in that zone",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_roof_support;i=6031",
                 browseName="EngineeringUnits",
                 description="This is the EngineeringUnit of the right clearance.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067858, displayName=o6.LocalizedText("m"), description=o6.LocalizedText("metre")
@@ -236,6 +247,7 @@ ns0.vartypes.AnalogUnitRangeType(
                 nodeId="ns=mining_roof_support;i=6032",
                 browseName="EURange",
                 description="This is the EURange of the right clearance.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Range,
                 value=ns0.datatypes.Range(low=-10.0, high=500.0),
             )
@@ -248,12 +260,14 @@ ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=mining_roof_support;i=6028",
     browseName="ns=mining_roof_support;ShieldWidth",
     description="The ShieldWidth Variable describes the width of the shields including the gap between the shields",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_roof_support;i=6033",
                 browseName="EngineeringUnits",
                 description="This is the EngineeringUnit of the shield width.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067858, displayName=o6.LocalizedText("m"), description=o6.LocalizedText("metre")
@@ -265,6 +279,7 @@ ns0.vartypes.AnalogUnitRangeType(
                 nodeId="ns=mining_roof_support;i=6034",
                 browseName="EURange",
                 description="This is the EURange of the shield width.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Range,
                 value=ns0.datatypes.Range(low=0.5, high=5.0),
             )
@@ -284,6 +299,7 @@ ns0.objtypes.BaseObjectType(
                 nodeId="ns=mining_roof_support;i=6024",
                 browseName="ns=mining_roof_support;AFCPushState",
                 description="The AFCPushState Variable describes the status of the AFCPush process determined on the actual shearer position",
+                modellingRule="Mandatory",
                 dataType=mining_roof_support_datypes.RSSStateEnum,
                 value=mining_roof_support_datypes.RSSStateEnum.UNDEFINED,
             )
@@ -295,6 +311,7 @@ ns0.objtypes.BaseObjectType(
                 nodeId="ns=mining_roof_support;i=6027",
                 browseName="ns=mining_roof_support;ShieldAdvanceState",
                 description="The ShieldAdvanceState Variable describes the status of the ShieldAdvance process determined on the actual shearer position",
+                modellingRule="Mandatory",
                 dataType=mining_roof_support_datypes.RSSStateEnum,
                 value=mining_roof_support_datypes.RSSStateEnum.UNDEFINED,
             )

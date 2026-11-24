@@ -64,7 +64,7 @@ def _slug(path: str) -> str:
 
 def _kind(path: str) -> str:
     name = path.rsplit(".", 1)[-1]
-    if name == "roles":
+    if name in ("roles", "license"):
         return "object"
     if name[:1].isupper():
         return "class or type"

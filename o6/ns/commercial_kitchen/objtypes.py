@@ -36,39 +36,53 @@ else:
 @o6.objecttype(nodeId="ns=commercial_kitchen;i=1002", browseName="ns=commercial_kitchen;BatchInformationType", displayName="BatchInformationType")
 class BatchInformationType(ns0.objtypes.BaseObjectType):
     batchId: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6002", browseName="ns=commercial_kitchen;BatchId", dataType=o6.String, accessLevel=3)
+        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6002", browseName="ns=commercial_kitchen;BatchId", modellingRule="Mandatory", dataType=o6.String, accessLevel=3)
     )
     localTime: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6004", browseName="ns=commercial_kitchen;LocalTime", dataType=ns0.datatypes.TimeZoneDataType, accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=commercial_kitchen;i=6004", browseName="ns=commercial_kitchen;LocalTime", modellingRule="Optional", dataType=ns0.datatypes.TimeZoneDataType, accessLevel=3
+        )
     )
     orderId: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6001", browseName="ns=commercial_kitchen;OrderId", dataType=o6.String, accessLevel=3)
+        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6001", browseName="ns=commercial_kitchen;OrderId", modellingRule="Mandatory", dataType=o6.String, accessLevel=3)
     )
     systemTime: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6003", browseName="ns=commercial_kitchen;SystemTime", dataType=ns0.datatypes.UtcTime, accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=commercial_kitchen;i=6003", browseName="ns=commercial_kitchen;SystemTime", modellingRule="Mandatory", dataType=ns0.datatypes.UtcTime, accessLevel=3
+        )
     )
 
 
 @o6.objecttype(nodeId="ns=commercial_kitchen;i=1003", browseName="ns=commercial_kitchen;KitchenDeviceHAConfigType", displayName="KitchenDeviceHAConfigType")
 class KitchenDeviceHAConfigType(ns0.objtypes.HistoricalDataConfigurationType):
     historyDuration: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6005", browseName="ns=commercial_kitchen;HistoryDuration", dataType=ns0.datatypes.Duration, accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=commercial_kitchen;i=6005", browseName="ns=commercial_kitchen;HistoryDuration", modellingRule="Mandatory", dataType=ns0.datatypes.Duration, accessLevel=3
+        )
     )
     samplingInterval: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6006", browseName="ns=commercial_kitchen;SamplingInterval", dataType=ns0.datatypes.Duration, accessLevel=3)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=commercial_kitchen;i=6006", browseName="ns=commercial_kitchen;SamplingInterval", modellingRule="Mandatory", dataType=ns0.datatypes.Duration, accessLevel=3
+        )
     )
 
 
 @o6.objecttype(nodeId="ns=commercial_kitchen;i=1004", browseName="ns=commercial_kitchen;KitchenDeviceParameterType", displayName="KitchenDeviceParameterType", isAbstract=True)
 class KitchenDeviceParameterType(ns0.objtypes.BaseObjectType):
     programId: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6007", browseName="ns=commercial_kitchen;ProgramId", dataType=o6.Int32, accessLevel=3)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=commercial_kitchen;i=6007", browseName="ns=commercial_kitchen;ProgramId", modellingRule="Optional", dataType=o6.Int32, accessLevel=3
+        )
     )
     programName: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6008", browseName="ns=commercial_kitchen;ProgramName", dataType=o6.LocalizedText, accessLevel=3)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=commercial_kitchen;i=6008", browseName="ns=commercial_kitchen;ProgramName", modellingRule="Optional", dataType=o6.LocalizedText, accessLevel=3
+        )
     )
     programUId: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6009", browseName="ns=commercial_kitchen;ProgramUId", dataType=o6.Guid, accessLevel=3)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=commercial_kitchen;i=6009", browseName="ns=commercial_kitchen;ProgramUId", modellingRule="Optional", dataType=o6.Guid, accessLevel=3
+        )
     )
 
 
@@ -77,20 +91,24 @@ class CommercialKitchenDeviceType(di.objtypes.DeviceType):
     batchInformation: BatchInformationType | None
     deviceClass: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=commercial_kitchen;i=6015", browseName="ns=di;DeviceClass", description="Indicates in which domain or for what purpose a device is used.", dataType=o6.String
+            nodeId="ns=commercial_kitchen;i=6015",
+            browseName="ns=di;DeviceClass",
+            description="Indicates in which domain or for what purpose a device is used.",
+            modellingRule="Mandatory",
+            dataType=o6.String,
         )
     )
     deviceLocationName: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6016", browseName="ns=commercial_kitchen;DeviceLocationName", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6016", browseName="ns=commercial_kitchen;DeviceLocationName", modellingRule="Optional", dataType=o6.String)
     )
     errorConditions: ns0.objtypes.BaseObjectType = o6.hasComponent(
-        ns0.objtypes.BaseObjectType(nodeId="ns=commercial_kitchen;i=5002", browseName="ns=commercial_kitchen;ErrorConditions")
+        ns0.objtypes.BaseObjectType(nodeId="ns=commercial_kitchen;i=5002", browseName="ns=commercial_kitchen;ErrorConditions", modellingRule="Mandatory")
     )
     hACCPValues: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
-        di.objtypes.FunctionalGroupType(nodeId="ns=commercial_kitchen;i=5004", browseName="ns=commercial_kitchen;HACCPValues")
+        di.objtypes.FunctionalGroupType(nodeId="ns=commercial_kitchen;i=5004", browseName="ns=commercial_kitchen;HACCPValues", modellingRule="Optional")
     )
     informationConditions: ns0.objtypes.BaseObjectType = o6.hasComponent(
-        ns0.objtypes.BaseObjectType(nodeId="ns=commercial_kitchen;i=5003", browseName="ns=commercial_kitchen;InformationConditions")
+        ns0.objtypes.BaseObjectType(nodeId="ns=commercial_kitchen;i=5003", browseName="ns=commercial_kitchen;InformationConditions", modellingRule="Mandatory")
     )
 
 
@@ -124,18 +142,24 @@ class MicrowaveCombiOvenDeviceType(CommercialKitchenDeviceType):
 class FryerParameterType(KitchenDeviceParameterType):
     actualTemperature: ns0.vartypes.AnalogItemType
     isLiftUp: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6032", browseName="ns=commercial_kitchen;IsLiftUp", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6032", browseName="ns=commercial_kitchen;IsLiftUp", modellingRule="Optional", dataType=o6.Boolean)
     )
     programMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6010", browseName="ns=commercial_kitchen;ProgramMode", dataType=commercial_kitchen_datypes.FryerModeEnumeration
+            nodeId="ns=commercial_kitchen;i=6010",
+            browseName="ns=commercial_kitchen;ProgramMode",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.FryerModeEnumeration,
         )
     )
     setProcessTime: ns0.vartypes.AnalogItemType
     setTemperature: ns0.vartypes.AnalogItemType
     signalMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6031", browseName="ns=commercial_kitchen;SignalMode", dataType=commercial_kitchen_datypes.SignalModeEnumeration
+            nodeId="ns=commercial_kitchen;i=6031",
+            browseName="ns=commercial_kitchen;SignalMode",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.SignalModeEnumeration,
         )
     )
     timeRemaining: ns0.vartypes.AnalogItemType
@@ -145,12 +169,15 @@ class FryerParameterType(KitchenDeviceParameterType):
 class FryerDeviceType(CommercialKitchenDeviceType):
     energySource: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=commercial_kitchen;i=6038", browseName="ns=commercial_kitchen;EnergySource", dataType=commercial_kitchen_datypes.EnergySourceEnumeration
+            nodeId="ns=commercial_kitchen;i=6038",
+            browseName="ns=commercial_kitchen;EnergySource",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.EnergySourceEnumeration,
         )
     )
     fryerCup_No_: FryerParameterType
     isWithLift: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6037", browseName="ns=commercial_kitchen;IsWithLift", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6037", browseName="ns=commercial_kitchen;IsWithLift", modellingRule="Mandatory", dataType=o6.Boolean)
     )
 
 
@@ -160,14 +187,17 @@ class FryingPanParameterType(KitchenDeviceParameterType):
     actualPressurePan: ns0.vartypes.AnalogItemType | None
     actualTemperature: ns0.vartypes.AnalogItemType
     cookingLevel: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6055", browseName="ns=commercial_kitchen;CookingLevel", dataType=o6.Int32)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6055", browseName="ns=commercial_kitchen;CookingLevel", modellingRule="Mandatory", dataType=o6.Int32)
     )
     isLidLocked: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6072", browseName="ns=commercial_kitchen;IsLidLocked", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6072", browseName="ns=commercial_kitchen;IsLidLocked", modellingRule="Optional", dataType=o6.Boolean)
     )
     programMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6054", browseName="ns=commercial_kitchen;ProgramMode", dataType=commercial_kitchen_datypes.FryingPanModeEnumeration
+            nodeId="ns=commercial_kitchen;i=6054",
+            browseName="ns=commercial_kitchen;ProgramMode",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.FryingPanModeEnumeration,
         )
     )
     setCoreTemperature: ns0.vartypes.AnalogItemType
@@ -175,7 +205,10 @@ class FryingPanParameterType(KitchenDeviceParameterType):
     setTemperature: ns0.vartypes.AnalogItemType
     signalMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6069", browseName="ns=commercial_kitchen;SignalMode", dataType=commercial_kitchen_datypes.SignalModeEnumeration
+            nodeId="ns=commercial_kitchen;i=6069",
+            browseName="ns=commercial_kitchen;SignalMode",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.SignalModeEnumeration,
         )
     )
     timeRemaining: ns0.vartypes.AnalogItemType
@@ -185,12 +218,15 @@ class FryingPanParameterType(KitchenDeviceParameterType):
 class FryingPanDeviceType(CommercialKitchenDeviceType):
     energySource: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=commercial_kitchen;i=6080", browseName="ns=commercial_kitchen;EnergySource", dataType=commercial_kitchen_datypes.EnergySourceEnumeration
+            nodeId="ns=commercial_kitchen;i=6080",
+            browseName="ns=commercial_kitchen;EnergySource",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.EnergySourceEnumeration,
         )
     )
     fryingPan: FryingPanParameterType
     isWithPressure: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6079", browseName="ns=commercial_kitchen;IsWithPressure", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6079", browseName="ns=commercial_kitchen;IsWithPressure", modellingRule="Mandatory", dataType=o6.Boolean)
     )
 
 
@@ -202,20 +238,27 @@ class CombiSteamerParameterType(KitchenDeviceParameterType):
     actualTemperatureChamber_No_: ns0.vartypes.AnalogItemType
     combiSteamerMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6104", browseName="ns=commercial_kitchen;CombiSteamerMode", dataType=commercial_kitchen_datypes.CombiSteamerModeEnumeration
+            nodeId="ns=commercial_kitchen;i=6104",
+            browseName="ns=commercial_kitchen;CombiSteamerMode",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.CombiSteamerModeEnumeration,
         )
     )
     isDoorOpen: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6130", browseName="ns=commercial_kitchen;IsDoorOpen", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6130", browseName="ns=commercial_kitchen;IsDoorOpen", modellingRule="Mandatory", dataType=o6.Boolean)
     )
     isEnergySavingActive: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6131", browseName="ns=commercial_kitchen;IsEnergySavingActive", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=commercial_kitchen;i=6131", browseName="ns=commercial_kitchen;IsEnergySavingActive", modellingRule="Optional", dataType=o6.Boolean
+        )
     )
     isLoaActive: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6133", browseName="ns=commercial_kitchen;IsLoaActive", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6133", browseName="ns=commercial_kitchen;IsLoaActive", modellingRule="Optional", dataType=o6.Boolean)
     )
     isSteamExhaustSystemActive: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6132", browseName="ns=commercial_kitchen;IsSteamExhaustSystemActive", dataType=o6.Boolean, accessLevel=3)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=commercial_kitchen;i=6132", browseName="ns=commercial_kitchen;IsSteamExhaustSystemActive", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3
+        )
     )
     setExternalCoreTemperature: ns0.vartypes.AnalogItemType | None
     setHumidity: ns0.vartypes.AnalogItemType | None
@@ -225,7 +268,10 @@ class CombiSteamerParameterType(KitchenDeviceParameterType):
     setTemperature: ns0.vartypes.AnalogItemType
     specialCookingMode: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6121", browseName="ns=commercial_kitchen;SpecialCookingMode", dataType=commercial_kitchen_datypes.SpecialCookingModeEnumeration
+            nodeId="ns=commercial_kitchen;i=6121",
+            browseName="ns=commercial_kitchen;SpecialCookingMode",
+            modellingRule="Optional",
+            dataType=commercial_kitchen_datypes.SpecialCookingModeEnumeration,
         )
     )
     timeRemainingProgram: ns0.vartypes.AnalogItemType
@@ -237,20 +283,29 @@ class CombiSteamerDeviceType(CommercialKitchenDeviceType):
     combiSteamer: CombiSteamerParameterType
     energySource: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=commercial_kitchen;i=6146", browseName="ns=commercial_kitchen;EnergySource", dataType=commercial_kitchen_datypes.EnergySourceEnumeration
+            nodeId="ns=commercial_kitchen;i=6146",
+            browseName="ns=commercial_kitchen;EnergySource",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.EnergySourceEnumeration,
         )
     )
     isWithAutomaticCleaning: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6147", browseName="ns=commercial_kitchen;IsWithAutomaticCleaning", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6147", browseName="ns=commercial_kitchen;IsWithAutomaticCleaning", modellingRule="Mandatory", dataType=o6.Boolean)
     )
     isWithExternalCoreTempSensor: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6149", browseName="ns=commercial_kitchen;IsWithExternalCoreTempSensor", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=commercial_kitchen;i=6149", browseName="ns=commercial_kitchen;IsWithExternalCoreTempSensor", modellingRule="Mandatory", dataType=o6.Boolean
+        )
     )
     isWithInternalCoreTempSensor: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6148", browseName="ns=commercial_kitchen;IsWithInternalCoreTempSensor", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=commercial_kitchen;i=6148", browseName="ns=commercial_kitchen;IsWithInternalCoreTempSensor", modellingRule="Mandatory", dataType=o6.Boolean
+        )
     )
     isWithSousvideTempSensor: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6150", browseName="ns=commercial_kitchen;IsWithSousvideTempSensor", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=commercial_kitchen;i=6150", browseName="ns=commercial_kitchen;IsWithSousvideTempSensor", modellingRule="Mandatory", dataType=o6.Boolean
+        )
     )
 
 
@@ -264,17 +319,20 @@ class ChamberType(KitchenDeviceParameterType):
     actualHumidity_No_: ns0.vartypes.AnalogItemType | None
     actualTopTemperature_No_: ns0.vartypes.AnalogItemType | None
     isDoorOpen: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6200", browseName="ns=commercial_kitchen;IsDoorOpen", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6200", browseName="ns=commercial_kitchen;IsDoorOpen", modellingRule="Optional", dataType=o6.Boolean)
     )
     isProgramEnd: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6199", browseName="ns=commercial_kitchen;IsProgramEnd", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6199", browseName="ns=commercial_kitchen;IsProgramEnd", modellingRule="Optional", dataType=o6.Boolean)
     )
     isReadyToStart: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6198", browseName="ns=commercial_kitchen;IsReadyToStart", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6198", browseName="ns=commercial_kitchen;IsReadyToStart", modellingRule="Optional", dataType=o6.Boolean)
     )
     operationMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6169", browseName="ns=commercial_kitchen;OperationMode", dataType=commercial_kitchen_datypes.ChamberModeEnumeration
+            nodeId="ns=commercial_kitchen;i=6169",
+            browseName="ns=commercial_kitchen;OperationMode",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.ChamberModeEnumeration,
         )
     )
     setBoilerTemperature: ns0.vartypes.AnalogItemType | None
@@ -295,20 +353,25 @@ class PressureCookingKettleParameterType(KitchenDeviceParameterType):
     actualPressureKettle: ns0.vartypes.AnalogItemType
     actualTemperature: ns0.vartypes.AnalogItemType
     cookingLevel: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6208", browseName="ns=commercial_kitchen;CookingLevel", dataType=o6.Int32)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6208", browseName="ns=commercial_kitchen;CookingLevel", modellingRule="Mandatory", dataType=o6.Int32)
     )
     isLidLocked: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6226", browseName="ns=commercial_kitchen;IsLidLocked", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6226", browseName="ns=commercial_kitchen;IsLidLocked", modellingRule="Mandatory", dataType=o6.Boolean)
     )
     isOpenExpressActive: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6228", browseName="ns=commercial_kitchen;IsOpenExpressActive", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=commercial_kitchen;i=6228", browseName="ns=commercial_kitchen;IsOpenExpressActive", modellingRule="Optional", dataType=o6.Boolean
+        )
     )
     isSteamActive: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6227", browseName="ns=commercial_kitchen;IsSteamActive", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6227", browseName="ns=commercial_kitchen;IsSteamActive", modellingRule="Mandatory", dataType=o6.Boolean)
     )
     programMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6207", browseName="ns=commercial_kitchen;ProgramMode", dataType=commercial_kitchen_datypes.PressureCookingKettleModeEnumeration
+            nodeId="ns=commercial_kitchen;i=6207",
+            browseName="ns=commercial_kitchen;ProgramMode",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.PressureCookingKettleModeEnumeration,
         )
     )
     setCoreTemperature: ns0.vartypes.AnalogItemType
@@ -316,7 +379,10 @@ class PressureCookingKettleParameterType(KitchenDeviceParameterType):
     setTemperature: ns0.vartypes.AnalogItemType
     signalMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6225", browseName="ns=commercial_kitchen;SignalMode", dataType=commercial_kitchen_datypes.SignalModeEnumeration
+            nodeId="ns=commercial_kitchen;i=6225",
+            browseName="ns=commercial_kitchen;SignalMode",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.SignalModeEnumeration,
         )
     )
     timeRemaining: ns0.vartypes.AnalogItemType
@@ -326,7 +392,10 @@ class PressureCookingKettleParameterType(KitchenDeviceParameterType):
 class PressureCookingKettleDeviceType(CommercialKitchenDeviceType):
     energySource: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=commercial_kitchen;i=6229", browseName="ns=commercial_kitchen;EnergySource", dataType=commercial_kitchen_datypes.EnergySourceEnumeration
+            nodeId="ns=commercial_kitchen;i=6229",
+            browseName="ns=commercial_kitchen;EnergySource",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.EnergySourceEnumeration,
         )
     )
     pressureCookingKettle: PressureCookingKettleParameterType
@@ -337,11 +406,14 @@ class CookingKettleParameterType(KitchenDeviceParameterType):
     actualCoreTemperature: ns0.vartypes.AnalogItemType
     actualTemperature: ns0.vartypes.AnalogItemType
     cookingLevel: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6252", browseName="ns=commercial_kitchen;CookingLevel", dataType=o6.Int32)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6252", browseName="ns=commercial_kitchen;CookingLevel", modellingRule="Mandatory", dataType=o6.Int32)
     )
     programMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6103", browseName="ns=commercial_kitchen;ProgramMode", dataType=commercial_kitchen_datypes.CookingKettleModeEnumeration
+            nodeId="ns=commercial_kitchen;i=6103",
+            browseName="ns=commercial_kitchen;ProgramMode",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.CookingKettleModeEnumeration,
         )
     )
     setCoreTemperature: ns0.vartypes.AnalogItemType
@@ -349,7 +421,10 @@ class CookingKettleParameterType(KitchenDeviceParameterType):
     setTemperature: ns0.vartypes.AnalogItemType
     signalMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6267", browseName="ns=commercial_kitchen;SignalMode", dataType=commercial_kitchen_datypes.SignalModeEnumeration
+            nodeId="ns=commercial_kitchen;i=6267",
+            browseName="ns=commercial_kitchen;SignalMode",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.SignalModeEnumeration,
         )
     )
     timeRemaining: ns0.vartypes.AnalogItemType
@@ -360,14 +435,17 @@ class CookingKettleDeviceType(CommercialKitchenDeviceType):
     cookingKettle: CookingKettleParameterType
     energySource: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=commercial_kitchen;i=6270", browseName="ns=commercial_kitchen;EnergySource", dataType=commercial_kitchen_datypes.EnergySourceEnumeration
+            nodeId="ns=commercial_kitchen;i=6270",
+            browseName="ns=commercial_kitchen;EnergySource",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.EnergySourceEnumeration,
         )
     )
     isWithAgitator: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6268", browseName="ns=commercial_kitchen;IsWithAgitator", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6268", browseName="ns=commercial_kitchen;IsWithAgitator", modellingRule="Mandatory", dataType=o6.Boolean)
     )
     isWithCooling: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6269", browseName="ns=commercial_kitchen;IsWithCooling", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6269", browseName="ns=commercial_kitchen;IsWithCooling", modellingRule="Mandatory", dataType=o6.Boolean)
     )
 
 
@@ -379,29 +457,32 @@ class MultiFunctionPanParameterType(KitchenDeviceParameterType):
     actualTemperatureCup: ns0.vartypes.AnalogItemType
     actualZoneTemperature_No_: ns0.vartypes.AnalogItemType | None
     cookingLevel: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6290", browseName="ns=commercial_kitchen;CookingLevel", dataType=o6.Int32)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6290", browseName="ns=commercial_kitchen;CookingLevel", modellingRule="Optional", dataType=o6.Int32)
     )
     isLidLocked: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6315", browseName="ns=commercial_kitchen;IsLidLocked", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6315", browseName="ns=commercial_kitchen;IsLidLocked", modellingRule="Optional", dataType=o6.Boolean)
     )
     isLidOpen: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6316", browseName="ns=commercial_kitchen;IsLidOpen", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6316", browseName="ns=commercial_kitchen;IsLidOpen", modellingRule="Optional", dataType=o6.Boolean)
     )
     isWithCleaning: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6319", browseName="ns=commercial_kitchen;IsWithCleaning", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6319", browseName="ns=commercial_kitchen;IsWithCleaning", modellingRule="Optional", dataType=o6.Boolean)
     )
     isWithLift: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6320", browseName="ns=commercial_kitchen;IsWithLift", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6320", browseName="ns=commercial_kitchen;IsWithLift", modellingRule="Optional", dataType=o6.Boolean)
     )
     isWithPressure: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6317", browseName="ns=commercial_kitchen;IsWithPressure", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6317", browseName="ns=commercial_kitchen;IsWithPressure", modellingRule="Optional", dataType=o6.Boolean)
     )
     isWithTilting: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6318", browseName="ns=commercial_kitchen;IsWithTilting", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6318", browseName="ns=commercial_kitchen;IsWithTilting", modellingRule="Optional", dataType=o6.Boolean)
     )
     multiFunctionPanMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6288", browseName="ns=commercial_kitchen;MultiFunctionPanMode", dataType=commercial_kitchen_datypes.MultiFunctionPanModeEnumeration
+            nodeId="ns=commercial_kitchen;i=6288",
+            browseName="ns=commercial_kitchen;MultiFunctionPanMode",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.MultiFunctionPanModeEnumeration,
         )
     )
     setCoreTemperature: ns0.vartypes.AnalogItemType
@@ -411,7 +492,10 @@ class MultiFunctionPanParameterType(KitchenDeviceParameterType):
     setZoneTemperature_No_: ns0.vartypes.AnalogItemType | None
     specialFunctionMode: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6289", browseName="ns=commercial_kitchen;SpecialFunctionMode", dataType=commercial_kitchen_datypes.SpecialFunctionModeEnumeration
+            nodeId="ns=commercial_kitchen;i=6289",
+            browseName="ns=commercial_kitchen;SpecialFunctionMode",
+            modellingRule="Optional",
+            dataType=commercial_kitchen_datypes.SpecialFunctionModeEnumeration,
         )
     )
     timeRemainingProgram: ns0.vartypes.AnalogItemType
@@ -422,7 +506,10 @@ class MultiFunctionPanParameterType(KitchenDeviceParameterType):
 class MultiFunctionPanDeviceType(CommercialKitchenDeviceType):
     energySource: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=commercial_kitchen;i=6321", browseName="ns=commercial_kitchen;EnergySource", dataType=commercial_kitchen_datypes.EnergySourceEnumeration
+            nodeId="ns=commercial_kitchen;i=6321",
+            browseName="ns=commercial_kitchen;EnergySource",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.EnergySourceEnumeration,
         )
     )
     multiFunctionPan_No_: MultiFunctionPanParameterType
@@ -432,18 +519,24 @@ class MultiFunctionPanDeviceType(CommercialKitchenDeviceType):
 class PastaCookerParameterType(KitchenDeviceParameterType):
     actualTemperature: ns0.vartypes.AnalogItemType
     cookingLevel: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6339", browseName="ns=commercial_kitchen;CookingLevel", dataType=o6.Int32)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6339", browseName="ns=commercial_kitchen;CookingLevel", modellingRule="Mandatory", dataType=o6.Int32)
     )
     programMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6338", browseName="ns=commercial_kitchen;ProgramMode", dataType=commercial_kitchen_datypes.PastaCookerModeEnumeration
+            nodeId="ns=commercial_kitchen;i=6338",
+            browseName="ns=commercial_kitchen;ProgramMode",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.PastaCookerModeEnumeration,
         )
     )
     setProcessTime: ns0.vartypes.AnalogItemType
     setTemperature: ns0.vartypes.AnalogItemType
     signalMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6348", browseName="ns=commercial_kitchen;SignalMode", dataType=commercial_kitchen_datypes.SignalModeEnumeration
+            nodeId="ns=commercial_kitchen;i=6348",
+            browseName="ns=commercial_kitchen;SignalMode",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.SignalModeEnumeration,
         )
     )
     timeRemaining: ns0.vartypes.AnalogItemType
@@ -453,11 +546,14 @@ class PastaCookerParameterType(KitchenDeviceParameterType):
 class PastaCookerDeviceType(CommercialKitchenDeviceType):
     energySource: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=commercial_kitchen;i=6350", browseName="ns=commercial_kitchen;EnergySource", dataType=commercial_kitchen_datypes.EnergySourceEnumeration
+            nodeId="ns=commercial_kitchen;i=6350",
+            browseName="ns=commercial_kitchen;EnergySource",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.EnergySourceEnumeration,
         )
     )
     isWithLift: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6349", browseName="ns=commercial_kitchen;IsWithLift", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6349", browseName="ns=commercial_kitchen;IsWithLift", modellingRule="Mandatory", dataType=o6.Boolean)
     )
     pastaCooker: PastaCookerParameterType
 
@@ -470,12 +566,16 @@ class CoffeeMachineParameterType(KitchenDeviceParameterType):
     boilerTempWater: ns0.vartypes.AnalogItemType
     currentState: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6368", browseName="ns=commercial_kitchen;CurrentState", dataType=commercial_kitchen_datypes.CoffeeMachineModeEnumeration, accessLevel=3
+            nodeId="ns=commercial_kitchen;i=6368",
+            browseName="ns=commercial_kitchen;CurrentState",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.CoffeeMachineModeEnumeration,
+            accessLevel=3,
         )
     )
     grinderRuntime_No_: ns0.vartypes.AnalogItemType
     systemClean: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6375", browseName="ns=commercial_kitchen;SystemClean", dataType=o6.DateTime)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6375", browseName="ns=commercial_kitchen;SystemClean", modellingRule="Mandatory", dataType=o6.DateTime)
     )
     totalBrew_No_: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
@@ -483,7 +583,7 @@ class CoffeeMachineParameterType(KitchenDeviceParameterType):
         )
     )
     totalMix: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6377", browseName="ns=commercial_kitchen;TotalMix", dataType=o6.UInt64)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6377", browseName="ns=commercial_kitchen;TotalMix", modellingRule="Mandatory", dataType=o6.UInt64)
     )
 
 
@@ -491,7 +591,11 @@ class CoffeeMachineParameterType(KitchenDeviceParameterType):
 class CoffeeMachineRecipeParameterType(KitchenDeviceParameterType):
     beverageSML: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6386", browseName="ns=commercial_kitchen;BeverageSML", dataType=commercial_kitchen_datypes.BeverageSMLEnumeration, accessLevel=3
+            nodeId="ns=commercial_kitchen;i=6386",
+            browseName="ns=commercial_kitchen;BeverageSML",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.BeverageSMLEnumeration,
+            accessLevel=3,
         )
     )
     beverageSize: ns0.vartypes.AnalogItemType
@@ -510,62 +614,89 @@ class CoffeeMachineRecipeParameterType(KitchenDeviceParameterType):
 )
 class DishWashingMachineProgramParameterType(KitchenDeviceParameterType):
     actualFinalRinseTemperatureNo: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6469", browseName="ns=commercial_kitchen;ActualFinalRinseTemperatureNo", dataType=o6.UInt16)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=commercial_kitchen;i=6469", browseName="ns=commercial_kitchen;ActualFinalRinseTemperatureNo", modellingRule="Mandatory", dataType=o6.UInt16
+        )
     )
     actualFinalRinseTemperature_No_: ns0.vartypes.AnalogItemType
     actualHygieneValue: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6473", browseName="ns=commercial_kitchen;ActualHygieneValue", dataType=o6.UInt16)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=commercial_kitchen;i=6473", browseName="ns=commercial_kitchen;ActualHygieneValue", modellingRule="Optional", dataType=o6.UInt16
+        )
     )
     actualMainTankTemperatureNo: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6463", browseName="ns=commercial_kitchen;ActualMainTankTemperatureNo", dataType=o6.UInt16)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=commercial_kitchen;i=6463", browseName="ns=commercial_kitchen;ActualMainTankTemperatureNo", modellingRule="Mandatory", dataType=o6.UInt16
+        )
     )
     actualMainTankTemperature_No_: ns0.vartypes.AnalogItemType
     actualPreTankTemperatureNo: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6460", browseName="ns=commercial_kitchen;ActualPreTankTemperatureNo", dataType=o6.UInt16)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=commercial_kitchen;i=6460", browseName="ns=commercial_kitchen;ActualPreTankTemperatureNo", modellingRule="Mandatory", dataType=o6.UInt16
+        )
     )
     actualPreTankTemperature_No_: ns0.vartypes.AnalogItemType
     actualPumpedFinalRinseTemperatureNo: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6466", browseName="ns=commercial_kitchen;ActualPumpedFinalRinseTemperatureNo", dataType=o6.UInt16)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=commercial_kitchen;i=6466", browseName="ns=commercial_kitchen;ActualPumpedFinalRinseTemperatureNo", modellingRule="Mandatory", dataType=o6.UInt16
+        )
     )
     actualPumpedFinalRinseTemperature_No_: ns0.vartypes.AnalogItemType
     finalRinseTemperatureSetpointNo: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6457", browseName="ns=commercial_kitchen;FinalRinseTemperatureSetpointNo", dataType=o6.UInt16)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=commercial_kitchen;i=6457", browseName="ns=commercial_kitchen;FinalRinseTemperatureSetpointNo", modellingRule="Mandatory", dataType=o6.UInt16
+        )
     )
     finalRinseTemperatureSetpoint_No_: ns0.vartypes.AnalogItemType
     hygieneMode: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6475", browseName="ns=commercial_kitchen;HygieneMode", dataType=commercial_kitchen_datypes.HygieneModeEnumeration
+            nodeId="ns=commercial_kitchen;i=6475",
+            browseName="ns=commercial_kitchen;HygieneMode",
+            modellingRule="Optional",
+            dataType=commercial_kitchen_datypes.HygieneModeEnumeration,
         )
     )
     hygieneSetpoint: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6472", browseName="ns=commercial_kitchen;HygieneSetpoint", dataType=o6.UInt16)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6472", browseName="ns=commercial_kitchen;HygieneSetpoint", modellingRule="Optional", dataType=o6.UInt16)
     )
     mainTankTemperatureSetpointNo: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6451", browseName="ns=commercial_kitchen;MainTankTemperatureSetpointNo", dataType=o6.UInt16)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=commercial_kitchen;i=6451", browseName="ns=commercial_kitchen;MainTankTemperatureSetpointNo", modellingRule="Mandatory", dataType=o6.UInt16
+        )
     )
     mainTankTemperatureSetpoint_No_: ns0.vartypes.AnalogItemType
     operationMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6476", browseName="ns=commercial_kitchen;OperationMode", dataType=commercial_kitchen_datypes.OperationModeEnumeration
+            nodeId="ns=commercial_kitchen;i=6476",
+            browseName="ns=commercial_kitchen;OperationMode",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.OperationModeEnumeration,
         )
     )
     preTankTemperatureSetpointNo: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6448", browseName="ns=commercial_kitchen;PreTankTemperatureSetpointNo", dataType=o6.UInt16)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=commercial_kitchen;i=6448", browseName="ns=commercial_kitchen;PreTankTemperatureSetpointNo", modellingRule="Mandatory", dataType=o6.UInt16
+        )
     )
     preTankTemperatureSetpoint_No_: ns0.vartypes.AnalogItemType
     productGroup: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6446", browseName="ns=commercial_kitchen;ProductGroup", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6446", browseName="ns=commercial_kitchen;ProductGroup", modellingRule="Optional", dataType=o6.String)
     )
     productType: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6447", browseName="ns=commercial_kitchen;ProductType", dataType=o6.UInt32)
+        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6447", browseName="ns=commercial_kitchen;ProductType", modellingRule="Optional", dataType=o6.UInt32)
     )
     programMode: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6474", browseName="ns=commercial_kitchen;ProgramMode", dataType=commercial_kitchen_datypes.ProgramModeEnumeration
+            nodeId="ns=commercial_kitchen;i=6474",
+            browseName="ns=commercial_kitchen;ProgramMode",
+            modellingRule="Optional",
+            dataType=commercial_kitchen_datypes.ProgramModeEnumeration,
         )
     )
     pumpedFinalRinseTemperatureSetpointNo: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6454", browseName="ns=commercial_kitchen;PumpedFinalRinseTemperatureSetpointNo", dataType=o6.UInt16)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=commercial_kitchen;i=6454", browseName="ns=commercial_kitchen;PumpedFinalRinseTemperatureSetpointNo", modellingRule="Mandatory", dataType=o6.UInt16
+        )
     )
     pumpedFinalRinseTemperatureSetpoint_No_: ns0.vartypes.AnalogItemType
 
@@ -575,17 +706,23 @@ class TrayType(KitchenDeviceParameterType):
     activeSince: ns0.vartypes.AnalogItemType
     actualTemperature: ns0.vartypes.AnalogItemType
     name: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6504", browseName="ns=commercial_kitchen;Name", dataType=o6.String, accessLevel=3)
+        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6504", browseName="ns=commercial_kitchen;Name", modellingRule="Mandatory", dataType=o6.String, accessLevel=3)
     )
     operatingCounter: ns0.vartypes.AnalogItemType
     programMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6499", browseName="ns=commercial_kitchen;ProgramMode", dataType=commercial_kitchen_datypes.TrayModeEnumeration, accessLevel=3
+            nodeId="ns=commercial_kitchen;i=6499",
+            browseName="ns=commercial_kitchen;ProgramMode",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.TrayModeEnumeration,
+            accessLevel=3,
         )
     )
     setTemperature: ns0.vartypes.AnalogItemType
     type: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6505", browseName="ns=commercial_kitchen;Type", dataType=commercial_kitchen_datypes.TrayTypeEnumeration)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=commercial_kitchen;i=6505", browseName="ns=commercial_kitchen;Type", modellingRule="Mandatory", dataType=commercial_kitchen_datypes.TrayTypeEnumeration
+        )
     )
 
 
@@ -595,15 +732,18 @@ class CookingZoneParameterType(KitchenDeviceParameterType):
     actualProcessTime: ns0.vartypes.AnalogItemType | None
     actualTemperature: ns0.vartypes.AnalogItemType | None
     cookingZoneName: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6531", browseName="ns=commercial_kitchen;CookingZoneName", dataType=o6.String)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6531", browseName="ns=commercial_kitchen;CookingZoneName", modellingRule="Optional", dataType=o6.String)
     )
     currentState: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6530", browseName="ns=commercial_kitchen;CurrentState", dataType=commercial_kitchen_datypes.CurrentStateEnumeration
+            nodeId="ns=commercial_kitchen;i=6530",
+            browseName="ns=commercial_kitchen;CurrentState",
+            modellingRule="Optional",
+            dataType=commercial_kitchen_datypes.CurrentStateEnumeration,
         )
     )
     isPanDetected: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6542", browseName="ns=commercial_kitchen;IsPanDetected", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6542", browseName="ns=commercial_kitchen;IsPanDetected", modellingRule="Optional", dataType=o6.Boolean)
     )
     nominalPower: ns0.vartypes.AnalogItemType
     setPowerValue: ns0.vartypes.AnalogItemType | None
@@ -615,15 +755,18 @@ class CookingZoneDeviceType(CommercialKitchenDeviceType):
     cookingZone_No_: CookingZoneParameterType
     energySource: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=commercial_kitchen;i=6552", browseName="ns=commercial_kitchen;EnergySource", dataType=commercial_kitchen_datypes.EnergySourceEnumeration
+            nodeId="ns=commercial_kitchen;i=6552",
+            browseName="ns=commercial_kitchen;EnergySource",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.EnergySourceEnumeration,
         )
     )
     isWithPanDetection: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6551", browseName="ns=commercial_kitchen;IsWithPanDetection", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6551", browseName="ns=commercial_kitchen;IsWithPanDetection", modellingRule="Mandatory", dataType=o6.Boolean)
     )
     nominalVoltage: ns0.vartypes.AnalogItemType
     numberOfPhases: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6555", browseName="ns=commercial_kitchen;NumberOfPhases", dataType=o6.Int32)
+        ns0.vartypes.PropertyType(nodeId="ns=commercial_kitchen;i=6555", browseName="ns=commercial_kitchen;NumberOfPhases", modellingRule="Mandatory", dataType=o6.Int32)
     )
 
 
@@ -633,18 +776,24 @@ class FryingAndGrillingParameterType(KitchenDeviceParameterType):
     actualPlatenTemperature_No_: ns0.vartypes.AnalogItemType | None
     currentState: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6558", browseName="ns=commercial_kitchen;CurrentState", dataType=commercial_kitchen_datypes.GrillingZoneStateEnumeration
+            nodeId="ns=commercial_kitchen;i=6558",
+            browseName="ns=commercial_kitchen;CurrentState",
+            modellingRule="Optional",
+            dataType=commercial_kitchen_datypes.GrillingZoneStateEnumeration,
         )
     )
     grillingZoneName: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6559", browseName="ns=commercial_kitchen;GrillingZoneName", dataType=o6.String)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6559", browseName="ns=commercial_kitchen;GrillingZoneName", modellingRule="Optional", dataType=o6.String)
     )
     isWithPlaten: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6573", browseName="ns=commercial_kitchen;IsWithPlaten", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6573", browseName="ns=commercial_kitchen;IsWithPlaten", modellingRule="Mandatory", dataType=o6.Boolean)
     )
     platenPositionState: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6572", browseName="ns=commercial_kitchen;PlatenPositionState", dataType=commercial_kitchen_datypes.PlatenPositionStateEnumeration
+            nodeId="ns=commercial_kitchen;i=6572",
+            browseName="ns=commercial_kitchen;PlatenPositionState",
+            modellingRule="Optional",
+            dataType=commercial_kitchen_datypes.PlatenPositionStateEnumeration,
         )
     )
     remainingProcessTime: ns0.vartypes.AnalogItemType | None
@@ -657,7 +806,10 @@ class FryingAndGrillingParameterType(KitchenDeviceParameterType):
 class FryingAndGrillingDeviceType(CommercialKitchenDeviceType):
     energySource: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=commercial_kitchen;i=6580", browseName="ns=commercial_kitchen;EnergySource", dataType=commercial_kitchen_datypes.EnergySourceEnumeration
+            nodeId="ns=commercial_kitchen;i=6580",
+            browseName="ns=commercial_kitchen;EnergySource",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.EnergySourceEnumeration,
         )
     )
     grillingZone_No_: FryingAndGrillingParameterType
@@ -667,16 +819,21 @@ class FryingAndGrillingDeviceType(CommercialKitchenDeviceType):
 class MicrowaveCombiOvenParameterType(KitchenDeviceParameterType):
     actualTemperatureChamber: ns0.vartypes.AnalogItemType
     cookingStep: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6592", browseName="ns=commercial_kitchen;CookingStep", dataType=o6.Int32)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6592", browseName="ns=commercial_kitchen;CookingStep", modellingRule="Optional", dataType=o6.Int32)
     )
     fanSpeed: ns0.vartypes.AnalogItemType | None
     isDoorOpen: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6598", browseName="ns=commercial_kitchen;IsDoorOpen", dataType=o6.Boolean, accessLevel=3)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=commercial_kitchen;i=6598", browseName="ns=commercial_kitchen;IsDoorOpen", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3
+        )
     )
     microwaveEnergy: ns0.vartypes.AnalogItemType | None
     operatingMode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=commercial_kitchen;i=6597", browseName="ns=commercial_kitchen;OperatingMode", dataType=commercial_kitchen_datypes.OperatingModeEnumeration
+            nodeId="ns=commercial_kitchen;i=6597",
+            browseName="ns=commercial_kitchen;OperatingMode",
+            modellingRule="Mandatory",
+            dataType=commercial_kitchen_datypes.OperatingModeEnumeration,
         )
     )
     remainingProcessTime: ns0.vartypes.AnalogItemType
@@ -690,7 +847,9 @@ class IceMachineParameterType(KitchenDeviceParameterType):
     lastFreezeTime: ns0.vartypes.AnalogItemType | None
     lastHarvestTime: ns0.vartypes.AnalogItemType | None
     status: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=commercial_kitchen;i=6621", browseName="ns=commercial_kitchen;Status", dataType=commercial_kitchen_datypes.StatusEnumeration)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=commercial_kitchen;i=6621", browseName="ns=commercial_kitchen;Status", modellingRule="Optional", dataType=commercial_kitchen_datypes.StatusEnumeration
+        )
     )
     temperature_No_: ns0.vartypes.AnalogItemType | None
     waterFillTime: ns0.vartypes.AnalogItemType | None
@@ -698,7 +857,9 @@ class IceMachineParameterType(KitchenDeviceParameterType):
 
 @o6.objecttype(nodeId="ns=commercial_kitchen;i=1036", browseName="ns=commercial_kitchen;IceMachineDeviceType", displayName="IceMachineDeviceType")
 class IceMachineDeviceType(CommercialKitchenDeviceType):
-    iceMachine: IceMachineParameterType = o6.hasComponent(IceMachineParameterType(nodeId="ns=commercial_kitchen;i=5020", browseName="ns=commercial_kitchen;IceMachine"))
+    iceMachine: IceMachineParameterType = o6.hasComponent(
+        IceMachineParameterType(nodeId="ns=commercial_kitchen;i=5020", browseName="ns=commercial_kitchen;IceMachine", modellingRule="Mandatory")
+    )
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ns0, commercial_kitchen_datypes

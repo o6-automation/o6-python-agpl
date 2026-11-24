@@ -43,11 +43,20 @@ else:
 class ResultType(ns0.vartypes.BaseDataVariableType):
     reducedResultContent: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=machinery_result;i=6011", browseName="ns=machinery_result;ReducedResultContent", valueRank=1, arrayDimensions=[0], accessLevel=3, userAccessLevel=1
+            nodeId="ns=machinery_result;i=6011",
+            browseName="ns=machinery_result;ReducedResultContent",
+            modellingRule="Optional",
+            valueRank=1,
+            arrayDimensions=[0],
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     resultContent: ns0.vartypes.BaseDataVariableType | None = o6.reference(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=machinery_result;i=6010", browseName="ns=machinery_result;ResultContent", valueRank=1, arrayDimensions=[0]), "i=24136"
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=machinery_result;i=6010", browseName="ns=machinery_result;ResultContent", modellingRule="Optional", valueRank=1, arrayDimensions=[0]
+        ),
+        "i=24136",
     )
     resultMetaData: ns0.vartypes.BaseDataVariableType
 

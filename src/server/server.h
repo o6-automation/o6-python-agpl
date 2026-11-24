@@ -74,7 +74,6 @@ void pyMdns_clear(PyServer *server);
 void pyMdns_recordChanged(PyServer *server, const UA_String *name,
                           const UA_ServerOnNetwork *local);
 void pyServer_stopDiscoveryGuard(PyServer *server);
-PyObject *pyServer_advance_registration_time(PyObject *self, PyObject *seconds);
 
 /* Forward declaration for PyServerConfig */
 typedef struct {
@@ -83,6 +82,29 @@ typedef struct {
 } PyServerConfig;
 
 extern PyTypeObject PyServerConfigType;
+
+/* The event loop of a server, or NULL before configuration or after
+ * teardown; for O6_REQUIRE_LOOP_THREAD. */
+static inline UA_EventLoop *
+pyServer_eventLoop(const PyServer *self) {
+    return self && self->server ? UA_Server_getConfig(self->server)->eventLoop : NULL;
+}
+
+static inline UA_EventLoop *
+pyServerConfig_eventLoop(const PyServerConfig *self) {
+    return pyServer_eventLoop(self->py_server);
+}
+
+/* Lock-free lifecycle check for configuration writes that are refused while
+ * the server runs, for O6_REQUIRE_WRITABLE_CONFIG: sets RuntimeError
+ * "Cannot <verb> <name> while server is running" and returns false. */
+static inline bool
+pyServerConfig_notRunning(const PyServerConfig *self, const char *verb, const char *name) {
+    if(!self->py_server || !self->py_server->running)
+        return true;
+    PyErr_Format(PyExc_RuntimeError, "Cannot %s %s while server is running", verb, name);
+    return false;
+}
 
 /* Factory to create a PyServerConfig for a given PyServer* */
 PyObject *PyServerConfig_New(PyServer *py_server);
@@ -142,8 +164,6 @@ PyObject* pyServer_browse_simplified_browse_paths(PyObject *self, PyObject *args
 PyObject* pyServer_for_each_child_node(PyObject *self, PyObject *args);
 PyObject* pyServer_register_discovery(PyObject *self, PyObject *args);
 PyObject* pyServer_deregister_discovery(PyObject *self, PyObject *args);
-PyObject* pyServer_register_server(PyObject *self, PyObject *args);
-PyObject* pyServer_deregister_server(PyObject *self, PyObject *args);
 PyObject* pyServer_register_server_on_network(PyObject *self, PyObject *args);
 PyObject* pyServer_deregister_server_on_network(PyObject *self, PyObject *args);
 PyObject* pyServer_set_register_server_callback(PyObject *self, PyObject *args);

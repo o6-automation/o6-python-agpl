@@ -211,8 +211,9 @@ udpOpen(UA_ConnectionManager *cm, const UA_KeyValueMap *params,
     if(!loop || cm->eventSource.state != UA_EVENTSOURCESTATE_STARTED)
         return UA_STATUSCODE_BADINVALIDSTATE;
     initUdpParams();
-    UA_StatusCode status = UA_KeyValueRestriction_validate(
-        loop->cLoop.logger, "UDP", udpParams, UDP_PARAMETERSSIZE, params);
+    UA_StatusCode status = UA_KeyValueMap_validate(
+        params, udpParams, UDP_PARAMETERSSIZE, false,
+        loop->cLoop.logger, UA_LOGCATEGORY_EVENTLOOP, "UDP");
     if(status != UA_STATUSCODE_GOOD)
         return status;
     const UA_UInt16 *port = (const UA_UInt16*)UA_KeyValueMap_getScalar(

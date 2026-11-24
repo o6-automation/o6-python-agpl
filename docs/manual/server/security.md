@@ -85,7 +85,9 @@ in an asyncio application, await each call. A Call service failure raises
 and must be checked separately.
 
 Request a DER-encoded PKCS #10 *certificate signing request* (CSR) with the
-current key.
+current key. `CreateSigningRequest` returns `Bad_TransactionPending` while
+another session owns a pending certificate or TrustList update. The owning
+session can still request a CSR before queuing `ApplyChanges`.
 
 !!! warning "Regenerated keys are not saved"
     `CreateSigningRequest` with `RegeneratePrivateKey=True` works for an in-memory
@@ -179,9 +181,11 @@ on the server's session-cleanup interval; transport loss alone is not session ex
 
 `AddCertificate` immediately adds a trusted non-CA certificate; use binary
 TrustList transfers for CAs, issuers and certificate revocation lists (CRLs).
-`RemoveCertificate` applies immediately, but removing an issuer CA can leave its
-CRLs behind. Use a complete TrustList transfer to update issuer certificates and
-CRLs together. Neither
+`RemoveCertificate` returns `Bad_CertificateChainIncomplete` without changing
+the TrustList if another stored certificate needs the CA being removed.
+Successful removal applies immediately, but removing an issuer CA can leave
+its CRLs behind. Use a complete TrustList transfer to update issuer certificates
+and CRLs together. Neither
 single-certificate method needs a further `ApplyChanges`. Application trust changes
 revalidate SecureChannels, so retain the manager's trust while making changes.
 User-token trust changes affect new certificate-authenticated sessions, without
@@ -543,6 +547,8 @@ On Linux and Windows, configure persistent certificates and trust lists before s
 ```python
 server.config.setDefaultWithFilestore(certificate_bytes, private_key_bytes, str(pki_root), port=4840)
 server.config.applicationUri = "urn:example:server"
+# Reject client application and user certificates with unsuitable extended key usage.
+server.config.certificateEkuRule = "abort"
 # Configure authentication and custom limits here, before startup.
 # Enable PushManagement afterwards if required.
 ```
@@ -556,6 +562,13 @@ each setup.
 The explicit certificate/key determine startup identity even when the store
 contains other saved credentials. There is no automatic credential selection or
 merging of constructor trust lists.
+
+`certificateEkuRule` accepts `"default"`, `"abort"`, `"warn"` or `"accept"`.
+The unchanged native default warns and accepts purpose violations. `"abort"`
+requires `clientAuth` for RSA application certificates. User and ECC application
+certificates may omit extended key usage, but an extension that is present must
+allow `clientAuth`. Trust, validity and signature checks still apply independently.
+Set this property after configuration reset methods and before starting the server.
 
 Under the PKI root, both `ApplCerts` and `UserTokenCerts` contain
 `trusted/certs`, `trusted/crl`, `issuer/certs`, `issuer/crl`, `own/certs`,

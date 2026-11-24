@@ -66,7 +66,7 @@ o6.reference(IMM_MES_InterfaceType, "i=41", "ns=plastics_rubber;i=1038")
 class InjectionUnitsType(ns0.objtypes.BaseObjectType):
     injectionUnit_Nr_: InjectionUnitType | None
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6006", browseName="NodeVersion", dataType=o6.String, value="\n      ")
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_imm2mes;i=6006", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value="\n      ")
     )
 
 
@@ -88,6 +88,7 @@ class InjectionUnitCycleParametersType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_imm2mes;i=6059",
             browseName="ns=plastics_imm2mes;DosingTime",
             description="Time to melt-up the plastic granulates and feed the melt for the next injection shot to the front of the screw",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.Duration,
             value=0.0,
         )
@@ -100,7 +101,12 @@ class InjectionUnitCycleParametersType(ns0.objtypes.BaseObjectType):
     hydraulicPressureMaximum: ns0.vartypes.AnalogItemType | None
     index: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_imm2mes;i=6107", browseName="ns=plastics_imm2mes;Index", description="Index of the injection unit", dataType=o6.UInt32, value=0
+            nodeId="ns=plastics_imm2mes;i=6107",
+            browseName="ns=plastics_imm2mes;Index",
+            description="Index of the injection unit",
+            modellingRule="Mandatory",
+            dataType=o6.UInt32,
+            value=0,
         )
     )
     injectionSpeedAverage: ns0.vartypes.AnalogItemType | None
@@ -111,6 +117,7 @@ class InjectionUnitCycleParametersType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_imm2mes;i=6060",
             browseName="ns=plastics_imm2mes;InjectionTime",
             description="Time required to fill the cavity or mould",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.Duration,
             value=0.0,
         )
@@ -145,6 +152,7 @@ class InjectionUnitType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_imm2mes;i=6097",
             browseName="ns=plastics_imm2mes;BarrelId",
             description="Id (e.g. serial number) of the barrel",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="\n      ",
         )
@@ -154,13 +162,19 @@ class InjectionUnitType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_imm2mes;i=6099",
             browseName="ns=plastics_imm2mes;InProduction",
             description="information if the injection unit is used in the current running production",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             value=True,
         )
     )
     index: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_imm2mes;i=6724", browseName="ns=plastics_imm2mes;Index", description="Number of the injection unit", dataType=o6.UInt32, value=0
+            nodeId="ns=plastics_imm2mes;i=6724",
+            browseName="ns=plastics_imm2mes;Index",
+            description="Number of the injection unit",
+            modellingRule="Mandatory",
+            dataType=o6.UInt32,
+            value=0,
         )
     )
     isPresent: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -168,6 +182,7 @@ class InjectionUnitType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_imm2mes;i=6098",
             browseName="ns=plastics_imm2mes;IsPresent",
             description="Information if the injection unit is physically installed on the injection machines",
+            modellingRule="Mandatory",
             dataType=o6.Boolean,
             value=True,
         )
@@ -179,6 +194,7 @@ class InjectionUnitType(ns0.objtypes.BaseObjectType):
             nodeId="ns=plastics_imm2mes;i=6106",
             browseName="ns=plastics_imm2mes;ScrewId",
             description="Id of the screw installed in the injection unit",
+            modellingRule="Optional",
             dataType=o6.String,
             value="\n      ",
         )

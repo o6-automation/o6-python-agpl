@@ -32,10 +32,10 @@ else:
     _VariableNode = object
 
 
-@o6.datatype(nodeId="ns=profinet;i=3002", browseName="PnDeviceRoleOptionSet", defaultEncodingId="ns=profinet;i=5001")
+@o6.datatype(nodeId="ns=profinet;i=3002", browseName="ns=profinet;PnDeviceRoleOptionSet", defaultEncodingId="ns=profinet;i=5001")
 class PnDeviceRoleOptionSet(ns0.datatypes.OptionSet):
-    value: o6.ByteString
-    validBits: o6.ByteString
+    value: o6.ByteString = o6.field(name="Value")
+    validBits: o6.ByteString = o6.field(name="ValidBits")
     iO_DEVICE = o6.optionsetbit(0, name="IO_DEVICE")
     iO_CONTROLLER = o6.optionsetbit(1, name="IO_CONTROLLER")
     iO_MULTIDEVICE = o6.optionsetbit(2, name="IO_MULTIDEVICE")
@@ -43,7 +43,7 @@ class PnDeviceRoleOptionSet(ns0.datatypes.OptionSet):
     iO_CIM = o6.optionsetbit(4, name="IO_CIM")
 
 
-@o6.enumtype(nodeId="ns=profinet;i=3003", browseName="PnDeviceStateEnumeration")
+@o6.enumtype(nodeId="ns=profinet;i=3003", browseName="ns=profinet;PnDeviceStateEnumeration")
 class PnDeviceStateEnumeration(ns0.datatypes.Enumeration):
     OFFLINE = o6.enumfield(0, name="OFFLINE")
     OFFLINE_DOCKING = o6.enumfield(1, name="OFFLINE_DOCKING")
@@ -51,7 +51,7 @@ class PnDeviceStateEnumeration(ns0.datatypes.Enumeration):
     ONLINE_DOCKING = o6.enumfield(3, name="ONLINE_DOCKING")
 
 
-@o6.enumtype(nodeId="ns=profinet;i=3004", browseName="PnARStateEnumeration")
+@o6.enumtype(nodeId="ns=profinet;i=3004", browseName="ns=profinet;PnARStateEnumeration")
 class PnARStateEnumeration(ns0.datatypes.Enumeration):
     CONNECTED = o6.enumfield(0, name="CONNECTED")
     UNCONNECTED = o6.enumfield(1, name="UNCONNECTED")
@@ -60,7 +60,7 @@ class PnARStateEnumeration(ns0.datatypes.Enumeration):
     UNCONNECTED_ERR_DUPLICATE_NOS = o6.enumfield(4, name="UNCONNECTED_ERR_DUPLICATE_NOS")
 
 
-@o6.enumtype(nodeId="ns=profinet;i=3005", browseName="PnARTypeEnumeration")
+@o6.enumtype(nodeId="ns=profinet;i=3005", browseName="ns=profinet;PnARTypeEnumeration")
 class PnARTypeEnumeration(ns0.datatypes.Enumeration):
     IOCAR_SINGLE = o6.enumfield(0, name="IOCARSingle")
     IOSAR = o6.enumfield(6, name="IOSAR")
@@ -68,7 +68,7 @@ class PnARTypeEnumeration(ns0.datatypes.Enumeration):
     IOCARSR = o6.enumfield(32, name="IOCARSR")
 
 
-@o6.enumtype(nodeId="ns=profinet;i=3006", browseName="PnModuleStateEnumeration")
+@o6.enumtype(nodeId="ns=profinet;i=3006", browseName="ns=profinet;PnModuleStateEnumeration")
 class PnModuleStateEnumeration(ns0.datatypes.Enumeration):
     NO_MODULE = o6.enumfield(0, name="NO_MODULE")
     WRONG_MODULE = o6.enumfield(1, name="WRONG_MODULE")
@@ -77,13 +77,13 @@ class PnModuleStateEnumeration(ns0.datatypes.Enumeration):
     OK = o6.enumfield(4, name="OK")
 
 
-@o6.enumtype(nodeId="ns=profinet;i=3007", browseName="PnSubmoduleAddInfoEnumeration")
+@o6.enumtype(nodeId="ns=profinet;i=3007", browseName="ns=profinet;PnSubmoduleAddInfoEnumeration")
 class PnSubmoduleAddInfoEnumeration(ns0.datatypes.Enumeration):
     NO_ADD_INFO = o6.enumfield(0, name="NO_ADD_INFO")
     TAKEOVER_NOT_ALLOWED = o6.enumfield(1, name="TAKEOVER_NOT_ALLOWED")
 
 
-@o6.enumtype(nodeId="ns=profinet;i=3008", browseName="PnSubmoduleARInfoEnumeration")
+@o6.enumtype(nodeId="ns=profinet;i=3008", browseName="ns=profinet;PnSubmoduleARInfoEnumeration")
 class PnSubmoduleARInfoEnumeration(ns0.datatypes.Enumeration):
     OWN = o6.enumfield(0, name="OWN")
     APPLICATION_READY_PENDING = o6.enumfield(128, name="APPLICATION_READY_PENDING")
@@ -92,7 +92,7 @@ class PnSubmoduleARInfoEnumeration(ns0.datatypes.Enumeration):
     LOCKED_BY_IO_SUPERVISOR = o6.enumfield(512, name="LOCKED_BY_IO_SUPERVISOR")
 
 
-@o6.enumtype(nodeId="ns=profinet;i=3009", browseName="PnSubmoduleIdentInfoEnumeration")
+@o6.enumtype(nodeId="ns=profinet;i=3009", browseName="ns=profinet;PnSubmoduleIdentInfoEnumeration")
 class PnSubmoduleIdentInfoEnumeration(ns0.datatypes.Enumeration):
     OK = o6.enumfield(0, name="OK")
     SUBSTITUTE = o6.enumfield(2048, name="SUBSTITUTE")
@@ -100,7 +100,7 @@ class PnSubmoduleIdentInfoEnumeration(ns0.datatypes.Enumeration):
     NO_SUBMODULE = o6.enumfield(6144, name="NO_SUBMODULE")
 
 
-@o6.enumtype(nodeId="ns=profinet;i=3010", browseName="PnChannelTypeEnumeration")
+@o6.enumtype(nodeId="ns=profinet;i=3010", browseName="ns=profinet;PnChannelTypeEnumeration")
 class PnChannelTypeEnumeration(ns0.datatypes.Enumeration):
     UNSPECIFIC = o6.enumfield(0, name="UNSPECIFIC")
     _1_BIT = o6.enumfield(1, name="1BIT")
@@ -112,13 +112,13 @@ class PnChannelTypeEnumeration(ns0.datatypes.Enumeration):
     _64_BIT = o6.enumfield(7, name="64BIT")
 
 
-@o6.enumtype(nodeId="ns=profinet;i=3011", browseName="PnChannelAccumulativeEnumeration")
+@o6.enumtype(nodeId="ns=profinet;i=3011", browseName="ns=profinet;PnChannelAccumulativeEnumeration")
 class PnChannelAccumulativeEnumeration(ns0.datatypes.Enumeration):
     SINGLE = o6.enumfield(0, name="SINGLE")
     ACCUMULATIVE = o6.enumfield(256, name="ACCUMULATIVE")
 
 
-@o6.enumtype(nodeId="ns=profinet;i=3012", browseName="PnChannelMaintenanceEnumeration")
+@o6.enumtype(nodeId="ns=profinet;i=3012", browseName="ns=profinet;PnChannelMaintenanceEnumeration")
 class PnChannelMaintenanceEnumeration(ns0.datatypes.Enumeration):
     FAULT = o6.enumfield(0, name="FAULT")
     MAINTENANCE_REQUIRED = o6.enumfield(512, name="MAINTENANCE_REQUIRED")
@@ -126,7 +126,7 @@ class PnChannelMaintenanceEnumeration(ns0.datatypes.Enumeration):
     USE_QUALIFIED_CHANNEL_QUALIFIER = o6.enumfield(1536, name="USE_QUALIFIED_CHANNEL_QUALIFIER")
 
 
-@o6.enumtype(nodeId="ns=profinet;i=3013", browseName="PnChannelSpecifierEnumeration")
+@o6.enumtype(nodeId="ns=profinet;i=3013", browseName="ns=profinet;PnChannelSpecifierEnumeration")
 class PnChannelSpecifierEnumeration(ns0.datatypes.Enumeration):
     ALL_DISAPPEARS = o6.enumfield(0, name="ALL_DISAPPEARS")
     APPEARS = o6.enumfield(2048, name="APPEARS")
@@ -134,7 +134,7 @@ class PnChannelSpecifierEnumeration(ns0.datatypes.Enumeration):
     DISAPPEARS_OTHER_REMAIN = o6.enumfield(6144, name="DISAPPEARS_OTHER_REMAIN")
 
 
-@o6.enumtype(nodeId="ns=profinet;i=3014", browseName="PnChannelDirectionEnumeration")
+@o6.enumtype(nodeId="ns=profinet;i=3014", browseName="ns=profinet;PnChannelDirectionEnumeration")
 class PnChannelDirectionEnumeration(ns0.datatypes.Enumeration):
     MANUFACTURER_SPECIFIC = o6.enumfield(0, name="MANUFACTURER_SPECIFIC")
     INPUT_CHANNEL = o6.enumfield(8192, name="INPUT_CHANNEL")
@@ -142,7 +142,7 @@ class PnChannelDirectionEnumeration(ns0.datatypes.Enumeration):
     BIDIRECTIONAL_CHANNEL = o6.enumfield(24576, name="BIDIRECTIONAL_CHANNEL")
 
 
-@o6.enumtype(nodeId="ns=profinet;i=3015", browseName="PnAssetTypeEnumeration")
+@o6.enumtype(nodeId="ns=profinet;i=3015", browseName="ns=profinet;PnAssetTypeEnumeration")
 class PnAssetTypeEnumeration(ns0.datatypes.Enumeration):
     DEVICE = o6.enumfield(0, name="DEVICE")
     MODULE = o6.enumfield(1, name="MODULE")
@@ -150,14 +150,14 @@ class PnAssetTypeEnumeration(ns0.datatypes.Enumeration):
     ASSET = o6.enumfield(3, name="ASSET")
 
 
-@o6.enumtype(nodeId="ns=profinet;i=3016", browseName="PnAssetChangeEnumeration")
+@o6.enumtype(nodeId="ns=profinet;i=3016", browseName="ns=profinet;PnAssetChangeEnumeration")
 class PnAssetChangeEnumeration(ns0.datatypes.Enumeration):
     INSERTED = o6.enumfield(0, name="INSERTED")
     REMOVED = o6.enumfield(1, name="REMOVED")
     CHANGED = o6.enumfield(2, name="CHANGED")
 
 
-@o6.enumtype(nodeId="ns=profinet;i=3017", browseName="PnLinkStateEnumeration")
+@o6.enumtype(nodeId="ns=profinet;i=3017", browseName="ns=profinet;PnLinkStateEnumeration")
 class PnLinkStateEnumeration(ns0.datatypes.Enumeration):
     UP = o6.enumfield(1, name="UP")
     DOWN = o6.enumfield(2, name="DOWN")
@@ -168,7 +168,7 @@ class PnLinkStateEnumeration(ns0.datatypes.Enumeration):
     LOWER_LAYER_DOWN = o6.enumfield(7, name="LOWER_LAYER_DOWN")
 
 
-@o6.enumtype(nodeId="ns=profinet;i=3018", browseName="PnPortStateEnumeration")
+@o6.enumtype(nodeId="ns=profinet;i=3018", browseName="ns=profinet;PnPortStateEnumeration")
 class PnPortStateEnumeration(ns0.datatypes.Enumeration):
     UNKNOWN = o6.enumfield(0, name="UNKNOWN")
     DISABLED_DISCARDING = o6.enumfield(1, name="DISABLED_DISCARDING")
@@ -179,38 +179,43 @@ class PnPortStateEnumeration(ns0.datatypes.Enumeration):
     BROKEN = o6.enumfield(6, name="BROKEN")
 
 
-@o6.datatype(nodeId="ns=profinet;i=3019", browseName="PnDeviceDiagnosisDataType", defaultEncodingId="ns=profinet;i=5004")
+@o6.datatype(nodeId="ns=profinet;i=3019", browseName="ns=profinet;PnDeviceDiagnosisDataType", defaultEncodingId="ns=profinet;i=5004")
 class PnDeviceDiagnosisDataType(ns0.datatypes.Structure):
-    aPI: o6.UInt32
-    slot: o6.UInt16
-    subslot: o6.UInt16
-    channelNumber: o6.UInt16
-    type: PnChannelTypeEnumeration
-    accumulative: PnChannelAccumulativeEnumeration
-    maintenance: PnChannelMaintenanceEnumeration
-    specifier: PnChannelSpecifierEnumeration
-    direction: PnChannelDirectionEnumeration
-    userStructureIdentifier: o6.UInt16
-    channelErrorType: o6.UInt16
-    extChannelErrorType: o6.UInt16
-    extChannelAddValue: o6.UInt32
-    qualifiedChannelQualifier: o6.UInt32
-    manufacturerData: o6.ByteString
-    message: o6.LocalizedText
-    helpText: o6.LocalizedText
+    aPI: o6.UInt32 = o6.field(name="API")
+    slot: o6.UInt16 = o6.field(name="Slot")
+    subslot: o6.UInt16 = o6.field(name="Subslot")
+    channelNumber: o6.UInt16 = o6.field(name="ChannelNumber")
+    type: PnChannelTypeEnumeration = o6.field(name="Type")
+    accumulative: PnChannelAccumulativeEnumeration = o6.field(name="Accumulative")
+    maintenance: PnChannelMaintenanceEnumeration = o6.field(name="Maintenance")
+    specifier: PnChannelSpecifierEnumeration = o6.field(name="Specifier")
+    direction: PnChannelDirectionEnumeration = o6.field(name="Direction")
+    userStructureIdentifier: o6.UInt16 = o6.field(name="UserStructureIdentifier")
+    channelErrorType: o6.UInt16 = o6.field(name="ChannelErrorType")
+    extChannelErrorType: o6.UInt16 = o6.field(name="ExtChannelErrorType")
+    extChannelAddValue: o6.UInt32 = o6.field(name="ExtChannelAddValue")
+    qualifiedChannelQualifier: o6.UInt32 = o6.field(name="QualifiedChannelQualifier")
+    manufacturerData: o6.ByteString = o6.field(name="ManufacturerData")
+    message: o6.LocalizedText = o6.field(name="Message")
+    helpText: o6.LocalizedText = o6.field(name="HelpText")
 
 
-@o6.datatype(nodeId="ns=profinet;i=3020", browseName="PnIM5DataType", description="Contains the fields of the APDU element I&M5 | I&M5Data", defaultEncodingId="ns=profinet;i=5007")
+@o6.datatype(
+    nodeId="ns=profinet;i=3020",
+    browseName="ns=profinet;PnIM5DataType",
+    description="Contains the fields of the APDU element I&M5 | I&M5Data",
+    defaultEncodingId="ns=profinet;i=5007",
+)
 class PnIM5DataType(ns0.datatypes.Structure):
-    annotation: o6.String
-    orderId: o6.String
-    vendorId: o6.UInt16
-    serialNumber: o6.String
-    hardwareRevision: o6.String
-    softwareRevision: o6.String
+    annotation: o6.String = o6.field(name="Annotation")
+    orderId: o6.String = o6.field(name="OrderId")
+    vendorId: o6.UInt16 = o6.field(name="VendorId")
+    serialNumber: o6.String = o6.field(name="SerialNumber")
+    hardwareRevision: o6.String = o6.field(name="HardwareRevision")
+    softwareRevision: o6.String = o6.field(name="SoftwareRevision")
 
 
-@o6.enumtype(nodeId="ns=profinet;i=3021", browseName="IMTagSelectorEnumeration")
+@o6.enumtype(nodeId="ns=profinet;i=3021", browseName="ns=profinet;IMTagSelectorEnumeration")
 class IMTagSelectorEnumeration(ns0.datatypes.Enumeration):
     FUNCTION = o6.enumfield(0, name="FUNCTION")
     LOCATION = o6.enumfield(1, name="LOCATION")

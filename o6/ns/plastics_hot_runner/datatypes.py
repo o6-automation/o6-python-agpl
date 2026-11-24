@@ -33,7 +33,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=plastics_hot_runner;i=3002", browseName="ControllerTypeEnumeration")
+@o6.enumtype(nodeId="ns=plastics_hot_runner;i=3002", browseName="ns=plastics_hot_runner;ControllerTypeEnumeration")
 class ControllerTypeEnumeration(ns0.datatypes.Enumeration):
     CLOSED_LOOP_CONTROL = o6.enumfield(0, name="CLOSED_LOOP_CONTROL")
     MANUAL = o6.enumfield(1, name="MANUAL")
@@ -44,7 +44,7 @@ class ControllerTypeEnumeration(ns0.datatypes.Enumeration):
     NOT_USED = o6.enumfield(6, name="NOT_USED")
 
 
-@o6.enumtype(nodeId="ns=plastics_hot_runner;i=3003", browseName="ZoneStatusEnumeration")
+@o6.enumtype(nodeId="ns=plastics_hot_runner;i=3003", browseName="ns=plastics_hot_runner;ZoneStatusEnumeration")
 class ZoneStatusEnumeration(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="OTHER")
     GOOD = o6.enumfield(1, name="GOOD")
@@ -58,12 +58,12 @@ class ZoneStatusEnumeration(ns0.datatypes.Enumeration):
     LEAKAGE_DETECTED = o6.enumfield(9, name="LEAKAGE_DETECTED")
 
 
-@o6.datatype(nodeId="ns=plastics_hot_runner;i=3005", browseName="TimeMethodPIDParametersDataType", defaultEncodingId="ns=plastics_hot_runner;i=5037")
+@o6.datatype(nodeId="ns=plastics_hot_runner;i=3005", browseName="ns=plastics_hot_runner;TimeMethodPIDParametersDataType", defaultEncodingId="ns=plastics_hot_runner;i=5037")
 class TimeMethodPIDParametersDataType(ns0.datatypes.Structure):
-    xp: o6.Double
-    tn: o6.Double
-    tv: o6.Double
-    ts: o6.Double
+    xp: o6.Double = o6.field(name="Xp")
+    tn: o6.Double = o6.field(name="Tn")
+    tv: o6.Double = o6.field(name="Tv")
+    ts: o6.Double = o6.field(name="Ts")
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ns0, plastics_rubber

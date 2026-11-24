@@ -76,6 +76,7 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=cranes_hoists;i=1463",
     browseName="ns=cranes_hoists;Active",
     description="The Active variable is TRUE if this particular protective function is active, i.e. that a stop or slowdown is initiated, FALSE otherwise. If Enabled is FALSE then Active shall be FALSE.",
+    modellingRule="Optional",
     dataType=o6.Boolean,
 )
 o6.reference(o6.ns["ns=cranes_hoists;i=5013"], "i=35", o6.ns["ns=cranes_hoists;i=1463"])
@@ -83,6 +84,7 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=cranes_hoists;i=1478",
     browseName="ns=cranes_hoists;Enabled",
     description="The Enabled variable is TRUE if this protective function is currently supervising the system, FALSE otherwise. A protective function may or may not be enabled at all times, e.g. the protective stop function of the safety doors are typically enabled in automatic operational mode and disabled in manual mode.",
+    modellingRule="Optional",
     dataType=o6.Boolean,
 )
 o6.reference(o6.ns["ns=cranes_hoists;i=5013"], "i=35", o6.ns["ns=cranes_hoists;i=1478"])
@@ -90,6 +92,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=cranes_hoists;i=1485",
     browseName="ns=cranes_hoists;SpeedLimitDirPlusSetpoint",
     description="Speed limitation request written from client, in direction where position value increases, in percentage of rated speed, range [0%..100%]",
+    modellingRule="Optional",
     dataType=o6.Double,
     accessLevel=3,
 )
@@ -97,6 +100,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=cranes_hoists;i=1486",
     browseName="ns=cranes_hoists;SpeedLimitDirMinusSetpoint",
     description="Speed limitation request written from client, in direction where position value decreases, in percentage of rated speed, range [0%..100%]",
+    modellingRule="Optional",
     dataType=o6.Double,
     accessLevel=3,
 )
@@ -104,6 +108,7 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=cranes_hoists;i=1511",
     browseName="ns=cranes_hoists;SpeedLimitEnabledDirPlus",
     description="Speed limitation request active, written from client, in direction where position value increases. True if a client requests the speed to be limited in this direction, false if speed doesn't need to be limited.",
+    modellingRule="Optional",
     dataType=o6.Boolean,
     accessLevel=3,
 )
@@ -111,14 +116,18 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=cranes_hoists;i=1845",
     browseName="ns=cranes_hoists;SpeedLimitEnabledDirMinus",
     description="Speed limitation request active, written from client, in direction where position value decreases. True if a client requests the speed to be limited in this direction, false if speed doesn't need to be limited.",
+    modellingRule="Optional",
     dataType=o6.Boolean,
     accessLevel=3,
 )
-ns0.vartypes.AnalogUnitType(nodeId="ns=cranes_hoists;i=1852", browseName="ns=cranes_hoists;RatedSpeed", description="Rated speed of this Axis.", dataType=o6.Double)
+ns0.vartypes.AnalogUnitType(
+    nodeId="ns=cranes_hoists;i=1852", browseName="ns=cranes_hoists;RatedSpeed", description="Rated speed of this Axis.", modellingRule="Optional", dataType=o6.Double
+)
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=cranes_hoists;i=1860",
     browseName="ns=cranes_hoists;DirPlusStop",
     description="Stop enabled for direction where position value increases (plus).",
+    modellingRule="Optional",
     dataType=o6.Boolean,
 )
 o6.reference(o6.ns["ns=cranes_hoists;i=5013"], "i=35", o6.ns["ns=cranes_hoists;i=1860"])
@@ -126,6 +135,7 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=cranes_hoists;i=1861",
     browseName="ns=cranes_hoists;DirMinusStop",
     description="Stop enabled for direction where position value decreases (minus).",
+    modellingRule="Optional",
     dataType=o6.Boolean,
 )
 o6.reference(o6.ns["ns=cranes_hoists;i=5013"], "i=35", o6.ns["ns=cranes_hoists;i=1861"])
@@ -133,18 +143,24 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=cranes_hoists;i=1950",
     browseName="ns=cranes_hoists;SpeedLimitDirPlus",
     description="Speed limitation value active on the control system, in direction where position value increases, in percentage of rated speed, range [0%..100%]",
+    modellingRule="Optional",
     dataType=o6.Double,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=cranes_hoists;i=2031",
     browseName="ns=cranes_hoists;SpeedLimitDirMinus",
     description="Speed limitation value active on the control system, in direction where position value decreases, in percentage of rated speed, range [0%..100%]",
+    modellingRule="Optional",
     dataType=o6.Double,
 )
 ns0.vartypes.BaseDataVariableType(
-    nodeId="ns=cranes_hoists;i=2037", browseName="ns=cranes_hoists;IsMoving", description="True when the Axis is moving, false if not.", dataType=o6.Boolean
+    nodeId="ns=cranes_hoists;i=2037",
+    browseName="ns=cranes_hoists;IsMoving",
+    description="True when the Axis is moving, false if not.",
+    modellingRule="Optional",
+    dataType=o6.Boolean,
 )
-ns0.vartypes.BaseDataVariableType(nodeId="ns=cranes_hoists;i=2096", browseName="ns=cranes_hoists;ActualPositionCapability", dataType=o6.Boolean)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=cranes_hoists;i=2096", browseName="ns=cranes_hoists;ActualPositionCapability", modellingRule="Mandatory", dataType=o6.Boolean)
 ns0.objtypes.BaseObjectType(
     nodeId="ns=cranes_hoists;i=2093", browseName="ns=di;ParameterSet", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=cranes_hoists;i=2096"])]
 )
@@ -157,16 +173,21 @@ o6.reference(o6.ns["ns=cranes_hoists;i=2093"], "i=47", o6.ns["ns=cranes_hoists;i
 o6.reference(o6.ns["ns=cranes_hoists;i=2093"], "i=47", o6.ns["ns=cranes_hoists;i=1950"])
 o6.reference(o6.ns["ns=cranes_hoists;i=2093"], "i=47", o6.ns["ns=cranes_hoists;i=2031"])
 o6.reference(o6.ns["ns=cranes_hoists;i=2093"], "i=47", o6.ns["ns=cranes_hoists;i=2037"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=cranes_hoists;i=2347", browseName="ns=cranes_hoists;SystemOn", dataType=o6.Boolean)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=cranes_hoists;i=2347", browseName="ns=cranes_hoists;SystemOn", modellingRule="Mandatory", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=cranes_hoists;i=2114"], "i=47", o6.ns["ns=cranes_hoists;i=2347"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=cranes_hoists;i=2348", browseName="ns=cranes_hoists;CraneOperationalMode", dataType=cranes_hoists_datypes.CraneOperationalModeEnum)
+ns0.vartypes.BaseDataVariableType(
+    nodeId="ns=cranes_hoists;i=2348", browseName="ns=cranes_hoists;CraneOperationalMode", modellingRule="Mandatory", dataType=cranes_hoists_datypes.CraneOperationalModeEnum
+)
 o6.reference(o6.ns["ns=cranes_hoists;i=2114"], "i=47", o6.ns["ns=cranes_hoists;i=2348"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=cranes_hoists;i=2369", browseName="ns=cranes_hoists;ExternalControlRequest", dataType=cranes_hoists_datypes.ExternalControlRequestEnum)
+ns0.vartypes.BaseDataVariableType(
+    nodeId="ns=cranes_hoists;i=2369", browseName="ns=cranes_hoists;ExternalControlRequest", modellingRule="Optional", dataType=cranes_hoists_datypes.ExternalControlRequestEnum
+)
 o6.reference(o6.ns["ns=cranes_hoists;i=2114"], "i=47", o6.ns["ns=cranes_hoists;i=2369"])
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=cranes_hoists;i=2375",
     browseName="ns=cranes_hoists;DirMinusSlowdown",
     description="Stop enabled for direction where position value decreases (minus).",
+    modellingRule="Optional",
     dataType=o6.Boolean,
 )
 o6.reference(o6.ns["ns=cranes_hoists;i=5013"], "i=35", o6.ns["ns=cranes_hoists;i=2375"])
@@ -174,10 +195,13 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=cranes_hoists;i=2379",
     browseName="ns=cranes_hoists;DirPlusSlowdown",
     description="Stop enabled for direction where position value increases (plus).",
+    modellingRule="Optional",
     dataType=o6.Boolean,
 )
 o6.reference(o6.ns["ns=cranes_hoists;i=5013"], "i=35", o6.ns["ns=cranes_hoists;i=2379"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=cranes_hoists;i=2381", browseName="ns=cranes_hoists;SpeedLimitGlobalEnabled", dataType=o6.Boolean, accessLevel=3)
+ns0.vartypes.BaseDataVariableType(
+    nodeId="ns=cranes_hoists;i=2381", browseName="ns=cranes_hoists;SpeedLimitGlobalEnabled", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3
+)
 o6.reference(o6.ns["ns=cranes_hoists;i=2114"], "i=47", o6.ns["ns=cranes_hoists;i=2381"])
 ns0.objtypes.BaseObjectType(
     nodeId="ns=cranes_hoists;i=5004",
@@ -237,7 +261,7 @@ di.objtypes.FunctionalGroupType(
     references=[o6.organizes(o6.ns["ns=cranes_hoists;i=2347"]), o6.organizes(o6.ns["ns=cranes_hoists;i=2348"]), o6.organizes(o6.ns["ns=cranes_hoists;i=2369"])],
 )
 o6.reference(cranes_hoists_objtypes.CraneMotionDeviceSystemType, ns0.reftypes.HasComponent, o6.ns["ns=cranes_hoists;i=5012"])
-cranes_hoists_objtypes.CraneMotorType(nodeId="ns=cranes_hoists;i=5022", browseName="ns=cranes_hoists;<CraneMotorIdentifier>")
+cranes_hoists_objtypes.CraneMotorType(nodeId="ns=cranes_hoists;i=5022", browseName="ns=cranes_hoists;<CraneMotorIdentifier>", modellingRule="Optional")
 o6.reference(o6.ns["ns=cranes_hoists;i=5022"], "ns=robotics;i=18181", "ns=robotics;i=16041")
 machinery.objtypes.MachineComponentsType(
     nodeId="ns=cranes_hoists;i=5016", browseName="ns=machinery;Components", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=cranes_hoists;i=5022"])]
@@ -249,7 +273,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=cranes_hoists;i=2113", browseName="ns=cranes_hoists;ProtectiveFunctions", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=cranes_hoists;i=5025"])]
 )
 o6.reference(cranes_hoists_objtypes.CraneMotionDeviceSystemType, ns0.reftypes.HasComponent, o6.ns["ns=cranes_hoists;i=2113"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=cranes_hoists;i=6000", browseName="ns=cranes_hoists;Overheated", dataType=o6.Boolean)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=cranes_hoists;i=6000", browseName="ns=cranes_hoists;Overheated", modellingRule="Optional", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=cranes_hoists;i=5019"], "i=35", o6.ns["ns=cranes_hoists;i=6000"])
 ns0.objtypes.BaseObjectType(
     nodeId="ns=cranes_hoists;i=5018", browseName="ns=di;ParameterSet", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=cranes_hoists;i=6000"])]
@@ -298,6 +322,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=cranes_hoists;i=6002",
     browseName="ns=cranes_hoists;DesignedWorkingPeriod",
     description="The lowest ISO 12482 designed working period (DWP) of this component. Percentage, initial value: 100.0%",
+    modellingRule="Optional",
     dataType=o6.Double,
 )
 o6.reference(o6.ns["ns=cranes_hoists;i=5014"], "i=35", o6.ns["ns=cranes_hoists;i=6002"])
@@ -331,7 +356,7 @@ ns0.vartypes.PropertyType(
     ],
     accessLevel=3,
 )
-ns0.vartypes.BaseDataVariableType(nodeId="ns=cranes_hoists;i=6005", browseName="ns=cranes_hoists;BrakeReleased", dataType=o6.Boolean)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=cranes_hoists;i=6005", browseName="ns=cranes_hoists;BrakeReleased", modellingRule="Mandatory", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=cranes_hoists;i=5009"], "i=35", o6.ns["ns=cranes_hoists;i=6005"])
 ns0.objtypes.BaseObjectType(
     nodeId="ns=cranes_hoists;i=5020", browseName="ns=di;ParameterSet", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=cranes_hoists;i=6005"])]
@@ -394,11 +419,13 @@ ns0.vartypes.PropertyType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=cranes_hoists;i=2416",
     browseName="ns=cranes_hoists;CraneAxisFunction",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=cranes_hoists;i=6016",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[9],
@@ -471,7 +498,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cranes_hoists;i=6017", browseName="ValueAsText", dataType=o6.LocalizedText, valueRank=-2)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=cranes_hoists;i=6017", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=-2)),
     ],
     dataType=o6.UInt16,
     valueRank=1,

@@ -34,20 +34,20 @@ else:
 @o6.variabletype(nodeId="ns=rsl;i=2002", browseName="ns=rsl;RelativeValueType", displayName="RelativeValueType", isAbstract=True, valueRank=o6.ValueRank.ANY)
 class RelativeValueType(ns0.vartypes.BaseDataVariableType):
     base: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6001", browseName="ns=rsl;Base", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6001", browseName="ns=rsl;Base", modellingRule="Optional", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1)
     )
 
 
 @o6.variabletype(nodeId="ns=rsl;i=2003", browseName="ns=rsl;SpatialLocationType", displayName="SpatialLocationType", isAbstract=True, valueRank=o6.ValueRank.ANY)
 class SpatialLocationType(RelativeValueType):
     base: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6002", browseName="ns=rsl;Base", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6002", browseName="ns=rsl;Base", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1)
     )
     orientation: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6004", browseName="ns=rsl;Orientation", accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6004", browseName="ns=rsl;Orientation", modellingRule="Optional", accessLevel=3, userAccessLevel=1)
     )
     position: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6003", browseName="ns=rsl;Position", accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6003", browseName="ns=rsl;Position", modellingRule="Optional", accessLevel=3, userAccessLevel=1)
     )
 
 
@@ -56,7 +56,7 @@ class SpatialLocationType(RelativeValueType):
 )
 class CartesianFrameAngleOrientationType(SpatialLocationType):
     base: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6005", browseName="ns=rsl;Base", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=rsl;i=6005", browseName="ns=rsl;Base", modellingRule="Mandatory", dataType=o6.NodeId, accessLevel=3, userAccessLevel=1)
     )
     orientation: RpyOrientationType
     position: ns0.vartypes.ThreeDCartesianCoordinatesType
@@ -72,17 +72,35 @@ class CartesianFrameAngleOrientationType(SpatialLocationType):
 class RpyOrientationType(ns0.vartypes.OrientationType):
     a: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=rsl;i=6037", browseName="ns=rsl;A", description="Rotation around X Axis (Roll) as per ISO 9787:2013", dataType=o6.Double, accessLevel=3, userAccessLevel=1
+            nodeId="ns=rsl;i=6037",
+            browseName="ns=rsl;A",
+            description="Rotation around X Axis (Roll) as per ISO 9787:2013",
+            modellingRule="Mandatory",
+            dataType=o6.Double,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     b: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=rsl;i=6040", browseName="ns=rsl;B", description="Rotation around Y Axis (Pitch) as per ISO 9787:2013", dataType=o6.Double, accessLevel=3, userAccessLevel=1
+            nodeId="ns=rsl;i=6040",
+            browseName="ns=rsl;B",
+            description="Rotation around Y Axis (Pitch) as per ISO 9787:2013",
+            modellingRule="Mandatory",
+            dataType=o6.Double,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     c: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
         ns0.vartypes.BaseDataVariableType(
-            nodeId="ns=rsl;i=6041", browseName="ns=rsl;C", description="Rotation around Z Axis (Yaw) as per ISO 9787:2013", dataType=o6.Double, accessLevel=3, userAccessLevel=1
+            nodeId="ns=rsl;i=6041",
+            browseName="ns=rsl;C",
+            description="Rotation around Z Axis (Yaw) as per ISO 9787:2013",
+            modellingRule="Mandatory",
+            dataType=o6.Double,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
 

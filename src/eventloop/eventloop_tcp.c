@@ -76,11 +76,35 @@ TCPProtocol_connection_made(AsyncIOConnection *self, PyObject *args) {
     UA_LOG_DEBUG(self->cm->cm.eventSource.eventLoop->logger, UA_LOGCATEGORY_NETWORK,
                  "TCP %zu\t| Opened a connection", (unsigned)self->connectionId);
 
+    /* Both IPv4 and IPv6 peername tuples start with the remote IP. The
+     * core copies it from this first notification; keep the Python string
+     * alive while the callback borrows its UTF-8 storage. */
+    PyObject *peername = PyObject_CallMethod(transport, "get_extra_info", "s", "peername");
+    if(!peername)
+        return NULL;
+    UA_KeyValueMap params = UA_KEYVALUEMAP_NULL;
+    UA_KeyValuePair remoteParam = {0};
+    UA_String remoteAddress = UA_STRING_NULL;
+    if(PyTuple_Check(peername) && PyTuple_GET_SIZE(peername) > 0 &&
+       PyUnicode_Check(PyTuple_GET_ITEM(peername, 0))) {
+        Py_ssize_t length;
+        const char *address = PyUnicode_AsUTF8AndSize(PyTuple_GET_ITEM(peername, 0), &length);
+        if(!address) {
+            Py_DECREF(peername);
+            return NULL;
+        }
+        remoteAddress = (UA_String){(size_t)length, (UA_Byte*)address};
+        remoteParam.key = UA_QUALIFIEDNAME(0, "remote-address");
+        UA_Variant_setScalar(&remoteParam.value, &remoteAddress, &UA_TYPES[UA_TYPES_STRING]);
+        params = (UA_KeyValueMap){1, &remoteParam};
+    }
+
     // Notify the application the connection has opened
     self->notified = true;
     self->cb(&self->cm->cm, self->connectionId, self->application,
              &self->context, UA_CONNECTIONSTATE_ESTABLISHED,
-             &UA_KEYVALUEMAP_NULL, UA_BYTESTRING_NULL);
+             &params, UA_BYTESTRING_NULL);
+    Py_DECREF(peername);
     if(PyErr_Occurred())
         return NULL;
     Py_RETURN_NONE;
@@ -1060,9 +1084,9 @@ AsyncIOTCP_openConnection(UA_ConnectionManager *cm, const UA_KeyValueMap *params
 
     /* Check the parameters */
     UA_StatusCode res =
-        UA_KeyValueRestriction_validate(el->cLoop.logger, "TCP",
-                                        tcpConnectionParams,
-                                        TCP_PARAMETERSSIZE, params);
+        UA_KeyValueMap_validate(params, tcpConnectionParams, TCP_PARAMETERSSIZE,
+                                false, el->cLoop.logger, UA_LOGCATEGORY_EVENTLOOP,
+                                "TCP");
     if(res != UA_STATUSCODE_GOOD) {
         UA_UNLOCK(&el->elMutex);
         return res;

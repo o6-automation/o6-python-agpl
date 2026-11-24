@@ -55,9 +55,9 @@ ns0.vartypes.ThreeDOrientationType(
     description="Informs about an orientation typically with respect to a position. In mathematics, orientation defines a geometric notion.",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=gpos;i=6014", browseName="A", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=gpos;i=6015", browseName="B", dataType=o6.Double)),
-        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=gpos;i=6016", browseName="C", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=gpos;i=6014", browseName="A", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=gpos;i=6015", browseName="B", modellingRule="Mandatory", dataType=o6.Double)),
+        o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=gpos;i=6016", browseName="C", modellingRule="Mandatory", dataType=o6.Double)),
     ],
     dataType=ns0.datatypes.ThreeDOrientation,
     accessLevel=3,
@@ -80,7 +80,7 @@ http_opcfoundation_org_UA_GPOS_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gpos;i=6022", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=gpos;i=6023", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=gpos;i=6023", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
@@ -103,9 +103,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=gpos;i=6034",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[122],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("local"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=4326, displayName=o6.LocalizedText("GPS"), description=o6.LocalizedText()),
@@ -232,7 +233,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gpos;i=6035", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gpos;i=6035", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -276,21 +277,23 @@ ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=gpos;i=6036",
     browseName="ns=gpos;CoordinateReferenceSystem",
     description="A projection identifier defining the projection of the provided location coordinate. The CoordinateReferenceSystem shall be either a valid EPSG identifier (https://epsg.io) or 'local' if the location is provided as a relative coordinate of the floor plan. For best interoperability and worldwide coverage, WGS84 (EPSG:4326) should be the preferred projection (as used also by GPS).",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=gpos;i=6037",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[2],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("local"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=4326, displayName=o6.LocalizedText("GPS"), description=o6.LocalizedText()),
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gpos;i=6048", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gpos;i=6048", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -306,6 +309,7 @@ gpos_vartypes.GlobalPositionType(
                 nodeId="ns=gpos;i=6039",
                 browseName="ns=gpos;SourceId",
                 description="Reference to the zone or provider calculating the position",
+                modellingRule="Mandatory",
                 dataType=o6.NodeId,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -316,6 +320,7 @@ gpos_vartypes.GlobalPositionType(
                 nodeId="ns=gpos;i=6031",
                 browseName="ns=gpos;Longitude",
                 description="MUST be interpreted according to the CoordinateReferenceSystem",
+                modellingRule="Mandatory",
                 dataType=o6.Double,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -326,6 +331,7 @@ gpos_vartypes.GlobalPositionType(
                 nodeId="ns=gpos;i=6032",
                 browseName="ns=gpos;Latitude",
                 description="MUST be interpreted according to the CoordinateReferenceSystem",
+                modellingRule="Mandatory",
                 dataType=o6.Double,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -348,16 +354,17 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=gpos;i=6050",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[2],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("floor"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("wgs84"), description=o6.LocalizedText()),
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gpos;i=6051", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=gpos;i=6051", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.Byte,
     accessLevel=3,

@@ -47,7 +47,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="ActionName", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
         ns0.datatypes.Argument(name="MethodArguments", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
@@ -61,13 +61,19 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="ActionNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
         ns0.datatypes.Argument(name="InvokeActionError", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="ns=fdi;i=22", browseName="ns=fdi;InvokeAction", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=23"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=24"]))
+o6.call(
+    nodeId="ns=fdi;i=22",
+    browseName="ns=fdi;InvokeAction",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=23"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=24"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi;i=26",
@@ -77,7 +83,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="ActionNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[]),
         ns0.datatypes.Argument(name="Response", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
@@ -91,10 +97,16 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="RespondActionError", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=fdi;i=25", browseName="ns=fdi;RespondAction", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=26"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=27"]))
+o6.call(
+    nodeId="ns=fdi;i=25",
+    browseName="ns=fdi;RespondAction",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=26"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=27"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi;i=29",
@@ -104,7 +116,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="ActionNodeId", dataType=o6.NodeId("i=17"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
@@ -115,10 +127,16 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="AbortActionError", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=fdi;i=28", browseName="ns=fdi;AbortAction", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=29"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=30"]))
+o6.call(
+    nodeId="ns=fdi;i=28",
+    browseName="ns=fdi;AbortAction",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=29"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=30"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi;i=56",
@@ -128,7 +146,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="ParentId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
         ns0.datatypes.Argument(name="TargetWindowMode", dataType=o6.NodeId("ns=fdi;i=194"), valueRank=-1, arrayDimensions=[]),
@@ -142,13 +160,19 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="EditContextId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
         ns0.datatypes.Argument(name="GetEditContextStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="ns=fdi;i=55", browseName="ns=fdi;GetEditContext", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=56"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=57"]))
+o6.call(
+    nodeId="ns=fdi;i=55",
+    browseName="ns=fdi;GetEditContext",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=56"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=57"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi;i=59",
@@ -158,7 +182,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="EditContextId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
         ns0.datatypes.Argument(name="NodesToRegister", dataType=o6.NodeId("ns=fdi;i=37"), valueRank=1, arrayDimensions=[0]),
@@ -172,10 +196,16 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="RegisterNodesStatus", dataType=o6.NodeId("ns=fdi;i=39"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=fdi;i=58", browseName="ns=fdi;RegisterNodesById", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=59"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=60"]))
+o6.call(
+    nodeId="ns=fdi;i=58",
+    browseName="ns=fdi;RegisterNodesById",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=59"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=60"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi;i=62",
@@ -185,7 +215,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="EditContextId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
         ns0.datatypes.Argument(name="NodesToRegister", dataType=o6.NodeId("ns=fdi;i=37"), valueRank=1, arrayDimensions=[0]),
@@ -199,10 +229,16 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="RegisterNodesStatus", dataType=o6.NodeId("ns=fdi;i=39"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=fdi;i=61", browseName="ns=fdi;RegisterNodesByRelativePath", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=62"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=63"]))
+o6.call(
+    nodeId="ns=fdi;i=61",
+    browseName="ns=fdi;RegisterNodesByRelativePath",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=62"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=63"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi;i=65",
@@ -212,7 +248,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="EditContextId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
@@ -223,10 +259,10 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="ApplyStatus", dataType=o6.NodeId("ns=fdi;i=44"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=fdi;i=64", browseName="ns=fdi;Apply", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=65"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=66"]))
+o6.call(nodeId="ns=fdi;i=64", browseName="ns=fdi;Apply", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=65"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=66"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi;i=68",
@@ -236,7 +272,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="EditContextId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
@@ -247,10 +283,10 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="ResetStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=fdi;i=67", browseName="ns=fdi;Reset", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=68"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=69"]))
+o6.call(nodeId="ns=fdi;i=67", browseName="ns=fdi;Reset", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=68"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=69"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi;i=71",
@@ -260,7 +296,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="EditContextId", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
@@ -271,10 +307,12 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="DiscardStatus", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=fdi;i=70", browseName="ns=fdi;Discard", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=71"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=72"]))
+o6.call(
+    nodeId="ns=fdi;i=70", browseName="ns=fdi;Discard", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=71"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=72"])
+)
 
 
 @o6.objecttype(nodeId="ns=fdi;i=54", browseName="ns=fdi;EditContextType", displayName="EditContextType")
@@ -295,7 +333,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="Context", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
@@ -306,10 +344,16 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="InitDirectAccessError", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=fdi;i=83", browseName="ns=fdi;InitDirectAccess", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=84"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=85"]))
+o6.call(
+    nodeId="ns=fdi;i=83",
+    browseName="ns=fdi;InitDirectAccess",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=84"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=85"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi;i=87",
@@ -319,7 +363,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[2],
+    arrayDimensions=[0],
     value=[
         ns0.datatypes.Argument(name="SendData", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
         ns0.datatypes.Argument(name="ReceiveData", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[]),
@@ -333,10 +377,12 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="TransferError", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=fdi;i=86", browseName="ns=fdi;Transfer", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=87"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=88"]))
+o6.call(
+    nodeId="ns=fdi;i=86", browseName="ns=fdi;Transfer", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=87"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=88"])
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fdi;i=90",
@@ -346,7 +392,7 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="InvalidateCache", dataType=o6.NodeId("i=1"), valueRank=-1, arrayDimensions=[])],
 )
 ns0.vartypes.PropertyType(
@@ -357,10 +403,16 @@ ns0.vartypes.PropertyType(
     referenceType=ns0.reftypes.HasProperty,
     dataType=ns0.datatypes.Argument,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[ns0.datatypes.Argument(name="EndDirectAccessError", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=fdi;i=89", browseName="ns=fdi;EndDirectAccess", inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=90"]), outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=91"]))
+o6.call(
+    nodeId="ns=fdi;i=89",
+    browseName="ns=fdi;EndDirectAccess",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=fdi;i=90"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=fdi;i=91"]),
+)
 
 
 @o6.objecttype(nodeId="ns=fdi;i=82", browseName="ns=fdi;DirectDeviceAccessType", displayName="DirectDeviceAccessType")

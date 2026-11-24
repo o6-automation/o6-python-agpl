@@ -36,14 +36,19 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-machinery.objtypes.MachineryOperationCounterType(nodeId="ns=glass_flat_v2;i=5026", browseName="ns=di;OperationCounters")
+machinery.objtypes.MachineryOperationCounterType(nodeId="ns=glass_flat_v2;i=5026", browseName="ns=di;OperationCounters", modellingRule="Mandatory")
 
 
 @o6.objecttype(nodeId="ns=glass_flat_v2;i=1041", browseName="ns=glass_flat_v2;ManualFolderType", displayName="ManualFolderType")
 class ManualFolderType(ns0.objtypes.FolderType):
     externalManuals: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=glass_flat_v2;i=6176", browseName="ns=glass_flat_v2;ExternalManuals", dataType=ns0.datatypes.UriString, valueRank=1, arrayDimensions=[0]
+            nodeId="ns=glass_flat_v2;i=6176",
+            browseName="ns=glass_flat_v2;ExternalManuals",
+            modellingRule="Optional",
+            dataType=ns0.datatypes.UriString,
+            valueRank=1,
+            arrayDimensions=[0],
         )
     )
     localManuals_: ns0.objtypes.FileType | None
@@ -52,33 +57,48 @@ class ManualFolderType(ns0.objtypes.FolderType):
 @o6.objecttype(nodeId="ns=glass_flat_v2;i=1015", browseName="ns=glass_flat_v2;GlassMachineType", displayName="GlassMachineType")
 class GlassMachineType(ns0.objtypes.BaseObjectType):
     components: machinery.objtypes.MachineComponentsType | None = o6.hasAddIn(
-        machinery.objtypes.MachineComponentsType(nodeId="ns=glass_flat_v2;i=5002", browseName="ns=isa95_jobcontrol_v2;Components")
+        machinery.objtypes.MachineComponentsType(nodeId="ns=glass_flat_v2;i=5002", browseName="ns=isa95_jobcontrol_v2;Components", modellingRule="Optional")
     )
     configurationRules: ConfigurationRulesType
     fileSystem: ns0.objtypes.FileDirectoryType
     identification: GlassMachineIdentificationType
     machineryBuildingBlocks: ns0.objtypes.FolderType
-    maintenanceManuals: ManualFolderType | None = o6.hasComponent(ManualFolderType(nodeId="ns=glass_flat_v2;i=5009", browseName="ns=glass_flat_v2;MaintenanceManuals"))
+    maintenanceManuals: ManualFolderType | None = o6.hasComponent(
+        ManualFolderType(nodeId="ns=glass_flat_v2;i=5009", browseName="ns=glass_flat_v2;MaintenanceManuals", modellingRule="Optional")
+    )
     operationCounters: machinery.objtypes.MachineryOperationCounterType = o6.hasAddIn(o6.ns["ns=glass_flat_v2;i=5026"])
-    operationManuals: ManualFolderType | None = o6.hasComponent(ManualFolderType(nodeId="ns=glass_flat_v2;i=5011", browseName="ns=glass_flat_v2;OperationManuals"))
+    operationManuals: ManualFolderType | None = o6.hasComponent(
+        ManualFolderType(nodeId="ns=glass_flat_v2;i=5011", browseName="ns=glass_flat_v2;OperationManuals", modellingRule="Optional")
+    )
 
 
 @o6.objecttype(nodeId="ns=glass_flat_v2;i=1063", browseName="ns=glass_flat_v2;ConfigurationRulesType", displayName="ConfigurationRulesType")
 class ConfigurationRulesType(ns0.objtypes.BaseObjectType):
     allowedEngineeringUnits: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=glass_flat_v2;i=6186", browseName="ns=glass_flat_v2;AllowedEngineeringUnits", dataType=ns0.datatypes.EUInformation, valueRank=1, arrayDimensions=[0]
+            nodeId="ns=glass_flat_v2;i=6186",
+            browseName="ns=glass_flat_v2;AllowedEngineeringUnits",
+            modellingRule="Optional",
+            dataType=ns0.datatypes.EUInformation,
+            valueRank=1,
+            arrayDimensions=[0],
         )
     )
     allowedFileFormats: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=glass_flat_v2;i=6174", browseName="ns=glass_flat_v2;AllowedFileFormats", dataType=glass_flat_v2_datypes.FileFormatDataType, valueRank=1, arrayDimensions=[0]
+            nodeId="ns=glass_flat_v2;i=6174",
+            browseName="ns=glass_flat_v2;AllowedFileFormats",
+            modellingRule="Optional",
+            dataType=glass_flat_v2_datypes.FileFormatDataType,
+            valueRank=1,
+            arrayDimensions=[0],
         )
     )
     machineProcessingCoordinateSystem: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=glass_flat_v2;i=6188",
             browseName="ns=glass_flat_v2;MachineProcessingCoordinateSystem",
+            modellingRule="Mandatory",
             dataType=glass_flat_v2_datypes.CoordinateSystemEnumeration,
             accessLevel=3,
             userAccessLevel=1,
@@ -89,16 +109,16 @@ class ConfigurationRulesType(ns0.objtypes.BaseObjectType):
 @o6.objecttype(nodeId="ns=glass_flat_v2;i=1030", browseName="ns=glass_flat_v2;GlassEventType", displayName="GlassEventType", isAbstract=True)
 class GlassEventType(ns0.objtypes.BaseEventType):
     identifier: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6405", browseName="ns=glass_flat_v2;Identifier", accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6405", browseName="ns=glass_flat_v2;Identifier", modellingRule="Optional", accessLevel=3, userAccessLevel=1)
     )
     jobdIdentifier: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6410", browseName="ns=glass_flat_v2;JobdIdentifier", accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6410", browseName="ns=glass_flat_v2;JobdIdentifier", modellingRule="Optional", accessLevel=3, userAccessLevel=1)
     )
     location: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6406", browseName="ns=glass_flat_v2;Location", accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6406", browseName="ns=glass_flat_v2;Location", modellingRule="Optional", accessLevel=3, userAccessLevel=1)
     )
     materialIdentifier: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6411", browseName="ns=glass_flat_v2;MaterialIdentifier", accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=glass_flat_v2;i=6411", browseName="ns=glass_flat_v2;MaterialIdentifier", modellingRule="Optional", accessLevel=3, userAccessLevel=1)
     )
 
 
@@ -106,13 +126,19 @@ class GlassEventType(ns0.objtypes.BaseEventType):
 class GlassMachineIdentificationType(machinery.objtypes.MachineIdentificationType):
     loggedInProfiles: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=glass_flat_v2;i=6414", browseName="ns=glass_flat_v2;LoggedInProfiles", dataType=glass_flat_v2_datypes.UserProfileDataType, valueRank=1, arrayDimensions=[0]
+            nodeId="ns=glass_flat_v2;i=6414",
+            browseName="ns=glass_flat_v2;LoggedInProfiles",
+            modellingRule="Optional",
+            dataType=glass_flat_v2_datypes.UserProfileDataType,
+            valueRank=1,
+            arrayDimensions=[0],
         )
     )
     processingCategories: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=glass_flat_v2;i=6029",
             browseName="ns=glass_flat_v2;ProcessingCategories",
+            modellingRule="Mandatory",
             dataType=glass_flat_v2_datypes.ProcessingCategoryDataType,
             valueRank=1,
             arrayDimensions=[0],

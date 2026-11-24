@@ -49,7 +49,7 @@ class Calibrator_InterfaceType(plastics_extrusion_v1.objtypes.ExtrusionDeviceTyp
 class CalibrationZonesType(ns0.objtypes.BaseObjectType):
     calibrationZone_Nr_: CalibrationZoneType | None
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_calibrator;i=6155", browseName="NodeVersion", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_calibrator;i=6155", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String)
     )
     waterFlowIn: plastics_rubber.objtypes.MeasuringDeviceType | None
     waterFlowOut: plastics_rubber.objtypes.MeasuringDeviceType | None
@@ -65,15 +65,24 @@ class CalibrationZoneType(ns0.objtypes.BaseObjectType):
     additionalMeasuringDevices: plastics_rubber.objtypes.MeasuringDevicesType | None
     airShowerPressure: plastics_rubber.objtypes.MeasuringDeviceType | None
     isPresent: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_calibrator;i=6002", browseName="ns=plastics_extrusion_v1_calibrator;IsPresent", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_v1_calibrator;i=6002", browseName="ns=plastics_extrusion_v1_calibrator;IsPresent", modellingRule="Mandatory", dataType=o6.Boolean
+        )
     )
     name: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=plastics_extrusion_v1_calibrator;i=6001", browseName="ns=plastics_extrusion_v1_calibrator;Name", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1
+            nodeId="ns=plastics_extrusion_v1_calibrator;i=6001",
+            browseName="ns=plastics_extrusion_v1_calibrator;Name",
+            modellingRule="Mandatory",
+            dataType=o6.LocalizedText,
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     position: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_v1_calibrator;i=6324", browseName="ns=plastics_extrusion_v1_calibrator;Position", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_v1_calibrator;i=6324", browseName="ns=plastics_extrusion_v1_calibrator;Position", modellingRule="Optional", dataType=o6.String
+        )
     )
     vacuum: plastics_rubber.objtypes.MeasuringDeviceType | None
     vacuumPumps: plastics_rubber.objtypes.DrivesType | None

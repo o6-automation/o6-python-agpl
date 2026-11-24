@@ -31,14 +31,14 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=cnc;i=3001", browseName="CncSpindleTurnDirection", description="Turn direction of a CNC spindle.")
+@o6.enumtype(nodeId="ns=cnc;i=3001", browseName="ns=cnc;CncSpindleTurnDirection", description="Turn direction of a CNC spindle.")
 class CncSpindleTurnDirection(ns0.datatypes.Enumeration):
     NONE = o6.enumfield(0, name="None")
     CW = o6.enumfield(1, name="CW")
     CCW = o6.enumfield(2, name="CCW")
 
 
-@o6.enumtype(nodeId="ns=cnc;i=3002", browseName="CncChannelProgramStatus", description="Status of program execution within a channel.")
+@o6.enumtype(nodeId="ns=cnc;i=3002", browseName="ns=cnc;CncChannelProgramStatus", description="Status of program execution within a channel.")
 class CncChannelProgramStatus(ns0.datatypes.Enumeration):
     STOPPED = o6.enumfield(0, name="Stopped")
     RUNNING = o6.enumfield(1, name="Running")
@@ -47,21 +47,21 @@ class CncChannelProgramStatus(ns0.datatypes.Enumeration):
     CANCELED = o6.enumfield(4, name="Canceled")
 
 
-@o6.enumtype(nodeId="ns=cnc;i=3003", browseName="CncChannelStatus", description="Status of a CNC channel.")
+@o6.enumtype(nodeId="ns=cnc;i=3003", browseName="ns=cnc;CncChannelStatus", description="Status of a CNC channel.")
 class CncChannelStatus(ns0.datatypes.Enumeration):
     ACTIVE = o6.enumfield(0, name="Active")
     INTERRUPTED = o6.enumfield(1, name="Interrupted")
     RESET = o6.enumfield(2, name="Reset")
 
 
-@o6.enumtype(nodeId="ns=cnc;i=3004", browseName="CncAxisStatus", description="Status of a CNC axis.")
+@o6.enumtype(nodeId="ns=cnc;i=3004", browseName="ns=cnc;CncAxisStatus", description="Status of a CNC axis.")
 class CncAxisStatus(ns0.datatypes.Enumeration):
     IN_POSITION = o6.enumfield(0, name="InPosition")
     MOVING = o6.enumfield(1, name="Moving")
     PARKED = o6.enumfield(2, name="Parked")
 
 
-@o6.enumtype(nodeId="ns=cnc;i=3005", browseName="CncSpindleStatus", description="Status of a CNC spindle.")
+@o6.enumtype(nodeId="ns=cnc;i=3005", browseName="ns=cnc;CncSpindleStatus", description="Status of a CNC spindle.")
 class CncSpindleStatus(ns0.datatypes.Enumeration):
     STOPPED = o6.enumfield(0, name="Stopped")
     IN_TARGET_AREA = o6.enumfield(1, name="InTargetArea")
@@ -70,18 +70,18 @@ class CncSpindleStatus(ns0.datatypes.Enumeration):
     PARKED = o6.enumfield(4, name="Parked")
 
 
-@o6.enumtype(nodeId="ns=cnc;i=3006", browseName="CncOperationMode", description="Modes of operation.")
+@o6.enumtype(nodeId="ns=cnc;i=3006", browseName="ns=cnc;CncOperationMode", description="Modes of operation.")
 class CncOperationMode(ns0.datatypes.Enumeration):
     MANUAL = o6.enumfield(0, name="Manual")
     MDA = o6.enumfield(1, name="MDA")
     AUTOMATIC = o6.enumfield(2, name="Automatic")
 
 
-@o6.datatype(nodeId="ns=cnc;i=3007", browseName="CncPositionDataType", description="Structure of position elements.", defaultEncodingId="ns=cnc;i=5001")
+@o6.datatype(nodeId="ns=cnc;i=3007", browseName="ns=cnc;CncPositionDataType", description="Structure of position elements.", defaultEncodingId="ns=cnc;i=5001")
 class CncPositionDataType(ns0.datatypes.Structure):
-    actPos: o6.Double
-    cmdPos: o6.Double
-    remDist: o6.Double
+    actPos: o6.Double = o6.field(name="ActPos")
+    cmdPos: o6.Double = o6.field(name="CmdPos")
+    remDist: o6.Double = o6.field(name="RemDist")
 
 
 del Any, TYPE_CHECKING, uuid, o6, ns0

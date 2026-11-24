@@ -36,7 +36,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=machine_tool;i=62", browseName="ProcessIrregularity")
+@o6.enumtype(nodeId="ns=machine_tool;i=62", browseName="ns=machine_tool;ProcessIrregularity")
 class ProcessIrregularity(ns0.datatypes.Enumeration):
     CAPABILITY_UNAVAILABLE = o6.enumfield(0, name="CapabilityUnavailable")
     DETECTED = o6.enumfield(1, name="Detected")
@@ -44,7 +44,7 @@ class ProcessIrregularity(ns0.datatypes.Enumeration):
     NOT_YET_DETERMINED = o6.enumfield(3, name="NotYetDetermined")
 
 
-@o6.enumtype(nodeId="ns=machine_tool;i=63", browseName="PartQuality")
+@o6.enumtype(nodeId="ns=machine_tool;i=63", browseName="ns=machine_tool;PartQuality")
 class PartQuality(ns0.datatypes.Enumeration):
     CAPABILITY_UNAVAILABLE = o6.enumfield(0, name="CapabilityUnavailable")
     GOOD = o6.enumfield(1, name="Good")
@@ -53,14 +53,14 @@ class PartQuality(ns0.datatypes.Enumeration):
     WILL_NOT_BE_MEASURED = o6.enumfield(4, name="WillNotBeMeasured")
 
 
-@o6.enumtype(nodeId="ns=machine_tool;i=64", browseName="ChannelState")
+@o6.enumtype(nodeId="ns=machine_tool;i=64", browseName="ns=machine_tool;ChannelState")
 class ChannelState(ns0.datatypes.Enumeration):
     ACTIVE = o6.enumfield(0, name="Active")
     INTERRUPTED = o6.enumfield(1, name="Interrupted")
     RESET = o6.enumfield(2, name="Reset")
 
 
-@o6.enumtype(nodeId="ns=machine_tool;i=65", browseName="MachineOperationMode")
+@o6.enumtype(nodeId="ns=machine_tool;i=65", browseName="ns=machine_tool;MachineOperationMode")
 class MachineOperationMode(ns0.datatypes.Enumeration):
     MANUAL = o6.enumfield(0, name="Manual")
     AUTOMATIC = o6.enumfield(1, name="Automatic")
@@ -70,7 +70,7 @@ class MachineOperationMode(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(5, name="Other")
 
 
-@o6.enumtype(nodeId="ns=machine_tool;i=66", browseName="ToolLocked")
+@o6.enumtype(nodeId="ns=machine_tool;i=66", browseName="ns=machine_tool;ToolLocked")
 class ToolLocked(ns0.datatypes.Enumeration):
     CAPABILITY_UNAVAILABLE = o6.enumfield(0, name="CapabilityUnavailable")
     BY_OPERATOR = o6.enumfield(1, name="ByOperator")
@@ -80,7 +80,7 @@ class ToolLocked(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(5, name="Other")
 
 
-@o6.enumtype(nodeId="ns=machine_tool;i=67", browseName="ChannelMode")
+@o6.enumtype(nodeId="ns=machine_tool;i=67", browseName="ns=machine_tool;ChannelMode")
 class ChannelMode(ns0.datatypes.Enumeration):
     AUTOMATIC = o6.enumfield(0, name="Automatic")
     MDA_MDI = o6.enumfield(1, name="MdaMdi")
@@ -92,7 +92,7 @@ class ChannelMode(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(7, name="Other")
 
 
-@o6.enumtype(nodeId="ns=machine_tool;i=68", browseName="ToolLifeIndication")
+@o6.enumtype(nodeId="ns=machine_tool;i=68", browseName="ns=machine_tool;ToolLifeIndication")
 class ToolLifeIndication(ns0.datatypes.Enumeration):
     TIME = o6.enumfield(0, name="Time")
     NUMBER_OF_PARTS = o6.enumfield(1, name="NumberOfParts")
@@ -104,14 +104,14 @@ class ToolLifeIndication(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(7, name="Other")
 
 
-@o6.enumtype(nodeId="ns=machine_tool;i=69", browseName="ToolManagement")
+@o6.enumtype(nodeId="ns=machine_tool;i=69", browseName="ns=machine_tool;ToolManagement")
 class ToolManagement(ns0.datatypes.Enumeration):
     NUMBER_BASED = o6.enumfield(0, name="NumberBased")
     GROUP_BASED = o6.enumfield(1, name="GroupBased")
     OTHER = o6.enumfield(2, name="Other")
 
 
-@o6.enumtype(nodeId="ns=machine_tool;i=70", browseName="LaserState")
+@o6.enumtype(nodeId="ns=machine_tool;i=70", browseName="ns=machine_tool;LaserState")
 class LaserState(ns0.datatypes.Enumeration):
     UNDEFINED = o6.enumfield(0, name="Undefined")
     READY = o6.enumfield(1, name="Ready")
@@ -119,7 +119,7 @@ class LaserState(ns0.datatypes.Enumeration):
     ERROR = o6.enumfield(3, name="Error")
 
 
-@o6.enumtype(nodeId="ns=machine_tool;i=71", browseName="EDMGeneratorState")
+@o6.enumtype(nodeId="ns=machine_tool;i=71", browseName="ns=machine_tool;EDMGeneratorState")
 class EDMGeneratorState(ns0.datatypes.Enumeration):
     UNDEFINED = o6.enumfield(0, name="Undefined")
     READY = o6.enumfield(1, name="Ready")

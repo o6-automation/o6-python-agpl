@@ -41,38 +41,46 @@ else:
 @o6.variabletype(nodeId="ns=wmtp;i=2001", browseName="ns=wmtp;WMTPOutputType", displayName="WMTPOutputType", dataType=wmtp_datypes.WMTPOutputDataType)
 class WMTPOutputType(ns0.vartypes.BaseDataVariableType):
     absoluteUncertainty: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6270", browseName="ns=wmtp;AbsoluteUncertainty", dataType=o6.Double)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6270", browseName="ns=wmtp;AbsoluteUncertainty", modellingRule="Mandatory", dataType=o6.Double)
     )
     actualValue: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6262", browseName="ns=wmtp;ActualValue", dataType=o6.Double)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6262", browseName="ns=wmtp;ActualValue", modellingRule="Mandatory", dataType=o6.Double)
     )
-    definition: ns0.vartypes.BaseDataVariableType = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6267", browseName="ns=wmtp;Definition", dataType=o6.String))
+    definition: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6267", browseName="ns=wmtp;Definition", modellingRule="Mandatory", dataType=o6.String)
+    )
     eURange: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6265", browseName="ns=wmtp;EURange", dataType=ns0.datatypes.Range)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6265", browseName="ns=wmtp;EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)
     )
     engineeringUnits: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6261", browseName="ns=wmtp;EngineeringUnits", dataType=ns0.datatypes.EUInformation)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6261", browseName="ns=wmtp;EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
     )
-    index: ns0.vartypes.BaseDataVariableType = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6272", browseName="ns=wmtp;Index", dataType=o6.UInt32))
+    index: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6272", browseName="ns=wmtp;Index", modellingRule="Mandatory", dataType=o6.UInt32)
+    )
     internalUpdateInterval: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6274", browseName="ns=wmtp;InternalUpdateInterval", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6274", browseName="ns=wmtp;InternalUpdateInterval", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
     )
     measurementPeriod: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6273", browseName="ns=wmtp;MeasurementPeriod", dataType=ns0.datatypes.Duration)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6273", browseName="ns=wmtp;MeasurementPeriod", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
     )
     relativeUncertainty: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6269", browseName="ns=wmtp;RelativeUncertainty", dataType=o6.Double)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6269", browseName="ns=wmtp;RelativeUncertainty", modellingRule="Mandatory", dataType=o6.Double)
     )
-    signalTag: ns0.vartypes.BaseDataVariableType = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6268", browseName="ns=wmtp;SignalTag", dataType=o6.String))
-    timestamp: ns0.vartypes.BaseDataVariableType = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6271", browseName="ns=wmtp;Timestamp", dataType=o6.DateTime))
+    signalTag: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6268", browseName="ns=wmtp;SignalTag", modellingRule="Mandatory", dataType=o6.String)
+    )
+    timestamp: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6271", browseName="ns=wmtp;Timestamp", modellingRule="Mandatory", dataType=o6.DateTime)
+    )
     typeOfMeasurement: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6263", browseName="ns=wmtp;TypeOfMeasurement", dataType=o6.UInt32)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6263", browseName="ns=wmtp;TypeOfMeasurement", modellingRule="Mandatory", dataType=o6.UInt32)
     )
     typeOfSample: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6264", browseName="ns=wmtp;TypeOfSample", dataType=o6.UInt32)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6264", browseName="ns=wmtp;TypeOfSample", modellingRule="Mandatory", dataType=o6.UInt32)
     )
     valuePrecision: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6266", browseName="ns=wmtp;ValuePrecision", dataType=o6.Double)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=wmtp;i=6266", browseName="ns=wmtp;ValuePrecision", modellingRule="Mandatory", dataType=o6.Double)
     )
 
 

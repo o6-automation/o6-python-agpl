@@ -20,7 +20,6 @@
 #include "client/client.h"
 #include "server/server.h"
 #include "server/python_nodestore.h"
-#include "server/server_notifications.h"
 #include <datetime.h>
 #include <numpy/arrayobject.h>
 
@@ -55,58 +54,6 @@ int o6_require_server(void) {
 
 int o6_require_pubsub(void) {
     return require_feature(pubsub_enabled, "PubSub");
-}
-
-const char *
-o6_parse_feature_scope(const UA_String *scope, o6_FeatureSet *features) {
-    *features = (o6_FeatureSet){false, false, false};
-    if(scope->length == 0) {
-        features->client = true;
-        features->server = true;
-        features->pubsub = true;
-        return NULL;
-    }
-    if(scope->length >= 512)
-        return "FeatureScope is too long";
-    if(memchr(scope->data, 0, scope->length))
-        return "FeatureScope contains a null character";
-
-    char buf[512];
-    memcpy(buf, scope->data, scope->length);
-    buf[scope->length] = 0;
-    char *input = buf;
-    while(input) {
-        char *next = strchr(input, ',');
-        if(next) {
-            *next = 0;
-            next++;
-        }
-        while(*input == ' ' || *input == '\t')
-            input++;
-        char *end = input + strlen(input);
-        while(end > input && (end[-1] == ' ' || end[-1] == '\t'))
-            *--end = 0;
-        if(*input == 0)
-            return "FeatureScope contains an empty feature";
-
-        bool *flag = NULL;
-        if(strcmp(input, "client") == 0)
-            flag = &features->client;
-        else if(strcmp(input, "server") == 0)
-            flag = &features->server;
-        else if(strcmp(input, "pubsub") == 0)
-            flag = &features->pubsub;
-        else
-            return "FeatureScope contains an unknown feature";
-        if(*flag)
-            return "FeatureScope contains a duplicate feature";
-        *flag = true;
-        input = next;
-    }
-
-    if(features->pubsub && !features->server)
-        return "FeatureScope enables pubsub without server";
-    return NULL;
 }
 
 static int
@@ -319,17 +266,28 @@ PyObject * PyErr_StatusCode(UA_StatusCode err) {
 static PyObject *
 py_create_certificate(PyObject *self, PyObject *args, PyObject *kwds) {
     static char *kwlist[] = {"subject", "alt_names", "expires_in_days",
-                             "key_size", "fmt", NULL};
+                             "key_size", "fmt", "valid_from", NULL};
     PyObject *py_subject = NULL;
     PyObject *py_alt_names = NULL;
     int expires_in_days = 365;
     int key_size = 2048;
     const char *fmt = "DER";
+    PyObject *py_valid_from = Py_None;
 
-    if (!PyArg_ParseTupleAndKeywords(args, kwds, "OO|iis", kwlist,
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "OO|iisO", kwlist,
                                      &py_subject, &py_alt_names,
-                                     &expires_in_days, &key_size, &fmt))
+                                     &expires_in_days, &key_size, &fmt,
+                                     &py_valid_from))
         return NULL;
+
+    /* Optional start of the validity in UA_DateTime ticks; without it the
+     * certificate is valid from its creation */
+    UA_DateTime valid_from = 0;
+    if (py_valid_from != Py_None) {
+        valid_from = (UA_DateTime)PyLong_AsLongLong(py_valid_from);
+        if (valid_from == -1 && PyErr_Occurred())
+            return NULL;
+    }
 
     if (!PyList_Check(py_subject)) {
         PyErr_SetString(PyExc_TypeError, "subject must be a list of strings");
@@ -386,20 +344,27 @@ py_create_certificate(PyObject *self, PyObject *args, PyObject *kwds) {
     }
 
     UA_KeyValueMap *kvm = UA_KeyValueMap_new();
+    UA_StatusCode status = kvm ? UA_STATUSCODE_GOOD : UA_STATUSCODE_BADOUTOFMEMORY;
     UA_UInt16 days = (UA_UInt16)expires_in_days;
-    UA_KeyValueMap_setScalar(kvm, UA_QUALIFIEDNAME(0, "expires-in-days"),
-                             (void *)&days, &UA_TYPES[UA_TYPES_UINT16]);
+    if (status == UA_STATUSCODE_GOOD)
+        status = UA_KeyValueMap_setScalar(kvm, UA_QUALIFIEDNAME(0, "expires-in-days"),
+                                          (void *)&days, &UA_TYPES[UA_TYPES_UINT16]);
     UA_UInt16 bits = (UA_UInt16)key_size;
-    UA_KeyValueMap_setScalar(kvm, UA_QUALIFIEDNAME(0, "key-size-bits"),
-                             (void *)&bits, &UA_TYPES[UA_TYPES_UINT16]);
+    if (status == UA_STATUSCODE_GOOD)
+        status = UA_KeyValueMap_setScalar(kvm, UA_QUALIFIEDNAME(0, "key-size-bits"),
+                                          (void *)&bits, &UA_TYPES[UA_TYPES_UINT16]);
+    if (status == UA_STATUSCODE_GOOD && py_valid_from != Py_None)
+        status = UA_KeyValueMap_setScalar(kvm, UA_QUALIFIEDNAME(0, "valid-from"),
+                                          &valid_from, &UA_TYPES[UA_TYPES_DATETIME]);
 
     UA_ByteString privateKey = UA_BYTESTRING_NULL;
     UA_ByteString certificate = UA_BYTESTRING_NULL;
 
-    UA_StatusCode status = UA_CreateCertificate(
-        UA_Log_Stdout, subject, (size_t)subject_size,
-        alt_names, (size_t)alt_size,
-        certFmt, kvm, &privateKey, &certificate);
+    if (status == UA_STATUSCODE_GOOD)
+        status = UA_CreateCertificate(
+            UA_Log_Stdout, subject, (size_t)subject_size,
+            alt_names, (size_t)alt_size,
+            certFmt, kvm, &privateKey, &certificate);
 
     UA_KeyValueMap_delete(kvm);
     UA_free(subject);
@@ -494,26 +459,6 @@ py_require_pubsub(PyObject *self, PyObject *Py_UNUSED(args)) {
     Py_RETURN_NONE;
 }
 
-static PyObject *
-py_parse_feature_scope(PyObject *self, PyObject *scopeObject) {
-    (void)self;
-    Py_ssize_t length;
-    const char *scopeData = PyUnicode_AsUTF8AndSize(scopeObject, &length);
-    if(!scopeData)
-        return NULL;
-    UA_String scope = {(size_t)length, (UA_Byte *)(uintptr_t)scopeData};
-    o6_FeatureSet features;
-    const char *error = o6_parse_feature_scope(&scope, &features);
-    if(error) {
-        PyErr_SetString(PyExc_ValueError, error);
-        return NULL;
-    }
-    return Py_BuildValue("(OOO)",
-                         features.client ? Py_True : Py_False,
-                         features.server ? Py_True : Py_False,
-                         features.pubsub ? Py_True : Py_False);
-}
-
 static PyMethodDef module_methods[] = {
     {"_register_namespace",
      (PyCFunction)py_register_namespace, METH_VARARGS,
@@ -528,8 +473,6 @@ static PyMethodDef module_methods[] = {
      "Raise PermissionError unless Server is enabled by the active Credential."},
     {"_require_pubsub", py_require_pubsub, METH_NOARGS,
      "Raise PermissionError unless PubSub is enabled by the active Credential."},
-    {"_parse_feature_scope", py_parse_feature_scope, METH_O,
-     "Validate a Credential FeatureScope without changing active entitlements."},
     {"create_certificate", (PyCFunction)py_create_certificate,
      METH_VARARGS | METH_KEYWORDS,
      "Create a self-signed certificate and private key.\n\n"
@@ -601,6 +544,17 @@ PyMODINIT_FUNC PyInit__o6(void) {
     mod = PyModule_Create(&pymodule);
     if(!mod)
         return NULL;
+
+    /* Snapshot the license state decided above; o6 wraps it as o6.license */
+    PyObject *license_status = o6_license_status();
+    int added = license_status
+        ? PyModule_AddObjectRef(mod, "_license", license_status) : -1;
+    Py_XDECREF(license_status);
+    if(added < 0) {
+        Py_DECREF(mod);
+        mod = NULL;
+        return NULL;
+    }
 
     /* Initialize event-loop PyType objects that are used at runtime by
      * UA_EventLoop_new_AsyncIO and UA_ConnectionManager_new_AsyncIO_TCP.
@@ -710,14 +664,6 @@ PyMODINIT_FUNC PyInit__o6(void) {
 #else
     PyModule_AddIntConstant(mod, "MDNS_AVAILABLE", 0);
 #endif
-
-    /* Expose the raw lifecycle notification-type constants so a test can
-     * cross-check them against o6.server.NotificationType's Python literals. */
-    if(server_notifications_add_constants(mod) < 0) {
-        Py_DECREF(mod);
-        mod = NULL;
-        return NULL;
-    }
 
     return mod;
 }

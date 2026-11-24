@@ -978,6 +978,8 @@ static int access_control_override(PyObject *overrides, const char *name) {
 }
 
 PyObject *PyAccessControl_install(PyServerConfig *self, PyObject *plugin) {
+    O6_REQUIRE_WRITABLE_CONFIG(pyServerConfig_notRunning(self, "modify", "access control"),
+                               pyServerConfig_eventLoop(self), NULL);
   UA_ServerConfig *cfg = (self->py_server && self->py_server->server)
                              ? UA_Server_getConfig(self->py_server->server)
                              : NULL;

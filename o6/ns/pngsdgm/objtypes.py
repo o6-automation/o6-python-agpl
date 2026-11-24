@@ -37,70 +37,96 @@ else:
 
 @o6.objecttype(nodeId="ns=pngsdgm;i=1002", browseName="ns=pngsdgm;GsdGenAlarmEventType", displayName="GsdGenAlarmEventType")
 class GsdGenAlarmEventType(ns0.objtypes.BaseEventType):
-    aPI: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6022", browseName="ns=pngsdgm;API", dataType=o6.UInt32))
+    aPI: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6022", browseName="ns=pngsdgm;API", modellingRule="Mandatory", dataType=o6.UInt32)
+    )
     accumulative: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6026", browseName="ns=pngsdgm;Accumulative", dataType=pngsdgm_datypes.GsdGenChannelAccumulativeEnumeration)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=pngsdgm;i=6026", browseName="ns=pngsdgm;Accumulative", modellingRule="Optional", dataType=pngsdgm_datypes.GsdGenChannelAccumulativeEnumeration
+        )
     )
     channelErrorType: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6031", browseName="ns=pngsdgm;ChannelErrorType", dataType=o6.UInt16)
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6031", browseName="ns=pngsdgm;ChannelErrorType", modellingRule="Mandatory", dataType=o6.UInt16)
     )
     channelNumber: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6025", browseName="ns=pngsdgm;ChannelNumber", dataType=o6.UInt16)
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6025", browseName="ns=pngsdgm;ChannelNumber", modellingRule="Optional", dataType=o6.UInt16)
     )
     direction: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6029", browseName="ns=pngsdgm;Direction", dataType=pngsdgm_datypes.GsdGenChannelDirectionEnumeration)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=pngsdgm;i=6029", browseName="ns=pngsdgm;Direction", modellingRule="Mandatory", dataType=pngsdgm_datypes.GsdGenChannelDirectionEnumeration
+        )
     )
     extChannelAddValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6033", browseName="ns=pngsdgm;ExtChannelAddValue", dataType=o6.UInt32)
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6033", browseName="ns=pngsdgm;ExtChannelAddValue", modellingRule="Optional", dataType=o6.UInt32)
     )
     extChannelErrorType: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6032", browseName="ns=pngsdgm;ExtChannelErrorType", dataType=o6.UInt16)
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6032", browseName="ns=pngsdgm;ExtChannelErrorType", modellingRule="Optional", dataType=o6.UInt16)
     )
-    helpText: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6036", browseName="ns=pngsdgm;HelpText", dataType=o6.LocalizedText))
+    helpText: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6036", browseName="ns=pngsdgm;HelpText", modellingRule="Mandatory", dataType=o6.LocalizedText)
+    )
     maintenance: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6027", browseName="ns=pngsdgm;Maintenance", dataType=pngsdgm_datypes.GsdGenChannelMaintenanceEnumeration)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=pngsdgm;i=6027", browseName="ns=pngsdgm;Maintenance", modellingRule="Optional", dataType=pngsdgm_datypes.GsdGenChannelMaintenanceEnumeration
+        )
     )
     manufacturerData: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6035", browseName="ns=pngsdgm;ManufacturerData", dataType=o6.ByteString)
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6035", browseName="ns=pngsdgm;ManufacturerData", modellingRule="Optional", dataType=o6.ByteString)
     )
     qualifiedChannelQualifier: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6034", browseName="ns=pngsdgm;QualifiedChannelQualifier", dataType=o6.UInt32)
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6034", browseName="ns=pngsdgm;QualifiedChannelQualifier", modellingRule="Optional", dataType=o6.UInt32)
     )
-    slot: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6023", browseName="ns=pngsdgm;Slot", dataType=o6.UInt16))
+    slot: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6023", browseName="ns=pngsdgm;Slot", modellingRule="Mandatory", dataType=o6.UInt16)
+    )
     specifier: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6028", browseName="ns=pngsdgm;Specifier", dataType=pngsdgm_datypes.GsdGenChannelSpecifierEnumeration)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=pngsdgm;i=6028", browseName="ns=pngsdgm;Specifier", modellingRule="Mandatory", dataType=pngsdgm_datypes.GsdGenChannelSpecifierEnumeration
+        )
     )
-    subslot: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6024", browseName="ns=pngsdgm;Subslot", dataType=o6.UInt16))
+    subslot: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6024", browseName="ns=pngsdgm;Subslot", modellingRule="Mandatory", dataType=o6.UInt16)
+    )
     userStructureIdentifier: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6030", browseName="ns=pngsdgm;UserStructureIdentifier", dataType=o6.UInt16)
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6030", browseName="ns=pngsdgm;UserStructureIdentifier", modellingRule="Mandatory", dataType=o6.UInt16)
     )
 
 
 @o6.objecttype(nodeId="ns=pngsdgm;i=1003", browseName="ns=pngsdgm;GsdGenIoChannelQualityType", displayName="GsdGenIoChannelQualityType")
 class GsdGenIoChannelQualityType(ns0.objtypes.BaseObjectType):
-    bitOffset: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6037", browseName="ns=pngsdgm;BitOffset", dataType=o6.UInt16))
+    bitOffset: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6037", browseName="ns=pngsdgm;BitOffset", modellingRule="Mandatory", dataType=o6.UInt16)
+    )
     format: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6038", browseName="ns=pngsdgm;Format", dataType=pngsdgm_datypes.GsdGenIoQualityFormatEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6038", browseName="ns=pngsdgm;Format", modellingRule="Mandatory", dataType=pngsdgm_datypes.GsdGenIoQualityFormatEnumeration)
     )
 
 
 @o6.objecttype(nodeId="ns=pngsdgm;i=1004", browseName="ns=pngsdgm;GsdGenIoChannelDataType", displayName="GsdGenIoChannelDataType")
 class GsdGenIoChannelDataType(ns0.objtypes.BaseObjectType):
-    bitLength: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6040", browseName="ns=pngsdgm;BitLength", dataType=o6.UInt16))
-    bitOffset: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6039", browseName="ns=pngsdgm;BitOffset", dataType=o6.UInt16))
+    bitLength: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6040", browseName="ns=pngsdgm;BitLength", modellingRule="Mandatory", dataType=o6.UInt16)
+    )
+    bitOffset: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6039", browseName="ns=pngsdgm;BitOffset", modellingRule="Mandatory", dataType=o6.UInt16)
+    )
 
 
 @o6.objecttype(nodeId="ns=pngsdgm;i=1005", browseName="ns=pngsdgm;GsdGenIoChannelType", displayName="GsdGenIoChannelType")
 class GsdGenIoChannelType(ns0.objtypes.BaseObjectType):
     data: GsdGenIoChannelDataType
-    number: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6041", browseName="ns=pngsdgm;Number", dataType=o6.UInt16))
+    number: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6041", browseName="ns=pngsdgm;Number", modellingRule="Mandatory", dataType=o6.UInt16)
+    )
     quality: GsdGenIoChannelQualityType | None
 
 
 @o6.objecttype(nodeId="ns=pngsdgm;i=1006", browseName="ns=pngsdgm;GsdGenIoDataType", displayName="GsdGenIoDataType")
 class GsdGenIoDataType(ns0.objtypes.BaseObjectType):
     consistency: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6046", browseName="ns=pngsdgm;Consistency", dataType=pngsdgm_datypes.GsdGenIoConsistencyEnumeration)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=pngsdgm;i=6046", browseName="ns=pngsdgm;Consistency", modellingRule="Mandatory", dataType=pngsdgm_datypes.GsdGenIoConsistencyEnumeration
+        )
     )
     dataItemx_: pngsdgm_vartypes.GsdGenIoDataItemVariableType | None
     inputChannelx_: GsdGenIoChannelType | None
@@ -118,25 +144,33 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ApplicationTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pngsdgm;i=7001", browseName="ns=pngsdgm;SetApplicationTag", inputArgs=o6.hasProperty(o6.ns["ns=pngsdgm;i=6074"]))
+o6.call(nodeId="ns=pngsdgm;i=7001", browseName="ns=pngsdgm;SetApplicationTag", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pngsdgm;i=6074"]))
 
 
 @o6.objecttype(nodeId="ns=pngsdgm;i=1007", browseName="ns=pngsdgm;GsdGenSubmoduleApplicationType", displayName="GsdGenSubmoduleApplicationType")
 class GsdGenSubmoduleApplicationType(ns0.objtypes.BaseObjectType):
-    aRIdentifier: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6106", browseName="ns=pngsdgm;ARIdentifier", dataType=o6.Guid))
+    aRIdentifier: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6106", browseName="ns=pngsdgm;ARIdentifier", modellingRule="Optional", dataType=o6.Guid)
+    )
     applicationTag: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6006", browseName="ns=pngsdgm;ApplicationTag", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6006", browseName="ns=pngsdgm;ApplicationTag", modellingRule="Optional", dataType=o6.String)
     )
     arrayFolder_: di.objtypes.FunctionalGroupType | None
     communicationStatus: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6104", browseName="ns=pngsdgm;CommunicationStatus", dataType=pngsdgm_datypes.GsdGenIoCommunicationStatusEnumeration)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=pngsdgm;i=6104", browseName="ns=pngsdgm;CommunicationStatus", modellingRule="Mandatory", dataType=pngsdgm_datypes.GsdGenIoCommunicationStatusEnumeration
+        )
     )
-    configuration: di.objtypes.FunctionalGroupType | None = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=pngsdgm;i=5015", browseName="ns=pngsdgm;Configuration"))
+    configuration: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
+        di.objtypes.FunctionalGroupType(nodeId="ns=pngsdgm;i=5015", browseName="ns=pngsdgm;Configuration", modellingRule="Optional")
+    )
     configurationStatus: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6105", browseName="ns=pngsdgm;ConfigurationStatus", dataType=pngsdgm_datypes.GsdGenIoConfigurationStatusEnumeration)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=pngsdgm;i=6105", browseName="ns=pngsdgm;ConfigurationStatus", modellingRule="Mandatory", dataType=pngsdgm_datypes.GsdGenIoConfigurationStatusEnumeration
+        )
     )
     controllerName: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6107", browseName="ns=pngsdgm;ControllerName", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=pngsdgm;i=6107", browseName="ns=pngsdgm;ControllerName", modellingRule="Optional", dataType=o6.String)
     )
     enumerationVariable_: ns0.vartypes.BaseDataVariableType | None
     folderName_: di.objtypes.FunctionalGroupType | None = o6.hasComponent(

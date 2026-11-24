@@ -42,7 +42,7 @@ plcopen_objtypes.SFCType(
     nodeId="ns=plcopen;i=1018",
     browseName="ns=plcopen;<SFCName>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plcopen;i=1019", browseName="ns=plcopen;Priority", dataType=o6.UInt32))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plcopen;i=1019", browseName="ns=plcopen;Priority", modellingRule="Mandatory", dataType=o6.UInt32))],
 )
 o6.reference(plcopen_objtypes.CtrlProgramOrganizationUnitType, ns0.reftypes.HasComponent, o6.ns["ns=plcopen;i=1018"])
 plcopen_objtypes.CtrlFunctionBlockType(nodeId="ns=plcopen;i=1020", browseName="ns=plcopen;<FunctionBlockInputName>", modellingRule="OptionalPlaceholder", _allow_abstract=True)
@@ -149,7 +149,13 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[0],
 )
-o6.call(nodeId="ns=plcopen;i=7001", browseName="ns=plcopen;Start", inputArgs=o6.hasProperty(o6.ns["ns=plcopen;i=1031"]), outputArgs=o6.hasProperty(o6.ns["ns=plcopen;i=1032"]))
+o6.call(
+    nodeId="ns=plcopen;i=7001",
+    browseName="ns=plcopen;Start",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=plcopen;i=1031"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=plcopen;i=1032"]),
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=plcopen;i=1034",
@@ -173,7 +179,13 @@ ns0.vartypes.PropertyType(
     valueRank=1,
     arrayDimensions=[0],
 )
-o6.call(nodeId="ns=plcopen;i=7002", browseName="ns=plcopen;Stop", inputArgs=o6.hasProperty(o6.ns["ns=plcopen;i=1034"]), outputArgs=o6.hasProperty(o6.ns["ns=plcopen;i=1035"]))
+o6.call(
+    nodeId="ns=plcopen;i=7002",
+    browseName="ns=plcopen;Stop",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=plcopen;i=1034"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=plcopen;i=1035"]),
+)
 
 ns0.objtypes.BaseObjectType(
     nodeId="ns=plcopen;i=5002",
@@ -188,8 +200,8 @@ ns0.objtypes.BaseObjectType(
     description="Flat list of Methods",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(o6.call(nodeId="ns=plcopen;i=7003", browseName="ns=plcopen;Start")),
-        o6.hasComponent(o6.call(nodeId="ns=plcopen;i=7004", browseName="ns=plcopen;Stop")),
+        o6.hasComponent(o6.call(nodeId="ns=plcopen;i=7003", browseName="ns=plcopen;Start", modellingRule="Optional")),
+        o6.hasComponent(o6.call(nodeId="ns=plcopen;i=7004", browseName="ns=plcopen;Stop", modellingRule="Optional")),
     ],
 )
 o6.reference(plcopen_objtypes.CtrlResourceType, ns0.reftypes.HasComponent, o6.ns["ns=plcopen;i=5012"])

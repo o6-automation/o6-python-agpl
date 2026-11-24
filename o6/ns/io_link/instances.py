@@ -36,7 +36,7 @@ else:
     _VariableNode = object
 
 iOLinkMasterSet = ns0.objtypes.FolderType(nodeId="ns=io_link;i=5005", browseName="ns=io_link;IOLinkMasterSet", parent="i=85", referenceType=ns0.reftypes.Organizes)
-di.objtypes.FunctionalGroupType(nodeId="ns=io_link;i=5039", browseName="ns=io_link;ConfiguredDevice")
+di.objtypes.FunctionalGroupType(nodeId="ns=io_link;i=5039", browseName="ns=io_link;ConfiguredDevice", modellingRule="Mandatory")
 di.objtypes.FunctionalGroupType(
     nodeId="ns=io_link;i=5031", browseName="ns=io_link;Configuration", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=io_link;i=5039"])]
 )
@@ -125,16 +125,21 @@ http_opcfoundation_org_UA_IOLink_ = ns0.objtypes.NamespaceMetadataType(
     parent="i=11715",
     referenceType=ns0.reftypes.HasComponent,
 )
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6024", browseName="ns=io_link;ErrorCount", dataType=o6.UInt16)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6024", browseName="ns=io_link;ErrorCount", modellingRule="Optional", dataType=o6.UInt16)
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=6024"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6025", browseName="ns=io_link;DetailedDeviceStatus", dataType=o6.Byte, valueRank=2, arrayDimensions=[0, 3])
+ns0.vartypes.BaseDataVariableType(
+    nodeId="ns=io_link;i=6025", browseName="ns=io_link;DetailedDeviceStatus", modellingRule="Optional", dataType=o6.Byte, valueRank=2, arrayDimensions=[0, 3]
+)
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=6025"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6028", browseName="ns=io_link;OffsetTime", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1)
+ns0.vartypes.BaseDataVariableType(
+    nodeId="ns=io_link;i=6028", browseName="ns=io_link;OffsetTime", modellingRule="Optional", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1
+)
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=6028"])
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=io_link;i=6021",
     browseName="ns=io_link;ApplicationSpecificTag",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6030", browseName="ns=io_link;StoredInDevice", dataType=o6.Boolean))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6030", browseName="ns=io_link;StoredInDevice", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.String,
     value="***",
     accessLevel=3,
@@ -144,7 +149,8 @@ o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=6021"])
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=io_link;i=6022",
     browseName="ns=io_link;FunctionTag",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6031", browseName="ns=io_link;StoredInDevice", dataType=o6.Boolean))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6031", browseName="ns=io_link;StoredInDevice", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.String,
     value="***",
     accessLevel=3,
@@ -154,7 +160,8 @@ o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=6022"])
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=io_link;i=6023",
     browseName="ns=io_link;LocationTag",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6032", browseName="ns=io_link;StoredInDevice", dataType=o6.Boolean))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6032", browseName="ns=io_link;StoredInDevice", modellingRule="Mandatory", dataType=o6.Boolean))],
     dataType=o6.String,
     value="***",
     accessLevel=3,
@@ -194,7 +201,10 @@ o6.reference(io_link_objtypes.IOLinkIODDDeviceType, ns0.reftypes.HasComponent, o
 ns0.vartypes.OptionSetType(
     nodeId="ns=io_link;i=6060",
     browseName="ns=io_link;SupportedAccessLocks",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6061", browseName="OptionSetValues", dataType=o6.LocalizedText, valueRank=1))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6061", browseName="OptionSetValues", modellingRule="Mandatory", dataType=o6.LocalizedText, valueRank=1))
+    ],
     dataType=o6.Byte,
 )
 ns0.objtypes.BaseObjectType(
@@ -209,40 +219,42 @@ ns0.objtypes.FolderType(
     nodeId="ns=io_link;i=5011",
     browseName="ns=io_link;IODDInformation",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6062", browseName="ns=io_link;Version", dataType=o6.String, value="")),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6063", browseName="ns=io_link;ReleaseDate", dataType=o6.String, value="")),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6064", browseName="ns=io_link;Copyright", dataType=o6.String, value="")),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6065", browseName="ns=io_link;IOLinkRevision", dataType=o6.String, value="")),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6062", browseName="ns=io_link;Version", modellingRule="Mandatory", dataType=o6.String, value="")),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6063", browseName="ns=io_link;ReleaseDate", modellingRule="Mandatory", dataType=o6.String, value="")),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6064", browseName="ns=io_link;Copyright", modellingRule="Mandatory", dataType=o6.String, value="")),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6065", browseName="ns=io_link;IOLinkRevision", modellingRule="Mandatory", dataType=o6.String, value="")),
     ],
 )
 o6.reference(io_link_objtypes.IOLinkIODDDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=io_link;i=5011"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6074", browseName="ns=io_link;DeviceIcon", dataType=ns0.datatypes.Image, value=b"")
+ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6074", browseName="ns=io_link;DeviceIcon", modellingRule="Optional", dataType=ns0.datatypes.Image, value=b"")
 o6.reference(o6.ns["ns=io_link;i=5014"], "i=47", o6.ns["ns=io_link;i=6074"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6075", browseName="ns=io_link;DeviceSymbol", dataType=ns0.datatypes.Image, value=b"")
+ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6075", browseName="ns=io_link;DeviceSymbol", modellingRule="Optional", dataType=ns0.datatypes.Image, value=b"")
 o6.reference(o6.ns["ns=io_link;i=5014"], "i=47", o6.ns["ns=io_link;i=6075"])
 io_link_objtypes.DeviceVariantType(
     nodeId="ns=io_link;i=5013",
     browseName="ns=io_link;DeviceVariant",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6071", browseName="ns=io_link;Description", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6072", browseName="ns=io_link;Name", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6073", browseName="ns=io_link;ProductId", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6071", browseName="ns=io_link;Description", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6072", browseName="ns=io_link;Name", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6073", browseName="ns=io_link;ProductId", modellingRule="Mandatory", dataType=o6.String)),
         o6.hasComponent(o6.ns["ns=io_link;i=6074"]),
         o6.hasComponent(o6.ns["ns=io_link;i=6075"]),
     ],
 )
 o6.reference(io_link_objtypes.IOLinkIODDDeviceType, ns0.reftypes.HasComponent, o6.ns["ns=io_link;i=5013"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6100", browseName="ns=io_link;MaxNumberOfPorts", dataType=o6.Byte)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6100", browseName="ns=io_link;MaxNumberOfPorts", modellingRule="Mandatory", dataType=o6.Byte)
 o6.reference(o6.ns["ns=io_link;i=5018"], "i=35", o6.ns["ns=io_link;i=6100"])
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=io_link;i=6101",
     browseName="ns=io_link;MaxPowerSupply",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=io_link;i=6048",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=4279632, displayName=o6.LocalizedText("A"), description=o6.LocalizedText("ampere")
@@ -253,12 +265,18 @@ ns0.vartypes.BaseDataVariableType(
     dataType=o6.Double,
 )
 o6.reference(o6.ns["ns=io_link;i=5018"], "i=35", o6.ns["ns=io_link;i=6101"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6102", browseName="ns=io_link;ApplicationSpecificTag", dataType=o6.String, value="***", accessLevel=3, userAccessLevel=1)
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6103", browseName="ns=io_link;FunctionTag", dataType=o6.String, value="***", accessLevel=3, userAccessLevel=1)
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6104", browseName="ns=io_link;LocationTag", dataType=o6.String, value="***", accessLevel=3, userAccessLevel=1)
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6106", browseName="ns=io_link;DateOfLastStatisticsReset", dataType=o6.DateTime)
+ns0.vartypes.BaseDataVariableType(
+    nodeId="ns=io_link;i=6102", browseName="ns=io_link;ApplicationSpecificTag", modellingRule="Mandatory", dataType=o6.String, value="***", accessLevel=3, userAccessLevel=1
+)
+ns0.vartypes.BaseDataVariableType(
+    nodeId="ns=io_link;i=6103", browseName="ns=io_link;FunctionTag", modellingRule="Mandatory", dataType=o6.String, value="***", accessLevel=3, userAccessLevel=1
+)
+ns0.vartypes.BaseDataVariableType(
+    nodeId="ns=io_link;i=6104", browseName="ns=io_link;LocationTag", modellingRule="Mandatory", dataType=o6.String, value="***", accessLevel=3, userAccessLevel=1
+)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6106", browseName="ns=io_link;DateOfLastStatisticsReset", modellingRule="Optional", dataType=o6.DateTime)
 o6.reference(o6.ns["ns=io_link;i=5020"], "i=35", o6.ns["ns=io_link;i=6106"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6107", browseName="ns=io_link;NumberOfIOLinkMasterStarts", dataType=o6.UInt32)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6107", browseName="ns=io_link;NumberOfIOLinkMasterStarts", modellingRule="Optional", dataType=o6.UInt32)
 o6.reference(o6.ns["ns=io_link;i=5020"], "i=35", o6.ns["ns=io_link;i=6107"])
 ns0.objtypes.BaseObjectType(
     nodeId="ns=io_link;i=5017",
@@ -279,11 +297,13 @@ o6.reference(o6.ns["ns=io_link;i=5017"], "i=47", o6.ns["ns=io_link;i=6104"])
 ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=io_link;i=6105",
     browseName="ns=io_link;MasterType",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=io_link;i=6108",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -312,7 +332,8 @@ o6.reference(o6.ns["ns=io_link;i=5015"], "i=35", o6.ns["ns=io_link;i=6082"])
 io_link_vartypes.ProcessDataVariableType(
     nodeId="ns=io_link;i=6027",
     browseName="ns=io_link;ProcessDataInput",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6133", browseName="ns=io_link;ProcessDataLength", dataType=o6.Byte))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6133", browseName="ns=io_link;ProcessDataLength", modellingRule="Mandatory", dataType=o6.Byte))],
     dataType=o6.Byte,
     valueRank=1,
 )
@@ -320,7 +341,8 @@ o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=6027"])
 io_link_vartypes.ProcessDataVariableType(
     nodeId="ns=io_link;i=6026",
     browseName="ns=io_link;ProcessDataOutput",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6134", browseName="ns=io_link;ProcessDataLength", dataType=o6.Byte))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=io_link;i=6134", browseName="ns=io_link;ProcessDataLength", modellingRule="Mandatory", dataType=o6.Byte))],
     dataType=o6.Byte,
     valueRank=1,
     accessLevel=3,
@@ -347,11 +369,13 @@ o6.reference(o6.ns["ns=io_link;i=5003"], "i=47", o6.ns["ns=io_link;i=6023"])
 ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=io_link;i=6150",
     browseName="ns=io_link;PortClass",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=io_link;i=6151",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
                 arrayDimensions=[3],
@@ -362,18 +386,20 @@ ns0.vartypes.MultiStateDiscreteType(
     dataType=o6.Byte,
 )
 o6.reference(o6.ns["ns=io_link;i=5028"], "i=35", o6.ns["ns=io_link;i=6150"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6153", browseName="ns=io_link;Pin2Support", dataType=o6.Boolean)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6153", browseName="ns=io_link;Pin2Support", modellingRule="Mandatory", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=io_link;i=5028"], "i=35", o6.ns["ns=io_link;i=6153"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6154", browseName="ns=io_link;CycleTime", dataType=ns0.datatypes.Duration)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6154", browseName="ns=io_link;CycleTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
 o6.reference(o6.ns["ns=io_link;i=5031"], "i=35", o6.ns["ns=io_link;i=6154"])
 ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=io_link;i=6155",
     browseName="ns=io_link;ValidationAndBackup",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=io_link;i=6156",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
                 arrayDimensions=[5],
@@ -393,11 +419,13 @@ o6.reference(o6.ns["ns=io_link;i=5031"], "i=35", o6.ns["ns=io_link;i=6155"])
 ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=io_link;i=6157",
     browseName="ns=io_link;PortMode",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=io_link;i=6158",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
                 arrayDimensions=[5],
@@ -417,11 +445,13 @@ o6.reference(o6.ns["ns=io_link;i=5031"], "i=35", o6.ns["ns=io_link;i=6157"])
 ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=io_link;i=6159",
     browseName="ns=io_link;Pin2Configuration",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=io_link;i=6160",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
                 arrayDimensions=[6],
@@ -439,20 +469,22 @@ ns0.vartypes.MultiStateDiscreteType(
     dataType=o6.Byte,
 )
 o6.reference(o6.ns["ns=io_link;i=5031"], "i=35", o6.ns["ns=io_link;i=6159"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6161", browseName="ns=io_link;UseIODD", dataType=o6.Boolean)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6161", browseName="ns=io_link;UseIODD", modellingRule="Mandatory", dataType=o6.Boolean)
 o6.reference(o6.ns["ns=io_link;i=5031"], "i=35", o6.ns["ns=io_link;i=6161"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6162", browseName="ns=io_link;DeviceID", dataType=o6.UInt32)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6162", browseName="ns=io_link;DeviceID", modellingRule="Mandatory", dataType=o6.UInt32)
 o6.reference(o6.ns["ns=io_link;i=5039"], "i=35", o6.ns["ns=io_link;i=6162"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6163", browseName="ns=io_link;VendorID", dataType=o6.UInt16)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6163", browseName="ns=io_link;VendorID", modellingRule="Mandatory", dataType=o6.UInt16)
 o6.reference(o6.ns["ns=io_link;i=5039"], "i=35", o6.ns["ns=io_link;i=6163"])
 ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=io_link;i=6164",
     browseName="ns=io_link;Baudrate",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=io_link;i=6165",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
                 arrayDimensions=[4],
@@ -463,16 +495,18 @@ ns0.vartypes.MultiStateDiscreteType(
     dataType=o6.Byte,
 )
 o6.reference(o6.ns["ns=io_link;i=5029"], "i=35", o6.ns["ns=io_link;i=6164"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6166", browseName="ns=io_link;ActualCycleTime", dataType=ns0.datatypes.Duration)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6166", browseName="ns=io_link;ActualCycleTime", modellingRule="Mandatory", dataType=ns0.datatypes.Duration)
 o6.reference(o6.ns["ns=io_link;i=5029"], "i=35", o6.ns["ns=io_link;i=6166"])
 ns0.vartypes.OptionSetType(
     nodeId="ns=io_link;i=6167",
     browseName="ns=io_link;Quality",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=io_link;i=6168",
                 browseName="OptionSetValues",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
                 arrayDimensions=[2],
@@ -486,11 +520,13 @@ o6.reference(o6.ns["ns=io_link;i=5029"], "i=35", o6.ns["ns=io_link;i=6167"])
 ns0.vartypes.MultiStateDiscreteType(
     nodeId="ns=io_link;i=6169",
     browseName="ns=io_link;Status",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=io_link;i=6170",
                 browseName="EnumStrings",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 valueRank=1,
                 arrayDimensions=[255],
@@ -757,28 +793,32 @@ ns0.vartypes.MultiStateDiscreteType(
     dataType=o6.Byte,
 )
 o6.reference(o6.ns["ns=io_link;i=5029"], "i=35", o6.ns["ns=io_link;i=6169"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6171", browseName="ns=io_link;Pin2ProcessData", accessLevel=3, userAccessLevel=1)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6171", browseName="ns=io_link;Pin2ProcessData", modellingRule="Optional", accessLevel=3, userAccessLevel=1)
 o6.reference(o6.ns["ns=io_link;i=5032"], "i=35", o6.ns["ns=io_link;i=6171"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6172", browseName="ns=io_link;Pin4ProcessData", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+ns0.vartypes.BaseDataVariableType(
+    nodeId="ns=io_link;i=6172", browseName="ns=io_link;Pin4ProcessData", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+)
 o6.reference(o6.ns["ns=io_link;i=5032"], "i=35", o6.ns["ns=io_link;i=6172"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6173", browseName="ns=io_link;DateOfLastStatisticsReset", dataType=o6.DateTime)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6173", browseName="ns=io_link;DateOfLastStatisticsReset", modellingRule="Optional", dataType=o6.DateTime)
 o6.reference(o6.ns["ns=io_link;i=5030"], "i=35", o6.ns["ns=io_link;i=6173"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6174", browseName="ns=io_link;NumberOfAborts", dataType=o6.UInt32)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6174", browseName="ns=io_link;NumberOfAborts", modellingRule="Optional", dataType=o6.UInt32)
 o6.reference(o6.ns["ns=io_link;i=5030"], "i=35", o6.ns["ns=io_link;i=6174"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6175", browseName="ns=io_link;NumberOfCycles", dataType=o6.UInt32)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6175", browseName="ns=io_link;NumberOfCycles", modellingRule="Optional", dataType=o6.UInt32)
 o6.reference(o6.ns["ns=io_link;i=5030"], "i=35", o6.ns["ns=io_link;i=6175"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6176", browseName="ns=io_link;NumberOfDeviceHasBeenExchanged", dataType=o6.UInt32)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6176", browseName="ns=io_link;NumberOfDeviceHasBeenExchanged", modellingRule="Optional", dataType=o6.UInt32)
 o6.reference(o6.ns["ns=io_link;i=5030"], "i=35", o6.ns["ns=io_link;i=6176"])
-ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6177", browseName="ns=io_link;NumberOfRetries", dataType=o6.UInt32)
+ns0.vartypes.BaseDataVariableType(nodeId="ns=io_link;i=6177", browseName="ns=io_link;NumberOfRetries", modellingRule="Optional", dataType=o6.UInt32)
 o6.reference(o6.ns["ns=io_link;i=5030"], "i=35", o6.ns["ns=io_link;i=6177"])
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=io_link;i=6152",
     browseName="ns=io_link;MaxPowerSupply",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=io_link;i=6178",
                 browseName="EngineeringUnits",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact",
@@ -853,7 +893,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=io_link;i=7005", browseName="ns=io_link;ReadISDU", inputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6033"]), outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6034"]))
+o6.call(
+    nodeId="ns=io_link;i=7005",
+    browseName="ns=io_link;ReadISDU",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6033"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6034"]),
+)
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7005"])
 
 ns0.vartypes.PropertyType(
@@ -885,7 +931,13 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=io_link;i=7006", browseName="ns=io_link;WriteISDU", inputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6035"]), outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6036"]))
+o6.call(
+    nodeId="ns=io_link;i=7006",
+    browseName="ns=io_link;WriteISDU",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6035"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6036"]),
+)
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7006"])
 
 ns0.vartypes.PropertyType(
@@ -914,7 +966,11 @@ ns0.vartypes.PropertyType(
     ],
 )
 o6.call(
-    nodeId="ns=io_link;i=7007", browseName="ns=io_link;SystemCommand", inputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6037"]), outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6038"])
+    nodeId="ns=io_link;i=7007",
+    browseName="ns=io_link;SystemCommand",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6037"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6038"]),
 )
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7007"])
 
@@ -932,7 +988,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=io_link;i=7008", browseName="ns=io_link;ParamUploadFromDeviceStart", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6039"]))
+o6.call(nodeId="ns=io_link;i=7008", browseName="ns=io_link;ParamUploadFromDeviceStart", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6039"]))
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7008"])
 
 ns0.vartypes.PropertyType(
@@ -949,7 +1005,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=io_link;i=7009", browseName="ns=io_link;ParamUploadFromDeviceStop", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6040"]))
+o6.call(nodeId="ns=io_link;i=7009", browseName="ns=io_link;ParamUploadFromDeviceStop", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6040"]))
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7009"])
 
 ns0.vartypes.PropertyType(
@@ -966,7 +1022,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=io_link;i=7010", browseName="ns=io_link;ParamDownloadToDeviceStart", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6041"]))
+o6.call(nodeId="ns=io_link;i=7010", browseName="ns=io_link;ParamDownloadToDeviceStart", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6041"]))
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7010"])
 
 ns0.vartypes.PropertyType(
@@ -983,7 +1039,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=io_link;i=7011", browseName="ns=io_link;ParamDownloadToDeviceStop", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6042"]))
+o6.call(nodeId="ns=io_link;i=7011", browseName="ns=io_link;ParamDownloadToDeviceStop", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6042"]))
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7011"])
 
 ns0.vartypes.PropertyType(
@@ -1000,7 +1056,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=io_link;i=7012", browseName="ns=io_link;ParamDownloadToDeviceStore", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6043"]))
+o6.call(nodeId="ns=io_link;i=7012", browseName="ns=io_link;ParamDownloadToDeviceStore", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6043"]))
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7012"])
 
 ns0.vartypes.PropertyType(
@@ -1017,7 +1073,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=io_link;i=7013", browseName="ns=io_link;ParamBreak", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6044"]))
+o6.call(nodeId="ns=io_link;i=7013", browseName="ns=io_link;ParamBreak", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6044"]))
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7013"])
 
 ns0.vartypes.PropertyType(
@@ -1034,7 +1090,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=io_link;i=7014", browseName="ns=io_link;DeviceReset", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6045"]))
+o6.call(nodeId="ns=io_link;i=7014", browseName="ns=io_link;DeviceReset", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6045"]))
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7014"])
 
 ns0.vartypes.PropertyType(
@@ -1051,7 +1107,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=io_link;i=7015", browseName="ns=io_link;ApplicationReset", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6046"]))
+o6.call(nodeId="ns=io_link;i=7015", browseName="ns=io_link;ApplicationReset", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6046"]))
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7015"])
 
 ns0.vartypes.PropertyType(
@@ -1068,7 +1124,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=io_link;i=7016", browseName="ns=io_link;RestoreFactorySettings", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6047"]))
+o6.call(nodeId="ns=io_link;i=7016", browseName="ns=io_link;RestoreFactorySettings", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6047"]))
 o6.reference(o6.ns["ns=io_link;i=5004"], "i=35", o6.ns["ns=io_link;i=7016"])
 
 ns0.objtypes.BaseObjectType(
@@ -1116,7 +1172,13 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=io_link;i=7024", browseName="ns=io_link;Restart", inputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6109"]), outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6110"]))
+o6.call(
+    nodeId="ns=io_link;i=7024",
+    browseName="ns=io_link;Restart",
+    modellingRule="Mandatory",
+    inputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6109"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6110"]),
+)
 o6.reference(o6.ns["ns=io_link;i=5019"], "i=35", o6.ns["ns=io_link;i=7024"])
 
 ns0.vartypes.PropertyType(
@@ -1130,7 +1192,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=io_link;i=7025", browseName="ns=io_link;ResetStatisticsOnAllPorts", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6111"]))
+o6.call(nodeId="ns=io_link;i=7025", browseName="ns=io_link;ResetStatisticsOnAllPorts", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6111"]))
 o6.reference(o6.ns["ns=io_link;i=5020"], "i=35", o6.ns["ns=io_link;i=7025"])
 
 ns0.objtypes.BaseObjectType(
@@ -1154,7 +1216,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Status", dataType=o6.NodeId("i=6"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=io_link;i=7040", browseName="ns=io_link;ResetStatistics", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6179"]))
+o6.call(nodeId="ns=io_link;i=7040", browseName="ns=io_link;ResetStatistics", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6179"]))
 o6.reference(o6.ns["ns=io_link;i=5030"], "i=35", o6.ns["ns=io_link;i=7040"])
 
 ns0.vartypes.PropertyType(
@@ -1190,6 +1252,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=io_link;i=7041",
     browseName="ns=io_link;UpdateConfiguration",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6180"]),
     outputArgs=o6.hasProperty(o6.ns["ns=io_link;i=6181"]),
 )

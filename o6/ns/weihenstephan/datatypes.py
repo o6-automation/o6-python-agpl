@@ -37,7 +37,7 @@ else:
 
 @o6.enumtype(
     nodeId="ns=weihenstephan;i=3000",
-    browseName="WSOperatingModeEnumerationType",
+    browseName="ns=weihenstephan;WSOperatingModeEnumerationType",
     description="The operating mode provides information about the nature and extent of the intervention on the control equipment by the operators, and also via feedback from the equipment (DIN 19 237). This value must be coded in bit form or be documented as an integer for machines which are components of bottling systems:",
 )
 class WSOperatingModeEnumerationType(ns0.datatypes.Enumeration):
@@ -49,7 +49,7 @@ class WSOperatingModeEnumerationType(ns0.datatypes.Enumeration):
 
 @o6.enumtype(
     nodeId="ns=weihenstephan;i=3001",
-    browseName="WSProgramEnumerationType",
+    browseName="ns=weihenstephan;WSProgramEnumerationType",
     description="The program is a consequent sequence of control instructions for a self-contained application-oriented function (DIN 19237). For bottling machines, bits or documented integer numbers must be used for machine operation with the following programs:",
 )
 class WSProgramEnumerationType(ns0.datatypes.Enumeration):

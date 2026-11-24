@@ -36,12 +36,15 @@ else:
     _VariableNode = object
 
 machinery.objtypes.MachineComponentsType(
-    nodeId="ns=mining;i=5010", browseName="ns=mining;Components", description="The components add-in contains placeholders for sub-components of an equipment asset"
+    nodeId="ns=mining;i=5010",
+    browseName="ns=mining;Components",
+    description="The components add-in contains placeholders for sub-components of an equipment asset",
+    modellingRule="Optional",
 )
-machinery.objtypes.MonitoringType(nodeId="ns=mining;i=5011", browseName="ns=machinery;Monitoring")
-machinery.objtypes.MachineryEquipmentFolderType(nodeId="ns=mining;i=5012", browseName="ns=machinery;MachineryEquipment")
-machinery.objtypes.NotificationsType(nodeId="ns=mining;i=5013", browseName="ns=machinery;Notifications")
-ns0.objtypes.FolderType(nodeId="ns=mining;i=5016", browseName="ns=machinery;MachineryBuildingBlocks")
+machinery.objtypes.MonitoringType(nodeId="ns=mining;i=5011", browseName="ns=machinery;Monitoring", modellingRule="Optional")
+machinery.objtypes.MachineryEquipmentFolderType(nodeId="ns=mining;i=5012", browseName="ns=machinery;MachineryEquipment", modellingRule="Optional")
+machinery.objtypes.NotificationsType(nodeId="ns=mining;i=5013", browseName="ns=machinery;Notifications", modellingRule="Optional")
+ns0.objtypes.FolderType(nodeId="ns=mining;i=5016", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Optional")
 o6.reference(o6.ns["ns=mining;i=5016"], "i=17604", o6.ns["ns=mining;i=5010"])
 o6.reference(o6.ns["ns=mining;i=5016"], "i=17604", o6.ns["ns=mining;i=5011"])
 o6.reference(o6.ns["ns=mining;i=5016"], "i=17604", o6.ns["ns=mining;i=5012"])
@@ -57,11 +60,13 @@ o6.reference(o6.ns["ns=mining;i=5016"], "i=17604", o6.ns["ns=mining;i=5013"])
 )
 class MiningEquipmentType(di.objtypes.TopologyElementType):
     components: machinery.objtypes.MachineComponentsType | None = o6.hasAddIn(o6.ns["ns=mining;i=5010"])
-    machineProperties: ns0.objtypes.FolderType | None = o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=mining;i=5015", browseName="ns=mining;MachineProperties"))
+    machineProperties: ns0.objtypes.FolderType | None = o6.hasComponent(
+        ns0.objtypes.FolderType(nodeId="ns=mining;i=5015", browseName="ns=mining;MachineProperties", modellingRule="Optional")
+    )
     machineryBuildingBlocks: ns0.objtypes.FolderType | None = o6.hasComponent(o6.ns["ns=mining;i=5016"])
     machineryEquipment: machinery.objtypes.MachineryEquipmentFolderType | None = o6.hasComponent(o6.ns["ns=mining;i=5012"])
     methodSet: ns0.objtypes.BaseObjectType | None = o6.hasComponent(
-        ns0.objtypes.BaseObjectType(nodeId="ns=mining;i=5014", browseName="ns=di;MethodSet", description="Flat list of Methods")
+        ns0.objtypes.BaseObjectType(nodeId="ns=mining;i=5014", browseName="ns=di;MethodSet", description="Flat list of Methods", modellingRule="Optional")
     )
     miningEquipmentIdentification: MiningEquipmentIdentificationType | None
     monitoring: machinery.objtypes.MonitoringType | None = o6.hasComponent(o6.ns["ns=mining;i=5011"])
@@ -77,6 +82,7 @@ class MiningEquipmentIdentificationType(machinery.objtypes.MachineIdentification
             nodeId="ns=mining;i=6027",
             browseName="ns=di;AssetId",
             description="To be used by end users to store a unique identification in the context of their overall application. Servers shall support at least 40 Unicode characters for the clients writing this value, this means clients can expect to be able to write strings with a length of 40 Unicode characters into that field.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
         )
@@ -95,6 +101,7 @@ class MiningEquipmentIdentificationType(machinery.objtypes.MachineIdentification
             nodeId="ns=mining;i=6032",
             browseName="ns=di;DeviceClass",
             description="Indicates in which domain or for what purpose the MachineryItem is used.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
         )
@@ -107,6 +114,7 @@ class MiningEquipmentIdentificationType(machinery.objtypes.MachineIdentification
             nodeId="ns=mining;i=6028",
             browseName="ns=di;ManufacturerUri",
             description="A globally unique identifier of the manufacturer of the MachineryItem.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             value="",
         )
@@ -116,6 +124,7 @@ class MiningEquipmentIdentificationType(machinery.objtypes.MachineIdentification
             nodeId="ns=mining;i=6029",
             browseName="ns=di;Model",
             description="A human-readable, localized name of the model of the MachineryItem.",
+            modellingRule="Mandatory",
             dataType=o6.LocalizedText,
             value=o6.LocalizedText(),
         )

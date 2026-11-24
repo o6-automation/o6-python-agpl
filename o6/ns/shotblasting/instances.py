@@ -36,20 +36,21 @@ else:
     _ObjectNode = object
     _VariableNode = object
 
-ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5014", browseName="ns=machinery;MachineryBuildingBlocks")
-ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5032", browseName="ns=machinery;MachineryBuildingBlocks")
-ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5035", browseName="ns=machinery;MachineryBuildingBlocks")
-ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5040", browseName="ns=machinery;MachineryBuildingBlocks")
-ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5044", browseName="ns=machinery;MachineryBuildingBlocks")
-ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5047", browseName="ns=machinery;MachineryBuildingBlocks")
+ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5014", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
+ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5032", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
+ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5035", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
+ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5040", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
+ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5044", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
+ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5047", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory")
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=shotblasting;i=6001",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6002", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6002", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
-    nodeId="ns=shotblasting;i=5001", browseName="ns=machinery;MachineryItemState", references=[o6.hasComponent(o6.ns["ns=shotblasting;i=6001"])]
+    nodeId="ns=shotblasting;i=5001", browseName="ns=machinery;MachineryItemState", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=shotblasting;i=6001"])]
 )
 ns0.objtypes.FolderType(
     nodeId="ns=shotblasting;i=5026", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory", references=[o6.hasAddIn(o6.ns["ns=shotblasting;i=5001"])]
@@ -65,6 +66,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=shotblasting;i=6004",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -73,6 +75,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=shotblasting;i=6005",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -81,6 +84,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=shotblasting;i=6006",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -91,14 +95,16 @@ o6.reference(o6.ns["ns=shotblasting;i=5008"], "i=17604", o6.ns["ns=shotblasting;
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=shotblasting;i=6011",
     browseName="ns=shotblasting;ShotBlastMediaHardnessUnit",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=shotblasting;i=6012",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[4],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("HRC"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("HV"), description=o6.LocalizedText()),
@@ -107,7 +113,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6013", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6013", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -134,6 +140,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=shotblasting;i=6015",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -142,6 +149,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=shotblasting;i=6016",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -152,7 +160,10 @@ o6.reference(o6.ns["ns=shotblasting;i=5011"], "i=17604", o6.ns["ns=shotblasting;
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=shotblasting;i=6017",
     browseName="ns=shotblasting;ShotBlastMediaThroughput",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6018", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6018", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -160,7 +171,10 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=shotblasting;i=6019",
     browseName="ns=shotblasting;ShotBlastMediaThroughputPercent",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6020", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6020", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.UInt16,
     accessLevel=3,
     userAccessLevel=1,
@@ -168,7 +182,10 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=shotblasting;i=6021",
     browseName="ns=shotblasting;ShotBlastPressure",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6022", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6022", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -176,7 +193,10 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=shotblasting;i=6023",
     browseName="ns=shotblasting;WheelRotationSpeed",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6024", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6024", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Int32,
     accessLevel=3,
     userAccessLevel=1,
@@ -188,7 +208,12 @@ ns0.objtypes.FolderType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=shotblasting;i=6025", browseName="ns=shotblasting;ShotBlastTime", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1
+                nodeId="ns=shotblasting;i=6025",
+                browseName="ns=shotblasting;ShotBlastTime",
+                modellingRule="Optional",
+                dataType=ns0.datatypes.Duration,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=shotblasting;i=6017"]),
@@ -201,12 +226,14 @@ o6.reference(shotblasting_objtypes.BlasterType, ns0.reftypes.HasComponent, o6.ns
 machinery.objtypes.MachineryComponentIdentificationType(
     nodeId="ns=shotblasting;i=5013",
     browseName="ns=di;Identification",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=shotblasting;i=6026",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -215,6 +242,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=shotblasting;i=6027",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -227,7 +255,7 @@ shotblasting_objtypes.BlasterType(
     modellingRule="MandatoryPlaceholder",
     references=[
         o6.hasComponent(o6.ns["ns=shotblasting;i=5014"]),
-        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5015", browseName="ns=shotblasting;Monitoring")),
+        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5015", browseName="ns=shotblasting;Monitoring", modellingRule="Mandatory")),
         o6.hasAddIn(o6.ns["ns=shotblasting;i=5013"]),
     ],
 )
@@ -242,10 +270,14 @@ ns0.objtypes.FolderType(
     modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6028", browseName="ns=shotblasting;HopperLevelMax", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=shotblasting;i=6028", browseName="ns=shotblasting;HopperLevelMax", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6029", browseName="ns=shotblasting;HopperLevelMin", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=shotblasting;i=6029", browseName="ns=shotblasting;HopperLevelMin", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
     ],
 )
@@ -256,10 +288,14 @@ ns0.objtypes.FolderType(
     modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6030", browseName="ns=shotblasting;RefillSiloLevelMax", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=shotblasting;i=6030", browseName="ns=shotblasting;RefillSiloLevelMax", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6031", browseName="ns=shotblasting;RefillSiloLevelMin", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=shotblasting;i=6031", browseName="ns=shotblasting;RefillSiloLevelMin", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
     ],
 )
@@ -274,6 +310,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=shotblasting;i=6032",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -282,6 +319,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=shotblasting;i=6033",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -292,7 +330,10 @@ o6.reference(o6.ns["ns=shotblasting;i=5020"], "i=17604", o6.ns["ns=shotblasting;
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=shotblasting;i=6036",
     browseName="ns=shotblasting;StoragePressure",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6037", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6037", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -304,12 +345,22 @@ ns0.objtypes.FolderType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=shotblasting;i=6034", browseName="ns=shotblasting;PressurisedBoilerLevelMax", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+                nodeId="ns=shotblasting;i=6034",
+                browseName="ns=shotblasting;PressurisedBoilerLevelMax",
+                modellingRule="Optional",
+                dataType=o6.Boolean,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=shotblasting;i=6035", browseName="ns=shotblasting;PressurisedBoilerLevelMin", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+                nodeId="ns=shotblasting;i=6035",
+                browseName="ns=shotblasting;PressurisedBoilerLevelMin",
+                modellingRule="Optional",
+                dataType=o6.Boolean,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=shotblasting;i=6036"]),
@@ -326,6 +377,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=shotblasting;i=6038",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -334,6 +386,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=shotblasting;i=6039",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -344,7 +397,10 @@ o6.reference(o6.ns["ns=shotblasting;i=5023"], "i=17604", o6.ns["ns=shotblasting;
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=shotblasting;i=6040",
     browseName="ns=shotblasting;ConveyorTransportSpeed",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6041", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6041", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -352,7 +408,10 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=shotblasting;i=6042",
     browseName="ns=shotblasting;WorkpieceRotationSpeed",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6043", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6043", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -373,9 +432,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=shotblasting;i=6045",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[4],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Shotblast Media"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("Electricity"), description=o6.LocalizedText()),
@@ -384,7 +444,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6046", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6046", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -395,7 +455,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=shotblasting;i=6047",
     browseName="ns=shotblasting;ActualConsumption",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6048", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6048", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -411,6 +473,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=shotblasting;i=6051",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -419,6 +482,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=shotblasting;i=6052",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -429,7 +493,10 @@ o6.reference(o6.ns["ns=shotblasting;i=5026"], "i=17604", o6.ns["ns=shotblasting;
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=shotblasting;i=6060",
     browseName="ns=shotblasting;DifferentialPressure",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6061", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6061", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -437,7 +504,10 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=shotblasting;i=6062",
     browseName="ns=shotblasting;TemperatureFilterUnit",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6063", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6063", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -446,7 +516,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=shotblasting;i=6064",
     browseName="ns=shotblasting;FillLevel<n>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6065", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6065", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.UInt16,
     accessLevel=3,
     userAccessLevel=1,
@@ -454,7 +526,10 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=shotblasting;i=6066",
     browseName="ns=shotblasting;FlowRate",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6067", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6067", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -462,7 +537,10 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=shotblasting;i=6068",
     browseName="ns=shotblasting;ResidualDust",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6069", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6069", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -473,23 +551,54 @@ ns0.objtypes.FolderType(
     modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6053", browseName="ns=shotblasting;FilterRunning", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
-        ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6054", browseName="ns=shotblasting;FlowRateOK", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6055", browseName="ns=shotblasting;FilterCleaningRunning", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=shotblasting;i=6053", browseName="ns=shotblasting;FilterRunning", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6056", browseName="ns=shotblasting;DifferentialPressureMax", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=shotblasting;i=6054", browseName="ns=shotblasting;FlowRateOK", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6057", browseName="ns=shotblasting;DifferentialPressureMin", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=shotblasting;i=6055", browseName="ns=shotblasting;FilterCleaningRunning", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6058", browseName="ns=shotblasting;DischargeSystemRunning", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=shotblasting;i=6056",
+                browseName="ns=shotblasting;DifferentialPressureMax",
+                modellingRule="Optional",
+                dataType=o6.Boolean,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6059", browseName="ns=shotblasting;ResidualDustOK", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=shotblasting;i=6057",
+                browseName="ns=shotblasting;DifferentialPressureMin",
+                modellingRule="Optional",
+                dataType=o6.Boolean,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=shotblasting;i=6058",
+                browseName="ns=shotblasting;DischargeSystemRunning",
+                modellingRule="Optional",
+                dataType=o6.Boolean,
+                accessLevel=3,
+                userAccessLevel=1,
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=shotblasting;i=6059", browseName="ns=shotblasting;ResidualDustOK", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=shotblasting;i=6060"]),
         o6.hasComponent(o6.ns["ns=shotblasting;i=6062"]),
@@ -509,6 +618,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=shotblasting;i=6003",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -517,6 +627,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=shotblasting;i=6070",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -525,6 +636,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=shotblasting;i=6071",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -534,12 +646,14 @@ o6.reference(shotblasting_objtypes.ShotBlastMachineType, ns0.reftypes.HasAddIn, 
 machinery.objtypes.MachineryComponentIdentificationType(
     nodeId="ns=shotblasting;i=5031",
     browseName="ns=di;Identification",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=shotblasting;i=6072",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -548,6 +662,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=shotblasting;i=6073",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -560,21 +675,25 @@ shotblasting_objtypes.BlasterType(
     modellingRule="MandatoryPlaceholder",
     references=[
         o6.hasComponent(o6.ns["ns=shotblasting;i=5032"]),
-        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5033", browseName="ns=shotblasting;Monitoring")),
+        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5033", browseName="ns=shotblasting;Monitoring", modellingRule="Mandatory")),
         o6.hasAddIn(o6.ns["ns=shotblasting;i=5031"]),
     ],
 )
-machinery.objtypes.MachineComponentsType(nodeId="ns=shotblasting;i=5029", browseName="ns=machinery;Components", references=[o6.hasComponent(o6.ns["ns=shotblasting;i=5030"])])
+machinery.objtypes.MachineComponentsType(
+    nodeId="ns=shotblasting;i=5029", browseName="ns=machinery;Components", modellingRule="Mandatory", references=[o6.hasComponent(o6.ns["ns=shotblasting;i=5030"])]
+)
 o6.reference(o6.ns["ns=shotblasting;i=5035"], "i=17604", o6.ns["ns=shotblasting;i=5029"])
 machinery.objtypes.MachineIdentificationType(
     nodeId="ns=shotblasting;i=5034",
     browseName="ns=di;Identification",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=shotblasting;i=6074",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -583,6 +702,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=shotblasting;i=6075",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -591,6 +711,7 @@ machinery.objtypes.MachineIdentificationType(
                 nodeId="ns=shotblasting;i=6076",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -603,7 +724,9 @@ shotblasting_objtypes.ShotBlastChamberType(
     modellingRule="MandatoryPlaceholder",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6077", browseName="ns=shotblasting;LoadingState", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=shotblasting;i=6077", browseName="ns=shotblasting;LoadingState", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         ),
         o6.hasComponent(o6.ns["ns=shotblasting;i=5035"]),
         o6.hasAddIn(o6.ns["ns=shotblasting;i=5029"]),
@@ -613,12 +736,14 @@ shotblasting_objtypes.ShotBlastChamberType(
 machinery.objtypes.MachineryComponentIdentificationType(
     nodeId="ns=shotblasting;i=5039",
     browseName="ns=di;Identification",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=shotblasting;i=6078",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -627,6 +752,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=shotblasting;i=6079",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -639,19 +765,21 @@ shotblasting_objtypes.PressurisedBoilerType(
     modellingRule="OptionalPlaceholder",
     references=[
         o6.hasComponent(o6.ns["ns=shotblasting;i=5040"]),
-        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5041", browseName="ns=shotblasting;Monitoring")),
+        o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=shotblasting;i=5041", browseName="ns=shotblasting;Monitoring", modellingRule="Mandatory")),
         o6.hasAddIn(o6.ns["ns=shotblasting;i=5039"]),
     ],
 )
 machinery.objtypes.MachineryComponentIdentificationType(
     nodeId="ns=shotblasting;i=5043",
     browseName="ns=di;Identification",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=shotblasting;i=6080",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -660,6 +788,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=shotblasting;i=6081",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -675,12 +804,14 @@ shotblasting_objtypes.ConveyorType(
 machinery.objtypes.MachineryComponentIdentificationType(
     nodeId="ns=shotblasting;i=5046",
     browseName="ns=di;Identification",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=shotblasting;i=6082",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -689,6 +820,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=shotblasting;i=6083",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -698,9 +830,12 @@ o6.reference(o6.ns["ns=shotblasting;i=5047"], "i=17604", o6.ns["ns=shotblasting;
 ns0.objtypes.FolderType(
     nodeId="ns=shotblasting;i=5048",
     browseName="ns=shotblasting;Monitoring",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6084", browseName="ns=shotblasting;FilterRunning", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=shotblasting;i=6084", browseName="ns=shotblasting;FilterRunning", modellingRule="Mandatory", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
         )
     ],
 )
@@ -727,14 +862,16 @@ o6.reference(shotblasting_objtypes.ShotBlastMachineType, ns0.reftypes.HasAddIn, 
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=shotblasting;i=6085",
     browseName="ns=shotblasting;ConsumedMedia",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=shotblasting;i=6086",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[4],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Shotblast Media"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Electricity"), description=o6.LocalizedText()),
@@ -743,7 +880,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6087", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6087", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -755,14 +892,16 @@ shotblasting_objtypes.DeploymentType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=shotblasting;i=6088",
     browseName="ns=shotblasting;ConsumedMedia",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=shotblasting;i=6089",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[4],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Shotblast Media"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Electricity"), description=o6.LocalizedText()),
@@ -771,7 +910,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6090", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6090", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -783,14 +922,16 @@ shotblasting_objtypes.DeploymentType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=shotblasting;i=6091",
     browseName="ns=shotblasting;ConsumedMedia",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=shotblasting;i=6092",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[4],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Shotblast Media"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Electricity"), description=o6.LocalizedText()),
@@ -799,7 +940,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6093", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6093", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -816,10 +957,15 @@ ns0.vartypes.AnalogUnitType(
     browseName="ns=shotblasting;TotalConsumption",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6050", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6050", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=shotblasting;i=6094", browseName="ns=shotblasting;ConsumingPeriod", dataType=ns0.datatypes.UtcTime, accessLevel=3, userAccessLevel=1
+                nodeId="ns=shotblasting;i=6094",
+                browseName="ns=shotblasting;ConsumingPeriod",
+                modellingRule="Optional",
+                dataType=ns0.datatypes.UtcTime,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
     ],
@@ -834,12 +980,13 @@ di.vartypes.LifetimeVariableType(
     browseName="ns=machinery;LifetimeVariable",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6098", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6098", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=shotblasting;i=6099",
                 browseName="ns=di;LimitValue",
                 description="LimitValue indicates when the end of lifetime has been reached.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Number,
             )
         ),
@@ -848,6 +995,7 @@ di.vartypes.LifetimeVariableType(
                 nodeId="ns=shotblasting;i=6100",
                 browseName="ns=di;StartValue",
                 description="StartValue indicates the initial value, when there is still the full lifetime left.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Number,
             )
         ),
@@ -857,43 +1005,50 @@ di.vartypes.LifetimeVariableType(
     userAccessLevel=1,
 )
 machinery.objtypes.MachineryLifetimeCounterType(
-    nodeId="ns=shotblasting;i=5054", browseName="ns=machinery;LifetimeCounter", references=[o6.hasComponent(o6.ns["ns=shotblasting;i=6097"])]
+    nodeId="ns=shotblasting;i=5054", browseName="ns=machinery;LifetimeCounter", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=shotblasting;i=6097"])]
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=shotblasting;i=6101",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6102", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6102", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryOperationModeStateMachineType(
-    nodeId="ns=shotblasting;i=5055", browseName="ns=machinery;MachineryOperationMode", references=[o6.hasComponent(o6.ns["ns=shotblasting;i=6101"])]
+    nodeId="ns=shotblasting;i=5055", browseName="ns=machinery;MachineryOperationMode", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=shotblasting;i=6101"])]
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=shotblasting;i=6103",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6104", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6104", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 machinery.objtypes.MachineryItemState_StateMachineType(
-    nodeId="ns=shotblasting;i=5056", browseName="ns=machinery;MachineryItemState", references=[o6.hasComponent(o6.ns["ns=shotblasting;i=6103"])]
+    nodeId="ns=shotblasting;i=5056", browseName="ns=machinery;MachineryItemState", modellingRule="Optional", references=[o6.hasComponent(o6.ns["ns=shotblasting;i=6103"])]
 )
 ns0.vartypes.FiniteStateVariableType(
     nodeId="ns=shotblasting;i=6105",
     browseName="CurrentState",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6106", browseName="Id", dataType=o6.NodeId))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6106", browseName="Id", modellingRule="Mandatory", dataType=o6.NodeId))],
     dataType=o6.LocalizedText,
 )
 isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
     nodeId="ns=shotblasting;i=5058",
     browseName="ns=machinery_jobs;JobOrderControl",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6111", browseName="ns=isa95_jobcontrol_v2;MaxDownloadableJobOrders", dataType=o6.UInt16)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6111", browseName="ns=isa95_jobcontrol_v2;MaxDownloadableJobOrders", modellingRule="Mandatory", dataType=o6.UInt16)
+        ),
         o6.hasComponent(o6.ns["ns=shotblasting;i=6105"]),
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
                 nodeId="ns=shotblasting;i=6107",
                 browseName="ns=isa95_jobcontrol_v2;EquipmentID",
                 description="Defines a read-only set of Equipment Class IDs and Equipment IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -904,6 +1059,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=shotblasting;i=6108",
                 browseName="ns=isa95_jobcontrol_v2;JobOrderList",
                 description="Defines a read-only list of job order information available from the server.",
+                modellingRule="Mandatory",
                 dataType=isa95_jobcontrol_v2.datatypes.ISA95JobOrderAndStateDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -914,6 +1070,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=shotblasting;i=6109",
                 browseName="ns=isa95_jobcontrol_v2;MaterialClassID",
                 description="Defines a read-only set of Material Classes IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -924,6 +1081,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=shotblasting;i=6110",
                 browseName="ns=isa95_jobcontrol_v2;MaterialDefinitionID",
                 description="Defines a read-only set of Material Classes IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -934,6 +1092,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=shotblasting;i=6112",
                 browseName="ns=isa95_jobcontrol_v2;PersonnelID",
                 description="Defines a read-only set of Personnel IDs and Person IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -944,6 +1103,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=shotblasting;i=6113",
                 browseName="ns=isa95_jobcontrol_v2;PhysicalAssetID",
                 description="Defines a read-only set of Physical Asset Class IDs and Physical Asset IDs that may be specified in a job order.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -954,6 +1114,7 @@ isa95_jobcontrol_v2.objtypes.ISA95JobOrderReceiverObjectType(
                 nodeId="ns=shotblasting;i=6114",
                 browseName="ns=isa95_jobcontrol_v2;WorkMaster",
                 description="Defines a read-only set of work master IDs that may be specified in a job order, and the read-only set of parameters that may be specified for a specific work master.",
+                modellingRule="Mandatory",
                 dataType=isa95_jobcontrol_v2.datatypes.ISA95WorkMasterDataType,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -981,7 +1142,7 @@ http_opcfoundation_org_UA_SurfaceTechnology_ShotBlasting_ = ns0.objtypes.Namespa
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),
@@ -998,14 +1159,16 @@ http_opcfoundation_org_UA_SurfaceTechnology_ShotBlasting_ = ns0.objtypes.Namespa
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=shotblasting;i=6130",
     browseName="ns=shotblasting;ConsumedMedia",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=shotblasting;i=6131",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[4],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Shotblast Media"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("Electricity"), description=o6.LocalizedText()),
@@ -1014,7 +1177,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6132", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6132", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -1041,14 +1204,16 @@ o6.reference(shotblasting_objtypes.ShotBlastMachineType, ns0.reftypes.HasCompone
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=shotblasting;i=6135",
     browseName="ns=shotblasting;ShotBlastMediaHardnessUnit",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=shotblasting;i=6136",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[4],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("HRC"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("HV"), description=o6.LocalizedText()),
@@ -1057,7 +1222,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6137", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=shotblasting;i=6137", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -1122,6 +1287,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=shotblasting;i=7001",
     browseName="ns=isa95_jobcontrol_v2;RequestJobResponseByJobOrderID",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=shotblasting;i=6115"]),
     outputArgs=o6.hasProperty(o6.ns["ns=shotblasting;i=6116"]),
 )
@@ -1174,6 +1340,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=shotblasting;i=7002",
     browseName="ns=isa95_jobcontrol_v2;RequestJobResponseByJobOrderState",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=shotblasting;i=6117"]),
     outputArgs=o6.hasProperty(o6.ns["ns=shotblasting;i=6118"]),
 )
@@ -1181,11 +1348,13 @@ o6.call(
 isa95_jobcontrol_v2.objtypes.ISA95JobResponseProviderObjectType(
     nodeId="ns=shotblasting;i=5059",
     browseName="ns=machinery_jobs;JobOrderResults",
+    modellingRule="Mandatory",
     references=[o6.hasComponent(o6.ns["ns=shotblasting;i=7001"]), o6.hasComponent(o6.ns["ns=shotblasting;i=7002"])],
 )
 machinery_jobs.objtypes.JobManagementType(
     nodeId="ns=shotblasting;i=5057",
     browseName="ns=machinery_jobs;JobManagement",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=shotblasting;i=5058"]), o6.hasComponent(o6.ns["ns=shotblasting;i=5059"])],
 )
 ns0.objtypes.FolderType(
@@ -1193,7 +1362,7 @@ ns0.objtypes.FolderType(
     browseName="ns=machinery;MachineryBuildingBlocks",
     modellingRule="Mandatory",
     references=[
-        o6.hasAddIn(machinery.objtypes.MachineryOperationCounterType(nodeId="ns=shotblasting;i=5053", browseName="ns=machinery;OperationCounter")),
+        o6.hasAddIn(machinery.objtypes.MachineryOperationCounterType(nodeId="ns=shotblasting;i=5053", browseName="ns=machinery;OperationCounter", modellingRule="Optional")),
         o6.hasAddIn(o6.ns["ns=shotblasting;i=5054"]),
         o6.hasAddIn(o6.ns["ns=shotblasting;i=5055"]),
         o6.hasAddIn(o6.ns["ns=shotblasting;i=5056"]),

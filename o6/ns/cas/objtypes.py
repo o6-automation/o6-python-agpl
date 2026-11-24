@@ -277,7 +277,10 @@ class CalibrationType(di.objtypes.FunctionalGroupType):
 class ComponentsGroupType(machinery.objtypes.MachineComponentsType):
     chargingSystems: machinery.objtypes.MachineComponentsType | None = o6.hasComponent(
         machinery.objtypes.MachineComponentsType(
-            nodeId="ns=cas;i=5012", browseName="ns=cas;ChargingSystems", description="Organizes all charging systems connected to the compressed air system."
+            nodeId="ns=cas;i=5012",
+            browseName="ns=cas;ChargingSystems",
+            description="Organizes all charging systems connected to the compressed air system.",
+            modellingRule="Optional",
         )
     )
     componentsGroup_: machinery.objtypes.MachineComponentsType | None = o6.hasComponent(
@@ -290,57 +293,79 @@ class ComponentsGroupType(machinery.objtypes.MachineComponentsType):
     )
     compressors: machinery.objtypes.MachineComponentsType | None = o6.hasComponent(
         machinery.objtypes.MachineComponentsType(
-            nodeId="ns=cas;i=5011", browseName="ns=cas;Compressors", description="Organizes all compressors connected to the compressed air system."
+            nodeId="ns=cas;i=5011", browseName="ns=cas;Compressors", description="Organizes all compressors connected to the compressed air system.", modellingRule="Optional"
         )
     )
     condensateDrains: machinery.objtypes.MachineComponentsType | None = o6.hasComponent(
         machinery.objtypes.MachineComponentsType(
-            nodeId="ns=cas;i=5014", browseName="ns=cas;CondensateDrains", description="Organizes all condensate drains connected to the compressed air system."
+            nodeId="ns=cas;i=5014",
+            browseName="ns=cas;CondensateDrains",
+            description="Organizes all condensate drains connected to the compressed air system.",
+            modellingRule="Optional",
         )
     )
     condensateSeparators: machinery.objtypes.MachineComponentsType | None = o6.hasComponent(
         machinery.objtypes.MachineComponentsType(
-            nodeId="ns=cas;i=5016", browseName="ns=cas;CondensateSeparators", description="Organizes all condensate separators connected to the compressed air system."
+            nodeId="ns=cas;i=5016",
+            browseName="ns=cas;CondensateSeparators",
+            description="Organizes all condensate separators connected to the compressed air system.",
+            modellingRule="Optional",
         )
     )
     converters: machinery.objtypes.MachineComponentsType | None = o6.hasComponent(
         machinery.objtypes.MachineComponentsType(
-            nodeId="ns=cas;i=5023", browseName="ns=cas;Converters", description="Organizes all converters connected to the compressed air system."
+            nodeId="ns=cas;i=5023", browseName="ns=cas;Converters", description="Organizes all converters connected to the compressed air system.", modellingRule="Optional"
         )
     )
     coolingSystems: machinery.objtypes.MachineComponentsType | None = o6.hasComponent(
         machinery.objtypes.MachineComponentsType(
-            nodeId="ns=cas;i=5024", browseName="ns=cas;CoolingSystems", description="Organizes all cooling systems connected to the compressed air system."
+            nodeId="ns=cas;i=5024",
+            browseName="ns=cas;CoolingSystems",
+            description="Organizes all cooling systems connected to the compressed air system.",
+            modellingRule="Optional",
         )
     )
     dryers: machinery.objtypes.MachineComponentsType | None = o6.hasComponent(
-        machinery.objtypes.MachineComponentsType(nodeId="ns=cas;i=5028", browseName="ns=cas;Dryers", description="Organizes all dryers connected to the compressed air system.")
+        machinery.objtypes.MachineComponentsType(
+            nodeId="ns=cas;i=5028", browseName="ns=cas;Dryers", description="Organizes all dryers connected to the compressed air system.", modellingRule="Optional"
+        )
     )
     filters: machinery.objtypes.MachineComponentsType | None = o6.hasComponent(
-        machinery.objtypes.MachineComponentsType(nodeId="ns=cas;i=5091", browseName="ns=cas;Filters", description="Organizes all filters connected to the compressed air system.")
+        machinery.objtypes.MachineComponentsType(
+            nodeId="ns=cas;i=5091", browseName="ns=cas;Filters", description="Organizes all filters connected to the compressed air system.", modellingRule="Optional"
+        )
     )
     heatRecoverySystems: machinery.objtypes.MachineComponentsType | None = o6.hasComponent(
         machinery.objtypes.MachineComponentsType(
-            nodeId="ns=cas;i=5188", browseName="ns=cas;HeatRecoverySystems", description="Organizes all heat recovery systems connected to the compressed air system."
+            nodeId="ns=cas;i=5188",
+            browseName="ns=cas;HeatRecoverySystems",
+            description="Organizes all heat recovery systems connected to the compressed air system.",
+            modellingRule="Optional",
         )
     )
     receivers: machinery.objtypes.MachineComponentsType | None = o6.hasComponent(
         machinery.objtypes.MachineComponentsType(
-            nodeId="ns=cas;i=5190", browseName="ns=cas;Receivers", description="Organizes all receivers connected to the compressed air system."
+            nodeId="ns=cas;i=5190", browseName="ns=cas;Receivers", description="Organizes all receivers connected to the compressed air system.", modellingRule="Optional"
         )
     )
     sensors: machinery.objtypes.MachineComponentsType | None = o6.hasComponent(
-        machinery.objtypes.MachineComponentsType(nodeId="ns=cas;i=5191", browseName="ns=cas;Sensors", description="Organizes all sensors connected to the compressed air system.")
+        machinery.objtypes.MachineComponentsType(
+            nodeId="ns=cas;i=5191", browseName="ns=cas;Sensors", description="Organizes all sensors connected to the compressed air system.", modellingRule="Optional"
+        )
     )
     valves: machinery.objtypes.MachineComponentsType | None = o6.hasComponent(
-        machinery.objtypes.MachineComponentsType(nodeId="ns=cas;i=5192", browseName="ns=cas;Valves", description="Organizes all valves connected to the compressed air system.")
+        machinery.objtypes.MachineComponentsType(
+            nodeId="ns=cas;i=5192", browseName="ns=cas;Valves", description="Organizes all valves connected to the compressed air system.", modellingRule="Optional"
+        )
     )
 
 
 @o6.objecttype(nodeId="ns=cas;i=1050", browseName="ns=cas;AirnetComponentsType", displayName="AirnetComponentsType", description="All components connected to the airnet.")
 class AirnetComponentsType(ns0.objtypes.FolderType):
     chargingSystems: ns0.objtypes.FolderType | None = o6.hasComponent(
-        ns0.objtypes.FolderType(nodeId="ns=cas;i=5194", browseName="ns=cas;ChargingSystems", description="Organizes all charging systems connected to the airnet.")
+        ns0.objtypes.FolderType(
+            nodeId="ns=cas;i=5194", browseName="ns=cas;ChargingSystems", description="Organizes all charging systems connected to the airnet.", modellingRule="Optional"
+        )
     )
     componentsGroup_: ns0.objtypes.FolderType | None = o6.hasComponent(
         ns0.objtypes.FolderType(
@@ -351,37 +376,45 @@ class AirnetComponentsType(ns0.objtypes.FolderType):
         )
     )
     compressors: ns0.objtypes.FolderType | None = o6.hasComponent(
-        ns0.objtypes.FolderType(nodeId="ns=cas;i=5195", browseName="ns=cas;Compressors", description="Organizes all compressors connected to the airnet.")
+        ns0.objtypes.FolderType(nodeId="ns=cas;i=5195", browseName="ns=cas;Compressors", description="Organizes all compressors connected to the airnet.", modellingRule="Optional")
     )
     condensateDrains: ns0.objtypes.FolderType | None = o6.hasComponent(
-        ns0.objtypes.FolderType(nodeId="ns=cas;i=5196", browseName="ns=cas;CondensateDrains", description="Organizes all condensate drains connected to the airnet.")
+        ns0.objtypes.FolderType(
+            nodeId="ns=cas;i=5196", browseName="ns=cas;CondensateDrains", description="Organizes all condensate drains connected to the airnet.", modellingRule="Optional"
+        )
     )
     condensateSeparators: ns0.objtypes.FolderType | None = o6.hasComponent(
-        ns0.objtypes.FolderType(nodeId="ns=cas;i=5212", browseName="ns=cas;CondensateSeparators", description="Organizes all condensate separators connected to the airnet.")
+        ns0.objtypes.FolderType(
+            nodeId="ns=cas;i=5212", browseName="ns=cas;CondensateSeparators", description="Organizes all condensate separators connected to the airnet.", modellingRule="Optional"
+        )
     )
     converters: ns0.objtypes.FolderType | None = o6.hasComponent(
-        ns0.objtypes.FolderType(nodeId="ns=cas;i=5213", browseName="ns=cas;Converters", description="Organizes all converters connected to the airnet.")
+        ns0.objtypes.FolderType(nodeId="ns=cas;i=5213", browseName="ns=cas;Converters", description="Organizes all converters connected to the airnet.", modellingRule="Optional")
     )
     coolingSystems: ns0.objtypes.FolderType | None = o6.hasComponent(
-        ns0.objtypes.FolderType(nodeId="ns=cas;i=5214", browseName="ns=cas;CoolingSystems", description="Organizes all cooling systems connected to the airnet.")
+        ns0.objtypes.FolderType(
+            nodeId="ns=cas;i=5214", browseName="ns=cas;CoolingSystems", description="Organizes all cooling systems connected to the airnet.", modellingRule="Optional"
+        )
     )
     dryers: ns0.objtypes.FolderType | None = o6.hasComponent(
-        ns0.objtypes.FolderType(nodeId="ns=cas;i=5215", browseName="ns=cas;Dryers", description="Organizes all dryers connected to the airnet.")
+        ns0.objtypes.FolderType(nodeId="ns=cas;i=5215", browseName="ns=cas;Dryers", description="Organizes all dryers connected to the airnet.", modellingRule="Optional")
     )
     filters: ns0.objtypes.FolderType | None = o6.hasComponent(
-        ns0.objtypes.FolderType(nodeId="ns=cas;i=5218", browseName="ns=cas;Filters", description="Organizes all filters connected to the airnet.")
+        ns0.objtypes.FolderType(nodeId="ns=cas;i=5218", browseName="ns=cas;Filters", description="Organizes all filters connected to the airnet.", modellingRule="Optional")
     )
     heatRecoverySystems: ns0.objtypes.FolderType | None = o6.hasComponent(
-        ns0.objtypes.FolderType(nodeId="ns=cas;i=5219", browseName="ns=cas;HeatRecoverySystems", description="Organizes all heat recovery systems connected to the airnet.")
+        ns0.objtypes.FolderType(
+            nodeId="ns=cas;i=5219", browseName="ns=cas;HeatRecoverySystems", description="Organizes all heat recovery systems connected to the airnet.", modellingRule="Optional"
+        )
     )
     receivers: ns0.objtypes.FolderType | None = o6.hasComponent(
-        ns0.objtypes.FolderType(nodeId="ns=cas;i=5220", browseName="ns=cas;Receivers", description="Organizes all receivers connected to the airnet.")
+        ns0.objtypes.FolderType(nodeId="ns=cas;i=5220", browseName="ns=cas;Receivers", description="Organizes all receivers connected to the airnet.", modellingRule="Optional")
     )
     sensors: ns0.objtypes.FolderType | None = o6.hasComponent(
-        ns0.objtypes.FolderType(nodeId="ns=cas;i=5221", browseName="ns=cas;Sensors", description="Organizes all sensors connected to the airnet.")
+        ns0.objtypes.FolderType(nodeId="ns=cas;i=5221", browseName="ns=cas;Sensors", description="Organizes all sensors connected to the airnet.", modellingRule="Optional")
     )
     valves: ns0.objtypes.FolderType | None = o6.hasComponent(
-        ns0.objtypes.FolderType(nodeId="ns=cas;i=5222", browseName="ns=cas;Valves", description="Organizes all valves connected to the airnet.")
+        ns0.objtypes.FolderType(nodeId="ns=cas;i=5222", browseName="ns=cas;Valves", description="Organizes all valves connected to the airnet.", modellingRule="Optional")
     )
 
 
@@ -403,13 +436,19 @@ class FluidQuantitiesType(ns0.objtypes.BaseObjectType):
     quantity_: ns0.vartypes.BaseAnalogType | None
     relativeHumidity: ns0.vartypes.BaseAnalogType | None
     resetStatistics: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=cas;i=7007", browseName="ns=ia;ResetStatistics", description="Restarts all statistical data, including a reset of the StartTime to the current time.")
+        o6.call(
+            nodeId="ns=cas;i=7007",
+            browseName="ns=ia;ResetStatistics",
+            description="Restarts all statistical data, including a reset of the StartTime to the current time.",
+            modellingRule="Optional",
+        )
     )
     startTime: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=cas;i=6541",
             browseName="ns=ia;StartTime",
             description="Indicates the point in time at which the collection of the statistical data has been started.",
+            modellingRule="Optional",
             dataType=o6.DateTime,
         )
     )
@@ -427,10 +466,10 @@ class FluidQuantitiesType(ns0.objtypes.BaseObjectType):
 )
 class CASIdentificationType(di.objtypes.FunctionalGroupType):
     assetId: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=cas;i=7702", browseName="ns=cas;AssetId", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=cas;i=7702", browseName="ns=cas;AssetId", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     componentName: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=cas;i=7703", browseName="ns=cas;ComponentName", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=cas;i=7703", browseName="ns=cas;ComponentName", modellingRule="Optional", dataType=o6.LocalizedText, accessLevel=3, userAccessLevel=1)
     )
 
 
@@ -449,11 +488,17 @@ class StatisticsType(di.objtypes.FunctionalGroupType):
             nodeId="ns=cas;i=6231",
             browseName="ns=ia;ResetCondition",
             description="The reason and context for the reset of the statistics, which is done without a trigger from an OPC UA Client, like calling the ResetStatistics Method. ResetCondition is a vendor-specific, human readable string. ResetCondition is non-localized and might contain an expression that can be parsed by certain clients. Examples are: “AFTER 4 HOURS”, “AFTER 1000 ITEMS”, “OPERATOR”. “OPERATOR” means, that an operator resets the statistics on a local HMI.",
+            modellingRule="Optional",
             dataType=o6.String,
         )
     )
     resetStatistics: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=cas;i=7793", browseName="ns=ia;ResetStatistics", description="Restarts all statistical data, including a reset of the StartTime to the current time.")
+        o6.call(
+            nodeId="ns=cas;i=7793",
+            browseName="ns=ia;ResetStatistics",
+            description="Restarts all statistical data, including a reset of the StartTime to the current time.",
+            modellingRule="Optional",
+        )
     )
     runningTime: ns0.vartypes.BaseAnalogType | None
     runningTimeToNextService: ns0.vartypes.BaseAnalogType | None
@@ -462,6 +507,7 @@ class StatisticsType(di.objtypes.FunctionalGroupType):
             nodeId="ns=cas;i=6230",
             browseName="ns=ia;StartTime",
             description="Indicates the point in time at which the collection of the statistical data has been started.",
+            modellingRule="Optional",
             dataType=o6.DateTime,
         )
     )
@@ -491,13 +537,19 @@ class ElectricalQuantitiesType(ns0.objtypes.BaseObjectType):
     energy: ns0.vartypes.BaseAnalogType | None
     power: ns0.vartypes.BaseAnalogType | None
     resetStatistics: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=cas;i=7814", browseName="ns=ia;ResetStatistics", description="Restarts all statistical data, including a reset of the StartTime to the current time.")
+        o6.call(
+            nodeId="ns=cas;i=7814",
+            browseName="ns=ia;ResetStatistics",
+            description="Restarts all statistical data, including a reset of the StartTime to the current time.",
+            modellingRule="Optional",
+        )
     )
     startTime: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=cas;i=6113",
             browseName="ns=ia;StartTime",
             description="Indicates the point in time at which the collection of the statistical data has been started.",
+            modellingRule="Optional",
             dataType=o6.DateTime,
         )
     )
@@ -508,7 +560,7 @@ class ElectricalQuantitiesType(ns0.objtypes.BaseObjectType):
 class AnalysisType(ns0.objtypes.BaseObjectType):
     outputFile: ns0.objtypes.FileType | None
     trigger: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=cas;i=7919", browseName="ns=cas;Trigger", description="Triggers the analysis on the MCS in a compressed air system.")
+        o6.call(nodeId="ns=cas;i=7919", browseName="ns=cas;Trigger", description="Triggers the analysis on the MCS in a compressed air system.", modellingRule="Optional")
     )
 
 
@@ -522,10 +574,20 @@ class MCSConfigurationType(ConfigurationType):
     communicationSettings: CommunicationSettingsType | None
     configurationFile: ns0.objtypes.FileType | None
     loadConfigurationFile: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=cas;i=9785", browseName="ns=cas;LoadConfigurationFile", description="Loads the configuration stored in ConfigurationFile to the MCS.")
+        o6.call(
+            nodeId="ns=cas;i=9785",
+            browseName="ns=cas;LoadConfigurationFile",
+            description="Loads the configuration stored in ConfigurationFile to the MCS.",
+            modellingRule="Optional",
+        )
     )
     saveConfigurationFile: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=cas;i=10123", browseName="ns=cas;SaveConfigurationFile", description="Saves the current configuration of the MCS to the stored ConfigurationFile.")
+        o6.call(
+            nodeId="ns=cas;i=10123",
+            browseName="ns=cas;SaveConfigurationFile",
+            description="Saves the current configuration of the MCS to the stored ConfigurationFile.",
+            modellingRule="Optional",
+        )
     )
 
 
@@ -548,7 +610,7 @@ class AirnetsType(machinery.objtypes.MachineComponentsType):
 @o6.objecttype(nodeId="ns=cas;i=1035", browseName="ns=cas;CASType", displayName="CASType", description="Compressed air system type")
 class CASType(ns0.objtypes.BaseObjectType):
     airnets: AirnetsType | None = o6.hasComponent(
-        AirnetsType(nodeId="ns=cas;i=5006", browseName="ns=cas;Airnets", description="All airnets in a compressed air system as browsable objects.")
+        AirnetsType(nodeId="ns=cas;i=5006", browseName="ns=cas;Airnets", description="All airnets in a compressed air system as browsable objects.", modellingRule="Optional")
     )
     components: ComponentsGroupType | None
     identification: CASIdentificationType | None
@@ -563,31 +625,47 @@ class CASType(ns0.objtypes.BaseObjectType):
 )
 class CommunicationSettingsType(ns0.objtypes.BaseObjectType):
     defaultGateway: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=cas;i=10520", browseName="ns=cas;DefaultGateway", description="IP Address of the default gateway used by the MCS.", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=cas;i=10520",
+            browseName="ns=cas;DefaultGateway",
+            description="IP Address of the default gateway used by the MCS.",
+            modellingRule="Optional",
+            dataType=o6.String,
+        )
     )
     dhcp: ns0.vartypes.TwoStateDiscreteType | None
     dnsServer: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=cas;i=10521", browseName="ns=cas;DnsServer", description="IP Address of the DNS server used by the MCS.", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=cas;i=10521", browseName="ns=cas;DnsServer", description="IP Address of the DNS server used by the MCS.", modellingRule="Optional", dataType=o6.String
+        )
     )
     domainName: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=cas;i=6324", browseName="ns=cas;DomainName", description="Domain name the MCS is assigned to.", dataType=o6.String)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=cas;i=6324", browseName="ns=cas;DomainName", description="Domain name the MCS is assigned to.", modellingRule="Optional", dataType=o6.String
+        )
     )
     hostname: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=cas;i=6325", browseName="ns=cas;Hostname", description="Host name of the MCS.", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=cas;i=6325", browseName="ns=cas;Hostname", description="Host name of the MCS.", modellingRule="Optional", dataType=o6.String)
     )
     ipAddress: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=cas;i=6326", browseName="ns=cas;IpAddress", description="IP address of the MCS.", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=cas;i=6326", browseName="ns=cas;IpAddress", description="IP address of the MCS.", modellingRule="Mandatory", dataType=o6.String)
     )
     ipVersion: ns0.vartypes.PropertyType | None = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=cas;i=10527", browseName="ns=cas;IpVersion", description="Version of the internet protocol used for the MCS.", dataType=cas_datypes.IpVersionEnum
+            nodeId="ns=cas;i=10527",
+            browseName="ns=cas;IpVersion",
+            description="Version of the internet protocol used for the MCS.",
+            modellingRule="Optional",
+            dataType=cas_datypes.IpVersionEnum,
         )
     )
     macAddress: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=cas;i=6460", browseName="ns=cas;MacAddress", description="MAC address of the NIC of the MCS.", dataType=o6.String)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=cas;i=6460", browseName="ns=cas;MacAddress", description="MAC address of the NIC of the MCS.", modellingRule="Optional", dataType=o6.String
+        )
     )
     subnetMask: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=cas;i=10528", browseName="ns=cas;SubnetMask", description="Subnet mask of the MCS.", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=cas;i=10528", browseName="ns=cas;SubnetMask", description="Subnet mask of the MCS.", modellingRule="Optional", dataType=o6.String)
     )
 
 
@@ -599,7 +677,7 @@ class CommunicationSettingsType(ns0.objtypes.BaseObjectType):
 )
 class DrainOperationalType(OperationalType):
     drainTest: o6.node.MethodNode | None = o6.hasComponent(
-        o6.call(nodeId="ns=cas;i=10530", browseName="ns=cas;DrainTest", description="Invoke a drain test on a condensate drain.")
+        o6.call(nodeId="ns=cas;i=10530", browseName="ns=cas;DrainTest", description="Invoke a drain test on a condensate drain.", modellingRule="Optional")
     )
 
 
@@ -610,6 +688,7 @@ class CASComponentType(di.objtypes.TopologyElementType):
             nodeId="ns=cas;i=12533",
             browseName="ns=cas;ActiveAirnet",
             description="Indicates which airnet is currently using this component.",
+            modellingRule="Optional",
             dataType=o6.NodeId,
             accessLevel=3,
             userAccessLevel=1,

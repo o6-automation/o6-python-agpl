@@ -29,6 +29,7 @@ from typing import Any, Callable, Optional, cast
 
 import o6
 from o6._o6 import types as _bootstrap  # type: ignore[import-not-found, import-untyped]
+from o6._registration_lock import REGISTRATION_LOCK
 from o6._declarations import (
     DataTypeSpec,
     EnumTypeSpec,
@@ -109,7 +110,8 @@ def _register(
     bases: tuple[type, ...] | None = None,
     enum_factory: _EnumFactory | None = None,
 ) -> Any:
-    pair = _REGISTER_DATATYPE(shortname, description, bases or None, enum_factory)
+    with REGISTRATION_LOCK:
+        pair = _REGISTER_DATATYPE(shortname, description, bases or None, enum_factory)
     if pair is None:
         raise RuntimeError(
             f"register type: C extension returned no PyType for "

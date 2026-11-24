@@ -35,7 +35,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=lads;i=3000", browseName="MaintenanceTaskResultEnum", description="This enumeration defines the different results when executing a Task..")
+@o6.enumtype(nodeId="ns=lads;i=3000", browseName="ns=lads;MaintenanceTaskResultEnum", description="This enumeration defines the different results when executing a Task..")
 class MaintenanceTaskResultEnum(ns0.datatypes.Enumeration):
     SUCCESS = o6.enumfield(0, name="Success")
     FAILURE = o6.enumfield(1, name="Failure")
@@ -44,26 +44,26 @@ class MaintenanceTaskResultEnum(ns0.datatypes.Enumeration):
 
 @o6.datatype(
     nodeId="ns=lads;i=3002",
-    browseName="SampleInfoType",
+    browseName="ns=lads;SampleInfoType",
     description="This DataType contains metadata for a sample, specifically data on the identification and location of the sample in a container.",
     defaultEncodingId="ns=lads;i=5042",
 )
 class SampleInfoType(ns0.datatypes.Structure):
-    containerId: o6.String
-    sampleId: o6.String
-    position: o6.String
-    customData: o6.String
+    containerId: o6.String = o6.field(name="ContainerId")
+    sampleId: o6.String = o6.field(name="SampleId")
+    position: o6.String = o6.field(name="Position")
+    customData: o6.String = o6.field(name="CustomData")
 
 
 @o6.datatype(
     nodeId="ns=lads;i=3003",
-    browseName="KeyValueType",
+    browseName="ns=lads;KeyValueType",
     description="A key-value pair similar to 0:KeyValuePair which uses 0:String instead of 0:Qualifiedname for easu of use.",
     defaultEncodingId="ns=lads;i=5045",
 )
 class KeyValueType(ns0.datatypes.Structure):
-    key: o6.String
-    value: o6.String
+    key: o6.String = o6.field(name="Key")
+    value: o6.String = o6.field(name="Value")
 
 
 del Any, TYPE_CHECKING, uuid, o6, amb, di, ia, machinery, ns0

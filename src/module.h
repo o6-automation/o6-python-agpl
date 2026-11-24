@@ -99,17 +99,6 @@ extern bool client_enabled;
 extern bool server_enabled;
 extern bool pubsub_enabled;
 
-typedef struct {
-    bool client;
-    bool server;
-    bool pubsub;
-} o6_FeatureSet;
-
-/* Parse a signed Credential FeatureScope without mutating active entitlement
- * state. Return NULL on success or a stable error description. */
-const char *o6_parse_feature_scope(const UA_String *scope,
-                                   o6_FeatureSet *features);
-
 /* Runtime entitlement checks. Return 0 when enabled, otherwise set a Python
  * PermissionError and return -1. */
 int o6_require_client(void);
@@ -127,6 +116,11 @@ PyObject *o6_namespace_module(UA_UInt16 index);
 /* Check compatibility and print the welcome message */
 bool o6_check_greet(void);
 void o6_clean_shutdown(void);
+
+/* The license state decided by o6_check_greet, as a new dict with the raw
+ * fields behind o6.license (dates as DateTime ticks). Valid after
+ * o6_check_greet returned true. */
+PyObject *o6_license_status(void);
 
 /*************/
 /* Eventloop */
@@ -154,6 +148,31 @@ typedef struct {
     int tearingDown; /* Set by tp_dealloc before el->stop / el->free to
                       * signal that Python API calls are unsafe (GC). */
 } AsyncIOLoop;
+
+/* Loop-thread affinity guard for native entry points. Native client and
+ * server state is touched only on the thread running the instance's asyncio
+ * loop, or while no thread runs that loop. Return 0 when the caller may
+ * proceed; otherwise set RuntimeError and return -1. A NULL el (not configured
+ * or torn down) passes. The caller holds the GIL (or is attached). */
+int o6_require_loop_thread(const UA_EventLoop *el);
+
+/* Return `failure` from the enclosing entry point unless the caller may touch
+ * the native state behind `el`; see o6_require_loop_thread. */
+#define O6_REQUIRE_LOOP_THREAD(el, failure)                                   \
+    do {                                                                      \
+        if(o6_require_loop_thread((const UA_EventLoop *)(el)) < 0)            \
+            return failure;                                                   \
+    } while(0)
+
+/* For configuration writes: the lock-free lifecycle check `writable` (an
+ * expression that sets RuntimeError when false) comes first, so a write to a
+ * live instance reports that from any thread; then the loop-thread guard. */
+#define O6_REQUIRE_WRITABLE_CONFIG(writable, el, failure)                     \
+    do {                                                                      \
+        if(!(writable))                                                       \
+            return failure;                                                   \
+        O6_REQUIRE_LOOP_THREAD(el, failure);                                  \
+    } while(0)
 
 struct AsyncIOConnectionManager;
 typedef struct AsyncIOConnectionManager AsyncIOConnectionManager;

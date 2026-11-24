@@ -33,7 +33,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=adi;i=3003", browseName="AcquisitionResultStatusEnumeration")
+@o6.enumtype(nodeId="ns=adi;i=3003", browseName="ns=adi;AcquisitionResultStatusEnumeration")
 class AcquisitionResultStatusEnumeration(ns0.datatypes.Enumeration):
     NOT_USED = o6.enumfield(0, name="NOT_USED")
     GOOD = o6.enumfield(1, name="GOOD")
@@ -42,7 +42,7 @@ class AcquisitionResultStatusEnumeration(ns0.datatypes.Enumeration):
     PARTIAL = o6.enumfield(4, name="PARTIAL")
 
 
-@o6.enumtype(nodeId="ns=adi;i=3009", browseName="AlarmStateEnumeration")
+@o6.enumtype(nodeId="ns=adi;i=3009", browseName="ns=adi;AlarmStateEnumeration")
 class AlarmStateEnumeration(ns0.datatypes.Enumeration):
     NORMAL_0 = o6.enumfield(0, name="NORMAL_0")
     WARNING_LOW_1 = o6.enumfield(1, name="WARNING_LOW_1")
@@ -53,7 +53,7 @@ class AlarmStateEnumeration(ns0.datatypes.Enumeration):
     ALARM_32 = o6.enumfield(32, name="ALARM_32")
 
 
-@o6.enumtype(nodeId="ns=adi;i=9378", browseName="ExecutionCycleEnumeration")
+@o6.enumtype(nodeId="ns=adi;i=9378", browseName="ns=adi;ExecutionCycleEnumeration")
 class ExecutionCycleEnumeration(ns0.datatypes.Enumeration):
     IDLE = o6.enumfield(0, name="IDLE")
     DIAGNOSTIC = o6.enumfield(1, name="DIAGNOSTIC")

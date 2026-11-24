@@ -32,7 +32,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=powerlink;i=24", browseName="PowerlinkNMTStateEnumeration", description="This DataType is an enumeration that represents the NMT State")
+@o6.enumtype(nodeId="ns=powerlink;i=24", browseName="ns=powerlink;PowerlinkNMTStateEnumeration", description="This DataType is an enumeration that represents the NMT State")
 class PowerlinkNMTStateEnumeration(ns0.datatypes.Enumeration):
     NMT_GS_OFF_ = o6.enumfield(0, name="NMT_GS_OFF ")
     NMT_GS_INITIALISING = o6.enumfield(25, name="NMT_GS_INITIALISING")
@@ -48,10 +48,12 @@ class PowerlinkNMTStateEnumeration(ns0.datatypes.Enumeration):
     NMT_XS_OPERATIONAL = o6.enumfield(253, name="NMT_XS_OPERATIONAL")
 
 
-@o6.datatype(nodeId="ns=powerlink;i=25", browseName="PowerlinkAttribute", description="Represents the POWERLINK entry attributes", defaultEncodingId="ns=powerlink;i=33")
+@o6.datatype(
+    nodeId="ns=powerlink;i=25", browseName="ns=powerlink;PowerlinkAttribute", description="Represents the POWERLINK entry attributes", defaultEncodingId="ns=powerlink;i=33"
+)
 class PowerlinkAttribute(ns0.datatypes.OptionSet):
-    value: o6.ByteString
-    validBits: o6.ByteString
+    value: o6.ByteString = o6.field(name="Value")
+    validBits: o6.ByteString = o6.field(name="ValidBits")
     const = o6.optionsetbit(0, name="Const")
     read = o6.optionsetbit(1, name="Read")
     write = o6.optionsetbit(2, name="Write")
@@ -64,10 +66,15 @@ class PowerlinkAttribute(ns0.datatypes.OptionSet):
     tPDO = o6.optionsetbit(9, name="TPDO")
 
 
-@o6.datatype(nodeId="ns=powerlink;i=26", browseName="ErrorRegisterBits", description="Represents the values of the POWERLINK ErrorRegister", defaultEncodingId="ns=powerlink;i=36")
+@o6.datatype(
+    nodeId="ns=powerlink;i=26",
+    browseName="ns=powerlink;ErrorRegisterBits",
+    description="Represents the values of the POWERLINK ErrorRegister",
+    defaultEncodingId="ns=powerlink;i=36",
+)
 class ErrorRegisterBits(ns0.datatypes.OptionSet):
-    value: o6.ByteString
-    validBits: o6.ByteString
+    value: o6.ByteString = o6.field(name="Value")
+    validBits: o6.ByteString = o6.field(name="ValidBits")
     generic_error = o6.optionsetbit(0, name="Generic_error")
     current = o6.optionsetbit(1, name="Current")
     voltage = o6.optionsetbit(2, name="Voltage")
@@ -80,7 +87,7 @@ class ErrorRegisterBits(ns0.datatypes.OptionSet):
 
 @o6.datatype(
     nodeId="ns=powerlink;i=27",
-    browseName="PowerlinkErrorEntryDataType",
+    browseName="ns=powerlink;PowerlinkErrorEntryDataType",
     description="Represents the entries of the POWERLINK Object ERR_History_ADOM (Object 1003h, SubIndex 1..254)",
     defaultEncodingId="ns=powerlink;i=53",
 )
@@ -92,7 +99,9 @@ class PowerlinkErrorEntryDataType(ns0.datatypes.Structure):
 
 
 @o6.enumtype(
-    nodeId="ns=powerlink;i=28", browseName="PowerlinkNMTResetCmdEnumeration", description="This DataType is an Enumeration that represents the NMT reset commands for POWERLINK"
+    nodeId="ns=powerlink;i=28",
+    browseName="ns=powerlink;PowerlinkNMTResetCmdEnumeration",
+    description="This DataType is an Enumeration that represents the NMT reset commands for POWERLINK",
 )
 class PowerlinkNMTResetCmdEnumeration(ns0.datatypes.Enumeration):
     NMT_RESET_NODE = o6.enumfield(40, name="NMTResetNode")
@@ -104,7 +113,7 @@ class PowerlinkNMTResetCmdEnumeration(ns0.datatypes.Enumeration):
 
 @o6.datatype(
     nodeId="ns=powerlink;i=29",
-    browseName="PowerlinkIpAddressDataType",
+    browseName="ns=powerlink;PowerlinkIpAddressDataType",
     description="Structure DataType PowerlinkIpAddressDataType to represent POWERLINK Objects of the POWERLINK data type IP_ADDRESS",
     defaultEncodingId="ns=powerlink;i=32",
 )
@@ -117,7 +126,7 @@ class PowerlinkIpAddressDataType(ns0.datatypes.Structure):
 
 @o6.datatype(
     nodeId="ns=powerlink;i=30",
-    browseName="PowerlinkPDOMappingEntryDataType",
+    browseName="ns=powerlink;PowerlinkPDOMappingEntryDataType",
     description="Structure DataType PowerlinkPDOMappingEntryDataType to represent the entries of POWERLINK Objects like PDO_RxCommParam_00h_REC",
     defaultEncodingId="ns=powerlink;i=40",
 )

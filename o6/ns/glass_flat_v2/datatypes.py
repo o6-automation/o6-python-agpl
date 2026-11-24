@@ -36,21 +36,21 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=glass_flat_v2;i=3003", browseName="SignificantSideEnumeration")
+@o6.enumtype(nodeId="ns=glass_flat_v2;i=3003", browseName="ns=glass_flat_v2;SignificantSideEnumeration")
 class SignificantSideEnumeration(ns0.datatypes.Enumeration):
     INDIFFERENT = o6.enumfield(0, name="Indifferent")
     TOP = o6.enumfield(1, name="Top")
     DOWN = o6.enumfield(2, name="Down")
 
 
-@o6.enumtype(nodeId="ns=glass_flat_v2;i=3004", browseName="StructureAlignmentEnumeration")
+@o6.enumtype(nodeId="ns=glass_flat_v2;i=3004", browseName="ns=glass_flat_v2;StructureAlignmentEnumeration")
 class StructureAlignmentEnumeration(ns0.datatypes.Enumeration):
     INDIFFERENT = o6.enumfield(0, name="Indifferent")
     LONGITUDINAL = o6.enumfield(1, name="Longitudinal")
     TRANSVERSE = o6.enumfield(2, name="Transverse")
 
 
-@o6.enumtype(nodeId="ns=glass_flat_v2;i=3005", browseName="SpacerMaterialClass")
+@o6.enumtype(nodeId="ns=glass_flat_v2;i=3005", browseName="ns=glass_flat_v2;SpacerMaterialClass")
 class SpacerMaterialClass(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="Other")
     METALLIC = o6.enumfield(1, name="Metallic")
@@ -59,24 +59,24 @@ class SpacerMaterialClass(ns0.datatypes.Enumeration):
     ELASTIC = o6.enumfield(4, name="Elastic")
 
 
-@o6.datatype(nodeId="ns=glass_flat_v2;i=3006", browseName="UserProfileDataType", defaultEncodingId="ns=glass_flat_v2;i=5082")
+@o6.datatype(nodeId="ns=glass_flat_v2;i=3006", browseName="ns=glass_flat_v2;UserProfileDataType", defaultEncodingId="ns=glass_flat_v2;i=5082")
 class UserProfileDataType(ns0.datatypes.Structure):
-    name: o6.String
-    loginTime: o6.DateTime
-    language: o6.String
-    measurementFormat: o6.String
-    accessLevel: o6.String
-    opcUaUser: o6.Boolean
+    name: o6.String = o6.field(name="Name")
+    loginTime: o6.DateTime = o6.field(name="LoginTime")
+    language: o6.String = o6.field(name="Language")
+    measurementFormat: o6.String = o6.field(name="MeasurementFormat")
+    accessLevel: o6.String = o6.field(name="AccessLevel")
+    opcUaUser: o6.Boolean = o6.field(name="OpcUaUser")
 
 
-@o6.datatype(nodeId="ns=glass_flat_v2;i=3007", browseName="FileFormatDataType", defaultEncodingId="ns=glass_flat_v2;i=5037")
+@o6.datatype(nodeId="ns=glass_flat_v2;i=3007", browseName="ns=glass_flat_v2;FileFormatDataType", defaultEncodingId="ns=glass_flat_v2;i=5037")
 class FileFormatDataType(ns0.datatypes.Structure):
-    name: o6.String
-    fileExtension: o6.String
-    version: o6.String
+    name: o6.String = o6.field(name="Name")
+    fileExtension: o6.String = o6.field(name="FileExtension")
+    version: o6.String = o6.field(name="Version")
 
 
-@o6.enumtype(nodeId="ns=glass_flat_v2;i=3008", browseName="CoordinateSystemEnumeration")
+@o6.enumtype(nodeId="ns=glass_flat_v2;i=3008", browseName="ns=glass_flat_v2;CoordinateSystemEnumeration")
 class CoordinateSystemEnumeration(ns0.datatypes.Enumeration):
     UNKNOWN = o6.enumfield(0, name="Unknown")
     SYSTEM1 = o6.enumfield(1, name="System1")
@@ -89,7 +89,7 @@ class CoordinateSystemEnumeration(ns0.datatypes.Enumeration):
     SYSTEM8 = o6.enumfield(8, name="System8")
 
 
-@o6.enumtype(nodeId="ns=glass_flat_v2;i=3009", browseName="CoatingClassEnumeration")
+@o6.enumtype(nodeId="ns=glass_flat_v2;i=3009", browseName="ns=glass_flat_v2;CoatingClassEnumeration")
 class CoatingClassEnumeration(ns0.datatypes.Enumeration):
     HARD_COATING = o6.enumfield(0, name="HardCoating")
     SOFT_COATING = o6.enumfield(1, name="SoftCoating")
@@ -97,48 +97,48 @@ class CoatingClassEnumeration(ns0.datatypes.Enumeration):
     USER_DEFINED = o6.enumfield(3, name="UserDefined")
 
 
-@o6.datatype(nodeId="ns=glass_flat_v2;i=3012", browseName="ReasonDescriptionType", defaultEncodingId="ns=glass_flat_v2;i=5003")
+@o6.datatype(nodeId="ns=glass_flat_v2;i=3012", browseName="ns=glass_flat_v2;ReasonDescriptionType", defaultEncodingId="ns=glass_flat_v2;i=5003")
 class ReasonDescriptionType(ns0.datatypes.Structure):
-    description: o6.LocalizedText
-    reference: o6.String | None
-    category: o6.String | None
-    vendorCode: o6.String | None
+    description: o6.LocalizedText = o6.field(name="Description")
+    reference: o6.String | None = o6.field(name="Reference")
+    category: o6.String | None = o6.field(name="Category")
+    vendorCode: o6.String | None = o6.field(name="VendorCode")
 
 
-@o6.datatype(nodeId="ns=glass_flat_v2;i=3017", browseName="EClassTermDataType", defaultEncodingId="ns=glass_flat_v2;i=5013")
+@o6.datatype(nodeId="ns=glass_flat_v2;i=3017", browseName="ns=glass_flat_v2;EClassTermDataType", defaultEncodingId="ns=glass_flat_v2;i=5013")
 class EClassTermDataType(ns0.datatypes.Structure):
-    iD: o6.String
-    description: o6.String
-    eClass: o6.String
+    iD: o6.String = o6.field(name="ID")
+    description: o6.String = o6.field(name="Description")
+    eClass: o6.String = o6.field(name="EClass")
 
 
-@o6.datatype(nodeId="ns=glass_flat_v2;i=3020", browseName="ValueDataType", defaultEncodingId="ns=glass_flat_v2;i=5019")
+@o6.datatype(nodeId="ns=glass_flat_v2;i=3020", browseName="ns=glass_flat_v2;ValueDataType", defaultEncodingId="ns=glass_flat_v2;i=5019")
 class ValueDataType(ns0.datatypes.Structure):
-    name: o6.String
-    description: o6.String
-    baseUnit: o6.String
-    possibleValue: o6.String
+    name: o6.String = o6.field(name="Name")
+    description: o6.String = o6.field(name="Description")
+    baseUnit: o6.String = o6.field(name="BaseUnit")
+    possibleValue: o6.String = o6.field(name="PossibleValue")
 
 
-@o6.datatype(nodeId="ns=glass_flat_v2;i=3011", browseName="ProcessingParameterDataType", defaultEncodingId="ns=glass_flat_v2;i=5004")
+@o6.datatype(nodeId="ns=glass_flat_v2;i=3011", browseName="ns=glass_flat_v2;ProcessingParameterDataType", defaultEncodingId="ns=glass_flat_v2;i=5004")
 class ProcessingParameterDataType(ns0.datatypes.Structure):
-    name: o6.String
-    description: o6.String
-    valueType: ValueDataType
-    typicalValue: o6.String
-    mandatory: o6.Boolean
-    eClass: EClassTermDataType
+    name: o6.String = o6.field(name="Name")
+    description: o6.String = o6.field(name="Description")
+    valueType: ValueDataType = o6.field(name="ValueType")
+    typicalValue: o6.String = o6.field(name="TypicalValue")
+    mandatory: o6.Boolean = o6.field(name="Mandatory")
+    eClass: EClassTermDataType = o6.field(name="EClass")
 
 
-@o6.datatype(nodeId="ns=glass_flat_v2;i=3014", browseName="ProcessingCategoryDataType", defaultEncodingId="ns=glass_flat_v2;i=5007")
+@o6.datatype(nodeId="ns=glass_flat_v2;i=3014", browseName="ns=glass_flat_v2;ProcessingCategoryDataType", defaultEncodingId="ns=glass_flat_v2;i=5007")
 class ProcessingCategoryDataType(ns0.datatypes.Structure):
-    iD: o6.String
-    description: o6.String
-    supportedParameter: list[ProcessingParameterDataType] = o6.field(arrayDimensions=[0])
-    supportedAssignment: list[o6.String] = o6.field(arrayDimensions=[0])
-    supportedVariable: list[ProcessingParameterDataType] = o6.field(arrayDimensions=[0])
-    supportsTransformation: o6.Int32
-    supportsSubProcessing: o6.Int32
+    iD: o6.String = o6.field(name="ID")
+    description: o6.String = o6.field(name="Description")
+    supportedParameter: list[ProcessingParameterDataType] = o6.field(name="SupportedParameter", arrayDimensions=[0])
+    supportedAssignment: list[o6.String] = o6.field(name="SupportedAssignment", arrayDimensions=[0])
+    supportedVariable: list[ProcessingParameterDataType] = o6.field(name="SupportedVariable", arrayDimensions=[0])
+    supportsTransformation: o6.Int32 = o6.field(name="SupportsTransformation")
+    supportsSubProcessing: o6.Int32 = o6.field(name="SupportsSubProcessing")
 
 
 del Any, TYPE_CHECKING, uuid, o6, di, ia, isa95_jobcontrol_v2, machinery, machinery_jobs, ns0

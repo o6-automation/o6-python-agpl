@@ -32,40 +32,40 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=mdis;i=3", browseName="CommandEnum")
+@o6.enumtype(nodeId="ns=mdis;i=3", browseName="ns=mdis;CommandEnum")
 class CommandEnum(ns0.datatypes.Enumeration):
     CLOSE = o6.enumfield(1, name="Close")
     OPEN = o6.enumfield(2, name="Open")
     NONE = o6.enumfield(4, name="None")
 
 
-@o6.enumtype(nodeId="ns=mdis;i=5", browseName="SEMEnum")
+@o6.enumtype(nodeId="ns=mdis;i=5", browseName="ns=mdis;SEMEnum")
 class SEMEnum(ns0.datatypes.Enumeration):
     SEM_A = o6.enumfield(1, name="SEM_A")
     SEM_B = o6.enumfield(2, name="SEM_B")
     AUTO = o6.enumfield(4, name="Auto")
 
 
-@o6.enumtype(nodeId="ns=mdis;i=602", browseName="ChokeMoveEnum")
+@o6.enumtype(nodeId="ns=mdis;i=602", browseName="ns=mdis;ChokeMoveEnum")
 class ChokeMoveEnum(ns0.datatypes.Enumeration):
     MOVING = o6.enumfield(1, name="Moving")
     STOPPED = o6.enumfield(2, name="Stopped")
 
 
-@o6.enumtype(nodeId="ns=mdis;i=699", browseName="SignatureStatusEnum")
+@o6.enumtype(nodeId="ns=mdis;i=699", browseName="ns=mdis;SignatureStatusEnum")
 class SignatureStatusEnum(ns0.datatypes.Enumeration):
     NOT_AVAILABLE = o6.enumfield(1, name="NotAvailable")
     COMPLETED = o6.enumfield(2, name="Completed")
     FAILED = o6.enumfield(4, name="Failed")
 
 
-@o6.enumtype(nodeId="ns=mdis;i=701", browseName="ChokeCommandEnum")
+@o6.enumtype(nodeId="ns=mdis;i=701", browseName="ns=mdis;ChokeCommandEnum")
 class ChokeCommandEnum(ns0.datatypes.Enumeration):
     CLOSE = o6.enumfield(1, name="Close")
     OPEN = o6.enumfield(2, name="Open")
 
 
-@o6.enumtype(nodeId="ns=mdis;i=703", browseName="ValvePositionEnum")
+@o6.enumtype(nodeId="ns=mdis;i=703", browseName="ns=mdis;ValvePositionEnum")
 class ValvePositionEnum(ns0.datatypes.Enumeration):
     CLOSED = o6.enumfield(1, name="Closed")
     OPEN = o6.enumfield(2, name="Open")
@@ -73,7 +73,7 @@ class ValvePositionEnum(ns0.datatypes.Enumeration):
     UNKNOWN = o6.enumfield(8, name="Unknown")
 
 
-@o6.enumtype(nodeId="ns=mdis;i=1287", browseName="SetCalculatedPositionEnum")
+@o6.enumtype(nodeId="ns=mdis;i=1287", browseName="ns=mdis;SetCalculatedPositionEnum")
 class SetCalculatedPositionEnum(ns0.datatypes.Enumeration):
     INITIAL = o6.enumfield(0, name="Initial")
     INPROGRESS = o6.enumfield(1, name="Inprogress")
@@ -81,21 +81,21 @@ class SetCalculatedPositionEnum(ns0.datatypes.Enumeration):
     FAULT = o6.enumfield(4, name="Fault")
 
 
-@o6.datatype(nodeId="ns=mdis;i=1289", browseName="MDISVersionDataType", defaultEncodingId="ns=mdis;i=1484")
+@o6.datatype(nodeId="ns=mdis;i=1289", browseName="ns=mdis;MDISVersionDataType", defaultEncodingId="ns=mdis;i=1484")
 class MDISVersionDataType(ns0.datatypes.Structure):
-    majorVersion: o6.Byte
-    minorVersion: o6.Byte
-    build: o6.Byte
+    majorVersion: o6.Byte = o6.field(name="MajorVersion")
+    minorVersion: o6.Byte = o6.field(name="MinorVersion")
+    build: o6.Byte = o6.field(name="Build")
 
 
-@o6.enumtype(nodeId="ns=mdis;i=15007", browseName="CIMVMoveEnum")
+@o6.enumtype(nodeId="ns=mdis;i=15007", browseName="ns=mdis;CIMVMoveEnum")
 class CIMVMoveEnum(ns0.datatypes.Enumeration):
     MOVE_CLOSE = o6.enumfield(1, name="MoveClose")
     MOVE_OPEN = o6.enumfield(2, name="MoveOpen")
     STOP = o6.enumfield(4, name="Stop")
 
 
-@o6.enumtype(nodeId="ns=mdis;i=15009", browseName="ArbitrationModeEnum")
+@o6.enumtype(nodeId="ns=mdis;i=15009", browseName="ns=mdis;ArbitrationModeEnum")
 class ArbitrationModeEnum(ns0.datatypes.Enumeration):
     AVERAGE = o6.enumfield(1, name="Average")
     DEFAULT_A = o6.enumfield(2, name="DefaultA")
@@ -106,20 +106,20 @@ class ArbitrationModeEnum(ns0.datatypes.Enumeration):
     LOW = o6.enumfield(64, name="Low")
 
 
-@o6.enumtype(nodeId="ns=mdis;i=15011", browseName="MotorStateEnum")
+@o6.enumtype(nodeId="ns=mdis;i=15011", browseName="ns=mdis;MotorStateEnum")
 class MotorStateEnum(ns0.datatypes.Enumeration):
     ACTIVE = o6.enumfield(1, name="Active")
     NON_ACTIVE = o6.enumfield(2, name="NonActive")
 
 
-@o6.enumtype(nodeId="ns=mdis;i=15013", browseName="MotorOperationEnum")
+@o6.enumtype(nodeId="ns=mdis;i=15013", browseName="ns=mdis;MotorOperationEnum")
 class MotorOperationEnum(ns0.datatypes.Enumeration):
     OFF = o6.enumfield(1, name="Off")
     AUTO = o6.enumfield(2, name="Auto")
     MANUAL = o6.enumfield(4, name="Manual")
 
 
-@o6.enumtype(nodeId="ns=mdis;i=15102", browseName="CIMVOperationModeEnum")
+@o6.enumtype(nodeId="ns=mdis;i=15102", browseName="ns=mdis;CIMVOperationModeEnum")
 class CIMVOperationModeEnum(ns0.datatypes.Enumeration):
     POSITION = o6.enumfield(1, name="Position")
     FLOW = o6.enumfield(2, name="Flow")

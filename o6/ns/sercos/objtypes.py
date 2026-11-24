@@ -55,10 +55,12 @@ class SercosFunctionGroupType(FunctionalGroupType):
 
 @o6.objecttype(nodeId="ns=sercos;i=1001", browseName="ns=sercos;SercosDeviceType", displayName="SercosDeviceType")
 class SercosDeviceType(di.objtypes.DeviceType):
-    classSet: FunctionalGroupType = o6.hasComponent(FunctionalGroupType(nodeId="ns=sercos;i=5002", browseName="ns=sercos;ClassSet"))
-    functionGroupSet: FunctionalGroupType = o6.hasComponent(FunctionalGroupType(nodeId="ns=sercos;i=5003", browseName="ns=sercos;FunctionGroupSet"))
-    parameterSet: FunctionalGroupType = o6.hasComponent(FunctionalGroupType(nodeId="ns=sercos;i=5007", browseName="ns=sercos;ParameterSet", description="Flat list of Parameters"))
-    profileSet: FunctionalGroupType = o6.hasComponent(FunctionalGroupType(nodeId="ns=sercos;i=5001", browseName="ns=sercos;ProfileSet"))
+    classSet: FunctionalGroupType = o6.hasComponent(FunctionalGroupType(nodeId="ns=sercos;i=5002", browseName="ns=sercos;ClassSet", modellingRule="Mandatory"))
+    functionGroupSet: FunctionalGroupType = o6.hasComponent(FunctionalGroupType(nodeId="ns=sercos;i=5003", browseName="ns=sercos;FunctionGroupSet", modellingRule="Mandatory"))
+    parameterSet: FunctionalGroupType = o6.hasComponent(
+        FunctionalGroupType(nodeId="ns=sercos;i=5007", browseName="ns=sercos;ParameterSet", description="Flat list of Parameters", modellingRule="Mandatory")
+    )
+    profileSet: FunctionalGroupType = o6.hasComponent(FunctionalGroupType(nodeId="ns=sercos;i=5001", browseName="ns=sercos;ProfileSet", modellingRule="Mandatory"))
 
 
 @o6.objecttype(nodeId="ns=sercos;i=6075", browseName="ns=sercos;ProfileSet", displayName="ProfileSet")

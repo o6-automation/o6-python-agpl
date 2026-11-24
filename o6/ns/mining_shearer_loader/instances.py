@@ -58,7 +58,7 @@ http_opcfoundation_org_UA_Mining_Extraction_ShearerLoader_ = ns0.objtypes.Namesp
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[2],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC, ns0.datatypes.IdType.STRING],
             )
         ),
@@ -140,12 +140,14 @@ mining.vartypes.LongwallShieldOffsetArrayItemType(
     nodeId="ns=mining_shearer_loader;i=6016",
     browseName="ns=mining_shearer_loader;RoofOffset",
     description="The RoofOffset variable describes a list of the current roof offset per shield",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_shearer_loader;i=6017",
                 browseName="EngineeringUnits",
                 description="This is the EngineeringUnit of the roof offsets.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067858, displayName=o6.LocalizedText("m"), description=o6.LocalizedText("metre")
@@ -157,6 +159,7 @@ mining.vartypes.LongwallShieldOffsetArrayItemType(
                 nodeId="ns=mining_shearer_loader;i=6019",
                 browseName="EURange",
                 description="This is the EURange of the roof offsets.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Range,
                 value=ns0.datatypes.Range(low=-5.0, high=5.0),
             )
@@ -176,6 +179,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_shearer_loader;i=6001",
                 browseName="ns=di;DeviceClass",
                 description="Indicates in which domain or for what purpose the MachineryItem is used.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -184,6 +188,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_shearer_loader;i=6002",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -192,6 +197,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_shearer_loader;i=6003",
                 browseName="ns=di;ManufacturerUri",
                 description="A globally unique identifier of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -200,6 +206,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_shearer_loader;i=6020",
                 browseName="ns=di;Model",
                 description="A human-readable, localized name of the model of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -208,6 +215,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_shearer_loader;i=6021",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -216,6 +224,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_shearer_loader;i=6022",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -226,12 +235,14 @@ mining.vartypes.LongwallShieldOffsetArrayItemType(
     nodeId="ns=mining_shearer_loader;i=6026",
     browseName="ns=mining_shearer_loader;FloorOffset",
     description="The FloorOffset variable describes a list of the current floor offset per shield",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_shearer_loader;i=6027",
                 browseName="ns=mining;EngineeringUnits",
                 description="This is the EngineeringUnit of the floor offsets.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067858, displayName=o6.LocalizedText("m"), description=o6.LocalizedText("metre")
@@ -245,6 +256,7 @@ mining.vartypes.LongwallShieldOffsetArrayItemType(
                 nodeId="ns=mining_shearer_loader;i=6028",
                 browseName="ns=mining;EURange",
                 description="This is the EURange of the floor offsets.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Range,
                 value=ns0.datatypes.Range(low=-5.0, high=5.0),
                 accessLevel=3,
@@ -266,6 +278,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_shearer_loader;i=6023",
                 browseName="ns=di;DeviceClass",
                 description="Indicates in which domain or for what purpose the MachineryItem is used.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
             )
@@ -275,6 +288,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_shearer_loader;i=6024",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText(),
             )
@@ -284,6 +298,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_shearer_loader;i=6025",
                 browseName="ns=di;ManufacturerUri",
                 description="A globally unique identifier of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
                 value="",
             )
@@ -293,6 +308,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_shearer_loader;i=6029",
                 browseName="ns=di;Model",
                 description="A human-readable, localized name of the model of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText(),
             )
@@ -302,6 +318,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_shearer_loader;i=6030",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the machine",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -310,6 +327,7 @@ mining.objtypes.MiningEquipmentIdentificationType(
                 nodeId="ns=mining_shearer_loader;i=6031",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -340,12 +358,14 @@ ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=mining_shearer_loader;i=6043",
     browseName="ns=mining_shearer_loader;MaxLength",
     description="The MaxLength variable describes maximum machine length including extracted drums",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_shearer_loader;i=6046",
                 browseName="EngineeringUnits",
                 description="This is the EngineeringUnit of the shearer maximum length.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067858, displayName=o6.LocalizedText("m"), description=o6.LocalizedText("metre")
@@ -357,6 +377,7 @@ ns0.vartypes.AnalogUnitRangeType(
                 nodeId="ns=mining_shearer_loader;i=6047",
                 browseName="EURange",
                 description="This is the EURange of the shearer maximum length.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Range,
                 value=ns0.datatypes.Range(low=1.0, high=20.0),
             )
@@ -369,12 +390,14 @@ ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=mining_shearer_loader;i=6044",
     browseName="ns=mining_shearer_loader;Position",
     description="The Position variable describes the current position of the shearer in relation  to the center of the shearer",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_shearer_loader;i=6048",
                 browseName="EngineeringUnits",
                 description="This is the EngineeringUnit of the shearer position.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067858, displayName=o6.LocalizedText("m"), description=o6.LocalizedText("metre")
@@ -386,6 +409,7 @@ ns0.vartypes.AnalogUnitRangeType(
                 nodeId="ns=mining_shearer_loader;i=6049",
                 browseName="EURange",
                 description="This is the EURange of the shearer position.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Range,
                 value=ns0.datatypes.Range(low=-50.0, high=500.0),
             )
@@ -407,6 +431,7 @@ ns0.objtypes.BaseObjectType(
                 nodeId="ns=mining_shearer_loader;i=6041",
                 browseName="ns=mining_shearer_loader;DrivingDirection",
                 description="The DrivingDirection variable describes the current driving direction of the shearer loader",
+                modellingRule="Mandatory",
                 dataType=mining_shearer_loader_datypes.ShearerDirectionEnum,
                 value=mining_shearer_loader_datypes.ShearerDirectionEnum.STOP,
             )
@@ -420,12 +445,14 @@ ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=mining_shearer_loader;i=6062",
     browseName="ns=mining_shearer_loader;DrumDiameter",
     description="The DrumDiameter variable describes drum's diameter",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_shearer_loader;i=6065",
                 browseName="EngineeringUnits",
                 description="This is the EngineeringUnit of the drum diameter.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067858, displayName=o6.LocalizedText("m"), description=o6.LocalizedText("metre")
@@ -437,6 +464,7 @@ ns0.vartypes.AnalogUnitRangeType(
                 nodeId="ns=mining_shearer_loader;i=6066",
                 browseName="EURange",
                 description="This is the EURange of the drum diameter.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Range,
                 value=ns0.datatypes.Range(low=0.5, high=10.0),
             )
@@ -449,12 +477,14 @@ ns0.vartypes.AnalogUnitRangeType(
     nodeId="ns=mining_shearer_loader;i=6063",
     browseName="ns=mining_shearer_loader;DrumHeight",
     description="The DrumHeight variable describes drum's current height as measured from the center of the shearer",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=mining_shearer_loader;i=6067",
                 browseName="EngineeringUnits",
                 description="This is the EngineeringUnit of the drum height.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EUInformation,
                 value=ns0.datatypes.EUInformation(
                     namespaceUri="http://www.opcfoundation.org/UA/units/un/cefact", unitId=5067858, displayName=o6.LocalizedText("m"), description=o6.LocalizedText("metre")
@@ -466,6 +496,7 @@ ns0.vartypes.AnalogUnitRangeType(
                 nodeId="ns=mining_shearer_loader;i=6068",
                 browseName="EURange",
                 description="This is the EURange of the drum height.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Range,
                 value=ns0.datatypes.Range(low=-2.0, high=10.0),
             )
@@ -485,6 +516,7 @@ ns0.objtypes.BaseObjectType(
                 nodeId="ns=mining_shearer_loader;i=6064",
                 browseName="ns=mining_shearer_loader;MountingPosition",
                 description="The MountingPosition property describes drum's mounting position on the shearer",
+                modellingRule="Mandatory",
                 dataType=mining_shearer_loader_datypes.ShearerDrumMountingPositionEnum,
                 value=mining_shearer_loader_datypes.ShearerDrumMountingPositionEnum.MOUNTING_POSITION_LEFT,
             )
@@ -552,6 +584,7 @@ o6.call(
     nodeId="ns=mining_shearer_loader;i=7001",
     browseName="ns=mining_shearer_loader;SetFloorOffset",
     description="The SetFloorOffset method accepts shield parameters and drum height correction offsets and returns a boolean to indicate succesfull execution",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=mining_shearer_loader;i=6034"]),
     outputArgs=o6.hasProperty(o6.ns["ns=mining_shearer_loader;i=6035"]),
 )
@@ -612,6 +645,7 @@ o6.call(
     nodeId="ns=mining_shearer_loader;i=7003",
     browseName="ns=mining_shearer_loader;SetRoofOffset",
     description="The SetRoofOffset method accepts shield parameters and drum height correction offsets and returns a boolean to indicate succesfull execution",
+    modellingRule="Mandatory",
     inputArgs=o6.hasProperty(o6.ns["ns=mining_shearer_loader;i=6036"]),
     outputArgs=o6.hasProperty(o6.ns["ns=mining_shearer_loader;i=6037"]),
 )

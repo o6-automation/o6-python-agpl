@@ -36,7 +36,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=woodworking;i=20", browseName="WwUnitModeEnumeration", description="This enumeration represents the generalized mode of a unit.")
+@o6.enumtype(nodeId="ns=woodworking;i=20", browseName="ns=woodworking;WwUnitModeEnumeration", description="This enumeration represents the generalized mode of a unit.")
 class WwUnitModeEnumeration(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="OTHER")
     AUTOMATIC = o6.enumfield(1, name="AUTOMATIC")
@@ -46,7 +46,7 @@ class WwUnitModeEnumeration(ns0.datatypes.Enumeration):
     SLEEP = o6.enumfield(5, name="SLEEP")
 
 
-@o6.enumtype(nodeId="ns=woodworking;i=21", browseName="WwUnitStateEnumeration", description="This enumeration represents the generalized state of a unit.")
+@o6.enumtype(nodeId="ns=woodworking;i=21", browseName="ns=woodworking;WwUnitStateEnumeration", description="This enumeration represents the generalized state of a unit.")
 class WwUnitStateEnumeration(ns0.datatypes.Enumeration):
     OFFLINE = o6.enumfield(0, name="OFFLINE")
     STANDBY = o6.enumfield(1, name="STANDBY")
@@ -57,46 +57,46 @@ class WwUnitStateEnumeration(ns0.datatypes.Enumeration):
 
 @o6.datatype(
     nodeId="ns=woodworking;i=3002",
-    browseName="WwMessageArgumentValueDataType",
+    browseName="ns=woodworking;WwMessageArgumentValueDataType",
     description="The WwArgumentValueDataType definition defines the possible types of an argument value.",
     defaultEncodingId="ns=woodworking;i=5010",
 )
 class WwMessageArgumentValueDataType(ns0.datatypes.Union):
-    array: list[WwMessageArgumentValueDataType] = o6.field(arrayDimensions=[1])
-    boolean: o6.Boolean
-    int16: o6.Int16
-    int32: o6.Int32
-    int64: o6.Int64
-    sByte: o6.SByte
-    uInt16: o6.UInt16
-    uInt32: o6.UInt32
-    uInt64: o6.UInt64
-    byte: o6.Byte
-    dateTime: o6.DateTime
-    guid: o6.Guid
-    localizedText: o6.LocalizedText
-    double: o6.Double
-    float: o6.Float
-    string: o6.String
-    other: o6.String
+    array: list[WwMessageArgumentValueDataType] = o6.field(name="Array", arrayDimensions=[1])
+    boolean: o6.Boolean = o6.field(name="Boolean")
+    int16: o6.Int16 = o6.field(name="Int16")
+    int32: o6.Int32 = o6.field(name="Int32")
+    int64: o6.Int64 = o6.field(name="Int64")
+    sByte: o6.SByte = o6.field(name="SByte")
+    uInt16: o6.UInt16 = o6.field(name="UInt16")
+    uInt32: o6.UInt32 = o6.field(name="UInt32")
+    uInt64: o6.UInt64 = o6.field(name="UInt64")
+    byte: o6.Byte = o6.field(name="Byte")
+    dateTime: o6.DateTime = o6.field(name="DateTime")
+    guid: o6.Guid = o6.field(name="Guid")
+    localizedText: o6.LocalizedText = o6.field(name="LocalizedText")
+    double: o6.Double = o6.field(name="Double")
+    float: o6.Float = o6.field(name="Float")
+    string: o6.String = o6.field(name="String")
+    other: o6.String = o6.field(name="Other")
 
 
 @o6.datatype(
     nodeId="ns=woodworking;i=3003",
-    browseName="WwMessageArgumentDataType",
+    browseName="ns=woodworking;WwMessageArgumentDataType",
     description="The WwArgumentDataType definition extends the argument structure with an argument value.",
     defaultEncodingId="ns=woodworking;i=5013",
 )
 class WwMessageArgumentDataType(ns0.datatypes.Argument):
-    name: o6.String
-    dataType: o6.NodeId
-    valueRank: o6.Int32
-    arrayDimensions: list[o6.UInt32]
-    description: o6.LocalizedText
-    value: WwMessageArgumentValueDataType
+    name: o6.String = o6.field(name="Name")
+    dataType: o6.NodeId = o6.field(name="DataType")
+    valueRank: o6.Int32 = o6.field(name="ValueRank")
+    arrayDimensions: list[o6.UInt32] = o6.field(name="ArrayDimensions")
+    description: o6.LocalizedText = o6.field(name="Description")
+    value: WwMessageArgumentValueDataType = o6.field(name="Value")
 
 
-@o6.enumtype(nodeId="ns=woodworking;i=3004", browseName="WwEventCategoryEnumeration", description="This enumeration represents the category of an event.")
+@o6.enumtype(nodeId="ns=woodworking;i=3004", browseName="ns=woodworking;WwEventCategoryEnumeration", description="This enumeration represents the category of an event.")
 class WwEventCategoryEnumeration(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="OTHER")
     DIAGNOSTIC = o6.enumfield(1, name="DIAGNOSTIC")

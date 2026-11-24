@@ -1109,12 +1109,17 @@ PY2UA_union(PyObject *obj, void *p, const UA_DataType *type) {
     const UA_DataTypeMember *member = &type->members[selection - 1];
     char snakeName[128];
     memberPyName(Py_TYPE(obj), type, selection - 1, snakeName);
+    /* The conversion can run Python code that assigns members, which
+     * releases the dict's value, so it holds its own reference. */
     PyObject *value = source->dict ?
         PyDict_GetItemString(source->dict, snakeName) : NULL;
-    if(member->isArray) {
-        size_t *targetSize = (size_t*)((char*)p + member->padding);
-        void **target = (void**)((char*)targetSize + sizeof(size_t));
-        if(!value) {
+    Py_XINCREF(value);
+    PyObject *result = Py_None;
+    if(!value) {
+        /* Not converted yet: copy the native member */
+        if(member->isArray) {
+            size_t *targetSize = (size_t*)((char*)p + member->padding);
+            void **target = (void**)((char*)targetSize + sizeof(size_t));
             size_t sourceSize = *(size_t*)(source->data + member->padding);
             void *sourceArray = *(void**)(source->data + member->padding +
                                           sizeof(size_t));
@@ -1125,42 +1130,47 @@ PY2UA_union(PyObject *obj, void *p, const UA_DataType *type) {
             *targetSize = sourceSize;
             return Py_None;
         }
+        UA_StatusCode status = UA_copy(
+            source->data + member->padding,
+            (char*)p + member->padding,
+            member->memberType);
+        return status == UA_STATUSCODE_GOOD ? Py_None : PyErr_StatusCode(status);
+    }
 
-        Py_ssize_t length = PyObject_Length(value);
-        if(length < 0)
-            return NULL;
-        *target = UA_calloc((size_t)length, member->memberType->memSize);
-        if(!*target && length > 0) {
-            PyErr_NoMemory();
-            return NULL;
-        }
-        *targetSize = (size_t)length;
-        uintptr_t position = (uintptr_t)*target;
-        for(Py_ssize_t i = 0; i < length; i++) {
-            PyObject *element = PySequence_GetItem(value, i);
-            if(!element)
-                return NULL;
-            PyObject *result = py2ua_inner(
-                element, (void*)position, member->memberType);
-            Py_DECREF(element);
-            if(!result)
-                return NULL;
-            position += member->memberType->memSize;
-        }
-        return Py_None;
+    if(!member->isArray) {
+        result = py2ua_inner(value, (char*)p + member->padding, member->memberType);
+        goto done;
     }
-    if(value) {
-        Py_INCREF(value);
-        PyObject *result = py2ua_inner(
-            value, (char*)p + member->padding, member->memberType);
-        Py_DECREF(value);
-        return result;
+    size_t *targetSize = (size_t*)((char*)p + member->padding);
+    void **target = (void**)((char*)targetSize + sizeof(size_t));
+    Py_ssize_t length = PyObject_Length(value);
+    if(length < 0) {
+        result = NULL;
+        goto done;
     }
-    UA_StatusCode status = UA_copy(
-        source->data + member->padding,
-        (char*)p + member->padding,
-        member->memberType);
-    return status == UA_STATUSCODE_GOOD ? Py_None : PyErr_StatusCode(status);
+    *target = UA_calloc((size_t)length, member->memberType->memSize);
+    if(!*target && length > 0) {
+        result = PyErr_NoMemory();
+        goto done;
+    }
+    *targetSize = (size_t)length;
+    uintptr_t position = (uintptr_t)*target;
+    for(Py_ssize_t i = 0; i < length; i++) {
+        PyObject *element = PySequence_GetItem(value, i);
+        if(!element) {
+            result = NULL;
+            break;
+        }
+        result = py2ua_inner(element, (void*)position, member->memberType);
+        Py_DECREF(element);
+        if(!result)
+            break;
+        position += member->memberType->memSize;
+    }
+
+ done:
+    Py_DECREF(value);
+    return result;
 }
 
 PyObject *

@@ -28,7 +28,7 @@
 
 // Registry of custom (runtime-registered) Python types, resolving UA_DataType* -> PyTypeObject*.
 //
-// Populated by createCustomPyTypeBound() below (via registerCustomPyType)
+// Populated by bindCustomPyType() below (via registerCustomPyType)
 // Used consulted by UA2PYType() (via findCustomPyTypeWithFlag) so that a decorated @o6.datatype / @o6.enumtype class wins over the plain C-generated PyType.
 //
 // A growable array plus a pointer-keyed index over it (below):
@@ -323,20 +323,19 @@ buildStructPyType(const UA_DataType *uaType, const char *name, PyObject *bases) 
 }
 
 PyObject *
-createCustomPyTypeBound(const UA_DataType *layoutType, const UA_DataType *bindType,
-                        const char *namespaceName, PyObject *bases,
-                        PyObject *enumFactory, PyObject *enumOverrideMembers) {
+createCustomPyType(const UA_DataType *layoutType, const char *namespaceName,
+                   PyObject *bases, PyObject *enumFactory,
+                   PyObject *enumOverrideMembers, char *nameBuf, size_t nameBufSize) {
     /* Build a name like "o6.<namespace>.<TypeName>".
      * Strip the namespace qualifier (e.g. "1:FetchResult" -> "FetchResult") */
     const char *rawName = layoutType->typeName ? layoutType->typeName : "Unknown";
     const char *colon = strchr(rawName, ':');
     const char *shortName = colon ? colon + 1 : rawName;
 
-    char nameBuf[256];
     if(namespaceName && namespaceName[0])
-        snprintf(nameBuf, sizeof(nameBuf), "o6.%s.%s", namespaceName, shortName);
+        snprintf(nameBuf, nameBufSize, "o6.%s.%s", namespaceName, shortName);
     else
-        snprintf(nameBuf, sizeof(nameBuf), "o6.%s", shortName);
+        snprintf(nameBuf, nameBufSize, "o6.%s", shortName);
 
     /* A non-NULL ``enumFactory`` is what says "this came from an
      * EnumDescription", and is therefore what decides between an enum class
@@ -345,20 +344,18 @@ createCustomPyTypeBound(const UA_DataType *layoutType, const UA_DataType *bindTy
      * Looks wrong; is not — the layout's members, member-size and type name
      * are still correct; the class builder touches only the member array, its
      * size and the type name. */
-    PyObject *pyType = enumFactory
+    return enumFactory
         ? buildEnumPyType(layoutType, shortName, bases, enumFactory, enumOverrideMembers)
         : buildStructPyType(layoutType, nameBuf, bases);
-    if(!pyType)
-        return NULL;
+}
 
-    bool mayPreemptBuiltin = enumFactory &&
+int
+bindCustomPyType(PyObject *pyType, const UA_DataType *bindType,
+                 const char *name, bool fromEnumFactory) {
+    bool mayPreemptBuiltin = fromEnumFactory &&
         bindType->typeKind != UA_DATATYPEKIND_ENUM;
-
-    if(PyTypeObject_setUAType((PyTypeObject *)pyType, bindType) < 0 ||
-       registerCustomPyType(bindType, (PyTypeObject *)pyType, nameBuf,
-                            mayPreemptBuiltin) < 0) {
-        Py_DECREF(pyType);
-        return NULL;
-    }
-    return pyType;
+    if(PyTypeObject_setUAType((PyTypeObject *)pyType, bindType) < 0)
+        return -1;
+    return registerCustomPyType(bindType, (PyTypeObject *)pyType, name,
+                                mayPreemptBuiltin);
 }

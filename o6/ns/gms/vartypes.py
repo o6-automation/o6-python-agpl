@@ -43,27 +43,29 @@ else:
 class AdditionalSensorType(ns0.vartypes.AnalogUnitType):
     class_: ns0.vartypes.MultiStateDiscreteType | None
     identifier: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=gms;i=6030", browseName="ns=gms;Identifier", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=gms;i=6030", browseName="ns=gms;Identifier", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     name: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=gms;i=6031", browseName="ns=gms;Name", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=gms;i=6031", browseName="ns=gms;Name", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
 
 
 @o6.variabletype(nodeId="ns=gms;i=2004", browseName="ns=gms;GMSResultType", displayName="GMSResultType", dataType=machinery_result.datatypes.ResultDataType)
 class GMSResultType(machinery_result.vartypes.ResultType):
     usedTools: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=gms;i=6047", browseName="ns=gms;UsedTools", dataType=o6.String, valueRank=1, arrayDimensions=[0], accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=gms;i=6047", browseName="ns=gms;UsedTools", modellingRule="Optional", dataType=o6.String, valueRank=1, arrayDimensions=[0], accessLevel=3, userAccessLevel=1
+        )
     )
 
 
 @o6.variabletype(nodeId="ns=gms;i=2003", browseName="ns=gms;CatalogType", displayName="CatalogType", dataType=ns0.datatypes.Number, valueRank=o6.ValueRank.ANY)
 class CatalogType(ns0.vartypes.MultiStateValueDiscreteType):
     catalogEntry: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=gms;i=6282", browseName="ns=gms;CatalogEntry", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=gms;i=6282", browseName="ns=gms;CatalogEntry", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     catalogName: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=gms;i=6281", browseName="ns=gms;CatalogName", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=gms;i=6281", browseName="ns=gms;CatalogName", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
 
 

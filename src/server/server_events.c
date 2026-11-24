@@ -73,6 +73,7 @@ static int event_fields_from_mapping(PyServer *self, PyObject *mapping,
 }
 
 PyObject *pyServer_emit_event(PyObject *obj, PyObject *args) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)obj), NULL);
   PyServer *self = (PyServer *)obj;
   PyObject *py_source;
   PyObject *py_type;

@@ -24,25 +24,6 @@
 # include <windows.h>
 #endif
 
-PyObject *
-pyServer_advance_registration_time(PyObject *self, PyObject *seconds) {
-    double elapsed = PyFloat_AsDouble(seconds);
-    if(PyErr_Occurred())
-        return NULL;
-    if(!(elapsed >= 0 && elapsed <= 86400)) {
-        PyErr_SetString(PyExc_ValueError, "seconds must be between 0 and 86400");
-        return NULL;
-    }
-    UA_Server *server = ((PyServer*)self)->server;
-    lockServer(server);
-    RegisteredServerRecord *record;
-    LIST_FOREACH(record, &server->registeredServers, pointers)
-        record->lastSeen -= (UA_DateTime)(elapsed * UA_DATETIME_SEC);
-    cleanupRegisteredServers(server);
-    unlockServer(server);
-    Py_RETURN_NONE;
-}
-
 #ifdef UA_ENABLE_DRIVER_MDNS_MDNSD
 #define O6_MDNS
 
@@ -285,6 +266,7 @@ pyMdns_recordChanged(PyServer *server, const UA_String *name,
 
 PyObject *
 pyServer_set_mdns(PyObject *self, PyObject *config) {
+    O6_REQUIRE_LOOP_THREAD(pyServer_eventLoop((PyServer *)self), NULL);
     PyServer *server = (PyServer*)self;
     if(server->running || UA_Server_getLifecycleState(server->server) != UA_LIFECYCLESTATE_STOPPED) {
         PyErr_SetString(PyExc_RuntimeError, "mDNS configuration requires a stopped server");

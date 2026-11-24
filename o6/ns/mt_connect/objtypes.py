@@ -58,6 +58,7 @@ class MTComponentType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2042",
             browseName="ns=mt_connect;Components",
             description="The base \\gls{MTComponent} Type from which all MTConnect Components are\n      derived. The component types will be created once for all\n      \\gls{MTComponent} \\glspl{Object} of that type based on the \\gls{QName} of\n      the MTConnect XML element. The Component Objects will be created and\n      inserted into the \\mtmodel{Components} folder with a \\gls{BrowseName} of\n      the Component \\gls{QName} and the \\mtmodel{name} element if specified\n      surrounded by square brackets, \\texttt{[]}. For example if the MTConnect\n      Element is: \\xml{<Linear name='X'>...</...>} The OPC\n      UA Object with \\gls{BrowseName} \\xml{Linear[X]} will be created with the\n      \\uamodel{HasTypeDefinition} referencing the \\mtmodel{Linear} OPC UA\n      \\gls{Type}. The meta data for the component and its relationships are\n      static. The dynamic data will be represented using the \\cite{UAPart8}. An\n      abstract XML element. Replaced in the XML document by types of component\n      elements representing physical parts and logical functions of a piece of\n      equipment.",
+            modellingRule="Optional",
         )
     )
     compositions: ns0.objtypes.FolderType | None = o6.organizes(
@@ -65,6 +66,7 @@ class MTComponentType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2043",
             browseName="ns=mt_connect;Compositions",
             description="The base \\gls{MTComponent} Type from which all MTConnect Components are\n      derived. The component types will be created once for all\n      \\gls{MTComponent} \\glspl{Object} of that type based on the \\gls{QName} of\n      the MTConnect XML element. The Component Objects will be created and\n      inserted into the \\mtmodel{Components} folder with a \\gls{BrowseName} of\n      the Component \\gls{QName} and the \\mtmodel{name} element if specified\n      surrounded by square brackets, \\texttt{[]}. For example if the MTConnect\n      Element is: \\xml{<Linear name='X'>...</...>} The OPC\n      UA Object with \\gls{BrowseName} \\xml{Linear[X]} will be created with the\n      \\uamodel{HasTypeDefinition} referencing the \\mtmodel{Linear} OPC UA\n      \\gls{Type}. The meta data for the component and its relationships are\n      static. The dynamic data will be represented using the \\cite{UAPart8}. An\n      abstract XML element. Replaced in the XML document by types of component\n      elements representing physical parts and logical functions of a piece of\n      equipment.",
+            modellingRule="Optional",
         )
     )
     configuration: MTConfigurationType | None = o6.hasComponent(
@@ -72,6 +74,7 @@ class MTComponentType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2029",
             browseName="ns=mt_connect;Configuration",
             description="The base \\gls{MTComponent} Type from which all MTConnect Components are\n      derived. The component types will be created once for all\n      \\gls{MTComponent} \\glspl{Object} of that type based on the \\gls{QName} of\n      the MTConnect XML element. The Component Objects will be created and\n      inserted into the \\mtmodel{Components} folder with a \\gls{BrowseName} of\n      the Component \\gls{QName} and the \\mtmodel{name} element if specified\n      surrounded by square brackets, \\texttt{[]}. For example if the MTConnect\n      Element is: \\xml{<Linear name='X'>...</...>} The OPC\n      UA Object with \\gls{BrowseName} \\xml{Linear[X]} will be created with the\n      \\uamodel{HasTypeDefinition} referencing the \\mtmodel{Linear} OPC UA\n      \\gls{Type}. The meta data for the component and its relationships are\n      static. The dynamic data will be represented using the \\cite{UAPart8}. An\n      abstract XML element. Replaced in the XML document by types of component\n      elements representing physical parts and logical functions of a piece of\n      equipment.",
+            modellingRule="Optional",
             _allow_abstract=True,
         )
     )
@@ -81,6 +84,7 @@ class MTComponentType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2023",
             browseName="ns=mt_connect;Name",
             description="The base \\gls{MTComponent} Type from which all MTConnect Components are\n      derived. The component types will be created once for all\n      \\gls{MTComponent} \\glspl{Object} of that type based on the \\gls{QName} of\n      the MTConnect XML element. The Component Objects will be created and\n      inserted into the \\mtmodel{Components} folder with a \\gls{BrowseName} of\n      the Component \\gls{QName} and the \\mtmodel{name} element if specified\n      surrounded by square brackets, \\texttt{[]}. For example if the MTConnect\n      Element is: \\xml{<Linear name='X'>...</...>} The OPC\n      UA Object with \\gls{BrowseName} \\xml{Linear[X]} will be created with the\n      \\uamodel{HasTypeDefinition} referencing the \\mtmodel{Linear} OPC UA\n      \\gls{Type}. The meta data for the component and its relationships are\n      static. The dynamic data will be represented using the \\cite{UAPart8}. An\n      abstract XML element. Replaced in the XML document by types of component\n      elements representing physical parts and logical functions of a piece of\n      equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -90,6 +94,7 @@ class MTComponentType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2024",
             browseName="ns=mt_connect;NativeName",
             description="The base \\gls{MTComponent} Type from which all MTConnect Components are\n      derived. The component types will be created once for all\n      \\gls{MTComponent} \\glspl{Object} of that type based on the \\gls{QName} of\n      the MTConnect XML element. The Component Objects will be created and\n      inserted into the \\mtmodel{Components} folder with a \\gls{BrowseName} of\n      the Component \\gls{QName} and the \\mtmodel{name} element if specified\n      surrounded by square brackets, \\texttt{[]}. For example if the MTConnect\n      Element is: \\xml{<Linear name='X'>...</...>} The OPC\n      UA Object with \\gls{BrowseName} \\xml{Linear[X]} will be created with the\n      \\uamodel{HasTypeDefinition} referencing the \\mtmodel{Linear} OPC UA\n      \\gls{Type}. The meta data for the component and its relationships are\n      static. The dynamic data will be represented using the \\cite{UAPart8}. An\n      abstract XML element. Replaced in the XML document by types of component\n      elements representing physical parts and logical functions of a piece of\n      equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -99,6 +104,7 @@ class MTComponentType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2027",
             browseName="ns=mt_connect;SampleInterval",
             description="The base \\gls{MTComponent} Type from which all MTConnect Components are\n      derived. The component types will be created once for all\n      \\gls{MTComponent} \\glspl{Object} of that type based on the \\gls{QName} of\n      the MTConnect XML element. The Component Objects will be created and\n      inserted into the \\mtmodel{Components} folder with a \\gls{BrowseName} of\n      the Component \\gls{QName} and the \\mtmodel{name} element if specified\n      surrounded by square brackets, \\texttt{[]}. For example if the MTConnect\n      Element is: \\xml{<Linear name='X'>...</...>} The OPC\n      UA Object with \\gls{BrowseName} \\xml{Linear[X]} will be created with the\n      \\uamodel{HasTypeDefinition} referencing the \\mtmodel{Linear} OPC UA\n      \\gls{Type}. The meta data for the component and its relationships are\n      static. The dynamic data will be represented using the \\cite{UAPart8}. An\n      abstract XML element. Replaced in the XML document by types of component\n      elements representing physical parts and logical functions of a piece of\n      equipment.",
+            modellingRule="Optional",
             dataType=o6.Float,
             valueRank=-1,
         )
@@ -108,6 +114,7 @@ class MTComponentType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2026",
             browseName="ns=mt_connect;SampleRate",
             description="The base \\gls{MTComponent} Type from which all MTConnect Components are\n      derived. The component types will be created once for all\n      \\gls{MTComponent} \\glspl{Object} of that type based on the \\gls{QName} of\n      the MTConnect XML element. The Component Objects will be created and\n      inserted into the \\mtmodel{Components} folder with a \\gls{BrowseName} of\n      the Component \\gls{QName} and the \\mtmodel{name} element if specified\n      surrounded by square brackets, \\texttt{[]}. For example if the MTConnect\n      Element is: \\xml{<Linear name='X'>...</...>} The OPC\n      UA Object with \\gls{BrowseName} \\xml{Linear[X]} will be created with the\n      \\uamodel{HasTypeDefinition} referencing the \\mtmodel{Linear} OPC UA\n      \\gls{Type}. The meta data for the component and its relationships are\n      static. The dynamic data will be represented using the \\cite{UAPart8}. An\n      abstract XML element. Replaced in the XML document by types of component\n      elements representing physical parts and logical functions of a piece of\n      equipment.",
+            modellingRule="Optional",
             dataType=o6.Float,
             valueRank=-1,
         )
@@ -117,6 +124,7 @@ class MTComponentType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2025",
             browseName="ns=mt_connect;Uuid",
             description="The base \\gls{MTComponent} Type from which all MTConnect Components are\n      derived. The component types will be created once for all\n      \\gls{MTComponent} \\glspl{Object} of that type based on the \\gls{QName} of\n      the MTConnect XML element. The Component Objects will be created and\n      inserted into the \\mtmodel{Components} folder with a \\gls{BrowseName} of\n      the Component \\gls{QName} and the \\mtmodel{name} element if specified\n      surrounded by square brackets, \\texttt{[]}. For example if the MTConnect\n      Element is: \\xml{<Linear name='X'>...</...>} The OPC\n      UA Object with \\gls{BrowseName} \\xml{Linear[X]} will be created with the\n      \\uamodel{HasTypeDefinition} referencing the \\mtmodel{Linear} OPC UA\n      \\gls{Type}. The meta data for the component and its relationships are\n      static. The dynamic data will be represented using the \\cite{UAPart8}. An\n      abstract XML element. Replaced in the XML document by types of component\n      elements representing physical parts and logical functions of a piece of\n      equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -126,6 +134,7 @@ class MTComponentType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2022",
             browseName="ns=mt_connect;XmlId",
             description="The base \\gls{MTComponent} Type from which all MTConnect Components are\n      derived. The component types will be created once for all\n      \\gls{MTComponent} \\glspl{Object} of that type based on the \\gls{QName} of\n      the MTConnect XML element. The Component Objects will be created and\n      inserted into the \\mtmodel{Components} folder with a \\gls{BrowseName} of\n      the Component \\gls{QName} and the \\mtmodel{name} element if specified\n      surrounded by square brackets, \\texttt{[]}. For example if the MTConnect\n      Element is: \\xml{<Linear name='X'>...</...>} The OPC\n      UA Object with \\gls{BrowseName} \\xml{Linear[X]} will be created with the\n      \\uamodel{HasTypeDefinition} referencing the \\mtmodel{Linear} OPC UA\n      \\gls{Type}. The meta data for the component and its relationships are\n      static. The dynamic data will be represented using the \\cite{UAPart8}. An\n      abstract XML element. Replaced in the XML document by types of component\n      elements representing physical parts and logical functions of a piece of\n      equipment.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -144,6 +153,7 @@ class MTSensorConfigurationType(MTConfigurationType):
             nodeId="ns=mt_connect;i=2048",
             browseName="ns=mt_connect;CalibrationDate",
             description="An MTConnect Sensor Configuration associated with the Component. See\n      SensorConfigurationType in type-specifications. An element that can\n      contain descriptive content defining the configuration information for\n      sensor.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.UtcTime,
             valueRank=-1,
         )
@@ -153,6 +163,7 @@ class MTSensorConfigurationType(MTConfigurationType):
             nodeId="ns=mt_connect;i=2050",
             browseName="ns=mt_connect;CalibrationInitials",
             description="An MTConnect Sensor Configuration associated with the Component. See\n      SensorConfigurationType in type-specifications. An element that can\n      contain descriptive content defining the configuration information for\n      sensor.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -162,6 +173,7 @@ class MTSensorConfigurationType(MTConfigurationType):
             nodeId="ns=mt_connect;i=2052",
             browseName="ns=mt_connect;Channels",
             description="An MTConnect Sensor Configuration associated with the Component. See\n      SensorConfigurationType in type-specifications. An element that can\n      contain descriptive content defining the configuration information for\n      sensor.",
+            modellingRule="Optional",
         )
     )
     firwareVersion: ns0.vartypes.PropertyType = o6.hasProperty(
@@ -169,6 +181,7 @@ class MTSensorConfigurationType(MTConfigurationType):
             nodeId="ns=mt_connect;i=2047",
             browseName="ns=mt_connect;FirwareVersion",
             description="An MTConnect Sensor Configuration associated with the Component. See\n      SensorConfigurationType in type-specifications. An element that can\n      contain descriptive content defining the configuration information for\n      sensor.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -178,6 +191,7 @@ class MTSensorConfigurationType(MTConfigurationType):
             nodeId="ns=mt_connect;i=2049",
             browseName="ns=mt_connect;NextCalibrationDate",
             description="An MTConnect Sensor Configuration associated with the Component. See\n      SensorConfigurationType in type-specifications. An element that can\n      contain descriptive content defining the configuration information for\n      sensor.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.UtcTime,
             valueRank=-1,
         )
@@ -196,6 +210,7 @@ class MTDescriptionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2057",
             browseName="ns=mt_connect;Data",
             description="An MTConnect Component Description. See the DescriptionType in the\n      type-specifications. An XML element that can contain any descriptive\n      content.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -205,6 +220,7 @@ class MTDescriptionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2056",
             browseName="ns=mt_connect;Manufacturer",
             description="An MTConnect Component Description. See the DescriptionType in the\n      type-specifications. An XML element that can contain any descriptive\n      content.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -214,6 +230,7 @@ class MTDescriptionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2055",
             browseName="ns=mt_connect;SerialNumber",
             description="An MTConnect Component Description. See the DescriptionType in the\n      type-specifications. An XML element that can contain any descriptive\n      content.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -223,6 +240,7 @@ class MTDescriptionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2054",
             browseName="ns=mt_connect;Station",
             description="An MTConnect Component Description. See the DescriptionType in the\n      type-specifications. An XML element that can contain any descriptive\n      content.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -241,6 +259,7 @@ class MTChannelType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2063",
             browseName="ns=mt_connect;CalibrationDate",
             description="A Channel of a sensor. See ChannelType in type specifications. channel\n      represents each sensing element connected to a sensor unit.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.UtcTime,
             valueRank=-1,
         )
@@ -250,6 +269,7 @@ class MTChannelType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2065",
             browseName="ns=mt_connect;CalibrationInitials",
             description="A Channel of a sensor. See ChannelType in type specifications. channel\n      represents each sensing element connected to a sensor unit.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -259,6 +279,7 @@ class MTChannelType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2062",
             browseName="ns=mt_connect;MTDescription",
             description="A Channel of a sensor. See ChannelType in type specifications. channel\n      represents each sensing element connected to a sensor unit.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -268,6 +289,7 @@ class MTChannelType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2061",
             browseName="ns=mt_connect;Name",
             description="A Channel of a sensor. See ChannelType in type specifications. channel\n      represents each sensing element connected to a sensor unit.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -277,6 +299,7 @@ class MTChannelType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2064",
             browseName="ns=mt_connect;NextCalibrationDate",
             description="A Channel of a sensor. See ChannelType in type specifications. channel\n      represents each sensing element connected to a sensor unit.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.UtcTime,
             valueRank=-1,
         )
@@ -286,6 +309,7 @@ class MTChannelType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2060",
             browseName="ns=mt_connect;Number",
             description="A Channel of a sensor. See ChannelType in type specifications. channel\n      represents each sensing element connected to a sensor unit.",
+            modellingRule="Mandatory",
             dataType=o6.Int32,
             valueRank=-1,
         )
@@ -304,6 +328,7 @@ class MTCompositionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2069",
             browseName="ns=mt_connect;MTTypeName",
             description="The \\mtmodel{MTCompositionType} represents all composition entities. The\n      specification of how to form the \\gls{BrowseName} is specified in\n      Section~\\ref{sec:browse-name-rules}. The data items are added to the\n      relationship where the \\gls{MTDataItem} to \\gls{Composition} relationship\n      is represented by the \\gls{BrowseName} Composition property of the data\n      item. The data items are added to the \\gls{Composition} by their\n      \\glspl{BrowseName}. An XML element used to describe the lowest level\n      structural building blocks contained within a component element.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -313,6 +338,7 @@ class MTCompositionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2071",
             browseName="ns=mt_connect;Name",
             description="The \\mtmodel{MTCompositionType} represents all composition entities. The\n      specification of how to form the \\gls{BrowseName} is specified in\n      Section~\\ref{sec:browse-name-rules}. The data items are added to the\n      relationship where the \\gls{MTDataItem} to \\gls{Composition} relationship\n      is represented by the \\gls{BrowseName} Composition property of the data\n      item. The data items are added to the \\gls{Composition} by their\n      \\glspl{BrowseName}. An XML element used to describe the lowest level\n      structural building blocks contained within a component element.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -322,6 +348,7 @@ class MTCompositionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2070",
             browseName="ns=mt_connect;Uuid",
             description="The \\mtmodel{MTCompositionType} represents all composition entities. The\n      specification of how to form the \\gls{BrowseName} is specified in\n      Section~\\ref{sec:browse-name-rules}. The data items are added to the\n      relationship where the \\gls{MTDataItem} to \\gls{Composition} relationship\n      is represented by the \\gls{BrowseName} Composition property of the data\n      item. The data items are added to the \\gls{Composition} by their\n      \\glspl{BrowseName}. An XML element used to describe the lowest level\n      structural building blocks contained within a component element.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -331,6 +358,7 @@ class MTCompositionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2068",
             browseName="ns=mt_connect;XmlId",
             description="The \\mtmodel{MTCompositionType} represents all composition entities. The\n      specification of how to form the \\gls{BrowseName} is specified in\n      Section~\\ref{sec:browse-name-rules}. The data items are added to the\n      relationship where the \\gls{MTDataItem} to \\gls{Composition} relationship\n      is represented by the \\gls{BrowseName} Composition property of the data\n      item. The data items are added to the \\gls{Composition} by their\n      \\glspl{BrowseName}. An XML element used to describe the lowest level\n      structural building blocks contained within a component element.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -2570,6 +2598,7 @@ class MTConstraintType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2650",
             browseName="ns=mt_connect;Maximum",
             description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+            modellingRule="Optional",
             dataType=o6.Float,
             valueRank=-1,
         )
@@ -2579,6 +2608,7 @@ class MTConstraintType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2649",
             browseName="ns=mt_connect;Minimum",
             description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+            modellingRule="Optional",
             dataType=o6.Float,
             valueRank=-1,
         )
@@ -2588,6 +2618,7 @@ class MTConstraintType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2651",
             browseName="ns=mt_connect;Nominal",
             description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+            modellingRule="Optional",
             dataType=o6.Float,
             valueRank=-1,
         )
@@ -2597,6 +2628,7 @@ class MTConstraintType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2648",
             browseName="ns=mt_connect;Values",
             description="The MTConnect constraints. The Values or the Minimum, Maximum, and Nominal\n      values should be provided. Multiple Values can be provided as an array as\n      a set of allowable values for this \\gls{MTDataItem}. A constraint is used\n      by a software application to evaluate the validity of the reported data.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=1,
         )
@@ -2606,7 +2638,7 @@ class MTConstraintType(ns0.objtypes.BaseObjectType):
 @o6.objecttype(nodeId="ns=mt_connect;i=2656", browseName="ns=mt_connect;MTMessageEventType", displayName="MTMessageEventType")
 class MTMessageEventType(ns0.objtypes.BaseEventType):
     nativeCode: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=mt_connect;i=2657", browseName="ns=mt_connect;NativeCode", dataType=o6.String, valueRank=-1)
+        ns0.vartypes.PropertyType(nodeId="ns=mt_connect;i=2657", browseName="ns=mt_connect;NativeCode", modellingRule="Optional", dataType=o6.String, valueRank=-1)
     )
 
 
@@ -2622,6 +2654,7 @@ class MTConditionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2917",
             browseName="ns=mt_connect;Category",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=mt_connect_datypes.MTCategoryType,
             valueRank=-1,
         )
@@ -2632,6 +2665,7 @@ class MTConditionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2919",
             browseName="ns=mt_connect;MTSubTypeName",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -2641,6 +2675,7 @@ class MTConditionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2918",
             browseName="ns=mt_connect;MTTypeName",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -2650,6 +2685,7 @@ class MTConditionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2916",
             browseName="ns=mt_connect;Name",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -2659,6 +2695,7 @@ class MTConditionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2923",
             browseName="ns=mt_connect;PeriodFilter",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.Float,
             valueRank=-1,
         )
@@ -2668,6 +2705,7 @@ class MTConditionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2922",
             browseName="ns=mt_connect;Representation",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.MTRepresentationType,
             valueRank=-1,
         )
@@ -2677,6 +2715,7 @@ class MTConditionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2921",
             browseName="ns=mt_connect;SampleRate",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.Double,
             valueRank=-1,
         )
@@ -2686,6 +2725,7 @@ class MTConditionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2920",
             browseName="ns=mt_connect;SourceData",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -2695,6 +2735,7 @@ class MTConditionType(ns0.objtypes.BaseObjectType):
             nodeId="ns=mt_connect;i=2915",
             browseName="ns=mt_connect;XmlId",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -2723,6 +2764,7 @@ class MTDeviceType(MTComponentType):
             nodeId="ns=mt_connect;i=2017",
             browseName="ns=mt_connect;Iso841Class",
             description="See DeviceType.tex. The primary container element for each piece of\n      equipment. device is organized within the devices container.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -2732,6 +2774,7 @@ class MTDeviceType(MTComponentType):
             nodeId="ns=mt_connect;i=3668",
             browseName="ns=mt_connect;Name",
             description="See DeviceType.tex. The primary container element for each piece of\n      equipment. device is organized within the devices container.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -2741,6 +2784,7 @@ class MTDeviceType(MTComponentType):
             nodeId="ns=mt_connect;i=3669",
             browseName="ns=mt_connect;Uuid",
             description="See DeviceType.tex. The primary container element for each piece of\n      equipment. device is organized within the devices container.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -2750,6 +2794,7 @@ class MTDeviceType(MTComponentType):
             nodeId="ns=mt_connect;i=2016",
             browseName="ns=mt_connect;Version",
             description="See DeviceType.tex. The primary container element for each piece of\n      equipment. device is organized within the devices container.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -2768,6 +2813,7 @@ class MTConditionEventType(ns0.objtypes.ConditionType):
             nodeId="ns=mt_connect;i=4336",
             browseName="ns=mt_connect;ActiveState",
             description="The condition type is derived from the UA \\uamodel{ContitionType}. When\n      the \\mtmodel{Warning} or \\mtmodel{Fault} state occurs, an\n      \\mtuatype{MTConditionEventType} \\uamodel{Event} is created with the\n      \\mtmodel{ActiveState} set to \\uamodel{True} and \\uamodel{Retain} set to\n      \\uamodel{True}. The severity is used to represent the MTConnect condition\n      states of Warning and Fault with the values of 500 and 1000 respectively.\n      A new \\uamodel{NodeId} will be created for every unique instance of the\n      MTConnect \\mtmodel{Condition} reported. When the \\mtmodel{Condition} goes\n      back to Normal, the \\mtmodel{ActiveState} is set to \\uamodel{False} and\n      \\uamodel{Retain} is also set to \\uamodel{False} with the \\uamodel{NodeId}\n      of the associated \\mtmodel{Condition}. If multiple MTConnect\n      \\mtmodel{Condition}s have been cleared at the same time, all currently\n      active \\mtuatype{MTConditionEventType} \\uamodel{Event}s will need to\n      deactivated. The \\mtuatype{MTConditionEventType} must set the\n      \\uamodel{BaseEvent} \\uamodel{SourceNode} to the related\n      \\mtuatype{MTConditionType} that represents the meta-data for this\n      Condition. The \\mtuatype{MTConditionEventType} will never be instantiated\n      in the \\uaterm{AddressSpace} as an \\uamodel{Object}.",
+            modellingRule="Mandatory",
             dataType=o6.LocalizedText,
             valueRank=-1,
         )
@@ -2777,6 +2823,7 @@ class MTConditionEventType(ns0.objtypes.ConditionType):
             nodeId="ns=mt_connect;i=4327",
             browseName="ns=mt_connect;DataItemId",
             description="The condition type is derived from the UA \\uamodel{ContitionType}. When\n      the \\mtmodel{Warning} or \\mtmodel{Fault} state occurs, an\n      \\mtuatype{MTConditionEventType} \\uamodel{Event} is created with the\n      \\mtmodel{ActiveState} set to \\uamodel{True} and \\uamodel{Retain} set to\n      \\uamodel{True}. The severity is used to represent the MTConnect condition\n      states of Warning and Fault with the values of 500 and 1000 respectively.\n      A new \\uamodel{NodeId} will be created for every unique instance of the\n      MTConnect \\mtmodel{Condition} reported. When the \\mtmodel{Condition} goes\n      back to Normal, the \\mtmodel{ActiveState} is set to \\uamodel{False} and\n      \\uamodel{Retain} is also set to \\uamodel{False} with the \\uamodel{NodeId}\n      of the associated \\mtmodel{Condition}. If multiple MTConnect\n      \\mtmodel{Condition}s have been cleared at the same time, all currently\n      active \\mtuatype{MTConditionEventType} \\uamodel{Event}s will need to\n      deactivated. The \\mtuatype{MTConditionEventType} must set the\n      \\uamodel{BaseEvent} \\uamodel{SourceNode} to the related\n      \\mtuatype{MTConditionType} that represents the meta-data for this\n      Condition. The \\mtuatype{MTConditionEventType} will never be instantiated\n      in the \\uaterm{AddressSpace} as an \\uamodel{Object}.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -2786,6 +2833,7 @@ class MTConditionEventType(ns0.objtypes.ConditionType):
             nodeId="ns=mt_connect;i=4328",
             browseName="ns=mt_connect;MTSeverity",
             description="The condition type is derived from the UA \\uamodel{ContitionType}. When\n      the \\mtmodel{Warning} or \\mtmodel{Fault} state occurs, an\n      \\mtuatype{MTConditionEventType} \\uamodel{Event} is created with the\n      \\mtmodel{ActiveState} set to \\uamodel{True} and \\uamodel{Retain} set to\n      \\uamodel{True}. The severity is used to represent the MTConnect condition\n      states of Warning and Fault with the values of 500 and 1000 respectively.\n      A new \\uamodel{NodeId} will be created for every unique instance of the\n      MTConnect \\mtmodel{Condition} reported. When the \\mtmodel{Condition} goes\n      back to Normal, the \\mtmodel{ActiveState} is set to \\uamodel{False} and\n      \\uamodel{Retain} is also set to \\uamodel{False} with the \\uamodel{NodeId}\n      of the associated \\mtmodel{Condition}. If multiple MTConnect\n      \\mtmodel{Condition}s have been cleared at the same time, all currently\n      active \\mtuatype{MTConditionEventType} \\uamodel{Event}s will need to\n      deactivated. The \\mtuatype{MTConditionEventType} must set the\n      \\uamodel{BaseEvent} \\uamodel{SourceNode} to the related\n      \\mtuatype{MTConditionType} that represents the meta-data for this\n      Condition. The \\mtuatype{MTConditionEventType} will never be instantiated\n      in the \\uaterm{AddressSpace} as an \\uamodel{Object}.",
+            modellingRule="Mandatory",
             dataType=mt_connect_datypes.MTSeverityDataType,
             valueRank=-1,
         )
@@ -2795,6 +2843,7 @@ class MTConditionEventType(ns0.objtypes.ConditionType):
             nodeId="ns=mt_connect;i=4329",
             browseName="ns=mt_connect;MTSubTypeName",
             description="The condition type is derived from the UA \\uamodel{ContitionType}. When\n      the \\mtmodel{Warning} or \\mtmodel{Fault} state occurs, an\n      \\mtuatype{MTConditionEventType} \\uamodel{Event} is created with the\n      \\mtmodel{ActiveState} set to \\uamodel{True} and \\uamodel{Retain} set to\n      \\uamodel{True}. The severity is used to represent the MTConnect condition\n      states of Warning and Fault with the values of 500 and 1000 respectively.\n      A new \\uamodel{NodeId} will be created for every unique instance of the\n      MTConnect \\mtmodel{Condition} reported. When the \\mtmodel{Condition} goes\n      back to Normal, the \\mtmodel{ActiveState} is set to \\uamodel{False} and\n      \\uamodel{Retain} is also set to \\uamodel{False} with the \\uamodel{NodeId}\n      of the associated \\mtmodel{Condition}. If multiple MTConnect\n      \\mtmodel{Condition}s have been cleared at the same time, all currently\n      active \\mtuatype{MTConditionEventType} \\uamodel{Event}s will need to\n      deactivated. The \\mtuatype{MTConditionEventType} must set the\n      \\uamodel{BaseEvent} \\uamodel{SourceNode} to the related\n      \\mtuatype{MTConditionType} that represents the meta-data for this\n      Condition. The \\mtuatype{MTConditionEventType} will never be instantiated\n      in the \\uaterm{AddressSpace} as an \\uamodel{Object}.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -2804,6 +2853,7 @@ class MTConditionEventType(ns0.objtypes.ConditionType):
             nodeId="ns=mt_connect;i=4330",
             browseName="ns=mt_connect;MTTypeName",
             description="The condition type is derived from the UA \\uamodel{ContitionType}. When\n      the \\mtmodel{Warning} or \\mtmodel{Fault} state occurs, an\n      \\mtuatype{MTConditionEventType} \\uamodel{Event} is created with the\n      \\mtmodel{ActiveState} set to \\uamodel{True} and \\uamodel{Retain} set to\n      \\uamodel{True}. The severity is used to represent the MTConnect condition\n      states of Warning and Fault with the values of 500 and 1000 respectively.\n      A new \\uamodel{NodeId} will be created for every unique instance of the\n      MTConnect \\mtmodel{Condition} reported. When the \\mtmodel{Condition} goes\n      back to Normal, the \\mtmodel{ActiveState} is set to \\uamodel{False} and\n      \\uamodel{Retain} is also set to \\uamodel{False} with the \\uamodel{NodeId}\n      of the associated \\mtmodel{Condition}. If multiple MTConnect\n      \\mtmodel{Condition}s have been cleared at the same time, all currently\n      active \\mtuatype{MTConditionEventType} \\uamodel{Event}s will need to\n      deactivated. The \\mtuatype{MTConditionEventType} must set the\n      \\uamodel{BaseEvent} \\uamodel{SourceNode} to the related\n      \\mtuatype{MTConditionType} that represents the meta-data for this\n      Condition. The \\mtuatype{MTConditionEventType} will never be instantiated\n      in the \\uaterm{AddressSpace} as an \\uamodel{Object}.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -2813,6 +2863,7 @@ class MTConditionEventType(ns0.objtypes.ConditionType):
             nodeId="ns=mt_connect;i=4331",
             browseName="ns=mt_connect;NativeCode",
             description="The condition type is derived from the UA \\uamodel{ContitionType}. When\n      the \\mtmodel{Warning} or \\mtmodel{Fault} state occurs, an\n      \\mtuatype{MTConditionEventType} \\uamodel{Event} is created with the\n      \\mtmodel{ActiveState} set to \\uamodel{True} and \\uamodel{Retain} set to\n      \\uamodel{True}. The severity is used to represent the MTConnect condition\n      states of Warning and Fault with the values of 500 and 1000 respectively.\n      A new \\uamodel{NodeId} will be created for every unique instance of the\n      MTConnect \\mtmodel{Condition} reported. When the \\mtmodel{Condition} goes\n      back to Normal, the \\mtmodel{ActiveState} is set to \\uamodel{False} and\n      \\uamodel{Retain} is also set to \\uamodel{False} with the \\uamodel{NodeId}\n      of the associated \\mtmodel{Condition}. If multiple MTConnect\n      \\mtmodel{Condition}s have been cleared at the same time, all currently\n      active \\mtuatype{MTConditionEventType} \\uamodel{Event}s will need to\n      deactivated. The \\mtuatype{MTConditionEventType} must set the\n      \\uamodel{BaseEvent} \\uamodel{SourceNode} to the related\n      \\mtuatype{MTConditionType} that represents the meta-data for this\n      Condition. The \\mtuatype{MTConditionEventType} will never be instantiated\n      in the \\uaterm{AddressSpace} as an \\uamodel{Object}.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -2822,6 +2873,7 @@ class MTConditionEventType(ns0.objtypes.ConditionType):
             nodeId="ns=mt_connect;i=4332",
             browseName="ns=mt_connect;NativeSeverity",
             description="The condition type is derived from the UA \\uamodel{ContitionType}. When\n      the \\mtmodel{Warning} or \\mtmodel{Fault} state occurs, an\n      \\mtuatype{MTConditionEventType} \\uamodel{Event} is created with the\n      \\mtmodel{ActiveState} set to \\uamodel{True} and \\uamodel{Retain} set to\n      \\uamodel{True}. The severity is used to represent the MTConnect condition\n      states of Warning and Fault with the values of 500 and 1000 respectively.\n      A new \\uamodel{NodeId} will be created for every unique instance of the\n      MTConnect \\mtmodel{Condition} reported. When the \\mtmodel{Condition} goes\n      back to Normal, the \\mtmodel{ActiveState} is set to \\uamodel{False} and\n      \\uamodel{Retain} is also set to \\uamodel{False} with the \\uamodel{NodeId}\n      of the associated \\mtmodel{Condition}. If multiple MTConnect\n      \\mtmodel{Condition}s have been cleared at the same time, all currently\n      active \\mtuatype{MTConditionEventType} \\uamodel{Event}s will need to\n      deactivated. The \\mtuatype{MTConditionEventType} must set the\n      \\uamodel{BaseEvent} \\uamodel{SourceNode} to the related\n      \\mtuatype{MTConditionType} that represents the meta-data for this\n      Condition. The \\mtuatype{MTConditionEventType} will never be instantiated\n      in the \\uaterm{AddressSpace} as an \\uamodel{Object}.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -2831,6 +2883,7 @@ class MTConditionEventType(ns0.objtypes.ConditionType):
             nodeId="ns=mt_connect;i=4333",
             browseName="ns=mt_connect;Qualifier",
             description="The condition type is derived from the UA \\uamodel{ContitionType}. When\n      the \\mtmodel{Warning} or \\mtmodel{Fault} state occurs, an\n      \\mtuatype{MTConditionEventType} \\uamodel{Event} is created with the\n      \\mtmodel{ActiveState} set to \\uamodel{True} and \\uamodel{Retain} set to\n      \\uamodel{True}. The severity is used to represent the MTConnect condition\n      states of Warning and Fault with the values of 500 and 1000 respectively.\n      A new \\uamodel{NodeId} will be created for every unique instance of the\n      MTConnect \\mtmodel{Condition} reported. When the \\mtmodel{Condition} goes\n      back to Normal, the \\mtmodel{ActiveState} is set to \\uamodel{False} and\n      \\uamodel{Retain} is also set to \\uamodel{False} with the \\uamodel{NodeId}\n      of the associated \\mtmodel{Condition}. If multiple MTConnect\n      \\mtmodel{Condition}s have been cleared at the same time, all currently\n      active \\mtuatype{MTConditionEventType} \\uamodel{Event}s will need to\n      deactivated. The \\mtuatype{MTConditionEventType} must set the\n      \\uamodel{BaseEvent} \\uamodel{SourceNode} to the related\n      \\mtuatype{MTConditionType} that represents the meta-data for this\n      Condition. The \\mtuatype{MTConditionEventType} will never be instantiated\n      in the \\uaterm{AddressSpace} as an \\uamodel{Object}.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.QualifierDataType,
             valueRank=-1,
         )

@@ -88,12 +88,16 @@ def _is_objecttype_base(base: type) -> bool:
 @contextmanager
 def _temporarily_concrete(server: Any, type_ids: set[o6.NodeId]):
     for type_id in type_ids:
-        server._on_event_loop(partial(server._set_type_abstract, type_id, False))
+        server._run_on_loop(
+            partial(server._set_type_abstract, type_id, False), sync_result=True, wait=True
+        )
     try:
         yield
     finally:
         for type_id in type_ids:
-            server._on_event_loop(partial(server._set_type_abstract, type_id, True))
+            server._run_on_loop(
+                partial(server._set_type_abstract, type_id, True), sync_result=True, wait=True
+            )
 
 
 def _namespace_values(ns: ModuleType) -> list[Any]:
@@ -192,7 +196,7 @@ class _NamespacePublisher:
 
     def _create_type(self, marker: type, create: Callable[[], Any]) -> None:
         if marker not in self._created_types:
-            self._server._on_event_loop(create)
+            self._server._run_on_loop(create, sync_result=True, wait=True)
             self._created_types.add(marker)
 
     def _inject_datatype_children(self) -> None:
@@ -266,11 +270,15 @@ class _NamespacePublisher:
 
     def _existing_node(self, nodeid: o6.NodeId) -> tuple[Any, o6.QualifiedName] | None:
         try:
-            node_class = self._server._on_event_loop(
-                partial(self._server._read_attribute, nodeid, int(o6.AttributeId.NODE_CLASS))
+            node_class = self._server._run_on_loop(
+                partial(self._server._read_attribute, nodeid, int(o6.AttributeId.NODE_CLASS)),
+                sync_result=True,
+                wait=True,
             )
-            browse_name = self._server._on_event_loop(
-                partial(self._server._read_attribute, nodeid, int(o6.AttributeId.BROWSE_NAME))
+            browse_name = self._server._run_on_loop(
+                partial(self._server._read_attribute, nodeid, int(o6.AttributeId.BROWSE_NAME)),
+                sync_result=True,
+                wait=True,
             )
         except o6.StatusCodeError as exc:
             if exc.code == o6.StatusCode.BAD_NODE_ID_UNKNOWN:
@@ -285,7 +293,7 @@ class _NamespacePublisher:
             attributes = ns0.datatypes.ObjectAttributes()
             attributes.displayName = o6.LocalizedText(_DEFAULT_BINARY)
             # A DataTypeEncoding has no hierarchical parent.
-            self._server._on_event_loop(
+            self._server._run_on_loop(
                 partial(
                     self._server._add_object_node,
                     encoding,
@@ -294,7 +302,9 @@ class _NamespacePublisher:
                     name,
                     o6.NodeId(_DATA_TYPE_ENCODING_TYPE),
                     attributes,
-                )
+                ),
+                sync_result=True,
+                wait=True,
             )
         elif existing != (ns0.datatypes.NodeClass.OBJECT, name):
             _logger.warning(
@@ -315,8 +325,8 @@ class _NamespacePublisher:
             0,
             ns0.datatypes.BrowseResultMask.BROWSE_NAME,
         )
-        properties = self._server._on_event_loop(
-            partial(self._server._browse_references, datatype, query)
+        properties = self._server._run_on_loop(
+            partial(self._server._browse_references, datatype, query), sync_result=True, wait=True
         )
         declared = [o6.QualifiedName(0, name) for name in _ENUM_PROPERTIES]
         if any(ref.browseName == name for ref in properties for name in declared):
@@ -363,7 +373,7 @@ class _NamespacePublisher:
         attributes.accessLevel = int(ns0.datatypes.AccessLevelType.CURRENT_READ)
         attributes.userAccessLevel = attributes.accessLevel
         attributes.value = value
-        self._server._on_event_loop(
+        self._server._run_on_loop(
             partial(
                 self._server._add_variable_node,
                 nodeid,
@@ -372,7 +382,9 @@ class _NamespacePublisher:
                 o6.QualifiedName(0, name),
                 o6.NodeId(_PROPERTY_TYPE),
                 attributes,
-            )
+            ),
+            sync_result=True,
+            wait=True,
         )
 
     def _inject_instances(self) -> None:

@@ -33,7 +33,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=plastics_tcd;i=3002", browseName="OperatingModeEnumeration", description="Actual operating mode of the TCD")
+@o6.enumtype(nodeId="ns=plastics_tcd;i=3002", browseName="ns=plastics_tcd;OperatingModeEnumeration", description="Actual operating mode of the TCD")
 class OperatingModeEnumeration(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="OTHER")
     READY_TO_OPERATE = o6.enumfield(1, name="READY_TO_OPERATE")

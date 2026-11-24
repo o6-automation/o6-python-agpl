@@ -49,10 +49,14 @@ di.vartypes.LifetimeVariableType(
     browseName="ns=machinery;LifetimeVariable",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6002", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6002", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=wmtp;i=6003", browseName="ns=di;LimitValue", description="LimitValue indicates when the end of lifetime has been reached.", dataType=ns0.datatypes.Number
+                nodeId="ns=wmtp;i=6003",
+                browseName="ns=di;LimitValue",
+                description="LimitValue indicates when the end of lifetime has been reached.",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.Number,
             )
         ),
         o6.hasProperty(
@@ -60,6 +64,7 @@ di.vartypes.LifetimeVariableType(
                 nodeId="ns=wmtp;i=6004",
                 browseName="ns=di;StartValue",
                 description="StartValue indicates the initial value, when there is still the full lifetime left.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Number,
             )
         ),
@@ -71,12 +76,14 @@ di.vartypes.LifetimeVariableType(
 machinery.objtypes.MachineryComponentIdentificationType(
     nodeId="ns=wmtp;i=5009",
     browseName="ns=di;Identification",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6006",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -85,6 +92,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=wmtp;i=6007",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -95,9 +103,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=wmtp;i=6008",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6009", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6010", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6009", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6010", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -107,9 +116,19 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=wmtp;i=5010",
     browseName="ns=wmtp;BatteryLevel",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6011", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=wmtp;i=6011",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
         o6.hasComponent(o6.ns["ns=wmtp;i=6008"]),
     ],
@@ -117,10 +136,15 @@ machinery_processvalues.objtypes.ProcessValueType(
 di.vartypes.LifetimeVariableType(
     nodeId="ns=wmtp;i=6016",
     browseName="ns=wmtp;LicenseValidity",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=wmtp;i=6017", browseName="ns=di;LimitValue", description="LimitValue indicates when the end of lifetime has been reached.", dataType=ns0.datatypes.Number
+                nodeId="ns=wmtp;i=6017",
+                browseName="ns=di;LimitValue",
+                description="LimitValue indicates when the end of lifetime has been reached.",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.Number,
             )
         ),
         o6.hasProperty(
@@ -128,10 +152,11 @@ di.vartypes.LifetimeVariableType(
                 nodeId="ns=wmtp;i=6018",
                 browseName="ns=di;StartValue",
                 description="StartValue indicates the initial value, when there is still the full lifetime left.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Number,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6019", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6019", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
     ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
@@ -140,10 +165,15 @@ di.vartypes.LifetimeVariableType(
 di.vartypes.LifetimeVariableType(
     nodeId="ns=wmtp;i=6020",
     browseName="ns=wmtp;RemainingLifetimeCounter",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=wmtp;i=6021", browseName="ns=di;LimitValue", description="LimitValue indicates when the end of lifetime has been reached.", dataType=ns0.datatypes.Number
+                nodeId="ns=wmtp;i=6021",
+                browseName="ns=di;LimitValue",
+                description="LimitValue indicates when the end of lifetime has been reached.",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.Number,
             )
         ),
         o6.hasProperty(
@@ -151,10 +181,11 @@ di.vartypes.LifetimeVariableType(
                 nodeId="ns=wmtp;i=6022",
                 browseName="ns=di;StartValue",
                 description="StartValue indicates the initial value, when there is still the full lifetime left.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Number,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6023", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6023", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
     ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
@@ -163,10 +194,15 @@ di.vartypes.LifetimeVariableType(
 di.vartypes.LifetimeVariableType(
     nodeId="ns=wmtp;i=6024",
     browseName="ns=wmtp;RemainingCycleCounter",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=wmtp;i=6025", browseName="ns=di;LimitValue", description="LimitValue indicates when the end of lifetime has been reached.", dataType=ns0.datatypes.Number
+                nodeId="ns=wmtp;i=6025",
+                browseName="ns=di;LimitValue",
+                description="LimitValue indicates when the end of lifetime has been reached.",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.Number,
             )
         ),
         o6.hasProperty(
@@ -174,10 +210,11 @@ di.vartypes.LifetimeVariableType(
                 nodeId="ns=wmtp;i=6026",
                 browseName="ns=di;StartValue",
                 description="StartValue indicates the initial value, when there is still the full lifetime left.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Number,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6027", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6027", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
     ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
@@ -186,10 +223,15 @@ di.vartypes.LifetimeVariableType(
 di.vartypes.LifetimeVariableType(
     nodeId="ns=wmtp;i=6028",
     browseName="ns=wmtp;NextServiceCounter",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=wmtp;i=6029", browseName="ns=di;LimitValue", description="LimitValue indicates when the end of lifetime has been reached.", dataType=ns0.datatypes.Number
+                nodeId="ns=wmtp;i=6029",
+                browseName="ns=di;LimitValue",
+                description="LimitValue indicates when the end of lifetime has been reached.",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.Number,
             )
         ),
         o6.hasProperty(
@@ -197,10 +239,11 @@ di.vartypes.LifetimeVariableType(
                 nodeId="ns=wmtp;i=6030",
                 browseName="ns=di;StartValue",
                 description="StartValue indicates the initial value, when there is still the full lifetime left.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Number,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6031", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6031", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
     ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
@@ -227,7 +270,12 @@ machinery.objtypes.MachineryOperationCounterType(
     references=[
         o6.hasComponent(
             ns0.vartypes.BaseDataVariableType(
-                nodeId="ns=wmtp;i=6032", browseName="ns=wmtp;OperationSinceLastServiceCounter", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1
+                nodeId="ns=wmtp;i=6032",
+                browseName="ns=wmtp;OperationSinceLastServiceCounter",
+                modellingRule="Optional",
+                dataType=ns0.datatypes.Duration,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         )
     ],
@@ -238,7 +286,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=wmtp;i=6033",
     browseName="ns=wmtp;TriggerSettings",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6034", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6034", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.UInt32,
     accessLevel=3,
     userAccessLevel=1,
@@ -248,7 +296,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=wmtp;i=6035",
     browseName="ns=wmtp;DeltaCondition",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6036", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6036", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -263,9 +311,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6038",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[8],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed"), description=o6.LocalizedText()),
@@ -278,7 +327,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6039", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6039", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -294,9 +343,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6041",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[7],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous"), description=o6.LocalizedText()),
@@ -310,7 +360,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6042", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6042", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -321,7 +371,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=wmtp;i=6043",
     browseName="ns=wmtp;RelativeUncertainty",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6044", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6044", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -331,7 +381,7 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=wmtp;i=6045",
     browseName="ns=wmtp;AbsoluteUncertainty",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6046", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6046", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -340,7 +390,8 @@ o6.reference(wmtp_objtypes.WMTPMeasurementType, ns0.reftypes.HasComponent, o6.ns
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=wmtp;i=6051",
     browseName="ns=wmtp;DeltaCondition",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6052", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6052", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -348,7 +399,8 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=wmtp;i=6053",
     browseName="ns=wmtp;TriggerSettings",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6054", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6054", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.UInt32,
     accessLevel=3,
     userAccessLevel=1,
@@ -356,14 +408,16 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=wmtp;i=6055",
     browseName="ns=wmtp;TypeOfMeasurement",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6056",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[8],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed"), description=o6.LocalizedText()),
@@ -376,7 +430,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6057", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6057", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -385,14 +439,16 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=wmtp;i=6058",
     browseName="ns=wmtp;TypeOfSample",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6059",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[7],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous"), description=o6.LocalizedText()),
@@ -406,7 +462,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6060", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6060", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -416,9 +472,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=wmtp;i=6061",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6062", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6063", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6062", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6063", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -428,7 +485,8 @@ padim.vartypes.AnalogSignalVariableType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=wmtp;i=6065",
     browseName="ns=wmtp;DeltaCondition",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6066", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6066", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -436,7 +494,8 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=wmtp;i=6067",
     browseName="ns=wmtp;TriggerSettings",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6068", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6068", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.UInt32,
     accessLevel=3,
     userAccessLevel=1,
@@ -444,14 +503,16 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=wmtp;i=6069",
     browseName="ns=wmtp;TypeOfMeasurement",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6070",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[8],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed"), description=o6.LocalizedText()),
@@ -464,7 +525,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6071", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6071", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -473,14 +534,16 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=wmtp;i=6072",
     browseName="ns=wmtp;TypeOfSample",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6073",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[7],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous"), description=o6.LocalizedText()),
@@ -494,7 +557,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6074", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6074", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -504,9 +567,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=wmtp;i=6075",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6076", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6077", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6076", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6077", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -516,7 +580,8 @@ padim.vartypes.AnalogSignalVariableType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=wmtp;i=6079",
     browseName="ns=wmtp;DeltaCondition",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6080", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6080", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -524,7 +589,8 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=wmtp;i=6081",
     browseName="ns=wmtp;TriggerSettings",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6082", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6082", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.UInt32,
     accessLevel=3,
     userAccessLevel=1,
@@ -532,14 +598,16 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=wmtp;i=6083",
     browseName="ns=wmtp;TypeOfMeasurement",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6084",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[8],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed"), description=o6.LocalizedText()),
@@ -552,7 +620,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6085", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6085", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -561,14 +629,16 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=wmtp;i=6086",
     browseName="ns=wmtp;TypeOfSample",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6087",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[7],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous"), description=o6.LocalizedText()),
@@ -582,7 +652,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6088", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6088", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -592,9 +662,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=wmtp;i=6089",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6090", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6091", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6090", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6091", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -604,7 +675,8 @@ padim.vartypes.AnalogSignalVariableType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=wmtp;i=6093",
     browseName="ns=wmtp;DeltaCondition",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6094", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6094", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -612,7 +684,8 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=wmtp;i=6095",
     browseName="ns=wmtp;TriggerSettings",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6096", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6096", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.UInt32,
     accessLevel=3,
     userAccessLevel=1,
@@ -620,14 +693,16 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=wmtp;i=6097",
     browseName="ns=wmtp;TypeOfMeasurement",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6098",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[8],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed"), description=o6.LocalizedText()),
@@ -640,7 +715,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6099", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6099", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -649,14 +724,16 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=wmtp;i=6100",
     browseName="ns=wmtp;TypeOfSample",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6101",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[7],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous"), description=o6.LocalizedText()),
@@ -670,7 +747,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6102", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6102", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -680,9 +757,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=wmtp;i=6103",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6104", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6105", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6104", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6105", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -692,7 +770,8 @@ padim.vartypes.AnalogSignalVariableType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=wmtp;i=6107",
     browseName="ns=wmtp;DeltaCondition",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6108", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6108", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -700,7 +779,8 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=wmtp;i=6109",
     browseName="ns=wmtp;TriggerSettings",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6110", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6110", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.UInt32,
     accessLevel=3,
     userAccessLevel=1,
@@ -708,14 +788,16 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=wmtp;i=6111",
     browseName="ns=wmtp;TypeOfMeasurement",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6112",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[8],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed"), description=o6.LocalizedText()),
@@ -728,7 +810,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6113", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6113", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -737,14 +819,16 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=wmtp;i=6114",
     browseName="ns=wmtp;TypeOfSample",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6115",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[7],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous"), description=o6.LocalizedText()),
@@ -758,7 +842,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6116", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6116", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -768,9 +852,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=wmtp;i=6117",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6118", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6119", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6118", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6119", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -780,7 +865,8 @@ padim.vartypes.AnalogSignalVariableType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=wmtp;i=6121",
     browseName="ns=wmtp;DeltaCondition",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6122", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6122", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -788,7 +874,8 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=wmtp;i=6123",
     browseName="ns=wmtp;TriggerSettings",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6124", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6124", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.UInt32,
     accessLevel=3,
     userAccessLevel=1,
@@ -796,14 +883,16 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=wmtp;i=6125",
     browseName="ns=wmtp;TypeOfMeasurement",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6126",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[8],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed"), description=o6.LocalizedText()),
@@ -816,7 +905,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6127", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6127", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -825,14 +914,16 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=wmtp;i=6128",
     browseName="ns=wmtp;TypeOfSample",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6129",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[7],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous"), description=o6.LocalizedText()),
@@ -846,7 +937,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6130", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6130", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -856,9 +947,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=wmtp;i=6131",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6132", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6133", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6132", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6133", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -868,7 +960,8 @@ padim.vartypes.AnalogSignalVariableType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=wmtp;i=6135",
     browseName="ns=wmtp;DeltaCondition",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6136", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6136", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -876,7 +969,8 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=wmtp;i=6137",
     browseName="ns=wmtp;TriggerSettings",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6138", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6138", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.UInt32,
     accessLevel=3,
     userAccessLevel=1,
@@ -884,14 +978,16 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=wmtp;i=6139",
     browseName="ns=wmtp;TypeOfMeasurement",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6140",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[8],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed"), description=o6.LocalizedText()),
@@ -904,7 +1000,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6141", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6141", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -913,14 +1009,16 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=wmtp;i=6142",
     browseName="ns=wmtp;TypeOfSample",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6143",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[7],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous"), description=o6.LocalizedText()),
@@ -934,7 +1032,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6144", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6144", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -944,9 +1042,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=wmtp;i=6145",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6146", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6147", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6146", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6147", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -956,7 +1055,8 @@ padim.vartypes.AnalogSignalVariableType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=wmtp;i=6149",
     browseName="ns=wmtp;DeltaCondition",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6150", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6150", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -964,7 +1064,8 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=wmtp;i=6151",
     browseName="ns=wmtp;TriggerSettings",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6152", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6152", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))],
     dataType=o6.UInt32,
     accessLevel=3,
     userAccessLevel=1,
@@ -972,14 +1073,16 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=wmtp;i=6153",
     browseName="ns=wmtp;TypeOfMeasurement",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6154",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[8],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("temperature"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("rotation speed"), description=o6.LocalizedText()),
@@ -992,7 +1095,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6155", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6155", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -1001,14 +1104,16 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=wmtp;i=6156",
     browseName="ns=wmtp;TypeOfSample",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6157",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[7],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("unspecified"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("instantaneous"), description=o6.LocalizedText()),
@@ -1022,7 +1127,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6158", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6158", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -1032,9 +1137,10 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=wmtp;i=6159",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6160", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6161", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6160", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6161", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1047,8 +1153,12 @@ ns0.vartypes.MultiStateValueDiscreteType(
     description="Indicates if a limit has been reached.",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6221", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6222", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=wmtp;i=6221", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6222", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -1056,9 +1166,13 @@ ns0.vartypes.MultiStateValueDiscreteType(
     userAccessLevel=1,
 )
 o6.reference(wmtp_objtypes.WMTPMeasurementType, ns0.reftypes.HasComponent, o6.ns["ns=wmtp;i=6220"])
-ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6223", browseName="ns=wmtp;OperationAboveHigh", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=wmtp;i=6223", browseName="ns=wmtp;OperationAboveHigh", modellingRule="Optional", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1
+)
 o6.reference(o6.ns["ns=wmtp;i=6220"], "i=46", o6.ns["ns=wmtp;i=6223"])
-ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6224", browseName="ns=wmtp;OperationAboveHighHigh", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=wmtp;i=6224", browseName="ns=wmtp;OperationAboveHighHigh", modellingRule="Optional", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1
+)
 o6.reference(o6.ns["ns=wmtp;i=6220"], "i=46", o6.ns["ns=wmtp;i=6224"])
 machinery.objtypes.MachineryOperationCounterType(
     nodeId="ns=wmtp;i=5019",
@@ -1074,14 +1188,16 @@ o6.reference(o6.ns["ns=wmtp;i=5021"], "i=39", o6.ns["ns=wmtp;i=6230"])
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=wmtp;i=6015",
     browseName="ns=wmtp;LifeCycleStatus",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=wmtp;i=6249",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[3],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("green"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("yellow"), description=o6.LocalizedText()),
@@ -1089,7 +1205,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6250", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6250", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt32,
     accessLevel=3,
@@ -1100,9 +1216,21 @@ ns0.objtypes.FolderType(
     browseName="ns=wmtp;DeviceInformation",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6012", browseName="ns=wmtp;LicenseInformation", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6013", browseName="ns=wmtp;NextServiceDate", dataType=ns0.datatypes.UtcTime, accessLevel=3, userAccessLevel=1)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6014", browseName="ns=wmtp;LastService", dataType=ns0.datatypes.UtcTime, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=wmtp;i=6012", browseName="ns=wmtp;LicenseInformation", modellingRule="Optional", dataType=o6.String, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=wmtp;i=6013", browseName="ns=wmtp;NextServiceDate", modellingRule="Optional", dataType=ns0.datatypes.UtcTime, accessLevel=3, userAccessLevel=1
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=wmtp;i=6014", browseName="ns=wmtp;LastService", modellingRule="Optional", dataType=ns0.datatypes.UtcTime, accessLevel=3, userAccessLevel=1
+            )
+        ),
         o6.hasComponent(o6.ns["ns=wmtp;i=5010"]),
         o6.hasComponent(o6.ns["ns=wmtp;i=6015"]),
         o6.hasAddIn(o6.ns["ns=wmtp;i=5009"]),
@@ -1119,7 +1247,7 @@ http_opcfoundation_org_UA_WMTP_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6254", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=wmtp;i=6255", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=wmtp;i=6255", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
@@ -1219,7 +1347,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="TimeZoneOffset", dataType=o6.NodeId("i=8912"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=wmtp;i=7001", browseName="ns=wmtp;SetDeviceTime", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6163"]))
+o6.call(nodeId="ns=wmtp;i=7001", browseName="ns=wmtp;SetDeviceTime", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6163"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6218",
@@ -1232,7 +1360,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FirmwareData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7002", browseName="ns=wmtp;UpdateFirmware", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6218"]))
+o6.call(nodeId="ns=wmtp;i=7002", browseName="ns=wmtp;UpdateFirmware", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6218"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6219",
@@ -1245,7 +1373,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="LicenseData", dataType=o6.NodeId("i=3"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7003", browseName="ns=wmtp;SendLicenseData", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6219"]))
+o6.call(nodeId="ns=wmtp;i=7003", browseName="ns=wmtp;SendLicenseData", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6219"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6231",
@@ -1258,14 +1386,18 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="TargetMode", dataType=o6.NodeId("i=5"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7004", browseName="ns=wmtp;SwitchCalibrationMode", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6231"]))
+o6.call(nodeId="ns=wmtp;i=7004", browseName="ns=wmtp;SwitchCalibrationMode", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6231"]))
 
 ns0.objtypes.FolderType(
     nodeId="ns=wmtp;i=5001",
     browseName="ns=wmtp;DeviceConfiguration",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6005", browseName="ns=wmtp;CalibrationMode", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=wmtp;i=6005", browseName="ns=wmtp;CalibrationMode", modellingRule="Optional", dataType=o6.Boolean, accessLevel=3, userAccessLevel=1
+            )
+        ),
         o6.hasComponent(o6.ns["ns=wmtp;i=7001"]),
         o6.hasComponent(o6.ns["ns=wmtp;i=7002"]),
         o6.hasComponent(o6.ns["ns=wmtp;i=7003"]),
@@ -1286,7 +1418,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7024", browseName="ns=wmtp;CombinedReportAll", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6242"]))
+o6.call(nodeId="ns=wmtp;i=7024", browseName="ns=wmtp;CombinedReportAll", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6242"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6175",
@@ -1299,14 +1431,14 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="NumberOfStoredRecords", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7025", browseName="ns=wmtp;ReportNumberOfStoredRecords", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6175"]))
+o6.call(nodeId="ns=wmtp;i=7025", browseName="ns=wmtp;ReportNumberOfStoredRecords", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6175"]))
 
 wmtp_objtypes.WMTPServiceCycleDataType(
     nodeId="ns=wmtp;i=5004",
     browseName="ns=wmtp;WMTPServiceCycleData",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(o6.call(nodeId="ns=wmtp;i=7023", browseName="ns=wmtp;AbortOperation")),
+        o6.hasComponent(o6.call(nodeId="ns=wmtp;i=7023", browseName="ns=wmtp;AbortOperation", modellingRule="Mandatory")),
         o6.hasComponent(o6.ns["ns=wmtp;i=7024"]),
         o6.hasComponent(o6.ns["ns=wmtp;i=7025"]),
     ],
@@ -1325,7 +1457,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="CombinedReport", dataType=o6.NodeId("ns=wmtp;i=3003"), valueRank=-2, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7027", browseName="ns=wmtp;CombinedReportAll", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6234"]))
+o6.call(nodeId="ns=wmtp;i=7027", browseName="ns=wmtp;CombinedReportAll", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6234"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6177",
@@ -1338,14 +1470,14 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="NumberOfStoredRecords", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7028", browseName="ns=wmtp;ReportNumberOfStoredRecords", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6177"]))
+o6.call(nodeId="ns=wmtp;i=7028", browseName="ns=wmtp;ReportNumberOfStoredRecords", modellingRule="Mandatory", outputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6177"]))
 
 wmtp_objtypes.WMTPWorkCycleDataType(
     nodeId="ns=wmtp;i=5003",
     browseName="ns=wmtp;WMTPWorkCycleData",
     modellingRule="Optional",
     references=[
-        o6.hasComponent(o6.call(nodeId="ns=wmtp;i=7026", browseName="ns=wmtp;AbortOperation")),
+        o6.hasComponent(o6.call(nodeId="ns=wmtp;i=7026", browseName="ns=wmtp;AbortOperation", modellingRule="Mandatory")),
         o6.hasComponent(o6.ns["ns=wmtp;i=7027"]),
         o6.hasComponent(o6.ns["ns=wmtp;i=7028"]),
     ],
@@ -1364,7 +1496,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="DeltaValue", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7031", browseName="ns=wmtp;SetDeltaCondition", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6204"]))
+o6.call(nodeId="ns=wmtp;i=7031", browseName="ns=wmtp;SetDeltaCondition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6204"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6186",
@@ -1377,7 +1509,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7032", browseName="ns=wmtp;SetTriggerSettings", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6186"]))
+o6.call(nodeId="ns=wmtp;i=7032", browseName="ns=wmtp;SetTriggerSettings", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6186"]))
 
 wmtp_objtypes.WMTPMeasurementType(
     nodeId="ns=wmtp;i=5014",
@@ -1385,7 +1517,16 @@ wmtp_objtypes.WMTPMeasurementType(
     modellingRule="OptionalPlaceholder",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6064", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=wmtp;i=6064",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
         o6.hasComponent(o6.ns["ns=wmtp;i=6051"]),
         o6.hasComponent(o6.ns["ns=wmtp;i=6055"]),
@@ -1409,7 +1550,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="DeltaValue", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7033", browseName="ns=wmtp;SetDeltaCondition", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6208"]))
+o6.call(nodeId="ns=wmtp;i=7033", browseName="ns=wmtp;SetDeltaCondition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6208"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6190",
@@ -1422,7 +1563,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7034", browseName="ns=wmtp;SetTriggerSettings", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6190"]))
+o6.call(nodeId="ns=wmtp;i=7034", browseName="ns=wmtp;SetTriggerSettings", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6190"]))
 
 wmtp_objtypes.WMTPMeasurementType(
     nodeId="ns=wmtp;i=5018",
@@ -1430,7 +1571,16 @@ wmtp_objtypes.WMTPMeasurementType(
     modellingRule="OptionalPlaceholder",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6078", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=wmtp;i=6078",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
         o6.hasComponent(o6.ns["ns=wmtp;i=6065"]),
         o6.hasComponent(o6.ns["ns=wmtp;i=6069"]),
@@ -1454,7 +1604,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="DeltaValue", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7035", browseName="ns=wmtp;SetDeltaCondition", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6205"]))
+o6.call(nodeId="ns=wmtp;i=7035", browseName="ns=wmtp;SetDeltaCondition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6205"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6187",
@@ -1467,7 +1617,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7036", browseName="ns=wmtp;SetTriggerSettings", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6187"]))
+o6.call(nodeId="ns=wmtp;i=7036", browseName="ns=wmtp;SetTriggerSettings", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6187"]))
 
 wmtp_objtypes.WMTPMeasurementType(
     nodeId="ns=wmtp;i=5015",
@@ -1475,7 +1625,16 @@ wmtp_objtypes.WMTPMeasurementType(
     modellingRule="OptionalPlaceholder",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6092", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=wmtp;i=6092",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
         o6.hasComponent(o6.ns["ns=wmtp;i=6079"]),
         o6.hasComponent(o6.ns["ns=wmtp;i=6083"]),
@@ -1499,7 +1658,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="DeltaValue", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7037", browseName="ns=wmtp;SetDeltaCondition", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6203"]))
+o6.call(nodeId="ns=wmtp;i=7037", browseName="ns=wmtp;SetDeltaCondition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6203"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6185",
@@ -1512,7 +1671,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7038", browseName="ns=wmtp;SetTriggerSettings", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6185"]))
+o6.call(nodeId="ns=wmtp;i=7038", browseName="ns=wmtp;SetTriggerSettings", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6185"]))
 
 wmtp_objtypes.WMTPMeasurementType(
     nodeId="ns=wmtp;i=5013",
@@ -1520,7 +1679,16 @@ wmtp_objtypes.WMTPMeasurementType(
     modellingRule="OptionalPlaceholder",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6106", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=wmtp;i=6106",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
         o6.hasComponent(o6.ns["ns=wmtp;i=6081"]),
         o6.hasComponent(o6.ns["ns=wmtp;i=6093"]),
@@ -1544,7 +1712,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="DeltaValue", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7039", browseName="ns=wmtp;SetDeltaCondition", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6207"]))
+o6.call(nodeId="ns=wmtp;i=7039", browseName="ns=wmtp;SetDeltaCondition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6207"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6189",
@@ -1557,7 +1725,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7040", browseName="ns=wmtp;SetTriggerSettings", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6189"]))
+o6.call(nodeId="ns=wmtp;i=7040", browseName="ns=wmtp;SetTriggerSettings", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6189"]))
 
 wmtp_objtypes.WMTPMeasurementType(
     nodeId="ns=wmtp;i=5017",
@@ -1565,7 +1733,16 @@ wmtp_objtypes.WMTPMeasurementType(
     modellingRule="OptionalPlaceholder",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6120", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=wmtp;i=6120",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
         o6.hasComponent(o6.ns["ns=wmtp;i=6107"]),
         o6.hasComponent(o6.ns["ns=wmtp;i=6111"]),
@@ -1589,7 +1766,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="DeltaValue", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7041", browseName="ns=wmtp;SetDeltaCondition", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6202"]))
+o6.call(nodeId="ns=wmtp;i=7041", browseName="ns=wmtp;SetDeltaCondition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6202"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6184",
@@ -1602,7 +1779,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7042", browseName="ns=wmtp;SetTriggerSettings", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6184"]))
+o6.call(nodeId="ns=wmtp;i=7042", browseName="ns=wmtp;SetTriggerSettings", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6184"]))
 
 wmtp_objtypes.WMTPMeasurementType(
     nodeId="ns=wmtp;i=5012",
@@ -1610,7 +1787,16 @@ wmtp_objtypes.WMTPMeasurementType(
     modellingRule="OptionalPlaceholder",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6134", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=wmtp;i=6134",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
         o6.hasComponent(o6.ns["ns=wmtp;i=6067"]),
         o6.hasComponent(o6.ns["ns=wmtp;i=6121"]),
@@ -1634,7 +1820,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="DeltaValue", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7043", browseName="ns=wmtp;SetDeltaCondition", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6201"]))
+o6.call(nodeId="ns=wmtp;i=7043", browseName="ns=wmtp;SetDeltaCondition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6201"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6183",
@@ -1647,7 +1833,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7044", browseName="ns=wmtp;SetTriggerSettings", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6183"]))
+o6.call(nodeId="ns=wmtp;i=7044", browseName="ns=wmtp;SetTriggerSettings", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6183"]))
 
 wmtp_objtypes.WMTPMeasurementType(
     nodeId="ns=wmtp;i=5011",
@@ -1655,7 +1841,16 @@ wmtp_objtypes.WMTPMeasurementType(
     modellingRule="OptionalPlaceholder",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6148", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=wmtp;i=6148",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
         o6.hasComponent(o6.ns["ns=wmtp;i=6053"]),
         o6.hasComponent(o6.ns["ns=wmtp;i=6135"]),
@@ -1679,7 +1874,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="DeltaValue", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7045", browseName="ns=wmtp;SetDeltaCondition", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6206"]))
+o6.call(nodeId="ns=wmtp;i=7045", browseName="ns=wmtp;SetDeltaCondition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6206"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wmtp;i=6188",
@@ -1692,7 +1887,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="TriggerDuration", dataType=o6.NodeId("i=290"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=wmtp;i=7046", browseName="ns=wmtp;SetTriggerSettings", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6188"]))
+o6.call(nodeId="ns=wmtp;i=7046", browseName="ns=wmtp;SetTriggerSettings", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wmtp;i=6188"]))
 
 wmtp_objtypes.WMTPMeasurementType(
     nodeId="ns=wmtp;i=5016",
@@ -1700,7 +1895,16 @@ wmtp_objtypes.WMTPMeasurementType(
     modellingRule="OptionalPlaceholder",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=wmtp;i=6162", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=wmtp;i=6162",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
+            )
         ),
         o6.hasComponent(o6.ns["ns=wmtp;i=6123"]),
         o6.hasComponent(o6.ns["ns=wmtp;i=6149"]),

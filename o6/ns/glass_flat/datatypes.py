@@ -34,26 +34,26 @@ else:
     _VariableNode = object
 
 
-@o6.datatype(nodeId="ns=glass_flat;i=3002", browseName="LimitedString64", parent="i=12")
+@o6.datatype(nodeId="ns=glass_flat;i=3002", browseName="ns=glass_flat;LimitedString64", parent="i=12")
 class LimitedString64:
     pass
 
 
-@o6.enumtype(nodeId="ns=glass_flat;i=3003", browseName="SignificantSideEnumeration")
+@o6.enumtype(nodeId="ns=glass_flat;i=3003", browseName="ns=glass_flat;SignificantSideEnumeration")
 class SignificantSideEnumeration(ns0.datatypes.Enumeration):
     INDIFFERENT = o6.enumfield(0, name="Indifferent")
     TOP = o6.enumfield(1, name="Top")
     DOWN = o6.enumfield(2, name="Down")
 
 
-@o6.enumtype(nodeId="ns=glass_flat;i=3004", browseName="StructureAlignmentEnumeration")
+@o6.enumtype(nodeId="ns=glass_flat;i=3004", browseName="ns=glass_flat;StructureAlignmentEnumeration")
 class StructureAlignmentEnumeration(ns0.datatypes.Enumeration):
     INDIFFERENT = o6.enumfield(0, name="Indifferent")
     LONGITUDINAL = o6.enumfield(1, name="Longitudinal")
     TRANSVERSE = o6.enumfield(2, name="Transverse")
 
 
-@o6.enumtype(nodeId="ns=glass_flat;i=3005", browseName="SpacerMaterialClass")
+@o6.enumtype(nodeId="ns=glass_flat;i=3005", browseName="ns=glass_flat;SpacerMaterialClass")
 class SpacerMaterialClass(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="Other")
     METALIC = o6.enumfield(1, name="Metalic")
@@ -62,24 +62,24 @@ class SpacerMaterialClass(ns0.datatypes.Enumeration):
     ELASTIC = o6.enumfield(4, name="Elastic")
 
 
-@o6.datatype(nodeId="ns=glass_flat;i=3006", browseName="UserProfileType", defaultEncodingId="ns=glass_flat;i=5082")
+@o6.datatype(nodeId="ns=glass_flat;i=3006", browseName="ns=glass_flat;UserProfileType", defaultEncodingId="ns=glass_flat;i=5082")
 class UserProfileType(ns0.datatypes.Structure):
-    name: o6.String
-    loginTime: o6.DateTime
-    language: o6.String
-    measurementFormat: o6.String
-    accessLevel: o6.String
-    opcUaUser: o6.Boolean
+    name: o6.String = o6.field(name="Name")
+    loginTime: o6.DateTime = o6.field(name="LoginTime")
+    language: o6.String = o6.field(name="Language")
+    measurementFormat: o6.String = o6.field(name="MeasurementFormat")
+    accessLevel: o6.String = o6.field(name="AccessLevel")
+    opcUaUser: o6.Boolean = o6.field(name="OpcUaUser")
 
 
-@o6.datatype(nodeId="ns=glass_flat;i=3007", browseName="FileFormatType", defaultEncodingId="ns=glass_flat;i=5037")
+@o6.datatype(nodeId="ns=glass_flat;i=3007", browseName="ns=glass_flat;FileFormatType", defaultEncodingId="ns=glass_flat;i=5037")
 class FileFormatType(ns0.datatypes.Structure):
-    name: o6.String
-    fileExtension: o6.String
-    version: o6.String
+    name: o6.String = o6.field(name="Name")
+    fileExtension: o6.String = o6.field(name="FileExtension")
+    version: o6.String = o6.field(name="Version")
 
 
-@o6.enumtype(nodeId="ns=glass_flat;i=3008", browseName="CoordinateSystemEnumeration")
+@o6.enumtype(nodeId="ns=glass_flat;i=3008", browseName="ns=glass_flat;CoordinateSystemEnumeration")
 class CoordinateSystemEnumeration(ns0.datatypes.Enumeration):
     UNKNOWN = o6.enumfield(0, name="Unknown")
     SYSTEM1 = o6.enumfield(1, name="System1")
@@ -92,7 +92,7 @@ class CoordinateSystemEnumeration(ns0.datatypes.Enumeration):
     SYSTEM8 = o6.enumfield(8, name="System8")
 
 
-@o6.enumtype(nodeId="ns=glass_flat;i=3009", browseName="CoatingClassEnumeration")
+@o6.enumtype(nodeId="ns=glass_flat;i=3009", browseName="ns=glass_flat;CoatingClassEnumeration")
 class CoatingClassEnumeration(ns0.datatypes.Enumeration):
     HARD_COATING = o6.enumfield(0, name="HardCoating")
     SOFT_COATING = o6.enumfield(1, name="SoftCoating")

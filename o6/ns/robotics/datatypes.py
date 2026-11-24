@@ -34,7 +34,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=robotics;i=3006", browseName="OperationalModeEnumeration")
+@o6.enumtype(nodeId="ns=robotics;i=3006", browseName="ns=robotics;OperationalModeEnumeration")
 class OperationalModeEnumeration(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="OTHER")
     MANUAL_REDUCED_SPEED = o6.enumfield(1, name="MANUAL_REDUCED_SPEED")
@@ -43,7 +43,7 @@ class OperationalModeEnumeration(ns0.datatypes.Enumeration):
     AUTOMATIC_EXTERNAL = o6.enumfield(4, name="AUTOMATIC_EXTERNAL")
 
 
-@o6.enumtype(nodeId="ns=robotics;i=3008", browseName="AxisMotionProfileEnumeration")
+@o6.enumtype(nodeId="ns=robotics;i=3008", browseName="ns=robotics;AxisMotionProfileEnumeration")
 class AxisMotionProfileEnumeration(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="OTHER")
     ROTARY = o6.enumfield(1, name="ROTARY")
@@ -52,14 +52,14 @@ class AxisMotionProfileEnumeration(ns0.datatypes.Enumeration):
     LINEAR_ENDLESS = o6.enumfield(4, name="LINEAR_ENDLESS")
 
 
-@o6.enumtype(nodeId="ns=robotics;i=18191", browseName="ExecutionModeEnumeration")
+@o6.enumtype(nodeId="ns=robotics;i=18191", browseName="ns=robotics;ExecutionModeEnumeration")
 class ExecutionModeEnumeration(ns0.datatypes.Enumeration):
     CYCLE = o6.enumfield(0, name="CYCLE")
     CONTINUOUS = o6.enumfield(1, name="CONTINUOUS")
     STEP = o6.enumfield(2, name="STEP")
 
 
-@o6.enumtype(nodeId="ns=robotics;i=18193", browseName="MotionDeviceCategoryEnumeration")
+@o6.enumtype(nodeId="ns=robotics;i=18193", browseName="ns=robotics;MotionDeviceCategoryEnumeration")
 class MotionDeviceCategoryEnumeration(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="OTHER")
     ARTICULATED_ROBOT = o6.enumfield(1, name="ARTICULATED_ROBOT")

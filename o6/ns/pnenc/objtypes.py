@@ -44,6 +44,7 @@ class LogbookEventType(ns0.objtypes.BaseEventType):
         ns0.vartypes.PropertyType(
             nodeId="ns=pnenc;i=6034",
             browseName="ns=pnenc;LogEntry",
+            modellingRule="Mandatory",
             dataType=pnenc_datypes.LogEntryDataType,
             value=pnenc_datypes.LogEntryDataType(
                 faultSituationNumber=0,
@@ -62,29 +63,39 @@ class LogbookEventType(ns0.objtypes.BaseEventType):
 @o6.objecttype(nodeId="ns=pnenc;i=1004", browseName="ns=pnenc;EncoderRefLatchEventType", displayName="EncoderRefLatchEventType")
 class EncoderRefLatchEventType(ns0.objtypes.BaseEventType):
     lastLatchedPos: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6036", browseName="ns=pnenc;LastLatchedPos", dataType=ns0.datatypes.Number)
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6036", browseName="ns=pnenc;LastLatchedPos", modellingRule="Mandatory", dataType=ns0.datatypes.Number)
     )
-    latchActive: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6035", browseName="ns=pnenc;LatchActive", dataType=o6.Boolean))
+    latchActive: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6035", browseName="ns=pnenc;LatchActive", modellingRule="Mandatory", dataType=o6.Boolean)
+    )
 
 
 @o6.objecttype(nodeId="ns=pnenc;i=1005", browseName="ns=pnenc;EncoderProbeLatchEventType", displayName="EncoderProbeLatchEventType")
 class EncoderProbeLatchEventType(ns0.objtypes.BaseEventType):
     lastLatchedPos: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6039", browseName="ns=pnenc;LastLatchedPos", dataType=ns0.datatypes.Number)
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6039", browseName="ns=pnenc;LastLatchedPos", modellingRule="Mandatory", dataType=ns0.datatypes.Number)
     )
-    latchActive: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6038", browseName="ns=pnenc;LatchActive", dataType=o6.Boolean))
-    probeName: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6037", browseName="ns=pnenc;ProbeName", dataType=o6.String))
+    latchActive: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6038", browseName="ns=pnenc;LatchActive", modellingRule="Mandatory", dataType=o6.Boolean)
+    )
+    probeName: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6037", browseName="ns=pnenc;ProbeName", modellingRule="Optional", dataType=o6.String)
+    )
 
 
 @o6.objecttype(nodeId="ns=pnenc;i=1006", browseName="ns=pnenc;EncoderDiagnosisEventType", displayName="EncoderDiagnosisEventType")
 class EncoderDiagnosisEventType(ns0.objtypes.BaseEventType):
     diagnosisType: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6041", browseName="ns=pnenc;DiagnosisType", dataType=pnenc_datypes.EventTypeEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6041", browseName="ns=pnenc;DiagnosisType", modellingRule="Mandatory", dataType=pnenc_datypes.EventTypeEnumeration)
     )
-    eventCode: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6040", browseName="ns=pnenc;EventCode", dataType=ns0.datatypes.Integer))
-    eventText: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6042", browseName="ns=pnenc;EventText", dataType=o6.String))
+    eventCode: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6040", browseName="ns=pnenc;EventCode", modellingRule="Mandatory", dataType=ns0.datatypes.Integer)
+    )
+    eventText: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6042", browseName="ns=pnenc;EventText", modellingRule="Mandatory", dataType=o6.String)
+    )
     reason: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6043", browseName="ns=pnenc;Reason", dataType=pnenc_datypes.EncoderDiagnosisReasonEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6043", browseName="ns=pnenc;Reason", modellingRule="Mandatory", dataType=pnenc_datypes.EncoderDiagnosisReasonEnumeration)
     )
 
 
@@ -99,7 +110,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ApplicationTag", dataType=o6.NodeId("i=12"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnenc;i=7001", browseName="ns=pnenc;SetApplicationTag", inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6002"]))
+o6.call(nodeId="ns=pnenc;i=7001", browseName="ns=pnenc;SetApplicationTag", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6002"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnenc;i=6052",
@@ -123,35 +134,43 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="SensorConfigParametersResult", dataType=o6.NodeId("i=14533"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnenc;i=7006", browseName="ns=pnenc;SetSensorConfig", inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6052"]), outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6053"]))
+o6.call(
+    nodeId="ns=pnenc;i=7006",
+    browseName="ns=pnenc;SetSensorConfig",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6052"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6053"]),
+)
 
 
 @o6.objecttype(nodeId="ns=pnenc;i=1007", browseName="ns=pnenc;EncoderSensorConfigType", displayName="EncoderSensorConfigType")
 class EncoderSensorConfigType(ns0.objtypes.BaseObjectType):
     absolutePosDeterminableRevolutions: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6051", browseName="ns=pnenc;AbsolutePosDeterminableRevolutions", dataType=ns0.datatypes.Integer)
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6051", browseName="ns=pnenc;AbsolutePosDeterminableRevolutions", modellingRule="Optional", dataType=ns0.datatypes.Integer)
     )
     absolutePosLinSupported: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6050", browseName="ns=pnenc;AbsolutePosLinSupported", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6050", browseName="ns=pnenc;AbsolutePosLinSupported", modellingRule="Optional", dataType=o6.Boolean)
     )
     configType: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6045", browseName="ns=pnenc;ConfigType", dataType=pnenc_datypes.EncoderConfigTypeEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6045", browseName="ns=pnenc;ConfigType", modellingRule="Optional", dataType=pnenc_datypes.EncoderConfigTypeEnumeration)
     )
     sensorAbsoluteType: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6044", browseName="ns=pnenc;SensorAbsoluteType", dataType=pnenc_datypes.EncoderSensorAbsoluteTypeEnumeration)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=pnenc;i=6044", browseName="ns=pnenc;SensorAbsoluteType", modellingRule="Optional", dataType=pnenc_datypes.EncoderSensorAbsoluteTypeEnumeration
+        )
     )
     sensorResolutionIncPerRotation: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6046", browseName="ns=pnenc;SensorResolutionIncPerRotation", dataType=ns0.datatypes.Integer)
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6046", browseName="ns=pnenc;SensorResolutionIncPerRotation", modellingRule="Optional", dataType=ns0.datatypes.Integer)
     )
     sensorResolutionNanometerPerIncrement: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6047", browseName="ns=pnenc;SensorResolutionNanometerPerIncrement", dataType=ns0.datatypes.Integer)
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6047", browseName="ns=pnenc;SensorResolutionNanometerPerIncrement", modellingRule="Optional", dataType=ns0.datatypes.Integer)
     )
     setSensorConfig: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnenc;i=7006"])
     shiftFactorXIST1: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6048", browseName="ns=pnenc;ShiftFactorXIST1", dataType=ns0.datatypes.Integer)
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6048", browseName="ns=pnenc;ShiftFactorXIST1", modellingRule="Optional", dataType=ns0.datatypes.Integer)
     )
     shiftFactorXIST2: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6049", browseName="ns=pnenc;ShiftFactorXIST2", dataType=ns0.datatypes.Integer)
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6049", browseName="ns=pnenc;ShiftFactorXIST2", modellingRule="Optional", dataType=ns0.datatypes.Integer)
     )
 
 
@@ -177,20 +196,30 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ControlConfigParametersResult", dataType=o6.NodeId("i=14533"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnenc;i=7007", browseName="ns=pnenc;SetControlConfig", inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6057"]), outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6058"]))
+o6.call(
+    nodeId="ns=pnenc;i=7007",
+    browseName="ns=pnenc;SetControlConfig",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6057"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6058"]),
+)
 
 
 @o6.objecttype(nodeId="ns=pnenc;i=1008", browseName="ns=pnenc;EncoderControlConfigType", displayName="EncoderControlConfigType")
 class EncoderControlConfigType(ns0.objtypes.BaseObjectType):
     alarmChannelControl: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6054", browseName="ns=pnenc;AlarmChannelControl", dataType=pnenc_datypes.EncoderAlarmChannelControlEnumeration)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=pnenc;i=6054", browseName="ns=pnenc;AlarmChannelControl", modellingRule="Optional", dataType=pnenc_datypes.EncoderAlarmChannelControlEnumeration
+        )
     )
     setControlConfig: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnenc;i=7007"])
     signOfLifeFailuresTolerated: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6056", browseName="ns=pnenc;SignOfLifeFailuresTolerated", dataType=o6.UInt16)
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6056", browseName="ns=pnenc;SignOfLifeFailuresTolerated", modellingRule="Optional", dataType=o6.UInt16)
     )
     xIST1PresetControl: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6055", browseName="ns=pnenc;XIST1PresetControl", dataType=pnenc_datypes.EncoderPresetControlEnumeration)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=pnenc;i=6055", browseName="ns=pnenc;XIST1PresetControl", modellingRule="Optional", dataType=pnenc_datypes.EncoderPresetControlEnumeration
+        )
     )
 
 
@@ -216,84 +245,100 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="AxisConfigParametersResult", dataType=o6.NodeId("i=14533"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnenc;i=7008", browseName="ns=pnenc;SetAxisConfig", inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6066"]), outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6067"]))
+o6.call(
+    nodeId="ns=pnenc;i=7008",
+    browseName="ns=pnenc;SetAxisConfig",
+    modellingRule="Optional",
+    inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6066"]),
+    outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6067"]),
+)
 
 
 @o6.objecttype(nodeId="ns=pnenc;i=1009", browseName="ns=pnenc;EncoderAxisConfigType", displayName="EncoderAxisConfigType")
 class EncoderAxisConfigType(ns0.objtypes.BaseObjectType):
     accelerationDampingTimeConstant: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(
-        ns0.vartypes.BaseAnalogType(nodeId="ns=pnenc;i=6065", browseName="ns=pnenc;AccelerationDampingTimeConstant", dataType=o6.Float)
+        ns0.vartypes.BaseAnalogType(nodeId="ns=pnenc;i=6065", browseName="ns=pnenc;AccelerationDampingTimeConstant", modellingRule="Optional", dataType=o6.Float)
     )
     axisType: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6060", browseName="ns=pnenc;AxisType", dataType=pnenc_datypes.EncoderAxisTypeEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6060", browseName="ns=pnenc;AxisType", modellingRule="Optional", dataType=pnenc_datypes.EncoderAxisTypeEnumeration)
     )
     codeSequence: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6061", browseName="ns=pnenc;CodeSequence", dataType=pnenc_datypes.EncoderCodeSequenceEnumeration)
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6061", browseName="ns=pnenc;CodeSequence", modellingRule="Optional", dataType=pnenc_datypes.EncoderCodeSequenceEnumeration)
     )
     positionScalingFactor: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6059", browseName="ns=pnenc;PositionScalingFactor", dataType=o6.Float)
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6059", browseName="ns=pnenc;PositionScalingFactor", modellingRule="Optional", dataType=o6.Float)
     )
     presetOrShiftValue: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6062", browseName="ns=pnenc;PresetOrShiftValue", dataType=o6.Float)
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6062", browseName="ns=pnenc;PresetOrShiftValue", modellingRule="Optional", dataType=o6.Float)
     )
     setAxisConfig: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnenc;i=7008"])
     velocityDampingTimeConstant: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(
-        ns0.vartypes.BaseAnalogType(nodeId="ns=pnenc;i=6064", browseName="ns=pnenc;VelocityDampingTimeConstant", dataType=o6.Float)
+        ns0.vartypes.BaseAnalogType(nodeId="ns=pnenc;i=6064", browseName="ns=pnenc;VelocityDampingTimeConstant", modellingRule="Optional", dataType=o6.Float)
     )
     velocityReference: ns0.vartypes.BaseAnalogType | None = o6.hasComponent(
-        ns0.vartypes.BaseAnalogType(nodeId="ns=pnenc;i=6063", browseName="ns=pnenc;VelocityReference", dataType=o6.Float)
+        ns0.vartypes.BaseAnalogType(nodeId="ns=pnenc;i=6063", browseName="ns=pnenc;VelocityReference", modellingRule="Optional", dataType=o6.Float)
     )
 
 
 @o6.objecttype(nodeId="ns=pnenc;i=1002", browseName="ns=pnenc;EncoderChannelType", displayName="EncoderChannelType")
 class EncoderChannelType(ns0.objtypes.BaseObjectType):
     acceleration: ns0.vartypes.AnalogUnitRangeType | None
-    applicationTag: ns0.vartypes.PropertyType | None = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6001", browseName="ns=pnenc;ApplicationTag", dataType=o6.String))
-    axisConfig: EncoderAxisConfigType | None = o6.hasComponent(EncoderAxisConfigType(nodeId="ns=pnenc;i=5008", browseName="ns=pnenc;AxisConfig"))
-    controlConfig: EncoderControlConfigType | None = o6.hasComponent(EncoderControlConfigType(nodeId="ns=pnenc;i=5009", browseName="ns=pnenc;ControlConfig"))
+    applicationTag: ns0.vartypes.PropertyType | None = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6001", browseName="ns=pnenc;ApplicationTag", modellingRule="Optional", dataType=o6.String)
+    )
+    axisConfig: EncoderAxisConfigType | None = o6.hasComponent(EncoderAxisConfigType(nodeId="ns=pnenc;i=5008", browseName="ns=pnenc;AxisConfig", modellingRule="Optional"))
+    controlConfig: EncoderControlConfigType | None = o6.hasComponent(
+        EncoderControlConfigType(nodeId="ns=pnenc;i=5009", browseName="ns=pnenc;ControlConfig", modellingRule="Optional")
+    )
     encoderChannelState: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6009", browseName="ns=pnenc;EncoderChannelState", dataType=pnenc_datypes.EncoderChannelStateEnumeration)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=pnenc;i=6009", browseName="ns=pnenc;EncoderChannelState", modellingRule="Optional", dataType=pnenc_datypes.EncoderChannelStateEnumeration
+        )
     )
     encoderProfileVersion: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6003", browseName="ns=pnenc;EncoderProfileVersion", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6003", browseName="ns=pnenc;EncoderProfileVersion", modellingRule="Optional", dataType=o6.String)
     )
     g1_STW: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6090", browseName="ns=pnenc;G1_STW", dataType=o6.UInt16)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6090", browseName="ns=pnenc;G1_STW", modellingRule="Optional", dataType=o6.UInt16)
     )
     g1_XIST1: ns0.vartypes.BaseDataVariableType | None
     g1_XIST2: ns0.vartypes.BaseDataVariableType | None
     g1_XIST3: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6094", browseName="ns=pnenc;G1_XIST3", dataType=o6.UInt64)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6094", browseName="ns=pnenc;G1_XIST3", modellingRule="Optional", dataType=o6.UInt64)
     )
     g1_XIST_PRESET_B: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6097", browseName="ns=pnenc;G1_XIST_PRESET_B", dataType=o6.UInt32)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6097", browseName="ns=pnenc;G1_XIST_PRESET_B", modellingRule="Optional", dataType=o6.UInt32)
     )
     g1_XIST_PRESET_B1: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6099", browseName="ns=pnenc;G1_XIST_PRESET_B1", dataType=o6.UInt32)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6099", browseName="ns=pnenc;G1_XIST_PRESET_B1", modellingRule="Optional", dataType=o6.UInt32)
     )
     g1_XIST_PRESET_C: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6098", browseName="ns=pnenc;G1_XIST_PRESET_C", dataType=o6.UInt64)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6098", browseName="ns=pnenc;G1_XIST_PRESET_C", modellingRule="Optional", dataType=o6.UInt64)
     )
     g1_ZSW: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6091", browseName="ns=pnenc;G1_ZSW", dataType=o6.UInt16)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6091", browseName="ns=pnenc;G1_ZSW", modellingRule="Optional", dataType=o6.UInt16)
     )
     lock: di.objtypes.LockingServicesType | None
     logbook: LogbookType | None
-    nIST_A: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6019", browseName="ns=pnenc;NIST_A", dataType=o6.Int16))
-    nIST_B: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6020", browseName="ns=pnenc;NIST_B", dataType=o6.Int32))
+    nIST_A: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6019", browseName="ns=pnenc;NIST_A", modellingRule="Optional", dataType=o6.Int16)
+    )
+    nIST_B: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6020", browseName="ns=pnenc;NIST_B", modellingRule="Optional", dataType=o6.Int32)
+    )
     position: ns0.vartypes.AnalogUnitRangeType | None
     positionSensorSignalValue: ns0.vartypes.BaseDataVariableType | None
-    probes: EncoderProbesType | None = o6.hasComponent(EncoderProbesType(nodeId="ns=pnenc;i=5012", browseName="ns=pnenc;Probes"))
+    probes: EncoderProbesType | None = o6.hasComponent(EncoderProbesType(nodeId="ns=pnenc;i=5012", browseName="ns=pnenc;Probes", modellingRule="Optional"))
     sTW2_ENC: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6095", browseName="ns=pnenc;STW2_ENC", dataType=o6.UInt16)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6095", browseName="ns=pnenc;STW2_ENC", modellingRule="Optional", dataType=o6.UInt16)
     )
     sensor: EncoderSensorType
-    sensorConfig: EncoderSensorConfigType | None = o6.hasComponent(EncoderSensorConfigType(nodeId="ns=pnenc;i=5007", browseName="ns=pnenc;SensorConfig"))
+    sensorConfig: EncoderSensorConfigType | None = o6.hasComponent(EncoderSensorConfigType(nodeId="ns=pnenc;i=5007", browseName="ns=pnenc;SensorConfig", modellingRule="Optional"))
     setApplicationTag: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnenc;i=7001"])
     temperature: ns0.vartypes.AnalogUnitRangeType | None
     velocity: ns0.vartypes.AnalogUnitRangeType | None
     zSW2_ENC: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6096", browseName="ns=pnenc;ZSW2_ENC", dataType=o6.UInt16)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6096", browseName="ns=pnenc;ZSW2_ENC", modellingRule="Optional", dataType=o6.UInt16)
     )
 
 
@@ -331,6 +376,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=pnenc;i=7010",
     browseName="ns=pnenc;GetFilteredLogbookEntries",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6070"]),
     outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6033"]),
 )
@@ -346,7 +392,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="CurrentLogEntries", dataType=o6.NodeId("ns=pnenc;i=3013"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnenc;i=7011", browseName="ns=pnenc;GetCurrentFaultSituation", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6071"]))
+o6.call(nodeId="ns=pnenc;i=7011", browseName="ns=pnenc;GetCurrentFaultSituation", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6071"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=pnenc;i=6072",
@@ -373,6 +419,7 @@ ns0.vartypes.PropertyType(
 o6.call(
     nodeId="ns=pnenc;i=7012",
     browseName="ns=pnenc;GetHistoricFaultSituation",
+    modellingRule="Optional",
     inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6072"]),
     outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6073"]),
 )
@@ -388,12 +435,12 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="ActiveDiagnosis", dataType=o6.NodeId("ns=pnenc;i=3013"), valueRank=1, arrayDimensions=[0], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnenc;i=7013", browseName="ns=pnenc;GetActiveDiagnosis", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6074"]))
+o6.call(nodeId="ns=pnenc;i=7013", browseName="ns=pnenc;GetActiveDiagnosis", modellingRule="Optional", outputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6074"]))
 
 
 @o6.objecttype(nodeId="ns=pnenc;i=1010", browseName="ns=pnenc;LogbookType", displayName="LogbookType")
 class LogbookType(ns0.objtypes.BaseObjectType):
-    deleteLogbook: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=pnenc;i=7009", browseName="ns=pnenc;DeleteLogbook"))
+    deleteLogbook: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=pnenc;i=7009", browseName="ns=pnenc;DeleteLogbook", modellingRule="Optional"))
     getActiveDiagnosis: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnenc;i=7013"])
     getCurrentFaultSituation: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnenc;i=7011"])
     getFilteredLogbookEntries: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnenc;i=7010"])
@@ -402,9 +449,10 @@ class LogbookType(ns0.objtypes.BaseObjectType):
         ns0.vartypes.BaseDataVariableType(
             nodeId="ns=pnenc;i=6068",
             browseName="ns=pnenc;LogEntries",
+            modellingRule="Mandatory",
             dataType=pnenc_datypes.LogEntryDataType,
             valueRank=1,
-            arrayDimensions=[1],
+            arrayDimensions=[0],
             value=[
                 pnenc_datypes.LogEntryDataType(
                     faultSituationNumber=0,
@@ -419,7 +467,9 @@ class LogbookType(ns0.objtypes.BaseObjectType):
             ],
         )
     )
-    logbookSize: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6069", browseName="ns=pnenc;LogbookSize", dataType=o6.UInt16))
+    logbookSize: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=pnenc;i=6069", browseName="ns=pnenc;LogbookSize", modellingRule="Mandatory", dataType=o6.UInt16)
+    )
 
 
 o6.reference(LogbookType, "i=41", LogbookEventType)
@@ -428,12 +478,12 @@ o6.reference(LogbookType, "i=41", LogbookEventType)
 @o6.objecttype(nodeId="ns=pnenc;i=1011", browseName="ns=pnenc;EncoderProbeType", displayName="EncoderProbeType")
 class EncoderProbeType(ns0.objtypes.BaseObjectType):
     lastLatchedPos: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6085", browseName="ns=pnenc;LastLatchedPos", dataType=ns0.datatypes.Number)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6085", browseName="ns=pnenc;LastLatchedPos", modellingRule="Mandatory", dataType=ns0.datatypes.Number)
     )
     latchActive: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6084", browseName="ns=pnenc;LatchActive", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6084", browseName="ns=pnenc;LatchActive", modellingRule="Optional", dataType=o6.Boolean)
     )
-    latchStart: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=pnenc;i=7018", browseName="ns=pnenc;LatchStart"))
+    latchStart: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=pnenc;i=7018", browseName="ns=pnenc;LatchStart", modellingRule="Optional"))
     lock: di.objtypes.LockingServicesType | None
 
 
@@ -451,22 +501,22 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="PresetValue", dataType=o6.NodeId("i=26"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=pnenc;i=7019", browseName="ns=pnenc;PresetControl", inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6086"]))
+o6.call(nodeId="ns=pnenc;i=7019", browseName="ns=pnenc;PresetControl", modellingRule="Optional", inputArgs=o6.hasProperty(o6.ns["ns=pnenc;i=6086"]))
 
 
 @o6.objecttype(nodeId="ns=pnenc;i=1013", browseName="ns=pnenc;EncoderSensorType", displayName="EncoderSensorType")
 class EncoderSensorType(ns0.objtypes.BaseObjectType):
     positionOffset: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6087", browseName="ns=pnenc;PositionOffset", dataType=ns0.datatypes.Number)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6087", browseName="ns=pnenc;PositionOffset", modellingRule="Mandatory", dataType=ns0.datatypes.Number)
     )
     presetControl: o6.node.MethodNode | None = o6.hasComponent(o6.ns["ns=pnenc;i=7019"])
     ref1LastLatchedPos: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6089", browseName="ns=pnenc;Ref1LastLatchedPos", dataType=ns0.datatypes.Number)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6089", browseName="ns=pnenc;Ref1LastLatchedPos", modellingRule="Optional", dataType=ns0.datatypes.Number)
     )
     ref1LatchActive: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6088", browseName="ns=pnenc;Ref1LatchActive", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=pnenc;i=6088", browseName="ns=pnenc;Ref1LatchActive", modellingRule="Optional", dataType=o6.Boolean)
     )
-    ref1LatchStart: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=pnenc;i=7020", browseName="ns=pnenc;Ref1LatchStart"))
+    ref1LatchStart: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=pnenc;i=7020", browseName="ns=pnenc;Ref1LatchStart", modellingRule="Optional"))
 
 
 o6.reference(EncoderSensorType, "i=41", EncoderRefLatchEventType)

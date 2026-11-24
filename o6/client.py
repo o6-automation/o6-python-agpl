@@ -23,7 +23,6 @@ from typing import (
     Literal,
     Mapping,
     TypeAlias,
-    TypeVar,
     overload,
 )
 from types import TracebackType
@@ -34,10 +33,11 @@ from contextlib import suppress
 import asyncio
 import datetime
 import hashlib
+import itertools
 import logging
 import operator
-import inspect
 import re
+import threading
 
 from typing import Self
 
@@ -84,7 +84,14 @@ else:
     del _o6
 import o6.node as nodes
 from o6 import LocalizedTextLike, MaybeAwaitable, NodeIdLike
-from o6.util import _WorkerLoop
+from o6.util import (
+    _call_native,
+    _ConfigView,
+    _finalize_native,
+    _run_on_loop,
+    _ScheduledFinalizer,
+    _WorkerLoop,
+)
 from typing import cast
 
 from o6.ns import ns0
@@ -175,7 +182,10 @@ def _unwrap_history_read(response: Any, is_scalar: bool, indices: list[int] | No
     return out
 
 
-_client_name_counter = 0
+# `next()` on a count is atomic, so concurrent clients get distinct auto-names
+_client_name_counter = itertools.count(1)
+# Seconds a collected client waits for its SecureChannel to close
+_FINALIZE_CLOSE_TIMEOUT = 1.0
 
 
 # The notification scopes open62541's client exposes, and the native setter
@@ -201,9 +211,6 @@ class Client(_NativeClient):
     See the [Client guide](manual/client/index.md) and the
     [tutorials](tutorials/index.md).
     """
-
-    config: o6.ClientConfig
-    """This client's [`ClientConfig`][o6.ClientConfig]."""
 
     _loop: asyncio.AbstractEventLoop
     root: nodes.ObjectNode
@@ -321,16 +328,22 @@ class Client(_NativeClient):
         self._logger = logger
         self._owns_loop = owns_loop
         self._worker: _WorkerLoop | None = _WorkerLoop(loop) if owns_loop else None
+        # The worker starts with the first operation that needs the loop
+        self._worker_pending = self._worker is not None
+        # Reentrant: an inline native call may start the worker itself
+        self._worker_start_lock = threading.RLock()
         self._subscriptions: dict[int, o6.subscription.Subscription] = {}
         self._default_subscription_id: int | None = None
         # The DataTypes `loadRemoteDataTypes` has warned about, once each.
         self._reportedDataTypes: set[Any] = set()
+        # Counts the native namespace snapshots applied; see `_apply_namespace_snapshot`.
+        self._namespace_applications = 0
+        self._notification_sync_lock = threading.Lock()
         self._notification_scopes: dict[str, NotificationHandlers] = {
             scope: NotificationHandlers(partial(self._sync_notification_scope, scope))
             for scope in _NOTIFICATION_SCOPES
         }
 
-        global _client_name_counter
         if name:
             if not name.isidentifier():
                 raise ValueError(
@@ -346,42 +359,46 @@ class Client(_NativeClient):
             if name in ["::global", "global"]:
                 raise ValueError(f"Client name is reserverd: {name!r}'")
         else:
-            _client_name_counter += 1
-            name = f"client{_client_name_counter}"
+            name = f"client{next(_client_name_counter)}"
 
         self._name = name
         if self._name + "_ns1" in o6.ns:
             raise ValueError(f"Client name {self._name} is not unique")
 
         super().__init__(logger=logger, loop=loop)
-        self._set_owns_loop(owns_loop)
-        self.config.tcpReuseAddr = True
-        if endpointUrl:
-            self.config.endpointUrl = endpointUrl
-
-        if certificate is not None:
-            self.config.certificate = certificate
-        if privateKey is not None:
-            self.config.privateKey = privateKey
-        if trustList is not None:
-            self.config.trustList = trustList
-        if revocationList is not None:
-            self.config.revocationList = revocationList
-        self.config.acceptAllCertificates = bool(acceptAllCertificates)
-        self.config.loadUnknownDataTypes = bool(loadUnknownDataTypes)
         self._unknownDataTypes = _UnknownDataTypes(self)
-        # Finalize certificate configuration before selecting the channel policy.
-        self.config._finalize_encryption()
-        if securityMode is not None:
-            self.config.securityMode = int(securityMode)
-        if securityPolicy is not None:
-            self.config.securityPolicy = securityPolicy
-        if applicationUri is not None:
-            self.config.applicationUri = applicationUri
 
-        if username is not None:
-            self.config.setUsernamePassword(username, password or "")
-        self.config.allowNonePolicyPassword = allowNonePolicyPassword
+        def configure() -> None:
+            self._set_owns_loop(owns_loop)
+            self.config.tcpReuseAddr = True
+            if endpointUrl:
+                self.config.endpointUrl = endpointUrl
+
+            if certificate is not None:
+                self.config.certificate = certificate
+            if privateKey is not None:
+                self.config.privateKey = privateKey
+            if trustList is not None:
+                self.config.trustList = trustList
+            if revocationList is not None:
+                self.config.revocationList = revocationList
+            self.config.acceptAllCertificates = bool(acceptAllCertificates)
+            self.config.loadUnknownDataTypes = bool(loadUnknownDataTypes)
+            # Finalize certificate configuration before selecting the channel policy.
+            self.config._finalize_encryption()
+            if securityMode is not None:
+                self.config.securityMode = int(securityMode)
+            if securityPolicy is not None:
+                self.config.securityPolicy = securityPolicy
+            if applicationUri is not None:
+                self.config.applicationUri = applicationUri
+
+            if username is not None:
+                self.config.setUsernamePassword(username, password or "")
+            self.config.allowNonePolicyPassword = allowNonePolicyPassword
+
+        # Runs on the thread of an application loop that already runs
+        self._call_native(configure)
 
         # Initialize the well-known entry-points into the namespace 0
         self._node_backend = _ClientBackend(self)
@@ -389,10 +406,6 @@ class Client(_NativeClient):
         self.objects = nodes.ObjectNode(self._node_backend, "i=85", o6.QualifiedName(0, "Objects"))
         self.types = nodes.ObjectNode(self._node_backend, "i=86", o6.QualifiedName(0, "Types"))
         self.views = nodes.ObjectNode(self._node_backend, "i=87", o6.QualifiedName(0, "Views"))
-
-        # Start the worker thread
-        if self._worker is not None:
-            self._worker.start()
 
     @classmethod
     def newFromFile(
@@ -440,81 +453,109 @@ class Client(_NativeClient):
         return client
 
     def __del__(self) -> None:
-        # Release the native client while this complete Python object and its
-        # worker loop still exist. Native cleanup closes any live channel;
-        # calling the public disconnect API here could create an unawaited
-        # coroutine for async-mode clients. The C deallocator is the fallback.
-        #
-        # Join the worker thread before the native teardown. The garbage
-        # collector can finalize this client on another thread. Native cleanup
-        # calls back into Python and may release the GIL; a still-running
-        # worker loop would then dispatch queued callbacks into the native
-        # client while it is freed. The loop is closed only after the cleanup,
-        # which still cancels its handles.
-        worker = self._worker
-        try:
-            if worker is not None:
-                worker.stop()
-        except Exception:
-            pass
-        try:
+        # Never blocks: while a thread runs the loop, teardown is scheduled on
+        # it (see `o6.util._finalize_native`). The C deallocator is the fallback.
+        loop = getattr(self, "_loop", None)
+        if loop is None:
+            return
+        worker = getattr(self, "_worker", None)
+
+        def cleanup() -> None:
             self._cleanup()
-        except Exception:
-            pass
-        try:
-            if worker is not None:
-                worker.stop(close=True)
-        except Exception:
-            pass
+            if self._owns_loop and not loop.is_closed():
+                loop.close()
 
-    T = TypeVar("T")
+        _finalize_native(
+            self, loop, worker, live=self._is_live, finalize=self._finalize, cleanup=cleanup
+        )
 
-    def _maybe_async(self, aw: Awaitable[T]) -> MaybeAwaitable[T]:
-        if self._worker is not None and not self._worker.running:
-            if asyncio.iscoroutine(aw):
-                aw.close()
-            raise RuntimeError("Client event loop is not running")
+    def _finalize(self) -> None:
+        """Close and release a collected client; runs on its loop at top level."""
 
-        try:
-            loop = asyncio.get_running_loop()
-            if loop == self._loop:
-                return aw
-        except RuntimeError:
-            loop = None
+        def release() -> None:
+            self._cleanup()
+            if self._worker is not None:
+                self._worker.retire(close=True)
 
-        async def _await(f):
-            return await f
+        if not self._is_live():
+            release()
+            return
 
-        # Sync caller on an external loop that nobody is driving.  Scheduling
-        # threadsafe would queue the coroutine on an idle loop and block the
-        # caller forever, so drive it to completion inline instead (same as
-        # Server._maybe_async).  Only for external loops — an owned loop is
-        # driven by our worker thread, which may not have reached run_forever
-        # yet.
-        if (
-            loop is None
-            and self._worker is None
-            and not self._loop.is_running()
-            and not self._loop.is_closed()
-        ):
-            if asyncio.iscoroutine(aw) or inspect.iscoroutine(aw):
-                return self._loop.run_until_complete(aw)
-            return self._loop.run_until_complete(_await(aw))
+        # Releases even if the task is cancelled, or destroyed by a closing loop
+        released = _ScheduledFinalizer(self._loop, release, release)
 
-        try:
-            if asyncio.iscoroutine(aw) or inspect.iscoroutine(aw):
-                fut = asyncio.run_coroutine_threadsafe(aw, self._loop)
-            else:
-                fut = asyncio.run_coroutine_threadsafe(_await(aw), self._loop)
-        except RuntimeError:
-            if asyncio.iscoroutine(aw):
-                aw.close()
-            raise RuntimeError("Client event loop is not running")
+        async def close() -> None:
+            try:
+                self._unknownDataTypes.cancel()
+                closing = super(Client, self)._disconnect_secure_channel()  # type: ignore[misc]
+                if closing is not None and not closing.done():
+                    await asyncio.wait({closing}, timeout=_FINALIZE_CLOSE_TIMEOUT)
+                # Let transport close events run before native cleanup
+                for _ in range(10):
+                    await asyncio.sleep(0)
+            except Exception:
+                self._logger.debug("Closing a collected client failed", exc_info=True)
+            finally:
+                released()
 
-        if loop is None or asyncio.current_task() is None:
-            return fut.result()
-        else:
-            return asyncio.wrap_future(fut)
+        # A task cancelled before its first step skips `finally`
+        self._loop.create_task(close()).add_done_callback(lambda _task: released())
+
+    def _run_on_loop(
+        self, fn: Callable[[], Any], *, sync_result: bool = False, wait: bool = False
+    ) -> Any:
+        """Run a native operation on this client's loop thread; see `o6.util._run_on_loop`."""
+        self._start_worker()
+        worker = self._worker
+        return _run_on_loop(
+            self._loop, lambda: worker, fn, sync_result=sync_result, wait=wait, owner="Client"
+        )
+
+    def _apply_namespace_snapshot(
+        self, uris: list[str], entries: list[tuple[str, int, int]]
+    ) -> None:
+        """Replace the native namespace mapping and custom DataTypes, and count the application.
+
+        `updateRemoteNamespaces` awaits between its provisional and its final
+        mapping. The count tells it whether a DataType lookup applied another
+        mapping meanwhile, so that the final one must be applied again.
+        """
+        super()._apply_namespace_snapshot(uris, entries)
+        self._namespace_applications += 1
+
+    def _start_worker(self) -> None:
+        """Start the owned worker for the first operation that needs the loop.
+
+        Until then no loop runs, so configuration runs inline on any thread.
+        A worker stopped by `disconnect()` stays stopped; `connect()` restarts it.
+        """
+        worker = self._worker
+        if worker is None:
+            return
+        with self._worker_start_lock:
+            if self._worker_pending:
+                self._worker_pending = False
+                worker.start()
+
+    @property
+    def config(self) -> o6.ClientConfig:
+        """This client's [`ClientConfig`][o6.ClientConfig].
+
+        Readable from any thread. It can be changed only while the client is
+        not connected.
+        """
+        return cast("o6.ClientConfig", _ConfigView(self, super().config))
+
+    def _call_native(self, fn: Callable[[], Any]) -> Any:
+        """Return a synchronous native operation's result from any thread; see `o6.util._call_native`."""
+        worker = self._worker
+        if worker is not None:
+            with self._worker_start_lock:
+                # The worker starts only under this lock, so a loop that no
+                # thread runs stays idle until `fn` returns.
+                if not worker.running and not self._loop.is_running():
+                    return fn()
+        return _call_native(self._loop, lambda: worker, fn, owner="Client")
 
     @property
     def loop(self) -> asyncio.AbstractEventLoop:
@@ -524,7 +565,7 @@ class Client(_NativeClient):
     @property
     def state(self) -> tuple[o6.SecureChannelState, o6.SessionState, o6.StatusCode]:
         """The tuple `(channelState, sessionState, connectStatus)`."""
-        channel_state, session_state, status_code = self._get_state()
+        channel_state, session_state, status_code = self._call_native(self._get_state)
         return (
             o6.SecureChannelState(channel_state),
             o6.SessionState(session_state),
@@ -591,7 +632,16 @@ class Client(_NativeClient):
         """
         registry = self._notification_scopes[scope]
         setter = getattr(self, f"_set_{scope}_notification_callback")
-        setter(partial(self._dispatch_notification, scope) if registry else None)
+
+        def install() -> None:
+            # Reads the registry and installs under one lock, so a concurrent
+            # add or remove cannot leave a stale callback installed. Runs on
+            # the loop thread, or inline while none runs the loop, so the lock
+            # is never held while marshalling.
+            with self._notification_sync_lock:
+                setter(partial(self._dispatch_notification, scope) if registry else None)
+
+        self._call_native(install)
 
     def _dispatch_notification(self, scope: str, type: int, payload: Mapping[str, Any]) -> None:
         handlers = self._notification_scopes[scope].snapshot()
@@ -611,7 +661,7 @@ class Client(_NativeClient):
             self._default_subscription_id = subscription.id
             return subscription
 
-        return self._maybe_async(_create())
+        return self._run_on_loop(_create)
 
     async def _set_ns1_mapping(self) -> None:
         sup = super()
@@ -659,7 +709,11 @@ class Client(_NativeClient):
                 could not be created. Configure `certificate` and `privateKey`
                 explicitly before retrying.
             StatusCodeError: Certificate validation, channel negotiation,
-                session activation or post-connect setup failed.
+                session activation or post-connect setup failed. Fails with
+                `BadTimeout` and closes the channel when the channel, and the
+                Session unless `noSession`, are not open within
+                `config.timeout` milliseconds. A timeout of `0` waits without
+                limit.
         """
         sup = super()
 
@@ -690,13 +744,16 @@ class Client(_NativeClient):
                         if result is not None:
                             await result
                     except Exception:
-                        pass  # best-effort; surface the original failure
+                        # Surface the original failure
+                        self._logger.warning(
+                            "Disconnect after a failed connect failed", exc_info=True
+                        )
                     raise
 
-        if self._worker is not None and not self._worker.running:
-            self._worker.start()
+        # Restart a worker that disconnect() stopped
+        self._worker_pending = self._worker is not None
 
-        return self._maybe_async(_connect())
+        return self._run_on_loop(_connect)
 
     def disconnect(
         self,
@@ -742,15 +799,15 @@ class Client(_NativeClient):
                     if result is not None:
                         await result
                 except Exception:
-                    pass  # ignore errors from the underlying C disconnect
+                    self._logger.warning("Disconnect failed", exc_info=True)
                 # Drain: let asyncio process pending transport close events
                 # (connection_lost, etc.) before stopping the event loop.
                 for _ in range(10):
                     await asyncio.sleep(0)
 
-            result = self._maybe_async(_disconnect())
+            result = self._run_on_loop(_disconnect)
 
-            # In synchronous context _maybe_async blocks until _disconnect
+            # In synchronous context _run_on_loop blocks until _disconnect
             # completes, so we can safely tear down the worker thread now.
             if not isinstance(result, asyncio.Future):
                 if self._worker is not None:
@@ -770,7 +827,7 @@ class Client(_NativeClient):
             async def _disconnect() -> None:
                 await sup._disconnect_secure_channel()  # type: ignore[attr-defined]
 
-            return self._maybe_async(_disconnect())
+            return self._run_on_loop(_disconnect)
 
     def startReverseConnect(
         self,
@@ -791,10 +848,10 @@ class Client(_NativeClient):
         async def _connect() -> None:
             await sup._start_reverse_connect(port, hostnames or [])  # type: ignore[attr-defined]
 
-        if self._worker is not None and not self._worker.running:
-            self._worker.start()
+        # Restart a worker that disconnect() stopped
+        self._worker_pending = self._worker is not None
 
-        return self._maybe_async(_connect())
+        return self._run_on_loop(_connect)
 
     def activateCurrentSession(self) -> Any:
         """Activate this client's existing Session again, on the current channel.
@@ -809,7 +866,7 @@ class Client(_NativeClient):
             await sup._activate_current_session()  # type: ignore[attr-defined]
             await self._create_default_subscription()
 
-        return self._maybe_async(_call())
+        return self._run_on_loop(_call)
 
     def activateSession(
         self,
@@ -831,7 +888,7 @@ class Client(_NativeClient):
             await sup._activate_session(authToken, serverNonce)  # type: ignore[attr-defined]
             await self._create_default_subscription()
 
-        return self._maybe_async(_call())
+        return self._run_on_loop(_call)
 
     def __enter__(self) -> Self:
         """Connect if not connected, and return the client."""
@@ -845,9 +902,8 @@ class Client(_NativeClient):
         exc_value: BaseException | None,
         traceback: TracebackType | None,
     ) -> None:
-        """Disconnect if still connected. Exceptions are not suppressed."""
-        if self.connected:
-            self.disconnect()
+        """Disconnect, also while connecting or reconnecting. Exceptions are not suppressed."""
+        self.disconnect()
 
     async def __aenter__(self) -> Self:
         """Await `connect()` if not connected, and return the client."""
@@ -861,9 +917,10 @@ class Client(_NativeClient):
         exc_value: BaseException | None,
         traceback: TracebackType | None,
     ) -> None:
-        """Await `disconnect()` if still connected. Exceptions are not suppressed."""
-        if self.connected:
-            await self.disconnect()  # type: ignore[misc]
+        """Await `disconnect()`, also while connecting or reconnecting. Exceptions are not suppressed."""
+        result = self.disconnect()
+        if result is not None:
+            await result
 
     def __getitem__(self, key: NodeIdLike) -> MaybeAwaitable[nodes.Node]:
         """Return a typed [Node][o6.Node] handle for a NodeId.
@@ -920,7 +977,7 @@ class Client(_NativeClient):
             return node_type(self._node_backend, nodeid, browse_name)
 
         try:
-            return self._maybe_async(_get_node())
+            return self._run_on_loop(_get_node)
         except Exception as exc:
             raise _without_traceback(exc) from None
 
@@ -928,7 +985,7 @@ class Client(_NativeClient):
     # Raw Service API
     #
     # These explicit methods preserve a discoverable, typed public API while
-    # _maybe_async provides the shared sync/async dispatch policy.
+    # _run_on_loop provides the shared sync/async dispatch policy.
 
     # Discovery Service Set
 
@@ -938,7 +995,7 @@ class Client(_NativeClient):
         """Call the FindServers service to list servers known to a discovery server.
 
         [OPC UA Part 4 §5.5.2](https://reference.opcfoundation.org/specs/OPC-10000-4/5.5.2)"""
-        return self._maybe_async(self._service_find_servers(request))
+        return self._run_on_loop(partial(self._service_find_servers, request))
 
     def serviceFindServersOnNetwork(
         self, request: ns0.datatypes.FindServersOnNetworkRequest
@@ -946,7 +1003,7 @@ class Client(_NativeClient):
         """Call the FindServersOnNetwork service to list servers found by mDNS or an LDS.
 
         [OPC UA Part 4 §5.5.3](https://reference.opcfoundation.org/specs/OPC-10000-4/5.5.3)"""
-        return self._maybe_async(self._service_find_servers_on_network(request))
+        return self._run_on_loop(partial(self._service_find_servers_on_network, request))
 
     def serviceGetEndpoints(
         self, request: ns0.datatypes.GetEndpointsRequest
@@ -954,7 +1011,7 @@ class Client(_NativeClient):
         """Call the GetEndpoints service to get the endpoint descriptions of a server.
 
         [OPC UA Part 4 §5.5.4](https://reference.opcfoundation.org/specs/OPC-10000-4/5.5.4)"""
-        return self._maybe_async(self._service_get_endpoints(request))
+        return self._run_on_loop(partial(self._service_get_endpoints, request))
 
     def serviceRegisterServer(
         self, request: ns0.datatypes.RegisterServerRequest
@@ -968,7 +1025,7 @@ class Client(_NativeClient):
         registration matches by server URI and at least one shared discovery
         URL.
         """
-        return self._maybe_async(self._service_register_server(request))
+        return self._run_on_loop(partial(self._service_register_server, request))
 
     def serviceRegisterServer2(
         self, request: ns0.datatypes.RegisterServer2Request
@@ -981,7 +1038,7 @@ class Client(_NativeClient):
         `serviceRegisterServer` only on `BadServiceUnsupported`. Matching and
         unregistration work as for `serviceRegisterServer`.
         """
-        return self._maybe_async(self._service_register_server2(request))
+        return self._run_on_loop(partial(self._service_register_server2, request))
 
     def invalidateNodeCache(self, target: NodeIdLike | None = None) -> MaybeAwaitable[None]:
         """Drop the cached children of this client's node handles.
@@ -1002,7 +1059,7 @@ class Client(_NativeClient):
         async def _invalidate() -> None:
             self._node_backend.invalidate_children(nodeid)
 
-        return self._maybe_async(_invalidate())
+        return self._run_on_loop(_invalidate)
 
     async def _mutate_address_space(self, operation: Awaitable[Any]) -> Any:
         try:
@@ -1065,7 +1122,7 @@ class Client(_NativeClient):
             model = await crawler.run()
             return model.save(directory)
 
-        return self._maybe_async(_export())
+        return self._run_on_loop(_export)
 
     # NodeManagement Service Set
 
@@ -1075,7 +1132,9 @@ class Client(_NativeClient):
         """Call the AddNodes service to add one or more nodes to the address space.
 
         [OPC UA Part 4 §5.8.2](https://reference.opcfoundation.org/specs/OPC-10000-4/5.8.2)"""
-        return self._maybe_async(self._mutate_address_space(self._service_addNodes(request)))
+        return self._run_on_loop(
+            lambda: self._mutate_address_space(self._service_addNodes(request))
+        )
 
     def serviceDeleteNodes(
         self, request: ns0.datatypes.DeleteNodesRequest
@@ -1083,7 +1142,9 @@ class Client(_NativeClient):
         """Call the DeleteNodes service to remove one or more nodes from the address space.
 
         [OPC UA Part 4 §5.8.4](https://reference.opcfoundation.org/specs/OPC-10000-4/5.8.4)"""
-        return self._maybe_async(self._mutate_address_space(self._service_deleteNodes(request)))
+        return self._run_on_loop(
+            lambda: self._mutate_address_space(self._service_deleteNodes(request))
+        )
 
     def serviceAddReferences(
         self, request: ns0.datatypes.AddReferencesRequest
@@ -1091,7 +1152,9 @@ class Client(_NativeClient):
         """Call the AddReferences service to add references between nodes.
 
         [OPC UA Part 4 §5.8.3](https://reference.opcfoundation.org/specs/OPC-10000-4/5.8.3)"""
-        return self._maybe_async(self._mutate_address_space(self._service_addReferences(request)))
+        return self._run_on_loop(
+            lambda: self._mutate_address_space(self._service_addReferences(request))
+        )
 
     def serviceDeleteReferences(
         self, request: ns0.datatypes.DeleteReferencesRequest
@@ -1099,8 +1162,8 @@ class Client(_NativeClient):
         """Call the DeleteReferences service to remove references between nodes.
 
         [OPC UA Part 4 §5.8.5](https://reference.opcfoundation.org/specs/OPC-10000-4/5.8.5)"""
-        return self._maybe_async(
-            self._mutate_address_space(self._service_deleteReferences(request))
+        return self._run_on_loop(
+            lambda: self._mutate_address_space(self._service_deleteReferences(request))
         )
 
     # View Service Set
@@ -1115,7 +1178,7 @@ class Client(_NativeClient):
         [serviceBrowseNext][o6.client.Client.serviceBrowseNext].
 
         [OPC UA Part 4 §5.9.2](https://reference.opcfoundation.org/specs/OPC-10000-4/5.9.2)"""
-        return self._maybe_async(self._service_browse(request))
+        return self._run_on_loop(partial(self._service_browse, request))
 
     def serviceBrowseNext(
         self, request: ns0.datatypes.BrowseNextRequest
@@ -1123,7 +1186,7 @@ class Client(_NativeClient):
         """Call the BrowseNext service to continue a Browse that returned a continuation point.
 
         [OPC UA Part 4 §5.9.3](https://reference.opcfoundation.org/specs/OPC-10000-4/5.9.3)"""
-        return self._maybe_async(self._service_browseNext(request))
+        return self._run_on_loop(partial(self._service_browseNext, request))
 
     def serviceTranslateBrowsePathsToNodeIds(
         self, request: ns0.datatypes.TranslateBrowsePathsToNodeIdsRequest
@@ -1131,7 +1194,7 @@ class Client(_NativeClient):
         """Call the TranslateBrowsePathsToNodeIds service to resolve BrowsePaths to NodeIds.
 
         [OPC UA Part 4 §5.9.4](https://reference.opcfoundation.org/specs/OPC-10000-4/5.9.4)"""
-        return self._maybe_async(self._service_translateBrowsePathsToNodeIds(request))
+        return self._run_on_loop(partial(self._service_translateBrowsePathsToNodeIds, request))
 
     def serviceRegisterNodes(
         self, request: ns0.datatypes.RegisterNodesRequest
@@ -1139,7 +1202,7 @@ class Client(_NativeClient):
         """Call the RegisterNodes service to obtain optimized NodeIds for repeated access.
 
         [OPC UA Part 4 §5.9.5](https://reference.opcfoundation.org/specs/OPC-10000-4/5.9.5)"""
-        return self._maybe_async(self._service_registerNodes(request))
+        return self._run_on_loop(partial(self._service_registerNodes, request))
 
     def serviceUnregisterNodes(
         self, request: ns0.datatypes.UnregisterNodesRequest
@@ -1147,7 +1210,7 @@ class Client(_NativeClient):
         """Call the UnregisterNodes service to release NodeIds obtained with RegisterNodes.
 
         [OPC UA Part 4 §5.9.6](https://reference.opcfoundation.org/specs/OPC-10000-4/5.9.6)"""
-        return self._maybe_async(self._service_unregisterNodes(request))
+        return self._run_on_loop(partial(self._service_unregisterNodes, request))
 
     # Attribute Service Set
 
@@ -1161,7 +1224,7 @@ class Client(_NativeClient):
         DataType from the server.
 
         [OPC UA Part 4 §5.11.2](https://reference.opcfoundation.org/specs/OPC-10000-4/5.11.2)"""
-        return self._maybe_async(self._service_read(request))
+        return self._run_on_loop(partial(self._service_read, request))
 
     def serviceHistoryRead(
         self, request: ns0.datatypes.HistoryReadRequest
@@ -1173,7 +1236,7 @@ class Client(_NativeClient):
         loads a DataType from the server.
 
         [OPC UA Part 4 §5.11.3](https://reference.opcfoundation.org/specs/OPC-10000-4/5.11.3)"""
-        return self._maybe_async(self._service_historyRead(request))
+        return self._run_on_loop(partial(self._service_historyRead, request))
 
     def serviceWrite(
         self, request: ns0.datatypes.WriteRequest
@@ -1181,10 +1244,11 @@ class Client(_NativeClient):
         """Call the Write service to write one or more node attribute values.
 
         [OPC UA Part 4 §5.11.4](https://reference.opcfoundation.org/specs/OPC-10000-4/5.11.4)"""
-        operation = self._service_write(request)
         if any(item.attributeId == o6.AttributeId.BROWSE_NAME for item in request.nodesToWrite):
-            operation = self._mutate_address_space(operation)
-        return self._maybe_async(operation)
+            return self._run_on_loop(
+                lambda: self._mutate_address_space(self._service_write(request))
+            )
+        return self._run_on_loop(partial(self._service_write, request))
 
     def serviceHistoryUpdate(
         self, request: ns0.datatypes.HistoryUpdateRequest
@@ -1192,7 +1256,7 @@ class Client(_NativeClient):
         """Call the HistoryUpdate service to insert, replace, or delete historical data.
 
         [OPC UA Part 4 §5.11.5](https://reference.opcfoundation.org/specs/OPC-10000-4/5.11.5)"""
-        return self._maybe_async(self._service_historyUpdate(request))
+        return self._run_on_loop(partial(self._service_historyUpdate, request))
 
     # Method Service Set
 
@@ -1206,7 +1270,7 @@ class Client(_NativeClient):
         DataType from the server.
 
         [OPC UA Part 4 §5.12.2](https://reference.opcfoundation.org/specs/OPC-10000-4/5.12.2)"""
-        return self._maybe_async(self._service_call(request))
+        return self._run_on_loop(partial(self._service_call, request))
 
     def getRemoteDataTypes(
         self, typeNodes: list[NodeIdLike] | None = None
@@ -1331,7 +1395,7 @@ class Client(_NativeClient):
                 )
             return result
 
-        return self._maybe_async(_call())
+        return self._run_on_loop(_call)
 
     def loadRemoteDataTypes(self) -> MaybeAwaitable[list[type]]:
         """Load the server's custom DataTypes, so their values decode to Python classes.
@@ -1369,7 +1433,7 @@ class Client(_NativeClient):
             RuntimeError: The client is not connected.
             StatusCodeError: A Browse or Read service call failed.
         """
-        return self._maybe_async(_RemoteDataTypes(self).run())
+        return self._run_on_loop(lambda: _RemoteDataTypes(self).run())
 
     def updateRemoteNamespaces(self) -> MaybeAwaitable[None]:
         """Refresh the namespace mapping and custom DataTypes from the server.
@@ -1487,11 +1551,12 @@ class Client(_NativeClient):
             }
             previous_uris = getattr(self, "_namespace_snapshot_uris", None)
             previous_selected = getattr(self, "_namespace_snapshot_selected", {})
-            provisional_applied = False
-            if ambiguous:
-                if previous_uris != uris:
-                    self._apply_namespace_snapshot(uris, provisional)
-                    provisional_applied = True
+            # The application count after the provisional mapping; None when not applied.
+            provisional_applied: int | None = None
+            if ambiguous and previous_uris != uris:
+                self._apply_namespace_snapshot(uris, provisional)
+                provisional_applied = self._namespace_applications
+            try:
                 for wire_index, hits in ambiguous.items():
                     mapped_index = previous_selected.get(wire_index, selected[wire_index].index)
                     server_version, _ = await _get_namespace_version_and_publication_date(
@@ -1509,27 +1574,43 @@ class Client(_NativeClient):
                             f"{server_version} which is newer than the client's best match "
                             f"version {chosen.version}."
                         )
-                _load_namespace_modules(selected.values())
+                if ambiguous:
+                    _load_namespace_modules(selected.values())
 
-            final = [
-                *entries,
-                *(
-                    (uris[wire_index], info.index, wire_index)
-                    for wire_index, info in sorted(selected.items())
-                ),
-            ]
-            final_snapshot = tuple(final)
-            if final_snapshot != getattr(self, "_namespace_snapshot", None) and not (
-                provisional_applied and final == provisional
-            ):
-                self._apply_namespace_snapshot(uris, final)
+                final = [
+                    *entries,
+                    *(
+                        (uris[wire_index], info.index, wire_index)
+                        for wire_index, info in sorted(selected.items())
+                    ),
+                ]
+                final_snapshot = tuple(final)
+                # A DataType lookup during the awaits re-applies the previous
+                # snapshot; the provisional mapping is then no longer applied.
+                if final_snapshot != getattr(self, "_namespace_snapshot", None) and not (
+                    provisional_applied == self._namespace_applications and final == provisional
+                ):
+                    self._apply_namespace_snapshot(uris, final)
+            # Not BaseException: a coroutine closed by the GC may outlive the native client.
+            except (Exception, asyncio.CancelledError):
+                current_uris = getattr(self, "_namespace_snapshot_uris", None)
+                current = getattr(self, "_namespace_snapshot", None)
+                if provisional_applied is not None and current_uris and current is not None:
+                    # A failed refresh leaves the current snapshot applied.
+                    try:
+                        self._apply_namespace_snapshot(current_uris, list(current))
+                    except Exception:
+                        self._logger.exception(
+                            "Restoring the namespace mapping after a failed refresh failed"
+                        )
+                raise
             self._namespace_snapshot = final_snapshot
             self._namespace_snapshot_uris = uris
             self._namespace_snapshot_selected = {
                 wire_index: info.index for wire_index, info in selected.items()
             }
 
-        return self._maybe_async(_update())
+        return self._run_on_loop(_update)
 
     #
     # Simplified Service API
@@ -1598,7 +1679,7 @@ class Client(_NativeClient):
                 mdnsServerName=name.text if mdnsServerName is None else mdnsServerName,
                 serverCapabilities=[] if serverCapabilities is None else serverCapabilities,
             )
-        return self._maybe_async(self._register_server(registered, configuration))
+        return self._run_on_loop(partial(self._register_server, registered, configuration))
 
     def unregisterServer(self, serverUri: str, discoveryUrls: list[str]) -> MaybeAwaitable[None]:
         """Remove an application registration from the connected discovery server.
@@ -1628,7 +1709,7 @@ class Client(_NativeClient):
             discoveryUrls=discoveryUrls,
             isOnline=False,
         )
-        return self._maybe_async(self._register_server(registered))
+        return self._run_on_loop(partial(self._register_server, registered))
 
     async def _register_server(
         self,
@@ -1695,7 +1776,7 @@ class Client(_NativeClient):
             response.responseHeader.serviceResult.check()
             return response.endpoints
 
-        return self._maybe_async(_call())
+        return self._run_on_loop(_call)
 
     def findServers(
         self,
@@ -1738,7 +1819,7 @@ class Client(_NativeClient):
             response.responseHeader.serviceResult.check()
             return response.servers
 
-        return self._maybe_async(_call())
+        return self._run_on_loop(_call)
 
     def findServersOnNetwork(
         self,
@@ -1780,7 +1861,7 @@ class Client(_NativeClient):
             response.responseHeader.serviceResult.check()
             return response.servers
 
-        return self._maybe_async(_call())
+        return self._run_on_loop(_call)
 
     def read(
         self,
@@ -1835,7 +1916,7 @@ class Client(_NativeClient):
                 raise RuntimeError("Read result count does not match the request")
             return await self._unknownDataTypes.decode(_read_results(results, is_scalar, valueOnly))
 
-        return self._maybe_async(_read())
+        return self._run_on_loop(_read)
 
     def write(
         self,
@@ -1910,7 +1991,7 @@ class Client(_NativeClient):
                     results[index] = status
             return results[0] if is_scalar else results
 
-        return self._maybe_async(_write())
+        return self._run_on_loop(_write)
 
     def call(
         self, objectId: NodeIdLike, methodId: NodeIdLike, inputArgs: list[Any] = []
@@ -1961,7 +2042,7 @@ class Client(_NativeClient):
             outputs = await self._unknownDataTypes.decode(list(result.outputArguments))
             return (result.statusCode, *outputs)
 
-        return self._maybe_async(_call())
+        return self._run_on_loop(_call)
 
     def browse(
         self,
@@ -2051,7 +2132,7 @@ class Client(_NativeClient):
                             next_page(collection.continuation_point, release=True)
                         )
 
-        return self._maybe_async(_browse())
+        return self._run_on_loop(_browse)
 
     def browsePage(
         self,
@@ -2099,7 +2180,7 @@ class Client(_NativeClient):
             pages = await self._browse_pages(self._service_browse(request), 1)
             return pages[0]
 
-        return self._maybe_async(first())
+        return self._run_on_loop(first)
 
     async def _browse_pages(
         self, operation: Awaitable[Any], count: int, tokens: tuple[bytes, ...] = ()
@@ -2164,7 +2245,7 @@ class Client(_NativeClient):
             )
             return await self._browse_pages(self._service_browseNext(request), len(tokens), tokens)
 
-        return self._maybe_async(next_pages())
+        return self._run_on_loop(next_pages)
 
     @overload
     def translateBrowsePathsToNodeIds(
@@ -2193,8 +2274,8 @@ class Client(_NativeClient):
             StatusCodeError: The service failed. For raw requests and
                 responses, use `serviceTranslateBrowsePathsToNodeIds`.
         """
-        return self._maybe_async(
-            _translate_paths(self._service_translateBrowsePathsToNodeIds, browsePath)
+        return self._run_on_loop(
+            partial(_translate_paths, self._service_translateBrowsePathsToNodeIds, browsePath)
         )
 
     def browseSimplifiedBrowsePaths(
@@ -2348,7 +2429,7 @@ class Client(_NativeClient):
                             "Could not release history continuation points", exc_info=True
                         )
 
-        return self._maybe_async(_history_read())
+        return self._run_on_loop(_history_read)
 
     def historyUpdateInsert(
         self,
@@ -2413,7 +2494,7 @@ class Client(_NativeClient):
                 raise RuntimeError("HistoryUpdate result count does not match the request")
             return response.results[0]
 
-        return self._maybe_async(_history_update())
+        return self._run_on_loop(_history_update)
 
     def historyUpdateDelete(
         self,
@@ -2451,7 +2532,7 @@ class Client(_NativeClient):
                 raise RuntimeError("HistoryUpdate delete result count does not match the request")
             return response.results[0]
 
-        return self._maybe_async(_history_delete())
+        return self._run_on_loop(_history_delete)
 
     # Node management
 
@@ -2520,7 +2601,7 @@ class Client(_NativeClient):
 
             return result.addedNodeId
 
-        return self._maybe_async(_add())
+        return self._run_on_loop(_add)
 
     def addObject(
         self,
@@ -2552,8 +2633,9 @@ class Client(_NativeClient):
         """
         name_id = o6.QualifiedName(f"{ns}:{name}")
         attributes = ns0.datatypes.ObjectAttributes(displayName=o6.LocalizedText(name))
-        return self._maybe_async(
-            self._create_convenience_node(
+        return self._run_on_loop(
+            partial(
+                self._create_convenience_node,
                 nodes.ObjectNode,
                 parent,
                 parentReference,
@@ -2626,8 +2708,9 @@ class Client(_NativeClient):
             name, value, dataType, writable, accessLevel, userAccessLevel
         )
         name_id = o6.QualifiedName(f"{ns}:{name}")
-        return self._maybe_async(
-            self._create_convenience_node(
+        return self._run_on_loop(
+            partial(
+                self._create_convenience_node,
                 nodes.VariableNode,
                 parent,
                 parentReference,
@@ -3029,7 +3112,7 @@ class Client(_NativeClient):
             results = list(response.results)
             return results[0] if is_scalar else results
 
-        return self._maybe_async(_delete_node())
+        return self._run_on_loop(_delete_node)
 
     def addReference(
         self,
@@ -3089,7 +3172,7 @@ class Client(_NativeClient):
 
             return response.results[0]
 
-        return self._maybe_async(_add_reference())
+        return self._run_on_loop(_add_reference)
 
     def deleteReference(
         self,
@@ -3147,7 +3230,7 @@ class Client(_NativeClient):
 
             return response.results[0]
 
-        return self._maybe_async(_delete_reference())
+        return self._run_on_loop(_delete_reference)
 
     def createSubscription(
         self,
@@ -3214,7 +3297,7 @@ class Client(_NativeClient):
             self._subscriptions[subscription.id] = subscription
             return subscription
 
-        return self._maybe_async(_create_subscription())
+        return self._run_on_loop(_create_subscription)
 
     def monitor(
         self,
@@ -3300,7 +3383,7 @@ class Client(_NativeClient):
                     discard_oldest=discardOldest,
                 )
 
-        return self._maybe_async(_monitor())
+        return self._run_on_loop(_monitor)
 
     def monitorEvent(
         self,
@@ -3362,7 +3445,7 @@ class Client(_NativeClient):
                 discard_oldest=discardOldest,
             )
 
-        return self._maybe_async(_monitor_event())
+        return self._run_on_loop(_monitor_event)
 
     # Properties
 

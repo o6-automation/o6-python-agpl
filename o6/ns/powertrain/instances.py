@@ -122,7 +122,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6003",
     browseName="ns=powertrain;PwmSwitchingFrequency",
     modellingRule="MandatoryPlaceholder",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6004", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6004", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 powertrain_objtypes.PtOutputConverterAttributesType(
@@ -135,7 +137,10 @@ o6.reference(powertrain_objtypes.PtAssetDriveIntegratedMotorRotaryType, powertra
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6005",
     browseName="ns=powertrain;Inductance",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6006", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6006", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
 )
@@ -153,6 +158,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=powertrain;i=6001",
                 browseName="ns=di;Manufacturer",
                 description="A human-readable, localized name of the manufacturer of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -161,6 +167,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=powertrain;i=6002",
                 browseName="ns=di;SerialNumber",
                 description="A string containing a unique production number of the manufacturer of the MachineryItem. The global uniqueness of the serial number is only given in the context of the manufacturer, and potentially the model. The value shall not change during the life-cycle of the MachineryItem.",
+                modellingRule="Mandatory",
                 dataType=o6.String,
             )
         ),
@@ -169,6 +176,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=powertrain;i=6007",
                 browseName="ns=di;AssetId",
                 description="To be used by end users to store a unique identification in the context of their overall application. Servers shall support at least 40 Unicode characters for the clients writing this value, this means clients can expect to be able to write strings with a length of 40 Unicode characters into that field.",
+                modellingRule="Optional",
                 dataType=o6.String,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -179,6 +187,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=powertrain;i=6008",
                 browseName="ns=di;ComponentName",
                 description="To be used by end users to store a human-readable localized text for the MachineryItem. The minimum number of locales supported for this property shall be two. Servers shall support at least 40 Unicode characters for the clients writing the text part of each locale, this means clients can expect to be able to write texts with a length of 40 Unicode characters into that field.",
+                modellingRule="Optional",
                 dataType=o6.LocalizedText,
                 value=o6.LocalizedText(),
                 accessLevel=3,
@@ -190,6 +199,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=powertrain;i=6009",
                 browseName="ns=di;DeviceClass",
                 description="Indicates in which domain or for what purpose the MachineryItem is used.",
+                modellingRule="Optional",
                 dataType=o6.String,
             )
         ),
@@ -198,6 +208,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=powertrain;i=6010",
                 browseName="ns=di;DeviceRevision",
                 description="A string representation of the overall revision level of the component. Often, it is increased when either the SoftwareRevision and / or the HardwareRevision of the component is increased. As an example, it can be used in ERP systems together with the ProductCode.",
+                modellingRule="Optional",
                 dataType=o6.String,
             )
         ),
@@ -206,6 +217,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=powertrain;i=6011",
                 browseName="ns=di;HardwareRevision",
                 description="A string representation of the revision level of the hardware of a MachineryItem. Hardware is physical equipment, as opposed to programs, procedures, rules and associated documentation. Many machines will not provide such information due to the modular and configurable nature of the machine.",
+                modellingRule="Optional",
                 dataType=o6.String,
             )
         ),
@@ -214,6 +226,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=powertrain;i=6012",
                 browseName="ns=machinery;InitialOperationDate",
                 description="The date, when the MachineryItem was switched on the first time after it has left the manufacturer plant.",
+                modellingRule="Optional",
                 dataType=o6.DateTime,
             )
         ),
@@ -222,6 +235,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=powertrain;i=6013",
                 browseName="ns=di;ManufacturerUri",
                 description="A globally unique identifier of the manufacturer of the MachineryItem.",
+                modellingRule="Optional",
                 dataType=o6.String,
             )
         ),
@@ -230,6 +244,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=powertrain;i=6014",
                 browseName="ns=di;Model",
                 description="A human-readable, localized name of the model of the MachineryItem.",
+                modellingRule="Optional",
                 dataType=o6.LocalizedText,
             )
         ),
@@ -238,6 +253,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=powertrain;i=6015",
                 browseName="ns=machinery;MonthOfConstruction",
                 description="The month in which the manufacturing process of the MachineryItem has been completed. It shall be a number between 1 and 12, representing the month from January to December.",
+                modellingRule="Optional",
                 dataType=o6.Byte,
             )
         ),
@@ -246,6 +262,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=powertrain;i=6016",
                 browseName="ns=di;ProductCode",
                 description="A machine-readable string of the model of the MachineryItem, that might include options like the hardware configuration of the model. This information might be provided by the ERP system of the vendor. For example, it can be used as order information.",
+                modellingRule="Optional",
                 dataType=o6.String,
             )
         ),
@@ -254,6 +271,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=powertrain;i=6017",
                 browseName="ns=di;ProductInstanceUri",
                 description="A globally unique resource identifier provided by the manufacturer of the MachineryItem.",
+                modellingRule="Optional",
                 dataType=o6.String,
             )
         ),
@@ -262,6 +280,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=powertrain;i=6018",
                 browseName="ns=di;SoftwareRevision",
                 description="A string representation of the revision level of a MachineryItem. In most cases, MachineryItems consist of several software components. In that case, information about the software components might be provided as additional information in the address space, including individual revision information. In that case, this property is either not provided or provides an overall software revision level. The value might change during the life-cycle of a MachineryItem.",
+                modellingRule="Optional",
                 dataType=o6.String,
             )
         ),
@@ -270,6 +289,7 @@ machinery.objtypes.MachineryComponentIdentificationType(
                 nodeId="ns=powertrain;i=6019",
                 browseName="ns=machinery;YearOfConstruction",
                 description="The year (Gregorian calendar) in which the manufacturing process of the MachineryItem has been completed. It shall be a four-digit number and never change during the life-cycle of a MachineryItem.",
+                modellingRule="Optional",
                 dataType=o6.UInt16,
             )
         ),
@@ -279,9 +299,18 @@ o6.reference(powertrain_objtypes.PtAssetType, ns0.reftypes.HasAddIn, o6.ns["ns=p
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6035",
     browseName="ns=powertrain;InputConverterType",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6036", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6037", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6036", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6037", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -292,9 +321,18 @@ o6.reference(powertrain_objtypes.PtAssetDriveIntegratedMotorRotaryType, powertra
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6038",
     browseName="ns=powertrain;ProtocolTypes",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6039", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6040", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6039", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6040", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     valueRank=1,
@@ -311,7 +349,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6041",
     browseName="ns=powertrain;PwmSwitchingFrequency",
     modellingRule="MandatoryPlaceholder",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6042", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6042", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 powertrain_objtypes.PtOutputConverterAttributesType(
@@ -346,7 +386,7 @@ http_opcfoundation_org_UA_Powertrain_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6068", browseName="NamespaceVersion", dataType=o6.String, value="1.0.0")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=powertrain;i=6069", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=powertrain;i=6069", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
@@ -360,46 +400,65 @@ http_opcfoundation_org_UA_Powertrain_ = ns0.objtypes.NamespaceMetadataType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6075",
     browseName="ns=powertrain;BrakeInertia",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6076", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6076", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6078",
     browseName="ns=powertrain;BrakeTurnOffDelayAC",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6079", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6079", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6080",
     browseName="ns=powertrain;BrakeTurnOffDelayDC",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6081", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6081", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6083",
     browseName="ns=powertrain;BrakeTurnOnDelay",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6084", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6084", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6086",
     browseName="ns=powertrain;BrakeVoltageRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6087", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6087", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtBrakeAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6086"])
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6090",
     browseName="ns=powertrain;BrakingEnergySingleEngagementMax",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6091", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6091", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6094",
     browseName="ns=powertrain;<ResistanceValue>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6095", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6095", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtBleedAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6094"])
@@ -407,14 +466,19 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6096",
     browseName="ns=powertrain;PowerRated",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6097", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6097", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtBleedAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6096"])
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6099",
     browseName="ns=powertrain;Inductance",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6100", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6100", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
 )
@@ -426,14 +490,19 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=powertrain;i=6102",
     browseName="ns=powertrain;FrequencyRange",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6103", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6103", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Range,
 )
 o6.reference(powertrain_objtypes.PtVibrationSensorAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6102"])
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6106",
     browseName="ns=powertrain;PowerRated",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6107", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6107", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 powertrain_objtypes.PtBleedAttributesType(
@@ -443,7 +512,10 @@ o6.reference(powertrain_objtypes.PtAssetElectricalBrakingModuleType, powertrain_
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6108",
     browseName="ns=powertrain;PowerRated",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6109", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6109", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 powertrain_objtypes.PtBleedAttributesType(
@@ -453,20 +525,28 @@ o6.reference(powertrain_objtypes.PtAssetInputConverterType, powertrain_reftypes.
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6114",
     browseName="ns=powertrain;TemperatureMax",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6115", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6115", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6116",
     browseName="ns=powertrain;TemperatureMin",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6117", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6117", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=powertrain;i=6119",
     browseName="ns=powertrain;MeasuringRange",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6120", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6120", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Range,
 )
 o6.reference(powertrain_objtypes.PtVibrationSensorAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6119"])
@@ -474,32 +554,46 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6121",
     browseName="ns=powertrain;OperatingVoltage",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6122", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6122", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtVibrationSensorAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6121"])
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=powertrain;i=6123",
     browseName="ns=powertrain;FrequencyRange",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6124", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6124", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Range,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6128",
     browseName="ns=powertrain;BrakeInertia",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6129", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6129", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6131",
     browseName="ns=powertrain;BrakeTurnOffDelayAC",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6132", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6132", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6133",
     browseName="ns=powertrain;BrakeTurnOffDelayDC",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6134", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6134", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
@@ -511,9 +605,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6098",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[3],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("AC"), description=o6.LocalizedText("AC-operated brake")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("DC"), description=o6.LocalizedText("DC-operated brake")),
@@ -521,7 +616,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6135", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6135", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -529,7 +628,10 @@ o6.reference(powertrain_objtypes.PtBrakeAttributesType, ns0.reftypes.HasComponen
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6136",
     browseName="ns=powertrain;BrakeTurnOnDelay",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6137", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6137", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
@@ -541,6 +643,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6101",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[2],
@@ -550,7 +653,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6138", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6138", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -558,21 +665,36 @@ o6.reference(powertrain_objtypes.PtBrakeAttributesType, ns0.reftypes.HasComponen
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=powertrain;i=6139",
     browseName="ns=powertrain;MeasuringRange",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6140", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6140", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Range,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6143",
     browseName="ns=powertrain;BrakingEnergySingleEngagementMax",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6144", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6144", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6104",
     browseName="ns=powertrain;InputConverterType",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6105", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6146", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6105", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6146", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -584,16 +706,27 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6151",
     browseName="ns=powertrain;<PwmSwitchingFrequency>",
     modellingRule="MandatoryPlaceholder",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6152", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6152", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtOutputConverterAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6151"])
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6147",
     browseName="ns=powertrain;ProtocolTypes",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6153", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6154", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6153", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6154", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     valueRank=1,
@@ -609,7 +742,10 @@ o6.reference(powertrain_objtypes.PtAssetDriveIntegratedMotorLinearType, powertra
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6158",
     browseName="ns=powertrain;PowerRated",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6159", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6159", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 powertrain_objtypes.PtBleedAttributesType(
@@ -619,9 +755,18 @@ o6.reference(powertrain_objtypes.PtAssetBleedType, powertrain_reftypes.HasPtAttr
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6160",
     browseName="ns=powertrain;InputConverterType",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6161", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6162", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6161", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6162", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -638,9 +783,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6165",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[8],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("IE1"), description=o6.LocalizedText("Standard Efficiency")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("IE2"), description=o6.LocalizedText("High Efficiency")),
@@ -659,7 +805,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6166", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6166", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -673,9 +823,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6149",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[9],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("PLANETARY_GEAR"), description=o6.LocalizedText("Gearbox with planetary gears")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("WORM_GEAR"), description=o6.LocalizedText("Gearbox with worm gear")),
@@ -689,7 +840,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6167", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6167", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -703,9 +858,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6111",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[8],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("ASYNCHRONOUS"), description=o6.LocalizedText("Asynchronous motor")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("PM_AC_SYNCHRONOUS"), description=o6.LocalizedText("Permanent magnet synchronous motor")),
@@ -720,7 +876,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6168", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6168", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -734,9 +894,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6113",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[3],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("THERMOCOUPLE"), description=o6.LocalizedText("Thermocouple")),
                     ns0.datatypes.EnumValueType(
@@ -746,7 +907,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6169", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6169", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -754,58 +919,91 @@ o6.reference(powertrain_objtypes.PtTemperatureSensorAttributesType, ns0.reftypes
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6171",
     browseName="ns=powertrain;TemperatureMax",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6172", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6172", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6173",
     browseName="ns=powertrain;TemperatureMin",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6174", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6174", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=powertrain;i=6176",
     browseName="ns=powertrain;FrequencyRange",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6177", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6177", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Range,
 )
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=powertrain;i=6178",
     browseName="ns=powertrain;MeasuringRange",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6179", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6179", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Range,
 )
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=powertrain;i=6180",
     browseName="ns=powertrain;FrequencyRange",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6181", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6181", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Range,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6170",
     browseName="ns=powertrain;TemperatureSensorTechnology",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6182", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6183", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6182", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6183", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6184",
     browseName="ns=powertrain;TemperatureMax",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6185", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6185", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6186",
     browseName="ns=powertrain;TemperatureMin",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6187", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6187", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=powertrain;i=6189",
     browseName="ns=powertrain;MeasuringRange",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6190", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6190", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Range,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
@@ -817,16 +1015,21 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6192",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[2],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("AC/DC"), description=o6.LocalizedText("AC input, DC output")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("DC/DC"), description=o6.LocalizedText("DC input, DC output")),
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6193", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6193", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -835,7 +1038,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6194",
     browseName="ns=powertrain;PreChargeTime",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6195", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6195", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtPrechargeAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6194"])
@@ -843,7 +1048,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6196",
     browseName="ns=powertrain;PreChargeTimeout",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6197", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6197", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtPrechargeAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6196"])
@@ -851,7 +1058,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6050",
     browseName="ns=powertrain;MotorPowerRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6199", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6199", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtMotorRatedAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6050"])
@@ -864,9 +1073,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6200",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[8],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("IE1"), description=o6.LocalizedText("Standard Efficiency")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("IE2"), description=o6.LocalizedText("High Efficiency")),
@@ -885,7 +1095,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6201", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6201", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -894,28 +1108,38 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6204",
     browseName="ns=powertrain;<DcBusVoltageRated>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6205", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6205", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtDcBusAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6204"])
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6207",
     browseName="ns=powertrain;<DcBusVoltageRated>",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6208", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6208", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6210",
     browseName="ns=powertrain;Capacitance",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6211", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6211", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtCapacitanceAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6210"])
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6233",
     browseName="ns=powertrain;<DcBusVoltageRated>",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6234", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6234", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 powertrain_objtypes.PtSoftStarterAttributesType(
@@ -923,12 +1147,24 @@ powertrain_objtypes.PtSoftStarterAttributesType(
     browseName="ns=powertrain;PtSoftStarterAttributes",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6214", browseName="ns=powertrain;IntegratedByPassSupported", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6215", browseName="ns=powertrain;MotorOverloadProtectionIntegrated", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6216", browseName="ns=powertrain;OperationalCurrent40CRated", dataType=o6.Float)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6214", browseName="ns=powertrain;IntegratedByPassSupported", modellingRule="Mandatory", dataType=o6.Boolean)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=powertrain;i=6238", browseName="ns=powertrain;OperationalVoltageRangeRated", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
+                nodeId="ns=powertrain;i=6215", browseName="ns=powertrain;MotorOverloadProtectionIntegrated", modellingRule="Mandatory", dataType=o6.Boolean, value=False
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6216", browseName="ns=powertrain;OperationalCurrent40CRated", modellingRule="Mandatory", dataType=o6.Float)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6238",
+                browseName="ns=powertrain;OperationalVoltageRangeRated",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.Range,
+                value=ns0.datatypes.Range(low=0.0, high=0.0),
             )
         ),
     ],
@@ -938,7 +1174,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6245",
     browseName="ns=powertrain;Inductance",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6246", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6246", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
 )
@@ -952,9 +1190,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6224",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[5],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("OTHER"), description=o6.LocalizedText("Other")),
                     ns0.datatypes.EnumValueType(
@@ -988,7 +1227,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6247", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6247", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -1002,9 +1245,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6225",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[2],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(
                         value=0,
@@ -1023,7 +1267,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6248", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6248", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -1037,9 +1285,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6226",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[3],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("OTHER"), description=o6.LocalizedText("Other group")),
                     ns0.datatypes.EnumValueType(
@@ -1057,7 +1306,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6249", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6249", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -1065,7 +1318,10 @@ o6.reference(powertrain_objtypes.PtInputFilterAttributesType, ns0.reftypes.HasCo
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6250",
     browseName="ns=powertrain;LineFilterPowerLoss",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6251", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6251", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 powertrain_objtypes.PtInputFilterAttributesType(
@@ -1075,7 +1331,10 @@ o6.reference(powertrain_objtypes.PtAssetInputFilterType, powertrain_reftypes.Has
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6252",
     browseName="ns=powertrain;Inductance",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6253", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6253", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
 )
@@ -1086,7 +1345,10 @@ o6.reference(powertrain_objtypes.PtAssetInputFilterType, powertrain_reftypes.Has
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6254",
     browseName="ns=powertrain;Inductance",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6255", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6255", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
 )
@@ -1098,13 +1360,18 @@ powertrain_objtypes.PtInputInterfaceAttributesType(
     nodeId="ns=powertrain;i=5027",
     browseName="ns=powertrain;PtInputInterfaceAttributes",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6256", browseName="ns=powertrain;NumberOfInputPhases", dataType=o6.Byte))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6256", browseName="ns=powertrain;NumberOfInputPhases", modellingRule="Mandatory", dataType=o6.Byte))
+    ],
 )
 o6.reference(powertrain_objtypes.PtAssetReactorFilterType, powertrain_reftypes.HasPtAttributes, o6.ns["ns=powertrain;i=5027"])
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6258",
     browseName="ns=powertrain;Inductance",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6259", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6259", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
 )
@@ -1115,7 +1382,10 @@ o6.reference(powertrain_objtypes.PtAssetOutputFilterType, powertrain_reftypes.Ha
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6260",
     browseName="ns=powertrain;Inductance",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6261", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6261", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
 )
@@ -1126,9 +1396,18 @@ o6.reference(powertrain_objtypes.PtAssetOutputReactorType, powertrain_reftypes.H
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6239",
     browseName="ns=powertrain;ProtocolTypes",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6263", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6264", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6263", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6264", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     valueRank=1,
@@ -1150,9 +1429,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6221",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[8],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("IE1"), description=o6.LocalizedText("Standard Efficiency")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("IE2"), description=o6.LocalizedText("High Efficiency")),
@@ -1171,7 +1451,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6267", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6267", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -1180,7 +1464,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6219",
     browseName="ns=powertrain;PowerFactorCorrection",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6268", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6268", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtInputConverterAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6219"])
@@ -1188,7 +1474,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6220",
     browseName="ns=powertrain;<PwmSwitchingFrequency>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6269", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6269", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtInputConverterAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6220"])
@@ -1196,7 +1484,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6223",
     browseName="ns=powertrain;RegenerativePowerRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6270", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6270", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtInputConverterAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6223"])
@@ -1209,9 +1499,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6237",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[8],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("IE1"), description=o6.LocalizedText("Standard Efficiency")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("IE2"), description=o6.LocalizedText("High Efficiency")),
@@ -1230,7 +1521,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6271", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6271", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -1244,16 +1539,21 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6273",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[2],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("SINE_WAVE_FILTER"), description=o6.LocalizedText("Component is a sine-wave filter")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("DV_DT_FILTER"), description=o6.LocalizedText("Component is a dv/dt filter")),
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6280", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6280", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -1261,9 +1561,18 @@ o6.reference(powertrain_objtypes.PtOutputFilterAttributesType, ns0.reftypes.HasC
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6290",
     browseName="ns=powertrain;TripClass",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6291", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6292", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6291", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6292", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -1271,7 +1580,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6294",
     browseName="ns=powertrain;<DcBusVoltageRated>",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6295", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6295", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 powertrain_objtypes.PtMotorManagementDeviceAttributesType(
@@ -1281,31 +1593,91 @@ powertrain_objtypes.PtMotorManagementDeviceAttributesType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=powertrain;i=6265", browseName="ns=powertrain;ControlVoltageAC50HzRangeRated", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
+                nodeId="ns=powertrain;i=6265",
+                browseName="ns=powertrain;ControlVoltageAC50HzRangeRated",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.Range,
+                value=ns0.datatypes.Range(low=0.0, high=0.0),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6266", browseName="ns=powertrain;CosPhiVariationDetectionSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6274", browseName="ns=powertrain;CurrentImbalanceDetectionSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6275", browseName="ns=powertrain;GroundEarthFaultDetectionSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6276", browseName="ns=powertrain;HMIPortSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6277", browseName="ns=powertrain;JamDetectionSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6278", browseName="ns=powertrain;LoadSheddingSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6279", browseName="ns=powertrain;NumberOfAnalogInputs", dataType=o6.UInt16, value=0)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6281", browseName="ns=powertrain;NumberOfDigitalInputs", dataType=o6.UInt16, value=0)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6282", browseName="ns=powertrain;NumberOfDigitalOutputs", dataType=o6.UInt16, value=0)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6283", browseName="ns=powertrain;NumberOfPtcThermistorInputs", dataType=o6.UInt16, value=0)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=powertrain;i=6284", browseName="ns=powertrain;OverloadCurrentSettingRange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
+                nodeId="ns=powertrain;i=6266", browseName="ns=powertrain;CosPhiVariationDetectionSupported", modellingRule="Mandatory", dataType=o6.Boolean, value=False
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6285", browseName="ns=powertrain;OverUnderCurrentDetectionSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6286", browseName="ns=powertrain;OverUnderVoltageDetectionSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6287", browseName="ns=powertrain;PhaseLossSensitiveSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6288", browseName="ns=powertrain;PhaseReversalDetectionSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6289", browseName="ns=powertrain;StallDetectionSuported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6293", browseName="ns=powertrain;UnderPowerDetectionSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6297", browseName="ns=powertrain;VoltageMonitoringSupported", dataType=o6.Boolean, value=False)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6274", browseName="ns=powertrain;CurrentImbalanceDetectionSupported", modellingRule="Mandatory", dataType=o6.Boolean, value=False
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6275", browseName="ns=powertrain;GroundEarthFaultDetectionSupported", modellingRule="Mandatory", dataType=o6.Boolean, value=False
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6276", browseName="ns=powertrain;HMIPortSupported", modellingRule="Mandatory", dataType=o6.Boolean, value=False)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6277", browseName="ns=powertrain;JamDetectionSupported", modellingRule="Mandatory", dataType=o6.Boolean, value=False)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6278", browseName="ns=powertrain;LoadSheddingSupported", modellingRule="Mandatory", dataType=o6.Boolean, value=False)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6279", browseName="ns=powertrain;NumberOfAnalogInputs", modellingRule="Mandatory", dataType=o6.UInt16, value=0)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6281", browseName="ns=powertrain;NumberOfDigitalInputs", modellingRule="Mandatory", dataType=o6.UInt16, value=0)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6282", browseName="ns=powertrain;NumberOfDigitalOutputs", modellingRule="Mandatory", dataType=o6.UInt16, value=0)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6283", browseName="ns=powertrain;NumberOfPtcThermistorInputs", modellingRule="Mandatory", dataType=o6.UInt16, value=0)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6284",
+                browseName="ns=powertrain;OverloadCurrentSettingRange",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.Range,
+                value=ns0.datatypes.Range(low=0.0, high=0.0),
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6285", browseName="ns=powertrain;OverUnderCurrentDetectionSupported", modellingRule="Mandatory", dataType=o6.Boolean, value=False
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6286", browseName="ns=powertrain;OverUnderVoltageDetectionSupported", modellingRule="Mandatory", dataType=o6.Boolean, value=False
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6287", browseName="ns=powertrain;PhaseLossSensitiveSupported", modellingRule="Mandatory", dataType=o6.Boolean, value=False
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6288", browseName="ns=powertrain;PhaseReversalDetectionSupported", modellingRule="Mandatory", dataType=o6.Boolean, value=False
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6289", browseName="ns=powertrain;StallDetectionSuported", modellingRule="Mandatory", dataType=o6.Boolean, value=False)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6293", browseName="ns=powertrain;UnderPowerDetectionSupported", modellingRule="Mandatory", dataType=o6.Boolean, value=False
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6297", browseName="ns=powertrain;VoltageMonitoringSupported", modellingRule="Mandatory", dataType=o6.Boolean, value=False
+            )
+        ),
         o6.hasComponent(o6.ns["ns=powertrain;i=6290"]),
     ],
 )
@@ -1314,7 +1686,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6198",
     browseName="ns=powertrain;PrechargeThreshold",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6299", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6299", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtPrechargeAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6198"])
@@ -1322,7 +1696,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6300",
     browseName="ns=powertrain;PreChargeMaximumCapacitance",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6301", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6301", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtPrechargeAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6300"])
@@ -1330,7 +1706,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6303",
     browseName="ns=powertrain;PressureMin",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6304", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6304", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtAmbientAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6303"])
@@ -1338,7 +1716,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6163",
     browseName="ns=powertrain;PwmSwitchingFrequency",
     modellingRule="MandatoryPlaceholder",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6305", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6305", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 powertrain_objtypes.PtOutputConverterAttributesType(
@@ -1349,15 +1729,26 @@ powertrain_objtypes.PtInputInterfaceAttributesType(
     nodeId="ns=powertrain;i=5106",
     browseName="ns=powertrain;PtInputInterfaceAttributes",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6306", browseName="ns=powertrain;NumberOfInputPhases", dataType=o6.Byte))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6306", browseName="ns=powertrain;NumberOfInputPhases", modellingRule="Mandatory", dataType=o6.Byte))
+    ],
 )
 o6.reference(powertrain_objtypes.PtAssetInputOutputConverterType, powertrain_reftypes.HasPtAttributes, o6.ns["ns=powertrain;i=5106"])
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6298",
     browseName="ns=powertrain;ProtocolTypes",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6308", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6309", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6308", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6309", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     valueRank=1,
@@ -1379,9 +1770,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6312",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[52],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("IP00"), description=o6.LocalizedText("non-protected / non-protected")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("IP01"), description=o6.LocalizedText("non-protected / vertically dripping")),
@@ -1440,7 +1832,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6313", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6313", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -1449,16 +1845,27 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6322",
     browseName="ns=powertrain;BrakeCurrentRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6323", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6323", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtBrakeAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6322"])
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6321",
     browseName="ns=powertrain;TripClass",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6324", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6325", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6324", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6325", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -1468,17 +1875,35 @@ powertrain_objtypes.PtElectronicOverloadRelayAttributesType(
     browseName="ns=powertrain;PtElectronicOverloadRelayAttributes",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6314", browseName="ns=powertrain;GroundEarthFaultDetectionSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6315", browseName="ns=powertrain;JamDetectionSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6316", browseName="ns=powertrain;NumberofAuxiliaryContactsNC", dataType=o6.UInt16, value=0)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=powertrain;i=6317", browseName="ns=powertrain;OverloadCurrentSettingRange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
+                nodeId="ns=powertrain;i=6314", browseName="ns=powertrain;GroundEarthFaultDetectionSupported", modellingRule="Mandatory", dataType=o6.Boolean, value=False
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6318", browseName="ns=powertrain;PhaseLossSensitiveSupported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6320", browseName="ns=powertrain;StallDetectionSuported", dataType=o6.Boolean, value=False)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6326", browseName="ns=powertrain;VoltageRated", dataType=o6.UInt16, value=0)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6315", browseName="ns=powertrain;JamDetectionSupported", modellingRule="Mandatory", dataType=o6.Boolean, value=False)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6316", browseName="ns=powertrain;NumberofAuxiliaryContactsNC", modellingRule="Mandatory", dataType=o6.UInt16, value=0)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6317",
+                browseName="ns=powertrain;OverloadCurrentSettingRange",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.Range,
+                value=ns0.datatypes.Range(low=0.0, high=0.0),
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6318", browseName="ns=powertrain;PhaseLossSensitiveSupported", modellingRule="Mandatory", dataType=o6.Boolean, value=False
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6320", browseName="ns=powertrain;StallDetectionSuported", modellingRule="Mandatory", dataType=o6.Boolean, value=False)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6326", browseName="ns=powertrain;VoltageRated", modellingRule="Mandatory", dataType=o6.UInt16, value=0)),
         o6.hasComponent(o6.ns["ns=powertrain;i=6321"]),
     ],
 )
@@ -1492,9 +1917,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6329",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[10],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("S1"), description=o6.LocalizedText("Continuous duty")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("S2"), description=o6.LocalizedText("Short-time duty")),
@@ -1513,7 +1939,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6330", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6330", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -1522,13 +1952,18 @@ powertrain_objtypes.PtOutputInterfaceAttributesType(
     nodeId="ns=powertrain;i=5107",
     browseName="ns=powertrain;PtOutputInterfaceAttributes",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6336", browseName="ns=powertrain;NumberOfOutputPhases", dataType=o6.Byte))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6336", browseName="ns=powertrain;NumberOfOutputPhases", modellingRule="Mandatory", dataType=o6.Byte))
+    ],
 )
 o6.reference(powertrain_objtypes.PtAssetInputOutputConverterType, powertrain_reftypes.HasPtAttributes, o6.ns["ns=powertrain;i=5107"])
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6337",
     browseName="ns=powertrain;<DcBusVoltageRated>",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6338", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6338", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.BaseDataVariableType(
@@ -1537,7 +1972,9 @@ ns0.vartypes.BaseDataVariableType(
     modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6340", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6340", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1
+            )
         )
     ],
     dataType=ns0.datatypes.Range,
@@ -1547,9 +1984,12 @@ o6.reference(powertrain_objtypes.PtDcBusAttributesType, ns0.reftypes.HasComponen
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=powertrain;i=6209",
     browseName="ns=powertrain;DcBusVoltageRange",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6341", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6341", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1
+            )
         )
     ],
     dataType=ns0.datatypes.Range,
@@ -1565,9 +2005,12 @@ o6.reference(powertrain_objtypes.PtAssetDcBusModuleType, powertrain_reftypes.Has
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=powertrain;i=6235",
     browseName="ns=powertrain;DcBusVoltageRange",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6343", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6343", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1
+            )
         )
     ],
     dataType=ns0.datatypes.Range,
@@ -1576,9 +2019,12 @@ ns0.vartypes.BaseDataVariableType(
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=powertrain;i=6296",
     browseName="ns=powertrain;DcBusVoltageRange",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6344", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6344", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1
+            )
         )
     ],
     dataType=ns0.datatypes.Range,
@@ -1588,7 +2034,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6345",
     browseName="ns=powertrain;BrakePowerRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6346", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6346", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtBrakeAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6345"])
@@ -1596,7 +2044,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6347",
     browseName="ns=powertrain;BrakeSurroundingAirTemperature",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6348", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6348", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtBrakeAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6347"])
@@ -1604,7 +2054,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6351",
     browseName="ns=powertrain;OutputCurrentMax",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6352", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6352", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtDigitalOutputElectricalAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6351"])
@@ -1612,14 +2064,19 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6353",
     browseName="ns=powertrain;BreakingCapacity",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6354", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6354", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtFuseAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6353"])
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6355",
     browseName="ns=powertrain;Inductance",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6356", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6356", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
 )
@@ -1631,15 +2088,20 @@ powertrain_objtypes.PtInputInterfaceAttributesType(
     nodeId="ns=powertrain;i=5068",
     browseName="ns=powertrain;PtInputInterfaceAttributes",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6357", browseName="ns=powertrain;NumberOfInputPhases", dataType=o6.Byte))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6357", browseName="ns=powertrain;NumberOfInputPhases", modellingRule="Mandatory", dataType=o6.Byte))
+    ],
 )
 o6.reference(powertrain_objtypes.PtAssetInputReactorType, powertrain_reftypes.HasPtAttributes, o6.ns["ns=powertrain;i=5068"])
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=powertrain;i=6349",
     browseName="ns=powertrain;DcBusVoltageRange",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6358", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6358", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1
+            )
         )
     ],
     dataType=ns0.datatypes.Range,
@@ -1653,16 +2115,27 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6359",
     browseName="ns=powertrain;BrakeTorqueRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6360", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6360", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtBrakeAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6359"])
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6361",
     browseName="ns=powertrain;OutputFilterType",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6362", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6363", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6362", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6363", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -1673,9 +2146,12 @@ o6.reference(powertrain_objtypes.PtAssetInputOutputConverterType, powertrain_ref
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=powertrain;i=6339",
     browseName="ns=powertrain;DcBusVoltageRange",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6364", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6364", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1
+            )
         )
     ],
     dataType=ns0.datatypes.Range,
@@ -1684,15 +2160,27 @@ ns0.vartypes.BaseDataVariableType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6307",
     browseName="ns=powertrain;<PwmSwitchingFrequency>",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6365", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6365", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6327",
     browseName="ns=powertrain;ProtocolTypes",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6342", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6366", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6342", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6366", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     valueRank=1,
@@ -1708,7 +2196,10 @@ o6.reference(powertrain_objtypes.PtAssetElectricOverloadRelayType, powertrain_re
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6368",
     browseName="ns=powertrain;Inductance",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6369", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6369", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
 )
@@ -1723,7 +2214,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6370",
     browseName="ns=powertrain;AltitudeMax",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6371", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6371", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtAmbientAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6370"])
@@ -1736,9 +2229,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6372",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[3],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("AC/DC_PASSIVE"), description=o6.LocalizedText("Passive AC/DC converter")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("AC/DC_ACTIVE"), description=o6.LocalizedText("Active AC/DC converter")),
@@ -1746,7 +2240,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6373", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6373", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -1754,9 +2252,18 @@ o6.reference(powertrain_objtypes.PtInputConverterAttributesType, ns0.reftypes.Ha
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6319",
     browseName="ns=powertrain;OutputFilterType",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6375", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6376", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6375", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6376", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -1764,7 +2271,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6377",
     browseName="ns=powertrain;TemperatureMin",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6379", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6379", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtAmbientAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6377"])
@@ -1772,7 +2281,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6380",
     browseName="ns=powertrain;PressureMax",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6381", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6381", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtAmbientAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6380"])
@@ -1780,7 +2291,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6382",
     browseName="ns=powertrain;TemperatureMax",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6383", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6383", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtAmbientAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6382"])
@@ -1788,20 +2301,28 @@ ns0.vartypes.BaseDataVariableType(
     nodeId="ns=powertrain;i=6386",
     browseName="ns=powertrain;FrequencyRange",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6387", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6387", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=ns0.datatypes.Range,
 )
 o6.reference(powertrain_objtypes.PtAnalogOutputElectricalAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6386"])
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6227",
     browseName="ns=powertrain;LineFilterPowerLoss",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6389", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6389", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6240",
     browseName="ns=powertrain;OutputFilterPowerLoss",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6390", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6390", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
@@ -1813,9 +2334,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6395",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[12],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("CLASS_2E"), description=o6.LocalizedText("Thermal protection class 2E")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("CLASS_3E"), description=o6.LocalizedText("Thermal protection class 3E")),
@@ -1832,7 +2354,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6396", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6396", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -1843,7 +2369,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6388",
     browseName="ns=powertrain;InputCurrentRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6398", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6398", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtInputInterfaceAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6388"])
@@ -1851,7 +2379,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6399",
     browseName="ns=powertrain;InputFrequencyMax",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6400", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6400", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtInputInterfaceAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6399"])
@@ -1859,7 +2389,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6401",
     browseName="ns=powertrain;InputPowerRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6402", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6402", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtInputInterfaceAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6401"])
@@ -1867,7 +2399,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6403",
     browseName="ns=powertrain;InputVoltageRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6404", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6404", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtInputInterfaceAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6403"])
@@ -1880,9 +2414,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6410",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[25],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(
                         value=0, displayName=o6.LocalizedText("ETHERCAT"), description=o6.LocalizedText("Ethernet for control automation technology for real-time systems")
@@ -1932,7 +2467,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6411", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6411", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     valueRank=1,
@@ -1948,9 +2487,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6413",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[11],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("FF-SIS"), description=o6.LocalizedText("Fieldbus Foundation Safety Instrumented Systems")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("CIP_SAFTEY"), description=o6.LocalizedText("Common Industrial Protocol Safety")),
@@ -1966,7 +2506,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6414", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6414", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     valueRank=1,
@@ -1976,9 +2520,18 @@ o6.reference(powertrain_objtypes.PtCommunicationInterfaceAttributesType, ns0.ref
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6415",
     browseName="ns=powertrain;ProtocolTypes",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6416", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6418", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6416", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6418", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     valueRank=1,
@@ -1995,7 +2548,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6422",
     browseName="ns=powertrain;NoiseLevel",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6424", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6424", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtHardwareAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6422"])
@@ -2003,7 +2558,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6425",
     browseName="ns=powertrain;HeatDissipationPower",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6426", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6426", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtHardwareAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6425"])
@@ -2011,7 +2568,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6427",
     browseName="ns=powertrain;OutputCurrentRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6428", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6428", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtOutputInterfaceAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6427"])
@@ -2019,21 +2578,25 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6430",
     browseName="ns=powertrain;OutputPowerRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6431", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6431", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtOutputInterfaceAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6430"])
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6384",
     browseName="ns=powertrain;DutyType",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6385",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[10],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("S1"), description=o6.LocalizedText("Continuous duty")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("S2"), description=o6.LocalizedText("Short-time duty")),
@@ -2052,7 +2615,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6438", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6438", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -2066,6 +2633,7 @@ powertrain_objtypes.PtCertificateAttributesType(
                 nodeId="ns=powertrain;i=6055",
                 browseName="ns=powertrain;Certificates",
                 displayName="DefaultInstanceBrowsename",
+                modellingRule="Optional",
                 dataType=o6.QualifiedName,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -2076,6 +2644,7 @@ powertrain_objtypes.PtCertificateAttributesType(
                 nodeId="ns=powertrain;i=6439",
                 browseName="ns=powertrain;Certificates",
                 displayName="DefaultInstanceBrowsename",
+                modellingRule="Optional",
                 dataType=o6.QualifiedName,
                 valueRank=1,
                 arrayDimensions=[0],
@@ -2088,7 +2657,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6429",
     browseName="ns=powertrain;OutputFrequencyRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6441", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6441", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtOutputInterfaceAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6429"])
@@ -2096,7 +2667,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6442",
     browseName="ns=powertrain;CurrentRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6445", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6445", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtFuseAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6442"])
@@ -2104,7 +2677,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6444",
     browseName="ns=powertrain;VoltageRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6446", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6446", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtFuseAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6444"])
@@ -2112,14 +2687,19 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6447",
     browseName="ns=powertrain;OutputVoltageRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6448", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6448", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtOutputInterfaceAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6447"])
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6450",
     browseName="ns=powertrain;Inductance",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6451", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6451", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
 )
@@ -2130,7 +2710,10 @@ o6.reference(powertrain_objtypes.PtAssetInputConverterType, powertrain_reftypes.
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6452",
     browseName="ns=powertrain;Inductance",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6453", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6453", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
 )
@@ -2147,9 +2730,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6474",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[28],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("OTHER"), description=o6.LocalizedText("Other viscosity grade")),
                     ns0.datatypes.EnumValueType(
@@ -2220,7 +2804,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6478", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6478", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -2234,9 +2822,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6334",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[7],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("OPTICAL"), description=o6.LocalizedText("Optical encoder")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("MAGNETIC"), description=o6.LocalizedText("Magnetic encoder")),
@@ -2248,7 +2837,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6479", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6479", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -2256,9 +2849,18 @@ o6.reference(powertrain_objtypes.PtEncoderAttributesType, ns0.reftypes.HasCompon
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6462",
     browseName="ns=powertrain;ProtocolTypes",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6473", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6489", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6473", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6489", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     valueRank=1,
@@ -2280,9 +2882,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6487",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[6],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("ROT_SINGLE_TURN"), description=o6.LocalizedText("Rotary absolute single-turn")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("ROT_MULTI_TURN"), description=o6.LocalizedText("Rotary absolute multi-turn")),
@@ -2293,7 +2896,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6491", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6491", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -2307,9 +2914,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6493",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[9],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(
                         value=0, displayName=o6.LocalizedText("RS-422_5V_TTL"), description=o6.LocalizedText("RS-422 (TTL - transistor transistor logic), 5 V signal level")
@@ -2335,7 +2943,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6494", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6494", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -2344,7 +2956,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6302",
     browseName="ns=powertrain;PreChargeCycleTimeLimit",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6500", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6500", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
 )
@@ -2352,9 +2966,18 @@ o6.reference(powertrain_objtypes.PtPrechargeAttributesType, ns0.reftypes.HasComp
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6503",
     browseName="ns=powertrain;OutputFilterType",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6504", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6505", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6504", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6505", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -2367,9 +2990,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6512",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[7],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(
                         value=0, displayName=o6.LocalizedText("CIA_402"), description=o6.LocalizedText("CANopen device profile for drives and motion control")
@@ -2393,7 +3017,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6513", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6513", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     valueRank=1,
@@ -2409,9 +3037,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6523",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[5],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("CAT_B"), description=o6.LocalizedText("Category B")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("CAT_1"), description=o6.LocalizedText("Category 1")),
@@ -2421,7 +3050,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6524", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6524", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -2435,9 +3068,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6496",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[15],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("BISS_C"), description=o6.LocalizedText("BiSS interface continuous mode")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("ENDAT_2.1"), description=o6.LocalizedText("EnDat (encoder data), operating mode 2.1")),
@@ -2463,7 +3097,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6526", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6526", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -2477,6 +3115,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6350",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
                 arrayDimensions=[2],
@@ -2494,7 +3133,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6528", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6528", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -2503,16 +3146,27 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6529",
     browseName="ns=powertrain;BrakeTorqueHolding",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6530", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6530", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtBrakeAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6529"])
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6490",
     browseName="ns=powertrain;PreChargeType",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6531", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6532", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6531", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6532", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -2524,15 +3178,26 @@ powertrain_objtypes.PtInputInterfaceAttributesType(
     nodeId="ns=powertrain;i=5118",
     browseName="ns=powertrain;PtInputInterfaceAttributes",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6533", browseName="ns=powertrain;NumberOfInputPhases", dataType=o6.Byte))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6533", browseName="ns=powertrain;NumberOfInputPhases", modellingRule="Mandatory", dataType=o6.Byte))
+    ],
 )
 o6.reference(powertrain_objtypes.PtAssetPrechargeType, powertrain_reftypes.HasPtAttributes, o6.ns["ns=powertrain;i=5118"])
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6534",
     browseName="ns=powertrain;ProtocolTypes",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6535", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6536", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6535", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6536", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     valueRank=1,
@@ -2548,45 +3213,90 @@ o6.reference(powertrain_objtypes.PtAssetPrechargeType, powertrain_reftypes.HasPt
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6537",
     browseName="ns=powertrain;BrakeType",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6538", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6539", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6538", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6539", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6540",
     browseName="ns=powertrain;BrakeDesignType",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6541", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6542", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6541", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6542", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6543",
     browseName="ns=powertrain;BrakeType",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6544", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6545", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6544", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6545", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6546",
     browseName="ns=powertrain;BrakeDesignType",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6547", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6548", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6547", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6548", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6549",
     browseName="ns=powertrain;ProtocolTypes",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6550", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6551", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6550", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6551", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     valueRank=1,
@@ -2602,7 +3312,10 @@ o6.reference(powertrain_objtypes.PtAssetDriveType, powertrain_reftypes.HasPtAttr
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6552",
     browseName="ns=powertrain;PowerRated",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6553", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6553", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 powertrain_objtypes.PtBleedAttributesType(
@@ -2612,18 +3325,36 @@ o6.reference(powertrain_objtypes.PtAssetDriveType, powertrain_reftypes.HasPtAttr
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6497",
     browseName="ns=powertrain;TemperatureSensorTechnology",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6498", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6555", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6498", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6555", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6556",
     browseName="ns=powertrain;TemperatureSensorTechnology",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6557", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6558", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6557", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6558", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -2636,9 +3367,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6559",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[13],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("VOLTAGE_0-10V"), description=o6.LocalizedText("Voltage range 0-10 volt")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("VOLTAGE_-10-10V"), description=o6.LocalizedText("Voltage range -10-10 volt")),
@@ -2656,7 +3388,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6560", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6560", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -2670,9 +3406,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6562",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[13],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("VOLTAGE_0-10V"), description=o6.LocalizedText("Voltage range 0-10 volt")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("VOLTAGE_-10-10V"), description=o6.LocalizedText("Voltage range -10-10 volt")),
@@ -2690,7 +3427,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6563", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6563", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -2704,9 +3445,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6565",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[7],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("TTL"), description=o6.LocalizedText("Transistor-transistor logic (0..5 V)")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("HTL"), description=o6.LocalizedText("High threshold logic (0..24 V)")),
@@ -2718,7 +3460,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6566", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6566", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -2732,9 +3478,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6568",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[7],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("TTL"), description=o6.LocalizedText("Transistor-transistor logic (0..5 V)")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("HTL"), description=o6.LocalizedText("High threshold logic (0..24 V)")),
@@ -2746,7 +3493,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6569", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6569", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -2760,16 +3511,21 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6571",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[2],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("ACTIVE_OPEN"), description=o6.LocalizedText("Active function signal by open output")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("ACTIVE_CLOSED"), description=o6.LocalizedText("Active function signal by closed output")),
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6572", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6572", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -2778,14 +3534,19 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6573",
     browseName="ns=powertrain;Resolution",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6574", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6574", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtVibrationSensorAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6573"])
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6501",
     browseName="ns=powertrain;Capacitance",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6575", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6575", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 powertrain_objtypes.PtCapacitanceAttributesType(
@@ -2795,7 +3556,10 @@ o6.reference(powertrain_objtypes.PtAssetDcBusModuleType, powertrain_reftypes.Has
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6576",
     browseName="ns=powertrain;Capacitance",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6577", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6577", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 powertrain_objtypes.PtCapacitanceAttributesType(
@@ -2805,7 +3569,10 @@ o6.reference(powertrain_objtypes.PtAssetInputConverterType, powertrain_reftypes.
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6578",
     browseName="ns=powertrain;Capacitance",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6579", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6579", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 powertrain_objtypes.PtCapacitanceAttributesType(
@@ -2815,18 +3582,36 @@ o6.reference(powertrain_objtypes.PtAssetOutputConverterType, powertrain_reftypes
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6581",
     browseName="ns=powertrain;InputConverterType",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6582", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6583", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6582", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6583", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6592",
     browseName="ns=powertrain;TripClass",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6593", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6594", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6593", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6594", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -2835,7 +3620,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6508",
     browseName="ns=powertrain;HumidityMin",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6604", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6604", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtAmbientAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6508"])
@@ -2843,20 +3630,28 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6605",
     browseName="ns=powertrain;HumidityMax",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6606", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6606", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtAmbientAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6605"])
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6607",
     browseName="ns=powertrain;TemperatureMin",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6608", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6608", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6609",
     browseName="ns=powertrain;TemperatureMax",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6610", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6610", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 powertrain_objtypes.PtAmbientAttributesType(
@@ -2875,9 +3670,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6611",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[13],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("VOLTAGE_0-10V"), description=o6.LocalizedText("Voltage range 0-10 volt")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("VOLTAGE_-10-10V"), description=o6.LocalizedText("Voltage range -10-10 volt")),
@@ -2895,7 +3691,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6612", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6612", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -2909,9 +3709,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6616",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[13],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("VOLTAGE_0-10V"), description=o6.LocalizedText("Voltage range 0-10 volt")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("VOLTAGE_-10-10V"), description=o6.LocalizedText("Voltage range -10-10 volt")),
@@ -2929,7 +3730,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6617", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6617", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -2937,9 +3742,18 @@ o6.reference(powertrain_objtypes.PtAnalogOutputElectricalAttributesType, ns0.ref
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6554",
     browseName="ns=powertrain;InputConverterType",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6623", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6624", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6623", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6624", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -2950,9 +3764,18 @@ o6.reference(powertrain_objtypes.PtAssetDriveType, powertrain_reftypes.HasPtAttr
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6626",
     browseName="ns=powertrain;ProtocolTypes",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6627", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6628", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6627", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6628", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     valueRank=1,
@@ -2961,9 +3784,18 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6629",
     browseName="ns=powertrain;ProtocolTypes",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6630", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6631", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6630", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6631", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     valueRank=1,
@@ -2972,9 +3804,18 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6632",
     browseName="ns=powertrain;ProtocolTypes",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6633", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6634", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6633", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6634", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     valueRank=1,
@@ -2983,9 +3824,18 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6635",
     browseName="ns=powertrain;ProtocolTypes",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6636", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6637", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6636", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6637", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     valueRank=1,
@@ -2994,9 +3844,18 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6641",
     browseName="ns=powertrain;ProtocolTypes",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6642", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6643", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6642", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6643", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     valueRank=1,
@@ -3006,7 +3865,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6625",
     browseName="ns=powertrain;PwmSwitchingFrequency",
     modellingRule="MandatoryPlaceholder",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6644", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6644", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 powertrain_objtypes.PtOutputConverterAttributesType(
@@ -3019,7 +3880,10 @@ o6.reference(powertrain_objtypes.PtAssetDriveType, powertrain_reftypes.HasPtAttr
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6645",
     browseName="ns=powertrain;Inductance",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6646", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6646", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
 )
@@ -3036,9 +3900,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6647",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[3],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(
                         value=0, displayName=o6.LocalizedText("AIR_COOLED_STATIC"), description=o6.LocalizedText("Cooled by just free ventilation openings")
@@ -3048,7 +3913,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6648", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6648", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -3062,9 +3931,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6516",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[7],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("TTL"), description=o6.LocalizedText("Transistor-transistor logic (0..5 V)")),
                     ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("HTL"), description=o6.LocalizedText("High threshold logic (0..24 V)")),
@@ -3076,7 +3946,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6649", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6649", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -3090,9 +3964,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6650",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[7],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("TTL"), description=o6.LocalizedText("Transistor-transistor logic (0..5 V)")),
                     ns0.datatypes.EnumValueType(value=2, displayName=o6.LocalizedText("HTL"), description=o6.LocalizedText("High threshold logic (0..24 V)")),
@@ -3104,7 +3979,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6651", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6651", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -3118,9 +3997,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6652",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[19],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("FF"), description=o6.LocalizedText("Very fast acting")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("F"), description=o6.LocalizedText("Fast acting")),
@@ -3182,7 +4062,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6653", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6653", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -3191,7 +4075,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6654",
     browseName="ns=powertrain;InputVoltageMax",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6655", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6655", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtInputInterfaceAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6654"])
@@ -3199,7 +4085,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6657",
     browseName="ns=powertrain;InputVoltageRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6658", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6658", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtOutputInterfaceAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6657"])
@@ -3207,7 +4095,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6659",
     browseName="ns=powertrain;InputCurrentRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6660", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6660", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtOutputInterfaceAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6659"])
@@ -3220,9 +4110,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6662",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[5],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("PLA"), description=o6.LocalizedText("Performance level a")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("PLB"), description=o6.LocalizedText("Performance level b")),
@@ -3232,7 +4123,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6663", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6663", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -3246,9 +4141,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6665",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[4],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("SIL_1"), description=o6.LocalizedText("Safety integrity level 1")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("SIL_2"), description=o6.LocalizedText("Safety integrity level 2")),
@@ -3257,7 +4153,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6666", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6666", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -3271,9 +4171,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6668",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[16],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("STO"), description=o6.LocalizedText("Safe torque off")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("SS1"), description=o6.LocalizedText("Safe stop 1")),
@@ -3294,7 +4195,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6669", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6669", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -3303,7 +4208,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6670",
     browseName="ns=powertrain;MotorInertia",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6671", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6671", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtMotorRotaryAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6670"])
@@ -3311,7 +4218,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6672",
     browseName="ns=powertrain;MotorBackEMF",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6673", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6673", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtMotorRotaryAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6672"])
@@ -3319,7 +4228,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6674",
     browseName="ns=powertrain;MotorPolePairPitch",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6675", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6675", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtMotorLinearAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6674"])
@@ -3327,7 +4238,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6676",
     browseName="ns=powertrain;ForcerWeight",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6677", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6677", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtMotorLinearAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6676"])
@@ -3335,7 +4248,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6678",
     browseName="ns=powertrain;MotorBackEMF",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6679", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6679", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtMotorLinearAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6678"])
@@ -3343,7 +4258,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6680",
     browseName="ns=powertrain;MotorSpeedMax",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6681", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6681", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtMotorRotaryRatedAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6680"])
@@ -3351,7 +4268,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6682",
     browseName="ns=powertrain;MotorSpeedRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6683", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6683", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtMotorRotaryRatedAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6682"])
@@ -3359,7 +4278,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6684",
     browseName="ns=powertrain;MotorTorqueMax",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6685", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6685", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtMotorRotaryRatedAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6684"])
@@ -3367,7 +4288,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6686",
     browseName="ns=powertrain;MotorTorqueRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6687", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6687", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtMotorRotaryRatedAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6686"])
@@ -3375,7 +4298,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6688",
     browseName="ns=powertrain;MotorTorqueContinuousStall",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6689", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6689", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtMotorRotaryRatedAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6688"])
@@ -3383,7 +4308,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6690",
     browseName="ns=powertrain;MotorTorqueConstant",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6691", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6691", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtMotorRotaryRatedAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6690"])
@@ -3391,7 +4318,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6692",
     browseName="ns=powertrain;MotorSpeedMax",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6693", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6693", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtMotorLinearRatedAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6692"])
@@ -3399,7 +4328,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6694",
     browseName="ns=powertrain;MotorSpeedRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6695", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6695", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtMotorLinearRatedAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6694"])
@@ -3407,7 +4338,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6696",
     browseName="ns=powertrain;MotorForceMax",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6697", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6697", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtMotorLinearRatedAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6696"])
@@ -3415,7 +4348,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6698",
     browseName="ns=powertrain;MotorForceRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6699", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6699", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtMotorLinearRatedAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6698"])
@@ -3423,7 +4358,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6700",
     browseName="ns=powertrain;MotorForceContinuousStall",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6701", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6701", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtMotorLinearRatedAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6700"])
@@ -3431,7 +4368,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6702",
     browseName="ns=powertrain;MotorForceConstant",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6703", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6703", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtMotorLinearRatedAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6702"])
@@ -3439,7 +4378,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6705",
     browseName="ns=powertrain;FeedbackResolverExcitationVoltage",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6706", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6706", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtEncoderRotaryAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6705"])
@@ -3447,7 +4388,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6707",
     browseName="ns=powertrain;FeedbackResolverExcitationFrequency",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6708", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6708", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtEncoderRotaryAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6707"])
@@ -3455,7 +4398,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6710",
     browseName="ns=powertrain;EncoderRotarySpeedMax",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6711", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6711", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtEncoderRotaryAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6710"])
@@ -3463,7 +4408,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6712",
     browseName="ns=powertrain;ResolutionRotaryIncremental",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6713", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6713", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.UInt32,
 )
 o6.reference(powertrain_objtypes.PtEncoderRotaryAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6712"])
@@ -3471,7 +4418,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6714",
     browseName="ns=powertrain;ResolutionSingleturnAbsolute",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6715", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6715", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.UInt32,
 )
 o6.reference(powertrain_objtypes.PtEncoderRotaryAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6714"])
@@ -3479,7 +4428,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6716",
     browseName="ns=powertrain;ResolutionMultiturnAbsolute",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6717", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6717", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.UInt32,
 )
 o6.reference(powertrain_objtypes.PtEncoderRotaryAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6716"])
@@ -3487,7 +4438,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6718",
     browseName="ns=powertrain;EncoderFlangeSize",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6719", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6719", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtEncoderRotaryAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6718"])
@@ -3501,9 +4454,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 nodeId="ns=powertrain;i=6721",
                 browseName="EnumValues",
                 description="Contactless encoder",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[7],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("CONTACTLESS"), description=o6.LocalizedText("Contactless encoder")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("SYNCHRO"), description=o6.LocalizedText("Synchro flange")),
@@ -3515,7 +4469,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6722", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6722", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -3529,9 +4487,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6724",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[6],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("THROUGH-HOLLOW"), description=o6.LocalizedText("Through hollow shaft type")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("BLIND-HOLLOW"), description=o6.LocalizedText("Blind hollow shaft type")),
@@ -3542,7 +4501,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6725", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6725", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -3551,7 +4514,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6726",
     browseName="ns=powertrain;EncoderShaftSize",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6727", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6727", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
 )
@@ -3560,7 +4525,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6729",
     browseName="ns=powertrain;ResolutionLinearAbsolute",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6730", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6730", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtEncoderLinearAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6729"])
@@ -3568,7 +4535,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6731",
     browseName="ns=powertrain;RangeLinear",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6732", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6732", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.UInt32,
 )
 o6.reference(powertrain_objtypes.PtEncoderLinearAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6731"])
@@ -3576,7 +4545,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6734",
     browseName="ns=powertrain;EncoderReadingDistance",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6735", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6735", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtEncoderLinearAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6734"])
@@ -3584,7 +4555,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6736",
     browseName="ns=powertrain;EncoderSpeedLinearMax",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6737", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6737", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtEncoderLinearAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=6736"])
@@ -3597,9 +4570,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6740",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[12],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("CLASS_2E"), description=o6.LocalizedText("Thermal protection class 2E")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("CLASS_3E"), description=o6.LocalizedText("Thermal protection class 3E")),
@@ -3616,7 +4590,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6741", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6741", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -3632,9 +4610,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=powertrain;i=6754",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[12],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("CLASS_2E"), description=o6.LocalizedText("Thermal protection class 2E")),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("CLASS_3E"), description=o6.LocalizedText("Thermal protection class 3E")),
@@ -3651,7 +4630,11 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6755", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6755", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
     value=0,
@@ -3661,28 +4644,46 @@ o6.reference(o6.ns["ns=powertrain;i=6753"], "i=17597", "ns=irdi_v1_0_0;s=0112/2/
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6774",
     browseName="ns=powertrain;MotorSpeedMax",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6775", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6775", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6776",
     browseName="ns=powertrain;MotorTorqueMax",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6777", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6777", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6778",
     browseName="ns=powertrain;MotorWindingType",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6779", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6780", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6779", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6780", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
 powertrain_objtypes.PtInputInterfaceAttributesType(
     nodeId="ns=powertrain;i=5086",
     browseName="ns=powertrain;PtInputInterfaceAttributes",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6781", browseName="ns=powertrain;NumberOfInputPhases", dataType=o6.Byte))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6781", browseName="ns=powertrain;NumberOfInputPhases", modellingRule="Mandatory", dataType=o6.Byte))
+    ],
 )
 powertrain_objtypes.PtMotorRotaryRatedAttributesType(
     nodeId="ns=powertrain;i=5085",
@@ -3699,22 +4700,37 @@ o6.reference(powertrain_objtypes.PtAssetMotorRotaryType, powertrain_reftypes.Has
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6782",
     browseName="ns=powertrain;MotorSpeedMax",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6783", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6783", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6784",
     browseName="ns=powertrain;MotorWindingType",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6785", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6786", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6785", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6786", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
 powertrain_objtypes.PtInputInterfaceAttributesType(
     nodeId="ns=powertrain;i=5090",
     browseName="ns=powertrain;PtInputInterfaceAttributes",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6787", browseName="ns=powertrain;NumberOfInputPhases", dataType=o6.Byte))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6787", browseName="ns=powertrain;NumberOfInputPhases", modellingRule="Mandatory", dataType=o6.Byte))
+    ],
 )
 powertrain_objtypes.PtMotorLinearRatedAttributesType(
     nodeId="ns=powertrain;i=5089",
@@ -3726,7 +4742,10 @@ o6.reference(powertrain_objtypes.PtAssetMotorLinearType, powertrain_reftypes.Has
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=6788",
     browseName="ns=powertrain;Inductance",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6789", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Mandatory",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6789", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
     value=0.0,
 )
@@ -3740,9 +4759,18 @@ o6.reference(powertrain_objtypes.PtAssetDriveType, powertrain_reftypes.HasPtAttr
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=powertrain;i=6790",
     browseName="ns=powertrain;OutputFilterType",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6791", browseName="EnumValues", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0])),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6792", browseName="ValueAsText", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid"))),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6791", browseName="EnumValues", modellingRule="Mandatory", dataType=ns0.datatypes.EnumValueType, valueRank=1, arrayDimensions=[0]
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6792", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText("Invalid")
+            )
+        ),
     ],
     dataType=o6.UInt16,
 )
@@ -3757,22 +4785,29 @@ powertrain_objtypes.PtInputInterfaceAttributesType(
     nodeId="ns=powertrain;i=5130",
     browseName="ns=powertrain;PtInputInterfaceAttributes",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6793", browseName="ns=powertrain;NumberOfInputPhases", dataType=o6.Byte))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6793", browseName="ns=powertrain;NumberOfInputPhases", modellingRule="Mandatory", dataType=o6.Byte))
+    ],
 )
 o6.reference(powertrain_objtypes.PtAssetDriveType, powertrain_reftypes.HasPtAttributes, o6.ns["ns=powertrain;i=5130"])
 powertrain_objtypes.PtOutputInterfaceAttributesType(
     nodeId="ns=powertrain;i=5131",
     browseName="ns=powertrain;<PtOutputInterfaceAttributes>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6794", browseName="ns=powertrain;NumberOfOutputPhases", dataType=o6.Byte))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6794", browseName="ns=powertrain;NumberOfOutputPhases", modellingRule="Mandatory", dataType=o6.Byte))
+    ],
 )
 o6.reference(powertrain_objtypes.PtAssetDriveType, powertrain_reftypes.HasPtAttributes, o6.ns["ns=powertrain;i=5131"])
 ns0.vartypes.BaseDataVariableType(
     nodeId="ns=powertrain;i=6795",
     browseName="ns=powertrain;DcBusVoltageRange",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6796", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6796", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation, accessLevel=3, userAccessLevel=1
+            )
         )
     ],
     dataType=ns0.datatypes.Range,
@@ -3787,12 +4822,14 @@ powertrain_objtypes.PtBrakeAttributesType(
     browseName="ns=powertrain;PtBrakeAttributes",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6072", browseName="ns=powertrain;BrakeCoolingMethod", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6073", browseName="ns=powertrain;BrakeDutyType", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6074", browseName="ns=powertrain;BrakeEmergencySwitchOffCount", dataType=o6.Int16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6077", browseName="ns=powertrain;SafetyPropertySupported", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6088", browseName="ns=powertrain;BrakeVoltageType", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6089", browseName="ns=powertrain;BrakeWireTerminalCount", dataType=o6.Int16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6072", browseName="ns=powertrain;BrakeCoolingMethod", modellingRule="Optional", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6073", browseName="ns=powertrain;BrakeDutyType", modellingRule="Optional", dataType=o6.String)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6074", browseName="ns=powertrain;BrakeEmergencySwitchOffCount", modellingRule="Optional", dataType=o6.Int16)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6077", browseName="ns=powertrain;SafetyPropertySupported", modellingRule="Optional", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6088", browseName="ns=powertrain;BrakeVoltageType", modellingRule="Optional", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6089", browseName="ns=powertrain;BrakeWireTerminalCount", modellingRule="Optional", dataType=o6.Int16)),
         o6.hasComponent(o6.ns["ns=powertrain;i=6075"]),
         o6.hasComponent(o6.ns["ns=powertrain;i=6078"]),
         o6.hasComponent(o6.ns["ns=powertrain;i=6080"]),
@@ -3808,7 +4845,7 @@ powertrain_objtypes.PtTemperatureSensorAttributesType(
     browseName="ns=powertrain;PtTemperatureSensorAttributes",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6118", browseName="ns=powertrain;TemperatureSensorType", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6118", browseName="ns=powertrain;TemperatureSensorType", modellingRule="Optional", dataType=o6.String)),
         o6.hasComponent(o6.ns["ns=powertrain;i=6114"]),
         o6.hasComponent(o6.ns["ns=powertrain;i=6116"]),
         o6.hasComponent(o6.ns["ns=powertrain;i=6170"]),
@@ -3827,12 +4864,14 @@ powertrain_objtypes.PtBrakeAttributesType(
     browseName="ns=powertrain;PtBrakeAttributes",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6053", browseName="ns=powertrain;BrakeCoolingMethod", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6126", browseName="ns=powertrain;BrakeDutyType", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6127", browseName="ns=powertrain;BrakeEmergencySwitchOffCount", dataType=o6.Int16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6130", browseName="ns=powertrain;SafetyPropertySupported", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6141", browseName="ns=powertrain;BrakeVoltageType", dataType=o6.String)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6142", browseName="ns=powertrain;BrakeWireTerminalCount", dataType=o6.Int16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6053", browseName="ns=powertrain;BrakeCoolingMethod", modellingRule="Optional", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6126", browseName="ns=powertrain;BrakeDutyType", modellingRule="Optional", dataType=o6.String)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6127", browseName="ns=powertrain;BrakeEmergencySwitchOffCount", modellingRule="Optional", dataType=o6.Int16)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6130", browseName="ns=powertrain;SafetyPropertySupported", modellingRule="Optional", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6141", browseName="ns=powertrain;BrakeVoltageType", modellingRule="Optional", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6142", browseName="ns=powertrain;BrakeWireTerminalCount", modellingRule="Optional", dataType=o6.Int16)),
         o6.hasComponent(o6.ns["ns=powertrain;i=6128"]),
         o6.hasComponent(o6.ns["ns=powertrain;i=6131"]),
         o6.hasComponent(o6.ns["ns=powertrain;i=6133"]),
@@ -3848,7 +4887,7 @@ powertrain_objtypes.PtTemperatureSensorAttributesType(
     browseName="ns=powertrain;PtTemperatureSensorAttributes",
     modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6175", browseName="ns=powertrain;TemperatureSensorType", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6175", browseName="ns=powertrain;TemperatureSensorType", modellingRule="Optional", dataType=o6.String)),
         o6.hasComponent(o6.ns["ns=powertrain;i=6171"]),
         o6.hasComponent(o6.ns["ns=powertrain;i=6173"]),
         o6.hasComponent(o6.ns["ns=powertrain;i=6497"]),
@@ -3867,7 +4906,7 @@ powertrain_objtypes.PtTemperatureSensorAttributesType(
     browseName="ns=powertrain;PtTemperatureSensorAttributes",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6188", browseName="ns=powertrain;TemperatureSensorType", dataType=o6.String)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6188", browseName="ns=powertrain;TemperatureSensorType", modellingRule="Optional", dataType=o6.String)),
         o6.hasComponent(o6.ns["ns=powertrain;i=6184"]),
         o6.hasComponent(o6.ns["ns=powertrain;i=6186"]),
         o6.hasComponent(o6.ns["ns=powertrain;i=6556"]),
@@ -3896,7 +4935,9 @@ powertrain_objtypes.PtInputInterfaceAttributesType(
     nodeId="ns=powertrain;i=15174",
     browseName="ns=powertrain;<PtInputInterfaceAttributes>",
     modellingRule="MandatoryPlaceholder",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6228", browseName="ns=powertrain;NumberOfInputPhases", dataType=o6.Byte))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6228", browseName="ns=powertrain;NumberOfInputPhases", modellingRule="Mandatory", dataType=o6.Byte))
+    ],
 )
 o6.reference(powertrain_objtypes.PtAssetInputConverterType, powertrain_reftypes.HasPtAttributes, o6.ns["ns=powertrain;i=15174"])
 powertrain_objtypes.PtDcBusAttributesType(
@@ -3928,7 +4969,9 @@ powertrain_objtypes.PtOutputInterfaceAttributesType(
     nodeId="ns=powertrain;i=15188",
     browseName="ns=powertrain;PtOutputInterfaceAttributes",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6242", browseName="ns=powertrain;NumberOfOutputPhases", dataType=o6.Byte))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6242", browseName="ns=powertrain;NumberOfOutputPhases", modellingRule="Mandatory", dataType=o6.Byte))
+    ],
 )
 o6.reference(powertrain_objtypes.PtAssetOutputConverterType, powertrain_reftypes.HasPtAttributes, o6.ns["ns=powertrain;i=15188"])
 powertrain_objtypes.PtDcBusAttributesType(
@@ -3956,13 +4999,18 @@ powertrain_objtypes.PtInputInterfaceAttributesType(
     nodeId="ns=powertrain;i=15202",
     browseName="ns=powertrain;PtInputInterfaceAttributes",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=15240", browseName="ns=powertrain;NumberOfInputPhases", dataType=o6.Byte))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=15240", browseName="ns=powertrain;NumberOfInputPhases", modellingRule="Mandatory", dataType=o6.Byte))
+    ],
 )
 o6.reference(powertrain_objtypes.PtAssetInputFilterType, powertrain_reftypes.HasPtAttributes, o6.ns["ns=powertrain;i=15202"])
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=15311",
     browseName="ns=powertrain;OutputFilterPowerLoss",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=15316", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=15316", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 powertrain_objtypes.PtOutputFilterAttributesType(
@@ -3976,14 +5024,18 @@ powertrain_objtypes.PtOutputInterfaceAttributesType(
     nodeId="ns=powertrain;i=15317",
     browseName="ns=powertrain;PtOutputInterfaceAttributes",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=15367", browseName="ns=powertrain;NumberOfOutputPhases", dataType=o6.Byte))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=15367", browseName="ns=powertrain;NumberOfOutputPhases", modellingRule="Mandatory", dataType=o6.Byte))
+    ],
 )
 o6.reference(powertrain_objtypes.PtAssetOutputFilterType, powertrain_reftypes.HasPtAttributes, o6.ns["ns=powertrain;i=15317"])
 powertrain_objtypes.PtOutputInterfaceAttributesType(
     nodeId="ns=powertrain;i=15379",
     browseName="ns=powertrain;PtOutputInterfaceAttributes",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=15429", browseName="ns=powertrain;NumberOfOutputPhases", dataType=o6.Byte))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=15429", browseName="ns=powertrain;NumberOfOutputPhases", modellingRule="Mandatory", dataType=o6.Byte))
+    ],
 )
 o6.reference(powertrain_objtypes.PtAssetOutputReactorType, powertrain_reftypes.HasPtAttributes, o6.ns["ns=powertrain;i=15379"])
 powertrain_objtypes.PtCommunicationInterfaceAttributesType(
@@ -4023,11 +5075,21 @@ powertrain_objtypes.PtContactorAttributesType(
     browseName="ns=powertrain;PtContactorAttributes",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6391", browseName="ns=powertrain;NumberofAuxiliaryContactsNC", dataType=o6.UInt16, value=0)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6392", browseName="ns=powertrain;NumberofAuxiliaryContactsNO", dataType=o6.UInt16, value=0)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6506", browseName="ns=powertrain;ControlVoltageAC50HzRangeRated", dataType=ns0.datatypes.Range)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6591", browseName="ns=powertrain;OperationalCurrentAC3At400VRated", dataType=o6.Float)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=15557", browseName="ns=powertrain;NumberofMainContactsNO", dataType=o6.UInt16)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6391", browseName="ns=powertrain;NumberofAuxiliaryContactsNC", modellingRule="Mandatory", dataType=o6.UInt16, value=0)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6392", browseName="ns=powertrain;NumberofAuxiliaryContactsNO", modellingRule="Mandatory", dataType=o6.UInt16, value=0)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6506", browseName="ns=powertrain;ControlVoltageAC50HzRangeRated", modellingRule="Mandatory", dataType=ns0.datatypes.Range
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6591", browseName="ns=powertrain;OperationalCurrentAC3At400VRated", modellingRule="Mandatory", dataType=o6.Float)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=15557", browseName="ns=powertrain;NumberofMainContactsNO", modellingRule="Mandatory", dataType=o6.UInt16)),
     ],
 )
 o6.reference(powertrain_objtypes.PtAssetContactorType, powertrain_reftypes.HasPtAttributes, o6.ns["ns=powertrain;i=15554"])
@@ -4038,18 +5100,36 @@ powertrain_objtypes.PtMotorStarterAttributesType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=powertrain;i=6507", browseName="ns=powertrain;OverloadCurrentSettingRange", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
+                nodeId="ns=powertrain;i=6507",
+                browseName="ns=powertrain;OverloadCurrentSettingRange",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.Range,
+                value=ns0.datatypes.Range(low=0.0, high=0.0),
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6595", browseName="ns=powertrain;OperationalCurrentAC3At400VRated", dataType=o6.Float, value=0.0)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6600", browseName="ns=powertrain;NumberofMainContactsNO", dataType=o6.UInt16, value=0)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=powertrain;i=6601", browseName="ns=powertrain;ControlVoltageAC50HzRangeRated", dataType=ns0.datatypes.Range, value=ns0.datatypes.Range(low=0.0, high=0.0)
+                nodeId="ns=powertrain;i=6595", browseName="ns=powertrain;OperationalCurrentAC3At400VRated", modellingRule="Mandatory", dataType=o6.Float, value=0.0
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6602", browseName="ns=powertrain;NumberofAuxiliaryContactsNO", dataType=o6.UInt16, value=0)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6603", browseName="ns=powertrain;NumberofAuxiliaryContactsNC", dataType=o6.UInt16, value=0)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6600", browseName="ns=powertrain;NumberofMainContactsNO", modellingRule="Mandatory", dataType=o6.UInt16, value=0)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=powertrain;i=6601",
+                browseName="ns=powertrain;ControlVoltageAC50HzRangeRated",
+                modellingRule="Mandatory",
+                dataType=ns0.datatypes.Range,
+                value=ns0.datatypes.Range(low=0.0, high=0.0),
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6602", browseName="ns=powertrain;NumberofAuxiliaryContactsNO", modellingRule="Mandatory", dataType=o6.UInt16, value=0)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6603", browseName="ns=powertrain;NumberofAuxiliaryContactsNC", modellingRule="Mandatory", dataType=o6.UInt16, value=0)
+        ),
         o6.hasComponent(o6.ns["ns=powertrain;i=6592"]),
     ],
 )
@@ -4065,7 +5145,9 @@ powertrain_objtypes.PtInputInterfaceAttributesType(
     nodeId="ns=powertrain;i=16401",
     browseName="ns=powertrain;PtInputInterfaceAttributes",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16439", browseName="ns=powertrain;NumberOfInputPhases", dataType=o6.Byte))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16439", browseName="ns=powertrain;NumberOfInputPhases", modellingRule="Mandatory", dataType=o6.Byte))
+    ],
 )
 o6.reference(powertrain_objtypes.PtMotorRatedAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16401"])
 powertrain_objtypes.PtMotorDutyAttributesType(
@@ -4076,7 +5158,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16444",
     browseName="ns=powertrain;MotorCurrentContinuousStall",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16449", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16449", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtMotorRatedAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16444"])
@@ -4084,7 +5168,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16492",
     browseName="ns=powertrain;MotorPowerFactor",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16497", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16497", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtMotorRatedAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16492"])
@@ -4092,7 +5178,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16505",
     browseName="ns=powertrain;<GearRatio>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6331", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6331", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtGearAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16505"])
@@ -4100,7 +5188,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16507",
     browseName="ns=powertrain;Backlash",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6332", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6332", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtGearAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16507"])
@@ -4108,7 +5198,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16508",
     browseName="ns=powertrain;TorsionalRigidity",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16513", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16513", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtGearAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16508"])
@@ -4116,7 +5208,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16514",
     browseName="ns=powertrain;GearInertia",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16519", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16519", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtGearAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16514"])
@@ -4124,7 +5218,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16520",
     browseName="ns=powertrain;TorqueRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16525", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16525", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtGearAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16520"])
@@ -4132,7 +5228,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16526",
     browseName="ns=powertrain;SpeedRated",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16531", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16531", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtGearAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16526"])
@@ -4140,7 +5238,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16538",
     browseName="ns=powertrain;AxialForceMax",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16543", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16543", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtGearAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16538"])
@@ -4148,7 +5248,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16544",
     browseName="ns=powertrain;<Efficiency>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16549", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16549", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtGearAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16544"])
@@ -4156,7 +5258,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16613",
     browseName="ns=powertrain;B10dValue",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16618", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16618", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.UInt32,
 )
 o6.reference(powertrain_objtypes.PtBrakeAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16613"])
@@ -4164,7 +5268,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16619",
     browseName="ns=powertrain;BrakingEnergySingleEngagementMax",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16624", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16624", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtBrakeAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16619"])
@@ -4172,7 +5278,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16631",
     browseName="ns=powertrain;BrakeAccelerationVoltage",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16636", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16636", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtBrakeAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16631"])
@@ -4180,7 +5288,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16637",
     browseName="ns=powertrain;BrakeHoldingVoltage",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16642", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16642", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtBrakeAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16637"])
@@ -4188,7 +5298,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16655",
     browseName="ns=powertrain;BrakeTurnOnDelay",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16660", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16660", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtBrakeAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16655"])
@@ -4196,7 +5308,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16661",
     browseName="ns=powertrain;BrakeTurnOffDelayAC",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16666", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16666", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtBrakeAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16661"])
@@ -4204,7 +5318,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16667",
     browseName="ns=powertrain;BrakeTurnOffDelayDC",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16672", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16672", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtBrakeAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16667"])
@@ -4212,7 +5328,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16691",
     browseName="ns=powertrain;BrakeInertia",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16696", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16696", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtBrakeAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16691"])
@@ -4220,7 +5338,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16697",
     browseName="ns=powertrain;BrakeWearMaximum",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16702", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16702", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtBrakeAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16697"])
@@ -4228,7 +5348,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16723",
     browseName="ns=powertrain;Accuracy",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16728", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16728", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtTemperatureSensorAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16723"])
@@ -4236,7 +5358,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16729",
     browseName="ns=powertrain;TemperatureMin",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16734", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16734", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtTemperatureSensorAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16729"])
@@ -4244,7 +5368,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16735",
     browseName="ns=powertrain;TemperatureMax",
     modellingRule="Mandatory",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16740", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16740", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtTemperatureSensorAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16735"])
@@ -4252,7 +5378,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16766",
     browseName="ns=powertrain;Accuracy",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16771", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16771", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtVibrationSensorAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16766"])
@@ -4260,7 +5388,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16772",
     browseName="ns=powertrain;Linearity",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16777", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16777", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtVibrationSensorAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16772"])
@@ -4268,7 +5398,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16829",
     browseName="ns=powertrain;LineFilterPowerLoss",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16834", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16834", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtInputFilterAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16829"])
@@ -4276,7 +5408,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16841",
     browseName="ns=powertrain;OutputFilterPowerLoss",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16846", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16846", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtOutputFilterAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16841"])
@@ -4284,7 +5418,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16912",
     browseName="ns=powertrain;InternalResistance",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6408", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=6408", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtAnalogInputElectricalAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16912"])
@@ -4292,7 +5428,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16916",
     browseName="ns=powertrain;LoadResistance",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16921", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16921", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtAnalogOutputElectricalAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16916"])
@@ -4300,7 +5438,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16930",
     browseName="ns=powertrain;SupplyVoltageDc",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16935", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16935", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtAuxiliarySupplyAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16930"])
@@ -4308,7 +5448,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16936",
     browseName="ns=powertrain;SupplyVoltageAc",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16941", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16941", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtAuxiliarySupplyAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16936"])
@@ -4316,7 +5458,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16942",
     browseName="ns=powertrain;CurrentMax",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16947", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16947", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtAuxiliarySupplyAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16942"])
@@ -4324,7 +5468,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16948",
     browseName="ns=powertrain;PowerConsumptionMax",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16953", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16953", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtAuxiliarySupplyAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16948"])
@@ -4332,7 +5478,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16954",
     browseName="ns=powertrain;FuseProtectionCurrentMax",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16959", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16959", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtAuxiliarySupplyAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16954"])
@@ -4340,7 +5488,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16975",
     browseName="ns=powertrain;Length",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16980", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16980", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtHardwareAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16975"])
@@ -4348,7 +5498,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16981",
     browseName="ns=powertrain;Width",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16986", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16986", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtHardwareAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16981"])
@@ -4356,7 +5508,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16987",
     browseName="ns=powertrain;Height",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16992", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16992", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtHardwareAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16987"])
@@ -4364,7 +5518,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=16993",
     browseName="ns=powertrain;Weight",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16998", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=16998", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtHardwareAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=16993"])
@@ -4372,7 +5528,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=17060",
     browseName="ns=powertrain;InputCurrentMax",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=17065", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=17065", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtInputInterfaceAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=17060"])
@@ -4380,7 +5538,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=17072",
     browseName="ns=powertrain;InputPowerMax",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=17077", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=17077", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtInputInterfaceAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=17072"])
@@ -4388,7 +5548,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=17087",
     browseName="ns=powertrain;OutputVoltageMax",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=17092", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=17092", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtOutputInterfaceAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=17087"])
@@ -4396,7 +5558,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=17099",
     browseName="ns=powertrain;OutputFrequencyMax",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=17104", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=17104", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtOutputInterfaceAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=17099"])
@@ -4404,7 +5568,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=17111",
     browseName="ns=powertrain;OutputCurrentMax",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=17116", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=17116", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtOutputInterfaceAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=17111"])
@@ -4412,7 +5578,9 @@ ns0.vartypes.AnalogUnitType(
     nodeId="ns=powertrain;i=17123",
     browseName="ns=powertrain;OutputPowerMax",
     modellingRule="Optional",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=17128", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=powertrain;i=17128", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation))
+    ],
     dataType=o6.Float,
 )
 o6.reference(powertrain_objtypes.PtOutputInterfaceAttributesType, ns0.reftypes.HasComponent, o6.ns["ns=powertrain;i=17123"])

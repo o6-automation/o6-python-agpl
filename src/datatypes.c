@@ -229,18 +229,40 @@ build_enum_members_dict(const UA_EnumDefinition *def) {
     return members;
 }
 
+/* Point the members of the published structure `type` that refer to `built`,
+ * the local copy it was built in, at `type` itself.  open62541 resolves a
+ * structure's indirect self-reference to the type under construction. */
+static void
+relink_self_members(UA_DataType *type, const UA_DataType *built) {
+    if(type->typeKind != UA_DATATYPEKIND_STRUCTURE &&
+       type->typeKind != UA_DATATYPEKIND_OPTSTRUCT &&
+       type->typeKind != UA_DATATYPEKIND_UNION)
+        return;  /* an enum's members carry values, not types */
+    UA_DataTypeMember *members = (UA_DataTypeMember*)(uintptr_t)type->members;
+    for(size_t i = 0; i < type->membersSize; i++) {
+        if(members[i].memberType == built)
+            members[i].memberType = type;
+    }
+}
+
 /* Convert a single Python description (StructureDescription / EnumDescription)
  * into a registered UA_DataType and Python class.  Grows the global chain
- * as needed.  Returns 0 on success, -1 on failure. */
+ * as needed.  Returns 0 on success, -1 on failure.
+ *
+ * The type is built in a local `UA_DataType` and copied into the chain only
+ * after every Python call: the enum factory, `__init_subclass__`, metaclass
+ * code and `UA2PY` can switch threads, and nothing else may claim, fill or
+ * observe the slot meanwhile.  Publication (reserve, copy, bind, claim) runs
+ * no Python code, so a concurrent or failed registration never leaves a
+ * half-filled slot in the chain. */
 static int
 build_one_type(const char *namespaceName,
                PyObject *py_descr, PyObject *bases, PyObject *enumFactory,
                PyObject **out_nodeid, PyObject **out_pytype) {
 
-    if(chain_reserve(1) < 0)
-        return -1;
-    /* chain_add_block owns mutable storage; open62541 exposes a const view. */
-    UA_DataType *dst = (UA_DataType*)(uintptr_t)&g_chain_head->types[g_chain_head->typesSize];
+    UA_DataType built;
+    memset(&built, 0, sizeof(built));
+    UA_DataType *dst = &built;
     PyObject *enumOverrideMembers = NULL;
 
     UA_ExtensionObject eo;
@@ -387,7 +409,7 @@ build_one_type(const char *namespaceName,
             enumOverrideMembers = build_enum_members_dict(&ed->enumDefinition);
             if(!enumOverrideMembers) {
                 UA_ExtensionObject_clear(&eo);
-                memset(dst, 0, sizeof(UA_DataType));
+                UA_DataType_clear(dst);
                 return -1;
             }
         }
@@ -408,36 +430,36 @@ build_one_type(const char *namespaceName,
 
     // Read the class members/layout from `dst` when we built it
     const UA_DataType *layoutType = build_dst ? dst : canonicalType;
-    const UA_DataType *bindType = reused_ns0_type ? canonicalType : dst;
 
-    PyObject *pyType = createCustomPyTypeBound(
-        layoutType, bindType, namespaceName,
+    char nameBuf[256];
+    PyObject *pyType = createCustomPyType(
+        layoutType, namespaceName,
         (bases && bases != Py_None) ? bases : NULL,
-        enumFactory, enumOverrideMembers);
+        enumFactory, enumOverrideMembers, nameBuf, sizeof(nameBuf));
     Py_XDECREF(enumOverrideMembers); /* buildEnumPyType took its own reference */
     if(!pyType) {
         // Only a freshly-built `dst` owns its members; free it on failure.
-        if(build_dst) {
+        if(build_dst)
             UA_DataType_clear(dst);
-            memset(dst, 0, sizeof(UA_DataType));
-        }
         return -1;
     }
-    PyObject *nodeId = UA2PY(&bindType->typeId, &UA_TYPES[UA_TYPES_NODEID], NULL);
+    PyObject *nodeId = UA2PY(reused_ns0_type ? &canonicalType->typeId : &dst->typeId,
+                             &UA_TYPES[UA_TYPES_NODEID], NULL);
     if(!nodeId) {
         Py_DECREF(pyType);
-        if(build_dst) {
+        if(build_dst)
             UA_DataType_clear(dst);
-            memset(dst, 0, sizeof(UA_DataType));
-        }
         return -1;
     }
 
     if(reused_ns0_type) {
         // Dedup'd: the canonical UA_TYPES[] entry is the wire type and consumes no chain slot.
-        if(build_dst) {
+        if(build_dst)
             UA_DataType_clear(dst);
-            memset(dst, 0, sizeof(UA_DataType));
+        if(bindCustomPyType(pyType, canonicalType, nameBuf, enumFactory != NULL) < 0) {
+            Py_DECREF(nodeId);
+            Py_DECREF(pyType);
+            return -1;
         }
     } else {
         // Freshly-built type.  An OptionSet's corrected kind is no longer ENUM, and its
@@ -445,6 +467,26 @@ build_one_type(const char *namespaceName,
         // ``dev_docs/optionset_datatype_definition.md``: Registration order and member storage.
         if(is_enum && dst->typeKind != UA_DATATYPEKIND_ENUM)
             free_type_members(dst);
+
+        /* Publish.  No Python code runs from here until the slot is claimed. */
+        if(chain_reserve(1) < 0) {
+            UA_DataType_clear(dst);
+            Py_DECREF(nodeId);
+            Py_DECREF(pyType);
+            return -1;
+        }
+        /* chain_add_block owns mutable storage; open62541 exposes a const view. */
+        UA_DataType *slot =
+            (UA_DataType*)(uintptr_t)&g_chain_head->types[g_chain_head->typesSize];
+        *slot = built;
+        relink_self_members(slot, &built);
+        if(bindCustomPyType(pyType, slot, nameBuf, enumFactory != NULL) < 0) {
+            UA_DataType_clear(slot);
+            memset(slot, 0, sizeof(UA_DataType));
+            Py_DECREF(nodeId);
+            Py_DECREF(pyType);
+            return -1;
+        }
         g_chain_head->typesSize++;
     }
 

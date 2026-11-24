@@ -22,9 +22,11 @@ from dataclasses import dataclass, field
 import enum
 from functools import partial
 import inspect
+import itertools
 import logging
 import re
 import threading
+import time
 import warnings
 import weakref
 from pathlib import Path
@@ -110,7 +112,14 @@ _HAS_SERVER_ON_NETWORK_CALLBACK = hasattr(_NativeServer, "set_server_on_network_
 
 from o6 import NodeIdLike, LocalizedTextLike, MaybeAwaitable
 from o6.util import (
+    _LOOP_ALIVE_POLL,
+    _ScheduledFinalizer,
     _WorkerLoop,
+    _call_native,
+    _idle_loop,
+    _ConfigView,
+    _finalize_native,
+    _run_on_loop,
 )
 from o6.util import _load_cert_or_bytes, _load_cert_list
 
@@ -404,11 +413,13 @@ class Session:
                 role if isinstance(role, Role) else self._server.roles[role]
                 for role in self._pending_roles
             )
-        return tuple(self._server.roles[name] for name in self._server._get_session_roles(self.id))
+        names = self._server._call_native(lambda: self._server._get_session_roles(self.id))
+        return tuple(self._server.roles[name] for name in names)
 
     @roles.setter
     def roles(self, roles: Iterable[Role | o6.NodeId]) -> None:
-        self._server._set_session_roles(self.id, [_role_id(self._server, role) for role in roles])
+        role_ids = [_role_id(self._server, role) for role in roles]
+        self._server._call_native(lambda: self._server._set_session_roles(self.id, role_ids))
         self._pending_roles = None
 
     def _apply_activation_roles(self) -> None:
@@ -430,7 +441,8 @@ class Session:
         Raises:
             StatusCodeError: The session is gone, or the attribute is not set.
         """
-        return self._server._get_session_attribute(self.id, _qualified_name(key))
+        name = _qualified_name(key)
+        return self._server._call_native(lambda: self._server._get_session_attribute(self.id, name))
 
     def set(self, key: o6.QualifiedName | str, value: Any) -> None:
         """Set one session attribute.
@@ -442,7 +454,8 @@ class Session:
         Raises:
             StatusCodeError: The session is gone.
         """
-        self._server._set_session_attribute(self.id, _qualified_name(key), value)
+        name = _qualified_name(key)
+        self._server._call_native(lambda: self._server._set_session_attribute(self.id, name, value))
 
     def delete(self, key: o6.QualifiedName | str) -> None:
         """Remove one session attribute.
@@ -453,7 +466,8 @@ class Session:
         Raises:
             StatusCodeError: The session is gone, or the attribute is not set.
         """
-        self._server._delete_session_attribute(self.id, _qualified_name(key))
+        name = _qualified_name(key)
+        self._server._call_native(lambda: self._server._delete_session_attribute(self.id, name))
 
     def close(self) -> None:
         """Close this session, cancelling its subscriptions.
@@ -461,7 +475,7 @@ class Session:
         Raises:
             StatusCodeError: The session is already gone.
         """
-        self._server._close_session(self.id)
+        self._server._call_native(lambda: self._server._close_session(self.id))
 
     def effectivePermissions(self, nodeId: NodeIdLike) -> ns0.datatypes.PermissionType:
         """The permissions this session has on one node.
@@ -484,8 +498,9 @@ class Session:
         Raises:
             StatusCodeError: The session is gone, or the node does not exist.
         """
+        node_id = o6.NodeId(nodeId)
         return ns0.datatypes.PermissionType(
-            self._server._effective_permissions(self.id, o6.NodeId(nodeId))
+            self._server._call_native(lambda: self._server._effective_permissions(self.id, node_id))
         )
 
 
@@ -597,6 +612,12 @@ class _RoleRegistry:
     def __init__(self, server: "Server") -> None:
         self._server = _server_proxy(server)
 
+    def _native(self, name: str, *args: Any) -> Any:
+        """Call a native server method on the loop thread; see `Server._call_native`."""
+        server = self._server
+        method = getattr(server, name)
+        return server._call_native(lambda: method(*args))
+
     @staticmethod
     def _from_native(data: dict[str, Any]) -> Role:
         return Role(
@@ -622,25 +643,25 @@ class _RoleRegistry:
         )
 
     def add(self, role: Role) -> Role:
-        role_id = self._server._add_role(*self._args(role))
+        role_id = self._native("_add_role", *self._args(role))
         return self[role_id]
 
     def update(self, role: Role) -> Role:
-        self._server._update_role(*self._args(role))
+        self._native("_update_role", *self._args(role))
         return self[role.id if role.id is not None else role.name]
 
     def remove(self, role: Role | o6.QualifiedName | str) -> None:
         name = role.name if isinstance(role, Role) else role
-        self._server._remove_role(_qualified_name(name))
+        self._native("_remove_role", _qualified_name(name))
 
     def __getitem__(self, key: o6.NodeId | o6.QualifiedName | str) -> Role:
         by_id = isinstance(key, o6.NodeId)
         return self._from_native(
-            self._server._get_role(key if by_id else _qualified_name(key), by_id)
+            self._native("_get_role", key if by_id else _qualified_name(key), by_id)
         )
 
     def __iter__(self) -> Iterator[Role]:
-        for name in self._server._get_roles():
+        for name in self._native("_get_roles"):
             yield self[name]
 
 
@@ -702,6 +723,12 @@ class NodePermissions:
         self._server = _server_proxy(server)
         self._node_id = o6.NodeId(nodeId)
 
+    def _native(self, name: str, *args: Any) -> Any:
+        """Call a native server method on the loop thread; see `Server._call_native`."""
+        server = self._server
+        method = getattr(server, name)
+        return server._call_native(lambda: method(*args))
+
     def get(self) -> dict[Role, ns0.datatypes.PermissionType]:
         """Return the permissions set explicitly on this node.
 
@@ -710,7 +737,7 @@ class NodePermissions:
         """
         return {
             self._server.roles[role_id]: ns0.datatypes.PermissionType(value)
-            for role_id, value in self._server._get_node_role_permissions(self._node_id).items()
+            for role_id, value in self._native("_get_node_role_permissions", self._node_id).items()
         }
 
     def set(
@@ -726,7 +753,8 @@ class NodePermissions:
                 given as [`Role`][o6.server.Role] objects or role NodeIds.
             recursive: Apply to this node's whole subtree.
         """
-        self._server._set_node_role_permissions(
+        self._native(
+            "_set_node_role_permissions",
             self._node_id,
             {_role_id(self._server, role): int(value) for role, value in permissions.items()},
             recursive,
@@ -748,8 +776,13 @@ class NodePermissions:
             overwrite: Replace the role's existing mask instead of adding to it.
             recursive: Apply to this node's whole subtree.
         """
-        self._server._add_role_permissions(
-            self._node_id, _role_id(self._server, role), int(permissions), overwrite, recursive
+        self._native(
+            "_add_role_permissions",
+            self._node_id,
+            _role_id(self._server, role),
+            int(permissions),
+            overwrite,
+            recursive,
         )
 
     def revoke(
@@ -766,8 +799,12 @@ class NodePermissions:
             permissions: The [`PermissionType`][o6.ns.ns0.datatypes.PermissionType] bits to remove.
             recursive: Apply to this node's whole subtree.
         """
-        self._server._remove_role_permissions(
-            self._node_id, _role_id(self._server, role), int(permissions), recursive
+        self._native(
+            "_remove_role_permissions",
+            self._node_id,
+            _role_id(self._server, role),
+            int(permissions),
+            recursive,
         )
 
     def clear(self, *, recursive: bool = False) -> None:
@@ -776,7 +813,7 @@ class NodePermissions:
         Args:
             recursive: Apply to this node's whole subtree.
         """
-        self._server._remove_node_role_permissions(self._node_id, recursive)
+        self._native("_remove_node_role_permissions", self._node_id, recursive)
 
 
 # Mirrors the switch in open62541's `ua_server_auditing.c` (`auditEvent`) that
@@ -1158,7 +1195,10 @@ class AccessControl:
         before invoking this hook. The base implementation then permits the
         transfer; an override can still reject it.
         """
-        return oldSession._server._allow_transfer_subscription(oldSession.id, newSession.id)
+        server = oldSession._server
+        return server._call_native(
+            lambda: server._allow_transfer_subscription(oldSession.id, newSession.id)
+        )
 
     def allowCreateSubscription(self, session: Session) -> bool:
         """Return whether the session may create a subscription.
@@ -1243,26 +1283,31 @@ class _ServerNamespaces:
         namespace: int | str,
         permissions: Mapping[Role | o6.NodeId, ns0.datatypes.PermissionType],
     ) -> None:
-        index = (
-            namespace
-            if isinstance(namespace, int)
-            else self._server._get_namespace_index(namespace)
-        )
-        self._server._set_namespace_role_permissions(
-            index, {_role_id(self._server, role): int(value) for role, value in permissions.items()}
-        )
+        server = self._server
+        values = {_role_id(server, role): int(value) for role, value in permissions.items()}
+
+        def apply() -> None:
+            index = (
+                namespace if isinstance(namespace, int) else server._get_namespace_index(namespace)
+            )
+            server._set_namespace_role_permissions(index, values)
+
+        server._call_native(apply)
 
     def get_default_permissions(
         self, namespace: int | str
     ) -> dict[Role, ns0.datatypes.PermissionType]:
-        index = (
-            namespace
-            if isinstance(namespace, int)
-            else self._server._get_namespace_index(namespace)
-        )
+        server = self._server
+
+        def read() -> dict[Any, int]:
+            index = (
+                namespace if isinstance(namespace, int) else server._get_namespace_index(namespace)
+            )
+            return dict(server._get_namespace_role_permissions(index))
+
         return {
-            self._server.roles[role_id]: ns0.datatypes.PermissionType(value)
-            for role_id, value in self._server._get_namespace_role_permissions(index).items()
+            server.roles[role_id]: ns0.datatypes.PermissionType(value)
+            for role_id, value in server._call_native(read).items()
         }
 
     def append(self, ns: ModuleType) -> None:
@@ -1299,8 +1344,10 @@ class _ServerNamespaces:
         for info in ns_infos:
             global_index = info.index
             assert global_index is not None
-            self._server._on_event_loop(
-                partial(self._server._add_namespace, info.uri, global_index)
+            self._server._run_on_loop(
+                partial(self._server._add_namespace, info.uri, global_index),
+                sync_result=True,
+                wait=True,
             )
 
         # Track the module so ``_all_registered_markers`` can walk reference-type markers
@@ -1324,18 +1371,24 @@ class _ServerNamespaces:
             )
             self._pending_publications[ns] = publisher
         # A NodeSet Variable without a Value stays empty instead of getting a default.
-        previous = self._server._on_event_loop(
-            partial(self._server._set_allow_empty_variables, True)
+        previous = self._server._run_on_loop(
+            partial(self._server._set_allow_empty_variables, True), sync_result=True, wait=True
         )
         try:
             publisher.publish()
         finally:
-            self._server._on_event_loop(partial(self._server._set_allow_empty_variables, previous))
+            self._server._run_on_loop(
+                partial(self._server._set_allow_empty_variables, previous),
+                sync_result=True,
+                wait=True,
+            )
 
 
-_server_name_counter = 0
+# `next()` on a count is atomic, so concurrent servers get distinct auto-names
+_server_name_counter = itertools.count()
 _live_servers: weakref.WeakSet["Server"] = weakref.WeakSet()
-_live_servers_lock = threading.Lock()
+# Reentrant: a garbage collection inside the lock can run Server.__del__
+_live_servers_lock = threading.RLock()
 
 
 def _register_live_server(server: "Server") -> None:
@@ -1346,6 +1399,17 @@ def _register_live_server(server: "Server") -> None:
 def _unregister_live_server(server: "Server") -> None:
     with _live_servers_lock:
         _live_servers.discard(server)
+
+
+def _release_owned_loop(loop: asyncio.AbstractEventLoop) -> None:
+    """Drop the hold on a server's owned loop once the server is collected.
+
+    The `weakref.finalize` registry keeps the loop reachable from outside the
+    server's reference cycle. Without that hold, a GC pass that collects the
+    cycle can finalize the loop's self-pipe sockets before `Server.__del__`
+    closes the loop, as the free-threaded GC does. `close()` then fails, and the
+    loop warns that it is unclosed. `__del__` still closes the loop.
+    """
 
 
 def _get_live_servers() -> tuple["Server", ...]:
@@ -1381,9 +1445,6 @@ class Server(_NativeServer):
     """
 
     ns: _ServerNamespaces
-
-    if TYPE_CHECKING:
-        config: o6.ServerConfig
 
     def enablePushManagement(self) -> None:
         """Enable remote certificate and trust-list management before startup.
@@ -1492,7 +1553,8 @@ class Server(_NativeServer):
                 locale `"en"`. Defaults to `"o6-python Server"`.
             productUri: ProductUri of the ApplicationDescription and of
                 `Server/ServerStatus/BuildInfo`. Defaults to
-                `"https://o6-automation.com/o6-python"`. Set the other
+                `"https://o6-automation.com/o6-python"`. BuildInfo's
+                SoftwareVersion defaults to `o6.__version__`. Set the other
                 BuildInfo fields with `config.buildInfo`.
             accessControl: An [`AccessControl`][o6.server.AccessControl] subclass
                 instance that authenticates and authorizes sessions.
@@ -1538,6 +1600,9 @@ class Server(_NativeServer):
             except RuntimeError:
                 self._loop = asyncio.new_event_loop()
                 self._owns_loop = True
+                weakref.finalize(self, _release_owned_loop, self._loop)
+        # start() creates the worker; native helpers read it from here on
+        self._worker: _WorkerLoop | None = None
 
         if logger is None:
             logger = logging.getLogger(__name__)
@@ -1555,6 +1620,7 @@ class Server(_NativeServer):
             self._attach_instance_type(marker, VariableNode)
         self.roles = _RoleRegistry(self)
         self._certificate_rejected_callback: Callable[[bytes, o6.StatusCode], Any] | None = None
+        self._notification_sync_lock = threading.Lock()
         self._notification_categories: dict[int, NotificationHandlers] = {
             dispatch_key(t): NotificationHandlers(self._sync_notification_trampoline)
             for t in _NOTIFICATION_PROPERTIES.values()
@@ -1610,18 +1676,19 @@ class Server(_NativeServer):
                 buildInfo.productUri = productUri
                 self.config.buildInfo = buildInfo
             self.config.applicationDescription = description
+        # Report the o6 version, not open62541's, as SoftwareVersion
+        buildInfo = self.config.buildInfo
+        buildInfo.softwareVersion = o6.__version__
+        self.config.buildInfo = buildInfo
         self.config.allowNonePolicyPassword = allowNonePolicyPassword
         if accessControl is not None:
             if not isinstance(accessControl, AccessControl):
                 raise TypeError("access_control must be an o6.AccessControl instance")
             self.config.setAccessControl(accessControl)
 
-        global _server_name_counter
-        self._name = "server" + str(_server_name_counter)
-        _server_name_counter += 1
+        self._name = f"server{next(_server_name_counter)}"
 
         self._port = port
-        self._worker: _WorkerLoop | None = None
         self.ns = _ServerNamespaces(self)
         self.root = cast(ObjectNode, _server_node(self, "i=84", ObjectNode))
         self.objects = cast(ObjectNode, _server_node(self, "i=85", ObjectNode))
@@ -1709,6 +1776,22 @@ class Server(_NativeServer):
         See [Implementing behaviour](manual/information-model-authoring/implementing-types.md) and
         [Server callbacks](manual/server/callbacks.md).
         """
+        self._run_on_loop(
+            partial(self._implement, target, implementation, call=call, read=read, write=write),
+            sync_result=True,
+            wait=True,
+        )
+
+    def _implement(
+        self,
+        target: MethodNode | VariableNode | VariableTypeNode | NodeIdLike | type,
+        implementation: Any,
+        *,
+        call: Callable[..., Any] | None | object,
+        read: VariableReadCallback | None | object,
+        write: VariableWriteCallback | None | object,
+    ) -> None:
+        """Run `implement` on the loop thread, where it resolves and reads nodes."""
         if implementation is not _CALLBACK_UNSET:
             if (
                 call is not _CALLBACK_UNSET
@@ -1741,8 +1824,10 @@ class Server(_NativeServer):
                     if isinstance(implementation, float)
                     else implementation
                 )
-                self._on_event_loop(
-                    lambda: super(Server, self)._set_local_value(target_node, value)
+                self._run_on_loop(
+                    lambda: super(Server, self)._set_local_value(target_node, value),
+                    sync_result=True,
+                    wait=True,
                 )
             return
         self._implement_callbacks(target, call=call, read=read, write=write)
@@ -1830,7 +1915,7 @@ class Server(_NativeServer):
                 instance_id,
             )
 
-        return self._maybe_async(_do())
+        return self._run_on_loop(_do)
 
     emitEvent = createEvent
 
@@ -2034,100 +2119,31 @@ class Server(_NativeServer):
 
     # -- Thread-safe dispatch ------------------------------------------------
 
-    def _maybe_async_coro(self, coro: Any) -> MaybeAwaitable:
-        return self._maybe_async(coro)
+    def _run_on_loop(
+        self, fn: Callable[[], Any], *, sync_result: bool = False, wait: bool = False
+    ) -> Any:
+        """Run a native operation on this server's loop thread; see `o6.util._run_on_loop`."""
+        return _run_on_loop(
+            self._loop,
+            lambda: self._worker,
+            fn,
+            sync_result=sync_result,
+            wait=wait,
+            owner="Server",
+        )
 
-    T = TypeVar("T")
+    @property
+    def config(self) -> o6.ServerConfig:
+        """This server's [`ServerConfig`][o6.ServerConfig].
 
-    def _maybe_async(self, aw: Awaitable[T]) -> MaybeAwaitable[T]:
-        if self._worker is not None and not self._worker.running:
-            if asyncio.iscoroutine(aw):
-                aw.close()
-            raise RuntimeError("Server event loop is not running")
+        Readable from any thread. It can be changed only while the server is
+        fully stopped.
+        """
+        return cast("o6.ServerConfig", _ConfigView(self, super().config))
 
-        try:
-            loop = asyncio.get_running_loop()
-            if loop == self._loop:
-                return aw  # type: ignore[return-value]
-        except RuntimeError:
-            loop = None
-
-        async def _await(f):
-            return await f
-
-        # Before startup there is no worker to service a foreign loop. Native
-        # address-space operations can execute on the configuring caller loop.
-        if loop is not None and self._worker is None and not self._loop.is_running():
-            return aw
-
-        # Sync caller, but our loop is not running yet (pre-start configuration
-        # phase).  Drive the awaitable to completion inline.
-        if loop is None and not self._loop.is_running():
-            if asyncio.iscoroutine(aw) or inspect.iscoroutine(aw):
-                return self._loop.run_until_complete(aw)
-            return self._loop.run_until_complete(_await(aw))
-
-        try:
-            if asyncio.iscoroutine(aw) or inspect.iscoroutine(aw):
-                fut = asyncio.run_coroutine_threadsafe(aw, self._loop)
-            else:
-                fut = asyncio.run_coroutine_threadsafe(_await(aw), self._loop)
-        except RuntimeError:
-            if asyncio.iscoroutine(aw):
-                aw.close()
-            raise RuntimeError("Server event loop is not running")
-
-        if loop is None or asyncio.current_task() is None:
-            # Sync caller: no running loop, or running on a foreign loop as a
-            # scheduled callback (not inside an async task).  Block until done.
-            return fut.result()
-        else:
-            # Async task on a foreign loop — return an awaitable the caller can
-            # ``await`` on their own loop.
-            return asyncio.wrap_future(fut)
-
-    def _wrap_future(
-        self,
-        fut: concurrent.futures.Future,
-        caller_loop: asyncio.AbstractEventLoop,
-    ) -> asyncio.Future:
-        afut = asyncio.wrap_future(fut, loop=caller_loop)
-        afut._concurrent_future = fut  # type: ignore[attr-defined]
-        return afut
-
-    def _on_event_loop(self, fn: Callable[[], Any]) -> Any:
-        # No worker thread yet, or already on it — call directly
-        if self._worker is None or not self._worker.running or self._worker.on_loop_thread:
-            out = invoke_sync(fn, ())
-            # Synchronous async-server calls resolve their future inline.
-            # Unwrap to keep the public API sync-friendly.
-            if asyncio.isfuture(out) and out.done():
-                return out.result()
-            return out
-
-        # Detect whether the caller is itself inside an event loop
-        try:
-            caller_loop = asyncio.get_running_loop()
-        except RuntimeError:
-            caller_loop = None
-
-        async def _call() -> Any:
-            out = invoke_sync(fn, ())
-            return await out if inspect.isawaitable(out) else out
-
-        coro = _call()
-        try:
-            fut = asyncio.run_coroutine_threadsafe(coro, self._loop)
-        except RuntimeError:
-            coro.close()
-            raise
-
-        # Sync caller (no running loop) or same loop — block until done
-        if caller_loop is None or caller_loop is self._loop or asyncio.current_task() is None:
-            return fut.result()
-
-        # Async task on a different running loop — return an awaitable.
-        return self._wrap_future(fut, caller_loop)
+    def _call_native(self, fn: Callable[[], Any]) -> Any:
+        """Return a synchronous native operation's result from any thread; see `o6.util._call_native`."""
+        return _call_native(self._loop, lambda: self._worker, fn, owner="Server")
 
     # -- Well-known nodes (convenience properties) ---------------------------
 
@@ -2159,7 +2175,7 @@ class Server(_NativeServer):
         node = await server["ns=1;s=Temperature"]  # async
         ```
         """
-        return self._maybe_async(self._node_backend.node_get(o6.NodeId(key)))
+        return self._run_on_loop(partial(self._node_backend.node_get, o6.NodeId(key)))
 
     @property
     def objectsNode(self) -> o6.NodeId:
@@ -2340,7 +2356,7 @@ class Server(_NativeServer):
 
         See [Rejected certificates](manual/server/lifecycle.md#rejected-certificates).
         """
-        return self._rejected_certificates()
+        return self._call_native(self._rejected_certificates)
 
     def onCertificateRejected(
         self, callback: Callable[[bytes, o6.StatusCode], Any] | None
@@ -2384,9 +2400,15 @@ class Server(_NativeServer):
             schedule_coroutine(result, self._loop, _logger)
 
     def _sync_notification_trampoline(self) -> None:
-        # The C-side flip is a single pointer write and idempotent; no
-        # Python-side guard needed.
-        self._set_notification_trampoline(any(self._notification_categories.values()))
+        def install() -> None:
+            # Reads the handlers and installs under one lock, so a concurrent
+            # add or remove cannot leave the trampoline off while handlers
+            # exist. Runs on the loop thread, or inline while none runs the
+            # loop, so the lock is never held while marshalling.
+            with self._notification_sync_lock:
+                self._set_notification_trampoline(any(self._notification_categories.values()))
+
+        self._call_native(install)
 
     def _dispatch_notification(self, type: int, payload: Mapping[str, Any]) -> None:
         category = self._notification_categories.get(dispatch_key(type))
@@ -2558,7 +2580,9 @@ class Server(_NativeServer):
         record = ns0.datatypes.ServerOnNetwork(
             serverName=serverName, discoveryUrl=discoveryUrl, serverCapabilities=capabilities
         )
-        return self._on_event_loop(lambda: super(Server, self)._register_server_on_network(record))
+        return self._run_on_loop(
+            lambda: super(Server, self)._register_server_on_network(record), sync_result=True
+        )
 
     @public_result
     def deregisterServerOnNetwork(self, serverName: str) -> o6.MaybeAwaitable[None]:
@@ -2578,8 +2602,8 @@ class Server(_NativeServer):
         """
         if not isinstance(serverName, str):
             raise TypeError("serverName must be a string")
-        return self._on_event_loop(
-            lambda: super(Server, self)._deregister_server_on_network(serverName)
+        return self._run_on_loop(
+            lambda: super(Server, self)._deregister_server_on_network(serverName), sync_result=True
         )
 
     # -- Lifecycle -----------------------------------------------------------
@@ -2625,17 +2649,22 @@ class Server(_NativeServer):
                 raise
             return
 
-        started_worker = not self._loop.is_running()
-
         async def start_and_wait():
             begin()
             await self.waitReady()
 
+        started_worker = False
         pending = None
         try:
-            if started_worker:
-                self._worker = _WorkerLoop(self._loop)
-                self._worker.start()
+            # Threads that use the idle loop inline check for the worker under
+            # the same lock, so none of them runs the loop once it exists.
+            with _idle_loop(self._loop).lock:
+                if not self._loop.is_running():
+                    worker = _WorkerLoop(self._loop)
+                    worker.start()
+                    # Published running, so that callers never see it stopped
+                    self._worker = worker
+                    started_worker = True
             pending = asyncio.run_coroutine_threadsafe(start_and_wait(), self._loop)
             pending.result()
         except BaseException:
@@ -2643,7 +2672,7 @@ class Server(_NativeServer):
                 pending.cancel()
             _unregister_live_server(self)
             if started_worker and self._worker is not None:
-                self._worker.stop(close=False)
+                self._worker.stop()
                 self._worker = None
             self._configuration_locked = not self._is_fully_stopped
             raise
@@ -2699,33 +2728,16 @@ class Server(_NativeServer):
         if worker is not None and worker.running:
             worker_thread = worker._thread
 
-            async def shutdown_and_drain() -> None:
-                if self.running:
-                    delay_ms = self._begin_shutdown_delay()
-                    if delay_ms > 0.0:
-                        await asyncio.sleep(delay_ms / 1000.0)
-                if self.running:
-                    self._run_shutdown()
-                for _ in range(10):
-                    if self._is_fully_stopped:
-                        break
-                    await asyncio.sleep(0.05)
-                # Drain transport close callbacks before stopping the native
-                # event loop; its cleanup still calls into asyncio transports.
-                for _ in range(10):
-                    await asyncio.sleep(0)
-                self._stop_event_loop()
-
             def begin_shutdown() -> asyncio.Task[None]:
                 if self._shutdown_task is None:
-                    self._shutdown_task = self._loop.create_task(shutdown_and_drain())
+                    self._shutdown_task = self._loop.create_task(self._shutdown_and_drain())
                 return self._shutdown_task
 
             def retire_worker() -> None:
                 # WorkerLoop.stop clears its thread handle even when called
                 # on that thread. Retain it so external callers can join it.
                 self._shutdown_thread = worker_thread
-                worker.stop(close=False)
+                worker.stop()
                 if worker_thread is not None and worker_thread is not threading.current_thread():
                     worker_thread.join(timeout=10.0)
                 if self._worker is worker:
@@ -2747,17 +2759,84 @@ class Server(_NativeServer):
                 task.add_done_callback(finished)
                 return task
 
-            async def shutdown_and_wait() -> None:
-                await begin_shutdown()
+            completed: concurrent.futures.Future[None] = concurrent.futures.Future()
 
-            future = asyncio.run_coroutine_threadsafe(shutdown_and_wait(), self._loop)
-            future.result(timeout=10.0 + delay_s)
+            def attach() -> None:
+                # A plain callback, so nothing is left unawaited if the loop
+                # stops before it runs.
+                def settle(task: asyncio.Task[None]) -> None:
+                    if task.cancelled():
+                        completed.cancel()
+                    elif task.exception() is not None:
+                        completed.set_exception(task.exception())  # type: ignore[arg-type]
+                    else:
+                        completed.set_result(None)
+
+                try:
+                    begin_shutdown().add_done_callback(settle)
+                except BaseException as exc:
+                    completed.set_exception(exc)
+
+            self._loop.call_soon_threadsafe(attach)
+            self._wait_for_shutdown(completed, worker_thread, 10.0 + delay_s)
             retire_worker()
         elif self.running:
-            self._run_shutdown()
-            self._stop_event_loop()
-            self._configuration_locked = not self._is_fully_stopped
+
+            def shut_down() -> bool:
+                self._run_shutdown()
+                self._stop_event_loop()
+                return self._is_fully_stopped
+
+            # On the thread of an application loop that runs elsewhere
+            self._configuration_locked = not self._call_native(shut_down)
         return None
+
+    def _wait_for_shutdown(
+        self,
+        completed: concurrent.futures.Future[None],
+        worker_thread: threading.Thread | None,
+        timeout: float,
+    ) -> None:
+        """Block until the shutdown task completes, for a caller off the loop thread.
+
+        A `stop()` on the loop thread retires the worker once the task is done,
+        which stops the loop. A request queued after that never runs, so the
+        end of the worker thread also ends the wait.
+
+        Raises:
+            TimeoutError: The shutdown did not complete within `timeout` seconds.
+            RuntimeError: The loop stopped before the shutdown completed.
+        """
+        deadline = time.monotonic() + timeout
+        while not completed.done():
+            if worker_thread is not None and not worker_thread.is_alive():
+                task = self._shutdown_task
+                if task is not None and task.done():
+                    return
+                raise RuntimeError("Server event loop stopped before the shutdown completed")
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise TimeoutError("Server shutdown did not complete in time")
+            concurrent.futures.wait((completed,), timeout=min(_LOOP_ALIVE_POLL, remaining))
+        completed.result()
+
+    async def _shutdown_and_drain(self) -> None:
+        """Shut down on the loop thread, serving `config.shutdownDelay` first."""
+        if self.running:
+            delay_ms = self._begin_shutdown_delay()
+            if delay_ms > 0.0:
+                await asyncio.sleep(delay_ms / 1000.0)
+        if self.running:
+            self._run_shutdown()
+        for _ in range(10):
+            if self._is_fully_stopped:
+                break
+            await asyncio.sleep(0.05)
+        # Drain transport close callbacks before stopping the native
+        # event loop; its cleanup still calls into asyncio transports.
+        for _ in range(10):
+            await asyncio.sleep(0)
+        self._stop_event_loop()
 
     def __enter__(self) -> "Server":
         """Start the server and return it."""
@@ -2791,21 +2870,61 @@ class Server(_NativeServer):
         if result is not None:
             await result
 
-    def __del__(self):
-        try:
-            if self.running:
-                self.stop()
-        except Exception:
-            pass
-        try:
+    def __del__(self) -> None:
+        # Never blocks: while a thread runs the loop, teardown is scheduled on
+        # it (see `o6.util._finalize_native`). The C deallocator is the fallback.
+        loop = getattr(self, "_loop", None)
+        if loop is None:
+            return
+        _unregister_live_server(self)
+
+        def cleanup() -> None:
+            try:
+                if self.running:
+                    self.stop()
+            finally:
+                self._cleanup()
+                if self._owns_loop and not loop.is_closed():
+                    loop.close()
+
+        _finalize_native(
+            self,
+            loop,
+            getattr(self, "_worker", None),
+            live=lambda: self.running,
+            finalize=self._finalize,
+            cleanup=cleanup,
+        )
+
+    def _finalize(self) -> None:
+        """Shut down and release a collected server; runs on its loop at top level."""
+
+        def release() -> None:
             self._cleanup()
-        except Exception:
-            pass
-        try:
-            if self._owns_loop and not self._loop.is_closed():
-                self._loop.close()
-        except Exception:
-            pass
+            worker, self._worker = self._worker, None
+            if worker is not None:
+                worker.retire(close=self._owns_loop)
+
+        task = self._shutdown_task
+        if task is not None and not task.done():
+            task.add_done_callback(lambda _task: release())
+        elif self.running:
+            # Releases even if the task is cancelled, or destroyed by a closing loop
+            released = _ScheduledFinalizer(self._loop, release, release)
+
+            async def shut_down() -> None:
+                try:
+                    await self._shutdown_and_drain()
+                except Exception:
+                    _logger.error("Server shutdown failed", exc_info=True)
+                finally:
+                    released()
+
+            # A task cancelled before its first step skips `finally`
+            self._shutdown_task = self._loop.create_task(shut_down())
+            self._shutdown_task.add_done_callback(lambda _task: released())
+        else:
+            release()
 
     # -- Reverse connect ------------------------------------------------------
 
@@ -2827,10 +2946,11 @@ class Server(_NativeServer):
         Returns:
             A handle that can be passed to `removeReverseConnect`.
         """
-        return self._on_event_loop(
+        return self._run_on_loop(
             lambda: super(Server, self)._add_reverse_connect(
                 url, synchronous(callback) if callback is not None else None
-            )
+            ),
+            sync_result=True,
         )
 
     @public_result
@@ -2840,7 +2960,9 @@ class Server(_NativeServer):
         Args:
             handle: The handle returned by `addReverseConnect`.
         """
-        return self._on_event_loop(lambda: super(Server, self)._remove_reverse_connect(handle))
+        return self._run_on_loop(
+            lambda: super(Server, self)._remove_reverse_connect(handle), sync_result=True
+        )
 
     # -- Add nodes (high-level) -----------------------------------------------
 
@@ -2855,7 +2977,7 @@ class Server(_NativeServer):
             out_id = add_thunk()
             return super(Server, self)._get_node(out_id, node_cls, self._node_backend)
 
-        return self._on_event_loop(create)
+        return self._run_on_loop(create, sync_result=True)
 
     @public_result
     def addVariable(
@@ -2988,7 +3110,7 @@ class Server(_NativeServer):
                 self._pending_history.append((out_id, history))
             return node
 
-        return self._on_event_loop(create)
+        return self._run_on_loop(create, sync_result=True)
 
     def historize(
         self,
@@ -3028,7 +3150,7 @@ class Server(_NativeServer):
             StatusCodeError: The node's store could not be allocated.
         """
         config = History(capacity=capacity, strategy=strategy, interval=interval)
-        return self._maybe_async(self._change_history(o6.NodeId(target), config))
+        return self._run_on_loop(partial(self._change_history, o6.NodeId(target), config))
 
     def unhistorize(self, target: NodeIdLike) -> MaybeAwaitable[None]:
         """Stop recording a Variable's history and release its store.
@@ -3049,7 +3171,7 @@ class Server(_NativeServer):
             RuntimeError: No history database is configured.
             StatusCodeError: The node does not exist.
         """
-        return self._maybe_async(self._change_history(o6.NodeId(target), None))
+        return self._run_on_loop(partial(self._change_history, o6.NodeId(target), None))
 
     async def _change_history(self, node_id: o6.NodeId, config: History | None) -> None:
         """Change attributes and native registration together on the server loop."""
@@ -3447,7 +3569,7 @@ class Server(_NativeServer):
             self.implement(node, call=callback)
             return node
 
-        return self._on_event_loop(create)
+        return self._run_on_loop(create, sync_result=True)
 
     def _callback_target(
         self, target: MethodNode | VariableNode | VariableTypeNode | NodeIdLike | type
@@ -3469,10 +3591,12 @@ class Server(_NativeServer):
             target_node = target
         else:
             target_id = o6.NodeId(target)
-            node_class = self._on_event_loop(
+            node_class = self._run_on_loop(
                 lambda: super(Server, self)._read_attribute(
                     target_id, int(o6.AttributeId.NODE_CLASS)
-                )
+                ),
+                sync_result=True,
+                wait=True,
             )
             return _server_node(
                 self,
@@ -3553,15 +3677,19 @@ class Server(_NativeServer):
         callback: Callable[..., Any] | None,
         receiver: Node | None = None,
     ) -> None:
-        self._on_event_loop(
+        self._run_on_loop(
             lambda: super(Server, self)._set_callback_slot(
                 target, _NATIVE_CALLBACK_KIND[kind], callback, receiver
-            )
+            ),
+            sync_result=True,
+            wait=True,
         )
 
     def _node_callback(self, target: Node, kind: _CallbackKind) -> Callable[..., Any] | None:
-        callback = self._on_event_loop(
-            lambda: super(Server, self)._get_callback(target, _NATIVE_CALLBACK_KIND[kind])
+        callback = self._run_on_loop(
+            lambda: super(Server, self)._get_callback(target, _NATIVE_CALLBACK_KIND[kind]),
+            sync_result=True,
+            wait=True,
         )
         return cast(Callable[..., Any] | None, callback)
 
@@ -3613,7 +3741,7 @@ class Server(_NativeServer):
         def add() -> None:
             super(Server, self)._add_reference(src_id, ref_id, tgt_id, forward).check()
 
-        return self._on_event_loop(add)
+        return self._run_on_loop(add, sync_result=True)
 
     @public_result
     def deleteReferenceLegacy(
@@ -3652,7 +3780,7 @@ class Server(_NativeServer):
                 src_id, ref_id, tgt_id, forward, bidirectional
             ).check()
 
-        return self._on_event_loop(delete)
+        return self._run_on_loop(delete, sync_result=True)
 
     @public_result
     def addReference(
@@ -3702,7 +3830,7 @@ class Server(_NativeServer):
                 return o6.StatusCode.BAD_NOT_SUPPORTED
             return super(Server, self)._add_reference(src_id, ref_id, tgt_id, forward)
 
-        return self._maybe_async(add())
+        return self._run_on_loop(add)
 
     def _add_reference_once(
         self,
@@ -3711,7 +3839,7 @@ class Server(_NativeServer):
         reference_type: NodeIdLike,
         *,
         forward: bool = True,
-    ) -> MaybeAwaitable[None]:
+    ) -> None:
         """Add an exact edge, accepting one already materialized by open62541."""
 
         def add() -> None:
@@ -3721,7 +3849,7 @@ class Server(_NativeServer):
                 if exc.code != o6.StatusCode.BAD_DUPLICATE_REFERENCE_NOT_ALLOWED:
                     raise
 
-        return self._on_event_loop(add)
+        return self._run_on_loop(add, sync_result=True, wait=True)
 
     def deleteReference(
         self,
@@ -3762,7 +3890,7 @@ class Server(_NativeServer):
                 src_id, ref_id, tgt_id, forward, deleteBidirectional
             )
 
-        return self._maybe_async(delete())
+        return self._run_on_loop(delete)
 
     @overload
     def deleteNode(
@@ -3812,7 +3940,7 @@ class Server(_NativeServer):
                 results.append(status)
             return results[0] if is_scalar else results
 
-        return self._maybe_async(delete())
+        return self._run_on_loop(delete)
 
     # -- Method call ----------------------------------------------------------
 
@@ -3848,7 +3976,7 @@ class Server(_NativeServer):
         async def _do() -> tuple[o6.StatusCode, *tuple[Any, ...]]:
             return await super(Server, self)._call(obj_id, mth_id, args, 0, True)
 
-        return self._maybe_async(_do())
+        return self._run_on_loop(_do)
 
     @public_result
     def addPublishedDataSet(
@@ -3867,8 +3995,9 @@ class Server(_NativeServer):
         Returns:
             The NodeId of the PublishedDataSet.
         """
-        return self._on_event_loop(
-            lambda: super(Server, self)._add_published_dataset(_normalize_nodeids(configuration))
+        return self._run_on_loop(
+            lambda: super(Server, self)._add_published_dataset(_normalize_nodeids(configuration)),
+            sync_result=True,
         )
 
     @public_result
@@ -3891,15 +4020,18 @@ class Server(_NativeServer):
         Returns:
             The NodeId of the SubscribedDataSet.
         """
-        return self._on_event_loop(
-            lambda: super(Server, self)._add_subscribed_dataset(name, metadata, targets)
+        return self._run_on_loop(
+            lambda: super(Server, self)._add_subscribed_dataset(name, metadata, targets),
+            sync_result=True,
         )
 
     @public_result
     def removeSubscribedDataSet(self, dataSetId: NodeIdLike) -> MaybeAwaitable[None]:
         """Remove a standalone SubscribedDataSet and its nodes."""
         node_id = o6.NodeId(dataSetId)
-        return self._on_event_loop(lambda: super(Server, self)._remove_subscribed_dataset(node_id))
+        return self._run_on_loop(
+            lambda: super(Server, self)._remove_subscribed_dataset(node_id), sync_result=True
+        )
 
     def _pubSubConfiguration(self, componentId: NodeIdLike):
         """Read an owned configuration snapshot; child arrays are read separately.
@@ -3907,41 +4039,46 @@ class Server(_NativeServer):
         Connection Enabled is configured intent. Read Status.State for its live state.
         """
         node_id = o6.NodeId(componentId)
-        return self._on_event_loop(lambda: super(Server, self)._pubsub_configuration(node_id))
+        return self._run_on_loop(
+            lambda: super(Server, self)._pubsub_configuration(node_id), sync_result=True, wait=True
+        )
 
     def _setPubSubConnectionEnabled(self, connectionId: NodeIdLike, enabled: bool) -> None:
         """Set native PubSub connection state (internal component bridge)."""
         node_id = o6.NodeId(connectionId)
-        return self._on_event_loop(
-            lambda: super(Server, self)._set_pubsub_connection_enabled(node_id, enabled)
+        return self._run_on_loop(
+            lambda: super(Server, self)._set_pubsub_connection_enabled(node_id, enabled),
+            sync_result=True,
+            wait=True,
         )
 
     def _setPubSubComponentEnabled(self, componentId: NodeIdLike, enabled: bool) -> None:
         """Set one native PubSub component state."""
         node_id = o6.NodeId(componentId)
-        return self._on_event_loop(
-            lambda: super(Server, self)._set_pubsub_component_enabled(node_id, enabled)
+        return self._run_on_loop(
+            lambda: super(Server, self)._set_pubsub_component_enabled(node_id, enabled),
+            sync_result=True,
+            wait=True,
         )
 
     def _removePubSubConnection(self, connectionId: NodeIdLike) -> None:
         """Remove a native PubSub connection and all child components."""
         node_id = o6.NodeId(connectionId)
-        return self._on_event_loop(lambda: super(Server, self)._remove_pubsub_connection(node_id))
+        return self._run_on_loop(
+            lambda: super(Server, self)._remove_pubsub_connection(node_id),
+            sync_result=True,
+            wait=True,
+        )
 
     def _setAllPubSubComponentsEnabled(self, enabled: bool) -> None:
         """Enable or disable the complete native PubSub component tree."""
-        return self._on_event_loop(
-            lambda: super(Server, self)._set_all_pubsub_components_enabled(enabled)
+        return self._run_on_loop(
+            lambda: super(Server, self)._set_all_pubsub_components_enabled(enabled),
+            sync_result=True,
+            wait=True,
         )
 
     # -- Read / write ---------------------------------------------------------
-
-    def _sync_result(self, result: Any) -> Any:
-        if asyncio.isfuture(result):
-            if hasattr(result, "_concurrent_future"):
-                return result._concurrent_future.result()  # type: ignore[attr-defined]
-            return result.result()
-        return result
 
     def read(
         self,
@@ -3992,7 +4129,7 @@ class Server(_NativeServer):
             ]
             return _read_results(results, is_scalar, valueOnly)
 
-        return self._maybe_async(_read())
+        return self._run_on_loop(_read)
 
     def write(
         self,
@@ -4048,7 +4185,7 @@ class Server(_NativeServer):
                 results.append(o6.StatusCode(result))
             return results[0] if is_scalar else results
 
-        return self._maybe_async(_write())
+        return self._run_on_loop(_write)
 
     def translateBrowsePaths(  # type: ignore[override]
         self,
@@ -4066,7 +4203,7 @@ class Server(_NativeServer):
             r = super(Server, self)._translate_browse_paths(request)
             return (await r) if inspect.isawaitable(r) else r
 
-        return self._maybe_async(_do())
+        return self._run_on_loop(_do)
 
     def serviceTranslateBrowsePathsToNodeIds(
         self, request: ns0.datatypes.TranslateBrowsePathsToNodeIdsRequest
@@ -4095,7 +4232,7 @@ class Server(_NativeServer):
             r = super(Server, self)._find_data_type(nid)
             return (await r) if inspect.isawaitable(r) else r
 
-        return self._maybe_async(_do())
+        return self._run_on_loop(_do)
 
     # -- View Service Set Methods  ------------------------------------------------------------
 
@@ -4137,7 +4274,7 @@ class Server(_NativeServer):
         async def _do() -> list[ns0.datatypes.ReferenceDescription]:
             return self._browse_references(target, bd)
 
-        return self._maybe_async(_do())
+        return self._run_on_loop(_do)
 
     def browsePage(
         self,
@@ -4182,7 +4319,7 @@ class Server(_NativeServer):
             result.statusCode.check()
             return result
 
-        return self._maybe_async(_do())
+        return self._run_on_loop(_do)
 
     def _browse_node(
         self,
@@ -4253,7 +4390,7 @@ class Server(_NativeServer):
                 raise
             return cast(list[ns0.datatypes.BrowseResult], pages)
 
-        return self._maybe_async(_do())
+        return self._run_on_loop(_do)
 
     def browseRecursive(
         self,
@@ -4283,7 +4420,7 @@ class Server(_NativeServer):
             r = super(Server, self)._browse_recursive(bd)
             return (await r) if inspect.isawaitable(r) else r
 
-        return self._maybe_async(_do())
+        return self._run_on_loop(_do)
 
     @overload
     def translateBrowsePathsToNodeIds(
@@ -4312,7 +4449,7 @@ class Server(_NativeServer):
             StatusCodeError: The service failed. For raw requests and
                 responses, use `serviceTranslateBrowsePathsToNodeIds`.
         """
-        return self._maybe_async(_translate_paths(self.translateBrowsePaths, browsePath))
+        return self._run_on_loop(partial(_translate_paths, self.translateBrowsePaths, browsePath))
 
     def browseSimplifiedBrowsePaths(
         self,
@@ -4360,7 +4497,7 @@ class Server(_NativeServer):
             if inspect.isawaitable(r):
                 await r
 
-        return self._maybe_async(_do())
+        return self._run_on_loop(_do)
 
     # -- Discovery Server ----------------------------------------------------------------
 
@@ -4415,8 +4552,9 @@ class Server(_NativeServer):
         """
         path_arg = str(semaphoreFilePath) if semaphoreFilePath is not None else None
         mode = 0 if securityMode is None else int(securityMode)
-        return self._on_event_loop(
-            lambda: super(Server, self)._register_discovery(url, path_arg, mode, securityPolicy)
+        return self._run_on_loop(
+            lambda: super(Server, self)._register_discovery(url, path_arg, mode, securityPolicy),
+            sync_result=True,
         )
 
     @public_result
@@ -4444,8 +4582,9 @@ class Server(_NativeServer):
                 `BadTooManyOperations` if a (de)registration is still pending.
         """
         mode = 0 if securityMode is None else int(securityMode)
-        return self._on_event_loop(
-            lambda: super(Server, self)._deregister_discovery(url, mode, securityPolicy)
+        return self._run_on_loop(
+            lambda: super(Server, self)._deregister_discovery(url, mode, securityPolicy),
+            sync_result=True,
         )
 
     def setRegisterServerCallback(
@@ -4461,10 +4600,12 @@ class Server(_NativeServer):
         Args:
             callback: The callback, or `None` to remove it.
         """
-        return self._on_event_loop(
+        return self._run_on_loop(
             lambda: super(Server, self)._set_register_server_callback(
                 synchronous(callback) if callable(callback) else callback
-            )
+            ),
+            sync_result=True,
+            wait=True,
         )
 
     def setServerOnNetworkCallback(
@@ -4490,49 +4631,12 @@ class Server(_NativeServer):
                 "server-on-network callbacks are not available with the "
                 "current open62541 discovery API"
             )
-        return self._on_event_loop(
+        return self._run_on_loop(
             lambda: super(Server, self)._set_server_on_network_callback(
                 synchronous(callback) if callback is not None else None
-            )
-        )
-
-    def _register_server_locally(self, registeredServer: "ns0.datatypes.RegisteredServer") -> None:
-        """Local API for the RegisterServer2 service — test-only trigger for
-        `onDiscoveryRegisterServerNotification`; not part of the public API.
-        Requires `config.applicationType = ApplicationType.DISCOVERYSERVER`
-        or `config.registeredServersEnabled = True`, or open62541 answers
-        `BadServiceUnsupported`."""
-        return self._on_event_loop(lambda: super(Server, self)._register_server(registeredServer))
-
-    def _deregister_server_locally(self, serverUri: str, discoveryUrls: Iterable[str] = ()) -> None:
-        """Remove a server record added via `_register_server_locally` —
-        test-only, not part of the public API."""
-        return self._on_event_loop(
-            lambda: super(Server, self)._deregister_server(serverUri, list(discoveryUrls))
-        )
-
-    def _register_server_on_network_locally(
-        self,
-        serverOnNetwork: "ns0.datatypes.ServerOnNetwork",
-        remoteAddress: str | None = None,
-        ttl: int | None = None,
-    ) -> None:
-        """Local API for adding/updating a ServerOnNetwork entry —
-        test-only trigger for `onDiscoveryServerOnNetworkNotification`; not
-        part of the public API. Requires `config.serversOnNetworkEnabled`,
-        or open62541 answers `BadNotImplemented`."""
-        return self._on_event_loop(
-            lambda: super(Server, self)._register_server_on_network(
-                serverOnNetwork, remoteAddress, ttl
-            )
-        )
-
-    def _deregister_server_on_network_locally(self, serverName: str) -> None:
-        """Remove a ServerOnNetwork entry by server name — test-only, not
-        part of the public API. Requires `config.serversOnNetworkEnabled`,
-        or open62541 answers `BadNotImplemented`."""
-        return self._on_event_loop(
-            lambda: super(Server, self)._deregister_server_on_network(serverName)
+            ),
+            sync_result=True,
+            wait=True,
         )
 
     # -- o6.subscription.MonitoredItem Service Set ------------------------------------------------
@@ -4569,15 +4673,17 @@ class Server(_NativeServer):
         ttr = timestamps if timestamps is not None else ns0.datatypes.TimestampsToReturn.SOURCE
 
         async def _create() -> o6.subscription.MonitoredItem:
-            out = self._on_event_loop(
+            out = self._run_on_loop(
                 lambda: super(Server, self)._create_data_change_monitored_item(
                     mir, ttr, context, synchronous(callback)
-                )
+                ),
+                sync_result=True,
+                wait=True,
             )
             result = await out if inspect.isawaitable(out) else out
             return o6.subscription.MonitoredItem._from_server(self, mir, result)
 
-        return self._maybe_async(_create())
+        return self._run_on_loop(_create)
 
     def deleteMonitoredItem(
         self, monitoredItemId: int | o6.subscription.MonitoredItem
@@ -4601,13 +4707,15 @@ class Server(_NativeServer):
                 mid = int(monitoredItemId.id)
             else:
                 mid = int(monitoredItemId)
-            out = self._on_event_loop(lambda: super(Server, self)._delete_monitored_item(mid))
+            out = self._run_on_loop(
+                lambda: super(Server, self)._delete_monitored_item(mid), sync_result=True, wait=True
+            )
             if inspect.isawaitable(out):
                 await out
             if isinstance(monitoredItemId, o6.subscription.MonitoredItem):
                 monitoredItemId._monitored_item_id = None
 
-        return self._maybe_async(_delete())
+        return self._run_on_loop(_delete)
 
     def createEventMonitoredItem(
         self,
@@ -4674,15 +4782,17 @@ class Server(_NativeServer):
         mir.requestedParameters.filter = copy.deepcopy(resolved_filter)
 
         async def _create() -> o6.subscription.MonitoredItem:
-            out = self._on_event_loop(
+            out = self._run_on_loop(
                 lambda: super(Server, self)._create_event_monitored_item(
                     mir, context, synchronous(callback)
-                )
+                ),
+                sync_result=True,
+                wait=True,
             )
             result = await out if inspect.isawaitable(out) else out
             return o6.subscription.MonitoredItem._from_server(self, mir, result)
 
-        return self._maybe_async(_create())
+        return self._run_on_loop(_create)
 
     # -- Server Callbacks ---------------------------------------------------------
 
@@ -4693,29 +4803,29 @@ class Server(_NativeServer):
             A callback ID for `changeRepeatedCallbackInterval` and
             `removeCallback`.
         """
-        return self._sync_result(
-            self._on_event_loop(
-                lambda: super(Server, self)._add_repeated_callback(
-                    synchronous(callback), float(intervalMs)
-                )
-            )
+        return self._run_on_loop(
+            lambda: super(Server, self)._add_repeated_callback(
+                synchronous(callback), float(intervalMs)
+            ),
+            sync_result=True,
+            wait=True,
         )
 
     def changeRepeatedCallbackInterval(self, callbackId: int, intervalMs: float) -> None:
         """Change the interval of an existing repeated callback."""
         cid = int(callbackId)
-        return self._sync_result(
-            self._on_event_loop(
-                lambda: super(Server, self)._change_repeated_callback_interval(
-                    cid, float(intervalMs)
-                )
-            )
+        return self._run_on_loop(
+            lambda: super(Server, self)._change_repeated_callback_interval(cid, float(intervalMs)),
+            sync_result=True,
+            wait=True,
         )
 
     def removeCallback(self, callbackId: int) -> None:
         """Remove a repeated callback by ID."""
         cid = int(callbackId)
-        return self._on_event_loop(lambda: super(Server, self)._remove_callback(cid))
+        return self._run_on_loop(
+            lambda: super(Server, self)._remove_callback(cid), sync_result=True, wait=True
+        )
 
 
 __all__ = [

@@ -34,7 +34,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=plastics_extrusion_v1_extruder;i=3003", browseName="FeedingModeEnumeration")
+@o6.enumtype(nodeId="ns=plastics_extrusion_v1_extruder;i=3003", browseName="ns=plastics_extrusion_v1_extruder;FeedingModeEnumeration")
 class FeedingModeEnumeration(ns0.datatypes.Enumeration):
     ONLY_CONVEYING = o6.enumfield(0, name="ONLY_CONVEYING")
     OTHER = o6.enumfield(1, name="OTHER")

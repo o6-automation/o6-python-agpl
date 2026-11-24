@@ -101,7 +101,9 @@ class ExtrusionMachineryItemState_StateMachineType(machinery.objtypes.MachineryI
 
 @o6.objecttype(nodeId="ns=plastics_extrusion;i=1007", browseName="ns=plastics_extrusion;RollBendingType", displayName="RollBendingType")
 class RollBendingType(ns0.objtypes.BaseObjectType):
-    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6305", browseName="NodeVersion", dataType=o6.String))
+    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6305", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String)
+    )
     referencePoint_Nr_: plastics_rubber.objtypes.MeasuringDeviceType | None
 
 
@@ -113,25 +115,29 @@ class GapType(ns0.objtypes.BaseObjectType):
     contactForce: plastics_rubber.objtypes.MonitoredParameterType | None
     distanceLeft: plastics_rubber.objtypes.MonitoredParameterType | None
     distanceRight: plastics_rubber.objtypes.MonitoredParameterType | None
-    id: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6344", browseName="ns=plastics_extrusion;Id", dataType=o6.String))
+    id: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6344", browseName="ns=plastics_extrusion;Id", modellingRule="Mandatory", dataType=o6.String)
+    )
     isClosed: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_extrusion;i=6345", browseName="ns=plastics_extrusion;IsClosed", dataType=o6.Boolean)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=plastics_extrusion;i=6345", browseName="ns=plastics_extrusion;IsClosed", modellingRule="Optional", dataType=o6.Boolean)
     )
     rollId1: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6346", browseName="ns=plastics_extrusion;RollId1", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6346", browseName="ns=plastics_extrusion;RollId1", modellingRule="Mandatory", dataType=o6.String)
     )
     rollId2: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6347", browseName="ns=plastics_extrusion;RollId2", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6347", browseName="ns=plastics_extrusion;RollId2", modellingRule="Mandatory", dataType=o6.String)
     )
     stockingGuideIsPresent: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6348", browseName="ns=plastics_extrusion;StockingGuideIsPresent", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6348", browseName="ns=plastics_extrusion;StockingGuideIsPresent", modellingRule="Optional", dataType=o6.Boolean)
     )
 
 
 @o6.objecttype(nodeId="ns=plastics_extrusion;i=1004", browseName="ns=plastics_extrusion;GapsType", displayName="GapsType")
 class GapsType(ns0.objtypes.BaseObjectType):
     gap_Nr_: GapType | None
-    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6467", browseName="NodeVersion", dataType=o6.String))
+    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6467", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String)
+    )
 
 
 o6.reference(GapsType, "i=41", "i=2133")
@@ -142,12 +148,14 @@ class RollType(ns0.objtypes.BaseObjectType):
     crossAxisLeft: plastics_rubber.objtypes.MonitoredParameterType | None
     crossAxisRight: plastics_rubber.objtypes.MonitoredParameterType | None
     drive: plastics_rubber.objtypes.DriveType
-    id: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6638", browseName="ns=plastics_extrusion;Id", dataType=o6.String))
+    id: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6638", browseName="ns=plastics_extrusion;Id", modellingRule="Mandatory", dataType=o6.String)
+    )
     masterRollId: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6641", browseName="ns=plastics_extrusion;MasterRollId", dataType=o6.String)
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6641", browseName="ns=plastics_extrusion;MasterRollId", modellingRule="Optional", dataType=o6.String)
     )
     name: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6642", browseName="ns=plastics_extrusion;Name", dataType=o6.LocalizedText)
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6642", browseName="ns=plastics_extrusion;Name", modellingRule="Optional", dataType=o6.LocalizedText)
     )
     peripheralDevices: RollPeripheralDevicesType | None
     rollBending: RollBendingType | None
@@ -161,10 +169,12 @@ class ExtrusionDeviceType(ns0.objtypes.BaseObjectType):
     fluidEnergy: plastics_rubber.objtypes.EnergyType | None
     identification: machinery.objtypes.MachineIdentificationType
     isPresent: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6035", browseName="ns=plastics_extrusion;IsPresent", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6035", browseName="ns=plastics_extrusion;IsPresent", modellingRule="Mandatory", dataType=o6.Boolean)
     )
     lineId: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6020", browseName="ns=plastics_extrusion;LineId", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion;i=6020", browseName="ns=plastics_extrusion;LineId", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1
+        )
     )
     machineConfiguration: plastics_rubber.objtypes.MachineConfigurationType | None
     machineryBuildingBlocks: ns0.objtypes.FolderType
@@ -173,19 +183,20 @@ class ExtrusionDeviceType(ns0.objtypes.BaseObjectType):
     productionDatasetManagement: plastics_rubber.objtypes.ProductionDatasetManagementType | None
     startDevice: plastics_rubber.objtypes.StartDeviceType | None
     strand: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6037", browseName="ns=plastics_extrusion;Strand", dataType=o6.UInt32)
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6037", browseName="ns=plastics_extrusion;Strand", modellingRule="Optional", dataType=o6.UInt32)
     )
     supportedLogbookEvents: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
             nodeId="ns=plastics_extrusion;i=6702",
             browseName="ns=plastics_extrusion;SupportedLogbookEvents",
+            modellingRule="Mandatory",
             dataType=plastics_rubber.datatypes.LogbookEventsEnumeration,
             valueRank=1,
             arrayDimensions=[0],
         )
     )
     target: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6036", browseName="ns=plastics_extrusion;Target", dataType=o6.String, valueRank=-3)
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6036", browseName="ns=plastics_extrusion;Target", modellingRule="Optional", dataType=o6.String, valueRank=-3)
     )
 
 
@@ -193,7 +204,7 @@ o6.reference(ExtrusionDeviceType, "i=41", "ns=plastics_rubber;i=1004")
 o6.reference(ExtrusionDeviceType, "i=41", "ns=plastics_rubber;i=1011")
 
 
-ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6772", browseName="NodeVersion", dataType=o6.String)
+ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6772", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String)
 o6.reference(o6.ns["ns=plastics_extrusion;i=6772"], "i=41", "i=2133")
 
 
@@ -209,7 +220,9 @@ o6.reference(RollPeripheralDevicesType, "i=41", "i=2133")
 
 @o6.objecttype(nodeId="ns=plastics_extrusion;i=1006", browseName="ns=plastics_extrusion;RollsType", displayName="RollsType")
 class RollsType(ns0.objtypes.BaseObjectType):
-    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6803", browseName="NodeVersion", dataType=o6.String))
+    nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6803", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String)
+    )
     roll_Nr_: RollType | None
 
 
@@ -220,7 +233,7 @@ o6.reference(RollsType, "i=41", "i=2133")
 class ExtrusionTemperatureZonesType(ns0.objtypes.BaseObjectType):
     maintenance: plastics_rubber.objtypes.MaintenanceType | None
     nodeVersion: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6987", browseName="NodeVersion", dataType=o6.String, value="0")
+        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion;i=6987", browseName="NodeVersion", modellingRule="Mandatory", dataType=o6.String, value="0")
     )
     startTempering: plastics_rubber.objtypes.StartDeviceType | None
     temperatureZone_Nr_: ExtrusionTemperatureZoneType | None

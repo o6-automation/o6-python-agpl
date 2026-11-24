@@ -39,12 +39,18 @@ else:
 @o6.objecttype(nodeId="ns=plastics_extrusion_haul_off;i=1002", browseName="ns=plastics_extrusion_haul_off;HaulOff_InterfaceType", displayName="HaulOff_InterfaceType")
 class HaulOff_InterfaceType(plastics_extrusion.objtypes.ExtrusionDeviceType):
     clampClosed: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=plastics_extrusion_haul_off;i=6013", browseName="ns=plastics_extrusion_haul_off;ClampClosed", dataType=o6.Boolean)
+        ns0.vartypes.PropertyType(
+            nodeId="ns=plastics_extrusion_haul_off;i=6013", browseName="ns=plastics_extrusion_haul_off;ClampClosed", modellingRule="Mandatory", dataType=o6.Boolean
+        )
     )
-    closeClamp: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_haul_off;i=7002", browseName="ns=plastics_extrusion_haul_off;CloseClamp"))
+    closeClamp: o6.node.MethodNode | None = o6.hasComponent(
+        o6.call(nodeId="ns=plastics_extrusion_haul_off;i=7002", browseName="ns=plastics_extrusion_haul_off;CloseClamp", modellingRule="Optional")
+    )
     drives: plastics_rubber.objtypes.DrivesType
     force: plastics_rubber.objtypes.MonitoredParameterType | None
-    openClamp: o6.node.MethodNode | None = o6.hasComponent(o6.call(nodeId="ns=plastics_extrusion_haul_off;i=7001", browseName="ns=plastics_extrusion_haul_off;OpenClamp"))
+    openClamp: o6.node.MethodNode | None = o6.hasComponent(
+        o6.call(nodeId="ns=plastics_extrusion_haul_off;i=7001", browseName="ns=plastics_extrusion_haul_off;OpenClamp", modellingRule="Optional")
+    )
     temperatureZones: plastics_extrusion.objtypes.ExtrusionTemperatureZonesType | None
 
 

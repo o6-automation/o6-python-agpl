@@ -44,15 +44,15 @@ surface_technology_mss_objtypes.STSysVesselType(
     nodeId="ns=surface_technology_mss;i=5012",
     browseName="ns=surface_technology_mss;<Vessel>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_mss;i=5002", browseName="ns=machinery;MachineryBuildingBlocks"))],
+    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_mss;i=5002", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory"))],
 )
 surface_technology_mss_objtypes.STCompHeaterType(
     nodeId="ns=surface_technology_mss;i=5010",
     browseName="ns=surface_technology_mss;<Heater>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_mss;i=5016", browseName="ns=machinery;MachineryBuildingBlocks"))],
+    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_mss;i=5016", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory"))],
 )
-machinery.objtypes.MachineryLifetimeCounterType(nodeId="ns=surface_technology_mss;i=5024", browseName="ns=surface_technology_mss;LifetimeCounters")
+machinery.objtypes.MachineryLifetimeCounterType(nodeId="ns=surface_technology_mss;i=5024", browseName="ns=surface_technology_mss;LifetimeCounters", modellingRule="Optional")
 ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_mss;i=5014",
     browseName="ns=machinery;MachineryBuildingBlocks",
@@ -64,19 +64,19 @@ surface_technology_mss_objtypes.STCompRamType(
     nodeId="ns=surface_technology_mss;i=5011",
     browseName="ns=surface_technology_mss;<Ram>",
     modellingRule="MandatoryPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_mss;i=5035", browseName="ns=machinery;MachineryBuildingBlocks"))],
+    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_mss;i=5035", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory"))],
 )
 surface_technology_mss_objtypes.STCompHeaterType(
     nodeId="ns=surface_technology_mss;i=5041",
     browseName="ns=surface_technology_mss;<Heater>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_mss;i=5038", browseName="ns=machinery;MachineryBuildingBlocks"))],
+    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_mss;i=5038", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory"))],
 )
 surface_technology_mss_objtypes.STCompStirrerType(
     nodeId="ns=surface_technology_mss;i=5009",
     browseName="ns=surface_technology_mss;<Stirrer>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_mss;i=5061", browseName="ns=machinery;MachineryBuildingBlocks"))],
+    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_mss;i=5061", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory"))],
 )
 machinery.objtypes.MachineComponentsType(
     nodeId="ns=surface_technology_mss;i=5007",
@@ -94,14 +94,19 @@ surface_technology_mss_objtypes.STCompStirrerType(
     nodeId="ns=surface_technology_mss;i=5040",
     browseName="ns=surface_technology_mss;<Stirrer>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_mss;i=5062", browseName="ns=machinery;MachineryBuildingBlocks"))],
+    references=[o6.hasComponent(ns0.objtypes.FolderType(nodeId="ns=surface_technology_mss;i=5062", browseName="ns=machinery;MachineryBuildingBlocks", modellingRule="Mandatory"))],
 )
-machinery.objtypes.MachineryLifetimeCounterType(nodeId="ns=surface_technology_mss;i=5071", browseName="ns=surface_technology_mss;LifetimeCounters")
+machinery.objtypes.MachineryLifetimeCounterType(nodeId="ns=surface_technology_mss;i=5071", browseName="ns=surface_technology_mss;LifetimeCounters", modellingRule="Optional")
 ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_mss;i=5070",
     browseName="ns=machinery;MachineryBuildingBlocks",
+    modellingRule="Mandatory",
     references=[
-        o6.hasComponent(machinery.objtypes.MachineryLifetimeCounterType(nodeId="ns=surface_technology_mss;i=5072", browseName="ns=surface_technology_mss;LifetimeCounters"))
+        o6.hasComponent(
+            machinery.objtypes.MachineryLifetimeCounterType(
+                nodeId="ns=surface_technology_mss;i=5072", browseName="ns=surface_technology_mss;LifetimeCounters", modellingRule="Optional"
+            )
+        )
     ],
 )
 surface_technology_mss_objtypes.STCompProcessValveType(
@@ -124,12 +129,14 @@ o6.reference(surface_technology_mss_objtypes.STSysVesselType, ns0.reftypes.HasAd
 di.vartypes.LifetimeVariableType(
     nodeId="ns=surface_technology_mss;i=6001",
     browseName="ns=surface_technology_mss;RemainingDurationOfUse",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=surface_technology_mss;i=6002",
                 browseName="ns=di;LimitValue",
                 description="LimitValue indicates when the end of lifetime has been reached.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Number,
             )
         ),
@@ -138,10 +145,13 @@ di.vartypes.LifetimeVariableType(
                 nodeId="ns=surface_technology_mss;i=6003",
                 browseName="ns=di;StartValue",
                 description="StartValue indicates the initial value, when there is still the full lifetime left.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Number,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6004", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6004", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     accessLevel=3,
@@ -152,19 +162,22 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_mss;i=5005",
     browseName="ns=machinery;Health",
     description="Entry point of health information of the MachineryItem.",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6001"])],
 )
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=surface_technology_mss;i=6005",
     browseName="ns=surface_technology_mss;FillState",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=surface_technology_mss;i=6006",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[5],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(
                         value=0, displayName=o6.LocalizedText("Empty"), description=o6.LocalizedText("The transport line is not filled with any material.")
@@ -190,7 +203,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6007", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6007", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -200,9 +213,12 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_mss;i=6008",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6009", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6010", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6009", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6010", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -212,10 +228,18 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=surface_technology_mss;i=5008",
     browseName="ns=surface_technology_mss;AverageFlowVelocity",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6011", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6011",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6008"]),
@@ -225,6 +249,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_mss;i=5004",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_mss;i=5008"]), o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6005"])],
 )
 machinery.objtypes.MonitoringType(
@@ -237,9 +262,10 @@ o6.reference(surface_technology_mss_objtypes.STSysMaterialTransportLineType, ns0
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=surface_technology_mss;i=6012",
     browseName="ns=surface_technology_mss;VesselVibration",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6013", browseName="FalseState", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6014", browseName="TrueState", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6013", browseName="FalseState", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6014", browseName="TrueState", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.Boolean,
     accessLevel=3,
@@ -249,6 +275,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_mss;i=5026",
     browseName="ns=machinery;Status",
     description="Entry point for status information of the MachineryItem. If this Object is provided, and the MachineryItemState is provided, it shall be referenced. If this Object is provided and the MachineryOperationMode is provided, it shall be referenced.",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6012"])],
 )
 machinery.objtypes.MonitoringType(
@@ -261,7 +288,12 @@ o6.reference(surface_technology_mss_objtypes.STCompPowderVibrationType, ns0.reft
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_mss;i=6017",
     browseName="ns=surface_technology_mss;FlowResistanceCoefficient",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6018", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6018", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -269,7 +301,12 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_mss;i=6019",
     browseName="ns=surface_technology_mss;PressureLossCoefficient",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6020", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6020", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -277,7 +314,12 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_mss;i=6021",
     browseName="ns=surface_technology_mss;CompressiveStrength",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6022", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6022", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -285,7 +327,12 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_mss;i=6023",
     browseName="ns=surface_technology_mss;Length",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6024", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6024", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -293,7 +340,12 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_mss;i=6025",
     browseName="ns=surface_technology_mss;CrossSection",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6026", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6026", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -305,7 +357,12 @@ ns0.objtypes.FolderType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6016", browseName="ns=surface_technology_mss;ContactMaterial", dataType=o6.String, accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6016",
+                browseName="ns=surface_technology_mss;ContactMaterial",
+                modellingRule="Optional",
+                dataType=o6.String,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6017"]),
@@ -319,9 +376,10 @@ o6.reference(surface_technology_mss_objtypes.STSysMaterialTransportLineType, ns0
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=surface_technology_mss;i=6027",
     browseName="ns=surface_technology_mss;DrumPresent",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6028", browseName="FalseState", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6029", browseName="TrueState", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6028", browseName="FalseState", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6029", browseName="TrueState", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.Boolean,
     accessLevel=3,
@@ -330,14 +388,16 @@ ns0.vartypes.TwoStateDiscreteType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=surface_technology_mss;i=6030",
     browseName="ns=surface_technology_mss;DiscreteFillingLevel",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=surface_technology_mss;i=6031",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[3],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("empty"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("almost empty"), description=o6.LocalizedText()),
@@ -345,7 +405,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6032", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6032", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -354,9 +414,10 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=surface_technology_mss;i=6033",
     browseName="ns=surface_technology_mss;CirculationActive",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6034", browseName="FalseState", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6035", browseName="TrueState", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6034", browseName="FalseState", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6035", browseName="TrueState", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.Boolean,
     accessLevel=3,
@@ -365,9 +426,10 @@ ns0.vartypes.TwoStateDiscreteType(
 ns0.vartypes.TwoStateDiscreteType(
     nodeId="ns=surface_technology_mss;i=6036",
     browseName="ns=surface_technology_mss;RamUnitReady",
+    modellingRule="Optional",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6037", browseName="FalseState", dataType=o6.LocalizedText)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6038", browseName="TrueState", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6037", browseName="FalseState", modellingRule="Mandatory", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6038", browseName="TrueState", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.Boolean,
     accessLevel=3,
@@ -377,6 +439,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_mss;i=5018",
     browseName="ns=machinery;Status",
     description="Entry point for status information of the MachineryItem. If this Object is provided, and the MachineryItemState is provided, it shall be referenced. If this Object is provided and the MachineryOperationMode is provided, it shall be referenced.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6027"]),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6030"]),
@@ -387,12 +450,14 @@ ns0.objtypes.FolderType(
 di.vartypes.LifetimeVariableType(
     nodeId="ns=surface_technology_mss;i=6039",
     browseName="ns=surface_technology_mss;RemainingCycles",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=surface_technology_mss;i=6040",
                 browseName="ns=di;LimitValue",
                 description="LimitValue indicates when the end of lifetime has been reached.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Number,
             )
         ),
@@ -401,10 +466,13 @@ di.vartypes.LifetimeVariableType(
                 nodeId="ns=surface_technology_mss;i=6041",
                 browseName="ns=di;StartValue",
                 description="StartValue indicates the initial value, when there is still the full lifetime left.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Number,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6042", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6042", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -413,12 +481,14 @@ di.vartypes.LifetimeVariableType(
 di.vartypes.LifetimeVariableType(
     nodeId="ns=surface_technology_mss;i=6043",
     browseName="ns=surface_technology_mss;RemainingMaterialTime",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=surface_technology_mss;i=6044",
                 browseName="ns=di;LimitValue",
                 description="LimitValue indicates when the end of lifetime has been reached.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Number,
             )
         ),
@@ -427,10 +497,13 @@ di.vartypes.LifetimeVariableType(
                 nodeId="ns=surface_technology_mss;i=6045",
                 browseName="ns=di;StartValue",
                 description="StartValue indicates the initial value, when there is still the full lifetime left.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Number,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6046", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6046", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=o6.Double,
     accessLevel=3,
@@ -440,9 +513,12 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_mss;i=6047",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6048", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6049", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6048", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6049", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -452,10 +528,18 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=surface_technology_mss;i=5019",
     browseName="ns=surface_technology_mss;MeasuredFillingLevel",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6050", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6050",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6047"]),
@@ -465,9 +549,12 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_mss;i=6051",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6052", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6053", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6052", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6053", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -477,10 +564,18 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=surface_technology_mss;i=5020",
     browseName="ns=surface_technology_mss;DownwardPressureRam",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6054", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6054",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6051"]),
@@ -490,9 +585,12 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_mss;i=6055",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6056", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6057", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6056", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6057", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -502,10 +600,18 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=surface_technology_mss;i=5021",
     browseName="ns=surface_technology_mss;InputCurrentRam",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6058", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6058",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6055"]),
@@ -515,9 +621,12 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_mss;i=6059",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6060", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6061", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6060", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6061", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -527,10 +636,18 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=surface_technology_mss;i=5022",
     browseName="ns=surface_technology_mss;InputPressureRam",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6062", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6062",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6059"]),
@@ -540,9 +657,12 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_mss;i=6063",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6064", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6065", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6064", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6065", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -552,10 +672,18 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=surface_technology_mss;i=5023",
     browseName="ns=surface_technology_mss;MaterialTemperature",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6066", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6066",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6063"]),
@@ -565,6 +693,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_mss;i=5017",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=5019"]),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=5020"]),
@@ -585,21 +714,23 @@ o6.reference(surface_technology_mss_objtypes.STCompRamType, ns0.reftypes.HasComp
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=surface_technology_mss;i=6071",
     browseName="ns=surface_technology_mss;TypeOfRam",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=surface_technology_mss;i=6072",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[2],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("SinglePostRam"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("DualPostRam"), description=o6.LocalizedText()),
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6073", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6073", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -608,14 +739,16 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=surface_technology_mss;i=6074",
     browseName="ns=surface_technology_mss;DrumVolumeClass",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=surface_technology_mss;i=6075",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[5],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("20 liters"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("200 liters"), description=o6.LocalizedText()),
@@ -625,7 +758,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6076", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6076", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -634,7 +767,12 @@ ns0.vartypes.MultiStateValueDiscreteType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_mss;i=6077",
     browseName="ns=surface_technology_mss;DrumInnerDiameter",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6078", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6078", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -653,7 +791,12 @@ o6.reference(surface_technology_mss_objtypes.STCompRamType, ns0.reftypes.HasComp
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_mss;i=6082",
     browseName="ns=surface_technology_mss;PowderSieveMeshSize",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6083", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6083", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -669,9 +812,12 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_mss;i=6084",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6085", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6086", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6085", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6086", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -681,18 +827,31 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=surface_technology_mss;i=5032",
     browseName="ns=surface_technology_mss;OpeningDegree",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6087", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6087",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6084"]),
     ],
 )
-ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6088", browseName="ns=di;OperationCycleCounter", dataType=ns0.datatypes.UInteger, accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=surface_technology_mss;i=6088", browseName="ns=di;OperationCycleCounter", modellingRule="Optional", dataType=ns0.datatypes.UInteger, accessLevel=3, userAccessLevel=1
+)
 machinery.objtypes.MachineryOperationCounterType(
-    nodeId="ns=surface_technology_mss;i=5006", browseName="ns=surface_technology_mss;OperationCounters", references=[o6.hasProperty(o6.ns["ns=surface_technology_mss;i=6088"])]
+    nodeId="ns=surface_technology_mss;i=5006",
+    browseName="ns=surface_technology_mss;OperationCounters",
+    modellingRule="Optional",
+    references=[o6.hasProperty(o6.ns["ns=surface_technology_mss;i=6088"])],
 )
 ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_mss;i=5069",
@@ -705,9 +864,12 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_mss;i=6091",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6092", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6093", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6092", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6093", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -717,10 +879,18 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=surface_technology_mss;i=5033",
     browseName="ns=surface_technology_mss;DutyCycle",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6094", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6094",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6091"]),
@@ -730,9 +900,12 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_mss;i=6095",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6096", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6097", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6096", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6097", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -742,10 +915,18 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=surface_technology_mss;i=5034",
     browseName="ns=surface_technology_mss;SwitchingFrequency",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6098", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6098",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6095"]),
@@ -754,12 +935,14 @@ machinery_processvalues.objtypes.ProcessValueType(
 di.vartypes.LifetimeVariableType(
     nodeId="ns=surface_technology_mss;i=6099",
     browseName="ns=surface_technology_mss;RemainingCycles",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=surface_technology_mss;i=6100",
                 browseName="ns=di;LimitValue",
                 description="LimitValue indicates when the end of lifetime has been reached.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Number,
             )
         ),
@@ -768,10 +951,13 @@ di.vartypes.LifetimeVariableType(
                 nodeId="ns=surface_technology_mss;i=6101",
                 browseName="ns=di;StartValue",
                 description="StartValue indicates the initial value, when there is still the full lifetime left.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Number,
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6102", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6102", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
     ],
     dataType=ns0.datatypes.Number,
     accessLevel=3,
@@ -782,15 +968,26 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_mss;i=5031",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6089", browseName="ns=surface_technology_mss;OpenTime", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6089",
+                browseName="ns=surface_technology_mss;OpenTime",
+                modellingRule="Optional",
+                dataType=ns0.datatypes.Duration,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6090", browseName="ns=surface_technology_mss;CloseTime", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6090",
+                browseName="ns=surface_technology_mss;CloseTime",
+                modellingRule="Optional",
+                dataType=ns0.datatypes.Duration,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=5032"]),
@@ -812,12 +1009,15 @@ di.vartypes.LifetimeVariableType(
     browseName="ns=machinery;LifetimeVariable",
     modellingRule="MandatoryPlaceholder",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6104", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6104", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=surface_technology_mss;i=6105",
                 browseName="ns=di;LimitValue",
                 description="LimitValue indicates when the end of lifetime has been reached.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Number,
             )
         ),
@@ -826,6 +1026,7 @@ di.vartypes.LifetimeVariableType(
                 nodeId="ns=surface_technology_mss;i=6106",
                 browseName="ns=di;StartValue",
                 description="StartValue indicates the initial value, when there is still the full lifetime left.",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.Number,
             )
         ),
@@ -835,7 +1036,10 @@ di.vartypes.LifetimeVariableType(
     userAccessLevel=1,
 )
 machinery.objtypes.MachineryLifetimeCounterType(
-    nodeId="ns=surface_technology_mss;i=5067", browseName="ns=surface_technology_mss;LifetimeCounters", references=[o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6103"])]
+    nodeId="ns=surface_technology_mss;i=5067",
+    browseName="ns=surface_technology_mss;LifetimeCounters",
+    modellingRule="Optional",
+    references=[o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6103"])],
 )
 o6.reference(o6.ns["ns=surface_technology_mss;i=5067"], "i=47", o6.ns["ns=surface_technology_mss;i=6039"])
 o6.reference(o6.ns["ns=surface_technology_mss;i=5067"], "i=47", o6.ns["ns=surface_technology_mss;i=6043"])
@@ -849,7 +1053,12 @@ o6.reference(surface_technology_mss_objtypes.STCompRamType, ns0.reftypes.HasComp
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_mss;i=6107",
     browseName="ns=surface_technology_mss;FlowCrossSection",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6108", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6108", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -857,7 +1066,12 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_mss;i=6109",
     browseName="ns=surface_technology_mss;Travel",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6110", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6110", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -865,7 +1079,12 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_mss;i=6116",
     browseName="ns=surface_technology_mss;MaterialPressureMax",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6117", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6117", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -873,7 +1092,12 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_mss;i=6118",
     browseName="ns=surface_technology_mss;FlowVolumeMax",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6119", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6119", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -881,14 +1105,16 @@ ns0.vartypes.AnalogUnitType(
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=surface_technology_mss;i=6120",
     browseName="ns=surface_technology_mss;TypeOfActuationEnergy",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=surface_technology_mss;i=6121",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[3],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("pneumatic"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("electric"), description=o6.LocalizedText()),
@@ -896,7 +1122,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6122", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6122", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -909,13 +1135,19 @@ ns0.objtypes.FolderType(
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6111", browseName="ns=surface_technology_mss;LifetimeCycles", dataType=o6.UInt16, accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6111",
+                browseName="ns=surface_technology_mss;LifetimeCycles",
+                modellingRule="Optional",
+                dataType=o6.UInt16,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=surface_technology_mss;i=6112",
                 browseName="ns=surface_technology_mss;MinimumPulseOpenTime",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.Duration,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -925,6 +1157,7 @@ ns0.objtypes.FolderType(
             ns0.vartypes.PropertyType(
                 nodeId="ns=surface_technology_mss;i=6113",
                 browseName="ns=surface_technology_mss;MinimumPulseCloseTime",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.Duration,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -932,12 +1165,22 @@ ns0.objtypes.FolderType(
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6114", browseName="ns=surface_technology_mss;OpeningTime", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6114",
+                browseName="ns=surface_technology_mss;OpeningTime",
+                modellingRule="Optional",
+                dataType=ns0.datatypes.Duration,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6115", browseName="ns=surface_technology_mss;ClosingTime", dataType=ns0.datatypes.Duration, accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6115",
+                browseName="ns=surface_technology_mss;ClosingTime",
+                modellingRule="Optional",
+                dataType=ns0.datatypes.Duration,
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6107"]),
@@ -952,9 +1195,12 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_mss;i=6123",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6124", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6125", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6124", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6125", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -964,10 +1210,18 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=surface_technology_mss;i=5044",
     browseName="ns=surface_technology_mss;RelativePressure",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6126", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6126",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6123"]),
@@ -977,9 +1231,12 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_mss;i=6127",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6128", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6129", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6128", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6129", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -989,10 +1246,18 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=surface_technology_mss;i=5045",
     browseName="ns=surface_technology_mss;Temperature",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6130", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6130",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6127"]),
@@ -1002,9 +1267,12 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_mss;i=6131",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6132", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6133", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6132", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6133", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1014,10 +1282,18 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=surface_technology_mss;i=5046",
     browseName="ns=surface_technology_mss;FillVolume",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6134", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6134",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6131"]),
@@ -1027,6 +1303,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_mss;i=5043",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=5044"]),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=5045"]),
@@ -1043,7 +1320,12 @@ o6.reference(surface_technology_mss_objtypes.STSysVesselType, ns0.reftypes.HasCo
 ns0.vartypes.AnalogUnitType(
     nodeId="ns=surface_technology_mss;i=6135",
     browseName="ns=surface_technology_mss;VesselVolume",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6136", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation))],
+    modellingRule="Optional",
+    references=[
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6136", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        )
+    ],
     dataType=o6.Double,
     accessLevel=3,
     userAccessLevel=1,
@@ -1059,9 +1341,12 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_mss;i=6137",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6138", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6139", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6138", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6139", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1071,10 +1356,18 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=surface_technology_mss;i=5049",
     browseName="ns=surface_technology_mss;StirrerSpeed",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6140", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6140",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6137"]),
@@ -1084,9 +1377,12 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_mss;i=6141",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6142", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6143", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6142", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6143", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1096,10 +1392,18 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=surface_technology_mss;i=5050",
     browseName="ns=surface_technology_mss;StirrerTorque",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6144", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6144",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6141"]),
@@ -1109,6 +1413,7 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_mss;i=5048",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_mss;i=5049"]), o6.hasComponent(o6.ns["ns=surface_technology_mss;i=5050"])],
 )
 machinery.objtypes.MonitoringType(
@@ -1121,21 +1426,23 @@ o6.reference(surface_technology_mss_objtypes.STCompStirrerType, ns0.reftypes.Has
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=surface_technology_mss;i=6145",
     browseName="ns=surface_technology_mss;TypeOfHeating",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=surface_technology_mss;i=6146",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[2],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("indirect fluid"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("electrical"), description=o6.LocalizedText()),
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6147", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6147", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -1145,15 +1452,19 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_mss;i=5054",
     browseName="ns=machinery;Status",
     description="Entry point for status information of the MachineryItem. If this Object is provided, and the MachineryItemState is provided, it shall be referenced. If this Object is provided and the MachineryOperationMode is provided, it shall be referenced.",
+    modellingRule="Optional",
     references=[o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6145"])],
 )
 padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_mss;i=6148",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6149", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6150", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6149", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6150", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1163,10 +1474,18 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=surface_technology_mss;i=5055",
     browseName="ns=surface_technology_mss;Temperature",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6151", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6151",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6148"]),
@@ -1176,9 +1495,12 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_mss;i=6152",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6153", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6154", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6153", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6154", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1188,10 +1510,18 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=surface_technology_mss;i=5056",
     browseName="ns=surface_technology_mss;StandbyTemperature",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6155", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6155",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6152"]),
@@ -1201,9 +1531,12 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_mss;i=6156",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6157", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6158", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6157", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6158", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1213,10 +1546,18 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=surface_technology_mss;i=5057",
     browseName="ns=surface_technology_mss;HeatingPower",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6159", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6159",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6156"]),
@@ -1226,9 +1567,12 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_mss;i=6161",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6162", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6163", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6162", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6163", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1238,10 +1582,18 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=surface_technology_mss;i=5058",
     browseName="ns=surface_technology_mss;HeatUpTime",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6164", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6164",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6161"]),
@@ -1251,9 +1603,12 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_mss;i=6165",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6166", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6167", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6166", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6167", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1263,10 +1618,18 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=surface_technology_mss;i=5059",
     browseName="ns=surface_technology_mss;HeatThroughTime",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6168", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6168",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6165"]),
@@ -1276,9 +1639,12 @@ padim.vartypes.AnalogSignalVariableType(
     nodeId="ns=surface_technology_mss;i=6169",
     browseName="ns=padim;AnalogSignal",
     description="The process value.",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6170", browseName="EngineeringUnits", dataType=ns0.datatypes.EUInformation)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6171", browseName="EURange", dataType=ns0.datatypes.Range)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6170", browseName="EngineeringUnits", modellingRule="Mandatory", dataType=ns0.datatypes.EUInformation)
+        ),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6171", browseName="EURange", modellingRule="Mandatory", dataType=ns0.datatypes.Range)),
     ],
     dataType=ns0.datatypes.Number,
     valueRank=-2,
@@ -1288,10 +1654,18 @@ padim.vartypes.AnalogSignalVariableType(
 machinery_processvalues.objtypes.ProcessValueType(
     nodeId="ns=surface_technology_mss;i=5060",
     browseName="ns=surface_technology_mss;StandbyTimeout",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=surface_technology_mss;i=6172", browseName="ns=padim;SignalTag", displayName="Tag", dataType=o6.String, value="", accessLevel=3, userAccessLevel=1
+                nodeId="ns=surface_technology_mss;i=6172",
+                browseName="ns=padim;SignalTag",
+                displayName="Tag",
+                modellingRule="Mandatory",
+                dataType=o6.String,
+                value="",
+                accessLevel=3,
+                userAccessLevel=1,
             )
         ),
         o6.hasComponent(o6.ns["ns=surface_technology_mss;i=6169"]),
@@ -1301,11 +1675,13 @@ ns0.objtypes.FolderType(
     nodeId="ns=surface_technology_mss;i=5053",
     browseName="ns=machinery;Process",
     description="Entry point for process information of the MachineryItem.",
+    modellingRule="Optional",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=surface_technology_mss;i=6160",
                 browseName="ns=surface_technology_mss;HeatingPowerRelative",
+                modellingRule="Optional",
                 dataType=ns0.datatypes.Number,
                 accessLevel=3,
                 userAccessLevel=1,
@@ -1329,14 +1705,16 @@ o6.reference(surface_technology_mss_objtypes.STCompHeaterType, ns0.reftypes.HasC
 ns0.vartypes.MultiStateValueDiscreteType(
     nodeId="ns=surface_technology_mss;i=6173",
     browseName="ns=surface_technology_mss;TypeOfDevice",
+    modellingRule="Mandatory",
     references=[
         o6.hasProperty(
             ns0.vartypes.PropertyType(
                 nodeId="ns=surface_technology_mss;i=6174",
                 browseName="EnumValues",
+                modellingRule="Mandatory",
                 dataType=ns0.datatypes.EnumValueType,
                 valueRank=1,
-                arrayDimensions=[3],
+                arrayDimensions=[0],
                 value=[
                     ns0.datatypes.EnumValueType(value=0, displayName=o6.LocalizedText("drum floor heater"), description=o6.LocalizedText()),
                     ns0.datatypes.EnumValueType(value=1, displayName=o6.LocalizedText("heating band"), description=o6.LocalizedText()),
@@ -1344,7 +1722,7 @@ ns0.vartypes.MultiStateValueDiscreteType(
                 ],
             )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6175", browseName="ValueAsText", dataType=o6.LocalizedText)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=surface_technology_mss;i=6175", browseName="ValueAsText", modellingRule="Mandatory", dataType=o6.LocalizedText)),
     ],
     dataType=o6.UInt16,
     accessLevel=3,
@@ -1379,7 +1757,7 @@ http_opcfoundation_org_UA_SurfaceTechnology_OCT_MSS_ = ns0.objtypes.NamespaceMet
                 browseName="StaticNodeIdTypes",
                 dataType=ns0.datatypes.IdType,
                 valueRank=1,
-                arrayDimensions=[1],
+                arrayDimensions=[0],
                 value=[ns0.datatypes.IdType.NUMERIC],
             )
         ),

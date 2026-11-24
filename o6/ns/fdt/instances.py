@@ -139,9 +139,13 @@ fdt_objtypes.FdtDocumentType(
     modellingRule="MandatoryPlaceholder",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6053", browseName="ns=fdt;Classification", dataType=fdt_datypes.DocumentClassification, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=fdt;i=6053", browseName="ns=fdt;Classification", modellingRule="Mandatory", dataType=fdt_datypes.DocumentClassification, accessLevel=3, userAccessLevel=1
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6054", browseName="ns=fdt;MediaType", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6054", browseName="ns=fdt;MediaType", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
     ],
     _allow_abstract=True,
 )
@@ -167,9 +171,13 @@ fdt_objtypes.FdtDocumentType(
     modellingRule="MandatoryPlaceholder",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6067", browseName="ns=fdt;Classification", dataType=fdt_datypes.DocumentClassification, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=fdt;i=6067", browseName="ns=fdt;Classification", modellingRule="Mandatory", dataType=fdt_datypes.DocumentClassification, accessLevel=3, userAccessLevel=1
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6068", browseName="ns=fdt;MediaType", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6068", browseName="ns=fdt;MediaType", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
     ],
     _allow_abstract=True,
 )
@@ -181,9 +189,13 @@ fdt_objtypes.FdtDocumentType(
     modellingRule="MandatoryPlaceholder",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6070", browseName="ns=fdt;Classification", dataType=fdt_datypes.DocumentClassification, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=fdt;i=6070", browseName="ns=fdt;Classification", modellingRule="Mandatory", dataType=fdt_datypes.DocumentClassification, accessLevel=3, userAccessLevel=1
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6071", browseName="ns=fdt;MediaType", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6071", browseName="ns=fdt;MediaType", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
     ],
     _allow_abstract=True,
 )
@@ -275,12 +287,12 @@ http_opcfoundation_org_UA_FDT_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6085", browseName="NamespaceVersion", dataType=o6.String, value="1.01.00")),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=fdt;i=6086", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=fdt;i=6086", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=fdt;i=6087", browseName="StaticNumericNodeIdRange", dataType=ns0.datatypes.NumericRange, valueRank=1, arrayDimensions=[1], value=["1:2147483647"]
+                nodeId="ns=fdt;i=6087", browseName="StaticNumericNodeIdRange", dataType=ns0.datatypes.NumericRange, valueRank=1, arrayDimensions=[0], value=["1:2147483647"]
             )
         ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6088", browseName="StaticStringNodeIdPattern", dataType=o6.String, value="\n      ")),
@@ -294,9 +306,13 @@ fdt_objtypes.FdtDocumentType(
     modellingRule="MandatoryPlaceholder",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6090", browseName="ns=fdt;Classification", dataType=fdt_datypes.DocumentClassification, accessLevel=3, userAccessLevel=1)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=fdt;i=6090", browseName="ns=fdt;Classification", modellingRule="Mandatory", dataType=fdt_datypes.DocumentClassification, accessLevel=3, userAccessLevel=1
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6091", browseName="ns=fdt;MediaType", dataType=o6.String, accessLevel=3, userAccessLevel=1)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6091", browseName="ns=fdt;MediaType", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ),
     ],
     _allow_abstract=True,
 )
@@ -307,7 +323,7 @@ o6.reference(o6.ns["ns=fdt;i=5005"], "i=39", o6.ns["ns=fdt;i=6092"])
 ns0.vartypes.DataTypeDescriptionType(nodeId="ns=fdt;i=6093", browseName="ns=fdt;SemanticInfoType", dataType=o6.String, value="//xs:element[@name='SemanticInfoType']")
 o6.reference(o6.ns["ns=fdt;i=5006"], "i=39", o6.ns["ns=fdt;i=6093"])
 ns0.vartypes.DataTypeDescriptionType(
-    nodeId="ns=fdt;i=6133", browseName="ns=fdt;FdtDeviceClassificationType", dataType=o6.String, value="FdtDeviceClassificationType", historizing=True
+    nodeId="ns=fdt;i=6133", browseName="ns=fdt;FdtDeviceClassificationType", dataType=o6.String, value="FdtDeviceClassificationType", accessLevel=1, historizing=True
 )
 o6.reference(o6.ns["ns=fdt;i=5007"], "i=39", o6.ns["ns=fdt;i=6133"])
 project_Namespace = ns0.vartypes.DataTypeDictionaryType(
@@ -316,7 +332,9 @@ project_Namespace = ns0.vartypes.DataTypeDictionaryType(
     description="Collects the data type descriptions of http://opcfoundation.org/UA/FDT/",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6007", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/FDT/", historizing=True)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=fdt;i=6007", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/FDT/", accessLevel=1, historizing=True
+            )
         ),
         o6.hasComponent(o6.ns["ns=fdt;i=6037"]),
         o6.hasComponent(o6.ns["ns=fdt;i=6092"]),
@@ -328,7 +346,12 @@ project_Namespace = ns0.vartypes.DataTypeDictionaryType(
     value=b'<opc:TypeDictionary xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://opcfoundation.org/UA/FDT/" DefaultByteOrder="LittleEndian" xmlns:opc="http://opcfoundation.org/BinarySchema/" xmlns:ua="http://opcfoundation.org/UA/" TargetNamespace="http://opcfoundation.org/UA/FDT/">\n <opc:Import Namespace="http://opcfoundation.org/UA/"/>\n <opc:StructuredType BaseType="ua:ExtensionObject" Name="DataRefType">\n  <opc:Documentation>Reference to a data item</opc:Documentation>\n  <opc:Field TypeName="opc:CharArray" Name="DataId"/>\n  <opc:Field TypeName="tns:SemanticInfoType" Name="SemanticInfo"/>\n </opc:StructuredType>\n <opc:StructuredType BaseType="ua:ExtensionObject" Name="FdtDeviceClassificationType">\n  <opc:Field TypeName="tns:ClassificationDomainId" Name="ClassificationDomain"/>\n  <opc:Field TypeName="tns:ClassificationId" Name="DeviceClassification"/>\n </opc:StructuredType>\n <opc:StructuredType BaseType="ua:ExtensionObject" Name="SemanticInfoType">\n  <opc:Field TypeName="opc:CharArray" Name="ApplicationDomain"/>\n  <opc:Field TypeName="opc:CharArray" Name="SemanticId"/>\n </opc:StructuredType>\n <opc:EnumeratedType LengthInBits="32" Name="AlarmType">\n  <opc:Documentation>Identifier for the alarm type to show the association between high- and low alarm and high-high- and low-low-alarm. (Provides mapping for Fdt.Dtm.DataAccess.AlarmType.)</opc:Documentation>\n  <opc:EnumeratedValue Name="HighHighAlarm" Value="0"/>\n  <opc:EnumeratedValue Name="HighAlarm" Value="1"/>\n  <opc:EnumeratedValue Name="LowLowAlarm" Value="2"/>\n  <opc:EnumeratedValue Name="LowAlarm" Value="3"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="ApplicationIdEnumeration">\n  <opc:Documentation>Identifies type of an application or function. (Provides mapping for Fdt.ApplicationId)</opc:Documentation>\n  <opc:EnumeratedValue Name="AdjustSetValue" Value="0"/>\n  <opc:EnumeratedValue Name="AssetManagement" Value="1"/>\n  <opc:EnumeratedValue Name="AuditTrail" Value="2"/>\n  <opc:EnumeratedValue Name="Configuration" Value="3"/>\n  <opc:EnumeratedValue Name="Diagnosis" Value="4"/>\n  <opc:EnumeratedValue Name="Force" Value="5"/>\n  <opc:EnumeratedValue Name="Observe" Value="6"/>\n  <opc:EnumeratedValue Name="OfflineCompare" Value="7"/>\n  <opc:EnumeratedValue Name="OfflineParameterize" Value="8"/>\n  <opc:EnumeratedValue Name="OnlineCompare" Value="9"/>\n  <opc:EnumeratedValue Name="OnlineParameterize" Value="10"/>\n  <opc:EnumeratedValue Name="Identify" Value="11"/>\n  <opc:EnumeratedValue Name="Calibration" Value="12"/>\n  <opc:EnumeratedValue Name="MainOperation" Value="13"/>\n  <opc:EnumeratedValue Name="NetworkManagement" Value="14"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="ClassificationDomainId">\n  <opc:EnumeratedValue Name="PowerDistribution" Value="0"/>\n  <opc:EnumeratedValue Name="MotionControl" Value="1"/>\n  <opc:EnumeratedValue Name="Measurement" Value="2"/>\n  <opc:EnumeratedValue Name="OperatorInterface" Value="3"/>\n  <opc:EnumeratedValue Name="ModulesAndControllers" Value="4"/>\n  <opc:EnumeratedValue Name="Communication" Value="5"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="ClassificationId">\n  <opc:Documentation>Classification according to device primary function. \n(Provides mapping to Fdt.Dtm.DeviceClassification.ClassificationId)</opc:Documentation>\n  <opc:EnumeratedValue Name="Flow" Value="0"/>\n  <opc:EnumeratedValue Name="Level" Value="1"/>\n  <opc:EnumeratedValue Name="Pressure" Value="2"/>\n  <opc:EnumeratedValue Name="Temperature" Value="3"/>\n  <opc:EnumeratedValue Name="Valve" Value="4"/>\n  <opc:EnumeratedValue Name="Positioner" Value="5"/>\n  <opc:EnumeratedValue Name="Actuator" Value="6"/>\n  <opc:EnumeratedValue Name="Nc_rc" Value="7"/>\n  <opc:EnumeratedValue Name="Encoder" Value="8"/>\n  <opc:EnumeratedValue Name="SpeedDrive" Value="9"/>\n  <opc:EnumeratedValue Name="Hmi" Value="10"/>\n  <opc:EnumeratedValue Name="AnalogInput" Value="11"/>\n  <opc:EnumeratedValue Name="AnalogOutput" Value="12"/>\n  <opc:EnumeratedValue Name="DigitalInput" Value="13"/>\n  <opc:EnumeratedValue Name="DigitalOutput" Value="14"/>\n  <opc:EnumeratedValue Name="ElectrochemicalAnalyser" Value="15"/>\n  <opc:EnumeratedValue Name="DtmSpecific" Value="16"/>\n  <opc:EnumeratedValue Name="Universal" Value="17"/>\n  <opc:EnumeratedValue Name="Analyser" Value="18"/>\n  <opc:EnumeratedValue Name="RemoteIO" Value="19"/>\n  <opc:EnumeratedValue Name="AnalogCombinedIO" Value="20"/>\n  <opc:EnumeratedValue Name="DigitalCombinedIO" Value="21"/>\n  <opc:EnumeratedValue Name="Recorder" Value="22"/>\n  <opc:EnumeratedValue Name="Controller" Value="23"/>\n  <opc:EnumeratedValue Name="Angle" Value="24"/>\n  <opc:EnumeratedValue Name="LimitSwitch" Value="25"/>\n  <opc:EnumeratedValue Name="Converter" Value="26"/>\n  <opc:EnumeratedValue Name="Motor" Value="27"/>\n  <opc:EnumeratedValue Name="Switchboard" Value="28"/>\n  <opc:EnumeratedValue Name="CircuitBreaker" Value="29"/>\n  <opc:EnumeratedValue Name="PowerMonitoring" Value="30"/>\n  <opc:EnumeratedValue Name="DistributionPanel" Value="31"/>\n  <opc:EnumeratedValue Name="Contactor" Value="32"/>\n  <opc:EnumeratedValue Name="ProtectionStarter" Value="33"/>\n  <opc:EnumeratedValue Name="SoftStarter" Value="34"/>\n  <opc:EnumeratedValue Name="Drive" Value="35"/>\n  <opc:EnumeratedValue Name="AxisControl" Value="36"/>\n  <opc:EnumeratedValue Name="MotorControlCenter" Value="37"/>\n  <opc:EnumeratedValue Name="ControlValve" Value="38"/>\n  <opc:EnumeratedValue Name="Electrical" Value="39"/>\n  <opc:EnumeratedValue Name="Density" Value="40"/>\n  <opc:EnumeratedValue Name="Quality" Value="41"/>\n  <opc:EnumeratedValue Name="SpeedOrRotaryFrequency" Value="42"/>\n  <opc:EnumeratedValue Name="Radiation" Value="43"/>\n  <opc:EnumeratedValue Name="WeightMass" Value="44"/>\n  <opc:EnumeratedValue Name="DistanceOrPositionPresence" Value="45"/>\n  <opc:EnumeratedValue Name="PushButton" Value="46"/>\n  <opc:EnumeratedValue Name="Joystick" Value="47"/>\n  <opc:EnumeratedValue Name="Keypad" Value="48"/>\n  <opc:EnumeratedValue Name="PilotLight" Value="49"/>\n  <opc:EnumeratedValue Name="StackLight" Value="50"/>\n  <opc:EnumeratedValue Name="Display" Value="51"/>\n  <opc:EnumeratedValue Name="CombinedButtonsAndLights" Value="52"/>\n  <opc:EnumeratedValue Name="OperatorStation" Value="53"/>\n  <opc:EnumeratedValue Name="GeneralInput" Value="54"/>\n  <opc:EnumeratedValue Name="GeneralOutput" Value="55"/>\n  <opc:EnumeratedValue Name="CombinedInputOutput" Value="56"/>\n  <opc:EnumeratedValue Name="Relay" Value="57"/>\n  <opc:EnumeratedValue Name="Timer" Value="58"/>\n  <opc:EnumeratedValue Name="Scanner" Value="59"/>\n  <opc:EnumeratedValue Name="ProgrammableController" Value="60"/>\n  <opc:EnumeratedValue Name="CommunicationAdapter" Value="61"/>\n  <opc:EnumeratedValue Name="Gateway" Value="62"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="DocumentClassification">\n  <opc:Documentation>Classification of a document. (Provides mapping for Fdt.Dtm.DocumentClassification)</opc:Documentation>\n  <opc:EnumeratedValue Name="Help" Value="0"/>\n  <opc:EnumeratedValue Name="TechnicalDocumentation" Value="1"/>\n  <opc:EnumeratedValue Name="OrderingInformation" Value="2"/>\n  <opc:EnumeratedValue Name="Miscellaneous" Value="3"/>\n  <opc:EnumeratedValue Name="TenderSpecification" Value="4"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="FunctionExecutionResultState">\n  <opc:EnumeratedValue Name="Cancel" Value="0"/>\n  <opc:EnumeratedValue Name="Success" Value="1"/>\n  <opc:EnumeratedValue Name="Fail" Value="2"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="IECDatatype">\n  <opc:EnumeratedValue Name="BOOL" Value="0"/>\n  <opc:EnumeratedValue Name="SINT" Value="1"/>\n  <opc:EnumeratedValue Name="INT" Value="2"/>\n  <opc:EnumeratedValue Name="DINT" Value="3"/>\n  <opc:EnumeratedValue Name="LINT" Value="4"/>\n  <opc:EnumeratedValue Name="USINT" Value="5"/>\n  <opc:EnumeratedValue Name="UINT" Value="6"/>\n  <opc:EnumeratedValue Name="UDINT" Value="7"/>\n  <opc:EnumeratedValue Name="ULINT" Value="8"/>\n  <opc:EnumeratedValue Name="REAL" Value="9"/>\n  <opc:EnumeratedValue Name="LREAL" Value="10"/>\n  <opc:EnumeratedValue Name="TIME" Value="11"/>\n  <opc:EnumeratedValue Name="DATE" Value="12"/>\n  <opc:EnumeratedValue Name="TimeOfDay" Value="13"/>\n  <opc:EnumeratedValue Name="DateAndTime" Value="14"/>\n  <opc:EnumeratedValue Name="STRING" Value="15"/>\n  <opc:EnumeratedValue Name="BYTE" Value="16"/>\n  <opc:EnumeratedValue Name="WORD" Value="17"/>\n  <opc:EnumeratedValue Name="DWORD" Value="18"/>\n  <opc:EnumeratedValue Name="LWORD" Value="19"/>\n  <opc:EnumeratedValue Name="WSTRING" Value="20"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="RangeType">\n  <opc:Documentation>Type of a range device data. (Provides mapping to Fdt.Dtm.DataAccess.RangeType)</opc:Documentation>\n  <opc:EnumeratedValue Name="LowerRange" Value="0"/>\n  <opc:EnumeratedValue Name="UpperRange" Value="1"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="SignalTypeEnumeration">\n  <opc:EnumeratedValue Name="Input" Value="0"/>\n  <opc:EnumeratedValue Name="Output" Value="1"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="SubstitutionType">\n  <opc:Documentation>Type of substitution data. (Provides mapping to Fdt.Dtm.DataAccess.SubstitutionType)</opc:Documentation>\n  <opc:EnumeratedValue Name="LastValue" Value="0"/>\n  <opc:EnumeratedValue Name="LastValidValue" Value="1"/>\n  <opc:EnumeratedValue Name="UpperRange" Value="2"/>\n  <opc:EnumeratedValue Name="LowerRange" Value="3"/>\n </opc:EnumeratedType>\n <opc:EnumeratedType LengthInBits="32" Name="SupportedTransfer">\n  <opc:Documentation>This enumeration provides values to describe the types of transfers provided for a device. (Provides mapping to Fdt.Dtm.SupportedTransfer)</opc:Documentation>\n  <opc:EnumeratedValue Name="None" Value="0"/>\n  <opc:EnumeratedValue Name="OnlyDownload" Value="1"/>\n  <opc:EnumeratedValue Name="OnlyUpload" Value="2"/>\n  <opc:EnumeratedValue Name="BothUploadAndDownload" Value="3"/>\n </opc:EnumeratedType>\n</opc:TypeDictionary>\n',
 )
 ns0.vartypes.DataTypeDescriptionType(
-    nodeId="ns=fdt;i=6134", browseName="ns=fdt;FdtDeviceClassificationType", dataType=o6.String, value="//xs:element[@name='FdtDeviceClassificationType']", historizing=True
+    nodeId="ns=fdt;i=6134",
+    browseName="ns=fdt;FdtDeviceClassificationType",
+    dataType=o6.String,
+    value="//xs:element[@name='FdtDeviceClassificationType']",
+    accessLevel=1,
+    historizing=True,
 )
 o6.reference(o6.ns["ns=fdt;i=5029"], "i=39", o6.ns["ns=fdt;i=6134"])
 project_Namespace_2 = ns0.vartypes.DataTypeDictionaryType(
@@ -337,7 +360,9 @@ project_Namespace_2 = ns0.vartypes.DataTypeDictionaryType(
     description="Collects the data type descriptions of http://opcfoundation.org/UA/FDT/",
     references=[
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6009", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/FDT/Types.xsd", historizing=True)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=fdt;i=6009", browseName="NamespaceUri", dataType=o6.String, value="http://opcfoundation.org/UA/FDT/Types.xsd", accessLevel=1, historizing=True
+            )
         ),
         o6.hasComponent(o6.ns["ns=fdt;i=6038"]),
         o6.hasComponent(o6.ns["ns=fdt;i=6093"]),
@@ -479,7 +504,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fdt;i=7001", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=fdt;i=6029"]))
+o6.call(nodeId="ns=fdt;i=7001", browseName="Close", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=fdt;i=6029"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fdt;i=6030",
@@ -503,7 +528,9 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fdt;i=7002", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=fdt;i=6030"]), outputArgs=o6.hasProperty(o6.ns["ns=fdt;i=6039"]))
+o6.call(
+    nodeId="ns=fdt;i=7002", browseName="GetPosition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=fdt;i=6030"]), outputArgs=o6.hasProperty(o6.ns["ns=fdt;i=6039"])
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fdt;i=6040",
@@ -527,7 +554,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fdt;i=7003", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=fdt;i=6040"]), outputArgs=o6.hasProperty(o6.ns["ns=fdt;i=6041"]))
+o6.call(nodeId="ns=fdt;i=7003", browseName="Open", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=fdt;i=6040"]), outputArgs=o6.hasProperty(o6.ns["ns=fdt;i=6041"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fdt;i=6043",
@@ -554,7 +581,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText())],
 )
-o6.call(nodeId="ns=fdt;i=7004", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=fdt;i=6043"]), outputArgs=o6.hasProperty(o6.ns["ns=fdt;i=6044"]))
+o6.call(nodeId="ns=fdt;i=7004", browseName="Read", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=fdt;i=6043"]), outputArgs=o6.hasProperty(o6.ns["ns=fdt;i=6044"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fdt;i=6046",
@@ -570,7 +597,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=fdt;i=7005", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=fdt;i=6046"]))
+o6.call(nodeId="ns=fdt;i=7005", browseName="SetPosition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=fdt;i=6046"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=fdt;i=6050",
@@ -586,19 +613,29 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[], description=o6.LocalizedText()),
     ],
 )
-o6.call(nodeId="ns=fdt;i=7006", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=fdt;i=6050"]))
+o6.call(nodeId="ns=fdt;i=7006", browseName="Write", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=fdt;i=6050"]))
 
 ns0.objtypes.FileType(
     nodeId="ns=fdt;i=5001",
     browseName="ns=fdt;File",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6042", browseName="OpenCount", description="The current number of open file handles.", dataType=o6.UInt16)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6047", browseName="Size", description="The size of the file in bytes.", dataType=o6.UInt64)),
         o6.hasProperty(
-            ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6048", browseName="UserWritable", description="Whether the file is writable by the current user.", dataType=o6.Boolean)
+            ns0.vartypes.PropertyType(
+                nodeId="ns=fdt;i=6042", browseName="OpenCount", description="The current number of open file handles.", modellingRule="Mandatory", dataType=o6.UInt16
+            )
         ),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6049", browseName="Writable", description="Whether the file is writable.", dataType=o6.Boolean)),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6047", browseName="Size", description="The size of the file in bytes.", modellingRule="Mandatory", dataType=o6.UInt64)
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(
+                nodeId="ns=fdt;i=6048", browseName="UserWritable", description="Whether the file is writable by the current user.", modellingRule="Mandatory", dataType=o6.Boolean
+            )
+        ),
+        o6.hasProperty(
+            ns0.vartypes.PropertyType(nodeId="ns=fdt;i=6049", browseName="Writable", description="Whether the file is writable.", modellingRule="Mandatory", dataType=o6.Boolean)
+        ),
         o6.hasComponent(o6.ns["ns=fdt;i=7001"]),
         o6.hasComponent(o6.ns["ns=fdt;i=7002"]),
         o6.hasComponent(o6.ns["ns=fdt;i=7003"]),

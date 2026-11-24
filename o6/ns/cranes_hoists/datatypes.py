@@ -36,7 +36,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=cranes_hoists;i=3000", browseName="CraneOperationalModeEnum")
+@o6.enumtype(nodeId="ns=cranes_hoists;i=3000", browseName="ns=cranes_hoists;CraneOperationalModeEnum")
 class CraneOperationalModeEnum(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="OTHER")
     MANUAL = o6.enumfield(1, name="MANUAL")
@@ -46,7 +46,7 @@ class CraneOperationalModeEnum(ns0.datatypes.Enumeration):
     MAINTENANCE = o6.enumfield(5, name="MAINTENANCE")
 
 
-@o6.enumtype(nodeId="ns=cranes_hoists;i=3001", browseName="ExternalControlRequestEnum")
+@o6.enumtype(nodeId="ns=cranes_hoists;i=3001", browseName="ns=cranes_hoists;ExternalControlRequestEnum")
 class ExternalControlRequestEnum(ns0.datatypes.Enumeration):
     NOT_REQUESTED = o6.enumfield(0, name="NOT_REQUESTED")
     REQUESTED_AND_CONTROL_ACTIVE = o6.enumfield(1, name="REQUESTED_AND_CONTROL_ACTIVE")
@@ -54,7 +54,7 @@ class ExternalControlRequestEnum(ns0.datatypes.Enumeration):
     REQUESTED_AND_CONTROL_BYPASSED = o6.enumfield(3, name="REQUESTED_AND_CONTROL_BYPASSED")
 
 
-@o6.enumtype(nodeId="ns=cranes_hoists;i=3002", browseName="ProtectiveFunctionEnum")
+@o6.enumtype(nodeId="ns=cranes_hoists;i=3002", browseName="ns=cranes_hoists;ProtectiveFunctionEnum")
 class ProtectiveFunctionEnum(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="OTHER")
     FORCE_LIMITER = o6.enumfield(1, name="FORCE_LIMITER")
@@ -63,7 +63,7 @@ class ProtectiveFunctionEnum(ns0.datatypes.Enumeration):
     ANTICOLLISION = o6.enumfield(4, name="ANTICOLLISION")
 
 
-@o6.enumtype(nodeId="ns=cranes_hoists;i=3003", browseName="CraneMotionDeviceCategoryEnum")
+@o6.enumtype(nodeId="ns=cranes_hoists;i=3003", browseName="ns=cranes_hoists;CraneMotionDeviceCategoryEnum")
 class CraneMotionDeviceCategoryEnum(ns0.datatypes.Enumeration):
     HOIST = o6.enumfield(0, name="HOIST")
     TROLLEY_TRAVERSE = o6.enumfield(1, name="TROLLEY_TRAVERSE")

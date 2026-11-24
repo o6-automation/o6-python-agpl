@@ -97,7 +97,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=wot;i=51", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=52"]), outputArgs=o6.hasProperty(o6.ns["ns=wot;i=53"]))
+o6.call(nodeId="ns=wot;i=51", browseName="Open", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=52"]), outputArgs=o6.hasProperty(o6.ns["ns=wot;i=53"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wot;i=55",
@@ -110,7 +110,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=wot;i=54", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=55"]))
+o6.call(nodeId="ns=wot;i=54", browseName="Close", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=55"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wot;i=57",
@@ -137,7 +137,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=wot;i=56", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=57"]), outputArgs=o6.hasProperty(o6.ns["ns=wot;i=58"]))
+o6.call(nodeId="ns=wot;i=56", browseName="Read", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=57"]), outputArgs=o6.hasProperty(o6.ns["ns=wot;i=58"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wot;i=60",
@@ -153,7 +153,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="ns=wot;i=59", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=60"]))
+o6.call(nodeId="ns=wot;i=59", browseName="Write", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=60"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wot;i=62",
@@ -177,7 +177,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=wot;i=61", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=62"]), outputArgs=o6.hasProperty(o6.ns["ns=wot;i=63"]))
+o6.call(nodeId="ns=wot;i=61", browseName="GetPosition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=62"]), outputArgs=o6.hasProperty(o6.ns["ns=wot;i=63"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wot;i=65",
@@ -193,7 +193,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="ns=wot;i=64", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=65"]))
+o6.call(nodeId="ns=wot;i=64", browseName="SetPosition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=65"]))
 
 http_opcfoundation_org_UA_WoT_Con_ = ns0.objtypes.NamespaceMetadataType(
     nodeId="ns=wot;i=67",
@@ -206,12 +206,12 @@ http_opcfoundation_org_UA_WoT_Con_ = ns0.objtypes.NamespaceMetadataType(
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=71", browseName="IsNamespaceSubset", dataType=o6.Boolean, value=False)),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=wot;i=72", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[1], value=[ns0.datatypes.IdType.NUMERIC]
+                nodeId="ns=wot;i=72", browseName="StaticNodeIdTypes", dataType=ns0.datatypes.IdType, valueRank=1, arrayDimensions=[0], value=[ns0.datatypes.IdType.NUMERIC]
             )
         ),
         o6.hasProperty(
             ns0.vartypes.PropertyType(
-                nodeId="ns=wot;i=73", browseName="StaticNumericNodeIdRange", dataType=ns0.datatypes.NumericRange, valueRank=1, arrayDimensions=[1], value=["1:2147483647"]
+                nodeId="ns=wot;i=73", browseName="StaticNumericNodeIdRange", dataType=ns0.datatypes.NumericRange, valueRank=1, arrayDimensions=[0], value=["1:2147483647"]
             )
         ),
         o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=74", browseName="StaticStringNodeIdPattern", dataType=o6.String, value="")),
@@ -239,17 +239,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=wot;i=106", browseName="ns=wot;CloseAndUpdate", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=107"]))
+o6.call(nodeId="ns=wot;i=106", browseName="ns=wot;CloseAndUpdate", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=107"]))
 
 wot_objtypes.WoTAssetFileType(
     nodeId="ns=wot;i=43",
     browseName="ns=wot;WoTFile",
     modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=44", browseName="Size", dataType=o6.UInt64)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=45", browseName="Writable", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=46", browseName="UserWritable", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=47", browseName="OpenCount", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=44", browseName="Size", modellingRule="Mandatory", dataType=o6.UInt64)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=45", browseName="Writable", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=46", browseName="UserWritable", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=47", browseName="OpenCount", modellingRule="Mandatory", dataType=o6.UInt16)),
         o6.hasComponent(o6.ns["ns=wot;i=51"]),
         o6.hasComponent(o6.ns["ns=wot;i=54"]),
         o6.hasComponent(o6.ns["ns=wot;i=56"]),
@@ -284,7 +284,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=wot;i=152", browseName="Open", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=153"]), outputArgs=o6.hasProperty(o6.ns["ns=wot;i=154"]))
+o6.call(nodeId="ns=wot;i=152", browseName="Open", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=153"]), outputArgs=o6.hasProperty(o6.ns["ns=wot;i=154"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wot;i=156",
@@ -297,7 +297,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=wot;i=155", browseName="Close", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=156"]))
+o6.call(nodeId="ns=wot;i=155", browseName="Close", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=156"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wot;i=158",
@@ -324,7 +324,7 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=wot;i=157", browseName="Read", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=158"]), outputArgs=o6.hasProperty(o6.ns["ns=wot;i=159"]))
+o6.call(nodeId="ns=wot;i=157", browseName="Read", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=158"]), outputArgs=o6.hasProperty(o6.ns["ns=wot;i=159"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wot;i=161",
@@ -340,7 +340,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Data", dataType=o6.NodeId("i=15"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="ns=wot;i=160", browseName="Write", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=161"]))
+o6.call(nodeId="ns=wot;i=160", browseName="Write", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=161"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wot;i=163",
@@ -364,7 +364,9 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=wot;i=162", browseName="GetPosition", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=163"]), outputArgs=o6.hasProperty(o6.ns["ns=wot;i=164"]))
+o6.call(
+    nodeId="ns=wot;i=162", browseName="GetPosition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=163"]), outputArgs=o6.hasProperty(o6.ns["ns=wot;i=164"])
+)
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wot;i=166",
@@ -380,7 +382,7 @@ ns0.vartypes.PropertyType(
         ns0.datatypes.Argument(name="Position", dataType=o6.NodeId("i=9"), valueRank=-1, arrayDimensions=[]),
     ],
 )
-o6.call(nodeId="ns=wot;i=165", browseName="SetPosition", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=166"]))
+o6.call(nodeId="ns=wot;i=165", browseName="SetPosition", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=166"]))
 
 ns0.vartypes.PropertyType(
     nodeId="ns=wot;i=168",
@@ -393,16 +395,17 @@ ns0.vartypes.PropertyType(
     arrayDimensions=[1],
     value=[ns0.datatypes.Argument(name="FileHandle", dataType=o6.NodeId("i=7"), valueRank=-1, arrayDimensions=[])],
 )
-o6.call(nodeId="ns=wot;i=167", browseName="ns=wot;CloseAndUpdate", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=168"]))
+o6.call(nodeId="ns=wot;i=167", browseName="ns=wot;CloseAndUpdate", modellingRule="Mandatory", inputArgs=o6.hasProperty(o6.ns["ns=wot;i=168"]))
 
 wot_objtypes.WoTAssetFileType(
     nodeId="ns=wot;i=144",
     browseName="ns=wot;WoTFile",
+    modellingRule="Mandatory",
     references=[
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=145", browseName="Size", dataType=o6.UInt64)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=146", browseName="Writable", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=147", browseName="UserWritable", dataType=o6.Boolean)),
-        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=148", browseName="OpenCount", dataType=o6.UInt16)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=145", browseName="Size", modellingRule="Mandatory", dataType=o6.UInt64)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=146", browseName="Writable", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=147", browseName="UserWritable", modellingRule="Mandatory", dataType=o6.Boolean)),
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=148", browseName="OpenCount", modellingRule="Mandatory", dataType=o6.UInt16)),
         o6.hasComponent(o6.ns["ns=wot;i=152"]),
         o6.hasComponent(o6.ns["ns=wot;i=155"]),
         o6.hasComponent(o6.ns["ns=wot;i=157"]),
@@ -416,7 +419,10 @@ ns0.objtypes.BaseObjectType(
     nodeId="ns=wot;i=2",
     browseName="ns=wot;<WoTAssetName>",
     modellingRule="OptionalPlaceholder",
-    references=[o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=169", browseName="ns=wot;AssetEndpoint", dataType=o6.String)), o6.hasComponent(o6.ns["ns=wot;i=144"])],
+    references=[
+        o6.hasProperty(ns0.vartypes.PropertyType(nodeId="ns=wot;i=169", browseName="ns=wot;AssetEndpoint", modellingRule="Optional", dataType=o6.String)),
+        o6.hasComponent(o6.ns["ns=wot;i=144"]),
+    ],
 )
 o6.reference(wot_objtypes.WoTAssetConnectionManagementType, ns0.reftypes.Organizes, o6.ns["ns=wot;i=2"])
 o6.reference(o6.ns["ns=wot;i=2"], "i=17603", wot_objtypes.IWoTAssetType)

@@ -39,21 +39,29 @@ else:
 
 @o6.objecttype(nodeId="ns=weihenstephan;i=1006", browseName="ns=weihenstephan;WSHeldStateMachineType", displayName="WSHeldStateMachineType")
 class WSHeldStateMachineType(ns0.objtypes.FiniteStateMachineType):
-    equipmentFailure: ns0.objtypes.StateType = o6.hasComponent(ns0.objtypes.StateType(nodeId="ns=weihenstephan;i=5012", browseName="ns=weihenstephan;EquipmentFailure"))
-    externalFailure: ns0.objtypes.StateType = o6.hasComponent(ns0.objtypes.StateType(nodeId="ns=weihenstephan;i=5014", browseName="ns=weihenstephan;ExternalFailure"))
+    equipmentFailure: ns0.objtypes.StateType = o6.hasComponent(
+        ns0.objtypes.StateType(nodeId="ns=weihenstephan;i=5012", browseName="ns=weihenstephan;EquipmentFailure", modellingRule="Mandatory")
+    )
+    externalFailure: ns0.objtypes.StateType = o6.hasComponent(
+        ns0.objtypes.StateType(nodeId="ns=weihenstephan;i=5014", browseName="ns=weihenstephan;ExternalFailure", modellingRule="Mandatory")
+    )
 
 
 @o6.objecttype(nodeId="ns=weihenstephan;i=1007", browseName="ns=weihenstephan;WSSuspendedStateMachineType", displayName="WSSuspendedStateMachineType")
 class WSSuspendedStateMachineType(ns0.objtypes.FiniteStateMachineType):
-    lack: ns0.objtypes.StateType = o6.hasComponent(ns0.objtypes.StateType(nodeId="ns=weihenstephan;i=5016", browseName="ns=weihenstephan;Lack"))
-    lackBranchLine: ns0.objtypes.StateType = o6.hasComponent(ns0.objtypes.StateType(nodeId="ns=weihenstephan;i=5018", browseName="ns=weihenstephan;LackBranchLine"))
-    prepared: ns0.objtypes.StateType = o6.hasComponent(ns0.objtypes.StateType(nodeId="ns=weihenstephan;i=5020", browseName="ns=weihenstephan;Prepared"))
-    tailback: ns0.objtypes.StateType = o6.hasComponent(ns0.objtypes.StateType(nodeId="ns=weihenstephan;i=5022", browseName="ns=weihenstephan;Tailback"))
-    tailbackBranchLine: ns0.objtypes.StateType = o6.hasComponent(ns0.objtypes.StateType(nodeId="ns=weihenstephan;i=5024", browseName="ns=weihenstephan;TailbackBranchLine"))
+    lack: ns0.objtypes.StateType = o6.hasComponent(ns0.objtypes.StateType(nodeId="ns=weihenstephan;i=5016", browseName="ns=weihenstephan;Lack", modellingRule="Mandatory"))
+    lackBranchLine: ns0.objtypes.StateType = o6.hasComponent(
+        ns0.objtypes.StateType(nodeId="ns=weihenstephan;i=5018", browseName="ns=weihenstephan;LackBranchLine", modellingRule="Mandatory")
+    )
+    prepared: ns0.objtypes.StateType = o6.hasComponent(ns0.objtypes.StateType(nodeId="ns=weihenstephan;i=5020", browseName="ns=weihenstephan;Prepared", modellingRule="Mandatory"))
+    tailback: ns0.objtypes.StateType = o6.hasComponent(ns0.objtypes.StateType(nodeId="ns=weihenstephan;i=5022", browseName="ns=weihenstephan;Tailback", modellingRule="Mandatory"))
+    tailbackBranchLine: ns0.objtypes.StateType = o6.hasComponent(
+        ns0.objtypes.StateType(nodeId="ns=weihenstephan;i=5024", browseName="ns=weihenstephan;TailbackBranchLine", modellingRule="Mandatory")
+    )
 
 
-WSHeldStateMachineType(nodeId="ns=weihenstephan;i=5026", browseName="ns=weihenstephan;HeldState")
-WSSuspendedStateMachineType(nodeId="ns=weihenstephan;i=5027", browseName="ns=weihenstephan;SuspendedState")
+WSHeldStateMachineType(nodeId="ns=weihenstephan;i=5026", browseName="ns=weihenstephan;HeldState", modellingRule="Mandatory")
+WSSuspendedStateMachineType(nodeId="ns=weihenstephan;i=5027", browseName="ns=weihenstephan;SuspendedState", modellingRule="Mandatory")
 ns0.objtypes.StateType(nodeId="ns=weihenstephan;i=5028", browseName="ns=pack_ml;Held")
 o6.reference(o6.ns["ns=weihenstephan;i=5028"], "i=117", o6.ns["ns=weihenstephan;i=5026"])
 ns0.objtypes.StateType(nodeId="ns=weihenstephan;i=5029", browseName="ns=pack_ml;Suspended")
@@ -75,74 +83,88 @@ class WSExecuteStateMachineType(pack_ml.objtypes.PackMLExecuteStateMachineType):
     description="Definition of a machine according to the Weihenstephan standards",
 )
 class WSMachineType(ns0.objtypes.BaseObjectType):
-    alarms: di.objtypes.FunctionalGroupType | None = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=weihenstephan;i=5008", browseName="ns=weihenstephan;Alarms"))
+    alarms: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
+        di.objtypes.FunctionalGroupType(nodeId="ns=weihenstephan;i=5008", browseName="ns=weihenstephan;Alarms", modellingRule="Optional")
+    )
     batchAndArticleTracing: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
-        di.objtypes.FunctionalGroupType(nodeId="ns=weihenstephan;i=5004", browseName="ns=weihenstephan;BatchAndArticleTracing")
+        di.objtypes.FunctionalGroupType(nodeId="ns=weihenstephan;i=5004", browseName="ns=weihenstephan;BatchAndArticleTracing", modellingRule="Optional")
     )
     computedValues: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
-        di.objtypes.FunctionalGroupType(nodeId="ns=weihenstephan;i=5002", browseName="ns=weihenstephan;ComputedValues")
+        di.objtypes.FunctionalGroupType(nodeId="ns=weihenstephan;i=5002", browseName="ns=weihenstephan;ComputedValues", modellingRule="Optional")
     )
-    counters: di.objtypes.FunctionalGroupType | None = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=weihenstephan;i=5003", browseName="ns=weihenstephan;Counters"))
+    counters: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
+        di.objtypes.FunctionalGroupType(nodeId="ns=weihenstephan;i=5003", browseName="ns=weihenstephan;Counters", modellingRule="Optional")
+    )
     identification: machinery.objtypes.MachineIdentificationType
     measuredValues: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
-        di.objtypes.FunctionalGroupType(nodeId="ns=weihenstephan;i=5009", browseName="ns=weihenstephan;MeasuredValues")
+        di.objtypes.FunctionalGroupType(nodeId="ns=weihenstephan;i=5009", browseName="ns=weihenstephan;MeasuredValues", modellingRule="Optional")
     )
     operatingModes: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
-        di.objtypes.FunctionalGroupType(nodeId="ns=weihenstephan;i=5005", browseName="ns=weihenstephan;OperatingModes")
+        di.objtypes.FunctionalGroupType(nodeId="ns=weihenstephan;i=5005", browseName="ns=weihenstephan;OperatingModes", modellingRule="Optional")
     )
     operatingStates: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
-        di.objtypes.FunctionalGroupType(nodeId="ns=weihenstephan;i=5006", browseName="ns=weihenstephan;OperatingStates")
+        di.objtypes.FunctionalGroupType(nodeId="ns=weihenstephan;i=5006", browseName="ns=weihenstephan;OperatingStates", modellingRule="Optional")
     )
     parameters: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
-        di.objtypes.FunctionalGroupType(nodeId="ns=weihenstephan;i=5010", browseName="ns=weihenstephan;Parameters")
+        di.objtypes.FunctionalGroupType(nodeId="ns=weihenstephan;i=5010", browseName="ns=weihenstephan;Parameters", modellingRule="Optional")
     )
-    programs: di.objtypes.FunctionalGroupType | None = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=weihenstephan;i=5007", browseName="ns=weihenstephan;Programs"))
+    programs: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
+        di.objtypes.FunctionalGroupType(nodeId="ns=weihenstephan;i=5007", browseName="ns=weihenstephan;Programs", modellingRule="Optional")
+    )
     wSMachineProfile: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6008", browseName="ns=weihenstephan;WSMachineProfile", dataType=o6.String, accessLevel=3)
+        ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6008", browseName="ns=weihenstephan;WSMachineProfile", modellingRule="Mandatory", dataType=o6.String, accessLevel=3)
     )
     wSVersion: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6009", browseName="ns=weihenstephan;WSVersion", dataType=o6.String, accessLevel=3)
+        ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6009", browseName="ns=weihenstephan;WSVersion", modellingRule="Mandatory", dataType=o6.String, accessLevel=3)
     )
     wSVersionProject: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6011", browseName="ns=weihenstephan;WSVersionProject", dataType=o6.String, accessLevel=3)
+        ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6011", browseName="ns=weihenstephan;WSVersionProject", modellingRule="Optional", dataType=o6.String, accessLevel=3)
     )
     wSVersionVendor: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6010", browseName="ns=weihenstephan;WSVersionVendor", dataType=o6.String, accessLevel=3)
+        ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6010", browseName="ns=weihenstephan;WSVersionVendor", modellingRule="Optional", dataType=o6.String, accessLevel=3)
     )
-    warnings: di.objtypes.FunctionalGroupType | None = o6.hasComponent(di.objtypes.FunctionalGroupType(nodeId="ns=weihenstephan;i=5011", browseName="ns=weihenstephan;Warnings"))
+    warnings: di.objtypes.FunctionalGroupType | None = o6.hasComponent(
+        di.objtypes.FunctionalGroupType(nodeId="ns=weihenstephan;i=5011", browseName="ns=weihenstephan;Warnings", modellingRule="Optional")
+    )
 
 
 @o6.objecttype(nodeId="ns=weihenstephan;i=1001", browseName="ns=weihenstephan;WSBaseObjectType", displayName="WSBaseObjectType")
 class WSBaseObjectType(ns0.objtypes.BaseObjectType):
     wSTagNumber: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6015", browseName="ns=weihenstephan;WSTagNumber", dataType=o6.UInt16, accessLevel=3)
+        ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6015", browseName="ns=weihenstephan;WSTagNumber", modellingRule="Optional", dataType=o6.UInt16, accessLevel=3)
     )
 
 
 @o6.objecttype(nodeId="ns=weihenstephan;i=1002", browseName="ns=weihenstephan;WSAlarmType", displayName="WSAlarmType")
 class WSAlarmType(WSBaseObjectType):
     wSAlarmCode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=weihenstephan;i=6016", browseName="ns=weihenstephan;WSAlarmCode", dataType=o6.UInt32, accessLevel=3)
+        ns0.vartypes.BaseDataVariableType(nodeId="ns=weihenstephan;i=6016", browseName="ns=weihenstephan;WSAlarmCode", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3)
     )
     wSAlarmMessage: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=weihenstephan;i=6017", browseName="ns=weihenstephan;WSAlarmMessage", dataType=o6.LocalizedText, accessLevel=3)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=weihenstephan;i=6017", browseName="ns=weihenstephan;WSAlarmMessage", modellingRule="Optional", dataType=o6.LocalizedText, accessLevel=3
+        )
     )
 
 
 @o6.objecttype(nodeId="ns=weihenstephan;i=1003", browseName="ns=weihenstephan;WSWarningType", displayName="WSWarningType")
 class WSWarningType(WSBaseObjectType):
     wSWarningCode: ns0.vartypes.BaseDataVariableType = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=weihenstephan;i=6018", browseName="ns=weihenstephan;WSWarningCode", dataType=o6.UInt32, accessLevel=3)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=weihenstephan;i=6018", browseName="ns=weihenstephan;WSWarningCode", modellingRule="Mandatory", dataType=o6.UInt32, accessLevel=3
+        )
     )
     wSWarningMessage: ns0.vartypes.BaseDataVariableType | None = o6.hasComponent(
-        ns0.vartypes.BaseDataVariableType(nodeId="ns=weihenstephan;i=6019", browseName="ns=weihenstephan;WSWarningMessage", dataType=o6.LocalizedText, accessLevel=3)
+        ns0.vartypes.BaseDataVariableType(
+            nodeId="ns=weihenstephan;i=6019", browseName="ns=weihenstephan;WSWarningMessage", modellingRule="Optional", dataType=o6.LocalizedText, accessLevel=3
+        )
     )
 
 
 @o6.objecttype(nodeId="ns=weihenstephan;i=1004", browseName="ns=weihenstephan;WSBaseStateMachineType", displayName="WSBaseStateMachineType")
 class WSBaseStateMachineType(pack_ml.objtypes.PackMLBaseStateMachineType):
     wSTagNumber: ns0.vartypes.PropertyType | None = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6020", browseName="ns=weihenstephan;WSTagNumber", dataType=o6.UInt16, accessLevel=3)
+        ns0.vartypes.PropertyType(nodeId="ns=weihenstephan;i=6020", browseName="ns=weihenstephan;WSTagNumber", modellingRule="Optional", dataType=o6.UInt16, accessLevel=3)
     )
 
 

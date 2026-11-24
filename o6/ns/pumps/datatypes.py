@@ -34,7 +34,7 @@ else:
     _VariableNode = object
 
 
-@o6.enumtype(nodeId="ns=pumps;i=3003", browseName="StateOfTheItemEnum", description="describes the state of the pump")
+@o6.enumtype(nodeId="ns=pumps;i=3003", browseName="ns=pumps;StateOfTheItemEnum", description="describes the state of the pump")
 class StateOfTheItemEnum(ns0.datatypes.Enumeration):
     IDLE_STATE = o6.enumfield(0, name="IdleState")
     STAND_BY_STATE = o6.enumfield(1, name="StandByState")
@@ -43,7 +43,7 @@ class StateOfTheItemEnum(ns0.datatypes.Enumeration):
     DOWN_STATE = o6.enumfield(4, name="DownState")
 
 
-@o6.enumtype(nodeId="ns=pumps;i=3004", browseName="MaintenanceLevelEnum", description="defines maintenance levels for the pump")
+@o6.enumtype(nodeId="ns=pumps;i=3004", browseName="ns=pumps;MaintenanceLevelEnum", description="defines maintenance levels for the pump")
 class MaintenanceLevelEnum(ns0.datatypes.Enumeration):
     LEVEL1 = o6.enumfield(0, name="Level1")
     LEVEL2 = o6.enumfield(1, name="Level2")
@@ -52,7 +52,7 @@ class MaintenanceLevelEnum(ns0.datatypes.Enumeration):
     LEVEL5 = o6.enumfield(4, name="Level5")
 
 
-@o6.enumtype(nodeId="ns=pumps;i=3005", browseName="FieldbusEnum", description="defines possible field buses")
+@o6.enumtype(nodeId="ns=pumps;i=3005", browseName="ns=pumps;FieldbusEnum", description="defines possible field buses")
 class FieldbusEnum(ns0.datatypes.Enumeration):
     OTHER = o6.enumfield(0, name="Other")
     ARCNET = o6.enumfield(1, name="ARCNET")
@@ -106,14 +106,14 @@ class FieldbusEnum(ns0.datatypes.Enumeration):
     Z_WAVE = o6.enumfield(49, name="Z-Wave")
 
 
-@o6.enumtype(nodeId="ns=pumps;i=3006", browseName="OperatingModeEnum", description="specifies whether the pump is to be operated in single, parallel or series connection")
+@o6.enumtype(nodeId="ns=pumps;i=3006", browseName="ns=pumps;OperatingModeEnum", description="specifies whether the pump is to be operated in single, parallel or series connection")
 class OperatingModeEnum(ns0.datatypes.Enumeration):
     SINGLE_OPERATION = o6.enumfield(0, name="SingleOperation")
     SERIES_OPERATION = o6.enumfield(1, name="SeriesOperation")
     PARALLEL_OPERATION = o6.enumfield(2, name="ParallelOperation")
 
 
-@o6.enumtype(nodeId="ns=pumps;i=3007", browseName="OperationModeEnum", description="describes the possible operation modes of the pump")
+@o6.enumtype(nodeId="ns=pumps;i=3007", browseName="ns=pumps;OperationModeEnum", description="describes the possible operation modes of the pump")
 class OperationModeEnum(ns0.datatypes.Enumeration):
     AUTO_CONTROL = o6.enumfield(0, name="AutoControl")
     CLOSED_LOOP_STANDARD_PID = o6.enumfield(1, name="ClosedLoopStandardPID")
@@ -128,7 +128,7 @@ class OperationModeEnum(ns0.datatypes.Enumeration):
     CALIBRATION = o6.enumfield(10, name="Calibration")
 
 
-@o6.enumtype(nodeId="ns=pumps;i=3008", browseName="ControlModeEnum", description="describes the possible control modes of the pump")
+@o6.enumtype(nodeId="ns=pumps;i=3008", browseName="ns=pumps;ControlModeEnum", description="describes the possible control modes of the pump")
 class ControlModeEnum(ns0.datatypes.Enumeration):
     CONSTANT_PRESSURE_CONTROL = o6.enumfield(0, name="ConstantPressureControl")
     CONSTANT_TEMPERATURE_CONTROL = o6.enumfield(1, name="ConstantTemperatureControl")
@@ -144,21 +144,21 @@ class ControlModeEnum(ns0.datatypes.Enumeration):
     UNCONTROLLED = o6.enumfield(11, name="Uncontrolled")
 
 
-@o6.enumtype(nodeId="ns=pumps;i=3009", browseName="PumpKickModeEnum", description="describes the pump kick mode of the pump")
+@o6.enumtype(nodeId="ns=pumps;i=3009", browseName="ns=pumps;PumpKickModeEnum", description="describes the pump kick mode of the pump")
 class PumpKickModeEnum(ns0.datatypes.Enumeration):
     MANUFACTURER_SPECIFIC = o6.enumfield(0, name="ManufacturerSpecific")
     DISABLED = o6.enumfield(1, name="Disabled")
     OPERATOR_SPECIFIC = o6.enumfield(2, name="OperatorSpecific")
 
 
-@o6.enumtype(nodeId="ns=pumps;i=3010", browseName="PumpRoleEnum", description="identifies the role rsp. task of the pump within the multi pump management")
+@o6.enumtype(nodeId="ns=pumps;i=3010", browseName="ns=pumps;PumpRoleEnum", description="identifies the role rsp. task of the pump within the multi pump management")
 class PumpRoleEnum(ns0.datatypes.Enumeration):
     SLAVE = o6.enumfield(0, name="Slave")
     MASTER = o6.enumfield(1, name="Master")
     SLAVE_AND_AUXILIARY_MASTER = o6.enumfield(2, name="SlaveAndAuxiliaryMaster")
 
 
-@o6.enumtype(nodeId="ns=pumps;i=3011", browseName="MultiPumpOperationModeEnum", description="specifies the actual multi pump operation mode")
+@o6.enumtype(nodeId="ns=pumps;i=3011", browseName="ns=pumps;MultiPumpOperationModeEnum", description="specifies the actual multi pump operation mode")
 class MultiPumpOperationModeEnum(ns0.datatypes.Enumeration):
     STANDALONE = o6.enumfield(0, name="Standalone")
     REDUNDANCY_OPERATION = o6.enumfield(1, name="RedundancyOperation")
@@ -166,7 +166,7 @@ class MultiPumpOperationModeEnum(ns0.datatypes.Enumeration):
     MIXED_REDUNDANCY = o6.enumfield(3, name="MixedRedundancy")
 
 
-@o6.enumtype(nodeId="ns=pumps;i=3012", browseName="ExchangeModeEnum", description="specifies the exchange mode of the pump")
+@o6.enumtype(nodeId="ns=pumps;i=3012", browseName="ns=pumps;ExchangeModeEnum", description="specifies the exchange mode of the pump")
 class ExchangeModeEnum(ns0.datatypes.Enumeration):
     MANUFACTURER_SPECIFIC = o6.enumfield(0, name="ManufacturerSpecific")
     EXCHANGE_DISABLED = o6.enumfield(1, name="ExchangeDisabled")
@@ -175,7 +175,7 @@ class ExchangeModeEnum(ns0.datatypes.Enumeration):
 
 @o6.enumtype(
     nodeId="ns=pumps;i=3013",
-    browseName="DistributionTypeEnum",
+    browseName="ns=pumps;DistributionTypeEnum",
     description="describes the share of operation time of different pumps of the pump system in addition operation mode",
 )
 class DistributionTypeEnum(ns0.datatypes.Enumeration):
@@ -185,7 +185,7 @@ class DistributionTypeEnum(ns0.datatypes.Enumeration):
     CONCERNING_LOAD_DISTRIBUTION = o6.enumfield(3, name="ConcerningLoadDistribution")
 
 
-@o6.enumtype(nodeId="ns=pumps;i=3014", browseName="PortDirectionEnum", description="determines whether the port is an inlet and outlet or both")
+@o6.enumtype(nodeId="ns=pumps;i=3014", browseName="ns=pumps;PortDirectionEnum", description="determines whether the port is an inlet and outlet or both")
 class PortDirectionEnum(ns0.datatypes.Enumeration):
     IN = o6.enumfield(0, name="In")
     OUT = o6.enumfield(1, name="Out")
@@ -193,11 +193,14 @@ class PortDirectionEnum(ns0.datatypes.Enumeration):
 
 
 @o6.datatype(
-    nodeId="ns=pumps;i=3015", browseName="ExplosionZoneOptionSet", description="defines flags for the category of explosion zones for devices", defaultEncodingId="ns=pumps;i=5001"
+    nodeId="ns=pumps;i=3015",
+    browseName="ns=pumps;ExplosionZoneOptionSet",
+    description="defines flags for the category of explosion zones for devices",
+    defaultEncodingId="ns=pumps;i=5001",
 )
 class ExplosionZoneOptionSet(ns0.datatypes.OptionSet):
-    value: o6.ByteString
-    validBits: o6.ByteString
+    value: o6.ByteString = o6.field(name="Value")
+    validBits: o6.ByteString = o6.field(name="ValidBits")
     zone_0 = o6.optionsetbit(0, name="Zone 0")
     zone_1 = o6.optionsetbit(1, name="Zone 1")
     zone_2 = o6.optionsetbit(2, name="Zone 2")
@@ -208,13 +211,13 @@ class ExplosionZoneOptionSet(ns0.datatypes.OptionSet):
 
 @o6.datatype(
     nodeId="ns=pumps;i=3016",
-    browseName="ExplosionProtectionOptionSet",
+    browseName="ns=pumps;ExplosionProtectionOptionSet",
     description="defines flags for the category of explosion protection for devices according to EU Directive 2014/34/EU (ATEX)",
     defaultEncodingId="ns=pumps;i=5004",
 )
 class ExplosionProtectionOptionSet(ns0.datatypes.OptionSet):
-    value: o6.ByteString
-    validBits: o6.ByteString
+    value: o6.ByteString = o6.field(name="Value")
+    validBits: o6.ByteString = o6.field(name="ValidBits")
     m1 = o6.optionsetbit(0, name="M1")
     m2 = o6.optionsetbit(1, name="M2")
     oneG = o6.optionsetbit(2, name="1G")
@@ -227,13 +230,13 @@ class ExplosionProtectionOptionSet(ns0.datatypes.OptionSet):
 
 @o6.datatype(
     nodeId="ns=pumps;i=3017",
-    browseName="OfferedControlModesOptionSet",
+    browseName="ns=pumps;OfferedControlModesOptionSet",
     description="defines flags for offerd control modes supported by the manufacturer for the product",
     defaultEncodingId="ns=pumps;i=5007",
 )
 class OfferedControlModesOptionSet(ns0.datatypes.OptionSet):
-    value: o6.ByteString
-    validBits: o6.ByteString
+    value: o6.ByteString = o6.field(name="Value")
+    validBits: o6.ByteString = o6.field(name="ValidBits")
     constant_pressure_control = o6.optionsetbit(0, name="Constant pressure control")
     constant_temperature_control = o6.optionsetbit(1, name="Constant temperature control")
     differential_pressure_control = o6.optionsetbit(2, name="Differential pressure control")
@@ -250,13 +253,13 @@ class OfferedControlModesOptionSet(ns0.datatypes.OptionSet):
 
 @o6.datatype(
     nodeId="ns=pumps;i=3018",
-    browseName="OfferedFieldbusesOptionSet",
+    browseName="ns=pumps;OfferedFieldbusesOptionSet",
     description="defines flags for fieldbuses supported by the manufacturer for the product",
     defaultEncodingId="ns=pumps;i=5010",
 )
 class OfferedFieldbusesOptionSet(ns0.datatypes.OptionSet):
-    value: o6.ByteString
-    validBits: o6.ByteString
+    value: o6.ByteString = o6.field(name="Value")
+    validBits: o6.ByteString = o6.field(name="ValidBits")
     other = o6.optionsetbit(0, name="Other")
     aRCNET = o6.optionsetbit(1, name="ARCNET")
     aS_Interface = o6.optionsetbit(2, name="AS_Interface")
@@ -311,13 +314,13 @@ class OfferedFieldbusesOptionSet(ns0.datatypes.OptionSet):
 
 @o6.datatype(
     nodeId="ns=pumps;i=3019",
-    browseName="DeclarationOfConformityOptionSet",
+    browseName="ns=pumps;DeclarationOfConformityOptionSet",
     description="defines flags for directives on the basis of which conformity was determined",
     defaultEncodingId="ns=pumps;i=5013",
 )
 class DeclarationOfConformityOptionSet(ns0.datatypes.OptionSet):
-    value: o6.ByteString
-    validBits: o6.ByteString
+    value: o6.ByteString = o6.field(name="Value")
+    validBits: o6.ByteString = o6.field(name="ValidBits")
     two006_42_EC = o6.optionsetbit(0, name="2006_42_EC")
     two009_125_EC = o6.optionsetbit(1, name="2009_125_EC")
     two011_65_EU = o6.optionsetbit(2, name="2011_65_EU")
@@ -328,17 +331,17 @@ class DeclarationOfConformityOptionSet(ns0.datatypes.OptionSet):
     two014_29_EU = o6.optionsetbit(7, name="2014_29_EU")
 
 
-@o6.datatype(nodeId="ns=pumps;i=3020", browseName="PhysicalAddressDataType", description="Physical address of the manufacturer.", defaultEncodingId="ns=pumps;i=5016")
+@o6.datatype(nodeId="ns=pumps;i=3020", browseName="ns=pumps;PhysicalAddressDataType", description="Physical address of the manufacturer.", defaultEncodingId="ns=pumps;i=5016")
 class PhysicalAddressDataType(ns0.datatypes.Structure):
-    street: o6.LocalizedText | None
-    number: o6.LocalizedText | None
-    city: o6.LocalizedText | None
-    postalCode: o6.LocalizedText | None
-    state: o6.LocalizedText | None
-    country: o6.LocalizedText | None
+    street: o6.LocalizedText | None = o6.field(name="Street")
+    number: o6.LocalizedText | None = o6.field(name="Number")
+    city: o6.LocalizedText | None = o6.field(name="City")
+    postalCode: o6.LocalizedText | None = o6.field(name="PostalCode")
+    state: o6.LocalizedText | None = o6.field(name="State")
+    country: o6.LocalizedText | None = o6.field(name="Country")
 
 
-@o6.enumtype(nodeId="ns=pumps;i=3021", browseName="PumpClassEnum", description="defines possible pump types")
+@o6.enumtype(nodeId="ns=pumps;i=3021", browseName="ns=pumps;PumpClassEnum", description="defines possible pump types")
 class PumpClassEnum(ns0.datatypes.Enumeration):
     ROTODYNAMIC_PUMP = o6.enumfield(0, name="RotodynamicPump")
     POSITIVE_DISPLACEMENT_PUMP = o6.enumfield(1, name="PositiveDisplacementPump")

@@ -51,14 +51,15 @@ class ValueListType(ns0.objtypes.BaseObjectType):
 
 AASConceptDictionaryType(nodeId="ns=i4aas;i=5005", browseName="ns=i4aas;<ConceptDictionary>", modellingRule="OptionalPlaceholder")
 AASViewType(nodeId="ns=i4aas;i=5006", browseName="ns=i4aas;<View>", modellingRule="OptionalPlaceholder")
-ValueListType(nodeId="ns=i4aas;i=5029", browseName="ns=i4aas;ValueList")
+ValueListType(nodeId="ns=i4aas;i=5029", browseName="ns=i4aas;ValueList", modellingRule="Optional")
 ns0.objtypes.BaseObjectType(nodeId="ns=i4aas;i=5041", browseName="ns=i4aas;<Referable>", modellingRule="OptionalPlaceholder")
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6001",
     browseName="ns=i4aas;Keys",
+    modellingRule="Mandatory",
     dataType=i4aas_datypes.AASKeyDataType,
     valueRank=1,
-    arrayDimensions=[1],
+    arrayDimensions=[0],
     value=[
         i4aas_datypes.AASKeyDataType(
             type=i4aas_datypes.AASKeyElementsDataType.ACCESS_PERMISSION_RULE, local=False, value="\n            ", idType=i4aas_datypes.AASKeyTypeDataType.ID_SHORT
@@ -81,6 +82,7 @@ o6.reference(AASReferenceType, "ns=i4aas;i=4003", "ns=i4aas;i=5041")
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6006",
     browseName="ns=i4aas;AssetKind",
+    modellingRule="Mandatory",
     dataType=i4aas_datypes.AASAssetKindDataType,
     value=i4aas_datypes.AASAssetKindDataType.TYPE,
     accessLevel=3,
@@ -89,15 +91,17 @@ ns0.vartypes.PropertyType(
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6009",
     browseName="ns=i4aas;ModelingKind",
+    modellingRule="Mandatory",
     dataType=i4aas_datypes.AASModelingKindDataType,
     value=i4aas_datypes.AASModelingKindDataType.TEMPLATE,
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6010", browseName="ns=i4aas;Type", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6010", browseName="ns=i4aas;Type", modellingRule="Mandatory", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6013",
     browseName="ns=i4aas;ModelingKind",
+    modellingRule="Mandatory",
     dataType=i4aas_datypes.AASModelingKindDataType,
     value=i4aas_datypes.AASModelingKindDataType.TEMPLATE,
     accessLevel=3,
@@ -106,28 +110,43 @@ ns0.vartypes.PropertyType(
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6015",
     browseName="ns=i4aas;ValueType",
+    modellingRule="Mandatory",
     dataType=i4aas_datypes.AASValueTypeDataType,
     value=i4aas_datypes.AASValueTypeDataType.BOOLEAN,
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6017", browseName="ns=i4aas;AllowDuplicates", dataType=o6.Boolean, value=False, accessLevel=3, userAccessLevel=1)
 ns0.vartypes.PropertyType(
-    nodeId="ns=i4aas;i=6019", browseName="ns=i4aas;Value", dataType=o6.LocalizedText, valueRank=1, arrayDimensions=[1], value=[o6.LocalizedText()], accessLevel=3, userAccessLevel=1
+    nodeId="ns=i4aas;i=6017", browseName="ns=i4aas;AllowDuplicates", modellingRule="Optional", dataType=o6.Boolean, value=False, accessLevel=3, userAccessLevel=1
 )
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6020", browseName="ns=i4aas;Value", accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=i4aas;i=6019",
+    browseName="ns=i4aas;Value",
+    modellingRule="Optional",
+    dataType=o6.LocalizedText,
+    valueRank=1,
+    arrayDimensions=[0],
+    value=[o6.LocalizedText()],
+    accessLevel=3,
+    userAccessLevel=1,
+)
+ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6020", browseName="ns=i4aas;Value", modellingRule="Optional", accessLevel=3, userAccessLevel=1)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6021",
     browseName="ns=i4aas;ValueType",
+    modellingRule="Mandatory",
     dataType=i4aas_datypes.AASValueTypeDataType,
     value=i4aas_datypes.AASValueTypeDataType.BOOLEAN,
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6037", browseName="ns=i4aas;MimeType", dataType=i4aas_datypes.AASMimeDataType, value="\n      ", accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=i4aas;i=6037", browseName="ns=i4aas;MimeType", modellingRule="Mandatory", dataType=i4aas_datypes.AASMimeDataType, value="\n      ", accessLevel=3, userAccessLevel=1
+)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6056",
     browseName="ns=i4aas;EntityType",
+    modellingRule="Mandatory",
     dataType=i4aas_datypes.AASEntityTypeDataType,
     value=i4aas_datypes.AASEntityTypeDataType.CO_MANAGED_ENTITY,
     accessLevel=3,
@@ -136,46 +155,60 @@ ns0.vartypes.PropertyType(
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6057",
     browseName="ns=i4aas;ValueType",
+    modellingRule="Mandatory",
     dataType=i4aas_datypes.AASValueTypeDataType,
     value=i4aas_datypes.AASValueTypeDataType.BOOLEAN,
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6058", browseName="ns=i4aas;Min", accessLevel=3, userAccessLevel=1)
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6059", browseName="ns=i4aas;Max", accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6058", browseName="ns=i4aas;Min", modellingRule="Optional", accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6059", browseName="ns=i4aas;Max", modellingRule="Optional", accessLevel=3, userAccessLevel=1)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6065",
     browseName="ns=i4aas;Category",
+    modellingRule="Optional",
     dataType=i4aas_datypes.AASCategoryDataType,
     value=i4aas_datypes.AASCategoryDataType.CONSTANT,
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6066", browseName="ns=i4aas;ShortName", dataType=o6.LocalizedText, value=o6.LocalizedText(), accessLevel=3, userAccessLevel=1)
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6067", browseName="ns=i4aas;SourceOfDefinition", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6068", browseName="ns=i4aas;Symbol", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6069", browseName="ns=i4aas;Unit", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6070", browseName="ns=i4aas;ValueFormat", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6071", browseName="ns=i4aas;Value", accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=i4aas;i=6066", browseName="ns=i4aas;ShortName", modellingRule="Optional", dataType=o6.LocalizedText, value=o6.LocalizedText(), accessLevel=3, userAccessLevel=1
+)
+ns0.vartypes.PropertyType(
+    nodeId="ns=i4aas;i=6067", browseName="ns=i4aas;SourceOfDefinition", modellingRule="Optional", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1
+)
+ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6068", browseName="ns=i4aas;Symbol", modellingRule="Optional", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6069", browseName="ns=i4aas;Unit", modellingRule="Optional", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=i4aas;i=6070", browseName="ns=i4aas;ValueFormat", modellingRule="Optional", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1
+)
+ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6071", browseName="ns=i4aas;Value", modellingRule="Optional", accessLevel=3, userAccessLevel=1)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6072",
     browseName="ns=i4aas;DataType",
+    modellingRule="Optional",
     dataType=i4aas_datypes.AASDataTypeIEC61360DataType,
     value=i4aas_datypes.AASDataTypeIEC61360DataType.BOOLEAN,
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6073", browseName="ns=i4aas;Definition", dataType=o6.LocalizedText, value=o6.LocalizedText(), accessLevel=3, userAccessLevel=1)
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6074", browseName="ns=i4aas;PreferredName", dataType=o6.LocalizedText, value=o6.LocalizedText(), accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=i4aas;i=6073", browseName="ns=i4aas;Definition", modellingRule="Optional", dataType=o6.LocalizedText, value=o6.LocalizedText(), accessLevel=3, userAccessLevel=1
+)
+ns0.vartypes.PropertyType(
+    nodeId="ns=i4aas;i=6074", browseName="ns=i4aas;PreferredName", modellingRule="Mandatory", dataType=o6.LocalizedText, value=o6.LocalizedText(), accessLevel=3, userAccessLevel=1
+)
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6075",
     browseName="ns=i4aas;LevelType",
+    modellingRule="Optional",
     dataType=i4aas_datypes.AASLevelTypeDataType,
     value=i4aas_datypes.AASLevelTypeDataType.MIN,
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6078", browseName="ns=i4aas;Value", accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6078", browseName="ns=i4aas;Value", modellingRule="Optional", accessLevel=3, userAccessLevel=1)
 
 
 @o6.objecttype(nodeId="ns=i4aas;i=1032", browseName="ns=i4aas;AASQualifierType", displayName="AASQualifierType")
@@ -186,7 +219,9 @@ class AASQualifierType(ns0.objtypes.BaseObjectType):
     valueType: ns0.vartypes.PropertyType = o6.hasProperty(o6.ns["ns=i4aas;i=6015"])
 
 
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6082", browseName="ns=i4aas;Category", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=i4aas;i=6082", browseName="ns=i4aas;Category", modellingRule="Mandatory", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1
+)
 
 
 @o6.objecttype(nodeId="ns=i4aas;i=1033", browseName="ns=i4aas;IAASReferableType", displayName="IAASReferableType")
@@ -194,8 +229,10 @@ class IAASReferableType(ns0.objtypes.BaseInterfaceType):
     category: ns0.vartypes.PropertyType = o6.hasProperty(o6.ns["ns=i4aas;i=6082"])
 
 
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6083", browseName="ns=i4aas;Version", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6084", browseName="ns=i4aas;Revision", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6083", browseName="ns=i4aas;Version", modellingRule="Optional", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(
+    nodeId="ns=i4aas;i=6084", browseName="ns=i4aas;Revision", modellingRule="Optional", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1
+)
 
 
 @o6.objecttype(nodeId="ns=i4aas;i=1030", browseName="ns=i4aas;AASAdministrativeInformationType", displayName="AASAdministrativeInformationType")
@@ -204,8 +241,8 @@ class AASAdministrativeInformationType(ns0.objtypes.BaseObjectType):
     version: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=i4aas;i=6083"])
 
 
-AASAdministrativeInformationType(nodeId="ns=i4aas;i=5027", browseName="ns=i4aas;Administration")
-AASAdministrativeInformationType(nodeId="ns=i4aas;i=5035", browseName="ns=i4aas;Administration")
+AASAdministrativeInformationType(nodeId="ns=i4aas;i=5027", browseName="ns=i4aas;Administration", modellingRule="Mandatory")
+AASAdministrativeInformationType(nodeId="ns=i4aas;i=5035", browseName="ns=i4aas;Administration", modellingRule="Mandatory")
 
 
 @o6.objecttype(nodeId="ns=i4aas;i=1034", browseName="ns=i4aas;IAASIdentifiableType", displayName="IAASIdentifiableType")
@@ -271,7 +308,13 @@ class AASDataSpecificationIEC61360Type(AASDataSpecificationType):
     dataType: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=i4aas;i=6072"])
     defaultInstanceBrowseName: ns0.vartypes.PropertyType = o6.hasProperty(
         ns0.vartypes.PropertyType(
-            nodeId="ns=i4aas;i=6063", browseName="ns=i4aas;DefaultInstanceBrowseName", dataType=o6.String, value="DataSpecificationIEC61360", accessLevel=3, userAccessLevel=1
+            nodeId="ns=i4aas;i=6063",
+            browseName="ns=i4aas;DefaultInstanceBrowseName",
+            modellingRule="Mandatory",
+            dataType=o6.String,
+            value="DataSpecificationIEC61360",
+            accessLevel=3,
+            userAccessLevel=1,
         )
     )
     definition: ns0.vartypes.PropertyType | None = o6.hasProperty(o6.ns["ns=i4aas;i=6073"])
@@ -292,12 +335,13 @@ class AASDataSpecificationIEC61360Type(AASDataSpecificationType):
 ns0.vartypes.PropertyType(
     nodeId="ns=i4aas;i=6085",
     browseName="ns=i4aas;IdType",
+    modellingRule="Mandatory",
     dataType=i4aas_datypes.AASIdentifierTypeDataType,
     value=i4aas_datypes.AASIdentifierTypeDataType.IRDI,
     accessLevel=3,
     userAccessLevel=1,
 )
-ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6086", browseName="ns=i4aas;Id", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
+ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6086", browseName="ns=i4aas;Id", modellingRule="Mandatory", dataType=o6.String, value="\n      ", accessLevel=3, userAccessLevel=1)
 
 
 @o6.objecttype(nodeId="ns=i4aas;i=1029", browseName="ns=i4aas;AASIdentifierType", displayName="AASIdentifierType")
@@ -309,7 +353,7 @@ class AASIdentifierType(ns0.objtypes.BaseObjectType):
 @o6.objecttype(nodeId="ns=i4aas;i=1009", browseName="ns=i4aas;AASSubmodelElementType", displayName="AASSubmodelElementType", isAbstract=True, interfaces=[IAASReferableType])
 class AASSubmodelElementType(ns0.objtypes.BaseObjectType):
     category: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6126", browseName="ns=i4aas;Category", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6126", browseName="ns=i4aas;Category", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
     dataSpecification_: AASReferenceType | None
     modelingKind: ns0.vartypes.PropertyType = o6.hasProperty(o6.ns["ns=i4aas;i=6013"])
@@ -390,7 +434,7 @@ class AASFileType(AASSubmodelElementType):
     file: ns0.objtypes.FileType | None
     mimeType: ns0.vartypes.PropertyType = o6.hasProperty(o6.ns["ns=i4aas;i=6037"])
     value: ns0.vartypes.PropertyType = o6.hasProperty(
-        ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6132", browseName="ns=i4aas;Value", dataType=o6.String, accessLevel=3, userAccessLevel=1)
+        ns0.vartypes.PropertyType(nodeId="ns=i4aas;i=6132", browseName="ns=i4aas;Value", modellingRule="Mandatory", dataType=o6.String, accessLevel=3, userAccessLevel=1)
     )
 
 

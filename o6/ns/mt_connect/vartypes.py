@@ -47,6 +47,7 @@ class MTAssetEventType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2753",
             browseName="ns=mt_connect;Category",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=mt_connect_datypes.MTCategoryType,
             valueRank=-1,
         )
@@ -57,6 +58,7 @@ class MTAssetEventType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2755",
             browseName="ns=mt_connect;MTSubTypeName",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -66,6 +68,7 @@ class MTAssetEventType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2754",
             browseName="ns=mt_connect;MTTypeName",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -75,6 +78,7 @@ class MTAssetEventType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2752",
             browseName="ns=mt_connect;Name",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -84,6 +88,7 @@ class MTAssetEventType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2759",
             browseName="ns=mt_connect;PeriodFilter",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.Float,
             valueRank=-1,
         )
@@ -93,6 +98,7 @@ class MTAssetEventType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2758",
             browseName="ns=mt_connect;Representation",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.MTRepresentationType,
             valueRank=-1,
         )
@@ -102,6 +108,7 @@ class MTAssetEventType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2757",
             browseName="ns=mt_connect;SampleRate",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.Double,
             valueRank=-1,
         )
@@ -111,6 +118,7 @@ class MTAssetEventType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2756",
             browseName="ns=mt_connect;SourceData",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -120,6 +128,7 @@ class MTAssetEventType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2751",
             browseName="ns=mt_connect;XmlId",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -140,6 +149,7 @@ class MTMessageType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2793",
             browseName="ns=mt_connect;Category",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=mt_connect_datypes.MTCategoryType,
             valueRank=-1,
         )
@@ -150,6 +160,7 @@ class MTMessageType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2795",
             browseName="ns=mt_connect;MTSubTypeName",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -159,6 +170,7 @@ class MTMessageType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2794",
             browseName="ns=mt_connect;MTTypeName",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -168,6 +180,7 @@ class MTMessageType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2792",
             browseName="ns=mt_connect;Name",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -177,6 +190,7 @@ class MTMessageType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2799",
             browseName="ns=mt_connect;PeriodFilter",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.Float,
             valueRank=-1,
         )
@@ -186,6 +200,7 @@ class MTMessageType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2798",
             browseName="ns=mt_connect;Representation",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.MTRepresentationType,
             valueRank=-1,
         )
@@ -195,6 +210,7 @@ class MTMessageType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2797",
             browseName="ns=mt_connect;SampleRate",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.Double,
             valueRank=-1,
         )
@@ -204,6 +220,7 @@ class MTMessageType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2796",
             browseName="ns=mt_connect;SourceData",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -213,6 +230,7 @@ class MTMessageType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2791",
             browseName="ns=mt_connect;XmlId",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -233,6 +251,7 @@ class MTStringEventType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2869",
             browseName="ns=mt_connect;Category",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=mt_connect_datypes.MTCategoryType,
             valueRank=-1,
         )
@@ -243,6 +262,7 @@ class MTStringEventType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2871",
             browseName="ns=mt_connect;MTSubTypeName",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -252,6 +272,7 @@ class MTStringEventType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2870",
             browseName="ns=mt_connect;MTTypeName",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -261,6 +282,7 @@ class MTStringEventType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2868",
             browseName="ns=mt_connect;Name",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -270,6 +292,7 @@ class MTStringEventType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2875",
             browseName="ns=mt_connect;PeriodFilter",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.Float,
             valueRank=-1,
         )
@@ -279,6 +302,7 @@ class MTStringEventType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2874",
             browseName="ns=mt_connect;Representation",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.MTRepresentationType,
             valueRank=-1,
         )
@@ -288,6 +312,7 @@ class MTStringEventType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2873",
             browseName="ns=mt_connect;SampleRate",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.Double,
             valueRank=-1,
         )
@@ -297,6 +322,7 @@ class MTStringEventType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2872",
             browseName="ns=mt_connect;SourceData",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -306,6 +332,7 @@ class MTStringEventType(ns0.vartypes.BaseDataVariableType):
             nodeId="ns=mt_connect;i=2867",
             browseName="ns=mt_connect;XmlId",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -326,6 +353,7 @@ class MTControlledVocabEventType(ns0.vartypes.MultiStateDiscreteType):
             nodeId="ns=mt_connect;i=2773",
             browseName="ns=mt_connect;Category",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=mt_connect_datypes.MTCategoryType,
             valueRank=-1,
         )
@@ -336,6 +364,7 @@ class MTControlledVocabEventType(ns0.vartypes.MultiStateDiscreteType):
             nodeId="ns=mt_connect;i=2775",
             browseName="ns=mt_connect;MTSubTypeName",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -345,6 +374,7 @@ class MTControlledVocabEventType(ns0.vartypes.MultiStateDiscreteType):
             nodeId="ns=mt_connect;i=2774",
             browseName="ns=mt_connect;MTTypeName",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -354,6 +384,7 @@ class MTControlledVocabEventType(ns0.vartypes.MultiStateDiscreteType):
             nodeId="ns=mt_connect;i=2772",
             browseName="ns=mt_connect;Name",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -363,6 +394,7 @@ class MTControlledVocabEventType(ns0.vartypes.MultiStateDiscreteType):
             nodeId="ns=mt_connect;i=2779",
             browseName="ns=mt_connect;PeriodFilter",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.Float,
             valueRank=-1,
         )
@@ -372,6 +404,7 @@ class MTControlledVocabEventType(ns0.vartypes.MultiStateDiscreteType):
             nodeId="ns=mt_connect;i=2778",
             browseName="ns=mt_connect;Representation",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.MTRepresentationType,
             valueRank=-1,
         )
@@ -381,6 +414,7 @@ class MTControlledVocabEventType(ns0.vartypes.MultiStateDiscreteType):
             nodeId="ns=mt_connect;i=2777",
             browseName="ns=mt_connect;SampleRate",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.Double,
             valueRank=-1,
         )
@@ -390,6 +424,7 @@ class MTControlledVocabEventType(ns0.vartypes.MultiStateDiscreteType):
             nodeId="ns=mt_connect;i=2776",
             browseName="ns=mt_connect;SourceData",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -399,6 +434,7 @@ class MTControlledVocabEventType(ns0.vartypes.MultiStateDiscreteType):
             nodeId="ns=mt_connect;i=3090",
             browseName="ns=mt_connect;ValueAsText",
             description="All \\glspl{MTDataItem} with \\gls{category} \\mtmodel{EVENT} having\n      Controlled Vocabularies (Enumerations) will be added as sub-types of this\n      type which is mapped to the OPC/UA MultiStateValueDiscreteType. Otherwise,\n      either \\mtmodel{MTString} or \\mtmodel{MTNumeric} will be used. All\n      subtypes are direct representations of the MTConnect equivalent elements\n      that can be found in the MTConnect Part 3 \\cite{MTCPart3} documents.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -408,6 +444,7 @@ class MTControlledVocabEventType(ns0.vartypes.MultiStateDiscreteType):
             nodeId="ns=mt_connect;i=2771",
             browseName="ns=mt_connect;XmlId",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -428,6 +465,7 @@ class MTNumericEventType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2807",
             browseName="ns=mt_connect;Category",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=mt_connect_datypes.MTCategoryType,
             valueRank=-1,
         )
@@ -438,6 +476,7 @@ class MTNumericEventType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2822",
             browseName="ns=mt_connect;CoordinateSystem",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.MTCoordinateSystemType,
             valueRank=-1,
         )
@@ -447,6 +486,7 @@ class MTNumericEventType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=3671",
             browseName="ns=mt_connect;Duration",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             valueRank=-1,
         )
@@ -456,6 +496,7 @@ class MTNumericEventType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2823",
             browseName="ns=mt_connect;InitialValue",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=o6.Double,
             valueRank=-1,
         )
@@ -465,6 +506,7 @@ class MTNumericEventType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2809",
             browseName="ns=mt_connect;MTSubTypeName",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -474,6 +516,7 @@ class MTNumericEventType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2808",
             browseName="ns=mt_connect;MTTypeName",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -483,6 +526,7 @@ class MTNumericEventType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2826",
             browseName="ns=mt_connect;MinimumDeltaFilter",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=o6.Float,
             valueRank=-1,
         )
@@ -492,6 +536,7 @@ class MTNumericEventType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2806",
             browseName="ns=mt_connect;Name",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -501,6 +546,7 @@ class MTNumericEventType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2821",
             browseName="ns=mt_connect;NativeUnits",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -510,6 +556,7 @@ class MTNumericEventType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2813",
             browseName="ns=mt_connect;PeriodFilter",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.Float,
             valueRank=-1,
         )
@@ -519,6 +566,7 @@ class MTNumericEventType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2812",
             browseName="ns=mt_connect;Representation",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.MTRepresentationType,
             valueRank=-1,
         )
@@ -528,6 +576,7 @@ class MTNumericEventType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2824",
             browseName="ns=mt_connect;ResetTrigger",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.MTResetTriggerType,
             valueRank=-1,
         )
@@ -537,6 +586,7 @@ class MTNumericEventType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=3675",
             browseName="ns=mt_connect;ResetTriggeredReason",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.MTResetTriggerType,
             valueRank=-1,
         )
@@ -546,6 +596,7 @@ class MTNumericEventType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2811",
             browseName="ns=mt_connect;SampleRate",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.Double,
             valueRank=-1,
         )
@@ -555,6 +606,7 @@ class MTNumericEventType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2819",
             browseName="ns=mt_connect;SignificantDigits",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=o6.Int16,
             valueRank=-1,
         )
@@ -564,6 +616,7 @@ class MTNumericEventType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2810",
             browseName="ns=mt_connect;SourceData",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -573,6 +626,7 @@ class MTNumericEventType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2820",
             browseName="ns=mt_connect;Statistic",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.MTStatisticType,
             valueRank=-1,
         )
@@ -582,6 +636,7 @@ class MTNumericEventType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2825",
             browseName="ns=mt_connect;Units",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -591,6 +646,7 @@ class MTNumericEventType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2805",
             browseName="ns=mt_connect;XmlId",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -611,6 +667,7 @@ class MTSampleType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=mt_connect;i=2841",
             browseName="ns=mt_connect;Category",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=mt_connect_datypes.MTCategoryType,
             valueRank=-1,
         )
@@ -621,6 +678,7 @@ class MTSampleType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=mt_connect;i=2856",
             browseName="ns=mt_connect;CoordinateSystem",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.MTCoordinateSystemType,
             valueRank=-1,
         )
@@ -630,6 +688,7 @@ class MTSampleType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=mt_connect;i=3672",
             browseName="ns=mt_connect;Duration",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             valueRank=-1,
         )
@@ -639,6 +698,7 @@ class MTSampleType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=mt_connect;i=2857",
             browseName="ns=mt_connect;InitialValue",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=o6.Double,
             valueRank=-1,
         )
@@ -648,6 +708,7 @@ class MTSampleType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=mt_connect;i=2843",
             browseName="ns=mt_connect;MTSubTypeName",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -657,6 +718,7 @@ class MTSampleType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=mt_connect;i=2842",
             browseName="ns=mt_connect;MTTypeName",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -666,6 +728,7 @@ class MTSampleType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=mt_connect;i=2860",
             browseName="ns=mt_connect;MinimumDeltaFilter",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=o6.Float,
             valueRank=-1,
         )
@@ -675,6 +738,7 @@ class MTSampleType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=mt_connect;i=2840",
             browseName="ns=mt_connect;Name",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -684,6 +748,7 @@ class MTSampleType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=mt_connect;i=2855",
             browseName="ns=mt_connect;NativeUnits",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -693,6 +758,7 @@ class MTSampleType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=mt_connect;i=2847",
             browseName="ns=mt_connect;PeriodFilter",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.Float,
             valueRank=-1,
         )
@@ -702,6 +768,7 @@ class MTSampleType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=mt_connect;i=2846",
             browseName="ns=mt_connect;Representation",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.MTRepresentationType,
             valueRank=-1,
         )
@@ -711,6 +778,7 @@ class MTSampleType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=mt_connect;i=2858",
             browseName="ns=mt_connect;ResetTrigger",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.MTResetTriggerType,
             valueRank=-1,
         )
@@ -720,6 +788,7 @@ class MTSampleType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=mt_connect;i=3676",
             browseName="ns=mt_connect;ResetTriggeredReason",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.MTResetTriggerType,
             valueRank=-1,
         )
@@ -729,6 +798,7 @@ class MTSampleType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=mt_connect;i=2845",
             browseName="ns=mt_connect;SampleRate",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.Double,
             valueRank=-1,
         )
@@ -738,6 +808,7 @@ class MTSampleType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=mt_connect;i=2853",
             browseName="ns=mt_connect;SignificantDigits",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=o6.Int16,
             valueRank=-1,
         )
@@ -747,6 +818,7 @@ class MTSampleType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=mt_connect;i=2844",
             browseName="ns=mt_connect;SourceData",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -756,6 +828,7 @@ class MTSampleType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=mt_connect;i=2854",
             browseName="ns=mt_connect;Statistic",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.MTStatisticType,
             valueRank=-1,
         )
@@ -765,6 +838,7 @@ class MTSampleType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=mt_connect;i=2859",
             browseName="ns=mt_connect;Units",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -774,6 +848,7 @@ class MTSampleType(ns0.vartypes.AnalogUnitType):
             nodeId="ns=mt_connect;i=2839",
             browseName="ns=mt_connect;XmlId",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -794,6 +869,7 @@ class MTThreeSpaceSampleType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2883",
             browseName="ns=mt_connect;Category",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=mt_connect_datypes.MTCategoryType,
             valueRank=-1,
         )
@@ -804,6 +880,7 @@ class MTThreeSpaceSampleType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2898",
             browseName="ns=mt_connect;CoordinateSystem",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.MTCoordinateSystemType,
             valueRank=-1,
         )
@@ -813,6 +890,7 @@ class MTThreeSpaceSampleType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=3673",
             browseName="ns=mt_connect;Duration",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=ns0.datatypes.Duration,
             valueRank=-1,
         )
@@ -822,6 +900,7 @@ class MTThreeSpaceSampleType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2642",
             browseName="ns=mt_connect;EngineeringUnits",
             description="A special data item type that represents a three space coordinate. It uses\n      a data type with three fields, X, Y, and Z, where the coordinates are\n      given in millimeters. The EngineeringUnits will always be set to MMT in\n      the UNECE convetion.",
+            modellingRule="Mandatory",
             dataType=ns0.datatypes.EUInformation,
             valueRank=-1,
         )
@@ -831,6 +910,7 @@ class MTThreeSpaceSampleType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2899",
             browseName="ns=mt_connect;InitialValue",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=o6.Double,
             valueRank=-1,
         )
@@ -840,6 +920,7 @@ class MTThreeSpaceSampleType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2885",
             browseName="ns=mt_connect;MTSubTypeName",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -849,6 +930,7 @@ class MTThreeSpaceSampleType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2884",
             browseName="ns=mt_connect;MTTypeName",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -858,6 +940,7 @@ class MTThreeSpaceSampleType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2902",
             browseName="ns=mt_connect;MinimumDeltaFilter",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=o6.Float,
             valueRank=-1,
         )
@@ -867,6 +950,7 @@ class MTThreeSpaceSampleType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2882",
             browseName="ns=mt_connect;Name",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -876,6 +960,7 @@ class MTThreeSpaceSampleType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2897",
             browseName="ns=mt_connect;NativeUnits",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -885,6 +970,7 @@ class MTThreeSpaceSampleType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2889",
             browseName="ns=mt_connect;PeriodFilter",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.Float,
             valueRank=-1,
         )
@@ -894,6 +980,7 @@ class MTThreeSpaceSampleType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2888",
             browseName="ns=mt_connect;Representation",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.MTRepresentationType,
             valueRank=-1,
         )
@@ -903,6 +990,7 @@ class MTThreeSpaceSampleType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2900",
             browseName="ns=mt_connect;ResetTrigger",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.MTResetTriggerType,
             valueRank=-1,
         )
@@ -912,6 +1000,7 @@ class MTThreeSpaceSampleType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=3677",
             browseName="ns=mt_connect;ResetTriggeredReason",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.MTResetTriggerType,
             valueRank=-1,
         )
@@ -921,6 +1010,7 @@ class MTThreeSpaceSampleType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2887",
             browseName="ns=mt_connect;SampleRate",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.Double,
             valueRank=-1,
         )
@@ -930,6 +1020,7 @@ class MTThreeSpaceSampleType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2895",
             browseName="ns=mt_connect;SignificantDigits",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=o6.Int16,
             valueRank=-1,
         )
@@ -939,6 +1030,7 @@ class MTThreeSpaceSampleType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2886",
             browseName="ns=mt_connect;SourceData",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -948,6 +1040,7 @@ class MTThreeSpaceSampleType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2896",
             browseName="ns=mt_connect;Statistic",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=mt_connect_datypes.MTStatisticType,
             valueRank=-1,
         )
@@ -957,6 +1050,7 @@ class MTThreeSpaceSampleType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2901",
             browseName="ns=mt_connect;Units",
             description="These are the additional attributes that are relevent to numeric data\n      items. The factory will evaluate these values and will set the engineering\n      units and the range associated with the parent entity.",
+            modellingRule="Optional",
             dataType=o6.String,
             valueRank=-1,
         )
@@ -966,6 +1060,7 @@ class MTThreeSpaceSampleType(ns0.vartypes.DataItemType):
             nodeId="ns=mt_connect;i=2881",
             browseName="ns=mt_connect;XmlId",
             description="The data item mixin will inject the properties and the methods into the\n      related classes. This facility is similar to the Ruby module mixin or the\n      Scala traits. data entity describing a piece of information reported about\n      a piece of equipment.",
+            modellingRule="Mandatory",
             dataType=o6.String,
             valueRank=-1,
         )

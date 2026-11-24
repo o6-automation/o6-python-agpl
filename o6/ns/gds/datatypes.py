@@ -31,15 +31,15 @@ else:
     _VariableNode = object
 
 
-@o6.datatype(nodeId="ns=gds;i=1", browseName="ApplicationRecordDataType", defaultEncodingId="ns=gds;i=134")
+@o6.datatype(nodeId="ns=gds;i=1", browseName="ns=gds;ApplicationRecordDataType", defaultEncodingId="ns=gds;i=134")
 class ApplicationRecordDataType(ns0.datatypes.Structure):
-    applicationId: o6.NodeId
-    applicationUri: o6.String
-    applicationType: ns0.datatypes.ApplicationType
-    applicationNames: list[o6.LocalizedText]
-    productUri: o6.String
-    discoveryUrls: list[o6.String]
-    serverCapabilities: list[o6.String]
+    applicationId: o6.NodeId = o6.field(name="ApplicationId")
+    applicationUri: o6.String = o6.field(name="ApplicationUri")
+    applicationType: ns0.datatypes.ApplicationType = o6.field(name="ApplicationType")
+    applicationNames: list[o6.LocalizedText] = o6.field(name="ApplicationNames")
+    productUri: o6.String = o6.field(name="ProductUri")
+    discoveryUrls: list[o6.String] = o6.field(name="DiscoveryUrls")
+    serverCapabilities: list[o6.String] = o6.field(name="ServerCapabilities")
 
 
 del Any, TYPE_CHECKING, uuid, o6, ns0
