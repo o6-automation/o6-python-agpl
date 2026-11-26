@@ -1,5 +1,19 @@
 # Release Notes
 
+## 3.1.1
+
+### New Features
+
+- Assigning an absent Optional child of a declared type to a live server node, for example `result.estimatedRuntime = 5.0`, now creates that child with the value, as `values=` does at construction. Before, the assignment only stored a Python attribute and created no node. Assigning a child that already exists raises `TypeError` that points to `node.child(value)`, instead of silently hiding the child node. Other attribute names are still plain Python attributes.
+
+### Improvements
+
+- Reading an absent Optional child raises an `AttributeError` that names it as optional and says how to add it.
+
+### Bug Fixes
+
+- Fixed a declared type instantiated without a server, such as `o6.ns.lads.objtypes.ResultType()`, raising `AttributeError` for every child that `dir()` listed. Mandatory children now resolve. Optional children are absent until added with `values=`, `references=` or an assignment, and `dir()` lists only the children that are present.
+
 ## 3.1.0
 
 ### New Features

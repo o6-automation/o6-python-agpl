@@ -214,6 +214,23 @@ def _resolve_member_node(
     return current
 
 
+def _add_live_child(node: Any, name: str, declaration: Any, value: Any) -> None:
+    """Create one absent type child of a live instance from its InstanceDeclaration.
+
+    OPC 10000-3 §6.4.3 lets References be added to an instance after creation
+    while its ModellingRules stay fulfilled, so an Optional child may be added
+    later. An existing child is not replaced: writes go through the child node.
+    """
+    server = node._backend._server
+    key = (*_browse_name_key(declaration.browsename), int(declaration.nodeclass))
+    if key in _browse_children(server, node):
+        raise TypeError(
+            f"{name!r} already exists on this node; write a Variable with "
+            f"node.{name}(value) instead of assigning it"
+        )
+    _precreate_children(server, o6.NodeId(node), type(node), {declaration.browsename: value})
+
+
 def _prepare_implementation_children(server: Any, node: Any, klass: type) -> None:
     """Materialize and promote implementation-selected direct children."""
     from o6.node import Node

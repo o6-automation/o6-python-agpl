@@ -405,7 +405,7 @@ class build_ext(_build_ext):
 
 setup(
     name="o6",
-    version="3.1.0",
+    version="3.1.1",
     ext_modules=[o6_core],
     cmdclass={
         "build_ext": build_ext,

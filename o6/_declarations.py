@@ -98,7 +98,91 @@ def _declared_node_dir(instance: Any) -> list[str]:
     if isinstance(instance, Node):
         return Node.__dir__(instance)
 
-    return sorted(_instance_child_members(_instance_declaration(instance)))
+    return sorted(_present_child_members(instance))
+
+
+def _present_child_members(instance: Any) -> dict[str, InstanceDeclaration]:
+    """Return the children an offline declaration will instantiate.
+
+    Mandatory type children are always present. Other children (Optional,
+    placeholders) are present only once opted in through ``values=``,
+    ``references=``, or attribute assignment, matching what publishing creates.
+    """
+    declaration = _instance_declaration(instance)
+    mandatory = _modelling_rule_nodeid("Mandatory")
+    explicit = {_browse_name_key(child.browsename) for child in declaration.children}
+    assigned = vars(instance)
+    return {
+        name: child
+        for name, child in _instance_child_members(declaration).items()
+        if child.modelling_rule == mandatory
+        or _browse_name_key(child.browsename) in explicit
+        or name in assigned
+    }
+
+
+def _declared_type_name(instance: Any) -> str:
+    """Return the declared type's name, not the name of its runtime subclass."""
+    for klass in type(instance).__mro__:
+        if isinstance(vars(klass).get("__o6_declaration__"), TypeDeclaration):
+            return klass.__name__
+    return type(instance).__name__
+
+
+def _absent_child_error(instance: Any, name: str) -> AttributeError:
+    """Explain a type child the instance lacks, since dir() does not list it."""
+    return AttributeError(
+        f"{name!r} is an optional child of {_declared_type_name(instance)} that is not "
+        "present; assign it to add it"
+    )
+
+
+def _declared_node_getattr(instance: Any, name: str) -> Any:
+    """Resolve the OPC UA children that ``_declared_node_dir`` lists."""
+    from o6.node import Node
+
+    if name.startswith("_"):
+        raise AttributeError(name)
+    if isinstance(instance, Node):
+        try:
+            return Node.__getattr__(instance, name)
+        except AttributeError as exc:
+            error = exc
+    else:
+        present = _present_child_members(instance)
+        if name in present:
+            return _namespace_node(present[name], python_name=name)
+        error = AttributeError(
+            f"{_declared_type_name(instance)!r} declaration has no child {name!r}"
+        )
+    # Children named by values= or references= are always present, so an
+    # absent child is always one of the type's own children.
+    if name in _all_child_members(type(instance)):
+        raise _absent_child_error(instance, name) from None
+    raise error
+
+
+def _declared_node_setattr(instance: Any, name: str, value: Any) -> None:
+    """Add an absent type child to a live server node by assigning it.
+
+    Assigning a type child's name to a live server instance creates that child
+    from its InstanceDeclaration with ``value``, as ``values=`` does at
+    construction. Other names stay ordinary Python attributes, and offline
+    declarations keep storing the assignment as a child override.
+    """
+    from o6.node import Node
+
+    live = (
+        not name.startswith("_") and isinstance(instance, Node) and instance._is_native_attached()
+    )
+    child = _all_child_members(type(instance)).get(name) if live else None
+    if child is None:
+        object.__setattr__(instance, name, value)
+        return
+
+    from o6._server_construction import _add_live_child
+
+    _add_live_child(instance, name, child, value)
 
 
 def _with_node_type_meta(klass: type[_T]) -> type[_T]:
@@ -1077,22 +1161,7 @@ def _browsename_is_qualified(text: str) -> bool:
     return bool(separator) and prefix.isdigit()
 
 
-def _all_children(cls: type) -> list[InstanceDeclaration]:
-    """Return inherited declarations in base-to-derived override order."""
-    by_name: dict[_BrowseNameKey, InstanceDeclaration] = {}
-    order: list[_BrowseNameKey] = []
-    for base in reversed(cls.__mro__):
-        declaration = vars(base).get("__o6_declaration__")
-        if not isinstance(declaration, TypeDeclaration) or not isinstance(
-            declaration.attributes, _CHILD_BEARING_SPECS
-        ):
-            continue
-        for child in declaration.instances:
-            key = _browse_name_key(child.browsename)
-            if key not in by_name:
-                order.append(key)
-            by_name[key] = child
-    return [by_name[key] for key in order]
+_NamedChildren = dict[_BrowseNameKey, tuple[str, InstanceDeclaration]]
 
 
 def _annotation_child_name(cls: type, child: InstanceDeclaration) -> str | None:
@@ -1103,61 +1172,60 @@ def _annotation_child_name(cls: type, child: InstanceDeclaration) -> str | None:
     return None
 
 
-def _all_child_members(cls: type) -> dict[str, InstanceDeclaration]:
-    """Return inherited type children keyed by their public Python name."""
-    by_browse_name: dict[_BrowseNameKey, tuple[str, InstanceDeclaration]] = {}
-    order: list[_BrowseNameKey] = []
+def _merge_child(
+    named: _NamedChildren, child: InstanceDeclaration, declared_name: str | None = None
+) -> None:
+    """Add or override one child by BrowseName; an override keeps the earlier name.
+
+    Dict order is first-declaration order, so overrides stay in their base's place.
+    """
+    key = _browse_name_key(child.browsename)
+    old = named.get(key)
+    name = declared_name or (old[0] if old is not None else _opcua_child_name(child.browsename))
+    named[key] = name, child
+
+
+def _named_type_children(cls: type) -> _NamedChildren:
+    """Return inherited type children by BrowseName, with their Python names."""
+    named: _NamedChildren = {}
     for base in reversed(cls.__mro__):
         declaration = vars(base).get("__o6_declaration__")
-        if not isinstance(declaration, TypeDeclaration) or not isinstance(
+        if isinstance(declaration, TypeDeclaration) and isinstance(
             declaration.attributes, _CHILD_BEARING_SPECS
         ):
-            continue
-        for child in declaration.instances:
-            key = _browse_name_key(child.browsename)
-            old = by_browse_name.get(key)
-            name = (
-                child.python_name
-                or _annotation_child_name(base, child)
-                or (old[0] if old is not None else _opcua_child_name(child.browsename))
-            )
-            if not name.isidentifier():
-                continue
-            if old is None:
-                order.append(key)
-            by_browse_name[key] = name, child
-    return {by_browse_name[key][0]: by_browse_name[key][1] for key in order}
+            for child in declaration.instances:
+                _merge_child(named, child, child.python_name or _annotation_child_name(base, child))
+    return named
+
+
+def _dot_members(named: _NamedChildren) -> dict[str, InstanceDeclaration]:
+    """Key children by Python name, leaving out names dot syntax cannot reach."""
+    return {name: child for name, child in named.values() if name.isidentifier()}
+
+
+def _all_children(cls: type) -> list[InstanceDeclaration]:
+    """Return inherited declarations in base-to-derived override order."""
+    return [child for _, child in _named_type_children(cls).values()]
+
+
+def _child_declarations_by_key(cls: type) -> dict[_BrowseNameKey, InstanceDeclaration]:
+    return {key: child for key, (_, child) in _named_type_children(cls).items()}
+
+
+def _all_child_members(cls: type) -> dict[str, InstanceDeclaration]:
+    """Return inherited type children keyed by their public Python name."""
+    return _dot_members(_named_type_children(cls))
 
 
 def _instance_child_members(
     declaration: InstanceDeclaration,
 ) -> dict[str, InstanceDeclaration]:
     """Return effective declaration children keyed for namespace dot syntax."""
-    inherited = (
-        _all_child_members(declaration.typeTarget)
-        if isinstance(declaration.typeTarget, type)
-        else {}
-    )
-    by_browse_name = {
-        _browse_name_key(child.browsename): (name, child) for name, child in inherited.items()
-    }
-    order = list(by_browse_name)
+    target = declaration.typeTarget
+    named = _named_type_children(target) if isinstance(target, type) else {}
     for child in declaration.children:
-        key = _browse_name_key(child.browsename)
-        old = by_browse_name.get(key)
-        name = child.python_name or (
-            old[0] if old is not None else _opcua_child_name(child.browsename)
-        )
-        if not name.isidentifier():
-            continue
-        if old is None:
-            order.append(key)
-        by_browse_name[key] = name, child
-    return {by_browse_name[key][0]: by_browse_name[key][1] for key in order}
-
-
-def _child_declarations_by_key(cls: type) -> dict[_BrowseNameKey, InstanceDeclaration]:
-    return {_browse_name_key(child.browsename): child for child in _all_children(cls)}
+        _merge_child(named, child, child.python_name)
+    return _dot_members(named)
 
 
 def _store_instance_child(

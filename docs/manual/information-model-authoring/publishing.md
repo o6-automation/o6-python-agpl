@@ -73,6 +73,15 @@ child in `values=` opts it in; for example, add `"highLimit": 80.0` to the
 Temperature declaration's `values` to create its optional HighLimit Property.
 The same rule applies recursively to Optional Objects and complex Variables.
 
+An Optional child can also be added after construction by assigning it, on a
+declaration before publishing or on a live node: `machine.temperature.highLimit = 80.0`
+creates the HighLimit Property with that value. The assigned value takes the
+same forms as in `values=`. Until an Optional child is present, `dir()` does not
+list it and reading it raises `AttributeError`; the type class, such as
+`dir(plant.TemperatureType)`, lists every child. Assignment never replaces a
+child that already exists: write a Variable by calling it, for example
+`machine.temperature.highLimit(85.0)`.
+
 ### Reading and writing
 
 The following optional fragments go in `plant_server.py` after constructing

@@ -52,7 +52,7 @@ from .common import (
 # Package metadata
 # =============================================================================
 
-__version__ = "3.1.0"
+__version__ = "3.1.1"
 __author__ = "o6 Automation GmbH"
 __email__ = "contact@o6-automation.com"
 

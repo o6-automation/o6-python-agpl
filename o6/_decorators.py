@@ -56,6 +56,8 @@ from o6._declarations import (
     _collect_children,
     _declared_bases,
     _declared_node_dir,
+    _declared_node_getattr,
+    _declared_node_setattr,
     _decorator_description,
     _declaration_values,
     _declared_type_nodeclass,
@@ -125,6 +127,8 @@ def _build_declared_type(
             delattr(klass, name)
     setattr(klass, "__new__", staticmethod(_instance_new))
     setattr(klass, "__dir__", _declared_node_dir)
+    setattr(klass, "__getattr__", _declared_node_getattr)
+    setattr(klass, "__setattr__", _declared_node_setattr)
     inherited_initializer = getattr(klass, "__init__", object.__init__)
     if vars(klass).get("__init__") is None and (
         inherited_initializer is object.__init__

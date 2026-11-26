@@ -216,7 +216,8 @@ class Node(_NativeNodeBase, HasNodeId):
 
     Public helpers on this class start with an underscore so they do not
     collide with child lookup. Subclasses can keep application state under
-    ordinary Python names.
+    ordinary Python names. On an instance of a declared type, assigning the
+    name of one of the type's children adds that child instead.
 
     See the [Node API](manual/node-api/index.md).
     """
@@ -224,7 +225,8 @@ class Node(_NativeNodeBase, HasNodeId):
     # Public helpers defined by the base Node API would collide with OPC UA
     # child dot syntax, so identity, permissions, caches, and similar helpers
     # must keep an underscore prefix. Subclasses may still carry application
-    # state under ordinary Python names; __dir__ intentionally lists children.
+    # state under ordinary Python names that are not child names (declared
+    # types reserve those, see _declared_node_setattr); __dir__ lists children.
     _nodeid = _NODE_ID_DESCRIPTOR
     _child_cache: Optional[dict[str, Any]]
 
